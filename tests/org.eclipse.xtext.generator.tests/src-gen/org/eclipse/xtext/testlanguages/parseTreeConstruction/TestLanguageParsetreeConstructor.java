@@ -46,11 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EntryRule ****************
  *
  * EntryRule returns Model:
- *   (multiFeature+=AbstractRule)*;
+ *   multiFeature+=AbstractRule*;
  *
  **/
 
-// (multiFeature+=AbstractRule)*
+// multiFeature+=AbstractRule*
 protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 	
 	public EntryRule_MultiFeatureAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -70,6 +70,7 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -86,10 +87,11 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EntryRule_MultiFeatureAssignment(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EntryRule_MultiFeatureAssignment(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -125,6 +127,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -153,9 +156,10 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -184,9 +188,10 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -198,11 +203,11 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 /************ begin Rule ChoiceRule ****************
  *
  * ChoiceRule returns ChoiceElement:
- *   "choice" (optionalKeyword?="optional")? name=ID;
+ *   "choice" optionalKeyword?="optional"? name=ID;
  *
  **/
 
-// "choice" (optionalKeyword?="optional")? name=ID
+// "choice" optionalKeyword?="optional"? name=ID
 protected class ChoiceRule_Group extends GroupToken {
 	
 	public ChoiceRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -222,6 +227,7 @@ protected class ChoiceRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -239,18 +245,18 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (optionalKeyword?="optional")?
+// optionalKeyword?="optional"?
 protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  {
 	
 	public ChoiceRule_OptionalKeywordAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -345,6 +351,7 @@ protected class ReducibleRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -362,14 +369,14 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -397,9 +404,9 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ReducibleRule_ReducibleKeyword_0(parent, next, 0, inst);
+			case 0: return new ReducibleRule_ReducibleKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -485,9 +492,9 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ReducibleRule_ReducibleCompositeActionFeatureAction_2_0(parent, next, 0, consumed);
+			case 0: return new ReducibleRule_ReducibleCompositeActionFeatureAction_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -518,15 +525,15 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringFeature",true)) == null) return null;

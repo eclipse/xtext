@@ -68,6 +68,7 @@ protected class Model_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -96,9 +97,10 @@ protected class Model_ChildParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -183,9 +185,9 @@ protected class Model_RightAssignment_1_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Model_ParentLeftAction_1_0(parent, next, 0, consumed);
+			case 0: return new Model_ParentLeftAction_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -216,15 +218,15 @@ protected class Child_NameAssignment extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

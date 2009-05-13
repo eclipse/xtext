@@ -26,19 +26,19 @@ public class LangATestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
 		//Main:
-		//  (imports+=Import)* (types+=Type)*;
+		//  imports+=Import* types+=Type*;
 		public ParserRule getRule() { return rule; }
 
-		//(imports+=Import)* (types+=Type)*
+		//imports+=Import* types+=Type*
 		public Group getGroup() { return cGroup; }
 
-		//(imports+=Import)*
+		//imports+=Import*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
 
-		//(types+=Type)*
+		//types+=Type*
 		public Assignment getTypesAssignment_1() { return cTypesAssignment_1; }
 
 		//Type
@@ -136,7 +136,7 @@ public class LangATestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Main:
-	//  (imports+=Import)* (types+=Type)*;
+	//  imports+=Import* types+=Type*;
 	public MainElements getMainAccess() {
 		return (pMain != null) ? pMain : (pMain = new MainElements());
 	}

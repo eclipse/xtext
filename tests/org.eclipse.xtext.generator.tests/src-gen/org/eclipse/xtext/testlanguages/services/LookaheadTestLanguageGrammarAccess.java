@@ -23,10 +23,10 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cContentsAltsParserRuleCall_0 = (RuleCall)cContentsAssignment.eContents().get(0);
 		
 		//Entry:
-		//  (contents+=Alts)*;
+		//  contents+=Alts*;
 		public ParserRule getRule() { return rule; }
 
-		//(contents+=Alts)*
+		//contents+=Alts*
 		public Assignment getContentsAssignment() { return cContentsAssignment; }
 
 		//Alts
@@ -252,7 +252,7 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Entry:
-	//  (contents+=Alts)*;
+	//  contents+=Alts*;
 	public EntryElements getEntryAccess() {
 		return (pEntry != null) ? pEntry : (pEntry = new EntryElements());
 	}

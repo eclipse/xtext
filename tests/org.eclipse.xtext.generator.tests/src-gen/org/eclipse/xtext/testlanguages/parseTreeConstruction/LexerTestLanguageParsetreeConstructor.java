@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (children+=Element)*;
+ *   children+=Element*;
  *
  **/
 
-// (children+=Element)*
+// children+=Element*
 protected class Model_ChildrenAssignment extends AssignmentToken  {
 	
 	public Model_ChildrenAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -67,6 +67,7 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -83,10 +84,11 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Model_ChildrenAssignment(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new Model_ChildrenAssignment(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -121,6 +123,7 @@ protected class Element_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -138,14 +141,14 @@ protected class Element_NameAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

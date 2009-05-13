@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (elements+=Element)*;
+ *   elements+=Element*;
  *
  **/
 
-// (elements+=Element)*
+// elements+=Element*
 protected class Model_ElementsAssignment extends AssignmentToken  {
 	
 	public Model_ElementsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -67,6 +67,7 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -83,10 +84,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Model_ElementsAssignment(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new Model_ElementsAssignment(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -97,11 +99,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
+ *   optional?="optional"? "element" name=ID descriptions+=STRING* ";";
  *
  **/
 
-// (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
+// optional?="optional"? "element" name=ID descriptions+=STRING* ";"
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -121,11 +123,12 @@ protected class Element_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (optional?="optional")?
+// optional?="optional"?
 protected class Element_OptionalAssignment_0 extends AssignmentToken  {
 	
 	public Element_OptionalAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -138,14 +141,14 @@ protected class Element_OptionalAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("optional",false)) == null) return null;
@@ -174,14 +177,14 @@ protected class Element_ElementKeyword_1 extends KeywordToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Element_OptionalAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -216,7 +219,7 @@ protected class Element_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// (descriptions+=STRING)*
+// descriptions+=STRING*
 protected class Element_DescriptionsAssignment_3 extends AssignmentToken  {
 	
 	public Element_DescriptionsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {

@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (child=Greeting)?;
+ *   child=Greeting?;
  *
  **/
 
-// (child=Greeting)?
+// child=Greeting?
 protected class Model_ChildAssignment extends AssignmentToken  {
 	
 	public Model_ChildAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -67,6 +67,7 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -83,9 +84,10 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
 		}	
 	}	
 }
@@ -120,6 +122,7 @@ protected class Greeting_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -137,14 +140,14 @@ protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 

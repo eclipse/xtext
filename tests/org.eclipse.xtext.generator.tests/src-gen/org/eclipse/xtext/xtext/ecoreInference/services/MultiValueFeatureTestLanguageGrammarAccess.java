@@ -23,10 +23,10 @@ public class MultiValueFeatureTestLanguageGrammarAccess implements IGrammarAcces
 		private final RuleCall cFeatureAIDTerminalRuleCall_0 = (RuleCall)cFeatureAAssignment.eContents().get(0);
 		
 		//Start:
-		//  (featureA+=ID)+;
+		//  featureA+=ID+;
 		public ParserRule getRule() { return rule; }
 
-		//(featureA+=ID)+
+		//featureA+=ID+
 		public Assignment getFeatureAAssignment() { return cFeatureAAssignment; }
 
 		//ID
@@ -58,7 +58,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess implements IGrammarAcces
 
 	
 	//Start:
-	//  (featureA+=ID)+;
+	//  featureA+=ID+;
 	public StartElements getStartAccess() {
 		return (pStart != null) ? pStart : (pStart = new StartElements());
 	}

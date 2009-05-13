@@ -23,10 +23,10 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cElementsAnElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//MainModel:
-		//  (elements+=AnElement)*;
+		//  elements+=AnElement*;
 		public ParserRule getRule() { return rule; }
 
-		//(elements+=AnElement)*
+		//elements+=AnElement*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
 		//AnElement
@@ -103,7 +103,7 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//MainModel:
-	//  (elements+=AnElement)*;
+	//  elements+=AnElement*;
 	public MainModelElements getMainModelAccess() {
 		return (pMainModel != null) ? pMainModel : (pMainModel = new MainModelElements());
 	}

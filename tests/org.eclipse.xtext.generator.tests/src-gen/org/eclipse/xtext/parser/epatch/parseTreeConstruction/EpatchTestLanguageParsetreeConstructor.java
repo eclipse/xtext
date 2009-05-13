@@ -66,11 +66,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EPatch ****************
  *
  * EPatch:
- *   "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
+ *   "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
  *
  **/
 
-// "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}"
+// "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}"
 protected class EPatch_Group extends GroupToken {
 	
 	public EPatch_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -90,6 +90,7 @@ protected class EPatch_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEPatchRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -107,14 +108,14 @@ protected class EPatch_EpatchKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -169,7 +170,7 @@ protected class EPatch_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 		
 }
 
-// (imports+=Import)*
+// imports+=Import*
 protected class EPatch_ImportsAssignment_3 extends AssignmentToken  {
 	
 	public EPatch_ImportsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -201,16 +202,16 @@ protected class EPatch_ImportsAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPatch_ImportsAssignment_3(parent, next, 0, consumed);
-			case 1: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, 1, consumed);
+			case 0: return new EPatch_ImportsAssignment_3(parent, next, actIndex, consumed);
+			case 1: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// (resources+=NamedResource)*
+// resources+=NamedResource*
 protected class EPatch_ResourcesAssignment_4 extends AssignmentToken  {
 	
 	public EPatch_ResourcesAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -242,17 +243,17 @@ protected class EPatch_ResourcesAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPatch_ResourcesAssignment_4(parent, next, 0, consumed);
-			case 1: return new EPatch_ImportsAssignment_3(parent, next, 1, consumed);
-			case 2: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, 2, consumed);
+			case 0: return new EPatch_ResourcesAssignment_4(parent, next, actIndex, consumed);
+			case 1: return new EPatch_ImportsAssignment_3(parent, next, actIndex, consumed);
+			case 2: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// (objects+=ObjectRef)*
+// objects+=ObjectRef*
 protected class EPatch_ObjectsAssignment_5 extends AssignmentToken  {
 	
 	public EPatch_ObjectsAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -284,12 +285,12 @@ protected class EPatch_ObjectsAssignment_5 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPatch_ObjectsAssignment_5(parent, next, 0, consumed);
-			case 1: return new EPatch_ResourcesAssignment_4(parent, next, 1, consumed);
-			case 2: return new EPatch_ImportsAssignment_3(parent, next, 2, consumed);
-			case 3: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, 3, consumed);
+			case 0: return new EPatch_ObjectsAssignment_5(parent, next, actIndex, consumed);
+			case 1: return new EPatch_ResourcesAssignment_4(parent, next, actIndex, consumed);
+			case 2: return new EPatch_ImportsAssignment_3(parent, next, actIndex, consumed);
+			case 3: return new EPatch_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -351,6 +352,7 @@ protected class Import_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -379,9 +381,10 @@ protected class Import_ModelImportParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -410,9 +413,10 @@ protected class Import_JavaImportParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -441,9 +445,10 @@ protected class Import_ExtensionImportParserRuleCall_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -480,6 +485,7 @@ protected class ModelImport_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -508,9 +514,10 @@ protected class ModelImport_ResourceImportParserRuleCall_0 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -539,9 +546,10 @@ protected class ModelImport_EPackageImportParserRuleCall_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -577,6 +585,7 @@ protected class ResourceImport_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getResourceImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -594,14 +603,14 @@ protected class ResourceImport_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -718,6 +727,7 @@ protected class EPackageImport_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEPackageImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -735,14 +745,14 @@ protected class EPackageImport_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -860,6 +870,7 @@ protected class JavaImport_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getJavaImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -877,14 +888,14 @@ protected class JavaImport_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1044,6 +1055,7 @@ protected class ExtensionImport_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getExtensionImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1061,14 +1073,14 @@ protected class ExtensionImport_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1227,6 +1239,7 @@ protected class NamedResource_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNamedResourceRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1244,14 +1257,14 @@ protected class NamedResource_ResourceKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1451,9 +1464,9 @@ protected class NamedResource_LeftRootAssignment_4_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new NamedResource_LeftKeyword_3(parent, next, 0, consumed);
+			case 0: return new NamedResource_LeftKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1625,9 +1638,9 @@ protected class NamedResource_RightRootAssignment_7_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new NamedResource_RightKeyword_6(parent, next, 0, consumed);
+			case 0: return new NamedResource_RightKeyword_6(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1706,6 +1719,7 @@ protected class NamedObject_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNamedObjectRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1734,9 +1748,10 @@ protected class NamedObject_ObjectRefParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -1765,9 +1780,10 @@ protected class NamedObject_CreatedObjectParserRuleCall_1 extends RuleCallToken 
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -1779,11 +1795,11 @@ protected class NamedObject_CreatedObjectParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule ObjectRef ****************
  *
  * ObjectRef:
- *   "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+ *   "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
  *
  **/
 
-// "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+// "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 protected class ObjectRef_Group extends GroupToken {
 	
 	public ObjectRef_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1804,6 +1820,7 @@ protected class ObjectRef_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getObjectRefRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1821,18 +1838,18 @@ protected class ObjectRef_ObjectKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (name=ID)?
+// name=ID?
 protected class ObjectRef_NameAssignment_1 extends AssignmentToken  {
 	
 	public ObjectRef_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -2257,10 +2274,10 @@ protected class ObjectRef_AssignmentsAssignment_3_1_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ObjectRef_Alternatives_3_1(parent, next, 0, consumed);
-			case 1: return new ObjectRef_LeftCurlyBracketKeyword_3_0(parent, next, 1, consumed);
+			case 0: return new ObjectRef_Alternatives_3_1(parent, next, actIndex, consumed);
+			case 1: return new ObjectRef_LeftCurlyBracketKeyword_3_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2298,10 +2315,10 @@ protected class ObjectRef_AssignmentsAssignment_3_1_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ObjectRef_Alternatives_3_1(parent, next, 0, consumed);
-			case 1: return new ObjectRef_LeftCurlyBracketKeyword_3_0(parent, next, 1, consumed);
+			case 0: return new ObjectRef_Alternatives_3_1(parent, next, actIndex, consumed);
+			case 1: return new ObjectRef_LeftCurlyBracketKeyword_3_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2380,9 +2397,9 @@ protected class ObjectRef_LeftMigAssignment_3_2_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ObjectRef_LeftKeyword_3_2_0(parent, next, 0, consumed);
+			case 0: return new ObjectRef_LeftKeyword_3_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2462,9 +2479,9 @@ protected class ObjectRef_RightMigAssignment_3_3_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ObjectRef_RightKeyword_3_3_0(parent, next, 0, consumed);
+			case 0: return new ObjectRef_RightKeyword_3_3_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2528,6 +2545,7 @@ protected class Assignment_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -2556,9 +2574,10 @@ protected class Assignment_BiSingleAssignmentParserRuleCall_0 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2587,9 +2606,10 @@ protected class Assignment_BiListAssignmentParserRuleCall_1 extends RuleCallToke
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2618,9 +2638,10 @@ protected class Assignment_MonoSingleAssignmentParserRuleCall_2 extends RuleCall
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2649,9 +2670,10 @@ protected class Assignment_MonoListAssignmentParserRuleCall_3 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2687,6 +2709,7 @@ protected class BiSingleAssignment_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -2704,14 +2727,14 @@ protected class BiSingleAssignment_FeatureAssignment_0 extends AssignmentToken  
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -2778,9 +2801,9 @@ protected class BiSingleAssignment_LeftValueAssignment_2 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiSingleAssignment_EqualsSignKeyword_1(parent, next, 0, consumed);
+			case 0: return new BiSingleAssignment_EqualsSignKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2838,9 +2861,9 @@ protected class BiSingleAssignment_RightValueAssignment_4 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiSingleAssignment_VerticalLineKeyword_3(parent, next, 0, consumed);
+			case 0: return new BiSingleAssignment_VerticalLineKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2897,6 +2920,7 @@ protected class BiListAssignment_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getBiListAssignmentRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -2914,14 +2938,14 @@ protected class BiListAssignment_FeatureAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -3029,9 +3053,9 @@ protected class BiListAssignment_LeftValuesAssignment_3_0 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiListAssignment_LeftSquareBracketKeyword_2(parent, next, 0, consumed);
+			case 0: return new BiListAssignment_LeftSquareBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3110,9 +3134,9 @@ protected class BiListAssignment_LeftValuesAssignment_3_1_1 extends AssignmentTo
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiListAssignment_CommaKeyword_3_1_0(parent, next, 0, consumed);
+			case 0: return new BiListAssignment_CommaKeyword_3_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3194,9 +3218,9 @@ protected class BiListAssignment_RightValuesAssignment_5_0 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiListAssignment_VerticalLineKeyword_4(parent, next, 0, consumed);
+			case 0: return new BiListAssignment_VerticalLineKeyword_4(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3275,9 +3299,9 @@ protected class BiListAssignment_RightValuesAssignment_5_1_1 extends AssignmentT
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new BiListAssignment_CommaKeyword_5_1_0(parent, next, 0, consumed);
+			case 0: return new BiListAssignment_CommaKeyword_5_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3357,6 +3381,7 @@ protected class MonoSingleAssignment_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -3374,14 +3399,14 @@ protected class MonoSingleAssignment_FeatureAssignment_0 extends AssignmentToken
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -3448,9 +3473,9 @@ protected class MonoSingleAssignment_LeftValueAssignment_2 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new MonoSingleAssignment_EqualsSignKeyword_1(parent, next, 0, consumed);
+			case 0: return new MonoSingleAssignment_EqualsSignKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3507,6 +3532,7 @@ protected class MonoListAssignment_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMonoListAssignmentRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -3524,14 +3550,14 @@ protected class MonoListAssignment_FeatureAssignment_0 extends AssignmentToken  
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -3639,9 +3665,9 @@ protected class MonoListAssignment_LeftValuesAssignment_3_0 extends AssignmentTo
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new MonoListAssignment_LeftSquareBracketKeyword_2(parent, next, 0, consumed);
+			case 0: return new MonoListAssignment_LeftSquareBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3720,9 +3746,9 @@ protected class MonoListAssignment_LeftValuesAssignment_3_1_1 extends Assignment
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new MonoListAssignment_CommaKeyword_3_1_0(parent, next, 0, consumed);
+			case 0: return new MonoListAssignment_CommaKeyword_3_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3805,6 +3831,7 @@ protected class AssignmentValue_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssignmentValueRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -3822,14 +3849,14 @@ protected class AssignmentValue_ValueAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -3878,14 +3905,14 @@ protected class AssignmentValue_RefObjectAssignment_1_0 extends AssignmentToken 
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refObject",true)) == null) return null;
@@ -4101,9 +4128,10 @@ protected class AssignmentValue_NewObjectAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
 		}	
 	}	
 }
@@ -4141,14 +4169,14 @@ protected class AssignmentValue_ImportAssignment_3_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("import",true)) == null) return null;
@@ -4229,6 +4257,7 @@ protected class ListAssignmentValue_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -4246,14 +4275,14 @@ protected class ListAssignmentValue_IndexAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("index",true)) == null) return null;
@@ -4688,9 +4717,9 @@ protected class ListAssignmentValue_NewObjectAssignment_2_3 extends AssignmentTo
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ListAssignmentValue_ColonKeyword_1(parent, next, 0, consumed);
+			case 0: return new ListAssignmentValue_ColonKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4818,6 +4847,7 @@ protected class SingleAssignmentValue_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -4835,14 +4865,14 @@ protected class SingleAssignmentValue_KeywordAssignment_0 extends AssignmentToke
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("keyword",true)) == null) return null;
@@ -4870,14 +4900,14 @@ protected class SingleAssignmentValue_ValueAssignment_1 extends AssignmentToken 
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -4926,14 +4956,14 @@ protected class SingleAssignmentValue_RefObjectAssignment_2_0 extends Assignment
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refObject",true)) == null) return null;
@@ -5149,9 +5179,10 @@ protected class SingleAssignmentValue_NewObjectAssignment_3 extends AssignmentTo
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
 		}	
 	}	
 }
@@ -5189,14 +5220,14 @@ protected class SingleAssignmentValue_ImportAssignment_4_0 extends AssignmentTok
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("import",true)) == null) return null;
@@ -5253,11 +5284,11 @@ protected class SingleAssignmentValue_ImpFragAssignment_4_1 extends AssignmentTo
 /************ begin Rule CreatedObject ****************
  *
  * CreatedObject:
- *   (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
+ *   (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?;
  *
  **/
 
-// (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
+// (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
 protected class CreatedObject_Group extends GroupToken {
 	
 	public CreatedObject_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5279,6 +5310,7 @@ protected class CreatedObject_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -5328,9 +5360,10 @@ protected class CreatedObject_ObjectNewParserRuleCall_0_0 extends RuleCallToken 
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -5359,15 +5392,16 @@ protected class CreatedObject_ObjectCopyParserRuleCall_0_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
 
 
-// (name=ID)?
+// name=ID?
 protected class CreatedObject_NameAssignment_1 extends AssignmentToken  {
 	
 	public CreatedObject_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5398,7 +5432,7 @@ protected class CreatedObject_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
+// ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
 protected class CreatedObject_Group_2 extends GroupToken {
 	
 	public CreatedObject_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5492,10 +5526,10 @@ protected class CreatedObject_AssignmentsAssignment_2_1_0 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new CreatedObject_Alternatives_2_1(parent, next, 0, consumed);
-			case 1: return new CreatedObject_LeftCurlyBracketKeyword_2_0(parent, next, 1, consumed);
+			case 0: return new CreatedObject_Alternatives_2_1(parent, next, actIndex, consumed);
+			case 1: return new CreatedObject_LeftCurlyBracketKeyword_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5533,17 +5567,17 @@ protected class CreatedObject_AssignmentsAssignment_2_1_1 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new CreatedObject_Alternatives_2_1(parent, next, 0, consumed);
-			case 1: return new CreatedObject_LeftCurlyBracketKeyword_2_0(parent, next, 1, consumed);
+			case 0: return new CreatedObject_Alternatives_2_1(parent, next, actIndex, consumed);
+			case 1: return new CreatedObject_LeftCurlyBracketKeyword_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// (leftMig=Migration)?
+// leftMig=Migration?
 protected class CreatedObject_LeftMigAssignment_2_2 extends AssignmentToken  {
 	
 	public CreatedObject_LeftMigAssignment_2_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5575,9 +5609,9 @@ protected class CreatedObject_LeftMigAssignment_2_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new CreatedObject_Alternatives_2_1(parent, next, 0, consumed);
+			case 0: return new CreatedObject_Alternatives_2_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5636,6 +5670,7 @@ protected class ObjectNew_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getObjectNewRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -5653,14 +5688,14 @@ protected class ObjectNew_NewKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -5760,6 +5795,7 @@ protected class ObjectCopy_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getObjectCopyRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -5777,14 +5813,14 @@ protected class ObjectCopy_CopyKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -5860,11 +5896,11 @@ protected class ObjectCopy_FragmentAssignment_2 extends AssignmentToken  {
 /************ begin Rule Migration ****************
  *
  * Migration:
- *   "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
+ *   "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
  *
  **/
 
-// "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
+// "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
 protected class Migration_Group extends GroupToken {
 	
 	public Migration_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5884,6 +5920,7 @@ protected class Migration_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -5901,18 +5938,18 @@ protected class Migration_MigrateKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (first=Executable)?
+// first=Executable?
 protected class Migration_FirstAssignment_1 extends AssignmentToken  {
 	
 	public Migration_FirstAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5944,9 +5981,9 @@ protected class Migration_FirstAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Migration_MigrateKeyword_0(parent, next, 0, consumed);
+			case 0: return new Migration_MigrateKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6046,9 +6083,9 @@ protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Migration_AsKeyword_2_0_0(parent, next, 0, consumed);
+			case 0: return new Migration_AsKeyword_2_0_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6128,9 +6165,9 @@ protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Migration_EachKeyword_2_1_0(parent, next, 0, consumed);
+			case 0: return new Migration_EachKeyword_2_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6192,6 +6229,7 @@ protected class Executable_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -6220,9 +6258,10 @@ protected class Executable_JavaExecutableParserRuleCall_0 extends RuleCallToken 
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -6251,9 +6290,10 @@ protected class Executable_ExpressionExecutableParserRuleCall_1 extends RuleCall
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -6289,6 +6329,7 @@ protected class JavaExecutable_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getJavaExecutableRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -6306,14 +6347,14 @@ protected class JavaExecutable_JavaKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -6412,15 +6453,15 @@ protected class ExpressionExecutable_ExprstrAssignment extends AssignmentToken  
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getExpressionExecutableRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("exprstr",true)) == null) return null;

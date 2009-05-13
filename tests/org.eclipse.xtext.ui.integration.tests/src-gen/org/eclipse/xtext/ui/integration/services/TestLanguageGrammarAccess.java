@@ -23,10 +23,10 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cStuffStuffParserRuleCall_0 = (RuleCall)cStuffAssignment.eContents().get(0);
 		
 		//File:
-		//  (stuff+=Stuff)*;
+		//  stuff+=Stuff*;
 		public ParserRule getRule() { return rule; }
 
-		//(stuff+=Stuff)*
+		//stuff+=Stuff*
 		public Assignment getStuffAssignment() { return cStuffAssignment; }
 
 		//Stuff
@@ -83,7 +83,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//File:
-	//  (stuff+=Stuff)*;
+	//  stuff+=Stuff*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}

@@ -23,10 +23,10 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
 		//Model:
-		//  (types+=Type)*;
+		//  types+=Type*;
 		public ParserRule getRule() { return rule; }
 
-		//(types+=Type)*
+		//types+=Type*
 		public Assignment getTypesAssignment() { return cTypesAssignment; }
 
 		//Type
@@ -63,10 +63,10 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" (properties+=Property)* "}";
+		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" (properties+=Property)* "}"
+		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -135,7 +135,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//(properties+=Property)*
+		//properties+=Property*
 		public Assignment getPropertiesAssignment_5() { return cPropertiesAssignment_5; }
 
 		//Property
@@ -156,13 +156,13 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Property:
-		//  (type+=[Type])+ name=ID ";";
+		//  type+=[Type]+ name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//(type+=[Type])+ name=ID ";"
+		//type+=[Type]+ name=ID ";"
 		public Group getGroup() { return cGroup; }
 
-		//(type+=[Type])+
+		//type+=[Type]+
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
 		//[Type]
@@ -208,7 +208,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  (types+=Type)*;
+	//  types+=Type*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -218,7 +218,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" (properties+=Property)* "}";
+	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -228,7 +228,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Property:
-	//  (type+=[Type])+ name=ID ";";
+	//  type+=[Type]+ name=ID ";";
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}

@@ -143,10 +143,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
 		//Parens returns Expression:
-		//  "(" Op ")" (em="!")?;
+		//  "(" Op ")" em="!"?;
 		public ParserRule getRule() { return rule; }
 
-		//"(" Op ")" (em="!")?
+		//"(" Op ")" em="!"?
 		public Group getGroup() { return cGroup; }
 
 		//"("
@@ -158,7 +158,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
-		//(em="!")?
+		//em="!"?
 		public Assignment getEmAssignment_3() { return cEmAssignment_3; }
 
 		//"!"
@@ -183,10 +183,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cNameSTRINGTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
 		
 		//TrickyA returns TypeA1:
-		//  "TA" TrickyA1 (name+=ID)* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"TA" TrickyA1 (name+=ID)* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING
+		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING
 		public Group getGroup() { return cGroup; }
 
 		//"TA"
@@ -195,7 +195,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//TrickyA1
 		public RuleCall getTrickyA1ParserRuleCall_1() { return cTrickyA1ParserRuleCall_1; }
 
-		//(name+=ID)*
+		//name+=ID*
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
@@ -258,10 +258,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cTypeINTTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//TrickyB:
-		//  "TB" (name=ID type+=INT)? (type+=INT)*;
+		//  "TB" (name=ID type+=INT)? type+=INT*;
 		public ParserRule getRule() { return rule; }
 
-		//"TB" (name=ID type+=INT)? (type+=INT)*
+		//"TB" (name=ID type+=INT)? type+=INT*
 		public Group getGroup() { return cGroup; }
 
 		//"TB"
@@ -282,7 +282,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//INT
 		public RuleCall getTypeINTTerminalRuleCall_1_1_0() { return cTypeINTTerminalRuleCall_1_1_0; }
 
-		//(type+=INT)*
+		//type+=INT*
 		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 
 		//INT
@@ -369,10 +369,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cTypeIDTerminalRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
 		//TrickyD:
-		//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? (type+=ID)*;
+		//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 		public ParserRule getRule() { return rule; }
 
-		//"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? (type+=ID)*
+		//"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
 		public Group getGroup() { return cGroup; }
 
 		//"TD"
@@ -414,7 +414,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//ID
 		public RuleCall getTypeIDTerminalRuleCall_2_1_0() { return cTypeIDTerminalRuleCall_2_1_0; }
 
-		//(type+=ID)*
+		//type+=ID*
 		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
 
 		//ID
@@ -720,7 +720,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//Parens returns Expression:
-	//  "(" Op ")" (em="!")?;
+	//  "(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	}
@@ -730,7 +730,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//TrickyA returns TypeA1:
-	//  "TA" TrickyA1 (name+=ID)* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
 	public TrickyAElements getTrickyAAccess() {
 		return (pTrickyA != null) ? pTrickyA : (pTrickyA = new TrickyAElements());
 	}
@@ -750,7 +750,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//TrickyB:
-	//  "TB" (name=ID type+=INT)? (type+=INT)*;
+	//  "TB" (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
 		return (pTrickyB != null) ? pTrickyB : (pTrickyB = new TrickyBElements());
 	}
@@ -770,7 +770,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//TrickyD:
-	//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? (type+=ID)*;
+	//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 	public TrickyDElements getTrickyDAccess() {
 		return (pTrickyD != null) ? pTrickyD : (pTrickyD = new TrickyDElements());
 	}

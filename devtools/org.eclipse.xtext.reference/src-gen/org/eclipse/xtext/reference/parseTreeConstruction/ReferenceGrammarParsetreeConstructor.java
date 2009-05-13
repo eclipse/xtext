@@ -49,11 +49,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz:
- *   ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
+ *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
  *
  **/
 
-// ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
+// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -73,6 +73,7 @@ protected class Spielplatz_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -90,14 +91,14 @@ protected class Spielplatz_SpielplatzKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -132,7 +133,7 @@ protected class Spielplatz_GroesseAssignment_1 extends AssignmentToken  {
 
 }
 
-// (beschreibung=STRING)?
+// beschreibung=STRING?
 protected class Spielplatz_BeschreibungAssignment_2 extends AssignmentToken  {
 	
 	public Spielplatz_BeschreibungAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -240,10 +241,10 @@ protected class Spielplatz_KinderAssignment_4_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new Spielplatz_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -281,10 +282,10 @@ protected class Spielplatz_ErzieherAssignment_4_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new Spielplatz_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -322,10 +323,10 @@ protected class Spielplatz_SpielzeugeAssignment_4_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new Spielplatz_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -363,10 +364,10 @@ protected class Spielplatz_FamilieAssignment_4_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new Spielplatz_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -404,10 +405,10 @@ protected class Spielplatz_TypesAssignment_4_4 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new Spielplatz_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -467,6 +468,7 @@ protected class Person_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -495,9 +497,10 @@ protected class Person_KindParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -526,9 +529,10 @@ protected class Person_ErwachsenerParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -564,6 +568,7 @@ protected class Kind_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -581,14 +586,14 @@ protected class Kind_KindKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -725,6 +730,7 @@ protected class Erwachsener_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -742,14 +748,14 @@ protected class Erwachsener_ErwachsenerKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -886,6 +892,7 @@ protected class Spielzeug_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -903,14 +910,14 @@ protected class Spielzeug_SpielzeugKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -997,9 +1004,9 @@ protected class Spielzeug_FarbeAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Spielzeug_NameAssignment_2(parent, next, 0, consumed);
+			case 0: return new Spielzeug_NameAssignment_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1056,6 +1063,7 @@ protected class Familie_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1073,14 +1081,14 @@ protected class Familie_FamilieKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1368,15 +1376,15 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("wert",true)) == null) return null;
@@ -1436,6 +1444,7 @@ protected class CustomTypeParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1453,14 +1462,14 @@ protected class CustomTypeParserRule_TypeKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 

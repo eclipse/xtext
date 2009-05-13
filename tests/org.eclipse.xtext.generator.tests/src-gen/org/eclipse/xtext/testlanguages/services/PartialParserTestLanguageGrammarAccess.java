@@ -79,10 +79,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Nested:
-		//  "nested" "{" (nested+=SomeContainer)+ "}";
+		//  "nested" "{" nested+=SomeContainer+ "}";
 		public ParserRule getRule() { return rule; }
 
-		//"nested" "{" (nested+=SomeContainer)+ "}"
+		//"nested" "{" nested+=SomeContainer+ "}"
 		public Group getGroup() { return cGroup; }
 
 		//"nested"
@@ -91,7 +91,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(nested+=SomeContainer)+
+		//nested+=SomeContainer+
 		public Assignment getNestedAssignment_2() { return cNestedAssignment_2; }
 
 		//SomeContainer
@@ -215,10 +215,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//AbstractChildren:
-		//  "abstract children" "{" (abstractChildren+=AbstractChild)+ "}";
+		//  "abstract children" "{" abstractChildren+=AbstractChild+ "}";
 		public ParserRule getRule() { return rule; }
 
-		//"abstract children" "{" (abstractChildren+=AbstractChild)+ "}"
+		//"abstract children" "{" abstractChildren+=AbstractChild+ "}"
 		public Group getGroup() { return cGroup; }
 
 		//"abstract children"
@@ -227,7 +227,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(abstractChildren+=AbstractChild)+
+		//abstractChildren+=AbstractChild+
 		public Assignment getAbstractChildrenAssignment_2() { return cAbstractChildrenAssignment_2; }
 
 		//AbstractChild
@@ -271,10 +271,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FirstConcrete:
-		//  "->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")";
+		//  "->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
 		public ParserRule getRule() { return rule; }
 
-		//"->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")"
+		//"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")"
 		public Group getGroup() { return cGroup; }
 
 		//"->"
@@ -292,7 +292,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		//Named
 		public RuleCall getValueNamedParserRuleCall_3_0() { return cValueNamedParserRuleCall_3_0; }
 
-		//(referencedContainer=[SomeContainer])?
+		//referencedContainer=[SomeContainer]?
 		public Assignment getReferencedContainerAssignment_4() { return cReferencedContainerAssignment_4; }
 
 		//[SomeContainer]
@@ -320,10 +320,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//SecondConcrete:
-		//  "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")";
+		//  "->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
 		public ParserRule getRule() { return rule; }
 
-		//"->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")"
+		//"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")"
 		public Group getGroup() { return cGroup; }
 
 		//"->"
@@ -344,7 +344,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		//Named
 		public RuleCall getValueNamedParserRuleCall_4_0() { return cValueNamedParserRuleCall_4_0; }
 
-		//(referencedChildren+=[Child])?
+		//referencedChildren+=[Child]?
 		public Assignment getReferencedChildrenAssignment_5() { return cReferencedChildrenAssignment_5; }
 
 		//[Child]
@@ -417,7 +417,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Nested:
-	//  "nested" "{" (nested+=SomeContainer)+ "}";
+	//  "nested" "{" nested+=SomeContainer+ "}";
 	public NestedElements getNestedAccess() {
 		return (pNested != null) ? pNested : (pNested = new NestedElements());
 	}
@@ -457,7 +457,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractChildren:
-	//  "abstract children" "{" (abstractChildren+=AbstractChild)+ "}";
+	//  "abstract children" "{" abstractChildren+=AbstractChild+ "}";
 	public AbstractChildrenElements getAbstractChildrenAccess() {
 		return (pAbstractChildren != null) ? pAbstractChildren : (pAbstractChildren = new AbstractChildrenElements());
 	}
@@ -477,7 +477,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//FirstConcrete:
-	//  "->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")";
+	//  "->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
 	public FirstConcreteElements getFirstConcreteAccess() {
 		return (pFirstConcrete != null) ? pFirstConcrete : (pFirstConcrete = new FirstConcreteElements());
 	}
@@ -487,7 +487,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//SecondConcrete:
-	//  "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")";
+	//  "->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
 	public SecondConcreteElements getSecondConcreteAccess() {
 		return (pSecondConcrete != null) ? pSecondConcrete : (pSecondConcrete = new SecondConcreteElements());
 	}

@@ -23,10 +23,10 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cChildrenNodeParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//Model:
-		//  (children+=Node)*;
+		//  children+=Node*;
 		public ParserRule getRule() { return rule; }
 
-		//(children+=Node)*
+		//children+=Node*
 		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
 
 		//Node
@@ -48,10 +48,10 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Node:
-		//  name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
+		//  name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};"
+		//name=ID "(" attrib=STRING ")" "{" children+=Node* "};"
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -75,7 +75,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//(children+=Node)*
+		//children+=Node*
 		public Assignment getChildrenAssignment_5() { return cChildrenAssignment_5; }
 
 		//Node
@@ -111,7 +111,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  (children+=Node)*;
+	//  children+=Node*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -121,7 +121,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Node:
-	//  name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
+	//  name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
 	public NodeElements getNodeAccess() {
 		return (pNode != null) ? pNode : (pNode = new NodeElements());
 	}

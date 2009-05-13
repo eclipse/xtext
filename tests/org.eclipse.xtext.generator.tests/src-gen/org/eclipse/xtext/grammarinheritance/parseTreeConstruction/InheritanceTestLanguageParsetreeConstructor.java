@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=ID "{" (elements+=Element)* "}";
+ *   "model" name=ID "{" elements+=Element* "}";
  *
  **/
 
-// "model" name=ID "{" (elements+=Element)* "}"
+// "model" name=ID "{" elements+=Element* "}"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -67,6 +67,7 @@ protected class Model_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -84,14 +85,14 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -146,7 +147,7 @@ protected class Model_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 		
 }
 
-// (elements+=Element)*
+// elements+=Element*
 protected class Model_ElementsAssignment_3 extends AssignmentToken  {
 	
 	public Model_ElementsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -178,10 +179,10 @@ protected class Model_ElementsAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Model_ElementsAssignment_3(parent, next, 0, consumed);
-			case 1: return new Model_LeftCurlyBracketKeyword_2(parent, next, 1, consumed);
+			case 0: return new Model_ElementsAssignment_3(parent, next, actIndex, consumed);
+			case 1: return new Model_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -239,6 +240,7 @@ protected class Element_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -256,14 +258,14 @@ protected class Element_ElementKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 

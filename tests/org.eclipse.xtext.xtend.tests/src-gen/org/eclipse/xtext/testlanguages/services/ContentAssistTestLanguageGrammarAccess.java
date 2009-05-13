@@ -26,16 +26,16 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Start:
-		//  "abstract rules" (rules+=AbstractRule)+ "end";
+		//  "abstract rules" rules+=AbstractRule+ "end";
 		public ParserRule getRule() { return rule; }
 
-		//"abstract rules" (rules+=AbstractRule)+ "end"
+		//"abstract rules" rules+=AbstractRule+ "end"
 		public Group getGroup() { return cGroup; }
 
 		//"abstract rules"
 		public Keyword getAbstractRulesKeyword_0() { return cAbstractRulesKeyword_0; }
 
-		//(rules+=AbstractRule)+
+		//rules+=AbstractRule+
 		public Assignment getRulesAssignment_1() { return cRulesAssignment_1; }
 
 		//AbstractRule
@@ -77,10 +77,10 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//FirstAbstractRuleChild:
-		//  name=ID "(" (elements+=AbstractRule)+ ")" ";";
+		//  name=ID "(" elements+=AbstractRule+ ")" ";";
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "(" (elements+=AbstractRule)+ ")" ";"
+		//name=ID "(" elements+=AbstractRule+ ")" ";"
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -92,7 +92,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(elements+=AbstractRule)+
+		//elements+=AbstractRule+
 		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
 
 		//AbstractRule
@@ -194,7 +194,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Start:
-	//  "abstract rules" (rules+=AbstractRule)+ "end";
+	//  "abstract rules" rules+=AbstractRule+ "end";
 	public StartElements getStartAccess() {
 		return (pStart != null) ? pStart : (pStart = new StartElements());
 	}
@@ -214,7 +214,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//FirstAbstractRuleChild:
-	//  name=ID "(" (elements+=AbstractRule)+ ")" ";";
+	//  name=ID "(" elements+=AbstractRule+ ")" ";";
 	public FirstAbstractRuleChildElements getFirstAbstractRuleChildAccess() {
 		return (pFirstAbstractRuleChild != null) ? pFirstAbstractRuleChild : (pFirstAbstractRuleChild = new FirstAbstractRuleChildElements());
 	}

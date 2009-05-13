@@ -85,16 +85,16 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//TestLinewrap:
-		//  "linewrap" (items+=Line)*;
+		//  "linewrap" items+=Line*;
 		public ParserRule getRule() { return rule; }
 
-		//"linewrap" (items+=Line)*
+		//"linewrap" items+=Line*
 		public Group getGroup() { return cGroup; }
 
 		//"linewrap"
 		public Keyword getLinewrapKeyword_0() { return cLinewrapKeyword_0; }
 
-		//(items+=Line)*
+		//items+=Line*
 		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
 
 		//Line
@@ -193,7 +193,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TestLinewrap:
-	//  "linewrap" (items+=Line)*;
+	//  "linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
 		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
 	}

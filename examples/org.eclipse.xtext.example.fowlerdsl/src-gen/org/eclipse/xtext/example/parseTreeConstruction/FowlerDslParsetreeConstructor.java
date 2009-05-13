@@ -46,11 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Statemachine ****************
  *
  * Statemachine:
- *   "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
+ *   "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
  *
  **/
 
-// "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*
+// "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
 protected class Statemachine_Group extends GroupToken {
 	
 	public Statemachine_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -71,6 +71,7 @@ protected class Statemachine_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStatemachineRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -88,18 +89,18 @@ protected class Statemachine_EventsKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (events+=Event)*
+// events+=Event*
 protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 	
 	public Statemachine_EventsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -131,10 +132,10 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Statemachine_EventsAssignment_1(parent, next, 0, consumed);
-			case 1: return new Statemachine_EventsKeyword_0(parent, next, 1, consumed);
+			case 0: return new Statemachine_EventsAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new Statemachine_EventsKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -181,7 +182,7 @@ protected class Statemachine_CommandsKeyword_3 extends KeywordToken  {
 		
 }
 
-// (commands+=Command)*
+// commands+=Command*
 protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 	
 	public Statemachine_CommandsAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -213,10 +214,10 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Statemachine_CommandsAssignment_4(parent, next, 0, consumed);
-			case 1: return new Statemachine_CommandsKeyword_3(parent, next, 1, consumed);
+			case 0: return new Statemachine_CommandsAssignment_4(parent, next, actIndex, consumed);
+			case 1: return new Statemachine_CommandsKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -243,7 +244,7 @@ protected class Statemachine_EndKeyword_5 extends KeywordToken  {
 		
 }
 
-// (states+=State)*
+// states+=State*
 protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 	
 	public Statemachine_StatesAssignment_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -275,10 +276,10 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Statemachine_StatesAssignment_6(parent, next, 0, consumed);
-			case 1: return new Statemachine_EndKeyword_5(parent, next, 1, consumed);
+			case 0: return new Statemachine_StatesAssignment_6(parent, next, actIndex, consumed);
+			case 1: return new Statemachine_EndKeyword_5(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -291,11 +292,11 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 /************ begin Rule Event ****************
  *
  * Event:
- *   (resetting?="resetting")? name=ID code=ID;
+ *   resetting?="resetting"? name=ID code=ID;
  *
  **/
 
-// (resetting?="resetting")? name=ID code=ID
+// resetting?="resetting"? name=ID code=ID
 protected class Event_Group extends GroupToken {
 	
 	public Event_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -315,11 +316,12 @@ protected class Event_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (resetting?="resetting")?
+// resetting?="resetting"?
 protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 	
 	public Event_ResettingAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -332,14 +334,14 @@ protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resetting",false)) == null) return null;
@@ -368,14 +370,14 @@ protected class Event_NameAssignment_1 extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Event_ResettingAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -452,6 +454,7 @@ protected class Command_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -469,14 +472,14 @@ protected class Command_NameAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -529,11 +532,11 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- *   "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
+ *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
  *
  **/
 
-// "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end"
+// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -553,6 +556,7 @@ protected class State_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -570,14 +574,14 @@ protected class State_StateKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -612,7 +616,7 @@ protected class State_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("actions" "{" (actions+=[Command])+ "}")?
+// ("actions" "{" actions+=[Command]+ "}")?
 protected class State_Group_2 extends GroupToken {
 	
 	public State_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -672,7 +676,7 @@ protected class State_LeftCurlyBracketKeyword_2_1 extends KeywordToken  {
 		
 }
 
-// (actions+=[Command])+
+// actions+=[Command]+
 protected class State_ActionsAssignment_2_2 extends AssignmentToken  {
 	
 	public State_ActionsAssignment_2_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -728,7 +732,7 @@ protected class State_RightCurlyBracketKeyword_2_3 extends KeywordToken  {
 }
 
 
-// (transitions+=Transition)*
+// transitions+=Transition*
 protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 	
 	public State_TransitionsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -760,11 +764,11 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new State_TransitionsAssignment_3(parent, next, 0, consumed);
-			case 1: return new State_Group_2(parent, next, 1, consumed);
-			case 2: return new State_NameAssignment_1(parent, next, 2, consumed);
+			case 0: return new State_TransitionsAssignment_3(parent, next, actIndex, consumed);
+			case 1: return new State_Group_2(parent, next, actIndex, consumed);
+			case 2: return new State_NameAssignment_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -823,6 +827,7 @@ protected class Transition_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -840,14 +845,14 @@ protected class Transition_EventAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("event",true)) == null) return null;

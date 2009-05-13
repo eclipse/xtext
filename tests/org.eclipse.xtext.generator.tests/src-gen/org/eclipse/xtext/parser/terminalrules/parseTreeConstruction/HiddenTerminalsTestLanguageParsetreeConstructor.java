@@ -78,6 +78,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -106,9 +107,10 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -137,9 +139,10 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -168,9 +171,10 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -199,9 +203,10 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -230,9 +235,10 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -244,11 +250,11 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 /************ begin Rule WithoutHiddens ****************
  *
  * WithoutHiddens:
- *   "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
+ *   "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
  *
  **/
 
-// "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";"
+// "without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
 protected class WithoutHiddens_Group extends GroupToken {
 	
 	public WithoutHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -268,6 +274,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -285,14 +292,14 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -347,7 +354,7 @@ protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 		
 }
 
-// (spaces+=WS)?
+// spaces+=WS?
 protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	
 	public WithoutHiddens_SpacesAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -441,6 +448,7 @@ protected class WithHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -458,14 +466,14 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -551,6 +559,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -568,14 +577,14 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -651,9 +660,9 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new OverridingHiddens_LeftParenthesisKeyword_2(parent, next, 0, consumed);
+			case 0: return new OverridingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -717,11 +726,11 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 /************ begin Rule OverridingHiddensCall ****************
  *
  * OverridingHiddensCall hidden ( ):
- *   "call" (spaces+=WS)? valid?=";";
+ *   "call" spaces+=WS? valid?=";";
  *
  **/
 
-// "call" (spaces+=WS)? valid?=";"
+// "call" spaces+=WS? valid?=";"
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
 	public OverridingHiddensCall_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -741,6 +750,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -758,18 +768,18 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (spaces+=WS)?
+// spaces+=WS?
 protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken  {
 	
 	public OverridingHiddensCall_SpacesAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -863,6 +873,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -880,14 +891,14 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -984,9 +995,9 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, 0, consumed);
+			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1024,9 +1035,9 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, 0, consumed);
+			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1115,6 +1126,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1132,14 +1144,14 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1206,6 +1218,7 @@ protected class HidingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1223,14 +1236,14 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1297,9 +1310,9 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new HidingHiddens_SpaceAssignment_1(parent, next, 0, consumed);
+			case 0: return new HidingHiddens_SpaceAssignment_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1336,6 +1349,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1353,14 +1367,14 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 

@@ -29,10 +29,10 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Model:
-		//  "model" name=ID "{" (elements+=Element)* "}";
+		//  "model" name=ID "{" elements+=Element* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"model" name=ID "{" (elements+=Element)* "}"
+		//"model" name=ID "{" elements+=Element* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"model"
@@ -47,7 +47,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(elements+=Element)*
+		//elements+=Element*
 		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
 		//Element
@@ -107,7 +107,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  "model" name=ID "{" (elements+=Element)* "}";
+	//  "model" name=ID "{" elements+=Element* "}";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

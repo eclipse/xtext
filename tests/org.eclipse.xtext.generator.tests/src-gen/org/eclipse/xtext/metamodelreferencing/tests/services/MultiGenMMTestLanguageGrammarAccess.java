@@ -26,10 +26,10 @@ public class MultiGenMMTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cNameRefsNameRefParserRuleCall_1_0 = (RuleCall)cNameRefsAssignment_1.eContents().get(0);
 		
 		//Foo:
-		//  name=ID (nameRefs+=NameRef)*;
+		//  name=ID nameRefs+=NameRef*;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID (nameRefs+=NameRef)*
+		//name=ID nameRefs+=NameRef*
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -38,7 +38,7 @@ public class MultiGenMMTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//(nameRefs+=NameRef)*
+		//nameRefs+=NameRef*
 		public Assignment getNameRefsAssignment_1() { return cNameRefsAssignment_1; }
 
 		//NameRef
@@ -87,7 +87,7 @@ public class MultiGenMMTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Foo:
-	//  name=ID (nameRefs+=NameRef)*;
+	//  name=ID nameRefs+=NameRef*;
 	public FooElements getFooAccess() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	}
