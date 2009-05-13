@@ -20,7 +20,7 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EObjectDescriptor extends Serializable {
+public interface EObjectDescriptor {
 
 	public interface DAO extends IDAO<EObjectDescriptor> {
 		Query createQuery();

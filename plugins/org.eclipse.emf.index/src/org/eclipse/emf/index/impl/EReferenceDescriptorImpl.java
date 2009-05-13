@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
+import java.io.Serializable;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
@@ -14,7 +16,7 @@ import org.eclipse.emf.index.ResourceDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EReferenceDescriptorImpl implements EReferenceDescriptor {
+public class EReferenceDescriptorImpl implements EReferenceDescriptor, Serializable {
 
 	private static final long serialVersionUID = -9111865497767470045L;
 
