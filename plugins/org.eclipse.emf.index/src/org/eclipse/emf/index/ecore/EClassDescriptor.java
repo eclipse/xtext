@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore;
 
-import java.io.Serializable;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;

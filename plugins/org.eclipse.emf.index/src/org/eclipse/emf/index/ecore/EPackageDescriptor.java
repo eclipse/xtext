@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EPackage;
