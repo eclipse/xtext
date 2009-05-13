@@ -3,32 +3,40 @@
 */
 package org.eclipse.xtext.parser.keywords.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
-			final AbstractToken t = new Model_Alternatives(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public KeywordsTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Model ****************
@@ -41,132 +49,168 @@ public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeC
 // first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Model_0_Assignment_first(current, this);
-			case 1: return new Model_1_Assignment_second(current, this);
-			case 2: return new Model_2_Assignment_third(current, this);
-			case 3: return new Model_3_Assignment_forth(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_FirstAssignment_0(parent, this, 0, inst);
+			case 1: return new Model_SecondAssignment_1(parent, this, 1, inst);
+			case 2: return new Model_ThirdAssignment_2(parent, this, 2, inst);
+			case 3: return new Model_ForthAssignment_3(parent, this, 3, inst);
 			default: return null;
-		}
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // first?="foo\\bar"
-protected class Model_0_Assignment_first extends AssignmentToken  {
+protected class Model_FirstAssignment_0 extends AssignmentToken  {
 	
-	public Model_0_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_FirstAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getFirstAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("first",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("first",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 // second?="foo\\"
-protected class Model_1_Assignment_second extends AssignmentToken  {
+protected class Model_SecondAssignment_1 extends AssignmentToken  {
 	
-	public Model_1_Assignment_second(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_SecondAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getSecondAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("second",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("second",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getSecondFooKeyword_1_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 // third?="\\bar"
-protected class Model_2_Assignment_third extends AssignmentToken  {
+protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 	
-	public Model_2_Assignment_third(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_ThirdAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getThirdAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("third",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("third");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("third",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("third");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getThirdBarKeyword_2_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 // forth?="\\"
-protected class Model_3_Assignment_forth extends AssignmentToken  {
+protected class Model_ForthAssignment_3 extends AssignmentToken  {
 	
-	public Model_3_Assignment_forth(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_ForthAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getForthAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("forth",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("forth");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("forth",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("forth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 
