@@ -59,9 +59,8 @@ public interface IScope {
     Iterable<IScopedElement> getContents();
     
     /**
-     * 
-     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's outer scope (see {@link IScope#getOuterScope()}), 
-     * where the elements from an outer scope follows the one from it's inner scope
+     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's outer scope
+     * (see {@link IScope#getOuterScope()}), where the elements from an outer scope follows the one from it's inner scope
      */
     Iterable<IScopedElement> getAllContents();
     
@@ -70,7 +69,8 @@ public interface IScope {
      * That is, if this scope does not contain a corresponding {@link IScopedElement} the outer scope is asked.
      * 
      * @param element
-     * @return the corresponding {@link IScopedElement} or <code>null</code> if neither this scope nor it's parents contain an {@link IScopedElement} corresponding to the passed {@link EObject}
+     * @return the corresponding {@link IScopedElement} or <code>null</code> if neither this
+     * 		   scope nor it's parents contain an {@link IScopedElement} corresponding to the passed {@link EObject}
      */
     IScopedElement getScopedElement(EObject element);
     

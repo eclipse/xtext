@@ -32,7 +32,8 @@ public interface IScopeProvider {
 	 * @param context the element from which an element shall be referenced
 	 * @param reference the reference to be used to filter the elements.
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
-	 *         passed context and reference.
+	 *         passed context and reference. Note for implementors: The result may not be <code>null</code>.
+	 *         Return <code>IScope.NULLSCOPE</code> instead.
 	 */
 	public IScope getScope(EObject context, EReference reference);
 
@@ -42,7 +43,8 @@ public interface IScopeProvider {
 	 * @param context the element from which an element shall be referenced
 	 * @param type the (super)type of the elements.
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
-	 *         passed context and type.
+	 *         passed context and type. Note for implementors: The result may not be <code>null</code>.
+	 *         Return <code>IScope.NULLSCOPE</code> instead.
 	 */
 	public IScope getScope(EObject context, EClass type);
 }
