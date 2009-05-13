@@ -27,7 +27,7 @@ import org.eclipse.emf.index.event.impl.IndexChangeEventImpl;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class BasicMemoryDAOImpl<T extends Serializable> implements IDAO<T>, Serializable {
+public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 
 	private static final long serialVersionUID = -5346820953902280859L;
 

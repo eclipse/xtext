@@ -18,7 +18,7 @@ import org.eclipse.emf.index.IGenericQuery;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EClassDescriptor extends Serializable {
+public interface EClassDescriptor {
 
 	public interface DAO extends IDAO<EClassDescriptor> {
 		Query createQuery();

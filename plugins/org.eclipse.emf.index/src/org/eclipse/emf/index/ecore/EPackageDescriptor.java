@@ -19,7 +19,7 @@ import org.eclipse.emf.index.IGenericQuery;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EPackageDescriptor extends Serializable {
+public interface EPackageDescriptor {
 	
 	static final long NEVER = Long.MIN_VALUE;
 

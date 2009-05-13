@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import org.eclipse.emf.index.ResourceDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ResourceDescriptorImpl implements ResourceDescriptor {
+public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable {
 
 	private static final long serialVersionUID = 4559062618979870492L;
 

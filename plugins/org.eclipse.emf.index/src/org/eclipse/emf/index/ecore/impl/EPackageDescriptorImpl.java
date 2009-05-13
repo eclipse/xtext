@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore.impl;
 
+import java.io.Serializable;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageDescriptorImpl implements EPackageDescriptor {
+public class EPackageDescriptorImpl implements EPackageDescriptor, Serializable {
 
 	private static final long serialVersionUID = -1515497757095678663L;
 

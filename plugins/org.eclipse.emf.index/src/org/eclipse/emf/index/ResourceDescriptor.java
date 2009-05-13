@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface ResourceDescriptor extends Serializable {
+public interface ResourceDescriptor {
 	
 	static final long NEVER = Long.MIN_VALUE;
 	
