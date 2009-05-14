@@ -8,6 +8,7 @@
 package org.eclipse.emf.index.impl;
 
 import java.io.Serializable;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
