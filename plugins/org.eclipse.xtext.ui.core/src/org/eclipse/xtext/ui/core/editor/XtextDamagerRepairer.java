@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.WeakHashMap;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -22,7 +21,9 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.util.SimpleCache;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -35,8 +36,8 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 
 	private final static Logger log = Logger.getLogger(XtextDamagerRepairer.class);
 
-	private Provider<Lexer> lexer;
-	private WeakHashMap<IDocument, TokenIterator> tokenIterators = new WeakHashMap<IDocument, TokenIterator>();
+	private final Provider<Lexer> lexer;
+	private final WeakHashMap<IDocument, String> previousContent = new WeakHashMap<IDocument, String>();
 
 	@Inject
 	public XtextDamagerRepairer(ITokenScanner scanner, Provider<Lexer> lexer) {
@@ -47,7 +48,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 	@Override
 	public void setDocument(IDocument document) {
 		super.setDocument(document);
-		tokenIterators.put(document, TokenIterator.create(lexer.get(), document.get()));
+		previousContent.put(document, document.get());
 	}
 
 	@Override
@@ -55,170 +56,164 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		if (documentPartitioningChanged)
 			return partition;
 		try {
-			return computeRegion(e);
+			return cache.get(e);
 		} catch (Exception e1) {
 			log.error(e1.getMessage(), e1);
 			return new Region(0, e.getDocument().getLength());
+		} finally {
+			previousContent.put(fDocument, fDocument.get());
+		}
+	}
+	
+	private SimpleCache<DocumentEvent, IRegion> cache = new SimpleCache<DocumentEvent, IRegion>(new Function<DocumentEvent, IRegion>() {
+
+		public IRegion apply(DocumentEvent from) {
+			IRegion computedRegion = computeTextChangeRegion(from);
+			int offset = Math.min(computedRegion.getOffset(),from.getOffset());
+			int length = Math.max(computedRegion.getLength(), from.getText().length());
+			return log(new Region(offset, length));
 		}
 
-	}
-
-	private IRegion computeRegion(final DocumentEvent e) {
-		TokenIterator previous = tokenIterators.get(e.fDocument);
-
-		// set previous iterator to offset
-		previous.goTo(e.getOffset());
-
-		TokenIterator newOne = TokenIterator.create(lexer.get(), e.getDocument().get(), previous);
-
-		// lengthDiff is the number of characters the trailing text (i.e. text
-		// after the change) is moved.
-		int lengthDiff = e.getText().length() - e.getLength();
-
-		// start offSet of the dirty region
-		int start = newOne.getOffset();
-
-		// go forward to the minimal end offSet
-		newOne.goTo(e.getOffset() + e.getText().length());
-
-		// keep previous in sync
-		previous.goTo(newOne.getOffset() + newOne.getLength());
-
-		try {
-			while (newOne.hasNext() && !(newOne.getOffset() + newOne.getLength() == previous.getOffset() + lengthDiff)) {
-				newOne.next();
-
-				// keep the previous iterator in sync, i.e. forward to the
-				while (newOne.getOffset() + newOne.getLength() > previous.getOffset() + lengthDiff) {
-					if (previous.hasNext())
-						previous.next();
-					else
-						// if the previous text exceeds, we know that we have to
-						// repair until the end of the document
-						return log(new Region(start, e.getDocument().getLength() - start));
+		private IRegion computeTextChangeRegion(final DocumentEvent e) {
+			// empty document -> no dirty region
+			if (e.getDocument().getLength()==0)
+				return new Region(0,0);
+			
+			// previously empty -> full document dirty
+			String previousText = previousContent.get(e.getDocument());
+			if (previousText.length()==0) 
+				return new Region(0,e.getDocument().getLength());
+			
+			TokenIterator previous = iterator(previousText);
+			TokenIterator actual = iterator(e.getDocument().get());
+			// forward to the first difference
+			while (previous.hasNext() && actual.hasNext() && equal(previous.next(),actual.next())) {
+				// do nothing, just move forward
+			}
+			
+			// the first pair of tokens which are not equal between previous and current text determines the start offset
+			int start = actual.getCurrent().getStartIndex();
+			int end = start+actual.getCurrent().getText().length();
+			if (equal(previous.getCurrent(),actual.getCurrent()))
+				start = start+actual.getCurrent().getText().length();
+			// lengthDiff is the number of characters the trailing text (i.e. text
+			// after the change) is moved.
+			int lengthDiff = e.getText().length() - e.getLength();
+			
+			
+			while (!inSync(previous,actual,lengthDiff)) {
+				
+				if (!actual.hasNext()) {
+					if (equal(previous.getCurrent(),actual.getCurrent())) {
+						return new Region(end, 0);
+					}
+					return new Region(start, actual.getCurrent().getStopIndex()+1-start);
+				} 
+				
+				end = actual.getCurrent().getStopIndex()+1;
+				//move forward and catch up
+				actual.next();
+				while (previous.getCurrent().getStartIndex()+lengthDiff < actual.getCurrent().getStartIndex()) {
+					if (!previous.hasNext()) {
+						return new Region(start,e.getDocument().getLength()-start);
+					}
+					previous.next();
 				}
 			}
-			return log(new Region(start, newOne.getOffset() + newOne.getLength() - start));
-		} finally {
-			tokenIterators.put(e.getDocument(), newOne);
+			
+			return new Region(start,end-start);
 		}
-	}
+		
+		
+		
+		/**
+		 * @param previous
+		 * @param actual
+		 * @param lengthDiff
+		 * @return
+		 */
+		private boolean inSync(TokenIterator previous, TokenIterator actual, int lengthDiff) {
+			boolean equal = equal(previous.getCurrent(),actual.getCurrent());
+			int prevIndex = previous.getCurrent().getStartIndex()+lengthDiff;
+			int startIndex = actual.getCurrent().getStartIndex();
+			return equal && prevIndex == startIndex;
+		}
+		
+		/**
+		 * @param t1
+		 * @param t2
+		 * @return
+		 */
+		private boolean equal(CommonToken t1, CommonToken t2) {
+			return t1.getText().equals(t2.getText());
+		}
+		
+		/**
+		 * @param string
+		 * @return
+		 */
+		private TokenIterator iterator(String string) {
+			Lexer l = lexer.get();
+			l.setCharStream(new ANTLRStringStream(string));
+			return new TokenIterator(l);
+		}
+	});
+
 
 	/**
 	 * @param region
 	 * @return
 	 */
-	private IRegion log(Region region) {
+	private IRegion log(IRegion region) {
 		if (log.isDebugEnabled())
 			log.debug(" dirty :" + region.getOffset() + " .. " + region.getLength());
 		return region;
 	}
 
-	public static class TokenIterator {
+	public static class TokenIterator implements Iterator<CommonToken> {
 
-		private List<Integer> tokenLengths;
-		private int index = -1;
-		private int offset = 0;
 		private Lexer lexer;
+		private CommonToken nextToken;
+		private CommonToken current;
 
 		/**
 		 * @param document
 		 */
-		private TokenIterator(Lexer lexer, int offset, List<Integer> parsed) {
-			this.tokenLengths = parsed;
-			if (!tokenLengths.isEmpty())
-				this.index = tokenLengths.size();// - 1;
-			this.offset = offset;
+		public TokenIterator(Lexer lexer) {
 			this.lexer = lexer;
 		}
-
-		public static TokenIterator create(Lexer lexer, String contents) {
-			lexer.setCharStream(new ANTLRStringStream(contents));
-			ArrayList<Integer> parsed = new ArrayList<Integer>();
-			TokenIterator tokenIterator = new TokenIterator(lexer, 0, parsed);
-			if (tokenIterator.hasNext())
-				tokenIterator.next();
-			return tokenIterator;
-		}
-
-		public static TokenIterator create(Lexer lexer, String txt, TokenIterator previous) {
-			int offset2 = previous.getOffset();
-			String input = txt.substring(offset2);
-			lexer.setCharStream(new ANTLRStringStream(input));
-
-			List<Integer> subList = new ArrayList<Integer>();
-			if (previous.getIndex() != -1) {
-				subList.addAll(previous.tokenLengths.subList(0, previous.getIndex()));
-			}
-
-			return new TokenIterator(lexer, offset2, subList);
-		}
-
-		public void goTo(int offset) {
-			while (!(getOffset() <= offset && getOffset() + getLength() > offset)) {
-				if (getOffset() > offset) {
-					backward();
-				} else {
-					if (hasNext()) {
-						next();
-					} else {
-						return;
-					}
-
-				}
-			}
-		}
-
-		public int getIndex() {
-			return index;
-		}
-
-		public int getOffset() {
-			return offset;
-		}
-
-		public int getLength() {
-			if (getIndex() == -1)
-				return 0;
-			while (tokenLengths.size() - 1 < index && !eof) {
-				consume();
-			}
-			return tokenLengths.get(getIndex());
-		}
-
-		public void next() {
-			if (hasNext()) {
-				index++;
-				if (index > 0)
-					offset = offset + tokenLengths.get(index - 1);
-			} else {
-				throw new IllegalStateException();
-			}
+		
+		public CommonToken getCurrent() {
+			return current;
 		}
 
 		public boolean hasNext() {
-			return index + 1 < tokenLengths.size() || consume();
-		}
-
-		private boolean eof = false;
-
-		/**
-		 * @return
-		 */
-		private boolean consume() {
+			if (nextToken != null)
+				return true;
 			CommonToken token = (CommonToken) lexer.nextToken();
-			eof = eof || token.getType() == Token.EOF;
-			if (!eof) {
-				tokenLengths.add(token.getStopIndex() + 1 - token.getStartIndex());
+			if (token.getType() == Token.EOF) {
+				return false;
+			} else {
+				nextToken = token;
+				return true;
 			}
-			return !eof;
 		}
 
-		public void backward() {
-			if (index > 0) {
-				offset = offset - tokenLengths.get(--index);
-			} else
-				throw new IllegalStateException();
+		public CommonToken next() {
+			try {
+				if (hasNext()) {
+					current = nextToken;
+					return nextToken;
+				} else {
+					throw new IllegalStateException();
+				}
+			} finally {
+				nextToken = null;
+			}
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
 		}
 
 	}
