@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
-import org.eclipse.xtext.parsetree.reconstr.impl.FormattingTokenSerializer;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenWithCardinalityElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ActionElements;
@@ -21,17 +21,10 @@ import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
 
-import com.google.inject.Inject;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
-
-	@Inject
-	public XtextFormattingTokenSerializer(XtextGrammarAccess grammarAccess) {
-		super(grammarAccess);
-	}
+public class XtextFormattingTokenSerializer extends AbstractFormattingTokenSerializer {
 
 	@Override
 	protected void configureFormatting(FormattingConfig cfg) {

@@ -84,7 +84,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		String templateName = pathToTemplates()+"DslUiProject::main";
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,false,
 				monitor);
 	}
 
@@ -106,7 +106,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.xtext.xtend;resolution:=optional"));
 
 		String templateName = pathToTemplates()+"DslProject::main";
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName, false,
 				monitor);
 	}
 
@@ -120,12 +120,12 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		String templateName = pathToTemplates()+"GeneratorProject::main";
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName, false,
 				monitor);
 	}
 
 	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName,
-			Set<String> requiredBundles, List<String> srcFolderList, String templateName,
+			Set<String> requiredBundles, List<String> srcFolderList, String templateName, boolean isXpandBasedAPI,
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Creating dsl projects " + projectName, 3);
 		final IProject dslProject = EclipseResourceUtil.createProject(projectName,
@@ -148,7 +148,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		// generate generator and activator for dsl and dsl.ui project
 		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate(templateName, xtextProjectInfo);
+		facade.evaluate(templateName, xtextProjectInfo,isXpandBasedAPI);
 
 		monitor.worked(1);
 

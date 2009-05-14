@@ -12,12 +12,12 @@
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::Extensions»
 
-«DEFINE main FOR XtextProjectInfo»
-	«EXPAND workflow»
+«DEFINE main(Boolean xpandBased) FOR XtextProjectInfo»
+	«EXPAND workflow(xpandBased)»
 	«EXPAND grammar»
 «ENDDEFINE»
 
-«DEFINE workflow FOR XtextProjectInfo»
+«DEFINE workflow(Boolean xpandBased) FOR XtextProjectInfo»
 
 «FILE basePackagePath+"/Generate"+languageNameAbbreviation+".properties" -»
 grammarURI=classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext
@@ -57,14 +57,6 @@ projectName=«this.projectName»
 			<!-- the serialization component -->
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			
-			<!-- a check based validation component 
-			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
-			-->
-			<!-- a java based validation component -->
-			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
-                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
-            </fragment>
-			
 			<!-- a custom ResourceFactory for use with EMF -->
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
@@ -77,8 +69,35 @@ projectName=«this.projectName»
 			<!-- Basic UI setup -->
 			<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
 			  fileExtensions="${file.extensions}"/>
-			 <!-- a java-based API for content assistance -->
+			«IF xpandBased»
+			<!-- check-based API for validation -->
+			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
+			«ELSE»
+			<!-- java-based API for validation -->
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
+                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
+            </fragment>
+			«ENDIF»
+            
+			<!-- scoping API -->
+			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
+			
+			<!-- formatter API -->
+			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
+
+			<!-- labeling API -->
+			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
+
+			<!-- outline API -->
+			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
+
+			«IF xpandBased»
+			<!-- xtend-based API for content assistance -->
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.XtendBasedContentAssistFragment"/>
+			«ELSE»
+			<!-- java-based API for content assistance -->
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			«ENDIF»
 		</language>
 	</component>
 </workflow>
@@ -104,7 +123,7 @@ Type:
 	DataType | Class;
 	
 DataType:
-	'datatype' name=ID ';';
+	'datatype' name=ID ';'?;
 	
 Class :
 	'class' name=ID ('extends' superClass=[Class])? '{'
@@ -115,9 +134,9 @@ Property:
 	Attribute | Reference;
 	
 Attribute:
-	'attr' name=ID ':' type=[DataType] ';';
+	'attr' name=ID ':' type=[DataType] ';'?;
 	
 Reference:
-	'ref' name=ID ':' type=[Class] ';';
+	'ref' name=ID ':' type=[Class] ';'?;
 «ENDFILE»
 «ENDDEFINE»

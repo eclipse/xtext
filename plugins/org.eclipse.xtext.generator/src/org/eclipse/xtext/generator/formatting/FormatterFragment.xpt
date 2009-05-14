@@ -1,0 +1,59 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::formatting::FormatterExtensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+
+
+«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+
+«DEFINE generate FOR Grammar»
+	«EXPAND Formatter»
+«ENDDEFINE»
+
+
+«DEFINE Formatter FOR Grammar»
+«FILE formatterName().asPath()+".java" SRC-»
+/*
+ «fileHeader()»
+ */
+package «formatterName().toJavaPackage()»;
+
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
+
+
+/**
+ * This class contains custom formatting description.
+ * 
+ * see : http://wiki.eclipse.org/Xtext/Documentation#Formatting
+ * on how and when to use it 
+ * 
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ */
+public class «formatterName().toSimpleName()» extends AbstractFormattingTokenSerializer {
+	
+	@Override
+	protected void configureFormatting(FormattingConfig c) {
+		«gaFQName()» f = («gaFQName()») getGrammarAccess();
+
+		//...
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

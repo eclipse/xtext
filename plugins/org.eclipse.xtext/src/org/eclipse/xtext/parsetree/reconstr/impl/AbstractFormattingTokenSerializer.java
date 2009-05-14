@@ -16,22 +16,30 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingConfig.ConfigRunner;
 
+import com.google.inject.Inject;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
+public abstract class AbstractFormattingTokenSerializer extends DefaultTokenSerializer {
 
 	protected FormattingConfig config;
 
 	protected ConfigRunner formatter;
 
-	private final IGrammarAccess grammarAccess;
-
-	protected FormattingTokenSerializer(IGrammarAccess grammarAccess) {
-		super();
+	private IGrammarAccess grammarAccess;
+	
+	@Inject
+	public void setGrammarAccess(IGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
-		config = createFormattingConfig();
-		configureFormatting(config);
+	}
+
+	private synchronized FormattingConfig getConfig() {
+		if (config == null) {
+			config = createFormattingConfig();
+			configureFormatting(config);
+		}
+		return config;
 	}
 
 	protected IGrammarAccess getGrammarAccess() {
@@ -41,14 +49,12 @@ public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
 	@Override
 	protected void afterToken(IAbstractToken token) throws IOException {
 		if (token.getNext() != null)
-			formatter.collectLocators(token.getGrammarElement(), token
-					.getNext().getGrammarElement());
+			formatter.collectLocators(token.getGrammarElement(), token.getNext().getGrammarElement());
 		super.afterToken(token);
 	}
 
 	@Override
-	protected void beforeElement(IInstanceDescription curr, AbstractElement ele)
-			throws IOException {
+	protected void beforeElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
 		if (outputHasStarted)
 			append(formatter.getSummarizedSpaces());
 		formatter.startCollectingLocators();
@@ -61,9 +67,8 @@ public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
 	}
 
 	@Override
-	public void serialize(IAbstractToken firstToken, OutputStream out)
-			throws IOException {
-		formatter = config.run();
+	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
+		formatter = getConfig().run();
 		super.serialize(firstToken, out);
 		formatter = null;
 	}
