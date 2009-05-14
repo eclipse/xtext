@@ -67,6 +67,16 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 
 		private static final char ASTERISK = '*';
 
+		protected boolean matchesGlobbing(Serializable test, Serializable pattern) {
+			if (test instanceof String && pattern instanceof String) {
+				String testAsString = (String) test;
+				String patternAsString = (String) pattern;
+				matchesGlobbing(testAsString, patternAsString);
+			}
+			
+			return test.equals(pattern);
+		}
+		
 		protected boolean matchesGlobbing(String testString, String pattern) {
 			if (pattern == null)
 				return true;

@@ -11,6 +11,7 @@ import static org.eclipse.emf.index.util.CollectionUtils.addAllIfNotNull;
 import static org.eclipse.emf.index.util.CollectionUtils.findEquivalent;
 import static org.eclipse.emf.index.util.CollectionUtils.toList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -64,7 +65,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		isTransactionStarted = true;
 	}
 
-	public void createResourceDescriptor(Resource resource, Map<String, String> userData) {
+	public void createResourceDescriptor(Resource resource, Map<String, Serializable> userData) {
 		assertTransactionStarted();
 		ResourceData resourceData = new ResourceData();
 		resourceData.uri = resource.getURI().toString();
@@ -73,7 +74,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		resourceDataCache.put(resource, resourceData);
 	}
 
-	public void createEObjectDescriptor(EObject eObject, String name, String displayName, Map<String, String> userData) {
+	public void createEObjectDescriptor(EObject eObject, String name, String displayName, Map<String, Serializable> userData) {
 		assertTransactionStarted();
 		Resource eResource = eObject.eResource();
 		if (eResource != null) {
@@ -231,14 +232,14 @@ public class IndexFeederImpl implements IndexFeeder {
 	private static class ResourceData {
 		String uri;
 		long indexingDate;
-		Map<String, String> userData;
+		Map<String, Serializable> userData;
 	}
 
 	private static class EObjectData {
 		String name;
 		String fragment;
 		String displayName;
-		Map<String, String> userData;
+		Map<String, Serializable> userData;
 	}
 
 	private static class EReferenceData {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +23,10 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 
 	private static final long serialVersionUID = -8283957734898241601L;
 
-	private Map<String, String> userData;
+	private Map<String, Serializable> userData;
 
 	public EObjectDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name,
-			String displayName, EClassDescriptor typeDescriptor, Map<String, String> userData) {
+			String displayName, EClassDescriptor typeDescriptor, Map<String, Serializable> userData) {
 		super(resourceDescriptor, fragment, name, displayName, typeDescriptor);
 		if (userData != null)
 			this.userData = Collections.unmodifiableMap(userData);
@@ -33,10 +34,10 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 
 	public boolean copyDetails(EObjectDescriptor newDesc) {
 		boolean hasChanged = super.copyDetails(newDesc);
-		Map<String, String> newUserData = newDesc.getUserData();
+		Map<String, Serializable> newUserData = newDesc.getUserData();
 		if (newUserData != null) {
 			if (!newUserData.equals(userData)) {
-				userData = Collections.unmodifiableMap(new HashMap<String, String>(newUserData));
+				userData = Collections.unmodifiableMap(new HashMap<String, Serializable>(newUserData));
 				return true;
 			}
 		}
@@ -47,13 +48,13 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 		return hasChanged;
 	}
 
-	public String getUserData(String key) {
+	public Serializable getUserData(String key) {
 		if (userData != null)
 			return userData.get(key);
 		return null;
 	}
 
-	public Map<String, String> getUserData() {
+	public Map<String, Serializable> getUserData() {
 		return userData;
 	}
 

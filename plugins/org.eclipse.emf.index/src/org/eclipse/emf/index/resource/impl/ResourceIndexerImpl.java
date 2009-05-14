@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.resource.impl;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +84,7 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 		}
 	}
 	
-	protected Map<String, String> getResourceUserData(Resource resource) {
+	protected Map<String, Serializable> getResourceUserData(Resource resource) {
 		return null;
 	}
 
@@ -116,7 +117,7 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 		return displayName;
 	}
 
-	protected Map<String, String> getEObjectUserData(EObject eObject) {
+	protected Map<String, Serializable> getEObjectUserData(EObject eObject) {
 		return null;
 	}
 

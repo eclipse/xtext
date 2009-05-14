@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -47,7 +48,7 @@ public interface EObjectDescriptor {
 
 		Query fragment(String pattern);
 
-		Query userData(String key, String pattern);
+		Query userData(String key, Serializable pattern);
 
 		Query name(String pattern);
 	}
@@ -62,7 +63,7 @@ public interface EObjectDescriptor {
 
 	String getFragment();
 
-	Map<String, String> getUserData();
+	Map<String, Serializable> getUserData();
 
 	/**
 	 * Derived
@@ -74,5 +75,5 @@ public interface EObjectDescriptor {
 	 * Derived
 	 * @return
 	 */
-	String getUserData(String key);
+	Serializable getUserData(String key);
 }
