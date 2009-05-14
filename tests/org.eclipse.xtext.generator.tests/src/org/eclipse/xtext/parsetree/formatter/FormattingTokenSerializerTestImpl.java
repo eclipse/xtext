@@ -1,17 +1,10 @@
 package org.eclipse.xtext.parsetree.formatter;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
-import org.eclipse.xtext.parsetree.reconstr.impl.FormattingTokenSerializer;
 
-import com.google.inject.Inject;
-
-public class FormattingTokenSerializerTestImpl extends FormattingTokenSerializer {
-
-	@Inject
-	public FormattingTokenSerializerTestImpl(FormatterTestLanguageGrammarAccess grammarAccess) {
-		super(grammarAccess);
-	}
+public class FormattingTokenSerializerTestImpl extends AbstractFormattingTokenSerializer {
 
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
