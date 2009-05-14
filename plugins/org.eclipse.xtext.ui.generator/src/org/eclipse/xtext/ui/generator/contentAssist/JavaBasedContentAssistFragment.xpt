@@ -24,10 +24,7 @@ package «getGenProposalProvider().toJavaPackage()»;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.*;
 «IF inherit && usedGrammars.size == 1-»
 import «usedGrammars.first().getProposalProvider()»;
 «ELSE-»
@@ -81,9 +78,16 @@ public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && us
 «ENDFILE»
 
 «FILE getProposalProvider().asPath()+".java" SRC_UI-»
+/*
+«fileHeader()»
+*/
 package «getProposalProvider().toJavaPackage()»;
 
-public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
+import «getGenProposalProvider()»;
+/**
+ * see http://wiki.eclipse.org/Xtext/Documentation#Content_Assist on how to customize content assistant
+ */
+public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider().toSimpleName()» {
 
 }
 «ENDFILE»
