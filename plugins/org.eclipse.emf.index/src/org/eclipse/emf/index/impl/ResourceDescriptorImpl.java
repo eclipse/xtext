@@ -23,9 +23,9 @@ public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable 
 
 	protected long indexingDate;
 	protected String uri;
-	protected Map<String, String> userData;
+	protected Map<String, Serializable> userData;
 
-	public ResourceDescriptorImpl(String uri, long indexingDate, Map<String, String> userData) {
+	public ResourceDescriptorImpl(String uri, long indexingDate, Map<String, Serializable> userData) {
 		this.uri = uri;
 		this.indexingDate = indexingDate;
 		if (userData != null)
@@ -40,11 +40,11 @@ public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable 
 		return uri;
 	}
 
-	public Map<String, String> getUserData() {
+	public Map<String, Serializable> getUserData() {
 		return userData;
 	}
 
-	public String getUserData(String key) {
+	public Serializable getUserData(String key) {
 		return (userData == null) ? null : userData.get(key);
 	}
 
@@ -68,10 +68,10 @@ public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable 
 	}
 
 	public boolean copyDetails(ResourceDescriptor resourceDesc) {
-		Map<String, String> newUserData = resourceDesc.getUserData();
+		Map<String, Serializable> newUserData = resourceDesc.getUserData();
 		if (newUserData != null) {
 			if (!newUserData.equals(userData)) {
-				userData = Collections.unmodifiableMap(new HashMap<String, String>(newUserData));
+				userData = Collections.unmodifiableMap(new HashMap<String, Serializable>(newUserData));
 				return true;
 			}
 		}

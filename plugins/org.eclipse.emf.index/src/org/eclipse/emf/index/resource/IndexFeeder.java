@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.resource;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -27,9 +28,9 @@ public interface IndexFeeder {
 
 	void begin();
 
-	void createResourceDescriptor(Resource resource, Map<String, String> userData);
+	void createResourceDescriptor(Resource resource, Map<String, Serializable> userData);
 
-	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String, String> userData);
+	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String, Serializable> userData);
 
 	void createEReferenceDescriptor(URI source, String eReferenceName, int index, URI target);
 

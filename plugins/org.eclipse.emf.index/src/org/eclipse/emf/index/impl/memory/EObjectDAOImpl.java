@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -114,7 +115,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 		private String namePattern;
 		private EClassDescriptor typeDescriptor;
 		private EClassDescriptor.Query typeQuery;
-		private Map<String, String> userDataPatterns;
+		private Map<String, Serializable> userDataPatterns;
 
 		public ElementQuery resource(ResourceDescriptor resourceDescriptor) {
 			if (resourceQuery != null) {
@@ -152,9 +153,9 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			return typeQuery;
 		}
 
-		public ElementQuery userData(String key, String pattern) {
+		public ElementQuery userData(String key, Serializable pattern) {
 			if (userDataPatterns == null) {
-				userDataPatterns = new HashMap<String, String>();
+				userDataPatterns = new HashMap<String, Serializable>();
 			}
 			userDataPatterns.put(key, pattern);
 			return this;
@@ -164,9 +165,11 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			if (matchesGlobbing(elementDescriptor.getFragment(), fragmentPattern)
 					&& matchesGlobbing(elementDescriptor.getName(), namePattern)) {
 				if (userDataPatterns != null) {
-					for (Entry<String, String> userDataEntry : userDataPatterns.entrySet()) {
-						if (!matchesGlobbing(elementDescriptor.getUserData(userDataEntry.getKey()), userDataEntry
-								.getValue())) {
+					for (Entry<String, Serializable> userDataEntry : userDataPatterns.entrySet()) {
+						if (!matchesGlobbing(
+								elementDescriptor.getUserData(userDataEntry.getKey()), 
+								userDataEntry.getValue()
+						)) {
 							return false;
 						}
 					}

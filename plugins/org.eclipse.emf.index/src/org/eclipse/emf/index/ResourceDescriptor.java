@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public interface ResourceDescriptor {
 	
 	long getIndexingDate();
 	
-	Map<String, String> getUserData();
+	Map<String, Serializable> getUserData();
 	
-	String getUserData(String key);
+	Serializable getUserData(String key);
 }

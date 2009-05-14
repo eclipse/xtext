@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.mocks;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -117,11 +118,11 @@ public interface MockDescriptors {
 			return RESOURCE_URI;
 		}
 
-		public Map<String, String> getUserData() {
+		public Map<String, Serializable> getUserData() {
 			return null;
 		}
 
-		public String getUserData(String key) {
+		public Serializable getUserData(String key) {
 			return null;
 		}
 	};
@@ -162,14 +163,14 @@ public interface MockDescriptors {
 			return resourceDescriptor;
 		}
 
-		public String getUserData(String key) {
+		public Serializable getUserData(String key) {
 			if (USER_DATA_KEY.equals(key))
 				return USER_DATA_VALUE;
 			return null;
 		}
 
-		public Map<String, String> getUserData() {
-			Map<String,String> userData = new HashMap<String,String>();
+		public Map<String, Serializable> getUserData() {
+			Map<String,Serializable> userData = new HashMap<String,Serializable>();
 			userData.put(USER_DATA_KEY, USER_DATA_VALUE);
 			return userData;
 		}
