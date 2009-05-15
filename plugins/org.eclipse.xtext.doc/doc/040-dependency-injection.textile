@@ -1,0 +1,1 @@
+h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice

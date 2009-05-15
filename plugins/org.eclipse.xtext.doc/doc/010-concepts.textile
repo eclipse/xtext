@@ -1,0 +1,1 @@
+h2. Xtext concepts from a bird's eye view

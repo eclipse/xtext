@@ -1,0 +1,1 @@
+h2(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
