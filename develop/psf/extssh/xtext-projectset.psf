@@ -123,7 +123,6 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core,org.eclipse.xtext.ui.core"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.core.tests,org.eclipse.xtext.ui.core.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.ui.feature,org.eclipse.xtext.ui.feature"/>
-<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.generator,org.eclipse.xtext.ui.generator"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.integration.tests,org.eclipse.xtext.ui.integration.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util,org.eclipse.xtext.util"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtend,org.eclipse.xtext.xtend"/>
@@ -291,6 +290,5 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.easymock" type="4"/>
 <item elementID="=org.eclipse.xtext.activities" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.logging" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>
