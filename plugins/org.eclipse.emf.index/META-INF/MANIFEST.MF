@@ -7,7 +7,7 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport,
  com.google.guice;resolution:=optional;visibility:=reexport,
- org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional
+ org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)";resolution:=optional
 Export-Package: org.eclipse.emf.index,
  org.eclipse.emf.index.ecore,
  org.eclipse.emf.index.ecore.impl,
