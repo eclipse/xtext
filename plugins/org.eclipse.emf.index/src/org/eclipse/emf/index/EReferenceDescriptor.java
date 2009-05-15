@@ -28,6 +28,9 @@ public interface EReferenceDescriptor extends Serializable {
 		IGenericQuery<EReferenceDescriptor> createQueryEReferencesFrom(URI sourceURI);
 		
 		IGenericQuery<EReferenceDescriptor> createQueryEReferencesTo(URI targetURI);
+		
+		IGenericQuery<EReferenceDescriptor> createQueryEReferencesFromResource(ResourceDescriptor sourceResourceDescriptor);
+
 	}
 
 	public interface Query extends IGenericQuery<EReferenceDescriptor> {

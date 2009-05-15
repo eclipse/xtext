@@ -15,6 +15,10 @@ import org.eclipse.emf.index.dao.EObjectDAOTest;
 import org.eclipse.emf.index.dao.EPackageDAOTest;
 import org.eclipse.emf.index.dao.EReferenceDAOTest;
 import org.eclipse.emf.index.ecore.EPackageRegistryTest;
+import org.eclipse.emf.index.feeder.DanglingReferenceTest;
+import org.eclipse.emf.index.feeder.EObjectTest;
+import org.eclipse.emf.index.feeder.ResourceTest;
+import org.eclipse.emf.index.feeder.TestIndexing;
 import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 import org.eclipse.emf.index.integration.IntegrationTests;
 
@@ -43,6 +47,11 @@ public abstract class AbstractEmfIndexTestSuite extends TestSuite {
 		addTestSuite(TestResourceUnloading.class);
 		addTestSuite(EPackageRegistryTest.class);
 		addTestSuite(IntegrationTests.class);
+		addTestSuite(DanglingReferenceTest.class);
+		addTestSuite(EObjectTest.class);
+		addTestSuite(ResourceTest.class);
+		addTestSuite(TestIndexing.class);
+		
 	}
 
 	public static Module getModule() {

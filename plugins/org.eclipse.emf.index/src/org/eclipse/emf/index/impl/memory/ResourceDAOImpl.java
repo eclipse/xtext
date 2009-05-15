@@ -22,8 +22,11 @@ public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> impl
 	private static final long serialVersionUID = -1273324973049478671L;
 
 	@Override
-	protected boolean doModify(ResourceDescriptor element, ResourceDescriptor newValues) {
-		return ((ResourceDescriptorImpl) element).copyDetails(newValues);
+	protected boolean doModify(ResourceDescriptor element, Object modification) {
+		if (modification instanceof ResourceDescriptor) {
+			return ((ResourceDescriptorImpl) element).copyDetails((ResourceDescriptor) modification);
+		}
+		throw new UnsupportedOperationException();
 	}
 
 	public ResourceDescriptor.Query createQuery() {

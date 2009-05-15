@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.IndexStore;
+import org.eclipse.emf.index.IndexingException;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
@@ -44,6 +45,8 @@ public class IndexFeederImpl implements IndexFeeder {
 
 	private boolean isTransactionStarted;
 
+	private List<URI> deleteResourceURIs = new ArrayList<URI>();
+	
 	private Map<Resource, ResourceData> resourceDataCache = new HashMap<Resource, ResourceData>();
 	private Map<EObject, EObjectData> eObjectDataCache = new HashMap<EObject, EObjectData>();
 	private List<EReferenceData> eReferenceCache = new ArrayList<EReferenceData>();
@@ -65,16 +68,33 @@ public class IndexFeederImpl implements IndexFeeder {
 		isTransactionStarted = true;
 	}
 
-	public void createResourceDescriptor(Resource resource, Map<String, Serializable> userData) {
+	public void deleteResourceDescriptor(URI resourceURI) throws IndexingException {
 		assertTransactionStarted();
+		for(Resource addedResources: resourceDataCache.keySet()) {
+			if(addedResources.getURI().equals(resourceURI)) {
+				throw new IndexingException("Cannot add and remove resource in the same transaction", resourceURI);
+			}
+		}
+		deleteResourceURIs.add(resourceURI);
+	}
+
+	public void createResourceDescriptor(Resource resource, Map<String, Serializable> userData) throws IndexingException {
+		assertTransactionStarted();
+		URI resourceURI = resource.getURI();
+		for(URI deleteResourceURI: deleteResourceURIs) {
+			if(resourceURI.equals(deleteResourceURI)) {
+				throw new IndexingException("Cannot add and remove resource in the same transaction", resourceURI);
+			}
+		}
 		ResourceData resourceData = new ResourceData();
-		resourceData.uri = resource.getURI().toString();
+		resourceData.uri = resourceURI.toString();
 		resourceData.indexingDate = System.currentTimeMillis();
 		resourceData.userData = userData;
 		resourceDataCache.put(resource, resourceData);
 	}
 
-	public void createEObjectDescriptor(EObject eObject, String name, String displayName, Map<String, Serializable> userData) {
+	public void createEObjectDescriptor(EObject eObject, String name, String displayName,
+			Map<String, Serializable> userData) {
 		assertTransactionStarted();
 		Resource eResource = eObject.eResource();
 		if (eResource != null) {
@@ -105,15 +125,20 @@ public class IndexFeederImpl implements IndexFeeder {
 				commitResourceDescriptors();
 				commitEObjectDescriptors();
 				commitEReferenceDescriptors();
-				cleanUpStaleDescriptors();
+				deleteStaleDescriptors();
 			}
 		}
 		finally {
-			isTransactionStarted = false;
 			clearAllCaches();
+			isTransactionStarted = false;
 		}
 	}
-
+	
+	public void rollback() {
+		clearAllCaches();	 
+		isTransactionStarted = false;
+	}
+	
 	public void commitResourceDescriptors() {
 		for (Entry<Resource, ResourceData> resourceEntry : resourceDataCache.entrySet()) {
 			Resource resource = resourceEntry.getKey();
@@ -126,6 +151,9 @@ public class IndexFeederImpl implements IndexFeeder {
 				Collection<EObjectDescriptor> existingEObjectsInResource = toList(index.eObjectDAO()
 						.createQueryEObjectsInResource(existingResourceDesc).executeListResult());
 				addAllIfNotNull(allExistingEObjectDescs, existingEObjectsInResource);
+				Collection<EReferenceDescriptor> existingEReferencesFromResource = toList(index.eReferenceDAO()
+						.createQuery().sourceResource(existingResourceDesc).executeListResult());
+				addAllIfNotNull(allExistingEReferenceDescs, existingEReferencesFromResource);
 				index.resourceDAO().modify(existingResourceDesc, newResourceDescriptor);
 				putResourceDescriptor(resource, existingResourceDesc);
 			}
@@ -159,9 +187,6 @@ public class IndexFeederImpl implements IndexFeeder {
 					data.displayName, eClassDescriptor, data.userData);
 			EObjectDescriptor existingEObjectDesc = findEquivalent(allExistingEObjectDescs, newEObjectDesc);
 			if (existingEObjectDesc != null) {
-				Collection<EReferenceDescriptor> existingEReferenceDescsFrom = toList(index.eReferenceDAO()
-						.createQueryEReferencesFrom(existingEObjectDesc.getFragmentURI()).executeListResult());
-				addAllIfNotNull(allExistingEReferenceDescs, existingEReferenceDescsFrom);
 				index.eObjectDAO().modify(existingEObjectDesc, newEObjectDesc);
 				allExistingEObjectDescs.remove(existingEObjectDesc);
 				eObjectDescCache.put(eObject, existingEObjectDesc);
@@ -185,16 +210,17 @@ public class IndexFeederImpl implements IndexFeeder {
 		}
 	}
 
-	public void cleanUpStaleDescriptors() {
+	public void deleteStaleDescriptors() {
+		for(URI deleteResourceURI : deleteResourceURIs) {
+			ResourceDescriptor deleteResourceDescriptor = index.resourceDAO().createQuery().uri(deleteResourceURI.toString()).executeSingleResult();
+			List<EObjectDescriptor> deleteEObjects = toList(index.eObjectDAO().createQueryEObjectsInResource(deleteResourceDescriptor).executeListResult());
+			addAllIfNotNull(allExistingEObjectDescs, deleteEObjects);
+			List<EReferenceDescriptor> deleteEReferences = toList(index.eReferenceDAO().createQueryEReferencesFromResource(deleteResourceDescriptor).executeListResult());
+			addAllIfNotNull(allExistingEReferenceDescs, deleteEReferences);
+			index.resourceDAO().delete(deleteResourceDescriptor);
+		}
 		for (EObjectDescriptor eObjectDesc : allExistingEObjectDescs) {
 			index.eObjectDAO().delete(eObjectDesc);
-			String fragment = eObjectDesc.getFragment();
-			ResourceDescriptor resourceDescriptor = eObjectDesc.getResourceDescriptor();
-			Iterable<EReferenceDescriptor> danglingEReferences = index.eReferenceDAO().createQuery().sourceFragment(
-					fragment).sourceResource(resourceDescriptor).executeListResult();
-			for (EReferenceDescriptor danglingEReference : danglingEReferences) {
-				index.eReferenceDAO().delete(danglingEReference);
-			}
 		}
 		for (EReferenceDescriptor eReferenceDesc : allExistingEReferenceDescs) {
 			index.eReferenceDAO().delete(eReferenceDesc);
@@ -227,6 +253,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		eObjectDescCache.clear();
 		allExistingEObjectDescs.clear();
 		allExistingEReferenceDescs.clear();
+		deleteResourceURIs.clear();
 	}
 
 	private static class ResourceData {

@@ -25,7 +25,7 @@ public interface IDAO<T> {
 
 	void delete(T element);
 	
-	void modify(T element, T newValues);
+	void modify(T element, Object modification);
 	
 	void initialize(IndexStore store);
 

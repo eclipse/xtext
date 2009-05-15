@@ -52,8 +52,8 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 		indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.REMOVED));
 	}
 
-	public void modify(T element, T newValues) {
-		if (doModify(element, newValues))
+	public void modify(T element, Object modification) {
+		if (doModify(element, modification))
 			indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.MODIFIED));
 	}
 
@@ -61,7 +61,7 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 		this.indexStore = indexStore;
 	}
 
-	protected abstract boolean doModify(T element, T newValues);
+	protected abstract boolean doModify(T element, Object modification);
 
 	protected abstract class Query implements IGenericQuery<T> {
 
