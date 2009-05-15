@@ -10,7 +10,7 @@ package org.eclipse.xtext.generator.validation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -18,8 +18,8 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.
@@ -44,7 +44,7 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 	}
 
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToTypeEagerSingleton(getValidatorName(grammar, ""), getValidatorName(grammar, ""))
 			.getBindings();

@@ -13,8 +13,9 @@
 «IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::generator::ModuleExtensions»
 
-«DEFINE generate(List[Binding] bindings) FOR Grammar»
+«DEFINE generate(Set[Binding] bindings) FOR Grammar»
 «EXPAND guiceModuleRt»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN»
@@ -65,8 +66,9 @@ public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()»
 
 
 «DEFINE bindingMethod FOR Binding»
-	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-	public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» bind«key.type.toSimpleName()»() {
+	// contributed by «contributedBy»
+	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF-»
+	public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName(this)»() {
 		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
 	}
 «ENDDEFINE»

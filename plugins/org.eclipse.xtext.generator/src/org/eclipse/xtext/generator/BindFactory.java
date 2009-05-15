@@ -8,30 +8,77 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class BindFactory {
-	private final Map<BindKey, BindValue> bindings = new LinkedHashMap<BindKey, BindValue>();
+	private String contributedBy;
+
+	public BindFactory() {
+		contributedBy = new Exception().getStackTrace()[1].getClassName();
+	}
+	public BindFactory(String contributedBy) {
+		this.contributedBy = contributedBy;
+	}
+	
+	public String getContributedBy() {
+		return contributedBy;
+	}
+	
+	private final Set<Binding> bindings = new LinkedHashSet<Binding>();
 
 	public BindFactory addTypeToInstance(String s1, String s2) {
-		bindings.put(BindKey.type(s1), BindValue.expr(s2));
+		bindings.add(binding(BindKey.type(s1), BindValue.expr(s2)));
 		return this;
 	}
+	/**
+	 * @param type
+	 * @param expr
+	 * @return
+	 */
+	private Binding binding(BindKey type, BindValue expr) {
+		return binding(type, expr, false);
+	}
+	
+	private Binding binding(BindKey type, BindValue expr, boolean isFinal) {
+		return new Binding(type, expr, isFinal, getContributedBy());
+	}
+
 	public BindFactory addTypeToType(String s1, String s2){
-		bindings.put(BindKey.type(s1), BindValue.type(s2));
+		add(binding(BindKey.type(s1), BindValue.type(s2)));
 		return this;
 	}
+	/**
+	 * @param binding
+	 */
+	private void add(Binding binding) {
+		if (bindings.contains(binding))
+			throw new IllegalArgumentException("Duplicate binding for "+binding.getKey()+" in "+getContributedBy());
+		bindings.add(binding);
+	}
+	
 	public BindFactory addTypeToTypeSingleton(String s1, String s2){
-		bindings.put(BindKey.singleton(s1), BindValue.type(s2));
+		add(binding(BindKey.singleton(s1), BindValue.type(s2)));
 		return this;
 	}
 	public BindFactory addTypeToTypeEagerSingleton(String s1, String s2){
-		bindings.put(BindKey.eagerSingleton(s1), BindValue.type(s2));
+		add(binding(BindKey.eagerSingleton(s1), BindValue.type(s2)));
+		return this;
+	}
+	public BindFactory addfinalTypeToType(String s1, String s2){
+		add(binding(BindKey.type(s1), BindValue.type(s2),true));
+		return this;
+	}
+	public BindFactory addfinalTypeToTypeSingleton(String s1, String s2){
+		add(binding(BindKey.singleton(s1), BindValue.type(s2),true));
+		return this;
+	}
+	public BindFactory addfinalTypeToTypeEagerSingleton(String s1, String s2){
+		add(binding(BindKey.eagerSingleton(s1), BindValue.type(s2),true));
 		return this;
 	}
 
-	public Map<BindKey, BindValue> getBindings() {
+	public Set<Binding> getBindings() {
 		return bindings;
 	}
 }

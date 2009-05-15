@@ -38,7 +38,6 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		INSTANCE = this;
 		«FOREACH this AS grammar»
 		injectors.put("«grammar.name»", Guice.createInjector(
-			new «guiceModuleRt(grammar)»(), 
 			new «guiceModuleUi(grammar)»(),
 			createUIPluginModule()
 		));

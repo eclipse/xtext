@@ -8,8 +8,7 @@
 
 package org.eclipse.xtext.generator;
 
-import static org.eclipse.xtext.generator.Naming.asPath;
-import static org.eclipse.xtext.generator.Naming.setup;
+import static org.eclipse.xtext.generator.Naming.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,9 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
@@ -44,7 +41,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
- *
+ * 
  *         The main xtext generator. Can be configured with
  *         {@link IGeneratorFragment} instances as well as with some properties
  *         declared via setter or adder methods.
@@ -67,9 +64,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
 		for (LanguageConfig config : languageConfigs) {
-			if (config.getGrammar() == null) {
-				issues.addError("property 'uri' is mandatory for element 'language'.");
-			}
+			config.checkConfiguration(issues);
 		}
 		if (getProjectNameRt() == null)
 			issues.addError("The property 'projectNameRt' is mandatory");
@@ -102,7 +97,6 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 	}
 
-	
 	private String pathRtProject = ".";
 	private String pathUiProject = null;
 	private String srcPath = "/src";
@@ -158,16 +152,18 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
-//		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
-//			@Override
-//			protected EPackage[] allPackages() {
-//				return new EPackage[] { XtextPackage.eINSTANCE, EcorePackage.eINSTANCE };
-//			}
-//		};
-//		execCtx.registerMetaModel(metamodel);
+		// EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
+		// @Override
+		// protected EPackage[] allPackages() {
+		// return new EPackage[] { XtextPackage.eINSTANCE,
+		// EcorePackage.eINSTANCE };
+		// }
+		// };
+		// execCtx.registerMetaModel(metamodel);
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
-		// add default value for 'modelPluginID' for generated GenModel required for further .edit/.editor generation
-		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID",getProjectNameRt()));
+		// add default value for 'modelPluginID' for generated GenModel required
+		// for further .edit/.editor generation
+		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID", getProjectNameRt()));
 		return execCtx;
 	}
 
@@ -178,6 +174,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private final List<LanguageConfig> languageConfigs = new ArrayList<LanguageConfig>();
 
 	public void addLanguage(LanguageConfig langConfig) {
+		langConfig.initialize(isUi());
 		this.languageConfigs.add(langConfig);
 	}
 
@@ -211,8 +208,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generateExecutableExtensionsFactory(LanguageConfig config, XpandExecutionContext exeCtx) {
 		XpandFacade facade = XpandFacade.create(exeCtx);
-		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(),
-				getActivator());
+		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(), getActivator());
 	}
 
 	private void generateActivator(List<LanguageConfig> configs, XpandExecutionContext exeCtx) {
@@ -253,30 +249,20 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
-		Map<BindKey, BindValue> bindings = config.getGuiceBindingsRt(config.getGrammar());
-		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(),
-				xpandify(bindings));
+		Set<Binding> bindings = config.getGuiceBindingsRt(config.getGrammar());
+		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings);
 	}
 
 	private void generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
 		if (isUi()) {
 			XpandFacade facade = XpandFacade.create(ctx);
-			Map<BindKey, BindValue> bindings = config.getGuiceBindingsUi(config.getGrammar());
-			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(),
-					xpandify(bindings));
+			Set<Binding> bindings = config.getGuiceBindingsUi(config.getGrammar());
+			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(), bindings);
 		}
 	}
 
 	private boolean isUi() {
 		return getPathUiProject() != null;
-	}
-
-	private List<Binding> xpandify(Map<BindKey, BindValue> bindings) {
-		List<Binding> result = new ArrayList<Binding>();
-		for (Entry<BindKey, BindValue> entry : bindings.entrySet()) {
-			result.add(new Binding(entry.getKey(), entry.getValue()));
-		}
-		return result;
 	}
 
 	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
@@ -308,8 +294,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 			try {
 				XpandFacade facade = XpandFacade.create(ctx);
-				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported,
-						requiredBundles, activator);
+				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported, requiredBundles, activator);
 			} finally {
 				ctx.getOutput().closeFile();
 			}
@@ -376,8 +361,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 				ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
 				try {
 					XpandFacade facade = XpandFacade.create(ctx);
-					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported,
-							requiredBundles, getActivator());
+					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported, requiredBundles,
+							getActivator());
 				} finally {
 					ctx.getOutput().closeFile();
 				}
@@ -433,10 +418,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return projectNameUi;
 	}
 
-	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version,
-			Set<String> exported, Set<String> requiredBundles, String activator) {
-		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", name, symbolicName, version, exported,
-				requiredBundles, activator);
+	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
+			Set<String> requiredBundles, String activator) {
+		facade
+				.evaluate("org::eclipse::xtext::generator::Manifest::file", name, symbolicName, version, exported, requiredBundles,
+						activator);
 	}
 
 	public void setActivator(String activator) {
@@ -451,5 +437,4 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return activator;
 	}
 
-	
 }

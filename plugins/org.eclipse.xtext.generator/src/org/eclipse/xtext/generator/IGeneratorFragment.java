@@ -8,8 +8,9 @@
 
 package org.eclipse.xtext.generator;
 
-import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
@@ -21,7 +22,15 @@ import org.eclipse.xtext.Grammar;
  *
  */
 public interface IGeneratorFragment {
-	
+    /**
+	 * Called by the container after configuration so the component can validate
+	 * the configuration before invocation.
+     * 
+	 * @param issues
+     *            implementors should report configuration issues to this.
+     */
+    public void checkConfiguration(Issues issues);
+    
 	/**
 	 * can be used to generate whatever necessary
 	 * 
@@ -59,14 +68,14 @@ public interface IGeneratorFragment {
 	 * 
 	 * @param grammar
 	 */
-	Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar);
+	Set<Binding> getGuiceBindingsRt(Grammar grammar);
 	
 	/**
 	 * return a map containing the contributed guice bindings for the ui part created in this generator fragment
 	 * 
 	 * @param grammar
 	 */
-	Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar);
+	Set<Binding> getGuiceBindingsUi(Grammar grammar);
 	
 	/**
 	 * return the bundles this fragment requires at runtime

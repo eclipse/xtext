@@ -8,15 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.validation;
 
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtend.expression.ExecutionContext;
 import org.eclipse.xtend.expression.ResourceManager;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * {@link IGeneratorFragment} to generate a check based validity checker for a given grammar.
@@ -33,7 +33,7 @@ public class CheckFragment extends AbstractValidatorFragment {
 	}
 	
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory addTypeToInstance = new BindFactory()
 			.addTypeToType(ExecutionContext.class.getName(), "org.eclipse.xtext.xtend.InjectableExecutionContext")
 			.addTypeToType(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")

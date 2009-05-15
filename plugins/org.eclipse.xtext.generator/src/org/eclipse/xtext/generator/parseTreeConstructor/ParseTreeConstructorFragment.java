@@ -8,19 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parseTreeConstructor;
 
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil;
 
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType(IParseTreeConstructor.class.getName(),ParseTreeConstructorUtil.getParseTreeConstructorName(grammar))
 			.getBindings();

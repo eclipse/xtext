@@ -10,9 +10,8 @@ package org.eclipse.xtext.generator;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
@@ -23,17 +22,13 @@ import org.eclipse.xtext.Grammar;
  * base class redirecting call backs to respective Xpand definitions.
  * The template needs to have the same qualified name the extending class has.
  */
-public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
-
-	private static Logger log = Logger.getLogger(AbstractGeneratorFragment.class);
+public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment {
 
 	protected String getTemplate() {
 		return getClass().getName().replaceAll("\\.", "::");
 	}
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing generate for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters(grammar));
 	}
 
@@ -57,11 +52,11 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 		return null;
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return null;
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return null;
 	}
 

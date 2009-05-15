@@ -10,15 +10,14 @@ package org.eclipse.xtext.generator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
@@ -26,15 +25,15 @@ import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * simple composite generator fragment implementation.
- * delegating all callbacks to its contained fragments
+ * 
+ *         simple composite generator fragment implementation. delegating all
+ *         callbacks to its contained fragments
  */
 public class CompositeGeneratorFragment implements IGeneratorFragment {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
-	private final List<IGeneratorFragment> fragments = new ArrayList<IGeneratorFragment>();
+	protected final List<IGeneratorFragment> fragments = new ArrayList<IGeneratorFragment>();
 
 	public void addFragment(IGeneratorFragment fragment) {
 		this.fragments.add(fragment);
@@ -76,42 +75,45 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		for (IGeneratorFragment fragment : fragments) {
 			try {
 				fragment.generate(grammar, ctx);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
 		}
 	}
 
 	public String[] getExportedPackagesRt(final Grammar grammar) {
-		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
+		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
 
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesRt(grammar);
-			}});
+			}
+		});
 	}
-	
+
 	public String[] getExportedPackagesUi(final Grammar grammar) {
-		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
+		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesUi(grammar);
-			}});
+			}
+		});
 	}
-	
-	public Map<BindKey, BindValue> getGuiceBindingsRt(final Grammar grammar) {
-		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
-			public Map<BindKey, BindValue> apply(IGeneratorFragment param) {
+
+	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
+		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsRt(grammar);
-			}});
+			}
+		});
 	}
-	
-	public Map<BindKey, BindValue> getGuiceBindingsUi(final Grammar grammar) {
-		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
-			public Map<BindKey, BindValue> apply(IGeneratorFragment param) {
+
+	public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
+		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsUi(grammar);
-			}});
+			}
+		});
 	}
-	
-	
+
 	private String[] internalGetExportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
@@ -121,22 +123,31 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		}
 		return all.toArray(new String[all.size()]);
 	}
-	
-	private Map<BindKey, BindValue> internalGetGuiceBindings(Grammar grammar, Function<IGeneratorFragment,Map<BindKey, BindValue>> func) {
-		Map<BindKey, BindValue> bindings = new LinkedHashMap<BindKey, BindValue>();
-		Map<BindKey, Class<? extends IGeneratorFragment>> contributedBy = new HashMap<BindKey, Class<? extends IGeneratorFragment>>();
+
+	private Set<Binding> internalGetGuiceBindings(Grammar grammar, Function<IGeneratorFragment, Set<Binding>> func) {
+		LinkedHashSet<Binding> bindings = new LinkedHashSet<Binding>();
 		for (IGeneratorFragment module : fragments) {
-			Map<BindKey, BindValue> temp =func.apply(module);
+			Set<Binding> temp = func.apply(module);
 			if (temp != null) {
-				for (Map.Entry<BindKey, BindValue> entry : temp.entrySet()) {
-					if (!contributedBy.containsKey(entry.getKey())) {
-						contributedBy.put(entry.getKey(), module.getClass());
-					} else {
-						throw new IllegalStateException("Duplicate binding for " + entry.getKey()
-								+ ". Contributed by '" + contributedBy.get(entry.getKey()).getName() + "' and '"
-								+ module.getClass().getName() + "'");
+				for (Binding entry : temp) {
+					if (bindings.contains(entry)) {
+						for (Iterator<Binding> iterator = bindings.iterator(); iterator.hasNext();) {
+							Binding binding = iterator.next();
+							if (binding.equals(entry)) {
+								if (binding.isFinal()) {
+									throw new IllegalStateException("Cannot override final binding '" + binding + "'");
+								} else {
+									if (LOG.isDebugEnabled()) {
+										LOG.debug("replacing binding : "+binding);
+										LOG.debug(" with new binding : "+entry);
+									}
+									iterator.remove();
+								}
+								break;
+							}
+						}
 					}
-					bindings.put(entry.getKey(), entry.getValue());
+					bindings.add(entry);
 				}
 			}
 		}
@@ -161,6 +172,12 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 				all.addAll(Arrays.asList(requiredBundlesUi));
 		}
 		return all.toArray(new String[all.size()]);
+	}
+
+	public void checkConfiguration(Issues issues) {
+		for (IGeneratorFragment fragment : fragments) {
+			fragment.checkConfiguration(issues);
+		}
 	}
 
 }

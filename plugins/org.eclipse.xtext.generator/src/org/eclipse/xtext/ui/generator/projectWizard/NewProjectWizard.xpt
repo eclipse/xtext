@@ -1,0 +1,55 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+
+«DEFINE root FOR Grammar»
+«FILE projectWizardClassName().asPath()+".java" SRC_GEN_UI-»
+package «projectWizardClassName().toJavaPackage()»;
+
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
+
+public class «projectWizardClassName().toSimpleName()» extends XtextNewProjectWizard {
+
+	private WizardNewProjectCreationPage mainPage;
+
+	/**
+	 * Use this method to add pages to the wizard.
+	 * The one-time generated version of this class will add a default new project page to the wizard.
+	 */
+	public void addPages() {
+		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
+		mainPage.setTitle("«getName()» Project");
+		mainPage.setDescription("Create a new «getName()» project.");
+		addPage(mainPage);
+	}
+
+	/**
+	 * Use this method to read the project settings from the wizard pages and feed them into the project info class.
+	 */
+	@Override
+	protected IProjectInfo getProjectInfo() {
+		«projectInfoClassName()» projectInfo = new «projectInfoClassName()»();
+		projectInfo.setProjectName(mainPage.getProjectName());
+		return projectInfo;
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+
