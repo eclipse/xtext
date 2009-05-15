@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.util.PolymorphicDispatcher.NullErrorHandler;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.inject.Inject;
@@ -43,13 +45,32 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractJavaBasedContentProposalProvider extends AbstractContentProposalProvider {
 	
+	protected class DefaultProposalCreator implements Function<IScopedElement, ICompletionProposal> {
+		private final ContentAssistContext contentAssistContext;
+		private final String ruleName;
+
+		protected DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName) {
+			this.contentAssistContext = contentAssistContext;
+			this.ruleName = ruleName;
+		}
+
+		public ICompletionProposal apply(IScopedElement candidate) {
+			if (ruleName != null) {
+				String proposal = getValueConverter().toString(getDisplayString(candidate), ruleName);
+				return createCompletionProposal(candidate.element(), proposal, getDisplayString(candidate), contentAssistContext);
+			}
+			return createCompletionProposal(candidate,	contentAssistContext);
+		}
+
+	}
+
 	private final static Logger logger = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
 	
 	@Inject
 	private IScopeProvider scopeProvider;
 	
 	private final Map<String, PolymorphicDispatcher<Void>> dispatchers;
-
+	
 	protected AbstractJavaBasedContentProposalProvider() {
 		dispatchers = new HashMap<String, PolymorphicDispatcher<Void>>();
 	}
@@ -83,17 +104,14 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		invokeMethod(methodName, acceptor, contentAssistContext.getCurrentModel(), assignment, contentAssistContext);
 	}
 
-	/**
-	 * Concrete subclasses can override this to provide custom lookup behavior
-	 * for <code>CrossReference</code>. This implementation delegates to the
-	 * injected LinkingService
-	 *
-	 * @return a list of <code>ICompletionProposal</code> matching the given
-	 *         assignment
-	 */
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(crossReference, contentAssistContext, acceptor, Predicates.<IScopedElement>alwaysTrue());
+	}
+	
+	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, Function<IScopedElement, ICompletionProposal> proposalFactory) {
+		lookupCrossReference(crossReference, contentAssistContext, acceptor, Predicates.<IScopedElement>alwaysTrue(), proposalFactory);
 	}
 	
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
@@ -105,6 +123,16 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			lookupCrossReference(crossReference, ref, contentAssistContext,	acceptor, filter);
 		}
 	}
+	
+	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter, Function<IScopedElement, ICompletionProposal> proposalFactory) {
+		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
+		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
+			EClass eClass = (EClass) containingParserRule.getType().getClassifier();
+			EReference ref = GrammarUtil.getReference(crossReference, eClass);
+			lookupCrossReference(crossReference, ref, acceptor, filter, proposalFactory);
+		}
+	}
 
 	protected void lookupCrossReference(CrossReference crossReference,
 			EReference reference, ContentAssistContext contentAssistContext,
@@ -113,25 +141,25 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		if (crossReference.getTerminal() instanceof RuleCall) {
 			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
 		}
-		lookupCrossReference(contentAssistContext.getCurrentModel(), reference, ruleName, contentAssistContext, acceptor, filter);
+		lookupCrossReference(contentAssistContext.getCurrentModel(), reference, acceptor, filter,
+				getProposalFactory(ruleName, contentAssistContext));
 	}
 	
-	protected void lookupCrossReference(EObject model, EReference reference, String ruleName, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter) {
+	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
+			Predicate<IScopedElement> filter, Function<IScopedElement, ICompletionProposal> proposalFactory) {
 		IScope scope = getScopeProvider().getScope(model, reference);
 		Iterable<IScopedElement> candidates = scope.getAllContents();
 		for (IScopedElement candidate: candidates) {
 			if (!acceptor.canAcceptMoreProposals())
 				return;
 			if (filter.apply(candidate)) {
-				if (ruleName != null) {
-					String proposal = getValueConverter().toString(candidate.name(), ruleName);
-					acceptor.accept(createCompletionProposal(candidate.element(), proposal, candidate.name(), contentAssistContext));
-				} else {
-					acceptor.accept(createCompletionProposal(candidate,	contentAssistContext));
-				}
+				acceptor.accept(proposalFactory.apply(candidate));
 			}
 		}
+	}
+	
+	protected Function<IScopedElement, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
+		return new DefaultProposalCreator(contentAssistContext, ruleName);
 	}
 	
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {

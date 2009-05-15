@@ -168,59 +168,59 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String name, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, name, getImage(element), contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, getDisplayString(element, proposal), getImage(element), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String name, String displayName, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, displayName, getImage(element), contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, String displayString, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, displayString, getImage(element), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
 	protected ICompletionProposal createCompletionProposal(IScopedElement element, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.element(), element.name(), element.name(), prefix, contentAssistContext);
+		return createCompletionProposal(element.element(), element.name(), getDisplayString(element), prefix, contentAssistContext);
 	}
 
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String name, String displayName, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, displayName, getImage(element), prefix, contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, String displayString, String prefix, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, displayString, getImage(element), prefix, contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String name, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, name, null, 100, contentAssistContext.getPrefix(), contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, proposal, null, 100, contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String name, Image image, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, name, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(String proposal, Image image, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, proposal, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String name, String displayString, Image image,
+	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, displayString, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String name, String displayString, Image image,
+	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, displayString, image, 100, prefix, contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, 100, prefix, contentAssistContext);
 	}
 	
 	/**
@@ -230,11 +230,11 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 * @param image the {@link Image} for the {@link ICompletionProposal}
 	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
 	 */
-	protected ICompletionProposal createCompletionProposal(String name, String displayString, Image image,
+	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			int priority, String prefix, ContentAssistContext context) {
 		int replacementOffset = context.getReplaceRegion().getOffset();
 		int replacementLength = context.getReplaceRegion().getLength();
-		return createCompletionProposal(name, displayString, image, replacementOffset, replacementLength, prefix, context);
+		return createCompletionProposal(proposal, displayString, image, replacementOffset, replacementLength, prefix, context);
 	}
 
 	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
@@ -252,12 +252,20 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return true;
 	}
 
-	protected ConfigurableCompletionProposal doCreateProposal(String name, String displayString, Image image,
+	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
 			int replacementOffset, int replacementLength, ContentAssistContext context) {
-		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(name, replacementOffset, replacementLength, name.length(), image, displayString, null, null);
+		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, proposal.length(), image, displayString, null, null);
 		result.setMatcher(context.getMatcher());
 		result.setReplaceContextLength(context.getCurrentNode().getLength());
 		return result;
+	}
+	
+	protected String getDisplayString(IScopedElement candidate) {
+		return candidate.name();
+	}
+	
+	protected String getDisplayString(EObject element, String proposal) {
+		return proposal;
 	}
 	
 	public void setValueConverter(IValueConverterService valueConverter) {
