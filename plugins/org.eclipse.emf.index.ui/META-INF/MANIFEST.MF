@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.core;bundle-version="3.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-Vendor: itemis AG
+Bundle-Vendor: Eclipse Modeling Project
 Export-Package: org.eclipse.emf.index.ui,
  org.eclipse.emf.index.ui.builder,
  org.eclipse.emf.index.ui.dialog,
