@@ -71,6 +71,28 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		assertEquals(resource1.getURI().toString(), ((ResourceDescriptor) firstEvent.getDescriptor()).getURI());		
 	}
 		
+	public void testNoChange() throws Exception {
+		ResourceDescriptor resourceDescriptor = index.resourceDAO().createQueryResource(resource0).executeSingleResult();
+		assertNotNull(resourceDescriptor);
+		long indexingDate0 = resourceDescriptor.getIndexingDate();
+		
+		indexFeeder.begin();
+		indexFeeder.createResourceDescriptor(resource0, null);
+		indexFeeder.commit();
+
+		resourceDescriptor = index.resourceDAO().createQueryResource(resource0).executeSingleResult();
+		assertNotNull(resourceDescriptor);
+		long indexingDate1 = resourceDescriptor.getIndexingDate();
+		assertTrue(indexingDate0 != indexingDate1);
+
+		List<IndexChangeEvent> events = listener.getEvents();
+		assertEquals(1, events.size());
+		IndexChangeEvent firstEvent = events.get(0);
+		assertEquals(IndexChangeEvent.Type.MODIFIED, firstEvent.getType());
+		assertTrue(firstEvent.getDescriptor() instanceof ResourceDescriptor);
+		assertEquals(resource0.getURI().toString(), ((ResourceDescriptor) firstEvent.getDescriptor()).getURI());		
+	}
+
 	public void testModify() throws Exception {
 		Map<String, Serializable> userData = new HashMap<String, Serializable>();
 		userData.put("impcat", "fatal");
