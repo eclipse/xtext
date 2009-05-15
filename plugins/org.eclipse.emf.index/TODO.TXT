@@ -10,9 +10,4 @@ faeture
  
  ==================
  
-- Index consistency:
-	- fire events
- 
-- Think about IndexFeederStrategy that is not a ResourceChangeListener
- 
- - throw some indexing exceptions or delete class
+Elaborate information in modification events 

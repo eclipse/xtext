@@ -8,7 +8,6 @@
 package org.eclipse.emf.index.impl;
 
 import java.io.Serializable;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,18 +68,23 @@ public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable 
 	}
 
 	public boolean copyDetails(ResourceDescriptor resourceDesc) {
+		boolean hasChanged = false;
 		Map<String, Serializable> newUserData = resourceDesc.getUserData();
 		if (newUserData != null) {
 			if (!newUserData.equals(userData)) {
 				userData = Collections.unmodifiableMap(new HashMap<String, Serializable>(newUserData));
-				return true;
+				hasChanged = true;
 			}
 		}
 		else if (userData != null) {
 			userData = null;
-			return true;
+			hasChanged = true;
 		}
-		return false;
+		if(resourceDesc.getIndexingDate() != indexingDate) {
+			indexingDate = resourceDesc.getIndexingDate();
+			hasChanged = true;
+		}
+		return hasChanged;
 	}
 
 }
