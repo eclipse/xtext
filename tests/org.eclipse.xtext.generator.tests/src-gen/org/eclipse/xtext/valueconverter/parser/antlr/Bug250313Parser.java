@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer;
-import org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser;
-
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

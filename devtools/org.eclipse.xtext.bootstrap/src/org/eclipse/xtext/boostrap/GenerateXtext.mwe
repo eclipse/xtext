@@ -18,11 +18,9 @@
 		<projectNameUi value="${uiProjectName}"/>
 		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>
 				
-		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext">
-			<property name="file.extensions" value="${file.extensions}"/>
+		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext" fileExtensions="${file.extensions}">
 			<property name="basePackage" value="org.eclipse"/>
 			
-			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" basePackage="${basePackage}"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
@@ -30,8 +28,6 @@
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> 
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
-			<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
-			  fileExtensions="${file.extensions}"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
@@ -42,7 +38,6 @@
 		<projectNameUi value="${commonUiProjectName}"/>
 				
 		<language uri="classpath:/org/eclipse/xtext/common/Terminals.xtext">
-			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>

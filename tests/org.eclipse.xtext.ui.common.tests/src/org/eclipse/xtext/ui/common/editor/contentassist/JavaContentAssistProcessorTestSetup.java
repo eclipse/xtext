@@ -9,22 +9,16 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
-import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.XtextUiModule;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
@@ -43,7 +37,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUiModule(),
+				return Guice.createInjector(new ReferenceGrammarTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};
@@ -53,7 +47,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule(),
+				return Guice.createInjector(new XtextGrammarTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};
@@ -63,7 +57,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule() {
+				return Guice.createInjector(new XtextUiModule() {
 					@Override
 					public Class<? extends ILabelProvider> bindILabelProvider() {
 						return SimpleLabelProvider.class;
@@ -78,7 +72,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule(),
+				return Guice.createInjector(new ContentAssistTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};
@@ -88,7 +82,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new KeywordsTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule(),
+				return Guice.createInjector(new KeywordsTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};
@@ -98,7 +92,7 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new EnumRulesTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new EnumRulesTestLanguageRuntimeModule(), new EnumRulesTestLanguageUiModule(),
+				return Guice.createInjector(new EnumRulesTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};

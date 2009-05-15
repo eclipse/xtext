@@ -8,7 +8,7 @@
 package org.eclipse.xtext.generator;
 
 import java.util.Collections;
-import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LoggingGeneratorFragment implements IGeneratorFragment {
+public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private static Logger log = Logger.getLogger(LoggingGeneratorFragment.class);
 
@@ -65,12 +65,12 @@ public class LoggingGeneratorFragment implements IGeneratorFragment {
 		return Strings.EMPTY_ARRAY;
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
-		return Collections.emptyMap();
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		return Collections.emptySet();
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
-		return Collections.emptyMap();
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return Collections.emptySet();
 	}
 
 	public String[] getRequiredBundlesRt(Grammar grammar) {

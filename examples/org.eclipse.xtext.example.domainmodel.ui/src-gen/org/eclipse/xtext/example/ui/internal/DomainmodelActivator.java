@@ -33,7 +33,6 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.example.Domainmodel", Guice.createInjector(
-			new org.eclipse.xtext.example.DomainmodelRuntimeModule(), 
 			new org.eclipse.xtext.example.DomainmodelUiModule(),
 			createUIPluginModule()
 		));

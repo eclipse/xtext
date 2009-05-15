@@ -12,17 +12,6 @@
   </extension>
 
 
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtextgrammartestlanguage">
-		</parser>
-	</extension>
-
-
 	<extension
 			point="org.eclipse.ui.editors">
 		<editor
@@ -101,6 +90,17 @@
 	</extension>
 	
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtextgrammartestlanguage">
+		</parser>
+	</extension>
+
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
@@ -108,17 +108,6 @@
        genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="keywordstestlanguage">
-		</parser>
-	</extension>
 
 
 	<extension
@@ -199,6 +188,17 @@
 	</extension>
 	
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="keywordstestlanguage">
+		</parser>
+	</extension>
+
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/tests/ContentAssist" 
@@ -206,17 +206,6 @@
        genModel = "org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="contentassisttestlanguage">
-		</parser>
-	</extension>
 
 
 	<extension
@@ -297,6 +286,17 @@
 	</extension>
 	
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="contentassisttestlanguage">
+		</parser>
+	</extension>
+
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/reference/ReferenceGrammar" 
@@ -304,17 +304,6 @@
        genModel = "org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="referencegrammartestlanguage">
-		</parser>
-	</extension>
 
 
 	<extension
@@ -395,6 +384,17 @@
 	</extension>
 	
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="referencegrammartestlanguage">
+		</parser>
+	</extension>
+
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
@@ -402,17 +402,6 @@
        genModel = "org/eclipse/xtext/testlanguages/TreeTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="treetestlanguage">
-		</parser>
-	</extension>
 
 
 	<extension
@@ -493,6 +482,17 @@
 	</extension>
 	
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="treetestlanguage">
+		</parser>
+	</extension>
+
+
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest" 
@@ -500,17 +500,6 @@
        genModel = "org/eclipse/xtext/enumrules/EnumRulesTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="enumrulestestlanguage">
-		</parser>
-	</extension>
 
 
 	<extension
@@ -590,5 +579,16 @@
 		</keyword>
 	</extension>
 	
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="enumrulestestlanguage">
+		</parser>
+	</extension>
+
 
 </plugin>

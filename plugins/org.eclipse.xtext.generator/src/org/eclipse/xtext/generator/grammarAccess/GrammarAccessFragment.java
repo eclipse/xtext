@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.grammarAccess;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -25,8 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
@@ -34,7 +32,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	private final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar))
 			.getBindings();

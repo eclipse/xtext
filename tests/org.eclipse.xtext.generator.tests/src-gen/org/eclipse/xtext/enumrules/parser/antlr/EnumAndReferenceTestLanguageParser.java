@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageLexer;
-import org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageParser;
-
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
 
 public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

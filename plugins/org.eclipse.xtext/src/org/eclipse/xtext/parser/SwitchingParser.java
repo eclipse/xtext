@@ -32,7 +32,7 @@ public class SwitchingParser implements ISwitchingParser {
 	@Inject(optional=true)
 	private IAntlrParser antlrParser;
 
-	@Inject
+	@Inject(optional=true)
 	private IPackratParser packratParser;
 
 	private boolean displayed = false;

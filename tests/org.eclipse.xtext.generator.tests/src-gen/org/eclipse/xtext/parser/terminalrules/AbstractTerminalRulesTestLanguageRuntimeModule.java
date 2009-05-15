@@ -23,42 +23,42 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 	}
 	
 	
-	
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguagePackratParser.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.TerminalRulesTestLanguageParsetreeConstructor.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.TerminalRulesTestLanguageParser.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.TerminalRulesTestLanguageAntlrTokenFileProvider.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalTerminalRulesTestLanguageLexer.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

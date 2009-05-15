@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalTerminalRulesTestLanguageLexer;
-import org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalTerminalRulesTestLanguageParser;
-
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
 public class TerminalRulesTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

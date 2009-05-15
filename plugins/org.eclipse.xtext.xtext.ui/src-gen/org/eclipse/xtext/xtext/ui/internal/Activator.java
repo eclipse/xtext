@@ -33,7 +33,6 @@ public class Activator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.Xtext", Guice.createInjector(
-			new org.eclipse.xtext.XtextRuntimeModule(), 
 			new org.eclipse.xtext.XtextUiModule(),
 			createUIPluginModule()
 		));

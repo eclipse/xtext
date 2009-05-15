@@ -33,7 +33,6 @@ public class Activator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.ui.integration.TestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.ui.integration.TestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.ui.integration.TestLanguageUiModule(),
 			createUIPluginModule()
 		));

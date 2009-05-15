@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer;
-import org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser;
-
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
 
 public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

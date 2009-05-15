@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer;
-import org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser;
-
 import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 
 public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalTwoContextsTestLanguageLexer;
-import org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalTwoContextsTestLanguageParser;
-
 import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTestLanguageGrammarAccess;
 
 public class TwoContextsTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

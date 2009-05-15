@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.formatting;
 
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 
 /**
@@ -24,7 +23,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
  */
 public class FormatterFragment extends AbstractGeneratorFragment {
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 		.addTypeToType(ITokenSerializer.class.getName(), getFormatterName(grammar))
 		.getBindings();

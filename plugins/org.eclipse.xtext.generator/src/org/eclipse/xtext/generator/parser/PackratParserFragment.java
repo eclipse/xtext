@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser;
 
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 
 /**
@@ -23,7 +22,7 @@ import org.eclipse.xtext.parser.packrat.IPackratParser;
 public class PackratParserFragment extends AbstractGeneratorFragment {
 
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar g) {
+	public Set<Binding> getGuiceBindingsRt(Grammar g) {
 		return new BindFactory()
 		.addTypeToType(IPackratParser.class.getName(),PackratParserGenUtil.getGeneratedParser(g))	
 		.getBindings();

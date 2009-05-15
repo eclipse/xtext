@@ -8,28 +8,29 @@
 
 package org.eclipse.xtext.generator;
 
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
-public class BasicRuntimeFragment extends AbstractGeneratorFragment {
-	@Override
+
+@Deprecated
+public class BasicRuntimeFragment implements IGeneratorFragment {
+	private static Logger LOG = Logger.getLogger(BasicRuntimeFragment.class); 
+
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+		LOG.warn("Fragment org.eclipse.xtext.generator.BasicRuntimeFragment is deprecated and not needed anymore. Just remove it from the mwe configuration.");
 	}
-	
-	@Override
-	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
-	}
-	
-	@Override
-	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-	}
-	
-	@Override
-	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
-	}
-	
-	@Override
-	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return new String[]{"org.eclipse.xtext", "org.eclipse.xtext.util"};
-	}
+	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {	}
+	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {	}
+	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {	}
+	public String[] getExportedPackagesRt(Grammar grammar) {		return null;	}
+	public String[] getExportedPackagesUi(Grammar grammar) {		return null;	}
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {		return null;	}
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {		return null;	}
+	public String[] getRequiredBundlesRt(Grammar grammar) {		return null;	}
+	public String[] getRequiredBundlesUi(Grammar grammar) {		return null;	}
+	public void checkConfiguration(Issues issues) {	}
 }

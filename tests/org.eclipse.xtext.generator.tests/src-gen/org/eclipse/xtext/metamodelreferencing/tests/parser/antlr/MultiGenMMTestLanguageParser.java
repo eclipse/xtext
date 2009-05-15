@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer;
-import org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser;
-
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
 public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

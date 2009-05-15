@@ -33,7 +33,6 @@ public class EcoreDslActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.example.EcoreDsl", Guice.createInjector(
-			new org.eclipse.xtext.example.EcoreDslRuntimeModule(), 
 			new org.eclipse.xtext.example.EcoreDslUiModule(),
 			createUIPluginModule()
 		));

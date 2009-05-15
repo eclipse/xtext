@@ -33,4 +33,11 @@ public class BindValue {
 	public static BindValue expr(String expr) {
 		return new BindValue(expr,null);
 	}
+	
+	@Override
+	public String toString() {
+		if (expression!=null)
+			return expression;
+		return typeName;
+	}
 }

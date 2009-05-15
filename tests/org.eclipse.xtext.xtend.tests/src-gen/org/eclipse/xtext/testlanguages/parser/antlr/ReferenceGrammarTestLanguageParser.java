@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalReferenceGrammarTestLanguageLexer;
-import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalReferenceGrammarTestLanguageParser;
-
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
 public class ReferenceGrammarTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

@@ -1,10 +1,8 @@
 package org.eclipse.xtext.enumrules;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IResourceFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -38,7 +36,6 @@ public class EnumRulesTestLanguageStandaloneSetup implements ISetup {
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("enumrulestestlanguage", resourceFactory);
 		
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

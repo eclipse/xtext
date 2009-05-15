@@ -38,13 +38,4 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 		return existsConflict(lastCompleteText, proposal);
 	}
 	
-	public static class NullHelper extends ProposalConflictHelper {
-
-		@Override
-		public boolean existsConflict(String lastCompleteText, String proposal) {
-			return false;
-		}
-		
-	}
-
 }

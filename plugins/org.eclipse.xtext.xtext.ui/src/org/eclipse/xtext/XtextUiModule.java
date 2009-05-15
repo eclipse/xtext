@@ -32,7 +32,6 @@ public class XtextUiModule extends AbstractXtextUiModule {
 		return XtextProjectCreator.class;
 	}
 	
-	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
 	}

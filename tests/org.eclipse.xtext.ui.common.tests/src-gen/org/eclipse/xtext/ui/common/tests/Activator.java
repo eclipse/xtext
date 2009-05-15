@@ -33,49 +33,41 @@ public class Activator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.XtextGrammarTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.XtextGrammarTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.testlanguages.ContentAssistTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.testlanguages.TreeTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.testlanguages.TreeTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		
 		injectors.put("org.eclipse.xtext.enumrules.EnumRulesTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule(), 
 			new org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule(),
 			createUIPluginModule()
 		));

@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.generator.parser.antlr.internal.InternallowerCaseNamedTestLanguageLexer;
-import org.eclipse.xtext.generator.parser.antlr.internal.InternallowerCaseNamedTestLanguageParser;
-
 import org.eclipse.xtext.generator.services.lowerCaseNamedTestLanguageGrammarAccess;
 
 public class lowerCaseNamedTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

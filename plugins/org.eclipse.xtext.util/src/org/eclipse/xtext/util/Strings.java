@@ -8,7 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.base.Function;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -38,6 +42,17 @@ public class Strings {
 
 	public static String concat(String separator, List<String> list) {
 		return concat(separator, list, 0);
+	}
+	
+	public static <T> String toString(Collection<T> list, Function<T,String> toString, String delim) {
+		StringBuffer buffer = new StringBuffer();
+		for (Iterator<T> iterator = list.iterator(); iterator.hasNext();) {
+			T t = iterator.next();
+			buffer.append(toString.apply(t));
+			if (iterator.hasNext())
+				buffer.append(delim);
+		}
+		return buffer.toString();
 	}
 
 	public static String concat(String separator, List<String> list, int skip) {

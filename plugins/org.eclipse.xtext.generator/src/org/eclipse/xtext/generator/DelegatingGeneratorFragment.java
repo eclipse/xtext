@@ -7,41 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.emf.mwe.core.resources.ResourceLoaderFactory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
+ * 
  */
-public class DelegatingGeneratorFragment implements IGeneratorFragment {
-
-	private static Logger log = Logger.getLogger(DelegatingGeneratorFragment.class);
+public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private IGeneratorFragment delegate;
 
 	private String message;
 
-	private String delegateClass;
+	private IGeneratorFragment fallback;
+
+	public void setFallback(IGeneratorFragment fragment) {
+		this.fallback = fragment;
+	}
 
 	public void setDelegate(String className) {
-		delegateClass = className;
 		try {
-			Class<?> delegateClass = Class.forName(className);
+			Class<?> delegateClass = ResourceLoaderFactory.createResourceLoader().loadClass(className);
 			delegate = (IGeneratorFragment) delegateClass.newInstance();
 			return;
-		}
-		catch (ClassNotFoundException e) {
-			// ignore
-		}
-		catch (InstantiationException e) {
-			// ignore
-		}
-		catch (IllegalAccessException e) {
+		} catch (Exception e) {
 			// ignore
 		}
 		delegate = null;
@@ -51,66 +46,78 @@ public class DelegatingGeneratorFragment implements IGeneratorFragment {
 		this.message = message;
 	}
 
+	public void checkConfiguration(Issues issues) {
+		if (delegate == null && message != null) {
+			issues.addWarning("---- ATTENTION----\n\t" + "\n\n\t" + message);
+		}
+		if (delegate != null)
+			delegate.checkConfiguration(issues);
+		else
+			fallback.checkConfiguration(issues);
+	}
+
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.addToPluginXmlRt(grammar, ctx);
+		else
+			fallback.addToPluginXmlRt(grammar, ctx);
 	}
 
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
-		delegate.addToPluginXmlUi(grammar, ctx);
+			delegate.addToPluginXmlUi(grammar, ctx);
+		else
+			fallback.addToPluginXmlUi(grammar, ctx);
 	}
 
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
-		delegate.addToStandaloneSetup(grammar, ctx);
+			delegate.addToStandaloneSetup(grammar, ctx);
+		else
+			fallback.addToStandaloneSetup(grammar, ctx);
 	}
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.generate(grammar, ctx);
-		else if (message != null) {
-			log.warn("---- ATTENTION ----");
-			log.warn(message);
-		} else {
-			throw new IllegalStateException("Delegate '" + delegateClass + "' could not be instantiated.");
-		}
+		else
+			fallback.generate(grammar, ctx);
 	}
 
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getExportedPackagesRt(grammar);
-		return Strings.EMPTY_ARRAY;
+		return fallback.getExportedPackagesRt(grammar);
 	}
 
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getExportedPackagesUi(grammar);
-		return Strings.EMPTY_ARRAY;
+		return fallback.getExportedPackagesUi(grammar);
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsRt(grammar);
-		return Collections.emptyMap();
+		return fallback.getGuiceBindingsRt(grammar);
 	}
 
-	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsUi(grammar);
-		return Collections.emptyMap();
+		return fallback.getGuiceBindingsUi(grammar);
 	}
 
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getRequiredBundlesRt(grammar);
-		return Strings.EMPTY_ARRAY;
+		return fallback.getRequiredBundlesRt(grammar);
 	}
 
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getRequiredBundlesUi(grammar);
-		return Strings.EMPTY_ARRAY;
+		return fallback.getRequiredBundlesUi(grammar);
 	}
 
 }

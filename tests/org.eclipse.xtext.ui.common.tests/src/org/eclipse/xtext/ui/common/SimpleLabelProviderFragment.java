@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common;
 
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.BindKey;
-import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,7 +21,7 @@ import org.eclipse.xtext.generator.BindValue;
 public class SimpleLabelProviderFragment extends AbstractGeneratorFragment {
 
 	@Override
-	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory().addTypeToType(
 				"org.eclipse.jface.viewers.ILabelProvider",
 				"org.eclipse.xtext.ui.core.SimpleLabelProvider").getBindings();

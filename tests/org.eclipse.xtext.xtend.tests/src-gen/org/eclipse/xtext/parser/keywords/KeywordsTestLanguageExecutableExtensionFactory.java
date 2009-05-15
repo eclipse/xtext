@@ -13,6 +13,8 @@ import org.eclipse.core.runtime.IExecutableExtensionFactory;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.Bundle;
 
+import com.google.inject.Injector;
+
 /**
  * generated
  */
@@ -20,11 +22,13 @@ public class KeywordsTestLanguageExecutableExtensionFactory implements IExecutab
 
 	private Logger log = Logger.getLogger(KeywordsTestLanguageExecutableExtensionFactory.class);
 	private String clazzName;
+	private IConfigurationElement config;
 
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 		throws CoreException {
 		if (data instanceof String) {
 			clazzName = (String) data;
+			this.config = config;
 		}
 		else {
 			throw new IllegalArgumentException("couldn't handle passed data : "+data);
@@ -37,8 +41,12 @@ public class KeywordsTestLanguageExecutableExtensionFactory implements IExecutab
 			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
 		Bundle bundle = instance.getBundle();
 		try {
-			Class<?> class1 = bundle.loadClass(clazzName);
-			return org.eclipse.xtext.xtend.XtendTestsActivator.getInstance().getInjector("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage").getInstance(class1);
+			final Class<?> clazz = bundle.loadClass(clazzName);
+			final Injector injector = org.eclipse.xtext.xtend.XtendTestsActivator.getInstance().getInjector("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage");
+			final Object result = injector.getInstance(clazz);
+			if (result instanceof IExecutableExtension)
+				((IExecutableExtension) result).setInitializationData(config, null, null);
+			return result;
 		}
 		catch (Exception e) {
 			log.error(e);

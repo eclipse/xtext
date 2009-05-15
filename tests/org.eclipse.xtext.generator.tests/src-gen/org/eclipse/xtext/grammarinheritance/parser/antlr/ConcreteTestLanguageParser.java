@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer;
-import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageParser;
-
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
 public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

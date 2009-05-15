@@ -5,10 +5,7 @@ package org.eclipse.xtext.testlanguages.contentassist;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.common.contentassist.TerminalsProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;

@@ -8,11 +8,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+/**
+ * 
+ * @author Sven Efftinge - Initial contribution and API
+ */
 public class BindKey {
 	private String type;
 	private boolean isSingleton = false;
 	private boolean isEagerSingleton = false;
 	
+	@Override
+	public String toString() {
+		if (isSingleton) {
+			return "singleton "+type;
+		}
+		if (isEagerSingleton) {
+			return "eagerSingleton "+type;
+		}
+		return type;
+	}
 	
 	public String getType() {
 		return type;
@@ -27,8 +41,7 @@ public class BindKey {
 	public boolean isEagerSingleton() {
 		return isEagerSingleton;
 	}
-
-
+	
 	private BindKey(String type, boolean isSingleton, boolean isEagerSingleton) {
 		super();
 		this.type = type;
