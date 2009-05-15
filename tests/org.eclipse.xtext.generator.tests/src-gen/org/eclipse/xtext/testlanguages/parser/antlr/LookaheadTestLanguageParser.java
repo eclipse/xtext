@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer;
-import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser;
-
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
 public class LookaheadTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

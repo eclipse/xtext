@@ -23,62 +23,42 @@ public abstract class AbstractReferenceGrammarTestLanguageRuntimeModule extends 
 	}
 	
 	
-	
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguagePackratParser.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.ReferenceGrammarTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.validation.ReferenceGrammarTestLanguageCheckValidator> bindReferenceGrammarTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.validation.ReferenceGrammarTestLanguageCheckValidator.class;
-	}
-
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.ReferenceGrammarTestLanguageParser.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.ReferenceGrammarTestLanguageAntlrTokenFileProvider.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalReferenceGrammarTestLanguageLexer.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

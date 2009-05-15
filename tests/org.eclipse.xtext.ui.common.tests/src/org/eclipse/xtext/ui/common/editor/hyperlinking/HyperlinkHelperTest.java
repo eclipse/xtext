@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
@@ -32,7 +31,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new org.eclipse.xtext.XtextUiModule(),
+				return Guice.createInjector(new org.eclipse.xtext.XtextUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		};

@@ -33,7 +33,6 @@ public class ReferenceGrammarActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.reference.ReferenceGrammar", Guice.createInjector(
-			new org.eclipse.xtext.reference.ReferenceGrammarRuntimeModule(), 
 			new org.eclipse.xtext.reference.ReferenceGrammarUiModule(),
 			createUIPluginModule()
 		));

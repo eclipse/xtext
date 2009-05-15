@@ -51,7 +51,7 @@ public class CheckValidatorTest extends AbstractXtextTests {
 
 					
 					@Override
-					public java.lang.ClassLoader bindClassLoader() {
+					public java.lang.ClassLoader bindClassLoaderToInstance() {
 						return getClass().getClassLoader();
 					}
 				});

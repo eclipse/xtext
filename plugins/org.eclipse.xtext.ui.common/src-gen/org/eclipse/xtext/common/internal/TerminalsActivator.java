@@ -33,7 +33,6 @@ public class TerminalsActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.common.Terminals", Guice.createInjector(
-			new org.eclipse.xtext.common.TerminalsRuntimeModule(), 
 			new org.eclipse.xtext.common.TerminalsUiModule(),
 			createUIPluginModule()
 		));

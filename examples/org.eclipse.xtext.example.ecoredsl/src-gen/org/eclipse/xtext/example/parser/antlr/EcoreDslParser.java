@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer;
-import org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser;
-
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 public class EcoreDslParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

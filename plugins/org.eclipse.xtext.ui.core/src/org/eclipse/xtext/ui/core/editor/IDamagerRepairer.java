@@ -10,9 +10,12 @@ package org.eclipse.xtext.ui.core.editor;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(FastLineBasedDamagerRepairer.class)
 public interface IDamagerRepairer {
 
 	IPresentationDamager getDamager();

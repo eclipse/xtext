@@ -9,11 +9,22 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(IProposalConflictHelper.NullHelper.class)
 public interface IProposalConflictHelper {
 
 	boolean existsConflict(String proposal, ContentAssistContext context);
 
+	public static class NullHelper extends ProposalConflictHelper {
+
+		@Override
+		public boolean existsConflict(String lastCompleteText, String proposal) {
+			return false;
+		}
+		
+	}
 }

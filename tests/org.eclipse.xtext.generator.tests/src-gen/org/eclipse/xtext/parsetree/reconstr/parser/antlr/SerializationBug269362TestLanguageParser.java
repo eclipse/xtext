@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationBug269362TestLanguageLexer;
-import org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationBug269362TestLanguageParser;
-
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestLanguageGrammarAccess;
 
 public class SerializationBug269362TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

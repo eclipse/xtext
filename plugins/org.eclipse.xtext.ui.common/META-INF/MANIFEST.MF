@@ -8,7 +8,9 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.ui.ide;bundle-version="3.4.0",
- org.eclipse.ui.workbench.texteditor;bundle-version="3.5.0"
+ org.eclipse.ui.workbench.texteditor;bundle-version="3.5.0",
+ org.eclipse.ui.editors,
+ org.eclipse.ui
 Export-Package: org.eclipse.xtext.common,
  org.eclipse.xtext.common.contentassist,
  org.eclipse.xtext.ui.common.editor.contentassist,
@@ -25,6 +27,7 @@ Export-Package: org.eclipse.xtext.common,
  org.eclipse.xtext.ui.common.editor.tasks,
  org.eclipse.xtext.ui.common.editor.tasks.dialogfields,
  org.eclipse.xtext.ui.common.editor.templates,
+ org.eclipse.xtext.ui.common.editor.toggleComments,
  org.eclipse.xtext.ui.common.service
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-Activator: org.eclipse.xtext.ui.common.internal.Activator

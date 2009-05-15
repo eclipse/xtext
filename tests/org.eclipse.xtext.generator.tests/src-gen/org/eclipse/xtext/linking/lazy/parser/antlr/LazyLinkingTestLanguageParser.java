@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer;
-import org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser;
-
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 
 public class LazyLinkingTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

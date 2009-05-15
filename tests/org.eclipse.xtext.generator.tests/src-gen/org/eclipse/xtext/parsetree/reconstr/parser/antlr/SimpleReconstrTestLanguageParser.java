@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer;
-import org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser;
-
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 
 public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

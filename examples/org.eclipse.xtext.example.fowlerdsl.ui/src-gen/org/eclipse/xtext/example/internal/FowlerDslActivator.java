@@ -33,7 +33,6 @@ public class FowlerDslActivator extends AbstractUIPlugin {
 		INSTANCE = this;
 		
 		injectors.put("org.eclipse.xtext.example.FowlerDsl", Guice.createInjector(
-			new org.eclipse.xtext.example.FowlerDslRuntimeModule(), 
 			new org.eclipse.xtext.example.FowlerDslUiModule(),
 			createUIPluginModule()
 		));

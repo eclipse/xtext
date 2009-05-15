@@ -23,62 +23,57 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 	}
 	
 	
-	
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess.class;
 	}
 
-	
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.ui.integration.parser.packrat.TestLanguagePackratParser.class;
-	}
-
-	
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.ui.integration.parseTreeConstruction.TestLanguageParsetreeConstructor.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator> bindTestLanguageCheckValidator() {
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator> bindTestLanguageCheckValidator() {
 		return org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.ui.integration.parser.antlr.TestLanguageParser.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.ui.integration.parser.antlr.TestLanguageAntlrTokenFileProvider.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer.class;
 	}
 
-	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

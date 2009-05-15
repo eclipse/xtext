@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer;
-import org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser;
-
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

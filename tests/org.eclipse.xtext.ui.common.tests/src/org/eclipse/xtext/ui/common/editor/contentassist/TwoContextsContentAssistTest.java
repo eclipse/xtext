@@ -39,7 +39,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 		return new TwoContextsTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new TwoContextsTestLanguageRuntimeModule(), new TwoContextsTestLanguageUiModule(){
+				return Guice.createInjector(new TwoContextsTestLanguageUiModule(){
 
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {

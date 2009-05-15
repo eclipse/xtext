@@ -16,10 +16,30 @@
 		<projectNameRt value="${projectName}"/>
 		<projectNameUi value="${projectName}.ui"/>
 		
-		<language uri="${grammarURI}">
-			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
-				<file.extensions value="${file.extensions}"/>
-			</fragments>
+		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
+			<!-- Java API to access grammar elements (required by several other fragments) -->
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			
+			<!-- generates Java API for the generated EPackages -->
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			
+			<!-- the serialization component -->
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			
+			<!-- a custom ResourceFactory for use with EMF -->
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+				fileExtensions="${file.extensions}"/>
+				
+			<!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com 
+			     and falls back to the packrat parser if it's not available. -->
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
+				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			</fragment>
+	
+			<!-- java-based API for content assistance -->
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
 </workflow>

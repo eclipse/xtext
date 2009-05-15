@@ -11,16 +11,13 @@
 		<projectNameRt value="${projectName}"/>
 		<activator value="org.eclipse.xtext.ui.integration.Activator"/>
 		<language uri="classpath:/org/eclipse/xtext/ui/integration/TestLanguage.xtext">
-			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
 			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
-			<fragment file="org/eclipse/xtext/ui/generator/StandardUiFragments.mwe"
-				  inheritAll="true"/>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
 </workflow>

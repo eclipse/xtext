@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer;
-import org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser;
-
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess;
 
 public class UnassignedRuleCallTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

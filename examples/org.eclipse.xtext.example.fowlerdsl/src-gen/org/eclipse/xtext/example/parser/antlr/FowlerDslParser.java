@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslLexer;
-import org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslParser;
-
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 public class FowlerDslParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

@@ -11,9 +11,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestLexer;
-import org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser;
-
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
