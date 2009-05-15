@@ -47,7 +47,7 @@
 			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
-			<fragment file="org/eclipse/xtext/generator/RuntimeFragmentsWithoutResource.mwe"/>
+			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext">
 			<fragment file="${standardFragments}" />

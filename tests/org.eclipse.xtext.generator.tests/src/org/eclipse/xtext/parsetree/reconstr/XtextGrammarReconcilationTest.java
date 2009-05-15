@@ -6,7 +6,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
