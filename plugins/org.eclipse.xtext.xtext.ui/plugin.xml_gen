@@ -3,25 +3,6 @@
 
 <plugin>
 
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtext">
-		</parser>
-	</extension>
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtext2">
-		</parser>
-	</extension>
-
-
 	<extension
 			point="org.eclipse.ui.editors">
 		<editor
@@ -99,5 +80,24 @@
 		</keyword>
 	</extension>
 	
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtext">
+		</parser>
+	</extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtext2">
+		</parser>
+	</extension>
+
 
 </plugin>
