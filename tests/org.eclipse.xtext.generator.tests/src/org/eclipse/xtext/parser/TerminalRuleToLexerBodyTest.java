@@ -19,6 +19,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO reactivate testcase and move to test plugin, that is not hosted at eclipse
  */
+@SuppressWarnings("unused")
 public abstract class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
 
 	private Grammar grammar;
