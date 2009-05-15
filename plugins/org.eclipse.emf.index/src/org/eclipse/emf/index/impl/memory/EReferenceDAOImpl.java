@@ -65,7 +65,7 @@ public class EReferenceDAOImpl extends BasicMemoryDAOImpl<EReferenceDescriptor> 
 	}
 
 	@Override
-	protected boolean doModify(EReferenceDescriptor element, EReferenceDescriptor newValues) {
+	protected boolean doModify(EReferenceDescriptor element, Object modification) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -84,6 +84,11 @@ public class EReferenceDAOImpl extends BasicMemoryDAOImpl<EReferenceDescriptor> 
 	public IGenericQuery<EReferenceDescriptor> createQueryEReferencesTo(URI targetURI) {
 		return DefaultQueryTool.createQueryEReferencesTo(this, targetURI);
 	}
+
+	public IGenericQuery<EReferenceDescriptor> createQueryEReferencesFromResource(ResourceDescriptor resourceDescriptor) {
+		return sourceResourceScope.createQuery(resourceDescriptor);
+	}
+
 
 	protected class EReferenceQuery extends BasicMemoryDAOImpl<EReferenceDescriptor>.Query implements
 			EReferenceDescriptor.Query {

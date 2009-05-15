@@ -19,7 +19,7 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 	private static final long serialVersionUID = -1607118599703893607L;
 
 	@Override
-	protected boolean doModify(EPackageDescriptor element, EPackageDescriptor newValues) {
+	protected boolean doModify(EPackageDescriptor element, Object modification) {
 		throw new UnsupportedOperationException();
 	}
 	

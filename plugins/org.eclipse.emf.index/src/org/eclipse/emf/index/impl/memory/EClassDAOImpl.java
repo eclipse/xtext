@@ -45,7 +45,7 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 	}
 
 	@Override
-	protected boolean doModify(EClassDescriptor element, EClassDescriptor newValues) {
+	protected boolean doModify(EClassDescriptor element, Object modification) {
 		throw new UnsupportedOperationException();
 	}
 

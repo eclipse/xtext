@@ -7,20 +7,15 @@
  *******************************************************************************/
 package org.eclipse.emf.index.event;
 
-import java.util.List;
-
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface IndexChangeEvent {
 
-	public enum Type { ADDED, REMOVED, MODIFIED }; 
-	
-	List<IndexChangeEvent> getChildren();
-	
-	boolean hasChildren();
+	enum Type { ADDED, REMOVED, MODIFIED }; 
 	
 	Type getType();
 	
 	Object getDescriptor();
+	
 }

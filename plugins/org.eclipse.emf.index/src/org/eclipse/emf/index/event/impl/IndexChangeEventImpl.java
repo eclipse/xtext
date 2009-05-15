@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.emf.index.event.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.index.event.IndexChangeEvent;
 
 /**
@@ -19,21 +16,10 @@ public class IndexChangeEventImpl implements IndexChangeEvent {
 
 	private Object descriptor;
 	private Type type;
-	private List<IndexChangeEvent> children;
 
 	public IndexChangeEventImpl(Object descriptor, Type type) {
 		this.descriptor = descriptor;
 		this.type = type;
-	}
-
-	public List<IndexChangeEvent> getChildren() {
-		if (children == null)
-			children = new ArrayList<IndexChangeEvent>();
-		return children;
-	}
-
-	public boolean hasChildren() {
-		return children != null && !children.isEmpty();
 	}
 
 	public Object getDescriptor() {

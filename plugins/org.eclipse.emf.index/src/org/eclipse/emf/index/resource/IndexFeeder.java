@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface IndexFeeder {
 
 	void begin();
+	
+	void deleteResourceDescriptor(URI resourceURI);
 
 	void createResourceDescriptor(Resource resource, Map<String, Serializable> userData);
 
@@ -35,5 +37,7 @@ public interface IndexFeeder {
 	void createEReferenceDescriptor(URI source, String eReferenceName, int index, URI target);
 
 	void commit();
+	
+	void rollback();
 
 }

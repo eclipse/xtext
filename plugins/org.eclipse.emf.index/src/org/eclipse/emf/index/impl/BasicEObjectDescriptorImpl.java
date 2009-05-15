@@ -75,7 +75,7 @@ public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor, S
 	public boolean equals(Object obj) {
 		if (obj instanceof EObjectDescriptor) {
 			EObjectDescriptor elementDescriptor = (EObjectDescriptor) obj;
-			return obj.hashCode() == hashCode() && fragment.equals(elementDescriptor)
+			return obj.hashCode() == hashCode() && fragment.equals(elementDescriptor.getFragment())
 					&& resourceDescriptor.equals(elementDescriptor.getResourceDescriptor());
 		}
 		return false;
