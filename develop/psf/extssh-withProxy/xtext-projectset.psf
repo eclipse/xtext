@@ -37,6 +37,7 @@
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit,org.eclipse.emf.edit"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit.ui,org.eclipse.emf.edit.ui"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/examples/org.eclipse.emf.generic.editor,org.eclipse.emf.generic.editor"/>
+<project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.emf.index.feature,org.eclipse.emf.index.feature"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.emf.index,org.eclipse.emf.index"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.emf.index.tests,org.eclipse.emf.index.tests"/>
 <project reference="1.0,:extssh:proxy.eclipse.org:443:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.emf.index.ui,org.eclipse.emf.index.ui"/>
@@ -178,6 +179,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.uml2-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.xsd-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.dependencies-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.index.feature" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_3" label="MWE" name="MWE">
 <item elementID="=org.eclipse.emf.mwe.examples" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
