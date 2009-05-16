@@ -1,1 +1,3 @@
-h2. Xtext concepts from a bird's eye view
+h2(#concepts). Xtext concepts from a bird's eye view
+
+text
