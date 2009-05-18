@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -239,5 +240,72 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());
 		assertEquals(parsingPointers.getDefaultReplaceRootNode().serialize(), parseResult.getRootNode().serialize());
 	}
-
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
+	 */
+	public void testBug273209_01() throws Exception {
+		with(XtextStandaloneSetup.class);
+		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/1'\n" +
+				"Model : \n" +
+				"        'model' ':' name=ID ';'*;";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("*;") + 1, 1, "");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("*") + 1, 0, " ");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("* ") + 2, 0, ";");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
+	 */
+	public void testBug273209_02() throws Exception {
+		with(XtextStandaloneSetup.class);
+		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/2'\n" +
+				"importa : \n" +
+				"        name=ID;\n" +
+				"Model : \n" +
+				"        import;";
+		XtextResource resource = getResourceFromString(model);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("import;") + "import".length(), 1, "");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf(" import") + " import".length(), 0, "a");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf(" importa") + " importa".length(), 0, ";");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=273209
+	 */
+	public void testBug273209_03() throws Exception {
+		with(XtextStandaloneSetup.class);
+		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/3'\n" +
+				"Model : \n" +
+				"        ('model' ':' name=ID ';'*);";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("*);") + 1, 2, "");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("*") + 1, 0, " ");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		model = resource.getParseResult().getRootNode().serialize();
+		resource.update(model.indexOf("* ") + 2, 0, ");");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
 }
