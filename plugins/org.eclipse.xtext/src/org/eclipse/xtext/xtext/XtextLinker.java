@@ -46,6 +46,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
+import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
 import com.google.inject.Inject;
@@ -59,6 +60,9 @@ public class XtextLinker extends Linker {
 
 	@Inject
 	private IScopeProvider scopeProvider;
+
+	@Inject(optional=true)
+	private IXtext2EcorePostProcessor postProcessor;
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
@@ -152,6 +156,7 @@ public class XtextLinker extends Linker {
 	protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {
 		final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
 		transformer.setErrorAcceptor(new TransformationDiagnosticsProducer(consumer));
+		transformer.setPostProcessor(postProcessor);
 		return transformer;
 	}
 
