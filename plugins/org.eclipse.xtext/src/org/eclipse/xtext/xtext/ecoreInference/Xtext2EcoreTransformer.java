@@ -76,6 +76,7 @@ public class Xtext2EcoreTransformer {
 	private Map<String, EPackage> generatedEPackages;
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
+	private IXtext2EcorePostProcessor postProcessor;
 
 	public Xtext2EcoreTransformer(Grammar grammar) {
 		this.grammar = grammar;
@@ -93,6 +94,10 @@ public class Xtext2EcoreTransformer {
 		public void acceptError(TransformationErrorCode errorCode, String arg0, EObject arg1) {
 			// do nothing
 		}
+	}
+
+	public void setPostProcessor(IXtext2EcorePostProcessor postProcessor) {
+		this.postProcessor = postProcessor;
 	}
 
 	public static void doTransform(Grammar grammar) {
@@ -135,6 +140,8 @@ public class Xtext2EcoreTransformer {
 			return;
 
 		normalizeAndValidateGeneratedPackages();
+
+		postProcessGeneratedPackages();
 	}
 
 	public void removeGeneratedPackages() {
@@ -873,6 +880,16 @@ public class Xtext2EcoreTransformer {
 		if (metaModel instanceof GeneratedMetamodel)
 			return metaModel.getEPackage();
 		return null;
+	}
+
+	private void postProcessGeneratedPackages() {
+		if (postProcessor != null) {
+			final Iterable<GeneratedMetamodel> generatedMetamodels = Iterables.filter(grammar
+					.getMetamodelDeclarations(), GeneratedMetamodel.class);
+			for (GeneratedMetamodel metamodel : generatedMetamodels) {
+				postProcessor.process(metamodel);
+			}
+		}
 	}
 
 	public EClassifierInfos getEClassifierInfos() {

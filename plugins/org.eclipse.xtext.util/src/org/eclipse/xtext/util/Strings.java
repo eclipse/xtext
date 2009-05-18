@@ -75,7 +75,7 @@ public class Strings {
 	}
 
 	public static String lastToken(String value, String separator) {
-		int index = value.lastIndexOf(separator) + 1;
+		int index = value.lastIndexOf(separator) + separator.length();
 		if (index < value.length())
 			return value.substring(index, value.length());
 		return "";
