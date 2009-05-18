@@ -139,6 +139,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);
 			document.modify(new IUnitOfWork.Void<XtextResource>() {
+				@Override
 				public void process(XtextResource resource) throws Exception {
 					try {
 						if (log.isDebugEnabled())

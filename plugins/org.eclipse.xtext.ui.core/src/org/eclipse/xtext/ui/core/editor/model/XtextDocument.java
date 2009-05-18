@@ -194,6 +194,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return resource;
 		}
 
+		@Override
 		protected void beforeReadOnly(XtextResource res, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
 			if (log.isDebugEnabled())
 				log.debug("read - " + Thread.currentThread().getName());
@@ -206,10 +207,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 				log.debug("write - " + Thread.currentThread().getName());
 		}
 
+		@Override
 		protected void afterReadOnly(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 		}
 
+		@Override
 		protected void afterModify(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 			notifyModelListeners(resource);
@@ -232,7 +235,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
 	private final Object validationLock = new Object();
