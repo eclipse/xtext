@@ -128,6 +128,7 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 				checkBox.setFont(font);
 				checkBox.addSelectionListener(new SelectionAdapter() {
 
+					@Override
 					public void widgetSelected(SelectionEvent event) {
 						setPresentsDefaultValue(false);
 						String oldResult = result;

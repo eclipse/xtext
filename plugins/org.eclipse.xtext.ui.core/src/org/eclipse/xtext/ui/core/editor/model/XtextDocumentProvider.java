@@ -74,6 +74,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 				protected IStatus run(IProgressMonitor monitor) {
 					document.modify(new IUnitOfWork.Void<XtextResource>() {
 
+						@Override
 						public void process(XtextResource arg) throws Exception {
 							for (IResourceDelta delta : visitor.deltas) {
 								IResource res = delta.getResource();
@@ -86,6 +87,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 										case IResourceDelta.REMOVED:
 											// UNLOAD
 											document.modify(new IUnitOfWork.Void<XtextResource>() {
+												@Override
 												public void process(XtextResource arg) throws Exception {
 													emfResource.unload();
 												}
@@ -96,6 +98,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 										case IResourceDelta.CHANGED:
 											// RELOAD
 											document.modify(new IUnitOfWork.Void<XtextResource>() {
+												@Override
 												public void process(XtextResource arg) throws Exception {
 													emfResource.unload();
 													try {

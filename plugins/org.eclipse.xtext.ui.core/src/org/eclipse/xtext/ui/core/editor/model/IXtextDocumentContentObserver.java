@@ -14,20 +14,15 @@ import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
  */
 public interface IXtextDocumentContentObserver extends IDocumentListener {
 
-	/**
-	 * 
-	 *
-	 */
 	public interface Processor {
 		<T> T process(IUnitOfWork<T, XtextResource> transaction);
 	}
 
 	/**
-	 * is called before some other code requests access to an IXtextDocument's state via
+	 * Called by the document before when any client requests access to an IXtextDocument's state via
 	 * {@link IXtextDocument#readOnly(IUnitOfWork)} or {@link IXtextDocument#modify(IUnitOfWork)}
 	 * 
 	 * Implementers get the chance to do any work using the passed {@link Processor}
