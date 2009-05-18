@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ReferencedMetamodel;
@@ -1035,5 +1036,22 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				" Object returns ecore::EObject: {ecore::EAnnotation}; ";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
+	}
+
+	public void testPostProcessorHook() throws Exception {
+		final String xtextGrammar = "grammar test with org.eclipse.xtext.common.Terminals" +
+				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				" generate test 'http://test' MyRule: myFeature=INT;";
+		Grammar grammar = (Grammar) getModel(xtextGrammar);
+		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
+		IXtext2EcorePostProcessor postProcessor = createMock(IXtext2EcorePostProcessor.class);
+		transformer.setPostProcessor(postProcessor);
+		GeneratedMetamodel testMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(1);
+
+		postProcessor.process(testMetamodel);
+		replay(postProcessor);
+		transformer.transform();
+
+		verify(postProcessor);
 	}
 }
