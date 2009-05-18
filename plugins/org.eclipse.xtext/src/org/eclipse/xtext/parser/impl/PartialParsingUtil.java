@@ -10,14 +10,25 @@ package org.eclipse.xtext.parser.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -29,10 +40,11 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.Range;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
+ * @author Sebastian Zarnekow
  */
 public class PartialParsingUtil {
 
@@ -174,20 +186,173 @@ public class PartialParsingUtil {
 		// include any existing parse errors
 		Range range = new Range(myOffset, myOffset + myReplacedTextLength);
 		range.mergeAllErrors(rootNode);
-
+		
 		myOffset = range.getFromOffset();
-//		EList<SyntaxError> allErrors = rootNode.allSyntaxErrors(); // uses TreeIterator and is not as fast as it should be
 		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.getFromOffset(),
 				range.getToOffset() - range.getFromOffset());
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
 				nodesEnclosingRegion, range.getFromOffset(),
 				range.getToOffset() - range.getFromOffset());
 
+		filterInvalidRootNodes(rootNode, validReplaceRootNodes);
+		
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
 		return new PartialParsingPointers(rootNode, myOffset, myReplacedTextLength, validReplaceRootNodes,
 				nodesEnclosingRegion);
+	}
+
+	private static void filterInvalidRootNodes(CompositeNode rootNode, List<CompositeNode> validReplaceRootNodes) {
+		ListIterator<CompositeNode> iter = validReplaceRootNodes.listIterator(validReplaceRootNodes.size());
+		while(iter.hasPrevious()) {
+			if (isInvalidRootNode(rootNode, iter.previous()))
+				iter.remove();
+			else
+				return;
+		}
+	}
+
+	private static boolean isInvalidRootNode(CompositeNode rootNode, CompositeNode candidate) {
+		int end = candidate.getTotalOffset() + candidate.getTotalLength();
+		if (end == rootNode.getTotalOffset() + rootNode.getTotalLength()) {
+			AbstractNode lastChild = getLastLeaf(candidate);
+			if (lastChild.getSyntaxError() != null) {
+				EObject lastChildElement = lastChild.getGrammarElement();
+				if (lastChildElement == null)
+					return true;
+				AbstractElement candidateElement = getCandidateElement(candidate.getGrammarElement());
+				if (candidateElement != null) {
+					if (isCalledBy(lastChildElement, candidateElement)) {
+						return hasMandatoryFollowElements(candidateElement);
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	private static boolean isCalledBy(final EObject child, AbstractElement parent) {
+		return new XtextSwitch<Boolean>() {
+			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
+			@Override
+			public Boolean caseGroup(Group object) {
+				if (object == child)
+					return true;
+				for (AbstractElement elem: object.getTokens()) {
+					if (doSwitch(elem))
+						return true;
+				}
+				return false;
+			}
+			@Override
+			public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
+				if (object == child)
+					return true;
+				for (AbstractElement elem: object.getGroups()) {
+					if (doSwitch(elem))
+						return true;
+				}
+				return false;
+			}
+			@Override
+			public Boolean caseAbstractElement(AbstractElement object) {
+				return object == child;
+			}
+			@Override
+			public Boolean caseRuleCall(RuleCall object) {
+				return object == child || doSwitch(object.getRule());
+			}
+			@Override
+			public Boolean caseAbstractRule(AbstractRule object) {
+				return object == child;
+			}
+			@Override
+			public Boolean caseParserRule(ParserRule object) {
+				return object == child || (rules.add(object) && doSwitch(object.getAlternatives()));
+			}
+		}.doSwitch(parent);
+	}
+
+	private static boolean hasMandatoryFollowElements(AbstractElement lastParsedElement) {
+		if (lastParsedElement.eContainer() instanceof AbstractElement) {
+			AbstractElement directParent = (AbstractElement) lastParsedElement.eContainer();
+			if (directParent instanceof Group) {
+				Group group = (Group) directParent;
+				int idx = group.getTokens().indexOf(lastParsedElement) + 1;
+				for (int i = idx; i < group.getTokens().size(); i++) {
+					if (isMandatory(group.getTokens().get(i)))
+						return true;
+				}
+			}
+			return hasMandatoryFollowElements(directParent);
+		}
+		return false;
+	}
+	
+	private static boolean isMandatory(AbstractElement element) {
+		return new XtextSwitch<Boolean>() {
+			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
+			@Override
+			public Boolean caseAction(Action object) {
+				return false;
+			}
+			@Override
+			public Boolean caseGroup(Group object) {
+				if (GrammarUtil.isOptionalCardinality(object))
+					return false;
+				for (AbstractElement child: object.getTokens()) {
+					if (doSwitch(child)) {
+						return true;
+					}
+				}
+				return false;
+			}
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				if (GrammarUtil.isOptionalCardinality(object))
+					return false;
+				for (AbstractElement child: object.getGroups()) {
+					if (!doSwitch(child)) {
+						return false;
+					}
+				}
+				return true;
+			}
+			@Override
+			public Boolean caseAbstractElement(AbstractElement object) {
+				return !GrammarUtil.isOptionalCardinality(object);
+			}
+			@Override
+			public Boolean caseRuleCall(RuleCall object) {
+				return !GrammarUtil.isOptionalCardinality(object) || doSwitch(object.getRule());
+			}
+			@Override
+			public Boolean caseAbstractRule(AbstractRule object) {
+				return true;
+			}
+			@Override
+			public Boolean caseParserRule(ParserRule object) {
+				return rules.add(object) && doSwitch(object.getAlternatives());
+			}
+		}.doSwitch(element);
+	}
+
+	private static AbstractElement getCandidateElement(EObject grammarElement) {
+		if (grammarElement instanceof AbstractElement)
+			return (AbstractElement) grammarElement;
+		return null;
+	}
+
+	private static AbstractNode getLastLeaf(CompositeNode parent) {
+		List<AbstractNode> children = parent.getChildren();
+		if (children.isEmpty())
+			return parent;
+		AbstractNode lastChild = children.get(children.size() - 1);
+		if (lastChild instanceof CompositeNode)
+			return getLastLeaf((CompositeNode) lastChild);
+		return lastChild;
 	}
 
 	/**
