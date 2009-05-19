@@ -105,6 +105,10 @@ public abstract class AbstractParseTreeConstructor2 implements
 			return out.toString();
 		}
 
+		public String toString() {
+			return serialize();
+		}
+
 		public IInstanceDescription tryConsume() {
 			return tryConsumeVal();
 		}
@@ -204,8 +208,9 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 
 		public AbstractToken2 createParentFollower(AbstractToken2 next,
-				int actIndex, int index, IInstanceDescription inst) {
-			return index == 0 ? new RootToken(next, inst) : null;
+				int actIndex, int index, IInstanceDescription i) {
+			return index != 0 || !i.isConsumed() ? null
+					: new RootToken(next, i);
 		}
 
 		public AbstractElement getGrammarElement() {
@@ -290,6 +295,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 			}
 		}
 		// TODO: improve error reporting
+		// return new RootToken(null);
 		throw new XtextSerializationException(inst, "Serialization failed");
 	}
 }
