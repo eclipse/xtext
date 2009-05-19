@@ -14,7 +14,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2;
 	
 Atom: 
 	name=ID;
@@ -42,3 +42,9 @@ Boolean:
 
 Transient1: 
 	'#5' (precStar?='*'|prec=INT) (',' (scaleStar?='*'|scale=INT))?;
+	
+Consumed1:
+	'#6' (('v1' v1+=INT* v2+=ID) | ('v2' v2+=ID* v1+=INT));
+	 
+Consumed2:
+	'#7' child=Consumed1; 
