@@ -4,14 +4,14 @@
     (c) Lawrence Mandel <lmandel@ca.ibm.com>
     (c) Peter Friese <peter.friese@itemis.com>
 -->
-<project name="how-to-use-wikitext" default="build-doc" basedir=".">
+<project name="org.eclipse.xtext.doc" default="build-doc" basedir=".">
 	
 	<!--
 		Global vars
 	-->
 	<property name="document.name" value="xtext"/>
 	<property name="document.stylesheet" value="styles/article.xsl"/>
-	<property name="document.pdf.stylesheet" value="styles/fopdf.xsl"/>
+	<property name="document.pdf.stylesheet" value="styles/xmpp.xsl"/>
 	
 	<property name="build.dir" value="build" />
 	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
@@ -38,6 +38,9 @@
 	<target name="install-wikitext" depends="get-wikitext">
 		<taskdef resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties">
 			<classpath>
+				<fileset dir="${basedir}/lib/plugins">
+					<include name="org.eclipse.xtext.wikitext.core*.jar"/>
+				</fileset>
 				<fileset dir="${wikitext.dir}">
 					<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
 				</fileset>
@@ -67,7 +70,8 @@
 	</target>
 	
 	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from textile">
-		<wikitext-to-docbook markupLanguage="Textile">
+		<!-- <wikitext-to-docbook markupLanguage="Textile"> -->
+		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect">
 			<fileset dir="${build.dir}">
 	 			<include name="${document.name}.textile"/>
 			</fileset>
@@ -111,6 +115,15 @@
 	<target name="init">
 		<mkdir dir="${download.dir}"/>
 		<mkdir dir="${build.dir}"/>
+		<antcall target="stage-images" />
+	</target>
+	
+	<target name="stage-images">
+		<copy todir="${build.dir}${file.separator}">
+			<fileset dir="doc/">
+    			<include name="images/**" />
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="build-doc" depends="init, install-wikitext, get-docbook-xsl, get-fop">
@@ -190,7 +203,7 @@
 		
 		<!-- Remove the resulting formatting object. This object isn't necessary in the
 		     result of this build. -->
-		<delete file="${build.dir}${file.separator}${document.name}.fo" />
+		<!-- <delete file="${build.dir}${file.separator}${document.name}.fo" /> -->
 	</target>
 	
 	
