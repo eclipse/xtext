@@ -84,10 +84,10 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -140,8 +140,7 @@ protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		

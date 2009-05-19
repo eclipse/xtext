@@ -90,8 +90,7 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -125,8 +124,7 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -160,8 +158,7 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -195,8 +192,7 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -230,8 +226,7 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -265,8 +260,7 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -300,8 +294,7 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		

@@ -107,10 +107,9 @@ protected class RootRule_ConcreteParserRuleParserRuleCall_0 extends RuleCallToke
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -139,10 +138,9 @@ protected class RootRule_CallOverridenParserRuleParserRuleCall_1 extends RuleCal
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -171,10 +169,9 @@ protected class RootRule_CallExtendedParserRuleParserRuleCall_2 extends RuleCall
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -203,10 +200,9 @@ protected class RootRule_OverridableParserRule2ParserRuleCall_3 extends RuleCall
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -261,8 +257,7 @@ protected class ConcreteParserRule_ModelKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -355,7 +350,8 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new ConcreteParserRule_ElementsAssignment_3(parent, next, actIndex, consumed);
 			case 1: return new ConcreteParserRule_ColonKeyword_2(parent, next, actIndex, consumed);
@@ -413,8 +409,7 @@ protected class OverridableParserRule_OverriddenelementKeyword_0 extends Keyword
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -503,10 +498,10 @@ protected class CallOverridenParserRule_CallAssignment extends AssignmentToken  
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -559,8 +554,7 @@ protected class OverridableParserRule2_OverriddenOtherElementKeyword_0 extends K
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -714,10 +708,9 @@ protected class ExtendableParserRule_Subrule1ParserRuleCall_0 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -746,10 +739,9 @@ protected class ExtendableParserRule_Subrule2ParserRuleCall_1 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -778,10 +770,9 @@ protected class ExtendableParserRule_Subrule3ParserRuleCall_2 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -835,8 +826,7 @@ protected class Subrule1_Subrule1Keyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -957,8 +947,7 @@ protected class Subrule2_Subrule3Keyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1079,8 +1068,7 @@ protected class Subrule3_Subrule3Keyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1200,10 +1188,10 @@ protected class CallExtendedParserRule_CallAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, consumed) : null;
-			default: return parent.createParentFollower(next,actIndex , index - 0, consumed);
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -1256,8 +1244,7 @@ protected class InheritedParserRule_ElementKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1348,8 +1335,7 @@ protected class AbstractCallOverridenParserRule_OverridemodelKeyword_0 extends K
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1391,7 +1377,8 @@ protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends Ass
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new AbstractCallOverridenParserRule_ElementsAssignment_1(parent, next, actIndex, consumed);
 			case 1: return new AbstractCallOverridenParserRule_OverridemodelKeyword_0(parent, next, actIndex, consumed);
@@ -1450,8 +1437,7 @@ protected class AbstractCallExtendedParserRule_ExtendedmodelKeyword_0 extends Ke
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 0, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1493,7 +1479,8 @@ protected class AbstractCallExtendedParserRule_ElementsAssignment_1 extends Assi
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new AbstractCallExtendedParserRule_ElementsAssignment_1(parent, next, actIndex, consumed);
 			case 1: return new AbstractCallExtendedParserRule_ExtendedmodelKeyword_0(parent, next, actIndex, consumed);

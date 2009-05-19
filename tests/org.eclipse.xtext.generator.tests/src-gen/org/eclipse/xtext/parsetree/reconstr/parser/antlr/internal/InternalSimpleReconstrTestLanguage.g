@@ -5,6 +5,7 @@ grammar InternalSimpleReconstrTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {
@@ -234,6 +235,26 @@ ruleTerm returns [EObject current=null]
     this_Transient1_8=ruleTransient1
     { 
         $current = $this_Transient1_8.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getConsumed1ParserRuleCall_9(), currentNode); 
+    }
+    this_Consumed1_9=ruleConsumed1
+    { 
+        $current = $this_Consumed1_9.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getConsumed2ParserRuleCall_10(), currentNode); 
+    }
+    this_Consumed2_10=ruleConsumed2
+    { 
+        $current = $this_Consumed2_10.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -862,6 +883,166 @@ ruleTransient1 returns [EObject current=null]
 	    }
 	
 )))?);
+
+
+
+
+
+// Entry rule entryRuleConsumed1
+entryRuleConsumed1 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getConsumed1Rule(), currentNode); }
+	 iv_ruleConsumed1=ruleConsumed1 
+	 { $current=$iv_ruleConsumed1.current; } 
+	 EOF 
+;
+
+// Rule Consumed1
+ruleConsumed1 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#6' 
+    {
+        createLeafNode(grammarAccess.getConsumed1Access().getNumberSignDigitSixKeyword_0(), null); 
+    }
+(('v1' 
+    {
+        createLeafNode(grammarAccess.getConsumed1Access().getV1Keyword_1_0_0(), null); 
+    }
+(	
+	
+	    lv_v1_2=	RULE_INT
+	{
+		createLeafNode(grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_0_1_0(), "v1"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConsumed1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "v1", lv_v1_2, "INT", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)*(	
+	
+	    lv_v2_3=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_0_2_0(), "v2"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConsumed1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "v2", lv_v2_3, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))
+    |('v2' 
+    {
+        createLeafNode(grammarAccess.getConsumed1Access().getV2Keyword_1_1_0(), null); 
+    }
+(	
+	
+	    lv_v2_5=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_1_1_0(), "v2"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConsumed1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "v2", lv_v2_5, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)*(	
+	
+	    lv_v1_6=	RULE_INT
+	{
+		createLeafNode(grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_1_2_0(), "v1"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConsumed1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "v1", lv_v1_6, "INT", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))));
+
+
+
+
+
+// Entry rule entryRuleConsumed2
+entryRuleConsumed2 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getConsumed2Rule(), currentNode); }
+	 iv_ruleConsumed2=ruleConsumed2 
+	 { $current=$iv_ruleConsumed2.current; } 
+	 EOF 
+;
+
+// Rule Consumed2
+ruleConsumed2 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#7' 
+    {
+        createLeafNode(grammarAccess.getConsumed2Access().getNumberSignDigitSevenKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getConsumed2Access().getChildConsumed1ParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_child_1=ruleConsumed1 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConsumed2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "child", lv_child_1, "Consumed1", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+));
 
 
 

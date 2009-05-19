@@ -5,6 +5,7 @@ grammar InternalSerializationBug269362TestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

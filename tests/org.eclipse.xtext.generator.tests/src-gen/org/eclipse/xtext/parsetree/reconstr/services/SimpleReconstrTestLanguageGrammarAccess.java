@@ -61,12 +61,14 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cSpareParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cBooleanParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		private final RuleCall cTransient1ParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cConsumed1ParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
+		private final RuleCall cConsumed2ParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		
 		//Term returns Expression:
-		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1;
+		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2;
 		public ParserRule getRule() { return rule; }
 
-		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1
+		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -95,6 +97,12 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Transient1
 		public RuleCall getTransient1ParserRuleCall_8() { return cTransient1ParserRuleCall_8; }
+
+		//Consumed1
+		public RuleCall getConsumed1ParserRuleCall_9() { return cConsumed1ParserRuleCall_9; }
+
+		//Consumed2
+		public RuleCall getConsumed2ParserRuleCall_10() { return cConsumed2ParserRuleCall_10; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -436,6 +444,98 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//INT
 		public RuleCall getScaleINTTerminalRuleCall_2_1_1_0() { return cScaleINTTerminalRuleCall_2_1_1_0; }
 	}
+
+	public class Consumed1Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cV1Keyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cV1Assignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cV1INTTerminalRuleCall_1_0_1_0 = (RuleCall)cV1Assignment_1_0_1.eContents().get(0);
+		private final Assignment cV2Assignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
+		private final RuleCall cV2IDTerminalRuleCall_1_0_2_0 = (RuleCall)cV2Assignment_1_0_2.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cV2Keyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cV2Assignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cV2IDTerminalRuleCall_1_1_1_0 = (RuleCall)cV2Assignment_1_1_1.eContents().get(0);
+		private final Assignment cV1Assignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cV1INTTerminalRuleCall_1_1_2_0 = (RuleCall)cV1Assignment_1_1_2.eContents().get(0);
+		
+		//Consumed1:
+		//  "#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT);
+		public ParserRule getRule() { return rule; }
+
+		//"#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT)
+		public Group getGroup() { return cGroup; }
+
+		//"#6"
+		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
+
+		//"v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"v1" v1+=INT* v2+=ID
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"v1"
+		public Keyword getV1Keyword_1_0_0() { return cV1Keyword_1_0_0; }
+
+		//v1+=INT*
+		public Assignment getV1Assignment_1_0_1() { return cV1Assignment_1_0_1; }
+
+		//INT
+		public RuleCall getV1INTTerminalRuleCall_1_0_1_0() { return cV1INTTerminalRuleCall_1_0_1_0; }
+
+		//v2+=ID
+		public Assignment getV2Assignment_1_0_2() { return cV2Assignment_1_0_2; }
+
+		//ID
+		public RuleCall getV2IDTerminalRuleCall_1_0_2_0() { return cV2IDTerminalRuleCall_1_0_2_0; }
+
+		//"v2" v2+=ID* v1+=INT
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"v2"
+		public Keyword getV2Keyword_1_1_0() { return cV2Keyword_1_1_0; }
+
+		//v2+=ID*
+		public Assignment getV2Assignment_1_1_1() { return cV2Assignment_1_1_1; }
+
+		//ID
+		public RuleCall getV2IDTerminalRuleCall_1_1_1_0() { return cV2IDTerminalRuleCall_1_1_1_0; }
+
+		//v1+=INT
+		public Assignment getV1Assignment_1_1_2() { return cV1Assignment_1_1_2; }
+
+		//INT
+		public RuleCall getV1INTTerminalRuleCall_1_1_2_0() { return cV1INTTerminalRuleCall_1_1_2_0; }
+	}
+
+	public class Consumed2Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cChildAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cChildConsumed1ParserRuleCall_1_0 = (RuleCall)cChildAssignment_1.eContents().get(0);
+		
+		//Consumed2:
+		//  "#7" child=Consumed1;
+		public ParserRule getRule() { return rule; }
+
+		//"#7" child=Consumed1
+		public Group getGroup() { return cGroup; }
+
+		//"#7"
+		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
+
+		//child=Consumed1
+		public Assignment getChildAssignment_1() { return cChildAssignment_1; }
+
+		//Consumed1
+		public RuleCall getChildConsumed1ParserRuleCall_1_0() { return cChildConsumed1ParserRuleCall_1_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -449,6 +549,8 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private SpareElements pSpare;
 	private BooleanElements pBoolean;
 	private Transient1Elements pTransient1;
+	private Consumed1Elements pConsumed1;
+	private Consumed2Elements pConsumed2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -482,7 +584,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Term returns Expression:
-	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1;
+	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -579,6 +681,26 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getTransient1Rule() {
 		return getTransient1Access().getRule();
+	}
+
+	//Consumed1:
+	//  "#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT);
+	public Consumed1Elements getConsumed1Access() {
+		return (pConsumed1 != null) ? pConsumed1 : (pConsumed1 = new Consumed1Elements());
+	}
+	
+	public ParserRule getConsumed1Rule() {
+		return getConsumed1Access().getRule();
+	}
+
+	//Consumed2:
+	//  "#7" child=Consumed1;
+	public Consumed2Elements getConsumed2Access() {
+		return (pConsumed2 != null) ? pConsumed2 : (pConsumed2 = new Consumed2Elements());
+	}
+	
+	public ParserRule getConsumed2Rule() {
+		return getConsumed2Access().getRule();
 	}
 
 	//terminal ID:

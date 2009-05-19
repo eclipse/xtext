@@ -5,6 +5,7 @@ grammar InternalTransientValuesTest;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

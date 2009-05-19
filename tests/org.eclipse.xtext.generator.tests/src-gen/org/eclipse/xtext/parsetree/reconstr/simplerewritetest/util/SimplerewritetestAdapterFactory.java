@@ -13,6 +13,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
@@ -130,6 +132,16 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTransient1(Transient1 object)
       {
         return createTransient1Adapter();
+      }
+      @Override
+      public Adapter caseConsumed1(Consumed1 object)
+      {
+        return createConsumed1Adapter();
+      }
+      @Override
+      public Adapter caseConsumed2(Consumed2 object)
+      {
+        return createConsumed2Adapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -289,6 +301,36 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTransient1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1 <em>Consumed1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1
+   * @generated
+   */
+  public Adapter createConsumed1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2 <em>Consumed2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2
+   * @generated
+   */
+  public Adapter createConsumed2Adapter()
   {
     return null;
   }

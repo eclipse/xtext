@@ -107,6 +107,24 @@ public interface SimplerewritetestFactory extends EFactory
   Transient1 createTransient1();
 
   /**
+   * Returns a new object of class '<em>Consumed1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Consumed1</em>'.
+   * @generated
+   */
+  Consumed1 createConsumed1();
+
+  /**
+   * Returns a new object of class '<em>Consumed2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Consumed2</em>'.
+   * @generated
+   */
+  Consumed2 createConsumed2();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -5,6 +5,7 @@ grammar InternalConcreteTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

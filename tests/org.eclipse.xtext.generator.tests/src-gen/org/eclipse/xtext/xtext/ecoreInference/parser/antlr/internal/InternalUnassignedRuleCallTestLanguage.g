@@ -5,6 +5,7 @@ grammar InternalUnassignedRuleCallTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

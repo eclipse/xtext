@@ -25,6 +25,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer booleanConsumer;
 
+	private INonTerminalConsumer consumed1Consumer;
+
+	private INonTerminalConsumer consumed2Consumer;
+
 	private INonTerminalConsumer manyStringsConsumer;
 
 	private INonTerminalConsumer parensConsumer;
@@ -59,6 +63,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$10$Consumer;
 
+	private IElementConsumer ruleCall$11$Consumer;
+
+	private IElementConsumer ruleCall$12$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -76,6 +84,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$8$Consumer);
 			acceptor.accept(ruleCall$9$Consumer);
 			acceptor.accept(ruleCall$10$Consumer);
+			acceptor.accept(ruleCall$11$Consumer);
+			acceptor.accept(ruleCall$12$Consumer);
 		}
 	}
 
@@ -187,6 +197,30 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(consumed1Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(consumed2Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -213,6 +247,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getSpareParserRuleCall_6());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getBooleanParserRuleCall_7());
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getTransient1ParserRuleCall_8());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getConsumed1ParserRuleCall_9());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getConsumed2ParserRuleCall_10());
 	}
 	
 	@Override
@@ -231,6 +267,14 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setBooleanConsumer(INonTerminalConsumer booleanConsumer) {
 		this.booleanConsumer = booleanConsumer;
+	}
+	
+	public void setConsumed1Consumer(INonTerminalConsumer consumed1Consumer) {
+		this.consumed1Consumer = consumed1Consumer;
+	}
+	
+	public void setConsumed2Consumer(INonTerminalConsumer consumed2Consumer) {
+		this.consumed2Consumer = consumed2Consumer;
 	}
 	
 	public void setManyStringsConsumer(INonTerminalConsumer manyStringsConsumer) {

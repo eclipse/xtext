@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
@@ -175,6 +177,22 @@ public class SimplerewritetestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimplerewritetestPackage.CONSUMED1:
+      {
+        Consumed1 consumed1 = (Consumed1)theEObject;
+        T result = caseConsumed1(consumed1);
+        if (result == null) result = caseExpression(consumed1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.CONSUMED2:
+      {
+        Consumed2 consumed2 = (Consumed2)theEObject;
+        T result = caseConsumed2(consumed2);
+        if (result == null) result = caseExpression(consumed2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SimplerewritetestPackage.OP:
       {
         Op op = (Op)theEObject;
@@ -327,6 +345,38 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseTransient1(Transient1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Consumed1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Consumed1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConsumed1(Consumed1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Consumed2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Consumed2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConsumed2(Consumed2 object)
   {
     return null;
   }
