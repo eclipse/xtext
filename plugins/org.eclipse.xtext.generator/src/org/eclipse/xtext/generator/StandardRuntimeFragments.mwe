@@ -6,8 +6,9 @@
 	<property name="file.extensions" value=""/>
 	<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 		delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
-		fallBack="org.eclipse.xtext.generator.parser.PackratParserFragment"
-		message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones."/>
+		message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
+		<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment" />
+	</fragment>
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 		fileExtensions="${file.extensions}"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
