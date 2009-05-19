@@ -52,6 +52,8 @@
             value="true">
       </persistent>
    </extension>
+
+   <!--
    <extension
          point="org.eclipse.ui.commands">
       <category
@@ -108,6 +110,7 @@
          </toolbar>
       </menuContribution>
    </extension>
+   -->
    <extension
          point="org.eclipse.ui.startup">
       <startup
