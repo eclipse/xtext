@@ -102,13 +102,18 @@ public abstract class AbstractXtextTests extends TestCase {
 		IAbstractToken token = getParseTreeConstructor().serialize(obj);
 		
 //		final String path = "tmp/";
+//		System.out.println(EmfFormatter.objToStr(obj));
 //		GrammarToDot gtd = new TraceToDot();
 //		try {
-//			gtd.draw(token, path + getClass().getSimpleName() +"-"+getName()+".pdf", "-v -T pdf");
+//			EStructuralFeature f = obj.eClass().getEStructuralFeature("name");
+//			String n = f != null ? "-" + obj.eGet(f) : "";
+//			String s = token.getCurrent() == null ? "fail" : "ok";
+//			gtd.draw(token, path + getClass().getSimpleName() + "-" + getName()
+//					+ n + "-" + s + ".pdf", "-v -T pdf");
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		
+//		if(token.getCurrent() == null) throw new RuntimeException("Serialization failed");
 		getTokenSerializer().serialize(token, out);
 	}
 	

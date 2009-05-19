@@ -53,7 +53,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-«EXPAND createFollowerMethod(false, "inst") FOR calcRootFollowers()-»
+«EXPAND createFollowerMethod FOR calcRootFollowers()-»
 }
 	
 «EXPAND rule FOREACH allParserRules()-»
@@ -83,7 +83,7 @@ protected class ThisRootNode extends RootToken {
 		return grammarAccess.«gaRuleElementAccessor()»;
 	}
 
-«EXPAND createFollowerMethod(false, "inst") FOR calcFollowers()-»
+«EXPAND createFollowerMethod FOR calcFollowers()-»
 		
 «IF calcFollowers().exists(e|e.ruleEnd) || isElementCallable()-»
 	public IInstanceDescription tryConsume() {
@@ -108,20 +108,36 @@ protected class ThisRootNode extends RootToken {
 
 
 
-«DEFINE createFollowerMethod(boolean parent, String currentName) FOR List[Follower]-»
+«DEFINE createFollowerMethod FOR List[Follower]-»
 «IF size > 0-»
-«IF parent-»
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
-«ELSE-»
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-«ENDIF-»
 		switch(index) {
 «FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
-			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», «parent ? "next" : "this"», «parent ? "actIndex" : i.counter0», «currentName»);
+			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «i.counter0», inst);
 «ENDFOREACH-»
 «IF exists(e|e.ruleEnd)-»
-			//default: return («currentName».isConsumed()) ? parent.createParentFollower(«parent ? "next" : "this"»,«parent ? "actIndex" : "index"» , index - «size - 1», «currentName») : null;
-			default: return parent.createParentFollower(«parent ? "next" : "this"»,«parent ? "actIndex" : "index"» , index - «size - 1», «currentName»);
+			default: return parent.createParentFollower(this, index, index«size > 1 ? (" - " + (size - 1)) : ""», inst);
+«ELSE-»
+			default: return null;
+«ENDIF-»			
+		}	
+	}	
+«ENDIF-»
+«ENDDEFINE»
+
+
+«DEFINE createParentFollowerMethod(boolean isAss) FOR List[Follower]-»
+«IF size > 0-»
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+«IF isAss-»
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+«ENDIF-»	
+		switch(index) {
+«FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
+			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
+«ENDFOREACH-»
+«IF exists(e|e.ruleEnd)-»
+			default: return parent.createParentFollower(next, actIndex , index«size > 1 ? (" - " + (size - 1)) : ""», «isAss ? "consumed" : "inst"»);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -183,7 +199,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 		return current;
 	}
 	
-«EXPAND createFollowerMethod(true, "inst") FOR calcParentFollowers()-»
+«EXPAND createParentFollowerMethod(false) FOR calcParentFollowers()-»
 }
 «ENDDEFINE»
 
@@ -267,7 +283,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 		return null;
 	}
 
-«EXPAND createFollowerMethod(true, "consumed") FOR calcParentFollowers()-»
+«EXPAND createParentFollowerMethod(true) FOR calcParentFollowers()-»
 }
 «ENDDEFINE»
 
