@@ -96,7 +96,6 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
 				"org.eclipse.xtext",
 				"org.eclipse.xtext.generator;resolution:=optional",
-				"org.eclipse.xtext.ui.generator;resolution:=optional",
 				"de.itemis.xtext.antlr;resolution:=optional",
 				"org.apache.commons.logging;resolution:=optional",
 				"org.eclipse.emf.codegen.ecore;resolution:=optional",
