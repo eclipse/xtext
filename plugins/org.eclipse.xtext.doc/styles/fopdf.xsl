@@ -82,7 +82,7 @@
                     <fo:table-row>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                <fo:external-graphic src="file:images/logo/building.jpg" content-width="21cm"/>
+                                <fo:external-graphic src="file:build/images/logo/xtext_logo.jpg"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -99,7 +99,7 @@
                     <fo:table-row>
                         <fo:table-cell text-align="right">
                             <fo:block padding-before="50mm">
-                                <fo:external-graphic src="file:images/logo/logo.tif" />
+                                <fo:external-graphic src="file:build/images/logo/logo.tif" />
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
