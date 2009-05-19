@@ -5,6 +5,7 @@ grammar InternalLazyLinkingTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

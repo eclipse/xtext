@@ -5,6 +5,7 @@ grammar InternalOptionalEmptyTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

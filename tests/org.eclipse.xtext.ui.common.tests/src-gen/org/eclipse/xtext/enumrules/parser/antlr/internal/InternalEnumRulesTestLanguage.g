@@ -5,6 +5,7 @@ grammar InternalEnumRulesTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

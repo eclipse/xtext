@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
@@ -94,6 +96,20 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass transient1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass consumed1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass consumed2EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -430,6 +446,56 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getConsumed1()
+  {
+    return consumed1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConsumed1_V1()
+  {
+    return (EAttribute)consumed1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConsumed1_V2()
+  {
+    return (EAttribute)consumed1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConsumed2()
+  {
+    return consumed2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConsumed2_Child()
+  {
+    return (EReference)consumed2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -510,6 +576,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     createEAttribute(transient1EClass, TRANSIENT1__SCALE_STAR);
     createEAttribute(transient1EClass, TRANSIENT1__SCALE);
 
+    consumed1EClass = createEClass(CONSUMED1);
+    createEAttribute(consumed1EClass, CONSUMED1__V1);
+    createEAttribute(consumed1EClass, CONSUMED1__V2);
+
+    consumed2EClass = createEClass(CONSUMED2);
+    createEReference(consumed2EClass, CONSUMED2__CHILD);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -551,6 +624,8 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     spareEClass.getESuperTypes().add(this.getExpression());
     booleanEClass.getESuperTypes().add(this.getExpression());
     transient1EClass.getESuperTypes().add(this.getExpression());
+    consumed1EClass.getESuperTypes().add(this.getExpression());
+    consumed2EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -588,6 +663,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEAttribute(getTransient1_Prec(), ecorePackage.getEInt(), "prec", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransient1_ScaleStar(), ecorePackage.getEBoolean(), "scaleStar", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransient1_Scale(), ecorePackage.getEInt(), "scale", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(consumed1EClass, Consumed1.class, "Consumed1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConsumed1_V1(), ecorePackage.getEInt(), "v1", null, 0, -1, Consumed1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConsumed1_V2(), ecorePackage.getEString(), "v2", null, 0, -1, Consumed1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(consumed2EClass, Consumed2.class, "Consumed2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConsumed2_Child(), this.getConsumed1(), null, "child", null, 0, 1, Consumed2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

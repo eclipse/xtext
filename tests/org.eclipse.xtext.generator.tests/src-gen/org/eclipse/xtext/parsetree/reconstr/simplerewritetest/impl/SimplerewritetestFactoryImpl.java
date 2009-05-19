@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
@@ -86,6 +88,8 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.SPARE: return createSpare();
       case SimplerewritetestPackage.BOOLEAN: return createBoolean();
       case SimplerewritetestPackage.TRANSIENT1: return createTransient1();
+      case SimplerewritetestPackage.CONSUMED1: return createConsumed1();
+      case SimplerewritetestPackage.CONSUMED2: return createConsumed2();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -189,6 +193,28 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     Transient1Impl transient1 = new Transient1Impl();
     return transient1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Consumed1 createConsumed1()
+  {
+    Consumed1Impl consumed1 = new Consumed1Impl();
+    return consumed1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Consumed2 createConsumed2()
+  {
+    Consumed2Impl consumed2 = new Consumed2Impl();
+    return consumed2;
   }
 
   /**

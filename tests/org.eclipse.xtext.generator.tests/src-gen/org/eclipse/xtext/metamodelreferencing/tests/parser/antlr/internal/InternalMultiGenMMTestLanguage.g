@@ -5,6 +5,7 @@ grammar InternalMultiGenMMTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

@@ -5,6 +5,7 @@ grammar InternalFowlerDslTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

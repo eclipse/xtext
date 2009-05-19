@@ -60,8 +60,7 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_FeatureAAssignment(parent, this, 0, inst);
-			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
-			default: return parent.createParentFollower(this,index , index - 1, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
 	}	
 		

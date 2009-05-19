@@ -5,6 +5,7 @@ grammar InternalReferenceGrammar;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {

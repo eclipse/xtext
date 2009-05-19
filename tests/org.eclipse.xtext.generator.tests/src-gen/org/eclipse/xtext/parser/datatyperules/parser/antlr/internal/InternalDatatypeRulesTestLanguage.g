@@ -5,6 +5,7 @@ grammar InternalDatatypeRulesTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {
