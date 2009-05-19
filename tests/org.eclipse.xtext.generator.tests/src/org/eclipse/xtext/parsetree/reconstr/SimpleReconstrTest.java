@@ -103,19 +103,22 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
+	// FIXME: This depends on
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient101() throws Exception {
 		String model = "#5 0";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
+	// FIXME: This depends on
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient102() throws Exception {
 		String model = "#5 1";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
+	// FIXME: This depends on
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient103() throws Exception {
 		String model = "#5 *";
 		assertEquals(model, parseAndSerialize(model));
@@ -180,6 +183,26 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	public void testSpare() throws Exception {
 		String model = "#3 id1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testConsume11() throws Exception {
+		String model = "#6 v1 1 2 a";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testConsume12() throws Exception {
+		String model = "#6 v2 a b 2";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testConsume21() throws Exception {
+		String model = "#7 #6 v1 1 2 a";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testConsume22() throws Exception {
+		String model = "#7 #6 v2 a b 2";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
