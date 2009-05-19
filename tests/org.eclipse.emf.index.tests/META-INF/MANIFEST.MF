@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EMF Index Tests Plug-in
+Bundle-Name: EMF Index Tests Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.emf.index.tests
 Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
