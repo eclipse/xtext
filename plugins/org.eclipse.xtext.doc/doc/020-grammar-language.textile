@@ -11,7 +11,8 @@ h3. First an example
 
 To get an idea of how it works we'll start by implementing a "simple example":http://martinfowler.com/dslwip/Intro.html introduced by Martin Fowler.
 It's mainly about describing state machines used as the (un)lock mechanism of secret compartments. 
-People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards. 
+People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards.  
+
 Then the secret compartment, for instance a panel, opens up.
 
 One of those state machines could look like this:
