@@ -1,4 +1,90 @@
 
 h2(#scoping). Scoping
 
-text
+An @IScopeProvider@ is responsible for providing an @IScope@ for a given @EObject@ and its @EReference@, for which all candidates shall be returned. 
+
+bc.. 
+@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
+public interface IScopeProvider {
+
+	/**
+	 * Returns a scope for the given context. The scope provides access to the compatible
+	 * visible EObjects for a given reference.
+	 *
+	 * @param context the element from which an element shall be referenced
+	 * @param reference the reference to be used to filter the elements.
+	 * @return {@link IScope} representing the inner most {@link IScope} for the
+	 *         passed context and reference.
+	 */
+	public IScope getScope(EObject context, EReference reference);
+
+	/**
+	 * Returns a scope for a given context. The scope contains any visible, type-compatible
+	 * element.
+	 * @param context the element from which an element shall be referenced
+	 * @param type the (super)type of the elements.
+	 * @return {@link IScope} representing the inner most {@link IScope} for the
+	 *         passed context and type.
+	 */
+	public IScope getScope(EObject context, EClass type);
+}
+
+p. An @IScope@ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
+For instance Java has multiple kinds of scopes (object scope, type scope, etc.).
+
+For Java one would create the scope hierarchy as commented in the following example:
+
+bc.. 
+// file contents scope
+import static my.Constants.STATIC;
+
+public class ScopeExample { // class body scope
+	private Object field = STATIC;
+	
+	private void method(String param) { // method body scope
+		String localVar = "bar";
+		innerBlock: { // block scope
+			String innerScopeVar = "foo";
+			Object field = innerScopeVar;
+			// the scope hierarchy at this point would look like so:
+			//blockScope{field,innerScopeVar}->
+			//methodScope{localVar,param}->
+			//classScope{field}-> ('field' is overlayed)
+			//fileScope{STATIC}->
+			//classpathScope{'all qualified names of accessible static fields'} ->
+			//NULLSCOPE{}
+			//
+		}
+		field.add(localVar);
+	}
+}
+
+p. In fact the class path scope should also reflect the order of class path entries.
+For instance:
+
+pre. classpathScope{stuff from bin/}
+-> classpathScope{stuff from foo.jar/}
+-> ...
+-> classpathScope{stuff from JRE System Library}
+-> NULLSCOPE{}
+
+Please find the motivation behind this and some additional details in "this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
+
+h3. Declarative Scope Provider
+
+As always there is an implementation allowing to specify scoping in a declarative way (@org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider@).
+It looks up methods which have the following signature:
+
+bc. IScope scope_<TypeToReturn>(<TypeOfContext> ctx, EReference ref)
+
+For example if you have a transition contained in a scope and you want to compute all reachable states the corresponding method could be declared as follows:
+
+bc. IScope scope_State(Transition this, EReference ref)
+
+If such a method does not exist, the implementation will try to find one for the context's container. This allows to reuse the same scope for different elements and references. In the case of a state machine you might want to declare the scope with available states per state machine.
+This can simply be done using the following signature:
+
+bc. IScope scope_State(StateMachine this, EReference ref)
+
+For a transition looking for possible states to link to, the implementation would first look for @scope_State(Transition,EReference)@, then for the container of the transition. Assuming that is a State the implementation would look for @scope_State(State,EReference)@ and so on.
+Until it finds a matching method (e.g. @scope_State(StateMachine,EReference)@)

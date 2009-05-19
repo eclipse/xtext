@@ -1,4 +1,125 @@
 
 h2(#linking). Linking
 
-text
+The linking feature allows for specification of cross references within an Xtext grammar.
+The following things are needed for the linking:
+
+# declaration of a cross link in the grammar (at least in the meta model)
+# specification of linking semantics
+
+h3. Declaration of cross links
+
+In the grammar a cross reference is specified using square brackets.
+
+bc. CrossReference :
+   '[' ReferencedEClass ('|' terminal=AbstractTerminal)? ']'
+
+Example:
+  
+bc. ReferringType :
+   'ref' referencedObject=[Entity|(ID|STRING)];
+
+The meta model derivation would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see scoping).
+
+Example: While parsing a given input string, say
+
+bc. ref Entity01
+
+Xtext produces an instance of 'ReferringType'. After this parsing step it enters the linking phase and tries to find an instance of ''Entity'' using the parsed text 'Entity01'. The input 
+
+bc. ref "EntityWithƒ÷‹"
+
+would work analogously. This is not an ID (umlauts are not allowed), but a STRING (as it is apparent from the quotation marks).
+
+
+h3. Specification of linking semantics
+
+The default @ILinker@ implementation installs @EObject@ proxies for all crosslinks, which are then resolved on demand.
+The actual cross ref resolution is done in @LazyLinkingResource.getEObject(String)@ and delegates to @ILinkingService@.
+Although the default linking behavior is appropriate in many cases there might be scenarios where this is not sufficient. For each grammar a linking service can be implemented/configured, which implements the following interface:
+
+bc.. @Stable(since = "0.7.0", subClass = AbstractLinkingService.class)
+public interface ILinkingService {
+
+	/**
+	 * Returns all {@link EObject}s referenced by the given link text in the
+	 * given context. But does not set the references or modifies the passed
+	 * information somehow
+	 */
+	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
+			throws IllegalNodeException;
+
+	/**
+	 * Returns the textual representation of a given object as it would be
+	 * serialized in the given context.
+	 * 
+	 * @param object
+	 * @param reference
+	 * @param context
+	 * @return the text representation.
+	 */
+	String getLinkText(EObject object, EReference reference, EObject context);
+}
+
+p. The method @getLinkedObjects@ is directly related to this topic whereas @getLinkText@ adresses complementary functionality: it is used for Serialization.
+
+A simple implementation of the linking service (@DefaultLinkingService@) is shipped with Xtext and is used for any grammar per default. It uses the default implementation of @IScopeProvider@. 
+
+h3. Default linking semantics
+
+The default implementation for all languages, looks within the current file for an EObject of the respective type ('Entity') which has a name attribute set to 'Entity01'. 
+
+Given the grammar :
+
+bc.. Model : (stuff+=(Ref|Entity))*;
+ 
+ Ref : 'ref' referencedObject=[Entity|ID] ';';
+ 
+ Entity : 'entity' name=ID ';';
+
+p. In the following model :
+
+bc. ref Entity01;
+ entity Entity01;
+
+the @ref@ would be linked to the declared entity ('entity Entity01;').
+
+h4. Default Imports
+
+There is a default implementation for inter-resource referencing, which as well uses convention:
+
+Given the grammar :
+
+bc.. Model : (imports+=Import)* (stuff+=(Ref|Entity))*;
+ 
+ Import : 'import' importURI=STRING ';';
+ 
+ Ref : 'ref' referencedObject=[Entity|ID] ';';
+ 
+ Entity : 'entity' name=ID ';';
+
+p. With this grammar in place it would be possible to write three files in the new DSL where the first references the other two, like this:
+
+bc.. --file model.dsl
+ import "model1.dsl";
+ import "model2.dsl";
+ 
+ ref Foo;
+ entity Bar;
+
+bc.. --file model1.dsl 
+ entity Stuff;
+
+bc.. --file model2.dsl
+ entity Foo;
+
+p. The resulting default scope list is as follows:
+
+pre.. Scope (model.dsl) {
+  parent : Scope (model1.dsl) {
+   parent : Scope (model2.dsl) {}
+  }
+ }
+
+p. So, the outer scope is asked for an Entity named 'Foo', as it does not contain such a declaration itself its parent is asked and so on.
+The default implementation of IScopeProvider creates this kind of scope chain.

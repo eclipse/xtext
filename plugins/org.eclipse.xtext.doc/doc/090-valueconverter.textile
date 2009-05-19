@@ -1,4 +1,59 @@
 
 h2(#valueconverter). Value Converter
 
-text
+Value converters are registered to convert parsed text into a certain data type instance and back.
+The primary hook is called org.eclipse.xtext.conversion.IValueConverterService and the concrete implementation can be registered via the runtime Guice module (TODO reference to framework description).
+
+h3. Annotation based value converters
+
+The most simple way to register additional value converters is to make use of @org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService@, which allows to
+declaratively register @IValueConverter@ via annotated methods. 
+
+The implementation for the default token grammar looks like 
+
+bc.. public class DefaultTerminalConverters extends AbstractAnnotationBasedValueConverterService {
+  
+  private Grammar grammar;
+  	
+  @Inject
+  public void setGrammar(IGrammarAccess grammarAccess) {
+    this.grammar = grammarAccess.getGrammar();
+  }
+  	
+  protected Grammar getGrammar() {
+    return grammar;
+  }
+  	
+  @ValueConverter(rule = "ID")
+  public IValueConverter<String> ID() {
+    return new AbstractNullSafeConverter<String>() {
+      @Override
+      protected String internalToValue(String string, AbstractNode node) {
+        return string.startsWith("^") ? string.substring(1) : string;
+      }
+  
+      @Override
+      protected String internalToString(String value) {
+        if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
+          return "^"+value;
+        }
+        return value;
+      }
+    };
+  }
+  
+       ...  some other value converter
+
+p. If you use the common terminals grammar (@org.eclipse.xtext.common.Terminals@) you should subclass @DefaultTerminalConverters@ and overwrite or add addition value converter by adding the respective methods.
+
+Imagine, you would want to add a rule creating BigDecimals:
+
+bc..  @ValueConverter(rule = "BIG_DECIMAL")
+  public IValueConverter<String> BIG_DECIMAL() {
+    return new AbstractToStringConverter<BigDecimal>() {
+      @Override
+      protected BigDecimal internalToValue(String string, AbstractNode node) {
+        return BigDecimal.valueOf(string);
+      }
+    };
+  }

@@ -1,4 +1,36 @@
 
-h2(dependencyInjection). Dependency Injection in Xtext with Google Guice
+h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
-text
+h3. Modules
+
+The Guice Injector configuration is done through the use of Modules (also a Guice concept).
+The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
+These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
+By default these modules extend a fully generated module.
+
+h4. Generated Modules
+
+The fully generated modules (never touch them!) are called Abstract[MyLanguage]RuntimeModule and Abstract[MyLanguage]UiModule respectively. 
+They contain all components which have been generated specifically for the language at hand.
+Examples are: the generated parsers, serializer or for UI a proposal provider for content assist is generated.
+What goes into these modules depends on how your generator is configured.
+
+h4. Default Modules
+
+Finally the fully generated modules extend the @DefaultRuntimeModule@ (resp. @DefaultUiModule@), which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
+Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
+
+h4. Changing Configuration
+
+We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
+The class is initially empty and has been generated only to allow for arbitrary customization.
+
+In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
+This class allows to write bindings like so:
+
+bc. public Class<? extends MyInterface> bind[anyname]() {
+     return MyInterfaceImpl.class;
+ }
+
+Such a method will be interpreted as a binding from @MyInterface@ to @MyInterfaceImpl@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding.
+Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method @void bind(Binding)@ and do what every you want.

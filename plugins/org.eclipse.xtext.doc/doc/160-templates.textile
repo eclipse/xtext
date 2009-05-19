@@ -1,4 +1,30 @@
 
 h2(#templates). Template Proposals
 
-text
+Xtext-based editors automatically support code templates. 
+That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file under ''templates/templates.xml'' containing templates in a format described in the "eclipse help":http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm  .
+
+By default Xtext registers ContextTypes for each Rule ([languageName].[RuleName]) and for each keyword ([languageName].kw_[keyword]), as long as the keywords are valid identifiers.
+If you don't like these defaults you'll have to subclass @org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry@ and configure it via guice.
+
+h3. CrossReference Resolver
+
+Xtext comes with a specific template variable resolver (@org.eclipse.jface.text.templates.TemplateVariableResolver@) called @CrossReferenceResolver@, which can be used to place cross refs within a template.
+
+The syntax is as follows:
+
+bc. ${someText:CrossReference('MyType.myRef')}
+
+For example the following template:
+
+
+bc.  <template name="transition" description="event transition"
+    id="transition"
+    context="org.eclipse.xtext.example.FowlerDsl.Transition" 
+    enabled="true"
+  >${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')</
+  template>
+
+... yields the text
+''event => state'' and allows selecting any events and states using a drop down.
+Just try it.
