@@ -76,6 +76,10 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		assertNotNull(resourceDescriptor);
 		long indexingDate0 = resourceDescriptor.getIndexingDate();
 		
+		// currentTimeMillis must be different!
+		while(indexingDate0 == System.currentTimeMillis())
+			Thread.sleep(10);
+		
 		indexFeeder.begin();
 		indexFeeder.createResourceDescriptor(resource0, null);
 		indexFeeder.commit();
@@ -86,11 +90,11 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		assertTrue(indexingDate0 != indexingDate1);
 
 		List<IndexChangeEvent> events = listener.getEvents();
-		assertEquals(1, events.size());
-		IndexChangeEvent firstEvent = events.get(0);
-		assertEquals(IndexChangeEvent.Type.MODIFIED, firstEvent.getType());
-		assertTrue(firstEvent.getDescriptor() instanceof ResourceDescriptor);
-		assertEquals(resource0.getURI().toString(), ((ResourceDescriptor) firstEvent.getDescriptor()).getURI());		
+		assertEquals(0, events.size());
+//		IndexChangeEvent firstEvent = events.get(0);
+//		assertEquals(IndexChangeEvent.Type.MODIFIED, firstEvent.getType());
+//		assertTrue(firstEvent.getDescriptor() instanceof ResourceDescriptor);
+//		assertEquals(resource0.getURI().toString(), ((ResourceDescriptor) firstEvent.getDescriptor()).getURI());		
 	}
 
 	public void testModify() throws Exception {

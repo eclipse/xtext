@@ -82,7 +82,7 @@ public class ResourceDescriptorImpl implements ResourceDescriptor, Serializable 
 		}
 		if(resourceDesc.getIndexingDate() != indexingDate) {
 			indexingDate = resourceDesc.getIndexingDate();
-			hasChanged = true;
+			// hasChanged = true;
 		}
 		return hasChanged;
 	}
