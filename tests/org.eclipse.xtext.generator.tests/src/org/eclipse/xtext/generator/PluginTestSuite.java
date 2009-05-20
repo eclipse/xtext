@@ -95,7 +95,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.service.AbstractGenericModuleTest.class);
 		suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.scoping.DeclarativeScopeProviderTest.class);
-		suite.addTestSuite(org.eclipse.xtext.scoping.index.IndexBasedScopeProviderTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.scoping.index.IndexBasedScopeProviderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.ResourceTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTests.class);
