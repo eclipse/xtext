@@ -239,6 +239,7 @@ public class EclipseResourceUtil {
 			}
 			mainContent.append("\n");
 		}
+		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
 		metaInf.create(false, true, new SubProgressMonitor(progressMonitor, 1));
