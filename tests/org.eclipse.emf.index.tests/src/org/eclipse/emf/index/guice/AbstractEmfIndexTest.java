@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.emf.index.guice;
 
+import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
+
 import junit.framework.TestCase;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * Base class for all tests depending on Google Guice for dependency injection. Subclasses can be run in standalone or
@@ -26,8 +29,15 @@ public abstract class AbstractEmfIndexTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		// each test should have its own instance of the dependencies, so we create a new Injector
-		this.injector = Guice.createInjector(AbstractEmfIndexTestSuite.getModule());
+		this.injector = Guice.createInjector(getModule());
 		injector.injectMembers(this);
+	}
+
+	/**
+	 * @return
+	 */
+	protected Module getModule() {
+		return new EmfIndexDefaultModule();
 	}
 
 }

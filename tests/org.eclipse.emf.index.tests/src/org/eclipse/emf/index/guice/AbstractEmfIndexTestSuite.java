@@ -34,11 +34,7 @@ import com.google.inject.Module;
  */
 public abstract class AbstractEmfIndexTestSuite extends TestSuite {
 
-	// TODO: Eeeek! Global state! Put it away!
-	private static Module module;
-
-	public AbstractEmfIndexTestSuite(Module module) {
-		AbstractEmfIndexTestSuite.module = module;
+	public AbstractEmfIndexTestSuite() {
 		addTestSuite(EClassDAOTest.class);
 		addTestSuite(EObjectDAOTest.class);
 		addTestSuite(EPackageDAOTest.class);
@@ -54,7 +50,5 @@ public abstract class AbstractEmfIndexTestSuite extends TestSuite {
 		
 	}
 
-	public static Module getModule() {
-		return (module == null) ? new EmfIndexDefaultModule() : module;
-	}
+
 }

@@ -16,18 +16,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * The write interface to the index. Creates descriptors and keeps the index consistent, e.g. free of dangling
- * references. Write operations take the form of transactions. Each transaction starts with a call to {@link #begin()}
- * followed by several calls to the <code>createXDescriptor</code> methods. The transaction is finished by calling
- * {@link #commit()}.
- * 
- * The indexFeeder implementation is currently NOT thread safe.
+ * references.
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface IndexFeeder {
 
-	void begin();
-	
 	void deleteResourceDescriptor(URI resourceURI);
 
 	void createResourceDescriptor(Resource resource, Map<String, Serializable> userData);
@@ -38,6 +32,4 @@ public interface IndexFeeder {
 
 	void commit();
 	
-	void rollback();
-
 }

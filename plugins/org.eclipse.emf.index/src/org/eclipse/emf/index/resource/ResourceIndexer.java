@@ -8,18 +8,25 @@
 package org.eclipse.emf.index.resource;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 
 /**
- * Interface to index a specific resource. Implementing classes should traverse the resource and call the
- * {@link IndexFeeder} to store the desired descriptors in the index.
+ * Interface to index a specific resource. Implementing classes should traverse
+ * the resource and call the {@link IndexFeeder} to store the desired
+ * descriptors in the index.
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface ResourceIndexer {
 
-	void resourceChanged(Resource resource, IndexFeeder feeder);
+	void resourceChanged(URI resource, IndexFeeder feeder);
 
 	void resourceDeleted(URI resourceURI, IndexFeeder feeder);
 
+	public interface Registry {
+		void registerIndexer(String fileExtension, ResourceIndexer listener);
+
+		void deregisterIndexer(String fileExtension, ResourceIndexer listener);
+
+		ResourceIndexer getIndexerFor(String fileExtension);
+	}
 }

@@ -10,17 +10,12 @@ package org.eclipse.emf.index;
 import junit.framework.TestSuite;
 
 import org.eclipse.emf.index.guice.AbstractEmfIndexTestSuite;
-import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class MemoryTestSuite extends AbstractEmfIndexTestSuite {
 
-	public MemoryTestSuite() {
-		super(new EmfIndexDefaultModule());
-	}
-	
 	public static TestSuite suite() {
 		return new MemoryTestSuite();
 	}

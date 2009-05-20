@@ -76,6 +76,7 @@ public abstract class BasicIndexStore implements IndexStore {
 	}
 
 	public void beginTransaction() {
+		//shouldn't the events lists cleared only if a new transaction is started, i.e. after the check?
 		firedEvents.clear();
 		if (isInTransaction)
 			throw new IllegalStateException("Transaction already open");

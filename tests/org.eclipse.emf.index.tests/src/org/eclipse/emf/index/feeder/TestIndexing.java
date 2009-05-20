@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -15,9 +16,12 @@ import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
+import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
 import org.eclipse.emf.index.resource.IndexFeeder;
 import org.eclipse.emf.index.resource.ResourceIndexer;
+import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
 
 import com.google.inject.Inject;
 
@@ -29,21 +33,14 @@ public class TestIndexing extends AbstractEmfIndexTest {
 	@Inject
 	private IndexStore index;
 
-	@Inject 
-	private EcoreIndexFeeder ecoreFeeder;
-
-	@Inject 
-	private IndexFeeder feeder;
-	
-	@Inject 
-	ResourceIndexer indexer;
+	ResourceIndexerImpl indexer = new ResourceIndexerImpl();
 	
 	private File testFile;
 
 	public void testIndexingObjectNameFeatureNull() {
 
 		// feed the EcorePackage only
-		ecoreFeeder.index(EcorePackage.eINSTANCE, false);
+		new EcoreIndexFeederImpl(index).index(EcorePackage.eINSTANCE, false);
 		
 		// create test data
 		EParameter objectNameAttributeNullToIndex = EcoreFactory.eINSTANCE.createEParameter();
@@ -53,7 +50,9 @@ public class TestIndexing extends AbstractEmfIndexTest {
 		r.getContents().add(objectNameAttributeNullToIndex);
 	 
 		// index test data
+		IndexFeederImpl feeder = new IndexFeederImpl(index);
 		indexer.resourceChanged(r, feeder);
+		feeder.commit();
 
 		// assert resource is indexed
 		ResourceDescriptor rd = index.resourceDAO().createQueryResource(r).executeSingleResult();

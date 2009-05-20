@@ -38,7 +38,7 @@ public class IndexOnSaveAdapter extends AdapterImpl {
 		int featureID = msg.getFeatureID(Resource.class);
 		if(featureID == Resource.RESOURCE__IS_MODIFIED &&
 				msg.getOldBooleanValue() && ! msg.getNewBooleanValue()) {
-			resourceIndexer.resourceChanged((Resource) msg.getNotifier(), indexFeeder);
+			resourceIndexer.resourceChanged(((Resource) msg.getNotifier()).getURI(), indexFeeder);
 		}
 	}
 	

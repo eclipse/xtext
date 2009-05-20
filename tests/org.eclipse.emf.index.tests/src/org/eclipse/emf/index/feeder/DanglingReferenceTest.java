@@ -18,6 +18,7 @@ import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
 import org.eclipse.emf.index.resource.IndexFeeder;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class DanglingReferenceTest extends AbstractEmfIndexTest {
 
@@ -29,7 +30,7 @@ public class DanglingReferenceTest extends AbstractEmfIndexTest {
 	private IndexStore index;
 	
 	@Inject
-	private IndexFeeder indexFeeder;
+	private Provider<IndexFeeder> indexFeederProvider;
 	
 	@Inject 
 	private EcoreIndexFeeder ecoreIndexFeeder;
@@ -55,7 +56,7 @@ public class DanglingReferenceTest extends AbstractEmfIndexTest {
 		resource.getContents().add(source);
 		resource.getContents().add(target);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = indexFeederProvider.get();
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(source, source.getName(), source.getName(), null);
 		indexFeeder.createEObjectDescriptor(target, target.getName(), target.getName(), null);
@@ -70,7 +71,7 @@ public class DanglingReferenceTest extends AbstractEmfIndexTest {
 		EReferenceDescriptor eRefDesc = index.eReferenceDAO().createQuery().referenceName(REFERENCE_NAME).executeSingleResult();
 		assertNotNull(eRefDesc);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = indexFeederProvider.get();
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(target, target.getName(), target.getName(), null);
 		indexFeeder.createEReferenceDescriptor(EcoreUtil.getURI(source), REFERENCE_NAME, 0, EcoreUtil.getURI(target));
@@ -91,7 +92,7 @@ public class DanglingReferenceTest extends AbstractEmfIndexTest {
 		EReferenceDescriptor eRefDesc = index.eReferenceDAO().createQuery().referenceName(REFERENCE_NAME).executeSingleResult();
 		assertNotNull(eRefDesc);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = indexFeederProvider.get();
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(source, source.getName(), source.getName(), null);
 		indexFeeder.createEReferenceDescriptor(EcoreUtil.getURI(source), REFERENCE_NAME, 0, EcoreUtil.getURI(target));
@@ -112,7 +113,7 @@ public class DanglingReferenceTest extends AbstractEmfIndexTest {
 		EReferenceDescriptor eRefDesc = index.eReferenceDAO().createQuery().referenceName(REFERENCE_NAME).executeSingleResult();
 		assertNotNull(eRefDesc);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = indexFeederProvider.get();
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(source, source.getName(), source.getName(), null);
 		indexFeeder.createEObjectDescriptor(target, target.getName(), target.getName(), null);

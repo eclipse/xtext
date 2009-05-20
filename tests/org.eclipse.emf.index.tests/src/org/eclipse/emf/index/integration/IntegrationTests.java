@@ -36,6 +36,7 @@ import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
 import org.eclipse.emf.index.resource.IndexFeeder;
 import org.eclipse.emf.index.resource.ResourceIndexer;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
 import org.eclipse.emf.index.util.CollectionUtils;
 
 import com.google.inject.Inject;
@@ -59,9 +60,7 @@ public class IntegrationTests extends AbstractEmfIndexTest {
 
 	protected IndexFeeder feeder;
 	
-	@Inject
-	private ResourceIndexer resourceIndexer;
-
+	private ResourceIndexer resourceIndexer = new ResourceIndexerImpl();
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -145,8 +144,7 @@ public class IntegrationTests extends AbstractEmfIndexTest {
 
 	private void indexExampleResource() throws IOException {
 		URI uri = URI.createFileURI("src/" + TEST_MODEL);
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(uri, true);
-		resourceIndexer.resourceChanged(resource, feeder);
+		resourceIndexer.resourceChanged(uri, feeder);
+		feeder.commit();
 	}
 }

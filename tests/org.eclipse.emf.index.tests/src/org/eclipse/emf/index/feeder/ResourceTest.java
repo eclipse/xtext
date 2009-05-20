@@ -15,10 +15,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.IndexingException;
 import org.eclipse.emf.index.ResourceDescriptor;
-import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
+import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.event.IndexChangeEvent;
 import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
 import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
 
 import com.google.inject.Inject;
 
@@ -29,12 +30,6 @@ public class ResourceTest extends AbstractEmfIndexTest {
 	
 	@Inject
 	private IndexStore index;
-	
-	@Inject
-	private IndexFeeder indexFeeder;
-	
-	@Inject 
-	private EcoreIndexFeeder ecoreIndexFeeder;
 	
 	private Resource resource0;
 	private Resource resource1;
@@ -49,7 +44,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		URI resource1URI = URI.createURI(RESOURCE_1_URI);
 		resource1 = new ResourceImpl(resource1URI);
 
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource0, null);
 		indexFeeder.commit();
 
@@ -59,7 +54,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 	
 	
 	public void testAdd() throws Exception {
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource1, null);
 		indexFeeder.commit();
 
@@ -75,12 +70,10 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		ResourceDescriptor resourceDescriptor = index.resourceDAO().createQueryResource(resource0).executeSingleResult();
 		assertNotNull(resourceDescriptor);
 		long indexingDate0 = resourceDescriptor.getIndexingDate();
-		
 		// currentTimeMillis must be different!
 		while(indexingDate0 == System.currentTimeMillis())
 			Thread.sleep(10);
-		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource0, null);
 		indexFeeder.commit();
 
@@ -101,7 +94,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		Map<String, Serializable> userData = new HashMap<String, Serializable>();
 		userData.put("impcat", "fatal");
 
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource0, userData);
 		indexFeeder.commit();
 
@@ -114,7 +107,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 	}
 		
 	public void testDelete() throws Exception {
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.deleteResourceDescriptor(resource0.getURI());
 		indexFeeder.commit();
 
@@ -127,7 +120,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 	}
 		
 	public void testDeleteAndAddInSameTransaction() throws Exception {
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.deleteResourceDescriptor(resource1.getURI());
 		try {
 			indexFeeder.createResourceDescriptor(resource1, null);
@@ -135,7 +128,7 @@ public class ResourceTest extends AbstractEmfIndexTest {
 		} catch (IndexingException e) {
 			// expected behavior
 		}
-		indexFeeder.begin();
+		indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource1, null);
 		try {
 			indexFeeder.deleteResourceDescriptor(resource1.getURI());
@@ -146,18 +139,19 @@ public class ResourceTest extends AbstractEmfIndexTest {
 	}
 	
 	public void testDeleteEObjectsAndEReferencesRecursively() {
+		EcoreIndexFeederImpl ecoreIndexFeeder = new EcoreIndexFeederImpl(index);
 		ecoreIndexFeeder.index(EcorePackage.eINSTANCE, false);
 		EPackage eObject = EcoreFactory.eINSTANCE.createEPackage();
 		resource0.getContents().add(eObject);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createEObjectDescriptor(eObject, eObject.getName(), eObject.getName(), null);
 		indexFeeder.createEReferenceDescriptor(EcoreUtil.getURI(eObject), "subPackage", 0, EcoreUtil.getURI(eObject));
 		indexFeeder.commit();
 		
 		listener.clearEvents();
 		
-		indexFeeder.begin();
+		indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.deleteResourceDescriptor(resource0.getURI());
 		indexFeeder.commit();
 		

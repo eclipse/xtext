@@ -13,10 +13,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IndexStore;
-import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
+import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.event.IndexChangeEvent;
 import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
 import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
 
 import com.google.inject.Inject;
 
@@ -27,12 +28,6 @@ public class EObjectTest extends AbstractEmfIndexTest {
 	@Inject
 	private IndexStore index;
 	
-	@Inject
-	private IndexFeeder indexFeeder;
-	
-	@Inject 
-	private EcoreIndexFeeder ecoreIndexFeeder;
-
 	private Resource resource;
 
 	private EPackage eObject0;
@@ -43,7 +38,7 @@ public class EObjectTest extends AbstractEmfIndexTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		ecoreIndexFeeder.index(EcorePackage.eINSTANCE, false);
+		new EcoreIndexFeederImpl(index).index(EcorePackage.eINSTANCE, false);
 		URI resourceURI = URI.createURI(RESOURCE_URI);
 		resource = new ResourceImpl(resourceURI);
 		eObject0 = EcoreFactory.eINSTANCE.createEPackage();
@@ -53,7 +48,7 @@ public class EObjectTest extends AbstractEmfIndexTest {
 		eObject1.setName("Anton");
 		resource.getContents().add(eObject1);
 		
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(eObject0, eObject0.getName(), eObject0.getName(), null);
 		indexFeeder.commit();
@@ -63,7 +58,7 @@ public class EObjectTest extends AbstractEmfIndexTest {
 	}
 	
 	public void testAdd() throws Exception {
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(eObject0, eObject0.getName(), eObject0.getName(), null);
 		indexFeeder.createEObjectDescriptor(eObject1, eObject1.getName(), eObject1.getName(), null);
@@ -80,7 +75,7 @@ public class EObjectTest extends AbstractEmfIndexTest {
 	public void testModify() throws Exception {
 		Map<String, Serializable> userData = new HashMap<String, Serializable>();
 		userData.put("impcat", "fatal");
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.createEObjectDescriptor(eObject0, eObject0.getName(), eObject0.getName(), userData);
 		indexFeeder.commit();
@@ -96,7 +91,7 @@ public class EObjectTest extends AbstractEmfIndexTest {
 	public void testDelete() throws Exception {
 		Map<String, Serializable> userData = new HashMap<String, Serializable>();
 		userData.put("impcat", "fatal");
-		indexFeeder.begin();
+		IndexFeeder indexFeeder = new IndexFeederImpl(index);
 		indexFeeder.createResourceDescriptor(resource, null);
 		indexFeeder.commit();
 				

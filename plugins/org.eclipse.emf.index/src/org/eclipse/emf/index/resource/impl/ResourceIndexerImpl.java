@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.internal.LogFacade;
@@ -31,19 +32,32 @@ import org.eclipse.emf.index.resource.ResourceIndexer;
  */
 public class ResourceIndexerImpl implements ResourceIndexer {
 
+	public void resourceChanged(URI resourceURI, IndexFeeder indexFeeder) {
+		Resource resource = loadResource(resourceURI);
+		this.resourceChanged(resource, indexFeeder);
+	}
+
+	protected Resource loadResource(URI resourceURI) {
+		try {
+			ResourceSet resourceSet = new ResourceSetImpl();
+			return resourceSet.getResource(resourceURI, true);
+		} catch (Exception exc) {
+			LogFacade.logError("Error loading resource", exc);
+			return null;
+		}
+	}
+
 	public void resourceChanged(Resource resource, IndexFeeder feeder) {
 		if (resource != null) {
-			feeder.begin();
 			try {
 				ResourceSet resourceSet = resource.getResourceSet();
-				URIConverter uriConverter = (resourceSet != null) ? resourceSet.getURIConverter()
-						: URIConverter.INSTANCE;
+				URIConverter uriConverter = (resourceSet != null) ? resourceSet.getURIConverter() : URIConverter.INSTANCE;
 				feeder.createResourceDescriptor(resource, getResourceUserData(resource));
 				for (Iterator<EObject> i = EcoreUtil.getAllProperContents(resource, false); i.hasNext();) {
 					EObject element = i.next();
 					if (isIndexElement(element)) {
-						feeder.createEObjectDescriptor(element, getEObjectName(element),
-								getEObjectDisplayName(element), getEObjectUserData(element));
+						feeder.createEObjectDescriptor(element, getEObjectName(element), getEObjectDisplayName(element),
+								getEObjectUserData(element));
 						URI sourceURI = uriConverter.normalize(EcoreUtil.getURI(element));
 						if (sourceURI != null) {
 							for (EReference eReference : element.eClass().getEAllReferences()) {
@@ -53,11 +67,9 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 										List<?> targets = (List<?>) element.eGet(eReference, false);
 										for (int index = 0; index < targets.size(); ++index) {
 											Object target = targets.get(index);
-											createEReferenceDescriptor(feeder, uriConverter, sourceURI, eReferenceName,
-													index, target);
+											createEReferenceDescriptor(feeder, uriConverter, sourceURI, eReferenceName, index, target);
 										}
-									}
-									else {
+									} else {
 										Object target = element.eGet(eReference, false);
 										createEReferenceDescriptor(feeder, uriConverter, sourceURI, eReferenceName,
 												EReferenceDescriptor.NO_INDEX, target);
@@ -67,29 +79,22 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 						}
 					}
 				}
-				feeder.commit();
-			}
-			catch (Exception exc) {
+			} catch (Exception exc) {
 				LogFacade.logError("Error indexing resource " + resource.getURI(), exc);
-				feeder.rollback();
 			}
 		}
 	}
 
 	public void resourceDeleted(URI resourceURI, IndexFeeder feeder) {
-		feeder.begin();
 		try {
 			feeder.deleteResourceDescriptor(resourceURI);
-		}
-		catch (Exception exc) {
+		} catch (Exception exc) {
 			LogFacade.logError("Error deleting resource from index " + resourceURI, exc);
-			feeder.rollback();
 		}
-		feeder.commit();
 	}
 
-	protected void createEReferenceDescriptor(IndexFeeder feeder, URIConverter uriConverter, URI sourceURI,
-			String eReferenceName, int index, Object target) {
+	protected void createEReferenceDescriptor(IndexFeeder feeder, URIConverter uriConverter, URI sourceURI, String eReferenceName,
+			int index, Object target) {
 		if (target instanceof EObject) {
 			URI targetURI = uriConverter.normalize(EcoreUtil.getURI((EObject) target));
 			if (targetURI != null) {
@@ -113,8 +118,7 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 			if (!nameFeature.isMany()) {
 				Object nameFeatureValue = eObject.eGet(nameFeature);
 				return (nameFeatureValue == null) ? null : nameFeatureValue.toString();
-			}
-			else {
+			} else {
 				List names = (List) eObject.eGet(nameFeature);
 				StringBuilder b = new StringBuilder();
 				for (Iterator nameIter = names.iterator(); nameIter.hasNext();) {
