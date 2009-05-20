@@ -8,30 +8,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.index;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
-public abstract class AbstractDeclarativeNameProvider extends DefaultGlobalNameProvider {
+@ImplementedBy(DefaultGlobalNameProvider.class)
+public interface IGlobalNameProvider {
+	/**
+	 * returns the name the passed element can be referred to
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	String getGlobalName(EObject obj);
 	
-	private PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("getName", 1,1, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>(){
-	
-		public String handle(Object[] params, Throwable throwable) {
-			return null;
-		}
-	});
-
-	public final String getGlobalName(EObject obj) {
-		return dispatcher.invoke(obj);
+	abstract class Abstract implements IGlobalNameProvider {
+		
 	}
-	
-	String getName(EObject obj) {
-		return super.getGlobalName(obj);
-	}
-	
 }

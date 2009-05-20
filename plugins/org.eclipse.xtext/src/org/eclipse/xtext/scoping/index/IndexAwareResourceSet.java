@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.resource.ResourceIndexer;
 import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
-import org.eclipse.emf.index.tracking.impl.IndexingResourceChangeListener;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -31,15 +31,15 @@ import com.google.inject.Inject;
 public class IndexAwareResourceSet extends XtextResourceSet {
 	private final IndexStore store;
 	private final IndexFeeder feeder;
-	private final IndexingResourceChangeListener listener;
+	private final ResourceIndexer listener;
 
 	@Inject
-	public IndexAwareResourceSet(final IndexStore store, final INameProvider nameProvider,
+	public IndexAwareResourceSet(final IndexStore store, final IGlobalNameProvider nameProvider,
 			final EPackage.Registry registry, final IndexFeeder indexFeeder, final EcoreIndexFeeder ecoreIndexFeeder) {
 		this.store = store;
 		this.feeder = indexFeeder;
 
-		this.listener = new IndexingResourceChangeListener(new ResourceIndexerImpl() {
+		this.listener = new ResourceIndexerImpl() {
 			@Override
 			protected String getEObjectName(EObject eObject) {
 				return nameProvider.getGlobalName(eObject);
@@ -48,11 +48,6 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 			@Override
 			protected boolean isIndexElement(EObject element) {
 				return nameProvider.getGlobalName(element) != null;
-			}
-		}) {
-			@Override
-			protected Resource loadResource(URI resourceUri) {
-				return IndexAwareResourceSet.this.getResource(resourceUri, true);
 			}
 		};
 
