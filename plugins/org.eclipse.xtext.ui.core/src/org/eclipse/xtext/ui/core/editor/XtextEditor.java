@@ -272,4 +272,19 @@ public class XtextEditor extends TextEditor {
 			getSourceViewer().invalidateTextPresentation();
 		}
 	}
+	
+	@Override
+	protected String[] collectContextMenuPreferencePages() {
+		String[] ids = super.collectContextMenuPreferencePages();
+		String[] more = new String[ids.length + 4];
+		// NOTE: preference page at index 0 will be opened, see
+		// PreferencesUtil.createPreferenceDialogOn
+		more[0] = getLanguageName() + ".editor"; //$NON-NLS-1$
+		more[1] = getLanguageName();
+		more[2] = getLanguageName() + ".templates"; //$NON-NLS-1$
+		more[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
+		System.arraycopy(ids, 0, more, 4, ids.length);
+		return more;
+	}
+	
 }
