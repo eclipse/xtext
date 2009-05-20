@@ -56,7 +56,6 @@ public class TestResourceUnloading extends AbstractEmfIndexTest {
 		EcoreIndexFeeder indexFeeder = new EcoreIndexFeederImpl(index);
 		indexFeeder.index(EcorePackage.eINSTANCE, true);
 		IndexFeeder feeder = new IndexFeederImpl(index);
-		feeder.begin();
 
 		// 3. create a new resource set
 		rs = new ResourceSetImpl();

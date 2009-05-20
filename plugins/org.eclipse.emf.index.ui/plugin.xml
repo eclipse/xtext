@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.eclipse.emf.index.indexer" name="EMF Indexer" schema="schema/org.eclipse.emf.index.indexer.exsd"/>
    <extension
          id="emfIndexBuilder"
          name="EMF Index Project Builder"
@@ -8,7 +9,11 @@
       <builder
             hasNature="true">
          <run
-               class="org.eclipse.emf.index.ui.builder.EmfIndexProjectBuilder">
+               class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory">
+               <parameter
+                     name="actualClass"
+                     value="org.eclipse.emf.index.ui.builder.EmfIndexProjectBuilder">
+               </parameter>
          </run>
       </builder>
    </extension>
@@ -114,7 +119,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.IndexBuildTrigger">
+            class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.IndexStartupInitializer">
       </startup>
    </extension>
 

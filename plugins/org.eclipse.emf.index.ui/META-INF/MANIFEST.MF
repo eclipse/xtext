@@ -16,4 +16,5 @@ Export-Package: org.eclipse.emf.index.ui,
  org.eclipse.emf.index.ui.builder,
  org.eclipse.emf.index.ui.dialog,
  org.eclipse.emf.index.ui.handlers,
- org.eclipse.emf.index.ui.internal
+ org.eclipse.emf.index.ui.internal,
+ org.eclipse.emf.index.ui.resource.impl

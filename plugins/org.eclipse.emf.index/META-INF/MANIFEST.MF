@@ -18,7 +18,6 @@ Export-Package: org.eclipse.emf.index,
  org.eclipse.emf.index.internal;x-friends:="org.eclipse.emf.index.tests",
  org.eclipse.emf.index.resource,
  org.eclipse.emf.index.resource.impl,
- org.eclipse.emf.index.tracking,
  org.eclipse.emf.index.tracking.impl,
  org.eclipse.emf.index.util
 Bundle-ActivationPolicy: lazy
