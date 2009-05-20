@@ -657,7 +657,27 @@ bc..
 
 h3. Feature Normalization
 
-As a last step, the generator examines all generated EClasses and lifts up similar features to supertypes if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple supertypes.
+Next the generator examines all generated EClasses and lifts up similar features to supertypes if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple supertypes.
+
+h3. Customized Post Processing
+
+As a last step, the generator invokes the post processor for every generated meta model. The post processor expects an Xtend file with name @MyDslPostProcessor.ext@ (if the name of the grammar file is @MyDsl.xtext@) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature @process(xtext::GeneratedMetamodel)@. E.g.
+
+bc.. 
+ process(xtext::GeneratedMetamodel this) :
+   process(ePackage)
+ ;
+ 
+ process(ecore::EPackage this) :
+   ...
+ ;
+
+p. The invoked extension can then augment the generated Ecore model in place. Some typical use cases are to:
+* set default values for attributes
+* add container references as opposites of existing containment references
+* add operations with implementation (using a body annotation)
+
+Great care must be taken not to modify the meta model in a way preventing the Xtext parser from working correctly (e.g. removing or renaming model elements).
 
 h3. Error Conditions
 
