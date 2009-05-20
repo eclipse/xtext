@@ -8,30 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.index;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
-public abstract class AbstractDeclarativeNameProvider extends DefaultGlobalNameProvider {
+public class DefaultGlobalNameProvider extends IGlobalNameProvider.Abstract {
 	
-	private PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("getName", 1,1, Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>(){
-	
-		public String handle(Object[] params, Throwable throwable) {
-			return null;
-		}
-	});
+	private final SimpleAttributeResolver<EObject, String> nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
 
-	public final String getGlobalName(EObject obj) {
-		return dispatcher.invoke(obj);
-	}
-	
-	String getName(EObject obj) {
-		return super.getGlobalName(obj);
+	public String getGlobalName(EObject obj) {
+		return nameResolver.getValue(obj);
 	}
 	
 }
