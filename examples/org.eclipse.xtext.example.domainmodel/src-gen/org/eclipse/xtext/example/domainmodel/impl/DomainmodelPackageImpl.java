@@ -7,6 +7,7 @@ package org.eclipse.xtext.example.domainmodel.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -28,6 +29,7 @@ import org.eclipse.xtext.example.domainmodel.StructuralFeature;
 import org.eclipse.xtext.example.domainmodel.Type;
 import org.eclipse.xtext.example.domainmodel.TypeRef;
 import org.eclipse.xtext.example.domainmodel.TypedElement;
+import org.eclipse.xtext.example.domainmodel.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,6 +143,13 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * @generated
    */
   private EClass typeRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum visibilityEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -410,9 +419,19 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getOperation_Visibility()
+  {
+    return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getOperation_Params()
   {
-    return (EReference)operationEClass.getEStructuralFeatures().get(0);
+    return (EReference)operationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -480,6 +499,16 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getVisibility()
+  {
+    return visibilityEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DomainmodelFactory getDomainmodelFactory()
   {
     return (DomainmodelFactory)getEFactoryInstance();
@@ -536,6 +565,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     createEReference(referenceEClass, REFERENCE__OPPOSITE);
 
     operationEClass = createEClass(OPERATION);
+    createEAttribute(operationEClass, OPERATION__VISIBILITY);
     createEReference(operationEClass, OPERATION__PARAMS);
 
     parameterEClass = createEClass(PARAMETER);
@@ -546,6 +576,9 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
 
     typeRefEClass = createEClass(TYPE_REF);
     createEReference(typeRefEClass, TYPE_REF__REFERENCED);
+
+    // Create enums
+    visibilityEEnum = createEEnum(VISIBILITY);
   }
 
   /**
@@ -620,6 +653,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     initEReference(getReference_Opposite(), this.getReference(), null, "opposite", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOperation_Visibility(), this.getVisibility(), "visibility", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getOperation_Params(), this.getParameter(), null, "params", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -630,6 +664,13 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
 
     initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeRef_Referenced(), this.getType(), null, "referenced", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+    addEEnumLiteral(visibilityEEnum, Visibility.PACKAGE);
+    addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
+    addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
+    addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
 
     // Create resource
     createResource(eNS_URI);

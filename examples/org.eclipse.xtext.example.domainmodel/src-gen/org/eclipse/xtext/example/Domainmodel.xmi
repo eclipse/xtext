@@ -167,6 +167,9 @@
         <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Operation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="visibility" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </tokens>
         <tokens xsi:type="xtext:Keyword" value="op"/>
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -235,6 +238,29 @@
           <tokens xsi:type="xtext:Keyword" value="."/>
           <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="Visibility">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.example.xtext/Domainmodel#//Visibility"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.example.xtext/Domainmodel#//Visibility/package"/>
+          <literal value="#"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.example.xtext/Domainmodel#//Visibility/private"/>
+          <literal value="-"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.example.xtext/Domainmodel#//Visibility/protected"/>
+          <literal value="!"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.example.xtext/Domainmodel#//Visibility/public"/>
+          <literal value="+"/>
+        </groups>
       </alternatives>
     </rules>
   </xtext:Grammar>

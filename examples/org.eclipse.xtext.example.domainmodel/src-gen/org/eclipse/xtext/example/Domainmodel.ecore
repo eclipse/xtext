@@ -30,6 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="//Reference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="//Visibility"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1" eType="//Parameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="//TypedElement"/>
@@ -41,5 +42,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="package" literal="#"/>
+    <eLiterals name="private" value="1" literal="-"/>
+    <eLiterals name="protected" value="2" literal="!"/>
+    <eLiterals name="public" value="3" literal="+"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -368,73 +368,81 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	public class OperationElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOpKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cParamsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cParamsParameterParserRuleCall_3_0_0 = (RuleCall)cParamsAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cParamsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cParamsParameterParserRuleCall_3_1_1_0 = (RuleCall)cParamsAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTypeTypeRefParserRuleCall_6_0 = (RuleCall)cTypeAssignment_6.eContents().get(0);
+		private final Assignment cVisibilityAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cVisibilityVisibilityEnumRuleCall_0_0 = (RuleCall)cVisibilityAssignment_0.eContents().get(0);
+		private final Keyword cOpKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Assignment cParamsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cParamsParameterParserRuleCall_4_0_0 = (RuleCall)cParamsAssignment_4_0.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
+		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cParamsParameterParserRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cColonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cTypeAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cTypeTypeRefParserRuleCall_7_0 = (RuleCall)cTypeAssignment_7.eContents().get(0);
 		
 		//Operation:
-		//  "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
+		//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//"op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
+		//visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
 		public Group getGroup() { return cGroup; }
 
+		//visibility=Visibility?
+		public Assignment getVisibilityAssignment_0() { return cVisibilityAssignment_0; }
+
+		//Visibility
+		public RuleCall getVisibilityVisibilityEnumRuleCall_0_0() { return cVisibilityVisibilityEnumRuleCall_0_0; }
+
 		//"op"
-		public Keyword getOpKeyword_0() { return cOpKeyword_0; }
+		public Keyword getOpKeyword_1() { return cOpKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
 		//(params+=Parameter ("," params+=Parameter)*)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//params+=Parameter
-		public Assignment getParamsAssignment_3_0() { return cParamsAssignment_3_0; }
+		public Assignment getParamsAssignment_4_0() { return cParamsAssignment_4_0; }
 
 		//Parameter
-		public RuleCall getParamsParameterParserRuleCall_3_0_0() { return cParamsParameterParserRuleCall_3_0_0; }
+		public RuleCall getParamsParameterParserRuleCall_4_0_0() { return cParamsParameterParserRuleCall_4_0_0; }
 
 		//("," params+=Parameter)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
+		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
 		//params+=Parameter
-		public Assignment getParamsAssignment_3_1_1() { return cParamsAssignment_3_1_1; }
+		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
 
 		//Parameter
-		public RuleCall getParamsParameterParserRuleCall_3_1_1_0() { return cParamsParameterParserRuleCall_3_1_1_0; }
+		public RuleCall getParamsParameterParserRuleCall_4_1_1_0() { return cParamsParameterParserRuleCall_4_1_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
 		//":"
-		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
+		public Keyword getColonKeyword_6() { return cColonKeyword_6; }
 
 		//type=TypeRef
-		public Assignment getTypeAssignment_6() { return cTypeAssignment_6; }
+		public Assignment getTypeAssignment_7() { return cTypeAssignment_7; }
 
 		//TypeRef
-		public RuleCall getTypeTypeRefParserRuleCall_6_0() { return cTypeTypeRefParserRuleCall_6_0; }
+		public RuleCall getTypeTypeRefParserRuleCall_7_0() { return cTypeTypeRefParserRuleCall_7_0; }
 	}
 
 	public class ParameterElements implements IParserRuleAccess {
@@ -534,6 +542,49 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 	
 	
+	public class VisibilityElements implements IEnumRuleAccess {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Visibility");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cPackageEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cPackageNumberSignKeyword_0_0 = (Keyword)cPackageEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cPrivateEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cPrivateHyphenMinusKeyword_1_0 = (Keyword)cPrivateEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cProtectedEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cProtectedExclamationMarkKeyword_2_0 = (Keyword)cProtectedEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cPublicEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cPublicPlusSignKeyword_3_0 = (Keyword)cPublicEnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum Visibility returns Visibility : package | private | protected | public ;
+		public EnumRule getRule() { return rule; }
+
+		//package | private | protected | public
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//package
+		public EnumLiteralDeclaration getPackageEnumLiteralDeclaration_0() { return cPackageEnumLiteralDeclaration_0; }
+
+		//"#"
+		public Keyword getPackageNumberSignKeyword_0_0() { return cPackageNumberSignKeyword_0_0; }
+
+		//private
+		public EnumLiteralDeclaration getPrivateEnumLiteralDeclaration_1() { return cPrivateEnumLiteralDeclaration_1; }
+
+		//"-"
+		public Keyword getPrivateHyphenMinusKeyword_1_0() { return cPrivateHyphenMinusKeyword_1_0; }
+
+		//protected
+		public EnumLiteralDeclaration getProtectedEnumLiteralDeclaration_2() { return cProtectedEnumLiteralDeclaration_2; }
+
+		//"!"
+		public Keyword getProtectedExclamationMarkKeyword_2_0() { return cProtectedExclamationMarkKeyword_2_0; }
+
+		//public
+		public EnumLiteralDeclaration getPublicEnumLiteralDeclaration_3() { return cPublicEnumLiteralDeclaration_3; }
+
+		//"+"
+		public Keyword getPublicPlusSignKeyword_3_0() { return cPublicPlusSignKeyword_3_0; }
+	}
+	
 	private FileElements pFile;
 	private ImportElements pImport;
 	private NamedElementElements pNamedElement;
@@ -550,6 +601,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	private TypedElementElements pTypedElement;
 	private TypeRefElements pTypeRef;
 	private QualifiedNameElements pQualifiedName;
+	private VisibilityElements unknownRuleVisibility;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -683,7 +735,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Operation:
-	//  "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
+	//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
@@ -730,6 +782,15 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getQualifiedNameRule() {
 		return getQualifiedNameAccess().getRule();
+	}
+
+	//enum Visibility returns Visibility : package | private | protected | public ;
+	public VisibilityElements getVisibilityAccess() {
+		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
+	}
+	
+	public EnumRule getVisibilityRule() {
+		return getVisibilityAccess().getRule();
 	}
 
 	//terminal ID:

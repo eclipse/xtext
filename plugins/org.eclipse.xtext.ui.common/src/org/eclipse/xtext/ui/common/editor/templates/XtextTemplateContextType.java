@@ -29,6 +29,11 @@ public class XtextTemplateContextType extends TemplateContextType {
 	public void setCrossReferenceResolver(CrossReferenceTemplateVariableResolver resolver) {
 		addResolver(resolver);
 	}
+	
+	@Inject
+	public void setEnumResolver(EnumTemplateVariableResolver resolver) {
+		addResolver(resolver);
+	}
 
 	protected void addDefaultTemplateVariables() {
 		addResolver(new GlobalTemplateVariables.WordSelection());
