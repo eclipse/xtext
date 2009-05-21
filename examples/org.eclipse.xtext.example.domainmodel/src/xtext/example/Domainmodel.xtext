@@ -49,7 +49,7 @@ Reference :
   'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;
   
 Operation :
-  'op' name=ID'('(params+=Parameter (',' params+=Parameter)*)?')' ':' type=TypeRef;
+  (visibility=Visibility)? 'op' name=ID'('(params+=Parameter (',' params+=Parameter)*)?')' ':' type=TypeRef;
   
 Parameter :
   name=ID type=TypeRef;
@@ -61,3 +61,5 @@ TypeRef :
 	referenced=[Type];
 	
 QualifiedName returns ecore::EString : ID ('.' ID)*;
+
+enum Visibility: package = "#" | private = "-" | protected = "!" | public = "+";

@@ -7,6 +7,7 @@ package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -514,13 +515,22 @@ public interface DomainmodelPackage extends EPackage
   int OPERATION__TYPE = FEATURE__TYPE;
 
   /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__VISIBILITY = FEATURE_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Params</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OPERATION__PARAMS = FEATURE_FEATURE_COUNT + 0;
+  int OPERATION__PARAMS = FEATURE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Operation</em>' class.
@@ -529,7 +539,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 1;
+  int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -595,6 +605,16 @@ public interface DomainmodelPackage extends EPackage
    * @ordered
    */
   int TYPE_REF_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.example.domainmodel.Visibility
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getVisibility()
+   * @generated
+   */
+  int VISIBILITY = 15;
 
 
   /**
@@ -806,6 +826,17 @@ public interface DomainmodelPackage extends EPackage
   EClass getOperation();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Operation#getVisibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Operation#getVisibility()
+   * @see #getOperation()
+   * @generated
+   */
+  EAttribute getOperation_Visibility();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.Operation#getParams <em>Params</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -878,6 +909,16 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    */
   EReference getTypeRef_Referenced();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Visibility
+   * @generated
+   */
+  EEnum getVisibility();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1087,6 +1128,14 @@ public interface DomainmodelPackage extends EPackage
     EClass OPERATION = eINSTANCE.getOperation();
 
     /**
+     * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPERATION__VISIBILITY = eINSTANCE.getOperation_Visibility();
+
+    /**
      * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1147,6 +1196,16 @@ public interface DomainmodelPackage extends EPackage
      * @generated
      */
     EReference TYPE_REF__REFERENCED = eINSTANCE.getTypeRef_Referenced();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.example.domainmodel.Visibility
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getVisibility()
+     * @generated
+     */
+    EEnum VISIBILITY = eINSTANCE.getVisibility();
 
   }
 

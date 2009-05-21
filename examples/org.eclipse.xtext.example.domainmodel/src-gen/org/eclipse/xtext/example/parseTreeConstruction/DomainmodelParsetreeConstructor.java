@@ -1552,11 +1552,11 @@ protected class Reference_OppositeAssignment_4_1 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- *   "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
+ *   visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
  *
  **/
 
-// "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
+// visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1569,7 +1569,7 @@ protected class Operation_Group extends GroupToken {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_TypeAssignment_6(parent, this, 0, inst);
+			case 0: return new Operation_TypeAssignment_7(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1581,15 +1581,15 @@ protected class Operation_Group extends GroupToken {
 	}
 }
 
-// "op"
-protected class Operation_OpKeyword_0 extends KeywordToken  {
+// visibility=Visibility?
+protected class Operation_VisibilityAssignment_0 extends AssignmentToken  {
 	
-	public Operation_OpKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_VisibilityAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getOperationAccess().getOpKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOperationAccess().getVisibilityAssignment_0();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -1602,22 +1602,57 @@ protected class Operation_OpKeyword_0 extends KeywordToken  {
   
 		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("visibility",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("visibility");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.ERC;
+			element = grammarAccess.getOperationAccess().getVisibilityVisibilityEnumRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
 }
 
-// name=ID
-protected class Operation_NameAssignment_1 extends AssignmentToken  {
+// "op"
+protected class Operation_OpKeyword_1 extends KeywordToken  {
 	
-	public Operation_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_OpKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getNameAssignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getOperationAccess().getOpKeyword_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_OpKeyword_0(parent, this, 0, inst);
+			case 0: return new Operation_VisibilityAssignment_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+  
+		return tryConsumeVal();
+	}
+}
+
+// name=ID
+protected class Operation_NameAssignment_2 extends AssignmentToken  {
+	
+	public Operation_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOperationAccess().getNameAssignment_2();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Operation_OpKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1627,7 +1662,7 @@ protected class Operation_NameAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -1636,19 +1671,19 @@ protected class Operation_NameAssignment_1 extends AssignmentToken  {
 }
 
 // "("
-protected class Operation_LeftParenthesisKeyword_2 extends KeywordToken  {
+protected class Operation_LeftParenthesisKeyword_3 extends KeywordToken  {
 	
-	public Operation_LeftParenthesisKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_LeftParenthesisKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getOperationAccess().getLeftParenthesisKeyword_2();
+		return grammarAccess.getOperationAccess().getLeftParenthesisKeyword_3();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new Operation_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1656,20 +1691,20 @@ protected class Operation_LeftParenthesisKeyword_2 extends KeywordToken  {
 }
 
 // (params+=Parameter ("," params+=Parameter)*)?
-protected class Operation_Group_3 extends GroupToken {
+protected class Operation_Group_4 extends GroupToken {
 	
-	public Operation_Group_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_Group_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getOperationAccess().getGroup_3();
+		return grammarAccess.getOperationAccess().getGroup_4();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_Group_3_1(parent, this, 0, inst);
-			case 1: return new Operation_ParamsAssignment_3_0(parent, this, 1, inst);
+			case 0: return new Operation_Group_4_1(parent, this, 0, inst);
+			case 1: return new Operation_ParamsAssignment_4_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -1677,14 +1712,14 @@ protected class Operation_Group_3 extends GroupToken {
 }
 
 // params+=Parameter
-protected class Operation_ParamsAssignment_3_0 extends AssignmentToken  {
+protected class Operation_ParamsAssignment_4_0 extends AssignmentToken  {
 	
-	public Operation_ParamsAssignment_3_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_ParamsAssignment_4_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getParamsAssignment_3_0();
+		return grammarAccess.getOperationAccess().getParamsAssignment_4_0();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -1711,26 +1746,26 @@ protected class Operation_ParamsAssignment_3_0 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Operation_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new Operation_LeftParenthesisKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ("," params+=Parameter)*
-protected class Operation_Group_3_1 extends GroupToken {
+protected class Operation_Group_4_1 extends GroupToken {
 	
-	public Operation_Group_3_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_Group_4_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getOperationAccess().getGroup_3_1();
+		return grammarAccess.getOperationAccess().getGroup_4_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_ParamsAssignment_3_1_1(parent, this, 0, inst);
+			case 0: return new Operation_ParamsAssignment_4_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1738,20 +1773,20 @@ protected class Operation_Group_3_1 extends GroupToken {
 }
 
 // ","
-protected class Operation_CommaKeyword_3_1_0 extends KeywordToken  {
+protected class Operation_CommaKeyword_4_1_0 extends KeywordToken  {
 	
-	public Operation_CommaKeyword_3_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_CommaKeyword_4_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getOperationAccess().getCommaKeyword_3_1_0();
+		return grammarAccess.getOperationAccess().getCommaKeyword_4_1_0();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_Group_3_1(parent, this, 0, inst);
-			case 1: return new Operation_ParamsAssignment_3_0(parent, this, 1, inst);
+			case 0: return new Operation_Group_4_1(parent, this, 0, inst);
+			case 1: return new Operation_ParamsAssignment_4_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -1759,14 +1794,14 @@ protected class Operation_CommaKeyword_3_1_0 extends KeywordToken  {
 }
 
 // params+=Parameter
-protected class Operation_ParamsAssignment_3_1_1 extends AssignmentToken  {
+protected class Operation_ParamsAssignment_4_1_1 extends AssignmentToken  {
 	
-	public Operation_ParamsAssignment_3_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_ParamsAssignment_4_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getParamsAssignment_3_1_1();
+		return grammarAccess.getOperationAccess().getParamsAssignment_4_1_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -1793,7 +1828,7 @@ protected class Operation_ParamsAssignment_3_1_1 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Operation_CommaKeyword_3_1_0(parent, next, actIndex, consumed);
+			case 0: return new Operation_CommaKeyword_4_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1802,20 +1837,20 @@ protected class Operation_ParamsAssignment_3_1_1 extends AssignmentToken  {
 
 
 // ")"
-protected class Operation_RightParenthesisKeyword_4 extends KeywordToken  {
+protected class Operation_RightParenthesisKeyword_5 extends KeywordToken  {
 	
-	public Operation_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_RightParenthesisKeyword_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getOperationAccess().getRightParenthesisKeyword_4();
+		return grammarAccess.getOperationAccess().getRightParenthesisKeyword_5();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_Group_3(parent, this, 0, inst);
-			case 1: return new Operation_LeftParenthesisKeyword_2(parent, this, 1, inst);
+			case 0: return new Operation_Group_4(parent, this, 0, inst);
+			case 1: return new Operation_LeftParenthesisKeyword_3(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -1823,19 +1858,19 @@ protected class Operation_RightParenthesisKeyword_4 extends KeywordToken  {
 }
 
 // ":"
-protected class Operation_ColonKeyword_5 extends KeywordToken  {
+protected class Operation_ColonKeyword_6 extends KeywordToken  {
 	
-	public Operation_ColonKeyword_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_ColonKeyword_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getOperationAccess().getColonKeyword_5();
+		return grammarAccess.getOperationAccess().getColonKeyword_6();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Operation_RightParenthesisKeyword_4(parent, this, 0, inst);
+			case 0: return new Operation_RightParenthesisKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1843,14 +1878,14 @@ protected class Operation_ColonKeyword_5 extends KeywordToken  {
 }
 
 // type=TypeRef
-protected class Operation_TypeAssignment_6 extends AssignmentToken  {
+protected class Operation_TypeAssignment_7 extends AssignmentToken  {
 	
-	public Operation_TypeAssignment_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Operation_TypeAssignment_7(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getOperationAccess().getTypeAssignment_6();
+		return grammarAccess.getOperationAccess().getTypeAssignment_7();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -1877,7 +1912,7 @@ protected class Operation_TypeAssignment_6 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Operation_ColonKeyword_5(parent, next, actIndex, consumed);
+			case 0: return new Operation_ColonKeyword_6(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
