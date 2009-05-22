@@ -37,7 +37,11 @@ public interface IndexStore {
 	 */
 	void fireIndexChangedEvent(IndexChangeEvent event);
 
-	void beginTransaction();
+	void beginWrite();
 	
-	void endTransaction();
+	void endWrite();
+	
+	void beginRead();
+	
+	void endRead();
 }

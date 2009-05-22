@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * @author Jan Köhnlein - Initial contribution and API
+ * @author Jan K?hnlein - Initial contribution and API
  */
 public class IntegrationTests extends AbstractEmfIndexTest {
 
@@ -147,4 +147,5 @@ public class IntegrationTests extends AbstractEmfIndexTest {
 		resourceIndexer.resourceChanged(uri, feeder);
 		feeder.commit();
 	}
+	
 }

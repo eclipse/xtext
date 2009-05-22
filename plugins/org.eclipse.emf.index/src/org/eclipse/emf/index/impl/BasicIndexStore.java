@@ -2,6 +2,8 @@ package org.eclipse.emf.index.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.EReferenceDescriptor;
@@ -15,7 +17,7 @@ import org.eclipse.emf.index.event.IndexChangeListener;
 import com.google.inject.Inject;
 
 public abstract class BasicIndexStore implements IndexStore {
-
+	
 	protected EClassDescriptor.DAO eClassDAO;
 
 	protected ResourceDescriptor.DAO resourceDAO;
@@ -29,12 +31,15 @@ public abstract class BasicIndexStore implements IndexStore {
 	private List<IndexChangeEvent> firedEvents = new ArrayList<IndexChangeEvent>();
 
 	private boolean isInTransaction = false;
+	
+	protected ReadWriteLock readWriteLock; 
 
 	private List<IndexChangeListener> indexChangeListeners = new ArrayList<IndexChangeListener>();
 
 	@Inject
 	public BasicIndexStore(EClassDescriptor.DAO eClassDao, ResourceDescriptor.DAO resourceDao,
 			EObjectDescriptor.DAO eObjectDao, EReferenceDescriptor.DAO eReferenceDao, EPackageDescriptor.DAO ePackageDao) {
+		readWriteLock = new ReentrantReadWriteLock();
 		eClassDAO = eClassDao;
 		resourceDAO = resourceDao;
 		eObjectDAO = eObjectDao;
@@ -75,24 +80,33 @@ public abstract class BasicIndexStore implements IndexStore {
 		}
 	}
 
-	public void beginTransaction() {
-		//shouldn't the events lists cleared only if a new transaction is started, i.e. after the check?
-		firedEvents.clear();
+	public void beginWrite() {
+		readWriteLock.writeLock().lock();
 		if (isInTransaction)
 			throw new IllegalStateException("Transaction already open");
 		isInTransaction = true;
 	}
 
-	public void endTransaction() {
+	public void endWrite() {
 		if (!isInTransaction)
 			throw new IllegalStateException("Transaction not open");
 		synchronized (indexChangeListeners) {
 			for (IndexChangeEvent event : firedEvents)
 				fireEventNow(event);
+			firedEvents.clear();
 		}
 		isInTransaction = false;
+		readWriteLock.writeLock().unlock();
+	}
+	
+	public void beginRead() {
+		readWriteLock.readLock().lock();
 	}
 
+	public void endRead() {
+		readWriteLock.readLock().unlock();
+	}
+	
 	private void fireEventNow(IndexChangeEvent event) {
 		for (IndexChangeListener indexChangeListener : indexChangeListeners) {
 			indexChangeListener.indexChanged(event);

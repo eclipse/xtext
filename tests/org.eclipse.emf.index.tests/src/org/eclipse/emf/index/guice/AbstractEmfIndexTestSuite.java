@@ -19,6 +19,7 @@ import org.eclipse.emf.index.feeder.DanglingReferenceTest;
 import org.eclipse.emf.index.feeder.EObjectTest;
 import org.eclipse.emf.index.feeder.ResourceTest;
 import org.eclipse.emf.index.feeder.TestIndexing;
+import org.eclipse.emf.index.integration.ConcurrencyTest;
 import org.eclipse.emf.index.integration.IntegrationTests;
 
 /**
@@ -44,6 +45,7 @@ public abstract class AbstractEmfIndexTestSuite extends TestSuite {
 		addTestSuite(EObjectTest.class);
 		addTestSuite(ResourceTest.class);
 		addTestSuite(TestIndexing.class);
+		addTestSuite(ConcurrencyTest.class);
 		
 	}
 
