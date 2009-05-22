@@ -109,14 +109,14 @@ public class IndexFeederImpl implements IndexFeeder {
 	public void commit() {
 		try {
 			synchronized (index) {
-				index.beginTransaction();
+				index.beginWrite();
 				try {
 					commitResourceDescriptors();
 					commitEObjectDescriptors();
 					commitEReferenceDescriptors();
 					deleteStaleDescriptors();
 				} finally {
-					index.endTransaction();
+					index.endWrite();
 				}
 			}
 		} finally {

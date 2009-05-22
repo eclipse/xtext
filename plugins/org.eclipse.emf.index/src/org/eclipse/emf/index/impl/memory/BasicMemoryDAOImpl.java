@@ -73,10 +73,10 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 				String patternAsString = (String) pattern;
 				matchesGlobbing(testAsString, patternAsString);
 			}
-			
+
 			return test.equals(pattern);
 		}
-		
+
 		protected boolean matchesGlobbing(String testString, String pattern) {
 			if (pattern == null)
 				return true;
@@ -105,30 +105,42 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 		}
 
 		public T executeSingleResult() {
-			Collection<T> queryScope = scope();
-			if (queryScope != null)
-				for (T candidate : queryScope) {
-					if (matches(candidate)) {
-						return candidate;
+			try {
+				indexStore.beginRead();
+				Collection<T> queryScope = scope();
+				if (queryScope != null)
+					for (T candidate : queryScope) {
+						if (matches(candidate)) {
+							return candidate;
+						}
 					}
-				}
-			return null;
+				return null;
+			}
+			finally {
+				indexStore.endRead();
+			}
 		}
 
 		public List<T> executeListResult() {
-			List<T> result = null;
-			Collection<T> queryScope = scope();
-			if (queryScope != null) {
-				for (T candidate : queryScope) {
-					if (matches(candidate)) {
-						if (result == null) {
-							result = new ArrayList<T>();
+			try {
+				indexStore.beginRead();
+				List<T> result = null;
+				Collection<T> queryScope = scope();
+				if (queryScope != null) {
+					for (T candidate : queryScope) {
+						if (matches(candidate)) {
+							if (result == null) {
+								result = new ArrayList<T>();
+							}
+							result.add(candidate);
 						}
-						result.add(candidate);
 					}
 				}
+				return result;
 			}
-			return result;
+			finally {
+				indexStore.endRead();
+			}
 		}
 
 		protected Collection<T> mergeScopes(Collection<T> scope0, Collection<T> scope1) {
