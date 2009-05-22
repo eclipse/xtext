@@ -19,10 +19,7 @@ import org.eclipse.emf.index.feeder.DanglingReferenceTest;
 import org.eclipse.emf.index.feeder.EObjectTest;
 import org.eclipse.emf.index.feeder.ResourceTest;
 import org.eclipse.emf.index.feeder.TestIndexing;
-import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 import org.eclipse.emf.index.integration.IntegrationTests;
-
-import com.google.inject.Module;
 
 /**
  * Base test suite that handles dependency injection with Google Guice. Implementors of
