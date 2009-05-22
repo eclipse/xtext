@@ -1,7 +1,6 @@
 package org.eclipse.emf.index.ui.resource.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
