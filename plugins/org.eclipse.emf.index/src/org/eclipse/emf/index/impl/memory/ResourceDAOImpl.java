@@ -37,7 +37,7 @@ public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> impl
 		return DefaultQueryTool.createQueryResource(this, resource);
 	}
 
-	private class ResourceQuery extends BasicMemoryDAOImpl<ResourceDescriptor>.Query implements
+	protected class ResourceQuery extends BasicMemoryDAOImpl<ResourceDescriptor>.Query implements
 			ResourceDescriptor.Query {
 
 		private static final long UNSET_DATE = Long.MIN_VALUE;
