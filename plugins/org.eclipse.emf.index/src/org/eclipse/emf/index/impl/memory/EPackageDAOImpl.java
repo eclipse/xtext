@@ -31,7 +31,7 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 		return DefaultQueryTool.createQueryEPackage(this, ePackage);
 	}
 
-	private class EPackageQuery extends BasicMemoryDAOImpl<EPackageDescriptor>.Query implements
+	protected class EPackageQuery extends BasicMemoryDAOImpl<EPackageDescriptor>.Query implements
 			EPackageDescriptor.Query {
 
 		private static final long UNSET_DATE = Long.MIN_VALUE;

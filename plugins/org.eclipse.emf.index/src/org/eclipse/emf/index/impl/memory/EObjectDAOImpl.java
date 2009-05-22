@@ -87,7 +87,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 	}
 
 	public EObjectDescriptor.Query createQuery() {
-		return new ElementQuery();
+		return new EObjectQuery();
 	}
 
 	public IGenericQuery<EObjectDescriptor> createQueryEObjectsByType(EClass eClass) {
@@ -110,7 +110,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 		return resourceScope.createQuery(resourceDescriptor);
 	}
 
-	private class ElementQuery extends BasicMemoryDAOImpl<EObjectDescriptor>.Query implements EObjectDescriptor.Query {
+	protected class EObjectQuery extends BasicMemoryDAOImpl<EObjectDescriptor>.Query implements EObjectDescriptor.Query {
 
 		private ResourceDescriptor resourceDescriptor;
 		private ResourceDescriptor.Query resourceQuery;
@@ -120,7 +120,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 		private EClassDescriptor.Query typeQuery;
 		private Map<String, Serializable> userDataPatterns;
 
-		public ElementQuery resource(ResourceDescriptor resourceDescriptor) {
+		public EObjectQuery resource(ResourceDescriptor resourceDescriptor) {
 			if (resourceQuery != null) {
 				throw new IllegalArgumentException("ReourceQuery already configured");
 			}
@@ -136,17 +136,17 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			return resourceQuery;
 		}
 
-		public ElementQuery fragment(String pattern) {
+		public EObjectQuery fragment(String pattern) {
 			fragmentPattern = pattern;
 			return this;
 		}
 
-		public ElementQuery name(String pattern) {
+		public EObjectQuery name(String pattern) {
 			namePattern = pattern;
 			return this;
 		}
 
-		public ElementQuery eClass(EClassDescriptor typeDescriptor) {
+		public EObjectQuery eClass(EClassDescriptor typeDescriptor) {
 			this.typeDescriptor = typeDescriptor;
 			return this;
 		}
@@ -156,7 +156,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			return typeQuery;
 		}
 
-		public ElementQuery userData(String key, Serializable pattern) {
+		public EObjectQuery userData(String key, Serializable pattern) {
 			if (userDataPatterns == null) {
 				userDataPatterns = new HashMap<String, Serializable>();
 			}
