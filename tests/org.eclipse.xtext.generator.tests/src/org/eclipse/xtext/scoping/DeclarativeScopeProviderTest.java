@@ -29,81 +29,82 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class DeclarativeScopeProviderTest extends TestCase {
 	@SuppressWarnings("unused")
 	public void testSimple() throws Exception {
-		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EClass clazz, EClass ref) {
 				return a;
 			}
 		};
-		
+
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(a,provider.getScope(details, details));
+		assertEquals(a, provider.getScope(details, details));
 	}
-	
+
 	@SuppressWarnings("unused")
 	public void testNested() throws Exception {
-		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EClass clazz, EClass ref) {
 				return a;
 			}
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+
+			private IScope scope_EClass(EReference ctx, EClass ref) {
 				return b;
 			}
 		};
-		
+
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(b,provider.getScope(details, details));
-		assertEquals(a,provider.getScope(details.getEContainingClass(), details));
+		assertEquals(b, provider.getScope(details, details));
+		assertEquals(a, provider.getScope(details.getEContainingClass(), details));
 	}
-	
+
 	@SuppressWarnings("unused")
 	public void testPolymorphic() throws Exception {
-		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		final IScope c =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClassifier clazz, EReference ref) {
+			private IScope scope_EClass(EClassifier clazz, EClass ref) {
 				return a;
 			}
-			
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+
+			private IScope scope_EClass(EClass clazz, EClass ref) {
 				return c;
 			}
-			
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+
+			private IScope scope_EClass(EReference ctx, EClass ref) {
 				return b;
 			}
 		};
-		
+
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(b,provider.getScope(details, details));
-		assertEquals(c,provider.getScope(details.getEContainingClass(), details));
+		assertEquals(b, provider.getScope(details, details));
+		assertEquals(c, provider.getScope(details.getEContainingClass(), details));
 	}
-	
+
 	@SuppressWarnings("unused")
 	public void testScopeByType() throws Exception {
-		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
-		final IScope c =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClassifier clazz, EReference ref) {
+			private IScope scope_EClass(EClassifier clazz, EClass ref) {
 				return a;
 			}
-			
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+
+			private IScope scope_EClass(EClass clazz, EClass ref) {
 				return c;
 			}
-			
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+
+			private IScope scope_EClass(EReference ctx, EClass ref) {
 				return b;
 			}
 		};
@@ -116,5 +117,29 @@ public class DeclarativeScopeProviderTest extends TestCase {
 		EReference details = (EReference) EcoreUtil.copy(EcorePackage.eINSTANCE.getEClass_ESuperTypes());
 		res.getContents().add(details);
 		assertNotNull(provider.getScope(details, details.eClass()));
+	}
+	
+	@SuppressWarnings("unused")
+	public void testScopeByReference() throws Exception {
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
+			private IScope scope_EClass_eSuperTypes(EClassifier clazz, EReference ref) {
+				return a;
+			}
+			
+			private IScope scope_EClass(EClass clazz, EClass ref) {
+				return c;
+			}
+			
+			private IScope scope_EClass(EReference ctx, EClass ref) {
+				return b;
+			}
+		};
+		
+		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
+		assertEquals(a, provider.getScope(details, details));
+		assertEquals(a, provider.getScope(details.getEContainingClass(), details));
 	}
 }
