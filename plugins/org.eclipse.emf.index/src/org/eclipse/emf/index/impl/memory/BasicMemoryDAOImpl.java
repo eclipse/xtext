@@ -124,14 +124,11 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 		public List<T> executeListResult() {
 			try {
 				indexStore.beginRead();
-				List<T> result = null;
+				List<T> result = new ArrayList<T>();
 				Collection<T> queryScope = scope();
 				if (queryScope != null) {
 					for (T candidate : queryScope) {
 						if (matches(candidate)) {
-							if (result == null) {
-								result = new ArrayList<T>();
-							}
 							result.add(candidate);
 						}
 					}
