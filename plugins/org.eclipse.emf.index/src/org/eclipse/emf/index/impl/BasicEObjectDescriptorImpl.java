@@ -96,6 +96,10 @@ public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor, S
 			displayName = eObjectDesc.getDisplayName();
 			hasChanged = true;
 		}
+		if (!equalsNullSafe(getEClassDescriptor(), eObjectDesc.getEClassDescriptor())) {
+			this.typeDescriptor = eObjectDesc.getEClassDescriptor();
+			hasChanged = true;
+		}
 		return hasChanged;
 	}
 }
