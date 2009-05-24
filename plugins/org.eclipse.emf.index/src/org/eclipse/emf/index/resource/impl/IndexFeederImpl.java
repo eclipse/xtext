@@ -32,6 +32,7 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
 import org.eclipse.emf.index.impl.EReferenceDescriptorImpl;
 import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
+import org.eclipse.emf.index.internal.LogFacade;
 import org.eclipse.emf.index.resource.IndexFeeder;
 
 import com.google.inject.Inject;
@@ -172,6 +173,10 @@ public class IndexFeederImpl implements IndexFeeder {
 			}
 			EClassDescriptor eClassDescriptor = index.eClassDAO().createQueryEClass(eObject.eClass())
 					.executeSingleResult();
+			if (eClassDescriptor==null) {
+				LogFacade.logError("Couldn't find EClassDescriptor for EClass "+eObject.eClass().getName());
+				return;
+			}
 			EObjectDescriptor newEObjectDesc = new EObjectDescriptorImpl(resourceDesc, data.fragment, data.name,
 					data.displayName, eClassDescriptor, data.userData);
 			EObjectDescriptor existingEObjectDesc = findEquivalent(allExistingEObjectDescs, newEObjectDesc);
