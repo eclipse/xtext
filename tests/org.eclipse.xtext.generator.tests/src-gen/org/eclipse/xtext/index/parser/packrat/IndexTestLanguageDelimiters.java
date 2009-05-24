@@ -21,9 +21,9 @@ public final class IndexTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$17$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$22$Delimiter = new SetBasedKeywordMatcher(
 		"import", "entity", "datatype");
 
 }

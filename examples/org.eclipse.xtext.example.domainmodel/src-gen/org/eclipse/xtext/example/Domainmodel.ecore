@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="domainmodel" nsURI="http://www.example.xtext/Domainmodel" nsPrefix="domainmodel">
-  <eClassifiers xsi:type="ecore:EClass" name="File">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1" eType="//Import" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElements" upperBound="-1" eType="//NamedElement" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Import" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclaration" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namedElements" upperBound="-1" eType="//NamedElement" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="//Entity"/>
@@ -44,9 +46,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
-    <eLiterals name="package" literal="#"/>
-    <eLiterals name="private" value="1" literal="-"/>
-    <eLiterals name="protected" value="2" literal="!"/>
-    <eLiterals name="public" value="3" literal="+"/>
+    <eLiterals name="public" literal="public"/>
+    <eLiterals name="private" value="1" literal="private"/>
+    <eLiterals name="protected" value="2" literal="protected"/>
   </eClassifiers>
 </ecore:EPackage>

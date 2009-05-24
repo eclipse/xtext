@@ -12,21 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.example.domainmodel.Attribute;
-import org.eclipse.xtext.example.domainmodel.DataType;
-import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.File;
-import org.eclipse.xtext.example.domainmodel.Import;
-import org.eclipse.xtext.example.domainmodel.NamedElement;
-import org.eclipse.xtext.example.domainmodel.Operation;
-import org.eclipse.xtext.example.domainmodel.Parameter;
-import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.example.domainmodel.StructuralFeature;
-import org.eclipse.xtext.example.domainmodel.Type;
-import org.eclipse.xtext.example.domainmodel.TypeRef;
-import org.eclipse.xtext.example.domainmodel.TypedElement;
+import org.eclipse.xtext.example.domainmodel.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,9 +78,14 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
     new DomainmodelSwitch<Adapter>()
     {
       @Override
-      public Adapter caseFile(File object)
+      public Adapter caseModel(Model object)
       {
-        return createFileAdapter();
+        return createModelAdapter();
+      }
+      @Override
+      public Adapter caseAbstractElement(AbstractElement object)
+      {
+        return createAbstractElementAdapter();
       }
       @Override
       public Adapter caseImport(Import object)
@@ -102,14 +93,9 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
         return createImportAdapter();
       }
       @Override
-      public Adapter caseNamedElement(NamedElement object)
+      public Adapter casePackageDeclaration(PackageDeclaration object)
       {
-        return createNamedElementAdapter();
-      }
-      @Override
-      public Adapter casePackage(org.eclipse.xtext.example.domainmodel.Package object)
-      {
-        return createPackageAdapter();
+        return createPackageDeclarationAdapter();
       }
       @Override
       public Adapter caseType(Type object)
@@ -189,16 +175,31 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.File <em>File</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.File
+   * @see org.eclipse.xtext.example.domainmodel.Model
    * @generated
    */
-  public Adapter createFileAdapter()
+  public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.AbstractElement <em>Abstract Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.example.domainmodel.AbstractElement
+   * @generated
+   */
+  public Adapter createAbstractElementAdapter()
   {
     return null;
   }
@@ -219,31 +220,16 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.NamedElement <em>Named Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.PackageDeclaration <em>Package Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.NamedElement
+   * @see org.eclipse.xtext.example.domainmodel.PackageDeclaration
    * @generated
    */
-  public Adapter createNamedElementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Package <em>Package</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Package
-   * @generated
-   */
-  public Adapter createPackageAdapter()
+  public Adapter createPackageDeclarationAdapter()
   {
     return null;
   }

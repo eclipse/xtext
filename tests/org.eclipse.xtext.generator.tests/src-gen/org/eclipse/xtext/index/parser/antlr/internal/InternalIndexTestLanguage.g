@@ -152,9 +152,9 @@ ruleImport returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_importedNamespace_1=ruleQualifiedName 
+	    lv_importedNamespace_1=ruleQualifiedNameWithWildCard 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getImportRule().getType().getClassifier());
@@ -162,7 +162,7 @@ ruleImport returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "importedNamespace", lv_importedNamespace_1, "QualifiedName", currentNode);
+	       		set($current, "importedNamespace", lv_importedNamespace_1, "QualifiedNameWithWildCard", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -170,6 +170,46 @@ ruleImport returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+// Entry rule entryRuleQualifiedNameWithWildCard
+entryRuleQualifiedNameWithWildCard returns [String current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getQualifiedNameWithWildCardRule(), currentNode); } 
+	 iv_ruleQualifiedNameWithWildCard=ruleQualifiedNameWithWildCard 
+	 { $current=$iv_ruleQualifiedNameWithWildCard.current.getText(); }  
+	 EOF 
+;
+
+// Rule QualifiedNameWithWildCard
+ruleQualifiedNameWithWildCard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0(), currentNode); 
+    }
+    this_QualifiedName_0=ruleQualifiedName    {
+		$current.merge(this_QualifiedName_0);
+    }
+
+    { 
+        currentNode = currentNode.getParent();
+    }
+(
+	kw='.*' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopAsteriskKeyword_1(), null); 
+    }
+)?)
+    ;
 
 
 

@@ -5,7 +5,7 @@
     <genEnums typeSafeEnumCompatible="false">
       <ecoreEnum href="Domainmodel.ecore#//Visibility"/>
       <genEnumLiterals>
-        <ecoreEnumLiteral href="Domainmodel.ecore#//Visibility/package"/>
+        <ecoreEnumLiteral href="Domainmodel.ecore#//Visibility/public"/>
       </genEnumLiterals>
       <genEnumLiterals>
         <ecoreEnumLiteral href="Domainmodel.ecore#//Visibility/private"/>
@@ -13,39 +13,36 @@
       <genEnumLiterals>
         <ecoreEnumLiteral href="Domainmodel.ecore#//Visibility/protected"/>
       </genEnumLiterals>
-      <genEnumLiterals>
-        <ecoreEnumLiteral href="Domainmodel.ecore#//Visibility/public"/>
-      </genEnumLiterals>
     </genEnums>
     <genClasses>
-      <ecoreClass href="Domainmodel.ecore#//File"/>
+      <ecoreClass href="Domainmodel.ecore#//Model"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Domainmodel.ecore#//File/imports"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Domainmodel.ecore#//Model/elements"/>
       </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Domainmodel.ecore#//File/namedElements"/>
-      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="Domainmodel.ecore#//AbstractElement"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="Domainmodel.ecore#//Import"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Domainmodel.ecore#//Import/importURI"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Domainmodel.ecore#//Import/importedNamespace"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="Domainmodel.ecore#//NamedElement"/>
+      <ecoreClass href="Domainmodel.ecore#//PackageDeclaration"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Domainmodel.ecore#//NamedElement/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Domainmodel.ecore#//PackageDeclaration/name"/>
       </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="Domainmodel.ecore#//Package"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="Domainmodel.ecore#//Package/namedElements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="Domainmodel.ecore#//PackageDeclaration/elements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="Domainmodel.ecore#//Type"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="Domainmodel.ecore#//Type/name"/>
+      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="Domainmodel.ecore#//DataType"/>

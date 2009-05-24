@@ -17,94 +17,86 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class DomainmodelGrammarAccess implements IGrammarAccess {
 	
 	
-	public class FileElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
-		private final Assignment cNamedElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNamedElementsNamedElementParserRuleCall_1_0 = (RuleCall)cNamedElementsAssignment_1.eContents().get(0);
+	public class ModelElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//File:
-		//  imports+=Import* namedElements+=NamedElement*;
+		//Model:
+		//  elements+=AbstractElement*;
 		public ParserRule getRule() { return rule; }
 
-		//imports+=Import* namedElements+=NamedElement*
-		public Group getGroup() { return cGroup; }
+		//elements+=AbstractElement*
+		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
-		//imports+=Import*
-		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
+		//AbstractElement
+		public RuleCall getElementsAbstractElementParserRuleCall_0() { return cElementsAbstractElementParserRuleCall_0; }
+	}
+
+	public class AbstractElementElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractElement");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPackageDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cImportParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//AbstractElement:
+		//  PackageDeclaration|Type|Import;
+		public ParserRule getRule() { return rule; }
+
+		//PackageDeclaration|Type|Import
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//PackageDeclaration
+		public RuleCall getPackageDeclarationParserRuleCall_0() { return cPackageDeclarationParserRuleCall_0; }
+
+		//Type
+		public RuleCall getTypeParserRuleCall_1() { return cTypeParserRuleCall_1; }
 
 		//Import
-		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
-
-		//namedElements+=NamedElement*
-		public Assignment getNamedElementsAssignment_1() { return cNamedElementsAssignment_1; }
-
-		//NamedElement
-		public RuleCall getNamedElementsNamedElementParserRuleCall_1_0() { return cNamedElementsNamedElementParserRuleCall_1_0; }
+		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
 	}
 
 	public class ImportElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importURI=STRING;
+		//  "import" importedNamespace=QualifiedNameWithWildCard;
 		public ParserRule getRule() { return rule; }
 
-		//"import" importURI=STRING
+		//"import" importedNamespace=QualifiedNameWithWildCard
 		public Group getGroup() { return cGroup; }
 
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		//importURI=STRING
-		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
+		//importedNamespace=QualifiedNameWithWildCard
+		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
 
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
+		//QualifiedNameWithWildCard
+		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
 	}
 
-	public class NamedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPackageParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//NamedElement:
-		//  Package|Type;
-		public ParserRule getRule() { return rule; }
-
-		//Package|Type
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//Package
-		public RuleCall getPackageParserRuleCall_0() { return cPackageParserRuleCall_0; }
-
-		//Type
-		public RuleCall getTypeParserRuleCall_1() { return cTypeParserRuleCall_1; }
-	}
-
-	public class PackageElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Package");
+	public class PackageDeclarationElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cNamedElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNamedElementsNamedElementParserRuleCall_3_0 = (RuleCall)cNamedElementsAssignment_3.eContents().get(0);
+		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElementsAbstractElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Package:
-		//  "package" name=QualifiedName "{" namedElements+=NamedElement* "}";
+		//PackageDeclaration:
+		//  "package" name=QualifiedName "{" elements+=AbstractElement* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"package" name=QualifiedName "{" namedElements+=NamedElement* "}"
+		//"package" name=QualifiedName "{" elements+=AbstractElement* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"package"
@@ -119,11 +111,11 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//namedElements+=NamedElement*
-		public Assignment getNamedElementsAssignment_3() { return cNamedElementsAssignment_3; }
+		//elements+=AbstractElement*
+		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
-		//NamedElement
-		public RuleCall getNamedElementsNamedElementParserRuleCall_3_0() { return cNamedElementsNamedElementParserRuleCall_3_0; }
+		//AbstractElement
+		public RuleCall getElementsAbstractElementParserRuleCall_3_0() { return cElementsAbstractElementParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -183,17 +175,17 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final CrossReference cSuperTypeEntityCrossReference_2_1_0 = (CrossReference)cSuperTypeAssignment_2_1.eContents().get(0);
-		private final RuleCall cSuperTypeEntityIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSuperTypeEntityCrossReference_2_1_0.eContents().get(1);
+		private final RuleCall cSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1 = (RuleCall)cSuperTypeEntityCrossReference_2_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cFeaturesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cFeaturesFeatureParserRuleCall_4_0 = (RuleCall)cFeaturesAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Entity:
-		//  "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}";
+		//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}"
+		//"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"entity"
@@ -205,20 +197,20 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("extends" superType=[Entity])?
+		//("extends" superType=[Entity|QualifiedName])?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"extends"
 		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 
-		//superType=[Entity]
+		//superType=[Entity|QualifiedName]
 		public Assignment getSuperTypeAssignment_2_1() { return cSuperTypeAssignment_2_1; }
 
-		//[Entity]
+		//[Entity|QualifiedName]
 		public CrossReference getSuperTypeEntityCrossReference_2_1_0() { return cSuperTypeEntityCrossReference_2_1_0; }
 
-		//ID
-		public RuleCall getSuperTypeEntityIDTerminalRuleCall_2_1_0_1() { return cSuperTypeEntityIDTerminalRuleCall_2_1_0_1; }
+		//QualifiedName
+		public RuleCall getSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1() { return cSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
@@ -497,20 +489,40 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
 		private final Assignment cReferencedAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cReferencedTypeCrossReference_0 = (CrossReference)cReferencedAssignment.eContents().get(0);
-		private final RuleCall cReferencedTypeIDTerminalRuleCall_0_1 = (RuleCall)cReferencedTypeCrossReference_0.eContents().get(1);
+		private final RuleCall cReferencedTypeQualifiedNameParserRuleCall_0_1 = (RuleCall)cReferencedTypeCrossReference_0.eContents().get(1);
 		
 		//TypeRef:
-		//  referenced=[Type];
+		//  referenced=[Type|QualifiedName];
 		public ParserRule getRule() { return rule; }
 
-		//referenced=[Type]
+		//referenced=[Type|QualifiedName]
 		public Assignment getReferencedAssignment() { return cReferencedAssignment; }
 
-		//[Type]
+		//[Type|QualifiedName]
 		public CrossReference getReferencedTypeCrossReference_0() { return cReferencedTypeCrossReference_0; }
 
-		//ID
-		public RuleCall getReferencedTypeIDTerminalRuleCall_0_1() { return cReferencedTypeIDTerminalRuleCall_0_1; }
+		//QualifiedName
+		public RuleCall getReferencedTypeQualifiedNameParserRuleCall_0_1() { return cReferencedTypeQualifiedNameParserRuleCall_0_1; }
+	}
+
+	public class QualifiedNameWithWildCardElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildCard");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//QualifiedNameWithWildCard returns ecore::EString:
+		//  QualifiedName ".*"?;
+		public ParserRule getRule() { return rule; }
+
+		//QualifiedName ".*"?
+		public Group getGroup() { return cGroup; }
+
+		//QualifiedName
+		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
+
+		//".*"?
+		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
 	}
 
 	public class QualifiedNameElements implements IParserRuleAccess {
@@ -545,50 +557,42 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	public class VisibilityElements implements IEnumRuleAccess {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Visibility");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cPackageEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cPackageNumberSignKeyword_0_0 = (Keyword)cPackageEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cPublicEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cPublicPublicKeyword_0_0 = (Keyword)cPublicEnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cPrivateEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cPrivateHyphenMinusKeyword_1_0 = (Keyword)cPrivateEnumLiteralDeclaration_1.eContents().get(0);
+		private final Keyword cPrivatePrivateKeyword_1_0 = (Keyword)cPrivateEnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cProtectedEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cProtectedExclamationMarkKeyword_2_0 = (Keyword)cProtectedEnumLiteralDeclaration_2.eContents().get(0);
-		private final EnumLiteralDeclaration cPublicEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cPublicPlusSignKeyword_3_0 = (Keyword)cPublicEnumLiteralDeclaration_3.eContents().get(0);
+		private final Keyword cProtectedProtectedKeyword_2_0 = (Keyword)cProtectedEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum Visibility returns Visibility : package | private | protected | public ;
+		//enum Visibility returns Visibility : public | private | protected ;
 		public EnumRule getRule() { return rule; }
 
-		//package | private | protected | public
+		//public | private | protected
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//package
-		public EnumLiteralDeclaration getPackageEnumLiteralDeclaration_0() { return cPackageEnumLiteralDeclaration_0; }
+		//public
+		public EnumLiteralDeclaration getPublicEnumLiteralDeclaration_0() { return cPublicEnumLiteralDeclaration_0; }
 
-		//"#"
-		public Keyword getPackageNumberSignKeyword_0_0() { return cPackageNumberSignKeyword_0_0; }
+		//"public"
+		public Keyword getPublicPublicKeyword_0_0() { return cPublicPublicKeyword_0_0; }
 
 		//private
 		public EnumLiteralDeclaration getPrivateEnumLiteralDeclaration_1() { return cPrivateEnumLiteralDeclaration_1; }
 
-		//"-"
-		public Keyword getPrivateHyphenMinusKeyword_1_0() { return cPrivateHyphenMinusKeyword_1_0; }
+		//"private"
+		public Keyword getPrivatePrivateKeyword_1_0() { return cPrivatePrivateKeyword_1_0; }
 
 		//protected
 		public EnumLiteralDeclaration getProtectedEnumLiteralDeclaration_2() { return cProtectedEnumLiteralDeclaration_2; }
 
-		//"!"
-		public Keyword getProtectedExclamationMarkKeyword_2_0() { return cProtectedExclamationMarkKeyword_2_0; }
-
-		//public
-		public EnumLiteralDeclaration getPublicEnumLiteralDeclaration_3() { return cPublicEnumLiteralDeclaration_3; }
-
-		//"+"
-		public Keyword getPublicPlusSignKeyword_3_0() { return cPublicPlusSignKeyword_3_0; }
+		//"protected"
+		public Keyword getProtectedProtectedKeyword_2_0() { return cProtectedProtectedKeyword_2_0; }
 	}
 	
-	private FileElements pFile;
+	private ModelElements pModel;
+	private AbstractElementElements pAbstractElement;
 	private ImportElements pImport;
-	private NamedElementElements pNamedElement;
-	private PackageElements pPackage;
+	private PackageDeclarationElements pPackageDeclaration;
 	private TypeElements pType;
 	private DataTypeElements pDataType;
 	private EntityElements pEntity;
@@ -600,8 +604,9 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	private ParameterElements pParameter;
 	private TypedElementElements pTypedElement;
 	private TypeRefElements pTypeRef;
-	private QualifiedNameElements pQualifiedName;
 	private VisibilityElements unknownRuleVisibility;
+	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
+	private QualifiedNameElements pQualifiedName;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -624,18 +629,28 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	
-	//File:
-	//  imports+=Import* namedElements+=NamedElement*;
-	public FileElements getFileAccess() {
-		return (pFile != null) ? pFile : (pFile = new FileElements());
+	//Model:
+	//  elements+=AbstractElement*;
+	public ModelElements getModelAccess() {
+		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
 	
-	public ParserRule getFileRule() {
-		return getFileAccess().getRule();
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
+
+	//AbstractElement:
+	//  PackageDeclaration|Type|Import;
+	public AbstractElementElements getAbstractElementAccess() {
+		return (pAbstractElement != null) ? pAbstractElement : (pAbstractElement = new AbstractElementElements());
+	}
+	
+	public ParserRule getAbstractElementRule() {
+		return getAbstractElementAccess().getRule();
 	}
 
 	//Import:
-	//  "import" importURI=STRING;
+	//  "import" importedNamespace=QualifiedNameWithWildCard;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -644,24 +659,14 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		return getImportAccess().getRule();
 	}
 
-	//NamedElement:
-	//  Package|Type;
-	public NamedElementElements getNamedElementAccess() {
-		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
+	//PackageDeclaration:
+	//  "package" name=QualifiedName "{" elements+=AbstractElement* "}";
+	public PackageDeclarationElements getPackageDeclarationAccess() {
+		return (pPackageDeclaration != null) ? pPackageDeclaration : (pPackageDeclaration = new PackageDeclarationElements());
 	}
 	
-	public ParserRule getNamedElementRule() {
-		return getNamedElementAccess().getRule();
-	}
-
-	//Package:
-	//  "package" name=QualifiedName "{" namedElements+=NamedElement* "}";
-	public PackageElements getPackageAccess() {
-		return (pPackage != null) ? pPackage : (pPackage = new PackageElements());
-	}
-	
-	public ParserRule getPackageRule() {
-		return getPackageAccess().getRule();
+	public ParserRule getPackageDeclarationRule() {
+		return getPackageDeclarationAccess().getRule();
 	}
 
 	//Type:
@@ -685,7 +690,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Entity:
-	//  "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}";
+	//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -765,13 +770,32 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//TypeRef:
-	//  referenced=[Type];
+	//  referenced=[Type|QualifiedName];
 	public TypeRefElements getTypeRefAccess() {
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	}
 	
 	public ParserRule getTypeRefRule() {
 		return getTypeRefAccess().getRule();
+	}
+
+	//enum Visibility returns Visibility : public | private | protected ;
+	public VisibilityElements getVisibilityAccess() {
+		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
+	}
+	
+	public EnumRule getVisibilityRule() {
+		return getVisibilityAccess().getRule();
+	}
+
+	//QualifiedNameWithWildCard returns ecore::EString:
+	//  QualifiedName ".*"?;
+	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
+		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
+	}
+	
+	public ParserRule getQualifiedNameWithWildCardRule() {
+		return getQualifiedNameWithWildCardAccess().getRule();
 	}
 
 	//QualifiedName returns ecore::EString:
@@ -782,15 +806,6 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getQualifiedNameRule() {
 		return getQualifiedNameAccess().getRule();
-	}
-
-	//enum Visibility returns Visibility : package | private | protected | public ;
-	public VisibilityElements getVisibilityAccess() {
-		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
-	}
-	
-	public EnumRule getVisibilityRule() {
-		return getVisibilityAccess().getRule();
 	}
 
 	//terminal ID:

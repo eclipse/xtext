@@ -58,4 +58,19 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.scoping.JavaScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.example.scoping.DomainmodelScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.example.validation.DomainmodelJavaValidator> bindDomainmodelJavaValidator() {
+		return org.eclipse.xtext.example.validation.DomainmodelJavaValidator.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.formatting.FormatterFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> bindITokenSerializer() {
+		return org.eclipse.xtext.example.formatting.DomainmodelFormatter.class;
+	}
+
 }

@@ -12,6 +12,11 @@
 			type="dmodel">
 		</parser>
 	</extension>
+	
+	<extension
+		point="org.eclipse.emf.index.indexer">
+		<indexer class="org.eclipse.xtext.index.DefaultDeclarativeResourceIndexer" fileExtensions="dmodel"/>
+	</extension>
 
 
 	<extension

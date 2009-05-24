@@ -26,13 +26,22 @@ public interface DomainmodelFactory extends EFactory
   DomainmodelFactory eINSTANCE = org.eclipse.xtext.example.domainmodel.impl.DomainmodelFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>File</em>'.
+   * Returns a new object of class '<em>Model</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>File</em>'.
+   * @return a new object of class '<em>Model</em>'.
    * @generated
    */
-  File createFile();
+  Model createModel();
+
+  /**
+   * Returns a new object of class '<em>Abstract Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Element</em>'.
+   * @generated
+   */
+  AbstractElement createAbstractElement();
 
   /**
    * Returns a new object of class '<em>Import</em>'.
@@ -44,22 +53,13 @@ public interface DomainmodelFactory extends EFactory
   Import createImport();
 
   /**
-   * Returns a new object of class '<em>Named Element</em>'.
+   * Returns a new object of class '<em>Package Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Element</em>'.
+   * @return a new object of class '<em>Package Declaration</em>'.
    * @generated
    */
-  NamedElement createNamedElement();
-
-  /**
-   * Returns a new object of class '<em>Package</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Package</em>'.
-   * @generated
-   */
-  Package createPackage();
+  PackageDeclaration createPackageDeclaration();
 
   /**
    * Returns a new object of class '<em>Type</em>'.

@@ -61,41 +61,51 @@ public interface DomainmodelPackage extends EPackage
   DomainmodelPackage eINSTANCE = org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.FileImpl <em>File</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl <em>Model</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.FileImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getFile()
+   * @see org.eclipse.xtext.example.domainmodel.impl.ModelImpl
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getModel()
    * @generated
    */
-  int FILE = 0;
+  int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FILE__IMPORTS = 0;
+  int MODEL__ELEMENTS = 0;
 
   /**
-   * The feature id for the '<em><b>Named Elements</b></em>' containment reference list.
+   * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FILE__NAMED_ELEMENTS = 1;
+  int MODEL_FEATURE_COUNT = 1;
 
   /**
-   * The number of structural features of the '<em>File</em>' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getAbstractElement()
+   * @generated
+   */
+  int ABSTRACT_ELEMENT = 1;
+
+  /**
+   * The number of structural features of the '<em>Abstract Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FILE_FEATURE_COUNT = 2;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ImportImpl <em>Import</em>}' class.
@@ -105,16 +115,16 @@ public interface DomainmodelPackage extends EPackage
    * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 1;
+  int IMPORT = 2;
 
   /**
-   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORT_URI = 0;
+  int IMPORT__IMPORTED_NAMESPACE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -123,45 +133,17 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT_FEATURE_COUNT = 1;
+  int IMPORT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.NamedElementImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getNamedElement()
+   * @see org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getPackageDeclaration()
    * @generated
    */
-  int NAMED_ELEMENT = 2;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_ELEMENT__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Named Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_ELEMENT_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.PackageImpl <em>Package</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.PackageImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getPackage()
-   * @generated
-   */
-  int PACKAGE = 3;
+  int PACKAGE_DECLARATION = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -170,25 +152,25 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PACKAGE__NAME = NAMED_ELEMENT__NAME;
+  int PACKAGE_DECLARATION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Named Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE__NAMED_ELEMENTS = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  int PACKAGE_DECLARATION__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Package</em>' class.
+   * The number of structural features of the '<em>Package Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  int PACKAGE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeImpl <em>Type</em>}' class.
@@ -207,7 +189,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE__NAME = NAMED_ELEMENT__NAME;
+  int TYPE__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -216,7 +198,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -618,36 +600,35 @@ public interface DomainmodelPackage extends EPackage
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.File <em>File</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>File</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.File
+   * @return the meta object for class '<em>Model</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Model
    * @generated
    */
-  EClass getFile();
+  EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.File#getImports <em>Imports</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.Model#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.File#getImports()
-   * @see #getFile()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Model#getElements()
+   * @see #getModel()
    * @generated
    */
-  EReference getFile_Imports();
+  EReference getModel_Elements();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.File#getNamedElements <em>Named Elements</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.AbstractElement <em>Abstract Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Named Elements</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.File#getNamedElements()
-   * @see #getFile()
+   * @return the meta object for class '<em>Abstract Element</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.AbstractElement
    * @generated
    */
-  EReference getFile_NamedElements();
+  EClass getAbstractElement();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Import <em>Import</em>}'.
@@ -660,57 +641,47 @@ public interface DomainmodelPackage extends EPackage
   EClass getImport();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Import#getImportURI <em>Import URI</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Import#getImportedNamespace <em>Imported Namespace</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Import URI</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Import#getImportURI()
+   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Import#getImportedNamespace()
    * @see #getImport()
    * @generated
    */
-  EAttribute getImport_ImportURI();
+  EAttribute getImport_ImportedNamespace();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.NamedElement <em>Named Element</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.PackageDeclaration <em>Package Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Named Element</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.NamedElement
+   * @return the meta object for class '<em>Package Declaration</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.PackageDeclaration
    * @generated
    */
-  EClass getNamedElement();
+  EClass getPackageDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.NamedElement#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.PackageDeclaration#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.NamedElement#getName()
-   * @see #getNamedElement()
+   * @see org.eclipse.xtext.example.domainmodel.PackageDeclaration#getName()
+   * @see #getPackageDeclaration()
    * @generated
    */
-  EAttribute getNamedElement_Name();
+  EAttribute getPackageDeclaration_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Package <em>Package</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.PackageDeclaration#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Package</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Package
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.PackageDeclaration#getElements()
+   * @see #getPackageDeclaration()
    * @generated
    */
-  EClass getPackage();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.Package#getNamedElements <em>Named Elements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Named Elements</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Package#getNamedElements()
-   * @see #getPackage()
-   * @generated
-   */
-  EReference getPackage_NamedElements();
+  EReference getPackageDeclaration_Elements();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Type <em>Type</em>}'.
@@ -721,6 +692,17 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    */
   EClass getType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Type#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Type#getName()
+   * @see #getType()
+   * @generated
+   */
+  EAttribute getType_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.DataType <em>Data Type</em>}'.
@@ -944,30 +926,32 @@ public interface DomainmodelPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.FileImpl <em>File</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl <em>Model</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.FileImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getFile()
+     * @see org.eclipse.xtext.example.domainmodel.impl.ModelImpl
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getModel()
      * @generated
      */
-    EClass FILE = eINSTANCE.getFile();
+    EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FILE__IMPORTS = eINSTANCE.getFile_Imports();
+    EReference MODEL__ELEMENTS = eINSTANCE.getModel_Elements();
 
     /**
-     * The meta object literal for the '<em><b>Named Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getAbstractElement()
      * @generated
      */
-    EReference FILE__NAMED_ELEMENTS = eINSTANCE.getFile_NamedElements();
+    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.ImportImpl <em>Import</em>}' class.
@@ -980,22 +964,22 @@ public interface DomainmodelPackage extends EPackage
     EClass IMPORT = eINSTANCE.getImport();
 
     /**
-     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
+    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.NamedElementImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getNamedElement()
+     * @see org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getPackageDeclaration()
      * @generated
      */
-    EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+    EClass PACKAGE_DECLARATION = eINSTANCE.getPackageDeclaration();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1003,25 +987,15 @@ public interface DomainmodelPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+    EAttribute PACKAGE_DECLARATION__NAME = eINSTANCE.getPackageDeclaration_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.PackageImpl <em>Package</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.PackageImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getPackage()
-     * @generated
-     */
-    EClass PACKAGE = eINSTANCE.getPackage();
-
-    /**
-     * The meta object literal for the '<em><b>Named Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE__NAMED_ELEMENTS = eINSTANCE.getPackage_NamedElements();
+    EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeImpl <em>Type</em>}' class.
@@ -1032,6 +1006,14 @@ public interface DomainmodelPackage extends EPackage
      * @generated
      */
     EClass TYPE = eINSTANCE.getType();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl <em>Data Type</em>}' class.
