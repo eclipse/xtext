@@ -25,7 +25,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private String message;
 
-	private IGeneratorFragment fallback;
+	private IGeneratorFragment fallback = new DefaultGeneratorFragment();
 
 	public void setFallback(IGeneratorFragment fragment) {
 		this.fallback = fragment;

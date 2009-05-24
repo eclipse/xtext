@@ -60,6 +60,9 @@
 			<fragment file="${standardFragments}"
 				genModels="${baseinheritance.genmodel}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext">
 			<fragment file="${standardFragments}"
 				genModels="${xtext.genmodel}"/>
