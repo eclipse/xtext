@@ -11,6 +11,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ui.EmfIndexUIModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -29,6 +30,12 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 
 	private volatile Injector injector;
 
+	private IndexStore indexStore;
+	
+	public IndexStore getIndexStore() {
+		return indexStore;
+	}
+
 	public EmfIndexUIPlugin() {
 	}
 
@@ -36,6 +43,7 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 		super.start(context);
 		// TODO: make the module configurable
 		injector = Guice.createInjector(new EmfIndexUIModule());
+		indexStore = injector.getInstance(IndexStore.class); 
 		plugin = this;
 	}
 
