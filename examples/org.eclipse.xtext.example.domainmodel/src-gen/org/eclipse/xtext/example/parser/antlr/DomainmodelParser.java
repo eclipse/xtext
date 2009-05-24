@@ -40,7 +40,7 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "File";
+		return "Model";
 	}
 	
 	public DomainmodelGrammarAccess getGrammarAccess() {

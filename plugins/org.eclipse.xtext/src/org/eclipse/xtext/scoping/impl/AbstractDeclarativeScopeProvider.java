@@ -86,7 +86,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 			if (object.eContainer() == null) {
 				if (log.isTraceEnabled())
 					log.trace(throwable.getMessage());
-				return genericFallBack.getScope(object, type);
+				return AbstractDeclarativeScopeProvider.this.getGenericFallBack().getScope(object, type);
 			}
 			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), type);
 		}
@@ -107,6 +107,10 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 	public void setGenericFallBack(DefaultScopeProvider defaultScopeProvider) {
 		this.genericFallBack = defaultScopeProvider;
 	}
+	
+	public IScopeProvider getGenericFallBack() {
+		return genericFallBack;
+	}
 
 	protected Predicate<Method> getPredicate(EObject context, EClass type) {
 		String methodName = "scope_" + type.getName();
@@ -118,7 +122,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		return PolymorphicDispatcher.Predicates.forName(methodName, 2);
 	}
 
-	public final IScope getScope(EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = internalGetScope(context, reference);
 		if (scope == null)
 			return getScope(context, (EClass) reference.getEType());
@@ -132,7 +136,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		return scope.invoke(context, reference);
 	}
 
-	public final IScope getScope(EObject context, EClass type) {
+	public IScope getScope(EObject context, EClass type) {
 		final Predicate<Method> predicate = getPredicate(context, type);
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
 				typeErrorHandler);

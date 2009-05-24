@@ -37,5 +37,6 @@ public class DomainmodelStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("dmodel", resourceFactory);
 		
 
+
 	}
 }

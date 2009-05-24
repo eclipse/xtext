@@ -6,18 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.impl;
+package org.eclipse.xtext.index;
 
-import org.eclipse.xtext.scoping.IScopedElement;
-
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public abstract class AbstractScopedElement implements IScopedElement {
-	@Override
-	public String toString() {
-		return name();
+public interface IQualifiedNameProvider {
+	public String getQualifiedName(EObject obj);
+	public String getDelimiter();
+	public String getWildcard();
+	
+	public static abstract class AbstractImpl implements IQualifiedNameProvider {
 	}
 }

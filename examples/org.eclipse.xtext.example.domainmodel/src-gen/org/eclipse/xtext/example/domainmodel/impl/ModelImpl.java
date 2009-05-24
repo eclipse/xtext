@@ -14,43 +14,46 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.example.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.NamedElement;
+import org.eclipse.xtext.example.domainmodel.Model;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Package</b></em>'.
+ * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.PackageImpl#getNamedElements <em>Named Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.example.domainmodel.Package
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The cached value of the '{@link #getNamedElements() <em>Named Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNamedElements()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<NamedElement> namedElements;
+  protected EList<AbstractElement> elements;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PackageImpl()
+  protected ModelImpl()
   {
     super();
   }
@@ -63,7 +66,7 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   @Override
   protected EClass eStaticClass()
   {
-    return DomainmodelPackage.Literals.PACKAGE;
+    return DomainmodelPackage.Literals.MODEL;
   }
 
   /**
@@ -71,13 +74,13 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<NamedElement> getNamedElements()
+  public EList<AbstractElement> getElements()
   {
-    if (namedElements == null)
+    if (elements == null)
     {
-      namedElements = new EObjectContainmentEList<NamedElement>(NamedElement.class, this, DomainmodelPackage.PACKAGE__NAMED_ELEMENTS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, DomainmodelPackage.MODEL__ELEMENTS);
     }
-    return namedElements;
+    return elements;
   }
 
   /**
@@ -90,8 +93,8 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   {
     switch (featureID)
     {
-      case DomainmodelPackage.PACKAGE__NAMED_ELEMENTS:
-        return ((InternalEList<?>)getNamedElements()).basicRemove(otherEnd, msgs);
+      case DomainmodelPackage.MODEL__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +109,8 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   {
     switch (featureID)
     {
-      case DomainmodelPackage.PACKAGE__NAMED_ELEMENTS:
-        return getNamedElements();
+      case DomainmodelPackage.MODEL__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +126,9 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   {
     switch (featureID)
     {
-      case DomainmodelPackage.PACKAGE__NAMED_ELEMENTS:
-        getNamedElements().clear();
-        getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
+      case DomainmodelPackage.MODEL__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +144,8 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   {
     switch (featureID)
     {
-      case DomainmodelPackage.PACKAGE__NAMED_ELEMENTS:
-        getNamedElements().clear();
+      case DomainmodelPackage.MODEL__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +161,10 @@ public class PackageImpl extends NamedElementImpl implements org.eclipse.xtext.e
   {
     switch (featureID)
     {
-      case DomainmodelPackage.PACKAGE__NAMED_ELEMENTS:
-        return namedElements != null && !namedElements.isEmpty();
+      case DomainmodelPackage.MODEL__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //PackageImpl
+} //ModelImpl

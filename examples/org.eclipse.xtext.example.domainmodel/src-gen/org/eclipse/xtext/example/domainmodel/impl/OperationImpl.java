@@ -49,7 +49,7 @@ public class OperationImpl extends FeatureImpl implements Operation
    * @generated
    * @ordered
    */
-  protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PACKAGE;
+  protected static final Visibility VISIBILITY_EDEFAULT = Visibility.PUBLIC;
 
   /**
    * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.

@@ -32,10 +32,10 @@ protected class ThisRootNode extends RootToken {
 	
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new File_Group(this, this, 0, inst);
-			case 1: return new Import_Group(this, this, 1, inst);
-			case 2: return new NamedElement_Alternatives(this, this, 2, inst);
-			case 3: return new Package_Group(this, this, 3, inst);
+			case 0: return new Model_ElementsAssignment(this, this, 0, inst);
+			case 1: return new AbstractElement_Alternatives(this, this, 1, inst);
+			case 2: return new Import_Group(this, this, 2, inst);
+			case 3: return new PackageDeclaration_Group(this, this, 3, inst);
 			case 4: return new Type_Alternatives(this, this, 4, inst);
 			case 5: return new DataType_Group(this, this, 5, inst);
 			case 6: return new Entity_Group(this, this, 6, inst);
@@ -53,48 +53,167 @@ protected class ThisRootNode extends RootToken {
 }
 	
 
-/************ begin Rule File ****************
+/************ begin Rule Model ****************
  *
- * File:
- *   imports+=Import* namedElements+=NamedElement*;
+ * Model:
+ *   elements+=AbstractElement*;
  *
  **/
 
-// imports+=Import* namedElements+=NamedElement*
-protected class File_Group extends GroupToken {
+// elements+=AbstractElement*
+protected class Model_ElementsAssignment extends AssignmentToken  {
 	
-	public File_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ElementsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Group getGrammarElement() {
-		return grammarAccess.getFileAccess().getGroup();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getElementsAssignment();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new File_NamedElementsAssignment_1(parent, this, 0, inst);
-			case 1: return new File_ImportsAssignment_0(parent, this, 1, inst);
+			case 0: return new AbstractElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
+		return tryConsumeVal();
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAbstractElementRule().getType().getClassifier())) {
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_ElementsAssignment(parent, next, actIndex, consumed);
+			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+/************ end Rule Model ****************/
+
+
+/************ begin Rule AbstractElement ****************
+ *
+ * AbstractElement:
+ *   PackageDeclaration|Type|Import;
+ *
+ **/
+
+// PackageDeclaration|Type|Import
+protected class AbstractElement_Alternatives extends AlternativesToken {
+
+	public AbstractElement_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAbstractElementAccess().getAlternatives();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AbstractElement_PackageDeclarationParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new AbstractElement_TypeParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new AbstractElement_ImportParserRuleCall_2(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAbstractElementRule().getType().getClassifier())) return null;
   
 		return tryConsumeVal();
 	}
 }
 
-// imports+=Import*
-protected class File_ImportsAssignment_0 extends AssignmentToken  {
+// PackageDeclaration
+protected class AbstractElement_PackageDeclarationParserRuleCall_0 extends RuleCallToken {
 	
-	public File_ImportsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AbstractElement_PackageDeclarationParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getFileAccess().getImportsAssignment_0();
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractElementAccess().getPackageDeclarationParserRuleCall_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new PackageDeclaration_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(PackageDeclaration_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getPackageDeclarationRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Type
+protected class AbstractElement_TypeParserRuleCall_1 extends RuleCallToken {
+	
+	public AbstractElement_TypeParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractElementAccess().getTypeParserRuleCall_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Type_Alternatives.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Import
+protected class AbstractElement_ImportParserRuleCall_2 extends RuleCallToken {
+	
+	public AbstractElement_ImportParserRuleCall_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractElementAccess().getImportParserRuleCall_2();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -105,82 +224,30 @@ protected class File_ImportsAssignment_0 extends AssignmentToken  {
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("imports",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("imports");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new File_ImportsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
-		}	
-	}	
-}
-
-// namedElements+=NamedElement*
-protected class File_NamedElementsAssignment_1 extends AssignmentToken  {
-	
-	public File_NamedElementsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+		if(checkForRecursion(Import_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
+		return current;
 	}
 	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getFileAccess().getNamedElementsAssignment_1();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new NamedElement_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("namedElements",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("namedElements");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new File_NamedElementsAssignment_1(parent, next, actIndex, consumed);
-			case 1: return new File_ImportsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 2, consumed);
+			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
 	}	
 }
 
 
-/************ end Rule File ****************/
+/************ end Rule AbstractElement ****************/
 
 
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importURI=STRING;
+ *   "import" importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
-// "import" importURI=STRING
+// "import" importedNamespace=QualifiedNameWithWildCard
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -193,7 +260,7 @@ protected class Import_Group extends GroupToken {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Import_ImportURIAssignment_1(parent, this, 0, inst);
+			case 0: return new Import_ImportedNamespaceAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -228,15 +295,15 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 	}
 }
 
-// importURI=STRING
-protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
+// importedNamespace=QualifiedNameWithWildCard
+protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 	
-	public Import_ImportURIAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Import_ImportedNamespaceAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getImportAccess().getImportURIAssignment_1();
+		return grammarAccess.getImportAccess().getImportedNamespaceAssignment_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -247,11 +314,11 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("importURI",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0();
+		if((value = current.getConsumable("importedNamespace",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("importedNamespace");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -263,146 +330,47 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 /************ end Rule Import ****************/
 
 
-/************ begin Rule NamedElement ****************
+/************ begin Rule PackageDeclaration ****************
  *
- * NamedElement:
- *   Package|Type;
- *
- **/
-
-// Package|Type
-protected class NamedElement_Alternatives extends AlternativesToken {
-
-	public NamedElement_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getAlternatives();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new NamedElement_PackageParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new NamedElement_TypeParserRuleCall_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) return null;
-  
-		return tryConsumeVal();
-	}
-}
-
-// Package
-protected class NamedElement_PackageParserRuleCall_0 extends RuleCallToken {
-	
-	public NamedElement_PackageParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getPackageParserRuleCall_0();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Package_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Package_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getPackageRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// Type
-protected class NamedElement_TypeParserRuleCall_1 extends RuleCallToken {
-	
-	public NamedElement_TypeParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Type_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Type_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-
-/************ end Rule NamedElement ****************/
-
-
-/************ begin Rule Package ****************
- *
- * Package:
- *   "package" name=QualifiedName "{" namedElements+=NamedElement* "}";
+ * PackageDeclaration:
+ *   "package" name=QualifiedName "{" elements+=AbstractElement* "}";
  *
  **/
 
-// "package" name=QualifiedName "{" namedElements+=NamedElement* "}"
-protected class Package_Group extends GroupToken {
+// "package" name=QualifiedName "{" elements+=AbstractElement* "}"
+protected class PackageDeclaration_Group extends GroupToken {
 	
-	public Package_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getPackageAccess().getGroup();
+		return grammarAccess.getPackageDeclarationAccess().getGroup();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Package_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new PackageDeclaration_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPackageRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getPackageDeclarationRule().getType().getClassifier())) return null;
   
 		return tryConsumeVal();
 	}
 }
 
 // "package"
-protected class Package_PackageKeyword_0 extends KeywordToken  {
+protected class PackageDeclaration_PackageKeyword_0 extends KeywordToken  {
 	
-	public Package_PackageKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_PackageKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPackageAccess().getPackageKeyword_0();
+		return grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -418,19 +386,19 @@ protected class Package_PackageKeyword_0 extends KeywordToken  {
 }
 
 // name=QualifiedName
-protected class Package_NameAssignment_1 extends AssignmentToken  {
+protected class PackageDeclaration_NameAssignment_1 extends AssignmentToken  {
 	
-	public Package_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPackageAccess().getNameAssignment_1();
+		return grammarAccess.getPackageDeclarationAccess().getNameAssignment_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Package_PackageKeyword_0(parent, this, 0, inst);
+			case 0: return new PackageDeclaration_PackageKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -440,7 +408,7 @@ protected class Package_NameAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = grammarAccess.getPackageAccess().getNameQualifiedNameParserRuleCall_1_0();
+			element = grammarAccess.getPackageDeclarationAccess().getNameQualifiedNameParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -449,49 +417,49 @@ protected class Package_NameAssignment_1 extends AssignmentToken  {
 }
 
 // "{"
-protected class Package_LeftCurlyBracketKeyword_2 extends KeywordToken  {
+protected class PackageDeclaration_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
-	public Package_LeftCurlyBracketKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_LeftCurlyBracketKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPackageAccess().getLeftCurlyBracketKeyword_2();
+		return grammarAccess.getPackageDeclarationAccess().getLeftCurlyBracketKeyword_2();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Package_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new PackageDeclaration_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// namedElements+=NamedElement*
-protected class Package_NamedElementsAssignment_3 extends AssignmentToken  {
+// elements+=AbstractElement*
+protected class PackageDeclaration_ElementsAssignment_3 extends AssignmentToken  {
 	
-	public Package_NamedElementsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_ElementsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPackageAccess().getNamedElementsAssignment_3();
+		return grammarAccess.getPackageDeclarationAccess().getElementsAssignment_3();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new NamedElement_Alternatives(this, this, 0, inst);
+			case 0: return new AbstractElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("namedElements",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("namedElements");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAbstractElementRule().getType().getClassifier())) {
 				type = AssignmentType.PRC; 
 				consumed = obj;
 				return param;
@@ -503,28 +471,28 @@ protected class Package_NamedElementsAssignment_3 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Package_NamedElementsAssignment_3(parent, next, actIndex, consumed);
-			case 1: return new Package_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new PackageDeclaration_ElementsAssignment_3(parent, next, actIndex, consumed);
+			case 1: return new PackageDeclaration_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "}"
-protected class Package_RightCurlyBracketKeyword_4 extends KeywordToken  {
+protected class PackageDeclaration_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Package_RightCurlyBracketKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public PackageDeclaration_RightCurlyBracketKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getPackageAccess().getRightCurlyBracketKeyword_4();
+		return grammarAccess.getPackageDeclarationAccess().getRightCurlyBracketKeyword_4();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Package_NamedElementsAssignment_3(parent, this, 0, inst);
-			case 1: return new Package_LeftCurlyBracketKeyword_2(parent, this, 1, inst);
+			case 0: return new PackageDeclaration_ElementsAssignment_3(parent, this, 0, inst);
+			case 1: return new PackageDeclaration_LeftCurlyBracketKeyword_2(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -532,7 +500,7 @@ protected class Package_RightCurlyBracketKeyword_4 extends KeywordToken  {
 }
 
 
-/************ end Rule Package ****************/
+/************ end Rule PackageDeclaration ****************/
 
 
 /************ begin Rule Type ****************
@@ -727,11 +695,11 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Entity ****************
  *
  * Entity:
- *   "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}";
+ *   "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
  *
  **/
 
-// "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}"
+// "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}"
 protected class Entity_Group extends GroupToken {
 	
 	public Entity_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -810,7 +778,7 @@ protected class Entity_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("extends" superType=[Entity])?
+// ("extends" superType=[Entity|QualifiedName])?
 protected class Entity_Group_2 extends GroupToken {
 	
 	public Entity_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -850,7 +818,7 @@ protected class Entity_ExtendsKeyword_2_0 extends KeywordToken  {
 		
 }
 
-// superType=[Entity]
+// superType=[Entity|QualifiedName]
 protected class Entity_SuperTypeAssignment_2_1 extends AssignmentToken  {
 	
 	public Entity_SuperTypeAssignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -2135,11 +2103,11 @@ protected class TypedElement_ParameterParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- *   referenced=[Type];
+ *   referenced=[Type|QualifiedName];
  *
  **/
 
-// referenced=[Type]
+// referenced=[Type|QualifiedName]
 protected class TypeRef_ReferencedAssignment extends AssignmentToken  {
 	
 	public TypeRef_ReferencedAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -2178,6 +2146,7 @@ protected class TypeRef_ReferencedAssignment extends AssignmentToken  {
 }
 
 /************ end Rule TypeRef ****************/
+
 
 
 }

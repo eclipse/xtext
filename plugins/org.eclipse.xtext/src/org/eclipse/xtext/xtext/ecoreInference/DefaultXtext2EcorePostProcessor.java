@@ -66,9 +66,12 @@ public class DefaultXtext2EcorePostProcessor implements IXtext2EcorePostProcesso
 		try {
 			org.eclipse.emf.ecore.resource.Resource grammarResource = metamodel.eResource();
 			URI uri = grammarResource.getURI();
+			URIConverter uriConverter = grammarResource.getResourceSet().getURIConverter();
+			// check if uri can be used for resolve
+			if (!uri.isHierarchical() || uri.isRelative())
+				return null;
 			uri = URI.createURI(Strings.lastToken(extension, "::")).appendFileExtension(XtendFile.FILE_EXTENSION).resolve(uri);
 
-			URIConverter uriConverter = grammarResource.getResourceSet().getURIConverter();
 			if (!uriConverter.exists(uri, null))
 				return null;
 

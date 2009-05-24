@@ -24,7 +24,7 @@ public final class IndexTestLanguageImportConsumer extends NonTerminalConsumer {
 
 	private ImportElements rule;	
 
-	private INonTerminalConsumer qualifiedNameConsumer;
+	private INonTerminalConsumer qualifiedNameWithWildCardConsumer;
 
 	private IElementConsumer group$1$Consumer;
 
@@ -81,7 +81,7 @@ public final class IndexTestLanguageImportConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(qualifiedNameConsumer, "importedNamespace", false, true, false, getElement(), optional);
+			return consumeNonTerminal(qualifiedNameWithWildCardConsumer, "importedNamespace", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -105,7 +105,7 @@ public final class IndexTestLanguageImportConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.getImportKeyword_0());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getImportedNamespaceAssignment_1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getImportedNamespaceQualifiedNameParserRuleCall_1_0());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0());
 	}
 	
 	@Override
@@ -118,8 +118,8 @@ public final class IndexTestLanguageImportConsumer extends NonTerminalConsumer {
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setQualifiedNameConsumer(INonTerminalConsumer qualifiedNameConsumer) {
-		this.qualifiedNameConsumer = qualifiedNameConsumer;
+	public void setQualifiedNameWithWildCardConsumer(INonTerminalConsumer qualifiedNameWithWildCardConsumer) {
+		this.qualifiedNameWithWildCardConsumer = qualifiedNameWithWildCardConsumer;
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

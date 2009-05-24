@@ -14,23 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.example.domainmodel.Attribute;
-import org.eclipse.xtext.example.domainmodel.DataType;
-import org.eclipse.xtext.example.domainmodel.DomainmodelFactory;
-import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.File;
-import org.eclipse.xtext.example.domainmodel.Import;
-import org.eclipse.xtext.example.domainmodel.NamedElement;
-import org.eclipse.xtext.example.domainmodel.Operation;
-import org.eclipse.xtext.example.domainmodel.Parameter;
-import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.example.domainmodel.StructuralFeature;
-import org.eclipse.xtext.example.domainmodel.Type;
-import org.eclipse.xtext.example.domainmodel.TypeRef;
-import org.eclipse.xtext.example.domainmodel.TypedElement;
-import org.eclipse.xtext.example.domainmodel.Visibility;
+import org.eclipse.xtext.example.domainmodel.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,10 +68,10 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     switch (eClass.getClassifierID())
     {
-      case DomainmodelPackage.FILE: return createFile();
+      case DomainmodelPackage.MODEL: return createModel();
+      case DomainmodelPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case DomainmodelPackage.IMPORT: return createImport();
-      case DomainmodelPackage.NAMED_ELEMENT: return createNamedElement();
-      case DomainmodelPackage.PACKAGE: return createPackage();
+      case DomainmodelPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
       case DomainmodelPackage.TYPE: return createType();
       case DomainmodelPackage.DATA_TYPE: return createDataType();
       case DomainmodelPackage.ENTITY: return createEntity();
@@ -143,10 +127,21 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
-  public File createFile()
+  public Model createModel()
   {
-    FileImpl file = new FileImpl();
-    return file;
+    ModelImpl model = new ModelImpl();
+    return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AbstractElement createAbstractElement()
+  {
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
   }
 
   /**
@@ -165,21 +160,10 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamedElement createNamedElement()
+  public PackageDeclaration createPackageDeclaration()
   {
-    NamedElementImpl namedElement = new NamedElementImpl();
-    return namedElement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public org.eclipse.xtext.example.domainmodel.Package createPackage()
-  {
-    PackageImpl package_ = new PackageImpl();
-    return package_;
+    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
+    return packageDeclaration;
   }
 
   /**

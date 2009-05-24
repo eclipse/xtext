@@ -5,30 +5,40 @@
  */
 package org.eclipse.xtext.example.domainmodel.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.example.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.NamedElement;
+import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Named Element</b></em>'.
+ * An implementation of the model object '<em><b>Package Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.NamedElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.PackageDeclarationImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NamedElementImpl extends MinimalEObjectImpl.Container implements NamedElement
+public class PackageDeclarationImpl extends AbstractElementImpl implements PackageDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -51,11 +61,21 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
   protected String name = NAME_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getElements()
+   * @generated
+   * @ordered
+   */
+  protected EList<AbstractElement> elements;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NamedElementImpl()
+  protected PackageDeclarationImpl()
   {
     super();
   }
@@ -68,7 +88,7 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
   @Override
   protected EClass eStaticClass()
   {
-    return DomainmodelPackage.Literals.NAMED_ELEMENT;
+    return DomainmodelPackage.Literals.PACKAGE_DECLARATION;
   }
 
   /**
@@ -91,7 +111,37 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.NAMED_ELEMENT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.PACKAGE_DECLARATION__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractElement> getElements()
+  {
+    if (elements == null)
+    {
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS);
+    }
+    return elements;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,8 +154,10 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
   {
     switch (featureID)
     {
-      case DomainmodelPackage.NAMED_ELEMENT__NAME:
+      case DomainmodelPackage.PACKAGE_DECLARATION__NAME:
         return getName();
+      case DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,13 +167,18 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case DomainmodelPackage.NAMED_ELEMENT__NAME:
+      case DomainmodelPackage.PACKAGE_DECLARATION__NAME:
         setName((String)newValue);
+        return;
+      case DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +194,11 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
   {
     switch (featureID)
     {
-      case DomainmodelPackage.NAMED_ELEMENT__NAME:
+      case DomainmodelPackage.PACKAGE_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
+        return;
+      case DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +214,10 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
   {
     switch (featureID)
     {
-      case DomainmodelPackage.NAMED_ELEMENT__NAME:
+      case DomainmodelPackage.PACKAGE_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case DomainmodelPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -177,4 +239,4 @@ public class NamedElementImpl extends MinimalEObjectImpl.Container implements Na
     return result.toString();
   }
 
-} //NamedElementImpl
+} //PackageDeclarationImpl

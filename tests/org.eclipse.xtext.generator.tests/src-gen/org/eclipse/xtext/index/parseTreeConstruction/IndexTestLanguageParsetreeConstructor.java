@@ -169,11 +169,11 @@ protected class File_NameSpacesAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importedNamespace=QualifiedName;
+ *   "import" importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
-// "import" importedNamespace=QualifiedName
+// "import" importedNamespace=QualifiedNameWithWildCard
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -221,7 +221,7 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 	}
 }
 
-// importedNamespace=QualifiedName
+// importedNamespace=QualifiedNameWithWildCard
 protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 	
 	public Import_ImportedNamespaceAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -244,7 +244,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("importedNamespace");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0();
+			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -254,6 +254,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Import ****************/
+
 
 
 

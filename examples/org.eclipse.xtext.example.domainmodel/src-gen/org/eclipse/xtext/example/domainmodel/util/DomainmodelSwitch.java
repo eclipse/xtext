@@ -10,21 +10,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.example.domainmodel.Attribute;
-import org.eclipse.xtext.example.domainmodel.DataType;
-import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.File;
-import org.eclipse.xtext.example.domainmodel.Import;
-import org.eclipse.xtext.example.domainmodel.NamedElement;
-import org.eclipse.xtext.example.domainmodel.Operation;
-import org.eclipse.xtext.example.domainmodel.Parameter;
-import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.example.domainmodel.StructuralFeature;
-import org.eclipse.xtext.example.domainmodel.Type;
-import org.eclipse.xtext.example.domainmodel.TypeRef;
-import org.eclipse.xtext.example.domainmodel.TypedElement;
+import org.eclipse.xtext.example.domainmodel.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,10 +95,17 @@ public class DomainmodelSwitch<T>
   {
     switch (classifierID)
     {
-      case DomainmodelPackage.FILE:
+      case DomainmodelPackage.MODEL:
       {
-        File file = (File)theEObject;
-        T result = caseFile(file);
+        Model model = (Model)theEObject;
+        T result = caseModel(model);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DomainmodelPackage.ABSTRACT_ELEMENT:
+      {
+        AbstractElement abstractElement = (AbstractElement)theEObject;
+        T result = caseAbstractElement(abstractElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -120,21 +113,15 @@ public class DomainmodelSwitch<T>
       {
         Import import_ = (Import)theEObject;
         T result = caseImport(import_);
+        if (result == null) result = caseAbstractElement(import_);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case DomainmodelPackage.NAMED_ELEMENT:
+      case DomainmodelPackage.PACKAGE_DECLARATION:
       {
-        NamedElement namedElement = (NamedElement)theEObject;
-        T result = caseNamedElement(namedElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.PACKAGE:
-      {
-        org.eclipse.xtext.example.domainmodel.Package package_ = (org.eclipse.xtext.example.domainmodel.Package)theEObject;
-        T result = casePackage(package_);
-        if (result == null) result = caseNamedElement(package_);
+        PackageDeclaration packageDeclaration = (PackageDeclaration)theEObject;
+        T result = casePackageDeclaration(packageDeclaration);
+        if (result == null) result = caseAbstractElement(packageDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -142,7 +129,7 @@ public class DomainmodelSwitch<T>
       {
         Type type = (Type)theEObject;
         T result = caseType(type);
-        if (result == null) result = caseNamedElement(type);
+        if (result == null) result = caseAbstractElement(type);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -151,7 +138,7 @@ public class DomainmodelSwitch<T>
         DataType dataType = (DataType)theEObject;
         T result = caseDataType(dataType);
         if (result == null) result = caseType(dataType);
-        if (result == null) result = caseNamedElement(dataType);
+        if (result == null) result = caseAbstractElement(dataType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -160,7 +147,7 @@ public class DomainmodelSwitch<T>
         Entity entity = (Entity)theEObject;
         T result = caseEntity(entity);
         if (result == null) result = caseType(entity);
-        if (result == null) result = caseNamedElement(entity);
+        if (result == null) result = caseAbstractElement(entity);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -237,17 +224,33 @@ public class DomainmodelSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>File</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>File</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFile(File object)
+  public T caseModel(Model object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractElement(AbstractElement object)
   {
     return null;
   }
@@ -269,33 +272,17 @@ public class DomainmodelSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNamedElement(NamedElement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Package</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePackage(org.eclipse.xtext.example.domainmodel.Package object)
+  public T casePackageDeclaration(PackageDeclaration object)
   {
     return null;
   }

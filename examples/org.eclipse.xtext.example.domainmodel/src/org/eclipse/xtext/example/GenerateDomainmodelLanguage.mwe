@@ -1,5 +1,5 @@
  <workflow>
-	<property name="grammarURI" value="classpath:/xtext/example/Domainmodel.xtext"/>
+	<property name="grammarURI" value="classpath:/org/eclipse/xtext/example/Domainmodel.xtext"/>
 	<property name="file.extensions" value="dmodel"/>
 	<property name="projectName" value="org.eclipse.xtext.example.domainmodel"/>
 	
@@ -18,28 +18,18 @@
 		<activator value="org.eclipse.xtext.example.ui.internal.DomainmodelActivator"/>
 		
 		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
-			<!-- Java API to access grammar elements (required by several other fragments) -->
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-			
-			<!-- generates Java API for the generated EPackages -->
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
-			
-			<!-- the serialization component -->
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
-			
-			<!-- a custom ResourceFactory for use with EMF -->
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
-				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com 
-			     and falls back to the packrat parser if it's not available. -->
-			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
-				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
-				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
+				<options backtrack="true"/>
 			</fragment>
-	
-			<!-- java-based API for content assistance -->
+			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
+			
+			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>

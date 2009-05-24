@@ -23,14 +23,14 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum Visibility implements Enumerator
 {
   /**
-   * The '<em><b>Package</b></em>' literal object.
+   * The '<em><b>Public</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #PACKAGE_VALUE
+   * @see #PUBLIC_VALUE
    * @generated
    * @ordered
    */
-  PACKAGE(0, "package", "#"),
+  PUBLIC(0, "public", "public"),
 
   /**
    * The '<em><b>Private</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum Visibility implements Enumerator
    * @generated
    * @ordered
    */
-  PRIVATE(1, "private", "-"),
+  PRIVATE(1, "private", "private"),
 
   /**
    * The '<em><b>Protected</b></em>' literal object.
@@ -50,32 +50,22 @@ public enum Visibility implements Enumerator
    * @generated
    * @ordered
    */
-  PROTECTED(2, "protected", "!"),
+  PROTECTED(2, "protected", "protected");
 
   /**
-   * The '<em><b>Public</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #PUBLIC_VALUE
-   * @generated
-   * @ordered
-   */
-  PUBLIC(3, "public", "+");
-
-  /**
-   * The '<em><b>Package</b></em>' literal value.
+   * The '<em><b>Public</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Package</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Public</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #PACKAGE
-   * @model name="package" literal="#"
+   * @see #PUBLIC
+   * @model name="public"
    * @generated
    * @ordered
    */
-  public static final int PACKAGE_VALUE = 0;
+  public static final int PUBLIC_VALUE = 0;
 
   /**
    * The '<em><b>Private</b></em>' literal value.
@@ -86,7 +76,7 @@ public enum Visibility implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #PRIVATE
-   * @model name="private" literal="-"
+   * @model name="private"
    * @generated
    * @ordered
    */
@@ -101,26 +91,11 @@ public enum Visibility implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #PROTECTED
-   * @model name="protected" literal="!"
+   * @model name="protected"
    * @generated
    * @ordered
    */
   public static final int PROTECTED_VALUE = 2;
-
-  /**
-   * The '<em><b>Public</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Public</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #PUBLIC
-   * @model name="public" literal="+"
-   * @generated
-   * @ordered
-   */
-  public static final int PUBLIC_VALUE = 3;
 
   /**
    * An array of all the '<em><b>Visibility</b></em>' enumerators.
@@ -131,10 +106,9 @@ public enum Visibility implements Enumerator
   private static final Visibility[] VALUES_ARRAY =
     new Visibility[]
     {
-      PACKAGE,
+      PUBLIC,
       PRIVATE,
       PROTECTED,
-      PUBLIC,
     };
 
   /**
@@ -193,10 +167,9 @@ public enum Visibility implements Enumerator
   {
     switch (value)
     {
-      case PACKAGE_VALUE: return PACKAGE;
+      case PUBLIC_VALUE: return PUBLIC;
       case PRIVATE_VALUE: return PRIVATE;
       case PROTECTED_VALUE: return PROTECTED;
-      case PUBLIC_VALUE: return PUBLIC;
     }
     return null;
   }

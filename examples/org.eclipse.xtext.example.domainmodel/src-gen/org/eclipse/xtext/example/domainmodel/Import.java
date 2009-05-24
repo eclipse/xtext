@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.example.domainmodel;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.Import#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.Import#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,32 +22,32 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Import extends EObject
+public interface Import extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Import URI</b></em>' attribute.
+   * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Import URI</em>' attribute isn't clear,
+   * If the meaning of the '<em>Imported Namespace</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Import URI</em>' attribute.
-   * @see #setImportURI(String)
-   * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getImport_ImportURI()
+   * @return the value of the '<em>Imported Namespace</em>' attribute.
+   * @see #setImportedNamespace(String)
+   * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getImport_ImportedNamespace()
    * @model
    * @generated
    */
-  String getImportURI();
+  String getImportedNamespace();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.example.domainmodel.Import#getImportURI <em>Import URI</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.example.domainmodel.Import#getImportedNamespace <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Import URI</em>' attribute.
-   * @see #getImportURI()
+   * @param value the new value of the '<em>Imported Namespace</em>' attribute.
+   * @see #getImportedNamespace()
    * @generated
    */
-  void setImportURI(String value);
+  void setImportedNamespace(String value);
 
 } // Import
