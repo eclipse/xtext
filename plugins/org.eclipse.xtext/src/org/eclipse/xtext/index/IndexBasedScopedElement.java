@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.index;
+package org.eclipse.xtext.index;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -41,5 +41,5 @@ public class IndexBasedScopedElement extends AbstractScopedElement {
 	public String name() {
 		return descriptor.getName();
 	}
-
+	
 }

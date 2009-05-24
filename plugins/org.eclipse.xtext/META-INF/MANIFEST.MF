@@ -39,7 +39,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.scoping,
  org.eclipse.xtext.scoping.impl,
- org.eclipse.xtext.scoping.index,
  org.eclipse.xtext.service,
  org.eclipse.xtext.services,
  org.eclipse.xtext.util,
@@ -61,5 +60,4 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.common,
  org.eclipse.xtend;bundle-version="0.7.0";resolution:=optional,
  org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0";resolution:=optional
-
 

@@ -12,8 +12,9 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,9 +22,6 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 public class DefaultDeclarativeResourceIndexer extends ResourceIndexerImpl {
 
-	private final PolymorphicDispatcher<String> getName = new PolymorphicDispatcher<String>("getName", 1, 1, Collections
-			.singletonList(this));
-	
 	private final PolymorphicDispatcher<Boolean> isIndex = new PolymorphicDispatcher<Boolean>("isIndex", 1, 1, Collections
 			.singletonList(this));
 
@@ -31,7 +29,7 @@ public class DefaultDeclarativeResourceIndexer extends ResourceIndexerImpl {
 			.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>() {
 
 		public String handle(Object[] params, Throwable throwable) {
-			return getName.invoke(params);
+			return getEObjectName((EObject) params[0]);
 		}
 	});
 	
@@ -45,30 +43,19 @@ public class DefaultDeclarativeResourceIndexer extends ResourceIndexerImpl {
 
 	@Override
 	protected String getEObjectName(EObject eObject) {
-		return getName.invoke(eObject);
+		return nameProvider.getQualifiedName(eObject);
 	}
 
 	@Override
 	protected String getEObjectDisplayName(EObject eObject) {
 		return getDisplayName.invoke(eObject);
 	}
-
-	private final SimpleAttributeResolver<EObject, String> resolver = SimpleAttributeResolver.newResolver(String.class, "name");
-
-	public String getName(EObject obj) {
-		String value = resolver.getValue(obj);
-		if (value == null)
-			return null;
-		while (obj.eContainer() != null) {
-			obj = obj.eContainer();
-			String name = getName(obj);
-			if (name != null)
-				return name + delimiter() + value;
-		}
-		return value;
+	
+	@Inject
+	private IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
+	
+	public void setNameProvider(IQualifiedNameProvider nameProvider) {
+		this.nameProvider = nameProvider;
 	}
 
-	protected String delimiter() {
-		return ".";
-	}
 }
