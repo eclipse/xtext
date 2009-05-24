@@ -95,7 +95,7 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 			if (file.isDerived())
 				return false;
 			try {
-				deleteMarkers(file);
+//				deleteMarkers(file);
 				ResourceIndexer indexer = indexerRegistry.getIndexerFor(file.getFileExtension());
 				if (indexer != null) {
 					URI resourceURI = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
@@ -108,7 +108,7 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 					return true;
 				}
 			} catch (Exception e) {
-				addMarker(file, e.getMessage(), 0, IMarker.SEVERITY_ERROR);
+//				addMarker(file, e.getMessage(), 0, IMarker.SEVERITY_ERROR);
 				EmfIndexUIPlugin.logError("Cannot index resource " + resource.getFullPath().toString(), e);
 			}
 		}
