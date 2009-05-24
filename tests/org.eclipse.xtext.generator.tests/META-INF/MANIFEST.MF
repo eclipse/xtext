@@ -234,6 +234,12 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage,
  org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl,
  org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.util,
- org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage,
- org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl,
- org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.util
+ org.eclipse.xtext.index,
+ org.eclipse.xtext.index.indexTestLanguage,
+ org.eclipse.xtext.index.indexTestLanguage.impl,
+ org.eclipse.xtext.index.indexTestLanguage.util,
+ org.eclipse.xtext.index.parser.packrat,
+ org.eclipse.xtext.index.parser.packrat.consumers,
+ org.eclipse.xtext.index.parseTreeConstruction,
+ org.eclipse.xtext.index.parser.antlr
+
