@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -272,5 +273,23 @@ public class Strings {
 	 */
 	private static final char[] hexDigit = {
 		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+	/**
+	 * @param value
+	 * @param delimiter
+	 * @return
+	 */
+	public static List<String> split(String value, String delimiter) {
+		List<String> result = new ArrayList<String>();
+		int lastIndex = 0;
+		int index = value.indexOf(delimiter, lastIndex);
+		while (index!=-1) {
+			result.add(value.substring(lastIndex, index));
+			lastIndex = index+delimiter.length();
+			index = value.indexOf(delimiter, lastIndex);
+		}
+		result.add(value.substring(lastIndex));
+		return result;
+	}
 
 }
