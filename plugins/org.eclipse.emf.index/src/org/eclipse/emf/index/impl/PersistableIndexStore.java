@@ -22,6 +22,11 @@ import org.eclipse.emf.index.IPersistableIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
+import org.eclipse.emf.index.impl.memory.EClassDAOImpl;
+import org.eclipse.emf.index.impl.memory.EObjectDAOImpl;
+import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
+import org.eclipse.emf.index.impl.memory.EReferenceDAOImpl;
+import org.eclipse.emf.index.impl.memory.ResourceDAOImpl;
 
 import com.google.inject.Inject;
 
@@ -39,6 +44,13 @@ public class PersistableIndexStore extends BasicIndexStore implements IPersistab
 				|| !(eReferenceDAO instanceof Serializable)) {
 			throw new IllegalStateException("All DAOs of a PersistableIndexStore must be persistable");
 		}
+	}
+	
+	/**
+	 * for convenient use without guice (e.g. in MWE or in unit tests)
+	 */
+	public PersistableIndexStore() {
+		super(new EClassDAOImpl(), new ResourceDAOImpl(), new EObjectDAOImpl(), new EReferenceDAOImpl(), new EPackageDAOImpl());
 	}
 
 	public void save(OutputStream outputStream) throws IOException {
