@@ -221,9 +221,13 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 
 	public XtextResource getResource(InputStream in) throws Exception {
+		return getResource(in, URI.createURI("mytestmodel.test"));
+	}
+
+	public XtextResource getResource(InputStream in, URI uri) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);
 		EcoreUtil.resolveAll(resource);
