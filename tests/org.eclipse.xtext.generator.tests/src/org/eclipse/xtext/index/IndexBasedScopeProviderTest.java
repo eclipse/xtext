@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.PersistableIndexStore;
@@ -43,27 +44,32 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 		store = new PersistableIndexStore();
 		new EcoreIndexFeederImpl(store).feedEPackagesFromRegistry();
-		XtextResource resource = getResource(new StringInputStream(
-				"foo.bar { " + 
-				"  entity Person {  " + 
-				"    String name " + 
-				"  } " + 
-				"  datatype String " + 
-				"}"));
 
 		indexer = new DefaultDeclarativeResourceIndexer();
 		DefaultDeclarativeQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 		indexer.setNameProvider(nameProvider);
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
 
 		scopeProvider = new DefaultIndexBasedScopeProvider();
 		scopeProvider.setIndexStore(store);
 		scopeProvider.setNameProvider(nameProvider);
 	}
 
+	public void indexExample() throws Exception {
+		final String source = "foo.bar { " + 
+			"  entity Person {  " + 
+			"    String name " + 
+			"  } " + 
+			"  datatype String " + 
+			"}";
+		XtextResource resource = getResource(new StringInputStream(source), URI.createURI("my.indextestlanguage"));
+
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+	}
+
 	public void testGlobalScope() throws Exception {
+		indexExample();
 		IScope scope = scopeProvider.getScope(null, IndexTestLanguagePackage.eINSTANCE.getNamedElement());
 		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
 		List<String> names = toListOfNames(scope.getAllContents());
@@ -74,8 +80,9 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 	}
 	
 	public void testImports() throws Exception {
+		indexExample();
 		XtextResource resource = getResource(new StringInputStream(
-				"import foo.bar.* "));
+				"import foo.bar.* "), URI.createURI("import.indextestlanguage"));
 		
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE.getNamedElement());
 		assertNotSame(IScope.NULLSCOPE, scope.getOuterScope());
@@ -95,7 +102,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		"    datatype String " +
 		"  } " +
 		"  entity Person {}" +
-		"}"));
+		"}"), URI.createURI("relative.indextestlanguage"));
 		IndexFeederImpl feeder = new IndexFeederImpl(store);
 		indexer.resourceChanged(resource, feeder);
 		feeder.commit();
