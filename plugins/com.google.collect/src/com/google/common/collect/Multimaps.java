@@ -684,35 +684,35 @@ public final class Multimaps {
       return keySet;
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override
     public boolean put(K key, V value) {
       throw new UnsupportedOperationException();
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override 
     public boolean putAll(K key,
-        @SuppressWarnings("hiding") Iterable<? extends V> values) {
+        Iterable<? extends V> values) {
       throw new UnsupportedOperationException();
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override
     public boolean putAll(Multimap<? extends K, ? extends V> multimap) {
       throw new UnsupportedOperationException();
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override
     public boolean remove(Object key, Object value) {
       throw new UnsupportedOperationException();
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override
     public Collection<V> removeAll(Object key) {
       throw new UnsupportedOperationException();
     }
 
-    @Override @SuppressWarnings("unused")
+    @Override
     public Collection<V> replaceValues(K key,
-        @SuppressWarnings("hiding") Iterable<? extends V> values) {
+        Iterable<? extends V> values) {
       throw new UnsupportedOperationException();
     }
 
@@ -778,7 +778,7 @@ public final class Multimaps {
       throw new UnsupportedOperationException();
     }
     @Override public List<V> replaceValues(
-        K key, @SuppressWarnings("hiding") Iterable<? extends V> values) {
+        K key, Iterable<? extends V> values) {
       throw new UnsupportedOperationException();
     }
     private static final long serialVersionUID = 0;
@@ -806,7 +806,7 @@ public final class Multimaps {
       throw new UnsupportedOperationException();
     }
     @Override public Set<V> replaceValues(
-        K key, @SuppressWarnings("hiding") Iterable<? extends V> values) {
+        K key, Iterable<? extends V> values) {
       throw new UnsupportedOperationException();
     }
     private static final long serialVersionUID = 0;
@@ -827,7 +827,7 @@ public final class Multimaps {
       throw new UnsupportedOperationException();
     }
     @Override public SortedSet<V> replaceValues(
-        K key, @SuppressWarnings("hiding") Iterable<? extends V> values) {
+        K key, Iterable<? extends V> values) {
       throw new UnsupportedOperationException();
     }
     public Comparator<? super V> valueComparator() {
