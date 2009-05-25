@@ -22,13 +22,16 @@ public class IndexBasedScopedElement extends AbstractScopedElement {
 	
 	private EObjectDescriptor descriptor;
 	
-	IndexBasedScopedElement(EObjectDescriptor decriptor) {
+	IndexBasedScopedElement(EObjectDescriptor descriptor) {
 		super();
-		this.descriptor = decriptor;
+		this.descriptor = descriptor;
 	}
 
+	/**
+	 * @return the user data map of the EObjectDescriptor.
+	 */
 	public Object additionalInformation() {
-		return descriptor.getUserData(null);
+		return descriptor.getUserData();
 	}
 
 	public EObject element() {
