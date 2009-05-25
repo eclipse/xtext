@@ -289,7 +289,8 @@ public final class Collections2 {
       return Lists.newArrayList(iterator()).toArray();
     }
 
-    public <T> T[] toArray(T[] array) {
+    @SuppressWarnings("hiding")
+	public <T> T[] toArray(T[] array) {
       return Lists.newArrayList(iterator()).toArray(array);
     }
     
