@@ -69,6 +69,7 @@ public class ConcurrencyTest extends AbstractEmfIndexTest {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResources().add(resource);
 		resourceIndexer.resourceChanged(uri, feeder);
+		feeder.commit();
 		return resource;
 	}
 
@@ -82,16 +83,17 @@ public class ConcurrencyTest extends AbstractEmfIndexTest {
 				while (true) {
 					resource.getContents().clear();
 					resourceIndexer.resourceChanged(resource, feeder);
+					feeder.commit();
 					resource.getContents().addAll(contents);
 					resourceIndexer.resourceChanged(resource, feeder);
+					feeder.commit();
 				}
 			};
 		};
 		indexerThread.start();
 
 		EReferenceDescriptor.Query crossRefQuery = index.eReferenceDAO().createQuery();
-		crossRefQuery.targetFragment("//Feature");
-
+		crossRefQuery.targetFragment("*NamedElement*");
 		for (int i = 0; i < 1000; i++) {
 			crossRefQuery.executeListResult();
 		}
