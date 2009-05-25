@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -124,16 +125,18 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 		public List<T> executeListResult() {
 			try {
 				indexStore.beginRead();
-				List<T> result = new ArrayList<T>();
+				List<T> result = null;
 				Collection<T> queryScope = scope();
 				if (queryScope != null) {
 					for (T candidate : queryScope) {
 						if (matches(candidate)) {
+							if (result == null)
+								result = new ArrayList<T>();
 							result.add(candidate);
 						}
 					}
 				}
-				return result;
+				return (result == null) ? Collections.<T>emptyList() : result;
 			}
 			finally {
 				indexStore.endRead();
