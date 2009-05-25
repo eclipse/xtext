@@ -53,6 +53,17 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 	}
 
 	@Override
+	protected boolean doModify(EObjectDescriptor element, Object modification) {
+		if (modification instanceof EObjectDescriptor) {
+			eClassScope.remove(element);
+			boolean isModified =  ((EObjectDescriptorImpl) element).copyDetails((EObjectDescriptor) modification);
+			eClassScope.put(element);
+			return isModified;
+		}
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void initialize(IndexStore indexStore) {
 		super.initialize(indexStore);
 		resourceScope = new InverseReferenceCache<ResourceDescriptor, EObjectDescriptor>() {
@@ -76,14 +87,6 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			resourceScope.put(eObjectDescriptor);
 			eClassScope.put(eObjectDescriptor);
 		}
-	}
-
-	@Override
-	protected boolean doModify(EObjectDescriptor element, Object modification) {
-		if (modification instanceof EObjectDescriptor) {
-			return ((EObjectDescriptorImpl) element).copyDetails((EObjectDescriptor) modification);
-		}
-		throw new UnsupportedOperationException();
 	}
 
 	public EObjectDescriptor.Query createQuery() {
