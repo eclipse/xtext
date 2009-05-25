@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.transform;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -45,14 +47,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	 *
 	 */
 	private final class DefaultImportNormalizer implements Function<String, String> {
-		/**
-		 * 
-		 */
 		private final List<String> elements;
 
-		/**
-		 * @param elements
-		 */
 		private DefaultImportNormalizer(List<String> elements) {
 			this.elements = elements;
 		}
@@ -98,7 +94,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		return getScope(context, (EClass) reference.getEType());
+		return getScope(context, reference.getEReferenceType());
 	}
 
 	public IScope getScope(final EObject context, final EClass type) {
@@ -110,9 +106,6 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		return new SimpleScope(importScope, getLocalElements(context, type));
 	}
 
-	/**
-	 * @param context
-	 */
 	@SuppressWarnings("unchecked")
 	private Iterable<IScopedElement> getLocalElements(final EObject context, final EClass type) {
 		final String commonPrefix = nameProvider.getQualifiedName(context)+nameProvider.getDelimiter();
@@ -142,17 +135,9 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 		});
 		// filter null values;
-		return filter(scopedElements, new Predicate<IScopedElement>(){
-
-			public boolean apply(IScopedElement input) {
-				return input!=null;
-			}
-		});
+		return filter(scopedElements, Predicates.notNull());
 	}
 
-	/**
-	 * @param context
-	 */
 	protected Set<Function<String, String>> getImportNormalizer(EObject context) {
 		Set<Function<String, String>> namespaceImports = new HashSet<Function<String, String>>();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importedNamespace");
@@ -168,13 +153,14 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		return namespaceImports;
 	}
 
-	/**
-	 * @param context
-	 * @param type
-	 */
 	protected Iterable<IScopedElement> getImportedElements(final EObject context, final EClass type) {
 		final Set<Function<String,String>> normalizers = getImportNormalizer(context);
-		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
+		Iterable<EObjectDescriptor> result = new Iterable<EObjectDescriptor>() {
+
+			public Iterator<EObjectDescriptor> iterator() {
+				return indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult().iterator();
+			}
+		};
 		
 		Iterable<IScopedElement> transformed = transform(result,new Function<EObjectDescriptor, IScopedElement>(){
 
@@ -188,18 +174,9 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 				return null;
 			}
 		});
-		return filter(transformed, new Predicate<IScopedElement>(){
-
-			public boolean apply(IScopedElement input) {
-				return input != null;
-			}
-		});
+		return filter(transformed, Predicates.notNull());
 	}
 
-	/**
-	 * @param from
-	 * @return
-	 */
 	protected EObject createProxy(EObjectDescriptor from) {
 		EClass eClass = from.getEClassDescriptor().getEClass();
 		EObject proxy = eClass.getEPackage().getEFactoryInstance().create(eClass);
@@ -207,13 +184,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		return proxy;
 	}
 
-	protected SimpleScope getGlobalScope(final EClass type) {
-		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQuery().executeListResult();
-		result = filter(result, new Predicate<EObjectDescriptor>(){
-			public boolean apply(EObjectDescriptor input) {
-				return type.isSuperTypeOf(input.getEClassDescriptor().getEClass());
-			}
-		});
+	protected IScope getGlobalScope(final EClass type) {
+		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
 		return new SimpleScope(transform(result, new Function<EObjectDescriptor, IScopedElement>() {
 			public IScopedElement apply(EObjectDescriptor from) {
 				return new IndexBasedScopedElement(from);
