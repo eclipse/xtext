@@ -47,6 +47,8 @@ public class EPackageDescriptorImpl implements EPackageDescriptor, Serializable 
 	}
 
 	public EPackage getEPackage() {
+		if(instance == null) 
+			instance = EPackage.Registry.INSTANCE.getEPackage(nsURI);
 		return instance;
 	}
 	
