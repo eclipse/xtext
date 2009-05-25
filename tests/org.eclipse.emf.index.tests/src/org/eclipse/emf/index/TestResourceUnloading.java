@@ -34,6 +34,9 @@ import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
 
 import com.google.inject.Inject;
 
+/**
+ * @author Christian Mohr
+ */
 public class TestResourceUnloading extends AbstractEmfIndexTest {
 
 	private File testFile;

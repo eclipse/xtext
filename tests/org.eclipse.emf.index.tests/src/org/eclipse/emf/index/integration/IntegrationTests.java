@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * @author Jan K?hnlein - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
  */
 public class IntegrationTests extends AbstractEmfIndexTest {
 

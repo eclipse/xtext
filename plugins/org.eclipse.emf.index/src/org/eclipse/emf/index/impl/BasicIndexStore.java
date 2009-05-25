@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
 import java.util.ArrayList;
@@ -16,8 +23,11 @@ import org.eclipse.emf.index.event.IndexChangeListener;
 
 import com.google.inject.Inject;
 
+/**
+ * @author Jan Köhnlein - Initial contribution and API
+ */
 public abstract class BasicIndexStore implements IndexStore {
-	
+
 	protected EClassDescriptor.DAO eClassDAO;
 
 	protected ResourceDescriptor.DAO resourceDAO;
@@ -31,8 +41,8 @@ public abstract class BasicIndexStore implements IndexStore {
 	private List<IndexChangeEvent> firedEvents = new ArrayList<IndexChangeEvent>();
 
 	private boolean isInTransaction = false;
-	
-	protected ReadWriteLock readWriteLock; 
+
+	protected ReadWriteLock readWriteLock;
 
 	private List<IndexChangeListener> indexChangeListeners = new ArrayList<IndexChangeListener>();
 
@@ -98,7 +108,7 @@ public abstract class BasicIndexStore implements IndexStore {
 		isInTransaction = false;
 		readWriteLock.writeLock().unlock();
 	}
-	
+
 	public void beginRead() {
 		readWriteLock.readLock().lock();
 	}
@@ -106,7 +116,7 @@ public abstract class BasicIndexStore implements IndexStore {
 	public void endRead() {
 		readWriteLock.readLock().unlock();
 	}
-	
+
 	private void fireEventNow(IndexChangeEvent event) {
 		for (IndexChangeListener indexChangeListener : indexChangeListeners) {
 			indexChangeListener.indexChanged(event);
@@ -124,7 +134,7 @@ public abstract class BasicIndexStore implements IndexStore {
 		else
 			fireEventNow(event);
 	}
-	
+
 	protected void initializeDAOs() {
 		ePackageDAO.initialize(this);
 		eClassDAO.initialize(this);
@@ -132,6 +142,5 @@ public abstract class BasicIndexStore implements IndexStore {
 		eObjectDAO.initialize(this);
 		eReferenceDAO.initialize(this);
 	}
-
 
 }

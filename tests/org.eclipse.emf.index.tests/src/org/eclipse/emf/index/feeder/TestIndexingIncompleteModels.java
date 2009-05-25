@@ -1,8 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.emf.index.feeder;
 
 import java.io.File;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -11,11 +19,15 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespaceDocumentRoot;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespaceFactory;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
+import org.eclipse.emf.index.resource.IndexFeeder;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
 import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
 
@@ -24,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Christian Mohr
  */
-public class TestIndexing extends AbstractEmfIndexTest {
+public class TestIndexingIncompleteModels extends AbstractEmfIndexTest {
 
 	@Inject
 	private IndexStore index;
@@ -62,11 +74,9 @@ public class TestIndexing extends AbstractEmfIndexTest {
 	
 	// TODO: fix bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=276460
 	
-	/*
 	public void testIndexingMissingtType() {
 
 		// create an empty index
-		IndexStore index = this.createIndexStore();
 		EcoreIndexFeeder ecoreFeeder = new EcoreIndexFeederImpl(index);
 		ecoreFeeder.index(EcorePackage.eINSTANCE, false);
 		
@@ -81,8 +91,9 @@ public class TestIndexing extends AbstractEmfIndexTest {
 	 
 		// index test data
 		IndexFeeder feeder = new IndexFeederImpl(index);
-		ResourceIndexer indexer = new ResourceIndexerImpl();
+		ResourceIndexerImpl indexer = new ResourceIndexerImpl();
 		indexer.resourceChanged(r, feeder);
+		feeder.commit();
 
 		// assert resource is indexed
 		ResourceDescriptor rd = index.resourceDAO().createQueryResource(r).executeSingleResult();
@@ -95,7 +106,6 @@ public class TestIndexing extends AbstractEmfIndexTest {
 		EObjectDescriptor od2 = index.eObjectDAO().createQueryEObjectInResource(objectNotIndexedClassToIndex, rd).executeSingleResult();
 		assertNull(od2);
 	}
-	 */
 
 	
 	public void setUp() throws Exception {

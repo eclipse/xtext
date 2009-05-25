@@ -24,7 +24,6 @@ import org.eclipse.emf.index.runtime.impl.IndexAwareResourceSet.IndexEntry;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class IndexAwareResourceSetTest extends TestCase {
 	
