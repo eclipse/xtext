@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
@@ -34,8 +33,6 @@ import com.google.inject.Provider;
 public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 
 	public static final String BUILDER_ID = "org.eclipse.emf.index.ui.emfIndexBuilder";
-
-	private static final String MARKER_TYPE = "org.eclipse.emf.index.ui.emfIndexProblem";
 
 	@Inject
 	private ResourceIndexer.Registry indexerRegistry;
@@ -95,7 +92,6 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 			if (file.isDerived())
 				return false;
 			try {
-//				deleteMarkers(file);
 				ResourceIndexer indexer = indexerRegistry.getIndexerFor(file.getFileExtension());
 				if (indexer != null) {
 					URI resourceURI = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
@@ -108,33 +104,10 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 					return true;
 				}
 			} catch (Exception e) {
-//				addMarker(file, e.getMessage(), 0, IMarker.SEVERITY_ERROR);
 				EmfIndexUIPlugin.logError("Cannot index resource " + resource.getFullPath().toString(), e);
 			}
 		}
 		return false;
-	}
-
-	private void addMarker(IFile file, String message, int lineNumber, int severity) {
-		try {
-			IMarker marker = file.createMarker(MARKER_TYPE);
-			marker.setAttribute(IMarker.MESSAGE, message);
-			marker.setAttribute(IMarker.SEVERITY, severity);
-			if (lineNumber == -1) {
-				lineNumber = 1;
-			}
-			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
-		} catch (CoreException e) {
-			EmfIndexUIPlugin.logError("Error adding marker", e);
-		}
-	}
-
-	private void deleteMarkers(IFile file) {
-		try {
-			file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
-		} catch (CoreException ce) {
-			EmfIndexUIPlugin.logError("Error deleting marker", ce);
-		}
 	}
 
 }
