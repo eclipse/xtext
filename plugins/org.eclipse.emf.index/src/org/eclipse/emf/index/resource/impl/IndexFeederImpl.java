@@ -95,6 +95,8 @@ public class IndexFeederImpl implements IndexFeeder {
 			eObjectData.displayName = displayName;
 			eObjectData.userData = userData;
 			eObjectDataCache.put(eObject, eObjectData);
+		} else {
+			LogFacade.logError("Cannot index an EObject that is not contained in a resource");
 		}
 	}
 
