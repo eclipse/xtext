@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
+
 import static org.eclipse.emf.index.util.CollectionUtils.union;
 import java.util.Collection;
 import java.util.Collections;
