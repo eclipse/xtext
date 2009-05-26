@@ -66,8 +66,6 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 
 	protected abstract class Query implements IGenericQuery<T> {
 
-		private static final char ASTERISK = '*';
-
 		protected boolean matchesGlobbing(Serializable test, Serializable pattern) {
 			if (test instanceof String && pattern instanceof String) {
 				String testAsString = (String) test;
@@ -84,13 +82,13 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T>, Serializable {
 			if (testString == null || "".equals(pattern))
 				return false;
 			int patternLength = pattern.length();
-			if (pattern.charAt(0) == ASTERISK) {
-				if (patternLength > 1 && pattern.charAt(patternLength - 1) == ASTERISK) {
+			if (pattern.charAt(0) == WILDCARD) {
+				if (patternLength > 1 && pattern.charAt(patternLength - 1) == WILDCARD) {
 					return testString.contains(pattern.substring(1, patternLength - 2));
 				}
 				return testString.endsWith(pattern.substring(1));
 			}
-			if (pattern.charAt(patternLength - 1) == ASTERISK) {
+			if (pattern.charAt(patternLength - 1) == WILDCARD) {
 				return testString.startsWith(pattern.substring(0, patternLength - 1));
 			}
 			return testString.equals(pattern);

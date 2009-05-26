@@ -13,6 +13,8 @@ package org.eclipse.emf.index;
  */
 public interface IGenericQuery<T> {
 	
+	static final char WILDCARD = '*';
+	
 	T executeSingleResult();
 	
 	Iterable<T> executeListResult();
