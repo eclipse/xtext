@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.PersistableIndexStore;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -70,7 +71,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 
 	public void testGlobalScope() throws Exception {
 		indexExample();
-		IScope scope = scopeProvider.getScope(null, IndexTestLanguagePackage.eINSTANCE.getNamedElement());
+		IScope scope = scopeProvider.getScope(null, IndexTestLanguagePackage.eINSTANCE.getElement());
 		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
 		List<String> names = toListOfNames(scope.getAllContents());
 		assertEquals(3, names.size());
@@ -84,7 +85,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		XtextResource resource = getResource(new StringInputStream(
 				"import foo.bar.* "), URI.createURI("import.indextestlanguage"));
 		
-		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE.getNamedElement());
+		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE.getElement());
 		assertNotSame(IScope.NULLSCOPE, scope.getOuterScope());
 		List<String> names = toListOfNames(scope.getAllContents());
 		assertEquals(5, names.size());
@@ -117,6 +118,63 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		assertEquals(names.toString(), 2, names.size());
 		assertTrue(names.contains("baz.String"));
 		assertTrue(names.contains("stuff.baz.String"));
+	}
+	
+	public void testRelativePath() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"stuff { " +
+				"  import baz.*" +
+				"  baz { " +
+				"    datatype String " +
+				"  } " +
+				"  entity Person {" +
+				"  }" +
+		"}"), URI.createURI("relative.indextestlanguage"));
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+		public Iterator<EObject> iterator() {
+			return resource.getAllContents();
+		}};
+		Entity entity = filter(allContents, Entity.class).iterator().next();
+		
+		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getDatatype());
+		List<String> names = toListOfNames(scope.getAllContents());
+		assertEquals(names.toString(), 3, names.size());
+		assertTrue(names.contains("String"));
+		assertTrue(names.contains("baz.String"));
+		assertTrue(names.contains("stuff.baz.String"));
+	}
+	
+	public void testReexports() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"stuff { " +
+				"  import baz.*" +
+				"  baz { " +
+				"    stuff {" +
+				"      import stuff.*" +
+				"      datatype String " +
+				"    }" +
+				"    entity Person {}" +
+				"  }" +
+		"}"), URI.createURI("relative.indextestlanguage"));
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
+		
+		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		List<String> names = toListOfNames(scope.getAllContents());
+		assertEquals(names.toString(), 3, names.size());
+		assertTrue(names.contains("Person"));
+		assertTrue(names.contains("baz.Person"));
+		assertTrue(names.contains("stuff.baz.Person"));
 	}
 
 	private List<String> toListOfNames(Iterable<IScopedElement> elements) {
