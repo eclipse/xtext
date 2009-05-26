@@ -169,12 +169,42 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		
+		// dataype String
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		List<String> names = toListOfNames(scope.getAllContents());
-		assertEquals(names.toString(), 3, names.size());
+		List<String> names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 0, names.size());
+		
+		scope = scope.getOuterScope(); // import stuff.*
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
+		assertTrue(names.toString(),names.contains("baz.Person"));
+		
+		scope = scope.getOuterScope(); // stuff {
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 0, names.size());
+		
+		scope = scope.getOuterScope(); // baz {
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.contains("Person"));
+		
+		scope = scope.getOuterScope(); // import baz.*
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
+		assertTrue(names.contains("Person"));
+		
+		scope = scope.getOuterScope(); // stuff {
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.contains("baz.Person"));
+		
+		scope = scope.getOuterScope(); // global scope
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.contains("stuff.baz.Person"));
+		
+		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
+		
 	}
 
 	private List<String> toListOfNames(Iterable<IScopedElement> elements) {
