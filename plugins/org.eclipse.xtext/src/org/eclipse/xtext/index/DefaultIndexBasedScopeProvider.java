@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Iterables.*;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -103,11 +102,14 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	public IScope getScope(final EObject context, final EClass type) {
 		if (context == null)
 			return getGlobalScope(type);
-		
+		if (nameProvider.getQualifiedName(context)==null)
+			return getScope(context.eContainer(),type);
 		IScope parent = getScope(context.eContainer(), type);
 		SimpleScope localScope = new SimpleScope(parent, getLocalElements(context, type));
-		SimpleScope localImportScope = new SimpleScope(localScope, getImportedElements(localScope, context, type));
-		return localImportScope;
+		Iterable<IScopedElement> importedElements = getImportedElements(localScope, context, type);
+		if (importedElements != null )
+			return new SimpleScope(localScope, importedElements);
+		return localScope;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,6 +161,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 	protected Iterable<IScopedElement> getImportedElements(IScope local, final EObject context, final EClass type) {
 		final Set<Function<String,String>> normalizers = getImportNormalizer(context);
+		if (normalizers.isEmpty())
+			return null;
 		Iterable<IScopedElement> transformed = transform(local.getAllContents(),new Function<IScopedElement, IScopedElement>() {
 
 			public IScopedElement apply(final IScopedElement input) {
