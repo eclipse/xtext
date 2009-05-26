@@ -11,9 +11,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -132,10 +134,21 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
-		IScopedElement scopedElement = scope.getScopedElement(object);
+		IScopedElement scopedElement = getScopedElement(scope,object);
 		if (scopedElement == null)
 			return null;
 		return scopedElement.name();
+	}
+
+	private IScopedElement getScopedElement(IScope scope, EObject element) {
+		Iterable<IScopedElement> allContents = scope.getAllContents();
+		URI left = EcoreUtil.getURI(element);
+		for (IScopedElement scopedElement : allContents) {
+			URI right = EcoreUtil.getURI(scopedElement.element());
+			if (left.equals(right))
+				return scopedElement;
+		}
+		return null;
 	}
 
 	protected String getConvertedValue(String name, EObject object, EReference reference, EObject context) {
