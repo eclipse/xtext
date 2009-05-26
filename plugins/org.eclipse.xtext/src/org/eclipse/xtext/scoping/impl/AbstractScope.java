@@ -40,13 +40,9 @@ public abstract class AbstractScope implements IScope {
 		}));
 	}
 
-	public IScopedElement getScopedElement(EObject element) {
-		Iterable<IScopedElement> allContents = getAllContents();
-		for (IScopedElement scopedElement : allContents) {
-			if (scopedElement.element().equals(element))
-				return scopedElement;
-		}
-		return null;
+	@Deprecated
+	public final IScopedElement getScopedElement(EObject element) {
+		throw new UnsupportedOperationException();
 	}
 
 }
