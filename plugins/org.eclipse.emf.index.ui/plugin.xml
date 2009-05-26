@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.eclipse.emf.index.indexer" name="EMF Indexer" schema="schema/org.eclipse.emf.index.indexer.exsd"/>
+   <extension-point id="org.eclipse.emf.index.indexChangeListener" name="EMF Index Change Listener" schema="schema/org.eclipse.emf.index.indexChangeListener.exsd"/>
    <extension
          id="emfIndexBuilder"
          name="EMF Index Project Builder"

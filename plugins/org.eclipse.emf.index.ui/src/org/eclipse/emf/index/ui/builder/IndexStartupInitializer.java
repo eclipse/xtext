@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ui.builder;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -37,27 +38,29 @@ public class IndexStartupInitializer implements IStartup {
 
 	@Inject
 	private IndexStore index;
-	
+
 	@Inject
 	private EcoreIndexFeeder ecoreIndexFeeder;
 
 	public void earlyStartup() {
-		
+
 		try {
-			((IPersistableIndexStore) index)
-					.load(new FileInputStream(EmfIndexUIPlugin.getIndexFile()));
+			File indexFile = EmfIndexUIPlugin.getIndexFile();
+			if (indexFile.exists()) {
+				((IPersistableIndexStore) index).load(new FileInputStream(indexFile));
+			}
 		}
 		catch (Exception e) {
 			EmfIndexUIPlugin.logError("Error loading EMF index", e);
 		}
-		
+
 		try {
 			ecoreIndexFeeder.feedEPackagesFromRegistry();
 		}
 		catch (Exception exc) {
 			EmfIndexUIPlugin.logError("Error indexing EPackage registry", exc);
 		}
-		
+
 		for (final IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			try {
 				if (project.isAccessible()) {
