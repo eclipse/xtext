@@ -12,6 +12,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
@@ -25,6 +26,8 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 
 	private ITerminalConsumer idConsumer;
 
+	private INonTerminalConsumer qualifiedNameConsumer;
+
 	private IElementConsumer group$1$Consumer;
 
 	private IElementConsumer assignment$2$Consumer;
@@ -34,8 +37,6 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 	private IElementConsumer assignment$6$Consumer;
 
 	private IElementConsumer ruleCall$7$Consumer;
-
-	private ISequenceMatcher ruleCall$5$Delimiter;
 
 	private ISequenceMatcher ruleCall$7$Delimiter;
 
@@ -72,7 +73,7 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "type", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+			return consumeNonTerminal(qualifiedNameConsumer, "type", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -102,7 +103,6 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 
 	public IndexTestLanguagePropertyConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -139,12 +139,8 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
-	}
-	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setQualifiedNameConsumer(INonTerminalConsumer qualifiedNameConsumer) {
+		this.qualifiedNameConsumer = qualifiedNameConsumer;
 	}
 	
 	public ISequenceMatcher getRuleCall$7$Delimiter() {

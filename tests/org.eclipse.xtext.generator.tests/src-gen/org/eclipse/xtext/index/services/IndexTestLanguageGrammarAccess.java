@@ -19,30 +19,18 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class FileElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
-		private final Assignment cNameSpacesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameSpacesNamespaceParserRuleCall_1_0 = (RuleCall)cNameSpacesAssignment_1.eContents().get(0);
+		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//File:
-		//  imports+=Import* nameSpaces+=Namespace*;
+		//  elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
-		//imports+=Import* nameSpaces+=Namespace*
-		public Group getGroup() { return cGroup; }
+		//elements+=Element*
+		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
-		//imports+=Import*
-		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
-
-		//Import
-		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
-
-		//nameSpaces+=Namespace*
-		public Assignment getNameSpacesAssignment_1() { return cNameSpacesAssignment_1; }
-
-		//Namespace
-		public RuleCall getNameSpacesNamespaceParserRuleCall_1_0() { return cNameSpacesNamespaceParserRuleCall_1_0; }
+		//Element
+		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
 
 	public class ImportElements implements IParserRuleAccess {
@@ -123,15 +111,15 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameQualifiedNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNamedElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNamedElementsNamedElementParserRuleCall_2_0 = (RuleCall)cNamedElementsAssignment_2.eContents().get(0);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cElementsElementParserRuleCall_2_0 = (RuleCall)cElementsAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Namespace:
-		//  name=QualifiedName "{" namedElements+=NamedElement* "}";
+		//  name=QualifiedName "{" elements+=Element* "}";
 		public ParserRule getRule() { return rule; }
 
-		//name=QualifiedName "{" namedElements+=NamedElement* "}"
+		//name=QualifiedName "{" elements+=Element* "}"
 		public Group getGroup() { return cGroup; }
 
 		//name=QualifiedName
@@ -143,27 +131,28 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//namedElements+=NamedElement*
-		public Assignment getNamedElementsAssignment_2() { return cNamedElementsAssignment_2; }
+		//elements+=Element*
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
 
-		//NamedElement
-		public RuleCall getNamedElementsNamedElementParserRuleCall_2_0() { return cNamedElementsNamedElementParserRuleCall_2_0; }
+		//Element
+		public RuleCall getElementsElementParserRuleCall_2_0() { return cElementsElementParserRuleCall_2_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
-	public class NamedElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
+	public class ElementElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNamespaceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cImportParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//NamedElement:
-		//  Namespace|Type;
+		//Element:
+		//  Namespace|Type|Import;
 		public ParserRule getRule() { return rule; }
 
-		//Namespace|Type
+		//Namespace|Type|Import
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Namespace
@@ -171,6 +160,9 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Type
 		public RuleCall getTypeParserRuleCall_1() { return cTypeParserRuleCall_1; }
+
+		//Import
+		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
 	}
 
 	public class TypeElements implements IParserRuleAccess {
@@ -262,25 +254,25 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cTypeTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
-		private final RuleCall cTypeTypeIDTerminalRuleCall_0_0_1 = (RuleCall)cTypeTypeCrossReference_0_0.eContents().get(1);
+		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeTypeCrossReference_0_0.eContents().get(1);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Property:
-		//  type=[Type] name=ID;
+		//  type=[Type|QualifiedName] name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//type=[Type] name=ID
+		//type=[Type|QualifiedName] name=ID
 		public Group getGroup() { return cGroup; }
 
-		//type=[Type]
+		//type=[Type|QualifiedName]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//[Type]
+		//[Type|QualifiedName]
 		public CrossReference getTypeTypeCrossReference_0_0() { return cTypeTypeCrossReference_0_0; }
 
-		//ID
-		public RuleCall getTypeTypeIDTerminalRuleCall_0_0_1() { return cTypeTypeIDTerminalRuleCall_0_0_1; }
+		//QualifiedName
+		public RuleCall getTypeTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeTypeQualifiedNameParserRuleCall_0_0_1; }
 
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -295,7 +287,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
 	private QualifiedNameElements pQualifiedName;
 	private NamespaceElements pNamespace;
-	private NamedElementElements pNamedElement;
+	private ElementElements pElement;
 	private TypeElements pType;
 	private EntityElements pEntity;
 	private DatatypeElements pDatatype;
@@ -323,7 +315,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//File:
-	//  imports+=Import* nameSpaces+=Namespace*;
+	//  elements+=Element*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
@@ -363,7 +355,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Namespace:
-	//  name=QualifiedName "{" namedElements+=NamedElement* "}";
+	//  name=QualifiedName "{" elements+=Element* "}";
 	public NamespaceElements getNamespaceAccess() {
 		return (pNamespace != null) ? pNamespace : (pNamespace = new NamespaceElements());
 	}
@@ -372,14 +364,14 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		return getNamespaceAccess().getRule();
 	}
 
-	//NamedElement:
-	//  Namespace|Type;
-	public NamedElementElements getNamedElementAccess() {
-		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
+	//Element:
+	//  Namespace|Type|Import;
+	public ElementElements getElementAccess() {
+		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
 	
-	public ParserRule getNamedElementRule() {
-		return getNamedElementAccess().getRule();
+	public ParserRule getElementRule() {
+		return getElementAccess().getRule();
 	}
 
 	//Type:
@@ -413,7 +405,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Property:
-	//  type=[Type] name=ID;
+	//  type=[Type|QualifiedName] name=ID;
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}

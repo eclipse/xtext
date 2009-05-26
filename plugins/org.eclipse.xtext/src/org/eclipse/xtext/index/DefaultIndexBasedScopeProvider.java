@@ -27,6 +27,7 @@ import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.AliasedScopedElement;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
@@ -66,8 +67,10 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 							break;
 						} else {
 							StringBuffer result = new StringBuffer(s2);
-							while (i2.hasNext())
+							while (i2.hasNext()){
+								result.append(nameProvider.getDelimiter());
 								result.append(i2.next());
+							}
 							return result.toString();
 						}
 					} else if (!i1.hasNext() && !i2.hasNext()) {
@@ -102,8 +105,9 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 			return getGlobalScope(type);
 		
 		IScope parent = getScope(context.eContainer(), type);
-		SimpleScope importScope = new SimpleScope(parent, getImportedElements(context, type));
-		return new SimpleScope(importScope, getLocalElements(context, type));
+		SimpleScope localScope = new SimpleScope(parent, getLocalElements(context, type));
+		SimpleScope localImportScope = new SimpleScope(localScope, getImportedElements(localScope, context, type));
+		return localImportScope;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -153,16 +157,15 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		return namespaceImports;
 	}
 
-	protected Iterable<IScopedElement> getImportedElements(final EObject context, final EClass type) {
+	protected Iterable<IScopedElement> getImportedElements(IScope local, final EObject context, final EClass type) {
 		final Set<Function<String,String>> normalizers = getImportNormalizer(context);
-		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
-		Iterable<IScopedElement> transformed = transform(result,new Function<EObjectDescriptor, IScopedElement>(){
+		Iterable<IScopedElement> transformed = transform(local.getAllContents(),new Function<IScopedElement, IScopedElement>() {
 
-			public IScopedElement apply(EObjectDescriptor from) {
+			public IScopedElement apply(final IScopedElement input) {
 				for (Function<String,String> normalizer : normalizers) {
-					String normalizedName = normalizer.apply(from.getName());
-					if (normalizedName!=null) {
-						return ScopedElement.create(normalizedName, createProxy(from));
+					final String newName = normalizer.apply(input.name());
+					if (newName !=null) {
+						return new AliasedScopedElement(newName,input);
 					}
 				}
 				return null;

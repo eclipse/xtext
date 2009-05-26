@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
+import org.eclipse.xtext.index.indexTestLanguage.Element;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.File;
 import org.eclipse.xtext.index.indexTestLanguage.Import;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguageFactory;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.index.indexTestLanguage.NamedElement;
 import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 import org.eclipse.xtext.index.indexTestLanguage.Property;
 import org.eclipse.xtext.index.indexTestLanguage.Type;
@@ -57,7 +57,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass namedElementEClass = null;
+  private EClass elementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -165,19 +165,9 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFile_Imports()
+  public EReference getFile_Elements()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getFile_NameSpaces()
-  {
-    return (EReference)fileEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -215,9 +205,9 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNamespace_NamedElements()
+  public EAttribute getNamespace_Name()
   {
-    return (EReference)namespaceEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)namespaceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -225,9 +215,9 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNamedElement()
+  public EReference getNamespace_Elements()
   {
-    return namedElementEClass;
+    return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -235,9 +225,9 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNamedElement_Name()
+  public EClass getElement()
   {
-    return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+    return elementEClass;
   }
 
   /**
@@ -248,6 +238,16 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
   public EClass getType()
   {
     return typeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getType_Name()
+  {
+    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -341,19 +341,19 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
 
     // Create classes and their features
     fileEClass = createEClass(FILE);
-    createEReference(fileEClass, FILE__IMPORTS);
-    createEReference(fileEClass, FILE__NAME_SPACES);
+    createEReference(fileEClass, FILE__ELEMENTS);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
     namespaceEClass = createEClass(NAMESPACE);
-    createEReference(namespaceEClass, NAMESPACE__NAMED_ELEMENTS);
+    createEAttribute(namespaceEClass, NAMESPACE__NAME);
+    createEReference(namespaceEClass, NAMESPACE__ELEMENTS);
 
-    namedElementEClass = createEClass(NAMED_ELEMENT);
-    createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+    elementEClass = createEClass(ELEMENT);
 
     typeEClass = createEClass(TYPE);
+    createEAttribute(typeEClass, TYPE__NAME);
 
     entityEClass = createEClass(ENTITY);
     createEReference(entityEClass, ENTITY__PROPERTIES);
@@ -394,26 +394,27 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    namespaceEClass.getESuperTypes().add(this.getNamedElement());
-    typeEClass.getESuperTypes().add(this.getNamedElement());
+    importEClass.getESuperTypes().add(this.getElement());
+    namespaceEClass.getESuperTypes().add(this.getElement());
+    typeEClass.getESuperTypes().add(this.getElement());
     entityEClass.getESuperTypes().add(this.getType());
     datatypeEClass.getESuperTypes().add(this.getType());
 
     // Initialize classes and features; add operations and parameters
     initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFile_Imports(), this.getImport(), null, "imports", null, 0, -1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFile_NameSpaces(), this.getNamespace(), null, "nameSpaces", null, 0, -1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFile_Elements(), this.getElement(), null, "elements", null, 0, -1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(namespaceEClass, Namespace.class, "Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNamespace_NamedElements(), this.getNamedElement(), null, "namedElements", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNamespace_Name(), ecorePackage.getEString(), "name", null, 0, 1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNamespace_Elements(), this.getElement(), null, "elements", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntity_Properties(), this.getProperty(), null, "properties", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

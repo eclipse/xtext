@@ -7,6 +7,7 @@ package org.eclipse.xtext.index.indexTestLanguage.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -14,11 +15,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.index.indexTestLanguage.Element;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.index.indexTestLanguage.NamedElement;
 import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 
 /**
@@ -28,23 +31,44 @@ import org.eclipse.xtext.index.indexTestLanguage.Namespace;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl#getNamedElements <em>Named Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NamespaceImpl extends NamedElementImpl implements Namespace
+public class NamespaceImpl extends ElementImpl implements Namespace
 {
   /**
-   * The cached value of the '{@link #getNamedElements() <em>Named Elements</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNamedElements()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<NamedElement> namedElements;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getElements()
+   * @generated
+   * @ordered
+   */
+  protected EList<Element> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,13 +96,36 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<NamedElement> getNamedElements()
+  public String getName()
   {
-    if (namedElements == null)
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, IndexTestLanguagePackage.NAMESPACE__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Element> getElements()
+  {
+    if (elements == null)
     {
-      namedElements = new EObjectContainmentEList<NamedElement>(NamedElement.class, this, IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS);
+      elements = new EObjectContainmentEList<Element>(Element.class, this, IndexTestLanguagePackage.NAMESPACE__ELEMENTS);
     }
-    return namedElements;
+    return elements;
   }
 
   /**
@@ -91,8 +138,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS:
-        return ((InternalEList<?>)getNamedElements()).basicRemove(otherEnd, msgs);
+      case IndexTestLanguagePackage.NAMESPACE__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +154,10 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS:
-        return getNamedElements();
+      case IndexTestLanguagePackage.NAMESPACE__NAME:
+        return getName();
+      case IndexTestLanguagePackage.NAMESPACE__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +173,12 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS:
-        getNamedElements().clear();
-        getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
+      case IndexTestLanguagePackage.NAMESPACE__NAME:
+        setName((String)newValue);
+        return;
+      case IndexTestLanguagePackage.NAMESPACE__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends Element>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +194,11 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS:
-        getNamedElements().clear();
+      case IndexTestLanguagePackage.NAMESPACE__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case IndexTestLanguagePackage.NAMESPACE__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,10 +214,29 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.NAMESPACE__NAMED_ELEMENTS:
-        return namedElements != null && !namedElements.isEmpty();
+      case IndexTestLanguagePackage.NAMESPACE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case IndexTestLanguagePackage.NAMESPACE__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //NamespaceImpl

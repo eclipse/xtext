@@ -8,13 +8,8 @@
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/indexTestLanguage#//File"/>
       </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="nameSpaces" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        </tokens>
+      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Import">
@@ -58,19 +53,20 @@
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="{"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="namedElements" operator="+=">
+        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="NamedElement">
+    <rules xsi:type="xtext:ParserRule" name="Element">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/indexTestLanguage#//NamedElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/indexTestLanguage#//Element"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Type">
@@ -119,7 +115,7 @@
             <type metamodel="/0/@metamodelDeclarations.0">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/indexTestLanguage#//Type"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </terminal>
         </tokens>
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">

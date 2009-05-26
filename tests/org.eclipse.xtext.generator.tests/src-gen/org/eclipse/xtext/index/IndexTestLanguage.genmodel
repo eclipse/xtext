@@ -5,10 +5,7 @@
     <genClasses>
       <ecoreClass href="IndexTestLanguage.ecore#//File"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="IndexTestLanguage.ecore#//File/imports"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="IndexTestLanguage.ecore#//File/nameSpaces"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="IndexTestLanguage.ecore#//File/elements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
@@ -19,18 +16,21 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="IndexTestLanguage.ecore#//Namespace"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="IndexTestLanguage.ecore#//Namespace/name"/>
+      </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="IndexTestLanguage.ecore#//Namespace/namedElements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="IndexTestLanguage.ecore#//Namespace/elements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="IndexTestLanguage.ecore#//NamedElement"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="IndexTestLanguage.ecore#//NamedElement/name"/>
-      </genFeatures>
+      <ecoreClass href="IndexTestLanguage.ecore#//Element"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="IndexTestLanguage.ecore#//Type"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="IndexTestLanguage.ecore#//Type/name"/>
+      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="IndexTestLanguage.ecore#//Entity"/>

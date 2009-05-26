@@ -32,10 +32,10 @@ protected class ThisRootNode extends RootToken {
 	
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new File_Group(this, this, 0, inst);
+			case 0: return new File_ElementsAssignment(this, this, 0, inst);
 			case 1: return new Import_Group(this, this, 1, inst);
 			case 2: return new Namespace_Group(this, this, 2, inst);
-			case 3: return new NamedElement_Alternatives(this, this, 3, inst);
+			case 3: return new Element_Alternatives(this, this, 3, inst);
 			case 4: return new Type_Alternatives(this, this, 4, inst);
 			case 5: return new Entity_Group(this, this, 5, inst);
 			case 6: return new Datatype_Group(this, this, 6, inst);
@@ -49,25 +49,24 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule File ****************
  *
  * File:
- *   imports+=Import* nameSpaces+=Namespace*;
+ *   elements+=Element*;
  *
  **/
 
-// imports+=Import* nameSpaces+=Namespace*
-protected class File_Group extends GroupToken {
+// elements+=Element*
+protected class File_ElementsAssignment extends AssignmentToken  {
 	
-	public File_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public File_ElementsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Group getGrammarElement() {
-		return grammarAccess.getFileAccess().getGroup();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFileAccess().getElementsAssignment();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new File_NameSpacesAssignment_1(parent, this, 0, inst);
-			case 1: return new File_ImportsAssignment_0(parent, this, 1, inst);
+			case 0: return new Element_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -77,32 +76,12 @@ protected class File_Group extends GroupToken {
   
 		return tryConsumeVal();
 	}
-}
-
-// imports+=Import*
-protected class File_ImportsAssignment_0 extends AssignmentToken  {
-	
-	public File_ImportsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getFileAccess().getImportsAssignment_0();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Import_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("imports",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("imports");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
 				type = AssignmentType.PRC; 
 				consumed = obj;
 				return param;
@@ -114,54 +93,11 @@ protected class File_ImportsAssignment_0 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new File_ImportsAssignment_0(parent, next, actIndex, consumed);
+			case 0: return new File_ElementsAssignment(parent, next, actIndex, consumed);
 			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
-
-// nameSpaces+=Namespace*
-protected class File_NameSpacesAssignment_1 extends AssignmentToken  {
-	
-	public File_NameSpacesAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getFileAccess().getNameSpacesAssignment_1();
-	}
-
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Namespace_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("nameSpaces",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("nameSpaces");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new File_NameSpacesAssignment_1(parent, next, actIndex, consumed);
-			case 1: return new File_ImportsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 2, consumed);
-		}	
-	}	
-}
-
 
 /************ end Rule File ****************/
 
@@ -261,11 +197,11 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- *   name=QualifiedName "{" namedElements+=NamedElement* "}";
+ *   name=QualifiedName "{" elements+=Element* "}";
  *
  **/
 
-// name=QualifiedName "{" namedElements+=NamedElement* "}"
+// name=QualifiedName "{" elements+=Element* "}"
 protected class Namespace_Group extends GroupToken {
 	
 	public Namespace_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -344,30 +280,30 @@ protected class Namespace_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 		
 }
 
-// namedElements+=NamedElement*
-protected class Namespace_NamedElementsAssignment_2 extends AssignmentToken  {
+// elements+=Element*
+protected class Namespace_ElementsAssignment_2 extends AssignmentToken  {
 	
-	public Namespace_NamedElementsAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Namespace_ElementsAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNamespaceAccess().getNamedElementsAssignment_2();
+		return grammarAccess.getNamespaceAccess().getElementsAssignment_2();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new NamedElement_Alternatives(this, this, 0, inst);
+			case 0: return new Element_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("namedElements",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("namedElements");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
 				type = AssignmentType.PRC; 
 				consumed = obj;
 				return param;
@@ -379,7 +315,7 @@ protected class Namespace_NamedElementsAssignment_2 extends AssignmentToken  {
 	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Namespace_NamedElementsAssignment_2(parent, next, actIndex, consumed);
+			case 0: return new Namespace_ElementsAssignment_2(parent, next, actIndex, consumed);
 			case 1: return new Namespace_LeftCurlyBracketKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
@@ -399,7 +335,7 @@ protected class Namespace_RightCurlyBracketKeyword_3 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Namespace_NamedElementsAssignment_2(parent, this, 0, inst);
+			case 0: return new Namespace_ElementsAssignment_2(parent, this, 0, inst);
 			case 1: return new Namespace_LeftCurlyBracketKeyword_1(parent, this, 1, inst);
 			default: return null;
 		}	
@@ -411,48 +347,49 @@ protected class Namespace_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ end Rule Namespace ****************/
 
 
-/************ begin Rule NamedElement ****************
+/************ begin Rule Element ****************
  *
- * NamedElement:
- *   Namespace|Type;
+ * Element:
+ *   Namespace|Type|Import;
  *
  **/
 
-// Namespace|Type
-protected class NamedElement_Alternatives extends AlternativesToken {
+// Namespace|Type|Import
+protected class Element_Alternatives extends AlternativesToken {
 
-	public NamedElement_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Element_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getAlternatives();
+		return grammarAccess.getElementAccess().getAlternatives();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new NamedElement_NamespaceParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new NamedElement_TypeParserRuleCall_1(parent, this, 1, inst);
+			case 0: return new Element_NamespaceParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new Element_TypeParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new Element_ImportParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
   
 		return tryConsumeVal();
 	}
 }
 
 // Namespace
-protected class NamedElement_NamespaceParserRuleCall_0 extends RuleCallToken {
+protected class Element_NamespaceParserRuleCall_0 extends RuleCallToken {
 	
-	public NamedElement_NamespaceParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Element_NamespaceParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0();
+		return grammarAccess.getElementAccess().getNamespaceParserRuleCall_0();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -476,14 +413,14 @@ protected class NamedElement_NamespaceParserRuleCall_0 extends RuleCallToken {
 }
 
 // Type
-protected class NamedElement_TypeParserRuleCall_1 extends RuleCallToken {
+protected class Element_TypeParserRuleCall_1 extends RuleCallToken {
 	
-	public NamedElement_TypeParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Element_TypeParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1();
+		return grammarAccess.getElementAccess().getTypeParserRuleCall_1();
 	}
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
@@ -506,8 +443,39 @@ protected class NamedElement_TypeParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
+// Import
+protected class Element_ImportParserRuleCall_2 extends RuleCallToken {
+	
+	public Element_ImportParserRuleCall_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getElementAccess().getImportParserRuleCall_2();
+	}
 
-/************ end Rule NamedElement ****************/
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Import_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Import_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule Element ****************/
 
 
 /************ begin Rule Type ****************
@@ -875,11 +843,11 @@ protected class Datatype_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   type=[Type] name=ID;
+ *   type=[Type|QualifiedName] name=ID;
  *
  **/
 
-// type=[Type] name=ID
+// type=[Type|QualifiedName] name=ID
 protected class Property_Group extends GroupToken {
 	
 	public Property_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -904,7 +872,7 @@ protected class Property_Group extends GroupToken {
 	}
 }
 
-// type=[Type]
+// type=[Type|QualifiedName]
 protected class Property_TypeAssignment_0 extends AssignmentToken  {
 	
 	public Property_TypeAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
