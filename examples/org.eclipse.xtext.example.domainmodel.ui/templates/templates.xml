@@ -32,6 +32,6 @@
     <template name="Operation" description="template for an Operation"
         id="org.eclipse.xtext.example.Domainmodel.Operation"
         context="org.eclipse.xtext.example.Domainmodel.Operation"
-        enabled="true">${visibility:Enum('Visibility')}op ${name} (${paramName1} ${paramType1:CrossReference('TypeRef.referenced')}) : ${type:CrossReference('TypeRef.referenced')}
+        enabled="true">${visibility:Enum('Visibility')} op ${name} (${paramName1} ${paramType1:CrossReference('TypeRef.referenced')}) : ${type:CrossReference('TypeRef.referenced')}
     </template>
 </templates>
