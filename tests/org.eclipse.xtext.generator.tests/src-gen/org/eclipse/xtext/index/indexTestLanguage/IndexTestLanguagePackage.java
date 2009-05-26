@@ -70,22 +70,13 @@ public interface IndexTestLanguagePackage extends EPackage
   int FILE = 0;
 
   /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FILE__IMPORTS = 0;
-
-  /**
-   * The feature id for the '<em><b>Name Spaces</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FILE__NAME_SPACES = 1;
+  int FILE__ELEMENTS = 0;
 
   /**
    * The number of structural features of the '<em>File</em>' class.
@@ -94,7 +85,26 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int FILE_FEATURE_COUNT = 2;
+  int FILE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.ElementImpl <em>Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.index.indexTestLanguage.impl.ElementImpl
+   * @see org.eclipse.xtext.index.indexTestLanguage.impl.IndexTestLanguagePackageImpl#getElement()
+   * @generated
+   */
+  int ELEMENT = 3;
+
+  /**
+   * The number of structural features of the '<em>Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.ImportImpl <em>Import</em>}' class.
@@ -113,7 +123,7 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORTED_NAMESPACE = 0;
+  int IMPORT__IMPORTED_NAMESPACE = ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -122,35 +132,7 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamedElementImpl <em>Named Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.index.indexTestLanguage.impl.NamedElementImpl
-   * @see org.eclipse.xtext.index.indexTestLanguage.impl.IndexTestLanguagePackageImpl#getNamedElement()
-   * @generated
-   */
-  int NAMED_ELEMENT = 3;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_ELEMENT__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Named Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_ELEMENT_FEATURE_COUNT = 1;
+  int IMPORT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamespaceImpl <em>Namespace</em>}' class.
@@ -169,16 +151,16 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
+  int NAMESPACE__NAME = ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Named Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NAMESPACE__NAMED_ELEMENTS = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  int NAMESPACE__ELEMENTS = ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Namespace</em>' class.
@@ -187,7 +169,7 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  int NAMESPACE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.TypeImpl <em>Type</em>}' class.
@@ -206,7 +188,7 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE__NAME = NAMED_ELEMENT__NAME;
+  int TYPE__NAME = ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -215,7 +197,7 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+  int TYPE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.EntityImpl <em>Entity</em>}' class.
@@ -331,26 +313,15 @@ public interface IndexTestLanguagePackage extends EPackage
   EClass getFile();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.index.indexTestLanguage.File#getImports <em>Imports</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.index.indexTestLanguage.File#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see org.eclipse.xtext.index.indexTestLanguage.File#getImports()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.index.indexTestLanguage.File#getElements()
    * @see #getFile()
    * @generated
    */
-  EReference getFile_Imports();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.index.indexTestLanguage.File#getNameSpaces <em>Name Spaces</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Name Spaces</em>'.
-   * @see org.eclipse.xtext.index.indexTestLanguage.File#getNameSpaces()
-   * @see #getFile()
-   * @generated
-   */
-  EReference getFile_NameSpaces();
+  EReference getFile_Elements();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.index.indexTestLanguage.Import <em>Import</em>}'.
@@ -384,36 +355,36 @@ public interface IndexTestLanguagePackage extends EPackage
   EClass getNamespace();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.index.indexTestLanguage.Namespace#getNamedElements <em>Named Elements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Named Elements</em>'.
-   * @see org.eclipse.xtext.index.indexTestLanguage.Namespace#getNamedElements()
-   * @see #getNamespace()
-   * @generated
-   */
-  EReference getNamespace_NamedElements();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.index.indexTestLanguage.NamedElement <em>Named Element</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Named Element</em>'.
-   * @see org.eclipse.xtext.index.indexTestLanguage.NamedElement
-   * @generated
-   */
-  EClass getNamedElement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.index.indexTestLanguage.NamedElement#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.index.indexTestLanguage.Namespace#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.index.indexTestLanguage.NamedElement#getName()
-   * @see #getNamedElement()
+   * @see org.eclipse.xtext.index.indexTestLanguage.Namespace#getName()
+   * @see #getNamespace()
    * @generated
    */
-  EAttribute getNamedElement_Name();
+  EAttribute getNamespace_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.index.indexTestLanguage.Namespace#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.index.indexTestLanguage.Namespace#getElements()
+   * @see #getNamespace()
+   * @generated
+   */
+  EReference getNamespace_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.index.indexTestLanguage.Element <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Element</em>'.
+   * @see org.eclipse.xtext.index.indexTestLanguage.Element
+   * @generated
+   */
+  EClass getElement();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.index.indexTestLanguage.Type <em>Type</em>}'.
@@ -424,6 +395,17 @@ public interface IndexTestLanguagePackage extends EPackage
    * @generated
    */
   EClass getType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.index.indexTestLanguage.Type#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.index.indexTestLanguage.Type#getName()
+   * @see #getType()
+   * @generated
+   */
+  EAttribute getType_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.index.indexTestLanguage.Entity <em>Entity</em>}'.
@@ -522,20 +504,12 @@ public interface IndexTestLanguagePackage extends EPackage
     EClass FILE = eINSTANCE.getFile();
 
     /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FILE__IMPORTS = eINSTANCE.getFile_Imports();
-
-    /**
-     * The meta object literal for the '<em><b>Name Spaces</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FILE__NAME_SPACES = eINSTANCE.getFile_NameSpaces();
+    EReference FILE__ELEMENTS = eINSTANCE.getFile_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.ImportImpl <em>Import</em>}' class.
@@ -566,30 +540,30 @@ public interface IndexTestLanguagePackage extends EPackage
     EClass NAMESPACE = eINSTANCE.getNamespace();
 
     /**
-     * The meta object literal for the '<em><b>Named Elements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NAMESPACE__NAMED_ELEMENTS = eINSTANCE.getNamespace_NamedElements();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.NamedElementImpl <em>Named Element</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.index.indexTestLanguage.impl.NamedElementImpl
-     * @see org.eclipse.xtext.index.indexTestLanguage.impl.IndexTestLanguagePackageImpl#getNamedElement()
-     * @generated
-     */
-    EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+    EAttribute NAMESPACE__NAME = eINSTANCE.getNamespace_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAMESPACE__ELEMENTS = eINSTANCE.getNamespace_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.ElementImpl <em>Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.index.indexTestLanguage.impl.ElementImpl
+     * @see org.eclipse.xtext.index.indexTestLanguage.impl.IndexTestLanguagePackageImpl#getElement()
+     * @generated
+     */
+    EClass ELEMENT = eINSTANCE.getElement();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.TypeImpl <em>Type</em>}' class.
@@ -600,6 +574,14 @@ public interface IndexTestLanguagePackage extends EPackage
      * @generated
      */
     EClass TYPE = eINSTANCE.getType();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.index.indexTestLanguage.impl.EntityImpl <em>Entity</em>}' class.

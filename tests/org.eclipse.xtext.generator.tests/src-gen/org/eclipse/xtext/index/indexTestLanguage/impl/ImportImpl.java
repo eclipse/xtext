@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.index.indexTestLanguage.Import;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
@@ -28,7 +27,7 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
  *
  * @generated
  */
-public class ImportImpl extends MinimalEObjectImpl.Container implements Import
+public class ImportImpl extends ElementImpl implements Import
 {
   /**
    * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.

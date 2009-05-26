@@ -53,13 +53,13 @@ public interface IndexTestLanguageFactory extends EFactory
   Namespace createNamespace();
 
   /**
-   * Returns a new object of class '<em>Named Element</em>'.
+   * Returns a new object of class '<em>Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Element</em>'.
+   * @return a new object of class '<em>Element</em>'.
    * @generated
    */
-  NamedElement createNamedElement();
+  Element createElement();
 
   /**
    * Returns a new object of class '<em>Type</em>'.

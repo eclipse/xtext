@@ -19,10 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.index.indexTestLanguage.Element;
 import org.eclipse.xtext.index.indexTestLanguage.File;
-import org.eclipse.xtext.index.indexTestLanguage.Import;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
-import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,8 +30,7 @@ import org.eclipse.xtext.index.indexTestLanguage.Namespace;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.FileImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.FileImpl#getNameSpaces <em>Name Spaces</em>}</li>
+ *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.FileImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,24 +39,14 @@ import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 public class FileImpl extends MinimalEObjectImpl.Container implements File
 {
   /**
-   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImports()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<Import> imports;
-
-  /**
-   * The cached value of the '{@link #getNameSpaces() <em>Name Spaces</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getNameSpaces()
-   * @generated
-   * @ordered
-   */
-  protected EList<Namespace> nameSpaces;
+  protected EList<Element> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,27 +74,13 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Import> getImports()
+  public EList<Element> getElements()
   {
-    if (imports == null)
+    if (elements == null)
     {
-      imports = new EObjectContainmentEList<Import>(Import.class, this, IndexTestLanguagePackage.FILE__IMPORTS);
+      elements = new EObjectContainmentEList<Element>(Element.class, this, IndexTestLanguagePackage.FILE__ELEMENTS);
     }
-    return imports;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Namespace> getNameSpaces()
-  {
-    if (nameSpaces == null)
-    {
-      nameSpaces = new EObjectContainmentEList<Namespace>(Namespace.class, this, IndexTestLanguagePackage.FILE__NAME_SPACES);
-    }
-    return nameSpaces;
+    return elements;
   }
 
   /**
@@ -119,10 +93,8 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.FILE__IMPORTS:
-        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-      case IndexTestLanguagePackage.FILE__NAME_SPACES:
-        return ((InternalEList<?>)getNameSpaces()).basicRemove(otherEnd, msgs);
+      case IndexTestLanguagePackage.FILE__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,10 +109,8 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.FILE__IMPORTS:
-        return getImports();
-      case IndexTestLanguagePackage.FILE__NAME_SPACES:
-        return getNameSpaces();
+      case IndexTestLanguagePackage.FILE__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -156,13 +126,9 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.FILE__IMPORTS:
-        getImports().clear();
-        getImports().addAll((Collection<? extends Import>)newValue);
-        return;
-      case IndexTestLanguagePackage.FILE__NAME_SPACES:
-        getNameSpaces().clear();
-        getNameSpaces().addAll((Collection<? extends Namespace>)newValue);
+      case IndexTestLanguagePackage.FILE__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends Element>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -178,11 +144,8 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.FILE__IMPORTS:
-        getImports().clear();
-        return;
-      case IndexTestLanguagePackage.FILE__NAME_SPACES:
-        getNameSpaces().clear();
+      case IndexTestLanguagePackage.FILE__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -198,10 +161,8 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
   {
     switch (featureID)
     {
-      case IndexTestLanguagePackage.FILE__IMPORTS:
-        return imports != null && !imports.isEmpty();
-      case IndexTestLanguagePackage.FILE__NAME_SPACES:
-        return nameSpaces != null && !nameSpaces.isEmpty();
+      case IndexTestLanguagePackage.FILE__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

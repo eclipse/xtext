@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
@@ -22,78 +21,33 @@ public final class IndexTestLanguageFileConsumer extends NonTerminalConsumer {
 
 	private FileElements rule;	
 
-	private INonTerminalConsumer importConsumer;
+	private INonTerminalConsumer elementConsumer;
 
-	private INonTerminalConsumer namespaceConsumer;
+	private IElementConsumer assignment$1$Consumer;
 
-	private IElementConsumer group$1$Consumer;
+	private IElementConsumer ruleCall$2$Consumer;
 
-	private IElementConsumer assignment$2$Consumer;
-
-	private IElementConsumer ruleCall$3$Consumer;
-
-	private IElementConsumer assignment$4$Consumer;
-
-	private IElementConsumer ruleCall$5$Consumer;
-
-	protected class Group$1$Consumer extends GroupConsumer {
+	protected class Assignment$1$Consumer extends LoopAssignmentConsumer {
 		
-		protected Group$1$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$2$Consumer);
-			acceptor.accept(assignment$4$Consumer);
-		}
-	}
-
-	protected class Assignment$2$Consumer extends LoopAssignmentConsumer {
-		
-		protected Assignment$2$Consumer(final Assignment assignment) {
+		protected Assignment$1$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$3$Consumer;
+			return ruleCall$2$Consumer;
 		}
 	}
 
-	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(importConsumer, "imports", true, false, false, getElement(), optional);
-		}
-	}
-
-	protected class Assignment$4$Consumer extends LoopAssignmentConsumer {
-		
-		protected Assignment$4$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$5$Consumer;
-		}
-	}
-
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(namespaceConsumer, "nameSpaces", true, false, false, getElement(), optional);
+			return consumeNonTerminal(elementConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -103,7 +57,7 @@ public final class IndexTestLanguageFileConsumer extends NonTerminalConsumer {
 	
 	@Override
 	protected int doConsume() throws Exception {
-		return group$1$Consumer.consume();
+		return assignment$1$Consumer.consume();
 	}
 
 	public FileElements getRule() {
@@ -113,11 +67,8 @@ public final class IndexTestLanguageFileConsumer extends NonTerminalConsumer {
 	public void setRule(FileElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.getImportsAssignment_0());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getImportsImportParserRuleCall_0_0());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameSpacesAssignment_1());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameSpacesNamespaceParserRuleCall_1_0());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getElementsAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getElementsElementParserRuleCall_0());
 	}
 	
 	@Override
@@ -130,12 +81,8 @@ public final class IndexTestLanguageFileConsumer extends NonTerminalConsumer {
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setImportConsumer(INonTerminalConsumer importConsumer) {
-		this.importConsumer = importConsumer;
-	}
-	
-	public void setNamespaceConsumer(INonTerminalConsumer namespaceConsumer) {
-		this.namespaceConsumer = namespaceConsumer;
+	public void setElementConsumer(INonTerminalConsumer elementConsumer) {
+		this.elementConsumer = elementConsumer;
 	}
 	
 }

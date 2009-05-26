@@ -70,7 +70,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
       case IndexTestLanguagePackage.FILE: return createFile();
       case IndexTestLanguagePackage.IMPORT: return createImport();
       case IndexTestLanguagePackage.NAMESPACE: return createNamespace();
-      case IndexTestLanguagePackage.NAMED_ELEMENT: return createNamedElement();
+      case IndexTestLanguagePackage.ELEMENT: return createElement();
       case IndexTestLanguagePackage.TYPE: return createType();
       case IndexTestLanguagePackage.ENTITY: return createEntity();
       case IndexTestLanguagePackage.DATATYPE: return createDatatype();
@@ -118,10 +118,10 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamedElement createNamedElement()
+  public Element createElement()
   {
-    NamedElementImpl namedElement = new NamedElementImpl();
-    return namedElement;
+    ElementImpl element = new ElementImpl();
+    return element;
   }
 
   /**

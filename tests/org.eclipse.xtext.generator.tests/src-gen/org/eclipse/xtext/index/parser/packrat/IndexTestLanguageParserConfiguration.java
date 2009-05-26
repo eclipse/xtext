@@ -14,7 +14,7 @@ import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageImportC
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageQualifiedNameWithWildCardConsumer;
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageQualifiedNameConsumer;
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageNamespaceConsumer;
-import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageNamedElementConsumer;
+import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageElementConsumer;
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageTypeConsumer;
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageEntityConsumer;
 import org.eclipse.xtext.index.parser.packrat.consumers.IndexTestLanguageDatatypeConsumer;
@@ -35,7 +35,7 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
     private IndexTestLanguageQualifiedNameWithWildCardConsumer qualifiedNameWithWildCardConsumer;
     private IndexTestLanguageQualifiedNameConsumer qualifiedNameConsumer;
     private IndexTestLanguageNamespaceConsumer namespaceConsumer;
-    private IndexTestLanguageNamedElementConsumer namedElementConsumer;
+    private IndexTestLanguageElementConsumer elementConsumer;
     private IndexTestLanguageTypeConsumer typeConsumer;
     private IndexTestLanguageEntityConsumer entityConsumer;
     private IndexTestLanguageDatatypeConsumer datatypeConsumer;
@@ -70,7 +70,7 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
 		namespaceConsumer = new IndexTestLanguageNamespaceConsumer(
     		this, null
     	);
-		namedElementConsumer = new IndexTestLanguageNamedElementConsumer(
+		elementConsumer = new IndexTestLanguageElementConsumer(
     		this, null
     	);
 		typeConsumer = new IndexTestLanguageTypeConsumer(
@@ -99,7 +99,7 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
 		getQualifiedNameWithWildCardConsumer().setRule(grammarAccess.getQualifiedNameWithWildCardAccess());
 		getQualifiedNameConsumer().setRule(grammarAccess.getQualifiedNameAccess());
 		getNamespaceConsumer().setRule(grammarAccess.getNamespaceAccess());
-		getNamedElementConsumer().setRule(grammarAccess.getNamedElementAccess());
+		getElementConsumer().setRule(grammarAccess.getElementAccess());
 		getTypeConsumer().setRule(grammarAccess.getTypeAccess());
 		getEntityConsumer().setRule(grammarAccess.getEntityAccess());
 		getDatatypeConsumer().setRule(grammarAccess.getDatatypeAccess());
@@ -113,8 +113,7 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
-		getFileConsumer().setImportConsumer(getImportConsumer());
-		getFileConsumer().setNamespaceConsumer(getNamespaceConsumer());
+		getFileConsumer().setElementConsumer(getElementConsumer());
 
 		getImportConsumer().setQualifiedNameWithWildCardConsumer(getQualifiedNameWithWildCardConsumer());
 
@@ -122,11 +121,12 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
 
 		getQualifiedNameConsumer().setIdConsumer(getIdConsumer());
 
-		getNamespaceConsumer().setNamedElementConsumer(getNamedElementConsumer());
+		getNamespaceConsumer().setElementConsumer(getElementConsumer());
 		getNamespaceConsumer().setQualifiedNameConsumer(getQualifiedNameConsumer());
 
-		getNamedElementConsumer().setNamespaceConsumer(getNamespaceConsumer());
-		getNamedElementConsumer().setTypeConsumer(getTypeConsumer());
+		getElementConsumer().setImportConsumer(getImportConsumer());
+		getElementConsumer().setNamespaceConsumer(getNamespaceConsumer());
+		getElementConsumer().setTypeConsumer(getTypeConsumer());
 
 		getTypeConsumer().setDatatypeConsumer(getDatatypeConsumer());
 		getTypeConsumer().setEntityConsumer(getEntityConsumer());
@@ -137,22 +137,22 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
 		getDatatypeConsumer().setIdConsumer(getIdConsumer());
 
 		getPropertyConsumer().setIdConsumer(getIdConsumer());
+		getPropertyConsumer().setQualifiedNameConsumer(getQualifiedNameConsumer());
 
-		getImportConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$11$Delimiter);
-		getQualifiedNameWithWildCardConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getQualifiedNameConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getQualifiedNameConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
-		getQualifiedNameConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
-		getNamespaceConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getNamespaceConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getEntityConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$11$Delimiter);
-		getEntityConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getEntityConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$18$Delimiter);
-		getEntityConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
-		getDatatypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$11$Delimiter);
-		getDatatypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
-		getPropertyConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
-		getPropertyConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$22$Delimiter);
+		getImportConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$8$Delimiter);
+		getQualifiedNameWithWildCardConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getQualifiedNameConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getQualifiedNameConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getQualifiedNameConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getNamespaceConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getNamespaceConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getEntityConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$8$Delimiter);
+		getEntityConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getEntityConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$15$Delimiter);
+		getEntityConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getDatatypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.keyword$8$Delimiter);
+		getDatatypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getPropertyConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.index.parser.packrat.IndexTestLanguageDelimiters.ruleCall$19$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -179,8 +179,8 @@ public class IndexTestLanguageParserConfiguration extends AbstractParserConfigur
     	return namespaceConsumer;
     }
 
-    public IndexTestLanguageNamedElementConsumer getNamedElementConsumer() {
-    	return namedElementConsumer;
+    public IndexTestLanguageElementConsumer getElementConsumer() {
+    	return elementConsumer;
     }
 
     public IndexTestLanguageTypeConsumer getTypeConsumer() {

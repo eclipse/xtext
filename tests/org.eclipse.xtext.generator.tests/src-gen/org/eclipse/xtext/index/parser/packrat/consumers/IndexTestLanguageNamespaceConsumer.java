@@ -24,7 +24,7 @@ public final class IndexTestLanguageNamespaceConsumer extends NonTerminalConsume
 
 	private NamespaceElements rule;	
 
-	private INonTerminalConsumer namedElementConsumer;
+	private INonTerminalConsumer elementConsumer;
 
 	private INonTerminalConsumer qualifiedNameConsumer;
 
@@ -117,7 +117,7 @@ public final class IndexTestLanguageNamespaceConsumer extends NonTerminalConsume
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getElement(), optional);
+			return consumeNonTerminal(elementConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -155,8 +155,8 @@ public final class IndexTestLanguageNamespaceConsumer extends NonTerminalConsume
 		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameQualifiedNameParserRuleCall_0_0());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftCurlyBracketKeyword_1());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.getNamedElementsAssignment_2());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNamedElementsNamedElementParserRuleCall_2_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getElementsAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getElementsElementParserRuleCall_2_0());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRightCurlyBracketKeyword_3());
 	}
 	
@@ -170,8 +170,8 @@ public final class IndexTestLanguageNamespaceConsumer extends NonTerminalConsume
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setNamedElementConsumer(INonTerminalConsumer namedElementConsumer) {
-		this.namedElementConsumer = namedElementConsumer;
+	public void setElementConsumer(INonTerminalConsumer elementConsumer) {
+		this.elementConsumer = elementConsumer;
 	}
 	
 	public void setQualifiedNameConsumer(INonTerminalConsumer qualifiedNameConsumer) {

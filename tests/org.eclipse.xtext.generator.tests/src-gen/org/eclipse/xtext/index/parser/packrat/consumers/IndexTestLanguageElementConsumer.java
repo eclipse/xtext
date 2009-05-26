@@ -15,11 +15,13 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
-import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.NamedElementElements;
+import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.ElementElements;
 
-public final class IndexTestLanguageNamedElementConsumer extends NonTerminalConsumer {
+public final class IndexTestLanguageElementConsumer extends NonTerminalConsumer {
 
-	private NamedElementElements rule;	
+	private ElementElements rule;	
+
+	private INonTerminalConsumer importConsumer;
 
 	private INonTerminalConsumer namespaceConsumer;
 
@@ -31,6 +33,8 @@ public final class IndexTestLanguageNamedElementConsumer extends NonTerminalCons
 
 	private IElementConsumer ruleCall$3$Consumer;
 
+	private IElementConsumer ruleCall$4$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -41,6 +45,7 @@ public final class IndexTestLanguageNamedElementConsumer extends NonTerminalCons
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 		}
 	}
 
@@ -68,7 +73,19 @@ public final class IndexTestLanguageNamedElementConsumer extends NonTerminalCons
 		}
 	}
 
-	public IndexTestLanguageNamedElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(importConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	public IndexTestLanguageElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
@@ -77,16 +94,17 @@ public final class IndexTestLanguageNamedElementConsumer extends NonTerminalCons
 		return alternatives$1$Consumer.consume();
 	}
 
-	public NamedElementElements getRule() {
+	public ElementElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(NamedElementElements rule) {
+	public void setRule(ElementElements rule) {
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getNamespaceParserRuleCall_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTypeParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getImportParserRuleCall_2());
 	}
 	
 	@Override
@@ -97,6 +115,10 @@ public final class IndexTestLanguageNamedElementConsumer extends NonTerminalCons
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setImportConsumer(INonTerminalConsumer importConsumer) {
+		this.importConsumer = importConsumer;
 	}
 	
 	public void setNamespaceConsumer(INonTerminalConsumer namespaceConsumer) {

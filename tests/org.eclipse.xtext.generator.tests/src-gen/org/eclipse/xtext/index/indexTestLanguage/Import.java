@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.index.indexTestLanguage;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Import extends EObject
+public interface Import extends Element
 {
   /**
    * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.

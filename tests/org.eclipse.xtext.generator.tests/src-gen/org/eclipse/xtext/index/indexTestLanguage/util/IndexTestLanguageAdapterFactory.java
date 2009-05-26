@@ -93,9 +93,9 @@ public class IndexTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createNamespaceAdapter();
       }
       @Override
-      public Adapter caseNamedElement(NamedElement object)
+      public Adapter caseElement(Element object)
       {
-        return createNamedElementAdapter();
+        return createElementAdapter();
       }
       @Override
       public Adapter caseType(Type object)
@@ -185,16 +185,16 @@ public class IndexTestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.index.indexTestLanguage.NamedElement <em>Named Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.index.indexTestLanguage.Element <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.index.indexTestLanguage.NamedElement
+   * @see org.eclipse.xtext.index.indexTestLanguage.Element
    * @generated
    */
-  public Adapter createNamedElementAdapter()
+  public Adapter createElementAdapter()
   {
     return null;
   }
