@@ -155,13 +155,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 	protected Iterable<IScopedElement> getImportedElements(final EObject context, final EClass type) {
 		final Set<Function<String,String>> normalizers = getImportNormalizer(context);
-		Iterable<EObjectDescriptor> result = new Iterable<EObjectDescriptor>() {
-
-			public Iterator<EObjectDescriptor> iterator() {
-				return indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult().iterator();
-			}
-		};
-		
+		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
 		Iterable<IScopedElement> transformed = transform(result,new Function<EObjectDescriptor, IScopedElement>(){
 
 			public IScopedElement apply(EObjectDescriptor from) {
