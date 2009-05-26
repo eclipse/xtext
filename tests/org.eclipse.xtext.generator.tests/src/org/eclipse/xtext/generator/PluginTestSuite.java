@@ -81,6 +81,9 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parsetree.NodeUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.ParseTreeUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.SerializeTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.LinuxAndMac.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.Windows.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest2.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
