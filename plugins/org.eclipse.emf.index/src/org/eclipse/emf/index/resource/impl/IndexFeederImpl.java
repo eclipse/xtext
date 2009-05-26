@@ -177,7 +177,7 @@ public class IndexFeederImpl implements IndexFeeder {
 					.executeSingleResult();
 			if (eClassDescriptor==null) {
 				LogFacade.logError("Couldn't find EClassDescriptor for EClass "+eObject.eClass().getName());
-				return;
+				continue;
 			}
 			EObjectDescriptor newEObjectDesc = new EObjectDescriptorImpl(resourceDesc, data.fragment, data.name,
 					data.displayName, eClassDescriptor, data.userData);

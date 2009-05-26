@@ -50,8 +50,7 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 	public void resourceChanged(Resource resource, IndexFeeder feeder) {
 		if (resource != null) {
 			try {
-				ResourceSet resourceSet = resource.getResourceSet();
-				URIConverter uriConverter = (resourceSet != null) ? resourceSet.getURIConverter() : URIConverter.INSTANCE;
+				URIConverter uriConverter = getURIConverter(resource);
 				feeder.createResourceDescriptor(resource, getResourceUserData(resource));
 				for (Iterator<EObject> i = EcoreUtil.getAllProperContents(resource, false); i.hasNext();) {
 					EObject element = i.next();
@@ -83,6 +82,11 @@ public class ResourceIndexerImpl implements ResourceIndexer {
 				LogFacade.logError("Error indexing resource " + resource.getURI(), exc);
 			}
 		}
+	}
+
+	protected URIConverter getURIConverter(Resource resource) {
+		ResourceSet resourceSet = resource.getResourceSet();
+		return (resourceSet != null) ? resourceSet.getURIConverter() : URIConverter.INSTANCE;
 	}
 
 	public void resourceDeleted(URI resourceURI, IndexFeeder feeder) {

@@ -1,9 +1,5 @@
 Performance Tests
 
-Locking 
-
-faeture
-
  Resource URI conversion
  - no classpath URIs allowed
  - cannonical URIs
