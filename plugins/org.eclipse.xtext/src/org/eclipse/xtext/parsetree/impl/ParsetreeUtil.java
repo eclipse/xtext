@@ -148,7 +148,7 @@ public class ParsetreeUtil {
 		final CompositeNode node = (CompositeNode) abstractNode;
 		for(int i = 0; i < node.getChildren().size(); i++) {
 			final AbstractNode child = node.getChildren().get(i);
-			if (child instanceof CompositeNode) 
+			if (child instanceof CompositeNode)
 				return child.getTotalOffset();
 			final LeafNode leaf = (LeafNode) child;
 			if (!leaf.isHidden())
@@ -168,8 +168,10 @@ public class ParsetreeUtil {
 		final CompositeNode node = (CompositeNode) abstractNode;
 		for(int i = 0; i < node.getChildren().size(); i++) {
 			final AbstractNode child = node.getChildren().get(i);
-			if (child instanceof CompositeNode) 
-				return child.getTotalLine();
+//			if (child instanceof CompositeNode)
+//				return child.getTotalLine();
+			if (child instanceof CompositeNode)
+				return getLine(child);
 			final LeafNode leaf = (LeafNode) child;
 			if (!leaf.isHidden())
 				return leaf.getTotalLine();
@@ -207,8 +209,10 @@ public class ParsetreeUtil {
 		final CompositeNode node = (CompositeNode) abstractNode;
 		for(int i = node.getChildren().size() - 1; i >= 0 ; i--) {
 			final AbstractNode child = node.getChildren().get(i);
+//			if (child instanceof CompositeNode)
+//				return child.totalEndLine();
 			if (child instanceof CompositeNode)
-				return child.totalEndLine();
+				return endLine(child);
 			if (!((LeafNode) child).isHidden())
 				return child.totalEndLine();
 		}
