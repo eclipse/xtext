@@ -22,8 +22,7 @@ From a grammar the following is derived:
 ** outline views
 ** code templates
 
-The generated artifacts are wired up through the "google guice":http://code.google.com/p/google-guice/ 
-dependency injection framework, which makes it easy to exchange certain functionality in a non-invasive 
+The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a 
+dependency injection framework which makes it easy to exchange certain functionality in a non-invasive 
 manner. For example if you don't like the default code assistant implementation, all you need to do is 
-to come up with an alternative implementation of the corresponding service and configure it via 
-"dependency injection":#dependencyInjection.
+to come up with an alternative implementation of the corresponding service and configure it via "dependency injection":#dependencyInjection.

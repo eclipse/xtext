@@ -65,9 +65,8 @@ Also there are transitions consisting of a reference to an event and a state. Pl
 
 In order to get a complete IDE for this little language from Xtext, you need to write the following grammar:
 
-bc.. 
- grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
- 
+bc..  grammar my.pack.SecretCompartments 
+   with org.eclipse.xtext.common.Terminals
  generate secretcompartment "http://www.eclipse.org/secretcompartment"
  
  Statemachine :
@@ -97,47 +96,52 @@ bc..
  Transition :
   event=[Event] '=>' state=[State];
   
-p. In the following the different concepts of the grammar language are explained. We refer to this grammar when useful.
+p. In the following the different concepts of the grammar language are explained. We refer to this grammar when appropriate.
 
 h3. Language Declaration
 
-The first line 
-bc.. grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
-p. declares the name of the grammar. 
-Xtext leverages Java's classpath mechanism. This means that the name can be any valid Java qualifier. 
-The file name needs to correspond and have the file extension ''xtext''.
-This means that the name needs to be ''SecretCompartments.xtext'' and must be placed in package 'my.pack' somewhere on your project's class path.
+The first line  @grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals@ declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond and have the file extension ''xtext''. This means that the name needs to be @SecretCompartments.xtext@ and must be placed in package @my.pack@ somewhere on your project's class path.
 
 The first line is also used to declare any used language (for mechanism details cf. [[#Grammar Mixins|Grammar Mixins]]).
 
 h3. EPackage declarations
 
 Xtext parsers instantiate Ecore models (aka meta model). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
-Xtext can infer Ecore models from a grammar (see "Meta-Model Inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this, use multiple existing ecore models and infer some others from one grammar. 
+Xtext can infer Ecore models from a grammar (see "Meta-Model Inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this, use multiple existing ECore models and infer some others from one grammar. 
 
 h4. EPackage generation
 
-The easiest way to get started is to let Xtext infer the meta model from your grammar. This is what is done in the secret compartment example.
-To do so just state:
+The easiest way to get started is to let Xtext infer the meta model from your grammar. This is what is done in the secret compartment example. To do so just state:
 
 bc. generate secretcompartment http://www.eclipse.org/secretcompartment
 
-p. Which says: generate an EPackage with name secretcompartment and nsURI @http://www.eclipse.org/secretcompartment@ (these are the properties needed to create an EPackage). See "Meta-Model Inference":#metamodelInference for details.
+Which means: generate an EPackage with name @secretcompartment@ and nsURI @http://www.eclipse.org/secretcompartment@ (these are the properties needed to create an EPackage). See "Meta-Model Inference":#metamodelInference for details.
 
 h4. EPackage import
 
-If you already have created such an EPackage somehow, you could import it using either the name space URI or a resource URI (URIs are an EMF concept):
+If you already have created such an EPackage somehow, you can import it using either a namespace URI or a resource URI (URIs are an EMF concept).
 
-bc. import http://www.eclipse.org/secretcompartment
+h5. Using namespace URIs to import existing EPackages
 
-p. Note that if you use, a namespace URI, the corresponding EPackage needs to be installed into the workbench, so that the editor can find it.
-At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in EPackage.Registry.INSTANCE.
+You can import existing EPackages using the following syntax:
 
-Xtext provides a new resource URI scheme, which is backed by the Java classpath. If you want to refer to an ecore file MyEcore.ecore, laying in a a package foo.bar, you could write 
+bc. import "http://www.eclipse.org/secretcompartment"
+
+Note that if you use a namespace URI, the corresponding EPackage needs to be installed into the workbench, so that the editor can find it.
+At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in @EPackage.Registry.INSTANCE@. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
+
+bc.. <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" 
+	platformUri="${runtimeProject}/..">
+	<registerGeneratedEPackage value="foo.bar.MyPackage"/>
+</bean>
+
+h5. Using classpath URIs to import existing EPackages
+
+Xtext provides a new resource URI scheme, which is backed by the Java classpath. If you want to refer to an ECore file @MyEcore.ecore@, provided in a package @foo.bar@, you could write 
 
 bc. import "classpath:/foo/bar/MyEcore.ecore"
 
-p. Using the classpath scheme is considered the preferred way.
+Using the classpath scheme is considered the preferred way.
 
 h4. Using multiple packages / meta model aliases
 
@@ -160,12 +164,12 @@ bc..
 
 p. With the declaration from above 
 
-# a reference to type ClassA would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassA@, 
-# a reference to type ClassB would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassB@, 
-# a reference to type NotYetDefined would be linked to a newly created EClass in @http://www.eclipse.org/toBeGenerated@
+# a reference to type @ClassA@ would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassA@, 
+# a reference to type @ClassB@ would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassB@, 
+# a reference to type @NotYetDefined@ would be linked to a newly created EClass in @http://www.eclipse.org/toBeGenerated@
 
 Note, that using this feature is not recommended, because it might cause problems, which are hard to tackle down.
-For instance, a reference to ''classA'' would as well be linked to a newly created EClass, because the corresponding type in @http://www.eclipse.org/packContainingClassA@ is spelled with a capital letter.
+For instance, a reference to ''@classA@'' would as well be linked to a newly created EClass, because the corresponding type in @http://www.eclipse.org/packContainingClassA@ is spelled with a capital letter.
 
 h3. Rules
 
