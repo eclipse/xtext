@@ -11,7 +11,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -109,5 +111,77 @@ public class ParsetreeUtilTest2 extends AbstractXtextTests {
 	
 	public void testTotalEndLine_03() {
 		assertEquals(4, parentMetamodelNode.totalEndLine());
+	}
+	
+	public void testOffset_01() {
+		assertEquals(modelAsString.indexOf("grammar"), grammarNode.getOffset());
+	}
+	
+	public void testOffset_02() {
+		assertEquals(modelAsString.indexOf("generate"), metamodelNode.getOffset());
+	}
+	
+	public void testOffset_03() {
+		assertEquals(modelAsString.indexOf("generate"), parentMetamodelNode.getOffset());
+	}
+	
+	public void testTotalOffset_01() {
+		assertEquals(0, grammarNode.getTotalOffset());
+	}
+	
+	public void testTotalOffset_02() {
+		assertEquals(modelAsString.indexOf("\n\ngenerate"), metamodelNode.getTotalOffset());
+	}
+	
+	public void testTotalOffset_03() {
+		assertEquals(modelAsString.indexOf("\n\ngenerate"), parentMetamodelNode.getTotalOffset());
+	}
+	
+	public void testLength_01() {
+		assertEquals(modelAsString.indexOf(';') - modelAsString.indexOf("grammar") + ";".length(), grammarNode.getLength());
+	}
+	
+	public void testLength_02() {
+		assertEquals(
+				modelAsString.indexOf("ParsetreeUtilTest\"") - modelAsString.indexOf("generate") + "ParsetreeUtilTest\"".length(),
+				metamodelNode.getLength());
+	}
+	
+	public void testLength_03() {
+		assertEquals(
+				modelAsString.indexOf("ParsetreeUtilTest\"") - modelAsString.indexOf("generate") + "ParsetreeUtilTest\"".length(),
+				parentMetamodelNode.getLength());
+	}
+	
+	public void testLength_04() {
+		CompositeNode newRootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+		newRootNode.getChildren().add(grammarNode);
+		NodeContentAdapter.createAdapterAndAddToNode(newRootNode);
+		assertEquals(
+				modelAsString.indexOf(';') - modelAsString.indexOf("grammar") + ";".length(),
+				newRootNode.getLength());
+	}
+	
+	public void testTotalLength_01() {
+		assertEquals(modelAsString.length(), grammarNode.getTotalLength());
+	}
+	
+	public void testTotalLength_02() {
+		assertEquals(
+				modelAsString.indexOf("ParsetreeUtilTest\"") - modelAsString.indexOf("\n\ngenerate") + "ParsetreeUtilTest\"".length(),
+				metamodelNode.getTotalLength());
+	}
+	
+	public void testTotalLength_03() {
+		assertEquals(
+				modelAsString.indexOf("ParsetreeUtilTest\"") - modelAsString.indexOf("\n\ngenerate") + "ParsetreeUtilTest\"".length(),
+				parentMetamodelNode.getTotalLength());
+	}
+	
+	public void testTotalLength_04() {
+		CompositeNode newRootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+		newRootNode.getChildren().add(grammarNode);
+		NodeContentAdapter.createAdapterAndAddToNode(newRootNode);
+		assertEquals(modelAsString.length(), grammarNode.getTotalLength());
 	}
 }
