@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.PersistableIndexStore;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
@@ -170,34 +171,34 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		
-		// dataype String
+		// datatype String
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
 		List<String> names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 0, names.size());
 		
+		scope = scope.getOuterScope(); // stuff {
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 0, names.size());
+
 		scope = scope.getOuterScope(); // import stuff.*
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.toString(),names.contains("baz.Person"));
 		
-		scope = scope.getOuterScope(); // stuff {
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 0, names.size());
-		
 		scope = scope.getOuterScope(); // baz {
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains("Person"));
-		
-		scope = scope.getOuterScope(); // import baz.*
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains("Person"));
-		
+		assertTrue(names.toString(), names.contains("Person"));
+
 		scope = scope.getOuterScope(); // stuff {
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.contains("baz.Person"));
+
+		scope = scope.getOuterScope(); // import baz.*
+		names = toListOfNames(scope.getContents());
+		assertEquals(names.toString(), 1, names.size());
+		assertTrue(names.contains("Person"));
 		
 		scope = scope.getOuterScope(); // global scope
 		names = toListOfNames(scope.getContents());
@@ -206,6 +207,48 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		
 		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
 		
+	}
+	public void testReexports2() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"A { " +
+				"  B { " +
+				"    entity D {}" +
+				"  }" +
+				"}" +
+				"E {" +
+				"  import A.B.*" +
+				"  entity D {}" +
+				"  datatype Context" +
+				"}"), URI.createURI("testReexports2.indextestlanguage"));
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
+		
+		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		List<String> names = toListOfNames(scope.getAllContents());
+		assertEquals(toString(scope, ""), 3, names.size());
+		assertTrue(names.toString(),names.contains("D"));
+		assertTrue(names.toString(),names.contains("E.D"));
+		assertTrue(names.toString(),names.contains("A.B.D"));
+	}
+	
+	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
+	
+	private String toString(IScope scope, String indent) {
+		if (scope==IScope.NULLSCOPE)
+			return indent+"{NULLSCOPE}";
+		String result = indent+"{\n";
+		for (IScopedElement e : scope.getContents()) {
+			result+= indent+e.name()+" ("+(((InternalEObject)e.element()).eIsProxy()?((InternalEObject)e.element()).eProxyURI(): nameProvider.getQualifiedName(e.element()))+")\n";
+		}
+		result+=toString(scope.getOuterScope(),indent+" ")+"\n";
+		return result+indent+"}\n";
 	}
 
 	public void testLazyGlobalIndexAccess() throws Exception {
