@@ -100,14 +100,29 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(final EObject context, final EClass type) {
+		// global scope
 		if (context == null)
 			return getGlobalScope(type);
+		
+		// outer scope
 		IScope result = getScope(context.eContainer(), type);
-		if (nameProvider.getQualifiedName(context) != null)
-			result = new SimpleScope(result, getLocalElements(context, type));
-		Iterable<IScopedElement> importedElements = getImportedElements(result, context, type);
-		if (importedElements != null)
-			return new SimpleScope(result, importedElements);
+		
+		IScope importScopeConfiguration = result;
+		// local scope used by the import scope
+		if (nameProvider.getQualifiedName(context) != null) {
+			Iterable<IScopedElement> localElements = getLocalElements(context, type);
+			importScopeConfiguration = new SimpleScope(result, localElements);
+		}
+		// imports
+		Iterable<IScopedElement> importedElements = getImportedElements(importScopeConfiguration, context, type);
+		if (importedElements != null) {
+			result = new SimpleScope(result, importedElements);
+		}
+		// local scope
+		if (nameProvider.getQualifiedName(context) != null) {
+			Iterable<IScopedElement> localElements = getLocalElements(context, type);
+			result = new SimpleScope(result, localElements);
+		}
 		return result;
 	}
 
