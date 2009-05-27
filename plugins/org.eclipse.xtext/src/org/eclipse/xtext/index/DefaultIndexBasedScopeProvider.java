@@ -44,7 +44,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
+	 * 
 	 */
 	private final class DefaultImportNormalizer implements Function<String, String> {
 		private final List<String> elements;
@@ -55,7 +55,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 		public String apply(String from) {
 			List<String> split = Strings.split(from, nameProvider.getDelimiter());
-			if (split.size()>=elements.size()) {
+			if (split.size() >= elements.size()) {
 				Iterator<String> i1 = elements.iterator(), i2 = split.iterator();
 				boolean proceed = i1.hasNext() && i2.hasNext();
 				while (proceed) {
@@ -66,7 +66,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 							break;
 						} else {
 							StringBuffer result = new StringBuffer(s2);
-							while (i2.hasNext()){
+							while (i2.hasNext()) {
 								result.append(nameProvider.getDelimiter());
 								result.append(i2.next());
 							}
@@ -87,10 +87,10 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
-	
+
 	@Inject
 	private IndexStore indexStore;
-	
+
 	public void setIndexStore(IndexStore indexStore) {
 		this.indexStore = indexStore;
 	}
@@ -102,39 +102,38 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	public IScope getScope(final EObject context, final EClass type) {
 		if (context == null)
 			return getGlobalScope(type);
-		if (nameProvider.getQualifiedName(context)==null)
-			return getScope(context.eContainer(),type);
-		IScope parent = getScope(context.eContainer(), type);
-		SimpleScope localScope = new SimpleScope(parent, getLocalElements(context, type));
-		Iterable<IScopedElement> importedElements = getImportedElements(localScope, context, type);
-		if (importedElements != null )
-			return new SimpleScope(localScope, importedElements);
-		return localScope;
+		IScope result = getScope(context.eContainer(), type);
+		if (nameProvider.getQualifiedName(context) != null)
+			result = new SimpleScope(result, getLocalElements(context, type));
+		Iterable<IScopedElement> importedElements = getImportedElements(result, context, type);
+		if (importedElements != null)
+			return new SimpleScope(result, importedElements);
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	private Iterable<IScopedElement> getLocalElements(final EObject context, final EClass type) {
-		final String commonPrefix = nameProvider.getQualifiedName(context)+nameProvider.getDelimiter();
+		final String commonPrefix = nameProvider.getQualifiedName(context) + nameProvider.getDelimiter();
 		Iterable<? extends EObject> contents = new Iterable<? extends EObject>() {
 
 			public Iterator<? extends EObject> iterator() {
-				return (Iterator<? extends EObject>)EcoreUtil.getAllProperContents(context, true);
+				return (Iterator<? extends EObject>) EcoreUtil.getAllProperContents(context, true);
 			}
-			
+
 		};
 		// filter by type
-		contents = filter(contents, new Predicate<EObject>(){
+		contents = filter(contents, new Predicate<EObject>() {
 
 			public boolean apply(EObject input) {
 				return type.isInstance(input);
 			}
 		});
 		// transform to IScopedElements
-		Iterable<IScopedElement> scopedElements = transform(contents, new Function<EObject, IScopedElement>(){
+		Iterable<IScopedElement> scopedElements = transform(contents, new Function<EObject, IScopedElement>() {
 
 			public IScopedElement apply(EObject from) {
 				String name = nameProvider.getQualifiedName(from);
-				if (name!=null && name.startsWith(commonPrefix))
+				if (name != null && name.startsWith(commonPrefix))
 					return ScopedElement.create(name.substring(commonPrefix.length()), from);
 				return null;
 			}
@@ -150,8 +149,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		for (EObject child : context.eContents()) {
 			String value = importResolver.getValue(child);
 			if (value != null) {
-				final List<String> elements = org.eclipse.xtext.util.Strings.split(value,nameProvider.getDelimiter());
-				if (elements.get(elements.size()-1).equals(nameProvider.getWildcard())) {
+				final List<String> elements = org.eclipse.xtext.util.Strings.split(value, nameProvider.getDelimiter());
+				if (elements.get(elements.size() - 1).equals(nameProvider.getWildcard())) {
 					namespaceImports.add(new DefaultImportNormalizer(elements));
 				}
 			}
@@ -160,16 +159,16 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected Iterable<IScopedElement> getImportedElements(IScope local, final EObject context, final EClass type) {
-		final Set<Function<String,String>> normalizers = getImportNormalizer(context);
+		final Set<Function<String, String>> normalizers = getImportNormalizer(context);
 		if (normalizers.isEmpty())
 			return null;
-		Iterable<IScopedElement> transformed = transform(local.getAllContents(),new Function<IScopedElement, IScopedElement>() {
+		Iterable<IScopedElement> transformed = transform(local.getAllContents(), new Function<IScopedElement, IScopedElement>() {
 
 			public IScopedElement apply(final IScopedElement input) {
-				for (Function<String,String> normalizer : normalizers) {
+				for (Function<String, String> normalizer : normalizers) {
 					final String newName = normalizer.apply(input.name());
-					if (newName !=null) {
-						return new AliasedScopedElement(newName,input);
+					if (newName != null) {
+						return new AliasedScopedElement(newName, input);
 					}
 				}
 				return null;
