@@ -27,6 +27,11 @@ public class «projectWizardClassName().toSimpleName()» extends XtextNewProjectWi
 
 	private WizardNewProjectCreationPage mainPage;
 
+	public «projectWizardClassName().toSimpleName()»() {
+		super();
+		setWindowTitle("New «getName()» Project");
+	}
+
 	/**
 	 * Use this method to add pages to the wizard.
 	 * The one-time generated version of this class will add a default new project page to the wizard.
