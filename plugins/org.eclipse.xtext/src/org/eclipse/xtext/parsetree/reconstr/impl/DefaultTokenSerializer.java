@@ -23,9 +23,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAssignmentToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IKeywordToken;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IUnassignedTextToken;
 
 import com.google.inject.Inject;
 
@@ -40,6 +42,9 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	@Inject
 	protected ICrossReferenceSerializer crossRefSerializer;
 
+	@Inject
+	protected IUnassignedTextSerializer unassTextSerializer;
+
 	protected boolean outputHasStarted;
 
 	protected OutputStream out;
@@ -47,7 +52,8 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	/**
 	 * @throws IOException
 	 */
-	protected void afterElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
+	protected void afterElement(IInstanceDescription curr, AbstractElement ele)
+			throws IOException {
 	}
 
 	/**
@@ -64,7 +70,8 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 		outputHasStarted = true;
 	}
 
-	protected void beforeElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
+	protected void beforeElement(IInstanceDescription curr, AbstractElement ele)
+			throws IOException {
 		if (outputHasStarted)
 			append(" ");
 	}
@@ -95,16 +102,18 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 		append(converterService.toString(value, call.getRule().getName()));
 		afterElement(current, call);
 	}
-	
+
 	protected void elementEnumRuleCall(IInstanceDescription current,
 			RuleCall call, Object value) throws IOException {
 		beforeElement(current, call);
 		EnumRule rule = (EnumRule) call.getRule();
 		if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
-			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
+			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule
+					.getAlternatives();
 			append(decl.getLiteral().getValue());
 		} else {
-			for(AbstractElement element: ((Alternatives) rule.getAlternatives()).getGroups()) {
+			for (AbstractElement element : ((Alternatives) rule
+					.getAlternatives()).getGroups()) {
 				EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
 				if (decl.getEnumLiteral().getInstance().equals(value)) {
 					append(decl.getLiteral().getValue());
@@ -116,7 +125,8 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	}
 
 	@Override
-	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
+	public void serialize(IAbstractToken firstToken, OutputStream out)
+			throws IOException {
 		outputHasStarted = false;
 		this.out = out;
 		for (IAbstractToken t = firstToken; t != null; t = t.getNext()) {
@@ -131,35 +141,51 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 			tokenKeyword((IKeywordToken) t);
 		else if (t instanceof IAssignmentToken)
 			tokenAssignment((IAssignmentToken) t);
+		else if (t instanceof IUnassignedTextToken)
+			tokenUnassText((IUnassignedTextToken) t);
+	}
+
+	protected void tokenUnassText(IUnassignedTextToken token)
+			throws IOException {
+		String val = unassTextSerializer.serializeUnassignedRuleCall(token
+				.getGrammarElement(), token.getCurrent().getDelegate());
+		beforeElement(token.getCurrent(), token.getGrammarElement());
+		append(val);
+		afterElement(token.getCurrent(), token.getGrammarElement());
 	}
 
 	protected void tokenAssignment(IAssignmentToken ass) throws IOException {
 		if (ass == null || ass.getType() == null)
 			return;
 		switch (ass.getType()) {
-			case CR:
-				elementCrossRef(ass.getCurrent(), (CrossReference) ass.getAssignmentElement(), (EObject) ass.getValue());
-				break;
-			case KW:
-				elementKeyword(ass.getCurrent(), (Keyword) ass.getAssignmentElement());
-				break;
-			case LRC:
-				elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass.getAssignmentElement(), ass.getValue());
-				break;
-			case ERC:
-				elementEnumRuleCall(ass.getCurrent(), (RuleCall) ass.getAssignmentElement(), ass.getValue());
-				break;
-			case PRC:
-				final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
-				if (ruleCall != null) {
-					final ParserRule parserRule = (ParserRule) ruleCall.getRule();
-					if (GrammarUtil.isDatatypeRule(parserRule)) {
-						elementLexerRuleCall(ass.getCurrent(), ruleCall, ass.getValue());
-					}
+		case CR:
+			elementCrossRef(ass.getCurrent(), (CrossReference) ass
+					.getAssignmentElement(), (EObject) ass.getValue());
+			break;
+		case KW:
+			elementKeyword(ass.getCurrent(), (Keyword) ass
+					.getAssignmentElement());
+			break;
+		case LRC:
+			elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass
+					.getAssignmentElement(), ass.getValue());
+			break;
+		case ERC:
+			elementEnumRuleCall(ass.getCurrent(), (RuleCall) ass
+					.getAssignmentElement(), ass.getValue());
+			break;
+		case PRC:
+			final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
+			if (ruleCall != null) {
+				final ParserRule parserRule = (ParserRule) ruleCall.getRule();
+				if (GrammarUtil.isDatatypeRule(parserRule)) {
+					elementLexerRuleCall(ass.getCurrent(), ruleCall, ass
+							.getValue());
 				}
-				break;
-			default:
-				break;
+			}
+			break;
+		default:
+			break;
 		}
 
 	}

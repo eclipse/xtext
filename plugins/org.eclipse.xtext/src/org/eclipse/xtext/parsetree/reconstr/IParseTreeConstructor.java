@@ -76,4 +76,8 @@ public interface IParseTreeConstructor {
 	public interface IRuleCallToken extends IAbstractToken {
 		public RuleCall getGrammarElement();
 	}
+	
+	public interface IUnassignedTextToken extends IAbstractToken {
+		public RuleCall getGrammarElement();
+	}
 }

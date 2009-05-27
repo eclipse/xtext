@@ -231,6 +231,19 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
+	public abstract class UnassignedTextToken extends AbstractToken2 implements
+			IUnassignedTextToken {
+
+		public UnassignedTextToken(AbstractToken2 parent, AbstractToken2 next,
+				int no, IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
 	protected List<IAbstractToken> fails = new ArrayList<IAbstractToken>();
 
 	private final Logger log = Logger
@@ -265,6 +278,9 @@ public abstract class AbstractParseTreeConstructor2 implements
 
 	public IAbstractToken serialize(EObject object) {
 		fails.clear();
+		if (object == null)
+			throw new NullPointerException(
+					"The to-be-serialized EObject is null");
 		IInstanceDescription inst = getDescr(object);
 		AbstractToken2 f = getRootToken(inst);
 		int no = 0;
