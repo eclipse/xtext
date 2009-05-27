@@ -26,7 +26,6 @@
 */
 package «getParseTreeConstructorName().toJavaPackage()»;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -85,22 +84,9 @@ protected class ThisRootNode extends RootToken {
 
 «EXPAND createFollowerMethod FOR calcFollowers()-»
 		
-«IF calcFollowers().exists(e|e.ruleEnd) || isElementCallable()-»
-	public IInstanceDescription tryConsume() {
 «IF isElementCallable()-»
+	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
-«ENDIF-»  «REM»
-«IF calcFollowers().exists(e|e.ruleEnd)-»
-		IInstanceDescription inst = tryConsumeVal();
-«IF metaType.name == "Association" && calcParentFollowers().size > 0-»
-		if(inst != null && !consumed.isConsumed()) return null;
-«ELSE-»
-		if(inst != null && !inst.isConsumed()) return null;
-«ENDIF-»
-		return inst; 
-«ELSE-»
-		return tryConsumeVal();
-«ENDIF-»«ENDREM»
 		return tryConsumeVal();
 	}
 «ENDIF-»
@@ -186,21 +172,24 @@ protected class «elementMethodName()» extends AlternativesToken {
 
 «DEFINE element FOR RuleCall»
 «grammarFragmentToStr("// ")»
+«IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
 	protected IInstanceDescription tryConsumeVal() {
-«IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
-«ELSE-»
-		// FIXME: terminal or datatype rule call
-«ENDIF-»
 		return current;
 	}
 	
 «EXPAND createParentFollowerMethod(false) FOR calcParentFollowers()-»
 }
+«ELSE-»
+protected class «elementMethodName()» extends UnassignedTextToken {
+
+«EXPAND constructor-»
+}
+«ENDIF-»
 «ENDDEFINE»
 
 

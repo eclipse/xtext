@@ -22,8 +22,10 @@ import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -60,6 +62,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return DefaultTransientValueService.class;
+	}
+	
+	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
+		return DefaultUnassignedTextSerializer.class;
 	}
 
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
