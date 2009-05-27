@@ -87,9 +87,9 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"import foo.bar.* "), URI.createURI("import.indextestlanguage"));
 		
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE.getElement());
-		assertNotSame(IScope.NULLSCOPE, scope.getOuterScope());
+		assertEquals(IScope.NULLSCOPE, scope.getOuterScope().getOuterScope());
 		List<String> names = toListOfNames(scope.getAllContents());
-		assertEquals(5, names.size());
+		assertEquals(names.toString(), 5, names.size());
 		assertTrue(names.contains("Person"));
 		assertTrue(names.contains("String"));
 		assertTrue(names.contains("foo.bar"));
