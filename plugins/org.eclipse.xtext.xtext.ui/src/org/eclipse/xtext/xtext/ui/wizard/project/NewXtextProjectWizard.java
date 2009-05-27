@@ -43,6 +43,11 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 
 	private NewXtextProjectWizardPage page;
 
+	public NewXtextProjectWizard() {
+		super();
+		setWindowTitle("New Xtext Project");
+	}
+
 	@Override
 	public void addPages() {
 		page = new NewXtextProjectWizardPage(selection);
