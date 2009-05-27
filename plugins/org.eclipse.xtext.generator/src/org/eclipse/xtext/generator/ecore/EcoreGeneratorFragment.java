@@ -51,9 +51,12 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.LineFilterOutputStream;
 import org.eclipse.xtext.util.Strings;
-
+/**
+ * @author Michael Clay
+ */
 public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
+	private static final String MODEL_PLUGIN_ID = "modelPluginID";
 	private static Logger log = Logger.getLogger(EcoreGeneratorFragment.class);
 
 	{
@@ -103,6 +106,26 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 				xmiPath = javaPath + "/" + grammar.getName().substring(0, grammar.getName().lastIndexOf('.')).replace('.', '/');
 			else
 				xmiPath = xmiModelDirectory;
+			if ((this.modelPluginID == null || "".equals(this.modelPluginID))
+					&& (ctx.getVariable(MODEL_PLUGIN_ID) != null)) {
+				this.modelPluginID = (String) ctx.getVariable(MODEL_PLUGIN_ID).getValue();
+			}
+			if (this.editDirectory == null || "".equals(this.editDirectory)) {
+				this.editDirectory = ctx.getOutput().getOutlet(
+						org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath() + ".edit/src";
+			}
+			if ((this.editPluginID == null || "".equals(this.editPluginID))
+					&& (this.modelPluginID != null)) {
+				this.editPluginID = this.modelPluginID + ".edit";
+			}
+			if (this.editorDirectory == null || "".equals(this.editorDirectory)) {
+				this.editorDirectory = ctx.getOutput().getOutlet(
+						org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath() + ".editor/src";
+			}
+			if ((this.editorPluginID == null || "".equals(this.editorPluginID))
+					&& (this.modelPluginID != null)) {
+				this.editorPluginID = this.modelPluginID + ".editor";
+			}
 			generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
 		}
 	}
@@ -156,8 +179,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
 		genModel.initialize(packs2);
-		genModel.setModelDirectory(javaPath);
+		genModel.setModelDirectory(toGenModelProjectPath(javaPath));
 		genModel.setModelName(modelName);
+		genModel.setModelPluginID(this.modelPluginID);
+		genModel.setEditDirectory(toGenModelProjectPath(this.editDirectory));
+		genModel.setEditorDirectory(toGenModelProjectPath(this.editorDirectory));
+		genModel.setEditPluginID(this.editPluginID);
+		genModel.setEditorPluginID(this.editorPluginID);
 		
 		genModel.setValidateModel(false);
 		genModel.setForceOverwrite(true);
@@ -171,27 +199,6 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			genPackage.setBasePackage(basePackage);
 		}
 		genModel.getUsedGenPackages().addAll(getUsedGenPackages());
-
-		if(javaEditDirectory != null) {
-			genModel.setEditDirectory(javaEditDirectory);
-		}
-		
-//		List<EPackage> missingPackages = genModel.getMissingPackages();
-//		if (!missingPackages.isEmpty()) {
-//			StringBuffer buff = new StringBuffer();
-//			int i = 0;
-//			for (EPackage pack : missingPackages) {
-//				i++;
-//				buff.append("'" + pack.getName() + "' (nsUri='" + pack.getNsURI() + "')");
-//				if (i < missingPackages.size()) {
-//					buff.append(",");
-//				}
-//			}
-//			throw new IllegalStateException("Couldn't generate EMF code for Grammar " + grammar.getName()
-//					+ ". Missing genmodels for " + buff + ". Was configured with '" + urisString + "'.");
-//		}
-//
-
 		// write genmodel
 		res.getContents().add(genModel);
 		res2.getContents().addAll(packs2);
@@ -214,16 +221,6 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 							public Adapter createGenEnumAdapter() {
 								return new GenEnumGeneratorAdapter(this) {
 									@Override
-									protected URI toURI(String pathName) {
-										return EcoreGeneratorFragment.this.toURI(pathName);
-									}
-									
-									@Override
-									protected URI toPlatformResourceURI(URI uri) {
-										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
-									}
-
-									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
 									}
@@ -234,16 +231,6 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 							public Adapter createGenClassAdapter() {
 								return new GenClassGeneratorAdapter(this) {
 									@Override
-									protected URI toURI(String pathName) {
-										return EcoreGeneratorFragment.this.toURI(pathName);
-									}
-									
-									@Override
-									protected URI toPlatformResourceURI(URI uri) {
-										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
-									}
-
-									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
 									}
@@ -253,16 +240,6 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 							@Override
 							public Adapter createGenPackageAdapter() {
 								return new GenPackageGeneratorAdapter(this) {
-									@Override
-									protected URI toURI(String pathName) {
-										return EcoreGeneratorFragment.this.toURI(pathName);
-									}
-									
-									@Override
-									protected URI toPlatformResourceURI(URI uri) {
-										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
-									}
-
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
@@ -280,26 +257,26 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		if (diagnostic.getSeverity() != Diagnostic.OK)
 			log.info(diagnostic);
 	}
-	
-	public URI toURI(String pathName) {
-		try {
-			String path = new File(pathName).getCanonicalPath();
-			return URI.createFileURI(path);
-		} catch (IOException ex) {
-			return URI.createFileURI(pathName);
-		}
-	}
-	
-	public URI toPlatformResourceURI(URI uri) {
-		// we use file URIs instead
-		return uri;
-	}
 
 	public OutputStream createOutputStream(OutputStream stream) throws Exception {
 		return new LineFilterOutputStream(stream, " * $Id" + "$");
 	}
-	
+	/**
+	 * required to match the path format as expected from {@link GenModelImpl#getProjectPath}
+	 */
+	private String toGenModelProjectPath(String path) {
+		return null==path || "".equals(path) || path.startsWith("/") ?  path :  path.substring(path.indexOf("/"));
+	 }
+	 
 	private String basePackage = null;
+	private String javaModelDirectory = null;
+	private String xmiModelDirectory = null;
+	private String modelPluginID = null;
+	private String editDirectory = null;
+	private String editorDirectory = null;
+	private String editPluginID = null;
+	private String editorPluginID = null;
+
 	
 	public void setBasePackage(String basePackage) {
 		if ("".equals(basePackage.trim()))
@@ -313,12 +290,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return basePackage;
 	}
 	
-	private String javaModelDirectory = null;
 	
-	private String xmiModelDirectory = null;
-
-	private String javaEditDirectory = null;
-
 	public void setJavaModelDirectory(String dir) {
 		javaModelDirectory = dir;
 	}
@@ -327,12 +299,29 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		xmiModelDirectory = dir;
 	}
 
-	public void setJavaEditDirectory(String dir) {
-		javaEditDirectory = dir;
+	public void setModelPluginID(String modelPluginId) {
+		modelPluginID = modelPluginId;
 	}
 	
+	public void setEditDirectory(String editDirectory) {
+		this.editDirectory = editDirectory;
+	}
+
+	public void setEditorDirectory(String editorDirectory) {
+		this.editorDirectory = editorDirectory;
+	}
+
+	public void setEditPluginID(String editPluginId) {
+		editPluginID = editPluginId;
+	}
+
+	public void setEditorPluginID(String editorPluginId) {
+		editorPluginID = editorPluginId;
+	}
+
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
 		return getBasePackage(g) + "." +pack.getName() +"."+ Strings.toFirstUpper(pack.getName())
 				+ "Package";
 	}
 }
+

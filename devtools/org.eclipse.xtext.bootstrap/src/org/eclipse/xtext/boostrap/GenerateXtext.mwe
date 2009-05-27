@@ -7,6 +7,7 @@
 	<property name="commonUiProject" value="../${commonUiProjectName}"/>
 	<property name="file.extensions" value="xtext,xtext2"/>
 	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${uiProject}/src-gen"/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${commonUiProject}/src-gen"/>
