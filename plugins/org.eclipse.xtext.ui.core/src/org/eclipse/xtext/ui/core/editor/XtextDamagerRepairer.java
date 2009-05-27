@@ -64,68 +64,67 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			previousContent.put(fDocument, fDocument.get());
 		}
 	}
-	
+
 	private SimpleCache<DocumentEvent, IRegion> cache = new SimpleCache<DocumentEvent, IRegion>(new Function<DocumentEvent, IRegion>() {
 
 		public IRegion apply(DocumentEvent from) {
-			IRegion computedRegion = computeTextChangeRegion(from);
-			int offset = Math.min(computedRegion.getOffset(),from.getOffset());
-			int length = Math.max(computedRegion.getLength(), from.getText().length());
-			return log(new Region(offset, length));
+			return computeTextChangeRegion(from);
 		}
 
 		private IRegion computeTextChangeRegion(final DocumentEvent e) {
 			// empty document -> no dirty region
-			if (e.getDocument().getLength()==0)
-				return new Region(0,0);
-			
+			if (e.getDocument().getLength() == 0)
+				return new Region(0, 0);
+
 			// previously empty -> full document dirty
 			String previousText = previousContent.get(e.getDocument());
-			if (previousText.length()==0) 
-				return new Region(0,e.getDocument().getLength());
-			
+			if (previousText.length() == 0)
+				return new Region(0, e.getDocument().getLength());
+
+			int start = e.getOffset();
+			int end = Math.min(e.getDocument().getLength(),e.getOffset()+e.getLength());
 			TokenIterator previous = iterator(previousText);
 			TokenIterator actual = iterator(e.getDocument().get());
 			// forward to the first difference
-			while (previous.hasNext() && actual.hasNext() && equal(previous.next(),actual.next())) {
+			while (previous.hasNext() && actual.hasNext() && equal(previous.next(), actual.next())) {
 				// do nothing, just move forward
+				if (actual.getCurrent().getStopIndex() > start) {
+					start = actual.getCurrent().getStartIndex();
+					break;
+				}
 			}
-			
-			// the first pair of tokens which are not equal between previous and current text determines the start offset
-			int start = actual.getCurrent().getStartIndex();
-			int end = start+actual.getCurrent().getText().length();
-			if (equal(previous.getCurrent(),actual.getCurrent()))
-				start = start+actual.getCurrent().getText().length();
-			// lengthDiff is the number of characters the trailing text (i.e. text
+			end = Math.max(end, actual.getCurrent().getStopIndex());
+			// the first pair of tokens which are not equal between previous and
+			// current text determines the start offset
+			start = Math.min(start, actual.getCurrent().getStartIndex());
+			// lengthDiff is the number of characters the trailing text (i.e.
+			// text
 			// after the change) is moved.
 			int lengthDiff = e.getText().length() - e.getLength();
-			
-			
-			while (!inSync(previous,actual,lengthDiff)) {
-				
+
+			while (!inSync(previous, actual, lengthDiff)) {
+
 				if (!actual.hasNext()) {
-					if (equal(previous.getCurrent(),actual.getCurrent())) {
+					if (equal(previous.getCurrent(), actual.getCurrent())) {
 						return new Region(end, 0);
 					}
-					return new Region(start, actual.getCurrent().getStopIndex()+1-start);
-				} 
-				
-				end = actual.getCurrent().getStopIndex()+1;
-				//move forward and catch up
+					return new Region(start, actual.getCurrent().getStopIndex() + 1 - start);
+				}
+
+				end = actual.getCurrent().getStopIndex() + 1;
+				// move forward and catch up
 				actual.next();
-				while (previous.getCurrent().getStartIndex()+lengthDiff < actual.getCurrent().getStartIndex()) {
+				while (previous.getCurrent().getStartIndex() + lengthDiff < actual.getCurrent().getStartIndex()) {
 					if (!previous.hasNext()) {
-						return new Region(start,e.getDocument().getLength()-start);
+						return new Region(start, e.getDocument().getLength() - start);
 					}
 					previous.next();
 				}
 			}
-			
-			return new Region(start,end-start);
+
+			return new Region(start, end - start);
 		}
-		
-		
-		
+
 		/**
 		 * @param previous
 		 * @param actual
@@ -133,12 +132,12 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		 * @return
 		 */
 		private boolean inSync(TokenIterator previous, TokenIterator actual, int lengthDiff) {
-			boolean equal = equal(previous.getCurrent(),actual.getCurrent());
-			int prevIndex = previous.getCurrent().getStartIndex()+lengthDiff;
+			boolean equal = equal(previous.getCurrent(), actual.getCurrent());
+			int prevIndex = previous.getCurrent().getStartIndex() + lengthDiff;
 			int startIndex = actual.getCurrent().getStartIndex();
 			return equal && prevIndex == startIndex;
 		}
-		
+
 		/**
 		 * @param t1
 		 * @param t2
@@ -147,7 +146,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		private boolean equal(CommonToken t1, CommonToken t2) {
 			return t1.getText().equals(t2.getText());
 		}
-		
+
 		/**
 		 * @param string
 		 * @return
@@ -158,17 +157,6 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			return new TokenIterator(l);
 		}
 	});
-
-
-	/**
-	 * @param region
-	 * @return
-	 */
-	private IRegion log(IRegion region) {
-		if (log.isDebugEnabled())
-			log.debug(" dirty :" + region.getOffset() + " .. " + region.getLength());
-		return region;
-	}
 
 	public static class TokenIterator implements Iterator<CommonToken> {
 
@@ -182,7 +170,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		public TokenIterator(Lexer lexer) {
 			this.lexer = lexer;
 		}
-		
+
 		public CommonToken getCurrent() {
 			return current;
 		}
