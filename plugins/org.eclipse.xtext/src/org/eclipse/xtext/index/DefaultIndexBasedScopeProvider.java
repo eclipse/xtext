@@ -186,12 +186,16 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope getGlobalScope(final EClass type) {
-		Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
-		return new SimpleScope(transform(result, new Function<EObjectDescriptor, IScopedElement>() {
-			public IScopedElement apply(EObjectDescriptor from) {
-				return new IndexBasedScopedElement(from);
+		return new SimpleScope(null) {
+			public Iterable<IScopedElement> getContents() {
+				Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
+				return transform(result, new Function<EObjectDescriptor, IScopedElement>() {
+					public IScopedElement apply(EObjectDescriptor from) {
+						return new IndexBasedScopedElement(from);
+					}
+				});
 			}
-		}));
+		};
 	}
 
 }

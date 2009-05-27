@@ -1,5 +1,3 @@
-package org.eclipse.xtext.index;
-
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -8,6 +6,7 @@ package org.eclipse.xtext.index;
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.index;
 
 import static com.google.common.collect.Iterables.*;
 
@@ -18,6 +17,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.PersistableIndexStore;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
@@ -205,6 +206,18 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		
 		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
 		
+	}
+
+	public void testLazyGlobalIndexAccess() throws Exception {
+		scopeProvider.setIndexStore(null);
+		IScope scope = scopeProvider.getScope(EcoreFactory.eINSTANCE.createEObject(), EcorePackage.Literals.EOBJECT);
+		assertNotNull(scope);
+		try {
+			scope.getContents();
+			fail("NullPointerException expected");
+		}
+		catch (NullPointerException e) {
+		}
 	}
 
 	private List<String> toListOfNames(Iterable<IScopedElement> elements) {
