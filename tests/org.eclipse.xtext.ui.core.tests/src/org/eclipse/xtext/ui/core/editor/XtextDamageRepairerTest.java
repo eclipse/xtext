@@ -69,7 +69,7 @@ public class XtextDamageRepairerTest extends TestCase {
 	}
 	
 	public void testAddElement() throws Exception {
-		assertEquals(7,9,check("foo bar",7,0," honolulu"));
+		assertEquals(4,12,check("foo bar",7,0," honolulu"));
 	}
 	
 	public void testChangeInTheMiddleElement() throws Exception {
@@ -78,6 +78,11 @@ public class XtextDamageRepairerTest extends TestCase {
 	
 	public void testComplicatedStuff1() throws Exception {
 		assertEquals(0,22,check("test : 'mo*/in' foo;",0,0,"/*"));
+	}
+	
+	
+	public void testBug276628() throws Exception {
+		assertEquals(7,10,check("Rule2: 'keyword';",8,9,"keyword';"));
 	}
 	
 	/**
