@@ -4,24 +4,6 @@
 <plugin>
 
 	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtext">
-		</parser>
-	</extension>
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtext2">
-		</parser>
-	</extension>
-
-
-
-    <extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -32,64 +14,6 @@
 			name="Xtext Editor">
 		</editor>
 	</extension>
-	 <extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.Xtext"
-			name="Xtext">
-			<keywordReference
-				id="org.eclipse.xtext.ui.keyword_Xtext">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.Xtext"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.Xtext.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.Xtext"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.Xtext.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.ui.keyword_Xtext"
-			label="Xtext">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.Xtext.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-
-
-
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            name="Xtext"
-            id="org.eclipse.xtext.projectwiz">
-      </category>
-      <wizard
-            category="org.eclipse.xtext.projectwiz"
-            class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-            icon="icons/editor.gif"
-            id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-            name="Xtext Project"
-            project="true">
-      </wizard>
-   </extension>
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
@@ -114,4 +38,68 @@
 			</and>
       </definition>
     </extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+			id="org.eclipse.xtext.Xtext"
+			name="Xtext">
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+		</page>
+		<page
+			category="org.eclipse.xtext.Xtext"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.Xtext.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+		</page>
+		<page
+			category="org.eclipse.xtext.Xtext"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.Xtext.templates"
+			name="Templates!">
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="org.eclipse.xtext.ui.keyword_Xtext"
+			label="Xtext"/>
+	</extension>
+	
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtext">
+		</parser>
+	</extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="xtext2">
+		</parser>
+	</extension>
+
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category
+			name="Xtext"
+			id="org.eclipse.xtext.projectwiz">
+		</category>
+		<wizard
+			category="org.eclipse.xtext.projectwiz"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			icon="icons/editor.gif"
+			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			name="Xtext Project"
+			project="true">
+		</wizard>
+	</extension>
 </plugin>
