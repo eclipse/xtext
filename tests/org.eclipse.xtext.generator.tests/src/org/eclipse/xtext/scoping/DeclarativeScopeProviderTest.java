@@ -15,6 +15,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,6 +23,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -31,7 +35,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class DeclarativeScopeProviderTest extends TestCase {
+public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 	@SuppressWarnings("unused")
 	public void testSimple() throws Exception {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
@@ -43,6 +47,15 @@ public class DeclarativeScopeProviderTest extends TestCase {
 
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
 		assertEquals(a, provider.getScope(details, details));
+	}
+	
+	
+	public void testFallBack() throws Exception {
+		with(new LazyLinkingTestLanguageStandaloneSetup());
+		EObject model = getModel("type Foo");
+		IScopeProvider provider = getScopeProvider();
+		IScope scope = provider.getScope(model, LazyLinkingPackage.eINSTANCE.getType());
+		assertEquals("Foo",scope.getAllContents().iterator().next().name());
 	}
 
 	@SuppressWarnings("unused")

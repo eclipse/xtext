@@ -17,8 +17,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
@@ -46,8 +48,11 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
+		// create a defensive clone
+		ResourceSet setImpl = EcoreUtil2.clone(new ResourceSetImpl(),grammar.eResource().getResourceSet());
+		grammar = (Grammar) setImpl.getResource(grammar.eResource().getURI(), true).getContents().get(0);
+		
 		// save grammar model
-		ResourceSet setImpl = grammar.eResource().getResourceSet();
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
 		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
 				+ "/" + xmiPath));
