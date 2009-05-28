@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,9 +25,14 @@ public class ImportUriUtil {
 	public static boolean isValid(EObject context, String uri) {
 		URI newURI = getResolvedImportUri(context.eResource(), uri);
 		try {
-			URI normalized = context.eResource().getResourceSet().getURIConverter().normalize(newURI);
+			URIConverter uriConverter = context.eResource().getResourceSet().getURIConverter();
+			URI normalized = uriConverter.normalize(newURI);
+			for (Resource res: context.eResource().getResourceSet().getResources()) {
+				if (uriConverter.normalize(res.getURI()).equals(normalized))
+					return true;
+			}
 			if (normalized != null)
-				return context.eResource().getResourceSet().getURIConverter().exists(normalized, new HashMap<Object,Object>(2));
+				return uriConverter.exists(normalized, new HashMap<Object,Object>(2));
 		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
 		}

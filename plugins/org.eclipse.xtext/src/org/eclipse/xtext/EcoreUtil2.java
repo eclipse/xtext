@@ -13,17 +13,16 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -37,11 +36,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 
 /**
@@ -58,6 +55,20 @@ public class EcoreUtil2 extends EcoreUtil {
 		if (ele.eContainer() != null)
 			return getContainerOfType(ele.eContainer(), type);
 		return null;
+	}
+	
+	/**
+	 * copies contents of a resource set into a new one
+	 */
+	public static <T extends ResourceSet> T clone(T target, ResourceSet source) {
+		EList<Resource> resources = source.getResources();
+		EcoreUtil.Copier copier = new EcoreUtil.Copier();
+		for (Resource resource : resources) {
+			Resource resource2 = target.createResource(resource.getURI());
+			resource2.getContents().addAll(copier.copyAll(resource.getContents()));
+		}
+		copier.copyReferences();
+		return target;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -135,30 +146,30 @@ public class EcoreUtil2 extends EcoreUtil {
 		return null;
 	}
 
-	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
-		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
-		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
-		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
-			URI originalBaseURI;
-			@Override
-			public void setBaseURI(URI uri) {
-				this.originalBaseURI = uri;
-				// fake the base uri
-			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
-			}
-
-			@Override
-			public URI deresolve(URI uri) {
-				if (uri.trimFragment().equals(baseURI))
-					return super.deresolve(uri);
-				if (uri.trimFragment().equals(originalBaseURI))
-					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
-				return uri;
-			}
-		});
-		metaModelResource.getContents().add(ePackage);
-		metaModelResource.save(options);
-	}
+//	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
+//		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
+//		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
+//		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
+//			URI originalBaseURI;
+//			@Override
+//			public void setBaseURI(URI uri) {
+//				this.originalBaseURI = uri;
+//				// fake the base uri
+//			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
+//			}
+//
+//			@Override
+//			public URI deresolve(URI uri) {
+//				if (uri.trimFragment().equals(baseURI))
+//					return super.deresolve(uri);
+//				if (uri.trimFragment().equals(originalBaseURI))
+//					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
+//				return uri;
+//			}
+//		});
+//		metaModelResource.getContents().add(ePackage);
+//		metaModelResource.save(options);
+//	}
 
 	public static String getURIFragment(EObject eObject) {
 		Resource resource = eObject.eResource();
