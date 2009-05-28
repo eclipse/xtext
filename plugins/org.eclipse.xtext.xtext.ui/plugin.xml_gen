@@ -27,17 +27,17 @@
 		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.Xtext.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.Xtext" 
-      						forcePluginActivation="true"/>
-         			</with>		
+		<definition id="org.eclipse.xtext.Xtext.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+						value="org.eclipse.xtext.Xtext" 
+						forcePluginActivation="true"/>
+				</with>		
 			</and>
-      </definition>
-    </extension>
+		</definition>
+	</extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -45,39 +45,28 @@
 			id="org.eclipse.xtext.Xtext"
 			name="Xtext"
 			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.ui.keyword_Xtext">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.Xtext"
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.Xtext.coloring"
 			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.Xtext"
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.Xtext.templates"
 			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.ui.keyword_Xtext"
-			label="Xtext">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.Xtext.tasktags"
-			label="Task Tags">
-		</keyword>
+			label="Xtext"/>
 	</extension>
 	
 
