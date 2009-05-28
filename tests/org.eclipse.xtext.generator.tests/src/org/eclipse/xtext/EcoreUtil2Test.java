@@ -13,12 +13,17 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
@@ -29,6 +34,43 @@ public class EcoreUtil2Test extends TestCase {
 		EClass result = EcoreFactory.eINSTANCE.createEClass();
 		result.setName(name);
 		return result;
+	}
+	
+	public void testClone() throws Exception {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION,
+				new XMIResourceFactoryImpl());
+		EPackage.Registry.INSTANCE.put(EcorePackage.eINSTANCE.getNsURI(), EcorePackage.eINSTANCE);
+		
+		ResourceSetImpl rs = new ResourceSetImpl();
+		Resource r1 = rs.createResource(URI.createURI("foo.xmi"));
+		Resource r2 = rs.createResource(URI.createURI("bar.xmi"));
+		EClass a = EcoreFactory.eINSTANCE.createEClass();
+		a.setName("a");
+		EClass b = EcoreFactory.eINSTANCE.createEClass();
+		r1.getContents().add(a);
+		b.setName("b");
+		b.getESuperTypes().add(a);
+		r2.getContents().add(b);
+		
+		ResourceSetImpl clone = EcoreUtil2.clone(new ResourceSetImpl(), rs);
+		EList<Resource> list = clone.getResources();
+		
+		Resource resA = list.get(0);
+		assertEquals(URI.createURI("foo.xmi"),resA.getURI());
+		assertNotSame(resA, r1);
+		
+		Resource resB = list.get(1);
+		assertEquals(URI.createURI("bar.xmi"),resB.getURI());
+		assertNotSame(resB, r2);
+		
+		EClass a1 = (EClass)resA.getContents().get(0);
+		EClass b1 = (EClass)resB.getContents().get(0);
+		assertEquals("a", a1.getName());
+		assertNotSame(a, a1);
+		assertEquals("b", b1.getName());
+		assertNotSame(b, b1);
+		assertSame(b1.getESuperTypes().get(0),a1);
+		assertSame(b.getESuperTypes().get(0),a);
 	}
 
 	public void testCommonCompatibleType01() {
