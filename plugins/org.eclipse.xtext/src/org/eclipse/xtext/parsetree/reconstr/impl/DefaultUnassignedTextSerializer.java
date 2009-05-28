@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 
 public class DefaultUnassignedTextSerializer extends
@@ -26,7 +27,12 @@ public class DefaultUnassignedTextSerializer extends
 		r = serializeByRule(rc.getRule(), current);
 		if (r != null)
 			return r;
-		return super.serializeUnassignedRuleCall(rc, current);
+		throw new IllegalArgumentException(
+				"Could not determine the value for the unassigned rulecall of rule "
+						+ rc.getRule().getName()
+						+ " from within rule "
+						+ GrammarUtil.containingRule(rc).getName()
+						+ ". You might want to implement IUnassignedTextSerializer or modify your implementation to handle this rulecall.");
 	}
 
 }
