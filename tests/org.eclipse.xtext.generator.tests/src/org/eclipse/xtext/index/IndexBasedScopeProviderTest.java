@@ -88,7 +88,6 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"import foo.bar.* "), URI.createURI("import.indextestlanguage"));
 		
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE.getElement());
-		assertEquals(IScope.NULLSCOPE, scope.getOuterScope().getOuterScope());
 		List<String> names = toListOfNames(scope.getAllContents());
 		assertEquals(names.toString(), 5, names.size());
 		assertTrue(names.contains("Person"));
@@ -205,8 +204,6 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.contains("stuff.baz.Person"));
 		
-		assertEquals(IScope.NULLSCOPE, scope.getOuterScope());
-		
 	}
 	public void testReexports2() throws Exception {
 		final XtextResource resource = getResource(new StringInputStream(
@@ -238,6 +235,62 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		assertTrue(names.toString(),names.contains("A.B.D"));
 	}
 	
+	public void testLocalElementsNotFromIndex() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"A { " +
+				"  B { " +
+				"    entity D {}" +
+				"  }" +
+				"}" +
+				"E {" +
+				"  datatype Context" +
+				"}"), URI.createURI("foo23.indextestlanguage"));
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
+		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		for (IScopedElement ele : scope.getAllContents()) {
+			if (ele.name().equals("A.B.D"))
+				return;
+		}
+		fail("No entity 'A.B.D' found");
+	}
+	
+	public void testLocalElementsNotFromIndex2() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"A { " +
+				"  B { " +
+				"    entity D {}" +
+				"  }" +
+				"}" +
+				"E {" +
+				"  datatype Context" +
+				"}"), URI.createURI("foo23.indextestlanguage"));
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
+		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		do {
+			for (IScopedElement ele : scope.getContents()) {
+				if (ele.name().equals("A.B.D")) {
+					assertFalse(ele instanceof IndexBasedScopedElement);
+				}
+			}
+			scope = scope.getOuterScope();
+		} while (scope!=IScope.NULLSCOPE);
+	}
+	
+	
+	
 	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 	
 	private String toString(IScope scope, String indent) {
@@ -256,7 +309,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		IScope scope = scopeProvider.getScope(EcoreFactory.eINSTANCE.createEObject(), EcorePackage.Literals.EOBJECT);
 		assertNotNull(scope);
 		try {
-			scope.getContents();
+			scope.getAllContents();
 			fail("NullPointerException expected");
 		}
 		catch (NullPointerException e) {
