@@ -22,9 +22,8 @@ public class HiddenTokensTest extends AbstractGeneratorTest {
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
 		AbstractNode node = getRootNode(model);
-		assertEquals(node.serialize(),model);
+		assertEquals(model,node.serialize());
 	}
-
 	
 	public void testWhitespaceIsIncluded2() throws Exception {
 		String model = "element foo;\nelement bar;/* foo bar */ element foo;\nelement bar;";
