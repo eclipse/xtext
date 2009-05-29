@@ -72,9 +72,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		allRules = new HashMap<String, AbstractRule>();
 	}
 
-	protected AbstractInternalAntlrParser(TokenStream input, IAstFactory factory, Grammar grammar) {
-		this(input);
-		this.factory = factory;
+	protected void registerRules(Grammar grammar) {
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
 			allRules.put(rule.getName(), rule);
 		}
