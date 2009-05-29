@@ -19,9 +19,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IndexStore;
+import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
@@ -100,13 +102,18 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(final EObject context, final EClass type) {
-		// global scope
+		IScope result = null;
 		if (context == null)
-			return getGlobalScope(type);
-		
-		// outer scope
-		IScope result = getScope(context.eContainer(), type);
-		
+			return getGlobalScope(context, type);
+		if (context.eContainer() == null) {
+			// global scope
+			result = getGlobalScope(context, type);
+			result = getResourceScope(result, context, type);
+		} else {
+			// outer scope
+			result = getScope(context.eContainer(), type);
+		}
+
 		IScope importScopeConfiguration = result;
 		// local scope used by the import scope
 		if (nameProvider.getQualifiedName(context) != null) {
@@ -124,6 +131,38 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 			result = new SimpleScope(result, localElements);
 		}
 		return result;
+	}
+
+	/**
+	 * @param result
+	 * @param context
+	 * @param type
+	 * @return
+	 */
+	private IScope getResourceScope(IScope parent, final EObject context, final EClass type) {
+		Iterable<EObject> eObjects = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return EcoreUtil.getAllProperContents(context.eResource(), true);
+			}
+		};
+		eObjects = filter(eObjects, new Predicate<EObject>(){
+
+			public boolean apply(EObject input) {
+				return type.isInstance(input);
+			}
+		});
+		
+		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
+
+			public IScopedElement apply(EObject from) {
+				String qualifiedName = nameProvider.getQualifiedName(from);
+				if (qualifiedName != null) {
+					return ScopedElement.create(qualifiedName, from);
+				}
+				return null;
+			}
+		});
+		return new SimpleScope(parent, filter(result, Predicates.notNull()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -199,10 +238,19 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		return proxy;
 	}
 
-	protected IScope getGlobalScope(final EClass type) {
+	protected IScope getGlobalScope(final EObject context, final EClass type) {
 		return new SimpleScope(null) {
 			public Iterable<IScopedElement> getContents() {
 				Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
+				if (context != null) {
+					Resource eResource = context.eResource();
+					final ResourceDescriptor descriptor = indexStore.resourceDAO().createQueryResource(eResource).executeSingleResult();
+					result = filter(result, new Predicate<EObjectDescriptor>() {
+						public boolean apply(EObjectDescriptor input) {
+							return !input.getResourceDescriptor().equals(descriptor);
+						}
+					});
+				}
 				return transform(result, new Function<EObjectDescriptor, IScopedElement>() {
 					public IScopedElement apply(EObjectDescriptor from) {
 						return new IndexBasedScopedElement(from);
