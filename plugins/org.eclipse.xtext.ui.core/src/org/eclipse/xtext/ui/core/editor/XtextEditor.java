@@ -9,9 +9,11 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -262,7 +264,7 @@ public class XtextEditor extends TextEditor {
 
 	private void doOnSaveValidation() {
 		if (validationJob == null)
-			validationJob = validationJobFactory.create(this, CheckMode.NORMAL_AND_FAST);
+			validationJob = validationJobFactory.create(this.getDocument(), (IFile) this.getResource(), CheckMode.NORMAL_AND_FAST, EValidator.MARKER, true);
 		validationJob.cancel();
 		try {
 			validationJob.join();
