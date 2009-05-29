@@ -40,7 +40,9 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
  	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
  	
     public InternalSimpleReconstrTestLanguageParser(TokenStream input, IAstFactory factory, SimpleReconstrTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

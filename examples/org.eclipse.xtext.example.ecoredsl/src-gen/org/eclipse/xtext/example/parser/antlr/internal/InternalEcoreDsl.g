@@ -40,7 +40,9 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
  	private EcoreDslGrammarAccess grammarAccess;
  	
     public InternalEcoreDslParser(TokenStream input, IAstFactory factory, EcoreDslGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

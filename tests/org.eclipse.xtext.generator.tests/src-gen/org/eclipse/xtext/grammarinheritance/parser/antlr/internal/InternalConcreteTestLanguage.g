@@ -40,7 +40,9 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
  	private ConcreteTestLanguageGrammarAccess grammarAccess;
  	
     public InternalConcreteTestLanguageParser(TokenStream input, IAstFactory factory, ConcreteTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

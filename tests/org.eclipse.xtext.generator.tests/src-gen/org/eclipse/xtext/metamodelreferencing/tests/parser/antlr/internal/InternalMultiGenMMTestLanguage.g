@@ -40,7 +40,9 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
  	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMultiGenMMTestLanguageParser(TokenStream input, IAstFactory factory, MultiGenMMTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

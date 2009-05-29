@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
  	private LexerTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLexerTestLanguageParser(TokenStream input, IAstFactory factory, LexerTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

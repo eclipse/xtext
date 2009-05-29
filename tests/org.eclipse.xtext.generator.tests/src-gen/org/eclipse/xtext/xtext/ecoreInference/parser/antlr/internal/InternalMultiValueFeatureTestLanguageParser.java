@@ -47,7 +47,9 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
      	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
      	
         public InternalMultiValueFeatureTestLanguageParser(TokenStream input, IAstFactory factory, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
-            super(input, factory, grammarAccess.getGrammar());
+            this(input);
+            this.factory = factory;
+            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
         
@@ -65,7 +67,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start entryRuleStart
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:70:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:72:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
     public final EObject entryRuleStart() throws RecognitionException {
         EObject current = null;
 
@@ -73,8 +75,8 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:70:47: (iv_ruleStart= ruleStart EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:71:2: iv_ruleStart= ruleStart EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:72:47: (iv_ruleStart= ruleStart EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:73:2: iv_ruleStart= ruleStart EOF
             {
              currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); 
             pushFollow(FOLLOW_ruleStart_in_entryRuleStart73);
@@ -100,7 +102,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleStart
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:78:1: ruleStart returns [EObject current=null] : (lv_featureA_0= RULE_ID )+ ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:80:1: ruleStart returns [EObject current=null] : (lv_featureA_0= RULE_ID )+ ;
     public final EObject ruleStart() throws RecognitionException {
         EObject current = null;
 
@@ -109,10 +111,10 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:83:6: ( (lv_featureA_0= RULE_ID )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:84:1: (lv_featureA_0= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:85:6: ( (lv_featureA_0= RULE_ID )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: (lv_featureA_0= RULE_ID )+
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:84:1: (lv_featureA_0= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: (lv_featureA_0= RULE_ID )+
             int cnt1=0;
             loop1:
             do {
@@ -126,7 +128,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:6: lv_featureA_0= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:88:6: lv_featureA_0= RULE_ID
             	    {
             	    lv_featureA_0=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart129); 

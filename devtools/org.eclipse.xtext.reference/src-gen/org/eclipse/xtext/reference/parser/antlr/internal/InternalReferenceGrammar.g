@@ -40,7 +40,9 @@ import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
  	private ReferenceGrammarGrammarAccess grammarAccess;
  	
     public InternalReferenceGrammarParser(TokenStream input, IAstFactory factory, ReferenceGrammarGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

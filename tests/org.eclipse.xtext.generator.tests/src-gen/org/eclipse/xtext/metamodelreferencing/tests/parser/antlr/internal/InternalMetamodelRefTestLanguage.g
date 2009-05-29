@@ -40,7 +40,9 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
  	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMetamodelRefTestLanguageParser(TokenStream input, IAstFactory factory, MetamodelRefTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

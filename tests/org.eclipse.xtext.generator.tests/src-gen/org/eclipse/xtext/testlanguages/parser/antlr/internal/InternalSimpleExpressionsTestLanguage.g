@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
  	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalSimpleExpressionsTestLanguageParser(TokenStream input, IAstFactory factory, SimpleExpressionsTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

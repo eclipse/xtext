@@ -40,7 +40,9 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
  	private TransientValuesTestGrammarAccess grammarAccess;
  	
     public InternalTransientValuesTestParser(TokenStream input, IAstFactory factory, TransientValuesTestGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

@@ -40,7 +40,9 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTest
  	private TwoContextsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalTwoContextsTestLanguageParser(TokenStream input, IAstFactory factory, TwoContextsTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

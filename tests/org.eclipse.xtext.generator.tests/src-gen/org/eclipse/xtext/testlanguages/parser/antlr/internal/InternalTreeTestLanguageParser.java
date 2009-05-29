@@ -47,7 +47,9 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
      	private TreeTestLanguageGrammarAccess grammarAccess;
      	
         public InternalTreeTestLanguageParser(TokenStream input, IAstFactory factory, TreeTestLanguageGrammarAccess grammarAccess) {
-            super(input, factory, grammarAccess.getGrammar());
+            this(input);
+            this.factory = factory;
+            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
         
@@ -65,7 +67,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:72:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -73,8 +75,8 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:70:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:72:47: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
@@ -100,7 +102,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:78:1: ruleModel returns [EObject current=null] : (lv_children_0= ruleNode )* ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:80:1: ruleModel returns [EObject current=null] : (lv_children_0= ruleNode )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -110,10 +112,10 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:83:6: ( (lv_children_0= ruleNode )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:84:1: (lv_children_0= ruleNode )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:85:6: ( (lv_children_0= ruleNode )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:86:1: (lv_children_0= ruleNode )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:84:1: (lv_children_0= ruleNode )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:86:1: (lv_children_0= ruleNode )*
             loop1:
             do {
                 int alt1=2;
@@ -126,7 +128,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:87:6: lv_children_0= ruleNode
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:89:6: lv_children_0= ruleNode
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0(), currentNode); 
@@ -177,7 +179,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start entryRuleNode
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:112:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:114:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -185,8 +187,8 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:112:46: (iv_ruleNode= ruleNode EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:113:2: iv_ruleNode= ruleNode EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:114:46: (iv_ruleNode= ruleNode EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:115:2: iv_ruleNode= ruleNode EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNodeRule(), currentNode); 
             pushFollow(FOLLOW_ruleNode_in_entryRuleNode178);
@@ -212,7 +214,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start ruleNode
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:120:1: ruleNode returns [EObject current=null] : ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:122:1: ruleNode returns [EObject current=null] : ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -224,14 +226,14 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:125:6: ( ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:126:1: ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:127:6: ( ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:128:1: ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:126:1: ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:126:2: (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:128:1: ( (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:128:2: (lv_name_0= RULE_ID ) '(' (lv_attrib_2= RULE_STRING ) ')' '{' (lv_children_5= ruleNode )* '};'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:126:2: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:128:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:128:2: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:130:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNode235); 
@@ -257,8 +259,8 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                     createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:150:1: (lv_attrib_2= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:152:6: lv_attrib_2= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:152:1: (lv_attrib_2= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:154:6: lv_attrib_2= RULE_STRING
             {
             lv_attrib_2=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNode274); 
@@ -288,7 +290,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                     createLeafNode(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:178:1: (lv_children_5= ruleNode )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:180:1: (lv_children_5= ruleNode )*
             loop2:
             do {
                 int alt2=2;
@@ -301,7 +303,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:181:6: lv_children_5= ruleNode
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:183:6: lv_children_5= ruleNode
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0(), currentNode); 

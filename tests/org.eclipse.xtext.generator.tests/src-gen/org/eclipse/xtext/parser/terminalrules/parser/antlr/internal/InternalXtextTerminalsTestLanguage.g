@@ -40,7 +40,9 @@ import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguag
  	private XtextTerminalsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalXtextTerminalsTestLanguageParser(TokenStream input, IAstFactory factory, XtextTerminalsTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

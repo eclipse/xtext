@@ -41,7 +41,9 @@ import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarA
  	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
  	
     public InternalEnumAndReferenceTestLanguageParser(TokenStream input, IAstFactory factory, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

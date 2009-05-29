@@ -40,7 +40,9 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
  	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnassignedTextTestLanguageParser(TokenStream input, IAstFactory factory, UnassignedTextTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

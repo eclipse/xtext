@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
  	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
  	
     public InternalOptionalEmptyTestLanguageParser(TokenStream input, IAstFactory factory, OptionalEmptyTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

@@ -48,7 +48,9 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
      	private EnumRulesTestLanguageGrammarAccess grammarAccess;
      	
         public InternalEnumRulesTestLanguageParser(TokenStream input, IAstFactory factory, EnumRulesTestLanguageGrammarAccess grammarAccess) {
-            super(input, factory, grammarAccess.getGrammar());
+            this(input);
+            this.factory = factory;
+            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
         
@@ -66,7 +68,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:73:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -74,8 +76,8 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:71:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:72:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:73:47: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:74:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
@@ -101,7 +103,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:79:1: ruleModel returns [EObject current=null] : ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:81:1: ruleModel returns [EObject current=null] : ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -115,10 +117,10 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:84:6: ( ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:85:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:86:6: ( ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:87:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:85:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:87:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -130,23 +132,23 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("85:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )", 2, 0, input);
+                    new NoViableAltException("87:1: ( ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? ) | ( 'generated' (lv_generated_5= ruleGeneratedEnum ) ) )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:85:2: ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:87:2: ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:85:2: ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:85:3: 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:87:2: ( 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:87:3: 'existing' (lv_existing_1= ruleExistingEnum ) ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )?
                     {
                     match(input,11,FOLLOW_11_in_ruleModel118); 
 
                             createLeafNode(grammarAccess.getModelAccess().getExistingKeyword_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:89:1: (lv_existing_1= ruleExistingEnum )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:92:6: lv_existing_1= ruleExistingEnum
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:91:1: (lv_existing_1= ruleExistingEnum )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:94:6: lv_existing_1= ruleExistingEnum
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), currentNode); 
@@ -171,7 +173,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:110:2: ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:112:2: ( 'generated' (lv_generated_3= ruleGeneratedEnum ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -180,14 +182,14 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:110:3: 'generated' (lv_generated_3= ruleGeneratedEnum )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:112:3: 'generated' (lv_generated_3= ruleGeneratedEnum )
                             {
                             match(input,12,FOLLOW_12_in_ruleModel166); 
 
                                     createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:114:1: (lv_generated_3= ruleGeneratedEnum )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:117:6: lv_generated_3= ruleGeneratedEnum
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:116:1: (lv_generated_3= ruleGeneratedEnum )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:119:6: lv_generated_3= ruleGeneratedEnum
                             {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), currentNode); 
@@ -225,17 +227,17 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:136:6: ( 'generated' (lv_generated_5= ruleGeneratedEnum ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:138:6: ( 'generated' (lv_generated_5= ruleGeneratedEnum ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:136:6: ( 'generated' (lv_generated_5= ruleGeneratedEnum ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:136:7: 'generated' (lv_generated_5= ruleGeneratedEnum )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:138:6: ( 'generated' (lv_generated_5= ruleGeneratedEnum ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:138:7: 'generated' (lv_generated_5= ruleGeneratedEnum )
                     {
                     match(input,12,FOLLOW_12_in_ruleModel223); 
 
                             createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:140:1: (lv_generated_5= ruleGeneratedEnum )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:143:6: lv_generated_5= ruleGeneratedEnum
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:142:1: (lv_generated_5= ruleGeneratedEnum )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:145:6: lv_generated_5= ruleGeneratedEnum
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), currentNode); 
@@ -289,16 +291,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleExistingEnum
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:168:1: ruleExistingEnum returns [Enumerator current=null] : ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:170:1: ruleExistingEnum returns [Enumerator current=null] : ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) ) ;
     public final Enumerator ruleExistingEnum() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:172:6: ( ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:173:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:174:6: ( ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:175:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:173:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:175:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -318,17 +320,17 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("173:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )", 3, 0, input);
+                    new NoViableAltException("175:1: ( ( 'SameName' ) | ( 'overridden' ) | ( 'DifferentLiteral' ) )", 3, 0, input);
 
                 throw nvae;
             }
 
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:173:2: ( 'SameName' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:175:2: ( 'SameName' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:173:2: ( 'SameName' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:173:4: 'SameName'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:175:2: ( 'SameName' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:175:4: 'SameName'
                     {
                     match(input,13,FOLLOW_13_in_ruleExistingEnum309); 
 
@@ -342,10 +344,10 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:179:6: ( 'overridden' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:181:6: ( 'overridden' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:179:6: ( 'overridden' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:179:8: 'overridden'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:181:6: ( 'overridden' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:181:8: 'overridden'
                     {
                     match(input,14,FOLLOW_14_in_ruleExistingEnum324); 
 
@@ -359,10 +361,10 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:185:6: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:187:6: ( 'DifferentLiteral' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:185:6: ( 'DifferentLiteral' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:185:8: 'DifferentLiteral'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:187:6: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:187:8: 'DifferentLiteral'
                     {
                     match(input,15,FOLLOW_15_in_ruleExistingEnum339); 
 
@@ -398,16 +400,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleGeneratedEnum
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:195:1: ruleGeneratedEnum returns [Enumerator current=null] : ( ( 'SameName' ) | ( 'DifferentLiteral' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:197:1: ruleGeneratedEnum returns [Enumerator current=null] : ( ( 'SameName' ) | ( 'DifferentLiteral' ) ) ;
     public final Enumerator ruleGeneratedEnum() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:199:6: ( ( ( 'SameName' ) | ( 'DifferentLiteral' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:200:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:201:6: ( ( ( 'SameName' ) | ( 'DifferentLiteral' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:202:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:200:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:202:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -419,16 +421,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("200:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )", 4, 0, input);
+                    new NoViableAltException("202:1: ( ( 'SameName' ) | ( 'DifferentLiteral' ) )", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:200:2: ( 'SameName' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:202:2: ( 'SameName' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:200:2: ( 'SameName' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:200:4: 'SameName'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:202:2: ( 'SameName' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:202:4: 'SameName'
                     {
                     match(input,13,FOLLOW_13_in_ruleGeneratedEnum382); 
 
@@ -442,10 +444,10 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:206:6: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:208:6: ( 'DifferentLiteral' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:206:6: ( 'DifferentLiteral' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:206:8: 'DifferentLiteral'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:208:6: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:208:8: 'DifferentLiteral'
                     {
                     match(input,15,FOLLOW_15_in_ruleGeneratedEnum397); 
 

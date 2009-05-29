@@ -40,7 +40,9 @@ import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguage
  	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
  	
     public InternalBaseInheritanceTestLanguageParser(TokenStream input, IAstFactory factory, BaseInheritanceTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

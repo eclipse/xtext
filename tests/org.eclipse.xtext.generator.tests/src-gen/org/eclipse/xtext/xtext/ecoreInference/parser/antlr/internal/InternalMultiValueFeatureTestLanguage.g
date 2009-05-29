@@ -40,7 +40,9 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
  	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMultiValueFeatureTestLanguageParser(TokenStream input, IAstFactory factory, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

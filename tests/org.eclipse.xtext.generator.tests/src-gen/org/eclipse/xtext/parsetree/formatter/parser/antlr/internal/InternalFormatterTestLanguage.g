@@ -40,7 +40,9 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
  	private FormatterTestLanguageGrammarAccess grammarAccess;
  	
     public InternalFormatterTestLanguageParser(TokenStream input, IAstFactory factory, FormatterTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

@@ -40,7 +40,9 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
  	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
  	
     public InternalDatatypeRulesTestLanguageParser(TokenStream input, IAstFactory factory, DatatypeRulesTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

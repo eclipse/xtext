@@ -48,7 +48,9 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
      	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
      	
         public InternalEnumAndReferenceTestLanguageParser(TokenStream input, IAstFactory factory, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
-            super(input, factory, grammarAccess.getGrammar());
+            this(input);
+            this.factory = factory;
+            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
         
@@ -66,7 +68,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start entryRuleEntityWithEnumAndReference
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:71:1: entryRuleEntityWithEnumAndReference returns [EObject current=null] : iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:73:1: entryRuleEntityWithEnumAndReference returns [EObject current=null] : iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF ;
     public final EObject entryRuleEntityWithEnumAndReference() throws RecognitionException {
         EObject current = null;
 
@@ -74,8 +76,8 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:71:68: (iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:72:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:73:68: (iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:74:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule(), currentNode); 
             pushFollow(FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference73);
@@ -101,7 +103,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleEntityWithEnumAndReference
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:79:1: ruleEntityWithEnumAndReference returns [EObject current=null] : ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:81:1: ruleEntityWithEnumAndReference returns [EObject current=null] : ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) ) ;
     public final EObject ruleEntityWithEnumAndReference() throws RecognitionException {
         EObject current = null;
 
@@ -112,14 +114,14 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:84:6: ( ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:85:1: ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:86:6: ( ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:87:1: ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:85:1: ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:85:2: (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:87:1: ( (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:87:2: (lv_type_0= ruleKindOfKeyword ) (lv_name_1= RULE_ID ) 'reference' ( RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:85:2: (lv_type_0= ruleKindOfKeyword )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:88:6: lv_type_0= ruleKindOfKeyword
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:87:2: (lv_type_0= ruleKindOfKeyword )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:90:6: lv_type_0= ruleKindOfKeyword
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), currentNode); 
@@ -144,8 +146,8 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:106:2: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:108:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:108:2: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:110:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference168); 
@@ -171,8 +173,8 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
                     createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:130:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:133:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:132:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:135:3: RULE_ID
             {
 
             			if (current==null) {
@@ -210,16 +212,16 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleKindOfKeyword
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:153:1: ruleKindOfKeyword returns [Enumerator current=null] : ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:155:1: ruleKindOfKeyword returns [Enumerator current=null] : ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) ) ;
     public final Enumerator ruleKindOfKeyword() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:157:6: ( ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:158:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:159:6: ( ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:160:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:158:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:160:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -231,16 +233,16 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("158:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )", 1, 0, input);
+                    new NoViableAltException("160:1: ( ( 'kindOfKeyword' ) | ( 'anotherEnumLiteral' ) )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:158:2: ( 'kindOfKeyword' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:160:2: ( 'kindOfKeyword' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:158:2: ( 'kindOfKeyword' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:158:4: 'kindOfKeyword'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:160:2: ( 'kindOfKeyword' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:160:4: 'kindOfKeyword'
                     {
                     match(input,12,FOLLOW_12_in_ruleKindOfKeyword257); 
 
@@ -254,10 +256,10 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:164:6: ( 'anotherEnumLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:166:6: ( 'anotherEnumLiteral' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:164:6: ( 'anotherEnumLiteral' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:164:8: 'anotherEnumLiteral'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:166:6: ( 'anotherEnumLiteral' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:166:8: 'anotherEnumLiteral'
                     {
                     match(input,13,FOLLOW_13_in_ruleKindOfKeyword272); 
 
