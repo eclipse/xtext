@@ -247,5 +247,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.unassignedtext.unassignedtext,
  org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl,
  org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.util,
- org.eclipse.xtext.parsetree.unassignedtext.parseTreeConstruction
+ org.eclipse.xtext.parsetree.unassignedtext.parseTreeConstruction,
+ org.eclipse.xtext.parsetree.unassignedtext.parser.packrat,
+ org.eclipse.xtext.parsetree.unassignedtext.parser.packrat.consumers
 

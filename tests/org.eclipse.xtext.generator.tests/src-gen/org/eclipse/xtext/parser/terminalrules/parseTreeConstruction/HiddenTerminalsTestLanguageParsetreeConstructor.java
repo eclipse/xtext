@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -78,7 +79,6 @@ protected class Model_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -269,7 +269,6 @@ protected class WithoutHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -291,10 +290,6 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // spaces+=WS
@@ -442,7 +437,6 @@ protected class WithHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -464,10 +458,6 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "hiddens"
@@ -552,7 +542,6 @@ protected class OverridingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -574,10 +563,6 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "hiddens"
@@ -743,7 +728,6 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -765,10 +749,6 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // spaces+=WS?
@@ -865,7 +845,6 @@ protected class InheritingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -887,10 +866,6 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "hiddens"
@@ -1119,7 +1094,6 @@ protected class DatatypeHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1141,10 +1115,6 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // valid?=DatatypeRule
@@ -1210,7 +1180,6 @@ protected class HidingHiddens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1232,10 +1201,6 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // space=WS
@@ -1341,7 +1306,6 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1363,10 +1327,6 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // valid?=";"

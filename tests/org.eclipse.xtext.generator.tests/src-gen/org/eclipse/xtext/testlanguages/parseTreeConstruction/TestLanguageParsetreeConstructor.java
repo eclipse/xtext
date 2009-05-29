@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -70,7 +71,6 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -127,7 +127,6 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -225,7 +224,6 @@ protected class ChoiceRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -247,10 +245,6 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // optionalKeyword?="optional"?
@@ -348,7 +342,6 @@ protected class ReducibleRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -370,10 +363,6 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // TerminalRule
@@ -528,7 +517,6 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {

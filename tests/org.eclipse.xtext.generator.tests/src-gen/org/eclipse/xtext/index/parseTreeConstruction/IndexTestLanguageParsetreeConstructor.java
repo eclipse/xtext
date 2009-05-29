@@ -4,6 +4,7 @@
 package org.eclipse.xtext.index.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -73,7 +74,6 @@ protected class File_ElementsAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -129,7 +129,6 @@ protected class Import_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -151,10 +150,6 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // importedNamespace=QualifiedNameWithWildCard
@@ -221,7 +216,6 @@ protected class Namespace_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -243,10 +237,6 @@ protected class Namespace_NameAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -376,7 +366,6 @@ protected class Element_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -506,7 +495,6 @@ protected class Type_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -604,7 +592,6 @@ protected class Entity_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntityRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -626,10 +613,6 @@ protected class Entity_EntityKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -777,7 +760,6 @@ protected class Datatype_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDatatypeRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -799,10 +781,6 @@ protected class Datatype_DatatypeKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -867,7 +845,6 @@ protected class Property_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -889,10 +866,6 @@ protected class Property_TypeAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");

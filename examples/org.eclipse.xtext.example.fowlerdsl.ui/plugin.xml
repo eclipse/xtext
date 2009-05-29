@@ -38,6 +38,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+            class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.example.FowlerDsl.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
       <definition id="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
@@ -90,6 +99,29 @@
 			id="org.eclipse.xtext.example.FowlerDsl.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>	
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.example.FowlerDsl.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.example.FowlerDsl.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+					definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
 	</extension>
-
 </plugin>

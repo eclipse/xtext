@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -72,7 +73,6 @@ protected class Sequence_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSequenceRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -231,7 +231,6 @@ protected class Addition_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -426,7 +425,6 @@ protected class Multiplication_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -621,7 +619,6 @@ protected class Term_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -718,7 +715,6 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -764,7 +760,6 @@ protected class Parens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -786,10 +781,6 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // Addition

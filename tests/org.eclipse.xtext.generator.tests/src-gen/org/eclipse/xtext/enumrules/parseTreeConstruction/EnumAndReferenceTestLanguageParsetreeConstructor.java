@@ -4,6 +4,7 @@
 package org.eclipse.xtext.enumrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -66,7 +67,6 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -88,10 +88,6 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");

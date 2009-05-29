@@ -25,19 +25,28 @@
 				</reference>
 			</activeWhen>
 		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.common.Terminals.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.common.Terminals" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
+		<handler
+            class="org.eclipse.xtext.common.TerminalsExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.common.Terminals.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.common.Terminals.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
     </extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xtext.common.Terminals.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+						value="org.eclipse.xtext.common.Terminals" 
+						forcePluginActivation="true"/>
+				</with>		
+			</and>
+		</definition>
+	</extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -45,40 +54,51 @@
 			id="org.eclipse.xtext.common.Terminals"
 			name="Terminals"
 			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.common.ui.keyword_Terminals">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.common.ui.keyword_Terminals"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.common.Terminals"
 			class="org.eclipse.xtext.common.TerminalsExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.common.Terminals.coloring"
 			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.common.ui.keyword_Terminals"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.common.Terminals"
 			class="org.eclipse.xtext.common.TerminalsExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.common.Terminals.templates"
 			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.common.ui.keyword_Terminals"/>
 		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.common.ui.keyword_Terminals"
-			label="Terminals">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.common.Terminals.tasktags"
-			label="Task Tags">
-		</keyword>
+			label="Terminals"/>
 	</extension>
-	
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.common.Terminals.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.common.Terminals.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="org.eclipse.xtext.common.Terminals.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+	</extension>
 
 </plugin>

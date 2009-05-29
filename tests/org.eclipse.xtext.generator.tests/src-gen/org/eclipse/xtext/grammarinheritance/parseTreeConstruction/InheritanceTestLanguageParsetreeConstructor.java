@@ -4,6 +4,7 @@
 package org.eclipse.xtext.grammarinheritance.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -67,7 +68,6 @@ protected class Model_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -89,10 +89,6 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -240,7 +236,6 @@ protected class Element_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -262,10 +257,6 @@ protected class Element_ElementKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID

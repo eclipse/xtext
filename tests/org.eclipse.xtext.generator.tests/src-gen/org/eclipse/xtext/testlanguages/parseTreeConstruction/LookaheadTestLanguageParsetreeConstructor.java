@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -72,7 +73,6 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntryRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -130,7 +130,6 @@ protected class Alts_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -259,7 +258,6 @@ protected class LookAhead0_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -281,10 +279,6 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // x="a"
@@ -349,7 +343,6 @@ protected class LookAhead1_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -371,10 +364,6 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // y=LookAhead2
@@ -511,7 +500,6 @@ protected class LookAhead2_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -554,10 +542,6 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
@@ -588,10 +572,6 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
@@ -657,7 +637,6 @@ protected class LookAhead3_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -679,10 +658,6 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "bar"
@@ -809,7 +784,6 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -831,10 +805,6 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -865,10 +835,6 @@ protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");

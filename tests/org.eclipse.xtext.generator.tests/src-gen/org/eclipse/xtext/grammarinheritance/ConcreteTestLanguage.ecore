@@ -6,42 +6,42 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1" containment="true">
-      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AType"/>
+      <eType xsi:type="ecore:EClass" href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallOverridenParserRule" eSuperTypes="//RootRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" containment="true">
-      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AModel"/>
+      <eType xsi:type="ecore:EClass" href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AModel"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AType2">
     <eSuperTypes href="#//RootRule"/>
-    <eSuperTypes href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AType"/>
+    <eSuperTypes href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="age">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Subrule1">
-    <eSuperTypes href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AType"/>
+    <eSuperTypes href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sub1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Subrule2">
-    <eSuperTypes href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AType"/>
+    <eSuperTypes href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sub2">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Subrule3">
-    <eSuperTypes href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AType"/>
+    <eSuperTypes href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sub1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallExtendedParserRule" eSuperTypes="//RootRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="call" containment="true">
-      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/tests/grammarinheritance#//AModel"/>
+      <eType xsi:type="ecore:EClass" href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AModel"/>
     </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

@@ -4,6 +4,7 @@
 package org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -67,7 +68,6 @@ protected class Model_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -89,15 +89,11 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // INT+
-protected class Model_INTTerminalRuleCall_1 extends RuleCallToken {
-	
+protected class Model_INTTerminalRuleCall_1 extends UnassignedTextToken {
+
 	public Model_INTTerminalRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
@@ -114,11 +110,6 @@ protected class Model_INTTerminalRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
-	protected IInstanceDescription tryConsumeVal() {
-		// FIXME: terminal or datatype rule call
-		return current;
-	}
-	
 }
 
 // modelFeatures=ModelFeatures
@@ -193,7 +184,6 @@ protected class ModelFeatures_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelFeaturesRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -215,10 +205,6 @@ protected class ModelFeatures_FeatureKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -253,8 +239,8 @@ protected class ModelFeatures_NameAssignment_1 extends AssignmentToken  {
 }
 
 // DataTypeRule
-protected class ModelFeatures_DataTypeRuleParserRuleCall_2 extends RuleCallToken {
-	
+protected class ModelFeatures_DataTypeRuleParserRuleCall_2 extends UnassignedTextToken {
+
 	public ModelFeatures_DataTypeRuleParserRuleCall_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
@@ -270,11 +256,6 @@ protected class ModelFeatures_DataTypeRuleParserRuleCall_2 extends RuleCallToken
 		}	
 	}	
 		
-	protected IInstanceDescription tryConsumeVal() {
-		// FIXME: terminal or datatype rule call
-		return current;
-	}
-	
 }
 
 // ";"

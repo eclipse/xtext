@@ -4,6 +4,7 @@
 package org.eclipse.xtext.grammarinheritance.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -71,7 +72,6 @@ protected class InheritedParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -93,10 +93,6 @@ protected class InheritedParserRule_ElementKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -162,7 +158,6 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -184,10 +179,6 @@ protected class AbstractCallOverridenParserRule_OverridemodelKeyword_0 extends K
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // elements+=OverridableParserRule*
@@ -263,7 +254,6 @@ protected class OverridableParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -285,10 +275,6 @@ protected class OverridableParserRule_ElementKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -353,7 +339,6 @@ protected class OverridableParserRule2_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOverridableParserRule2Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -375,10 +360,6 @@ protected class OverridableParserRule2_OtherElementKeyword_0 extends KeywordToke
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=STRING
@@ -444,7 +425,6 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -466,10 +446,6 @@ protected class AbstractCallExtendedParserRule_ExtendedmodelKeyword_0 extends Ke
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // elements+=ExtendableParserRule*
@@ -545,7 +521,6 @@ protected class ExtendableParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -567,10 +542,6 @@ protected class ExtendableParserRule_ElementKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID

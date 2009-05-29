@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -69,7 +70,6 @@ protected class Root_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -91,10 +91,6 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // TestRequired|TestOptional|TestList
@@ -247,7 +243,6 @@ protected class TestRequired_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -269,10 +264,6 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // required1=INT
@@ -370,7 +361,6 @@ protected class TestOptional_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -392,10 +382,6 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // opt1=INT?
@@ -534,7 +520,6 @@ protected class TestList_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -556,10 +541,6 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // item+=INT*

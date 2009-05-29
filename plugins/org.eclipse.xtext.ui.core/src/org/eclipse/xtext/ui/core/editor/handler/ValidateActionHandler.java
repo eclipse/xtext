@@ -16,12 +16,17 @@ import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
 
+import com.google.inject.Inject;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class ValidateActionHandler extends AbstractHandler {
 
+	@Inject
+	private ValidationJob.Factory validationJobFactory;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -33,7 +38,7 @@ public class ValidateActionHandler extends AbstractHandler {
 		// Due to an Handler ExtensionPoint declaration, we have an XtextEditor
 		// as Active Editor so can just cast to an XtextEditor
 		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-		new ValidationJob(editor, CheckMode.ALL).schedule();
+		validationJobFactory.create(editor, CheckMode.ALL).schedule();
 		return this;
 	}
 

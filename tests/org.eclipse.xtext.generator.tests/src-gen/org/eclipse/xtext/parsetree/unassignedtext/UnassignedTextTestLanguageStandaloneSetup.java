@@ -29,13 +29,13 @@ public class UnassignedTextTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/unassignedtext")) {
+		EPackage.Registry.INSTANCE.put("http://simple/unassignedtext", org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage.eINSTANCE);
+	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("unassignedtexttestlanguage", resourceFactory);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/unassignedtext")) {
-		EPackage.Registry.INSTANCE.put("http://simple/unassignedtext", org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage.eINSTANCE);
-	}
 
 	}
 }

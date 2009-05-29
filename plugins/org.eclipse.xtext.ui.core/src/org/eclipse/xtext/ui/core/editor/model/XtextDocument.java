@@ -61,6 +61,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 
+	@Inject
+	private ValidationJob.Factory validationJobFactory;
+	
 	public void setInput(IEditorInput editorInput) {
 		file = ResourceUtil.getFile(editorInput);
 
@@ -244,7 +247,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		synchronized (validationLock) {
 			if (validationJob != null)
 				validationJob.cancel();
-			validationJob = new ValidationJob(this, file, CheckMode.FAST_ONLY, true);
+			validationJob = validationJobFactory.create(this, file, CheckMode.FAST_ONLY, true);
 			validationJob.schedule(250);
 		}
 	}

@@ -4,6 +4,7 @@
 package org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -69,7 +70,6 @@ protected class Foo_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -91,10 +91,6 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -180,7 +176,6 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -228,7 +223,6 @@ protected class MyRule_NameAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {

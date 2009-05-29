@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -71,7 +72,6 @@ protected class Statemachine_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStatemachineRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -93,10 +93,6 @@ protected class Statemachine_EventsKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // events+=Event*
@@ -318,7 +314,6 @@ protected class Event_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -340,10 +335,6 @@ protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resetting",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
@@ -375,10 +366,6 @@ protected class Event_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -454,7 +441,6 @@ protected class Command_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -476,10 +462,6 @@ protected class Command_NameAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -555,7 +537,6 @@ protected class State_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -577,10 +558,6 @@ protected class State_StateKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -826,7 +803,6 @@ protected class Transition_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -848,10 +824,6 @@ protected class Transition_EventAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("event",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");

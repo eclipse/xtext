@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -103,7 +104,6 @@ protected class Grammar_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getGrammarRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -125,10 +125,6 @@ protected class Grammar_GrammarKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=GrammarID
@@ -663,7 +659,6 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -793,7 +788,6 @@ protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesTo
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractMetamodelDeclarationRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -892,7 +886,6 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -914,10 +907,6 @@ protected class GeneratedMetamodel_GenerateKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -1089,7 +1078,6 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1111,10 +1099,6 @@ protected class ReferencedMetamodel_ImportKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // ePackage=[ecore::EPackage|STRING]
@@ -1254,7 +1238,6 @@ protected class ParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1276,10 +1259,6 @@ protected class ParserRule_NameAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1715,7 +1694,6 @@ protected class TypeRef_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1757,10 +1735,6 @@ protected class TypeRef_MetamodelAssignment_0_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("metamodel",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("metamodel");
@@ -1816,10 +1790,6 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("classifier",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("classifier");
@@ -1868,7 +1838,6 @@ protected class Alternatives_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2068,7 +2037,6 @@ protected class Group_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2227,7 +2195,6 @@ protected class AbstractToken_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2326,7 +2293,6 @@ protected class AbstractTokenWithCardinality_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractTokenWithCardinalityRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2487,7 +2453,6 @@ protected class Action_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getActionRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2509,10 +2474,6 @@ protected class Action_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // type=TypeRef
@@ -2738,7 +2699,6 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractTerminalRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2866,7 +2826,6 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -2911,7 +2870,6 @@ protected class RuleCall_RuleAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -2960,7 +2918,6 @@ protected class Assignment_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2982,10 +2939,6 @@ protected class Assignment_FeatureAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3115,7 +3068,6 @@ protected class AssignableTerminal_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3275,7 +3227,6 @@ protected class ParenthesizedAssignableElement_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParenthesizedAssignableElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3297,10 +3248,6 @@ protected class ParenthesizedAssignableElement_LeftParenthesisKeyword_0 extends 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // AssignableAlternatives
@@ -3387,7 +3334,6 @@ protected class AssignableAlternatives_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3586,7 +3532,6 @@ protected class CrossReference_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCrossReferenceRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3608,10 +3553,6 @@ protected class CrossReference_LeftSquareBracketKeyword_0 extends KeywordToken  
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // type=TypeRef
@@ -3791,7 +3732,6 @@ protected class CrossReferenceableTerminal_Alternatives extends AlternativesToke
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3920,7 +3860,6 @@ protected class ParenthesizedCrossReferenceableElement_Group extends GroupToken 
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3942,10 +3881,6 @@ protected class ParenthesizedCrossReferenceableElement_LeftParenthesisKeyword_0 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // CrossReferenceableAlternatives
@@ -4032,7 +3967,6 @@ protected class CrossReferenceableAlternatives_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4231,7 +4165,6 @@ protected class ParenthesizedElement_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParenthesizedElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4253,10 +4186,6 @@ protected class ParenthesizedElement_LeftParenthesisKeyword_0 extends KeywordTok
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // Alternatives
@@ -4342,7 +4271,6 @@ protected class TerminalRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4364,10 +4292,6 @@ protected class TerminalRule_TerminalKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -4597,7 +4521,6 @@ protected class TerminalAlternatives_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4797,7 +4720,6 @@ protected class TerminalGroup_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4956,7 +4878,6 @@ protected class TerminalToken_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5068,7 +4989,6 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5259,7 +5179,6 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParenthesizedTerminalElementRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5281,10 +5200,6 @@ protected class ParenthesizedTerminalElement_LeftParenthesisKeyword_0 extends Ke
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // TerminalAlternatives
@@ -5371,7 +5286,6 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractNegatedTokenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5469,7 +5383,6 @@ protected class NegatedToken_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNegatedTokenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5491,10 +5404,6 @@ protected class NegatedToken_ExclamationMarkKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // ^terminal=TerminalTokenElement
@@ -5569,7 +5478,6 @@ protected class UntilToken_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5591,10 +5499,6 @@ protected class UntilToken_HyphenMinusGreaterThanSignKeyword_0 extends KeywordTo
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // ^terminal=TerminalTokenElement
@@ -5669,7 +5573,6 @@ protected class Wildcard_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5691,10 +5594,6 @@ protected class Wildcard_WildcardAction_0 extends ActionToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())) return null;
@@ -5755,7 +5654,6 @@ protected class CharacterRange_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5932,7 +5830,6 @@ protected class EnumRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5954,10 +5851,6 @@ protected class EnumRule_EnumKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -6187,7 +6080,6 @@ protected class EnumLiterals_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -6387,7 +6279,6 @@ protected class EnumLiteralDeclaration_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -6409,10 +6300,6 @@ protected class EnumLiteralDeclaration_EnumLiteralAssignment_0 extends Assignmen
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("enumLiteral",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("enumLiteral");

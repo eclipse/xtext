@@ -37,12 +37,12 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
-public class XtextResourceChecker {
+public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
 	private static final int MAX_ERRORS = 99;
-	private static final Logger log = Logger.getLogger(XtextResourceChecker.class);
+	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
 
-	private XtextResourceChecker() {
+	private DefaultXtextResourceChecker() {
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class XtextResourceChecker {
 		}
 	}
 
-	public static void addMarkers(final IFile file, final List<Map<String, Object>> issues, boolean deleteOldMarkers, IProgressMonitor monitor) {
+	public void addMarkers(final IFile file, final List<Map<String, Object>> issues, boolean deleteOldMarkers, IProgressMonitor monitor) {
 		try {
 			new AddMarkersOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(file), issues, file, EValidator.MARKER, deleteOldMarkers)
 					.run(monitor);
@@ -108,7 +108,7 @@ public class XtextResourceChecker {
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
-	public static List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor) {
+	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor) {
 		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>();
 		try {
 			// Syntactical errors
@@ -162,13 +162,13 @@ public class XtextResourceChecker {
 		return markers;
 	}
 
-	private static void logCheckStatus(final Resource resource, boolean parserDiagFail, String string) {
+	private void logCheckStatus(final Resource resource, boolean parserDiagFail, String string) {
 		if (log.isDebugEnabled()) {
 			log.debug(string + " check " + (parserDiagFail ? "FAIL" : "OK") + "! Resource: " + resource.getURI());
 		}
 	}
 
-	private static Map<String, Object> markerFromXtextResourceDiagnostic(
+	private Map<String, Object> markerFromXtextResourceDiagnostic(
 			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, severity);
@@ -185,7 +185,7 @@ public class XtextResourceChecker {
 		return map;
 	}
 
-	private static Map<String, Object> markerFromEValidatorDiagnostic(Diagnostic diagnostic) {
+	private Map<String, Object> markerFromEValidatorDiagnostic(Diagnostic diagnostic) {
 		if (diagnostic.getSeverity() == Diagnostic.OK)
 			return null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -226,7 +226,7 @@ public class XtextResourceChecker {
 		return map;
 	}
 
-	private static EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
+	private EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
 		if (feature instanceof String) {
 			return ele.eClass().getEStructuralFeature((String) feature);
 		} else if (feature instanceof EStructuralFeature) {

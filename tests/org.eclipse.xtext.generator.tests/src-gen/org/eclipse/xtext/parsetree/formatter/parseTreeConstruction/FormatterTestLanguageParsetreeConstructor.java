@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parsetree.formatter.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -69,7 +70,6 @@ protected class Root_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -91,10 +91,6 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // TestLinewrap|TestIndentation
@@ -214,7 +210,6 @@ protected class Line_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -236,10 +231,6 @@ protected class Line_TypeAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -336,7 +327,6 @@ protected class TestLinewrap_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -358,10 +348,6 @@ protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // items+=Line*
@@ -437,7 +423,6 @@ protected class TestIndentation_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -459,10 +444,6 @@ protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "{"

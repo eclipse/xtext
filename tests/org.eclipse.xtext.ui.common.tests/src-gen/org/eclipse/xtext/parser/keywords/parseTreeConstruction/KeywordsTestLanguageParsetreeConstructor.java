@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parser.keywords.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -69,7 +70,6 @@ protected class Model_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -91,10 +91,6 @@ protected class Model_FirstAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("first");
@@ -125,10 +121,6 @@ protected class Model_SecondAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("second");
@@ -159,10 +151,6 @@ protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("third",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("third");
@@ -193,10 +181,6 @@ protected class Model_ForthAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("forth",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("forth");
