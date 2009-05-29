@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.xtext.Messages;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well
@@ -55,9 +56,9 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	 * @param pageName
 	 */
 	public NewXtextProjectWizardPage(ISelection selection) {
-		super("wizardPage");
-		setTitle("Xtext project wizard");
-		setDescription("This wizard creates a pair of projects for your Xtext DSL.");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.NewXtextProjectWizardPage_Title);
+		setDescription(Messages.NewXtextProjectWizardPage_Description);
 //		this.selection = selection;
 	}
 
@@ -72,7 +73,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		layout.verticalSpacing = 9;
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		Label label = new Label(container, SWT.NULL);
-		label.setText("Main &project name:");
+		label.setText(Messages.NewXtextProjectWizardPage_MainProjectName);
 
 		projectText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -84,7 +85,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		});
 
 		label = new Label(container, SWT.NULL);
-		label.setText("&Language name:");
+		label.setText(Messages.NewXtextProjectWizardPage_LanguageName);
 
 		languageNameText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -96,7 +97,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		});
 
 		label = new Label(container, SWT.NULL);
-		label.setText("DSL-File extension:");
+		label.setText(Messages.NewXtextProjectWizardPage_FileExtension);
 
 		fileExtensionText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -108,7 +109,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		});
 
 		label = new Label(container, SWT.NULL);
-		label.setText("Create generator project:");
+		label.setText(Messages.NewXtextProjectWizardPage_GeneratorProject);
 
 		generateGenProject = new Button(container, SWT.CHECK);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -145,20 +146,20 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		xtextProjectInfo.setFileExtension(fileExtensionText.getText());
 		xtextProjectInfo.setCreateGeneratorProject(generateGenProject.getSelection());
 
-		if (!xtextProjectInfo.getProjectName().matches("\\w+[\\w\\.]*\\w+")) {
-			setErrorMessage("Project name must be specified (and must be in Java Package syntax (e.g. org.example))");
+		if (!xtextProjectInfo.getProjectName().matches("\\w+[\\w\\.]*\\w+")) { //$NON-NLS-1$
+			setErrorMessage(Messages.NewXtextProjectWizardPage_ProjectNameValidationError);
 			setPageComplete(false);
 			return;
 		}
 		// check whether project already exists
 		final IProject handle = ResourcesPlugin.getWorkspace().getRoot().getProject(xtextProjectInfo.getProjectName());
 		if (handle.exists()) {
-			setErrorMessage("A project with this name already exists.");
+			setErrorMessage(Messages.NewXtextProjectWizardPage_DuplicateProjectName);
 			setPageComplete(false);
 			return;
 		}
-		if (!xtextProjectInfo.getLanguageName().matches("\\w+[\\w\\.]*\\w+")) {
-			setErrorMessage("Language name must be specified (example: org.xtext.example.MyDsl)");
+		if (!xtextProjectInfo.getLanguageName().matches("\\w+[\\w\\.]*\\w+")) { //$NON-NLS-1$
+			setErrorMessage(Messages.NewXtextProjectWizardPage_LanguageNameMandatory);
 			setPageComplete(false);
 			return;
 		}
@@ -166,7 +167,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 			new URI(xtextProjectInfo.getNsURI());
 		}
 		catch (URISyntaxException e) {
-			setErrorMessage("The namespace URI is no valid URI (example: 'http://example.xtext.org/MyDsl')");
+			setErrorMessage(Messages.NewXtextProjectWizardPage_InvalidURI);
 			setPageComplete(false);
 			return;
 		}
@@ -175,9 +176,9 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	}
 
 	private void initializeDefaultValues() {
-		String dslName = findNextValidDSLName("org.xtext.example", "MyDsl");
-		projectText.setText("org.xtext.example." + dslName.toLowerCase());
-		languageNameText.setText("org.xtext.example." + dslName);
+		String dslName = findNextValidDSLName("org.xtext.example", "MyDsl"); //$NON-NLS-1$ //$NON-NLS-2$
+		projectText.setText("org.xtext.example." + dslName.toLowerCase()); //$NON-NLS-1$
+		languageNameText.setText("org.xtext.example." + dslName); //$NON-NLS-1$
 		fileExtensionText.setText(dslName.toLowerCase());
 		generateGenProject.setSelection(true);
 	}
@@ -185,7 +186,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	private String findNextValidDSLName(String prefix, String name) {
 		String candidate = name;
 		int suffix = 1;
-		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) {
+		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) { //$NON-NLS-1$
 			candidate = name + suffix;
 			suffix++;
 		}
