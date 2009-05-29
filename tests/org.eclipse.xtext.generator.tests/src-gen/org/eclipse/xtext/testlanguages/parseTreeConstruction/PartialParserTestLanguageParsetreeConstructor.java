@@ -4,6 +4,7 @@
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -75,7 +76,6 @@ protected class SomeContainer_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSomeContainerRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -97,10 +97,6 @@ protected class SomeContainer_ContainerKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -312,7 +308,6 @@ protected class Nested_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNestedRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -334,10 +329,6 @@ protected class Nested_NestedKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "{"
@@ -454,7 +445,6 @@ protected class Content_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getContentRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -552,7 +542,6 @@ protected class Children_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChildrenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -574,10 +563,6 @@ protected class Children_ChildrenKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "{"
@@ -776,7 +761,6 @@ protected class Child_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -798,10 +782,6 @@ protected class Child_HyphenMinusGreaterThanSignKeyword_0 extends KeywordToken  
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "C"
@@ -936,7 +916,6 @@ protected class AbstractChildren_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractChildrenRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -958,10 +937,6 @@ protected class AbstractChildren_AbstractChildrenKeyword_0 extends KeywordToken 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "{"
@@ -1078,7 +1053,6 @@ protected class AbstractChild_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractChildRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1176,7 +1150,6 @@ protected class FirstConcrete_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFirstConcreteRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1198,10 +1171,6 @@ protected class FirstConcrete_HyphenMinusGreaterThanSignKeyword_0 extends Keywor
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "F"
@@ -1371,7 +1340,6 @@ protected class SecondConcrete_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSecondConcreteRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1393,10 +1361,6 @@ protected class SecondConcrete_HyphenMinusGreaterThanSignKeyword_0 extends Keywo
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "F"
@@ -1585,7 +1549,6 @@ protected class Named_NameAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNamedRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {

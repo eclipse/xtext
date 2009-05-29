@@ -4,6 +4,7 @@
 package org.eclipse.xtext.reference.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -73,7 +74,6 @@ protected class Spielplatz_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -95,10 +95,6 @@ protected class Spielplatz_SpielplatzKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // groesse=INT
@@ -472,7 +468,6 @@ protected class Person_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -570,7 +565,6 @@ protected class Kind_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -592,10 +586,6 @@ protected class Kind_KindKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "("
@@ -731,7 +721,6 @@ protected class Erwachsener_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -753,10 +742,6 @@ protected class Erwachsener_ErwachsenerKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "("
@@ -892,7 +877,6 @@ protected class Spielzeug_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -914,10 +898,6 @@ protected class Spielzeug_SpielzeugKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "("
@@ -1063,7 +1043,6 @@ protected class Familie_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1085,10 +1064,6 @@ protected class Familie_FamilieKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "("
@@ -1381,7 +1356,6 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -1442,7 +1416,6 @@ protected class CustomTypeParserRule_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1464,10 +1437,6 @@ protected class CustomTypeParserRule_TypeKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID

@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -79,7 +80,6 @@ protected class Op_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOpRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -247,7 +247,6 @@ protected class Term_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -623,7 +622,6 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -670,7 +668,6 @@ protected class Parens_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -692,10 +689,6 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // Op
@@ -813,7 +806,6 @@ protected class TwoNumbers_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTwoNumbersRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -835,10 +827,6 @@ protected class TwoNumbers_Num1Assignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("num1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num1");
@@ -987,7 +975,6 @@ protected class ManyStrings_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getManyStringsRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1009,10 +996,6 @@ protected class ManyStrings_EqualsSignKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // str1+=STRING*
@@ -1110,7 +1093,6 @@ protected class Type_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1132,10 +1114,6 @@ protected class Type_TypeKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -1254,7 +1232,6 @@ protected class Ref2_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRef2Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1276,10 +1253,6 @@ protected class Ref2_NumberSignDigitTwoKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // ref2=( "mykeyword1" | STRING | "mykeyword2" )
@@ -1355,7 +1328,6 @@ protected class Spare_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSpareRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1377,10 +1349,6 @@ protected class Spare_NumberSignDigitThreeKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // id+=ID
@@ -1518,7 +1486,6 @@ protected class Boolean_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getBooleanRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1540,10 +1507,6 @@ protected class Boolean_NumberSignDigitFourKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // bool?="myoption"?
@@ -1661,7 +1624,6 @@ protected class Transient1_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTransient1Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1683,10 +1645,6 @@ protected class Transient1_NumberSignDigitFiveKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // precStar?="*"|prec=INT
@@ -1929,7 +1887,6 @@ protected class Consumed1_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getConsumed1Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1951,10 +1908,6 @@ protected class Consumed1_NumberSignDigitSixKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT
@@ -2220,7 +2173,6 @@ protected class Consumed2_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getConsumed2Rule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2242,10 +2194,6 @@ protected class Consumed2_NumberSignDigitSevenKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // child=Consumed1

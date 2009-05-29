@@ -25,19 +25,28 @@
 				</reference>
 			</activeWhen>
 		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.example.EcoreDsl" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
+		<handler
+            class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.example.EcoreDsl.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
     </extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+						value="org.eclipse.xtext.example.EcoreDsl" 
+						forcePluginActivation="true"/>
+				</with>		
+			</and>
+		</definition>
+	</extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -45,41 +54,52 @@
 			id="org.eclipse.xtext.example.EcoreDsl"
 			name="EcoreDsl"
 			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.example.ui.keyword_EcoreDsl">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.example.EcoreDsl"
 			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.example.EcoreDsl.coloring"
 			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.example.EcoreDsl"
 			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.example.EcoreDsl.templates"
 			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"/>
 		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"
-			label="EcoreDsl">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.example.EcoreDsl.tasktags"
-			label="Task Tags">
-		</keyword>
+			label="EcoreDsl"/>
 	</extension>
-	
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.example.EcoreDsl.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.example.EcoreDsl.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+	</extension>
 
 <!-- adding resource factories -->
 

@@ -4,6 +4,7 @@
 package org.eclipse.xtext.example.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -84,7 +85,6 @@ protected class EcoreDsl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEcoreDslRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -202,7 +202,6 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -224,10 +223,6 @@ protected class ReferencedMetamodel_ImportKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // (alias=ID "=")?
@@ -388,7 +383,6 @@ protected class EPackageDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEPackageDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -452,10 +446,6 @@ protected class EPackageDecl_PackageKeyword_1 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=QID
@@ -809,7 +799,6 @@ protected class SubEPackageDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSubEPackageDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -873,10 +862,6 @@ protected class SubEPackageDecl_PackageKeyword_1 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -1089,7 +1074,6 @@ protected class EClassifierDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEClassifierDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1188,7 +1172,6 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEDataTypeDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1272,10 +1255,6 @@ protected class EDataTypeDecl_SerializableAssignment_0_1 extends AssignmentToken
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serializable",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serializable");
@@ -1328,10 +1307,6 @@ protected class EDataTypeDecl_DatatypeKeyword_0_2_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -1501,7 +1476,6 @@ protected class EAnnotationDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEAnnotationDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1523,10 +1497,6 @@ protected class EAnnotationDecl_CommercialAtKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // source=STRING_OR_QID
@@ -1777,7 +1747,6 @@ protected class EClassDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEClassDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -1841,10 +1810,6 @@ protected class EClassDecl_AbstractAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("abstract",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
@@ -1898,10 +1863,6 @@ protected class EClassDecl_InterfaceAssignment_2_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("interface",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("interface");
@@ -1934,10 +1895,6 @@ protected class EClassDecl_ClassKeyword_2_1 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 
@@ -2581,7 +2538,6 @@ protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEStructuralFeatureDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2679,7 +2635,6 @@ protected class EAttributeDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEAttributeDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -2771,10 +2726,6 @@ protected class EAttributeDecl_IDAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("iD",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("iD");
@@ -2807,10 +2758,6 @@ protected class EAttributeDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -2843,10 +2790,6 @@ protected class EAttributeDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -2879,10 +2822,6 @@ protected class EAttributeDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
@@ -2915,10 +2854,6 @@ protected class EAttributeDecl_VolatileAssignment_1_4 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("volatile",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("volatile");
@@ -2951,10 +2886,6 @@ protected class EAttributeDecl_TransientAssignment_1_5 extends AssignmentToken  
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transient",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transient");
@@ -2987,10 +2918,6 @@ protected class EAttributeDecl_UnsettableAssignment_1_6 extends AssignmentToken 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unsettable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unsettable");
@@ -3023,10 +2950,6 @@ protected class EAttributeDecl_DerivedAssignment_1_7 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("derived",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("derived");
@@ -3060,10 +2983,6 @@ protected class EAttributeDecl_AttrKeyword_2 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // eGenericType=EGenericTypeReferenceDecl
@@ -3428,7 +3347,6 @@ protected class EReferenceDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEReferenceDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -3520,10 +3438,6 @@ protected class EReferenceDecl_ResolveProxiesAssignment_1_0 extends AssignmentTo
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resolveProxies",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resolveProxies");
@@ -3556,10 +3470,6 @@ protected class EReferenceDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -3592,10 +3502,6 @@ protected class EReferenceDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -3628,10 +3534,6 @@ protected class EReferenceDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
@@ -3664,10 +3566,6 @@ protected class EReferenceDecl_VolatileAssignment_1_4 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("volatile",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("volatile");
@@ -3700,10 +3598,6 @@ protected class EReferenceDecl_TransientAssignment_1_5 extends AssignmentToken  
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transient",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transient");
@@ -3736,10 +3630,6 @@ protected class EReferenceDecl_UnsettableAssignment_1_6 extends AssignmentToken 
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unsettable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unsettable");
@@ -3772,10 +3662,6 @@ protected class EReferenceDecl_DerivedAssignment_1_7 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("derived",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("derived");
@@ -3830,10 +3716,6 @@ protected class EReferenceDecl_ContainmentAssignment_2_0 extends AssignmentToken
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("containment",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("containment");
@@ -3866,10 +3748,6 @@ protected class EReferenceDecl_RefKeyword_2_1 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 
@@ -4239,7 +4117,6 @@ protected class EEnumDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEEnumDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4303,10 +4180,6 @@ protected class EEnumDecl_EnumKeyword_1 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // name=ID
@@ -4453,7 +4326,6 @@ protected class EEnumLiteralDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4517,10 +4389,6 @@ protected class EEnumLiteralDecl_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -4692,7 +4560,6 @@ protected class ETypeParameterDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getETypeParameterDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4714,10 +4581,6 @@ protected class ETypeParameterDecl_NameAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -4845,7 +4708,6 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -4888,10 +4750,6 @@ protected class EGenericTypeReferenceDecl_EClassifierAssignment_0_0 extends Assi
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("eClassifier",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
@@ -5132,10 +4990,6 @@ protected class EGenericTypeReferenceDecl_NumberSignKeyword_1_0 extends KeywordT
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // eTypeParameter=[ecore::ETypeParameter]
@@ -5206,7 +5060,6 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5249,10 +5102,6 @@ protected class EGenericTypeDecl_EClassifierAssignment_0_0 extends AssignmentTok
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("eClassifier",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
@@ -5493,10 +5342,6 @@ protected class EGenericTypeDecl_NumberSignKeyword_1_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // eTypeParameter=[ecore::ETypeParameter]
@@ -5571,10 +5416,6 @@ protected class EGenericTypeDecl_QuestionMarkKeyword_2_0 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // "extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
@@ -5795,7 +5636,6 @@ protected class EOperationDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEOperationDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -5881,10 +5721,6 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
@@ -5917,10 +5753,6 @@ protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
@@ -5954,10 +5786,6 @@ protected class EOperationDecl_OpKeyword_2 extends KeywordToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 }
 
 // eGenericType=EGenericTypeReferenceDecl|"void"
@@ -6666,7 +6494,6 @@ protected class EParameterDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEParameterDeclRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -6815,7 +6642,6 @@ protected class MapEntry_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMapEntryRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -6837,10 +6663,6 @@ protected class MapEntry_KeyAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("key",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("key");

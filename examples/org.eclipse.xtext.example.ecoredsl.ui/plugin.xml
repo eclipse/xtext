@@ -35,6 +35,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+            class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.example.EcoreDsl.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
       <definition id="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
@@ -101,6 +110,11 @@
                name="Generate Ecore Dsl"
                description="Generate Ecore Dsl">
          </command>
+	     <command
+            	description="Trigger expensive validation"
+            	id="org.eclipse.xtext.example.EcoreDsl.validate"
+         	    name="Validate">
+         </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -142,6 +156,19 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.example.EcoreDsl.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="org.eclipse.xtext.example.EcoreDsl.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
    </extension>
 
 </plugin>

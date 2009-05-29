@@ -122,6 +122,16 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 		return org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.utils.ValidationJob.Factory> bindValidationJob$Factory() {
+		return org.eclipse.xtext.ui.core.editor.utils.DefaultValidationJobFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextResourceChecker> bindIXtextResourceChecker() {
+		return org.eclipse.xtext.ui.core.editor.DefaultXtextResourceChecker.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.common.contentassist.TerminalsProposalProvider.class;

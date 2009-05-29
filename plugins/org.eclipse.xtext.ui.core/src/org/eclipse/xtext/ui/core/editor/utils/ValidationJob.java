@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.core.editor.IXtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.validation.CheckMode;
 
@@ -36,44 +36,48 @@ public final class ValidationJob extends Job {
 	private final IFile iFile;
 
 	private final boolean deleteOldMarkers;
-
+	private IXtextResourceChecker xtextResourceChecker;
+	
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 *
+	 * 
+	 * @param 
 	 * @param xtextEditor
 	 * @param checkMode
 	 */
-	public ValidationJob(XtextEditor xtextEditor, CheckMode checkMode) {
-		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker, XtextEditor xtextEditor, CheckMode checkMode) {
+		this(xtextResourceChecker, xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
 				.getResource() : null), checkMode, true);
 	}
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 *
+	 * 
 	 * @param xtextEditor
 	 * @param checkMode
 	 */
-	public ValidationJob(XtextEditor xtextEditor, CheckMode checkMode, boolean deleteOldMarkers) {
-		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker, XtextEditor xtextEditor, CheckMode checkMode, boolean deleteOldMarkers) {
+		this(xtextResourceChecker, xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
 				.getResource() : null), checkMode, deleteOldMarkers);
 	}
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 *
+	 * 
 	 * @param xtextDocument
 	 * @param iFile
 	 * @param checkMode
-	 * @param deleteOldMarkers - whenever marker should be deleted or not
+	 * @param deleteOldMarkers
+	 *            - whenever marker should be deleted or not
 	 */
-	public ValidationJob(IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker,IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
 		super("Xtext validation");
 
 		this.xtextDocument = xtextDocument;
 		this.iFile = iFile;
 		this.checkMode = checkMode;
 		this.deleteOldMarkers = deleteOldMarkers;
+		this.xtextResourceChecker = xtextResourceChecker;
 	}
 
 	@Override
@@ -86,16 +90,27 @@ public final class ValidationJob extends Job {
 			log.debug("Aborting Xtext Validation with CheckMode: " + checkMode + " because file does not exist.");
 			return Status.OK_STATUS;
 		}
-		final List<Map<String, Object>> issues = xtextDocument.readOnly(new IUnitOfWork<List<Map<String, Object>>, XtextResource>() {
-			public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-				return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode), monitor);
-			}
-		});
+		final List<Map<String, Object>> issues = xtextDocument
+				.readOnly(new IUnitOfWork<List<Map<String, Object>>, XtextResource>() {
+					public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
+						return xtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode),
+								monitor);
+					}
+				});
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		XtextResourceChecker.addMarkers(iFile, issues, deleteOldMarkers, monitor);
+		xtextResourceChecker.addMarkers(iFile, issues, deleteOldMarkers, monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		return Status.OK_STATUS;
+	}
+
+	public static interface Factory {
+
+		ValidationJob create(XtextEditor xtextEditor, CheckMode checkMode);
+
+		ValidationJob create(XtextEditor xtextEditor, CheckMode checkMode, boolean deleteOldMarkers);
+
+		ValidationJob create(IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers);
 	}
 }

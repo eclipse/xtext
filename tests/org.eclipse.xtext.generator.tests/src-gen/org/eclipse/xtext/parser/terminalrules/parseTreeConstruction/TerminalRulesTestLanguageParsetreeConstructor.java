@@ -4,6 +4,7 @@
 package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -72,7 +73,6 @@ protected class Model_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-  
 		return tryConsumeVal();
 	}
 }
@@ -94,10 +94,6 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("idValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
@@ -128,10 +124,6 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("intValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
@@ -162,10 +154,6 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
@@ -196,10 +184,6 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("mlCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
@@ -230,10 +214,6 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("slCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
@@ -264,10 +244,6 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("wsValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
@@ -298,10 +274,6 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-  
-		return tryConsumeVal();
-	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("anyValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");

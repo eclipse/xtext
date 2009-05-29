@@ -46,6 +46,15 @@
 				</reference>
 			</activeWhen>
 		</handler>
+		<handler
+            class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.reference.ReferenceGrammar.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
       <definition id="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
@@ -99,5 +108,27 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.reference.ReferenceGrammar.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+	</extension>
 </plugin>

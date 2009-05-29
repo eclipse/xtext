@@ -65,6 +65,11 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
 
+	@Inject
+	private ValidationJob.Factory validationJobFactory;
+
+	private ValidationJob validationJob;
+
 	private String languageName;
 
 	public XtextEditor() {
@@ -84,7 +89,7 @@ public class XtextEditor extends TextEditor {
 	public String getLanguageName() {
 		return languageName;
 	}
-	
+
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		if (log.isDebugEnabled()) {
@@ -107,7 +112,7 @@ public class XtextEditor extends TextEditor {
 
 		setPreferenceStore(new ChainedPreferenceStore(new IPreferenceStore[] {
 				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() }));
-		
+
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
 
@@ -159,8 +164,9 @@ public class XtextEditor extends TextEditor {
 			markAsStateDependentAction("Format", true); //$NON-NLS-1$
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
-		
-		ToggleSLCommentAction action= new ToggleSLCommentAction(XtextUIMessages.getResourceBundle(), "ToggleComment.", this); //$NON-NLS-1$
+
+		ToggleSLCommentAction action = new ToggleSLCommentAction(XtextUIMessages.getResourceBundle(),
+				"ToggleComment.", this); //$NON-NLS-1$
 		action.setActionDefinitionId(Activator.PLUGIN_ID + ".ToggleCommentAction");
 		setAction("ToggleComment", action); //$NON-NLS-1$
 		markAsStateDependentAction("ToggleComment", true); //$NON-NLS-1$
@@ -173,11 +179,11 @@ public class XtextEditor extends TextEditor {
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
 	}
-	
+
 	private void configureToggleCommentAction(ToggleSLCommentAction action) {
-		ISourceViewer sourceViewer= getSourceViewer();
-		SourceViewerConfiguration configuration= getSourceViewerConfiguration();
-		((ToggleSLCommentAction)action).configure(sourceViewer, configuration);
+		ISourceViewer sourceViewer = getSourceViewer();
+		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
+		((ToggleSLCommentAction) action).configure(sourceViewer, configuration);
 	}
 
 	/**
@@ -230,8 +236,7 @@ public class XtextEditor extends TextEditor {
 
 	/**
 	 * TODO: get rid of this method. It is only here to support
-	 * org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler,
-	 * which needs access to the sourceviewer.
+	 * org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler, which needs access to the sourceviewer.
 	 */
 	public ISourceViewer getInternalSourceViewer() {
 		return getSourceViewer();
@@ -240,23 +245,32 @@ public class XtextEditor extends TextEditor {
 	@Override
 	protected void performSaveAs(IProgressMonitor progressMonitor) {
 		super.performSaveAs(progressMonitor);
-		doExpensiveValidation();
+		doOnSaveValidation();
 	}
 
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
 		super.performSave(overwrite, progressMonitor);
-		doExpensiveValidation();
+		doOnSaveValidation();
 	}
 
 	@Override
 	protected void performRevert() {
 		super.performRevert();
-		doExpensiveValidation();
+		doOnSaveValidation();
 	}
 
-	private void doExpensiveValidation() {
-		new ValidationJob(this, CheckMode.NORMAL_AND_FAST).schedule();
+	private void doOnSaveValidation() {
+		if (validationJob == null)
+			validationJob = validationJobFactory.create(this, CheckMode.NORMAL_AND_FAST);
+		validationJob.cancel();
+		try {
+			validationJob.join();
+		}
+		catch (InterruptedException e) {
+			log.error("Error joining canceled ValidationJob", e);
+		}
+		validationJob.schedule();
 	}
 
 	@Override
@@ -272,7 +286,7 @@ public class XtextEditor extends TextEditor {
 			getSourceViewer().invalidateTextPresentation();
 		}
 	}
-	
+
 	@Override
 	protected String[] collectContextMenuPreferencePages() {
 		String[] ids = super.collectContextMenuPreferencePages();
@@ -286,5 +300,5 @@ public class XtextEditor extends TextEditor {
 		System.arraycopy(ids, 0, more, 4, ids.length);
 		return more;
 	}
-	
+
 }

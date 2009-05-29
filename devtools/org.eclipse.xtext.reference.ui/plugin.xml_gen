@@ -25,19 +25,28 @@
 				</reference>
 			</activeWhen>
 		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.reference.ReferenceGrammar" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
+		<handler
+            class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.reference.ReferenceGrammar.validate">
+         <activeWhen>
+            <reference
+					definitionId="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
     </extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+						value="org.eclipse.xtext.reference.ReferenceGrammar" 
+						forcePluginActivation="true"/>
+				</with>		
+			</and>
+		</definition>
+	</extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -45,41 +54,52 @@
 			id="org.eclipse.xtext.reference.ReferenceGrammar"
 			name="ReferenceGrammar"
 			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.reference.ReferenceGrammar"
 			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.reference.ReferenceGrammar.coloring"
 			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.reference.ReferenceGrammar"
 			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.reference.ReferenceGrammar.templates"
 			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
+			<keywordReference id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar"/>
 		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar"
-			label="ReferenceGrammar">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.reference.ReferenceGrammar.tasktags"
-			label="Task Tags">
-		</keyword>
+			label="ReferenceGrammar"/>
 	</extension>
-	
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.reference.ReferenceGrammar.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+	</extension>
 
 <!-- adding resource factories -->
 
