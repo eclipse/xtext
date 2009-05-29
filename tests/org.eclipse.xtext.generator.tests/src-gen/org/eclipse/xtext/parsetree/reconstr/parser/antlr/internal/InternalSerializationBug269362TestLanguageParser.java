@@ -47,7 +47,9 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
      	private SerializationBug269362TestLanguageGrammarAccess grammarAccess;
      	
         public InternalSerializationBug269362TestLanguageParser(TokenStream input, IAstFactory factory, SerializationBug269362TestLanguageGrammarAccess grammarAccess) {
-            super(input, factory, grammarAccess.getGrammar());
+            this(input);
+            this.factory = factory;
+            registerRules(grammarAccess.getGrammar());
             this.grammarAccess = grammarAccess;
         }
         
@@ -65,7 +67,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:72:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -73,8 +75,8 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:70:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:72:47: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
@@ -100,7 +102,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:78:1: ruleModel returns [EObject current=null] : ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -111,10 +113,10 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:83:6: ( ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:84:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:85:6: ( ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:86:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:84:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:86:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -126,23 +128,23 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("84:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )", 2, 0, input);
+                    new NoViableAltException("86:1: ( ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? ) | ( 'bar' (lv_bar_5= RULE_ID ) ) )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:84:2: ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:86:2: ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:84:2: ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:84:3: 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:86:2: ( 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:86:3: 'foo' (lv_foo_1= RULE_ID ) ( 'bar' (lv_bar_3= RULE_ID ) )?
                     {
                     match(input,11,FOLLOW_11_in_ruleModel118); 
 
                             createLeafNode(grammarAccess.getModelAccess().getFooKeyword_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:88:1: (lv_foo_1= RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:90:6: lv_foo_1= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:90:1: (lv_foo_1= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:92:6: lv_foo_1= RULE_ID
                     {
                     lv_foo_1=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel140); 
@@ -164,7 +166,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:108:2: ( 'bar' (lv_bar_3= RULE_ID ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:110:2: ( 'bar' (lv_bar_3= RULE_ID ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -173,14 +175,14 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:108:3: 'bar' (lv_bar_3= RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:110:3: 'bar' (lv_bar_3= RULE_ID )
                             {
                             match(input,12,FOLLOW_12_in_ruleModel158); 
 
                                     createLeafNode(grammarAccess.getModelAccess().getBarKeyword_0_2_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:112:1: (lv_bar_3= RULE_ID )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:114:6: lv_bar_3= RULE_ID
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:114:1: (lv_bar_3= RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:116:6: lv_bar_3= RULE_ID
                             {
                             lv_bar_3=(Token)input.LT(1);
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel180); 
@@ -215,17 +217,17 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:133:6: ( 'bar' (lv_bar_5= RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:135:6: ( 'bar' (lv_bar_5= RULE_ID ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:133:6: ( 'bar' (lv_bar_5= RULE_ID ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:133:7: 'bar' (lv_bar_5= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:135:6: ( 'bar' (lv_bar_5= RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:135:7: 'bar' (lv_bar_5= RULE_ID )
                     {
                     match(input,12,FOLLOW_12_in_ruleModel207); 
 
                             createLeafNode(grammarAccess.getModelAccess().getBarKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:137:1: (lv_bar_5= RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:139:6: lv_bar_5= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:139:1: (lv_bar_5= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:141:6: lv_bar_5= RULE_ID
                     {
                     lv_bar_5=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel229); 

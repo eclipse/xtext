@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
  	private LookaheadTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLookaheadTestLanguageParser(TokenStream input, IAstFactory factory, LookaheadTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

@@ -40,7 +40,9 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
  	private UnassignedRuleCallTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnassignedRuleCallTestLanguageParser(TokenStream input, IAstFactory factory, UnassignedRuleCallTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

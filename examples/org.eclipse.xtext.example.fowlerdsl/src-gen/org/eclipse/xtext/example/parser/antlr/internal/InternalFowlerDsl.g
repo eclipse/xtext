@@ -40,7 +40,9 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
  	private FowlerDslGrammarAccess grammarAccess;
  	
     public InternalFowlerDslParser(TokenStream input, IAstFactory factory, FowlerDslGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

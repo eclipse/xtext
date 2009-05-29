@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
  	private ActionTestLanguageGrammarAccess grammarAccess;
  	
     public InternalActionTestLanguageParser(TokenStream input, IAstFactory factory, ActionTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

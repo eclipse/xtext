@@ -42,7 +42,9 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
  	private DomainmodelGrammarAccess grammarAccess;
  	
     public InternalDomainmodelParser(TokenStream input, IAstFactory factory, DomainmodelGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

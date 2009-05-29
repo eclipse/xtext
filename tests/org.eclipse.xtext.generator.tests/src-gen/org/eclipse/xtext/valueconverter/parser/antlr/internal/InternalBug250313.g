@@ -40,7 +40,9 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
  	private Bug250313GrammarAccess grammarAccess;
  	
     public InternalBug250313Parser(TokenStream input, IAstFactory factory, Bug250313GrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

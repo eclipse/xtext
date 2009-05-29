@@ -40,7 +40,9 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
  	private FowlerDslTestLanguageGrammarAccess grammarAccess;
  	
     public InternalFowlerDslTestLanguageParser(TokenStream input, IAstFactory factory, FowlerDslTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

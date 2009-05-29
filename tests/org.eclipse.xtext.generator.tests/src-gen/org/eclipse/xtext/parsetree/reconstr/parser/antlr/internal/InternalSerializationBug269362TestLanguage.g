@@ -40,7 +40,9 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestL
  	private SerializationBug269362TestLanguageGrammarAccess grammarAccess;
  	
     public InternalSerializationBug269362TestLanguageParser(TokenStream input, IAstFactory factory, SerializationBug269362TestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

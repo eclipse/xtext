@@ -40,7 +40,9 @@ import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAcc
  	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLazyLinkingTestLanguageParser(TokenStream input, IAstFactory factory, LazyLinkingTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     

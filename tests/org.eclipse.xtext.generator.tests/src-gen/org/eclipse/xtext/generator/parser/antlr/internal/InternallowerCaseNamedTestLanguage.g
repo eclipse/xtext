@@ -40,7 +40,9 @@ import org.eclipse.xtext.generator.services.lowerCaseNamedTestLanguageGrammarAcc
  	private lowerCaseNamedTestLanguageGrammarAccess grammarAccess;
  	
     public InternallowerCaseNamedTestLanguageParser(TokenStream input, IAstFactory factory, lowerCaseNamedTestLanguageGrammarAccess grammarAccess) {
-        super(input, factory, grammarAccess.getGrammar());
+        this(input);
+        this.factory = factory;
+        registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
     }
     
