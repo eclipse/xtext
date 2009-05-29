@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import org.eclipse.xtext.Messages;
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
 
@@ -45,7 +46,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 
 	public NewXtextProjectWizard() {
 		super();
-		setWindowTitle("New Xtext Project");
+		setWindowTitle(Messages.NewXtextProjectWizard_WindowTitle);
 	}
 
 	@Override
