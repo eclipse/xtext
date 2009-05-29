@@ -24,7 +24,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  *
  */
 @Stable(since="0.7.0")
-public class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
+public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
 	
 	private static Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
 
