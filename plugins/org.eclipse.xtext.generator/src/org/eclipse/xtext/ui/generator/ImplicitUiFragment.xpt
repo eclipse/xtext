@@ -40,7 +40,16 @@
 				</reference>
 			</activeWhen>
 		</handler>
-	</extension>
+		<handler
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="«name».validate">
+         <activeWhen>
+            <reference
+					definitionId="«name».Editor.opened">
+			</reference>
+         </activeWhen>
+      </handler>
+    </extension>
 	<extension point="org.eclipse.core.expressions.definitions">
 		<definition id="«name».Editor.opened">
 			<and>
@@ -83,7 +92,30 @@
 			id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"
 			label="«name.toSimpleName()»"/>
 	</extension>
-	
+	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="«name».validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+    	<menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="«name».validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+					definitionId="«name».Editor.opened">
+				</reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+	</extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+
