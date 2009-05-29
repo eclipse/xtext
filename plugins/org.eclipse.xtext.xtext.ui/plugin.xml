@@ -11,7 +11,7 @@
 			default="true"
 			extensions="xtext,xtext2"
 			id="org.eclipse.xtext.Xtext"
-			name="Xtext Editor">
+			name="%Xtext_Editor">
 		</editor>
 	</extension>
 	<extension
@@ -52,21 +52,21 @@
 		<page
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.Xtext"
-			name="Xtext">
+			name="%Xtext">
 			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.Xtext"
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.Xtext.coloring"
-			name="Syntax Coloring">
+			name="%Syntax_Coloring">
 			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 		<page
 			category="org.eclipse.xtext.Xtext"
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.Xtext.templates"
-			name="Templates!">
+			name="%Templates">
 			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 	</extension>
@@ -74,31 +74,9 @@
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.ui.keyword_Xtext"
-			label="Xtext"/>
+			label="%Xtext"/>
 	</extension>
-	<extension
-         point="org.eclipse.ui.commands">
-      <command
-            description="Trigger expensive validation"
-            id="org.eclipse.xtext.Xtext.validate"
-            name="Validate">
-      </command>
-    </extension>
-	<extension point="org.eclipse.ui.menus">
-    	<menuContribution
-            locationURI="popup:#TextEditorContext?after=group.open">
-             <command
-                 commandId="org.eclipse.xtext.Xtext.validate"
-                 style="push"
-                 tooltip="Trigger expensive validation">
-            <visibleWhen checkEnabled="false">
-                <reference
-					definitionId="org.eclipse.xtext.Xtext.Editor.opened">
-				</reference>
-            </visibleWhen>
-         </command>  
-         </menuContribution>
-	</extension>
+	
 
 <!-- adding resource factories -->
 
@@ -129,7 +107,7 @@
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			icon="icons/editor.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-			name="Xtext Project"
+			name="%Xtext_Project"
 			project="true">
 		</wizard>
 	</extension>
