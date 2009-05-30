@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -193,7 +192,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * 
 	 */
 	private final class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
-		
 		@Override
 		protected XtextResource getState() {
 			return resource;
@@ -249,7 +247,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		synchronized (validationLock) {
 			if (validationJob != null)
 				validationJob.cancel();
-			validationJob = validationJobFactory.create(this, file, CheckMode.FAST_ONLY, EValidator.MARKER, true);
+			validationJob = validationJobFactory.create(this, file, CheckMode.FAST_ONLY, true);
 			validationJob.schedule(250);
 		}
 	}

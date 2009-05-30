@@ -35,9 +35,12 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	private static final int MAX_ERRORS = 99;
 	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
 
+	private DefaultXtextResourceChecker() {
+	}
+
 	/**
 	 * Checks an {@link XtextResource}
-	 *
+	 * 
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
@@ -46,14 +49,14 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 		try {
 			// Syntactical errors
 			// Collect EMF Resource Diagnostics
-			for(int i = 0 ; i < resource.getErrors().size(); i++) {
+			for (int i = 0; i < resource.getErrors().size(); i++) {
 				markers.add(markerFromXtextResourceDiagnostic(resource.getErrors().get(i), IMarker.SEVERITY_ERROR));
 			}
 
 			if (monitor.isCanceled())
 				return null;
 
-			for(int i = 0 ; i < resource.getWarnings().size(); i++) {
+			for (int i = 0; i < resource.getWarnings().size(); i++) {
 				markers.add(markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), IMarker.SEVERITY_WARNING));
 			}
 
@@ -77,7 +80,8 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 									return markers;
 							}
 						}
-					} else {
+					}
+					else {
 						Map<String, Object> marker = markerFromEValidatorDiagnostic(diagnostic);
 						if (marker != null) {
 							markers.add(marker);
@@ -85,11 +89,13 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 								return markers;
 						}
 					}
-				} catch (RuntimeException e) {
+				}
+				catch (RuntimeException e) {
 					log.error(e.getMessage(), e);
 				}
 			}
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
 		}
 		return markers;
@@ -152,6 +158,7 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 				int offset = parserNode.getOffset();
 				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
 				map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.getLength()));
+				map.put(DIAGNOSTIC_KEY, diagnostic);
 			}
 		}
 		map.put(IMarker.MESSAGE, diagnostic.getMessage());
@@ -162,9 +169,11 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	private EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
 		if (feature instanceof String) {
 			return ele.eClass().getEStructuralFeature((String) feature);
-		} else if (feature instanceof EStructuralFeature) {
+		}
+		else if (feature instanceof EStructuralFeature) {
 			return (EStructuralFeature) feature;
-		} else if (feature instanceof Integer) {
+		}
+		else if (feature instanceof Integer) {
 			return ele.eClass().getEStructuralFeature((Integer) feature);
 		}
 		return null;

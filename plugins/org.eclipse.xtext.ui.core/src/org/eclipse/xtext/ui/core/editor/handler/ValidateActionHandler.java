@@ -12,7 +12,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
@@ -40,7 +39,7 @@ public class ValidateActionHandler extends AbstractHandler {
 		// Due to an Handler ExtensionPoint declaration, we have an XtextEditor
 		// as Active Editor so can just cast to an XtextEditor
 		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-		validationJobFactory.create(editor.getDocument(), (IFile) editor.getResource(), CheckMode.ALL, EValidator.MARKER, true).schedule();
+		validationJobFactory.create(editor.getDocument(), (IFile) editor.getResource(), CheckMode.ALL, true).schedule();
 		return this;
 	}
 

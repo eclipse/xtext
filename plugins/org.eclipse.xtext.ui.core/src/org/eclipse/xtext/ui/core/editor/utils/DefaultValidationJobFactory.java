@@ -17,8 +17,8 @@ public class DefaultValidationJobFactory implements ValidationJob.Factory {
 		this.xtextResourceChecker = xtextResourceChecker;
 	}
 
-	public ValidationJob create(IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, String markerId, boolean deleteOldMarkers) {
-		return new ValidationJob(xtextResourceChecker, xtextDocument, iFile, checkMode, markerId, deleteOldMarkers);
+	public ValidationJob create(IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
+		return new ValidationJob(xtextResourceChecker, xtextDocument, iFile, checkMode, deleteOldMarkers);
 	}
 
 }
