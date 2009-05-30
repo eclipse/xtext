@@ -112,6 +112,30 @@
             commandId="org.eclipse.xtext.ui.ToggleCommentAction"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
+  <extension
+         id="fast"
+         name="Xtext Check (fast)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+      <attribute name="uri"/>
+   </extension>
+  <extension
+         id="normal"
+         name="Xtext Check (normal)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+      <attribute name="uri"/>
+   </extension>
+  <extension
+         id="expensive"
+         name="Xtext Check (expensive)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+      <attribute name="uri"/>
+   </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector

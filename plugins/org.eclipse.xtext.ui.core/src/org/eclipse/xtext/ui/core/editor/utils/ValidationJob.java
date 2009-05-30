@@ -35,25 +35,18 @@ public final class ValidationJob extends Job {
 	private final IFile iFile;
 
 	private final boolean deleteOldMarkers;
-	private IXtextResourceChecker xtextResourceChecker;
 
-	private String markerId;
+	private IXtextResourceChecker xtextResourceChecker;
 
 	private IStateAccess<XtextResource> xtextDocument;
 	
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
 	 * 
-	 * @param xtextDocument
-	 * @param iFile
-	 * @param checkMode
-	 * @param deleteOldMarkers
-	 *            - whenever marker should be deleted or not
 	 */
-	public ValidationJob(IXtextResourceChecker xtextResourceChecker,IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, String markerId, boolean deleteOldMarkers) {
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker,IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
 		super("Xtext validation");
 
-		this.markerId = markerId;
 		this.xtextDocument = xtextDocument;
 		this.iFile = iFile;
 		this.checkMode = checkMode;
@@ -80,13 +73,13 @@ public final class ValidationJob extends Job {
 				});
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		MarkerUtil.addMarkers(iFile, issues, markerId, deleteOldMarkers, monitor);
+		MarkerUtil.addMarkers(iFile, issues, checkMode, deleteOldMarkers, monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		return Status.OK_STATUS;
 	}
 
 	public static interface Factory {
-		ValidationJob create(IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, String markerId, boolean deleteOldMarkers);
+		ValidationJob create(IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers);
 	}
 }
