@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+	<!-- F3 / Hyperlinking stuff -->
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="F3"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+		</key>
+	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
@@ -18,14 +28,5 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>
-	<extension
-		point="org.eclipse.ui.bindings">
-		<key
-			contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-			sequence="F3"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-		</key>
 	</extension>
 </plugin>

@@ -14,6 +14,8 @@
 			name="%Xtext_Editor">
 		</editor>
 	</extension>
+	
+	<!-- Open declaration -->
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
@@ -27,17 +29,19 @@
 		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.Xtext.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.Xtext" 
-      						forcePluginActivation="true"/>
-         			</with>		
+		<definition id="org.eclipse.xtext.Xtext.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+						value="org.eclipse.xtext.Xtext" 
+						forcePluginActivation="true"/>
+				</with>
 			</and>
-      </definition>
-    </extension>
+		</definition>
+	</extension>
+	
+	<!-- Preference pages -->
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -68,8 +72,7 @@
 			label="%Xtext_keyword"/>
 	</extension>
 	
-<!-- adding resource factories -->
-
+	<!-- Resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -86,6 +89,7 @@
 		</parser>
 	</extension>
 
+	<!-- Wizards -->
 	<extension
 		point="org.eclipse.ui.newWizards">
 		<category
@@ -100,5 +104,37 @@
 			name="%Xtext_Project"
 			project="true">
 		</wizard>
+	</extension>
+	
+	<!-- Outline context menu actions -->
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions">
+			<command
+				commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand"
+				label="Sample action registered for ParserRule">
+				<visibleWhen checkEnabled="false">
+					<iterate>
+						<adapt type="org.eclipse.xtext.ParserRule" />
+					</iterate>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand"
+			name="Sample Command"
+			description="Just a sample command">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.xtext.ui.editor.outline.SampleOulineNodeHandler"
+			commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand">
+		</handler>
 	</extension>
 </plugin>

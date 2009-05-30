@@ -12,6 +12,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.concurrent.IEObjectHandle;
+import org.eclipse.xtext.concurrent.IStateAccess;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
@@ -62,6 +65,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	
 	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = new ContentOutlineNode();
+		outlineNode.setClazz(semanticNode.eClass());
 		
 		outlineNode.setLabel(getText(semanticNode));
 		Image image = getImage(semanticNode);

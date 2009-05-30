@@ -85,6 +85,7 @@ projectName=«this.projectName»
 
 			<!-- outline API -->
 			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment"/>
 
 			«IF xpandBased»
 			<!-- xtend-based API for content assistance -->
