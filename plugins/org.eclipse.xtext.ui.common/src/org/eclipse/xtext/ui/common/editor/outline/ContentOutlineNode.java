@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
@@ -26,6 +27,7 @@ public class ContentOutlineNode {
 	private int selectionLength;
 	private List<ContentOutlineNode> children;
 	private ContentOutlineNode parent;
+	private EClass clazz;
 
 	public void setLabel(String label) {
 		this.label = label;
@@ -84,6 +86,14 @@ public class ContentOutlineNode {
 
 	public ImageDescriptor getImageDescriptor() {
 		return imageDescriptor;
+	}
+
+	public void setClazz(EClass clazz) {
+		this.clazz = clazz;
+	}
+
+	public EClass getClazz() {
+		return clazz;
 	}
 
 }

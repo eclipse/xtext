@@ -10,9 +10,11 @@ package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
@@ -21,6 +23,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
@@ -37,6 +40,7 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.LexicalSortingAction;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
 import org.eclipse.xtext.ui.common.editor.outline.impl.OutlineSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.impl.ToggleLinkWithEditorAction;
+import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
@@ -62,19 +66,27 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
+	private static final String contextMenuID = "xtextOutlineContextMenu";
+
 	@Inject
 	private ILazyTreeProvider provider;
-
+	
+	@Inject
+	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
+	
 	private ISourceViewer sourceViewer;
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 	private EditorSelectionChangedListener editorSelectionChangedListener;
 
 	private IXtextModelListener modelListener;
 
+	private Menu contextMenu;
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 		configureViewer();
+		configureContextMenu();
 		configureProviders();
 		configureDocument();
 	}
@@ -82,6 +94,22 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
 		viewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
+	}
+	
+	private void configureContextMenu() {
+		MenuManager manager= new MenuManager(contextMenuID, contextMenuID);
+		manager.setRemoveAllWhenShown(true);
+//		manager.addMenuListener(new IMenuListener() {
+//			public void menuAboutToShow(IMenuManager m) {
+//				contextMenuAboutToShow(m);
+//			}
+//		});
+		contextMenu = manager.createContextMenu(getTreeViewer().getTree());
+		getTreeViewer().getTree().setMenu(contextMenu);
+
+		IPageSite site= getSite();
+		Platform.getAdapterManager().registerAdapters(outlineNodeFactory, ContentOutlineNode.class);
+		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
 	}
 
 	protected void configureProviders() {
