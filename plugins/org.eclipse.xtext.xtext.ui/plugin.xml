@@ -65,7 +65,7 @@
 		point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.eclipse.xtext.ui.keyword_Xtext"
-			label="%Xtext"/>
+			label="%Xtext_keyword"/>
 	</extension>
 	
 <!-- adding resource factories -->
