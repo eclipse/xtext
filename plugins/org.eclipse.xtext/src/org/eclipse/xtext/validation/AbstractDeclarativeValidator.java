@@ -86,6 +86,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 					return;
 				try {
 					state.currentMethod = method;
+					state.currentCheckType = annotation.value();
 					method.setAccessible(true);
 					method.invoke(instance, state.currentObject);
 				}
@@ -220,6 +221,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private EObject currentObject = null;
 		private Method currentMethod = null;
 		private CheckMode checkMode = null;
+		private CheckType currentCheckType = null;
 		private boolean hasErrors = false;
 	}
 
@@ -267,12 +269,12 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void warning(String string, Integer feature) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.get().currentObject, feature));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.get().currentObject, feature,  state.get().currentCheckType));
 	}
 
 	protected void error(String string, Integer feature) {
 		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.get().currentObject, feature));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.get().currentObject, feature, state.get().currentCheckType));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
@@ -351,20 +353,22 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		return injector;
 	}
 
-	static class DiagnosticImpl implements Diagnostic {
+	public static class DiagnosticImpl implements Diagnostic {
 
-		private DiagnosticImpl(int severity, String message, EObject source, Integer feature) {
+		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType) {
 			super();
 			this.severity = severity;
 			this.message = message;
 			this.source = source;
 			this.feature = feature;
+			this.checkType = checkType;
 		}
 
 		private final String message;
 		private final EObject source;
 		private final Integer feature;
 		private final int severity;
+		private final CheckType checkType;
 
 		public List<Diagnostic> getChildren() {
 			return Collections.emptyList();
@@ -396,6 +400,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 		public String getSource() {
 			return source.toString();
+		}
+		
+		public CheckType getCheckType() {
+			return checkType;
 		}
 
 		// partially copied from BasicDiagnostic#toString()
