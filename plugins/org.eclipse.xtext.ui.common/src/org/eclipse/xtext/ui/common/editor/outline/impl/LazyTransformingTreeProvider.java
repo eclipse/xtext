@@ -59,15 +59,16 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			XtextDocument document = (XtextDocument) newInput;
 			outlineModel = document.readOnly(new IUnitOfWork<ContentOutlineNode, XtextResource>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
+					if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootASTElement() == null)
+						return createErrorNode();
 					EObject semanticModelRoot = resource.getParseResult().getRootASTElement();
-					if (semanticModelRoot != null) {
-						return transformSemanticModelToOutlineModel(semanticModelRoot);
-					}
-					else {
-						ContentOutlineNode errorNode = new ContentOutlineNode();
-						errorNode.setLabel("Error: No model available.");
-						return errorNode;
-					}
+					return transformSemanticModelToOutlineModel(semanticModelRoot);
+				}
+
+				private ContentOutlineNode createErrorNode() {
+					ContentOutlineNode errorNode = new ContentOutlineNode();
+					errorNode.setLabel("Error: No model available.");
+					return errorNode;
 				}
 			});
 		}
