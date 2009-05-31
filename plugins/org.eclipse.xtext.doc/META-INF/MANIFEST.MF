@@ -2,7 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.eclipse.xtext.doc
+Bundle-SymbolicName: org.eclipse.xtext.doc;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.help

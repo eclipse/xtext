@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.eclipse.ant.AntBuilderLaunchConfigurationType">
+<booleanAttribute key="org.eclipse.ant.ui.ATTR_TARGETS_UPDATED" value="true"/>
+<booleanAttribute key="org.eclipse.ant.ui.DEFAULT_VM_INSTALL" value="false"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/org.eclipse.xtext.doc/customBuild.xml"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
+<booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtext.doc"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_BUILD_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;launchConfigurationWorkingSet editPageId=&quot;org.eclipse.ui.resourceWorkingSetPage&quot; factoryID=&quot;org.eclipse.ui.internal.WorkingSetFactory&quot; id=&quot;1243768845412_46&quot; label=&quot;workingSet&quot; name=&quot;workingSet&quot;&gt;&#10;&lt;item factoryID=&quot;org.eclipse.ui.internal.model.ResourceFactory&quot; path=&quot;/org.eclipse.xtext.doc/doc&quot; type=&quot;2&quot;/&gt;&#10;&lt;/launchConfigurationWorkingSet&gt;}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/org.eclipse.xtext.doc/customBuild.xml}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_RUN_BUILD_KINDS" value="full,incremental,auto,"/>
+<booleanAttribute key="org.eclipse.ui.externaltools.ATTR_TRIGGERS_CONFIGURED" value="true"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/org.eclipse.xtext.doc}"/>
+</launchConfiguration>

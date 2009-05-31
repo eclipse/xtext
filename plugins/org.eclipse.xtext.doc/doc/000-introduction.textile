@@ -1,4 +1,4 @@
-h1. Xtext Documentation
+h1. Overview
 
 h2. What's Xtext?
 

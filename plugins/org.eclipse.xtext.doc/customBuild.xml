@@ -12,6 +12,9 @@
 	<property name="document.name" value="xtext"/>
 	<property name="document.stylesheet" value="styles/article.xsl"/>
 	<property name="document.pdf.stylesheet" value="styles/xmpp.xsl"/>
+
+	<property name="document.eclipse.stylesheet" value="styles/eclipsehelp.xsl"/>
+	<property name="eclipsehelp-css.file" value="styles/book.css" />
 	
 	<property name="build.dir" value="build" />
 	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
@@ -61,17 +64,10 @@
 		</concat>
 	</target>
 	
-	<target name="wikitext2pdf" depends="assemble" description="Generate PDF from textile">
-		<wikitext-to-pdf markupLanguage="Textile">
-			<fileset dir="${build.dir}">
-	 			<include name="${document.name}.textile"/>
-			</fileset>
-		</wikitext-to-pdf>
-	</target>
-	
-	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from textile">
-		<!-- <wikitext-to-docbook markupLanguage="Textile"> -->
-		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect">
+	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from Textile">
+		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
+			booktitle="Xtext User Guide"
+			validate="true">
 			<fileset dir="${build.dir}">
 	 			<include name="${document.name}.textile"/>
 			</fileset>
@@ -129,11 +125,12 @@
 	<target name="build-doc" depends="init, install-wikitext, get-docbook-xsl, get-fop">
 		<echo>Building Output...</echo>
 		<antcall target="wikitext2docbook"/>
-		<antcall target="docbook2html"/>
 		<antcall target="docbook2pdf"/>
 		<!--
-		<antcall target="dist"/>
+		<antcall target="docbook2html"/>
+		<antcall target="wikitext2eclipsehelp"/>
 		-->
+		<antcall target="docbook2eclipsehelp"/>
 	</target>
 		
 	<target name="check-docbook">
@@ -177,9 +174,10 @@
 	
 	<target name="docbook2pdf">
 		<echo>Converting article to PDF...</echo>
-
-		<delete file="${build.dir}${file.separator}${document.name}.pdf"/>
+		<delete file="manual${file.separator}${document.name}.pdf" failonerror="false"/>
 		<delete file="${build.dir}${file.separator}${document.name}.fo"/>
+		<mkdir dir="manual"/>
+		
 		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.fo" style="${document.pdf.stylesheet}">
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
@@ -199,12 +197,54 @@
 
 		<docbook2pdf 
 			source="${build.dir}${file.separator}${document.name}.fo"
-			target="${build.dir}${file.separator}${document.name}.pdf"/>
+			target="manual${file.separator}${document.name}.pdf"/>
 		
 		<!-- Remove the resulting formatting object. This object isn't necessary in the
 		     result of this build. -->
-		<!-- <delete file="${build.dir}${file.separator}${document.name}.fo" /> -->
+		<delete file="${build.dir}${file.separator}${document.name}.fo" />
 	</target>
+	
+	<target name="wikitext2eclipsehelp" depends="assemble" description="Generate Eclipse Help from textile">
+		<wikitext-to-eclipse-help markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
+			multipleOutputFiles="true"
+			navigationImages="false"
+			formatoutput="true"
+			helpPrefix="help">
+			<fileset dir="${build.dir}">
+	 			<include name="${document.name}.textile"/>
+			</fileset>
+			<stylesheet url="book.css"/>
+			<stylesheet file="${basedir}/help/styles/main.css"/>
+		</wikitext-to-eclipse-help>
+	 </target>
+	
+	<target name="docbook2eclipsehelp">
+		<echo>Converting article to Eclipe Help...</echo>
+		<delete dir="${basedir}/help"
+		        failonerror="false"
+		        excludes="CVS" 
+				includeemptydirs="true"/>
+		<copy todir="${basedir}/help/images">
+			<fileset dir="doc/images">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<copy file="${eclipsehelp-css.file}" todir="${basedir}/help" />
+		
+		<xslt basedir="${build.dir}" destdir="${basedir}" style="${document.eclipse.stylesheet}">
+			<include name="xtext.xml"/>
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
+				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
+			</factory>
+			<xmlcatalog>
+				<entity 
+					publicId="chunk.xsl"
+					location="${docbook.dir}${file.separator}html${file.separator}chunk.xsl"/>
+			</xmlcatalog>
+		</xslt>
+		<delete file="${basedir}/xtext.html" />
+	</target>
+
 	
 	
 </project>
