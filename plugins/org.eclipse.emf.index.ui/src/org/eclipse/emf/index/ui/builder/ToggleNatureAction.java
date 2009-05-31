@@ -21,6 +21,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Peter Friese
  */
 public class ToggleNatureAction implements IObjectActionDelegate {
 
@@ -28,15 +29,14 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 
 	public void run(IAction action) {
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it
-					.hasNext();) {
+			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
 				Object element = it.next();
 				IProject project = null;
 				if (element instanceof IProject) {
 					project = (IProject) element;
-				} else if (element instanceof IAdaptable) {
-					project = (IProject) ((IAdaptable) element)
-							.getAdapter(IProject.class);
+				}
+				else if (element instanceof IAdaptable) {
+					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
 				}
 				if (project != null) {
 					toggleNature(project);
@@ -52,37 +52,46 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 	}
 
-	/**
-	 * Toggles sample nature on a project
-	 * 
-	 * @param project
-	 *            to have sample nature added or removed
-	 */
-	private void toggleNature(IProject project) {
+	private void toggleNature(IProject project)  {
 		try {
 			IProjectDescription description = project.getDescription();
-			String[] natures = description.getNatureIds();
-
-			for (int i = 0; i < natures.length; ++i) {
-				if (EmfIndexNature.NATURE_ID.equals(natures[i])) {
-					// Remove the nature
-					String[] newNatures = new String[natures.length - 1];
-					System.arraycopy(natures, 0, newNatures, 0, i);
-					System.arraycopy(natures, i + 1, newNatures, i,
-							natures.length - i - 1);
-					description.setNatureIds(newNatures);
-					project.setDescription(description, null);
-					return;
-				}
+			if (description.hasNature(EmfIndexNature.NATURE_ID)) {
+				removeNature(project, EmfIndexNature.NATURE_ID);
 			}
+			else {
+				addNature(project, EmfIndexNature.NATURE_ID);
+			}
+		}
+		catch (CoreException e) {
+		}
+	}
 
-			// Add the nature
-			String[] newNatures = new String[natures.length + 1];
-			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = EmfIndexNature.NATURE_ID;
-			description.setNatureIds(newNatures);
-			project.setDescription(description, null);
-		} catch (CoreException e) {
+	private void addNature(IProject project, String natureId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		String[] natures = description.getNatureIds();
+
+		// Add the nature
+		String[] newNatures = new String[natures.length + 1];
+		System.arraycopy(natures, 0, newNatures, 0, natures.length);
+		newNatures[natures.length] = EmfIndexNature.NATURE_ID;
+		description.setNatureIds(newNatures);
+		project.setDescription(description, null);
+	}
+
+	private void removeNature(IProject project, String natureId) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		String[] natures = description.getNatureIds();
+
+		for (int i = 0; i < natures.length; ++i) {
+			if (natureId.equals(natures[i])) {
+				// Remove the nature
+				String[] newNatures = new String[natures.length - 1];
+				System.arraycopy(natures, 0, newNatures, 0, i);
+				System.arraycopy(natures, i + 1, newNatures, i, natures.length - i - 1);
+				description.setNatureIds(newNatures);
+				project.setDescription(description, null);
+				return;
+			}
 		}
 	}
 
