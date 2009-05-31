@@ -42,9 +42,36 @@
                class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.ToggleNatureAction"
                enablesFor="+"
                id="org.eclipse.emf.index.ui.addRemoveNatureAction"
-               label="Add/Remove EMF Index Nature"
-               menubarPath="additions">
+               label="Add EMF Index Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions">
          </action>
+         <visibility>
+         	<not>
+	            <objectState
+    	              name="nature"
+        	          value="org.eclipse.emf.index.ui.emfIndexNature">
+            	</objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.emf.index.ui.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.ToggleNatureAction"
+               enablesFor="+"
+               id="org.eclipse.emf.index.ui.addRemoveNatureAction"
+               label="Remove EMF Index Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions">
+         </action>
+         <visibility>
+            <objectState
+	              name="nature"
+    	          value="org.eclipse.emf.index.ui.emfIndexNature">
+        	</objectState>
+         </visibility>
       </objectContribution>
    </extension>
    <extension
