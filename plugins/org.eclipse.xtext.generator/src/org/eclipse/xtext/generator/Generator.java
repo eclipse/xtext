@@ -148,7 +148,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		} else {
 			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcPath()));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
 		}
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
