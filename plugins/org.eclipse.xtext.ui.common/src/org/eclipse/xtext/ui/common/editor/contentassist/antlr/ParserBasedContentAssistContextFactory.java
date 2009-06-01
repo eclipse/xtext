@@ -1,0 +1,457 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.common.editor.contentassist.antlr;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractContentAssistContextFactory;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator;
+import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator.IFollowElementAcceptor;
+import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class ParserBasedContentAssistContextFactory extends AbstractContentAssistContextFactory {
+
+	@Inject
+	private IContentAssistParser parser;
+	
+	@Inject
+	private Provider<ContentAssistContext> contentAssistContextProvider;
+	
+	@Inject
+	private PrefixMatcher matcher;
+
+	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
+		try {
+			IParseResult parseResult = resource.getParseResult();
+			if (parseResult == null)
+				throw new NullPointerException("parseResult is null");
+
+			// adjust offset to beginning of normalized selection
+			ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
+			int completionOffset = offset;
+			if (selection.getOffset() + selection.getLength() == offset)
+				completionOffset = selection.getOffset();
+
+			CompositeNode rootNode = parseResult.getRootNode();
+			
+			AbstractNode lastCompleteNode = new LeafNodeFinder(completionOffset, true).doSwitch(rootNode);
+			if (lastCompleteNode == null)
+				lastCompleteNode = rootNode;
+
+			AbstractNode currentNode = new LeafNodeFinder(completionOffset, false).doSwitch(rootNode);
+			if (currentNode == null)
+				currentNode = lastCompleteNode;
+
+			AbstractNode lastVisibleNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, completionOffset);
+			EObject currentModel = NodeUtil.getNearestSemanticObject(lastVisibleNode);
+			
+			List<ContentAssistContext> result = Lists.newArrayList();
+			// 1st context: assume we are inside a datatype rule
+			AbstractNode datatypeNode = getContainingDatatypeRuleNode(lastCompleteNode);
+			if (datatypeNode != lastCompleteNode) {
+				String prefix = getPrefix(datatypeNode, completionOffset);
+				String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
+				
+				Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+				createContexts(viewer, parseResult, completionOffset, rootNode, datatypeNode, datatypeNode, result, prefix,
+						currentModel, followElements);
+			}
+			
+			// 2nd context: we assume, that the current token is incomplete and try to calculate
+			// any valid grammar element by removing the current token and using it as prefix
+			if (datatypeNode == lastCompleteNode && completionOffset != lastCompleteNode.getOffset()) {
+				String prefix = getPrefix(lastCompleteNode, completionOffset);
+				String completeInput = viewer.getDocument().get(0, lastCompleteNode.getOffset());
+				AbstractNode previousNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, lastCompleteNode.getOffset());
+				EObject previousModel = NodeUtil.getNearestSemanticObject(previousNode);
+				AbstractNode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
+				Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+				createContexts(viewer, parseResult, completionOffset, rootNode, previousNode, currentDatatypeNode, result, prefix,
+						previousModel, followElements);
+			}
+
+			// 3rd context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
+			if (!(lastCompleteNode instanceof LeafNode) || lastCompleteNode.getGrammarElement() != null) {
+				// do not calculate twice for the same input
+				if (!(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
+					String prefix = "";
+					String completeInput = viewer.getDocument().get(0, completionOffset);
+					Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+					createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNode, currentNode, result, prefix,
+							currentModel, followElements);
+				}
+			}
+			
+			return result.toArray(new ContentAssistContext[result.size()]);
+		}
+		catch (BadLocationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void createContexts(
+			ITextViewer viewer, IParseResult parseResult, int completionOffset,
+			CompositeNode rootNode, AbstractNode lastCompleteNode, AbstractNode currentNode,
+			List<ContentAssistContext> result, String prefix,
+			EObject previousModel, Collection<FollowElement> followElements) {
+		Multimap<EObject, FollowElement> contextMap = computeCurrentModel(previousModel, followElements);
+		for (Entry<EObject, Collection<FollowElement>> entry : contextMap.asMap().entrySet()) {
+			ContentAssistContext context = createContext(viewer, completionOffset, parseResult, rootNode,
+					lastCompleteNode, entry.getKey(), currentNode, prefix);
+			computeFollowElements(entry.getValue(), context);
+			result.add(context);
+		}
+	}
+	
+	private Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel,
+			Collection<FollowElement> followElements) {
+		Multimap<EObject, FollowElement> result = Multimaps.newArrayListMultimap();
+		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
+		if (adapter == null || adapter.getParserNode() == null) {
+			result.putAll(currentModel, followElements);
+			return result;
+		}
+		CompositeNode currentNode = adapter.getParserNode();
+		EObject currentGrammarElement = currentNode.getGrammarElement();
+		AbstractRule currentRule = getRule(currentGrammarElement);
+		for(FollowElement element: followElements) {
+			AbstractElement grammarElement = element.getGrammarElement();
+			if (!element.getLocalTrace().isEmpty())
+			   grammarElement = element.getLocalTrace().get(0);
+			EObject loopGrammarElement = currentGrammarElement;
+			AbstractRule rule = currentRule;
+			CompositeNode node = currentNode;
+			while (!EcoreUtil.isAncestor(rule, grammarElement) && node.getParent() != null) {
+				node = node.getParent();
+				while(node.getGrammarElement() == null && node.getParent() != null)
+					node = node.getParent();
+				loopGrammarElement = node.getGrammarElement();
+				rule = getRule(loopGrammarElement);
+			}
+			EObject context = NodeUtil.getNearestSemanticObject(node);
+			result.put(context, element);
+		}
+		return result;
+	}
+
+	private AbstractRule getRule(EObject currentGrammarElement) {
+		AbstractRule rule = null;
+		if (currentGrammarElement instanceof RuleCall)
+			rule = ((RuleCall) currentGrammarElement).getRule();
+		if (currentGrammarElement instanceof AbstractRule)
+			rule = (AbstractRule) currentGrammarElement;
+		if (currentGrammarElement instanceof Action)
+			rule = EcoreUtil2.getContainerOfType(currentGrammarElement, AbstractRule.class);
+		if (rule == null)
+			throw new IllegalStateException();
+		return rule;
+	}
+
+	public static class LeafNodeFinder extends ParsetreeSwitch<LeafNode> {
+		private final int offset;
+		private final boolean leading;
+		
+		public LeafNodeFinder(int offset, boolean leading) {
+			this.offset = offset;
+			this.leading = leading;
+		}
+		
+		@Override
+		public LeafNode caseCompositeNode(CompositeNode object) {
+			if (leading) {
+				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset) {
+					for (AbstractNode node: object.getChildren()) {
+						LeafNode result = doSwitch(node);
+						if (result != null)
+							return result;
+					}
+				}
+			} else {
+				if (object.getTotalOffset() <= offset && object.getTotalLength() + object.getTotalOffset() > offset) {
+					for (AbstractNode node: object.getChildren()) {
+						LeafNode result = doSwitch(node);
+						if (result != null)
+							return result;
+					}
+				}
+			}
+			return null;
+		}
+		
+		@Override
+		public LeafNode caseLeafNode(LeafNode object) {
+			if (leading) {
+				if (object.getTotalOffset() < offset && object.getTotalLength() + object.getTotalOffset() >= offset)
+					return object;
+			} else {
+				if (object.getTotalOffset() <= offset && object.getTotalLength() + object.getTotalOffset() > offset)
+					return object;
+			}
+			return null;
+		}
+	}
+
+	private void computeFollowElements(Collection<FollowElement> followElements, final ContentAssistContext result) {
+		FollowElementCalculator calculator = new FollowElementCalculator();
+		calculator.acceptor =
+			new IFollowElementAcceptor(){
+				public void accept(AbstractElement element) {
+					ParserRule rule = GrammarUtil.containingParserRule(element);
+					if (rule == null || !GrammarUtil.isDatatypeRule(rule))
+						result.accept(element);
+				}
+			};
+		for(FollowElement element: followElements) {
+			computeFollowElements(calculator, element);
+		}
+	}
+	
+	private void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
+		if (element.getLookAhead() <= 1) {
+			Assignment ass = EcoreUtil2.getContainerOfType(element.getGrammarElement(), Assignment.class);
+			if (ass != null)
+				calculator.doSwitch(ass);
+			else {
+				calculator.doSwitch(element.getGrammarElement());
+				ParserRule rule = EcoreUtil2.getContainerOfType(element.getGrammarElement(), ParserRule.class);
+				if (rule != null && GrammarUtil.isDatatypeRule(rule)) {
+					for (int i = element.getLocalTrace().size() - 1; i >= 0; i--) {
+						AbstractElement grammarElement = element.getTrace().get(i);
+						if (grammarElement instanceof Assignment) {
+							calculator.doSwitch(grammarElement);
+							return;
+						}
+					}
+				}
+			}
+			return;
+		}
+		Collection<FollowElement> followElements = parser.getFollowElements(element);
+		for(FollowElement newElement: followElements) {
+			computeFollowElements(calculator, newElement);
+		}
+	}
+
+	public AbstractNode getContainingDatatypeRuleNode(AbstractNode node) {
+		AbstractNode result = node;
+		EObject grammarElement = result.getGrammarElement();
+		if (grammarElement != null) {
+			ParserRule parserRule = GrammarUtil.containingParserRule(grammarElement);
+			while (parserRule != null && GrammarUtil.isDatatypeRule(parserRule)) {
+				result = result.getParent();
+				grammarElement = result.getGrammarElement();
+				parserRule = GrammarUtil.containingParserRule(grammarElement);
+			}
+		}
+		return result;
+	}
+
+	public ContentAssistContext createContext(ITextViewer viewer, int offset, IParseResult parseResult,
+			CompositeNode rootNode, AbstractNode lastCompleteNode, EObject currentModel, AbstractNode currentNode,
+			String prefix) {
+		ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
+		ContentAssistContext context = contentAssistContextProvider.get();
+
+		context.setRootNode(rootNode);
+		context.setLastCompleteNode(lastCompleteNode);
+		context.setCurrentNode(currentNode);
+
+		context.setRootModel(parseResult.getRootASTElement());
+		context.setCurrentModel(currentModel);
+		context.setOffset(offset);
+		context.setViewer(viewer);
+		context.setPrefix(prefix);
+		int regionLength = prefix.length();
+		if (selection.getLength() > 0)
+			regionLength = regionLength + selection.getLength();
+		Region region = new Region(offset - prefix.length(), regionLength);
+		context.setReplaceRegion(region);
+		context.setSelectedText(selection.getText());
+		context.setMatcher(matcher);
+		return context;
+	}
+
+	public String getPrefix(AbstractNode prefixNode, int offset) {
+		if (prefixNode instanceof LeafNode) {
+			if (((LeafNode) prefixNode).isHidden())
+				return "";
+			return getNodeText(prefixNode, offset);
+		}
+		StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
+		doComputePrefix((CompositeNode) prefixNode, result, offset);
+		return result.toString();
+	}
+
+	public String getNodeText(AbstractNode currentNode, int offset) {
+		int startOffset = currentNode.getOffset();
+		String text = ((LeafNode) currentNode).getText();
+		int length = offset - startOffset;
+		String result = length > text.length() ? text : text.substring(0, length);
+		return result;
+	}
+
+	public boolean doComputePrefix(CompositeNode node, StringBuilder result, int offset) {
+		List<LeafNode> hiddens = new ArrayList<LeafNode>(2);
+		for (AbstractNode child : node.getChildren()) {
+			if (child instanceof CompositeNode) {
+				if (!doComputePrefix((CompositeNode) child, result, offset))
+					return false;
+			}
+			else {
+				LeafNode leaf = (LeafNode) child;
+				if (leaf.getOffset() > offset)
+					return false;
+				if (leaf.isHidden()) {
+					if (result.length() != 0)
+						hiddens.add((LeafNode) child);
+				}
+				else {
+					Iterator<LeafNode> iter = hiddens.iterator();
+					while (iter.hasNext()) {
+						result.append(iter.next().getText());
+					}
+					hiddens.clear();
+					result.append(getNodeText(leaf, offset));
+					if (leaf.getOffset() + leaf.getLength() > offset)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void setParser(IContentAssistParser parser) {
+		this.parser = parser;
+	}
+
+	public IContentAssistParser getParser() {
+		return parser;
+	}
+	
+	public static class FollowElementCalculator extends XtextSwitch<Boolean> {
+		
+		protected IFollowElementCalculator.IFollowElementAcceptor acceptor;
+		
+		@Override
+		public Boolean caseAlternatives(Alternatives object) {
+			boolean more = false;
+			for(AbstractElement element: object.getGroups()) {
+				more = doSwitch(element) || more;
+			}
+			return more || isOptional(object);
+		}
+		
+		@Override
+		public Boolean caseGroup(Group object) {
+			boolean more = true;
+			for(AbstractElement element: object.getTokens()) {
+				more = more && doSwitch(element);
+			}
+			return more || isOptional(object);
+		}
+		
+		@Override
+		public Boolean caseAction(Action object) {
+			return true;
+		}
+		
+		@Override
+		public Boolean caseAssignment(Assignment object) {
+			acceptor.accept(object);
+			return doSwitch(object.getTerminal()) || isOptional(object);
+		}
+		
+		@Override
+		public Boolean caseCrossReference(CrossReference object) {
+			return Boolean.FALSE;
+		}
+		
+		@Override
+		public Boolean caseParserRule(ParserRule object) {
+			if (GrammarUtil.isDatatypeRule(object))
+				return Boolean.FALSE;
+			return doSwitch(object.getAlternatives());
+		}
+		
+		@Override
+		public Boolean caseEnumRule(EnumRule object) {
+			return doSwitch(object.getAlternatives());
+		}
+		
+		@Override
+		public Boolean caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+			return doSwitch(object.getLiteral());
+		}
+		
+		@Override
+		public Boolean caseRuleCall(RuleCall object) {
+			acceptor.accept(object);
+			return doSwitch(object.getRule()) || isOptional(object);
+		}
+		
+		@Override
+		public Boolean caseTerminalRule(TerminalRule object) {
+			return Boolean.FALSE;
+		}
+		
+		@Override
+		public Boolean caseKeyword(Keyword object) {
+			acceptor.accept(object);
+			return isOptional(object);
+		}
+		
+		public boolean isOptional(AbstractElement element) {
+			return GrammarUtil.isOptionalCardinality(element);
+		}
+	}
+}

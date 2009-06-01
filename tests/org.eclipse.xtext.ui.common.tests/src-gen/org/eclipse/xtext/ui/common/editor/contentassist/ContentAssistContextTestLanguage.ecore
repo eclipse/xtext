@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="contentAssistContextTest" nsURI="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest" nsPrefix="contentAssistContextTest">
+  <eClassifiers xsi:type="ecore:EClass" name="FirstLevel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondLevelA" upperBound="-1" eType="//SecondLevelA" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondLevelB" upperBound="-1" eType="//SecondLevelB" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondLevelA">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelA1" upperBound="-1" eType="//ThirdLevelA1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelA2" upperBound="-1" eType="//ThirdLevelA2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondLevelB">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelB1" upperBound="-1" eType="//ThirdLevelB1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thirdLevelB2" upperBound="-1" eType="//ThirdLevelB2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdLevelA1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdLevelA2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdLevelB1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThirdLevelB2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

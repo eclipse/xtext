@@ -40,7 +40,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		Set<AbstractElement> nextValidElementSet = getValidElementSet(rootNode, lastCompleteNode, offset);
 		if (nextValidElementSet != null && !nextValidElementSet.isEmpty()) {
 			IFollowElementAcceptor nullSafeAcceptor = new NullSafeElementAcceptor(acceptor);
-			ElementSwitch elementSwitch = new ElementSwitch(nullSafeAcceptor);
+			FirstSetCalculator elementSwitch = new FirstSetCalculator(nullSafeAcceptor);
 			for (AbstractElement element: nextValidElementSet) {
 				elementSwitch.doSwitch(element);
 			}
@@ -66,16 +66,16 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		
 	}
 	
-	public static class ElementSwitch extends XtextSwitch<ElementSwitch> {
+	public static class FirstSetCalculator extends XtextSwitch<FirstSetCalculator> {
 		
 		private final IFollowElementAcceptor acceptor;
 
-		public ElementSwitch(IFollowElementAcceptor acceptor) {
+		public FirstSetCalculator(IFollowElementAcceptor acceptor) {
 			this.acceptor = acceptor;
 		}
 		
 		@Override
-		public ElementSwitch caseAlternatives(Alternatives alternatives) {
+		public FirstSetCalculator caseAlternatives(Alternatives alternatives) {
 			for (AbstractElement alternativeElement : alternatives.getGroups()) {
 				doSwitch(alternativeElement);
 			}
@@ -83,14 +83,14 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		}
 		
 		@Override
-		public ElementSwitch caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+		public FirstSetCalculator caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
 			doSwitch(object.getLiteral());
 			acceptor.accept(object);
 			return this;
 		}
 
 		@Override
-		public ElementSwitch caseGroup(Group group) {
+		public FirstSetCalculator caseGroup(Group group) {
 			for(AbstractElement token: group.getTokens()) {
 				doSwitch(token);
 				if (!isOptional(token))
@@ -100,42 +100,42 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		}
 		
 		@Override
-		public ElementSwitch caseAssignment(Assignment assignment) {
+		public FirstSetCalculator caseAssignment(Assignment assignment) {
 			acceptor.accept(assignment);
 			doSwitch(assignment.getTerminal());
 			return this;
 		}
 
 		@Override
-		public ElementSwitch caseRuleCall(RuleCall ruleCall) {
+		public FirstSetCalculator caseRuleCall(RuleCall ruleCall) {
 			doSwitch(ruleCall.getRule());
 			return this;
 		}
 		
 		@Override
-		public ElementSwitch caseAbstractRule(AbstractRule object) {
+		public FirstSetCalculator caseAbstractRule(AbstractRule object) {
 			return this;
 		}
 		
 		@Override
-		public ElementSwitch caseParserRule(ParserRule object) {
+		public FirstSetCalculator caseParserRule(ParserRule object) {
 			doSwitch(object.getAlternatives());
 			return this;
 		}
 		
 		@Override
-		public ElementSwitch caseEnumRule(EnumRule object) {
+		public FirstSetCalculator caseEnumRule(EnumRule object) {
 			doSwitch(object.getAlternatives());
 			return this;
 		}
 		
 		@Override
-		public ElementSwitch caseAbstractElement(AbstractElement object) {
+		public FirstSetCalculator caseAbstractElement(AbstractElement object) {
 			return this;
 		}
 		
 		@Override
-		public ElementSwitch caseKeyword(Keyword object) {
+		public FirstSetCalculator caseKeyword(Keyword object) {
 			acceptor.accept(object);
 			return this;
 		}
@@ -145,7 +145,5 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		}
 
 	}
-	
-	
 
 }

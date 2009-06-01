@@ -10,4 +10,5 @@
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
 	<fragment class="org.eclipse.xtext.ui.common.SimpleLabelProviderFragment"/>
 	<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+	<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
 </config>

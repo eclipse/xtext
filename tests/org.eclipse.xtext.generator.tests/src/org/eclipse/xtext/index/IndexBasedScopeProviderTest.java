@@ -42,6 +42,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 	private DefaultDeclarativeResourceIndexer indexer;
 	private DefaultIndexBasedScopeProvider scopeProvider;
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
@@ -58,11 +59,11 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void indexExample() throws Exception {
-		final String source = "foo.bar { " + 
-			"  entity Person {  " + 
-			"    String name " + 
-			"  } " + 
-			"  datatype String " + 
+		final String source = "foo.bar { " +
+			"  entity Person {  " +
+			"    String name " +
+			"  } " +
+			"  datatype String " +
 			"}";
 		XtextResource resource = getResource(new StringInputStream(source), URI.createURI("my.indextestlanguage"));
 

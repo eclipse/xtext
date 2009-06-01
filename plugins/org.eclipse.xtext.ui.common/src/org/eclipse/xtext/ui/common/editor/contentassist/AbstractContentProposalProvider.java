@@ -256,7 +256,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			int replacementOffset, int replacementLength, ContentAssistContext context) {
 		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, proposal.length(), image, displayString, null, null);
 		result.setMatcher(context.getMatcher());
-		result.setReplaceContextLength(context.getCurrentNode().getLength());
+		int replaceContextLength = context.getCurrentNode().getLength() - (replacementOffset - context.getCurrentNode().getOffset());
+		result.setReplaceContextLength(replaceContextLength);
 		return result;
 	}
 	
