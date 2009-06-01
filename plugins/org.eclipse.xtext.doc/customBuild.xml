@@ -77,7 +77,8 @@
 	<!--
 		DocBook Toolchain
 	-->
-	<property name="docbook.version" value="1.73.2" />
+	<!-- <property name="docbook.version" value="1.73.2" /> -->
+	<property name="docbook.version" value="1.75.1" />
 	<property name="docbook.dir" value="${download.dir}${file.separator}docbook-xsl-${docbook.version}"/>
 	<property name="docbookxsl.url" value="http://internap.dl.sourceforge.net/sourceforge/docbook/docbook-xsl-${docbook.version}.zip"/>
 	<property name="fop.dir" value="${download.dir}${file.separator}fop-0.95"/>
@@ -232,6 +233,7 @@
 		<copy file="${eclipsehelp-css.file}" todir="${basedir}/help" />
 		
 		<xslt basedir="${build.dir}" destdir="${basedir}" style="${document.eclipse.stylesheet}">
+			<param name="chunk.quietly" expression="1"/>
 			<include name="xtext.xml"/>
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>

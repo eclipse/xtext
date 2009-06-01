@@ -9,7 +9,7 @@
 <xsl:import href="chunk.xsl"/>
 
 <!-- ********************************************************************
-     $Id: eclipse.xsl,v 1.2 2009/05/31 11:41:32 pfriese Exp $
+     $Id: eclipse.xsl,v 1.3 2009/06/01 21:46:16 pfriese Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -29,9 +29,7 @@
          toss the namespace and continue.  Use the docbook5 namespaced
          stylesheets for DocBook5 if you don't want to use this feature.-->
     <!-- include extra test for Xalan quirk -->
-    <xsl:when test="(function-available('exsl:node-set') or
-                     contains(system-property('xsl:vendor'),
-                       'Apache Software Foundation'))
+    <xsl:when test="$exsl.node.set.available != 0
                     and (*/self::ng:* or */self::db:*)">
       <xsl:call-template name="log.message">
         <xsl:with-param name="level">Note</xsl:with-param>
@@ -81,6 +79,8 @@
             <xsl:apply-templates select="key('id',$rootid)"
                         mode="process.root"/>
             <xsl:call-template name="etoc"/>
+            <!-- <xsl:call-template name="plugin.xml"/> -->
+			<xsl:call-template name="helpidx"/>
           </xsl:if>
         </xsl:otherwise>
       </xsl:choose>
@@ -93,6 +93,8 @@
       <xsl:if test="$collect.xref.targets != 'only'">
         <xsl:apply-templates select="/" mode="process.root"/>
         <xsl:call-template name="etoc"/>
+        <!-- <xsl:call-template name="plugin.xml"/> -->
+		<xsl:call-template name="helpidx"/>
       </xsl:if>
     </xsl:otherwise>
   </xsl:choose>
@@ -111,6 +113,7 @@
     <xsl:with-param name="method" select="'xml'"/>
     <xsl:with-param name="encoding" select="'utf-8'"/>
     <xsl:with-param name="indent" select="'yes'"/>
+    <xsl:with-param name="quiet" select="$chunk.quietly"/>
     <xsl:with-param name="content">
       <xsl:choose>
 
@@ -191,5 +194,115 @@
 </xsl:template>
 
 <xsl:template match="text()" mode="etoc"/>
+
+<!--
+<xsl:template name="plugin.xml">
+  <xsl:call-template name="write.chunk">
+    <xsl:with-param name="filename">
+      <xsl:if test="$manifest.in.base.dir != 0">
+        <xsl:value-of select="$base.dir"/>
+      </xsl:if>
+      <xsl:value-of select="'plugin.xml'"/>
+    </xsl:with-param>
+    <xsl:with-param name="method" select="'xml'"/>
+    <xsl:with-param name="encoding" select="'utf-8'"/>
+    <xsl:with-param name="indent" select="'yes'"/>
+    <xsl:with-param name="quiet" select="$chunk.quietly"/>
+    <xsl:with-param name="content">
+      <plugin name="{$eclipse.plugin.name}"
+        id="{$eclipse.plugin.id}"
+        version="1.0"
+        provider-name="{$eclipse.plugin.provider}">
+
+		  <extension point="org.eclipse.help.toc">
+			<toc file="toc.xml" primary="true"/>
+		  </extension>
+		  <extension point="org.eclipse.help.index">
+			<index file="index.xml"/>
+		  </extension>
+      </plugin>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+-->
+
+<!-- ==================================================================== -->
+<!-- The following templates come from the javahelp xsls with modifications needed to make them generate and ecilpse index.xml file -->
+
+<xsl:template name="helpidx">
+  <xsl:call-template name="write.chunk.with.doctype">
+    <xsl:with-param name="filename" select="concat($base.dir, 'index.xml')"/>
+    <xsl:with-param name="method" select="'xml'"/>
+    <xsl:with-param name="indent" select="'yes'"/>
+    <xsl:with-param name="doctype-public" select="''"/>
+    <xsl:with-param name="doctype-system" select="''"/>
+    <xsl:with-param name="encoding" select="'utf-8'"/>
+    <xsl:with-param name="quiet" select="$chunk.quietly"/>
+    <xsl:with-param name="content">
+      <xsl:call-template name="helpidx.content"/>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+
+  <xsl:template name="helpidx.content">
+	<index>
+	  <xsl:choose>
+		<xsl:when test="$rootid != ''">
+		  <xsl:apply-templates select="key('id',$rootid)//indexterm" mode="idx">
+			<xsl:sort select="normalize-space(concat(primary/@sortas, primary[not(@sortas) or @sortas = '']))"/>
+			<xsl:sort select="normalize-space(concat(secondary/@sortas, secondary[not(@sortas) or @sortas = '']))"/>
+			<xsl:sort select="normalize-space(concat(tertiary/@sortas, tertiary[not(@sortas) or @sortas = '']))"/>
+		  </xsl:apply-templates>
+		</xsl:when>
+		<xsl:otherwise>
+		  <xsl:apply-templates select="//indexterm" mode="idx">
+			<xsl:sort select="normalize-space(concat(primary/@sortas, primary[not(@sortas) or @sortas = '']))"/>
+			<xsl:sort select="normalize-space(concat(secondary/@sortas, secondary[not(@sortas) or @sortas = '']))"/>
+			<xsl:sort select="normalize-space(concat(tertiary/@sortas, tertiary[not(@sortas) or @sortas = '']))"/>
+		  </xsl:apply-templates>
+		</xsl:otherwise>
+	  </xsl:choose>
+	</index>
+  </xsl:template>
+  
+  <xsl:template match="indexterm[@class='endofrange']" mode="idx"/>
+  
+  <xsl:template match="indexterm|primary|secondary|tertiary" mode="idx">
+
+	<xsl:variable name="href">
+	  <xsl:call-template name="href.target.with.base.dir">
+		<xsl:with-param name="context" select="/"/>        <!-- Generate links relative to the location of root file/toc.xml file -->
+	  </xsl:call-template>
+	</xsl:variable>
+
+	<xsl:variable name="text">
+	  <xsl:value-of select="normalize-space(.)"/>
+	  <xsl:if test="following-sibling::*[1][self::see]">
+		<xsl:text> (</xsl:text><xsl:call-template name="gentext">
+		  <xsl:with-param name="key" select="'see'"/>
+		</xsl:call-template><xsl:text> </xsl:text>
+		<xsl:value-of select="following-sibling::*[1][self::see]"/>)</xsl:if>
+	</xsl:variable>
+	
+	<xsl:choose>
+	  <xsl:when test="self::indexterm">
+		<xsl:apply-templates select="primary" mode="idx"/>
+	  </xsl:when>
+	  <xsl:when test="self::primary">
+		<entry keyword="{$text}">
+		  <topic href="{$href}"/>
+		  <xsl:apply-templates select="following-sibling::secondary"  mode="idx"/>
+		</entry>
+	  </xsl:when>
+	  <xsl:otherwise>
+		<entry keyword="{$text}">
+		  <topic href="{$href}"/>
+		  <xsl:apply-templates select="following-sibling::tertiary"  mode="idx"/>
+		</entry>
+	  </xsl:otherwise>
+	</xsl:choose>
+  </xsl:template>
+
+  <!-- ==================================================================== -->
 
 </xsl:stylesheet>
