@@ -42,7 +42,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[] { GrammarUtil.getNamespace(grammar) };
+		return new String[] { GrammarUtil.getNamespace(grammar), GrammarUtil.getNamespace(grammar) + ".services" };
 	}
 
 	@Override
