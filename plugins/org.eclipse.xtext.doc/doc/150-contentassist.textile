@@ -1,27 +1,32 @@
 
 h2(#contentAssist). Content Assist
 
-The Xtext generator, amongst other things, generates the following two content assist (CA) related artefacts:
+The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 
-* an abstract proposal provider class named ''Abstract[Language]ProposalProvider'' generated into the src-gen folder within the 'ui' project
-* a concrete descendent in the src-folder of the 'ui' project [Language]ProposalProvider
+* an abstract proposal provider class named '@Abstract[Language]ProposalProvider'@ generated into the @src-gen@ folder within the @ui@ project
+* a concrete descendent in the @src@-folder of the @ui@ project @[Language]ProposalProvider@
 
-First we will investigate the generated ''Abstract[Language]ProposalProvider'' with methods that look like this:
+First we will investigate the generated @Abstract[Language]ProposalProvider@ with methods that look like this:
 
 h3. ProposalProvider
 
-bc.. 
-public void complete[TypeName]_[FeatureName](
-  EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+bc.. public void complete[TypeName]_[FeatureName](
+  EObject model, 
+  Assignment assignment, 
+  ContentAssistContext context, 
+  ICompletionProposalAcceptor acceptor) {
   // clients may override
 }
 
 public void complete_[RuleName](
-  EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+  EObject model, 
+  RuleCall ruleCall, 
+  ContentAssistContext context, 
+  ICompletionProposalAcceptor acceptor) {
   // clients may override
 }
 
-p. The snippet above indicates that the generated ProposalProvider class contains a 'complete*'-method for each assigned feature in the grammar and for each rule. The brackets are placeholders that should give a clou about the naming scheme, that is used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
+p. The snippet above indicates that the generated ProposalProvider class contains a @complete*@-method for each assigned feature in the grammar and for each rule. The brackets are placeholders that should give a clue about the naming scheme, that is used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
 
 Clients who want to customize the behavior may override the methods from the @AbstractProposalProvider@ or in turn introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 
@@ -31,11 +36,17 @@ h3. Sample Implementation
 
 To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give 'Description for model #7' for a model with the intAttribute '7'
 
-bc.. 
-public void completeModel_StringDescription (
-  Model model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+bc.. public void completeModel_StringDescription (
+  Model model, 
+  Assignment assignment, 
+  ContentAssistContext context, 
+  ICompletionProposalAcceptor acceptor) {
   // call implementation in superclass
-  super.completeModel_StringDescription(model, assignment, context, acceptor);
+  super.completeModel_StringDescription(
+    model, 
+    assignment, 
+    context, 
+    acceptor);
 
   // compute the plain proposal
   String proposal = "Description for model #" + model.getIntAttribute();
@@ -44,9 +55,11 @@ public void completeModel_StringDescription (
   proposal = getValueConverter().toString(proposal, "STRING");
 
   // create the completion proposal
-  // the result may be null as the createCompletionProposal(..) methods check for valid prefixes
+  // the result may be null as the createCompletionProposal(..) methods 
+  // check for valid prefixes
   // and terminal token conflicts
-  ICompletionProposal completionProposal = createCompletionProposal(proposal, contentAssistContext);
+  ICompletionProposal completionProposal = 
+    createCompletionProposal(proposal, contentAssistContext);
 
   // register the proposal, the acceptor handles null-values gracefully
   acceptor.accept(completionProposal);

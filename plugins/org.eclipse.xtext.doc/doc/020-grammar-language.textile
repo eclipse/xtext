@@ -100,9 +100,13 @@ p. In the following the different concepts of the grammar language are explained
 
 h3. Language Declaration
 
-The first line  @grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals@ declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond and have the file extension ''xtext''. This means that the name needs to be @SecretCompartments.xtext@ and must be placed in package @my.pack@ somewhere on your project's class path.
+The first line  
 
-The first line is also used to declare any used language (for mechanism details cf. [[#Grammar Mixins|Grammar Mixins]]).
+bc. grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
+
+declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond and have the file extension ''xtext''. This means that the name needs to be @SecretCompartments.xtext@ and must be placed in package @my.pack@ somewhere on your project's class path.
+
+The first line is also used to declare any used language (for mechanism details cf. "Grammar Mixins":#Grammar Mixins).
 
 h3. EPackage declarations
 
@@ -173,7 +177,7 @@ For instance, a reference to ''@classA@'' would as well be linked to a newly cre
 
 h3. Rules
 
-The default parsing is based on a homegrown packrat parser. It can be substituted by an Anltr parser through the Xtext service mechanism. Antlr is a sophisticated parser generator framework based on "an LL(*) parsing algorithm":http://www.antlr.org/wiki/display/ANTLR3/3.+LL(*)+Parsing+(Excursion) , that works quite well for Xtext. At the moment it is advised to download the plugin de.itemis.xtext.antlr (from update site @http://www.itemis.com/xtext/updatesite/milestones@) and use the Antlr Parser instead of the packrat parser (cf. [[Xtext_Workspace_Setup|Xtext Workspace Setup]]).
+The default parsing is based on a homegrown packrat parser. It can be substituted by an Anltr parser through the Xtext service mechanism. Antlr is a sophisticated parser generator framework based on an LL(*) "parsing algorithm":http://bit.ly/ANTLR_LL_star_algorithm, that works quite well for Xtext. At the moment it is advised to download the plugin de.itemis.xtext.antlr (from update site @http://www.itemis.com/xtext/updatesite/milestones@) and use the Antlr Parser instead of the packrat parser (cf. "Xtext Workspace Setup":Xtext_Workspace_Setup).
 
 Basically parsing can be separated in the following phases. 
 # lexing
@@ -185,7 +189,7 @@ h4. Terminal Rules
 
 In the first phase, i.e. lexing, a sequence of characters (the text input) is transformed into a sequence of so called tokens. 
 Each token consists of one or more characters and was matched by a particular terminal rule and represents an atomic symbol.
-In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar org.eclipse.xtext.common.Terminals (cf. [[#Grammar Mixins | Grammar Mixins]]).
+In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar org.eclipse.xtext.common.Terminals (cf. "Grammar Mixins":#Grammar Mixins).
 Terminal rules are also referred to as token rules or lexer rules. There is an informal naming convention that terminal-rule names are all uppercase.
 
 Therein the ID rule is defined as follows:
@@ -208,7 +212,7 @@ bc..
 
 p. Note, that the order of terminal rules is crucial for your grammar, as they may hide each other. This is especially important for newly introduced rules in connection with mixed rules from used grammars. 
 
-If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should implement it as a [[#Datatype_rules| datatype rule]], instead of adding another terminal rule.
+If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should implement it as a "datatype rule":#Datatype_rules, instead of adding another terminal rule.
 
 h5. Return types
 
@@ -222,7 +226,8 @@ bc..
 p. This means that the terminal rule INT returns instances of ecore::EInt. It is possible to define any kind of data type here, which just needs to be an instance of ecore::EDataType.
 In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 'IValueConverterService' (cf. [[Xtext/Documentation/ValueConverter|value converters]]).
 
-The implementation needs to be registered as a service (cf. [[#Service_Framework|Service Framework]]).
+The implementation needs to be registered as a service (cf. "Service Framework":#Service_Framework).
+
 This is also the point where you can remove things like quotes form string literals or the caret ('^') from identifiers.
 
 h4. Extended Backus-Naur form expressions
@@ -250,10 +255,10 @@ Note that a keyword can have any length and contain arbitrary characters.
 h5. Character Ranges
 
 A character range can be declared using the '..' operator.
+
 Example:
 
-bc. 
- terminal INT returns ecore::EInt: ('0'..'9')+ ;
+bc. terminal INT returns ecore::EInt: ('0'..'9')+ ;
 
 In this case an INT is comprised of one or more (note the '+' operator) characters between (and including) '0' and '9'.
 
@@ -262,8 +267,7 @@ h5. Wildcard
 If you want to allow any character you can simple write a dot:
 Example:
 
-bc. 
- FOO : 'f' . 'o';
+bc. FOO : 'f' . 'o';
 
 The rule above would allow expressions like 'foo', 'f0o' or even 'f\no'.
 
@@ -272,8 +276,7 @@ h5. Until Token
 With the until token it is possible to state that everything should be consumed until a certain token occurs.
 The multi line comment is implemented using it:
 
-bc. 
-  terminal ML_COMMENT	: '/*' -> '*/' ;
+bc. terminal ML_COMMENT	: '/*' -> '*/' ;
 
 This is the rule for Java-style comments that begin with '/*' and end with '*/'.
 
@@ -281,8 +284,7 @@ h5. Negated Token
 
 All the tokens explained above can be inverted using a preceding explanation mark:
 
-bc. 
-  terminal ML_COMMENT	: '/*' (!'*/')+ ;
+bc. terminal ML_COMMENT	: '/*' (!'*/')+ ;
 
 h5. Rule Calls
 
@@ -291,16 +293,14 @@ We refer to this as rule calls. Rule calls in terminal rules can only point to t
 
 Example:
 
-bc. 
- terminal QUALIFIED_NAME : ID ('.' ID)*;
+bc. terminal QUALIFIED_NAME : ID ('.' ID)*;
 
 h5. Alternatives 
 
 Using alternatives one can state multiple different alternatives.
 For instance, the whitespace rule uses alternatives like so:
 
-bc. 
- terminal WS : (' '|'\t'|'\r'|'\n')+ ;
+bc. terminal WS : (' '|'\t'|'\r'|'\n')+ ;
 
 That is a WS can be made of one or more whitespace characters (including ' ','\t','\r','\n')
 
@@ -309,8 +309,7 @@ h5. Groups
 Finally, if you put tokens one after another, the whole sequence is referred to as a group.
 Example:
 
-bc. 
- terminal FOO : '0x' ('0'..'7') ('0'..'9'|'A'..'F') ;
+bc. terminal FOO : '0x' ('0'..'7') ('0'..'9'|'A'..'F') ;
 
 That is the 4-digit hexadecimal code of ascii characters.
 
@@ -322,10 +321,10 @@ h4. Extended Backus-Naur Form expressions
 
 In parser rules (as well as in datatype rules) not all the expressions available for terminal rules can be used. Character ranges, wildcards, the until token and the negation are currently only available for terminal rules. 
 Available in parser rules as well as in terminal rules are
-# [[#Groups|groups]], 
-# [[#Alternatives|alternatives]], 
-# [[#Keywords|keywords]] and 
-# [[#Rule Calls|rule calls]].
+# "groups":#Groups, 
+# "alternatives":#Alternatives, 
+# "keywords":#Keywords and 
+# "rule calls"#RuleCalls.
 
 In addition to these elements, there are some expressions used to direct how the AST is constructed, which are listed and explained in the following.
 
@@ -344,14 +343,14 @@ bc..
 
 p. The syntactic declaration for states in the state machine example starts with a keyword 'state' followed by an assignment :
 
-bc. 
- name=ID
+bc. name=ID
 
 Where the left hand side refers to a feature of the current EClass (in this case EClass 'State'). 
 The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
 The type of the feature needs to be compatible to the type of the expression on the right. As ID returns an EString the feature name needs to be of type EString as well.
 
-=h4. Assignment Operators==
+h4. Assignment Operators
+
 There are three different assignment operators, each with different semantics
 # the simple equal sign "=" is the straight forward assignment, and used for features which take only one element
 # the "+=" sign (the add operator) awaits a multiple feature and adds the value on the right hand to that feature, which is, of course, a list feature
@@ -388,10 +387,9 @@ By default (that's why it's optional) it is "|ID".
 
 You may even use alternatives as the referencable terminal. This way, either an ID or a STRING may be used as the referencable terminal, as it is possible in many SQL dialects.
 
-bc. 
- TableRef: table=[Table|(ID|STRING)];
+bc. TableRef: table=[Table|(ID|STRING)];
 
-Have a look at the [[#Linking| linking section]] in order to understand how linking is done.
+Have a look at the "linking section":#Linking in order to understand how linking is done.
 
 h5. Simple Actions 
 
@@ -436,8 +434,10 @@ bc..
     TokenB |
     TokenC;
 
-p. As AbstractToken could possibly return an instance of TokenA, TokenB or TokenC its type must by a super type to these types.
+p. As @AbstractToken@ could possibly return an instance of @TokenA@, @TokenB@ or @TokenC@ its type must by a super type to these types.
+
 It is now for instance as well possible to further change the state of the AST element by assigning additional things.
+
 Example:
 
 bc.. 
@@ -455,64 +455,59 @@ LL parsing has some significant advantages over LR algorithms. The most importan
 However, LL also has some drawbacks. The most important is, that it does not allow left recursive grammars.
 For instance, the following is not allowed in LL based grammars, because "Expression '+' Expression" is left recursive:
 
-bc.. 
- Expression :
-   Expression '+' Expression |
-   '(' Expression ')'
-   INT;
+bc.. Expression :
+  Expression '+' Expression |
+  '(' Expression ')'
+  INT;
 
 p. Instead one has to rewrite such things by "left-factoring" it:
 
-bc.. 
-  Expression :
-    TerminalExpression ('+' TerminalExpression)?;
+bc.. Expression :
+  TerminalExpression ('+' TerminalExpression)?;
  
-  TerminalExpression :
-    '(' Expression ')' |
-    INT 
+TerminalExpression :
+  '(' Expression ')' |
+   INT 
 
 p. In practice this is always the same pattern and therefore not that problematic. 
 However, by simply applying Xtext's AST construction we know so far like so ...
 
-bc.. 
-  Expression :
-    {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?;
+bc.. Expression :
+  {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?;
  
-  TerminalExpression returns Expression:
-    '(' Expression ')' |
-    {IntLiteral} value=INT;
+TerminalExpression returns Expression:
+  '(' Expression ')' |
+  {IntLiteral} value=INT;
 
 p. ... one would get unwanted elements in the resulting AST.
 For instance the expression " ( 42 ) " would result in a tree like this:
 
-bc.. 
- Operation {
+bc.. Operation {
   left=Operation {
-   left=IntLiteral {
-    value=42
-   }
+    left=IntLiteral {
+      value=42
+    }
   }
- }
+}
 
 p. Typically one would only want to have one instance of IntLiteral instead.
 
 One can solve this problem using a combination of unassigned rule calls and actions:
 
-bc.. 
-  Expression :
-    TerminalExpression ({Operation.left=current} op='+' right=TerminalExpression)?;
+bc.. Expression :
+  TerminalExpression ({Operation.left=current} 
+    op='+' right=TerminalExpression)?;
  
-  TerminalExpression returns Expression:
-    '(' Expression ')' |
-    {IntLiteral} value=INT;
+TerminalExpression returns Expression:
+  '(' Expression ')' |
+  {IntLiteral} value=INT;
 
-p. In the example above ''{Operation.left=current}'' is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (current variable) to a feature of the newly created Object (in this case 'left').
+p. In the example above @{Operation.left=current}@ is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (current variable) to a feature of the newly created Object (in this case 'left').
 In Java the semantics could be expressed like so:
 
-bc.. 
-  Operation temp = new Operation();
-  temp.setLeft(current);
-  current = temp;
+bc.. Operation temp = new Operation();
+temp.setLeft(current);
+current = temp;
 
 h3. Hidden terminal symbols
 
@@ -536,12 +531,13 @@ bc..
    /* comment */
    42      ;
 
-p. A list of all default terminals like WS can be found in section [[#Grammar_Mixins | Grammar Mixins]].
+p. A list of all default terminals like WS can be found in section "Grammar Mixins":#Grammar_Mixins.
 
 h3. Datatype rules
 
 Datatype rules are parsing-phase rules, which create instances of EDatatype as terminal rules do.
 The nice thing about datatype rules is that they are actually parser rules and are therefore 
+
 # context sensitive and 
 # allow for use of hidden tokens
 
@@ -560,12 +556,11 @@ In addition having this defined as a datatype rule, it is allowed to use hidden 
 
 Return types can be specified like in terminal rules:
 
-bc. 
- QualifiedName returns ecore::EString : ID ('.' ID)*;
+bc. QualifiedName returns ecore::EString : ID ('.' ID)*;
 
 Note that if a rule does not call another parser rule and does not contain any actions nor assignments (see parser rules), it is considered a datatype rule and the datatype EString is implied if not explicitly declared differently.
 
-For conversion again value converters are responsible (cf. [[Xtext/Documentation/ValueConverter|value converters]]).
+For conversion again value converters are responsible (cf. "value converters":Xtext/Documentation/ValueConverter).
 
 h3. Enum Rules
 
@@ -611,17 +606,16 @@ By using the 'generate' directive, one tells Xtext to derive an EPackage from th
 h3. Type and Package Generation
 
 Xtext creates
-;an EPackage
-* for each generated package declaration. After the directive ''generate'' a list of parameters follows. The ''name'' of the EPackage will be set to the first parameter, its ''nsURI'' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.
-;an EClass
-* for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.
-* for each type defined in an action or a cross-reference.
 
-;an EEnum
-* for each return type of an enum rule.
-
-;an EDatatype
-* for each return type of a terminal rule or a datatype rule.
+* an EPackage
+** for each generated package declaration. After the directive ''generate'' a list of parameters follows. The ''name'' of the EPackage will be set to the first parameter, its ''nsURI'' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.
+* an EClass
+** for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.
+** for each type defined in an action or a cross-reference.
+* an EEnum
+** for each return type of an enum rule.
+* an EDatatype
+** for each return type of a terminal rule or a datatype rule.
 
 All EClasses, EEnums and EDatatypes are added to the EPackage referred to by the alias provided in the type reference they were created from.
 
@@ -637,17 +631,18 @@ While walking through the grammar, the algorithm keeps track of a set of the cur
 * A rule call is optional, if its cardinality is '?' or '*'.
 
 While iterating the parser rules Xtext creates
-;an EAttribute in each current return type
-* of type EBoolean for each feature assignment using the '?=' operator. No further EReferences or EAttributes will be generated from this assignment.
-* for each assignment with the '=' or '+=' operator calling a terminal rule. Its type will be the return type of the called rule.
-;an EReference in each current return type
-* for each assignment with the '=' or '+=' operator in a parser rule calling a parser rule. The EReference type will be the return type of the called parser rule.
-* for each action. The reference's type will be set to the return type of the current calling rule. 
+* an EAttribute in each current return type
+** of type EBoolean for each feature assignment using the '?=' operator. No further EReferences or EAttributes will be generated from this assignment.
+** for each assignment with the '=' or '+=' operator calling a terminal rule. Its type will be the return type of the called rule.
+* an EReference in each current return type
+** for each assignment with the '=' or '+=' operator in a parser rule calling a parser rule. The EReference type will be the return type of the called parser rule.
+** for each action. The reference's type will be set to the return type of the current calling rule. 
 
 Each EAttribute or EReference takes its name from the assignment/action that caused it. Multiplicities will be 0...1 for assignments with the '=' operator and 0...* for assignments with the '+=' operator. 
 
 Furthermore, each type that is added to the currently possible return types automatically inherits from the current return type of the parser rule. You can specify additional common supertypes by means of "artificial" parser rules, that are never called, e.g.
 
+bc.. 
  CommonSuperType:
    SubTypeA | SubTypeB | SubTypeC;
 
@@ -698,13 +693,11 @@ h2. Importing existing Meta Models
 
 With the import directive in Xtext you can refer to existing Ecore metamodels and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore datatypes.
 
-bc. 
- import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+bc. import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Specify an explicit return type to reuse such imported types. Note that this even works for lexer rules.
 
-bc. 
- terminal INT returns ecore::EInt : ('0'..'9')+;
+bc. terminal INT returns ecore::EInt : ('0'..'9')+;
 
 h2. Grammar Mixins
 
@@ -718,6 +711,7 @@ bc..
  ....
 
 p. Inheriting from another grammar makes the rules defined in that grammar referable. It is also possible to overwrite rules from the super grammar. 
+
 Example :
 
 bc.. 
@@ -739,17 +733,18 @@ h2. Default tokens
 
 Xtext is shipped with a default set of predefined, reasonable and often required terminal rules. This grammar is defined as follows:
 
-bc.. 
- grammar org.eclipse.xtext.common.Terminals hidden(WS, ML_COMMENT, SL_COMMENT)
-											
+bc..  grammar org.eclipse.xtext.common.Terminals 
+   hidden(WS, ML_COMMENT, SL_COMMENT)
+
  import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
- terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
+ terminal ID : 
+   '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')* ;
  terminal INT returns ecore::EInt: ('0'..'9')+ ;
  terminal STRING	: 
-			'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
-			"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
-			; 
+   '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+   "'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+   ; 
  terminal ML_COMMENT	: '/*' -> '*/' ;
  terminal SL_COMMENT 	: '//' !('\n'|'\r')* ('\r'? '\n')? ;
 

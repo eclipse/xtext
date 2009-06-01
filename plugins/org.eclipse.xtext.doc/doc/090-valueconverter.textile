@@ -11,7 +11,8 @@ declaratively register @IValueConverter@ via annotated methods.
 
 The implementation for the default token grammar looks like 
 
-bc.. public class DefaultTerminalConverters extends AbstractAnnotationBasedValueConverterService {
+bc.. public class DefaultTerminalConverters 
+    extends AbstractAnnotationBasedValueConverterService {
   
   private Grammar grammar;
   	
@@ -23,7 +24,7 @@ bc.. public class DefaultTerminalConverters extends AbstractAnnotationBasedValue
   protected Grammar getGrammar() {
     return grammar;
   }
-  	
+
   @ValueConverter(rule = "ID")
   public IValueConverter<String> ID() {
     return new AbstractNullSafeConverter<String>() {

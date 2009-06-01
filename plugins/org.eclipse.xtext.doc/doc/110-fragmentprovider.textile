@@ -2,12 +2,15 @@
 h2(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
 
 Although inter-Xtext linking is not done by URIs, you may want to be able to reference your @EObject@ from non-Xtext models.
-In those cases URIs are used, which are made up of a part identifying the resource. Each @EObject@ contained in a Resource can be identified by a so called 'fragment'.
+In those cases URIs are used, which are made up of a part identifying the resource. Each @EObject@ contained in a resource can be identified by a so called _fragment_.
+
 A fragment is a part of an EMF URI and needs to be unique per resource.
+
 The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.
 
 However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to @EObjects@.
-Therefore one can contribute a so called IFragmentProvider per language.
+
+Therefore one can contribute a so called @IFragmentProvider@ per language.
 
 bc.. public interface IFragmentProvider extends ILanguageService {
  
@@ -15,8 +18,9 @@ bc.. public interface IFragmentProvider extends ILanguageService {
 	 * Computes the local ID of the given object. 
 	 * @param obj
 	 *            The EObject to compute the fragment for
-	 * @return the fragment, which can be an arbitrary string but must be unique
-	 *         within a resource. Return null to use default implementation
+	 * @return the fragment, which can be an arbitrary string but must be 
+	 *         unique within a resource. Return null to use default 
+	 *         implementation
 	 */
 	String getFragment(EObject obj);
 	
@@ -30,3 +34,4 @@ bc.. public interface IFragmentProvider extends ILanguageService {
  }
 
 p. However, the currently available default fragment provider does nothing.
+

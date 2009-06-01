@@ -41,24 +41,30 @@ Although the default linking behavior is appropriate in many cases there might b
 bc.. @Stable(since = "0.7.0", subClass = AbstractLinkingService.class)
 public interface ILinkingService {
 
-	/**
-	 * Returns all {@link EObject}s referenced by the given link text in the
-	 * given context. But does not set the references or modifies the passed
-	 * information somehow
-	 */
-	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
-			throws IllegalNodeException;
+  /**
+   * Returns all {@link EObject}s referenced by the given link text in the
+   * given context. But does not set the references or modifies the passed
+   * information somehow
+   */
+  List<EObject> getLinkedObjects(
+    EObject context, 
+    EReference reference, 
+    AbstractNode node)
+		throws IllegalNodeException;
 
-	/**
-	 * Returns the textual representation of a given object as it would be
-	 * serialized in the given context.
-	 * 
-	 * @param object
-	 * @param reference
-	 * @param context
-	 * @return the text representation.
-	 */
-	String getLinkText(EObject object, EReference reference, EObject context);
+  /**
+   * Returns the textual representation of a given object as it would be
+   * serialized in the given context.
+   * 
+   * @param object
+   * @param reference
+   * @param context
+   * @return the text representation.
+   */
+  String getLinkText(
+    EObject object, 
+    EReference reference, 
+    EObject context);
 }
 
 p. The method @getLinkedObjects@ is directly related to this topic whereas @getLinkText@ adresses complementary functionality: it is used for Serialization.
@@ -72,9 +78,7 @@ The default implementation for all languages, looks within the current file for 
 Given the grammar :
 
 bc.. Model : (stuff+=(Ref|Entity))*;
- 
  Ref : 'ref' referencedObject=[Entity|ID] ';';
- 
  Entity : 'entity' name=ID ';';
 
 p. In the following model :
@@ -82,7 +86,7 @@ p. In the following model :
 bc. ref Entity01;
  entity Entity01;
 
-the @ref@ would be linked to the declared entity ('entity Entity01;').
+the @ref@ would be linked to the declared entity (@entity Entity01;@).
 
 h4. Default Imports
 
@@ -91,11 +95,8 @@ There is a default implementation for inter-resource referencing, which as well 
 Given the grammar :
 
 bc.. Model : (imports+=Import)* (stuff+=(Ref|Entity))*;
- 
  Import : 'import' importURI=STRING ';';
- 
  Ref : 'ref' referencedObject=[Entity|ID] ';';
- 
  Entity : 'entity' name=ID ';';
 
 p. With this grammar in place it would be possible to write three files in the new DSL where the first references the other two, like this:
@@ -115,11 +116,11 @@ bc.. --file model2.dsl
 
 p. The resulting default scope list is as follows:
 
-pre.. Scope (model.dsl) {
+bc.. Scope (model.dsl) {
   parent : Scope (model1.dsl) {
    parent : Scope (model2.dsl) {}
   }
  }
 
-p. So, the outer scope is asked for an Entity named 'Foo', as it does not contain such a declaration itself its parent is asked and so on.
-The default implementation of IScopeProvider creates this kind of scope chain.
+p. So, the outer scope is asked for an Entity named @Foo@, as it does not contain such a declaration itself its parent is asked and so on.
+The default implementation of @IScopeProvider@ creates this kind of scope chain.

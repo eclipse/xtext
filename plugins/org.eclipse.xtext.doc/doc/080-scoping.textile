@@ -7,26 +7,26 @@ bc..
 @Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
 public interface IScopeProvider {
 
-	/**
-	 * Returns a scope for the given context. The scope provides access to the compatible
-	 * visible EObjects for a given reference.
-	 *
-	 * @param context the element from which an element shall be referenced
-	 * @param reference the reference to be used to filter the elements.
-	 * @return {@link IScope} representing the inner most {@link IScope} for the
-	 *         passed context and reference.
-	 */
-	public IScope getScope(EObject context, EReference reference);
+  /**
+   * Returns a scope for the given context. The scope provides access to 
+   * the compatible visible EObjects for a given reference.
+   *
+   * @param context the element from which an element shall be referenced
+   * @param reference the reference to be used to filter the elements.
+   * @return {@link IScope} representing the inner most {@link IScope} for 
+   *         the passed context and reference.
+   */
+  public IScope getScope(EObject context, EReference reference);
 
-	/**
-	 * Returns a scope for a given context. The scope contains any visible, type-compatible
-	 * element.
-	 * @param context the element from which an element shall be referenced
-	 * @param type the (super)type of the elements.
-	 * @return {@link IScope} representing the inner most {@link IScope} for the
-	 *         passed context and type.
-	 */
-	public IScope getScope(EObject context, EClass type);
+  /**
+   * Returns a scope for a given context. The scope contains any visible, 
+   * type-compatible element.
+   * @param context the element from which an element shall be referenced
+   * @param type the (super)type of the elements.
+   * @return {@link IScope} representing the inner most {@link IScope} for
+   *         the passed context and type.
+   */
+  public IScope getScope(EObject context, EClass type);
 }
 
 p. An @IScope@ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
@@ -62,7 +62,7 @@ public class ScopeExample { // class body scope
 p. In fact the class path scope should also reflect the order of class path entries.
 For instance:
 
-pre. classpathScope{stuff from bin/}
+bc. classpathScope{stuff from bin/}
 -> classpathScope{stuff from foo.jar/}
 -> ...
 -> classpathScope{stuff from JRE System Library}

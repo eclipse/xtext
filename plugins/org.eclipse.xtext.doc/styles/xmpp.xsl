@@ -6,7 +6,6 @@
 
   <!-- Include other stylesheets -->
   <xsl:import href="docbook.xsl"/>
-  <xsl:include href="params.xsl" />
   <xsl:include href="inline.xsl" />
   <xsl:include href="component.xsl" />
   <xsl:include href="inline.xsl" />
