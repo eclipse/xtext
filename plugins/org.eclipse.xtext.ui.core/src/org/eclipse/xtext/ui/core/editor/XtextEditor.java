@@ -50,6 +50,7 @@ import com.google.inject.name.Named;
  * @author Dennis Huebner - Initial contribution and API
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
+ * @author Dan Stefanescu - Fix for bug 278279
  */
 public class XtextEditor extends TextEditor {
 
@@ -60,8 +61,10 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private XtextSourceViewerConfiguration sourceViewerConfiguration;
 
-	@Inject(optional = true)
 	private IContentOutlinePage outlinePage;
+	
+	@Inject(optional = true)
+	private Provider<IContentOutlinePage> outlinePageProvider;
 
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
@@ -146,12 +149,38 @@ public class XtextEditor extends TextEditor {
 	}
 
 	private IContentOutlinePage getContentOutlinePage() {
-		if (outlinePage != null) {
-			if (outlinePage instanceof ISourceViewerAware) {
-				((ISourceViewerAware) outlinePage).setSourceViewer(getSourceViewer());
-			}
+		if (outlinePage == null) {
+			outlinePage = createOutlinePage();
 		}
 		return outlinePage;
+	}
+
+	private IContentOutlinePage createOutlinePage() {
+		IContentOutlinePage page = null;
+		if (outlinePageProvider != null) {
+			// can be null, optional injection
+			page = outlinePageProvider.get();
+
+			if (page != null) {
+				if (page instanceof ISourceViewerAware) {
+					((ISourceViewerAware) page).setSourceViewer(getSourceViewer());
+				}
+				if (page instanceof IXtextEditorAware) {
+					((IXtextEditorAware) page).setEditor(this);
+				}
+			}
+		}
+		return page;
+	}
+
+	/**
+	 * Informs the editor that its outline has been closed.
+	 */
+	public void outlinePageClosed() {
+		if (outlinePage != null) {
+			outlinePage = null;
+			resetHighlightRange();
+		}
 	}
 
 	@Override

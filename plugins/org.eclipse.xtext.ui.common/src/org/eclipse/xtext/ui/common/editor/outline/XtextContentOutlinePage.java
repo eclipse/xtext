@@ -42,6 +42,8 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.OutlineSelectionChangedLi
 import org.eclipse.xtext.ui.common.editor.outline.impl.ToggleLinkWithEditorAction;
 import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
+import org.eclipse.xtext.ui.core.editor.IXtextEditorAware;
+import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
@@ -62,7 +64,7 @@ import com.google.inject.Inject;
  * 
  * @author Peter Friese - Initial contribution and API
  */
-public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware {
+public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage implements ISourceViewerAware, IXtextEditorAware {
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
@@ -73,6 +75,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	
 	@Inject
 	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
+	
+	private XtextEditor editor; 
 	
 	private ISourceViewer sourceViewer;
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
@@ -197,6 +201,10 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		editorSelectionChangedListener.uninstall(sourceViewer.getSelectionProvider());
 		editorSelectionChangedListener = null;
 		uninstallModelListener();
+        if (editor != null) {
+            editor.outlinePageClosed();
+            editor = null;
+        }
 		provider.dispose();
 		provider = null;
 		super.dispose();
@@ -236,6 +244,14 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	public ISourceViewer getSourceViewer() {
 		return sourceViewer;
 	}
+	
+    public void setEditor(XtextEditor editor) {
+        this.editor = editor;
+    }
+
+    public XtextEditor getEditor() {
+        return editor;
+    }
 
 	private OutlineSelectionChangedListener getOutlineSelectionListener() {
 		if (outlineSelectionChangedListener == null) {
@@ -353,5 +369,4 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 			}
 		});
 	}
-
 }
