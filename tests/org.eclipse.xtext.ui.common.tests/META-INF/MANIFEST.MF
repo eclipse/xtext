@@ -94,5 +94,17 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.testlanguages.validation,
  org.eclipse.xtext.enumrules.validation,
  org.eclipse.xtext.grammarinheritance.parser.antlr,
- org.eclipse.xtext.grammarinheritance.contentassist
+ org.eclipse.xtext.grammarinheritance.contentassist,
+ org.eclipse.xtext.ui.common.editor.contentassist.contentAssistContextTest,
+ org.eclipse.xtext.ui.common.editor.contentassist.contentAssistContextTest.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.contentAssistContextTest.util,
+ org.eclipse.xtext.contentassist.antlr,
+ org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr,
+ org.eclipse.xtext.grammarinheritance.contentassist.antlr,
+ org.eclipse.xtext.parser.keywords.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.contentassist.antlr,
+ org.eclipse.xtext.enumrules.contentassist.antlr,
+ org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest,
+ org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.util
 

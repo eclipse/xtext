@@ -82,7 +82,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		return result;
 	}
 
-	private CompletionProposalComputer createCompletionProposalComputer(ITextViewer viewer, int offset) {
+	protected CompletionProposalComputer createCompletionProposalComputer(ITextViewer viewer, int offset) {
 		return new CompletionProposalComputer(this, viewer, offset);
 	}
 

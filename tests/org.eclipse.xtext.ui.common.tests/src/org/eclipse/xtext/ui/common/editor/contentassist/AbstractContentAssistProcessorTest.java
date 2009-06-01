@@ -7,10 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
+import java.util.Set;
+
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
+import org.eclipse.xtext.ui.common.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
+
+import com.google.common.collect.Sets;
 
 /**
  * Unit test for class <code>DefaultContentAssistProcessor</code>. Reused by Xtend implementation.
@@ -21,7 +33,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
  */
 public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTests {
 
-	private IContentAssistProcessorTestSetup setup;
+	protected IContentAssistProcessorTestSetup setup;
 	
 	private static final Logger logger = Logger.getLogger(AbstractContentAssistProcessorTest.class);
 	
@@ -89,10 +101,32 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			.append("e2 ").assertText("k1","k2")
 			.append("k").assertText("k1","k2",",",")")
 			.append("1 ").assertText(",",")")
-			.append("k2 ").assertText(",",")")
+			.append(",k2 ").assertText(",",")")
 		;
 	}
-
+	
+	public void testComputeCompletionProposalsText_02() throws Exception {
+		newBuilder(setup.getRefGrammarSetup()).
+			append("spielplatz 1 \"Beschreibung\" { " +
+					"erwachsener ( e1 1 ) " +
+					"erwachsener (e2 0) " +
+					"kind ( k1 1 ) " +
+					"kind (k2 0) " +
+					"familie ( keyword e1 e2 k1, k2 ").assertText(",",")")
+		;
+	}
+	
+	public void testComputeCompletionProposalsText_03() throws Exception {
+		newBuilder(setup.getRefGrammarSetup()).
+			append("spielplatz 1 \"Beschreibung\" { " +
+					"erwachsener ( e1 1 ) " +
+					"erwachsener (e2 0) " +
+					"kind ( k1 1 ) " +
+					"kind (k2 0) " +
+					"familie ( keyword e1 e2 k1 k2 ").assertText() // parse error, cannot propose something
+		;
+	}
+	
 	public void testBetweenContext() throws Exception {
 		newBuilder(setup.getRefGrammarSetup())
 		.append("spielplatz 1 \"1\" {kind")
@@ -227,6 +261,14 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                         "import");
     }
     
+    public void testCompleteReturnsKeyword_01() throws Exception {
+        newBuilder(setup.getXtextGrammarTestSetup())
+                .appendNl("grammar foo")
+                .append("MyRule r").assertText(
+                                "returns"
+                );
+    }
+    
     public void _testCompleteGenerateKeyword() throws Exception {
         newBuilder(setup.getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
@@ -294,7 +336,10 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate meta \"url\"")
         .appendNl("Rule: name=ID;")
-        .assertTextAtCursorPosition("generate", 3,"generate");
+        .assertTextAtCursorPosition("generate", 3,
+        		"generate",
+        		":" // as 'gen' is a parser rule, 'hidden' and 'returns' would conflict with rulename
+        		);
     }
     
     /**
@@ -305,7 +350,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.common.Terminals");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.common.Terminals", ",");
     }
     
     /**
@@ -316,7 +361,15 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
-	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.common.Terminals");
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.common.Terminals", ",");
+    }
+    
+    public void testCompletionOnDatatypeReference_03() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate meta \"url\"")
+	        .appendNl("Rule: name=ID;")
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 4, "org.eclipse.xtext.common.Terminals");
     }
     
     public void testCompletionOnSyntaxError_01() throws Exception {
@@ -367,10 +420,10 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         		"=",
         		"?",
         		"?=",
-        		"{")
+        		"{",
+        		"|")
         .appendNl(";")
         .append("terminal Other_Id").assertText(":");
-
     }
     
     public void testCompleteGrammarName_01() throws Exception {
@@ -393,16 +446,76 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     
     public void testCompleteAfterGenerateName_01() throws Exception {
     	newBuilder(setup.getXtextSetup())
-        .appendNl("grammar org.foo.bar with org.eclipse.common.Terminals")
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .append("generate name ")
         .assertCount(EPackage.Registry.INSTANCE.size());
     }
     
     public void testCompleteAfterGenerateName_02() throws Exception {
     	newBuilder(setup.getXtextSetup())
-        .appendNl("grammar org.foo.bar with org.eclipse.common.Terminals")
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
         .append("generate name \"")
         .assertCount(EPackage.Registry.INSTANCE.size());
+    }
+    
+    public void testCompleteCrossReference_01() throws Exception {
+    	newBuilder(setup.getXtextSetup())
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
+        .appendNl("generate metamodelB 'http://foo.bar/B'")
+        .appendNl("RuleA: name=ID;")
+        .append("RuleB returns ")
+        .assertText("RuleA", "RuleB", "alias");
+    }
+    
+    public void testCompleteCrossReference_02() throws Exception {
+    	newBuilder(setup.getXtextSetup())
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
+        .appendNl("generate metamodelB 'http://foo.bar/B'")
+        .appendNl("RuleA: name=ID;")
+        .append("RuleB returns a")
+        .assertText(
+        		"alias",
+        		"::",
+        		":",
+        		"a" // has already been infered as type in metamodelA
+        );
+    }
+    
+    public void testCompleteCrossReference_03() throws Exception {
+    	newBuilder(setup.getXtextSetup())
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
+        .appendNl("generate metamodelB 'http://foo.bar/B'")
+        .appendNl("RuleA: name=ID;")
+        .append("RuleB returns alias")
+        .assertText("alias", "::", ":");
+    }
+    
+    public void testCompleteCrossReference_04() throws Exception {
+    	newBuilder(setup.getXtextSetup())
+        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate metamodelA 'http://foo.bar/A' as alias")
+        .appendNl("generate metamodelB 'http://foo.bar/B'")
+        .appendNl("RuleA: name=ID;")
+        .append("RuleB returns alias:")
+        .assertText(
+        		"::",
+        		":",
+        		"Feature",
+        		"\"Value\"",
+        		"RuleA",
+        		"RuleB",
+        		"ID",
+        		"STRING",
+        		"INT",
+        		"SL_COMMENT",
+        		"WS",
+        		"ML_COMMENT",
+        		"ANY_OTHER",
+        		"(",
+        		"{");
     }
     
     /**
@@ -483,6 +596,103 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'")
 	        .appendNl("enum ExistingEnum:")
 	        .assertText("SameName", "DifferentName", "OverriddenLiteral");
+    }
+    
+    public void testBug276742_01() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	        .assertText("A1", "B1");
+    }
+    
+    public void testBug276742_02() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+    		.append("A1")
+	        .assertText("A1");
+    }
+    
+    public void testBug276742_03() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	    	.append("A1 ")
+	    	.assertText("A1", "A2", "Name");
+    }
+    
+    public void testBug276742_04() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	    	.append("A")
+	    	.assertText("A1");
+    }
+    
+    public void testBug276742_05() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	    	.append("A1 A1")
+	    	.assertText("A1");
+    }
+    
+    public void testBug276742_06() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	    	.append("A1 A")
+	    	.assertText(/* "A", */ "A1", "A2");
+    }
+    
+    public void testBug276742_07() throws Exception {
+    	newBuilder(setup.getContentAssistContextTestLanguageSetup())
+	    	.append("A1 A A2")
+	    	.assertText("A2");
+    }
+    
+    public void testBug276742_08() throws Exception {
+    	newBuilder(setup.getCrossReferenceProposalTestLanguageSetup())
+	    	.append("Foo {}")
+	    	.assertText("Foo", "Name", "}");
+    }
+    
+    public void testBug276742_08b() throws Exception {
+    	String modelAsString = "Foo {}";
+		ContentAssistProcessorTestBuilder builder = newBuilder(setup.getCrossReferenceProposalTestLanguageSetup());
+    	XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
+    	XtextResource resource = getResourceFromString(modelAsString);
+    	
+    	ITextViewer viewer = builder.getTextViewer(modelAsString, builder.getDocument(resource, modelAsString));
+    	ContentAssistContext[] contexts = processor.getContextFactory().create(viewer, modelAsString.length(), resource);
+    	assertEquals(2, contexts.length);
+    	Set<EClass> contextTypes = Sets.newHashSet(
+    			CrossReferenceProposalTestPackage.Literals.MODEL,
+    			CrossReferenceProposalTestPackage.Literals.CLASS
+    	);
+    	CrossReferenceProposalTestLanguageGrammarAccess grammarAccess = get(CrossReferenceProposalTestLanguageGrammarAccess.class);
+    	for(ContentAssistContext context: contexts) {
+    		EObject model = context.getCurrentModel();
+    		assertTrue(contextTypes.remove(model.eClass()));
+    		if (context.getFirstSetGrammarElements().contains(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3())) {
+    			assertEquals(CrossReferenceProposalTestPackage.Literals.CLASS, model.eClass());
+    		} else {
+    			assertEquals(CrossReferenceProposalTestPackage.Literals.MODEL, model.eClass());
+    		}
+    	}
+    }
+    
+    public void testBug276742_09() throws Exception {
+    	newBuilder(setup.getCrossReferenceProposalTestLanguageSetup())
+	    	.append("Foo {}")
+	    	.assertTextAtCursorPosition(0, "Foo", "Name");
+    }
+    
+    public void testBug276742_09b() throws Exception {
+    	String modelAsString = "Foo {}";
+		ContentAssistProcessorTestBuilder builder = newBuilder(setup.getCrossReferenceProposalTestLanguageSetup());
+    	XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
+    	XtextResource resource = getResourceFromString(modelAsString);
+    	
+    	ITextViewer viewer = builder.getTextViewer(modelAsString, builder.getDocument(resource, modelAsString));
+    	ContentAssistContext[] contexts = processor.getContextFactory().create(viewer, 0, resource);
+    	assertEquals(1, contexts.length);
+    	for(ContentAssistContext context: contexts) {
+   			assertEquals(CrossReferenceProposalTestPackage.Literals.MODEL, context.getCurrentModel().eClass());
+    	}
+    }
+    
+    public void testBug276742_10() throws Exception {
+    	newBuilder(setup.getCrossReferenceProposalTestLanguageSetup())
+	    	.assertText("Name");
     }
     
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {

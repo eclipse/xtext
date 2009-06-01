@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.common.tests/src-gen" editDirectory="/org.eclipse.xtext.ui.common.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.common.tests.editor/src" modelPluginID="org.eclipse.xtext.ui.common.tests" forceOverwrite="true" modelName="ContentAssistContextTestLanguage" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.common.tests.edit" editorPluginID="org.eclipse.xtext.ui.common.tests.editor">
+  <genPackages prefix="ContentAssistContextTest" basePackage="org.eclipse.xtext.ui.common.editor.contentassist" disposableProviderFactory="true">
+    <ecorePackage href="ContentAssistContextTestLanguage.ecore#/"/>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//FirstLevel"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelA"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//FirstLevel/secondLevelB"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//SecondLevelA"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA1"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//SecondLevelA/thirdLevelA2"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//SecondLevelB"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB1"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistContextTestLanguage.ecore#//SecondLevelB/thirdLevelB2"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//ThirdLevelA1"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ContentAssistContextTestLanguage.ecore#//ThirdLevelA1/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//ThirdLevelA2"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ContentAssistContextTestLanguage.ecore#//ThirdLevelA2/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//ThirdLevelB1"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ContentAssistContextTestLanguage.ecore#//ThirdLevelB1/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ContentAssistContextTestLanguage.ecore#//ThirdLevelB2"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ContentAssistContextTestLanguage.ecore#//ThirdLevelB2/name"/>
+      </genFeatures>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

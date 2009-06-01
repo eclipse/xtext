@@ -12,8 +12,11 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.JavaContentAssistProcessorTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.ParserBasedContentAssistProcessorTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsContentAssistTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest;
 import org.eclipse.xtext.ui.common.editor.outline.impl.AbstractDeclarativeSemanticModelTransformerTest;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest;
@@ -28,6 +31,10 @@ public class AllTests {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui.common.tests");
 		// $JUnit-BEGIN$
 		suite.addTestSuite(JavaContentAssistProcessorTest.class);
+		suite.addTestSuite(ParserBasedContentAssistProcessorTest.class);
+		suite.addTestSuite(InternalParserTest.class);
+		suite.addTestSuite(ParserTest.class);
+		suite.addTestSuite(ParserBasedContentAssistProcessorTest.class);
 		suite.addTestSuite(TwoContextsContentAssistTest.class);
 		suite.addTestSuite(HyperlinkHelperTest.class);
 		suite.addTestSuite(ProposalConflictHelperTest.Antlr.class);

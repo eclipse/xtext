@@ -20,6 +20,10 @@ import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
+import org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageUiModule;
+import org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistProcessorTestSetup;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.xtend.tests.Activator;
@@ -87,6 +91,26 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new EnumRulesTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
+			}
+		};
+	}
+
+	public ISetup getContentAssistContextTestLanguageSetup() {
+		return new ContentAssistContextTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new ContentAssistContextTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
+			}
+		};
+	}
+	
+	public ISetup getCrossReferenceProposalTestLanguageSetup() {
+		return new CrossReferenceProposalTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new CrossReferenceProposalTestLanguageUiModule(),
 						new UIPluginModule(Activator.getDefault()));
 			}
 		};

@@ -25,5 +25,9 @@ public interface IContentAssistProcessorTestSetup {
 	ISetup getKeywordsLangSetup();
 
 	ISetup getEnumsLangSetup();
+	
+	ISetup getContentAssistContextTestLanguageSetup();
+	
+	ISetup getCrossReferenceProposalTestLanguageSetup();
 
 }

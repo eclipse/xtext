@@ -19,6 +19,12 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/TwoContextsTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/ContentAssistContextTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/CrossReferenceProposalTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>

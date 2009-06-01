@@ -154,18 +154,9 @@ public class ContentAssistProcessorTestBuilder {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		ITextViewer textViewer = new MockableTextViewer() {
-			@Override
-			public ISelectionProvider getSelectionProvider() {
-				return new MockableSelectionProvider() {
-					@Override
-					public ISelection getSelection() {
-						return TextSelection.emptySelection();
-					}
-				};
-			}
-		};
 		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
+		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
+		ITextViewer textViewer = getTextViewer(currentModelToParse, xtextDocument);
 		ContentAssistContext.Factory factory = tests.get(ContentAssistContext.Factory.class);
 		ContentAssistContext[] contexts = factory.create(textViewer, currentModelToParse.length(), xtextResource);
 		for(ContentAssistContext context: contexts) {
@@ -217,10 +208,9 @@ public class ContentAssistProcessorTestBuilder {
 			throws Exception {
 
 		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
+		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 
-		final IXtextDocument xtextDocument = getDocument(xtextResource);
-
-		return this.contentAssistProcessor.computeCompletionProposals(resetTextViewerMock(currentModelToParse, xtextDocument), cursorPosition);
+		return this.contentAssistProcessor.computeCompletionProposals(getTextViewer(currentModelToParse, xtextDocument), cursorPosition);
 	}
 
 
@@ -230,7 +220,7 @@ public class ContentAssistProcessorTestBuilder {
 				+ this.cursorPosition;
 	}
 
-	private IXtextDocument getDocument(final XtextResource xtextResource) {
+	public IXtextDocument getDocument(final XtextResource xtextResource, final String model) {
 		final IXtextDocument xtextDocument = (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(),
 				new Class[] { IXtextDocument.class }, new InvocationHandler() {
 
@@ -238,8 +228,14 @@ public class ContentAssistProcessorTestBuilder {
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 						if (args!=null && args[0] instanceof IUnitOfWork)
 							return ((IUnitOfWork<?,XtextResource>) args[0]).exec(xtextResource);
-						if (method.getName().equals("get"))
+						if (method.getName().equals("get")) {
+							if (args != null && args.length == 2) {
+								int from = (Integer) args[0];
+								int length = (Integer) args[1];
+								return model.substring(from, length - from);
+							}
 							return model;
+						}
 						if (method.getName().equals("getLength"))
 							return Integer.MAX_VALUE;
 						throw new UnsupportedOperationException("The test mock IXtextDocument does not support the operation "+method);
@@ -248,7 +244,7 @@ public class ContentAssistProcessorTestBuilder {
 		return xtextDocument;
 	}
 
-	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {
+	public ITextViewer getTextViewer(final String currentModelToParse, final IXtextDocument xtextDocument) {
 		ITextViewer result = new MockableTextViewer() {
 			@Override
 			public IDocument getDocument() {
