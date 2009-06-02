@@ -26,7 +26,12 @@
 	<property name="wikitext.dir" value="${download.dir}${file.separator}wikitext"/>
 
 	<target name="check-wikitext">
-		<available file="${download.dir}${file.separator}wikitext.zip" property="hasWikiText"/>
+		<condition property="hasWikiText">
+			<and>
+				<available file="${download.dir}${file.separator}wikitext.zip" property="hasWikiTextZIP"/>
+				<available file="${wikitext.dir}" property="hasWikiTextDir"/>
+			</and>
+		</condition>
 	</target>
 	
 	<target name="get-wikitext" description="Downloads WikiText" depends="check-wikitext" unless="hasWikiText">
@@ -135,11 +140,21 @@
 	</target>
 		
 	<target name="check-docbook">
-		<available file="${download.dir}${file.separator}docbook.zip" property="hasDocbook"/>
+		<condition property="hasDocbook">
+			<and>
+				<available file="${download.dir}${file.separator}docbook.zip" property="hasDocbookZip"/>
+				<available file="${docbook.dir}" type="dir" property="hasDocbookDir"/>
+			</and>
+		</condition>
 	</target>
 	
 	<target name="check-fop">
-		<available file="${download.dir}${file.separator}fop.zip" property="hasFOP"/>
+		<condition property="hasFOP">
+			<and>
+				<available file="${download.dir}${file.separator}fop.zip" property="hasFOPZip"/>
+				<available file="${fop.dir}" type="dir" property="hasFOPDir"/>
+			</and>
+		</condition>
 	</target>
 		
 	<target name="get-docbook-xsl" description="Downloads docbook xsl" depends="check-docbook" unless="hasDocbook">
