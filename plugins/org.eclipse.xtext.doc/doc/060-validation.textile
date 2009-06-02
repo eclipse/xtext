@@ -43,7 +43,7 @@ In addition to the reflective invocation of test methods  the AbstractDeclarativ
 
 All in all this is very similar to how Junit work. Example:
 
-bc..
+bc.. 
   public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
     
     @Check
