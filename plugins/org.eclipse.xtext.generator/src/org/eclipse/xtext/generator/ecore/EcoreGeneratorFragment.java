@@ -30,6 +30,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenClassGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenEnumGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenPackageGeneratorAdapter;
 import org.eclipse.emf.common.notify.Adapter;
@@ -192,6 +193,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.setCanGenerate(true);
 		genModel.setFacadeHelperClass(null);
 		genModel.setBundleManifest(false);
+		genModel.setUpdateClasspath(false);
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 
@@ -246,6 +248,25 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 									}
 
 								};
+							}
+							
+							@Override
+							public Adapter createGenModelAdapter() {
+								if (genModelGeneratorAdapter == null)
+							    {
+							      genModelGeneratorAdapter = new GenModelGeneratorAdapter(this) {
+							    	  // we handle these ones on our own
+							    	  protected void generateModelBuildProperties(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
+							    	  }
+							    	  protected void generateModelManifest(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
+							    	  }
+							    	  protected void generateModelPluginProperties(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
+							    	  }
+							    	  protected void generateModelPluginClass(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
+							    	  }
+							      };
+							    }
+							    return genModelGeneratorAdapter;
 							}
 						};
 					}
