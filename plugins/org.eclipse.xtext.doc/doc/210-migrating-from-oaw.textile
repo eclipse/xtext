@@ -1,0 +1,179 @@
+
+h1(#from_oaw_to_tmf). From oAW to TMF
+
+TMF Xtext is a complete rewrite of the Xtext framework previously released with openArchitectureWare 4.3.1 (oAW). We refer to the version from oAW as oAW Xtext.
+oAW Xtext has been around for about 2 years before TMF Xtext was released in June 2009 and has been used by many people to develop little languages and corresponding Eclipse-based IDE support.
+
+This document describes the differences between oAW Xtext and TMF Xtext and is intended to be used as a guide to migrate from oAW Xtext to TMF Xtext.
+For people already familiar with the concepts of oAW Xtext it should also serves as a shortcut to learn TMF Xtext.  
+
+h2(#why_rewrite). Why a rewrite
+
+The first thing you might wonder about is why we decided to reimplement the framework from scratch as opposed to use the existing code base and enhance it further on. 
+We decided so because we had learned a lot of lessons from oAW Xtext and wanted to stick with many proven concepts 
+but found the implementation to lack a solid foundation (the author of these lines is the original author of that non-solid code btw. :-)). The first version of oAW Xtext was just a proof of concept
+and was so well received that it had been extended with all kinds of features (some were good, some were bad). Unfortunately code quality, clean and orthogonal concepts and test coverage had not the needed focus.
+
+In addition to this general lack of code quality, oAW Xtext suffers from some severe performance problems. The naive use of Xtend (see next section) made use of bigger models in Xtext editors unusable.
+
+h2(#Xtend_based_apis). Xtend-based APIs
+
+One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure. 
+Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand).  It provides nicer expression syntax than Java
+especially the existence of higher-order functions for collections are extremely handy when working with models.
+In addition to the nice syntax it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe.
+In contrast using Java one usually has to write instanceof and cast orgies. 
+
+h3(#Xtend_is_hard_to_debug). Xtend is hard to debug
+
+While the aforementioned things allow for convenient specification of label and icon providers, outline views, content assist and linking. Xtend is interpreted and therefore hard to debug.
+Because of that Xpand is shipped with a special debugger facility, however using the shipped debugger implies that the Xtend functions are called from a workflow. This is not and cannot be the case in Xtext.
+As a result one has to debug his way through the interpreter, which is hard and inconvenient even for us, who have written that interpreter.
+
+h3(#Xtend_is_slow). Xtend is slow
+
+But the problematic debugging was not the main reason why there are no Xtend-based APIs in TMF Xtext. The main reason is that Xtend is too slow to be evaluated "live in the editor", that is evaluating lots of Xtend code while you type. 
+While Xtend's performance is sufficiently good when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model).
+Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime wich function is the best match and it has to do so on each call.
+Also Xtend supports a plggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. Last but not least the code is interpreted and not compiled once. The price we pay for all these nice features reduced performance.
+
+In addition to these scalability problems we have designed seom core concepts around the idea of Iterables, which allows for lazy resolution of things. As Xtend does not know the concept of Iterators you'ld have work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.
+
+h3(#Declarative_Java). Declarative Java
+
+To summarize this we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
+As a result we found ways and means to tweak Javaas good as possible to allow for relatively convenient, high performing implementations. 
+
+To allow convenience in Java we tried to mimic the nice things of Xtend in Java. This is done through two things
+
+h4(#polymorphic_dispatching). Polymorphic Dispatcher
+
+Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the polymorphic dispatch know from Xtend. A ILabelProvider to be used in any Eclipse view can be writte like so for instance:
+
+bc.. 
+  public class XtextLabelProvider extends DefaultLabelProvider {
+
+	  String text(Grammar grammar) {
+		  return GrammarUtil.getName(grammar);
+	  }
+	
+	  String image(Grammar grammar) {
+		  return "language.gif";
+	  }
+	
+	  String image(GeneratedMetamodel metamodel) {
+		  return "export.gif";
+	  }
+  }
+  
+p. As you can see this is very similar to the way one describes labels and icons in oAW Xtext, but has the advantage that it is easier to test and to debug, faster and can be used everywhere an ILabelProvider is expected.
+
+h4(#google_collections). Google Collections
+
+The other thing we love about Xtend is its convenient way to navigate a model. This is something which can't be done with Java, as it lacks closures and in general requires to write lots of boilerplate such as superfluos type information, etc. So this is where you have to make compromises.
+Anyway, we think this could be improved a bit by using Google Collections which is (the name suggests it) a collections framewokr written by google. It's open-source and there's a JSR proposing to add the framework to the JDK, which would IMHO be a very good addition.
+
+It provides lots of nice static factory methods similar to what we have in java.util.Collections and java.util.Arrays, contains higher-order functions based on a function type included in the library and a couple of very good collection implementations such as multi maps and immutable implementations of the various collection types. With this it is possible to  write a chain of filters and transformers like so.
+
+bc.. 
+   	ArrayList<String> names = newArrayList("foo", "bar", "honk");
+		Iterable<String> filtered = filter(names, not(isEqualTo("bar")));
+		Iterable<Integer> lengths = transform(filtered,new Function<String, Integer>() {
+			public Integer apply(String from) {
+				return from.length();
+			}
+		});
+
+p. or in a more functional way :
+
+bc.. 
+	 transform(
+			filter(
+				newArrayList("foo", "bar", "honk"), 
+				not(isEqualTo("bar"))
+			),
+			new Function<String, Integer>() {
+				public Integer apply(String from) {
+					return from.length();
+				}
+			}
+		);
+
+p. From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it's a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.
+
+h3(#conclusion). Conclusion
+
+Just to get it right, Xtend is a very nice language and we still use it for it's main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it's performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. 
+
+h2(#differences). Differences
+
+In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We'll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI apsects, such as outline view and content assist.
+
+h3(#differenced_grammar_language). Differences in the grammar language
+
+When looking at a TMF Xtext gramar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models.
+In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. 
+
+Apart from the first three lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
+Also assignments are syntactically and semantically identical in both versions. 
+However in TMF Xtext some concepts have been generalized and improved:
+
+h4(#differences_datatype_rules). String rules become Datatype rules
+
+The very handy String rules are still present in TMF Xtext but we generalized them so that you don't need to write the 'String' keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes.
+
+h4(#differences_enum_rules). Enum rules
+
+Enum rules have not changed significantly. The keyword has changed to be all lower case ('enum' instead of 'Enum').
+Also the right handside of the assignment is now optional. That is in oAW Xtext:
+
+bc.. 
+  Enum MyEnum : foo='foo' | bar='bar';
+  
+p. becomes
+
+bc.. 
+   enum MyEnum : foo='foo' | bar='bar';
+   
+p. and because the name of the literal equals the literal value one can ommit the right handside in this case and write:
+
+bc.. 
+  enum MyEnum : foo | bar;
+
+h4(#differences_native_rules). Native rules
+
+The most significant improvement to oAW Xtext is that we could replace the blackbox native rules with full-blown EBNF syntax. 
+That is native rules become terminal rules and or no longer written as a string literal containing ANTLR syntax but are a part of the language.
+
+Example :
+
+bc.. Native FOO : "'f' 'o' 'o'";
+
+p. becomes
+
+bc.. terminal FOO : 'f' 'o' 'o';
+
+p. See the reference documentation for all the different expressions possible in terminal rules.
+
+h4(#differences_no_builtin_terminals). No built-in terminals
+
+In oAW Xtext common terminals lie ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn't be removed.
+Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don't have to use them and you can come up with your own reusable rules. 
+
+h4(#differences_no_URI_token). No URI terminal rule anymore
+
+Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it as we only wanted to mark the model some how to identify what information to use in orde to load referenced models. Instead we decided to solve this similar to how we do resolution by name: We use convention.
+That is if you've used the URI token like so:
+
+bc.. 
+ Import : 'import' myReference=URI;
+ 
+p. you'll have to rewrite it like so
+
+bc.. 
+ Import : 'import' importedURI=STRING;
+ 
+p. Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by Xtext's simple import mechanism. So we assume and hope  that changing the reference is not a big deal for you. 
+
+ 
+  
