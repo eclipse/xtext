@@ -1,0 +1,143 @@
+<html>
+<head>
+<title>Scoping</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="prev" href="linking.html" title="Linking"/>
+<link rel="next" href="valueconverter.html" title="Value Converter"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>An 
+				<code class="code">IScopeProvider</code> is responsible for providing an 
+				<code class="code">IScope</code> for a given 
+				<code class="code">EObject</code> and its 
+				<code class="code">EReference</code>, for which all candidates shall be returned. 
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)<br/>
+public interface IScopeProvider {<br/>
+<br/>
+  /**<br/>
+   * Returns a scope for the given context. The scope provides access to <br/>
+   * the compatible visible EObjects for a given reference.<br/>
+   *<br/>
+   * @param context the element from which an element shall be referenced<br/>
+   * @param reference the reference to be used to filter the elements.<br/>
+   * @return {@link IScope} representing the inner most {@link IScope} for <br/>
+   *         the passed context and reference.<br/>
+   */<br/>
+  public IScope getScope(EObject context, EReference reference);<br/>
+<br/>
+  /**<br/>
+   * Returns a scope for a given context. The scope contains any visible, <br/>
+   * type-compatible element.<br/>
+   * @param context the element from which an element shall be referenced<br/>
+   * @param type the (super)type of the elements.<br/>
+   * @return {@link IScope} representing the inner most {@link IScope} for<br/>
+   *         the passed context and type.<br/>
+   */<br/>
+  public IScope getScope(EObject context, EClass type);<br/>
+}<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>An 
+				<code class="code">IScope</code> represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
+				For instance Java has multiple kinds of scopes (object scope, type scope, etc.).
+			</p>
+<p>For Java one would create the scope hierarchy as commented in the following example:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+// file contents scope<br/>
+import static my.Constants.STATIC;<br/>
+<br/>
+public class ScopeExample { // class body scope<br/>
+	private Object field = STATIC;<br/>
+	<br/>
+	private void method(String param) { // method body scope<br/>
+		String localVar = "bar";<br/>
+		innerBlock: { // block scope<br/>
+			String innerScopeVar = "foo";<br/>
+			Object field = innerScopeVar;<br/>
+			// the scope hierarchy at this point would look like so:<br/>
+			//blockScope{field,innerScopeVar}-&gt;<br/>
+			//methodScope{localVar,param}-&gt;<br/>
+			//classScope{field}-&gt; ('field' is overlayed)<br/>
+			//fileScope{STATIC}-&gt;<br/>
+			//classpathScope{'all qualified names of accessible static fields'} -&gt;<br/>
+			//NULLSCOPE{}<br/>
+			//<br/>
+		}<br/>
+		field.add(localVar);<br/>
+	}<br/>
+}<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>In fact the class path scope should also reflect the order of class path entries.
+				For instance:</p>
+<div class="literallayout">
+<p>
+<code class="code">classpathScope{stuff from bin/}<br/>
+-&gt; classpathScope{stuff from foo.jar/}<br/>
+-&gt; ...<br/>
+-&gt; classpathScope{stuff from JRE System Library}<br/>
+-&gt; NULLSCOPE{}<br/>
+</code>
+</p>
+</div>
+<p>Please find the motivation behind this and some additional details in 
+				<a class="ulink" href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html" target="_top">this blog post</a> .
+			</p>
+<div class="section" title="Declarative Scope Provider">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="DeclarativeScopeProvider"/>Declarative Scope Provider</h3>
+</div>
+</div>
+</div>
+<p>As always there is an implementation allowing to specify scoping in a declarative way (
+					<code class="code">org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider</code>).
+					It looks up methods which have the following signature:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">IScope scope_&lt;TypeToReturn&gt;(&lt;TypeOfContext&gt; ctx, EReference ref)<br/>
+</code>
+</p>
+</div>
+<p>For example if you have a transition contained in a scope and you want to compute all reachable states the corresponding method could be declared as follows:</p>
+<div class="literallayout">
+<p>
+<code class="code">IScope scope_State(Transition this, EReference ref)<br/>
+</code>
+</p>
+</div>
+<p>If such a method does not exist, the implementation will try to find one for the context&#8217;s container. This allows to reuse the same scope for different elements and references. In the case of a state machine you might want to declare the scope with available states per state machine.
+					This can simply be done using the following signature:</p>
+<div class="literallayout">
+<p>
+<code class="code">IScope scope_State(StateMachine this, EReference ref)<br/>
+</code>
+</p>
+</div>
+<p>For a transition looking for possible states to link to, the implementation would first look for 
+					<code class="code">scope_State(Transition,EReference)</code>, then for the container of the transition. Assuming that is a State the implementation would look for 
+					<code class="code">scope_State(State,EReference)</code> and so on.
+					Until it finds a matching method (e.g. 
+					<code class="code">scope_State(StateMachine,EReference)</code>)
+				</p>
+</div>
+</body>
+</html>

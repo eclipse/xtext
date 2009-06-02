@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Fragment Provider (referencing Xtext models from other EMF artifacts)</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="prev" href="transientvalues.html" title="Transient Values"/>
+<link rel="next" href="IDEconcepts.html" title="IDE concepts"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>Although inter-Xtext linking is not done by URIs, you may want to be able to reference your 
+				<code class="code">EObject</code> from non-Xtext models.
+				In those cases URIs are used, which are made up of a part identifying the resource. Each 
+				<code class="code">EObject</code> contained in a resource can be identified by a so called 
+				<span class="emphasis">
+<em>fragment</em>
+</span>.
+			</p>
+<p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
+<p>The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.</p>
+<p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&#8217;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
+				<code class="code">EObjects</code>.
+			</p>
+<p>Therefore one can contribute a so called 
+				<code class="code">IFragmentProvider</code> per language.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">public interface IFragmentProvider extends ILanguageService {<br/>
+ <br/>
+	/**<br/>
+	 * Computes the local ID of the given object. <br/>
+	 * @param obj<br/>
+	 *            The EObject to compute the fragment for<br/>
+	 * @return the fragment, which can be an arbitrary string but must be <br/>
+	 *         unique within a resource. Return null to use default <br/>
+	 *         implementation<br/>
+	 */<br/>
+	String getFragment(EObject obj);<br/>
+	<br/>
+	/**<br/>
+	 * Locates an EObject in a resource by its fragment. <br/>
+	 * @param resource<br/>
+	 * @param fragment<br/>
+	 * @return the EObject <br/>
+	 */<br/>
+	EObject getEObject(Resource resource, String fragment);<br/>
+ }<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>However, the currently available default fragment provider does nothing.</p>
+</body>
+</html>

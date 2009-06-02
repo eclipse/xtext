@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Setup within Eclipse / Equinox</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="prev" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="next" href="validation.html" title="Validation"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>Within Eclipse we have a generated Activator, which creates a guice injector using the modules.
+				In addition an IExecutableExtensionFactory is generated for each language, which is used to create ExecutableExtensions.
+				This means that everything which is created via extension points is managed by guice as well, i.e. you can declare dependencies and get them injected upon creation. </p>
+<p>The only thing you have to do in order to use this factory is to prefix the class with the factory ([MyLanguageName]ExecutableExtensionFactory) name followed by a colon.</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+&lt;extension<br/>
+  point="org.eclipse.ui.editors"&gt;<br/>
+  &lt;editor<br/>
+    class="&lt;MyLanguageName&gt;ExecutableExtensionFactory:<br/>
+      org.eclipse.xtext.ui.core.editor.XtextEditor"<br/>
+    contributorClass=<br/>
+      "org.eclipse.ui.editors.text.TextEditorActionContributor"<br/>
+    default="true"<br/>
+    extensions="ecoredsl"<br/>
+    id="org.eclipse.xtext.example.EcoreDsl"<br/>
+    name="EcoreDsl Editor"&gt;<br/>
+  &lt;/editor&gt;<br/>
+&lt;/extension&gt;<br/>
+  <br/>
+  <br/>
+<br/>
+</code>
+</p>
+</div>
+</body>
+</html>

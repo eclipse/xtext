@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Dependency Injection in Xtext with Google Guice</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="Overview.html" title="Overview"/>
+<link rel="prev" href="generator.html" title="The Generator"/>
+<link rel="next" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="section" title="Modules">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Modules"/>Modules</h3>
+</div>
+</div>
+</div>
+<p>The Guice Injector configuration is done through the use of Modules (also a Guice concept).
+					The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
+					These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
+					By default these modules extend a fully generated module.</p>
+<div class="section" title="Generated Modules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="GeneratedModules"/>Generated Modules</h4>
+</div>
+</div>
+</div>
+<p>The fully generated modules (never touch them!) are called Abstract[MyLanguage]RuntimeModule and Abstract[MyLanguage]UiModule respectively. 
+						They contain all components which have been generated specifically for the language at hand.
+						Examples are: the generated parsers, serializer or for UI a proposal provider for content assist is generated.
+						What goes into these modules depends on how your generator is configured.</p>
+</div>
+<div class="section" title="Default Modules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="DefaultModules"/>Default Modules</h4>
+</div>
+</div>
+</div>
+<p>Finally the fully generated modules extend the 
+						<code class="code">DefaultRuntimeModule</code> (resp. 
+						<code class="code">DefaultUiModule</code>), which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
+						Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
+					</p>
+</div>
+<div class="section" title="Changing Configuration">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="ChangingConfiguration"/>Changing Configuration</h4>
+</div>
+</div>
+</div>
+<p>We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
+						The class is initially empty and has been generated only to allow for arbitrary customization.</p>
+<p>In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
+						This class allows to write bindings like so:</p>
+<div class="literallayout">
+<p>
+<code class="code">public Class&lt;? extends MyInterface&gt; bind[anyname]() {<br/>
+     return MyInterfaceImpl.class;<br/>
+ }<br/>
+</code>
+</p>
+</div>
+<p>Such a method will be interpreted as a binding from 
+						<code class="code">MyInterface</code> to 
+						<code class="code">MyInterfaceImpl</code>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding.
+						Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method 
+						<code class="code">void bind(Binding)</code> and do what every you want.
+					</p>
+</div>
+</div>
+</body>
+</html>

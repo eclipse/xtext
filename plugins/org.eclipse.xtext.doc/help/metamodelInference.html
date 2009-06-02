@@ -1,0 +1,267 @@
+<html>
+<head>
+<title>Meta-Model inference</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="Overview.html" title="Overview"/>
+<link rel="prev" href="grammarLanguage.html" title="The Grammar Language"/>
+<link rel="next" href="ImportingexistingMetaModels.html" title="Importing existing Meta Models"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>The meta model of a textual language describes the structure of its abstract syntax trees (AST). </p>
+<p>Xtext uses Ecore EPackages to define meta models. Meta models are declared to be either inferred (generated) from the grammar or imported. 
+				By using the &#8216;generate&#8217; directive, one tells Xtext to derive an EPackage from the grammar. </p>
+<div class="section" title="Type and Package Generation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="TypeandPackageGeneration"/>Type and Package Generation</h3>
+</div>
+</div>
+</div>
+<p>Xtext creates</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>an EPackage</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>for each generated package declaration. After the directive '&#8216;generate&#8217;&#8216; a list of parameters follows. The &#8217;&#8216;name&#8217;&#8216; of the EPackage will be set to the first parameter, its &#8217;&#8216;nsURI&#8217;' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>an EClass</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.</p>
+</li>
+<li class="listitem">
+<p>for each type defined in an action or a cross-reference.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>an EEnum</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>for each return type of an enum rule.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>an EDatatype</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>for each return type of a terminal rule or a datatype rule.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<p>All EClasses, EEnums and EDatatypes are added to the EPackage referred to by the alias provided in the type reference they were created from.</p>
+</div>
+<div class="section" title="Feature and Type Hierarchy Generation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="FeatureandTypeHierarchyGeneration"/>Feature and Type Hierarchy Generation</h3>
+</div>
+</div>
+</div>
+<p>While walking through the grammar, the algorithm keeps track of a set of the currently possible return types to add features to. </p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Entering a parser rule the set contains only the return type of the rule. </p>
+</li>
+<li class="listitem">
+<p>Entering a group in an alternative the set is reset to the same state it was in when entering the first group of this alternative. </p>
+</li>
+<li class="listitem">
+<p>Leaving an alternative the set contains the union of all types at the end of each of its groups.</p>
+</li>
+<li class="listitem">
+<p>After an optional element, the set is reset to the same state it was before entering it. </p>
+</li>
+<li class="listitem">
+<p>After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called rule or action. </p>
+</li>
+<li class="listitem">
+<p>An optional rule call does not modify the set.</p>
+</li>
+<li class="listitem">
+<p>A rule call is optional, if its cardinality is &#8216;?&#8217; or &#8216;*&#8217;.</p>
+</li>
+</ul>
+</div>
+<p>While iterating the parser rules Xtext creates</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>an EAttribute in each current return type</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>of type EBoolean for each feature assignment using the &#8216;?=&#8217; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
+</li>
+<li class="listitem">
+<p>for each assignment with the &#8216;=&#8217; or &#8216;+=&#8217; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>an EReference in each current return type</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>for each assignment with the &#8216;=&#8217; or &#8216;+=&#8217; operator in a parser rule calling a parser rule. The EReference type will be the return type of the called parser rule.</p>
+</li>
+<li class="listitem">
+<p>for each action. The reference&#8217;s type will be set to the return type of the current calling rule. </p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<p>Each EAttribute or EReference takes its name from the assignment/action that caused it. Multiplicities will be 0...1 for assignments with the &#8216;=&#8217; operator and 0...* for assignments with the &#8216;+=&#8217; operator. </p>
+<p>Furthermore, each type that is added to the currently possible return types automatically inherits from the current return type of the parser rule. You can specify additional common supertypes by means of &#8220;artificial&#8221; parser rules, that are never called, e.g.</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+ CommonSuperType:<br/>
+   SubTypeA | SubTypeB | SubTypeC;<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Enum Literal Generation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EnumLiteralGeneration"/>Enum Literal Generation</h3>
+</div>
+</div>
+</div>
+<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another with the same name cannot be found. The &#8216;literal&#8217; property of the generated enum literal is set to the right hand side of the declaration. If it is ommitted, you&#8217;ll get an enum literal with equal &#8216;name&#8217; and &#8216;literal&#8217; attributes.</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+ enum MyGeneratedEnum:<br/>
+   NAME = 'literal' | EQUAL_NAME_AND_LITERAL;<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Feature Normalization">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="FeatureNormalization"/>Feature Normalization</h3>
+</div>
+</div>
+</div>
+<p>Next the generator examines all generated EClasses and lifts up similar features to supertypes if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple supertypes.</p>
+</div>
+<div class="section" title="Customized Post Processing">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="CustomizedPostProcessing"/>Customized Post Processing</h3>
+</div>
+</div>
+</div>
+<p>As a last step, the generator invokes the post processor for every generated meta model. The post processor expects an Xtend file with name 
+					<code class="code">MyDslPostProcessor.ext</code> (if the name of the grammar file is 
+					<code class="code">MyDsl.xtext</code>) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature 
+					<code class="code">process(xtext::GeneratedMetamodel)</code>. E.g.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+ process(xtext::GeneratedMetamodel this) :<br/>
+   process(ePackage)<br/>
+ ;<br/>
+ <br/>
+ process(ecore::EPackage this) :<br/>
+   ...<br/>
+ ;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>The invoked extension can then augment the generated Ecore model in place. Some typical use cases are to:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>set default values for attributes</p>
+</li>
+<li class="listitem">
+<p>add container references as opposites of existing containment references</p>
+</li>
+<li class="listitem">
+<p>add operations with implementation (using a body annotation)</p>
+</li>
+</ul>
+</div>
+<p>Great care must be taken not to modify the meta model in a way preventing the Xtext parser from working correctly (e.g. removing or renaming model elements).</p>
+</div>
+<div class="section" title="Error Conditions">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ErrorConditions"/>Error Conditions</h3>
+</div>
+</div>
+</div>
+<p>The following conditions cause an error</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>An EAttribute or EReference has two different types or different cardinality.</p>
+</li>
+<li class="listitem">
+<p>There are an EAttribute and an EReference with the same name in the same EClass.</p>
+</li>
+<li class="listitem">
+<p>There is a cycle in the type hierarchy.</p>
+</li>
+<li class="listitem">
+<p>An new EAttribute, EReference or supertype is added to an imported type.</p>
+</li>
+<li class="listitem">
+<p>An EClass is added to an imported EPackage.</p>
+</li>
+<li class="listitem">
+<p>An undeclared alias is used. </p>
+</li>
+<li class="listitem">
+<p>An imported metamodel cannot be loaded.</p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

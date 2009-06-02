@@ -1,0 +1,231 @@
+<html>
+<head>
+<title>Linking</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="prev" href="validation.html" title="Validation"/>
+<link rel="next" href="scoping.html" title="Scoping"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>The linking feature allows for specification of cross references within an Xtext grammar.
+				The following things are needed for the linking:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>declaration of a cross link in the grammar (at least in the meta model)</p>
+</li>
+<li class="listitem">
+<p>specification of linking semantics</p>
+</li>
+</ol>
+</div>
+<div class="section" title="Declaration of cross links">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Declarationofcrosslinks"/>Declaration of cross links</h3>
+</div>
+</div>
+</div>
+<p>In the grammar a cross reference is specified using square brackets.</p>
+<div class="literallayout">
+<p>
+<code class="code">CrossReference†:<br/>
+†††'['†ReferencedEClass†('|'†terminal=AbstractTerminal)?†']'<br/>
+</code>
+</p>
+</div>
+<p>Example:</p>
+<div class="literallayout">
+<p>
+<code class="code">ReferringType†:<br/>
+†††'ref'†referencedObject=[Entity|(ID|STRING)];<br/>
+</code>
+</p>
+</div>
+<p>The meta model derivation would create an 
+					<code class="code">EClass</code> &#8216;ReferringType&#8217; with an 
+					<code class="code">EReference</code> &#8216;referencedObject&#8217; of type &#8216;Entity&#8217; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see scoping).
+				</p>
+<p>Example: While parsing a given input string, say</p>
+<div class="literallayout">
+<p>
+<code class="code">ref†Entity01<br/>
+</code>
+</p>
+</div>
+<p>Xtext produces an instance of &#8216;ReferringType&#8217;. After this parsing step it enters the linking phase and tries to find an instance of '&#8216;Entity&#8217;' using the parsed text &#8216;Entity01&#8217;. The input </p>
+<div class="literallayout">
+<p>
+<code class="code">ref†"EntityWithƒ÷‹"<br/>
+</code>
+</p>
+</div>
+<p>would work analogously. This is not an ID (umlauts are not allowed), but a STRING (as it is apparent from the quotation marks).</p>
+</div>
+<div class="section" title="Specification of linking semantics">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Specificationoflinkingsemantics"/>Specification of linking semantics</h3>
+</div>
+</div>
+</div>
+<p>The default 
+					<code class="code">ILinker</code> implementation installs 
+					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
+					The actual cross ref resolution is done in 
+					<code class="code">LazyLinkingResource.getEObject(String)</code> and delegates to 
+					<code class="code">ILinkingService</code>.
+					Although the default linking behavior is appropriate in many cases there might be scenarios where this is not sufficient. For each grammar a linking service can be implemented/configured, which implements the following interface:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">@Stable(since†=†"0.7.0",†subClass†=†AbstractLinkingService.class)<br/>
+public†interface†ILinkingService†{<br/>
+<br/>
+††/**<br/>
+†††*†Returns†all†{@link†EObject}s†referenced†by†the†given†link†text†in†the<br/>
+†††*†given†context.†But†does†not†set†the†references†or†modifies†the†passed<br/>
+†††*†information†somehow<br/>
+†††*/<br/>
+††List&lt;EObject&gt;†getLinkedObjects(<br/>
+††††EObject†context,†<br/>
+††††EReference†reference,†<br/>
+††††AbstractNode†node)<br/>
+		throws†IllegalNodeException;<br/>
+<br/>
+††/**<br/>
+†††*†Returns†the†textual†representation†of†a†given†object†as†it†would†be<br/>
+†††*†serialized†in†the†given†context.<br/>
+†††*†<br/>
+†††*†@param†object<br/>
+†††*†@param†reference<br/>
+†††*†@param†context<br/>
+†††*†@return†the†text†representation.<br/>
+†††*/<br/>
+††String†getLinkText(<br/>
+††††EObject†object,†<br/>
+††††EReference†reference,†<br/>
+††††EObject†context);<br/>
+}<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>The method 
+					<code class="code">getLinkedObjects</code> is directly related to this topic whereas 
+					<code class="code">getLinkText</code> adresses complementary functionality: it is used for Serialization.
+				</p>
+<p>A simple implementation of the linking service (
+					<code class="code">DefaultLinkingService</code>) is shipped with Xtext and is used for any grammar per default. It uses the default implementation of 
+					<code class="code">IScopeProvider</code>. 
+				</p>
+</div>
+<div class="section" title="Default linking semantics">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Defaultlinkingsemantics"/>Default linking semantics</h3>
+</div>
+</div>
+</div>
+<p>The default implementation for all languages, looks within the current file for an EObject of the respective type (&#8216;Entity&#8217;) which has a name attribute set to &#8216;Entity01&#8217;. </p>
+<p>Given the grammar :</p>
+<div class="literallayout">
+<p>
+<code class="code">Model†:†(stuff+=(Ref|Entity))*;<br/>
+†Ref†:†'ref'†referencedObject=[Entity|ID]†';';<br/>
+†Entity†:†'entity'†name=ID†';';<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>In the following model :</p>
+<div class="literallayout">
+<p>
+<code class="code">ref†Entity01;<br/>
+†entity†Entity01;<br/>
+</code>
+</p>
+</div>
+<p>the 
+					<code class="code">ref</code> would be linked to the declared entity (
+					<code class="code">entity Entity01;</code>).
+				</p>
+<div class="section" title="Default Imports">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="DefaultImports"/>Default Imports</h4>
+</div>
+</div>
+</div>
+<p>There is a default implementation for inter-resource referencing, which as well uses convention:</p>
+<p>Given the grammar :</p>
+<div class="literallayout">
+<p>
+<code class="code">Model†:†(imports+=Import)*†(stuff+=(Ref|Entity))*;<br/>
+†Import†:†'import'†importURI=STRING†';';<br/>
+†Ref†:†'ref'†referencedObject=[Entity|ID]†';';<br/>
+†Entity†:†'entity'†name=ID†';';<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>With this grammar in place it would be possible to write three files in the new DSL where the first references the other two, like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">--file†model.dsl<br/>
+†import†"model1.dsl";<br/>
+†import†"model2.dsl";<br/>
+†<br/>
+†ref†Foo;<br/>
+†entity†Bar;<br/>
+<br/>
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">--file†model1.dsl†<br/>
+†entity†Stuff;<br/>
+<br/>
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">--file†model2.dsl<br/>
+†entity†Foo;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>The resulting default scope list is as follows:</p>
+<div class="literallayout">
+<p>
+<code class="code">Scope†(model.dsl)†{<br/>
+††parent†:†Scope†(model1.dsl)†{<br/>
+†††parent†:†Scope†(model2.dsl)†{}<br/>
+††}<br/>
+†}<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>So, the outer scope is asked for an Entity named 
+						<code class="code">Foo</code>, as it does not contain such a declaration itself its parent is asked and so on.
+						The default implementation of 
+						<code class="code">IScopeProvider</code> creates this kind of scope chain.
+					</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>IDE concepts</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="index.html" title="Xtext User Guide"/>
+<link rel="prev" href="fragmentProvider.html" title="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
+<link rel="next" href="labelProvider.html" title="Label Provider"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>For the following part we will refer to a concrete example grammar in order to explain certain aspect of the UI more clearly. The used example grammar is as follows:</p>
+<div class="literallayout">
+<p>
+<code class="code">grammar org.eclipse.text.documentation.Sample <br/>
+    with org.eclipse.xtext.common.Terminals<br/>
+<br/>
+generate gen 'http://www.eclipse.org/xtext/documentation/Sample' as gen<br/>
+<br/>
+Model :<br/>
+  "model" intAttribute=INT (stringDescription=STRING)? "{" <br/>
+     (rules += AbstractRule)* <br/>
+  "}" <br/>
+;<br/>
+<br/>
+AbstractRule:<br/>
+  RuleA | RuleB<br/>
+;<br/>
+	 <br/>
+RuleA :<br/>
+	 "RuleA" "(" name = ID ")" ;<br/>
+	 <br/>
+RuleB return gen::CustomType:<br/>
+	 "RuleB" "(" ruleA = [RuleA] ")" ;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p/>
+<div class="section" title="Managing Concurrency">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="concurrency"/>Managing Concurrency</h2>
+</div>
+</div>
+</div>
+<p>text</p>
+</div>
+</body>
+</html>

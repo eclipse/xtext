@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Template Proposals</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="IDEconcepts.html" title="IDE concepts"/>
+<link rel="prev" href="contentAssist.html" title="Content Assist"/>
+<link rel="next" href="outline.html" title="Outline View"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file under 
+				<code class="code">templates/templates.xml</code> containing templates in a format described in the 
+				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_top">eclipse help</a>  .
+			</p>
+<p>By default Xtext registers ContextTypes for each Rule (
+				<code class="code">.[RuleName]</code>) and for each keyword (
+				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers.
+			</p>
+<p>If you don&#8217;t like these defaults you&#8217;ll have to subclass 
+				<code class="code">org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry</code> and configure it via Guice.
+			</p>
+<div class="section" title="CrossReference Resolver">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="CrossReferenceResolver"/>CrossReference Resolver</h3>
+</div>
+</div>
+</div>
+<p>Xtext comes with a specific template variable resolver (
+					<code class="code">org.eclipse.jface.text.templates.TemplateVariableResolver</code>) called 
+					<code class="code">CrossReferenceResolver</code>, which can be used to place cross refs within a template.
+				</p>
+<p>The syntax is as follows:</p>
+<div class="literallayout">
+<p>
+<code class="code">${someText:CrossReference('MyType.myRef')}<br/>
+</code>
+</p>
+</div>
+<p>For example the following template:</p>
+<div class="literallayout">
+<p>
+<code class="code">&lt;template name="transition" description="event transition"<br/>
+    id="transition"<br/>
+    context="org.eclipse.xtext.example.FowlerDsl.Transition" <br/>
+    enabled="true"<br/>
+  &gt;${event:CrossReference('Transition.event')} =&gt; <br/>
+    ${state:CrossReference('Transition.state')&lt;/<br/>
+  template&gt;<br/>
+</code>
+</p>
+</div>
+<p>yields the text
+
+					<code class="code">event =&gt; state</code> and allows selecting any events and states using a drop down.
+				</p>
+</div>
+</body>
+</html>

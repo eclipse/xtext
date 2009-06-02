@@ -1,0 +1,100 @@
+<toc topic="help/index.html" label="Xtext User Guide">
+<topic href="help/Overview.html" label="Overview">
+<topic href="help/Overview.html#WhatsXtext" label="What&#8217;s Xtext?"/>
+<topic href="help/concepts.html" label="Xtext concepts from a bird&#8217;s eye view"/>
+<topic href="help/grammarLanguage.html" label="The Grammar Language">
+<topic href="help/grammarLanguage.html#Firstanexample" label="First an example"/>
+<topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"/>
+<topic href="help/grammarLanguage.html#EPackagedeclarations" label="EPackage declarations">
+<topic href="help/grammarLanguage.html#EPackagegeneration" label="EPackage generation"/>
+<topic href="help/grammarLanguage.html#EPackageimport" label="EPackage import">
+<topic href="help/grammarLanguage.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"/>
+<topic href="help/grammarLanguage.html#UsingclasspathURIstoimportexistingEPackages" label="Using classpath URIs to import existing EPackages"/>
+</topic>
+<topic href="help/grammarLanguage.html#Usingmultiplepackagesmetamodelaliases" label="Using multiple packages / meta model aliases"/>
+</topic>
+<topic href="help/grammarLanguage.html#Rules" label="Rules">
+<topic href="help/grammarLanguage.html#TerminalRules" label="Terminal Rules">
+<topic href="help/grammarLanguage.html#Returntypes" label="Return types"/>
+</topic>
+<topic href="help/grammarLanguage.html#ExtendedBackusNaurformexpressions" label="Extended Backus-Naur form expressions">
+<topic href="help/grammarLanguage.html#KeywordsCharacters" label="Keywords / Characters"/>
+<topic href="help/grammarLanguage.html#CharacterRanges" label="Character Ranges"/>
+<topic href="help/grammarLanguage.html#Wildcard" label="Wildcard"/>
+<topic href="help/grammarLanguage.html#UntilToken" label="Until Token"/>
+<topic href="help/grammarLanguage.html#NegatedToken" label="Negated Token"/>
+<topic href="help/grammarLanguage.html#RuleCalls" label="Rule Calls"/>
+<topic href="help/grammarLanguage.html#Alternatives" label="Alternatives"/>
+<topic href="help/grammarLanguage.html#Groups" label="Groups"/>
+</topic>
+</topic>
+<topic href="help/grammarLanguage.html#ParserRules" label="Parser Rules">
+<topic href="help/grammarLanguage.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
+<topic href="help/grammarLanguage.html#Assignments" label="Assignments"/>
+</topic>
+<topic href="help/grammarLanguage.html#AssignmentOperators" label="Assignment Operators">
+<topic href="help/grammarLanguage.html#CrossReferences" label="Cross References"/>
+<topic href="help/grammarLanguage.html#SimpleActions" label="Simple Actions"/>
+<topic href="help/grammarLanguage.html#Unassignedrulecalls" label="Unassigned rule calls"/>
+<topic href="help/grammarLanguage.html#TreeRewriteActions" label="Tree Rewrite Actions"/>
+</topic>
+</topic>
+<topic href="help/grammarLanguage.html#Hiddenterminalsymbols" label="Hidden terminal symbols"/>
+<topic href="help/grammarLanguage.html#Datatyperules" label="Datatype rules"/>
+<topic href="help/grammarLanguage.html#EnumRules" label="Enum Rules"/>
+</topic>
+<topic href="help/metamodelInference.html" label="Meta-Model inference">
+<topic href="help/metamodelInference.html#TypeandPackageGeneration" label="Type and Package Generation"/>
+<topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"/>
+<topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"/>
+<topic href="help/metamodelInference.html#FeatureNormalization" label="Feature Normalization"/>
+<topic href="help/metamodelInference.html#CustomizedPostProcessing" label="Customized Post Processing"/>
+<topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"/>
+</topic>
+<topic href="help/ImportingexistingMetaModels.html" label="Importing existing Meta Models"/>
+<topic href="help/GrammarMixins.html" label="Grammar Mixins"/>
+<topic href="help/Defaulttokens.html" label="Default tokens"/>
+<topic href="help/generator.html" label="The Generator"/>
+<topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
+<topic href="help/dependencyInjection.html#Modules" label="Modules">
+<topic href="help/dependencyInjection.html#GeneratedModules" label="Generated Modules"/>
+<topic href="help/dependencyInjection.html#DefaultModules" label="Default Modules"/>
+<topic href="help/dependencyInjection.html#ChangingConfiguration" label="Changing Configuration"/>
+</topic>
+</topic>
+</topic>
+<topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
+<topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"/>
+<topic href="help/SetupwithinEclipseEquinox.html" label="Setup within Eclipse / Equinox"/>
+<topic href="help/validation.html" label="Validation"/>
+<topic href="help/linking.html" label="Linking">
+<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"/>
+<topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"/>
+<topic href="help/linking.html#Defaultlinkingsemantics" label="Default linking semantics">
+<topic href="help/linking.html#DefaultImports" label="Default Imports"/>
+</topic>
+</topic>
+<topic href="help/scoping.html" label="Scoping">
+<topic href="help/scoping.html#DeclarativeScopeProvider" label="Declarative Scope Provider"/>
+</topic>
+<topic href="help/valueconverter.html" label="Value Converter">
+<topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"/>
+</topic>
+<topic href="help/transientvalues.html" label="Transient Values"/>
+<topic href="help/fragmentProvider.html" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
+</topic>
+<topic href="help/IDEconcepts.html" label="IDE concepts">
+<topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"/>
+<topic href="help/labelProvider.html" label="Label Provider"/>
+<topic href="help/contentAssist.html" label="Content Assist">
+<topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"/>
+<topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"/>
+</topic>
+<topic href="help/templates.html" label="Template Proposals">
+<topic href="help/templates.html#CrossReferenceResolver" label="CrossReference Resolver"/>
+</topic>
+<topic href="help/outline.html" label="Outline View"/>
+<topic href="help/navigation.html" label="Navigation and Hyperlinking"/>
+<topic href="help/formatting.html" label="Formatting (Pretty Printing)"/>
+</topic>
+</toc>

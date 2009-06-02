@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Overview</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="index.html" title="Xtext User Guide"/>
+<link rel="prev" href="index.html" title="Xtext User Guide"/>
+<link rel="next" href="concepts.html" title="Xtext concepts from a bird&#8217;s eye view"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="section" title="What&#8217;s Xtext?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="WhatsXtext"/>What&#8217;s Xtext?</h2>
+</div>
+</div>
+</div>
+<p>The TMF Xtext project provides a domain-specific language (the grammar language) for description of textual programming languages and domain-specific languages. It is tightly integrated with the Eclipse Modeling Framework (EMF) and leverages the Eclipse Platform in order to provide language-specific tool support. </p>
+<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), the grammar language is used to derive much more than just a parser and lexer (lexical analyzer). </p>
+<p>From a grammar the following is derived:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>incremental, ANTLR 3 based parser and lexer</p>
+</li>
+<li class="listitem">
+<p>Ecore-based meta models (optional)</p>
+</li>
+<li class="listitem">
+<p>a serializer, used to serialize instances of such meta models back to a parseable textual representation</p>
+</li>
+<li class="listitem">
+<p>a linker</p>
+</li>
+<li class="listitem">
+<p>an implementation of the EMF Resource interface (based on the parser and the serializer)</p>
+</li>
+<li class="listitem">
+<p>a full-fledged integration of the language into Eclipse IDE</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>syntax coloring</p>
+</li>
+<li class="listitem">
+<p>navigation (F3, etc.) </p>
+</li>
+<li class="listitem">
+<p>code completion</p>
+</li>
+<li class="listitem">
+<p>outline views</p>
+</li>
+<li class="listitem">
+<p>code templates</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<p>The generated artifacts are wired up through 
+				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_top">Google Guice</a>, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you don&#8217;t like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via 
+				<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>.
+			</p>
+</div>
+</body>
+</html>

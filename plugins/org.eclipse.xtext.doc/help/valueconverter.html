@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Value Converter</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link rel="prev" href="scoping.html" title="Scoping"/>
+<link rel="next" href="transientvalues.html" title="Transient Values"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<p>Value converters are registered to convert parsed text into a certain data type instance and back.
+				The primary hook is called org.eclipse.xtext.conversion.IValueConverterService and the concrete implementation can be registered via the runtime Guice module (TODO reference to framework description).</p>
+<div class="section" title="Annotation based value converters">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Annotationbasedvalueconverters"/>Annotation based value converters</h3>
+</div>
+</div>
+</div>
+<p>The most simple way to register additional value converters is to make use of 
+					<code class="code">org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService</code>, which allows to
+					declaratively register 
+					<code class="code">IValueConverter</code> via annotated methods. 
+				</p>
+<p>The implementation for the default token grammar looks like </p>
+<div class="literallayout">
+<p>
+<code class="code">public class DefaultTerminalConverters <br/>
+    extends AbstractAnnotationBasedValueConverterService {<br/>
+  <br/>
+  private Grammar grammar;<br/>
+  	<br/>
+  @Inject<br/>
+  public void setGrammar(IGrammarAccess grammarAccess) {<br/>
+    this.grammar = grammarAccess.getGrammar();<br/>
+  }<br/>
+  	<br/>
+  protected Grammar getGrammar() {<br/>
+    return grammar;<br/>
+  }<br/>
+<br/>
+  @ValueConverter(rule = "ID")<br/>
+  public IValueConverter&lt;String&gt; ID() {<br/>
+    return new AbstractNullSafeConverter&lt;String&gt;() {<br/>
+      @Override<br/>
+      protected String internalToValue(String string, AbstractNode node) {<br/>
+        return string.startsWith("^") ? string.substring(1) : string;<br/>
+      }<br/>
+  <br/>
+      @Override<br/>
+      protected String internalToString(String value) {<br/>
+        if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {<br/>
+          return "^"+value;<br/>
+        }<br/>
+        return value;<br/>
+      }<br/>
+    };<br/>
+  }<br/>
+  <br/>
+       ...  some other value converter<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>If you use the common terminals grammar (
+					<code class="code">org.eclipse.xtext.common.Terminals</code>) you should subclass 
+					<code class="code">DefaultTerminalConverters</code> and overwrite or add addition value converter by adding the respective methods.
+				</p>
+<p>Imagine, you would want to add a rule creating BigDecimals:</p>
+<div class="literallayout">
+<p>
+<code class="code">@ValueConverter(rule = "BIG_DECIMAL")<br/>
+  public IValueConverter&lt;String&gt; BIG_DECIMAL() {<br/>
+    return new AbstractToStringConverter&lt;BigDecimal&gt;() {<br/>
+      @Override<br/>
+      protected BigDecimal internalToValue(String string, AbstractNode node) {<br/>
+        return BigDecimal.valueOf(string);<br/>
+      }<br/>
+    };<br/>
+  }<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
+</body>
+</html>
