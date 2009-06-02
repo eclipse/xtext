@@ -28,7 +28,7 @@
 	<!-- ===================================================================== -->
 	<target name="pre.build.jars">
 		<echoproperties/>
-		<ant antfile="customBuild.xml.xml" target="build-doc"/>
+		<ant antfile="customBuild.xml" target="build-doc"/>
 	</target>
 
 	<!-- ===================================================================== -->
