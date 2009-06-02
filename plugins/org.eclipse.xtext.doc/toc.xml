@@ -66,7 +66,11 @@
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
 <topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"/>
 <topic href="help/SetupwithinEclipseEquinox.html" label="Setup within Eclipse / Equinox"/>
-<topic href="help/validation.html" label="Validation"/>
+<topic href="help/validation.html" label="Validation">
+<topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"/>
+<topic href="help/validation.html#linking_validation" label="Cross-link Validation"/>
+<topic href="help/validation.html#custom_validation" label="Custom Validation"/>
+</topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"/>
 <topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"/>

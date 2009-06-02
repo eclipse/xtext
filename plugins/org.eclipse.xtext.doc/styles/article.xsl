@@ -1,12 +1,12 @@
 <?xml version='1.0'?>
 <!--
-        $Id: article.xsl,v 1.1 2009/05/08 15:13:31 pfriese Exp $
+        $Id: article.xsl,v 1.2 2009/06/02 14:25:56 pfriese Exp $
         author: Chris Aniszczyk <zx@us.ibm.com>
         author: Lawrence Mandel <lmandel@ca.ibm.com>
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	version="1.0">
-	<xsl:import href="docbook.xsl" />
+	<xsl:import href="chunk.xsl" />
 	
 	<xsl:param name="html.stylesheet"
 		select="'default_style.css'" />

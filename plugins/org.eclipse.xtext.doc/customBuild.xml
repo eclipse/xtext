@@ -127,8 +127,8 @@
 		<echo>Building Output...</echo>
 		<antcall target="wikitext2docbook"/>
 		<antcall target="docbook2pdf"/>
-		<!--
 		<antcall target="docbook2html"/>
+		<!--
 		<antcall target="wikitext2eclipsehelp"/>
 		-->
 		<antcall target="docbook2eclipsehelp"/>
@@ -162,6 +162,9 @@
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
 			</factory>
 			<xmlcatalog>
+				<entity 
+					publicId="chunk.xsl"
+					location="${docbook.dir}${file.separator}html${file.separator}chunk.xsl"/>
 				<entity 
 					publicId="docbook.xsl"
 					location="${docbook.dir}${file.separator}html${file.separator}docbook.xsl"/>

@@ -46,5 +46,11 @@
         section   nop
         set       toc,title
     </xsl:param>
+    
+    <!-- Make sure each chunk has a decent (visible!) heading -->
+	<xsl:template name="user.header.content">
+		<h1><xsl:value-of select="./title"/></h1>
+    </xsl:template>
+    
  
 </xsl:stylesheet>
