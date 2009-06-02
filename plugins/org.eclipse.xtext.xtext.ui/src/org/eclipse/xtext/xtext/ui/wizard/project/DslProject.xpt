@@ -63,6 +63,7 @@ projectName=«this.projectName»
 				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
 				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			</fragment>
+			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> -->
 	
 			«IF xpandBased»
 			<!-- check-based API for validation -->
@@ -93,6 +94,13 @@ projectName=«this.projectName»
 			«ELSE»
 			<!-- java-based API for content assistance -->
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			<!-- the following fragment tries to use the Antlr based content assist fragment which can be downloaded from http://www.itemis.com 
+			     and will be ignored if it's not available. -->
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
+			</fragment>
+			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
 			«ENDIF»
 		</language>
 	</component>
