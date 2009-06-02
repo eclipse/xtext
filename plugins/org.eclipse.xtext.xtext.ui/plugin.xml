@@ -47,7 +47,7 @@
 		<page
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.Xtext"
-			name="%Xtext">
+			name="%Xtext_Language_Root_Preferences">
 			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
 		</page>
 		<page
