@@ -16,6 +16,21 @@ and was so well received that it had been extended with all kinds of features (s
 
 In addition to this general lack of code quality, oAW Xtext suffers from some severe performance problems. The naive use of Xtend (see next section) made use of bigger models in Xtext editors unusable.
 
+h2(#migration_overview). Migration overview
+
+Although a couple of things have changed we tried to keep good things and often used things unchanged. At the same time we wanted to clean up wrong concepts and solve the main problems we and you had with oAW Xtext.
+From a bird's eye view if you want to migrate an existing oAW Xtext project to TMF Xtext, you mainly just need to rename the old grammar from *.txtx to *.xtext and add two lines to the beginning of that document (see below for details). Also you might change a few keywords, but all in all this is pretty easy and we've migrated a couple of oAW Xtext projects this way.
+The other aspect where lots of code might have been written for is validation. In oAW Xtext we used Xpand's Check language to define constraints on the meta model. Because of the huge amount of existing code in oAW Xtext projects, it was not an option to ask everyone to translate all the checks to a different language. So TMF Xtext still allows to define constraints using Check, although this has been one major reason for the lack of scalability. We've implemented some additional things which allow explicitely state when which check is to be evaluated (while you type, on save, or on triggering an explicit action). See the validation section below. 
+Anyway, if you want to provide a nice user experience checks should run fast and  be evaluated while you type. Therfore we strongly encourage you to consider implementing validation using our declarative Java approach.
+
+We've developed and reviewed a lot of oAW Xtext projects and saw that most of the work was done in the grammar and in the validation view point. 
+Other aspects such as outline view, label provider or content assist have been customized too, but they usually do not contain complicated Xtend code.
+One exception might be linking and content assist which in oAW Xtext contain a lot of duplicate code. This is because in oAW we didn't have the notion of scopes (see below).
+Because this concept wasn't there and the code to implement scopes usually is cluttered and duplicated through linking and content assist. We didn't manage to come up with a good compatibility layer.
+So this is where most of the migration effort will go into. But we think the notion of scopes is such a valuable addition that it is worth the refactoring. Also when looking at existing oAW Xtext projects we found that most projects didn't change the default linking that much or they came up with their own linking framework.
+
+However, if we have completely missunderstood the situation and your oAW Xtext project is not migratable in a reasonable amount of time, please tell us. We want to help you.  
+
 h2(#Xtend_based_apis). Where are the Xtend-based APIs?
 
 One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure. 
@@ -75,7 +90,7 @@ It provides lots of nice static factory methods similar to what we have in java.
 With this, for instance, one can write a chain of filters and transformers like so:
 
 bc.. 
-   	ArrayList<String> names = newArrayList("foo", "bar", "honk");
+		ArrayList<String> names = newArrayList("foo", "bar", "honk");
 		Iterable<String> filtered = filter(names, not(isEqualTo("bar")));
 		Iterable<Integer> lengths = transform(filtered,new Function<String, Integer>() {
 			public Integer apply(String from) {
@@ -104,7 +119,7 @@ h3(#conclusion). Conclusion
 
 Just to get it right, Xtend is a very nice language and we still use it for it's main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it's performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. 
 
-As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily) that's why Groovy or JRuby were no alternative. Using Scala would have been a very good match, but we didn't want to require knowledge of Scala so we didn't use it. 
+As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That's why Groovy or JRuby were no alternative. Using Scala would have been a very good match, but we didn't want to require knowledge of Scala so we didn't use it. 
 
 h2(#differences). Differences
 
@@ -188,5 +203,100 @@ bc..
  
 p. Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. 
 
- 
+h4(#differences_return_types). Return types
+
+The syntax to ecplicitely declare the return type of a rule has changed. In oAW Xtext (where this was marked as 'experimental') the syntax was like so:
+
+bc.. MyRule [MyType] : foo=ID;  
+
+p. in TMF Xtext we have a keyword for this :
+
+bc.. MyRule returns MyType : foo:ID;
+
+p. So this is a bit more verbose, but at the same time more readable. And as you don't have to write the return type in most situations, it's good to have a more explicit, readable syntax.
+
+h4(#differences_grammar_improvements). General Improvements
+
+Aside the improvements already mentioned previously some noteworthy new things added to the grammar language are:
+
+h5(#differences_grammar_mixins). Grammar mixins
+
+Grammar mixins allows you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types. We eat our own dogfood and have introduced a common.Terminals grammar which defines the terminal rules, which in oAW Xtext have been hard-coded into the grammar language.
+
+h5(#differences_import_ecore_model). Reuse existing ecore models
+
+In oAW Xtext reusing existing ecore models didn't work well and we communicated this by flagging the feature as 'experimental'. In TMF Xtext importing existing ecore models is fully supported. Moreover it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.
+
+h5(#differences_actions). Actions
+
+The grammar language gained one new concpet important when writing left-factored grammars (e.g. expressions). In oAW Xtext one usualy wrote something like the following:
+
+bc.. 
+  Addition  : left=Multi ('+' right=Addition)?;
+  Multi     : left=Expr ('*' right=Multi)?;
+  Expr      : IntLiteral | '(' Addition ')';
+  IntLiteral: value=INT;
+  	
+p. This is a working grammar, but the problem is that the resulting ecore model is not like you want it to look and more important the model created by the parser contains a lot of redundant information.
+For instance the expression @(3)@ would be parsed into the following model:
+
+bc.. 
+Addition {
+  left=Multi {
+    left=Addition {
+      left=Multi {
+        left=IntLiteral {
+          value=3
+        }
+      }
+    }
+  }
+}
+p.  This is of course not what you want or expect. Also the structure of the generated ecore model is not how one usually wants it to look like.
+We solved this in TMF Xtext by introducing a new concept: Actions. With actions one can do minor AST rewritings within a rule. For example in TMF Xtext above's expression language should be defined like this:
+
+bc.. 
+  Addition  : Multi ({Addition.left=current} '+' right=Multi)*;
+  Multi     : Expr  ({Multi.left=current) '*' right=Expr)*;
+  Expr      : IntLiteral | '(' Addition ')';
+  IntLiteral: value=INT;
+  
+p. Actions are enclosed in curly braces and follow the syntax 
+
+bc.. '{' type=[EClass] '.' feature=[EReference] ('='|'+=') 'current' '}'
+
+p. You can think of it as a short form of the following Java code:
+
+bc.. 
+ temp = current;
+ current = new MyType();
+ current.setMyReference(temp);
+
+h3(#differences_validation). Differences in Validation
+
+TMF Xtext still supports implementing validation using Xpand's check. However it is no longer using the EMF meta model (typesystem) but now uses the JavaBeansMetamodel.
+This requires minor changes (namely the namespaces to be imported are now the qualfied name of the generated Java classes). We changed this in order to allow use of any Java API , such as IScopeProvider, from within Check and Xtend.
+
+In addition to the switch to the JavaBeans Metamodel it is now possible to add information about the feature which is validated:
+
+bc.. 
+  context Class#feature ERROR "My message "+this.name+"." :
+    my.complex.predicate;
+
+p. This is of you add the name of a feature separated by a hash ('#'), in the editor only the value of the feature will be marked, not the whole object.
+
+h4(#differences_validation_lifecycles). Validation Lifecycles
+
+In order to make more expensive validations possible without slowing down the editor, TMF Xtext supports three different validation hooks.
+# FAST constraints are executed in the reconciler (i.e. 500 ms after the last keystroke) and on save.
+# NORMAL constraints are executed on save only.
+# EXPENSIVE constraints are executed through an action which is available through the context menu.
+
+h3(#differences_linking). Differences in Linking
+
+The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all 'visible' EObjects and than filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. 
+There are two problems with this approach.
+
+First, 
+
   
