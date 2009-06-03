@@ -275,7 +275,21 @@ bc..
 h3(#differences_validation). Differences in Validation
 
 TMF Xtext still supports implementing validation using Xpand's check. However it is no longer using the EMF meta model (typesystem) but now uses the JavaBeansMetamodel.
-This requires minor changes (namely the namespaces to be imported are now the qualfied name of the generated Java classes). We changed this in order to allow use of any Java API , such as IScopeProvider, from within Check and Xtend.
+This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
+Example: If your check file looked like this in oAW Xtext :
+
+bc.. 
+  import myMetamodel;
+  context Type ERROR "foo" : name!=null;   
+
+p. it becomes something like the following in TMF Xtext :
+
+bc.. 
+  import my::pack::to::myMetaModel;
+  context Type ERROR "foo" : name!=null;
+
+p. Where my::pack::to::myMetaModel refers to the package the generated EClasses are in. In other words there's a Java class @my.pack.to.myMetaModel.Type@.
+We changed this in order to allow use of any Java API , such as ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScopeProvider}, from within Check and Xtend.
 
 In addition to the switch to the JavaBeans Metamodel it is now possible to add information about the feature which is validated:
 
@@ -294,9 +308,41 @@ In order to make more expensive validations possible without slowing down the ed
 
 h3(#differences_linking). Differences in Linking
 
-The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all 'visible' EObjects and than filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. 
-There are two problems with this approach.
+The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all 'visible' EObjects and than filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. This was not only very expensive but also lacks an important abstraction: the notion of scopes.
 
-First, 
+h4(#differences_linking_sopes). The idea of scopes
+
+In oAW Xtext one typically had to override the link_feature() extension in order to change the default linking. A typical rewritten extension called the allVisibleElements() extensions and than filters out everything which shouddn't be taken into account for the specific link. For all elements left we typically took the first element where the id() extension returned a string similar to what has been written in the text.
+
+The code about selecting and filtering allElements() usually has been duplicated in the corresponding content assist function, so that linking an content assist are semantically in sync. If you're good (we usually were not) you externalized that pice of code and reused the same extension in content assist and linking.
+
+In TMF Xtext we've introduced scopes and scopeproviders. Scopeproviders are responsible for creating scopes and a scope is basically a hierarchy of Lists of name->value pairs. This is where most of the semantics of linking typically goes and by implmenting an ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScopeProvider} for your language linking and content assist will automatically be kept in sync since both rely and use the scope provider.
+
+The default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: 
+# Elements which have an attribute name will be made visible by their name,
+# referenced resources ca be put on the scope by using the 'importedURI'- naming convention (TODO-REF)
+# the available elements are filtered by the expected type (i.e. the type of the reference to be linked)
+
+h4(#differences_linking_migration). Migration
+
+We expect the migration of linking to be very simple, if you've not changed the default semantics that much. We've already migrated a couple of projects it wasn't too hard to do so.
+If you have changed linking (and also content assist) a lot, you'll have to translate the semantics to the IScopeProvider concept. This might a bit of work, but it is worth the effort as this will clean up your code base and better separate concerns. Also we're confident that there's much value in migrating to TMF Xtext. 
+
+That said you might not have the time to do the migration and wished to have better support for migrating oAW linking to TMF linking.  In this document we tried to explain why we diceded to change the conceptual architecture and why it is not easily possible to come up with an adapter for the notion of scopes. If you don't want to do the migration yourself we (itemis AG) can do the work or help you with that. Note also that you're welcome to ask any questions in the newsgroup and that we'll try to help you as much as possible in order to get your projects migrated. 
+
+h3(#differences_content_assist). Differences in Content Assist
+
+In oAW Xtext content assist has been customized using Xtend. This was a very convenient thing because of the polymorphic dispatch. However in content assist one usually don't have to do extensive model computation. At least not in TMF Xtext as content assist relies on scope providers which do the complicated work.
+
+In TMF Xtext content assist can be conveniently customize using a declarative Java API (see TODO-REF).
+
+h3(#differences_outline_view). Differences in Outline View
+
+In TMF Xtext the outline view does not support mutliple view points so far. This is just because we didn't manage to get this included (due to low priorization). We don't think that this is in general a bad idea, but we thought of other things as more important.
+That said the default outline view is similar to the one in oAW Xtext, but the customization is again done using a declarative Java approach (see TODO-REF).
+
+h3(#differences_label_provider). Differences in Label Provider
+
+As mentioned previously label providers are also now implemented in Java and are an implementation of ILabelProvider (see TODO-REF).
 
   
