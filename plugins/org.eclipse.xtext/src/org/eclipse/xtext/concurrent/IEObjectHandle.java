@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.concurrent;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
@@ -19,6 +21,8 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(IEObjectHandle.DefaultImpl.class)
 public interface IEObjectHandle<T extends EObject> extends IStateAccess<T> {
+	
+	public URI getURI();
 	
 	static class DefaultImpl<P extends EObject> implements IEObjectHandle<P> {
 		
@@ -58,6 +62,10 @@ public interface IEObjectHandle<T extends EObject> extends IStateAccess<T> {
 				}
 				return work.exec(obj);
 			}
+		}
+
+		public URI getURI() {
+			return EcoreUtil.getURI(internal);
 		}
 
 	}
