@@ -3,6 +3,7 @@ package org.eclipse.xtext.ui.common.editor.hyperlinking;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -12,6 +13,8 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.presentation.EcoreEditor;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -33,6 +36,7 @@ import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
  * This action opens a <code>XtextEditor</code> on a selected <code>CrossReference</code> element.
  *
  * @author Michael Clay - Initial contribution and API
+ * @author Peter Friese
  *
  * @see org.eclipse.jface.action.Action
  */
@@ -101,7 +105,17 @@ public class OpenDeclarationAction extends Action {
 					edit.selectAndReveal(region.getOffset(),region.getLength());
 				}});
 			}
-		} else if (openEditor instanceof ISelectionProvider) {
+		}
+		else if (openEditor instanceof EcoreEditor) {
+			EcoreEditor ecoreEditor = (EcoreEditor)openEditor;
+			// set selection
+		    EditingDomain editingDomain = ecoreEditor.getEditingDomain();
+		    EObject editObject = editingDomain.getResourceSet().getEObject(uri, true);
+		    if (editObject != null) {
+		        ecoreEditor.setSelectionToViewer(Collections.singleton(editObject));
+		    }
+		}
+		else if (openEditor instanceof ISelectionProvider) {
 			//TODO: use ISelectionProvider instead of ITextEditor
 		}
 	}
