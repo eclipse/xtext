@@ -119,7 +119,8 @@ The easiest way to get started is to let Xtext infer the meta model from your gr
 
 bc. generate secretcompartment http://www.eclipse.org/secretcompartment
 
-Which means: generate an EPackage with name @secretcompartment@ and nsURI @http://www.eclipse.org/secretcompartment@ (these are the properties needed to create an EPackage). See "Meta-Model Inference":#metamodelInference for details.
+Which means: generate an EPackage with name @secretcompartment@ and nsURI @http://www.eclipse.org/secretcompartment@ (these are the properties needed to create an EPackage). 
+The whole algorithm used to derive complete ecore models from Xtext grammars is described in yection "Meta-Model Inference":#metamodelInference.
 
 h4. EPackage import
 
@@ -139,13 +140,21 @@ bc.. <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup"
 	<registerGeneratedEPackage value="foo.bar.MyPackage"/>
 </bean>
 
-h5. Using classpath URIs to import existing EPackages
+p. using namespace URIs is typically only interesting when using common ecore models, such as Ecore itself or the UML metamodel. If you're developing the EPackage together with the DSL abut don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
 
-Xtext provides a new resource URI scheme, which is backed by the Java classpath. If you want to refer to an ECore file @MyEcore.ecore@, provided in a package @foo.bar@, you could write 
+h5. Using resource URIs to import existing EPackages
 
-bc. import "classpath:/foo/bar/MyEcore.ecore"
+If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
+Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult EMF documentation (we recomend the book) for details.
 
-Using the classpath scheme is considered the preferred way.
+An import statement referring to an ecore file by a platform:/resource/ URI looks like so: 
+
+bc. import "platform:/resource/my.project/modelFolder/MyEcore.ecore"
+
+If you want to mix generated and imported ecore models you'll have to configure the generator fragment in your MWE file repsonsible for generating the ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs to the genmodels for the referenced ecore models.
+Example:
+
+bc. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="platform:/resource/my.project/model/myEcore.genmodel"/>
 
 h4. Using multiple packages / meta model aliases
 
