@@ -10,8 +10,6 @@ package org.eclipse.xtext.scoping;
 
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -154,5 +152,29 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
 		assertEquals(a, provider.getScope(details, details));
 		assertEquals(a, provider.getScope(details.getEContainingClass(), details));
+	}
+	
+	@SuppressWarnings("unused")
+	public void testScopeByReference2() throws Exception {
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
+			private IScope scope_EClass(EClassifier clazz, EReference ref) {
+				return a;
+			}
+			
+			private IScope scope_EClass(EClass clazz, EClass ref) {
+				return c;
+			}
+			
+			private IScope scope_EClass(EReference ctx, EClass ref) {
+				return b;
+			}
+		};
+		
+		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
+		assertEquals(b, provider.getScope(details, details));
+		assertEquals(c, provider.getScope(details.getEContainingClass(), details));
 	}
 }
