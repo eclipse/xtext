@@ -183,8 +183,9 @@
 </div>
 <p>Which means: generate an EPackage with name 
 						<code class="code">secretcompartment</code> and nsURI 
-						<code class="code">http://www.eclipse.org/secretcompartment</code> (these are the properties needed to create an EPackage). See 
-						<a class="link" href="metamodelInference.html" title="Meta-Model inference">Meta-Model Inference</a> for details.
+						<code class="code">http://www.eclipse.org/secretcompartment</code> (these are the properties needed to create an EPackage). 
+						The whole algorithm used to derive complete ecore models from Xtext grammars is described in yection 
+						<a class="link" href="metamodelInference.html" title="Meta-Model inference">Meta-Model Inference</a>.
 					</p>
 </div>
 <div class="section" title="EPackage import">
@@ -220,34 +221,43 @@
 <div class="literallayout">
 <p>
 <code class="code">&lt;bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" <br/>
-	platformUri="${runtimeProject}/.."&gt;<br/>
-	&lt;registerGeneratedEPackage value="foo.bar.MyPackage"/&gt;<br/>
+  platformUri="${runtimeProject}/.."&gt;<br/>
+  &lt;registerGeneratedEPackage value="foo.bar.MyPackage"/&gt;<br/>
 &lt;/bean&gt;<br/>
 <br/>
 </code>
 </p>
 </div>
+<p>using namespace URIs is typically only interesting when using common ecore models, such as Ecore itself or the UML metamodel. If you&#8217;re developing the EPackage together with the DSL abut don&#8217;t want to have it derived from the grammar for some reason, we suggest to use a resource URI.</p>
 </div>
-<div class="section" title="Using classpath URIs to import existing EPackages">
+<div class="section" title="Using resource URIs to import existing EPackages">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="UsingclasspathURIstoimportexistingEPackages"/>Using classpath URIs to import existing EPackages</h5>
+<a name="UsingresourceURIstoimportexistingEPackages"/>Using resource URIs to import existing EPackages</h5>
 </div>
 </div>
 </div>
-<p>Xtext provides a new resource URI scheme, which is backed by the Java classpath. If you want to refer to an ECore file 
-							<code class="code">MyEcore.ecore</code>, provided in a package 
-							<code class="code">foo.bar</code>, you could write 
-						</p>
+<p>If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
+							Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult EMF documentation (we recomend the book) for details.</p>
+<p>An import statement referring to an ecore file by a platform:/resource/ URI looks like so: </p>
 <div class="literallayout">
 <p>
-<code class="code">import "classpath:/foo/bar/MyEcore.ecore"<br/>
+<code class="code">import "platform:/resource/my.project/modelFolder/MyEcore.ecore"<br/>
 </code>
 </p>
 </div>
-<p>Using the classpath scheme is considered the preferred way.</p>
+<p>If you want to mix generated and imported ecore models you&#8217;ll have to configure the generator fragment in your MWE file repsonsible for generating the ecore classes (
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs to the genmodels for the referenced ecore models.
+							Example:
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">&lt;fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="platform:/resource/my.project/model/myEcore.genmodel"/&gt;<br/>
+</code>
+</p>
+</div>
 </div>
 </div>
 <div class="section" title="Using multiple packages / meta model aliases">
@@ -264,8 +274,8 @@
 <p>
 <code class="code">
 <br/>
- generate secretcompartment http://www.eclipse.org/secretcompartment<br/>
- import http://www.eclipse.org/anotherPackage as another<br/>
+  generate secretcompartment http://www.eclipse.org/secretcompartment<br/>
+  import http://www.eclipse.org/anotherPackage as another<br/>
 <br/>
 </code>
 </p>
@@ -277,9 +287,9 @@
 <p>
 <code class="code">
 <br/>
- generate toBeGenerated http://www.eclipse.org/toBeGenerated<br/>
- import http://www.eclipse.org/packContainingClassA<br/>
- import http://www.eclipse.org/packContainingClassB<br/>
+  generate toBeGenerated http://www.eclipse.org/toBeGenerated<br/>
+  import http://www.eclipse.org/packContainingClassA<br/>
+  import http://www.eclipse.org/packContainingClassB<br/>
 <br/>
 </code>
 </p>

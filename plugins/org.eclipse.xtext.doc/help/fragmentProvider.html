@@ -30,23 +30,23 @@
 <p>
 <code class="code">public interface IFragmentProvider extends ILanguageService {<br/>
  <br/>
-	/**<br/>
-	 * Computes the local ID of the given object. <br/>
-	 * @param obj<br/>
-	 *            The EObject to compute the fragment for<br/>
-	 * @return the fragment, which can be an arbitrary string but must be <br/>
-	 *         unique within a resource. Return null to use default <br/>
-	 *         implementation<br/>
-	 */<br/>
-	String getFragment(EObject obj);<br/>
-	<br/>
-	/**<br/>
-	 * Locates an EObject in a resource by its fragment. <br/>
-	 * @param resource<br/>
-	 * @param fragment<br/>
-	 * @return the EObject <br/>
-	 */<br/>
-	EObject getEObject(Resource resource, String fragment);<br/>
+  /**<br/>
+   * Computes the local ID of the given object. <br/>
+   * @param obj<br/>
+   *            The EObject to compute the fragment for<br/>
+   * @return the fragment, which can be an arbitrary string but must be <br/>
+   *         unique within a resource. Return null to use default <br/>
+   *         implementation<br/>
+   */<br/>
+  String getFragment(EObject obj);<br/>
+  <br/>
+  /**<br/>
+   * Locates an EObject in a resource by its fragment. <br/>
+   * @param resource<br/>
+   * @param fragment<br/>
+   * @return the EObject <br/>
+   */<br/>
+  EObject getEObject(Resource resource, String fragment);<br/>
  }<br/>
 <br/>
 </code>

@@ -102,29 +102,32 @@
 				</p><div class="section" title="EPackage generation"><div class="titlepage"><div><div><h4 class="title"><a name="EPackagegeneration"></a>EPackage generation</h4></div></div></div><p>The easiest way to get started is to let Xtext infer the meta model from your grammar. This is what is done in the secret compartment example. To do so just state:</p><div class="literallayout"><p><code class="code">generate&nbsp;secretcompartment&nbsp;http://www.eclipse.org/secretcompartment<br>
 </code></p></div><p>Which means: generate an EPackage with name 
 						<code class="code">secretcompartment</code> and nsURI 
-						<code class="code">http://www.eclipse.org/secretcompartment</code> (these are the properties needed to create an EPackage). See 
-						<a class="link" href="#metamodelInference" title="Meta-Model inference">Meta-Model Inference</a> for details.
+						<code class="code">http://www.eclipse.org/secretcompartment</code> (these are the properties needed to create an EPackage). 
+						The whole algorithm used to derive complete ecore models from Xtext grammars is described in yection 
+						<a class="link" href="#metamodelInference" title="Meta-Model inference">Meta-Model Inference</a>.
 					</p></div><div class="section" title="EPackage import"><div class="titlepage"><div><div><h4 class="title"><a name="EPackageimport"></a>EPackage import</h4></div></div></div><p>If you already have created such an EPackage somehow, you can import it using either a namespace URI or a resource URI (URIs are an EMF concept).</p><div class="section" title="Using namespace URIs to import existing EPackages"><div class="titlepage"><div><div><h5 class="title"><a name="UsingnamespaceURIstoimportexistingEPackages"></a>Using namespace URIs to import existing EPackages</h5></div></div></div><p>You can import existing EPackages using the following syntax:</p><div class="literallayout"><p><code class="code">import&nbsp;"http://www.eclipse.org/secretcompartment"<br>
 </code></p></div><p>Note that if you use a namespace URI, the corresponding EPackage needs to be installed into the workbench, so that the editor can find it.
 							At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in 
 							<code class="code">EPackage.Registry.INSTANCE</code>. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
 						</p><div class="literallayout"><p><code class="code">&lt;bean&nbsp;class="org.eclipse.emf.mwe.utils.StandaloneSetup"&nbsp;<br>
-	platformUri="${runtimeProject}/.."&gt;<br>
-	&lt;registerGeneratedEPackage&nbsp;value="foo.bar.MyPackage"/&gt;<br>
+&nbsp;&nbsp;platformUri="${runtimeProject}/.."&gt;<br>
+&nbsp;&nbsp;&lt;registerGeneratedEPackage&nbsp;value="foo.bar.MyPackage"/&gt;<br>
 &lt;/bean&gt;<br>
 <br>
-</code></p></div></div><div class="section" title="Using classpath URIs to import existing EPackages"><div class="titlepage"><div><div><h5 class="title"><a name="UsingclasspathURIstoimportexistingEPackages"></a>Using classpath URIs to import existing EPackages</h5></div></div></div><p>Xtext provides a new resource URI scheme, which is backed by the Java classpath. If you want to refer to an ECore file 
-							<code class="code">MyEcore.ecore</code>, provided in a package 
-							<code class="code">foo.bar</code>, you could write 
-						</p><div class="literallayout"><p><code class="code">import&nbsp;"classpath:/foo/bar/MyEcore.ecore"<br>
-</code></p></div><p>Using the classpath scheme is considered the preferred way.</p></div></div><div class="section" title="Using multiple packages / meta model aliases"><div class="titlepage"><div><div><h4 class="title"><a name="Usingmultiplepackagesmetamodelaliases"></a>Using multiple packages / meta model aliases</h4></div></div></div><p>If you want to use multiple EPackages you need to specify aliases like so:</p><div class="literallayout"><p><code class="code"><br>
-&nbsp;generate&nbsp;secretcompartment&nbsp;http://www.eclipse.org/secretcompartment<br>
-&nbsp;import&nbsp;http://www.eclipse.org/anotherPackage&nbsp;as&nbsp;another<br>
+</code></p></div><p>using namespace URIs is typically only interesting when using common ecore models, such as Ecore itself or the UML metamodel. If you&rsquo;re developing the EPackage together with the DSL abut don&rsquo;t want to have it derived from the grammar for some reason, we suggest to use a resource URI.</p></div><div class="section" title="Using resource URIs to import existing EPackages"><div class="titlepage"><div><div><h5 class="title"><a name="UsingresourceURIstoimportexistingEPackages"></a>Using resource URIs to import existing EPackages</h5></div></div></div><p>If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
+							Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult EMF documentation (we recomend the book) for details.</p><p>An import statement referring to an ecore file by a platform:/resource/ URI looks like so: </p><div class="literallayout"><p><code class="code">import&nbsp;"platform:/resource/my.project/modelFolder/MyEcore.ecore"<br>
+</code></p></div><p>If you want to mix generated and imported ecore models you&rsquo;ll have to configure the generator fragment in your MWE file repsonsible for generating the ecore classes (
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs to the genmodels for the referenced ecore models.
+							Example:
+						</p><div class="literallayout"><p><code class="code">&lt;fragment&nbsp;class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"&nbsp;genModels="platform:/resource/my.project/model/myEcore.genmodel"/&gt;<br>
+</code></p></div></div></div><div class="section" title="Using multiple packages / meta model aliases"><div class="titlepage"><div><div><h4 class="title"><a name="Usingmultiplepackagesmetamodelaliases"></a>Using multiple packages / meta model aliases</h4></div></div></div><p>If you want to use multiple EPackages you need to specify aliases like so:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;generate&nbsp;secretcompartment&nbsp;http://www.eclipse.org/secretcompartment<br>
+&nbsp;&nbsp;import&nbsp;http://www.eclipse.org/anotherPackage&nbsp;as&nbsp;another<br>
 <br>
 </code></p></div><p>When referring to a type somewhere in the grammar you need to qualify them using that alias (example '&lsquo;another::CoolType&rsquo;'). We&rsquo;ll see later where such type references occur.</p><p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are no two EClassifiers with the same name. In such cases none of them are referable. It is even possible to have multiple '&lsquo;import&rsquo;&lsquo;s and one &rsquo;&lsquo;generate&rsquo;' declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p><p>Example:</p><div class="literallayout"><p><code class="code"><br>
-&nbsp;generate&nbsp;toBeGenerated&nbsp;http://www.eclipse.org/toBeGenerated<br>
-&nbsp;import&nbsp;http://www.eclipse.org/packContainingClassA<br>
-&nbsp;import&nbsp;http://www.eclipse.org/packContainingClassB<br>
+&nbsp;&nbsp;generate&nbsp;toBeGenerated&nbsp;http://www.eclipse.org/toBeGenerated<br>
+&nbsp;&nbsp;import&nbsp;http://www.eclipse.org/packContainingClassA<br>
+&nbsp;&nbsp;import&nbsp;http://www.eclipse.org/packContainingClassB<br>
 <br>
 </code></p></div><p>With the declaration from above </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>a reference to type 
 								<code class="code">ClassA</code> would be linked to the EClass contained in 
@@ -626,24 +629,24 @@ public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
 import&nbsp;static&nbsp;my.Constants.STATIC;<br>
 <br>
 public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;scope<br>
-	private&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br>
-	<br>
-	private&nbsp;void&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;//&nbsp;method&nbsp;body&nbsp;scope<br>
-		String&nbsp;localVar&nbsp;=&nbsp;"bar";<br>
-		innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br>
-			String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br>
-			Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br>
-			//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;so:<br>
-			//blockScope{field,innerScopeVar}-&gt;<br>
-			//methodScope{localVar,param}-&gt;<br>
-			//classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
-			//fileScope{STATIC}-&gt;<br>
-			//classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
-			//NULLSCOPE{}<br>
-			//<br>
-		}<br>
-		field.add(localVar);<br>
-	}<br>
+&nbsp;&nbsp;private&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br>
+<br>
+&nbsp;&nbsp;private&nbsp;void&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;//&nbsp;method&nbsp;body&nbsp;scope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;"bar";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;so:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//blockScope{field,innerScopeVar}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//methodScope{localVar,param}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//fileScope{STATIC}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//NULLSCOPE{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br>
+&nbsp;&nbsp;}<br>
 }<br>
 <br>
 </code></p></div><p>In fact the class path scope should also reflect the order of class path entries.
@@ -729,23 +732,23 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 				<code class="code">IFragmentProvider</code> per language.
 			</p><div class="literallayout"><p><code class="code">public&nbsp;interface&nbsp;IFragmentProvider&nbsp;extends&nbsp;ILanguageService&nbsp;{<br>
 &nbsp;<br>
-	/**<br>
-	&nbsp;*&nbsp;Computes&nbsp;the&nbsp;local&nbsp;ID&nbsp;of&nbsp;the&nbsp;given&nbsp;object.&nbsp;<br>
-	&nbsp;*&nbsp;@param&nbsp;obj<br>
-	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;EObject&nbsp;to&nbsp;compute&nbsp;the&nbsp;fragment&nbsp;for<br>
-	&nbsp;*&nbsp;@return&nbsp;the&nbsp;fragment,&nbsp;which&nbsp;can&nbsp;be&nbsp;an&nbsp;arbitrary&nbsp;string&nbsp;but&nbsp;must&nbsp;be&nbsp;<br>
-	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique&nbsp;within&nbsp;a&nbsp;resource.&nbsp;Return&nbsp;null&nbsp;to&nbsp;use&nbsp;default&nbsp;<br>
-	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation<br>
-	&nbsp;*/<br>
-	String&nbsp;getFragment(EObject&nbsp;obj);<br>
-	<br>
-	/**<br>
-	&nbsp;*&nbsp;Locates&nbsp;an&nbsp;EObject&nbsp;in&nbsp;a&nbsp;resource&nbsp;by&nbsp;its&nbsp;fragment.&nbsp;<br>
-	&nbsp;*&nbsp;@param&nbsp;resource<br>
-	&nbsp;*&nbsp;@param&nbsp;fragment<br>
-	&nbsp;*&nbsp;@return&nbsp;the&nbsp;EObject&nbsp;<br>
-	&nbsp;*/<br>
-	EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment);<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Computes&nbsp;the&nbsp;local&nbsp;ID&nbsp;of&nbsp;the&nbsp;given&nbsp;object.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;obj<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;EObject&nbsp;to&nbsp;compute&nbsp;the&nbsp;fragment&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;fragment,&nbsp;which&nbsp;can&nbsp;be&nbsp;an&nbsp;arbitrary&nbsp;string&nbsp;but&nbsp;must&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique&nbsp;within&nbsp;a&nbsp;resource.&nbsp;Return&nbsp;null&nbsp;to&nbsp;use&nbsp;default&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;String&nbsp;getFragment(EObject&nbsp;obj);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Locates&nbsp;an&nbsp;EObject&nbsp;in&nbsp;a&nbsp;resource&nbsp;by&nbsp;its&nbsp;fragment.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;resource<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;fragment<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;EObject&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment);<br>
 &nbsp;}<br>
 <br>
 </code></p></div><p>However, the currently available default fragment provider does nothing.</p></div></div><div class="chapter" title="Chapter&nbsp;3.&nbsp;IDE concepts"><div class="titlepage"><div><div><h2 class="title"><a name="IDEconcepts"></a>Chapter&nbsp;3.&nbsp;IDE concepts</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#concurrency">Managing Concurrency</a></span></dt><dt><span class="section"><a href="#labelProvider">Label Provider</a></span></dt><dt><span class="section"><a href="#contentAssist">Content Assist</a></span></dt><dd><dl><dt><span class="section"><a href="#ProposalProvider">ProposalProvider</a></span></dt><dt><span class="section"><a href="#SampleImplementation">Sample Implementation</a></span></dt></dl></dd><dt><span class="section"><a href="#templates">Template Proposals</a></span></dt><dd><dl><dt><span class="section"><a href="#CrossReferenceResolver">CrossReference Resolver</a></span></dt></dl></dd><dt><span class="section"><a href="#outline">Outline View</a></span></dt><dt><span class="section"><a href="#navigation">Navigation and Hyperlinking</a></span></dt><dt><span class="section"><a href="#formatting">Formatting (Pretty Printing)</a></span></dt></dl></div><p>For the following part we will refer to a concrete example grammar in order to explain certain aspect of the UI more clearly. The used example grammar is as follows:</p><div class="literallayout"><p><code class="code">grammar&nbsp;org.eclipse.text.documentation.Sample&nbsp;<br>
@@ -762,12 +765,12 @@ Model&nbsp;:<br>
 AbstractRule:<br>
 &nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB<br>
 ;<br>
-	&nbsp;<br>
+<br>
 RuleA&nbsp;:<br>
-	&nbsp;"RuleA"&nbsp;"("&nbsp;name&nbsp;=&nbsp;ID&nbsp;")"&nbsp;;<br>
-	&nbsp;<br>
+&nbsp;&nbsp;&nbsp;"RuleA"&nbsp;"("&nbsp;name&nbsp;=&nbsp;ID&nbsp;")"&nbsp;;<br>
+<br>
 RuleB&nbsp;return&nbsp;gen::CustomType:<br>
-	&nbsp;"RuleB"&nbsp;"("&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;")"&nbsp;;<br>
+&nbsp;&nbsp;&nbsp;"RuleB"&nbsp;"("&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;")"&nbsp;;<br>
 <br>
 </code></p></div><p></p><div class="section" title="Managing Concurrency"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="concurrency"></a>Managing Concurrency</h2></div></div></div><p>text</p></div><div class="section" title="Label Provider"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="labelProvider"></a>Label Provider</h2></div></div></div><p>text</p></div><div class="section" title="Content Assist"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="contentAssist"></a>Content Assist</h2></div></div></div><p>The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>an abstract proposal provider class named '
 						<code class="code">Abstract[Language]ProposalProvider'</code> generated into the 
@@ -850,64 +853,74 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </code></p></div><p>yields the text
 
 					<code class="code">event =&gt; state</code> and allows selecting any events and states using a drop down.
-				</p></div></div><div class="section" title="Outline View"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="outline"></a>Outline View</h2></div></div></div><p>text</p></div><div class="section" title="Navigation and Hyperlinking"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="navigation"></a>Navigation and Hyperlinking</h2></div></div></div><p>text</p></div><div class="section" title="Formatting (Pretty Printing)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="formatting"></a>Formatting (Pretty Printing)</h2></div></div></div><p>text</p></div></div><div class="chapter" title="Chapter&nbsp;4.&nbsp;From oAW to TMF"><div class="titlepage"><div><div><h2 class="title"><a name="from_oaw_to_tmf"></a>Chapter&nbsp;4.&nbsp;From oAW to TMF</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#why_rewrite">Why a rewrite</a></span></dt><dt><span class="section"><a href="#Xtend_based_apis">Xtend-based APIs</a></span></dt><dd><dl><dt><span class="section"><a href="#Xtend_is_hard_to_debug">Xtend is hard to debug</a></span></dt><dt><span class="section"><a href="#Xtend_is_slow">Xtend is slow</a></span></dt><dt><span class="section"><a href="#Declarative_Java">Declarative Java</a></span></dt><dt><span class="section"><a href="#conclusion">Conclusion</a></span></dt></dl></dd><dt><span class="section"><a href="#differences">Differences</a></span></dt><dd><dl><dt><span class="section"><a href="#differenced_grammar_language">Differences in the grammar language</a></span></dt></dl></dd></dl></div><p>TMF Xtext is a complete rewrite of the Xtext framework previously released with openArchitectureWare 4.3.1 (oAW). We refer to the version from oAW as oAW Xtext.
-			oAW Xtext has been around for about 2 years before TMF Xtext was released in June 2009 and has been used by many people to develop little languages and corresponding Eclipse-based IDE support.</p><p>This document describes the differences between oAW Xtext and TMF Xtext and is intended to be used as a guide to migrate from oAW Xtext to TMF Xtext.
-			For people already familiar with the concepts of oAW Xtext it should also serves as a shortcut to learn TMF Xtext.  </p><div class="section" title="Why a rewrite"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="why_rewrite"></a>Why a rewrite</h2></div></div></div><p>The first thing you might wonder about is why we decided to reimplement the framework from scratch as opposed to use the existing code base and enhance it further on. 
-				We decided so because we had learned a lot of lessons from oAW Xtext and wanted to stick with many proven concepts 
-				but found the implementation to lack a solid foundation (the author of these lines is the original author of that non-solid code btw. :-)). The first version of oAW Xtext was just a proof of concept
-				and was so well received that it had been extended with all kinds of features (some were good, some were bad). Unfortunately code quality, clean and orthogonal concepts and test coverage had not the needed focus.</p><p>In addition to this general lack of code quality, oAW Xtext suffers from some severe performance problems. The naive use of Xtend (see next section) made use of bigger models in Xtext editors unusable.</p></div><div class="section" title="Xtend-based APIs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Xtend_based_apis"></a>Xtend-based APIs</h2></div></div></div><p>One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure. 
-				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand).  It provides nicer expression syntax than Java
-				especially the existence of higher-order functions for collections are extremely handy when working with models.
-				In addition to the nice syntax it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe.
-				In contrast using Java one usually has to write instanceof and cast orgies. </p><div class="section" title="Xtend is hard to debug"><div class="titlepage"><div><div><h3 class="title"><a name="Xtend_is_hard_to_debug"></a>Xtend is hard to debug</h3></div></div></div><p>While the aforementioned things allow for convenient specification of label and icon providers, outline views, content assist and linking. Xtend is interpreted and therefore hard to debug.
-					Because of that Xpand is shipped with a special debugger facility, however using the shipped debugger implies that the Xtend functions are called from a workflow. This is not and cannot be the case in Xtext.
-					As a result one has to debug his way through the interpreter, which is hard and inconvenient even for us, who have written that interpreter.</p></div><div class="section" title="Xtend is slow"><div class="titlepage"><div><div><h3 class="title"><a name="Xtend_is_slow"></a>Xtend is slow</h3></div></div></div><p>But the problematic debugging was not the main reason why there are no Xtend-based APIs in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &ldquo;live in the editor&rdquo;, that is evaluating lots of Xtend code while you type. 
-					While Xtend&rsquo;s performance is sufficiently good when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model).
-					Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime wich function is the best match and it has to do so on each call.
-					Also Xtend supports a plggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. Last but not least the code is interpreted and not compiled once. The price we pay for all these nice features reduced performance.</p><p>In addition to these scalability problems we have designed seom core concepts around the idea of Iterables, which allows for lazy resolution of things. As Xtend does not know the concept of Iterators you&rsquo;ld have work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p></div><div class="section" title="Declarative Java"><div class="titlepage"><div><div><h3 class="title"><a name="Declarative_Java"></a>Declarative Java</h3></div></div></div><p>To summarize this we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
-					As a result we found ways and means to tweak Javaas good as possible to allow for relatively convenient, high performing implementations. </p><p>To allow convenience in Java we tried to mimic the nice things of Xtend in Java. This is done through two things</p><div class="section" title="Polymorphic Dispatcher"><div class="titlepage"><div><div><h4 class="title"><a name="polymorphic_dispatching"></a>Polymorphic Dispatcher</h4></div></div></div><p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the polymorphic dispatch know from Xtend. A ILabelProvider to be used in any Eclipse view can be writte like so for instance:</p><div class="literallayout"><p><code class="code"><br>
-&nbsp;&nbsp;public&nbsp;class&nbsp;XtextLabelProvider&nbsp;extends&nbsp;DefaultLabelProvider&nbsp;{<br>
+				</p></div></div><div class="section" title="Outline View"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="outline"></a>Outline View</h2></div></div></div><p>text</p></div><div class="section" title="Navigation and Hyperlinking"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="navigation"></a>Navigation and Hyperlinking</h2></div></div></div><p>text</p></div><div class="section" title="Formatting (Pretty Printing)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="formatting"></a>Formatting (Pretty Printing)</h2></div></div></div><p>text</p></div></div><div class="chapter" title="Chapter&nbsp;4.&nbsp;From oAW to TMF"><div class="titlepage"><div><div><h2 class="title"><a name="from_oaw_to_tmf"></a>Chapter&nbsp;4.&nbsp;From oAW to TMF</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#why_rewrite">Why a rewrite?</a></span></dt><dt><span class="section"><a href="#migration_overview">Migration overview</a></span></dt><dt><span class="section"><a href="#Xtend_based_apis">Where are the Xtend-based APIs?</a></span></dt><dd><dl><dt><span class="section"><a href="#Xtend_is_hard_to_debug">Xtend is hard to debug</a></span></dt><dt><span class="section"><a href="#Xtend_is_slow">Xtend is slow</a></span></dt><dt><span class="section"><a href="#Declarative_Java">Declarative Java</a></span></dt><dt><span class="section"><a href="#conclusion">Conclusion</a></span></dt></dl></dd><dt><span class="section"><a href="#differences">Differences</a></span></dt><dd><dl><dt><span class="section"><a href="#differenced_grammar_language">Differences in the grammar language</a></span></dt><dt><span class="section"><a href="#differences_validation">Differences in Validation</a></span></dt><dt><span class="section"><a href="#differences_linking">Differences in Linking</a></span></dt><dt><span class="section"><a href="#differences_content_assist">Differences in Content Assist</a></span></dt><dt><span class="section"><a href="#differences_outline_view">Differences in Outline View</a></span></dt><dt><span class="section"><a href="#differences_label_provider">Differences in Label Provider</a></span></dt></dl></dd></dl></div><p>TMF Xtext is a complete rewrite of the Xtext framework previously released with openArchitectureWare 4.3.1 (oAW). We refer to the version from oAW as oAW Xtext whereas the current Xtext version will be called TMF Xtext to avoid misconceptions.
+			oAW Xtext has been around for about 2 years before TMF Xtext was released in June 2009 and has been used by many people to develop little languages and corresponding Eclipse-based IDE support.</p><p>TODO: Motivate migration from oAW to TMF with reference to new features</p><p>This document describes the differences between oAW Xtext and TMF Xtext and is intended to be used as a guide to migrate from oAW Xtext to TMF Xtext.
+			For people already familiar with the concepts of oAW Xtext it should also serves as a shortcut to learn TMF Xtext.  </p><div class="section" title="Why a rewrite?"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="why_rewrite"></a>Why a rewrite?</h2></div></div></div><p>The first thing you might wonder about is why we decided to reimplement the framework from scratch as opposed to use the existing code base and enhance it further on. 
+				We decided so because we had learned a lot of lessons from oAW Xtext. On the other hand we wanted to stick with many proven concepts 
+				but found the implementation was lacking a solid foundation (the author of these lines is the original author of that non-solid code btw. :-)). The first version of oAW Xtext was just a proof of concept but was so well received that it had been extended with all kinds of features (some were good, some were bad). Unfortunately code quality, clean and orthogonal concepts and test coverage did not receive the needed focus.</p><p>In addition to this aspects of quality, oAW Xtext suffers from some severe performance problems. The naive use of Xtend (see next section) prevented us to use oAW Xtext for growing real-world models.</p></div><div class="section" title="Migration overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="migration_overview"></a>Migration overview</h2></div></div></div><p>Although a couple of things have changed we tried to keep good ideas and left many things unchanged. At the same time we wanted to clean up wrong concepts and solve the main problems we and you had with oAW Xtext.
+				From a bird&rsquo;s eye view if you want to migrate an existing oAW Xtext project to TMF Xtext, you mainly just need to rename the old grammar from *.xtxt to *.xtext and add two lines to the beginning of that document (see below for details). You might also have to change a few keywords, but all in all this is pretty easy and we&rsquo;ve migrated a couple of oAW Xtext projects this way without problems.
+				The other aspect where lots of code might have been written for is validation. In oAW Xtext we used Xpand&rsquo;s Check language to define constraints on the meta model. Even though this has been one major reason for the lack of scalability in Xtext we decided to keep the Check language as an option for compatibility reasons. Therefore, you do not need to translate your existing checks to a different language. Even better, you can overcome some performance issues by leveraging the newly introduced hooks to control the time of validation (while you type, on save, or on triggering an explicit action). See the validation section below. 
+				Anyway, if you want to provide a slick user experience validation should run fast while you type. Therefore, we strongly encourage you to consider implementing validation using our declarative Java approach (TODO: ref).</p><p>We&rsquo;ve developed and reviewed a lot of oAW Xtext projects and saw that most of the work was done in the grammar and in the validation view point. 
+				Other aspects such as outline view, label provider or content assist have been customized too, but they usually do not contain complicated Xtend code.
+				One exception was linking and content assist which in oAW Xtext contains a lot of duplicated code. While working on this we came up with a new concept called &ldquo;scopes&rdquo; that not only streamlines implementation in terms of redundancy. Scopes also increase the overall performance of Xtext.
+				But since the concept of scopes was not carved out in oAW Xtext one usually implemented a cluttered and duplicated poor copy through linking and content assist. For obvious reasons, we didn&rsquo;t manage to come up with a good compatibility layer.
+				So this is where most of the migration effort will go into. But we think the notion of scopes is such a valuable addition that it is worth the refactoring. Also, when looking at existing oAW Xtext projects we found that most projects didn&rsquo;t change the default linking that much or they came up with their own linking framework anyway.</p><p>However, if we have completely misunderstood the situation and your oAW Xtext project cannot be migrated in a reasonable amount of time, please tell us. We want to help you!</p></div><div class="section" title="Where are the Xtend-based APIs?"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Xtend_based_apis"></a>Where are the Xtend-based APIs?</h2></div></div></div><p>One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure.
+				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand).  It provides nicer expression syntax than Java.
+				Especially the existence of higher-order functions for collections is extremely handy when working with models.
+				In addition to the nice syntax, it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe at the same time.
+				In contrast using Java one usually has to write instanceof and cast orgies. </p><div class="section" title="Xtend is hard to debug"><div class="titlepage"><div><div><h3 class="title"><a name="Xtend_is_hard_to_debug"></a>Xtend is hard to debug</h3></div></div></div><p>While the aforementioned features allow the convenient specification of label and icon providers, outline views, content assist and linking. Xtend is interpreted and therefore hard to debug. Because of that Xpand is shipped with a special debugger facility. Unfortunately, the shipped debugger cannot be used in the context of Xtext since it implies that the Xtend functions have to be called from a workflow. This is not and cannot be the case for Xtext Editors.
+					As a result one has to debug his way through the interpreter, which is hard and inconvenient (even for us, who have written that interpreter).</p></div><div class="section" title="Xtend is slow"><div class="titlepage"><div><div><h3 class="title"><a name="Xtend_is_slow"></a>Xtend is slow</h3></div></div></div><p>But the problematic debugging was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &ldquo;inside&rdquo; the editor, that is evaluating lots of Xtend code while you type. 
+					While Xtend&rsquo;s performance is sufficient when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model). Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime which function is the best match and it has to do so on each call. Also Xtend supports a pluggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. This is very powerful and flexible but introduces another indirection layer. Last but not least the code is interpreted and not compiled. The price we pay for all these nice features is reduced performance.</p><p>In addition to these scalability problems we have designed some core APIs (e.g. scopes) around the idea of Iterables, which allows for lazy resolution of elements. As Xtend does not know the concept of Iterators you would have to work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p></div><div class="section" title="Declarative Java"><div class="titlepage"><div><div><h3 class="title"><a name="Declarative_Java"></a>Declarative Java</h3></div></div></div><p>To summarize this we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
+					As a result we found ways and means to tweak Java as good as possible to allow for relatively convenient, high performing implementations. </p><p>Java is fast and can easily be debugged but ranks behind Xtend regarding convenience. We address this with different approaches to make Java development in text context of Xtext as comfortable as possible.</p><div class="section" title="Polymorphic Dispatcher"><div class="titlepage"><div><div><h4 class="title"><a name="polymorphic_dispatching"></a>Polymorphic Dispatcher</h4></div></div></div><p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the polymorphic dispatch known from Xtend. 
+						With polymorphic dispatch an ILabelProvider to be used in any Eclipse view can be written like so for instance:</p><div class="literallayout"><p><code class="code"><br>
+public&nbsp;class&nbsp;XtextLabelProvider&nbsp;extends&nbsp;DefaultLabelProvider&nbsp;{<br>
 <br>
-	&nbsp;&nbsp;String&nbsp;text(Grammar&nbsp;grammar)&nbsp;{<br>
-		&nbsp;&nbsp;return&nbsp;GrammarUtil.getName(grammar);<br>
-	&nbsp;&nbsp;}<br>
-	<br>
-	&nbsp;&nbsp;String&nbsp;image(Grammar&nbsp;grammar)&nbsp;{<br>
-		&nbsp;&nbsp;return&nbsp;"language.gif";<br>
-	&nbsp;&nbsp;}<br>
-	<br>
-	&nbsp;&nbsp;String&nbsp;image(GeneratedMetamodel&nbsp;metamodel)&nbsp;{<br>
-		&nbsp;&nbsp;return&nbsp;"export.gif";<br>
-	&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;String&nbsp;text(Grammar&nbsp;grammar)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;GrammarUtil.getName(grammar);<br>
 &nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;String&nbsp;image(Grammar&nbsp;grammar)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"language.gif";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;String&nbsp;image(GeneratedMetamodel&nbsp;metamodel)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"export.gif";<br>
+&nbsp;&nbsp;}<br>
+}<br>
 &nbsp;&nbsp;<br>
-</code></p></div><p>As you can see this is very similar to the way one describes labels and icons in oAW Xtext, but has the advantage that it is easier to test and to debug, faster and can be used everywhere an ILabelProvider is expected.</p></div><div class="section" title="Google Collections"><div class="titlepage"><div><div><h4 class="title"><a name="google_collections"></a>Google Collections</h4></div></div></div><p>The other thing we love about Xtend is its convenient way to navigate a model. This is something which can&rsquo;t be done with Java, as it lacks closures and in general requires to write lots of boilerplate such as superfluos type information, etc. So this is where you have to make compromises.
-						Anyway, we think this could be improved a bit by using Google Collections which is (the name suggests it) a collections framewokr written by google. It&rsquo;s open-source and there&rsquo;s a JSR proposing to add the framework to the JDK, which would IMHO be a very good addition.</p><p>It provides lots of nice static factory methods similar to what we have in java.util.Collections and java.util.Arrays, contains higher-order functions based on a function type included in the library and a couple of very good collection implementations such as multi maps and immutable implementations of the various collection types. With this it is possible to  write a chain of filters and transformers like so.</p><div class="literallayout"><p><code class="code"><br>
-&nbsp;&nbsp;&nbsp;	ArrayList&lt;String&gt;&nbsp;names&nbsp;=&nbsp;newArrayList("foo",&nbsp;"bar",&nbsp;"honk");<br>
-		Iterable&lt;String&gt;&nbsp;filtered&nbsp;=&nbsp;filter(names,&nbsp;not(isEqualTo("bar")));<br>
-		Iterable&lt;Integer&gt;&nbsp;lengths&nbsp;=&nbsp;transform(filtered,new&nbsp;Function&lt;String,&nbsp;Integer&gt;()&nbsp;{<br>
-			public&nbsp;Integer&nbsp;apply(String&nbsp;from)&nbsp;{<br>
-				return&nbsp;from.length();<br>
-			}<br>
-		});<br>
+</code></p></div><p>As you can see this is very similar to the way one describes labels and icons in oAW Xtext, but has the advantage that it is easier to test and to debug, faster and can be used everywhere an ILabelProvider is expected.</p></div><div class="section" title="Google Collections"><div class="titlepage"><div><div><h4 class="title"><a name="google_collections"></a>Google Collections</h4></div></div></div><p>The other thing we love about Xtend is its convenient way to navigate a model. This is something which can&rsquo;t be done with Java, as it lacks closures and in general requires to write lots of boilerplate such as superfluos type information, etc. So this is where we have to make some compromises.
+						Anyway, we think we could improve this a bit by using Google Collections which is (the name suggests it) a collections framework written by some google guys. It&rsquo;s open-source and there&rsquo;s a JSR proposing to add the framework to the JDK, which would IOHO be a very good addition.</p><p>It provides lots of nice static factory methods similar to what we have in java.util.Collections and java.util.Arrays, contains higher-order functions based on a function type included in the library and a couple of very good collection implementations such as multi maps and immutable implementations of the various collection types. 
+						With this, for instance, one can write a chain of filters and transformers like so:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;ArrayList&lt;String&gt;&nbsp;names&nbsp;=&nbsp;newArrayList("foo",&nbsp;"bar",&nbsp;"honk");<br>
+&nbsp;&nbsp;Iterable&lt;String&gt;&nbsp;filtered&nbsp;=&nbsp;filter(names,&nbsp;not(isEqualTo("bar")));<br>
+&nbsp;&nbsp;Iterable&lt;Integer&gt;&nbsp;lengths&nbsp;=&nbsp;transform(filtered,new&nbsp;Function&lt;String,&nbsp;Integer&gt;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Integer&nbsp;apply(String&nbsp;from)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;from.length();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;});<br>
 <br>
 </code></p></div><p>or in a more functional way :</p><div class="literallayout"><p><code class="code"><br>
-	&nbsp;transform(<br>
-			filter(<br>
-				newArrayList("foo",&nbsp;"bar",&nbsp;"honk"),&nbsp;<br>
-				not(isEqualTo("bar"))<br>
-			),<br>
-			new&nbsp;Function&lt;String,&nbsp;Integer&gt;()&nbsp;{<br>
-				public&nbsp;Integer&nbsp;apply(String&nbsp;from)&nbsp;{<br>
-					return&nbsp;from.length();<br>
-				}<br>
-			}<br>
-		);<br>
+&nbsp;&nbsp;transform(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filter(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newArrayList("foo",&nbsp;"bar",&nbsp;"honk"),&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not(isEqualTo("bar"))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;Function&lt;String,&nbsp;Integer&gt;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Integer&nbsp;apply(String&nbsp;from)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;from.length();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;);<br>
 <br>
-</code></p></div><p>From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it&rsquo;s a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.</p></div></div><div class="section" title="Conclusion"><div class="titlepage"><div><div><h3 class="title"><a name="conclusion"></a>Conclusion</h3></div></div></div><p>Just to get it right, Xtend is a very nice language and we still use it for it&rsquo;s main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it&rsquo;s performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p></div></div><div class="section" title="Differences"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="differences"></a>Differences</h2></div></div></div><p>In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We&rsquo;ll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI apsects, such as outline view and content assist.</p><div class="section" title="Differences in the grammar language"><div class="titlepage"><div><div><h3 class="title"><a name="differenced_grammar_language"></a>Differences in the grammar language</h3></div></div></div><p>When looking at a TMF Xtext gramar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models.
-					In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p><p>Apart from the first three lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
+</code></p></div><p>From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it&rsquo;s a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.</p></div></div><div class="section" title="Conclusion"><div class="titlepage"><div><div><h3 class="title"><a name="conclusion"></a>Conclusion</h3></div></div></div><p>Just to get it right, Xtend is a very nice language and we still use it for it&rsquo;s main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it&rsquo;s performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p><p>As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That&rsquo;s why Groovy or JRuby were no alternative. Using Scala would have been a very good match, but we didn&rsquo;t want to require knowledge of Scala so we didn&rsquo;t use it. </p></div></div><div class="section" title="Differences"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="differences"></a>Differences</h2></div></div></div><p>In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We&rsquo;ll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI aspects, such as outline view and content assist. We&rsquo;ll also try to translate/map some of the oAW Xtext concepts to their counterparts from TMF Xtext.</p><div class="section" title="Differences in the grammar language"><div class="titlepage"><div><div><h3 class="title"><a name="differenced_grammar_language"></a>Differences in the grammar language</h3></div></div></div><p>When looking at a TMF Xtext grammar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models:</p><p>TMF Xtext heading information</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;grammar&nbsp;my.namespace.Language&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br>
+&nbsp;&nbsp;generate&nbsp;myDsl&nbsp;"http://www.namespace.my/2009/MyDSL"<br>
+&nbsp;<br>
+&nbsp;&nbsp;FirstRule&nbsp;:&nbsp;...<br>
+<br>
+</code></p></div><p>In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p><p>Apart from the first two lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
 					Also assignments are syntactically and semantically identical in both versions. 
-					However in TMF Xtext some concepts have been generalized and improved:</p><div class="section" title="String rules become Datatype rules"><div class="titlepage"><div><div><h4 class="title"><a name="differences_datatype_rules"></a>String rules become Datatype rules</h4></div></div></div><p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &lsquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes.</p></div><div class="section" title="Enum rules"><div class="titlepage"><div><div><h4 class="title"><a name="differences_enum_rules"></a>Enum rules</h4></div></div></div><p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&lsquo;enum&rsquo; instead of &lsquo;Enum&rsquo;).
+					However in TMF Xtext some concepts have been generalized and improved:</p><div class="section" title="String rules become Datatype rules"><div class="titlepage"><div><div><h4 class="title"><a name="differences_datatype_rules"></a>String rules become Datatype rules</h4></div></div></div><p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &lsquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes (see TODO-REF).</p></div><div class="section" title="Enum rules"><div class="titlepage"><div><div><h4 class="title"><a name="differences_enum_rules"></a>Enum rules</h4></div></div></div><p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&lsquo;enum&rsquo; instead of &lsquo;Enum&rsquo;).
 						Also the right handside of the assignment is now optional. That is in oAW Xtext:</p><div class="literallayout"><p><code class="code"><br>
 &nbsp;&nbsp;Enum&nbsp;MyEnum&nbsp;:&nbsp;foo='foo'&nbsp;|&nbsp;bar='bar';<br>
 &nbsp;&nbsp;<br>
@@ -922,12 +935,76 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <br>
 </code></p></div><p>becomes</p><div class="literallayout"><p><code class="code">terminal&nbsp;FOO&nbsp;:&nbsp;'f'&nbsp;'o'&nbsp;'o';<br>
 <br>
-</code></p></div><p>See the reference documentation for all the different expressions possible in terminal rules.</p></div><div class="section" title="No built-in terminals"><div class="titlepage"><div><div><h4 class="title"><a name="differences_no_builtin_terminals"></a>No built-in terminals</h4></div></div></div><p>In oAW Xtext common terminals lie ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&rsquo;t be removed.
-						Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don&rsquo;t have to use them and you can come up with your own reusable rules. </p></div><div class="section" title="No URI terminal rule anymore"><div class="titlepage"><div><div><h4 class="title"><a name="differences_no_URI_token"></a>No URI terminal rule anymore</h4></div></div></div><p>Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it as we only wanted to mark the model some how to identify what information to use in orde to load referenced models. Instead we decided to solve this similar to how we do resolution by name: We use convention.
+</code></p></div><p>See the reference documentation for all the different expressions possible in terminal rules (TODO-REF).</p></div><div class="section" title="No built-in terminals"><div class="titlepage"><div><div><h4 class="title"><a name="differences_no_builtin_terminals"></a>No built-in terminals</h4></div></div></div><p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&rsquo;t be removed.
+						Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don&rsquo;t have to use them and you can come up with your own reusable rules. 
+						This is what the 
+						<code class="code">with org.eclipse.xtext.common.Terminals</code> part is about. It imports the common terminal rules.
+					</p></div><div class="section" title="No URI terminal rule anymore"><div class="titlepage"><div><div><h4 class="title"><a name="differences_no_URI_token"></a>No URI terminal rule anymore</h4></div></div></div><p>Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it. The only reason for the URI token was to mark the model some how so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p><p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks fro EAttributes of type EString with the name &lsquo;importedURI&rsquo;.
 						That is if you&rsquo;ve used the URI token like so:</p><div class="literallayout"><p><code class="code"><br>
 &nbsp;Import&nbsp;:&nbsp;'import'&nbsp;myReference=URI;<br>
 &nbsp;<br>
 </code></p></div><p>you&rsquo;ll have to rewrite it like so</p><div class="literallayout"><p><code class="code"><br>
 &nbsp;Import&nbsp;:&nbsp;'import'&nbsp;importedURI=STRING;<br>
 &nbsp;<br>
-</code></p></div><p>Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by Xtext&rsquo;s simple import mechanism. So we assume and hope  that changing the reference is not a big deal for you. </p></div></div></div></div></div></body></html>
+</code></p></div><p>Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. </p></div><div class="section" title="Return types"><div class="titlepage"><div><div><h4 class="title"><a name="differences_return_types"></a>Return types</h4></div></div></div><p>The syntax to ecplicitely declare the return type of a rule has changed. In oAW Xtext (where this was marked as &lsquo;experimental&rsquo;) the syntax was like so:</p><div class="literallayout"><p><code class="code">MyRule&nbsp;[MyType]&nbsp;:&nbsp;foo=ID;&nbsp;&nbsp;<br>
+<br>
+</code></p></div><p>in TMF Xtext we have a keyword for this :</p><div class="literallayout"><p><code class="code">MyRule&nbsp;returns&nbsp;MyType&nbsp;:&nbsp;foo:ID;<br>
+<br>
+</code></p></div><p>So this is a bit more verbose, but at the same time more readable. And as you don&rsquo;t have to write the return type in most situations, it&rsquo;s good to have a more explicit, readable syntax.</p></div><div class="section" title="General Improvements"><div class="titlepage"><div><div><h4 class="title"><a name="differences_grammar_improvements"></a>General Improvements</h4></div></div></div><p>Aside the improvements already mentioned previously some noteworthy new things added to the grammar language are:</p><div class="section" title="Grammar mixins"><div class="titlepage"><div><div><h5 class="title"><a name="differences_grammar_mixins"></a>Grammar mixins</h5></div></div></div><p>Grammar mixins allows you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types. We eat our own dogfood and have introduced a common.Terminals grammar which defines the terminal rules, which in oAW Xtext have been hard-coded into the grammar language.</p></div><div class="section" title="Reuse existing ecore models"><div class="titlepage"><div><div><h5 class="title"><a name="differences_import_ecore_model"></a>Reuse existing ecore models</h5></div></div></div><p>In oAW Xtext reusing existing ecore models didn&rsquo;t work well and we communicated this by flagging the feature as &lsquo;experimental&rsquo;. In TMF Xtext importing existing ecore models is fully supported. Moreover it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.</p></div><div class="section" title="Actions"><div class="titlepage"><div><div><h5 class="title"><a name="differences_actions"></a>Actions</h5></div></div></div><p>The grammar language gained one new concpet important when writing left-factored grammars (e.g. expressions). In oAW Xtext one usualy wrote something like the following:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;Addition&nbsp;&nbsp;:&nbsp;left=Multi&nbsp;('+'&nbsp;right=Addition)?;<br>
+&nbsp;&nbsp;Multi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;left=Expr&nbsp;('*'&nbsp;right=Multi)?;<br>
+&nbsp;&nbsp;Expr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;IntLiteral&nbsp;|&nbsp;'('&nbsp;Addition&nbsp;')';<br>
+&nbsp;&nbsp;IntLiteral:&nbsp;value=INT;<br>
+&nbsp;&nbsp;	<br>
+</code></p></div><p>This is a working grammar, but the problem is that the resulting ecore model is not like you want it to look and more important the model created by the parser contains a lot of redundant information.
+							For instance the expression 
+							<code class="code">(3)</code> would be parsed into the following model:
+						</p><div class="literallayout"><p><code class="code"><br>
+Addition&nbsp;{<br>
+&nbsp;&nbsp;left=Multi&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;left=Addition&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left=Multi&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left=IntLiteral&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value=3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+</code></p></div><p>This is of course not what you want or expect. Also the structure of the generated ecore model is not how one usually wants it to look like.
+							We solved this in TMF Xtext by introducing a new concept: Actions. With actions one can do minor AST rewritings within a rule. For example in TMF Xtext above&rsquo;s expression language should be defined like this:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;Addition&nbsp;&nbsp;:&nbsp;Multi&nbsp;({Addition.left=current}&nbsp;'+'&nbsp;right=Multi)*;<br>
+&nbsp;&nbsp;Multi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Expr&nbsp;&nbsp;({Multi.left=current)&nbsp;'*'&nbsp;right=Expr)*;<br>
+&nbsp;&nbsp;Expr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;IntLiteral&nbsp;|&nbsp;'('&nbsp;Addition&nbsp;')';<br>
+&nbsp;&nbsp;IntLiteral:&nbsp;value=INT;<br>
+&nbsp;&nbsp;<br>
+</code></p></div><p>Actions are enclosed in curly braces and follow the syntax </p><div class="literallayout"><p><code class="code">'{'&nbsp;type=[EClass]&nbsp;'.'&nbsp;feature=[EReference]&nbsp;('='|'+=')&nbsp;'current'&nbsp;'}'<br>
+<br>
+</code></p></div><p>You can think of it as a short form of the following Java code:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;temp&nbsp;=&nbsp;current;<br>
+&nbsp;&nbsp;current&nbsp;=&nbsp;new&nbsp;MyType();<br>
+&nbsp;&nbsp;current.setMyReference(temp);<br>
+<br>
+</code></p></div></div></div></div><div class="section" title="Differences in Validation"><div class="titlepage"><div><div><h3 class="title"><a name="differences_validation"></a>Differences in Validation</h3></div></div></div><p>TMF Xtext still supports implementing validation using Xpand&rsquo;s check. However it is no longer using the EMF meta model (typesystem) but now uses the JavaBeansMetamodel.
+					This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
+					Example: If your check file looked like this in oAW Xtext :</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;import&nbsp;myMetamodel;<br>
+&nbsp;&nbsp;context&nbsp;Type&nbsp;ERROR&nbsp;"foo"&nbsp;:&nbsp;name!=null;&nbsp;&nbsp;&nbsp;<br>
+<br>
+</code></p></div><p>it becomes something like the following in TMF Xtext :</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;import&nbsp;my::pack::to::myMetaModel;<br>
+&nbsp;&nbsp;context&nbsp;Type&nbsp;ERROR&nbsp;"foo"&nbsp;:&nbsp;name!=null;<br>
+<br>
+</code></p></div><p>Where my::pack::to::myMetaModel refers to the package the generated EClasses are in. In other words there&rsquo;s a Java class 
+					<code class="code">my.pack.to.myMetaModel.Type</code>.
+					We changed this in order to allow use of any Java API , such as 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a>, from within Check and Xtend.
+				</p><p>In addition to the switch to the JavaBeans Metamodel it is now possible to add information about the feature which is validated:</p><div class="literallayout"><p><code class="code"><br>
+&nbsp;&nbsp;context&nbsp;Class#feature&nbsp;ERROR&nbsp;"My&nbsp;message&nbsp;"+this.name+"."&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;my.complex.predicate;<br>
+<br>
+</code></p></div><p>This is of you add the name of a feature separated by a hash (&lsquo;#&rsquo;), in the editor only the value of the feature will be marked, not the whole object.</p><div class="section" title="Validation Lifecycles"><div class="titlepage"><div><div><h4 class="title"><a name="differences_validation_lifecycles"></a>Validation Lifecycles</h4></div></div></div><p>In order to make more expensive validations possible without slowing down the editor, TMF Xtext supports three different validation hooks.</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>FAST constraints are executed in the reconciler (i.e. 500 ms after the last keystroke) and on save.</p></li><li class="listitem"><p>NORMAL constraints are executed on save only.</p></li><li class="listitem"><p>EXPENSIVE constraints are executed through an action which is available through the context menu.</p></li></ol></div></div></div><div class="section" title="Differences in Linking"><div class="titlepage"><div><div><h3 class="title"><a name="differences_linking"></a>Differences in Linking</h3></div></div></div><p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all &lsquo;visible&rsquo; EObjects and than filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. This was not only very expensive but also lacks an important abstraction: the notion of scopes.</p><div class="section" title="The idea of scopes"><div class="titlepage"><div><div><h4 class="title"><a name="differences_linking_sopes"></a>The idea of scopes</h4></div></div></div><p>In oAW Xtext one typically had to override the link_feature() extension in order to change the default linking. A typical rewritten extension called the allVisibleElements() extensions and than filters out everything which shouddn&rsquo;t be taken into account for the specific link. For all elements left we typically took the first element where the id() extension returned a string similar to what has been written in the text.</p><p>The code about selecting and filtering allElements() usually has been duplicated in the corresponding content assist function, so that linking an content assist are semantically in sync. If you&rsquo;re good (we usually were not) you externalized that pice of code and reused the same extension in content assist and linking.</p><p>In TMF Xtext we&rsquo;ve introduced scopes and scopeproviders. Scopeproviders are responsible for creating scopes and a scope is basically a hierarchy of Lists of name-&gt;value pairs. This is where most of the semantics of linking typically goes and by implmenting an 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both rely and use the scope provider.
+					</p><p>The default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Elements which have an attribute name will be made visible by their name,</p></li><li class="listitem"><p>referenced resources ca be put on the scope by using the &lsquo;importedURI&rsquo;- naming convention (TODO-REF)</p></li><li class="listitem"><p>the available elements are filtered by the expected type (i.e. the type of the reference to be linked)</p></li></ol></div></div><div class="section" title="Migration"><div class="titlepage"><div><div><h4 class="title"><a name="differences_linking_migration"></a>Migration</h4></div></div></div><p>We expect the migration of linking to be very simple, if you&rsquo;ve not changed the default semantics that much. We&rsquo;ve already migrated a couple of projects it wasn&rsquo;t too hard to do so.
+						If you have changed linking (and also content assist) a lot, you&rsquo;ll have to translate the semantics to the IScopeProvider concept. This might a bit of work, but it is worth the effort as this will clean up your code base and better separate concerns. Also we&rsquo;re confident that there&rsquo;s much value in migrating to TMF Xtext. </p><p>That said you might not have the time to do the migration and wished to have better support for migrating oAW linking to TMF linking.  In this document we tried to explain why we diceded to change the conceptual architecture and why it is not easily possible to come up with an adapter for the notion of scopes. If you don&rsquo;t want to do the migration yourself we (itemis AG) can do the work or help you with that. Note also that you&rsquo;re welcome to ask any questions in the newsgroup and that we&rsquo;ll try to help you as much as possible in order to get your projects migrated. </p></div></div><div class="section" title="Differences in Content Assist"><div class="titlepage"><div><div><h3 class="title"><a name="differences_content_assist"></a>Differences in Content Assist</h3></div></div></div><p>In oAW Xtext content assist has been customized using Xtend. This was a very convenient thing because of the polymorphic dispatch. However in content assist one usually don&rsquo;t have to do extensive model computation. At least not in TMF Xtext as content assist relies on scope providers which do the complicated work.</p><p>In TMF Xtext content assist can be conveniently customize using a declarative Java API (see TODO-REF).</p></div><div class="section" title="Differences in Outline View"><div class="titlepage"><div><div><h3 class="title"><a name="differences_outline_view"></a>Differences in Outline View</h3></div></div></div><p>In TMF Xtext the outline view does not support mutliple view points so far. This is just because we didn&rsquo;t manage to get this included (due to low priorization). We don&rsquo;t think that this is in general a bad idea, but we thought of other things as more important.
+					That said the default outline view is similar to the one in oAW Xtext, but the customization is again done using a declarative Java approach (see TODO-REF).</p></div><div class="section" title="Differences in Label Provider"><div class="titlepage"><div><div><h3 class="title"><a name="differences_label_provider"></a>Differences in Label Provider</h3></div></div></div><p>As mentioned previously label providers are also now implemented in Java and are an implementation of ILabelProvider (see TODO-REF).</p></div></div></div></div></body></html>

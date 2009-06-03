@@ -136,8 +136,8 @@ Note that if you use a namespace URI, the corresponding EPackage needs to be ins
 At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in @EPackage.Registry.INSTANCE@. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
 
 bc.. <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" 
-	platformUri="${runtimeProject}/..">
-	<registerGeneratedEPackage value="foo.bar.MyPackage"/>
+  platformUri="${runtimeProject}/..">
+  <registerGeneratedEPackage value="foo.bar.MyPackage"/>
 </bean>
 
 p. using namespace URIs is typically only interesting when using common ecore models, such as Ecore itself or the UML metamodel. If you're developing the EPackage together with the DSL abut don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
@@ -161,8 +161,8 @@ h4. Using multiple packages / meta model aliases
 If you want to use multiple EPackages you need to specify aliases like so:
 
 bc.. 
- generate secretcompartment http://www.eclipse.org/secretcompartment
- import http://www.eclipse.org/anotherPackage as another
+  generate secretcompartment http://www.eclipse.org/secretcompartment
+  import http://www.eclipse.org/anotherPackage as another
 
 p. When referring to a type somewhere in the grammar you need to qualify them using that alias (example ''another::CoolType''). We'll see later where such type references occur.
 
@@ -171,9 +171,9 @@ It is also supported to put multiple EPackage imports into one alias. This is no
 Example:
 
 bc.. 
- generate toBeGenerated http://www.eclipse.org/toBeGenerated
- import http://www.eclipse.org/packContainingClassA
- import http://www.eclipse.org/packContainingClassB
+  generate toBeGenerated http://www.eclipse.org/toBeGenerated
+  import http://www.eclipse.org/packContainingClassA
+  import http://www.eclipse.org/packContainingClassB
 
 p. With the declaration from above 
 

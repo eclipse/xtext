@@ -17,11 +17,11 @@ Model :
 AbstractRule:
   RuleA | RuleB
 ;
-	 
+
 RuleA :
-	 "RuleA" "(" name = ID ")" ;
-	 
+   "RuleA" "(" name = ID ")" ;
+
 RuleB return gen::CustomType:
-	 "RuleB" "(" ruleA = [RuleA] ")" ;
+   "RuleB" "(" ruleA = [RuleA] ")" ;
 
 p. 

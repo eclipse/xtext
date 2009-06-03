@@ -65,20 +65,20 @@ Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the poly
 With polymorphic dispatch an ILabelProvider to be used in any Eclipse view can be written like so for instance:
 
 bc.. 
-  public class XtextLabelProvider extends DefaultLabelProvider {
+public class XtextLabelProvider extends DefaultLabelProvider {
 
-	  String text(Grammar grammar) {
-		  return GrammarUtil.getName(grammar);
-	  }
-	
-	  String image(Grammar grammar) {
-		  return "language.gif";
-	  }
-	
-	  String image(GeneratedMetamodel metamodel) {
-		  return "export.gif";
-	  }
+  String text(Grammar grammar) {
+    return GrammarUtil.getName(grammar);
   }
+
+  String image(Grammar grammar) {
+    return "language.gif";
+  }
+
+  String image(GeneratedMetamodel metamodel) {
+    return "export.gif";
+  }
+}
   
 p. As you can see this is very similar to the way one describes labels and icons in oAW Xtext, but has the advantage that it is easier to test and to debug, faster and can be used everywhere an ILabelProvider is expected.
 
@@ -91,28 +91,28 @@ It provides lots of nice static factory methods similar to what we have in java.
 With this, for instance, one can write a chain of filters and transformers like so:
 
 bc.. 
-		ArrayList<String> names = newArrayList("foo", "bar", "honk");
-		Iterable<String> filtered = filter(names, not(isEqualTo("bar")));
-		Iterable<Integer> lengths = transform(filtered,new Function<String, Integer>() {
-			public Integer apply(String from) {
-				return from.length();
-			}
-		});
+  ArrayList<String> names = newArrayList("foo", "bar", "honk");
+  Iterable<String> filtered = filter(names, not(isEqualTo("bar")));
+  Iterable<Integer> lengths = transform(filtered,new Function<String, Integer>() {
+    public Integer apply(String from) {
+      return from.length();
+    }
+  });
 
 p. or in a more functional way :
 
 bc.. 
-	 transform(
-			filter(
-				newArrayList("foo", "bar", "honk"), 
-				not(isEqualTo("bar"))
-			),
-			new Function<String, Integer>() {
-				public Integer apply(String from) {
-					return from.length();
-				}
-			}
-		);
+  transform(
+    filter(
+      newArrayList("foo", "bar", "honk"), 
+        not(isEqualTo("bar"))
+      ),
+      new Function<String, Integer>() {
+        public Integer apply(String from) {
+          return from.length();
+        }
+      }
+    );
 
 p. From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it's a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.
 
@@ -133,10 +133,10 @@ When looking at a TMF Xtext grammar the first time it looks like one has to prov
 TMF Xtext heading information
 
 bc.. 
- grammar my.namespace.Language with org.eclipse.xtext.common.Terminals
- generate myDsl "http://www.namespace.my/2009/MyDSL"
+  grammar my.namespace.Language with org.eclipse.xtext.common.Terminals
+  generate myDsl "http://www.namespace.my/2009/MyDSL"
  
- FirstRule : ...
+  FirstRule : ...
 
 p. In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. 
 
@@ -269,9 +269,9 @@ bc.. '{' type=[EClass] '.' feature=[EReference] ('='|'+=') 'current' '}'
 p. You can think of it as a short form of the following Java code:
 
 bc.. 
- temp = current;
- current = new MyType();
- current.setMyReference(temp);
+  temp = current;
+  current = new MyType();
+  current.setMyReference(temp);
 
 h3(#differences_validation). Differences in Validation
 

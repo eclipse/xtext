@@ -5,11 +5,11 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
 <link rel="home" href="index.html" title="Xtext User Guide"/>
 <link rel="up" href="from_oaw_to_tmf.html" title="From oAW to TMF"/>
-<link rel="prev" href="Xtend_based_apis.html" title="Xtend-based APIs"/>
+<link rel="prev" href="Xtend_based_apis.html" title="Where are the Xtend-based APIs?"/>
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Differences</h1>
-<p>In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We&#8217;ll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI apsects, such as outline view and content assist.</p>
+<p>In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We&#8217;ll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI aspects, such as outline view and content assist. We&#8217;ll also try to translate/map some of the oAW Xtext concepts to their counterparts from TMF Xtext.</p>
 <div class="section" title="Differences in the grammar language">
 <div class="titlepage">
 <div>
@@ -19,9 +19,22 @@
 </div>
 </div>
 </div>
-<p>When looking at a TMF Xtext gramar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models.
-					In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p>
-<p>Apart from the first three lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
+<p>When looking at a TMF Xtext grammar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models:</p>
+<p>TMF Xtext heading information</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  grammar my.namespace.Language with org.eclipse.xtext.common.Terminals<br/>
+  generate myDsl "http://www.namespace.my/2009/MyDSL"<br/>
+ <br/>
+  FirstRule : ...<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p>
+<p>Apart from the first two lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
 					Also assignments are syntactically and semantically identical in both versions. 
 					However in TMF Xtext some concepts have been generalized and improved:</p>
 <div class="section" title="String rules become Datatype rules">
@@ -33,7 +46,7 @@
 </div>
 </div>
 </div>
-<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&#8217;t need to write the &#8216;String&#8217; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes.</p>
+<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&#8217;t need to write the &#8216;String&#8217; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes (see TODO-REF).</p>
 </div>
 <div class="section" title="Enum rules">
 <div class="titlepage">
@@ -103,7 +116,7 @@
 </code>
 </p>
 </div>
-<p>See the reference documentation for all the different expressions possible in terminal rules.</p>
+<p>See the reference documentation for all the different expressions possible in terminal rules (TODO-REF).</p>
 </div>
 <div class="section" title="No built-in terminals">
 <div class="titlepage">
@@ -114,8 +127,11 @@
 </div>
 </div>
 </div>
-<p>In oAW Xtext common terminals lie ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&#8217;t be removed.
-						Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don&#8217;t have to use them and you can come up with your own reusable rules. </p>
+<p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&#8217;t be removed.
+						Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don&#8217;t have to use them and you can come up with your own reusable rules. 
+						This is what the 
+						<code class="code">with org.eclipse.xtext.common.Terminals</code> part is about. It imports the common terminal rules.
+					</p>
 </div>
 <div class="section" title="No URI terminal rule anymore">
 <div class="titlepage">
@@ -126,7 +142,8 @@
 </div>
 </div>
 </div>
-<p>Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it as we only wanted to mark the model some how to identify what information to use in orde to load referenced models. Instead we decided to solve this similar to how we do resolution by name: We use convention.
+<p>Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it. The only reason for the URI token was to mark the model some how so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p>
+<p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks fro EAttributes of type EString with the name &#8216;importedURI&#8217;.
 						That is if you&#8217;ve used the URI token like so:</p>
 <div class="literallayout">
 <p>
@@ -147,8 +164,310 @@
 </code>
 </p>
 </div>
-<p>Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by Xtext&#8217;s simple import mechanism. So we assume and hope  that changing the reference is not a big deal for you. </p>
+<p>Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. </p>
 </div>
+<div class="section" title="Return types">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_return_types"/>Return types</h4>
+</div>
+</div>
+</div>
+<p>The syntax to ecplicitely declare the return type of a rule has changed. In oAW Xtext (where this was marked as &#8216;experimental&#8217;) the syntax was like so:</p>
+<div class="literallayout">
+<p>
+<code class="code">MyRule [MyType] : foo=ID;  <br/>
+<br/>
+</code>
+</p>
+</div>
+<p>in TMF Xtext we have a keyword for this :</p>
+<div class="literallayout">
+<p>
+<code class="code">MyRule returns MyType : foo:ID;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>So this is a bit more verbose, but at the same time more readable. And as you don&#8217;t have to write the return type in most situations, it&#8217;s good to have a more explicit, readable syntax.</p>
+</div>
+<div class="section" title="General Improvements">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_grammar_improvements"/>General Improvements</h4>
+</div>
+</div>
+</div>
+<p>Aside the improvements already mentioned previously some noteworthy new things added to the grammar language are:</p>
+<div class="section" title="Grammar mixins">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="differences_grammar_mixins"/>Grammar mixins</h5>
+</div>
+</div>
+</div>
+<p>Grammar mixins allows you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types. We eat our own dogfood and have introduced a common.Terminals grammar which defines the terminal rules, which in oAW Xtext have been hard-coded into the grammar language.</p>
+</div>
+<div class="section" title="Reuse existing ecore models">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="differences_import_ecore_model"/>Reuse existing ecore models</h5>
+</div>
+</div>
+</div>
+<p>In oAW Xtext reusing existing ecore models didn&#8217;t work well and we communicated this by flagging the feature as &#8216;experimental&#8217;. In TMF Xtext importing existing ecore models is fully supported. Moreover it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.</p>
+</div>
+<div class="section" title="Actions">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="differences_actions"/>Actions</h5>
+</div>
+</div>
+</div>
+<p>The grammar language gained one new concpet important when writing left-factored grammars (e.g. expressions). In oAW Xtext one usualy wrote something like the following:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  Addition  : left=Multi ('+' right=Addition)?;<br/>
+  Multi     : left=Expr ('*' right=Multi)?;<br/>
+  Expr      : IntLiteral | '(' Addition ')';<br/>
+  IntLiteral: value=INT;<br/>
+  	<br/>
+</code>
+</p>
+</div>
+<p>This is a working grammar, but the problem is that the resulting ecore model is not like you want it to look and more important the model created by the parser contains a lot of redundant information.
+							For instance the expression 
+							<code class="code">(3)</code> would be parsed into the following model:
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+Addition {<br/>
+  left=Multi {<br/>
+    left=Addition {<br/>
+      left=Multi {<br/>
+        left=IntLiteral {<br/>
+          value=3<br/>
+        }<br/>
+      }<br/>
+    }<br/>
+  }<br/>
+}<br/>
+</code>
+</p>
+</div>
+<p>This is of course not what you want or expect. Also the structure of the generated ecore model is not how one usually wants it to look like.
+							We solved this in TMF Xtext by introducing a new concept: Actions. With actions one can do minor AST rewritings within a rule. For example in TMF Xtext above&#8217;s expression language should be defined like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  Addition  : Multi ({Addition.left=current} '+' right=Multi)*;<br/>
+  Multi     : Expr  ({Multi.left=current) '*' right=Expr)*;<br/>
+  Expr      : IntLiteral | '(' Addition ')';<br/>
+  IntLiteral: value=INT;<br/>
+  <br/>
+</code>
+</p>
+</div>
+<p>Actions are enclosed in curly braces and follow the syntax </p>
+<div class="literallayout">
+<p>
+<code class="code">'{' type=[EClass] '.' feature=[EReference] ('='|'+=') 'current' '}'<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>You can think of it as a short form of the following Java code:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  temp = current;<br/>
+  current = new MyType();<br/>
+  current.setMyReference(temp);<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Differences in Validation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differences_validation"/>Differences in Validation</h3>
+</div>
+</div>
+</div>
+<p>TMF Xtext still supports implementing validation using Xpand&#8217;s check. However it is no longer using the EMF meta model (typesystem) but now uses the JavaBeansMetamodel.
+					This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
+					Example: If your check file looked like this in oAW Xtext :</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  import myMetamodel;<br/>
+  context Type ERROR "foo" : name!=null;   <br/>
+<br/>
+</code>
+</p>
+</div>
+<p>it becomes something like the following in TMF Xtext :</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  import my::pack::to::myMetaModel;<br/>
+  context Type ERROR "foo" : name!=null;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>Where my::pack::to::myMetaModel refers to the package the generated EClasses are in. In other words there&#8217;s a Java class 
+					<code class="code">my.pack.to.myMetaModel.Type</code>.
+					We changed this in order to allow use of any Java API , such as 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&amp;view=co" target="_new">IScopeProvider</a>, from within Check and Xtend.
+				</p>
+<p>In addition to the switch to the JavaBeans Metamodel it is now possible to add information about the feature which is validated:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  context Class#feature ERROR "My message "+this.name+"." :<br/>
+    my.complex.predicate;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>This is of you add the name of a feature separated by a hash (&#8216;#&#8217;), in the editor only the value of the feature will be marked, not the whole object.</p>
+<div class="section" title="Validation Lifecycles">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_validation_lifecycles"/>Validation Lifecycles</h4>
+</div>
+</div>
+</div>
+<p>In order to make more expensive validations possible without slowing down the editor, TMF Xtext supports three different validation hooks.</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>FAST constraints are executed in the reconciler (i.e. 500 ms after the last keystroke) and on save.</p>
+</li>
+<li class="listitem">
+<p>NORMAL constraints are executed on save only.</p>
+</li>
+<li class="listitem">
+<p>EXPENSIVE constraints are executed through an action which is available through the context menu.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" title="Differences in Linking">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differences_linking"/>Differences in Linking</h3>
+</div>
+</div>
+</div>
+<p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all &#8216;visible&#8217; EObjects and than filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. This was not only very expensive but also lacks an important abstraction: the notion of scopes.</p>
+<div class="section" title="The idea of scopes">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_linking_sopes"/>The idea of scopes</h4>
+</div>
+</div>
+</div>
+<p>In oAW Xtext one typically had to override the link_feature() extension in order to change the default linking. A typical rewritten extension called the allVisibleElements() extensions and than filters out everything which shouddn&#8217;t be taken into account for the specific link. For all elements left we typically took the first element where the id() extension returned a string similar to what has been written in the text.</p>
+<p>The code about selecting and filtering allElements() usually has been duplicated in the corresponding content assist function, so that linking an content assist are semantically in sync. If you&#8217;re good (we usually were not) you externalized that pice of code and reused the same extension in content assist and linking.</p>
+<p>In TMF Xtext we&#8217;ve introduced scopes and scopeproviders. Scopeproviders are responsible for creating scopes and a scope is basically a hierarchy of Lists of name-&gt;value pairs. This is where most of the semantics of linking typically goes and by implmenting an 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&amp;view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both rely and use the scope provider.
+					</p>
+<p>The default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: </p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>Elements which have an attribute name will be made visible by their name,</p>
+</li>
+<li class="listitem">
+<p>referenced resources ca be put on the scope by using the &#8216;importedURI&#8217;- naming convention (TODO-REF)</p>
+</li>
+<li class="listitem">
+<p>the available elements are filtered by the expected type (i.e. the type of the reference to be linked)</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" title="Migration">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_linking_migration"/>Migration</h4>
+</div>
+</div>
+</div>
+<p>We expect the migration of linking to be very simple, if you&#8217;ve not changed the default semantics that much. We&#8217;ve already migrated a couple of projects it wasn&#8217;t too hard to do so.
+						If you have changed linking (and also content assist) a lot, you&#8217;ll have to translate the semantics to the IScopeProvider concept. This might a bit of work, but it is worth the effort as this will clean up your code base and better separate concerns. Also we&#8217;re confident that there&#8217;s much value in migrating to TMF Xtext. </p>
+<p>That said you might not have the time to do the migration and wished to have better support for migrating oAW linking to TMF linking.  In this document we tried to explain why we diceded to change the conceptual architecture and why it is not easily possible to come up with an adapter for the notion of scopes. If you don&#8217;t want to do the migration yourself we (itemis AG) can do the work or help you with that. Note also that you&#8217;re welcome to ask any questions in the newsgroup and that we&#8217;ll try to help you as much as possible in order to get your projects migrated. </p>
+</div>
+</div>
+<div class="section" title="Differences in Content Assist">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differences_content_assist"/>Differences in Content Assist</h3>
+</div>
+</div>
+</div>
+<p>In oAW Xtext content assist has been customized using Xtend. This was a very convenient thing because of the polymorphic dispatch. However in content assist one usually don&#8217;t have to do extensive model computation. At least not in TMF Xtext as content assist relies on scope providers which do the complicated work.</p>
+<p>In TMF Xtext content assist can be conveniently customize using a declarative Java API (see TODO-REF).</p>
+</div>
+<div class="section" title="Differences in Outline View">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differences_outline_view"/>Differences in Outline View</h3>
+</div>
+</div>
+</div>
+<p>In TMF Xtext the outline view does not support mutliple view points so far. This is just because we didn&#8217;t manage to get this included (due to low priorization). We don&#8217;t think that this is in general a bad idea, but we thought of other things as more important.
+					That said the default outline view is similar to the one in oAW Xtext, but the customization is again done using a declarative Java approach (see TODO-REF).</p>
+</div>
+<div class="section" title="Differences in Label Provider">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differences_label_provider"/>Differences in Label Provider</h3>
+</div>
+</div>
+</div>
+<p>As mentioned previously label providers are also now implemented in Java and are an implementation of ILabelProvider (see TODO-REF).</p>
 </div>
 </body>
 </html>

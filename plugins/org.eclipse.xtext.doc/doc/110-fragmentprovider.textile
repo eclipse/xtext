@@ -14,23 +14,23 @@ Therefore one can contribute a so called @IFragmentProvider@ per language.
 
 bc.. public interface IFragmentProvider extends ILanguageService {
  
-	/**
-	 * Computes the local ID of the given object. 
-	 * @param obj
-	 *            The EObject to compute the fragment for
-	 * @return the fragment, which can be an arbitrary string but must be 
-	 *         unique within a resource. Return null to use default 
-	 *         implementation
-	 */
-	String getFragment(EObject obj);
-	
-	/**
-	 * Locates an EObject in a resource by its fragment. 
-	 * @param resource
-	 * @param fragment
-	 * @return the EObject 
-	 */
-	EObject getEObject(Resource resource, String fragment);
+  /**
+   * Computes the local ID of the given object. 
+   * @param obj
+   *            The EObject to compute the fragment for
+   * @return the fragment, which can be an arbitrary string but must be 
+   *         unique within a resource. Return null to use default 
+   *         implementation
+   */
+  String getFragment(EObject obj);
+  
+  /**
+   * Locates an EObject in a resource by its fragment. 
+   * @param resource
+   * @param fragment
+   * @return the EObject 
+   */
+  EObject getEObject(Resource resource, String fragment);
  }
 
 p. However, the currently available default fragment provider does nothing.

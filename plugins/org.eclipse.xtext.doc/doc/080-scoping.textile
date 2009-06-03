@@ -39,24 +39,24 @@ bc..
 import static my.Constants.STATIC;
 
 public class ScopeExample { // class body scope
-	private Object field = STATIC;
-	
-	private void method(String param) { // method body scope
-		String localVar = "bar";
-		innerBlock: { // block scope
-			String innerScopeVar = "foo";
-			Object field = innerScopeVar;
-			// the scope hierarchy at this point would look like so:
-			//blockScope{field,innerScopeVar}->
-			//methodScope{localVar,param}->
-			//classScope{field}-> ('field' is overlayed)
-			//fileScope{STATIC}->
-			//classpathScope{'all qualified names of accessible static fields'} ->
-			//NULLSCOPE{}
-			//
-		}
-		field.add(localVar);
-	}
+  private Object field = STATIC;
+
+  private void method(String param) { // method body scope
+    String localVar = "bar";
+    innerBlock: { // block scope
+      String innerScopeVar = "foo";
+      Object field = innerScopeVar;
+      // the scope hierarchy at this point would look like so:
+      //blockScope{field,innerScopeVar}->
+      //methodScope{localVar,param}->
+      //classScope{field}-> ('field' is overlayed)
+      //fileScope{STATIC}->
+      //classpathScope{'all qualified names of accessible static fields'} ->
+      //NULLSCOPE{}
+      //
+    }
+    field.add(localVar);
+  }
 }
 
 p. In fact the class path scope should also reflect the order of class path entries.

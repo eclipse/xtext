@@ -61,24 +61,24 @@ public interface IScopeProvider {<br/>
 import static my.Constants.STATIC;<br/>
 <br/>
 public class ScopeExample { // class body scope<br/>
-	private Object field = STATIC;<br/>
-	<br/>
-	private void method(String param) { // method body scope<br/>
-		String localVar = "bar";<br/>
-		innerBlock: { // block scope<br/>
-			String innerScopeVar = "foo";<br/>
-			Object field = innerScopeVar;<br/>
-			// the scope hierarchy at this point would look like so:<br/>
-			//blockScope{field,innerScopeVar}-&gt;<br/>
-			//methodScope{localVar,param}-&gt;<br/>
-			//classScope{field}-&gt; ('field' is overlayed)<br/>
-			//fileScope{STATIC}-&gt;<br/>
-			//classpathScope{'all qualified names of accessible static fields'} -&gt;<br/>
-			//NULLSCOPE{}<br/>
-			//<br/>
-		}<br/>
-		field.add(localVar);<br/>
-	}<br/>
+  private Object field = STATIC;<br/>
+<br/>
+  private void method(String param) { // method body scope<br/>
+    String localVar = "bar";<br/>
+    innerBlock: { // block scope<br/>
+      String innerScopeVar = "foo";<br/>
+      Object field = innerScopeVar;<br/>
+      // the scope hierarchy at this point would look like so:<br/>
+      //blockScope{field,innerScopeVar}-&gt;<br/>
+      //methodScope{localVar,param}-&gt;<br/>
+      //classScope{field}-&gt; ('field' is overlayed)<br/>
+      //fileScope{STATIC}-&gt;<br/>
+      //classpathScope{'all qualified names of accessible static fields'} -&gt;<br/>
+      //NULLSCOPE{}<br/>
+      //<br/>
+    }<br/>
+    field.add(localVar);<br/>
+  }<br/>
 }<br/>
 <br/>
 </code>
