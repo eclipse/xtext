@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Differences</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="from_oaw_to_tmf.html" title="From oAW to TMF"/>
+<link rel="prev" href="Xtend_based_apis.html" title="Xtend-based APIs"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Differences</h1>
+<p>In this section differences between oAW Xtext and TMF Xtext are outlined and explained. We&#8217;ll start from the primary APIs such as the grammar language and the validation hook and finish with the different secondary hooks for customizing linking and several UI apsects, such as outline view and content assist.</p>
+<div class="section" title="Differences in the grammar language">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="differenced_grammar_language"/>Differences in the grammar language</h3>
+</div>
+</div>
+</div>
+<p>When looking at a TMF Xtext gramar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models.
+					In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of the grammar in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p>
+<p>Apart from the first three lines the grammar languages are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinatlities) is similar.
+					Also assignments are syntactically and semantically identical in both versions. 
+					However in TMF Xtext some concepts have been generalized and improved:</p>
+<div class="section" title="String rules become Datatype rules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_datatype_rules"/>String rules become Datatype rules</h4>
+</div>
+</div>
+</div>
+<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&#8217;t need to write the &#8216;String&#8217; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDatatype. The return type is inferred and if not specified EString is assumed, however you can now simply create a parser rule returning other EDatatypes.</p>
+</div>
+<div class="section" title="Enum rules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_enum_rules"/>Enum rules</h4>
+</div>
+</div>
+</div>
+<p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&#8216;enum&#8217; instead of &#8216;Enum&#8217;).
+						Also the right handside of the assignment is now optional. That is in oAW Xtext:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  Enum MyEnum : foo='foo' | bar='bar';<br/>
+  <br/>
+</code>
+</p>
+</div>
+<p>becomes</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+   enum MyEnum : foo='foo' | bar='bar';<br/>
+   <br/>
+</code>
+</p>
+</div>
+<p>and because the name of the literal equals the literal value one can ommit the right handside in this case and write:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  enum MyEnum : foo | bar;<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Native rules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_native_rules"/>Native rules</h4>
+</div>
+</div>
+</div>
+<p>The most significant improvement to oAW Xtext is that we could replace the blackbox native rules with full-blown EBNF syntax. 
+						That is native rules become terminal rules and or no longer written as a string literal containing ANTLR syntax but are a part of the language.</p>
+<p>Example :</p>
+<div class="literallayout">
+<p>
+<code class="code">Native FOO : "'f' 'o' 'o'";<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>becomes</p>
+<div class="literallayout">
+<p>
+<code class="code">terminal FOO : 'f' 'o' 'o';<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>See the reference documentation for all the different expressions possible in terminal rules.</p>
+</div>
+<div class="section" title="No built-in terminals">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_no_builtin_terminals"/>No built-in terminals</h4>
+</div>
+</div>
+</div>
+<p>In oAW Xtext common terminals lie ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&#8217;t be removed.
+						Also overriding was error-prone and challenged. In TMF Xtext these terminals are important through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don&#8217;t have to use them and you can come up with your own reusable rules. </p>
+</div>
+<div class="section" title="No URI terminal rule anymore">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="differences_no_URI_token"/>No URI terminal rule anymore</h4>
+</div>
+</div>
+</div>
+<p>Although with grammar-mixins we would have been able to implement the URI terminal rule again, we decided to remove it as we only wanted to mark the model some how to identify what information to use in orde to load referenced models. Instead we decided to solve this similar to how we do resolution by name: We use convention.
+						That is if you&#8217;ve used the URI token like so:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+ Import : 'import' myReference=URI;<br/>
+ <br/>
+</code>
+</p>
+</div>
+<p>you&#8217;ll have to rewrite it like so</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+ Import : 'import' importedURI=STRING;<br/>
+ <br/>
+</code>
+</p>
+</div>
+<p>Although this changes your meta model, one usually never used this reference explicititely as it was only there to be used by Xtext&#8217;s simple import mechanism. So we assume and hope  that changing the reference is not a big deal for you. </p>
+</div>
+</div>
+</body>
+</html>

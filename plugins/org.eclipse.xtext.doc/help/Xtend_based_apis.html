@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Xtend-based APIs</title>
+<link href="book.css" rel="stylesheet" type="text/css"/>
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
+<link rel="home" href="index.html" title="Xtext User Guide"/>
+<link rel="up" href="from_oaw_to_tmf.html" title="From oAW to TMF"/>
+<link rel="prev" href="from_oaw_to_tmf.html" title="From oAW to TMF"/>
+<link rel="next" href="differences.html" title="Differences"/>
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Xtend-based APIs</h1>
+<p>One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure. 
+				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand).  It provides nicer expression syntax than Java
+				especially the existence of higher-order functions for collections are extremely handy when working with models.
+				In addition to the nice syntax it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe.
+				In contrast using Java one usually has to write instanceof and cast orgies. </p>
+<div class="section" title="Xtend is hard to debug">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Xtend_is_hard_to_debug"/>Xtend is hard to debug</h3>
+</div>
+</div>
+</div>
+<p>While the aforementioned things allow for convenient specification of label and icon providers, outline views, content assist and linking. Xtend is interpreted and therefore hard to debug.
+					Because of that Xpand is shipped with a special debugger facility, however using the shipped debugger implies that the Xtend functions are called from a workflow. This is not and cannot be the case in Xtext.
+					As a result one has to debug his way through the interpreter, which is hard and inconvenient even for us, who have written that interpreter.</p>
+</div>
+<div class="section" title="Xtend is slow">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Xtend_is_slow"/>Xtend is slow</h3>
+</div>
+</div>
+</div>
+<p>But the problematic debugging was not the main reason why there are no Xtend-based APIs in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &#8220;live in the editor&#8221;, that is evaluating lots of Xtend code while you type. 
+					While Xtend&#8217;s performance is sufficiently good when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model).
+					Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime wich function is the best match and it has to do so on each call.
+					Also Xtend supports a plggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. Last but not least the code is interpreted and not compiled once. The price we pay for all these nice features reduced performance.</p>
+<p>In addition to these scalability problems we have designed seom core concepts around the idea of Iterables, which allows for lazy resolution of things. As Xtend does not know the concept of Iterators you&#8217;ld have work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p>
+</div>
+<div class="section" title="Declarative Java">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Declarative_Java"/>Declarative Java</h3>
+</div>
+</div>
+</div>
+<p>To summarize this we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
+					As a result we found ways and means to tweak Javaas good as possible to allow for relatively convenient, high performing implementations. </p>
+<p>To allow convenience in Java we tried to mimic the nice things of Xtend in Java. This is done through two things</p>
+<div class="section" title="Polymorphic Dispatcher">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="polymorphic_dispatching"/>Polymorphic Dispatcher</h4>
+</div>
+</div>
+</div>
+<p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the polymorphic dispatch know from Xtend. A ILabelProvider to be used in any Eclipse view can be writte like so for instance:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  public class XtextLabelProvider extends DefaultLabelProvider {<br/>
+<br/>
+	  String text(Grammar grammar) {<br/>
+		  return GrammarUtil.getName(grammar);<br/>
+	  }<br/>
+	<br/>
+	  String image(Grammar grammar) {<br/>
+		  return "language.gif";<br/>
+	  }<br/>
+	<br/>
+	  String image(GeneratedMetamodel metamodel) {<br/>
+		  return "export.gif";<br/>
+	  }<br/>
+  }<br/>
+  <br/>
+</code>
+</p>
+</div>
+<p>As you can see this is very similar to the way one describes labels and icons in oAW Xtext, but has the advantage that it is easier to test and to debug, faster and can be used everywhere an ILabelProvider is expected.</p>
+</div>
+<div class="section" title="Google Collections">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="google_collections"/>Google Collections</h4>
+</div>
+</div>
+</div>
+<p>The other thing we love about Xtend is its convenient way to navigate a model. This is something which can&#8217;t be done with Java, as it lacks closures and in general requires to write lots of boilerplate such as superfluos type information, etc. So this is where you have to make compromises.
+						Anyway, we think this could be improved a bit by using Google Collections which is (the name suggests it) a collections framewokr written by google. It&#8217;s open-source and there&#8217;s a JSR proposing to add the framework to the JDK, which would IMHO be a very good addition.</p>
+<p>It provides lots of nice static factory methods similar to what we have in java.util.Collections and java.util.Arrays, contains higher-order functions based on a function type included in the library and a couple of very good collection implementations such as multi maps and immutable implementations of the various collection types. With this it is possible to  write a chain of filters and transformers like so.</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+   	ArrayList&lt;String&gt; names = newArrayList("foo", "bar", "honk");<br/>
+		Iterable&lt;String&gt; filtered = filter(names, not(isEqualTo("bar")));<br/>
+		Iterable&lt;Integer&gt; lengths = transform(filtered,new Function&lt;String, Integer&gt;() {<br/>
+			public Integer apply(String from) {<br/>
+				return from.length();<br/>
+			}<br/>
+		});<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>or in a more functional way :</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+	 transform(<br/>
+			filter(<br/>
+				newArrayList("foo", "bar", "honk"), <br/>
+				not(isEqualTo("bar"))<br/>
+			),<br/>
+			new Function&lt;String, Integer&gt;() {<br/>
+				public Integer apply(String from) {<br/>
+					return from.length();<br/>
+				}<br/>
+			}<br/>
+		);<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it&#8217;s a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.</p>
+</div>
+</div>
+<div class="section" title="Conclusion">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="conclusion"/>Conclusion</h3>
+</div>
+</div>
+</div>
+<p>Just to get it right, Xtend is a very nice language and we still use it for it&#8217;s main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it&#8217;s performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p>
+</div>
+</body>
+</html>

@@ -47,6 +47,8 @@
         set       toc,title
     </xsl:param>
     
+    <xsl:param name="ulink.target" select="'_new'"/>
+    
     <!-- Make sure each chunk has a decent (visible!) heading -->
 	<xsl:template name="user.header.content">
 		<h1><xsl:value-of select="./title"/></h1>

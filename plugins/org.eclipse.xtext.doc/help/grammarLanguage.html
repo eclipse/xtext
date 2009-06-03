@@ -11,13 +11,13 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Grammar Language</h1>
 <p>The 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&amp;view=markup" target="_top">grammar language</a> 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&amp;view=markup" target="_new">grammar language</a> 
 				is the corner stone of Xtext and is defined in itself &#8211; of course.
 			</p>
 <p>It is a DSL carefully designed for description of textual languages, based on 
-				<a class="ulink" href="http://en.wikipedia.org/wiki/LL_parser" target="_top">LL(*)-Parsing</a> that is like 
-				<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_top">Antlr3's parsing strategy</a> and supported by 
-				<a class="ulink" href="http://pdos.csail.mit.edu/~baford/packrat/" target="_top">packrat parsers</a>.
+				<a class="ulink" href="http://en.wikipedia.org/wiki/LL_parser" target="_new">LL(*)-Parsing</a> that is like 
+				<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">Antlr3's parsing strategy</a> and supported by 
+				<a class="ulink" href="http://pdos.csail.mit.edu/~baford/packrat/" target="_new">packrat parsers</a>.
 				The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 			</p>
 <div class="section" title="First an example">
@@ -30,7 +30,7 @@
 </div>
 </div>
 <p>To get an idea of how it works we&#8217;ll start by implementing a 
-					<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_top">simple example</a> introduced by Martin Fowler.
+					<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">simple example</a> introduced by Martin Fowler.
 					It&#8217;s mainly about describing state machines used as the (un)lock mechanism of secret compartments. 
 					People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards.  
 				</p>
@@ -87,7 +87,7 @@
 </div>
 <p>So, we have a bunch of declared events, commands and states. Within states there are references to declared actions, which should be executed when entering such a state.
 					Also there are transitions consisting of a reference to an event and a state. Please read 
-					<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_top">Martin's description</a>  if it is not clear enough.
+					<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">Martin's description</a>  if it is not clear enough.
 				</p>
 <p>In order to get a complete IDE for this little language from Xtext, you need to write the following grammar:</p>
 <div class="literallayout">
@@ -324,9 +324,9 @@
 </div>
 </div>
 <p>The default parsing is based on a homegrown packrat parser. It can be substituted by an Anltr parser through the Xtext service mechanism. Antlr is a sophisticated parser generator framework based on an LL(*) 
-					<a class="ulink" href="http://bit.ly/ANTLR_LL_star_algorithm" target="_top">parsing algorithm</a>, that works quite well for Xtext. At the moment it is advised to download the plugin de.itemis.xtext.antlr (from update site 
+					<a class="ulink" href="http://bit.ly/ANTLR_LL_star_algorithm" target="_new">parsing algorithm</a>, that works quite well for Xtext. At the moment it is advised to download the plugin de.itemis.xtext.antlr (from update site 
 					<code class="code">http://www.itemis.com/xtext/updatesite/milestones</code>) and use the Antlr Parser instead of the packrat parser (cf. 
-					<a class="ulink" href="Xtext_Workspace_Setup" target="_top">Xtext Workspace Setup</a>).
+					<a class="ulink" href="Xtext_Workspace_Setup" target="_new">Xtext Workspace Setup</a>).
 				</p>
 <p>Basically parsing can be separated in the following phases. </p>
 <div class="orderedlist">
@@ -1055,7 +1055,7 @@ current = temp;<br/>
 </div>
 <p>Note that if a rule does not call another parser rule and does not contain any actions nor assignments (see parser rules), it is considered a datatype rule and the datatype EString is implied if not explicitly declared differently.</p>
 <p>For conversion again value converters are responsible (cf. 
-					<a class="ulink" href="Xtext/Documentation/ValueConverter" target="_top">value converters</a>).
+					<a class="ulink" href="Xtext/Documentation/ValueConverter" target="_new">value converters</a>).
 				</p>
 </div>
 <div class="section" title="Enum Rules">

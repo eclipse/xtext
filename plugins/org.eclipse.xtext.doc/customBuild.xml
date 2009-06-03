@@ -15,6 +15,7 @@
 
 	<property name="document.eclipse.stylesheet" value="styles/eclipsehelp.xsl"/>
 	<property name="eclipsehelp-css.file" value="styles/book.css" />
+	<property name="html-css.file" value="styles/book.css" />
 	
 	<property name="build.dir" value="build" />
 	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
@@ -117,15 +118,6 @@
 	<target name="init">
 		<mkdir dir="${download.dir}"/>
 		<mkdir dir="${build.dir}"/>
-		<antcall target="stage-images" />
-	</target>
-	
-	<target name="stage-images">
-		<copy todir="${build.dir}${file.separator}">
-			<fileset dir="doc/">
-    			<include name="images/**" />
-			</fileset>
-		</copy>
 	</target>
 	
 	<target name="build-doc" depends="init, install-wikitext, get-docbook-xsl, get-fop">
@@ -171,15 +163,23 @@
 	
 	<target name="docbook2html">
 		<echo>Converting article to HTML...</echo>
-		<delete file="${build.dir}${file.separator}${document.name}.html"/>
-		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.html" style="${document.stylesheet}">
+		<delete dir="${basedir}/html"
+		        failonerror="false"
+		        excludes="CVS" 
+				includeemptydirs="true"/>
+		
+		<copy todir="${basedir}/html">
+			<fileset dir="doc/">
+    			<include name="images/**" />
+			</fileset>
+		</copy>
+		<copy file="${html-css.file}" todir="${basedir}/html" />
+		
+		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${basedir}/html${file.separator}${document.name}.html" style="${document.stylesheet}">
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
 				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
 			</factory>
 			<xmlcatalog>
-				<entity 
-					publicId="chunk.xsl"
-					location="${docbook.dir}${file.separator}html${file.separator}chunk.xsl"/>
 				<entity 
 					publicId="docbook.xsl"
 					location="${docbook.dir}${file.separator}html${file.separator}docbook.xsl"/>
@@ -261,6 +261,7 @@
 					publicId="chunk.xsl"
 					location="${docbook.dir}${file.separator}html${file.separator}chunk.xsl"/>
 			</xmlcatalog>
+			<param name="header.rule" expression="1" />
 		</xslt>
 		<delete file="${basedir}/xtext.html" />
 	</target>

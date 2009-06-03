@@ -101,4 +101,25 @@
 <topic href="help/navigation.html" label="Navigation and Hyperlinking"/>
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)"/>
 </topic>
+<topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">
+<topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite"/>
+<topic href="help/Xtend_based_apis.html" label="Xtend-based APIs">
+<topic href="help/Xtend_based_apis.html#Xtend_is_hard_to_debug" label="Xtend is hard to debug"/>
+<topic href="help/Xtend_based_apis.html#Xtend_is_slow" label="Xtend is slow"/>
+<topic href="help/Xtend_based_apis.html#Declarative_Java" label="Declarative Java">
+<topic href="help/Xtend_based_apis.html#polymorphic_dispatching" label="Polymorphic Dispatcher"/>
+<topic href="help/Xtend_based_apis.html#google_collections" label="Google Collections"/>
+</topic>
+<topic href="help/Xtend_based_apis.html#conclusion" label="Conclusion"/>
+</topic>
+<topic href="help/differences.html" label="Differences">
+<topic href="help/differences.html#differenced_grammar_language" label="Differences in the grammar language">
+<topic href="help/differences.html#differences_datatype_rules" label="String rules become Datatype rules"/>
+<topic href="help/differences.html#differences_enum_rules" label="Enum rules"/>
+<topic href="help/differences.html#differences_native_rules" label="Native rules"/>
+<topic href="help/differences.html#differences_no_builtin_terminals" label="No built-in terminals"/>
+<topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"/>
+</topic>
+</topic>
+</topic>
 </toc>
