@@ -11,7 +11,7 @@ import org.eclipse.xtext.generator.Binding;
 
 public class ImplicitUiFragment extends AbstractGeneratorFragment {
 
-	private List<String> fileExtensions;
+	private final List<String> fileExtensions;
 
 	public ImplicitUiFragment(List<String> fileExtensions2) {
 		this.fileExtensions = fileExtensions2;
@@ -24,9 +24,9 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { 
-				"org.eclipse.xtext.ui.core", 
-				"org.eclipse.xtext.ui.common", 
+		return new String[] {
+				"org.eclipse.xtext.ui.core",
+				"org.eclipse.xtext.ui.common",
 				"org.eclipse.ui.editors",
 				"org.eclipse.ui" };
 	}
@@ -45,9 +45,9 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.ui.views.contentoutline.IContentOutlinePage","org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage")
 		
 		// syntax coloring
-		.addTypeToType("org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer","org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer.NullTokenColorer")
 		.addTypeToType("org.eclipse.jface.text.rules.ITokenScanner","org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner")
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.IDamagerRepairer","org.eclipse.xtext.ui.core.editor.FastLineBasedDamagerRepairer")
+		.addTypeToType("org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper","org.eclipse.xtext.ui.common.editor.syntaxcoloring.HighlightingHelper")
 		
 		//label provider
 		.addTypeToType("org.eclipse.jface.viewers.ILabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
