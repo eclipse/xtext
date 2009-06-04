@@ -1,5 +1,5 @@
 /*******************************************************************************
-s * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,12 +19,12 @@ public class SimpleResourceIndexerRegistryImpl implements ResourceIndexer.Regist
 
 	private Map<String, ResourceIndexer> registry = new HashMap<String, ResourceIndexer>();
 
-	public void registerIndexer(String fileExtension, ResourceIndexer factory) {
-		registry.put(fileExtension, factory);
+	public void registerIndexer(String fileExtension, ResourceIndexer indexer) {
+		registry.put(fileExtension, indexer);
 	}
 
-	public void deregisterIndexer(String fileExtension, ResourceIndexer factory) {
-		if (registry.get(fileExtension) == factory)
+	public void deregisterIndexer(String fileExtension, ResourceIndexer indexer) {
+		if (registry.get(fileExtension) == indexer)
 			registry.remove(fileExtension);
 	}
 
