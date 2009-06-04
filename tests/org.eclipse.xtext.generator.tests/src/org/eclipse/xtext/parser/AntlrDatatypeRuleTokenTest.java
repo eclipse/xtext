@@ -108,5 +108,28 @@ public class AntlrDatatypeRuleTokenTest extends TestCase {
 		assertEquals("t ext", token.getText());
 		assertEquals(12, token.getExpectedOffset());
 	}
+	
+	public void testMergeEmptyToken() {
+		AntlrDatatypeRuleToken emptyToken = new AntlrDatatypeRuleToken();
+		AntlrDatatypeRuleToken token = new AntlrDatatypeRuleToken();
+		token.setStartOffset(1);
+		token.setExpectedOffset(2);
+		token.setText("t");
+		token.merge(emptyToken);
+		assertEquals("t", token.getText());
+		assertEquals(2, token.getExpectedOffset());
+	}
+	
+	public void testMergeEmptyTokenWithOffset() {
+		AntlrDatatypeRuleToken emptyToken = new AntlrDatatypeRuleToken();
+		emptyToken.setStartOffset(9);
+		AntlrDatatypeRuleToken token = new AntlrDatatypeRuleToken();
+		token.setStartOffset(1);
+		token.setExpectedOffset(2);
+		token.setText("t");
+		token.merge(emptyToken);
+		assertEquals("t", token.getText());
+		assertEquals(2, token.getExpectedOffset());
+	}
 
 }
