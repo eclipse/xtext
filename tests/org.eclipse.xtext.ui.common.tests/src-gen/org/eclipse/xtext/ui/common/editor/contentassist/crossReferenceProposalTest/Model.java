@@ -41,6 +41,6 @@ public interface Model extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Class> getElements();
+  EList<org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.Class> getElements();
 
 } // Model

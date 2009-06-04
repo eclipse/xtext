@@ -106,5 +106,11 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.enumrules.contentassist.antlr,
  org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest,
  org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.impl,
- org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.util
+ org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.util,
+ org.eclipse.xtext.services,
+ org.eclipse.xtext.ui.common.editor.contentassist.services,
+ org.eclipse.xtext.grammarinheritance.services,
+ org.eclipse.xtext.parser.keywords.services,
+ org.eclipse.xtext.testlanguages.services,
+ org.eclipse.xtext.enumrules.services
 
