@@ -23,9 +23,9 @@ public interface ResourceIndexer {
 	void resourceDeleted(URI resourceURI, IndexFeeder feeder);
 
 	public interface Registry {
-		void registerIndexer(String fileExtension, ResourceIndexer listener);
+		void registerIndexer(String fileExtension, ResourceIndexer indexer);
 
-		void deregisterIndexer(String fileExtension, ResourceIndexer listener);
+		void deregisterIndexer(String fileExtension, ResourceIndexer indexer);
 
 		ResourceIndexer getIndexerFor(String fileExtension);
 	}

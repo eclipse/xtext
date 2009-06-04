@@ -35,11 +35,11 @@ public class ExtensionRegistryBasedIndexerRegistry implements ResourceIndexer.Re
 		this.registry = registry;
 	}
 
-	public void deregisterIndexer(String fileExtension, ResourceIndexer listener) {
+	public void deregisterIndexer(String fileExtension, ResourceIndexer indexer) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void registerIndexer(String fileExtension, ResourceIndexer listener) {
+	public void registerIndexer(String fileExtension, ResourceIndexer indexer) {
 		throw new UnsupportedOperationException();
 	}
 
