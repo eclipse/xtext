@@ -15,7 +15,6 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.PreferenceStoreAccessor;
 
 import com.google.inject.Inject;
 
@@ -27,23 +26,15 @@ import com.google.inject.Inject;
 public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	@Inject
-	public AntlrTokenScanner(
-			final PreferenceStoreAccessor accessor,
-			final ITokenColorer tokenColorer,
-			final Lexer lexer) {
-		super(accessor);
-		this.tokenColorer = tokenColorer;
-		this.lexer = lexer;
-	}
+	private Lexer lexer;
 
-	private final ITokenColorer tokenColorer;
-
-	private final Lexer lexer;
-
+	@Inject
+	private AbstractAntlrTokenToAttributeIdMapper tokenIdMapper;
+	
 	private int dirtyRegionOffset;
 
 	private CommonToken currentAntlrToken;
-
+	
 	public int getTokenLength() {
 		return currentAntlrToken.getStopIndex() - currentAntlrToken.getStartIndex() + 1;
 	}
@@ -57,7 +48,8 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 		if (currentAntlrToken.getType() == org.antlr.runtime.Token.EOF) {
 			return Token.EOF;
 		}
-		return new Token(createTextAttribute(tokenColorer.getTokenStyle(Integer.toString(currentAntlrToken.getType()))));
+		String id = tokenIdMapper.getId(currentAntlrToken.getType());
+		return new Token(getAttribute(id));
 	}
 
 	public void setRange(IDocument document, int offset, int length) {
@@ -69,5 +61,13 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 		catch (BadLocationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setTokenIdMapper(AbstractAntlrTokenToAttributeIdMapper tokenIdMapper) {
+		this.tokenIdMapper = tokenIdMapper;
+	}
+
+	public AbstractAntlrTokenToAttributeIdMapper getTokenIdMapper() {
+		return tokenIdMapper;
 	}
 }

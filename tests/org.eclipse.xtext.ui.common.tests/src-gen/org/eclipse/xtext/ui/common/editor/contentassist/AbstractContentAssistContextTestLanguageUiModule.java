@@ -48,6 +48,11 @@ public abstract class AbstractContentAssistContextTestLanguageUiModule extends C
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper> bindIHighlightingHelper() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.HighlightingHelper.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.common.notify.AdapterFactory> bindAdapterFactory() {
 		return org.eclipse.xtext.ui.core.InjectableAdapterFactory.class;
 	}
@@ -108,18 +113,8 @@ public abstract class AbstractContentAssistContextTestLanguageUiModule extends C
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
-		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.CommonAntlrTokenColorer.class;
-	}
-
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
-	}
-
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyleProvider> bindITokenStyleProvider() {
-		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenStyleProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

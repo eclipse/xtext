@@ -9,9 +9,8 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.ITokenScanner;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -19,31 +18,19 @@ import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
  */
 public abstract class AbstractTokenScanner implements ITokenScanner {
 
-	private final PreferenceStoreAccessor preferenceStoreAccessor;
-
-	protected AbstractTokenScanner(final PreferenceStoreAccessor accessor) {
-		this.preferenceStoreAccessor = accessor;
+	@Inject
+	private ITextAttributeProvider textAttributeProvider;
+	
+	public void setTextAttributeProvider(ITextAttributeProvider textAttributeProvider) {
+		this.textAttributeProvider = textAttributeProvider;
 	}
 
-	protected TextAttribute createTextAttribute(ITokenStyle tokenStyle) {
-		TextStyle textStyle = new TextStyle();
-		// we need difference to an default TextAttribute(null,null,0,null) in
-		// DefaultDamagerRepair
-		if (tokenStyle == null) {
-			return new TextAttribute(null, null, 0, null) {
-				@Override
-				public boolean equals(Object object) {
-					return false;
-				}
-			};
-		}
-		preferenceStoreAccessor.populateTextStyle(tokenStyle.getID(), textStyle, tokenStyle.getDefaultTextStyle());
-		int style = textStyle.getStyle();
-		Font fontFromFontData = null;
-		if (style == SWT.NORMAL) {
-			fontFromFontData = EditorUtils.fontFromFontData(textStyle.getFontData());
-		}
-		return new TextAttribute(EditorUtils.colorFromRGB(textStyle.getColor()), EditorUtils.colorFromRGB(textStyle
-				.getBackgroundColor()), style, fontFromFontData);
+	public ITextAttributeProvider getTextAttributeProvider() {
+		return textAttributeProvider;
 	}
+	
+	protected TextAttribute getAttribute(String id) {
+		return textAttributeProvider.getAttribute(id);
+	}
+
 }

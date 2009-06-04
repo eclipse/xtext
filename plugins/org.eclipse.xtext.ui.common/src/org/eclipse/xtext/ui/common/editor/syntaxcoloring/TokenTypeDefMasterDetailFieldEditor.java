@@ -14,6 +14,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractDetailsPart;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractMasterDetailsFieldEditor;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.util.Triple;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -21,22 +23,22 @@ import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractMasterDetails
  */
 public class TokenTypeDefMasterDetailFieldEditor extends AbstractMasterDetailsFieldEditor {
 
-	public TokenTypeDefMasterDetailFieldEditor(String name, String labelText, Composite composite,
-			IPreferenceStore preferenceStore, List<ITokenStyle> list) {
+	TokenTypeDefMasterDetailFieldEditor(String name, String labelText, Composite composite,
+			IPreferenceStore preferenceStore, List<Triple<String, String, TextStyle>> list) {
 		super(name, labelText, composite, preferenceStore, list);
 	}
 
 	@Override
 	protected String label(Object object) {
-		if (object instanceof ITokenStyle)
-			return ((ITokenStyle) object).getName();
+		if (object instanceof Triple<?, ?, ?>)
+			return (String) ((Triple<?, ?, ?>) object).getSecond();
 		return object.toString();
 	}
 
 	@Override
 	protected String identifier(Object object) {
-		if (object instanceof ITokenStyle)
-			return ((ITokenStyle) object).getID();
+		if (object instanceof Triple<?, ?, ?>)
+			return (String) ((Triple<?, ?, ?>) object).getFirst();
 		return object.toString();
 	}
 

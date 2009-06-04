@@ -11,17 +11,10 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DefaultTokenScanner extends AbstractTokenScanner {
-
-	@Inject
-	public DefaultTokenScanner(final PreferenceStoreAccessor accessor) {
-		super(accessor);
-	}
 
 	private int length;
 	private boolean tokenReturned;
@@ -37,7 +30,7 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 	public IToken nextToken() {
 		if (!tokenReturned) {
 			tokenReturned = true;
-			return new Token(createTextAttribute(CommonTokenStyles.DEFAULT));
+			return new Token(getAttribute(DefaultLexicalHighlightingConfiguration.DEFAULT_ID));
 		}
 		return Token.EOF;
 	}

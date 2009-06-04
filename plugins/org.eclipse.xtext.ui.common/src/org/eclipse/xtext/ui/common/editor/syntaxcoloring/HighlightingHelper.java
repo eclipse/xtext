@@ -1,0 +1,141 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.xtext.ui.common.editor.preferencepage.IScopedPreferenceStoreAccessor;
+import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.ui.core.editor.XtextPresentationReconciler;
+import org.eclipse.xtext.ui.core.editor.XtextSourceViewer;
+import org.eclipse.xtext.ui.core.editor.XtextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+/**
+ * Highlighting helper.
+ * Initially copied from org.eclipse.jdt.internal.ui.javaeditor.SemanticHighlightingManager
+ * 
+ * @author Sebastian Zarnekow
+ */
+public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeListener {
+
+	@Inject
+	private Provider<HighlightingReconciler> reconcilerProvider;
+	
+	@Inject
+	private Provider<HighlightingPresenter> presenterProvider;
+	
+	@Inject
+	private IScopedPreferenceStoreAccessor preferenceStoreAccessor;
+	
+	/** Highlighting presenter */
+	private HighlightingPresenter fPresenter;
+	/** Highlighting reconciler */
+	private HighlightingReconciler fReconciler;
+
+	/** The editor */
+	private XtextEditor fEditor;
+	/** The source viewer */
+	private XtextSourceViewer fSourceViewer;
+	/** The source viewer configuration */
+	private XtextSourceViewerConfiguration fConfiguration;
+	/** The presentation reconciler */
+	private XtextPresentationReconciler fPresentationReconciler;
+
+	public void install(XtextEditor editor, XtextSourceViewer sourceViewer) {
+		fEditor= editor;
+		fSourceViewer= sourceViewer;
+		if (fEditor != null) {
+			fConfiguration= editor.getXtextSourceViewerConfiguration();
+			fPresentationReconciler= (XtextPresentationReconciler) fConfiguration.getPresentationReconciler(sourceViewer);
+		} else {
+			fConfiguration= null;
+			fPresentationReconciler= null;
+		}
+		preferenceStoreAccessor.getStore().addPropertyChangeListener(this);
+		enable();
+	}
+
+	/**
+	 * Enable advanced highlighting.
+	 */
+	private void enable() {
+		fPresenter= getPresenterProvider().get();
+		fPresenter.install(fSourceViewer, fPresentationReconciler);
+
+		if (fEditor != null) {
+			fReconciler= reconcilerProvider.get();
+			fReconciler.install(fEditor, fSourceViewer, fPresenter);
+		}
+	}
+
+	public void uninstall() {
+		disable();
+		preferenceStoreAccessor.getStore().removePropertyChangeListener(this);
+		fEditor= null;
+		fSourceViewer= null;
+		fConfiguration= null;
+		fPresentationReconciler= null;
+	}
+
+	/**
+	 * Disable advanced highlighting.
+	 */
+	private void disable() {
+		if (fReconciler != null) {
+			fReconciler.uninstall();
+			fReconciler= null;
+		}
+
+		if (fPresenter != null) {
+			fPresenter.uninstall();
+			fPresenter= null;
+		}
+	}
+
+	/**
+	 * Returns this hightlighter's reconciler.
+	 *
+	 * @return the highlighter reconciler or <code>null</code> if none
+	 */
+	public HighlightingReconciler getReconciler() {
+		return fReconciler;
+	}
+
+	public void setReconcilerProvider(Provider<HighlightingReconciler> reconcilerProvider) {
+		this.reconcilerProvider = reconcilerProvider;
+	}
+
+	public Provider<HighlightingReconciler> getReconcilerProvider() {
+		return reconcilerProvider;
+	}
+
+	public void setPresenterProvider(Provider<HighlightingPresenter> presenterProvider) {
+		this.presenterProvider = presenterProvider;
+	}
+
+	public Provider<HighlightingPresenter> getPresenterProvider() {
+		return presenterProvider;
+	}
+
+	public void setPreferenceStoreAccessor(IScopedPreferenceStoreAccessor preferenceStoreAccessor) {
+		this.preferenceStoreAccessor = preferenceStoreAccessor;
+	}
+
+	public IScopedPreferenceStoreAccessor getPreferenceStoreAccessor() {
+		return preferenceStoreAccessor;
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles"))
+			fReconciler.refresh();
+	}
+}

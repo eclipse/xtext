@@ -5,16 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.preferencepage;
+
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(NullTokenStyleProvider.class)
-public interface ITokenStyleProvider {
+@ImplementedBy(DefaultScopedPreferenceStoreAccess.class)
+public interface IScopedPreferenceStoreAccessor {
 
-	ITokenStyle[] getTokenStyles();
+	ScopedPreferenceStore getStore();
 	
 }
