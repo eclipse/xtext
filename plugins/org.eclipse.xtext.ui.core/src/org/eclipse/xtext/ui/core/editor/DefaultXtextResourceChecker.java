@@ -25,18 +25,13 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
 public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
-	private static final int MAX_ERRORS = 99;
 	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
-
-	private DefaultXtextResourceChecker() {
-	}
 
 	/**
 	 * Checks an {@link XtextResource}
@@ -45,7 +40,7 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
 	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor) {
-		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
 		try {
 			// Syntactical errors
 			// Collect EMF Resource Diagnostics
@@ -76,8 +71,6 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 							Map<String, Object> marker = markerFromEValidatorDiagnostic(childDiagnostic);
 							if (marker != null) {
 								markers.add(marker);
-								if (markers.size() > MAX_ERRORS)
-									return markers;
 							}
 						}
 					}
@@ -85,8 +78,6 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 						Map<String, Object> marker = markerFromEValidatorDiagnostic(diagnostic);
 						if (marker != null) {
 							markers.add(marker);
-							if (markers.size() > MAX_ERRORS)
-								return markers;
 						}
 					}
 				}

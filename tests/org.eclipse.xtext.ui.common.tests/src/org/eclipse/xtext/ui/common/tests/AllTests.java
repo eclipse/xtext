@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.xtext.ui.common.DefaultXtextResourceCheckerTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.JavaContentAssistProcessorTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.ParserBasedContentAssistProcessorTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperTest;
@@ -40,6 +41,7 @@ public class AllTests {
 		suite.addTestSuite(ProposalConflictHelperTest.Antlr.class);
 		suite.addTestSuite(DefaultSemanticModelTransformerTest.class);
 		suite.addTestSuite(AbstractDeclarativeSemanticModelTransformerTest.class);
+		suite.addTestSuite(DefaultXtextResourceCheckerTest.class);
 		// $JUnit-END$
 		return suite;
 	}
