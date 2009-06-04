@@ -92,8 +92,7 @@ public class WhitespacePreservingTokenSerializer extends DefaultTokenSerializer 
 			return false;
 		if (ele instanceof Assignment) {
 			Assignment a = (Assignment) ele;
-			if (a.getFeature() != leaf.getFeature())
-				return false;
+			return a.getFeature().equals(leaf.getFeature());
 		}
 		return true;
 	}
