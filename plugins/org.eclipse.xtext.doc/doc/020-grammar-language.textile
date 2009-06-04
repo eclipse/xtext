@@ -457,7 +457,7 @@ bc..
 
 p. Thus, to state the cardinality is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk.
 
-h5. Tree Rewrite Actions 
+h5(grammar_actions). Tree Rewrite Actions 
 
 LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially Antlr has a very nice generic error recovery mechanism. This allows to have AST constructed even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
 
@@ -698,7 +698,7 @@ The following conditions cause an error
 * An undeclared alias is used. 
 * An imported metamodel cannot be loaded.
 
-h2. Importing existing Meta Models
+h2(grammar_import). Importing existing Meta Models
 
 With the import directive in Xtext you can refer to existing Ecore metamodels and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore datatypes.
 
@@ -708,7 +708,7 @@ Specify an explicit return type to reuse such imported types. Note that this eve
 
 bc. terminal INT returns ecore::EInt : ('0'..'9')+;
 
-h2. Grammar Mixins
+h2(grammar_mixins). Grammar Mixins
 
 Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard extend @org.eclipse.xtext.common.Terminals@ by default. 
 

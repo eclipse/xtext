@@ -4,10 +4,11 @@ h1(#from_oaw_to_tmf). From oAW to TMF
 TMF Xtext is a complete rewrite of the Xtext framework previously released with openArchitectureWare 4.3.1 (oAW). We refer to the version from oAW as oAW Xtext whereas the current Xtext version will be called TMF Xtext to avoid misconceptions.
 oAW Xtext has been around for about 2 years before TMF Xtext was released in June 2009 and has been used by many people to develop little languages and corresponding Eclipse-based IDE support.
 
-TODO: Motivate migration from oAW to TMF with reference to new features
+TMF Xtext has been improved in many aspects compared to the former version. Not only it integrates far better into the EMF world, it offers new fundamental features as well. The overhauled architecture leads to better performance when working with large models and since the whole framework is wired via dependency injection it is and will be highly customizable even in scenarios we currently cannot foresee. 
+Last not least a test coverage of more than 1.800 unit tests provided the needed confidence to use TMF Xtext in productive environments starting with one of the earlier milestones.
 
-This document describes the differences between oAW Xtext and TMF Xtext and is intended to be used as a guide to migrate from oAW Xtext to TMF Xtext.
-For people already familiar with the concepts of oAW Xtext it should also serves as a shortcut to learn TMF Xtext.  
+In this document we want to share our experience we made when migrating existing Xtext projects. The document describes the differences between oAW Xtext and TMF Xtext and is intended to be used as a guide to migrate from oAW Xtext to TMF Xtext.
+For people already familiar with the concepts of oAW Xtext it should also serve as a shortcut to learn TMF Xtext.  
 
 h2(#why_rewrite). Why a rewrite?
 
@@ -207,7 +208,7 @@ We changed this in order to allow use of any Java API , such as ${org.eclipse.xt
 
 h3(#differences_linking). Differences in Linking
 
-The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries list of all 'visible' EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. As a side-effect of link_feature() the reference is then set.
+The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all 'visible' EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the id() extension. As a side-effect of link_feature() the reference is then set.
 
 The code about selecting and filtering allElements() usually has been duplicated in the corresponding content assist function, so that linking an content assist are semantically in sync. If you're good (we usually were not) you externalized that piece of code and reused the same extension in content assist and linking. 
 
@@ -221,7 +222,7 @@ h4(#differences_linking_sopes). The idea of scopes
 
 In TMF Xtext we've introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name->value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare "visible" objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find the needed objects. The content assist reuses this set of visible objects to offer only objects that can be linked. 
 
-When implementing custom linking scoping is where most of the semantics typically goes into. By implementing an ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScopeProvider} for your language linking and content assist will automatically be kept in sync since both rely and use the scope provider.
+When implementing custom linking scoping is where most of the semantics typically goes into. By implementing an ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScopeProvider} for your language linking and content assist will automatically be kept in sync since both rely on and use the scope provider.
 
 The provided default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: 
 # Elements which have an attribute 'name' will be made visible by their name,
@@ -239,129 +240,47 @@ In oAW Xtext several UI services such as content assist, outline view or the lab
 
 Beside the API change in favor of Java we have to mention that in TMF Xtext the outline view does not support multiple view points so far. This is just because we didn't manage to get this included (due to low priorization). We don't think that view points are a bad idea in general, but we decided that other things were more important.
 
-h2. Migration Support
+h2. New Features
 
-In this document we tried to explain why we decided to change some aspects of Xtext's architecture. We consider most changes as minor but in the case of scopes you will face a conceptual break. We tried to explain why it is not easily possible to come up with an adapter for the notion of the latter.
+This section provides an overview of new possibilities with TMF Xtext compared to oAW Xtext. Please note that this list is neither complete nor does it explain every aspect in detail to keep this document tight.
 
-That said you might not have the time to do the migration and wished to have advice for migrating, especially from oAW linking to TMF linking. You're welcome to ask any questions in the newsgroup and we'll try to help you as much as possible in order to get your projects migrated. Also, if you don't want to do the migration yourself we (itemis AG) can do the work or help you with that. 
-  
-h2. Catch Basin
+h3. Dependency Injection with Google Guice
 
-The following sections have been removed from somewhere else but should not be completely removed, yet.
+Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of Xtext are wired using "Google Guice":http://code.google.com/p/google-guice  and can easily replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
 
-h4(#google_collections). Google Collections
+h3. Improvements on Grammar Level
 
-The other thing we love about Xtend is its convenient way to navigate a model. This is something which can't be done with Java, as it lacks closures and in general requires to write lots of boilerplate such as superfluos type information, etc. So this is where we have to make some compromises.
-Anyway, we think we could improve this a bit by using Google Collections which is (the name suggests it) a collections framework written by some google guys. It's open-source and there's a JSR proposing to add the framework to the JDK, which would IOHO be a very good addition.
+The Xtext grammar language introduces some new features, too. Read the chapter "grammar language":#grammarLanguage to understand the details about all the improvements that have been implemented.
 
-It provides lots of nice static factory methods similar to what we have in java.util.Collections and java.util.Arrays, contains higher-order functions based on a function type included in the library and a couple of very good collection implementations such as multi maps and immutable implementations of the various collection types. 
-With this, for instance, one can write a chain of filters and transformers like so:
+"Grammar mixins":#grammar_mixins allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
+ 
+In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn't be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar @org.eclipse.xtext.common.Terminals@ per default. This means that they are still there but they are libraries now. You don't have to use them and you can come up with your own reusable rules. 
 
-bc.. 
-  ArrayList<String> names = newArrayList("foo", "bar", "honk");
-  Iterable<String> filtered = filter(names, not(isEqualTo("bar")));
-  Iterable<Integer> lengths = transform(filtered,new Function<String, Integer>() {
-    public Integer apply(String from) {
-      return from.length();
-    }
-  });
+"Reusing existing ecore models":#grammar_import in oAW Xtext didn't work well and we communicated this by flagging this feature as 'experimental'. In TMF Xtext importing existing ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.
 
-p. or in a more functional way :
+The grammar language gained one new concept that is of great value when writing left-factored grammars (e.g. expressions). With actions one can do minor AST rewritings within a rule to overcome degenerated ASTs. You will find an "in-depth explanation of actions":#grammar_actions in the dedicated chapter.
 
-bc.. 
-  transform(
-    filter(
-      newArrayList("foo", "bar", "honk"), 
-        not(isEqualTo("bar"))
-      ),
-      new Function<String, Integer>() {
-        public Integer apply(String from) {
-          return from.length();
-        }
-      }
-    );
+h3. Fine-grained control for validation
 
-p. From a syntactical point of view Google Collections is in no way a replacement for real closures and a non-verbose expression language like we have in Xtend, but it's a big improvement over traditional Java programming with java.util.* and it performs much better than Xtend.
+In order to make more expensive validations possible without slowing down the editor, TMF Xtext supports three different validation hooks.  
 
-h4(#differences_grammar_improvements). General Improvements
-
-Aside the improvements already mentioned previously some noteworthy new things added to the grammar language are:
-
-h4(#differences_no_builtin_terminals). No built-in terminals
-
-In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn't be removed.
-Also overriding was error-prone and challenged. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism. This means that they are still there but they are now libraries. You don't have to use them and you can come up with your own reusable rules. 
-This is what the @with org.eclipse.xtext.common.Terminals@ part is about. It imports the common terminal rules.
-
-h5(#differences_grammar_mixins). Grammar mixins
-
-Grammar mixins allows you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types. We eat our own dogfood and have introduced a common.Terminals grammar which defines the terminal rules, which in oAW Xtext have been hard-coded into the grammar language.
-
-h5(#differences_import_ecore_model). Reuse existing ecore models
-
-In oAW Xtext reusing existing ecore models didn't work well and we communicated this by flagging the feature as 'experimental'. In TMF Xtext importing existing ecore models is fully supported. Moreover it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.
-
-h4(#differences_validation_lifecycles). Validation Lifecycles
-
-In order to make more expensive validations possible without slowing down the editor, TMF Xtext supports three different validation hooks.
 # FAST constraints are executed in the reconciler (i.e. 500 ms after the last keystroke) and on save.
 # NORMAL constraints are executed on save only.
 # EXPENSIVE constraints are executed through an action which is available through the context menu.
 
 Please note that when using Xtext models for code generation the checks of all three categories will be performed. 
 
-h4. Validation
-
-In addition to the switch to the JavaBeans metamodel it is now possible to add information about the feature which is validated:
+Beside this it is now possible to add information about the feature which is validated.
 
 bc. 
   context Entity#name ERROR "Name should start with a capital "+this.name+"." :
     this.name.toFirstUpper() == this.name;
 
-If you add the name of a feature prepended by a hash ('#'), in the editor only the value of the feature will be marked, not the whole object.
+If you add the name of a feature prepended by a hash ('#') in Check, the editor will only mark the value of the feature (name), not the whole object (Entity). Both concepts, control over validation time as well as pointing to a specific feature, play well in Check and Java based validation.
 
+h2. Migration Support
 
-h5(#differences_actions). Actions
+In this document we tried to explain why we decided to change some aspects of Xtext's architecture. We consider most changes as minor but in the case of scopes you will face a conceptual break. We tried to explain why it is not easily possible to come up with an adapter for the latter.
 
-The grammar language gained one new concpet important when writing left-factored grammars (e.g. expressions). In oAW Xtext one usualy wrote something like the following:
-
-bc.. 
-  Addition  : left=Multi ('+' right=Addition)?;
-  Multi     : left=Expr ('*' right=Multi)?;
-  Expr      : IntLiteral | '(' Addition ')';
-  IntLiteral: value=INT;
-  	
-p. This is a working grammar, but the problem is that the resulting ecore model is not like you want it to look and more important the model created by the parser contains a lot of redundant information.
-For instance the expression @(3)@ would be parsed into the following model:
-
-bc.. 
-Addition {
-  left=Multi {
-    left=Addition {
-      left=Multi {
-        left=IntLiteral {
-          value=3
-        }
-      }
-    }
-  }
-}
-p.  This is of course not what you want or expect. Also the structure of the generated ecore model is not how one usually wants it to look like.
-We solved this in TMF Xtext by introducing a new concept: Actions. With actions one can do minor AST rewritings within a rule. For example in TMF Xtext above's expression language should be defined like this:
-
-bc.. 
-  Addition  : Multi ({Addition.left=current} '+' right=Multi)*;
-  Multi     : Expr  ({Multi.left=current) '*' right=Expr)*;
-  Expr      : IntLiteral | '(' Addition ')';
-  IntLiteral: value=INT;
+That said you might not have the time to do the migration and wished to have advice for migrating, especially from oAW linking to TMF linking. You're welcome to ask any questions in the newsgroup and we'll try to help you as much as possible in order to get your projects migrated. Also, if you don't want to do the migration yourself we (itemis AG) can do the work for you or help you with that. 
   
-p. Actions are enclosed in curly braces and follow the syntax 
-
-bc.. '{' type=[EClass] '.' feature=[EReference] ('='|'+=') 'current' '}'
-
-p. You can think of it as a short form of the following Java code:
-
-bc.. 
-  temp = current;
-  current = new MyType();
-  current.setMyReference(temp);

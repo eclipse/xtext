@@ -107,10 +107,7 @@
 <topic href="help/Xtend_based_apis.html" label="Where are the Xtend-based APIs?">
 <topic href="help/Xtend_based_apis.html#Xtend_is_hard_to_debug" label="Xtend is hard to debug"/>
 <topic href="help/Xtend_based_apis.html#Xtend_is_slow" label="Xtend is slow"/>
-<topic href="help/Xtend_based_apis.html#Declarative_Java" label="Declarative Java">
-<topic href="help/Xtend_based_apis.html#polymorphic_dispatching" label="Polymorphic Dispatcher"/>
-<topic href="help/Xtend_based_apis.html#google_collections" label="Google Collections"/>
-</topic>
+<topic href="help/Xtend_based_apis.html#Convenient_Java" label="Convenient Java"/>
 <topic href="help/Xtend_based_apis.html#conclusion" label="Conclusion"/>
 </topic>
 <topic href="help/differences.html" label="Differences">
@@ -118,25 +115,21 @@
 <topic href="help/differences.html#differences_datatype_rules" label="String rules become Datatype rules"/>
 <topic href="help/differences.html#differences_enum_rules" label="Enum rules"/>
 <topic href="help/differences.html#differences_native_rules" label="Native rules"/>
-<topic href="help/differences.html#differences_no_builtin_terminals" label="No built-in terminals"/>
 <topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"/>
 <topic href="help/differences.html#differences_return_types" label="Return types"/>
-<topic href="help/differences.html#differences_grammar_improvements" label="General Improvements">
-<topic href="help/differences.html#differences_grammar_mixins" label="Grammar mixins"/>
-<topic href="help/differences.html#differences_import_ecore_model" label="Reuse existing ecore models"/>
-<topic href="help/differences.html#differences_actions" label="Actions"/>
 </topic>
-</topic>
-<topic href="help/differences.html#differences_validation" label="Differences in Validation">
-<topic href="help/differences.html#differences_validation_lifecycles" label="Validation Lifecycles"/>
-</topic>
+<topic href="help/differences.html#differences_validation" label="Differences in Validation"/>
 <topic href="help/differences.html#differences_linking" label="Differences in Linking">
 <topic href="help/differences.html#differences_linking_sopes" label="The idea of scopes"/>
 <topic href="help/differences.html#differences_linking_migration" label="Migration"/>
 </topic>
-<topic href="help/differences.html#differences_content_assist" label="Differences in Content Assist"/>
-<topic href="help/differences.html#differences_outline_view" label="Differences in Outline View"/>
-<topic href="help/differences.html#differences_label_provider" label="Differences in Label Provider"/>
+<topic href="help/differences.html#differences_ui" label="Differences in UI customizing"/>
 </topic>
+<topic href="help/NewFeatures.html" label="New Features">
+<topic href="help/NewFeatures.html#DependencyInjectionwithGoogleGuice" label="Dependency Injection with Google Guice"/>
+<topic href="help/NewFeatures.html#ImprovementsonGrammarLevel" label="Improvements on Grammar Level"/>
+<topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"/>
+</topic>
+<topic href="help/MigrationSupport.html" label="Migration Support"/>
 </topic>
 </toc>
