@@ -11,10 +11,10 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Where are the Xtend-based APIs?</h1>
 <p>One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure.
-				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand).  It provides nicer expression syntax than Java.
+				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand). It provides a nicer expression syntax than Java.
 				Especially the existence of higher-order functions for collections is extremely handy when working with models.
 				In addition to the nice syntax, it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe at the same time.
-				In contrast using Java one usually has to write instanceof and cast orgies. </p>
+				In Java one usually has to write instanceof and cast orgies. </p>
 <div class="section" title="Xtend is hard to debug">
 <div class="titlepage">
 <div>
@@ -24,7 +24,7 @@
 </div>
 </div>
 </div>
-<p>While the aforementioned features allow the convenient specification of label and icon providers, outline views, content assist and linking. Xtend is interpreted and therefore hard to debug. Because of that Xpand is shipped with a special debugger facility. Unfortunately, the shipped debugger cannot be used in the context of Xtext since it implies that the Xtend functions have to be called from a workflow. This is not and cannot be the case for Xtext Editors.
+<p>While the aforementioned features allow the convenient specification of label and icon providers, outline views, content assist and linking, Xtend is interpreted and therefore hard to debug. Because of that Xpand is shipped with a special debugger facility. Unfortunately, this debugger cannot be used in the context of Xtext since it implies that the Xtend functions have to be called from a workflow. This is not and cannot be the case for Xtext Editors.
 					As a result one has to debug his way through the interpreter, which is hard and inconvenient (even for us, who have written that interpreter).</p>
 </div>
 <div class="section" title="Xtend is slow">
@@ -36,7 +36,7 @@
 </div>
 </div>
 </div>
-<p>But the problematic debugging was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &#8220;inside&#8221; the editor, that is evaluating lots of Xtend code while you type. 
+<p>But the problematic debugging was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &#8220;inside&#8221; the editor again and again while you type. 
 					While Xtend&#8217;s performance is sufficient when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model). Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime which function is the best match and it has to do so on each call. Also Xtend supports a pluggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. This is very powerful and flexible but introduces another indirection layer. Last but not least the code is interpreted and not compiled. The price we pay for all these nice features is reduced performance.</p>
 <p>In addition to these scalability problems we have designed some core APIs (e.g. scopes) around the idea of Iterables, which allows for lazy resolution of elements. As Xtend does not know the concept of Iterators you would have to work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p>
 </div>
@@ -49,18 +49,21 @@
 </div>
 </div>
 </div>
-<p>To summarize this we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
+<p>To summarize the dilemma we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
 					As a result we found ways and means to tweak Java as good as possible to allow for relatively convenient, high performing implementations. </p>
-<p>Java is fast and can easily be debugged but ranks behind Xtend regarding convenience. We address this with different approaches to make Java development in text context of Xtext as comfortable as possible.</p>
-<p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the polymorphic dispatch known from Xtend. Another valuable feature of Xtend while working with oAW Xtext is static type checking while working with the inferred metamodel whereas In Java the work with dynamic ecore classes was rather cumbersome. Since TMF Xtext generates static ecore classes per default you get back static typing in Java as well. The use of 
+<p>Java is fast and can easily be debugged but ranks behind Xtend regarding convenience. We address this with different approaches to make Java development in the context of Xtext as comfortable as possible.</p>
+<p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the behavior known from Xtend. Another valuable feature of Xtend while working with oAW Xtext is static type checking while working with the inferred metamodel whereas in Java the work with dynamic Ecore classes was rather cumbersome. Since TMF Xtext generates static Ecore classes per default you get static typing in Java as well. The use of 
 					<a class="ulink" href="http://code.google.com/p/google-collections" target="_new">Google Collections</a> reduces the pain when navigating over your model to extract information. 
 				</p>
-<p>With these techniques an ILabelProvider that handles your own EClasses Property and Entity can be written like this:</p>
+<p>With these techniques an ILabelProvider that handles your own EClasses 
+					<code class="code">Property</code> and 
+					<code class="code">Entity</code> can be written like this:
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">
 <br/>
-public class XtextLabelProvider extends DefaultLabelProvider {<br/>
+public class DomainModelLabelProvider extends DefaultLabelProvider {<br/>
 <br/>
   String label(Entity e) {<br/>
     return e.getName();<br/>
@@ -92,7 +95,7 @@ public class XtextLabelProvider extends DefaultLabelProvider {<br/>
 </div>
 </div>
 </div>
-<p>Just to get it right, Xtend is a very powerful language and we still use it for it&#8217;s main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and it&#8217;s performance is at least in our experience sufficient for that use case. Actually we were able to increase runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still, live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p>
+<p>Just to get it right, Xtend is a very powerful language and we still use it for its main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and its performance is at least in our experience sufficient for that use case. Actually we were able to increase the runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still, live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p>
 <p>As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That&#8217;s why Groovy or JRuby were no alternative. Using Scala would have been a very good match, but we didn&#8217;t want to require knowledge of Scala so we didn&#8217;t use it and stuck to Java. </p>
 </div>
 </body>

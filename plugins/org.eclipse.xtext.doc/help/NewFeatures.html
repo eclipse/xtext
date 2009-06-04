@@ -20,7 +20,7 @@
 </div>
 </div>
 </div>
-<p>Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of Xtext are wired using 
+<p>Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of TMF Xtext are wired using 
 					<a class="ulink" href="http://code.google.com/p/google-guice" target="_new">Google Guice</a>  and can easily replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
 				</p>
 </div>
@@ -37,16 +37,16 @@
 					<a class="link" href="grammarLanguage.html" title="The Grammar Language">grammar language</a> to understand the details about all the improvements that have been implemented.
 				</p>
 <p>
-					<a class="link" href="">Grammar mixins</a> allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
+					<a class="link" href="">Grammar mixins</a> allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the Ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
 				</p>
 <p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&#8217;t be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar 
-					<code class="code">org.eclipse.xtext.common.Terminals</code> per default. This means that they are still there but they are libraries now. You don&#8217;t have to use them and you can come up with your own reusable rules. 
+					<code class="code">org.eclipse.xtext.common.Terminals</code> per default. This means that they are still there but reside in a libraries now. You don&#8217;t have to use them and you can come up with your own set of reusable rules. 
 				</p>
 <p>
-					<a class="link" href="">Reusing existing ecore models</a> in oAW Xtext didn&#8217;t work well and we communicated this by flagging this feature as &#8216;experimental&#8217;. In TMF Xtext importing existing ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated ecore models extend or refer to the existing ecore models.
+					<a class="link" href="">Reusing existing Ecore models</a> in oAW Xtext didn&#8217;t work well and we communicated this by flagging this feature as &#8216;experimental&#8217;. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
 				</p>
 <p>The grammar language gained one new concept that is of great value when writing left-factored grammars (e.g. expressions). With actions one can do minor AST rewritings within a rule to overcome degenerated ASTs. You will find an 
-					<a class="link" href="">in-depth explanation of actions</a> in the dedicated chapter.
+					<a class="link" href="">in-depth explanation of actions</a> in the dedicated chapter in the reference documentation.
 				</p>
 </div>
 <div class="section" title="Fine-grained control for validation">
@@ -62,7 +62,7 @@
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>FAST constraints are executed in the reconciler (i.e. 500 ms after the last keystroke) and on save.</p>
+<p>FAST constraints are triggered by the reconciler (i.e. 500 ms after the last keystroke) and on save.</p>
 </li>
 <li class="listitem">
 <p>NORMAL constraints are executed on save only.</p>
@@ -83,7 +83,7 @@
 </code>
 </p>
 </div>
-<p>If you add the name of a feature prepended by a hash (&#8216;#&#8217;) in Check, the editor will only mark the value of the feature (name), not the whole object (Entity). Both concepts, control over validation time as well as pointing to a specific feature, play well in Check and Java based validation.</p>
+<p>If you add the name of a feature prepended by a hash (&#8216;#&#8217;) in Check, the editor will only mark the value of the feature (name), not the whole object (Entity). Both concepts, control over validation time as well as pointing to a specific feature, complement one another in Check and Java based validation.</p>
 </div>
 </body>
 </html>
