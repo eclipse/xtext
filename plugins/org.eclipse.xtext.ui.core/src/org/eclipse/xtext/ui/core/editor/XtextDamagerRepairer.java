@@ -65,7 +65,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		}
 	}
 
-	private SimpleCache<DocumentEvent, IRegion> cache = new SimpleCache<DocumentEvent, IRegion>(new Function<DocumentEvent, IRegion>() {
+	private final SimpleCache<DocumentEvent, IRegion> cache = new SimpleCache<DocumentEvent, IRegion>(new Function<DocumentEvent, IRegion>() {
 
 		public IRegion apply(DocumentEvent from) {
 			return computeTextChangeRegion(from);
@@ -88,7 +88,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			// forward to the first difference
 			while (previous.hasNext() && actual.hasNext() && equal(previous.next(), actual.next())) {
 				// do nothing, just move forward
-				if (actual.getCurrent().getStopIndex() > start) {
+				if (actual.getCurrent().getStopIndex() >= start) {
 					start = actual.getCurrent().getStartIndex();
 					break;
 				}
@@ -160,7 +160,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 
 	public static class TokenIterator implements Iterator<CommonToken> {
 
-		private Lexer lexer;
+		private final Lexer lexer;
 		private CommonToken nextToken;
 		private CommonToken current;
 
@@ -181,10 +181,9 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			CommonToken token = (CommonToken) lexer.nextToken();
 			if (token.getType() == Token.EOF) {
 				return false;
-			} else {
-				nextToken = token;
-				return true;
 			}
+			nextToken = token;
+			return true;
 		}
 
 		public CommonToken next() {
@@ -192,9 +191,8 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 				if (hasNext()) {
 					current = nextToken;
 					return nextToken;
-				} else {
-					throw new IllegalStateException();
 				}
+				throw new IllegalStateException();
 			} finally {
 				nextToken = null;
 			}

@@ -80,9 +80,12 @@ public class XtextDamageRepairerTest extends TestCase {
 		assertEquals(0,22,check("test : 'mo*/in' foo;",0,0,"/*"));
 	}
 	
-	
 	public void testBug276628() throws Exception {
 		assertEquals(7,10,check("Rule2: 'keyword';",8,9,"keyword';"));
+	}
+	
+	public void testBug279061() throws Exception {
+		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
 	}
 	
 	/**
