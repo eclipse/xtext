@@ -7,11 +7,15 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.FilteringXtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
+import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
+import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 /**
@@ -22,6 +26,14 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return XtextDeclarativeModelTransformer.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SemanticHighlightingCalculator.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingConfiguration> bindISemanticHighlightingConfiguration() {
+		return SemanticHighlightingConfiguration.class;
 	}
 	
 	@Override
