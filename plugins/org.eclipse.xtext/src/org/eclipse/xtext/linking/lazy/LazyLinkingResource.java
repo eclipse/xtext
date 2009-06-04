@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -30,8 +30,6 @@ import com.google.inject.Inject;
  */
 public class LazyLinkingResource extends XtextResource {
 	
-	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
-
 	@Inject
 	private ILinkingService linkingService;
 	
@@ -53,7 +51,7 @@ public class LazyLinkingResource extends XtextResource {
 				List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), triple.getSecond(),
 						triple.getThird());
 				if (linkedObjects.isEmpty()) {
-					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
+					XtextLinkingDiagnostic diag = createDiagnostic(triple);
 					if (!getErrors().contains(diag))
 						getErrors().add(diag);
 					return null;
@@ -63,20 +61,26 @@ public class LazyLinkingResource extends XtextResource {
 							+ uriFragment);
 				EObject result = linkedObjects.get(0);
 				if (!triple.getSecond().getEReferenceType().isSuperTypeOf(result.eClass())) {
-					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
+					XtextLinkingDiagnostic diag = createDiagnostic(triple);
 					if (!getErrors().contains(diag))
 						getErrors().add(diag);
 					return null;
 				}
 				// remove previously added error markers, since everything should be fine now
-				XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
+				XtextLinkingDiagnostic diag = createDiagnostic(triple);
 				getErrors().remove(diag);
 				return result;
 			}
-		} catch (RuntimeException e) { // XXX: why do we catch any runtime exception?
-			log.error(e.getMessage(), e);
+		} catch (RuntimeException e) { 
+			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
+			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	private XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+		String msg = "Couldn't resolve reference to "+triple.getSecond().getEType().getName()+" "+triple.getThird().serialize();
+		return new XtextLinkingDiagnostic(triple.getThird(), msg);
 	}
 
 	public void setLinkingService(ILinkingService linkingService) {
