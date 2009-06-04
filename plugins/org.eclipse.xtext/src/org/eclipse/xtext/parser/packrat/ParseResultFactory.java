@@ -261,9 +261,6 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		Throwable cause = ex.getCause();
 		if (ex != cause) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			String message = cause.getMessage();
-			if (message == null)
-				message = cause.getClass().getSimpleName();
 			if (ex.getNode() == null) {
 				currentNode.setSyntaxError(error);
 			} else {
