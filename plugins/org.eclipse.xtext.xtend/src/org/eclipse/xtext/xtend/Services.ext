@@ -33,5 +33,5 @@ IScope getScope(IScopeProvider this, Object obj, Object ref) :
 	JAVA org.eclipse.xtext.xtend.contentassist.ContentAssistHelper.getScope(org.eclipse.xtext.scoping.IScopeProvider, java.lang.Object, java.lang.Object);
 	
 List toList(Iterable this):
-	JAVA com.google.common.collect.Lists.newArrayList(java.lang.Iterable);
+	JAVA com.google.common.^collect.Lists.newArrayList(java.lang.Iterable);
 
