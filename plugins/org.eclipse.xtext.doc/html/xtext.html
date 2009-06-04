@@ -510,7 +510,7 @@ current&nbsp;=&nbsp;temp;<br>
 					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
 					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see scoping).
 				</p><p>Example: While parsing a given input string, say</p><div class="literallayout"><p><code class="code">ref&nbsp;Entity01<br>
-</code></p></div><p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p><div class="literallayout"><p><code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
+</code></p></div><p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p><div class="literallayout"><p><code class="code">ref&nbsp;"EntityWith&#402;&divide;&lsaquo;"<br>
 </code></p></div><p>would work analogously. This is not an ID (umlauts are not allowed), but a STRING (as it is apparent from the quotation marks).</p></div><div class="section" title="Specification of linking semantics"><div class="titlepage"><div><div><h3 class="title"><a name="Specificationoflinkingsemantics"></a>Specification of linking semantics</h3></div></div></div><p>The default 
 					<code class="code">ILinker</code> implementation installs 
 					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
@@ -657,18 +657,32 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 -&gt;&nbsp;NULLSCOPE{}<br>
 </code></p></div><p>Please find the motivation behind this and some additional details in 
 				<a class="ulink" href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html" target="_new">this blog post</a> .
-			</p><div class="section" title="Declarative Scope Provider"><div class="titlepage"><div><div><h3 class="title"><a name="DeclarativeScopeProvider"></a>Declarative Scope Provider</h3></div></div></div><p>As always there is an implementation allowing to specify scoping in a declarative way (
-					<code class="code">org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider</code>).
-					It looks up methods which have the following signature:
-				</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;TypeOfContext&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
-</code></p></div><p>For example if you have a transition contained in a scope and you want to compute all reachable states the corresponding method could be declared as follows:</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
-</code></p></div><p>If such a method does not exist, the implementation will try to find one for the context&rsquo;s container. This allows to reuse the same scope for different elements and references. In the case of a state machine you might want to declare the scope with available states per state machine.
-					This can simply be done using the following signature:</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
-</code></p></div><p>For a transition looking for possible states to link to, the implementation would first look for 
-					<code class="code">scope_State(Transition,EReference)</code>, then for the container of the transition. Assuming that is a State the implementation would look for 
-					<code class="code">scope_State(State,EReference)</code> and so on.
-					Until it finds a matching method (e.g. 
-					<code class="code">scope_State(StateMachine,EReference)</code>)
+			</p><div class="section" title="Declarative Scope Provider"><div class="titlepage"><div><div><h3 class="title"><a name="DeclarativeScopeProvider"></a>Declarative Scope Provider</h3></div></div></div><p>As always there is an implementation allowing to specify scoping in a declarative way (extend 
+					<code class="code">org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider</code> for this purpose). It looks up methods which have either of the following two signatures:
+				</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_&lt;ContextReference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+</code></p></div><div class="literallayout"><p><code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EClass&nbsp;type)<br>
+</code></p></div><p>The former is used when evaluating the scope for a specific cross reference and here 
+					<code class="code">&lt;ContextReference&gt;</code> corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and separated by an underscore). Tthe 
+					<code class="code">ref</code> parameter represents this cross reference.
+				</p><p>The latter method signature is used when evaluating the scope of a given element type and is applicable to all cross references of that type. Here 
+					<code class="code">&lt;TypeToReturn&gt;</code> is the name of that type which also corresponds to the 
+					<code class="code">type</code> parameter. 
+				</p><p>So if you for example have a state machine with a  
+					<span class="emphasis"><em>Transition</em></span> object owned by its source 
+					<span class="emphasis"><em>State</em></span> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the 
+					<span class="emphasis"><em>Transition</em></span> type and is called 
+					<span class="emphasis"><em>target</em></span>):
+				</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_Transition_target(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
+</code></p></div><p>If such a method does not exist, the implementation will try to find one for the context object&rsquo;s container. Thus in the example this would match a method with the same name but 
+					<span class="emphasis"><em>State</em></span> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the 
+					<span class="emphasis"><em>State</em></span> objects could for instance be owned by a containing 
+					<span class="emphasis"><em>StateMachine</em></span> object.
+				</p><p>If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the 
+					<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt matching the context object. Thus in the example the signature first matched would be:
+				</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+</code></p></div><p>If no such method exists, the implementation will again try to find a method matching the context object&rsquo;s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p><div class="literallayout"><p><code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+</code></p></div><p>This scope can now be used for any cross references of type 
+					<span class="emphasis"><em>Scope</em></span> for context objects owned by the state machine.
 				</p></div></div><div class="section" title="Value Converter"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="valueconverter"></a>Value Converter</h2></div></div></div><p>Value converters are registered to convert parsed text into a certain data type instance and back.
 				The primary hook is called org.eclipse.xtext.conversion.IValueConverterService and the concrete implementation can be registered via the runtime Guice module (TODO reference to framework description).</p><div class="section" title="Annotation based value converters"><div class="titlepage"><div><div><h3 class="title"><a name="Annotationbasedvalueconverters"></a>Annotation based value converters</h3></div></div></div><p>The most simple way to register additional value converters is to make use of 
 					<code class="code">org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService</code>, which allows to
