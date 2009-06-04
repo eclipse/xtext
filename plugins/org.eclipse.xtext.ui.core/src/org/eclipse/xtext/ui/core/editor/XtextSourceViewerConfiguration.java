@@ -18,7 +18,6 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
-import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
@@ -51,6 +50,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Inject(optional=true)
 	private ISingleLineCommentHelper singleLineCommentHelper;
+	
+	@Inject
+	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -66,7 +68,8 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		if (damagerRepairerProvider != null) {
-			PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
+			XtextPresentationReconciler reconciler = getPresentationReconcilerProvider().get();
+			reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 			IDamagerRepairer defDR = damagerRepairerProvider.get();
 			reconciler.setRepairer(defDR.getRepairer(), IDocument.DEFAULT_CONTENT_TYPE);
 			reconciler.setDamager(defDR.getDamager(), IDocument.DEFAULT_CONTENT_TYPE);
@@ -121,5 +124,13 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	public ISingleLineCommentHelper getSingleLineCommentHelper() {
 		return singleLineCommentHelper;
+	}
+
+	public void setPresentationReconcilerProvider(Provider<XtextPresentationReconciler> presentationReconcilerProvider) {
+		this.presentationReconcilerProvider = presentationReconcilerProvider;
+	}
+
+	public Provider<XtextPresentationReconciler> getPresentationReconcilerProvider() {
+		return presentationReconcilerProvider;
 	}
 }

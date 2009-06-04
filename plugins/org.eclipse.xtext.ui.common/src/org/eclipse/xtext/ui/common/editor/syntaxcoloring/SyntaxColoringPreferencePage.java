@@ -8,12 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
+import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
 import org.eclipse.xtext.ui.core.editor.preferences.AbstractPreferencePage;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.inject.Inject;
 
@@ -21,34 +26,52 @@ import com.google.inject.Inject;
  * @author Dennis Hübner - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
+public class SyntaxColoringPreferencePage extends AbstractPreferencePage implements IHighlightingConfigurationAcceptor, Comparator<Triple<String, String, TextStyle>> {
 
-	@Inject
-	private ITokenStyleProvider tokenStyleProvider;
+	private final List<Triple<String, String, TextStyle>> highlightings;
 
 	@Inject
 	private PreferenceStoreAccessor preferenceStoreAccessor;
 
+	public SyntaxColoringPreferencePage() {
+		this.highlightings = new ArrayList<Triple<String, String, TextStyle>>();
+	}
+	
 	@Override
 	protected String qualifiedName() {
 		return PreferenceStoreAccessor.syntaxColorerTag(getLanguageName());
 	}
 
+	@Inject
+	public void collectLexicalHighlightings(ILexicalHighlightingConfiguration configuration) {
+		configuration.configure(this);
+	}
+	
+	@Inject
+	public void collectSemanticHighlightings(ISemanticHighlightingConfiguration configuration) {
+		configuration.configure(this);
+	}
+	
+	public void acceptDefaultHighlighting(String id, String name, TextStyle style) {
+		highlightings.add(Tuples.create(id, name, style));
+	}
+	
 	@Override
 	protected void createFieldEditors() {
-		final List<ITokenStyle> allTokenStyles = Arrays.asList(tokenStyleProvider.getTokenStyles());
-		refreshTokenStyles(allTokenStyles);
+		refreshAttributes();
 		addField(new TokenTypeDefMasterDetailFieldEditor(CommonPreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG,
-				"Token Styles", getFieldEditorParent(), getPreferenceStore(), allTokenStyles));
+				"Token Styles", getFieldEditorParent(), getPreferenceStore(), highlightings));
 	}
 
-	/**
-	 * @param allTokenStyles
-	 */
-	private void refreshTokenStyles(List<ITokenStyle> allTokenStyles) {
-		for (ITokenStyle tokenTypeDef : allTokenStyles) {
-			preferenceStoreAccessor.populateTextStyle(tokenTypeDef.getID(), new TextStyle(), tokenTypeDef.getDefaultTextStyle());
+	protected void refreshAttributes() {
+		Collections.sort(highlightings, this);
+		for (Triple<String, String, TextStyle> highlighting : highlightings) {
+			preferenceStoreAccessor.populateTextStyle(highlighting.getFirst(), new TextStyle(), highlighting.getThird());
 		}
+	}
+
+	public int compare(Triple<String, String, TextStyle> left, Triple<String, String, TextStyle> right) {
+		return left.getSecond().compareTo(right.getSecond());
 	}
 
 }

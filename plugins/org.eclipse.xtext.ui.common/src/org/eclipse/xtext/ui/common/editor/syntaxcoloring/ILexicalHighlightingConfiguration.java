@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NullTokenStyleProvider implements ITokenStyleProvider {
+@ImplementedBy(DefaultLexicalHighlightingConfiguration.class)
+public interface ILexicalHighlightingConfiguration {
 
-	public ITokenStyle[] getTokenStyles() {
-		return new ITokenStyle[] { CommonTokenStyles.DEFAULT };
-	}
-
+	void configure(IHighlightingConfigurationAcceptor acceptor);
+	
 }

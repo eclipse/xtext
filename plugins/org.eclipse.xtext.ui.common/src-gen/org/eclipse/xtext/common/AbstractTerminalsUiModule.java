@@ -48,11 +48,6 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
-		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer.NullTokenColorer.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner.class;
 	}
@@ -60,6 +55,11 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.IDamagerRepairer> bindIDamagerRepairer() {
 		return org.eclipse.xtext.ui.core.editor.FastLineBasedDamagerRepairer.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper> bindIHighlightingHelper() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.HighlightingHelper.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment

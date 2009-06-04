@@ -37,6 +37,7 @@ import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
@@ -68,6 +69,12 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
+
+	@Inject
+	private XtextSourceViewer.Factory sourceViewerFactory;
+
+	@Inject
+	private IHighlightingHelper highlightingHelper;
 
 	@Inject
 	private ValidationJob.Factory validationJobFactory;
@@ -121,6 +128,10 @@ public class XtextEditor extends TextEditor {
 		// to the source viewer yet (it will be created later).
 
 		super.init(site, input);
+	}
+	
+	public XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
+		return sourceViewerConfiguration;
 	}
 
 	/**
@@ -182,7 +193,7 @@ public class XtextEditor extends TextEditor {
 			resetHighlightRange();
 		}
 	}
-
+	
 	@Override
 	protected void createActions() {
 		super.createActions();
@@ -213,7 +224,7 @@ public class XtextEditor extends TextEditor {
 	private void configureToggleCommentAction(ToggleSLCommentAction action) {
 		ISourceViewer sourceViewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
-		((ToggleSLCommentAction) action).configure(sourceViewer, configuration);
+		action.configure(sourceViewer, configuration);
 	}
 
 	/**
@@ -232,7 +243,7 @@ public class XtextEditor extends TextEditor {
 		// overwrite superclass implementation to allow folding
 		fAnnotationAccess = createAnnotationAccess();
 		fOverviewRuler = createOverviewRuler(getSharedColors());
-		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
+		ISourceViewer projectionViewer = sourceViewerFactory.createSourceViewer(parent, ruler, getOverviewRuler(),
 				isOverviewRulerVisible(), styles);
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
@@ -251,6 +262,18 @@ public class XtextEditor extends TextEditor {
 		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
 		projectionSupport.install();
 		// TODO Folding stuff
+		
+		installHighlightingHelper();
+	}
+	
+	private void installHighlightingHelper() {
+		if (highlightingHelper != null)
+			highlightingHelper.install(this, (XtextSourceViewer) getSourceViewer());
+	}
+	
+	private void uninstallHighlightingHelper() {
+		if (highlightingHelper != null)
+			highlightingHelper.uninstall();
 	}
 
 	@Override
@@ -262,6 +285,7 @@ public class XtextEditor extends TextEditor {
 		if (outlinePage != null) {
 			outlinePage = null;
 		}
+		uninstallHighlightingHelper();
 	}
 
 	/**
