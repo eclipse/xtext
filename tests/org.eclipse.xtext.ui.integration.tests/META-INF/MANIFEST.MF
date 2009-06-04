@@ -14,7 +14,8 @@ Export-Package: org.eclipse.xtext.ui.core.util,
  org.eclipse.xtext.ui.integration.foo.impl,
  org.eclipse.xtext.ui.integration.foo.util,
  org.eclipse.xtext.ui.integration.contentassist,
- org.eclipse.xtext.ui.integration.validation
+ org.eclipse.xtext.ui.integration.validation,
+ org.eclipse.xtext.ui.integration.services
 Require-Bundle: org.eclipse.xtext.generator;bundle-version="0.7.0";resolution:=optional,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtext;bundle-version="0.7.0",

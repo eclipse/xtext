@@ -60,5 +60,9 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.xtend.tests,
  org.eclipse.xtext.xtextTest,
  org.eclipse.xtext.xtextTest.impl,
- org.eclipse.xtext.xtextTest.util
+ org.eclipse.xtext.xtextTest.util,
+ org.eclipse.xtext.services,
+ org.eclipse.xtext.parser.keywords.services,
+ org.eclipse.xtext.testlanguages.services,
+ org.eclipse.xtext.enumrules.services
 Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator
