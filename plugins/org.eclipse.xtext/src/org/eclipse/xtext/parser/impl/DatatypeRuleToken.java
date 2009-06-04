@@ -41,6 +41,9 @@ public abstract class DatatypeRuleToken {
 	}
 
 	protected void internalMerge(String text, int offset) {
+		if (text == null) {
+			return;
+		}
 		if (startOffset == INITIAL_OFFSET) {
 			startOffset = offset;
 		}
