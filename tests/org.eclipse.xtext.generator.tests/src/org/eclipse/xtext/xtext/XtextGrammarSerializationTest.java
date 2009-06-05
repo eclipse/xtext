@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtext;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,7 +49,9 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 		final Grammar g = (Grammar) resource.getParseResult().getRootASTElement();
 		assertNotNull(g);
 		final OutputStream outputStream = new ByteArrayOutputStream();
-		resource.save(outputStream, Collections.emptyMap());
+		Map<String,Object> opt = new HashMap<String, Object>();
+		opt.put(XtextResource.OPTION_FORMAT, Boolean.TRUE);
+		resource.save(outputStream, opt);
 		final String serializedModel = outputStream.toString();
 		assertEquals(expectedModel, serializedModel);
 	}
