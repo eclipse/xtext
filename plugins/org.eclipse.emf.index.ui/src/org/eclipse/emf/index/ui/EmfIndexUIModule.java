@@ -26,6 +26,7 @@ import org.eclipse.emf.index.impl.memory.ResourceDAOImpl;
 import org.eclipse.emf.index.resource.IndexFeeder;
 import org.eclipse.emf.index.resource.ResourceIndexer;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.emf.index.ui.event.impl.ExtensionRegistryBasedIndexChangeListenerRegistry;
 import org.eclipse.emf.index.ui.resource.impl.ExtensionRegistryBasedIndexerRegistry;
 
 import com.google.inject.AbstractModule;
@@ -49,7 +50,8 @@ public class EmfIndexUIModule extends AbstractModule {
 		// unlikely to be changed
 		bind(EcoreIndexFeeder.class).to(EcoreIndexFeederImpl.class).in(Scopes.SINGLETON);
 		bind(ResourceIndexer.Registry.class).to(ExtensionRegistryBasedIndexerRegistry.class).in(Scopes.SINGLETON);
-
+		bind(ExtensionRegistryBasedIndexChangeListenerRegistry.class);
+		
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
 		// non-singletons
 		bind(IndexFeeder.class).to(IndexFeederImpl.class); 
