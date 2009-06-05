@@ -73,7 +73,7 @@ public class XtextDamageRepairerTest extends TestCase {
 	}
 	
 	public void testChangeInTheMiddleElement() throws Exception {
-		assertEquals(4,3,check("foo bar import",6,1,"z"));
+		assertEquals(4,4,check("foo bar import",6,1,"z"));
 	}
 	
 	public void testComplicatedStuff1() throws Exception {
@@ -90,6 +90,12 @@ public class XtextDamageRepairerTest extends TestCase {
 	
 	public void testMlEndOfLine() throws Exception {
 		String model = "/* foo ";
+		String end = "*/";
+		
+		assertEquals(0,(model+end).length(), check(model+end,0,model.length(),model));
+	}
+	public void testMlEndOfLine2() throws Exception {
+		String model = "foo /* foo ";
 		String end = "*/";
 		
 		assertEquals(0,(model+end).length(), check(model+end,0,model.length(),model));

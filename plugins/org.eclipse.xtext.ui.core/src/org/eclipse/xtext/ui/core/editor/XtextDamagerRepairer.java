@@ -102,7 +102,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			// after the change) is moved.
 			int lengthDiff = e.getText().length() - e.getLength();
 
-			while (!inSync(previous, actual, lengthDiff)) {
+			while (!inSync(previous, actual, lengthDiff) || actual.getCurrent().getStopIndex()+1<end) {
 
 				if (!actual.hasNext()) {
 					if (equal(previous.getCurrent(), actual.getCurrent())) {
@@ -111,7 +111,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 					return new Region(start, actual.getCurrent().getStopIndex() + 1 - start);
 				}
 
-				end = actual.getCurrent().getStopIndex() + 1;
+				end =  Math.max(end, actual.getCurrent().getStopIndex()+1);
 				// move forward and catch up
 				actual.next();
 				while (previous.getCurrent().getStartIndex() + lengthDiff < actual.getCurrent().getStartIndex()) {
@@ -121,7 +121,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 					previous.next();
 				}
 			}
-
+			end =  Math.max(end, actual.getCurrent().getStopIndex()+1);
 			return new Region(start, end - start);
 		}
 
