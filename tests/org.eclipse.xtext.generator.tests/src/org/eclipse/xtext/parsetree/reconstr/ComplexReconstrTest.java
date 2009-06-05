@@ -19,7 +19,8 @@ import org.eclipse.xtext.util.EmfFormatter;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger.getLogger(ComplexReconstrTest.class);
+	private static final Logger logger = Logger
+			.getLogger(ComplexReconstrTest.class);
 
 	@Override
 	protected void setUp() throws Exception {
@@ -30,7 +31,8 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	public void testPrintGrammar() {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
-		URI u = URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
+		URI u = URI
+				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
 		EObject o = rs.getResource(u, true).getContents().get(0);
 		for (Object x : o.eContents())
 			if (x instanceof ParserRule) {
@@ -56,7 +58,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
 			logger.trace(EmfFormatter.objToStr(result));
-		return serialize(result);
+		return getSerializer().serialize(result, false);
 	}
 
 	public void testNormalizableCompositeNodesIncluded() throws Exception {

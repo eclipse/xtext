@@ -21,16 +21,20 @@ public class FormatterTest extends AbstractGeneratorTest {
 		assertEquals(expected, res);
 	}
 
-	public void _testKeepComments() throws Exception {
+	public void testKeepComments() throws Exception {
 		// final String model = "test linewrap float val; int x; double y;";
-		final String model = "// begincomment \ntest linewrap // comment1\n"
-				+ "float val; //comment2\n" + "int x;\n"
+		final String model = "// begincomment \ntest linewrap// comment1\n"
+				+ "float val;//comment2\n" + "int x;"
 				+ "double y;//yoyoyo!\n// endcomment.";
+		final String exp = "// begincomment \ntest linewrap // comment1\n"
+			+ "float val; //comment2\n" + "int x;\n"
+			+ "double y; //yoyoyo!\n// endcomment.";
 		EObject m = getModel(model);
-		// System.out.println(EmfFormater.objToStr(m, ""));
+//		System.out.println(EmfFormatter.objToStr(getResource(
+//				new StringInputStream(model)).getParseResult().getRootNode()));
 		String res = serialize(m);
 		// System.out.println(res);
-		assertEquals(model, res);
+		assertEquals(exp, res);
 	}
 
 	public void testIndentation() throws Exception {

@@ -57,7 +57,7 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-		return serialize(result);
+		return getSerializer().serialize(result, false);
 	}
 
 	@SuppressWarnings("unused")
