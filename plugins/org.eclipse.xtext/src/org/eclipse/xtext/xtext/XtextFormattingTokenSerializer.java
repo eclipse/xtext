@@ -16,6 +16,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess.AlternativesElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GeneratedMetamodelElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.GrammarIDElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ReferencedMetamodelElements;
@@ -38,10 +39,15 @@ public class XtextFormattingTokenSerializer extends
 		// cfg.setLinewrap(2).after(gr.getMetamodelDeclarationsAssignment_4());
 		// cfg.setLinewrap(2).after(gr.getRulesAssignment_5());
 		
+		// GrammarID
+		GrammarIDElements gi = g.getGrammarIDAccess();
+		cfg.setNoSpace().between(gi.getIDTerminalRuleCall_0(), gi.getFullStopKeyword_1_0());
+		cfg.setNoSpace().between(gi.getFullStopKeyword_1_0(), gi.getIDTerminalRuleCall_1_1());
+
 		// Generate
 		GeneratedMetamodelElements gm = g.getGeneratedMetamodelAccess();
 		cfg.setLinewrap(2).before(gm.getGenerateKeyword_0());
-		
+
 		// Import
 		ReferencedMetamodelElements rm = g.getReferencedMetamodelAccess();
 		cfg.setLinewrap(2).before(rm.getImportKeyword_0());
