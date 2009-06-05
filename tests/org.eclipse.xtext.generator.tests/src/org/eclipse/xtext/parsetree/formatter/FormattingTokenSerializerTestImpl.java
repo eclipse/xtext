@@ -1,10 +1,10 @@
 package org.eclipse.xtext.parsetree.formatter;
 
+import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatter.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
 
-public class FormattingTokenSerializerTestImpl extends AbstractFormattingTokenSerializer {
+public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormatter {
 
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
@@ -17,5 +17,7 @@ public class FormattingTokenSerializerTestImpl extends AbstractFormattingTokenSe
 				f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+		c.setNoLinewrap().before(f.getSL_COMMENTRule());
+		c.setNoSpace().after(f.getSL_COMMENTRule());
 	}
 }

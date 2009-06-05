@@ -48,7 +48,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)
 					.getLeafNodes()));
 		}
-		return serialize(result);
+		return getSerializer().serialize(result, false);
 	}
 
 	public void testSimpleExpressions5() throws Exception {
