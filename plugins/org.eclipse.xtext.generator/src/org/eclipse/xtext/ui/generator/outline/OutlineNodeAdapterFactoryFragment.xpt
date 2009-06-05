@@ -21,7 +21,7 @@
 */
 package «qualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultContentOutlineNodeAdapterFactory;
+import org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory;
 
 public class «qualifiedName().toSimpleName()» extends DefaultContentOutlineNodeAdapterFactory {
 
