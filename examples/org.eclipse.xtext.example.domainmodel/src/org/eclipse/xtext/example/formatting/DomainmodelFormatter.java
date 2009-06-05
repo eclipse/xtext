@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.example.formatting;
 
+import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.EntityElements;
+import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.PackageDeclarationElements;
 import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatter.impl.FormattingConfig;
 
@@ -20,7 +22,24 @@ public class DomainmodelFormatter extends AbstractDeclarativeFormatter {
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
 		org.eclipse.xtext.example.services.DomainmodelGrammarAccess f = (org.eclipse.xtext.example.services.DomainmodelGrammarAccess) getGrammarAccess();
-
-		//...
+		c.setAutoLinewrap(80);
+		
+		PackageDeclarationElements pack = f.getPackageDeclarationAccess();
+		c.setLinewrap().before(pack.getPackageKeyword_0());
+		c.setIndentation(pack.getLeftCurlyBracketKeyword_2(), pack.getRightCurlyBracketKeyword_4());
+		c.setLinewrap().before(pack.getRightCurlyBracketKeyword_4());
+		
+		c.setLinewrap().before(f.getImportAccess().getImportKeyword_0());
+		
+		EntityElements entity = f.getEntityAccess();
+		c.setLinewrap().before(entity.getEntityKeyword_0());
+		c.setIndentation(entity.getLeftCurlyBracketKeyword_3(), entity.getRightCurlyBracketKeyword_5());
+		c.setLinewrap().before(entity.getRightCurlyBracketKeyword_5());
+		
+		c.setLinewrap().before(f.getDataTypeAccess().getDatatypeKeyword_0());
+		c.setLinewrap().before(f.getReferenceAccess().getRefKeyword_0());
+		c.setLinewrap().before(f.getAttributeAccess().getAttrKeyword_0());
+		c.setNoSpace().around(f.getQualifiedNameAccess().getFullStopKeyword_1_0());
+		c.setNoSpace().before(f.getQualifiedNameWithWildCardAccess().getFullStopAsteriskKeyword_1());
 	}
 }
