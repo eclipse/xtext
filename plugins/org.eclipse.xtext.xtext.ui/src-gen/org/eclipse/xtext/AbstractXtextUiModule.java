@@ -33,13 +33,13 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer.class;
+	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer> bindISemanticModelTransformer() {
+		return org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider> bindILazyTreeProvider() {
-		return org.eclipse.xtext.ui.common.editor.outline.impl.LazyTransformingTreeProvider.class;
+	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ITreeProvider> bindITreeProvider() {
+		return org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment

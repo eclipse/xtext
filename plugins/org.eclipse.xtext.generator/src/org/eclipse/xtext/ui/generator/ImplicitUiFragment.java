@@ -40,8 +40,8 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.toggleComments.ISingleLineCommentHelper","org.eclipse.xtext.ui.common.editor.toggleComments.DefaultSingleLineCommentHelper")
 		
 		// outline
-		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer","org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer")
-		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider","org.eclipse.xtext.ui.common.editor.outline.impl.LazyTransformingTreeProvider")
+		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer","org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer")
+		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ITreeProvider","org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider")
 		.addTypeToType("org.eclipse.ui.views.contentoutline.IContentOutlinePage","org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage")
 		
 		// syntax coloring

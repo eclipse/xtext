@@ -6,12 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline;
+package org.eclipse.xtext.ui.common.editor.outline.actions;
+
+import org.eclipse.core.runtime.IAdapterFactory;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public interface IFilterableContentProvider {
-	void enableFilter(IOutlineFilter filterSpec);
-	void disableFilter(IOutlineFilter filterSpec);
+@ImplementedBy(value = DefaultContentOutlineNodeAdapterFactory.class)
+public interface IContentOutlineNodeAdapterFactory extends IAdapterFactory {
+
 }

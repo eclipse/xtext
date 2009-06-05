@@ -6,12 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.actions;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodeAdapterFactory;
 
 /**
  * @author Peter Friese - Initial contribution and API

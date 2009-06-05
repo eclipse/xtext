@@ -6,9 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline;
+package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
+import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -17,13 +20,12 @@ public interface ISemanticModelTransformer {
 
 	ContentOutlineNode transformSemanticModel(EObject semanticModel);
 
-	//TODO SE: this is never used, is it necessary?
-//	void transformSemanticNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
-
 	void setSorted(boolean on);
 
 	void enableFilter(IOutlineFilter filterSpec);
 
 	void disableFilter(IOutlineFilter filterSpec);
+
+	void setDocument(XtextDocument document);
 
 }

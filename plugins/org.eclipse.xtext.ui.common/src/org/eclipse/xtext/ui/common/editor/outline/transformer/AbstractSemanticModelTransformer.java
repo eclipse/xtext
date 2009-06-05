@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,8 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
-import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
 
 import com.google.inject.Inject;
 

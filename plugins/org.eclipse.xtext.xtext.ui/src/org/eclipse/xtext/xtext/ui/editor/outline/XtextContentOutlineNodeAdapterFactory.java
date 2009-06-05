@@ -9,7 +9,7 @@
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultContentOutlineNodeAdapterFactory;
+import org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory;
 
 /**
  * @author Peter Friese - Initial contribution and API

@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
-import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.outline.impl.OutlineAction;
+import org.eclipse.xtext.ui.common.editor.outline.actions.OutlineAction;
+import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
