@@ -90,7 +90,7 @@ public class Xtext2EcoreTransformer {
 		this.errorAcceptor = errorAcceptor;
 	}
 
-	public class NullErrorAcceptor implements ErrorAcceptor {
+	public static class NullErrorAcceptor implements ErrorAcceptor {
 		public void acceptError(TransformationErrorCode errorCode, String arg0, EObject arg1) {
 			// do nothing
 		}

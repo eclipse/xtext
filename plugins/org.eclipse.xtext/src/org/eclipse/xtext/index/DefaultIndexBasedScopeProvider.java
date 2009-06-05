@@ -104,7 +104,7 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	public IScope getScope(final EObject context, final EClass type) {
 		IScope result = null;
 		if (context == null)
-			return getGlobalScope(context, type);
+			return getGlobalScope(null, type);
 		if (context.eContainer() == null) {
 			// global scope
 			result = getGlobalScope(context, type);

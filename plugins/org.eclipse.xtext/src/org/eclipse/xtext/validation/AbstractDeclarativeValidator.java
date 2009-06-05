@@ -115,6 +115,8 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 		@Override
 		public boolean equals(Object obj) {
+			if (!(obj instanceof MethodWrapper))
+				return false;
 			MethodWrapper mw = (MethodWrapper) obj;
 			return s.equals(mw.s) && instance == mw.instance;
 		}
