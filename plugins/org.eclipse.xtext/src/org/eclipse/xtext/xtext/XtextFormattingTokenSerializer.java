@@ -41,8 +41,7 @@ public class XtextFormattingTokenSerializer extends
 		
 		// GrammarID
 		GrammarIDElements gi = g.getGrammarIDAccess();
-		cfg.setNoSpace().between(gi.getIDTerminalRuleCall_0(), gi.getFullStopKeyword_1_0());
-		cfg.setNoSpace().between(gi.getFullStopKeyword_1_0(), gi.getIDTerminalRuleCall_1_1());
+		cfg.setNoSpace().around(gi.getFullStopKeyword_1_0());
 
 		// Generate
 		GeneratedMetamodelElements gm = g.getGeneratedMetamodelAccess();
