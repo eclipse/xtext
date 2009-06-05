@@ -93,7 +93,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 					break;
 				}
 			}
-			end = Math.max(end, actual.getCurrent().getStopIndex());
+			end = Math.max(end, actual.getCurrent().getStopIndex()+1);
 			// the first pair of tokens which are not equal between previous and
 			// current text determines the start offset
 			start = Math.min(start, actual.getCurrent().getStartIndex());
