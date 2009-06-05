@@ -11,8 +11,7 @@ Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.5.0",
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.core.expressions;bundle-version="3.4.100",
- org.eclipse.emf.ecore.editor;bundle-version="2.5.0"
+ org.eclipse.core.expressions;bundle-version="3.4.100"
 Export-Package: org.eclipse.xtext.common,
  org.eclipse.xtext.common.contentassist,
  org.eclipse.xtext.ui.common.editor.contentassist,
