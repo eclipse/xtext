@@ -18,81 +18,81 @@
 «DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="«modelFileExtensions.toString(",")»"
-			id="«name»"
-			name="«name.toSimpleName()» Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="«name».Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-		<handler
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="«modelFileExtensions.toString(",")»"
+            id="«name»"
+            name="«name.toSimpleName()» Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="«name».Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
             class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
             commandId="«name».validate">
          <activeWhen>
             <reference
-					definitionId="«name».Editor.opened">
-			</reference>
+                    definitionId="«name».Editor.opened">
+            </reference>
          </activeWhen>
       </handler>
     </extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-		<definition id="«name».Editor.opened">
-			<and>
-				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-						value="«name»" 
-						forcePluginActivation="true"/>
-				</with>		
-			</and>
-		</definition>
-	</extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="«name»"
-			name="«name.toSimpleName()»"
-			category="org.eclipse.xtext.languages">
-			<keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
-		</page>
-		<page
-			category="«name»"
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="«name».coloring"
-			name="Syntax Coloring">
-			<keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
-		</page>
-		<page
-			category="«name»"
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="«name».templates"
-			name="Templates">
-			<keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"
-			label="«name.toSimpleName()»"/>
-	</extension>
-	<extension
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="«name».Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                        value="«name»" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="«name»"
+            name="«name.toSimpleName()»"
+            category="org.eclipse.xtext.languages">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+        </page>
+        <page
+            category="«name»"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="«name».coloring"
+            name="Syntax Coloring">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+        </page>
+        <page
+            category="«name»"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="«name».templates"
+            name="Templates">
+            <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"
+            label="«name.toSimpleName()»"/>
+    </extension>
+    <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
@@ -101,7 +101,7 @@
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
-    	<menuContribution
+        <menuContribution
             locationURI="popup:#TextEditorContext?after=group.open">
              <command
                  commandId="«name».validate"
@@ -109,12 +109,12 @@
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-					definitionId="«name».Editor.opened">
-				</reference>
+                    definitionId="«name».Editor.opened">
+                </reference>
             </visibleWhen>
          </command>  
          </menuContribution>
-	</extension>
+    </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
