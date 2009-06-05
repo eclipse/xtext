@@ -12,10 +12,10 @@ import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.formatter.IFormatter;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,7 +25,7 @@ public class FormatterFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType(ITokenSerializer.class.getName(), getFormatterName(grammar))
+		.addTypeToType(IFormatter.class.getName(), getFormatterName(grammar))
 		.getBindings();
 	}
 

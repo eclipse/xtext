@@ -8,46 +8,41 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import java.util.Collections;
-import java.util.List;
 
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractSerializationDiagnostic;
 
 @SuppressWarnings("serial")
 public class XtextSerializationException extends RuntimeException {
-	private static String diagToString(
-			List<AbstractSerializationDiagnostic> diagnostic) {
-		Collections.sort(diagnostic);
-		StringBuffer b = new StringBuffer();
-		for (AbstractSerializationDiagnostic d : diagnostic) {
-			b.append("\n");
-			b.append(d.toString());
-		}
-		return b.toString();
-	}
-
+//	private static String diagToString(
+//			List<AbstractSerializationDiagnostic> diagnostic) {
+//		Collections.sort(diagnostic);
+//		StringBuffer b = new StringBuffer();
+//		for (AbstractSerializationDiagnostic d : diagnostic) {
+//			b.append("\n");
+//			b.append(d.toString());
+//		}
+//		return b.toString();
+//	}
+//
 	private IInstanceDescription desc;
-
-	private List<AbstractSerializationDiagnostic> diagnostic;
-
+//	private List<AbstractSerializationDiagnostic> diagnostic;
 	public XtextSerializationException(IInstanceDescription desc, String msg) {
 		super(msg);
 		this.desc = desc;
-		this.diagnostic = null;
+//		this.diagnostic = null;
 	}
-
-	public XtextSerializationException(IInstanceDescription desc, String msg,
-			List<AbstractSerializationDiagnostic> diagnostic) {
-		super(msg + diagToString(diagnostic));
-		this.desc = desc;
-		this.diagnostic = diagnostic;
-	}
-
-	public IInstanceDescription getDesc() {
-		return desc;
-	}
-
-	public List<AbstractSerializationDiagnostic> getDiagnostic() {
-		return diagnostic;
-	}
+//
+//	public XtextSerializationException(IInstanceDescription desc, String msg,
+//			List<AbstractSerializationDiagnostic> diagnostic) {
+//		super(msg + diagToString(diagnostic));
+//		this.desc = desc;
+//		this.diagnostic = diagnostic;
+//	}
+//
+//	public IInstanceDescription getDesc() {
+//		return desc;
+//	}
+//
+//	public List<AbstractSerializationDiagnostic> getDiagnostic() {
+//		return diagnostic;
+//	}
 }

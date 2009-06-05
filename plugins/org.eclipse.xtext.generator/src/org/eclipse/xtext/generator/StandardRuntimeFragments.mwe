@@ -4,6 +4,9 @@
 	<property name="javaModelDirectory" value=""/>
 	<property name="xmiModelDirectory" value=""/>
 	<property name="file.extensions" value=""/>
+	<property name="generateDotDiagram" value=""/>
+	<property name="graphvizCommand" value=""/>
+	
 	<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 		delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
 		message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
@@ -13,5 +16,7 @@
 		fileExtensions="${file.extensions}"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genmodels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
-	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"
+		generateDotDiagram="${generateDotDiagram}"
+		graphvizCommand="${graphvizCommand}" />
 </compose>

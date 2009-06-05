@@ -40,9 +40,9 @@ import org.eclipse.xtext.parser.ISwitchingParser;
 import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -98,33 +98,8 @@ public abstract class AbstractXtextTests extends TestCase {
 		super.tearDown();
 	}
 
-	public void serialize(EObject obj, OutputStream out) throws IOException {
-		IAbstractToken token = getParseTreeConstructor().serialize(obj);
-		
-//		final String path = "tmp/";
-//		System.out.println(EmfFormatter.objToStr(obj));
-//		GrammarToDot gtd = new TraceToDot();
-//		try {
-//			EStructuralFeature f = obj.eClass().getEStructuralFeature("name");
-//			String n = f != null ? "-" + obj.eGet(f) : "";
-//			String s = token.getCurrent() == null ? "fail" : "ok";
-//			gtd.draw(token, path + getClass().getSimpleName() + "-" + getName()
-//					+ n + "-" + s + ".pdf", "-v -T pdf");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		if(token.getCurrent() == null) throw new RuntimeException("Serialization failed");
-		getTokenSerializer().serialize(token, out);
-	}
-	
 	public String serialize(EObject obj) {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		try {
-			serialize(obj, out);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return out.toString();
+		return getSerializer().serialize(obj);
 	}
 
 	/**
@@ -194,8 +169,8 @@ public abstract class AbstractXtextTests extends TestCase {
 		return injector.getInstance(IValueConverterService.class);
 	}
 
-	protected ITokenSerializer getTokenSerializer() {
-		return injector.getInstance(ITokenSerializer.class);
+	protected SerializerUtil getSerializer() {
+		return injector.getInstance(SerializerUtil.class);
 	}
 
 	protected IScopeProvider getScopeProvider() {

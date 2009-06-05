@@ -34,9 +34,8 @@
  */
 package «formatterName().toJavaPackage()»;
 
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
-
+import org.eclipse.xtext.formatter.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatter.FormattingConfig;
 
 /**
  * This class contains custom formatting description.
@@ -46,7 +45,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
-public class «formatterName().toSimpleName()» extends AbstractFormattingTokenSerializer {
+public class «formatterName().toSimpleName()» extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {

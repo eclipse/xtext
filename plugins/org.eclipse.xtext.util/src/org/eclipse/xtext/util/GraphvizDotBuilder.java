@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -26,6 +27,9 @@ import org.eclipse.emf.ecore.EPackage;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class GraphvizDotBuilder {
+
+	protected static final Logger log = Logger
+			.getLogger(GraphvizDotBuilder.class);
 
 	protected class Digraph extends Props {
 
@@ -155,6 +159,10 @@ public abstract class GraphvizDotBuilder {
 	}
 
 	public void draw(Object obj, PrintStream out) {
+		out.println("## This is a Graphviz .dot file "
+				+ "(http://www.graphviz.org/)");
+		out.println("## You can use the command "
+				+ "'dot -Tpdf this.dot > out.pdf' to render it.");
 		drawObject(obj).draw(out);
 	}
 
@@ -162,7 +170,11 @@ public abstract class GraphvizDotBuilder {
 	public void draw(Object obj, String outfile, String options)
 			throws IOException {
 		String cmd = getGraphvizBinary() + " -o " + outfile + " " + options;
-		System.out.println("Running '" + cmd + "'");
+		draw(obj, cmd);
+	}
+
+	public void draw(Object obj, String cmd) throws IOException {
+		log.info("Running '" + cmd + "'");
 		Process p = Runtime.getRuntime().exec(cmd);
 		PrintStream ps = new PrintStream(p.getOutputStream());
 		BufferedInputStream in = new BufferedInputStream(p.getInputStream());
@@ -170,12 +182,16 @@ public abstract class GraphvizDotBuilder {
 		draw(obj, ps);
 		ps.close();
 		int b;
+		ByteArrayOutputStream oerr = new ByteArrayOutputStream();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		while ((b = err.read()) >= 0)
-			System.err.write(b);
+			oerr.write(b);
 		while ((b = in.read()) >= 0)
-			System.out.write(b);
-		System.out.println("done.");
-		System.out.println(draw(obj));
+			out.write(b);
+		if (oerr.size() > 0)
+			log.info("Graphviz output to stderr: \n" + oerr.toString());
+		if (out.size() > 0)
+			log.info("Graphviz output to stdout: \n" + out.toString());
 	}
 
 	protected abstract Props drawObject(Object obj);
