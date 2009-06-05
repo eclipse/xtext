@@ -135,13 +135,12 @@ public class TypeHierarchyHelper {
 			EClassInfo info) {
 		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
 		for (EStructuralFeature feature : commonFeatures) {
-			switch (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), feature)) {
-				case FeatureDoesNotExist:
-					info.addFeature(feature);
-				case FeatureExists:
-					result.add(feature);
-				default:
-					break;
+			FindResult findResult = EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), feature);
+			if (findResult == FindResult.FeatureDoesNotExist) {
+				info.addFeature(feature);
+				result.add(feature);
+			} else if (findResult == FindResult.FeatureExists) {
+				result.add(feature);
 			}
 		}
 		return result;
