@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 
