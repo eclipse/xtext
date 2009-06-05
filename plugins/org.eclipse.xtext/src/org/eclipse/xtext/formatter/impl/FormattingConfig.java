@@ -1,66 +1,20 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+package org.eclipse.xtext.formatter.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.TerminalRule;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class FormattingConfig extends AbstractFormattingConfig {
-	private class FormattingRunner extends ConfigRunner {
-		protected int column = 0;
-		protected int indentationLevel = 0;
-
-		@Override
-		public String getSummarizedSpaces() {
-			boolean nospace = false;
-			int wrap = wrapNeeded() ? 1 : 0;
-			for (ElementLocator e : activeLocators)
-				if (e instanceof LinewrapLocator)
-					wrap = Math.max(wrap, ((LinewrapLocator) e).getLines());
-			for (ElementLocator e : activeLocators) {
-				if (e instanceof NoSpaceLocator)
-					nospace = true;
-				else if (e instanceof NoLinewrapLocator)
-					wrap = 0;
-				else if (e instanceof IndentationLocatorStart)
-					indentationLevel++;
-				else if (e instanceof IndentationLocatorEnd)
-					indentationLevel--;
-			}
-			if (wrap > 0)
-				return wrap(wrap);
-			else if (nospace)
-				return "";
-			else
-				return " ";
-		}
-
-//		public void seek(int cols) {
-//			column += cols;
-//		}
-
-		protected String wrap(int lines) {
-			column = 0;
-			StringBuffer r = new StringBuffer();
-			for (int i = 0; i < lines; i++)
-				r.append("\n");
-			for (int i = 0; i < indentationLevel; i++)
-				r.append(indentationSpace);
-			return r.toString();
-		}
-
-		protected boolean wrapNeeded() {
-			return charsPerLine < column;
-		}
-
-	}
 
 	public class IndentationLocatorEnd extends ElementLocator {
 
@@ -84,32 +38,32 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 		private final int lines;
 
+		public LinewrapLocator() {
+			this(1);
+		}
+
 		public LinewrapLocator(int lines) {
 			super();
 			this.lines = lines;
 		}
 
-		public int getLines() {
-			return lines;
-		}
-
-		public LinewrapLocator() {
-			this(1);
-		}
-
 		@Override
-		public void after(AbstractElement left) {
+		public void after(EObject left) {
 			super.after(left);
 		}
 
 		@Override
-		public void before(AbstractElement right) {
+		public void before(EObject right) {
 			super.before(right);
 		}
 
 		@Override
-		public void between(AbstractElement left, AbstractElement right) {
+		public void between(EObject left, EObject right) {
 			super.between(left, right);
+		}
+
+		public int getLines() {
+			return lines;
 		}
 
 	}
@@ -117,22 +71,22 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public class NoLinewrapLocator extends ElementLocator {
 
 		@Override
-		public void after(AbstractElement left) {
+		public void after(EObject left) {
 			super.after(left);
 		}
 
 		@Override
-		public void before(AbstractElement right) {
+		public void before(EObject right) {
 			super.before(right);
 		}
 
 		@Override
-		public void between(AbstractElement left, AbstractElement right) {
+		public void between(EObject left, EObject right) {
 			super.between(left, right);
 		}
 
 		@Override
-		public void range(AbstractElement left, AbstractElement right) {
+		public void range(EObject left, EObject right) {
 			super.range(left, right);
 		}
 
@@ -141,28 +95,28 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public class NoSpaceLocator extends ElementLocator {
 
 		@Override
-		public void after(AbstractElement left) {
+		public void after(EObject left) {
 			super.after(left);
 		}
 
 		@Override
-		public void before(AbstractElement right) {
+		public void around(EObject ele) {
+			super.around(ele);
+		}
+
+		@Override
+		public void before(EObject right) {
 			super.before(right);
 		}
 
 		@Override
-		public void between(AbstractElement left, AbstractElement right) {
+		public void between(EObject left, EObject right) {
 			super.between(left, right);
 		}
 
 		@Override
-		public void range(AbstractElement left, AbstractElement right) {
+		public void range(EObject left, EObject right) {
 			super.range(left, right);
-		}
-
-		@Override
-		public void around(AbstractElement ele) {
-			super.around(ele);
 		}
 
 	}
@@ -171,9 +125,18 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected String indentationSpace = "  ";
 
-	@Override
-	public ConfigRunner run() {
-		return new FormattingRunner();
+	protected TerminalRule whitespaceRule = null;
+
+	public int getCharsPerLine() {
+		return charsPerLine;
+	}
+
+	public String getIndentationSpace() {
+		return indentationSpace;
+	}
+
+	public TerminalRule getWhitespaceRule() {
+		return whitespaceRule;
 	}
 
 	public void setAutoLinewrap(int charsPerLine) {
@@ -204,5 +167,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	public NoSpaceLocator setNoSpace() {
 		return new NoSpaceLocator();
+	}
+
+	public void setWhitespaceRule(TerminalRule rule) {
+		whitespaceRule = rule;
 	}
 }

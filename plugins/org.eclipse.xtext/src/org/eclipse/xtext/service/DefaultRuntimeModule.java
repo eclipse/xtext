@@ -10,6 +10,8 @@ package org.eclipse.xtext.service;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
+import org.eclipse.xtext.formatter.IFormatter;
+import org.eclipse.xtext.formatter.impl.OneWhitespaceFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
@@ -20,13 +22,14 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -51,7 +54,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public EValidator.Registry bindEValidatorRegistry() {
 		return EValidator.Registry.INSTANCE;
 	}
-	
+
 	public EPackage.Registry bindEPackageRegistry() {
 		return EPackage.Registry.INSTANCE;
 	}
@@ -63,7 +66,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return DefaultTransientValueService.class;
 	}
-	
+
 	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
 		return DefaultUnassignedTextSerializer.class;
 	}
@@ -72,8 +75,16 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultCrossReferenceSerializer.class;
 	}
 
-	public Class<? extends ITokenSerializer> bindITokenSerializer() {
-		return WhitespacePreservingTokenSerializer.class;
+	public Class<? extends IFormatter> bindIFormatter() {
+		return OneWhitespaceFormatter.class;
+	}
+
+	public Class<? extends IHiddenTokenMerger> bindIHiddenTokenMerger() {
+		return DefaultHiddenTokenMerger.class;
+	}
+
+	public Class<? extends SerializerUtil> bindSerializerUtil() {
+		return SerializerUtil.class;
 	}
 
 	public Class<? extends IResourceFactory> bindIResourceFactory() {
@@ -115,9 +126,9 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
 	}
-	
+
 	public Class<? extends XtextResource> bindXtextResource() {
 		return LazyLinkingResource.class;
 	}
-	
+
 }

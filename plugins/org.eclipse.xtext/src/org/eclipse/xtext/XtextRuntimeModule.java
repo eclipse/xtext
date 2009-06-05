@@ -9,9 +9,9 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatter.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
@@ -57,7 +57,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	}
 
 	@Override
-	public Class<? extends ITokenSerializer> bindITokenSerializer() {
+	public Class<? extends IFormatter> bindIFormatter() {
 		return XtextFormattingTokenSerializer.class;
 	}
 

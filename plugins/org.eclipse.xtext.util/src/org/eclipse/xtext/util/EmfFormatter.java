@@ -159,6 +159,8 @@ public class EmfFormatter {
 
 	private static void getURI(EObject parent, EObject target, Appendable buf) throws Exception {
 		Resource r = target.eResource();
+		buf.append(target.eClass().getName());
+		buf.append("@");
 		if (r == null)
 			buf.append("(resource null)");
 		else if (parent.eResource() == r)

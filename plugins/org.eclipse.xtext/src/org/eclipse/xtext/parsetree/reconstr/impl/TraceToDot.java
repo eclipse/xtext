@@ -15,7 +15,6 @@ import java.util.Set;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2.AbstractToken2;
 
 /**
@@ -31,13 +30,13 @@ public class TraceToDot extends FollowerToDot {
 
 	protected Digraph drawPTC(AbstractToken2 obj) {
 		Digraph d = new Digraph();
-		Set<IAbstractToken> drawn = new HashSet<IAbstractToken>();
+		Set<AbstractToken2> drawn = new HashSet<AbstractToken2>();
 		Set<ParserRule> drawnRules = new HashSet<ParserRule>();
-		List<IAbstractToken> traces = new ArrayList<IAbstractToken>();
+		List<AbstractToken2> traces = new ArrayList<AbstractToken2>();
 		traces.add(obj);
 		traces.addAll(obj.getParseTreeConstructor().getFails());
 		boolean sol = true;
-		for (IAbstractToken t : traces) {
+		for (AbstractToken2 t : traces) {
 			while (t != null && !drawn.contains(t)) {
 				// String ser = ((AbstractToken2) t).serialize().replaceAll(
 				// "\\\\", "\\\\");
@@ -60,7 +59,7 @@ public class TraceToDot extends FollowerToDot {
 					d.add(e);
 				}
 				drawn.add(t);
-				t = (IAbstractToken) t.getNext();
+				t = (AbstractToken2) t.getNext();
 			}
 			sol = false;
 		}

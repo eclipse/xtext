@@ -8,18 +8,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 
 import com.google.inject.Inject;
@@ -30,7 +40,7 @@ import com.google.inject.Inject;
 public abstract class AbstractParseTreeConstructor2 implements
 		IParseTreeConstructor {
 
-	public abstract class AbstractToken2 implements IAbstractToken {
+	public abstract class AbstractToken2 /* implements IAbstractToken */{
 		protected final IInstanceDescription current;
 		protected final AbstractToken2 next;
 		protected final int no;
@@ -46,7 +56,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 
 		protected boolean checkForRecursion(Class<?> clazz,
 				IInstanceDescription curr) {
-			IAbstractToken token = next;
+			AbstractToken2 token = next;
 			while (token != null) {
 				if (token.getClass() == clazz)
 					return token.getCurrent() == curr;
@@ -78,6 +88,8 @@ public abstract class AbstractParseTreeConstructor2 implements
 			return null;
 		}
 
+		public abstract AbstractElement getGrammarElement();
+
 		public AbstractToken2 getNext() {
 			return next;
 		}
@@ -94,19 +106,8 @@ public abstract class AbstractParseTreeConstructor2 implements
 			return AbstractParseTreeConstructor2.this;
 		}
 
-		public String serialize() {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			try {
-				tokenSerializer.serialize(this, out);
-			} catch (Throwable e) {
-				e.printStackTrace();
-				return "Error: " + e.getMessage();
-			}
-			return out.toString();
-		}
-
-		public String toString() {
-			return serialize();
+		public String serializeThis() {
+			return null;
 		}
 
 		public IInstanceDescription tryConsume() {
@@ -116,8 +117,10 @@ public abstract class AbstractParseTreeConstructor2 implements
 		protected abstract IInstanceDescription tryConsumeVal();
 	}
 
-	public abstract class ActionToken extends AbstractToken2 implements
-			IActionToken {
+	public abstract class ActionToken extends AbstractToken2 /*
+															 * implements
+															 * IActionToken
+															 */{
 
 		public ActionToken(AbstractToken2 parent, AbstractToken2 next, int no,
 				IInstanceDescription current) {
@@ -125,8 +128,10 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	public abstract class AlternativesToken extends AbstractToken2 implements
-			IAlternativeesToken {
+	public abstract class AlternativesToken extends AbstractToken2 /*
+																	 * implements
+																	 * IAlternativeesToken
+																	 */{
 
 		public AlternativesToken(AbstractToken2 parent, AbstractToken2 next,
 				int no, IInstanceDescription current) {
@@ -138,8 +143,10 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	public abstract class AssignmentToken extends AbstractToken2 implements
-			IAssignmentToken {
+	public abstract class AssignmentToken extends AbstractToken2 /*
+																 * implements
+																 * IAssignmentToken
+																 */{
 
 		protected IInstanceDescription consumed;
 
@@ -165,10 +172,54 @@ public abstract class AbstractParseTreeConstructor2 implements
 		public Object getValue() {
 			return value;
 		}
+
+		public String serializeThis() {
+			if (type == null)
+				return null;
+			switch (type) {
+			case CR:
+				return crossRefSerializer.serializeCrossRef(current,
+						(CrossReference) element, (EObject) value);
+			case KW:
+				return ((Keyword) element).getValue();
+			case LRC:
+				return converterService.toString(value, ((RuleCall) element)
+						.getRule().getName());
+			case ERC:
+				EnumRule rule = (EnumRule) ((RuleCall) element).getRule();
+				if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
+					EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule
+							.getAlternatives();
+					return decl.getLiteral().getValue();
+				} else {
+					for (AbstractElement element : ((Alternatives) rule
+							.getAlternatives()).getGroups()) {
+						EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
+						if (decl.getEnumLiteral().getInstance().equals(value)) {
+							return decl.getLiteral().getValue();
+						}
+					}
+					return null;
+				}
+			case PRC:
+				return null;
+			case DRC:
+				ParserRule p = (ParserRule) ((RuleCall) element).getRule();
+				return converterService.toString(value, p.getName());
+			default:
+				return null;
+			}
+		}
 	}
 
-	public abstract class GroupToken extends AbstractToken2 implements
-			IGroupToken {
+	public enum AssignmentType {
+		CR, DRC, ERC, KW, LRC, PRC
+	}
+
+	public abstract class GroupToken extends AbstractToken2 /*
+															 * implements
+															 * IGroupToken
+															 */{
 
 		public GroupToken(AbstractToken2 parent, AbstractToken2 next, int no,
 				IInstanceDescription current) {
@@ -180,12 +231,18 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	public abstract class KeywordToken extends AbstractToken2 implements
-			IKeywordToken {
+	public abstract class KeywordToken extends AbstractToken2 /*
+															 * implements
+															 * IKeywordToken
+															 */{
 
 		public KeywordToken(AbstractToken2 parent, AbstractToken2 next, int no,
 				IInstanceDescription current) {
 			super(parent, next, no, current);
+		}
+
+		public String serializeThis() {
+			return ((Keyword) getGrammarElement()).getValue();
 		}
 
 		protected IInstanceDescription tryConsumeVal() {
@@ -222,8 +279,10 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	public abstract class RuleCallToken extends AbstractToken2 implements
-			IRuleCallToken {
+	public abstract class RuleCallToken extends AbstractToken2 /*
+																 * implements
+																 * IRuleCallToken
+																 */{
 
 		public RuleCallToken(AbstractToken2 parent, AbstractToken2 next,
 				int no, IInstanceDescription current) {
@@ -231,12 +290,19 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	public abstract class UnassignedTextToken extends AbstractToken2 implements
-			IUnassignedTextToken {
+	public abstract class UnassignedTextToken extends AbstractToken2 /*
+																	 * implements
+																	 * IUnassignedTextToken
+																	 */{
 
 		public UnassignedTextToken(AbstractToken2 parent, AbstractToken2 next,
 				int no, IInstanceDescription current) {
 			super(parent, next, no, current);
+		}
+
+		public String serializeThis() {
+			return unassTextSerializer.serializeUnassignedRuleCall(
+					(RuleCall) getGrammarElement(), current.getDelegate());
 		}
 
 		protected IInstanceDescription tryConsumeVal() {
@@ -244,16 +310,22 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 	}
 
-	protected List<IAbstractToken> fails = new ArrayList<IAbstractToken>();
+	@Inject
+	protected IValueConverterService converterService;
+
+	@Inject
+	protected ICrossReferenceSerializer crossRefSerializer;
+
+	protected List<AbstractToken2> fails = new ArrayList<AbstractToken2>();
 
 	private final Logger log = Logger
 			.getLogger(AbstractParseTreeConstructor2.class);
 
 	@Inject
-	protected ITokenSerializer tokenSerializer;
+	protected ITransientValueService tvService;
 
 	@Inject
-	protected ITransientValueService tvService;
+	protected IUnassignedTextSerializer unassTextSerializer;
 
 	protected String debug(AbstractToken2 t, IInstanceDescription i) {
 		AbstractToken2 x = t;
@@ -268,7 +340,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 		return new InstanceDescription(tvService, obj);
 	}
 
-	public List<IAbstractToken> getFails() {
+	public List<AbstractToken2> getFails() {
 		return fails;
 	}
 
@@ -276,7 +348,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 
 	protected abstract AbstractToken2 getRootToken(IInstanceDescription inst);
 
-	public IAbstractToken serialize(EObject object) {
+	public AbstractToken2 serialize(EObject object) {
 		fails.clear();
 		if (object == null)
 			throw new NullPointerException(
@@ -295,7 +367,8 @@ public abstract class AbstractParseTreeConstructor2 implements
 				return n.getNext();
 			if (n != null && i != null) {
 				if (log.isTraceEnabled())
-					log.trace(debug(f, inst) + " -> found -> " + f.serialize());
+					log.trace(debug(f, inst) + " -> found -> "
+							+ f.serializeThis());
 				f = n;
 				inst = i;
 				no = 0;
@@ -313,5 +386,20 @@ public abstract class AbstractParseTreeConstructor2 implements
 		// TODO: improve error reporting
 		// return new RootToken(null);
 		throw new XtextSerializationException(inst, "Serialization failed");
+	}
+
+	public void serialize(EObject object, ITokenStream out) throws IOException {
+		AbstractToken2 token = serialize(object);
+		while (token != null) {
+			String s = token.serializeThis();
+			if (s != null && !"".equals(s)) {
+				AbstractElement e = token instanceof AssignmentToken ? ((AssignmentToken) token)
+						.getAssignmentElement()
+						: token.getGrammarElement();
+				out.writeSemantic(e, s);
+			}
+			token = token.getNext();
+		}
+		out.close();
 	}
 }
