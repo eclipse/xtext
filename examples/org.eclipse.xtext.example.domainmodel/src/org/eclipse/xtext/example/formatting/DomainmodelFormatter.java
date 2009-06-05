@@ -3,8 +3,8 @@
  */
 package org.eclipse.xtext.example.formatting;
 
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractFormattingTokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
+import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatter.impl.FormattingConfig;
 
 
 /**
@@ -15,7 +15,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
-public class DomainmodelFormatter extends AbstractFormattingTokenSerializer {
+public class DomainmodelFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
