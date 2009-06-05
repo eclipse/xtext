@@ -1,12 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.com) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.transformer;
+
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
@@ -21,13 +23,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.IFilterableContentProvider;
-import org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider;
-import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
-import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
-import org.eclipse.xtext.ui.common.editor.outline.ISortableContentProvider;
+import org.eclipse.xtext.ui.common.editor.outline.ITreeProvider;
 import org.eclipse.xtext.ui.common.internal.Activator;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
@@ -35,28 +32,29 @@ import com.google.inject.Inject;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class LazyTransformingTreeProvider extends LabelProvider implements ILazyTreeProvider, ISortableContentProvider, IFilterableContentProvider {
+public class TransformingTreeProvider extends LabelProvider implements ITreeProvider {
+	
+	private static final Object[] EMPTY_ARRAY = new Object[0];
 
-	final static Logger logger = Logger.getLogger(LazyTransformingTreeProvider.class);
+	final static Logger logger = Logger.getLogger(TransformingTreeProvider.class);
 
 	private final LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
-	private TreeViewer viewer;
 	private ContentOutlineNode outlineModel;
-
+	
 	@Override
 	public void dispose() {
 		super.dispose();
 		resourceManager.dispose();
 		outlineModel = null;
 	}
-
+	
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		Assert.isTrue(viewer instanceof TreeViewer);
-		this.viewer = (TreeViewer) viewer;
 
 		if (newInput instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) newInput;
+			semanticModelTransformer.setDocument(document);
 			outlineModel = document.readOnly(new IUnitOfWork<ContentOutlineNode, XtextResource>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
 					if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootASTElement() == null)
@@ -73,48 +71,45 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			});
 		}
 	}
-
+	
 	@Inject
 	private ISemanticModelTransformer semanticModelTransformer;
-
+	
 	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
 		return semanticModelTransformer.transformSemanticModel(semanticModel);
 	}
 
+	public Object[] getChildren(Object parentElement) {
+		if (parentElement instanceof ContentOutlineNode) {
+			ContentOutlineNode node = (ContentOutlineNode) parentElement;
+			List<ContentOutlineNode> children = node.getChildren();
+			return children.toArray();
+		}
+		return null;
+	}
+
 	public Object getParent(Object element) {
 		if (element instanceof ContentOutlineNode) {
-			return ((ContentOutlineNode) element).getParent();
+			ContentOutlineNode node = (ContentOutlineNode) element;
+			return node.getParent();
 		}
-		return outlineModel;
+		return null;
 	}
 
-	public void updateChildCount(Object element, int currentChildCount) {
-		int length = 0;
-		if (outlineModel != null) { // happens when tree had been disposed.
-			if (element instanceof IXtextDocument) {
-				length = outlineModel.getChildren().size();
-			}
-			else if (element instanceof ContentOutlineNode) {
-				ContentOutlineNode node = (ContentOutlineNode) element;
-				length = node.getChildren().size();
-			}
+	public boolean hasChildren(Object element) {
+		if (element instanceof ContentOutlineNode) {
+			ContentOutlineNode node = (ContentOutlineNode) element;
+			return (node.getChildren().size() > 0);
 		}
-		viewer.setChildCount(element, length);
+		return false;
 	}
 
-	public void updateElement(Object parent, int index) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Updating tree element at index [" + index + "]");
+	public Object[] getElements(Object inputElement) {
+		if (outlineModel != null) {
+			List<ContentOutlineNode> children = outlineModel.getChildren();
+			return children.toArray();
 		}
-		Object element = null;
-		if (parent instanceof IXtextDocument) {
-			element = outlineModel.getChildren().get(index);
-		}
-		else if (parent instanceof ContentOutlineNode) {
-			element = ((ContentOutlineNode) parent).getChildren().get(index);
-		}
-		viewer.replace(parent, index, element);
-		updateChildCount(element, -1);
+		return EMPTY_ARRAY;
 	}
 
 	@Override
@@ -142,18 +137,6 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			return image;
 		}
 		return super.getImage(element);
-	}
-
-	public void setSorted(boolean on) {
-		semanticModelTransformer.setSorted(on);
-	}
-
-	public void enableFilter(IOutlineFilter filterSpec) {
-		semanticModelTransformer.enableFilter(filterSpec);
-	}
-
-	public void disableFilter(IOutlineFilter filterSpec) {
-		semanticModelTransformer.disableFilter(filterSpec);
 	}
 
 }

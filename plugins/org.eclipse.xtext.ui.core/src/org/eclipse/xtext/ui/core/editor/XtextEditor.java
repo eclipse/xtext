@@ -21,6 +21,7 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -182,6 +183,10 @@ public class XtextEditor extends TextEditor {
 			}
 		}
 		return page;
+	}
+	
+	public void doSelectionChanged(ISelection selection) {
+		
 	}
 
 	/**

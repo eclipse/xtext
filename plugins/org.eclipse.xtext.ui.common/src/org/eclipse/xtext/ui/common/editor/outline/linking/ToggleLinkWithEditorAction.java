@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.linking;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;

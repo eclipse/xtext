@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.linking;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.ITextSelection;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
  * @author Peter Friese - Initial contribution and API
  */
 public final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
-	
+
 	public EditorSelectionChangedListener(XtextContentOutlinePage outlinePage) {
 		super(outlinePage);
 	}
@@ -47,7 +47,7 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 					// Get the current element from the offset
 					int offset = textSel.getOffset();
 					AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
-					
+
 					// Synchronize the outline page
 					outlinePage.synchronizeOutlinePage(node);
 				}
@@ -55,5 +55,5 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 
 		}
 	}
-	
+
 }

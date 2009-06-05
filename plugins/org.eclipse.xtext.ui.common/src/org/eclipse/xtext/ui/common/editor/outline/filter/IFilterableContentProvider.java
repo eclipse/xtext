@@ -6,11 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline;
+package org.eclipse.xtext.ui.common.editor.outline.filter;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public interface IOutlineFilter {
-	
+public interface IFilterableContentProvider {
+	void enableFilter(IOutlineFilter filterSpec);
+	void disableFilter(IOutlineFilter filterSpec);
 }

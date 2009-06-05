@@ -6,17 +6,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.concurrent.IEObjectHandle;
-import org.eclipse.xtext.concurrent.IStateAccess;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
+import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
 
@@ -28,6 +29,8 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 
 	private ILocationInFileProvider locationProvider;
+
+	private XtextDocument document;
 
 	@Inject
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
@@ -66,6 +69,9 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = new ContentOutlineNode();
 		outlineNode.setClazz(semanticNode.eClass());
+		
+		IEObjectHandle<EObject> handle = new IEObjectHandle.DefaultImpl<EObject>(semanticNode, document);
+		outlineNode.setEObjectHandle(handle);
 		
 		outlineNode.setLabel(getText(semanticNode));
 		Image image = getImage(semanticNode);
@@ -107,6 +113,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		return newOutlineNode(semanticNode, outlineParentNode);
+	}
+
+	public void setDocument(XtextDocument document) {
+		this.document = document;
 	}
 
 }

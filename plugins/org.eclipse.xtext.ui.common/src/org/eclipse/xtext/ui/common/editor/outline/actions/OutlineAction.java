@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.ui.common.editor.outline.linking.ToggleHelper;
 
 /**
  * @author Peter Friese - Initial contribution and API

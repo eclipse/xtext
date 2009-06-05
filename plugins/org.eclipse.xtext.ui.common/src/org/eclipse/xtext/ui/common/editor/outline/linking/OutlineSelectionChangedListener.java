@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.linking;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -27,14 +27,17 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
-		ISelection sel = event.getSelection();
-		if (sel instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) sel;
-			Object firstElement = structuredSelection.getFirstElement();
-			if (firstElement instanceof ContentOutlineNode) {
-				final ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
-				getSourceViewer().revealRange(outlineNode.getSelectionOffset(), outlineNode.getSelectionLength());
-				getSourceViewer().setSelectedRange(outlineNode.getSelectionOffset(), outlineNode.getSelectionLength());
+		if (outlinePage.getControl().isFocusControl()) {
+			ISelection sel = event.getSelection();
+			if (sel instanceof IStructuredSelection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
+				Object firstElement = structuredSelection.getFirstElement();
+				if (firstElement instanceof ContentOutlineNode) {
+					final ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
+					getSourceViewer().revealRange(outlineNode.getSelectionOffset(), outlineNode.getSelectionLength());
+					getSourceViewer().setSelectedRange(outlineNode.getSelectionOffset(),
+							outlineNode.getSelectionLength());
+				}
 			}
 		}
 	}

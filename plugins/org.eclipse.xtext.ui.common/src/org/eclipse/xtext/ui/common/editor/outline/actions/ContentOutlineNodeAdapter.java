@@ -6,30 +6,43 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.actions;
 
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class ContentOutlineNodeAdapterFactory extends AdapterFactoryImpl {
+public class ContentOutlineNodeAdapter implements Adapter {
 
-	public static final ContentOutlineNodeAdapterFactory INSTANCE = new ContentOutlineNodeAdapterFactory();
+	private Notifier target;
 	
-	private ContentOutlineNodeAdapterFactory() {
+	private ContentOutlineNode contentOutlineNode;
+
+	public void setTarget(Notifier newTarget) {
+		target = newTarget;
 	}
 	
-	@Override
-	protected Adapter createAdapter(Notifier target) {
-		return new ContentOutlineNodeAdapter();
+	public Notifier getTarget() {
+		return target;
 	}
-	
-	@Override
-	public boolean isFactoryForType(Object type) {
+
+	public boolean isAdapterForType(Object type) {
 		return type == ContentOutlineNode.class;
 	}
+
+	public void notifyChanged(Notification notification) {
+	}
+
+	public void setContentOutlineNode(ContentOutlineNode contentOutlineNode) {
+		this.contentOutlineNode = contentOutlineNode;
+	}
+
+	public ContentOutlineNode getContentOutlineNode() {
+		return contentOutlineNode;
+	}
+
 }
