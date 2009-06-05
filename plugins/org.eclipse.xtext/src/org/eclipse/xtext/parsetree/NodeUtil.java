@@ -10,10 +10,12 @@ package org.eclipse.xtext.parsetree;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -163,16 +165,16 @@ public class NodeUtil {
 		int currentOffset = rootNode.getTotalOffset();
 		for (AbstractNode child : rootNode.getChildren()) {
 			if (child.getTotalOffset() != currentOffset) {
-				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is "
-						+ child.getTotalOffset() + "\n" + child.serialize());
+				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getTotalOffset() + "\n"
+						+ child.serialize());
 			}
 			if (child instanceof CompositeNode) {
 				checkOffsetConsistency((CompositeNode) child);
 			}
 			int serializedLength = child.serialize().length();
 			if (child.getTotalLength() != serializedLength) {
-				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is "
-						+ child.getTotalLength() + "\n" + child.serialize());
+				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getTotalLength()
+						+ "\n" + child.serialize());
 			}
 			currentOffset += serializedLength;
 		}
@@ -198,8 +200,7 @@ public class NodeUtil {
 		return Collections.emptyList();
 	}
 
-	private static List<AbstractNode> findNodesForFeature(EObject ele, AbstractNode node,
-			EStructuralFeature structuralFeature) {
+	private static List<AbstractNode> findNodesForFeature(EObject ele, AbstractNode node, EStructuralFeature structuralFeature) {
 		List<AbstractNode> result = new ArrayList<AbstractNode>();
 		EObject element = NodeUtil.getNearestSemanticObject(node);
 		if (ele.equals(element)) {
@@ -220,6 +221,33 @@ public class NodeUtil {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @param rootNode
+	 * @return
+	 */
+	public static Iterable<AbstractNode> getAllContents(final CompositeNode rootNode) {
+		final TreeIterator<Object> allContents = EcoreUtil.getAllContents(rootNode, false);
+		return new Iterable<AbstractNode>() {
+			public Iterator<AbstractNode> iterator() {
+				return new Iterator<AbstractNode>() {
+
+					public boolean hasNext() {
+						return allContents.hasNext();
+					}
+
+					public AbstractNode next() {
+						return (AbstractNode) allContents.next();
+					}
+
+					public void remove() {
+						throw new UnsupportedOperationException();
+					}
+
+				};
+			}
+		};
 	}
 
 }
