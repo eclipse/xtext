@@ -68,13 +68,17 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		if (!visitedGrammars.add(grammar))
 			return;
 		resource.getContents().add(grammar);
+		replaceResourceURIsWithNsURIs(grammar);
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
+			addAllGrammarsToResource(resource, usedGrammar, visitedGrammars);
+		}
+	}
+
+	private void replaceResourceURIsWithNsURIs(Grammar grammar) {
 		for (AbstractMetamodelDeclaration metamodelDecl : grammar.getMetamodelDeclarations()) {
 			EPackage generatedPackage = metamodelDecl.getEPackage();
 			Resource packResource = generatedPackage.eResource();
 			packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
-		}
-		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
-			addAllGrammarsToResource(resource, usedGrammar, visitedGrammars);
 		}
 	}
 }
