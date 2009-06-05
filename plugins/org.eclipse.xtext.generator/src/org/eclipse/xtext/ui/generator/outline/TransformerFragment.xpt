@@ -21,7 +21,7 @@
 */
 package «qualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.common.editor.outline.impl.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 
 /**
  * customization of the default outline structure

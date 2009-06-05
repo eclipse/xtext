@@ -13,7 +13,7 @@ public class TransformerFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer",
+			.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer",
 					getQualifiedName(grammar))
 			.getBindings();
 	}
