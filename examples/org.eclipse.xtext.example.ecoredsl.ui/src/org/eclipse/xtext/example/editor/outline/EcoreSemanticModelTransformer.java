@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer;
 
 /**
  * @author Peter Friese - Initial contribution and API
