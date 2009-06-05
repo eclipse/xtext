@@ -25,7 +25,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 
 import com.google.inject.Guice;
 
@@ -84,12 +83,14 @@ public class GrammarAccessUtil {
 	public static String serialize(EObject obj, String prefix) {
 		String s;
 		try {
-			s = xtextSerializer.serialize(obj);
-		} catch (XtextSerializationException e) {
+			s = xtextSerializer.serialize(obj, true);
+		} catch (Exception e) {
 			s = e.toString();
 			// e.printStackTrace();
 		}
-		s = prefix + s.replaceAll("[\\r\\n]", "\n" + prefix);
+		s = prefix
+				+ s.trim().replaceAll("[\\r\\n]", "\n" + prefix).replaceAll(
+						"/\\*", "/ *").replaceAll("\\*/", "* /");
 		return s;
 	}
 
