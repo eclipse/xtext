@@ -34,8 +34,8 @@
  */
 package «formatterName().toJavaPackage()»;
 
-import org.eclipse.xtext.formatter.AbstractDeclarativeFormatter;
-import org.eclipse.xtext.formatter.FormattingConfig;
+import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatter.impl.FormattingConfig;
 
 /**
  * This class contains custom formatting description.
