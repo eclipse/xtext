@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
@@ -40,6 +41,8 @@ public abstract class AbstractAntlrTokenToAttributeIdMapper {
 	protected abstract String calculateId(String tokenName, int tokenType);
 	
 	public String getId(int tokenType) {
+		if (tokenType == Token.INVALID_TOKEN_TYPE)
+			return DefaultLexicalHighlightingConfiguration.INVALID_TOKEN_ID;
 		return ids[tokenType-Token.MIN_TOKEN_TYPE];
 	}
 }
