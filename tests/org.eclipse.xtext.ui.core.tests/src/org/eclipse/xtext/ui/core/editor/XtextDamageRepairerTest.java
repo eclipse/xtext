@@ -88,6 +88,13 @@ public class XtextDamageRepairerTest extends TestCase {
 		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
 	}
 	
+	public void testMlEndOfLine() throws Exception {
+		String model = "/* foo ";
+		String end = "*/";
+		
+		assertEquals(0,(model+end).length(), check(model+end,0,model.length(),model));
+	}
+	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
