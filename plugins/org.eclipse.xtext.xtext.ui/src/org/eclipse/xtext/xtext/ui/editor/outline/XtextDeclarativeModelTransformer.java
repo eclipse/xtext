@@ -37,7 +37,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.impl.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 import org.eclipse.xtext.util.Strings;
 
 /**

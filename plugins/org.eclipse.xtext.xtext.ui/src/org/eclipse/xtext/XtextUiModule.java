@@ -5,8 +5,8 @@ package org.eclipse.xtext;
 
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodeAdapterFactory;
-import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
+import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
