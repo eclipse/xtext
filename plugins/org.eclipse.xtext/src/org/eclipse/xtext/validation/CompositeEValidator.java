@@ -46,9 +46,11 @@ public class CompositeEValidator implements EValidator {
 
 		@Override
 		public boolean equals(Object obj) {
+			if (!(obj instanceof EValidatorEqualitySupport))
+				return false;
 			return obj != null
-					&& ((EValidatorEqualitySupport) obj).getDelegate().getClass().getName().equals(
-							getDelegate().getClass().getName());
+					&& ((EValidatorEqualitySupport) obj).getDelegate().getClass().equals(
+							getDelegate().getClass());
 		}
 
 		@Override
