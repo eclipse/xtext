@@ -69,7 +69,7 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.formatting.FormatterFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> bindITokenSerializer() {
+	public Class<? extends org.eclipse.xtext.formatter.IFormatter> bindIFormatter() {
 		return org.eclipse.xtext.example.formatting.DomainmodelFormatter.class;
 	}
 

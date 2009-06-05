@@ -24,14 +24,14 @@ public class TransientValuesTest extends AbstractGeneratorTest {
 
 	public void testOptional1() throws Exception {
 		final String in = "test optional 12";
-		final String out = "test optional ";
+		final String out = "test optional";
 		String s = serialize(getModel(in));
 		assertEquals(out, s);
 	}
 
 	public void testOptional2() throws Exception {
 		final String in = "test optional 12:13";
-		final String out = "test optional ";
+		final String out = "test optional";
 		String s = serialize(getModel(in));
 		assertEquals(out, s);
 	}

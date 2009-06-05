@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.linking.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -98,7 +97,8 @@ protected class Main_ImportsAssignment_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -139,7 +139,8 @@ protected class Main_TypesAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}

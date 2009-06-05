@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.example.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -119,7 +118,8 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getStatemachineAccess().getEventsEventParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -202,7 +202,8 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getStatemachineAccess().getCommandsCommandParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -265,7 +266,8 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getStatemachineAccess().getStatesStateParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -731,7 +733,8 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getStateAccess().getTransitionsTransitionParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}

@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -629,7 +628,8 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -953,7 +953,8 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -994,7 +995,8 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1139,7 +1141,7 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 		if((value = current.getConsumable("valid",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return obj;
 		}
@@ -1258,7 +1260,8 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}

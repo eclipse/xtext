@@ -339,7 +339,12 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Child2:
-		//  name=STRING;
+		//  name=STRING; 
+		//
+		//   
+		//
+		// // TODO rename test language to ValueConverterTestLanguage
+		// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		public ParserRule getRule() { return rule; }
 
 		//name=STRING
@@ -429,7 +434,12 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	}
 
 	//Child2:
-	//  name=STRING;
+	//  name=STRING; 
+	//
+	//   
+	//
+	// // TODO rename test language to ValueConverterTestLanguage
+	// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 	public Child2Elements getChild2Access() {
 		return (pChild2 != null) ? pChild2 : (pChild2 = new Child2Elements());
 	}
@@ -457,7 +467,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/*" -> "*/";
+	//  "/ *" -> "* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

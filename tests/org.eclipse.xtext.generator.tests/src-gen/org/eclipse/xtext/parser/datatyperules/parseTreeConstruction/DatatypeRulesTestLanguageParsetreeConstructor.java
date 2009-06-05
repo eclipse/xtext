@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parser.datatyperules.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -76,7 +75,8 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCompositeModelAccess().getModelModelParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -148,7 +148,7 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0();
 			return obj;
 		}
@@ -219,7 +219,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 		if((value = current.getConsumable("value",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0();
 			return obj;
 		}
@@ -292,7 +292,7 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 		if((value = current.getConsumable("vector",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vector");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0();
 			return obj;
 		}
@@ -366,7 +366,7 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 		if((value = current.getConsumable("dots",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("dots");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0();
 			return obj;
 		}

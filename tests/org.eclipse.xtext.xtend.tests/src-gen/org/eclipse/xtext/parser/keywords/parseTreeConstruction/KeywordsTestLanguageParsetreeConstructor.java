@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parser.keywords.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;

@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.ui.common.editor.contentassist.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -102,7 +101,8 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSecondLevelARule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getFirstLevelAccess().getSecondLevelASecondLevelAParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -143,7 +143,8 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSecondLevelBRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getFirstLevelAccess().getSecondLevelBSecondLevelBParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -220,7 +221,8 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelA1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSecondLevelAAccess().getThirdLevelA1ThirdLevelA1ParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -261,7 +263,8 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelA2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSecondLevelAAccess().getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -338,7 +341,8 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelB1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSecondLevelBAccess().getThirdLevelB1ThirdLevelB1ParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -379,7 +383,8 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelB2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSecondLevelBAccess().getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}

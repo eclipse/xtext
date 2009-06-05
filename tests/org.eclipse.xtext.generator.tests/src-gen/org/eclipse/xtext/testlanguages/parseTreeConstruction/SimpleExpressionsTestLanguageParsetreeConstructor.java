@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -181,7 +180,8 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSequenceAccess().getExpressionsAdditionParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -375,7 +375,8 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAdditionAccess().getValuesMultiplicationParserRuleCall_1_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -569,7 +570,8 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMultiplicationAccess().getValuesTermParserRuleCall_1_2_0(); 
 				consumed = obj;
 				return param;
 			}

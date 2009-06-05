@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -329,7 +328,8 @@ protected class Op_AddOperandsAssignment_1_0_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getOpAccess().getAddOperandsTermParserRuleCall_1_0_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -440,7 +440,8 @@ protected class Op_MinusOperandsAssignment_1_1_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getOpAccess().getMinusOperandsTermParserRuleCall_1_1_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -608,7 +609,15 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 /************ begin Rule Parens ****************
  *
  * Parens returns Expression:
- *   "(" Op ")" em="!"?;
+ *   "(" Op ")" em="!"?; 
+ * 
+ *       
+ * 	       
+ * 
+ *  / * TODO not working yet
+ * StrangeStuff :
+ * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+ * * /
  *
  **/
 
@@ -746,7 +755,12 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 /************ begin Rule TrickyA ****************
  *
  * TrickyA returns TypeA1:
- *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+ *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING; 
+ * 
+ *  / * TODO not working yet
+ * StrangeStuff :
+ * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+ * * /
  *
  **/
 
@@ -1573,7 +1587,11 @@ protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 /************ begin Rule TrickyD ****************
  *
  * TrickyD:
- *   "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
+ *   "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*; 
+ * 
+ *                                          
+ * 
+ *  // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
  *
  **/
 
@@ -1862,7 +1880,12 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule TrickyE ****************
  *
  * TrickyE:
- *   "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
+ *   "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;   
+ * 
+ *  // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+ *                
+ * 
+ *  //
  *
  **/
 
@@ -2137,7 +2160,9 @@ protected class TrickyE_TypeAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule TrickyF ****************
  *
  * TrickyF:
- *   "TF" (name+=ID type+=INT)* (name+=ID|type+=INT);
+ *   "TF" (name+=ID type+=INT)* (name+=ID|type+=INT); 
+ * 
+ *  //
  *
  **/
 
@@ -2432,7 +2457,8 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTrickyGAccess().getTreeTrickyG1ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2548,7 +2574,8 @@ protected class TrickyG1_ValsAssignment_1_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2630,7 +2657,8 @@ protected class TrickyG1_ValsAssignment_1_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2677,11 +2705,31 @@ protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
 /************ begin Rule TrickyG2 ****************
  *
  * TrickyG2:
- *   TrickyG1|val=INT;
+ *   TrickyG1|val=INT; 
+ *        
+ * 
+ *  //TrickyH: x+='a' TrickyH?; 
+ *  
+ * 
+ *  // TrickyG: TrickyG1 | TrickyG2;
+ *  // TrickyG1: name=TrickyG3;
+ *  // TrickyG2: name=TrickyG4;
+ *  // TrickyG3: val=ID {T.x=current} 'x';
+ *  // TrickyG4: val=INT {T.x=current} 'y';
  *
  **/
 
-// TrickyG1|val=INT
+// TrickyG1|val=INT 
+//        
+// 
+//  //TrickyH: x+='a' TrickyH?; 
+//  
+// 
+//  // TrickyG: TrickyG1 | TrickyG2;
+//  // TrickyG1: name=TrickyG3;
+//  // TrickyG2: name=TrickyG4;
+//  // TrickyG3: val=ID {T.x=current} 'x';
+//  // TrickyG4: val=INT {T.x=current} 'y';
 protected class TrickyG2_Alternatives extends AlternativesToken {
 
 	public TrickyG2_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {

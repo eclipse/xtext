@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parser.epatch.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -189,7 +188,8 @@ protected class EPatch_ImportsAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEPatchAccess().getImportsImportParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -231,7 +231,8 @@ protected class EPatch_ResourcesAssignment_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNamedResourceRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEPatchAccess().getResourcesNamedResourceParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -274,7 +275,8 @@ protected class EPatch_ObjectsAssignment_5 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getObjectRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEPatchAccess().getObjectsObjectRefParserRuleCall_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1417,7 +1419,8 @@ protected class NamedResource_LeftRootAssignment_4_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getNamedResourceAccess().getLeftRootCreatedObjectParserRuleCall_4_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1592,7 +1595,8 @@ protected class NamedResource_RightRootAssignment_7_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getNamedResourceAccess().getRightRootCreatedObjectParserRuleCall_7_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2220,7 +2224,8 @@ protected class ObjectRef_AssignmentsAssignment_3_1_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getObjectRefAccess().getAssignmentsBiSingleAssignmentParserRuleCall_3_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2262,7 +2267,8 @@ protected class ObjectRef_AssignmentsAssignment_3_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBiListAssignmentRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getObjectRefAccess().getAssignmentsBiListAssignmentParserRuleCall_3_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2345,7 +2351,8 @@ protected class ObjectRef_LeftMigAssignment_3_2_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getObjectRefAccess().getLeftMigMigrationParserRuleCall_3_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2428,7 +2435,8 @@ protected class ObjectRef_RightMigAssignment_3_3_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getObjectRefAccess().getRightMigMigrationParserRuleCall_3_3_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2740,7 +2748,8 @@ protected class BiSingleAssignment_LeftValueAssignment_2 extends AssignmentToken
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2801,7 +2810,8 @@ protected class BiSingleAssignment_RightValueAssignment_4 extends AssignmentToke
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiSingleAssignmentAccess().getRightValueSingleAssignmentValueParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2988,7 +2998,8 @@ protected class BiListAssignment_LeftValuesAssignment_3_0 extends AssignmentToke
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3070,7 +3081,8 @@ protected class BiListAssignment_LeftValuesAssignment_3_1_1 extends AssignmentTo
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3155,7 +3167,8 @@ protected class BiListAssignment_RightValuesAssignment_5_0 extends AssignmentTok
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3237,7 +3250,8 @@ protected class BiListAssignment_RightValuesAssignment_5_1_1 extends AssignmentT
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3406,7 +3420,8 @@ protected class MonoSingleAssignment_LeftValueAssignment_2 extends AssignmentTok
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMonoSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3593,7 +3608,8 @@ protected class MonoListAssignment_LeftValuesAssignment_3_0 extends AssignmentTo
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3675,7 +3691,8 @@ protected class MonoListAssignment_LeftValuesAssignment_3_1_1 extends Assignment
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAssignmentValueRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4047,7 +4064,8 @@ protected class AssignmentValue_NewObjectAssignment_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4625,7 +4643,8 @@ protected class ListAssignmentValue_NewObjectAssignment_2_3 extends AssignmentTo
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getListAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5072,7 +5091,8 @@ protected class SingleAssignmentValue_NewObjectAssignment_3 extends AssignmentTo
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSingleAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5411,7 +5431,8 @@ protected class CreatedObject_AssignmentsAssignment_2_1_0 extends AssignmentToke
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCreatedObjectAccess().getAssignmentsMonoSingleAssignmentParserRuleCall_2_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5453,7 +5474,8 @@ protected class CreatedObject_AssignmentsAssignment_2_1_1 extends AssignmentToke
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMonoListAssignmentRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCreatedObjectAccess().getAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5496,7 +5518,8 @@ protected class CreatedObject_LeftMigAssignment_2_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCreatedObjectAccess().getLeftMigMigrationParserRuleCall_2_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5780,7 +5803,9 @@ protected class ObjectCopy_FragmentAssignment_2 extends AssignmentToken  {
 /************ begin Rule Migration ****************
  *
  * Migration:
- *   "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
+ *   "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
+ * 	
+ *  // ******************* migration *****************************
  *
  **/
 
@@ -5851,7 +5876,8 @@ protected class Migration_FirstAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5954,7 +5980,8 @@ protected class Migration_AsOpAssignment_2_0_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_2_0_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6037,7 +6064,8 @@ protected class Migration_EachOpAssignment_2_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_2_1_1_0(); 
 				consumed = obj;
 				return param;
 			}

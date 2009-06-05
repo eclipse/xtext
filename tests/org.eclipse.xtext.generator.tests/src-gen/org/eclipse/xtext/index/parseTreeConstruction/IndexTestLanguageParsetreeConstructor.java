@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.index.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -82,7 +81,8 @@ protected class File_ElementsAssignment extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getFileAccess().getElementsElementParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -174,7 +174,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 		if((value = current.getConsumable("importedNamespace",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importedNamespace");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0();
 			return obj;
 		}
@@ -241,7 +241,7 @@ protected class Namespace_NameAssignment_0 extends AssignmentToken  {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_0_0();
 			return obj;
 		}
@@ -294,7 +294,8 @@ protected class Namespace_ElementsAssignment_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getNamespaceAccess().getElementsElementParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -690,7 +691,8 @@ protected class Entity_PropertiesAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEntityAccess().getPropertiesPropertyParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}

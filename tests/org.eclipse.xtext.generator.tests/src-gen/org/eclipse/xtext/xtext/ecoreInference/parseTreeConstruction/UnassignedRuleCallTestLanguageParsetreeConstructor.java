@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -136,7 +135,8 @@ protected class Model_ModelFeaturesAssignment_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getModelFeaturesRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getModelFeaturesModelFeaturesParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}

@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -188,7 +187,8 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getOpAccess().getValuesTermParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2220,7 +2220,8 @@ protected class Consumed2_ChildAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getConsumed1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getConsumed2Access().getChildConsumed1ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
