@@ -43,8 +43,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 	private static final String[] PROJECT_NATURES = new String[] {
 			JavaCore.NATURE_ID,
-			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
-			"org.eclipse.xtend.shared.ui.xtendXPandNature"}; //$NON-NLS-1$
+			"org.eclipse.pde.PluginNature"}; //$NON-NLS-1$
 	// some constants
 	private static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
 	private static final String SRC_ROOT = "src"; //$NON-NLS-1$
