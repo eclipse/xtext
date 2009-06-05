@@ -123,6 +123,11 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
+		return org.eclipse.xtext.ui.core.editor.formatting.ContentFormatterFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.utils.ValidationJob.Factory> bindValidationJob$Factory() {
 		return org.eclipse.xtext.ui.core.editor.utils.DefaultValidationJobFactory.class;
 	}

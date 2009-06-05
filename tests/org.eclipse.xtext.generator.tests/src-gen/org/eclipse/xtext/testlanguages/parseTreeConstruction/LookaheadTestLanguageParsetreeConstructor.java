@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -81,7 +80,8 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -390,7 +390,8 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -735,7 +736,8 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}

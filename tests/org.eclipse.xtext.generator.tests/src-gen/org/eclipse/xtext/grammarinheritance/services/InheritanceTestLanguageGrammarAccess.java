@@ -145,7 +145,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/*" -> "*/";
+	//  "/ *" -> "* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaBaseInheritanceTestLanguage.getML_COMMENTRule();
 	} 

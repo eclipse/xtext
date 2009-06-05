@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.valueconverter.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -153,12 +152,12 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 			return obj;
 		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_0_1_0_2();
 			return obj;
 		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_0_1_0_3();
 			return obj;
 		}
@@ -244,12 +243,12 @@ protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 			return obj;
 		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_1_1_0_2();
 			return obj;
 		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_1_1_0_3();
 			return obj;
 		}
@@ -467,7 +466,7 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_4_1_0();
 			return obj;
 		}
@@ -538,7 +537,7 @@ protected class Model_MultiValueAssignment_5_1 extends AssignmentToken  {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_5_1_0();
 			return obj;
 		}
@@ -609,7 +608,7 @@ protected class Model_ValueAssignment_6_1 extends AssignmentToken  {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_6_1_0();
 			return obj;
 		}
@@ -680,7 +679,7 @@ protected class Model_MultiValueAssignment_7_1 extends AssignmentToken  {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_7_1_0();
 			return obj;
 		}
@@ -774,7 +773,8 @@ protected class Model_ChildrenAssignment_8_0_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getChildrenChildParserRuleCall_8_0_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1037,7 +1037,12 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 /************ begin Rule Child2 ****************
  *
  * Child2:
- *   name=STRING;
+ *   name=STRING; 
+ * 
+ *    
+ * 
+ *  // TODO rename test language to ValueConverterTestLanguage
+ *  // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
  *
  **/
 

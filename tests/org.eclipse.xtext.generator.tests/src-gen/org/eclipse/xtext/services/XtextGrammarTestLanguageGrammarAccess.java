@@ -212,10 +212,22 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cReferencedMetamodelParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractMetamodelDeclaration:
-		//  GeneratedMetamodel|ReferencedMetamodel;
+		//  GeneratedMetamodel|ReferencedMetamodel; 
+		//
+		//   
+		//	     
+		//	
+		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		// // generated metamodels have to have different aliases
 		public ParserRule getRule() { return rule; }
 
-		//GeneratedMetamodel|ReferencedMetamodel
+		//GeneratedMetamodel|ReferencedMetamodel 
+		//
+		//   
+		//	     
+		//	
+		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		// // generated metamodels have to have different aliases
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//GeneratedMetamodel
@@ -240,7 +252,15 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cAliasIDTerminalRuleCall_3_1_0 = (RuleCall)cAliasAssignment_3_1.eContents().get(0);
 		
 		//GeneratedMetamodel:
-		//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+		//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+		//	
+		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		// // generated metamodels have to have different aliases
+		//   
+		//	         
+		//
+		// // referenced metamodels may share aliases with other referenced metamodels
+		// // and with generated metamodels
 		public ParserRule getRule() { return rule; }
 
 		//"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -290,7 +310,10 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cAliasIDTerminalRuleCall_2_1_0 = (RuleCall)cAliasAssignment_2_1.eContents().get(0);
 		
 		//ReferencedMetamodel:
-		//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+		//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+		//
+		// // referenced metamodels may share aliases with other referenced metamodels
+		// // and with generated metamodels
 		public ParserRule getRule() { return rule; }
 
 		//"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -1602,7 +1625,13 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractMetamodelDeclaration:
-	//  GeneratedMetamodel|ReferencedMetamodel;
+	//  GeneratedMetamodel|ReferencedMetamodel; 
+	//
+	//   
+	//	     
+	//	
+	// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+	// // generated metamodels have to have different aliases
 	public AbstractMetamodelDeclarationElements getAbstractMetamodelDeclarationAccess() {
 		return (pAbstractMetamodelDeclaration != null) ? pAbstractMetamodelDeclaration : (pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements());
 	}
@@ -1612,7 +1641,15 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//GeneratedMetamodel:
-	//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+	//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+	//	
+	// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+	// // generated metamodels have to have different aliases
+	//   
+	//	         
+	//
+	// // referenced metamodels may share aliases with other referenced metamodels
+	// // and with generated metamodels
 	public GeneratedMetamodelElements getGeneratedMetamodelAccess() {
 		return (pGeneratedMetamodel != null) ? pGeneratedMetamodel : (pGeneratedMetamodel = new GeneratedMetamodelElements());
 	}
@@ -1622,7 +1659,10 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ReferencedMetamodel:
-	//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+	//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+	//
+	// // referenced metamodels may share aliases with other referenced metamodels
+	// // and with generated metamodels
 	public ReferencedMetamodelElements getReferencedMetamodelAccess() {
 		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
 	}
@@ -1980,7 +2020,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/*" -> "*/";
+	//  "/ *" -> "* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

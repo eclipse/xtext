@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.reference.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -228,7 +227,8 @@ protected class Spielplatz_KinderAssignment_4_0 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -270,7 +270,8 @@ protected class Spielplatz_ErzieherAssignment_4_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -312,7 +313,8 @@ protected class Spielplatz_SpielzeugeAssignment_4_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -354,7 +356,8 @@ protected class Spielplatz_FamilieAssignment_4_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -396,7 +399,8 @@ protected class Spielplatz_TypesAssignment_4_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielplatzAccess().getTypesCustomTypeParserRuleParserRuleCall_4_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -975,7 +979,8 @@ protected class Spielzeug_FarbeAssignment_3 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}

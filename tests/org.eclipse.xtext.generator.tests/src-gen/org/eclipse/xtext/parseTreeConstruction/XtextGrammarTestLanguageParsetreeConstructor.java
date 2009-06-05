@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -149,7 +148,7 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
+			type = AssignmentType.DRC;
 			element = grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0();
 			return obj;
 		}
@@ -560,7 +559,8 @@ protected class Grammar_MetamodelDeclarationsAssignment_4 extends AssignmentToke
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractMetamodelDeclarationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -604,7 +604,8 @@ protected class Grammar_RulesAssignment_5 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -763,11 +764,23 @@ protected class AbstractRule_EnumRuleParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule AbstractMetamodelDeclaration ****************
  *
  * AbstractMetamodelDeclaration:
- *   GeneratedMetamodel|ReferencedMetamodel;
+ *   GeneratedMetamodel|ReferencedMetamodel; 
+ * 
+ *    
+ * 	     
+ * 	
+ *  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+ *  // generated metamodels have to have different aliases
  *
  **/
 
-// GeneratedMetamodel|ReferencedMetamodel
+// GeneratedMetamodel|ReferencedMetamodel 
+// 
+//    
+// 	     
+// 	
+//  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+//  // generated metamodels have to have different aliases
 protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesToken {
 
 	public AbstractMetamodelDeclaration_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -861,7 +874,15 @@ protected class AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1
 /************ begin Rule GeneratedMetamodel ****************
  *
  * GeneratedMetamodel:
- *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+ *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+ * 	
+ *  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+ *  // generated metamodels have to have different aliases
+ *    
+ * 	         
+ * 
+ *  // referenced metamodels may share aliases with other referenced metamodels
+ *  // and with generated metamodels
  *
  **/
 
@@ -1053,7 +1074,10 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
 /************ begin Rule ReferencedMetamodel ****************
  *
  * ReferencedMetamodel:
- *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+ *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
+ * 
+ *  // referenced metamodels may share aliases with other referenced metamodels
+ *  // and with generated metamodels
  *
  **/
 
@@ -1336,7 +1360,8 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1626,7 +1651,8 @@ protected class ParserRule_AlternativesAssignment_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1986,7 +2012,8 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2144,7 +2171,8 @@ protected class Group_TokensAssignment_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2500,7 +2528,8 @@ protected class Action_TypeAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3017,7 +3046,8 @@ protected class Assignment_TerminalAssignment_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3482,7 +3512,8 @@ protected class AssignableAlternatives_GroupsAssignment_1_1_1 extends Assignment
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3579,7 +3610,8 @@ protected class CrossReference_TypeAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3660,7 +3692,8 @@ protected class CrossReference_TerminalAssignment_2_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4115,7 +4148,8 @@ protected class CrossReferenceableAlternatives_GroupsAssignment_1_1_1 extends As
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4389,7 +4423,8 @@ protected class TerminalRule_TypeAssignment_2_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4452,7 +4487,8 @@ protected class TerminalRule_AlternativesAssignment_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4669,7 +4705,8 @@ protected class TerminalAlternatives_GroupsAssignment_1_1_1 extends AssignmentTo
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4827,7 +4864,8 @@ protected class TerminalGroup_TokensAssignment_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5430,7 +5468,8 @@ protected class NegatedToken_TerminalAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5525,7 +5564,8 @@ protected class UntilToken_TerminalAssignment_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5781,7 +5821,8 @@ protected class CharacterRange_RightAssignment_1_2 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5948,7 +5989,8 @@ protected class EnumRule_TypeAssignment_2_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6011,7 +6053,8 @@ protected class EnumRule_AlternativesAssignment_4 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6228,7 +6271,8 @@ protected class EnumLiterals_GroupsAssignment_1_1_1 extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6380,7 +6424,8 @@ protected class EnumLiteralDeclaration_LiteralAssignment_1_1 extends AssignmentT
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}

@@ -3,8 +3,7 @@
 */
 package org.eclipse.xtext.grammarinheritance.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
@@ -52,11 +51,21 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule RootRule ****************
  *
  * RootRule:
- *   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2;
+ *   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2; 
+ * 
+ *  
+ * 	             
+ * 
+ *  // call InheritedParserRule
  *
  **/
 
-// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2
+// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2 
+// 
+//  
+// 	             
+// 
+//  // call InheritedParserRule
 protected class RootRule_Alternatives extends AlternativesToken {
 
 	public RootRule_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -214,7 +223,13 @@ protected class RootRule_OverridableParserRule2ParserRuleCall_3 extends RuleCall
 /************ begin Rule ConcreteParserRule ****************
  *
  * ConcreteParserRule:
- *   "model" magicNumber=REAL ":" elements+=InheritedParserRule*;
+ *   "model" magicNumber=REAL ":" elements+=InheritedParserRule*; 
+ * 
+ *  // call InheritedParserRule
+ *    
+ * 	       
+ * 	
+ *  // override OverridableParserRule and call it
  *
  **/
 
@@ -337,7 +352,8 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getConcreteParserRuleAccess().getElementsInheritedParserRuleParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -362,7 +378,9 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
 /************ begin Rule OverridableParserRule ****************
  *
  * OverridableParserRule returns mm::AType:
- *   "overriddenelement" name=ID;
+ *   "overriddenelement" name=ID; 
+ * 	
+ *  // override OverridableParserRule and call it
  *
  **/
 
@@ -447,7 +465,12 @@ protected class OverridableParserRule_NameAssignment_1 extends AssignmentToken  
 /************ begin Rule CallOverridenParserRule ****************
  *
  * CallOverridenParserRule:
- *   call=AbstractCallOverridenParserRule;
+ *   call=AbstractCallOverridenParserRule; 
+ * 	
+ *  
+ * 	 
+ * 	
+ *  // override parser rule and change return type
  *
  **/
 
@@ -479,7 +502,8 @@ protected class CallOverridenParserRule_CallAssignment extends AssignmentToken  
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCallOverridenParserRuleAccess().getCallAbstractCallOverridenParserRuleParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -501,7 +525,13 @@ protected class CallOverridenParserRule_CallAssignment extends AssignmentToken  
 /************ begin Rule OverridableParserRule2 ****************
  *
  * OverridableParserRule2 returns AType2:
- *   "overridden other element" name=ID "-" age=INT;
+ *   "overridden other element" name=ID "-" age=INT; 
+ * 	
+ *  // override parser rule and change return type
+ *        
+ * 	       
+ * 	
+ *  // override and extend ExtendableParserRule and call it
  *
  **/
 
@@ -637,11 +667,15 @@ protected class OverridableParserRule2_AgeAssignment_3 extends AssignmentToken  
 /************ begin Rule ExtendableParserRule ****************
  *
  * ExtendableParserRule returns mm::AType:
- *   Subrule1|Subrule2|Subrule3;
+ *   Subrule1|Subrule2|Subrule3; 
+ * 	
+ *  // override and extend ExtendableParserRule and call it
  *
  **/
 
-// Subrule1|Subrule2|Subrule3
+// Subrule1|Subrule2|Subrule3 
+// 	
+//  // override and extend ExtendableParserRule and call it
 protected class ExtendableParserRule_Alternatives extends AlternativesToken {
 
 	public ExtendableParserRule_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1147,7 +1181,8 @@ protected class CallExtendedParserRule_CallAssignment extends AssignmentToken  {
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCallExtendedParserRuleAccess().getCallAbstractCallExtendedParserRuleParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1326,7 +1361,8 @@ protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends Ass
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAbstractCallOverridenParserRuleAccess().getElementsOverridableParserRuleParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1423,7 +1459,8 @@ protected class AbstractCallExtendedParserRule_ElementsAssignment_1 extends Assi
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) {
-				type = AssignmentType.PRC; 
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAbstractCallExtendedParserRuleAccess().getElementsExtendableParserRuleParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
