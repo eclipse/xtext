@@ -36,9 +36,9 @@
 </div>
 </div>
 </div>
-<p>But the problematic debugging was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &#8220;inside&#8221; the editor again and again while you type. 
+<p>But the problematic debugging the context of Xtext was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &#8220;inside&#8221; the editor again and again while you type. 
 					While Xtend&#8217;s performance is sufficient when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model). Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime which function is the best match and it has to do so on each call. Also Xtend supports a pluggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. This is very powerful and flexible but introduces another indirection layer. Last but not least the code is interpreted and not compiled. The price we pay for all these nice features is reduced performance.</p>
-<p>In addition to these scalability problems we have designed some core APIs (e.g. scopes) around the idea of Iterables, which allows for lazy resolution of elements. As Xtend does not know the concept of Iterators you would have to work with lists all the time. This is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p>
+<p>In addition to these scalability problems we have designed some core APIs (e.g. scopes) around the idea of Iterables, which allows for lazy resolution of elements. As Xtend does not know the concept of Iterators you would have to work with lists all the time. Copying collections over and over again is of course far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p>
 </div>
 <div class="section" title="Convenient Java">
 <div class="titlepage">
@@ -52,7 +52,7 @@
 <p>To summarize the dilemma we had to find a way to allow for convenient, scalable and debuggable APIs. Ultimately we wanted to provide neat DSLs for every view point, which provide all these things. However, we had to prioritize our efforts with the available resources in mind. 
 					As a result we found ways and means to tweak Java as good as possible to allow for relatively convenient, high performing implementations. </p>
 <p>Java is fast and can easily be debugged but ranks behind Xtend regarding convenience. We address this with different approaches to make Java development in the context of Xtext as comfortable as possible.</p>
-<p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the behavior known from Xtend. Another valuable feature of Xtend while working with oAW Xtext is static type checking while working with the inferred metamodel whereas in Java the work with dynamic Ecore classes was rather cumbersome. Since TMF Xtext generates static Ecore classes per default you get static typing in Java as well. The use of 
+<p>Most of the APIs in TMF Xtext use polymorphic dispatching, which mimics the behavior known from Xtend. Another valuable feature of Xtend while working with oAW Xtext is static type checking while working with the inferred Ecore model whereas in Java the work with dynamic Ecore classes was rather cumbersome. Since TMF Xtext generates static Ecore classes per default you get static typing in Java as well. Additionally, the use of 
 					<a class="ulink" href="http://code.google.com/p/google-collections" target="_new">Google Collections</a> reduces the pain when navigating over your model to extract information. 
 				</p>
 <p>With these techniques an ILabelProvider that handles your own EClasses 
@@ -75,8 +75,6 @@ public class DomainModelLabelProvider extends DefaultLabelProvider {<br/>
 <br/>
   String image(Entity e) {<br/>
     return "entity.gif";<br/>
-    // TOOD: think of a nice way to introduce google collections<br/>
-    // e.g. e.properties.typeselect(Reference).empty ? value object : entity<br/>
   }<br/>
 <br/>
 }<br/>
@@ -96,7 +94,7 @@ public class DomainModelLabelProvider extends DefaultLabelProvider {<br/>
 </div>
 </div>
 <p>Just to get it right, Xtend is a very powerful language and we still use it for its main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and its performance is at least in our experience sufficient for that use case. Actually we were able to increase the runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still, live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p>
-<p>As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That&#8217;s why Groovy or JRuby were no alternative. Using Scala would have been a very good match, but we didn&#8217;t want to require knowledge of Scala so we didn&#8217;t use it and stuck to Java. </p>
+<p>As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That&#8217;s why Groovy or JRuby were no alternatives. Using Scala would have been a very good match, but we didn&#8217;t want to require knowledge of Scala so we didn&#8217;t use it and stuck to Java. Also without changing the EMF generator it is inconvenient to use EMF classes in Scala, since Scala uses a different convention for getter and setter methods.</p>
 </div>
 </body>
 </html>

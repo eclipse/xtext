@@ -54,7 +54,9 @@
 <topic href="help/ImportingexistingMetaModels.html" label="Importing existing Meta Models"/>
 <topic href="help/GrammarMixins.html" label="Grammar Mixins"/>
 <topic href="help/Defaulttokens.html" label="Default tokens"/>
-<topic href="help/generator.html" label="The Generator"/>
+<topic href="help/generator.html" label="The Generator">
+<topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to the Modeling Workflow Engine (MWE)"/>
+</topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
 <topic href="help/dependencyInjection.html#Modules" label="Modules">
 <topic href="help/dependencyInjection.html#GeneratedModules" label="Generated Modules"/>

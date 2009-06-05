@@ -34,7 +34,7 @@
 </code>
 </p>
 </div>
-<p>In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar and had therefore be part of it in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p>
+<p>In oAW Xtext this information was provided through the generator (actually it is contained in the *.properties file) but we found that these things are very important for a complete description of a grammar. Therefore we made that information becoming a part of the grammar language in order to have self-describing grammars and allow for sophisticated static analysis, etc.. </p>
 <p>Apart from the first two lines the grammar languages of both versions are more or less compatible. The syntax for all the different EBNF concepts (alternatives, groups, cardinalities) is similar.
 					Also assignments are syntactically and semantically identical in both versions. 
 					However in TMF Xtext some concepts have been generalized and improved:</p>
@@ -107,7 +107,7 @@
 </div>
 </div>
 </div>
-<p>The most significant improvement to oAW Xtext is that we could replace the blackbox native rules with full-blown EBNF syntax. 
+<p>Another improvement is that we could replace the blackbox native rules with full-blown EBNF syntax. 
 						That is native rules become terminal rules and are no longer written as a string literal containing ANTLR syntax.</p>
 <p>Example :</p>
 <div class="literallayout">
@@ -138,7 +138,7 @@
 </div>
 </div>
 </div>
-<p>We decided to remove the URI terminal. The only reason for the it existence was to mark the model somehow so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p>
+<p>We decided to remove the URI terminal. The only reason for the existence was to mark the model somehow so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p>
 <p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name &#8216;importedURI&#8217;.
 						That is if you&#8217;ve used the URI token like this:</p>
 <div class="literallayout">
@@ -199,8 +199,7 @@
 </div>
 </div>
 </div>
-<p>TMF Xtext still supports implementing validation using Xpand&#8217;s Check. However it is no longer using the EMF meta model (typesystem) but now uses the JavaBeansMetamodel.
-					This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
+<p>TMF Xtext still supports implementing validation using Xpand&#8217;s Check. However it is no longer using the EMF meta model (typesystem) but now uses the so called JavaBeansMetamodel. This means that the types in Check and Xtend correspond to Java types. This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
 					Example: If your Check file looked like this in oAW Xtext :</p>
 <div class="literallayout">
 <p>

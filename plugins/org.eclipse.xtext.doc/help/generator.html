@@ -10,6 +10,132 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Generator</h1>
-<p>Text</p>
+<p>Xtext provides you with lots of generic implementations for you language&#8217;s infrastructure but also uses code generation to generate some of the components.
+				Those generated components are for instance the parser, the serializer, the Ecore model and a couple of convenient base classes for content assist etc. The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the &#8220;Guice&#8221;#Guice modules.</p>
+<p>The architecture of the generator in Xtext is leveraging the MWE project from EMFT and introduces the notion of so called fragments. That is a generator consists of any number of languages. Each language is configured with a URI pointing to its grammar file, the file extensions for the dsl and a list of 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s. We use the MWE project from EMFT in order to configure and execute xtext generators. 
+			</p>
+<div class="section" title="A short introduction to the Modeling Workflow Engine (MWE)">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="short_intor_to_mwe"/>A short introduction to the Modeling Workflow Engine (MWE)</h3>
+</div>
+</div>
+</div>
+<p>The nice thing about MWE is that it just instantiates java classes and the configuration is done through setter and adder methods.
+					Given the following Java class :</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  package foo;<br/>
+  class Person {<br/>
+     private String name;<br/>
+     private List&lt;Person&gt; children = new ArrayList&lt;Person&gt;();<br/>
+     public void setName(String name) { <br/>
+       this.name = name;<br/>
+     }<br/>
+     public void addChild(Person child) {<br/>
+       this.chidlren.add(child);<br/>
+     }<br/>
+  }<br/>
+  <br/>
+</code>
+</p>
+</div>
+<p>one can create a family tree using MWE like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+  &lt;x class="foo.Person"&gt;<br/>
+    &lt;name value="Grandpa"/&gt;<br/>
+    &lt;child class="foo.Person" name="Papa"&gt;<br/>
+      &lt;child name="Son"/&gt;<br/>
+    &lt;/child&gt;<br/>
+  &lt;/x&gt;<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>In this simple example</p>
+<p>This means that whenever you see a *.mwe file and wonder what how the different components can be configured, all you have to do in order to find out is open Java class and look for setter and adder methods.
+					In the following we see a typical Xtetx generator configuration written in MWE configuration code:  </p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+&lt;workflow&gt;<br/>
+	&lt;property file="org/xtext/example/GenerateMyDsl.properties"/&gt;<br/>
+	<br/>
+	&lt;property name="runtimeProject" value="../${projectName}"/&gt;<br/>
+	<br/>
+	&lt;bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/&gt;<br/>
+	<br/>
+	&lt;component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/&gt;<br/>
+	&lt;component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/&gt;<br/>
+	<br/>
+	&lt;component class="org.eclipse.xtext.generator.Generator"&gt;<br/>
+		&lt;pathRtProject value="${runtimeProject}"/&gt;<br/>
+		&lt;pathUiProject value="${runtimeProject}.ui"/&gt;<br/>
+		&lt;projectNameRt value="${projectName}"/&gt;<br/>
+		&lt;projectNameUi value="${projectName}.ui"/&gt;<br/>
+		<br/>
+		&lt;language uri="${grammarURI}" fileExtensions="${file.extensions}"&gt;<br/>
+			<br/>
+			&lt;!-- Java API to access grammar elements (required by several other fragments) --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br/>
+			<br/>
+			&lt;!-- generates Java API for the generated EPackages --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/&gt;<br/>
+			<br/>
+			&lt;!-- the serialization component --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/&gt;<br/>
+			<br/>
+			&lt;!-- a custom ResourceFactory for use with EMF --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" <br/>
+				fileExtensions="${file.extensions}"/&gt;<br/>
+				<br/>
+			&lt;!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com <br/>
+			     and falls back to the packrat parser if it's not available. --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" <br/>
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"<br/>
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones."&gt;<br/>
+				&lt;fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/&gt;<br/>
+			&lt;/fragment&gt;<br/>
+	<br/>
+			<br/>
+			&lt;!-- java-based API for validation --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br/>
+                &lt;composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/&gt;<br/>
+            &lt;/fragment&gt;<br/>
+			<br/>
+            <br/>
+			&lt;!-- scoping API --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;<br/>
+			<br/>
+			&lt;!-- formatter API --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/&gt;<br/>
+<br/>
+			&lt;!-- labeling API --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/&gt;<br/>
+<br/>
+			&lt;!-- outline API --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/&gt;<br/>
+<br/>
+			<br/>
+			&lt;!-- java-based API for content assistance --&gt;<br/>
+			&lt;fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/&gt;<br/>
+			<br/>
+		&lt;/language&gt;<br/>
+	&lt;/component&gt;<br/>
+&lt;/workflow&gt;<br/>
+<br/>
+</code>
+</p>
+</div>
+</div>
 </body>
 </html>
