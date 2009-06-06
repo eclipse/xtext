@@ -35,10 +35,10 @@ public class DefaultCrossReferenceSerializer extends
 		final String text = linkingService.getLinkText(target, ref, context);
 		if (text == null)
 			throw new XtextSerializationException(
-					container,
 					"Error serializing CrossRefs: "
 							+ "Unable to create a string represenation for reference '"
-							+ grammarElement.getType().getClassifier().getName() + "' using "
+							+ grammarElement.getType().getClassifier()
+									.getName() + "' using "
 							+ linkingService.getClass().getName()
 							+ " EReference: " + ref.getName() + " Context:"
 							+ context + " Target:" + target);

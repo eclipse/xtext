@@ -23,18 +23,18 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2.A
 public class TraceToDot extends FollowerToDot {
 
 	protected Props drawObject(Object obj) {
-		if (obj instanceof AbstractToken2)
-			return drawPTC((AbstractToken2) obj);
+		if (obj instanceof TreeConstructionReportImpl)
+			return drawPTC((TreeConstructionReportImpl) obj);
 		return super.drawObject(obj);
 	}
 
-	protected Digraph drawPTC(AbstractToken2 obj) {
+	protected Digraph drawPTC(TreeConstructionReportImpl rep) {
 		Digraph d = new Digraph();
 		Set<AbstractToken2> drawn = new HashSet<AbstractToken2>();
 		Set<ParserRule> drawnRules = new HashSet<ParserRule>();
 		List<AbstractToken2> traces = new ArrayList<AbstractToken2>();
-		traces.add(obj);
-		traces.addAll(obj.getParseTreeConstructor().getFails());
+		traces.add(rep.getSuccess());
+		traces.addAll(rep.getDeadends());
 		boolean sol = true;
 		for (AbstractToken2 t : traces) {
 			while (t != null && !drawn.contains(t)) {

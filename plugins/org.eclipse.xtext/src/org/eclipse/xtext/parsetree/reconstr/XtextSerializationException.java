@@ -8,41 +8,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 
 @SuppressWarnings("serial")
 public class XtextSerializationException extends RuntimeException {
-//	private static String diagToString(
-//			List<AbstractSerializationDiagnostic> diagnostic) {
-//		Collections.sort(diagnostic);
-//		StringBuffer b = new StringBuffer();
-//		for (AbstractSerializationDiagnostic d : diagnostic) {
-//			b.append("\n");
-//			b.append(d.toString());
-//		}
-//		return b.toString();
-//	}
-//
-	private IInstanceDescription desc;
-//	private List<AbstractSerializationDiagnostic> diagnostic;
-	public XtextSerializationException(IInstanceDescription desc, String msg) {
-		super(msg);
-		this.desc = desc;
-//		this.diagnostic = null;
+	private TreeConstructionReport rep;
+
+	public XtextSerializationException(TreeConstructionReport rep, String msg) {
+		super(msg + "\n" + rep.toString());
+		this.rep = rep;
 	}
-//
-//	public XtextSerializationException(IInstanceDescription desc, String msg,
-//			List<AbstractSerializationDiagnostic> diagnostic) {
-//		super(msg + diagToString(diagnostic));
-//		this.desc = desc;
-//		this.diagnostic = diagnostic;
-//	}
-//
-//	public IInstanceDescription getDesc() {
-//		return desc;
-//	}
-//
-//	public List<AbstractSerializationDiagnostic> getDiagnostic() {
-//		return diagnostic;
-//	}
+
+	public XtextSerializationException(String message) {
+		super(message);
+	}
+
+	public TreeConstructionReport getReport() {
+		return rep;
+	}
 }

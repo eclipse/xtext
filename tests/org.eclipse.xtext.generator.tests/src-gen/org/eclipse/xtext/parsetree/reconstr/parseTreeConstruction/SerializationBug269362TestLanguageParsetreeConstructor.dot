@@ -1,0 +1,40 @@
+## This is a Graphviz .dot file (http://www.graphviz.org/)
+## You can use the command 'dot -Tpdf this.dot > out.pdf' to render it.
+digraph G {
+alternatives7331456 [shape=record,label="Model:\n\|"];
+group3024151 [label="( )"];
+keyword4791772 [label="\"foo\"",peripheries=2];
+assignment12556446 [label="foo= "];
+rulecall8364954 [label="=>ID",style=dotted];
+group5672033 [label="( )?"];
+keyword1724059 [label="\"bar\""];
+assignment2023219 [label="bar= "];
+rulecall2012470 [label="=>ID",style=dotted];
+group2079342 [label="( )"];
+keyword13614738 [label="\"bar\"",peripheries=2];
+assignment15231177 [label="bar= "];
+rulecall8909204 [label="=>ID",style=dotted];
+group3024151->keyword4791772 [];
+assignment12556446->rulecall8364954 [];
+assignment12556446->keyword4791772 [label=0,style=dotted,arrowhead=onormal];
+group3024151->assignment12556446 [];
+keyword1724059->assignment12556446 [label=0,style=dotted,arrowhead=onormal];
+group5672033->keyword1724059 [];
+assignment2023219->rulecall2012470 [];
+assignment2023219->keyword1724059 [label=0,style=dotted,arrowhead=onormal];
+group5672033->assignment2023219 [];
+group5672033->assignment2023219 [label=0,style=dotted,arrowhead=onormal];
+group3024151->group5672033 [];
+group3024151->group5672033 [label=0,style=dotted,arrowhead=onormal];
+group3024151->assignment12556446 [label=1,style=dotted,arrowhead=onormal];
+alternatives7331456->group3024151 [];
+group2079342->keyword13614738 [];
+assignment15231177->rulecall8909204 [];
+assignment15231177->keyword13614738 [label=0,style=dotted,arrowhead=onormal];
+group2079342->assignment15231177 [];
+group2079342->assignment15231177 [label=0,style=dotted,arrowhead=onormal];
+alternatives7331456->group2079342 [];
+alternatives7331456->group3024151 [label=0,style=dotted,arrowhead=onormal];
+alternatives7331456->group2079342 [label=1,style=dotted,arrowhead=onormal];
+}
+

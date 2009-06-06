@@ -8,6 +8,7 @@ import org.eclipse.xtext.formatter.IFormatter;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenOutputStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 
@@ -38,17 +39,17 @@ public class SerializerUtil {
 		return n.getParent() == null ? n : n.getParent();
 	}
 
-	public void serialize(EObject obj, ITokenStream out, CompositeNode node,
-			boolean format) throws IOException {
+	public TreeConstructionReport serialize(EObject obj, ITokenStream out,
+			CompositeNode node, boolean format) throws IOException {
 		ITokenStream t = formatter.createFormatterStream(null, out, !format);
 		if (node != null)
 			t = merger.createHiddenTokenMerger(t, node);
-		parseTreeReconstructor.serialize(obj, t);
+		return parseTreeReconstructor.serialize(obj, t);
 	}
 
-	public void serialize(EObject obj, OutputStream out, CompositeNode node,
-			boolean format) throws IOException {
-		serialize(obj, new TokenOutputStream(out), node, format);
+	public TreeConstructionReport serialize(EObject obj, OutputStream out,
+			CompositeNode node, boolean format) throws IOException {
+		return serialize(obj, new TokenOutputStream(out), node, format);
 	}
 
 	public String serialize(EObject obj) {
