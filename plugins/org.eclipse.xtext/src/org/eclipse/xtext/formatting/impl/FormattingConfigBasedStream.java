@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatter.impl;
+package org.eclipse.xtext.formatting.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatter.impl.AbstractFormattingConfig.ElementLocator;
-import org.eclipse.xtext.formatter.impl.AbstractFormattingConfig.LocatorType;
-import org.eclipse.xtext.formatter.impl.FormattingConfig.IndentationLocatorEnd;
-import org.eclipse.xtext.formatter.impl.FormattingConfig.IndentationLocatorStart;
-import org.eclipse.xtext.formatter.impl.FormattingConfig.LinewrapLocator;
-import org.eclipse.xtext.formatter.impl.FormattingConfig.NoLinewrapLocator;
-import org.eclipse.xtext.formatter.impl.FormattingConfig.NoSpaceLocator;
+import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
+import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.LocatorType;
+import org.eclipse.xtext.formatting.impl.FormattingConfig.IndentationLocatorEnd;
+import org.eclipse.xtext.formatting.impl.FormattingConfig.IndentationLocatorStart;
+import org.eclipse.xtext.formatting.impl.FormattingConfig.LinewrapLocator;
+import org.eclipse.xtext.formatting.impl.FormattingConfig.NoLinewrapLocator;
+import org.eclipse.xtext.formatting.impl.FormattingConfig.NoSpaceLocator;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
 /**

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatter.IFormatter;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;

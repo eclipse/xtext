@@ -5,16 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatter;
+package org.eclipse.xtext.formatting.impl;
 
-import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.TerminalRule;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IFormatter {
+public class BaseFormatter extends AbstractFormatter {
+	
+	@Inject
+	protected IGrammarAccess grammar;
 
-	public ITokenStream createFormatterStream(String initalIndentation,
-			ITokenStream outputStream, boolean preserveWhitespaces);
+	protected TerminalRule getWSRule() {
+		// FIXME: make this configurable
+		return (TerminalRule) GrammarUtil.findRuleForName(grammar.getGrammar(),
+				"WS");
+	}
 
 }

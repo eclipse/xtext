@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2.AbstractToken2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -30,15 +30,15 @@ public class TraceToDot extends FollowerToDot {
 
 	protected Digraph drawPTC(TreeConstructionReportImpl rep) {
 		Digraph d = new Digraph();
-		Set<AbstractToken2> drawn = new HashSet<AbstractToken2>();
+		Set<AbstractToken> drawn = new HashSet<AbstractToken>();
 		Set<ParserRule> drawnRules = new HashSet<ParserRule>();
-		List<AbstractToken2> traces = new ArrayList<AbstractToken2>();
+		List<AbstractToken> traces = new ArrayList<AbstractToken>();
 		traces.add(rep.getSuccess());
 		traces.addAll(rep.getDeadends());
 		boolean sol = true;
-		for (AbstractToken2 t : traces) {
+		for (AbstractToken t : traces) {
 			while (t != null && !drawn.contains(t)) {
-				// String ser = ((AbstractToken2) t).serialize().replaceAll(
+				// String ser = ((AbstractToken) t).serialize().replaceAll(
 				// "\\\\", "\\\\");
 				String s = t.getClass().getSimpleName() + "\\n"
 						+ t.getCurrent() + "\\n'" /* + ser */+ "'";
@@ -53,13 +53,13 @@ public class TraceToDot extends FollowerToDot {
 				}
 				if (t.getNext() != null) {
 					Edge e = new Edge(t.getNext(), t);
-					e.setLabel(String.valueOf(((AbstractToken2) t).getNo()));
+					e.setLabel(String.valueOf(((AbstractToken) t).getNo()));
 					if (!sol)
 						e.setStyle("dashed");
 					d.add(e);
 				}
 				drawn.add(t);
-				t = (AbstractToken2) t.getNext();
+				t = (AbstractToken) t.getNext();
 			}
 			sol = false;
 		}

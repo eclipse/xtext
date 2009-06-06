@@ -15,12 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2.AbstractToken2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,16 +30,16 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2.A
 @SuppressWarnings("serial")
 public class TreeConstructionReportImpl implements TreeConstructionReport {
 
-	protected List<AbstractToken2> deadends = new ArrayList<AbstractToken2>();
+	protected List<AbstractToken> deadends = new ArrayList<AbstractToken>();
 
-	protected Map<AbstractToken2, Integer> length = new HashMap<AbstractToken2, Integer>() {
+	protected Map<AbstractToken, Integer> length = new HashMap<AbstractToken, Integer>() {
 		@Override
 		public Integer get(Object key) {
-			AbstractToken2 t = (AbstractToken2) key;
+			AbstractToken t = (AbstractToken) key;
 			Integer r = super.get(key);
 			if (r == null) {
 				int l = 0;
-				AbstractToken2 x = t;
+				AbstractToken x = t;
 				while ((x = x.getNext()) != null)
 					l++;
 				r = l;
@@ -47,17 +49,17 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		}
 	};
 
-	protected AbstractToken2 success;
+	protected AbstractToken success;
 
 	public TreeConstructionReportImpl() {
 		super();
 	}
 
-	protected void addDeadEnd(AbstractToken2 deadend) {
+	protected void addDeadEnd(AbstractToken deadend) {
 		this.deadends.add(deadend);
 	}
 
-	protected String checkUnconsumed(AbstractToken2 t, IInstanceDescription inst) {
+	protected String checkUnconsumed(AbstractToken t, IInstanceDescription inst) {
 		boolean finalNode = ParseTreeConstructorUtil.isRuleEnd(t
 				.getGrammarElement());
 		if (!finalNode || inst.isConsumed())
@@ -82,9 +84,9 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return b.toString();
 	}
 
-	protected List<String> collectDiagnostics(AbstractToken2 t) {
+	protected List<String> collectDiagnostics(AbstractToken t) {
 		int i = 0;
-		AbstractToken2 f;
+		AbstractToken f;
 		IInstanceDescription inst = t.tryConsume();
 		ArrayList<String> diags = new ArrayList<String>();
 		while ((f = t.createFollower(i++, inst)) != null) {
@@ -104,14 +106,14 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return diags;
 	}
 
-	public List<AbstractToken2> getDeadends() {
+	public List<AbstractToken> getDeadends() {
 		return deadends;
 	}
 
-	public List<AbstractToken2> getDeadEndsSorted() {
-		ArrayList<AbstractToken2> r = new ArrayList<AbstractToken2>(deadends);
-		Collections.sort(r, new Comparator<AbstractToken2>() {
-			public int compare(AbstractToken2 o1, AbstractToken2 o2) {
+	public List<AbstractToken> getDeadEndsSorted() {
+		ArrayList<AbstractToken> r = new ArrayList<AbstractToken>(deadends);
+		Collections.sort(r, new Comparator<AbstractToken>() {
+			public int compare(AbstractToken o1, AbstractToken o2) {
 				return length.get(o2).compareTo(length.get(o1));
 			}
 		});
@@ -120,10 +122,10 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	}
 
 	public List<String> getLikelyErrorReasons() {
-		List<AbstractToken2> r = getDeadEndsSorted();
+		List<AbstractToken> r = getDeadEndsSorted();
 		ArrayList<String> msgs = new ArrayList<String>();
 		for (int i = 0; i < r.size() && i < 5; i++) {
-			AbstractToken2 t = r.get(i);
+			AbstractToken t = r.get(i);
 			StringBuffer b = new StringBuffer();
 			b.append(length.get(r.get(i)));
 			b.append(": \"");
@@ -138,7 +140,19 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return msgs;
 	}
 
-	public AbstractToken2 getSuccess() {
+	protected String getPath(EObject obj) {
+		if (obj.eContainer() == null)
+			return "";
+		EObject c = obj.eContainer();
+		EReference r = obj.eContainmentFeature();
+		if (r.isMany()) {
+			int index = ((List<?>) c.eGet(r)).indexOf(obj);
+			return getPath(c) + "/" + r.getName() + "[" + index + "]";
+		}
+		return getPath(c) + "/" + r.getName();
+	}
+
+	public AbstractToken getSuccess() {
 		return success;
 	}
 
@@ -146,7 +160,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return success != null;
 	}
 
-	protected void setSuccess(AbstractToken2 succes) {
+	protected void setSuccess(AbstractToken succes) {
 		this.success = succes;
 	}
 
@@ -154,8 +168,8 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	public String toString() {
 		StringBuffer b = new StringBuffer();
 		b.append("<# of serialized tokens>: ");
-		b.append("<serializable fragment, starting from the end>:\n");
-		b.append("  -> <possible reasons for not continuing >\n");
+		b.append("\"<serializable fragment, starting from the end>\":\n");
+		b.append("  -> <possible reasons for not continuing>\n");
 		for (String s : getLikelyErrorReasons()) {
 			b.append(s);
 			b.append("\n");

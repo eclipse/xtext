@@ -10,7 +10,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatter.impl.AbstractTokenStream;
+import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

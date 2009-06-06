@@ -5,26 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatter.impl;
+package org.eclipse.xtext.formatting.impl;
 
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.TerminalRule;
+import java.io.IOException;
 
-import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class BaseFormatter extends AbstractFormatter {
-	
-	@Inject
-	protected IGrammarAccess grammar;
+public abstract class AbstractTokenStream implements
+		ITokenStream {
 
-	protected TerminalRule getWSRule() {
-		// FIXME: make this configurable
-		return (TerminalRule) GrammarUtil.findRuleForName(grammar.getGrammar(),
-				"WS");
+	public void close() throws IOException {
 	}
 
+	public void writeHidden(EObject grammarElement, String value)
+			throws IOException {
+	}
+
+	public void writeSemantic(EObject grammarElement, String value)
+			throws IOException {
+	}
 }

@@ -5,27 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatter.impl;
+package org.eclipse.xtext.formatting;
 
-import java.io.IOException;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractTokenStream implements
-		ITokenStream {
+public interface IFormatter {
 
-	public void close() throws IOException {
-	}
+	public ITokenStream createFormatterStream(String initalIndentation,
+			ITokenStream outputStream, boolean preserveWhitespaces);
 
-	public void writeHidden(EObject grammarElement, String value)
-			throws IOException {
-	}
-
-	public void writeSemantic(EObject grammarElement, String value)
-			throws IOException {
-	}
 }
