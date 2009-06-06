@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.formatter;
 
-import org.eclipse.xtext.formatter.IFormatter;
+import org.eclipse.xtext.formatting.IFormatter;
 
 /**
  * used to register components to be used within the IDE.

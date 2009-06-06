@@ -29,13 +29,13 @@ package «getParseTreeConstructorName().toJavaPackage()»;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import «gaFQName()»;
 
 import com.google.inject.Inject;
 
-public class «getParseTreeConstructorName().toSimpleName()» extends AbstractParseTreeConstructor2 {
+public class «getParseTreeConstructorName().toSimpleName()» extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private «gaSimpleName()» grammarAccess;
@@ -44,7 +44,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -75,7 +75,7 @@ protected class ThisRootNode extends RootToken {
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
-	public «elementMethodName()»(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public «elementMethodName()»(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -97,7 +97,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createFollowerMethod FOR List[Follower]-»
 «IF size > 0-»
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 «FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
 			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «i.counter0», inst);
@@ -115,7 +115,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createParentFollowerMethod(boolean isAss) FOR List[Follower]-»
 «IF size > 0-»
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 «IF isAss-»
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 «ENDIF-»	
