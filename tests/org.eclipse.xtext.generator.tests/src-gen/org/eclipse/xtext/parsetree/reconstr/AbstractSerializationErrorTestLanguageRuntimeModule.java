@@ -11,21 +11,21 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguageRuntimeModule}
+ * Manual modifications go to {org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguageRuntimeModule}
  */
-public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractSerializationErrorTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-			"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage");
+			"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage");
 	}
 	
 	
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SimpleReconstrTestLanguageParser.class;
+		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SerializationErrorTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -35,12 +35,12 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends De
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SimpleReconstrTestLanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SerializationErrorTestLanguageAntlrTokenFileProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer.class;
+		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -50,12 +50,12 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends De
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.class;
+		return org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SimpleReconstrTestLanguageParsetreeConstructor.class;
+		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SerializationErrorTestLanguageParsetreeConstructor.class;
 	}
 
 }

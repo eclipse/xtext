@@ -10,10 +10,10 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class ComplexReconstrTestLanguageStandaloneSetup implements ISetup {
+public class SerializationErrorTestLanguageStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
-		new ComplexReconstrTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+		new SerializationErrorTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
@@ -25,16 +25,16 @@ public class ComplexReconstrTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageRuntimeModule());
+		return Guice.createInjector(new org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("complexreconstrtestlanguage", resourceFactory);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("serializationerrortestlanguage", resourceFactory);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://complex/rewrite/test")) {
-		EPackage.Registry.INSTANCE.put("http://complex/rewrite/test", org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
+		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE);
 	}
 
 	}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen" editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src" modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="SerializationErrorTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit" editorPluginID="org.eclipse.xtext.generator.tests.editor">
+  <genPackages prefix="Serializationerror" basePackage="org.eclipse.xtext.parsetree.reconstr" disposableProviderFactory="true">
+    <ecorePackage href="SerializationErrorTestLanguage.ecore#/"/>
+    <genClasses>
+      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Model"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Model/test"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Test"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//Test/one"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//Test/two"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoRequired"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoOptions"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

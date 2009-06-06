@@ -137,8 +137,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.reconstr.complexrewritetest.util,
  org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction,
  org.eclipse.xtext.parsetree.reconstr.parser.antlr,
- org.eclipse.xtext.parsetree.reconstr.parser.packrat,
- org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers,
  org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage,
  org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl,
  org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.util,
@@ -269,5 +267,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.transientvalues.services,
  org.eclipse.xtext.testlanguages.services,
  org.eclipse.xtext.valueconverter.services,
- org.eclipse.xtext.xtext.ecoreInference.services
+ org.eclipse.xtext.xtext.ecoreInference.services,
+ org.eclipse.xtext.parsetree.reconstr.serializationerror,
+ org.eclipse.xtext.parsetree.reconstr.serializationerror.impl,
+ org.eclipse.xtext.parsetree.reconstr.serializationerror.util
 
