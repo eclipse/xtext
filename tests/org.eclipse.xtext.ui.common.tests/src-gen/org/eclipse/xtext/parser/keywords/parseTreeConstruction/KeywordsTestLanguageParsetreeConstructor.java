@@ -6,13 +6,13 @@ package org.eclipse.xtext.parser.keywords.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeC
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -49,7 +49,7 @@ protected class ThisRootNode extends RootToken {
 // first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -57,7 +57,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_FirstAssignment_0(parent, this, 0, inst);
 			case 1: return new Model_SecondAssignment_1(parent, this, 1, inst);
@@ -76,7 +76,7 @@ protected class Model_Alternatives extends AlternativesToken {
 // first?="foo\\bar"
 protected class Model_FirstAssignment_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_FirstAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -84,7 +84,7 @@ protected class Model_FirstAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getFirstAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -106,7 +106,7 @@ protected class Model_FirstAssignment_0 extends AssignmentToken  {
 // second?="foo\\"
 protected class Model_SecondAssignment_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_SecondAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class Model_SecondAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getSecondAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -136,7 +136,7 @@ protected class Model_SecondAssignment_1 extends AssignmentToken  {
 // third?="\\bar"
 protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 	
-	public Model_ThirdAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ThirdAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -144,7 +144,7 @@ protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getThirdAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -166,7 +166,7 @@ protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 // forth?="\\"
 protected class Model_ForthAssignment_3 extends AssignmentToken  {
 	
-	public Model_ForthAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ForthAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -174,7 +174,7 @@ protected class Model_ForthAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getForthAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

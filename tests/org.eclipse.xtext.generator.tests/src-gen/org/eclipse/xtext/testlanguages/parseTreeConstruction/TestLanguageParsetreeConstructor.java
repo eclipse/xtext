@@ -6,13 +6,13 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntryRule_MultiFeatureAssignment(this, this, 0, inst);
 			case 1: return new AbstractRule_Alternatives(this, this, 1, inst);
@@ -53,7 +53,7 @@ protected class ThisRootNode extends RootToken {
 // multiFeature+=AbstractRule*
 protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 	
-	public EntryRule_MultiFeatureAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntryRule_MultiFeatureAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -61,7 +61,7 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		return grammarAccess.getEntryRuleAccess().getMultiFeatureAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -87,7 +87,7 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new EntryRule_MultiFeatureAssignment(parent, next, actIndex, consumed);
@@ -109,7 +109,7 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 // ChoiceRule|ReducibleRule
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
-	public AbstractRule_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AbstractRule_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -117,7 +117,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		return grammarAccess.getAbstractRuleAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_ChoiceRuleParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new AbstractRule_ReducibleRuleParserRuleCall_1(parent, this, 1, inst);
@@ -134,7 +134,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 // ChoiceRule
 protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 	
-	public AbstractRule_ChoiceRuleParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AbstractRule_ChoiceRuleParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -142,7 +142,7 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getAbstractRuleAccess().getChoiceRuleParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_Group(this, this, 0, inst);
 			default: return null;
@@ -155,7 +155,7 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -165,7 +165,7 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 // ReducibleRule
 protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken {
 	
-	public AbstractRule_ReducibleRuleParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AbstractRule_ReducibleRuleParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -173,7 +173,7 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 		return grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_Group(this, this, 0, inst);
 			default: return null;
@@ -186,7 +186,7 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -207,7 +207,7 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 // "choice" optionalKeyword?="optional"? name=ID
 protected class ChoiceRule_Group extends GroupToken {
 	
-	public ChoiceRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ChoiceRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -215,7 +215,7 @@ protected class ChoiceRule_Group extends GroupToken {
 		return grammarAccess.getChoiceRuleAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -231,7 +231,7 @@ protected class ChoiceRule_Group extends GroupToken {
 // "choice"
 protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 	
-	public ChoiceRule_ChoiceKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ChoiceRule_ChoiceKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -239,7 +239,7 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 		return grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -250,7 +250,7 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 // optionalKeyword?="optional"?
 protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  {
 	
-	public ChoiceRule_OptionalKeywordAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ChoiceRule_OptionalKeywordAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -258,7 +258,7 @@ protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  
 		return grammarAccess.getChoiceRuleAccess().getOptionalKeywordAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_ChoiceKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -281,7 +281,7 @@ protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  
 // name=ID
 protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 	
-	public ChoiceRule_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ChoiceRule_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -289,7 +289,7 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getChoiceRuleAccess().getNameAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_OptionalKeywordAssignment_1(parent, this, 0, inst);
 			case 1: return new ChoiceRule_ChoiceKeyword_0(parent, this, 1, inst);
@@ -324,7 +324,7 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 // "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 protected class ReducibleRule_Group extends GroupToken {
 	
-	public ReducibleRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -332,7 +332,7 @@ protected class ReducibleRule_Group extends GroupToken {
 		return grammarAccess.getReducibleRuleAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_Group_2(parent, this, 0, inst);
 			case 1: return new ReducibleRule_TerminalRuleParserRuleCall_1(parent, this, 1, inst);
@@ -349,7 +349,7 @@ protected class ReducibleRule_Group extends GroupToken {
 // "reducible"
 protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 	
-	public ReducibleRule_ReducibleKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_ReducibleKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -357,7 +357,7 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 		return grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -368,7 +368,7 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 // TerminalRule
 protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken {
 	
-	public ReducibleRule_TerminalRuleParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_TerminalRuleParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -376,7 +376,7 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 		return grammarAccess.getReducibleRuleAccess().getTerminalRuleParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
 			default: return null;
@@ -389,7 +389,7 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_ReducibleKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -400,7 +400,7 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 // ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 protected class ReducibleRule_Group_2 extends GroupToken {
 	
-	public ReducibleRule_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -408,7 +408,7 @@ protected class ReducibleRule_Group_2 extends GroupToken {
 		return grammarAccess.getReducibleRuleAccess().getGroup_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_ActionFeatureAssignment_2_1(parent, this, 0, inst);
 			default: return null;
@@ -420,7 +420,7 @@ protected class ReducibleRule_Group_2 extends GroupToken {
 // {ReducibleComposite.actionFeature+=current}
 protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends ActionToken  {
 
-	public ReducibleRule_ReducibleCompositeActionFeatureAction_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_ReducibleCompositeActionFeatureAction_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -428,7 +428,7 @@ protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends 
 		return grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_TerminalRuleParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
@@ -448,7 +448,7 @@ protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends 
 // actionFeature+=TerminalRule
 protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToken  {
 	
-	public ReducibleRule_ActionFeatureAssignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ReducibleRule_ActionFeatureAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -456,7 +456,7 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		return grammarAccess.getReducibleRuleAccess().getActionFeatureAssignment_2_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
 			default: return null;
@@ -478,7 +478,7 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new ReducibleRule_ReducibleCompositeActionFeatureAction_2_0(parent, next, actIndex, consumed);
@@ -502,7 +502,7 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 // stringFeature=STRING
 protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 	
-	public TerminalRule_StringFeatureAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TerminalRule_StringFeatureAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -510,7 +510,7 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 		return grammarAccess.getTerminalRuleAccess().getStringFeatureAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

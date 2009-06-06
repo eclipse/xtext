@@ -6,13 +6,13 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TreeTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TreeTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TreeTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TreeTestLanguageParsetreeConstructor extends AbstractParseTreeConst
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ChildrenAssignment(this, this, 0, inst);
 			case 1: return new Node_Group(this, this, 1, inst);
@@ -50,7 +50,7 @@ protected class ThisRootNode extends RootToken {
 // children+=Node*
 protected class Model_ChildrenAssignment extends AssignmentToken  {
 	
-	public Model_ChildrenAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ChildrenAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -58,7 +58,7 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getChildrenAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_Group(this, this, 0, inst);
 			default: return null;
@@ -84,7 +84,7 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Model_ChildrenAssignment(parent, next, actIndex, consumed);
@@ -106,7 +106,7 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 // name=ID "(" attrib=STRING ")" "{" children+=Node* "};"
 protected class Node_Group extends GroupToken {
 	
-	public Node_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class Node_Group extends GroupToken {
 		return grammarAccess.getNodeAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_RightCurlyBracketSemicolonKeyword_6(parent, this, 0, inst);
 			default: return null;
@@ -130,7 +130,7 @@ protected class Node_Group extends GroupToken {
 // name=ID
 protected class Node_NameAssignment_0 extends AssignmentToken  {
 	
-	public Node_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -138,7 +138,7 @@ protected class Node_NameAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getNodeAccess().getNameAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -160,7 +160,7 @@ protected class Node_NameAssignment_0 extends AssignmentToken  {
 // "("
 protected class Node_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
-	public Node_LeftParenthesisKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_LeftParenthesisKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -168,7 +168,7 @@ protected class Node_LeftParenthesisKeyword_1 extends KeywordToken  {
 		return grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
@@ -180,7 +180,7 @@ protected class Node_LeftParenthesisKeyword_1 extends KeywordToken  {
 // attrib=STRING
 protected class Node_AttribAssignment_2 extends AssignmentToken  {
 	
-	public Node_AttribAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_AttribAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -188,7 +188,7 @@ protected class Node_AttribAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getNodeAccess().getAttribAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -211,7 +211,7 @@ protected class Node_AttribAssignment_2 extends AssignmentToken  {
 // ")"
 protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 	
-	public Node_RightParenthesisKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_RightParenthesisKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -219,7 +219,7 @@ protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 		return grammarAccess.getNodeAccess().getRightParenthesisKeyword_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_AttribAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -231,7 +231,7 @@ protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 // "{"
 protected class Node_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Node_LeftCurlyBracketKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_LeftCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -239,7 +239,7 @@ protected class Node_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 		return grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_RightParenthesisKeyword_3(parent, this, 0, inst);
 			default: return null;
@@ -251,7 +251,7 @@ protected class Node_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 // children+=Node*
 protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 	
-	public Node_ChildrenAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_ChildrenAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -259,7 +259,7 @@ protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 		return grammarAccess.getNodeAccess().getChildrenAssignment_5();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_Group(this, this, 0, inst);
 			default: return null;
@@ -281,7 +281,7 @@ protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Node_ChildrenAssignment_5(parent, next, actIndex, consumed);
@@ -294,7 +294,7 @@ protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 // "};"
 protected class Node_RightCurlyBracketSemicolonKeyword_6 extends KeywordToken  {
 	
-	public Node_RightCurlyBracketSemicolonKeyword_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Node_RightCurlyBracketSemicolonKeyword_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -302,7 +302,7 @@ protected class Node_RightCurlyBracketSemicolonKeyword_6 extends KeywordToken  {
 		return grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Node_ChildrenAssignment_5(parent, this, 0, inst);
 			case 1: return new Node_LeftCurlyBracketKeyword_4(parent, this, 1, inst);

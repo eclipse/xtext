@@ -6,13 +6,13 @@ package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParse
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -49,7 +49,7 @@ protected class ThisRootNode extends RootToken {
 // idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -57,7 +57,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_IdValueAssignment_0(parent, this, 0, inst);
 			case 1: return new Model_IntValueAssignment_1(parent, this, 1, inst);
@@ -79,7 +79,7 @@ protected class Model_Alternatives extends AlternativesToken {
 // idValue=ID
 protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 	
-	public Model_IdValueAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_IdValueAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -87,7 +87,7 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getIdValueAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -109,7 +109,7 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 // intValue=INT
 protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 	
-	public Model_IntValueAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_IntValueAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -117,7 +117,7 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getIntValueAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -139,7 +139,7 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 // stringValue=STRING
 protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 	
-	public Model_StringValueAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_StringValueAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -147,7 +147,7 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getStringValueAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -169,7 +169,7 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 // mlCommentValue=ML_COMMENT
 protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	
-	public Model_MlCommentValueAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_MlCommentValueAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -177,7 +177,7 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getMlCommentValueAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -199,7 +199,7 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 // slCommentValue=SL_COMMENT
 protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	
-	public Model_SlCommentValueAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_SlCommentValueAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -207,7 +207,7 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getSlCommentValueAssignment_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -229,7 +229,7 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 // wsValue=WS
 protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	
-	public Model_WsValueAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_WsValueAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -237,7 +237,7 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getWsValueAssignment_5();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -259,7 +259,7 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 // anyValue=ANY_OTHER
 protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	
-	public Model_AnyValueAssignment_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_AnyValueAssignment_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -267,7 +267,7 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getAnyValueAssignment_6();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

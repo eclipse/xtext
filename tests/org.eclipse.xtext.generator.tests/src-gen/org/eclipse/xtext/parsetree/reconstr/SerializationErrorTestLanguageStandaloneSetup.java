@@ -29,13 +29,13 @@ public class SerializationErrorTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
+		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE);
+	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("serializationerrortestlanguage", resourceFactory);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
-		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE);
-	}
 
 	}
 }

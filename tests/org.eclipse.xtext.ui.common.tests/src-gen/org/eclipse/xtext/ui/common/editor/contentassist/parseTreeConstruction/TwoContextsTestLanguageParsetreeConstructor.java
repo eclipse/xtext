@@ -6,13 +6,13 @@ package org.eclipse.xtext.ui.common.editor.contentassist.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TwoContextsTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTr
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MainModel_ElementsAssignment(this, this, 0, inst);
 			case 1: return new AnElement_Group(this, this, 1, inst);
@@ -50,7 +50,7 @@ protected class ThisRootNode extends RootToken {
 // elements+=AnElement*
 protected class MainModel_ElementsAssignment extends AssignmentToken  {
 	
-	public MainModel_ElementsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public MainModel_ElementsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -58,7 +58,7 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 		return grammarAccess.getMainModelAccess().getElementsAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_Group(this, this, 0, inst);
 			default: return null;
@@ -84,7 +84,7 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new MainModel_ElementsAssignment(parent, next, actIndex, consumed);
@@ -106,7 +106,7 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 // name=ID ("refersTo" referred=[AnElement])? ";"
 protected class AnElement_Group extends GroupToken {
 	
-	public AnElement_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class AnElement_Group extends GroupToken {
 		return grammarAccess.getAnElementAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
@@ -130,7 +130,7 @@ protected class AnElement_Group extends GroupToken {
 // name=ID
 protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 	
-	public AnElement_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -138,7 +138,7 @@ protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getAnElementAccess().getNameAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -160,7 +160,7 @@ protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 // ("refersTo" referred=[AnElement])?
 protected class AnElement_Group_1 extends GroupToken {
 	
-	public AnElement_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -168,7 +168,7 @@ protected class AnElement_Group_1 extends GroupToken {
 		return grammarAccess.getAnElementAccess().getGroup_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_ReferredAssignment_1_1(parent, this, 0, inst);
 			default: return null;
@@ -180,7 +180,7 @@ protected class AnElement_Group_1 extends GroupToken {
 // "refersTo"
 protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 	
-	public AnElement_RefersToKeyword_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_RefersToKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -188,7 +188,7 @@ protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 		return grammarAccess.getAnElementAccess().getRefersToKeyword_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
@@ -200,7 +200,7 @@ protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 // referred=[AnElement]
 protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 	
-	public AnElement_ReferredAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_ReferredAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -208,7 +208,7 @@ protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 		return grammarAccess.getAnElementAccess().getReferredAssignment_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_RefersToKeyword_1_0(parent, this, 0, inst);
 			default: return null;
@@ -235,7 +235,7 @@ protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 // ";"
 protected class AnElement_SemicolonKeyword_2 extends KeywordToken  {
 	
-	public AnElement_SemicolonKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public AnElement_SemicolonKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -243,7 +243,7 @@ protected class AnElement_SemicolonKeyword_2 extends KeywordToken  {
 		return grammarAccess.getAnElementAccess().getSemicolonKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AnElement_Group_1(parent, this, 0, inst);
 			case 1: return new AnElement_NameAssignment_0(parent, this, 1, inst);

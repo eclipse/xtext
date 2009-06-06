@@ -6,13 +6,13 @@ package org.eclipse.xtext.ui.integration.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new File_StuffAssignment(this, this, 0, inst);
 			case 1: return new Stuff_Group(this, this, 1, inst);
@@ -50,7 +50,7 @@ protected class ThisRootNode extends RootToken {
 // stuff+=Stuff*
 protected class File_StuffAssignment extends AssignmentToken  {
 	
-	public File_StuffAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public File_StuffAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -58,7 +58,7 @@ protected class File_StuffAssignment extends AssignmentToken  {
 		return grammarAccess.getFileAccess().getStuffAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Stuff_Group(this, this, 0, inst);
 			default: return null;
@@ -84,7 +84,7 @@ protected class File_StuffAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new File_StuffAssignment(parent, next, actIndex, consumed);
@@ -106,7 +106,7 @@ protected class File_StuffAssignment extends AssignmentToken  {
 // "stuff" name=ID
 protected class Stuff_Group extends GroupToken {
 	
-	public Stuff_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Stuff_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class Stuff_Group extends GroupToken {
 		return grammarAccess.getStuffAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Stuff_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -130,7 +130,7 @@ protected class Stuff_Group extends GroupToken {
 // "stuff"
 protected class Stuff_StuffKeyword_0 extends KeywordToken  {
 	
-	public Stuff_StuffKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Stuff_StuffKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -138,7 +138,7 @@ protected class Stuff_StuffKeyword_0 extends KeywordToken  {
 		return grammarAccess.getStuffAccess().getStuffKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -149,7 +149,7 @@ protected class Stuff_StuffKeyword_0 extends KeywordToken  {
 // name=ID
 protected class Stuff_NameAssignment_1 extends AssignmentToken  {
 	
-	public Stuff_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Stuff_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -157,7 +157,7 @@ protected class Stuff_NameAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getStuffAccess().getNameAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Stuff_StuffKeyword_0(parent, this, 0, inst);
 			default: return null;

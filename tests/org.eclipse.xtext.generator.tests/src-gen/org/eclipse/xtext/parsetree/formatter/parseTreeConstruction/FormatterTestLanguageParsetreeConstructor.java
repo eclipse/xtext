@@ -6,13 +6,13 @@ package org.eclipse.xtext.parsetree.formatter.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private FormatterTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTree
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Group(this, this, 0, inst);
 			case 1: return new Line_Group(this, this, 1, inst);
@@ -52,7 +52,7 @@ protected class ThisRootNode extends RootToken {
 // "test" (TestLinewrap|TestIndentation)
 protected class Root_Group extends GroupToken {
 	
-	public Root_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -60,7 +60,7 @@ protected class Root_Group extends GroupToken {
 		return grammarAccess.getRootAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Alternatives_1(parent, this, 0, inst);
 			default: return null;
@@ -76,7 +76,7 @@ protected class Root_Group extends GroupToken {
 // "test"
 protected class Root_TestKeyword_0 extends KeywordToken  {
 	
-	public Root_TestKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -84,7 +84,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 		return grammarAccess.getRootAccess().getTestKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -95,7 +95,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 // TestLinewrap|TestIndentation
 protected class Root_Alternatives_1 extends AlternativesToken {
 
-	public Root_Alternatives_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -103,7 +103,7 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestLinewrapParserRuleCall_1_0(parent, this, 0, inst);
 			case 1: return new Root_TestIndentationParserRuleCall_1_1(parent, this, 1, inst);
@@ -116,7 +116,7 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 // TestLinewrap
 protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 	
-	public Root_TestLinewrapParserRuleCall_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestLinewrapParserRuleCall_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -124,7 +124,7 @@ protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 		return grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestLinewrap_Group(this, this, 0, inst);
 			default: return null;
@@ -137,7 +137,7 @@ protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -148,7 +148,7 @@ protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 // TestIndentation
 protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 	
-	public Root_TestIndentationParserRuleCall_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestIndentationParserRuleCall_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -156,7 +156,7 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 		return grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_Group(this, this, 0, inst);
 			default: return null;
@@ -169,7 +169,7 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -192,7 +192,7 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 // type+=ID name+=ID ";"
 protected class Line_Group extends GroupToken {
 	
-	public Line_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Line_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -200,7 +200,7 @@ protected class Line_Group extends GroupToken {
 		return grammarAccess.getLineAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Line_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
@@ -216,7 +216,7 @@ protected class Line_Group extends GroupToken {
 // type+=ID
 protected class Line_TypeAssignment_0 extends AssignmentToken  {
 	
-	public Line_TypeAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Line_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -224,7 +224,7 @@ protected class Line_TypeAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getLineAccess().getTypeAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -246,7 +246,7 @@ protected class Line_TypeAssignment_0 extends AssignmentToken  {
 // name+=ID
 protected class Line_NameAssignment_1 extends AssignmentToken  {
 	
-	public Line_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Line_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -254,7 +254,7 @@ protected class Line_NameAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getLineAccess().getNameAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Line_TypeAssignment_0(parent, this, 0, inst);
 			default: return null;
@@ -277,7 +277,7 @@ protected class Line_NameAssignment_1 extends AssignmentToken  {
 // ";"
 protected class Line_SemicolonKeyword_2 extends KeywordToken  {
 	
-	public Line_SemicolonKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Line_SemicolonKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -285,7 +285,7 @@ protected class Line_SemicolonKeyword_2 extends KeywordToken  {
 		return grammarAccess.getLineAccess().getSemicolonKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Line_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -308,7 +308,7 @@ protected class Line_SemicolonKeyword_2 extends KeywordToken  {
 // "linewrap" items+=Line*
 protected class TestLinewrap_Group extends GroupToken {
 	
-	public TestLinewrap_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestLinewrap_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -316,7 +316,7 @@ protected class TestLinewrap_Group extends GroupToken {
 		return grammarAccess.getTestLinewrapAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestLinewrap_ItemsAssignment_1(parent, this, 0, inst);
 			case 1: return new TestLinewrap_LinewrapKeyword_0(parent, this, 1, inst);
@@ -333,7 +333,7 @@ protected class TestLinewrap_Group extends GroupToken {
 // "linewrap"
 protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 	
-	public TestLinewrap_LinewrapKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestLinewrap_LinewrapKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -341,7 +341,7 @@ protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 		return grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -352,7 +352,7 @@ protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 // items+=Line*
 protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 	
-	public TestLinewrap_ItemsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestLinewrap_ItemsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -360,7 +360,7 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getTestLinewrapAccess().getItemsAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Line_Group(this, this, 0, inst);
 			default: return null;
@@ -382,7 +382,7 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new TestLinewrap_ItemsAssignment_1(parent, next, actIndex, consumed);
@@ -406,7 +406,7 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 // "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
 protected class TestIndentation_Group extends GroupToken {
 	
-	public TestIndentation_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -414,7 +414,7 @@ protected class TestIndentation_Group extends GroupToken {
 		return grammarAccess.getTestIndentationAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_RightCurlyBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
@@ -430,7 +430,7 @@ protected class TestIndentation_Group extends GroupToken {
 // "indentation"
 protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 	
-	public TestIndentation_IndentationKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_IndentationKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -438,7 +438,7 @@ protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 		return grammarAccess.getTestIndentationAccess().getIndentationKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -449,7 +449,7 @@ protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 // "{"
 protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
-	public TestIndentation_LeftCurlyBracketKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_LeftCurlyBracketKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -457,7 +457,7 @@ protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  
 		return grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_IndentationKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -469,7 +469,7 @@ protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  
 // (sub+=TestIndentation|items+=Line)*
 protected class TestIndentation_Alternatives_2 extends AlternativesToken {
 
-	public TestIndentation_Alternatives_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_Alternatives_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -477,7 +477,7 @@ protected class TestIndentation_Alternatives_2 extends AlternativesToken {
 		return grammarAccess.getTestIndentationAccess().getAlternatives_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_SubAssignment_2_0(parent, this, 0, inst);
 			case 1: return new TestIndentation_ItemsAssignment_2_1(parent, this, 1, inst);
@@ -490,7 +490,7 @@ protected class TestIndentation_Alternatives_2 extends AlternativesToken {
 // sub+=TestIndentation
 protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 	
-	public TestIndentation_SubAssignment_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_SubAssignment_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -498,7 +498,7 @@ protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 		return grammarAccess.getTestIndentationAccess().getSubAssignment_2_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_Group(this, this, 0, inst);
 			default: return null;
@@ -520,7 +520,7 @@ protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new TestIndentation_Alternatives_2(parent, next, actIndex, consumed);
@@ -533,7 +533,7 @@ protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 // items+=Line
 protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 	
-	public TestIndentation_ItemsAssignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_ItemsAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -541,7 +541,7 @@ protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 		return grammarAccess.getTestIndentationAccess().getItemsAssignment_2_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Line_Group(this, this, 0, inst);
 			default: return null;
@@ -563,7 +563,7 @@ protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new TestIndentation_Alternatives_2(parent, next, actIndex, consumed);
@@ -577,7 +577,7 @@ protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 // "}"
 protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public TestIndentation_RightCurlyBracketKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestIndentation_RightCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -585,7 +585,7 @@ protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken 
 		return grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestIndentation_Alternatives_2(parent, this, 0, inst);
 			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, this, 1, inst);

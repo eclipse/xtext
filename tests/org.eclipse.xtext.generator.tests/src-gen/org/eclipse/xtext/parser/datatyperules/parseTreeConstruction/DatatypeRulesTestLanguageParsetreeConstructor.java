@@ -6,13 +6,13 @@ package org.eclipse.xtext.parser.datatyperules.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class DatatypeRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class DatatypeRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class DatatypeRulesTestLanguageParsetreeConstructor extends AbstractParse
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new CompositeModel_ModelAssignment(this, this, 0, inst);
 			case 1: return new Model_Group(this, this, 1, inst);
@@ -50,7 +50,7 @@ protected class ThisRootNode extends RootToken {
 // model+=Model+
 protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 	
-	public CompositeModel_ModelAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public CompositeModel_ModelAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -58,7 +58,7 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 		return grammarAccess.getCompositeModelAccess().getModelAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
 			default: return null;
@@ -84,7 +84,7 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new CompositeModel_ModelAssignment(parent, next, actIndex, consumed);
@@ -106,7 +106,7 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 // id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
 protected class Model_Group extends GroupToken {
 	
-	public Model_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class Model_Group extends GroupToken {
 		return grammarAccess.getModelAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_SemicolonKeyword_4(parent, this, 0, inst);
 			default: return null;
@@ -130,7 +130,7 @@ protected class Model_Group extends GroupToken {
 // id=NestedModelId
 protected class Model_IdAssignment_0 extends AssignmentToken  {
 	
-	public Model_IdAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_IdAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -138,7 +138,7 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getIdAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -160,7 +160,7 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 // (":" value=Fraction)?
 protected class Model_Group_1 extends GroupToken {
 	
-	public Model_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -168,7 +168,7 @@ protected class Model_Group_1 extends GroupToken {
 		return grammarAccess.getModelAccess().getGroup_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ValueAssignment_1_1(parent, this, 0, inst);
 			default: return null;
@@ -180,7 +180,7 @@ protected class Model_Group_1 extends GroupToken {
 // ":"
 protected class Model_ColonKeyword_1_0 extends KeywordToken  {
 	
-	public Model_ColonKeyword_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ColonKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -188,7 +188,7 @@ protected class Model_ColonKeyword_1_0 extends KeywordToken  {
 		return grammarAccess.getModelAccess().getColonKeyword_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_IdAssignment_0(parent, this, 0, inst);
 			default: return null;
@@ -200,7 +200,7 @@ protected class Model_ColonKeyword_1_0 extends KeywordToken  {
 // value=Fraction
 protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 	
-	public Model_ValueAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ValueAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -208,7 +208,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getValueAssignment_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ColonKeyword_1_0(parent, this, 0, inst);
 			default: return null;
@@ -232,7 +232,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 // ("#" vector=Vector)?
 protected class Model_Group_2 extends GroupToken {
 	
-	public Model_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -240,7 +240,7 @@ protected class Model_Group_2 extends GroupToken {
 		return grammarAccess.getModelAccess().getGroup_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_VectorAssignment_2_1(parent, this, 0, inst);
 			default: return null;
@@ -252,7 +252,7 @@ protected class Model_Group_2 extends GroupToken {
 // "#"
 protected class Model_NumberSignKeyword_2_0 extends KeywordToken  {
 	
-	public Model_NumberSignKeyword_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_NumberSignKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -260,7 +260,7 @@ protected class Model_NumberSignKeyword_2_0 extends KeywordToken  {
 		return grammarAccess.getModelAccess().getNumberSignKeyword_2_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group_1(parent, this, 0, inst);
 			case 1: return new Model_IdAssignment_0(parent, this, 1, inst);
@@ -273,7 +273,7 @@ protected class Model_NumberSignKeyword_2_0 extends KeywordToken  {
 // vector=Vector
 protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 	
-	public Model_VectorAssignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_VectorAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -281,7 +281,7 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getVectorAssignment_2_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_NumberSignKeyword_2_0(parent, this, 0, inst);
 			default: return null;
@@ -305,7 +305,7 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 // ("+" dots=Dots)?
 protected class Model_Group_3 extends GroupToken {
 	
-	public Model_Group_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -313,7 +313,7 @@ protected class Model_Group_3 extends GroupToken {
 		return grammarAccess.getModelAccess().getGroup_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_DotsAssignment_3_1(parent, this, 0, inst);
 			default: return null;
@@ -325,7 +325,7 @@ protected class Model_Group_3 extends GroupToken {
 // "+"
 protected class Model_PlusSignKeyword_3_0 extends KeywordToken  {
 	
-	public Model_PlusSignKeyword_3_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_PlusSignKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -333,7 +333,7 @@ protected class Model_PlusSignKeyword_3_0 extends KeywordToken  {
 		return grammarAccess.getModelAccess().getPlusSignKeyword_3_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group_2(parent, this, 0, inst);
 			case 1: return new Model_Group_1(parent, this, 1, inst);
@@ -347,7 +347,7 @@ protected class Model_PlusSignKeyword_3_0 extends KeywordToken  {
 // dots=Dots
 protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 	
-	public Model_DotsAssignment_3_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_DotsAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -355,7 +355,7 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getDotsAssignment_3_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_PlusSignKeyword_3_0(parent, this, 0, inst);
 			default: return null;
@@ -379,7 +379,7 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 // ";"
 protected class Model_SemicolonKeyword_4 extends KeywordToken  {
 	
-	public Model_SemicolonKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_SemicolonKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -387,7 +387,7 @@ protected class Model_SemicolonKeyword_4 extends KeywordToken  {
 		return grammarAccess.getModelAccess().getSemicolonKeyword_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group_3(parent, this, 0, inst);
 			case 1: return new Model_Group_2(parent, this, 1, inst);

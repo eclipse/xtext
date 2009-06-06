@@ -6,13 +6,13 @@ package org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseT
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Foo_Group(this, this, 0, inst);
 			case 1: return new NameRef_RuleAssignment(this, this, 1, inst);
@@ -51,7 +51,7 @@ protected class ThisRootNode extends RootToken {
 // name=ID nameRefs+=NameRef*
 protected class Foo_Group extends GroupToken {
 	
-	public Foo_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Foo_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -59,7 +59,7 @@ protected class Foo_Group extends GroupToken {
 		return grammarAccess.getFooAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Foo_NameRefsAssignment_1(parent, this, 0, inst);
 			case 1: return new Foo_NameAssignment_0(parent, this, 1, inst);
@@ -76,7 +76,7 @@ protected class Foo_Group extends GroupToken {
 // name=ID
 protected class Foo_NameAssignment_0 extends AssignmentToken  {
 	
-	public Foo_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Foo_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -84,7 +84,7 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getFooAccess().getNameAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -106,7 +106,7 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 // nameRefs+=NameRef*
 protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 	
-	public Foo_NameRefsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Foo_NameRefsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -114,7 +114,7 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getFooAccess().getNameRefsAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NameRef_RuleAssignment(this, this, 0, inst);
 			default: return null;
@@ -136,7 +136,7 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Foo_NameRefsAssignment_1(parent, next, actIndex, consumed);
@@ -160,7 +160,7 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 // rule=[xtext::ParserRule]
 protected class NameRef_RuleAssignment extends AssignmentToken  {
 	
-	public NameRef_RuleAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public NameRef_RuleAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -168,7 +168,7 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 		return grammarAccess.getNameRefAccess().getRuleAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -207,7 +207,7 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 // name=ID
 protected class MyRule_NameAssignment extends AssignmentToken  {
 	
-	public MyRule_NameAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public MyRule_NameAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -215,7 +215,7 @@ protected class MyRule_NameAssignment extends AssignmentToken  {
 		return grammarAccess.getMyRuleAccess().getNameAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

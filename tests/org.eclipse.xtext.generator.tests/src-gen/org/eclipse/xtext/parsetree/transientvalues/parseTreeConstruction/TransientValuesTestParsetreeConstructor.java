@@ -6,13 +6,13 @@ package org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeCo
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Group(this, this, 0, inst);
 			case 1: return new TestRequired_Group(this, this, 1, inst);
@@ -52,7 +52,7 @@ protected class ThisRootNode extends RootToken {
 // "test" (TestRequired|TestOptional|TestList)
 protected class Root_Group extends GroupToken {
 	
-	public Root_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -60,7 +60,7 @@ protected class Root_Group extends GroupToken {
 		return grammarAccess.getRootAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Alternatives_1(parent, this, 0, inst);
 			default: return null;
@@ -76,7 +76,7 @@ protected class Root_Group extends GroupToken {
 // "test"
 protected class Root_TestKeyword_0 extends KeywordToken  {
 	
-	public Root_TestKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -84,7 +84,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 		return grammarAccess.getRootAccess().getTestKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -95,7 +95,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 // TestRequired|TestOptional|TestList
 protected class Root_Alternatives_1 extends AlternativesToken {
 
-	public Root_Alternatives_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -103,7 +103,7 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestRequiredParserRuleCall_1_0(parent, this, 0, inst);
 			case 1: return new Root_TestOptionalParserRuleCall_1_1(parent, this, 1, inst);
@@ -117,7 +117,7 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 // TestRequired
 protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 	
-	public Root_TestRequiredParserRuleCall_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestRequiredParserRuleCall_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -125,7 +125,7 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 		return grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestRequired_Group(this, this, 0, inst);
 			default: return null;
@@ -138,7 +138,7 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -149,7 +149,7 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 // TestOptional
 protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 	
-	public Root_TestOptionalParserRuleCall_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestOptionalParserRuleCall_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -157,7 +157,7 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 		return grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_Group(this, this, 0, inst);
 			default: return null;
@@ -170,7 +170,7 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -181,7 +181,7 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 // TestList
 protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 	
-	public Root_TestListParserRuleCall_1_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Root_TestListParserRuleCall_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -189,7 +189,7 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 		return grammarAccess.getRootAccess().getTestListParserRuleCall_1_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestList_Group(this, this, 0, inst);
 			default: return null;
@@ -202,7 +202,7 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -225,7 +225,7 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 // "required" required1=INT required2=INT
 protected class TestRequired_Group extends GroupToken {
 	
-	public TestRequired_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestRequired_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -233,7 +233,7 @@ protected class TestRequired_Group extends GroupToken {
 		return grammarAccess.getTestRequiredAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestRequired_Required2Assignment_2(parent, this, 0, inst);
 			default: return null;
@@ -249,7 +249,7 @@ protected class TestRequired_Group extends GroupToken {
 // "required"
 protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 	
-	public TestRequired_RequiredKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestRequired_RequiredKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -257,7 +257,7 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 		return grammarAccess.getTestRequiredAccess().getRequiredKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -268,7 +268,7 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 // required1=INT
 protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 	
-	public TestRequired_Required1Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestRequired_Required1Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -276,7 +276,7 @@ protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 		return grammarAccess.getTestRequiredAccess().getRequired1Assignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestRequired_RequiredKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -299,7 +299,7 @@ protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 // required2=INT
 protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 	
-	public TestRequired_Required2Assignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestRequired_Required2Assignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -307,7 +307,7 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 		return grammarAccess.getTestRequiredAccess().getRequired2Assignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestRequired_Required1Assignment_1(parent, this, 0, inst);
 			default: return null;
@@ -341,7 +341,7 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 // "optional" opt1=INT? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
-	public TestOptional_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -349,7 +349,7 @@ protected class TestOptional_Group extends GroupToken {
 		return grammarAccess.getTestOptionalAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_Group_2(parent, this, 0, inst);
 			case 1: return new TestOptional_Opt1Assignment_1(parent, this, 1, inst);
@@ -367,7 +367,7 @@ protected class TestOptional_Group extends GroupToken {
 // "optional"
 protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 	
-	public TestOptional_OptionalKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_OptionalKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -375,7 +375,7 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 		return grammarAccess.getTestOptionalAccess().getOptionalKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -386,7 +386,7 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 // opt1=INT?
 protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 	
-	public TestOptional_Opt1Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_Opt1Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -394,7 +394,7 @@ protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 		return grammarAccess.getTestOptionalAccess().getOpt1Assignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_OptionalKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -417,7 +417,7 @@ protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 // (":" opt2=INT)?
 protected class TestOptional_Group_2 extends GroupToken {
 	
-	public TestOptional_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -425,7 +425,7 @@ protected class TestOptional_Group_2 extends GroupToken {
 		return grammarAccess.getTestOptionalAccess().getGroup_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_Opt2Assignment_2_1(parent, this, 0, inst);
 			default: return null;
@@ -437,7 +437,7 @@ protected class TestOptional_Group_2 extends GroupToken {
 // ":"
 protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 	
-	public TestOptional_ColonKeyword_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_ColonKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -445,7 +445,7 @@ protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 		return grammarAccess.getTestOptionalAccess().getColonKeyword_2_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_Opt1Assignment_1(parent, this, 0, inst);
 			case 1: return new TestOptional_OptionalKeyword_0(parent, this, 1, inst);
@@ -458,7 +458,7 @@ protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 // opt2=INT
 protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 	
-	public TestOptional_Opt2Assignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestOptional_Opt2Assignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -466,7 +466,7 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 		return grammarAccess.getTestOptionalAccess().getOpt2Assignment_2_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestOptional_ColonKeyword_2_0(parent, this, 0, inst);
 			default: return null;
@@ -501,7 +501,7 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 // "list" item+=INT*
 protected class TestList_Group extends GroupToken {
 	
-	public TestList_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestList_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -509,7 +509,7 @@ protected class TestList_Group extends GroupToken {
 		return grammarAccess.getTestListAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestList_ItemAssignment_1(parent, this, 0, inst);
 			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
@@ -526,7 +526,7 @@ protected class TestList_Group extends GroupToken {
 // "list"
 protected class TestList_ListKeyword_0 extends KeywordToken  {
 	
-	public TestList_ListKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestList_ListKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -534,7 +534,7 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 		return grammarAccess.getTestListAccess().getListKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -545,7 +545,7 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 // item+=INT*
 protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 	
-	public TestList_ItemAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public TestList_ItemAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -553,7 +553,7 @@ protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getTestListAccess().getItemAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TestList_ItemAssignment_1(parent, this, 0, inst);
 			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
