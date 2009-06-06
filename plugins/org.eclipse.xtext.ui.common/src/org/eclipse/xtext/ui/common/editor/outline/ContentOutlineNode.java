@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -108,23 +108,16 @@ public class ContentOutlineNode {
 		this.handle = handle;
 	}
 	
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		result = prime * result + ((getUri() == null) ? 0 : getUri().hashCode());
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
-//		if (getUri() != null) {
-//			return getUri().hashCode();
-//		}
-//		return super.hashCode();
 	}
-
-	@Override
+	
 	public boolean equals(Object obj) {
-
 		if (this == obj) {
 			return true;
 		}
@@ -134,16 +127,8 @@ public class ContentOutlineNode {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-
+		
 		final ContentOutlineNode other = (ContentOutlineNode) obj;
-		if (image == null) {
-			if (other.image != null) {
-				return false;
-			}
-		}
-		else if (!image.equals(other.image)) {
-			return false;
-		}
 		if (label == null) {
 			if (other.label != null) {
 				return false;
@@ -152,23 +137,16 @@ public class ContentOutlineNode {
 		else if (!label.equals(other.label)) {
 			return false;
 		}
-		if (getUri() == null) {
-			if (other.getUri() != null) {
+		if (parent == null) {
+			if (other.parent != null) {
 				return false;
 			}
 		}
-		else if (!getUri().equals(other.getUri())) {
+		else if (!parent.equals(other.parent)) {
 			return false;
 		}
-		return true;
-		
-//		if (getUri() != null) {
-//			URI uri = getUri();
-//			URI uri2 = other.getUri();
-//			return uri.equals(uri2);
-//		}
-//		return super.equals(obj);
 
+		return true;
 	}
 
 }
