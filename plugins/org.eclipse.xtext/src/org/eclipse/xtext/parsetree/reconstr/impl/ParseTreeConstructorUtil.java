@@ -44,6 +44,13 @@ public class ParseTreeConstructorUtil {
 			}
 		return callees;
 	}
+	
+	public static boolean isRuleEnd(AbstractElement ele) {
+		for(Follower f:calcFollowers(ele))
+			if(f.isRuleEnd())
+				return true;
+		return false;
+	} 
 
 	public static List<Follower> calcFollowers(AbstractElement ele) {
 		if (!isCodeElement(ele))
