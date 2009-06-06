@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.formatter.impl.AbstractTokenStream;
+import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

@@ -5,8 +5,8 @@ package org.eclipse.xtext.example.formatting;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.EntityElements;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.PackageDeclarationElements;
-import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
-import org.eclipse.xtext.formatter.impl.FormattingConfig;
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 
 /**

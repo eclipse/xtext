@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parsetree.formatter;
 
-import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
-import org.eclipse.xtext.formatter.impl.FormattingConfig;
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormatter {

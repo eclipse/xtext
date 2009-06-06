@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.formatter.impl.AbstractDeclarativeFormatter;
-import org.eclipse.xtext.formatter.impl.FormattingConfig;
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenWithCardinalityElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ActionElements;

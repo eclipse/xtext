@@ -6,13 +6,13 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private LookaheadTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTree
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Entry_ContentsAssignment(this, this, 0, inst);
 			case 1: return new Alts_Alternatives(this, this, 1, inst);
@@ -55,7 +55,7 @@ protected class ThisRootNode extends RootToken {
 // contents+=Alts*
 protected class Entry_ContentsAssignment extends AssignmentToken  {
 	
-	public Entry_ContentsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Entry_ContentsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -63,7 +63,7 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 		return grammarAccess.getEntryAccess().getContentsAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Alts_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -89,7 +89,7 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Entry_ContentsAssignment(parent, next, actIndex, consumed);
@@ -111,7 +111,7 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 // LookAhead0|LookAhead1|LookAhead3
 protected class Alts_Alternatives extends AlternativesToken {
 
-	public Alts_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Alts_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -119,7 +119,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 		return grammarAccess.getAltsAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Alts_LookAhead0ParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Alts_LookAhead1ParserRuleCall_1(parent, this, 1, inst);
@@ -137,7 +137,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 // LookAhead0
 protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 	
-	public Alts_LookAhead0ParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Alts_LookAhead0ParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -145,7 +145,7 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead0_Group(this, this, 0, inst);
 			default: return null;
@@ -158,7 +158,7 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -168,7 +168,7 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 // LookAhead1
 protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 	
-	public Alts_LookAhead1ParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Alts_LookAhead1ParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -176,7 +176,7 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 		return grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead1_Group(this, this, 0, inst);
 			default: return null;
@@ -189,7 +189,7 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -199,7 +199,7 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 // LookAhead3
 protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 	
-	public Alts_LookAhead3ParserRuleCall_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Alts_LookAhead3ParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -207,7 +207,7 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 		return grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead3_Group(this, this, 0, inst);
 			default: return null;
@@ -220,7 +220,7 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -241,7 +241,7 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 // "bar" x="a"
 protected class LookAhead0_Group extends GroupToken {
 	
-	public LookAhead0_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead0_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -249,7 +249,7 @@ protected class LookAhead0_Group extends GroupToken {
 		return grammarAccess.getLookAhead0Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead0_XAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -265,7 +265,7 @@ protected class LookAhead0_Group extends GroupToken {
 // "bar"
 protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 	
-	public LookAhead0_BarKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead0_BarKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -273,7 +273,7 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 		return grammarAccess.getLookAhead0Access().getBarKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -284,7 +284,7 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 // x="a"
 protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead0_XAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead0_XAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -292,7 +292,7 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getLookAhead0Access().getXAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead0_BarKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -326,7 +326,7 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 // "foo" y=LookAhead2 x="b" x="d"
 protected class LookAhead1_Group extends GroupToken {
 	
-	public LookAhead1_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -334,7 +334,7 @@ protected class LookAhead1_Group extends GroupToken {
 		return grammarAccess.getLookAhead1Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead1_XAssignment_3(parent, this, 0, inst);
 			default: return null;
@@ -350,7 +350,7 @@ protected class LookAhead1_Group extends GroupToken {
 // "foo"
 protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 	
-	public LookAhead1_FooKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead1_FooKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -358,7 +358,7 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 		return grammarAccess.getLookAhead1Access().getFooKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -369,7 +369,7 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 // y=LookAhead2
 protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead1_YAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead1_YAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -377,7 +377,7 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getLookAhead1Access().getYAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead2_Group(this, this, 0, inst);
 			default: return null;
@@ -399,7 +399,7 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new LookAhead1_FooKeyword_0(parent, next, actIndex, consumed);
@@ -411,7 +411,7 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 // x="b"
 protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 	
-	public LookAhead1_XAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead1_XAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -419,7 +419,7 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getLookAhead1Access().getXAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead1_YAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -442,7 +442,7 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 // x="d"
 protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 	
-	public LookAhead1_XAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead1_XAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -450,7 +450,7 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getLookAhead1Access().getXAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead1_XAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -484,7 +484,7 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 // (z="foo"|z="bar") "c"
 protected class LookAhead2_Group extends GroupToken {
 	
-	public LookAhead2_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -492,7 +492,7 @@ protected class LookAhead2_Group extends GroupToken {
 		return grammarAccess.getLookAhead2Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead2_CKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -508,7 +508,7 @@ protected class LookAhead2_Group extends GroupToken {
 // z="foo"|z="bar"
 protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 
-	public LookAhead2_Alternatives_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead2_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -516,7 +516,7 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 		return grammarAccess.getLookAhead2Access().getAlternatives_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead2_ZAssignment_0_0(parent, this, 0, inst);
 			case 1: return new LookAhead2_ZAssignment_0_1(parent, this, 1, inst);
@@ -529,7 +529,7 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 // z="foo"
 protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 	
-	public LookAhead2_ZAssignment_0_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead2_ZAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -537,7 +537,7 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 		return grammarAccess.getLookAhead2Access().getZAssignment_0_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -559,7 +559,7 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 // z="bar"
 protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 	
-	public LookAhead2_ZAssignment_0_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead2_ZAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -567,7 +567,7 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 		return grammarAccess.getLookAhead2Access().getZAssignment_0_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -590,7 +590,7 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 // "c"
 protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 	
-	public LookAhead2_CKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead2_CKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -598,7 +598,7 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 		return grammarAccess.getLookAhead2Access().getCKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead2_Alternatives_0(parent, this, 0, inst);
 			default: return null;
@@ -621,7 +621,7 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 // "foo" "bar" x="b" z=LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
-	public LookAhead3_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead3_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -629,7 +629,7 @@ protected class LookAhead3_Group extends GroupToken {
 		return grammarAccess.getLookAhead3Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead3_ZAssignment_3(parent, this, 0, inst);
 			default: return null;
@@ -645,7 +645,7 @@ protected class LookAhead3_Group extends GroupToken {
 // "foo"
 protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 	
-	public LookAhead3_FooKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead3_FooKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -653,7 +653,7 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 		return grammarAccess.getLookAhead3Access().getFooKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -664,7 +664,7 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 // "bar"
 protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 	
-	public LookAhead3_BarKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead3_BarKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -672,7 +672,7 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 		return grammarAccess.getLookAhead3Access().getBarKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead3_FooKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -684,7 +684,7 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 // x="b"
 protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 	
-	public LookAhead3_XAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead3_XAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -692,7 +692,7 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getLookAhead3Access().getXAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead3_BarKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -715,7 +715,7 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 // z=LookAhead4
 protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 	
-	public LookAhead3_ZAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead3_ZAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -723,7 +723,7 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getLookAhead3Access().getZAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead4_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -745,7 +745,7 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new LookAhead3_XAssignment_2(parent, next, actIndex, consumed);
@@ -768,7 +768,7 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 // x="c"|x="d"
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
-	public LookAhead4_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead4_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -776,7 +776,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 		return grammarAccess.getLookAhead4Access().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LookAhead4_XAssignment_0(parent, this, 0, inst);
 			case 1: return new LookAhead4_XAssignment_1(parent, this, 1, inst);
@@ -793,7 +793,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 // x="c"
 protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 	
-	public LookAhead4_XAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead4_XAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -801,7 +801,7 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getLookAhead4Access().getXAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -823,7 +823,7 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 // x="d"
 protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead4_XAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public LookAhead4_XAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -831,7 +831,7 @@ protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getLookAhead4Access().getXAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

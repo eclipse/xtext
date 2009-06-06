@@ -6,13 +6,13 @@ package org.eclipse.xtext.generator.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.generator.services.lowerCaseNamedTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class lowerCaseNamedTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class lowerCaseNamedTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private lowerCaseNamedTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class lowerCaseNamedTestLanguageParsetreeConstructor extends AbstractPars
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_NameAssignment(this, this, 0, inst);
 			default: return null;
@@ -49,7 +49,7 @@ protected class ThisRootNode extends RootToken {
 // name=ID
 protected class Model_NameAssignment extends AssignmentToken  {
 	
-	public Model_NameAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_NameAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -57,7 +57,7 @@ protected class Model_NameAssignment extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getNameAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	

@@ -6,13 +6,13 @@ package org.eclipse.xtext.ui.common.editor.contentassist.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.services.ContentAssistContextTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class ContentAssistContextTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class ContentAssistContextTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class ContentAssistContextTestLanguageParsetreeConstructor extends Abstra
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstLevel_Group(this, this, 0, inst);
 			case 1: return new SecondLevelA_Group(this, this, 1, inst);
@@ -55,7 +55,7 @@ protected class ThisRootNode extends RootToken {
 // secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*
 protected class FirstLevel_Group extends GroupToken {
 	
-	public FirstLevel_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public FirstLevel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -63,7 +63,7 @@ protected class FirstLevel_Group extends GroupToken {
 		return grammarAccess.getFirstLevelAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, this, 0, inst);
 			case 1: return new FirstLevel_SecondLevelAAssignment_0(parent, this, 1, inst);
@@ -80,7 +80,7 @@ protected class FirstLevel_Group extends GroupToken {
 // secondLevelA+=SecondLevelA*
 protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 	
-	public FirstLevel_SecondLevelAAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public FirstLevel_SecondLevelAAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -88,7 +88,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		return grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelA_Group(this, this, 0, inst);
 			default: return null;
@@ -110,7 +110,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new FirstLevel_SecondLevelAAssignment_0(parent, next, actIndex, consumed);
@@ -122,7 +122,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 // secondLevelB+=SecondLevelB*
 protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 	
-	public FirstLevel_SecondLevelBAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public FirstLevel_SecondLevelBAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -130,7 +130,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getFirstLevelAccess().getSecondLevelBAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelB_Group(this, this, 0, inst);
 			default: return null;
@@ -152,7 +152,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, next, actIndex, consumed);
@@ -176,7 +176,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 // thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+
 protected class SecondLevelA_Group extends GroupToken {
 	
-	public SecondLevelA_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelA_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -184,7 +184,7 @@ protected class SecondLevelA_Group extends GroupToken {
 		return grammarAccess.getSecondLevelAAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, this, 0, inst);
 			default: return null;
@@ -200,7 +200,7 @@ protected class SecondLevelA_Group extends GroupToken {
 // thirdLevelA1+=ThirdLevelA1+
 protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 	
-	public SecondLevelA_ThirdLevelA1Assignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelA_ThirdLevelA1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -208,7 +208,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		return grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_Group(this, this, 0, inst);
 			default: return null;
@@ -230,7 +230,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new SecondLevelA_ThirdLevelA1Assignment_0(parent, next, actIndex, consumed);
@@ -242,7 +242,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 // thirdLevelA2+=ThirdLevelA2+
 protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 	
-	public SecondLevelA_ThirdLevelA2Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelA_ThirdLevelA2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -250,7 +250,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		return grammarAccess.getSecondLevelAAccess().getThirdLevelA2Assignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_Group(this, this, 0, inst);
 			default: return null;
@@ -272,7 +272,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, next, actIndex, consumed);
@@ -296,7 +296,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 // thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+
 protected class SecondLevelB_Group extends GroupToken {
 	
-	public SecondLevelB_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelB_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -304,7 +304,7 @@ protected class SecondLevelB_Group extends GroupToken {
 		return grammarAccess.getSecondLevelBAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, this, 0, inst);
 			default: return null;
@@ -320,7 +320,7 @@ protected class SecondLevelB_Group extends GroupToken {
 // thirdLevelB1+=ThirdLevelB1+
 protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 	
-	public SecondLevelB_ThirdLevelB1Assignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelB_ThirdLevelB1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -328,7 +328,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		return grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_Group(this, this, 0, inst);
 			default: return null;
@@ -350,7 +350,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new SecondLevelB_ThirdLevelB1Assignment_0(parent, next, actIndex, consumed);
@@ -362,7 +362,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 // thirdLevelB2+=ThirdLevelB2+
 protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 	
-	public SecondLevelB_ThirdLevelB2Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public SecondLevelB_ThirdLevelB2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -370,7 +370,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		return grammarAccess.getSecondLevelBAccess().getThirdLevelB2Assignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_Group(this, this, 0, inst);
 			default: return null;
@@ -392,7 +392,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, next, actIndex, consumed);
@@ -416,7 +416,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 // "A1" {ThirdLevelA1} name=ID?
 protected class ThirdLevelA1_Group extends GroupToken {
 	
-	public ThirdLevelA1_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -424,7 +424,7 @@ protected class ThirdLevelA1_Group extends GroupToken {
 		return grammarAccess.getThirdLevelA1Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_NameAssignment_2(parent, this, 0, inst);
 			case 1: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 1, inst);
@@ -441,7 +441,7 @@ protected class ThirdLevelA1_Group extends GroupToken {
 // "A1"
 protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelA1_A1Keyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA1_A1Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -449,7 +449,7 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 		return grammarAccess.getThirdLevelA1Access().getA1Keyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -460,7 +460,7 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 // {ThirdLevelA1}
 protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 
-	public ThirdLevelA1_ThirdLevelA1Action_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA1_ThirdLevelA1Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -468,7 +468,7 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 		return grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_A1Keyword_0(parent, this, 0, inst);
 			default: return null;
@@ -486,7 +486,7 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 // name=ID?
 protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelA1_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -494,7 +494,7 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getThirdLevelA1Access().getNameAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 0, inst);
 			default: return null;
@@ -528,7 +528,7 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 // "A2" {ThirdLevelA2} name=ID?
 protected class ThirdLevelA2_Group extends GroupToken {
 	
-	public ThirdLevelA2_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -536,7 +536,7 @@ protected class ThirdLevelA2_Group extends GroupToken {
 		return grammarAccess.getThirdLevelA2Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_NameAssignment_2(parent, this, 0, inst);
 			case 1: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 1, inst);
@@ -553,7 +553,7 @@ protected class ThirdLevelA2_Group extends GroupToken {
 // "A2"
 protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelA2_A2Keyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA2_A2Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -561,7 +561,7 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 		return grammarAccess.getThirdLevelA2Access().getA2Keyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -572,7 +572,7 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 // {ThirdLevelA2}
 protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 
-	public ThirdLevelA2_ThirdLevelA2Action_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA2_ThirdLevelA2Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -580,7 +580,7 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 		return grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_A2Keyword_0(parent, this, 0, inst);
 			default: return null;
@@ -598,7 +598,7 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 // name=ID?
 protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelA2_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelA2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -606,7 +606,7 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getThirdLevelA2Access().getNameAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 0, inst);
 			default: return null;
@@ -640,7 +640,7 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 // "B1" {ThirdLevelB1} name=ID?
 protected class ThirdLevelB1_Group extends GroupToken {
 	
-	public ThirdLevelB1_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -648,7 +648,7 @@ protected class ThirdLevelB1_Group extends GroupToken {
 		return grammarAccess.getThirdLevelB1Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_NameAssignment_2(parent, this, 0, inst);
 			case 1: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 1, inst);
@@ -665,7 +665,7 @@ protected class ThirdLevelB1_Group extends GroupToken {
 // "B1"
 protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelB1_B1Keyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB1_B1Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -673,7 +673,7 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 		return grammarAccess.getThirdLevelB1Access().getB1Keyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -684,7 +684,7 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 // {ThirdLevelB1}
 protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 
-	public ThirdLevelB1_ThirdLevelB1Action_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB1_ThirdLevelB1Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -692,7 +692,7 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 		return grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_B1Keyword_0(parent, this, 0, inst);
 			default: return null;
@@ -710,7 +710,7 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 // name=ID?
 protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelB1_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -718,7 +718,7 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getThirdLevelB1Access().getNameAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 0, inst);
 			default: return null;
@@ -752,7 +752,7 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 // "B2" {ThirdLevelB2} name=ID?
 protected class ThirdLevelB2_Group extends GroupToken {
 	
-	public ThirdLevelB2_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -760,7 +760,7 @@ protected class ThirdLevelB2_Group extends GroupToken {
 		return grammarAccess.getThirdLevelB2Access().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_NameAssignment_2(parent, this, 0, inst);
 			case 1: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 1, inst);
@@ -777,7 +777,7 @@ protected class ThirdLevelB2_Group extends GroupToken {
 // "B2"
 protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelB2_B2Keyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB2_B2Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -785,7 +785,7 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 		return grammarAccess.getThirdLevelB2Access().getB2Keyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -796,7 +796,7 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 // {ThirdLevelB2}
 protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 
-	public ThirdLevelB2_ThirdLevelB2Action_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB2_ThirdLevelB2Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -804,7 +804,7 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 		return grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_B2Keyword_0(parent, this, 0, inst);
 			default: return null;
@@ -822,7 +822,7 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 // name=ID?
 protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelB2_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public ThirdLevelB2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -830,7 +830,7 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getThirdLevelB2Access().getNameAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 0, inst);
 			default: return null;

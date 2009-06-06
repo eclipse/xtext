@@ -6,13 +6,13 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractP
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group(this, this, 0, inst);
 			case 1: return new Addition_Group(this, this, 1, inst);
@@ -54,7 +54,7 @@ protected class ThisRootNode extends RootToken {
 // Addition ({Sequence.expressions+=current} expressions+=Addition)*
 protected class Sequence_Group extends GroupToken {
 	
-	public Sequence_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Sequence_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -62,7 +62,7 @@ protected class Sequence_Group extends GroupToken {
 		return grammarAccess.getSequenceAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group_1(parent, this, 0, inst);
 			case 1: return new Sequence_AdditionParserRuleCall_0(parent, this, 1, inst);
@@ -79,7 +79,7 @@ protected class Sequence_Group extends GroupToken {
 // Addition
 protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 	
-	public Sequence_AdditionParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Sequence_AdditionParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -87,7 +87,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getSequenceAccess().getAdditionParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
@@ -100,7 +100,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -110,7 +110,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 // ({Sequence.expressions+=current} expressions+=Addition)*
 protected class Sequence_Group_1 extends GroupToken {
 	
-	public Sequence_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Sequence_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -118,7 +118,7 @@ protected class Sequence_Group_1 extends GroupToken {
 		return grammarAccess.getSequenceAccess().getGroup_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_ExpressionsAssignment_1_1(parent, this, 0, inst);
 			default: return null;
@@ -130,7 +130,7 @@ protected class Sequence_Group_1 extends GroupToken {
 // {Sequence.expressions+=current}
 protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 
-	public Sequence_SequenceExpressionsAction_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Sequence_SequenceExpressionsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -138,7 +138,7 @@ protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 		return grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group_1(parent, this, 0, inst);
 			case 1: return new Sequence_AdditionParserRuleCall_0(parent, this, 1, inst);
@@ -159,7 +159,7 @@ protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 // expressions+=Addition
 protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 	
-	public Sequence_ExpressionsAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Sequence_ExpressionsAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -167,7 +167,7 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		return grammarAccess.getSequenceAccess().getExpressionsAssignment_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
@@ -189,7 +189,7 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Sequence_SequenceExpressionsAction_1_0(parent, next, actIndex, consumed);
@@ -213,7 +213,7 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 // Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
-	public Addition_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -221,7 +221,7 @@ protected class Addition_Group extends GroupToken {
 		return grammarAccess.getAdditionAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group_1(parent, this, 0, inst);
 			case 1: return new Addition_MultiplicationParserRuleCall_0(parent, this, 1, inst);
@@ -238,7 +238,7 @@ protected class Addition_Group extends GroupToken {
 // Multiplication
 protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 	
-	public Addition_MultiplicationParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_MultiplicationParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -246,7 +246,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
 			default: return null;
@@ -259,7 +259,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -269,7 +269,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 // ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
 protected class Addition_Group_1 extends GroupToken {
 	
-	public Addition_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -277,7 +277,7 @@ protected class Addition_Group_1 extends GroupToken {
 		return grammarAccess.getAdditionAccess().getGroup_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_ValuesAssignment_1_2(parent, this, 0, inst);
 			default: return null;
@@ -289,7 +289,7 @@ protected class Addition_Group_1 extends GroupToken {
 // {Op.values+=current}
 protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 
-	public Addition_OpValuesAction_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_OpValuesAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -297,7 +297,7 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 		return grammarAccess.getAdditionAccess().getOpValuesAction_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group_1(parent, this, 0, inst);
 			case 1: return new Addition_MultiplicationParserRuleCall_0(parent, this, 1, inst);
@@ -318,7 +318,7 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 // operator=( "+" | "-" )
 protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 	
-	public Addition_OperatorAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -326,7 +326,7 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 		return grammarAccess.getAdditionAccess().getOperatorAssignment_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_OpValuesAction_1_0(parent, this, 0, inst);
 			default: return null;
@@ -354,7 +354,7 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 // values+=Multiplication
 protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 	
-	public Addition_ValuesAssignment_1_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Addition_ValuesAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -362,7 +362,7 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		return grammarAccess.getAdditionAccess().getValuesAssignment_1_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
 			default: return null;
@@ -384,7 +384,7 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Addition_OperatorAssignment_1_1(parent, next, actIndex, consumed);
@@ -408,7 +408,7 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 // Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
 protected class Multiplication_Group extends GroupToken {
 	
-	public Multiplication_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -416,7 +416,7 @@ protected class Multiplication_Group extends GroupToken {
 		return grammarAccess.getMultiplicationAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group_1(parent, this, 0, inst);
 			case 1: return new Multiplication_TermParserRuleCall_0(parent, this, 1, inst);
@@ -433,7 +433,7 @@ protected class Multiplication_Group extends GroupToken {
 // Term
 protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 	
-	public Multiplication_TermParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_TermParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -441,7 +441,7 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getMultiplicationAccess().getTermParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -454,7 +454,7 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -464,7 +464,7 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 // ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
 protected class Multiplication_Group_1 extends GroupToken {
 	
-	public Multiplication_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -472,7 +472,7 @@ protected class Multiplication_Group_1 extends GroupToken {
 		return grammarAccess.getMultiplicationAccess().getGroup_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_ValuesAssignment_1_2(parent, this, 0, inst);
 			default: return null;
@@ -484,7 +484,7 @@ protected class Multiplication_Group_1 extends GroupToken {
 // {Op.values+=current}
 protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 
-	public Multiplication_OpValuesAction_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_OpValuesAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -492,7 +492,7 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 		return grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group_1(parent, this, 0, inst);
 			case 1: return new Multiplication_TermParserRuleCall_0(parent, this, 1, inst);
@@ -513,7 +513,7 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 // operator=( "*" | "/" )
 protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 	
-	public Multiplication_OperatorAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -521,7 +521,7 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 		return grammarAccess.getMultiplicationAccess().getOperatorAssignment_1_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_OpValuesAction_1_0(parent, this, 0, inst);
 			default: return null;
@@ -549,7 +549,7 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 // values+=Term
 protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 	
-	public Multiplication_ValuesAssignment_1_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Multiplication_ValuesAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -557,7 +557,7 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		return grammarAccess.getMultiplicationAccess().getValuesAssignment_1_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -579,7 +579,7 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Multiplication_OperatorAssignment_1_1(parent, next, actIndex, consumed);
@@ -603,7 +603,7 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 // Atom|Parens
 protected class Term_Alternatives extends AlternativesToken {
 
-	public Term_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -611,7 +611,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		return grammarAccess.getTermAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_AtomParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Term_ParensParserRuleCall_1(parent, this, 1, inst);
@@ -628,7 +628,7 @@ protected class Term_Alternatives extends AlternativesToken {
 // Atom
 protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 	
-	public Term_AtomParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Term_AtomParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -636,7 +636,7 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getTermAccess().getAtomParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Atom_NameAssignment(this, this, 0, inst);
 			default: return null;
@@ -649,7 +649,7 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -659,7 +659,7 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 // Parens
 protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 	
-	public Term_ParensParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Term_ParensParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -667,7 +667,7 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		return grammarAccess.getTermAccess().getParensParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_Group(this, this, 0, inst);
 			default: return null;
@@ -680,7 +680,7 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -701,7 +701,7 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 // name=ID
 protected class Atom_NameAssignment extends AssignmentToken  {
 	
-	public Atom_NameAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Atom_NameAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -709,7 +709,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		return grammarAccess.getAtomAccess().getNameAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -745,7 +745,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 // "(" Addition ")"
 protected class Parens_Group extends GroupToken {
 	
-	public Parens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Parens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -753,7 +753,7 @@ protected class Parens_Group extends GroupToken {
 		return grammarAccess.getParensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
@@ -769,7 +769,7 @@ protected class Parens_Group extends GroupToken {
 // "("
 protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 	
-	public Parens_LeftParenthesisKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Parens_LeftParenthesisKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -777,7 +777,7 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		return grammarAccess.getParensAccess().getLeftParenthesisKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -788,7 +788,7 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 // Addition
 protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 	
-	public Parens_AdditionParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Parens_AdditionParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -796,7 +796,7 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 		return grammarAccess.getParensAccess().getAdditionParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
@@ -809,7 +809,7 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
 			default: return null;
@@ -820,7 +820,7 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 // ")"
 protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 	
-	public Parens_RightParenthesisKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Parens_RightParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -828,7 +828,7 @@ protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 		return grammarAccess.getParensAccess().getRightParenthesisKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_AdditionParserRuleCall_1(parent, this, 0, inst);
 			default: return null;

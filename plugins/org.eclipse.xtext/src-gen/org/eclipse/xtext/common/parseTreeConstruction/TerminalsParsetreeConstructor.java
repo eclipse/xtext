@@ -6,13 +6,13 @@ package org.eclipse.xtext.common.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private TerminalsGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor2
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	

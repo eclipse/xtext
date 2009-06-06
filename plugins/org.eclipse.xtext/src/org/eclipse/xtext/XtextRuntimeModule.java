@@ -9,7 +9,7 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.formatter.IFormatter;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;

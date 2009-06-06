@@ -6,13 +6,13 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParse
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ChildAssignment(this, this, 0, inst);
 			case 1: return new Greeting_Group(this, this, 1, inst);
@@ -50,7 +50,7 @@ protected class ThisRootNode extends RootToken {
 // child=Greeting?
 protected class Model_ChildAssignment extends AssignmentToken  {
 	
-	public Model_ChildAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_ChildAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -58,7 +58,7 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		return grammarAccess.getModelAccess().getChildAssignment();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_Group(this, this, 0, inst);
 			default: return null;
@@ -84,7 +84,7 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, consumed);
@@ -105,7 +105,7 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 // "hallo" name=ID
 protected class Greeting_Group extends GroupToken {
 	
-	public Greeting_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Greeting_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -113,7 +113,7 @@ protected class Greeting_Group extends GroupToken {
 		return grammarAccess.getGreetingAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -129,7 +129,7 @@ protected class Greeting_Group extends GroupToken {
 // "hallo"
 protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 	
-	public Greeting_HalloKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Greeting_HalloKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -137,7 +137,7 @@ protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 		return grammarAccess.getGreetingAccess().getHalloKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -148,7 +148,7 @@ protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 // name=ID
 protected class Greeting_NameAssignment_1 extends AssignmentToken  {
 	
-	public Greeting_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Greeting_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -156,7 +156,7 @@ protected class Greeting_NameAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getGreetingAccess().getNameAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_HalloKeyword_0(parent, this, 0, inst);
 			default: return null;

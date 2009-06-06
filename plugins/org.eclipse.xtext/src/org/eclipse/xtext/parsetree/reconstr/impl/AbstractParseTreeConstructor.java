@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
+import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -15,515 +41,390 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
 
-//	public static abstract class AbstractSerializationDiagnostic implements
-//			Resource.Diagnostic, Comparable<AbstractSerializationDiagnostic> {
-//
-//		protected String msg;
-//
-//		private int prio = -1;
-//
-//		protected AbstractToken token;
-//
-//		protected boolean subsequentMessage = false;
-//
-//		public boolean isSubsequentMessage() {
-//			return subsequentMessage;
-//		}
-//
-//		public int compareTo(AbstractSerializationDiagnostic o) {
-//			return (getPrio() > o.getPrio() ? -1
-//					: (getPrio() == o.getPrio() ? 0 : 1));
-//		}
-//
-//		public int getColumn() {
-//			return 0;
-//		}
-//
-//		public int getLine() {
-//			return 0;
-//		}
-//
-//		public String getLocation() {
-//			return token == null ? "root" : token.getClass().getSimpleName();
-//		}
-//
-//		public String getMessage() {
-//			return msg;
-//		}
-//
-//		public int getPrio() {
-//			if (prio < 0) {
-//				prio = 0;
-//				for (AbstractToken t = token; t != null; t = t.predecessor)
-//					prio++;
-//			}
-//			return prio;
-//		}
-//
-//		@Override
-//		public String toString() {
-//			return getPrio() + ": in " + getLocation() + ": " + getMessage();
-//		}
-//
-//	}
-//
-//	@Inject
-//	protected ITokenSerializer tokenSerializer;
-//
-//	public abstract class AbstractToken implements IAbstractToken {
-//
-//		public class Solution {
-//			private final IInstanceDescription current;
-//			private final AbstractToken predecessor;
-//
-//			public Solution() {
-//				super();
-//				this.current = AbstractToken.this.current;
-//				this.predecessor = AbstractToken.this;
-//			}
-//
-//			public Solution(AbstractToken predecessor) {
-//				super();
-//				this.current = AbstractToken.this.current;
-//				this.predecessor = predecessor;
-//			}
-//
-//			public Solution(final IInstanceDescription current) {
-//				super();
-//				this.current = current;
-//				this.predecessor = AbstractToken.this;
-//			}
-//
-//			public Solution(IInstanceDescription current,
-//					AbstractToken predecessor) {
-//				super();
-//				this.current = current;
-//				this.predecessor = predecessor;
-//			}
-//
-//			public IInstanceDescription getCurrent() {
-//				return current;
-//			}
-//
-//			public AbstractToken getPredecessor() {
-//				return predecessor;
-//			}
-//		}
-//
-//		protected final static boolean IS_MANY = true;
-//
-//		protected final static boolean IS_REQUIRED = true;
-//
-//		protected final IInstanceDescription current;
-//		protected final boolean many;
-//		protected Solution otherSolution;
-//		protected final AbstractToken predecessor;
-//		protected boolean required; // TODO: make this final again
-//
-//		public AbstractToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super();
-//			this.current = curr;
-//			this.predecessor = pred;
-//			this.many = many;
-//			this.required = required;
-//		}
-//
-//		protected boolean activateNextSolution() {
-//			return false;
-//		}
-//
-//		protected boolean checkForRecursion(Class<?> clazz,
-//				IInstanceDescription curr) {
-//			AbstractToken token = predecessor;
-//			while (token != null) {
-//				if (token.getClass() == clazz)
-//					return token.current == curr;
-//				token = token.predecessor;
-//			}
-//			return false;
-//		}
-//
-//		protected abstract Solution createSolution();
-//
-//		protected String depth(AbstractToken ele) {
-//			if (ele == null)
-//				return "";
-//			StringBuffer b = new StringBuffer();
-//			for (AbstractToken t = ele.predecessor; t != null; t = t.predecessor)
-//				b.append(" ");
-//			return b.toString();
-//		}
-//
-//		private String dsl(AbstractToken ele) {
-//			ByteArrayOutputStream out = new ByteArrayOutputStream();
-//			try {
-//				tokenSerializer.serialize(ele, out);
-//			} catch (Throwable e) {
-//				e.printStackTrace();
-//				return "Error: " + e.getMessage();
-//			}
-//			return out.toString();
-//		}
-//
-////		protected Object text = new Object() {
-//
-////			@Override
-////			public String toString() {
-////				return dsl(AbstractToken.this);
-////			}
-//
-////		};
-//
-//		public Solution firstSolution() {
-//			if (log.isTraceEnabled())
-//				log.trace("->" + depth(this) + getClass().getSimpleName()
-//						+ "\t " + current + " -> " + dsl(this));
-//			Solution t1 = createSolution();
-//			if (log.isTraceEnabled())
-//				log.trace("< "
-//						+ depth(this)
-//						+ getClass().getSimpleName()
-//						+ " -> "
-//						+ ((t1 == null) ? "failed" : "success" + "\t "
-//								+ t1.current));
-//
-//			if (t1 == null)
-//				return required ? null : new Solution(current, predecessor);
-//
-//			otherSolution = required ? null
-//					: new Solution(current, predecessor);
-//			if (many) {
-//				AbstractToken t = newInstance(t1.getCurrent(), t1
-//						.getPredecessor());
-//				t.required = false;
-//				Solution t3 = t.firstSolution();
-//
-//				if (t3 != null)
-//					return t3;
-//			}
-//			return t1;
-//		}
-//
-//		public IInstanceDescription getCurrent() {
-//			return current;
-//		}
-//
-//		public IAbstractToken getNext() {
-//			return predecessor;
-//		}
-//
-//		protected Solution localNextSolution() {
-//			if (otherSolution != null) {
-//				Solution t = otherSolution;
-//				otherSolution = null;
-//				return t;
-//			} else if (activateNextSolution())
-//				return firstSolution();
-//			return null;
-//		}
-//
-//		protected AbstractToken newInstance(IInstanceDescription curr,
-//				AbstractToken pred) {
-//			try {
-//				Constructor<?> c = getClass().getConstructor(
-//						getClass().getEnclosingClass(),
-//						IInstanceDescription.class, AbstractToken.class);
-//				return (AbstractToken) c.newInstance(
-//						AbstractParseTreeConstructor.this, curr, pred);
-//			} catch (SecurityException e) {
-//				throw new RuntimeException(e);
-//			} catch (NoSuchMethodException e) {
-//				throw new RuntimeException(e);
-//			} catch (IllegalArgumentException e) {
-//				throw new RuntimeException(e);
-//			} catch (InstantiationException e) {
-//				throw new RuntimeException(e);
-//			} catch (IllegalAccessException e) {
-//				throw new RuntimeException(e);
-//			} catch (InvocationTargetException e) {
-//				throw new RuntimeException(e);
-//			}
-//		}
-//
-//		public abstract AbstractElement getGrammarElement();
-//
-//		public Solution nextSolution(AbstractToken limit, Solution last) {
-//			if (log.isTraceEnabled())
-//				log.trace("--"
-//						+ depth(limit)
-//						+ ((limit == null) ? "root" : limit.getClass()
-//								.getSimpleName()) + " -> nextSolution() -> "
-//						+ dsl(this));
-//			AbstractToken t = this;
-//			while (t != null && t != limit) {
-//				Solution s;
-//				do {
-//					s = t.localNextSolution();
-//					if (s != null) {
-//						boolean valid = last.getCurrent().getDelegate() == s
-//								.getCurrent().getDelegate();
-//						if (log.isTraceEnabled())
-//							log
-//									.trace("--"
-//											+ depth(this)
-//											+ getClass().getSimpleName()
-//											+ " -> nextSolution() -> "
-//											+ t.getClass().getSimpleName()
-//											+ " ("
-//											+ s.getPredecessor().getClass()
-//													.getSimpleName()
-//											+ ")"
-//											+ (valid ? ""
-//													: " -> delegates differ, discarding solution."));
-//						if (valid)
-//							return s;
-//					}
-//				} while (s != null);
-//				t = t.predecessor;
-//			}
-//			if (log.isTraceEnabled())
-//				log.trace("-- " + depth(this) + getClass().getSimpleName()
-//						+ " -> nextSolution() -> not found");
-//			// if (t == null)
-//			// throw new IllegalStateException("Bug found");
-//			return null;
-//		}
-//	}
-//
-//	public abstract class ActionToken extends AbstractToken implements
-//			IActionToken {
-//		@Override
-//		public abstract Action getGrammarElement();
-//
-//		public ActionToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//	}
-//
-//	public abstract class AlternativesToken extends AbstractToken implements
-//			IAlternativeesToken {
-//
-//		@Override
-//		public abstract Alternatives getGrammarElement();
-//
-//		protected int alt = getGrammarElement().getGroups().size() - 1;
-//
-//		protected AbstractToken last;
-//
-//		// TODO: remove this variable
-//		protected boolean first = true;
-//
-//		public AlternativesToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//		@Override
-//		protected boolean activateNextSolution() {
-//			return --alt > -1;
-//		}
-//
-//		@Override
-//		protected Solution createSolution() {
-//			do {
-//				Solution s = createChild(alt).firstSolution();
-//				if (s != null) {
-//					last = s.getPredecessor();
-//					return s;
-//				}
-//			} while (activateNextSolution());
-//			return null;
-//		}
-//
-//		// TODO: make this method abstract
-//		protected AbstractToken createChild(int id) {
-//			return null;
-//		}
-//
-//		public IAbstractToken getLast() {
-//			return last;
-//		}
-//	}
-//
-//	public abstract class AssignmentToken extends AbstractToken implements
-//			IAssignmentToken {
-//
-//		protected AbstractElement element;
-//
-//		protected AssignmentType type;
-//
-//		protected Object value;
-//		
-//		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//		public AbstractElement getAssignmentElement() {
-//			return element;
-//		}
-//
-//		@Override
-//		public Assignment getGrammarElement() {
-//			return GrammarUtil.containingAssignment(element);
-//		}
-//
-//		public AssignmentType getType() {
-//			return type;
-//		}
-//
-//		public Object getValue() {
-//			return value;
-//		}
-//
-//	}
-//
-//	public class FeatureNotConsumedDiagnostic extends
-//			AbstractSerializationDiagnostic {
-//
-//		public FeatureNotConsumedDiagnostic(AbstractToken token, Solution s) {
-//			super();
-//			this.token = token;
-//			this.current = s.getCurrent();
-//			ArrayList<String> unconsumed = new ArrayList<String>();
-//			for (Entry<EStructuralFeature, Integer> e : s.getCurrent()
-//					.getUnconsumed().entrySet())
-//				unconsumed.add(e.getValue() + "x " + e.getKey().getName());
-//			EObject o = s.getCurrent().getDelegate();
-//			this.msg = "Unconsumed feature(s): " + unconsumed + " in "
-//					+ o.eClass().getName() + ", path:" + getPath(o);
-//		}
-//
-//		protected IInstanceDescription current;
-//
-//		public IInstanceDescription getCurrent() {
-//			return current;
-//		}
-//
-//	}
-//
-//	public abstract class GroupToken extends AbstractToken implements
-//			IGroupToken {
-//
-//		@Override
-//		public abstract Group getGrammarElement();
-//
-//		protected AbstractToken last;
-//
-//		public GroupToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//		public IAbstractToken getLast() {
-//			return last;
-//		}
-//
-//	}
-//
-//	public abstract class KeywordToken extends AbstractToken implements
-//			IKeywordToken {
-//
-//		@Override
-//		public abstract Keyword getGrammarElement();
-//
-//		public KeywordToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//		@Override
-//		protected Solution createSolution() {
-//			return new Solution();
-//		}
-//	}
-//
-//	public abstract class RuleCallToken extends AbstractToken implements
-//			IRuleCallToken {
-//
-//		@Override
-//		public abstract RuleCall getGrammarElement();
-//
-//		public RuleCallToken(IInstanceDescription curr, AbstractToken pred,
-//				boolean many, boolean required) {
-//			super(curr, pred, many, required);
-//		}
-//
-//	}
-//
-//	protected List<AbstractSerializationDiagnostic> diagnostic = new ArrayList<AbstractSerializationDiagnostic>();
-//
-//	private final Logger log = Logger
-//			.getLogger(AbstractParseTreeConstructor.class);
-//
-//	private EObject rootObject;
-//
-//	@Inject
-//	private ITransientValueService tvService;
-//
-//	protected final IInstanceDescription getDescr(EObject obj) {
-//		return new InstanceDescription(tvService, obj);
-//	}
-//
-//	protected final IInstanceDescription getDescr(IInstanceDescription obj) {
-//		return obj;
-//	}
-//
-//	protected String getPath(EObject obj) {
-//		if (obj.eContainer() == null || obj == rootObject)
-//			return "";
-//		EObject c = obj.eContainer();
-//		EReference r = obj.eContainmentFeature();
-//		if (r.isMany()) {
-//			int index = ((List<?>) c.eGet(r)).indexOf(obj);
-//			return getPath(c) + "/" + r.getName() + "[" + index + "]";
-//		}
-//		return getPath(c) + "/" + r.getName();
-//	}
-//
-//	public ITransientValueService getTVService() {
-//		return tvService;
-//	}
-//
-//	protected abstract Solution internalSerialize(EObject obj);
-//
-//	protected boolean isConsumed(Solution s, AbstractToken token) {
-//		if (s.getCurrent().isConsumed())
-//			return true;
-//		if (!isSubsequentNonconsumption(s.getCurrent().getDelegate()))
-//			diagnostic.add(new FeatureNotConsumedDiagnostic(token, s));
-//		return false;
-//	}
-//
-//	protected boolean isSubsequentNonconsumption(EObject obj) {
-//		for (AbstractSerializationDiagnostic d : diagnostic)
-//			if (d instanceof FeatureNotConsumedDiagnostic) {
-//				EObject del = ((FeatureNotConsumedDiagnostic) d).getCurrent()
-//						.getDelegate().eContainer();
-//				while (del != null) {
-//					if (del == obj)
-//						return true;
-//					del = del.eContainer();
-//				}
-//			}
-//		return false;
-//	}
-//
-//	public IAbstractToken serialize(EObject object) {
-//		diagnostic.clear();
-//		rootObject = object;
-//		if (object == null)
-//			throw new IllegalArgumentException(
-//					"The to-be-serialialized model is null");
-//		Solution t = internalSerialize(object);
-//		if (t == null)
-//			throw new XtextSerializationException(getDescr(object),
-//					"Serialization of " + object.eClass().getName()
-//							+ " failed.", diagnostic);
-//		return t.getPredecessor();
-//	}
+	public abstract class AbstractToken {
+		protected final IInstanceDescription current;
+		protected final AbstractToken next;
+		protected final int no;
+		protected final AbstractToken parent;
 
+		public AbstractToken(AbstractToken parent, AbstractToken next,
+				int no, IInstanceDescription current) {
+			this.next = next;
+			this.parent = parent;
+			this.no = no;
+			this.current = current;
+		}
+
+		protected boolean checkForRecursion(Class<?> clazz,
+				IInstanceDescription curr) {
+			AbstractToken token = next;
+			while (token != null) {
+				if (token.getClass() == clazz)
+					return token.getCurrent() == curr;
+				token = token.getNext();
+			}
+			return false;
+		}
+
+		public AbstractToken createFollower(int index,
+				IInstanceDescription inst) {
+			return null;
+		}
+
+		public AbstractToken createParentFollower(AbstractToken next,
+				int index, IInstanceDescription inst) {
+			return createParentFollower(next, index, index, inst);
+		}
+
+		public AbstractToken createParentFollower(AbstractToken next,
+				int actIndex, int index, IInstanceDescription inst) {
+			return null;
+		}
+
+		public IInstanceDescription getCurrent() {
+			return current;
+		}
+
+		public String getDiagnostic() {
+			return null;
+		}
+
+		public abstract AbstractElement getGrammarElement();
+
+		public AbstractToken getNext() {
+			return next;
+		}
+
+		public int getNo() {
+			return no;
+		}
+
+		public AbstractToken getParent() {
+			return parent;
+		}
+
+		public String serialize(int depth, int length, boolean appendDots) {
+			ArrayList<String> tokens = new ArrayList<String>();
+			AbstractToken t = this;
+			while (t != null && tokens.size() <= depth + 1) {
+				String s = t.serializeThis();
+				if (s != null)
+					tokens.add(s);
+				t = t.getNext();
+			}
+			boolean overdepth = tokens.size() > depth;
+			if (overdepth)
+				tokens.remove(tokens.size() - 1);
+			StringBuffer r = new StringBuffer();
+			for (int i = 0; i < tokens.size(); i++) {
+				r.append(tokens.get(i));
+				if (i != tokens.size() - 1)
+					r.append(" ");
+			}
+			boolean overlength = r.length() > length;
+			if (overlength)
+				r.delete(length + 1, r.length());
+			if (appendDots && (overdepth || overlength))
+				r.append("...");
+			return r.toString();
+		}
+
+		public String serializeThis() {
+			return null;
+		}
+
+		public IInstanceDescription tryConsume() {
+			return tryConsumeVal();
+		}
+
+		protected abstract IInstanceDescription tryConsumeVal();
+	}
+
+	public abstract class ActionToken extends AbstractToken {
+
+		public ActionToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+	}
+
+	public abstract class AlternativesToken extends AbstractToken {
+
+		public AlternativesToken(AbstractToken parent, AbstractToken next,
+				int no, IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
+	public abstract class AssignmentToken extends AbstractToken {
+
+		protected IInstanceDescription consumed;
+
+		protected AbstractElement element;
+
+		protected AssignmentType type;
+
+		protected Object value;
+
+		public AssignmentToken(AbstractToken parent, AbstractToken next,
+				int no, IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		public AbstractElement getAssignmentElement() {
+			return element;
+		}
+
+		public AssignmentType getType() {
+			return type;
+		}
+
+		public Object getValue() {
+			return value;
+		}
+
+		@Override
+		public String getDiagnostic() {
+			Assignment ass = (Assignment) getGrammarElement();
+			boolean consumable = current.getConsumable(ass.getFeature(), false) != null;
+			if (!consumable) {
+				EStructuralFeature f = current.getDelegate().eClass()
+						.getEStructuralFeature(ass.getFeature());
+				String cls = f.getEContainingClass() == current.getDelegate()
+						.eClass() ? f.getEContainingClass().getName() : f
+						.getEContainingClass().getName()
+						+ "(" + current.getDelegate().eClass().getName() + ")";
+				String feat = cls + "." + f.getName();
+				if (f.isMany()) {
+					int size = ((List<?>) current.getDelegate().eGet(f)).size();
+					return "All " + size + " values of " + feat
+							+ " have been consumed. "
+							+ "More are needed to continue here.";
+				} else
+					return feat + " is not set.";
+			}
+			return null;
+		}
+
+		public String serializeThis() {
+			if (type == null)
+				return null;
+			switch (type) {
+			case CR:
+				return crossRefSerializer.serializeCrossRef(current,
+						(CrossReference) element, (EObject) value);
+			case KW:
+				return ((Keyword) element).getValue();
+			case LRC:
+				return converterService.toString(value, ((RuleCall) element)
+						.getRule().getName());
+			case ERC:
+				EnumRule rule = (EnumRule) ((RuleCall) element).getRule();
+				if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
+					EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule
+							.getAlternatives();
+					return decl.getLiteral().getValue();
+				} else {
+					for (AbstractElement element : ((Alternatives) rule
+							.getAlternatives()).getGroups()) {
+						EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
+						if (decl.getEnumLiteral().getInstance().equals(value)) {
+							return decl.getLiteral().getValue();
+						}
+					}
+					return null;
+				}
+			case PRC:
+				return null;
+			case DRC:
+				ParserRule p = (ParserRule) ((RuleCall) element).getRule();
+				return converterService.toString(value, p.getName());
+			default:
+				return null;
+			}
+		}
+	}
+
+	public enum AssignmentType {
+		CR, DRC, ERC, KW, LRC, PRC
+	}
+
+	public abstract class GroupToken extends AbstractToken {
+
+		public GroupToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
+	public abstract class KeywordToken extends AbstractToken {
+
+		public KeywordToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		public String serializeThis() {
+			return ((Keyword) getGrammarElement()).getValue();
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
+	public class RootToken extends AbstractToken {
+
+		private RootToken(AbstractToken next, IInstanceDescription inst) {
+			super(null, next, 0, inst);
+		}
+
+		public RootToken(IInstanceDescription inst) {
+			super(null, null, 0, inst);
+		}
+
+		public boolean containsRuleCall() {
+			return true;
+		}
+
+		public AbstractToken createParentFollower(AbstractToken next,
+				int actIndex, int index, IInstanceDescription i) {
+			return index != 0 || !i.isConsumed() ? null
+					: new RootToken(next, i);
+		}
+
+		public AbstractElement getGrammarElement() {
+			return null;
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
+	public abstract class RuleCallToken extends AbstractToken {
+
+		public RuleCallToken(AbstractToken parent, AbstractToken next,
+				int no, IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+	}
+
+	public abstract class UnassignedTextToken extends AbstractToken {
+
+		public UnassignedTextToken(AbstractToken parent, AbstractToken next,
+				int no, IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		public String serializeThis() {
+			return unassTextSerializer.serializeUnassignedRuleCall(
+					(RuleCall) getGrammarElement(), current.getDelegate());
+		}
+
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
+
+	@Inject
+	protected IValueConverterService converterService;
+
+	@Inject
+	protected ICrossReferenceSerializer crossRefSerializer;
+
+	private final Logger log = Logger
+			.getLogger(AbstractParseTreeConstructor.class);
+
+	@Inject
+	protected ITransientValueService tvService;
+
+	@Inject
+	protected IUnassignedTextSerializer unassTextSerializer;
+
+	protected TreeConstructionReportImpl createReport() {
+		return new TreeConstructionReportImpl();
+	}
+
+	protected String debug(AbstractToken t, IInstanceDescription i) {
+		StringBuffer b = new StringBuffer(t.serialize(10, 50, true));
+		b.append(t.getClass().getSimpleName() + ":" + t.getNo() + " -> " + i);
+		return b.toString();
+	}
+
+	protected final IInstanceDescription getDescr(EObject obj) {
+		return new InstanceDescription(tvService, obj);
+	}
+
+	public abstract IGrammarAccess getGrammarAccess();
+
+	protected abstract AbstractToken getRootToken(IInstanceDescription inst);
+
+	public TreeConstructionReport serialize(EObject object, ITokenStream out)
+			throws IOException {
+		TreeConstructionReportImpl rep = createReport();
+		AbstractToken token = serialize(object, rep);
+		while (token != null) {
+			String s = token.serializeThis();
+			if (s != null && !"".equals(s)) {
+				AbstractElement e = token instanceof AssignmentToken ? ((AssignmentToken) token)
+						.getAssignmentElement()
+						: token.getGrammarElement();
+				out.writeSemantic(e, s);
+			}
+			token = token.getNext();
+		}
+		out.close();
+		return rep;
+	}
+
+	private AbstractToken serialize(EObject object,
+			TreeConstructionReportImpl rep) {
+		if (object == null)
+			throw new NullPointerException(
+					"The to-be-serialized EObject is null");
+		IInstanceDescription inst = getDescr(object);
+		AbstractToken f = getRootToken(inst);
+		int no = 0;
+		boolean lastSucc = true;
+		while (f != null) {
+			AbstractToken n = null;
+			IInstanceDescription i = null;
+			if ((n = f.createFollower(no, inst)) != null) {
+				while (n != null && (i = n.tryConsume()) == null)
+					n = f.createFollower(++no, inst);
+			}
+			if (n instanceof RootToken && n.getNext() != null)
+				return n.getNext();
+			if (n != null && i != null) {
+				if (log.isTraceEnabled())
+					log.trace(debug(f, inst) + " -> found -> "
+							+ f.serializeThis());
+				f = n;
+				inst = i;
+				no = 0;
+				lastSucc = true;
+			} else {
+				if (log.isTraceEnabled())
+					log
+							.trace(debug(f, inst) + " -> fail -> "
+									+ (f.getNo() + 1));
+				if (lastSucc)
+					rep.addDeadEnd(f);
+				no = f.getNo() + 1;
+				inst = f.getCurrent();
+				f = f.getNext();
+				lastSucc = false;
+			}
+		}
+		throw new XtextSerializationException(rep, "Serialization failed");
+	}
 }

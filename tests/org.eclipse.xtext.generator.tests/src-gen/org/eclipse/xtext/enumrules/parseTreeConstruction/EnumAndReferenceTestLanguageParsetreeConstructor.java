@@ -6,13 +6,13 @@ package org.eclipse.xtext.enumrules.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractPa
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_Group(this, this, 0, inst);
 			default: return null;
@@ -49,7 +49,7 @@ protected class ThisRootNode extends RootToken {
 // type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_Group extends GroupToken {
 	
-	public EntityWithEnumAndReference_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntityWithEnumAndReference_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -57,7 +57,7 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_RefAssignment_3(parent, this, 0, inst);
 			default: return null;
@@ -73,7 +73,7 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 // type=KindOfKeyword
 protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_TypeAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntityWithEnumAndReference_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -81,7 +81,7 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeAssignment_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -103,7 +103,7 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 // name=ID
 protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntityWithEnumAndReference_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -111,7 +111,7 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getNameAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_TypeAssignment_0(parent, this, 0, inst);
 			default: return null;
@@ -134,7 +134,7 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 // "reference"
 protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordToken  {
 	
-	public EntityWithEnumAndReference_ReferenceKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntityWithEnumAndReference_ReferenceKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -142,7 +142,7 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -154,7 +154,7 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 // ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_RefAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public EntityWithEnumAndReference_RefAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -162,7 +162,7 @@ protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentTok
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getRefAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_ReferenceKeyword_2(parent, this, 0, inst);
 			default: return null;

@@ -6,13 +6,13 @@ package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
+public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
 	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
@@ -21,7 +21,7 @@ public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractPar
 		return grammarAccess;
 	}
 
-	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
 	
@@ -30,7 +30,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new WithoutHiddens_Group(this, this, 1, inst);
@@ -57,7 +57,7 @@ protected class ThisRootNode extends RootToken {
 // WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -65,7 +65,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_WithoutHiddensParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Model_WithHiddensParserRuleCall_1(parent, this, 1, inst);
@@ -85,7 +85,7 @@ protected class Model_Alternatives extends AlternativesToken {
 // WithoutHiddens
 protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 	
-	public Model_WithoutHiddensParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_WithoutHiddensParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -93,7 +93,7 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 		return grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -106,7 +106,7 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -116,7 +116,7 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 // WithHiddens
 protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 	
-	public Model_WithHiddensParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_WithHiddensParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -124,7 +124,7 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 		return grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -137,7 +137,7 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -147,7 +147,7 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 // OverridingHiddens
 protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 	
-	public Model_OverridingHiddensParserRuleCall_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_OverridingHiddensParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -155,7 +155,7 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 		return grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -168,7 +168,7 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -178,7 +178,7 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 // InheritingHiddens
 protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 	
-	public Model_InheritingHiddensParserRuleCall_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_InheritingHiddensParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -186,7 +186,7 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 		return grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -199,7 +199,7 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -209,7 +209,7 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 // DatatypeHiddens
 protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 	
-	public Model_DatatypeHiddensParserRuleCall_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public Model_DatatypeHiddensParserRuleCall_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -217,7 +217,7 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 		return grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -230,7 +230,7 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
 		}	
@@ -251,7 +251,7 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 // "without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
 protected class WithoutHiddens_Group extends GroupToken {
 	
-	public WithoutHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -259,7 +259,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 		return grammarAccess.getWithoutHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_ValidAssignment_4(parent, this, 0, inst);
 			default: return null;
@@ -275,7 +275,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 // "without"
 protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 	
-	public WithoutHiddens_WithoutKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_WithoutKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -283,7 +283,7 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 		return grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -294,7 +294,7 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 // spaces+=WS
 protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 	
-	public WithoutHiddens_SpacesAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_SpacesAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -302,7 +302,7 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getWithoutHiddensAccess().getSpacesAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_WithoutKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -325,7 +325,7 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 // "hiddens"
 protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 	
-	public WithoutHiddens_HiddensKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_HiddensKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -333,7 +333,7 @@ protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 		return grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_SpacesAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -345,7 +345,7 @@ protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 // spaces+=WS?
 protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	
-	public WithoutHiddens_SpacesAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_SpacesAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -353,7 +353,7 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getWithoutHiddensAccess().getSpacesAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_HiddensKeyword_2(parent, this, 0, inst);
 			default: return null;
@@ -376,7 +376,7 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 // valid?=";"
 protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 	
-	public WithoutHiddens_ValidAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithoutHiddens_ValidAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -384,7 +384,7 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 		return grammarAccess.getWithoutHiddensAccess().getValidAssignment_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_SpacesAssignment_3(parent, this, 0, inst);
 			case 1: return new WithoutHiddens_HiddensKeyword_2(parent, this, 1, inst);
@@ -419,7 +419,7 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 // "with" "hiddens" valid?=";"
 protected class WithHiddens_Group extends GroupToken {
 	
-	public WithHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -427,7 +427,7 @@ protected class WithHiddens_Group extends GroupToken {
 		return grammarAccess.getWithHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithHiddens_ValidAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -443,7 +443,7 @@ protected class WithHiddens_Group extends GroupToken {
 // "with"
 protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 	
-	public WithHiddens_WithKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithHiddens_WithKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -451,7 +451,7 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 		return grammarAccess.getWithHiddensAccess().getWithKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -462,7 +462,7 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public WithHiddens_HiddensKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -470,7 +470,7 @@ protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 		return grammarAccess.getWithHiddensAccess().getHiddensKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithHiddens_WithKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -482,7 +482,7 @@ protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 // valid?=";"
 protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 	
-	public WithHiddens_ValidAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public WithHiddens_ValidAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -490,7 +490,7 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getWithHiddensAccess().getValidAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WithHiddens_HiddensKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -524,7 +524,7 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 // "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
 protected class OverridingHiddens_Group extends GroupToken {
 	
-	public OverridingHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -532,7 +532,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 		return grammarAccess.getOverridingHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_ValidAssignment_5(parent, this, 0, inst);
 			default: return null;
@@ -548,7 +548,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 // "overriding"
 protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 	
-	public OverridingHiddens_OverridingKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_OverridingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -556,7 +556,7 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 		return grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -567,7 +567,7 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public OverridingHiddens_HiddensKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -575,7 +575,7 @@ protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 		return grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_OverridingKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -587,7 +587,7 @@ protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 // "("
 protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
-	public OverridingHiddens_LeftParenthesisKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_LeftParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -595,7 +595,7 @@ protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 		return grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_HiddensKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -607,7 +607,7 @@ protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 // called=OverridingHiddensCall
 protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	
-	public OverridingHiddens_CalledAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_CalledAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -615,7 +615,7 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 		return grammarAccess.getOverridingHiddensAccess().getCalledAssignment_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -637,7 +637,7 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new OverridingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
@@ -649,7 +649,7 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 // ")"
 protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public OverridingHiddens_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_RightParenthesisKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -657,7 +657,7 @@ protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 		return grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_CalledAssignment_3(parent, this, 0, inst);
 			default: return null;
@@ -669,7 +669,7 @@ protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 // valid?=";"
 protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
-	public OverridingHiddens_ValidAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddens_ValidAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -677,7 +677,7 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 		return grammarAccess.getOverridingHiddensAccess().getValidAssignment_5();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
@@ -711,7 +711,7 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 // "call" spaces+=WS? valid?=";"
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
-	public OverridingHiddensCall_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddensCall_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -719,7 +719,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 		return grammarAccess.getOverridingHiddensCallAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddensCall_ValidAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -735,7 +735,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 // "call"
 protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
-	public OverridingHiddensCall_CallKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddensCall_CallKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -743,7 +743,7 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 		return grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -754,7 +754,7 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 // spaces+=WS?
 protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken  {
 	
-	public OverridingHiddensCall_SpacesAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddensCall_SpacesAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -762,7 +762,7 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 		return grammarAccess.getOverridingHiddensCallAccess().getSpacesAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddensCall_CallKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -785,7 +785,7 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 // valid?=";"
 protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken  {
 	
-	public OverridingHiddensCall_ValidAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public OverridingHiddensCall_ValidAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -793,7 +793,7 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 		return grammarAccess.getOverridingHiddensCallAccess().getValidAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new OverridingHiddensCall_SpacesAssignment_1(parent, this, 0, inst);
 			case 1: return new OverridingHiddensCall_CallKeyword_0(parent, this, 1, inst);
@@ -828,7 +828,7 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 // "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
-	public InheritingHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -836,7 +836,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 		return grammarAccess.getInheritingHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_ValidAssignment_5(parent, this, 0, inst);
 			default: return null;
@@ -852,7 +852,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 // "inheriting"
 protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 	
-	public InheritingHiddens_InheritingKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_InheritingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -860,7 +860,7 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 		return grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -871,7 +871,7 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public InheritingHiddens_HiddensKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -879,7 +879,7 @@ protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 		return grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_InheritingKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -891,7 +891,7 @@ protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 // "("
 protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
-	public InheritingHiddens_LeftParenthesisKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_LeftParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -899,7 +899,7 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 		return grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_HiddensKeyword_1(parent, this, 0, inst);
 			default: return null;
@@ -911,7 +911,7 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 // called=InheritingHiddensCall|hidingCalled=HidingHiddens
 protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 
-	public InheritingHiddens_Alternatives_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_Alternatives_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -919,7 +919,7 @@ protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 		return grammarAccess.getInheritingHiddensAccess().getAlternatives_3();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_CalledAssignment_3_0(parent, this, 0, inst);
 			case 1: return new InheritingHiddens_HidingCalledAssignment_3_1(parent, this, 1, inst);
@@ -932,7 +932,7 @@ protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 // called=InheritingHiddensCall
 protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  {
 	
-	public InheritingHiddens_CalledAssignment_3_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_CalledAssignment_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -940,7 +940,7 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 		return grammarAccess.getInheritingHiddensAccess().getCalledAssignment_3_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -962,7 +962,7 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
@@ -974,7 +974,7 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 // hidingCalled=HidingHiddens
 protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentToken  {
 	
-	public InheritingHiddens_HidingCalledAssignment_3_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_HidingCalledAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -982,7 +982,7 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 		return grammarAccess.getInheritingHiddensAccess().getHidingCalledAssignment_3_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new HidingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -1004,7 +1004,7 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
@@ -1017,7 +1017,7 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 // ")"
 protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public InheritingHiddens_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_RightParenthesisKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1025,7 +1025,7 @@ protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 		return grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_Alternatives_3(parent, this, 0, inst);
 			default: return null;
@@ -1037,7 +1037,7 @@ protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 // valid?=";"
 protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
-	public InheritingHiddens_ValidAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddens_ValidAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1045,7 +1045,7 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 		return grammarAccess.getInheritingHiddensAccess().getValidAssignment_5();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
@@ -1079,7 +1079,7 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 // "datatype" valid?=DatatypeRule
 protected class DatatypeHiddens_Group extends GroupToken {
 	
-	public DatatypeHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public DatatypeHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1087,7 +1087,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 		return grammarAccess.getDatatypeHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeHiddens_ValidAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -1103,7 +1103,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 // "datatype"
 protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 	
-	public DatatypeHiddens_DatatypeKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public DatatypeHiddens_DatatypeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1111,7 +1111,7 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 		return grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -1122,7 +1122,7 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 // valid?=DatatypeRule
 protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 	
-	public DatatypeHiddens_ValidAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public DatatypeHiddens_ValidAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1130,7 +1130,7 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getDatatypeHiddensAccess().getValidAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeHiddens_DatatypeKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -1165,7 +1165,7 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 // "hiding" space=WS called=InheritingHiddensCall
 protected class HidingHiddens_Group extends GroupToken {
 	
-	public HidingHiddens_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public HidingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1173,7 +1173,7 @@ protected class HidingHiddens_Group extends GroupToken {
 		return grammarAccess.getHidingHiddensAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new HidingHiddens_CalledAssignment_2(parent, this, 0, inst);
 			default: return null;
@@ -1189,7 +1189,7 @@ protected class HidingHiddens_Group extends GroupToken {
 // "hiding"
 protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 	
-	public HidingHiddens_HidingKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public HidingHiddens_HidingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1197,7 +1197,7 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 		return grammarAccess.getHidingHiddensAccess().getHidingKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -1208,7 +1208,7 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 // space=WS
 protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 	
-	public HidingHiddens_SpaceAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public HidingHiddens_SpaceAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1216,7 +1216,7 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 		return grammarAccess.getHidingHiddensAccess().getSpaceAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new HidingHiddens_HidingKeyword_0(parent, this, 0, inst);
 			default: return null;
@@ -1239,7 +1239,7 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 // called=InheritingHiddensCall
 protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 	
-	public HidingHiddens_CalledAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public HidingHiddens_CalledAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1247,7 +1247,7 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 		return grammarAccess.getHidingHiddensAccess().getCalledAssignment_2();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -1269,7 +1269,7 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new HidingHiddens_SpaceAssignment_1(parent, next, actIndex, consumed);
@@ -1292,7 +1292,7 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 // "call" valid?=";"
 protected class InheritingHiddensCall_Group extends GroupToken {
 	
-	public InheritingHiddensCall_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddensCall_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1300,7 +1300,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 		return grammarAccess.getInheritingHiddensCallAccess().getGroup();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_ValidAssignment_1(parent, this, 0, inst);
 			default: return null;
@@ -1316,7 +1316,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 // "call"
 protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
-	public InheritingHiddensCall_CallKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddensCall_CallKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1324,7 +1324,7 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 		return grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
@@ -1335,7 +1335,7 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 // valid?=";"
 protected class InheritingHiddensCall_ValidAssignment_1 extends AssignmentToken  {
 	
-	public InheritingHiddensCall_ValidAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+	public InheritingHiddensCall_ValidAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
@@ -1343,7 +1343,7 @@ protected class InheritingHiddensCall_ValidAssignment_1 extends AssignmentToken 
 		return grammarAccess.getInheritingHiddensCallAccess().getValidAssignment_1();
 	}
 
-	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_CallKeyword_0(parent, this, 0, inst);
 			default: return null;

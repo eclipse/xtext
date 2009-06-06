@@ -18,7 +18,7 @@ import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
-import org.eclipse.xtext.formatter.IFormatter;
+import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
