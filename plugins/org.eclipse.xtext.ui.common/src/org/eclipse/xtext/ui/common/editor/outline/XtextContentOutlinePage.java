@@ -19,15 +19,14 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreePath;
+import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.SWT;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
-import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -69,7 +68,10 @@ import com.google.inject.Inject;
  * 
  * @author Peter Friese - Initial contribution and API
  */
-public class XtextContentOutlinePage extends PreservingContentOutlinePage implements ISourceViewerAware, IXtextEditorAware {
+public class XtextContentOutlinePage extends PreservingContentOutlinePage implements ISourceViewerAware,
+		IXtextEditorAware {
+	public XtextContentOutlinePage() {
+	}
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
@@ -90,7 +92,9 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 	private IXtextModelListener modelListener;
 
 	private Menu contextMenu;
-	
+
+	private ViewerSorter sorter = new TreePathViewerSorter();
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -185,11 +189,7 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
 		if (toolBarManager != null) {
 			toolBarManager.add(new ToggleLinkWithEditorAction(this));
-
-			// sort button only available if provider offers sorting facilities
-			if (provider instanceof ISortableContentProvider) {
-				toolBarManager.add(new LexicalSortingAction(this));
-			}
+			toolBarManager.add(new LexicalSortingAction(this));
 		}
 	}
 
@@ -331,10 +331,13 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 	}
 
 	public void setSorted(boolean sorted) {
-		if (provider instanceof ISortableContentProvider) {
-			ISortableContentProvider sortableContentProvider = (ISortableContentProvider) provider;
-			sortableContentProvider.setSorted(sorted);
-			refresh();
+		if (getTreeViewer() != null) {
+			if (sorted) {
+				getTreeViewer().setSorter(sorter);
+			}
+			else {
+				getTreeViewer().setSorter(null);
+			}
 		}
 	}
 
