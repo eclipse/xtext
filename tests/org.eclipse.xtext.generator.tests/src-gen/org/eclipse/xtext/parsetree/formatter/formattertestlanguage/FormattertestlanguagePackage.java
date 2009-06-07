@@ -98,13 +98,32 @@ public interface FormattertestlanguagePackage extends EPackage
   int LINE = 1;
 
   /**
+   * The number of structural features of the '<em>Line</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LINE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl <em>Decl</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getDecl()
+   * @generated
+   */
+  int DECL = 2;
+
+  /**
    * The feature id for the '<em><b>Type</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LINE__TYPE = 0;
+  int DECL__TYPE = LINE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute list.
@@ -113,16 +132,136 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int LINE__NAME = 1;
+  int DECL__NAME = LINE_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Line</em>' class.
+   * The number of structural features of the '<em>Decl</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LINE_FEATURE_COUNT = 2;
+  int DECL_FEATURE_COUNT = LINE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl <em>Assign</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getAssign()
+   * @generated
+   */
+  int ASSIGN = 3;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGN__VAR = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Op</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGN__OP = LINE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGN__VAL = LINE_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Assign</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGN_FEATURE_COUNT = LINE_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.MethImpl <em>Meth</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.MethImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getMeth()
+   * @generated
+   */
+  int METH = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METH__NAME = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Param</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METH__PARAM = LINE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Meth</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METH_FEATURE_COUNT = LINE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.ParamImpl <em>Param</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.ParamImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getParam()
+   * @generated
+   */
+  int PARAM = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAM__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAM__TYPE = 1;
+
+  /**
+   * The number of structural features of the '<em>Param</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAM_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapImpl <em>Test Linewrap</em>}' class.
@@ -132,7 +271,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestLinewrap()
    * @generated
    */
-  int TEST_LINEWRAP = 2;
+  int TEST_LINEWRAP = 6;
 
   /**
    * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -160,7 +299,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestIndentation()
    * @generated
    */
-  int TEST_INDENTATION = 3;
+  int TEST_INDENTATION = 7;
 
   /**
    * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -222,26 +361,143 @@ public interface FormattertestlanguagePackage extends EPackage
   EClass getLine();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line#getType <em>Type</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl <em>Decl</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Decl</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl
+   * @generated
+   */
+  EClass getDecl();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute list '<em>Type</em>'.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line#getType()
-   * @see #getLine()
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl#getType()
+   * @see #getDecl()
    * @generated
    */
-  EAttribute getLine_Type();
+  EAttribute getDecl_Type();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute list '<em>Name</em>'.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line#getName()
-   * @see #getLine()
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl#getName()
+   * @see #getDecl()
    * @generated
    */
-  EAttribute getLine_Name();
+  EAttribute getDecl_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign <em>Assign</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assign</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign
+   * @generated
+   */
+  EClass getAssign();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getVar <em>Var</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Var</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getVar()
+   * @see #getAssign()
+   * @generated
+   */
+  EAttribute getAssign_Var();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getOp <em>Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Op</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getOp()
+   * @see #getAssign()
+   * @generated
+   */
+  EAttribute getAssign_Op();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign#getVal()
+   * @see #getAssign()
+   * @generated
+   */
+  EAttribute getAssign_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth <em>Meth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Meth</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth
+   * @generated
+   */
+  EClass getMeth();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth#getName()
+   * @see #getMeth()
+   * @generated
+   */
+  EAttribute getMeth_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth#getParam <em>Param</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Param</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth#getParam()
+   * @see #getMeth()
+   * @generated
+   */
+  EReference getMeth_Param();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param <em>Param</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Param</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param
+   * @generated
+   */
+  EClass getParam();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param#getName()
+   * @see #getParam()
+   * @generated
+   */
+  EAttribute getParam_Name();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Type</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param#getType()
+   * @see #getParam()
+   * @generated
+   */
+  EAttribute getParam_Type();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap <em>Test Linewrap</em>}'.
@@ -326,12 +582,22 @@ public interface FormattertestlanguagePackage extends EPackage
     EClass LINE = eINSTANCE.getLine();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl <em>Decl</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getDecl()
+     * @generated
+     */
+    EClass DECL = eINSTANCE.getDecl();
+
+    /**
      * The meta object literal for the '<em><b>Type</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LINE__TYPE = eINSTANCE.getLine_Type();
+    EAttribute DECL__TYPE = eINSTANCE.getDecl_Type();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute list feature.
@@ -339,7 +605,93 @@ public interface FormattertestlanguagePackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LINE__NAME = eINSTANCE.getLine_Name();
+    EAttribute DECL__NAME = eINSTANCE.getDecl_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl <em>Assign</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getAssign()
+     * @generated
+     */
+    EClass ASSIGN = eINSTANCE.getAssign();
+
+    /**
+     * The meta object literal for the '<em><b>Var</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSIGN__VAR = eINSTANCE.getAssign_Var();
+
+    /**
+     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSIGN__OP = eINSTANCE.getAssign_Op();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSIGN__VAL = eINSTANCE.getAssign_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.MethImpl <em>Meth</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.MethImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getMeth()
+     * @generated
+     */
+    EClass METH = eINSTANCE.getMeth();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METH__NAME = eINSTANCE.getMeth_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Param</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METH__PARAM = eINSTANCE.getMeth_Param();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.ParamImpl <em>Param</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.ParamImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getParam()
+     * @generated
+     */
+    EClass PARAM = eINSTANCE.getParam();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAM__TYPE = eINSTANCE.getParam_Type();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapImpl <em>Test Linewrap</em>}' class.

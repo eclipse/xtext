@@ -12,9 +12,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap;
@@ -40,6 +44,34 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * @generated
    */
   private EClass lineEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass declEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assignEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass methEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass paramEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -153,9 +185,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLine_Type()
+  public EClass getDecl()
   {
-    return (EAttribute)lineEClass.getEStructuralFeatures().get(0);
+    return declEClass;
   }
 
   /**
@@ -163,9 +195,119 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLine_Name()
+  public EAttribute getDecl_Type()
   {
-    return (EAttribute)lineEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)declEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDecl_Name()
+  {
+    return (EAttribute)declEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAssign()
+  {
+    return assignEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssign_Var()
+  {
+    return (EAttribute)assignEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssign_Op()
+  {
+    return (EAttribute)assignEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssign_Val()
+  {
+    return (EAttribute)assignEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMeth()
+  {
+    return methEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMeth_Name()
+  {
+    return (EAttribute)methEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMeth_Param()
+  {
+    return (EReference)methEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParam()
+  {
+    return paramEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParam_Name()
+  {
+    return (EAttribute)paramEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParam_Type()
+  {
+    return (EAttribute)paramEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -232,8 +374,23 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     createEReference(rootEClass, ROOT__ITEMS);
 
     lineEClass = createEClass(LINE);
-    createEAttribute(lineEClass, LINE__TYPE);
-    createEAttribute(lineEClass, LINE__NAME);
+
+    declEClass = createEClass(DECL);
+    createEAttribute(declEClass, DECL__TYPE);
+    createEAttribute(declEClass, DECL__NAME);
+
+    assignEClass = createEClass(ASSIGN);
+    createEAttribute(assignEClass, ASSIGN__VAR);
+    createEAttribute(assignEClass, ASSIGN__OP);
+    createEAttribute(assignEClass, ASSIGN__VAL);
+
+    methEClass = createEClass(METH);
+    createEAttribute(methEClass, METH__NAME);
+    createEReference(methEClass, METH__PARAM);
+
+    paramEClass = createEClass(PARAM);
+    createEAttribute(paramEClass, PARAM__NAME);
+    createEAttribute(paramEClass, PARAM__TYPE);
 
     testLinewrapEClass = createEClass(TEST_LINEWRAP);
 
@@ -270,6 +427,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    declEClass.getESuperTypes().add(this.getLine());
+    assignEClass.getESuperTypes().add(this.getLine());
+    methEClass.getESuperTypes().add(this.getLine());
     testLinewrapEClass.getESuperTypes().add(this.getRoot());
     testIndentationEClass.getESuperTypes().add(this.getRoot());
 
@@ -278,8 +438,23 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEReference(getRoot_Items(), this.getLine(), null, "items", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLine_Type(), ecorePackage.getEString(), "type", null, 0, -1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLine_Name(), ecorePackage.getEString(), "name", null, 0, -1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(declEClass, Decl.class, "Decl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDecl_Type(), ecorePackage.getEString(), "type", null, 0, -1, Decl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDecl_Name(), ecorePackage.getEString(), "name", null, 0, -1, Decl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(assignEClass, Assign.class, "Assign", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAssign_Var(), ecorePackage.getEString(), "var", null, 0, 1, Assign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssign_Op(), ecorePackage.getEString(), "op", null, 0, 1, Assign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssign_Val(), ecorePackage.getEInt(), "val", null, 0, -1, Assign.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(methEClass, Meth.class, "Meth", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMeth_Name(), ecorePackage.getEString(), "name", null, 0, 1, Meth.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMeth_Param(), this.getParam(), null, "param", null, 0, -1, Meth.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParam_Name(), ecorePackage.getEString(), "name", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getParam_Type(), ecorePackage.getEString(), "type", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testLinewrapEClass, TestLinewrap.class, "TestLinewrap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

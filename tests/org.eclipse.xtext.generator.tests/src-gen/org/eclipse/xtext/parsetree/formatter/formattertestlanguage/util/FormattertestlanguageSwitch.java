@@ -109,6 +109,37 @@ public class FormattertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FormattertestlanguagePackage.DECL:
+      {
+        Decl decl = (Decl)theEObject;
+        T result = caseDecl(decl);
+        if (result == null) result = caseLine(decl);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.ASSIGN:
+      {
+        Assign assign = (Assign)theEObject;
+        T result = caseAssign(assign);
+        if (result == null) result = caseLine(assign);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.METH:
+      {
+        Meth meth = (Meth)theEObject;
+        T result = caseMeth(meth);
+        if (result == null) result = caseLine(meth);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.PARAM:
+      {
+        Param param = (Param)theEObject;
+        T result = caseParam(param);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FormattertestlanguagePackage.TEST_LINEWRAP:
       {
         TestLinewrap testLinewrap = (TestLinewrap)theEObject;
@@ -157,6 +188,70 @@ public class FormattertestlanguageSwitch<T>
    * @generated
    */
   public T caseLine(Line object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Decl</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Decl</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDecl(Decl object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assign</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assign</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssign(Assign object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Meth</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Meth</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMeth(Meth object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Param</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Param</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParam(Param object)
   {
     return null;
   }

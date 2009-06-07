@@ -88,6 +88,26 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createLineAdapter();
       }
       @Override
+      public Adapter caseDecl(Decl object)
+      {
+        return createDeclAdapter();
+      }
+      @Override
+      public Adapter caseAssign(Assign object)
+      {
+        return createAssignAdapter();
+      }
+      @Override
+      public Adapter caseMeth(Meth object)
+      {
+        return createMethAdapter();
+      }
+      @Override
+      public Adapter caseParam(Param object)
+      {
+        return createParamAdapter();
+      }
+      @Override
       public Adapter caseTestLinewrap(TestLinewrap object)
       {
         return createTestLinewrapAdapter();
@@ -145,6 +165,66 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl <em>Decl</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl
+   * @generated
+   */
+  public Adapter createDeclAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign <em>Assign</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign
+   * @generated
+   */
+  public Adapter createAssignAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth <em>Meth</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth
+   * @generated
+   */
+  public Adapter createMethAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param <em>Param</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param
+   * @generated
+   */
+  public Adapter createParamAdapter()
   {
     return null;
   }

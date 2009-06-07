@@ -44,6 +44,42 @@ public interface FormattertestlanguageFactory extends EFactory
   Line createLine();
 
   /**
+   * Returns a new object of class '<em>Decl</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Decl</em>'.
+   * @generated
+   */
+  Decl createDecl();
+
+  /**
+   * Returns a new object of class '<em>Assign</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assign</em>'.
+   * @generated
+   */
+  Assign createAssign();
+
+  /**
+   * Returns a new object of class '<em>Meth</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Meth</em>'.
+   * @generated
+   */
+  Meth createMeth();
+
+  /**
+   * Returns a new object of class '<em>Param</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Param</em>'.
+   * @generated
+   */
+  Param createParam();
+
+  /**
    * Returns a new object of class '<em>Test Linewrap</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
