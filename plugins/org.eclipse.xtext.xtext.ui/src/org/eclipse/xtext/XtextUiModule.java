@@ -58,5 +58,5 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory.class;
 	}
-	
+		
 }
