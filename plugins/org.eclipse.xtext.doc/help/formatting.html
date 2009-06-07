@@ -10,6 +10,230 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Formatting (Pretty Printing)</h1>
-<p>text</p>
+<p>A formatter can be implemented via the 
+				<code class="code">IFormatter</code> service. Technically speaking, a formatter is a 
+				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
+			</p>
+<p>The formatter is invoked during the 
+				<a class="link" href="serialization.html" title="Serialization">serialization phase</a> and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
+			</p>
+<p>Xtext ships with two formatters:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The 
+						<code class="code">OneWhitespaceFormatter</code> simply writes one whitespace between all tokens.
+					</p>
+</li>
+<li class="listitem">
+<p>The 
+						<code class="code">AbstractDeclarativeFormatter</code> allows advanced configuration using a 
+						<code class="code">FormattingConfig</code>. Both are explained in the 
+						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">next chapter</a>.
+					</p>
+</li>
+</ul>
+</div>
+<div class="section" title="Declarative Formatter">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="declarativeformatter"/>Declarative Formatter   </h3>
+</div>
+</div>
+</div>
+<p>A declarative formatter can be implemented by sub-classing 
+					<code class="code">AbstractDeclarativeFormatter</code>, as shown in the following example:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br/>
+public class ExampleFormatter extends AbstractDeclarativeFormatter {<br/>
+<br/>
+  @Override<br/>
+  protected void configureFormatting(FormattingConfig c) {<br/>
+    ExampleLanguageGrammarAccess f = (ExampleLanguageGrammarAccess) getGrammarAccess();<br/>
+    <br/>
+    c.setAutoLinewrap(120);<br/>
+<br/>
+    // Line<br/>
+    c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br/>
+    c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br/>
+    <br/>
+    // TestIndentation<br/>
+    c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),<br/>
+        f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+    c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br/>
+    c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+    <br/>
+    // Param<br/>
+    c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br/>
+    c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br/>
+    <br/>
+    // comments<br/>
+    c.setNoLinewrap().before(f.getSL_COMMENTRule());<br/>
+  }<br/>
+}<br/>
+<br/>
+</code>
+</p>
+</div>
+<p>The formatter has to implement the method 
+					<code class="code">configureFormatting(...)</code> which is supposed to declaratively set up a 
+					<code class="code">FormattingConfig</code>.
+				</p>
+<p>The 
+					<code class="code">FormattingConfig</code> consist general settings and a set of rules:
+				</p>
+<div class="section" title="General FormattingConfig Settings">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="GeneralFormattingConfigSettings"/>General FormattingConfig Settings</h4>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								<code class="code">setAutoLinewrap(int)</code>  defines the amount of characters after which a linebreak should be dynamically inserted between two tokens. The rule 
+								<code class="code">setNoLinewrap()</code> can be used to suppress this behavior locally. The default is 80.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setIndentationSpace(String)</code> defines the string which is used for a single degree of indentation. The default is two whitespaces.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setWhitespaceRule(AbstractRule)</code> defines the grammar rule which is used to match whitespaces. This is needed by the formatter to identify whitespaces and to insert whitespaces. The default is the rule named 
+								<code class="code">WS</code>.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setIndentation(startele, endele)</code> increases the level of indentation when 
+								<code class="code">startele</code> is matched and decreases the level when 
+								<code class="code">endele</code> is matched. The matching of elements happens in the same way as it does for formatting rules.
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="FormattingConfig Rules">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="FormattingConfigRules"/>FormattingConfig Rules</h4>
+</div>
+</div>
+</div>
+<p>Per default, the 
+						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">Declarative Formatter</a> inserts one whitespace between two tokens. Rules can be used to specify a different behavior. They consist of two parts: 
+						<span class="emphasis">
+<em>When</em>
+</span> to apply the rule and 
+						<span class="emphasis">
+<em>what</em>
+</span> to do.
+					</p>
+<p>To understand 
+						<span class="emphasis">
+<em>when</em>
+</span> a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching constructs exist.
+					</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								<code class="code">after(ele)</code>: The rule is executed after the grammar element 
+								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &#8220;;&#8221; to end lines, this can instruct the formatter to insert a linebreak after the semicolon.  
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &#8220;,&#8221;, you this can instruct the formatter to suppress the whitespace before the comma.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">around(ele)</code>: This is the same as 
+								<code class="code">before(ele)</code> combined with  
+								<code class="code">after(ele)</code>.  
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">between(ele1, ele2)</code>: This matches if 
+								<code class="code">ele2</code> directly follows 
+								<code class="code">ele1</code>. There may be no other elements in between.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">bounds(ele1, ele2)</code>: This is the same as 
+								<code class="code">before(ele1)</code> combined with  
+								<code class="code">after(ele2)</code>.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">range(ele1, ele2)</code>: The rule is enabled when 
+								<code class="code">ele1</code> is matched, and disabled when 
+								<code class="code">ele2</code> is matched. Thereby, the rule is active for the complete region which is surrounded by 
+								<code class="code">ele1</code> and 
+								<code class="code">ele2</code>. 
+							</p>
+</li>
+</ul>
+</div>
+<p>The parameter 
+						<code class="code">ele</code> can be a grammar&#8217;s 
+						<code class="code">AbstractElement</code> or a grammar&#8217;s 
+						<code class="code">AbstractRule</code>. However, only elements which represent one token in the textual representation can be matched. This are:
+					</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Terminal rules for comments.</p>
+</li>
+<li class="listitem">
+<p>Keywords, Associations, Terminal RuleCalls, Datatype RuleCalls.</p>
+</li>
+</ul>
+</div>
+<p>After having explained how rules can be activated, this is what they can do:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								<code class="code">setLinewrap()</code>: Inserts a linebreak at this position.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setLinewrap(int)</code>: Inserts the specified number of linebreak at this position.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setNoLinewrap()</code>: Suppresses automatic line wrap, which may occur when the line&#8217;s length exceeds the defined limit.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								<code class="code">setNoSpace()</code>: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
+							</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </body>
 </html>

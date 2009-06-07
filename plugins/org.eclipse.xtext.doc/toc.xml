@@ -86,7 +86,15 @@
 <topic href="help/valueconverter.html" label="Value Converter">
 <topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"/>
 </topic>
-<topic href="help/transientvalues.html" label="Transient Values"/>
+<topic href="help/serialization.html" label="Serialization">
+<topic href="help/serialization.html#serializationcontract" label="The Contract"/>
+<topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"/>
+<topic href="help/serialization.html#transientvalues" label="Transient Values"/>
+<topic href="help/serialization.html#unassignedtext" label="Unassigned Text"/>
+<topic href="help/serialization.html#crossreferenceserializer" label="Cross Reference Serializer"/>
+<topic href="help/serialization.html#hiddentokenmerger" label="Hidden Token Merger"/>
+<topic href="help/serialization.html#tokenstream" label="Token Stream"/>
+</topic>
 <topic href="help/fragmentProvider.html" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
@@ -101,7 +109,12 @@
 </topic>
 <topic href="help/outline.html" label="Outline View"/>
 <topic href="help/navigation.html" label="Navigation and Hyperlinking"/>
-<topic href="help/formatting.html" label="Formatting (Pretty Printing)"/>
+<topic href="help/formatting.html" label="Formatting (Pretty Printing)">
+<topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
+<topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"/>
+<topic href="help/formatting.html#FormattingConfigRules" label="FormattingConfig Rules"/>
+</topic>
+</topic>
 </topic>
 <topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">
 <topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite?"/>

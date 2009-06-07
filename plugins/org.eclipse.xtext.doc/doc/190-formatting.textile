@@ -1,4 +1,76 @@
 
 h2(#formatting). Formatting (Pretty Printing)
 
-text
+p. A formatter can be implemented via the @IFormatter@ service. Technically speaking, a formatter is a "Token Stream":#tokenstream which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
+
+The formatter is invoked during the "serialization phase":#serialization and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
+
+Xtext ships with two formatters:
+* The @OneWhitespaceFormatter@ simply writes one whitespace between all tokens.
+* The @AbstractDeclarativeFormatter@ allows advanced configuration using a @FormattingConfig@. Both are explained in the "next chapter":#declarativeformatter.
+
+h3(#declarativeformatter). Declarative Formatter   
+
+p. A declarative formatter can be implemented by sub-classing @AbstractDeclarativeFormatter@, as shown in the following example:
+
+bc.. 
+public class ExampleFormatter extends AbstractDeclarativeFormatter {
+
+  @Override
+  protected void configureFormatting(FormattingConfig c) {
+    ExampleLanguageGrammarAccess f = (ExampleLanguageGrammarAccess) getGrammarAccess();
+    
+    c.setAutoLinewrap(120);
+
+    // Line
+    c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());
+    c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
+    
+    // TestIndentation
+    c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),
+        f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+    c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+    c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+    
+    // Param
+    c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());
+    c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());
+    
+    // comments
+    c.setNoLinewrap().before(f.getSL_COMMENTRule());
+  }
+}
+
+p. The formatter has to implement the method @configureFormatting(...)@ which is supposed to declaratively set up a @FormattingConfig@.
+
+The @FormattingConfig@ consist general settings and a set of rules:
+
+h4. General FormattingConfig Settings
+
+* @setAutoLinewrap(int)@  defines the amount of characters after which a linebreak should be dynamically inserted between two tokens. The rule @setNoLinewrap()@ can be used to suppress this behavior locally. The default is 80.
+* @setIndentationSpace(String)@ defines the string which is used for a single degree of indentation. The default is two whitespaces.
+* @setWhitespaceRule(AbstractRule)@ defines the grammar rule which is used to match whitespaces. This is needed by the formatter to identify whitespaces and to insert whitespaces. The default is the rule named @WS@.
+* @setIndentation(startele, endele)@ increases the level of indentation when @startele@ is matched and decreases the level when @endele@ is matched. The matching of elements happens in the same way as it does for formatting rules.
+
+h4. FormattingConfig Rules
+
+p. Per default, the "Declarative Formatter":#declarativeformatter inserts one whitespace between two tokens. Rules can be used to specify a different behavior. They consist of two parts: _When_ to apply the rule and _what_ to do.
+
+To understand _when_ a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching constructs exist.
+* @after(ele)@: The rule is executed after the grammar element @ele@ has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a linebreak after the semicolon.  
+* @before(ele)@: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword ",", you this can instruct the formatter to suppress the whitespace before the comma.
+* @around(ele)@: This is the same as @before(ele)@ combined with  @after(ele)@.  
+* @between(ele1, ele2)@: This matches if @ele2@ directly follows @ele1@. There may be no other elements in between.
+* @bounds(ele1, ele2)@: This is the same as @before(ele1)@ combined with  @after(ele2)@.
+* @range(ele1, ele2)@: The rule is enabled when @ele1@ is matched, and disabled when @ele2@ is matched. Thereby, the rule is active for the complete region which is surrounded by @ele1@ and @ele2@. 
+
+p. The parameter @ele@ can be a grammar's @AbstractElement@ or a grammar's @AbstractRule@. However, only elements which represent one token in the textual representation can be matched. This are:
+* Terminal rules for comments.
+* Keywords, Associations, Terminal RuleCalls, Datatype RuleCalls.
+
+After having explained how rules can be activated, this is what they can do:
+* @setLinewrap()@: Inserts a linebreak at this position.
+* @setLinewrap(int)@: Inserts the specified number of linebreak at this position.
+* @setNoLinewrap()@: Suppresses automatic line wrap, which may occur when the line's length exceeds the defined limit.
+* @setNoSpace()@: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
+ 
