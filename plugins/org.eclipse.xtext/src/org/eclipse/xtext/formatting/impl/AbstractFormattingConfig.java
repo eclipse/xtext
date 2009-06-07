@@ -32,8 +32,13 @@ public abstract class AbstractFormattingConfig {
 			list(after, left).add(this);
 		}
 
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + "-" + type.name();
+		}
+
 		protected void around(EObject ele) {
-			this.type = LocatorType.BETWEEN;
+			this.type = LocatorType.AROUND;
 			this.left = ele;
 			this.right = ele;
 			list(after, ele).add(this);

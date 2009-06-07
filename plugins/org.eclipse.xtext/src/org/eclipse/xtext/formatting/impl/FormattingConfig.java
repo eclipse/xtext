@@ -71,6 +71,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public class NoLinewrapLocator extends ElementLocator {
 
 		@Override
+		public void around(EObject ele) {
+			super.around(ele);
+		}
+
+		@Override
 		public void after(EObject left) {
 			super.after(left);
 		}
@@ -121,7 +126,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	}
 
-	protected int charsPerLine;
+	protected int charsPerLine = 80;
 
 	protected String indentationSpace = "  ";
 
