@@ -1,4 +1,0 @@
-
-h2(#transientvalues). Transient Values
-
-text
