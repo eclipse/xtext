@@ -69,6 +69,10 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
     {
       case FormattertestlanguagePackage.ROOT: return createRoot();
       case FormattertestlanguagePackage.LINE: return createLine();
+      case FormattertestlanguagePackage.DECL: return createDecl();
+      case FormattertestlanguagePackage.ASSIGN: return createAssign();
+      case FormattertestlanguagePackage.METH: return createMeth();
+      case FormattertestlanguagePackage.PARAM: return createParam();
       case FormattertestlanguagePackage.TEST_LINEWRAP: return createTestLinewrap();
       case FormattertestlanguagePackage.TEST_INDENTATION: return createTestIndentation();
       default:
@@ -96,6 +100,50 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     LineImpl line = new LineImpl();
     return line;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Decl createDecl()
+  {
+    DeclImpl decl = new DeclImpl();
+    return decl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Assign createAssign()
+  {
+    AssignImpl assign = new AssignImpl();
+    return assign;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Meth createMeth()
+  {
+    MethImpl meth = new MethImpl();
+    return meth;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Param createParam()
+  {
+    ParamImpl param = new ParamImpl();
+    return param;
   }
 
   /**

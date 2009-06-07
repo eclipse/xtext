@@ -10,11 +10,44 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="FormatterTestLanguage.ecore#//Line"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="FormatterTestLanguage.ecore#//Decl"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Line/type"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Decl/type"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Line/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Decl/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="FormatterTestLanguage.ecore#//Assign"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Assign/var"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Assign/op"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Assign/val"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="FormatterTestLanguage.ecore#//Meth"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Meth/name"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="FormatterTestLanguage.ecore#//Meth/param"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="FormatterTestLanguage.ecore#//Param"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Param/name"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="FormatterTestLanguage.ecore#//Param/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
