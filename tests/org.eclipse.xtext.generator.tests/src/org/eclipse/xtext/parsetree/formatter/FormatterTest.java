@@ -46,5 +46,31 @@ public class FormatterTest extends AbstractGeneratorTest {
 		// System.out.println(res);
 		assertEquals(expected, res);
 	}
+	
+	public void testAssociation() throws Exception {
+		final String model = "test indentation { var = [0,1,2,3,4]; }";
+		final String expected = "test indentation {\n  var=[ 0, 1, 2, 3, 4 ];\n}";
+		EObject m = getModel(model);
+		// System.out.println(EmfFormater.objToStr(m, ""));
+		String res = serialize(m);
+		// System.out.println(res);
+		assertEquals(expected, res);
+	}
+	
+	public void testIndentationAndComments() throws Exception {
+		final String model = "test /* xxx */ indentation { float val; // some float\n double /* oo */ y; indentation { // some block\n int x; // xxx\n } } // final comment";
+		final String expected = "test /* xxx */ indentation {\n  float val; // some float\n  double /* oo */ y;\n  indentation { // some block\n    int x; // xxx\n  }\n} // final comment";
+		EObject m = getModel(model);
+		String res = serialize(m);
+		assertEquals(expected, res);
+	}
+	
+	public void testIndentationAndLineWrap() throws Exception {
+		final String model = "test indentation { void func(x:int,y:int,s:javalangString, foo:javasqlDate, blupp:mylongtype,  msads:adshdjkhsakdasdkslajdlsask, x:x, a:b, c:d ); }";
+		final String expected = "test indentation {\n  void func(x:int, y:int,\n    s:javalangString,\n    foo:javasqlDate,\n    blupp:mylongtype,\n    msads:adshdjkhsakdasdkslajdlsask,\n    x:x, a:b, c:d);\n}";
+		EObject m = getModel(model);
+		String res = serialize(m);
+		assertEquals(expected, res);
+	}
 
 }

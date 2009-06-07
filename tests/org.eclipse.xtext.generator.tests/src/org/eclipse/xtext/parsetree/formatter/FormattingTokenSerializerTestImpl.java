@@ -9,15 +9,39 @@ public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormat
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
 		FormatterTestLanguageGrammarAccess f = (FormatterTestLanguageGrammarAccess) getGrammarAccess();
+		
+		c.setAutoLinewrap(30);
 
+		// TestLinewrap
 		c.setLinewrap().after(f.getTestLinewrapAccess().getLinewrapKeyword_0());
-		c.setLinewrap().after(f.getLineAccess().getSemicolonKeyword_2());
-		c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_2());
+		
+		// Line
+		c.setLinewrap().after(f.getLineAccess().getSemicolonKeyword_1());
+		c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
+		
+		// TestIndentation
 		c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),
 				f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+		
+		// Assign
+		c.setNoSpace().around(f.getAssignAccess().getOpAssignment_1());
+		c.setNoSpace().before(f.getAssignAccess().getCommaKeyword_3_1_0());
+		
+		// Meth
+		c.setNoSpace().around(f.getMethAccess().getLeftParenthesisKeyword_2());
+		c.setNoSpace().before(f.getMethAccess().getRightParenthesisKeyword_4());
+		c.setNoSpace().before(f.getMethAccess().getCommaKeyword_3_1_0());
+		c.setNoLinewrap().before(f.getMethAccess().getCommaKeyword_3_1_0());
+		c.setIndentation(f.getMethAccess().getLeftParenthesisKeyword_2(), 
+						 f.getMethAccess().getRightParenthesisKeyword_4());
+		
+		// Param
+		c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());
+		c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());
+		
+		// comments
 		c.setNoLinewrap().before(f.getSL_COMMENTRule());
-		c.setNoSpace().after(f.getSL_COMMENTRule());
 	}
 }
