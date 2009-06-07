@@ -14,7 +14,19 @@ Root:
 	"test" (TestLinewrap | TestIndentation);
 	
 Line:
-	type+=ID name+=ID ";";
+	(Decl | Assign | Meth) ";";
+	
+Decl:	
+	type+=ID name+=ID;
+	
+Assign:
+	var=ID op=("="|"+=") "[" (val+=INT ("," val+=INT)*)? "]";
+	
+Meth:
+	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+	
+Param:
+	name+=ID ":" type+=ID;
 	
 TestLinewrap:
 	"linewrap" items+=Line*;
