@@ -10,9 +10,9 @@ grammar org.eclipse.xtext.grammarinheritance.InheritanceTest2Language
  	
 generate inheritanceTest2 "http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language"
 
-Element returns ModelX:
+Model:
 	"model" name=ID "{"
-		elements2+=Element*
+		elements+=Element*
 		ids+=FQN
 	"}"
 ;

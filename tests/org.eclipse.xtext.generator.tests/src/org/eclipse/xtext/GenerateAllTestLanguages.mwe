@@ -63,7 +63,7 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext">
 			<fragment file="${standardFragments}"
-				genModels="${baseinheritance.genmodel},${inheritance.genmodel}"/>
+				genModels="${inheritance.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
