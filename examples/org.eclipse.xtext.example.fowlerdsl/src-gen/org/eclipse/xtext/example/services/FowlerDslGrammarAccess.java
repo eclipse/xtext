@@ -151,7 +151,8 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+		//;
 		public ParserRule getRule() { return rule; }
 
 		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
@@ -296,7 +297,8 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//State:
-	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+	//;
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -328,7 +330,8 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

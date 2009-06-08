@@ -40,7 +40,7 @@ public class InheritanceTest2LanguageParser extends org.eclipse.xtext.parser.ant
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Element";
+		return "Model";
 	}
 	
 	public InheritanceTest2LanguageGrammarAccess getGrammarAccess() {

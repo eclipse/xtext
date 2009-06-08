@@ -26,13 +26,13 @@ public interface InheritanceTest2Factory extends EFactory
   InheritanceTest2Factory eINSTANCE = org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2FactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model X</em>'.
+   * Returns a new object of class '<em>Model</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model X</em>'.
+   * @return a new object of class '<em>Model</em>'.
    * @generated
    */
-  ModelX createModelX();
+  Model createModel();
 
   /**
    * Returns the package supported by this factory.

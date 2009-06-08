@@ -182,10 +182,12 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Entity:
-		//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
+		//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature*
+		//  "}";
 		public ParserRule getRule() { return rule; }
 
-		//"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}"
+		//"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature*
+		//"}"
 		public Group getGroup() { return cGroup; }
 
 		//"entity"
@@ -379,10 +381,12 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTypeTypeRefParserRuleCall_7_0 = (RuleCall)cTypeAssignment_7.eContents().get(0);
 		
 		//Operation:
-		//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
+		//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)?
+		//  ")" ":" type=TypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
+		//visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)?
+		//")" ":" type=TypeRef
 		public Group getGroup() { return cGroup; }
 
 		//visibility=Visibility?
@@ -690,7 +694,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Entity:
-	//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
+	//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature*
+	//  "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -740,7 +745,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Operation:
-	//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
+	//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)?
+	//  ")" ":" type=TypeRef;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
@@ -821,7 +827,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

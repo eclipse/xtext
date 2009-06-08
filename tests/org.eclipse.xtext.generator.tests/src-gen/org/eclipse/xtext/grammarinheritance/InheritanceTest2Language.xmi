@@ -4,9 +4,9 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="inheritanceTest2">
       <ePackage href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="Element">
+    <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language#//ModelX"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="model"/>
@@ -14,8 +14,8 @@
           <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="{"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="elements2" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         </tokens>
         <tokens xsi:type="xtext:Assignment" feature="ids" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.1"/>
@@ -39,7 +39,7 @@
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="{"/>
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="}"/>
       </alternatives>

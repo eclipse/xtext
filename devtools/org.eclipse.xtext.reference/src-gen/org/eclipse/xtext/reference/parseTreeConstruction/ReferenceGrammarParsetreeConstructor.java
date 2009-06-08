@@ -49,11 +49,15 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz:
- *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
+ *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+ *   Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+ *   "}")?;
  *
  **/
 
-// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
+// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+// Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+// "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -179,7 +183,8 @@ protected class Spielplatz_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 		
 }
 
-// (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+// (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types
+// +=CustomTypeParserRule)*
 protected class Spielplatz_Alternatives_4 extends AlternativesToken {
 
 	public Spielplatz_Alternatives_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1024,11 +1029,13 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Familie ****************
  *
  * Familie:
- *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
+ *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+ *   kinder+=[Kind] ("," kinder+=[Kind])* ")";
  *
  **/
 
-// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
+// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+// kinder+=[Kind] ("," kinder+=[Kind])* ")"
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

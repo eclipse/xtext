@@ -67,7 +67,7 @@ public class InheritanceTest2FactoryImpl extends EFactoryImpl implements Inherit
   {
     switch (eClass.getClassifierID())
     {
-      case InheritanceTest2Package.MODEL_X: return createModelX();
+      case InheritanceTest2Package.MODEL: return createModel();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -78,10 +78,10 @@ public class InheritanceTest2FactoryImpl extends EFactoryImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
-  public ModelX createModelX()
+  public Model createModel()
   {
-    ModelXImpl modelX = new ModelXImpl();
-    return modelX;
+    ModelImpl model = new ModelImpl();
+    return model;
   }
 
   /**

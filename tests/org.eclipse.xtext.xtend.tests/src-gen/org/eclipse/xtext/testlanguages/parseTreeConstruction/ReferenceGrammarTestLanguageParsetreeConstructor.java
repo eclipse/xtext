@@ -48,11 +48,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz:
- *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
+ *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+ *   Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
  *
  **/
 
-// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
+// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+// Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1093,11 +1095,13 @@ protected class Farbe_GRÜNKeyword_3 extends KeywordToken  {
 /************ begin Rule Familie ****************
  *
  * Familie:
- *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
+ *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+ *   kinder+=[Kind] ("," kinder+=[Kind])* ")";
  *
  **/
 
-// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
+// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+// kinder+=[Kind] ("," kinder+=[Kind])* ")"
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

@@ -34,10 +34,12 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cGeneratedGeneratedEnumEnumRuleCall_1_1_0 = (RuleCall)cGeneratedAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum;
+		//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
+		//  generated=GeneratedEnum;
 		public ParserRule getRule() { return rule; }
 
-		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum
+		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
+		//generated=GeneratedEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?
@@ -88,7 +90,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final EnumLiteralDeclaration cDifferentNameEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cDifferentNameDifferentLiteralKeyword_2_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" | DifferentName ;
+		//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" |
+		//DifferentName ;
 		public EnumRule getRule() { return rule; }
 
 		//SameName | OverriddenLiteral = "overridden" | DifferentName
@@ -166,7 +169,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum;
+	//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
+	//  generated=GeneratedEnum;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -175,7 +179,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		return getModelAccess().getRule();
 	}
 
-	//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" | DifferentName ;
+	//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" |
+	//DifferentName ;
 	public ExistingEnumElements getExistingEnumAccess() {
 		return (unknownRuleExistingEnum != null) ? unknownRuleExistingEnum : (unknownRuleExistingEnum = new ExistingEnumElements());
 	}
@@ -206,7 +211,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

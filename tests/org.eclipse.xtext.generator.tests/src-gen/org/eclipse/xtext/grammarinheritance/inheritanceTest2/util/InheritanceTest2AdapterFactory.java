@@ -12,8 +12,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.grammarinheritance.inheritanceTest.Element;
-
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.*;
 
 /**
@@ -80,14 +78,19 @@ public class InheritanceTest2AdapterFactory extends AdapterFactoryImpl
     new InheritanceTest2Switch<Adapter>()
     {
       @Override
-      public Adapter caseModelX(ModelX object)
+      public Adapter caseModel(Model object)
       {
-        return createModelXAdapter();
+        return createModelAdapter();
       }
       @Override
-      public Adapter caseElement(Element object)
+      public Adapter caseBaseInheritanceTest_Model(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
       {
-        return createElementAdapter();
+        return createBaseInheritanceTest_ModelAdapter();
+      }
+      @Override
+      public Adapter caseInheritanceTest_Model(org.eclipse.xtext.grammarinheritance.inheritanceTest.Model object)
+      {
+        return createInheritanceTest_ModelAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -112,31 +115,46 @@ public class InheritanceTest2AdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX <em>Model X</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model
    * @generated
    */
-  public Adapter createModelXAdapter()
+  public Adapter createModelAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest.Element <em>Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest.Element
+   * @see org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model
    * @generated
    */
-  public Adapter createElementAdapter()
+  public Adapter createBaseInheritanceTest_ModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest.Model <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest.Model
+   * @generated
+   */
+  public Adapter createInheritanceTest_ModelAdapter()
   {
     return null;
   }
