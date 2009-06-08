@@ -23,6 +23,7 @@ import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -52,6 +53,8 @@ import com.google.common.collect.Multimaps;
  */
 public abstract class AbstractInternalAntlrParser extends Parser {
 
+	private final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
+	
 	protected CompositeNode currentNode;
 
 	protected IAstFactory factory;
@@ -422,6 +425,14 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (xtextTokenStream.getLookaheadTokens().size() > numLookaheadBeforeMatch) {
 			xtextTokenStream.removeLastLookaheadToken();
 		}
+	}
+	
+	@Override
+	public void emitErrorMessage(String msg) {
+		// don't call super, since it would do a plain vanilla
+		// System.err.println(msg);
+		if (logger.isTraceEnabled())
+			logger.trace(msg);
 	}
 
 	protected abstract InputStream getTokenFile();
