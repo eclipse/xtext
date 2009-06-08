@@ -16,6 +16,7 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
+import org.apache.log4j.Logger;
 
 /**
  * Hack: As AntLR does not allow to define the superclass of the generated
@@ -27,6 +28,8 @@ import org.antlr.runtime.Token;
  */
 public abstract class Lexer extends org.antlr.runtime.Lexer {
 
+	private static final Logger logger = Logger.getLogger(Lexer.class);
+	
 	public Lexer() {
 		super();
 	}
@@ -35,7 +38,7 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 		super(input);
 	}
 
-	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
+	private final Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
 	@Override
 	public Token nextToken() {
@@ -78,5 +81,13 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 
 	public String getErrorMessage(Token t) {
 		return tokenErrorMap.get(t);
+	}
+	
+	@Override
+	public void emitErrorMessage(String msg) {
+		// don't call super, since it would do a plain vanilla
+		// System.err.println(msg);
+		if (logger.isTraceEnabled())
+			logger.trace(msg);
 	}
 }
