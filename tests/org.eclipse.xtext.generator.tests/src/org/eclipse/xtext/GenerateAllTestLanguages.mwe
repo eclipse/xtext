@@ -6,6 +6,7 @@
 	<property name="ametamodel.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
 	<property name="enums.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
 	<property name="baseinheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
+	<property name="inheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"/>
 	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
@@ -59,6 +60,10 @@
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext">
 			<fragment file="${standardFragments}"
 				genModels="${baseinheritance.genmodel}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext">
+			<fragment file="${standardFragments}"
+				genModels="${baseinheritance.genmodel},${inheritance.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
