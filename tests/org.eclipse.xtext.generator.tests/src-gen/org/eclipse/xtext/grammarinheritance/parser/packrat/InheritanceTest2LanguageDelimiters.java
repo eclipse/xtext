@@ -7,9 +7,9 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-public final class BaseInheritanceTestLanguageDelimiters {
+public final class InheritanceTest2LanguageDelimiters {
 
-	private BaseInheritanceTestLanguageDelimiters() {
+	private InheritanceTest2LanguageDelimiters() {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
@@ -21,9 +21,9 @@ public final class BaseInheritanceTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
+	public static final ICharacterClass keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+
 	public static final ISequenceMatcher ruleCall$6$Delimiter = new SetBasedKeywordMatcher(
 		"model");
-
-	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 
 }

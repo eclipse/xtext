@@ -105,6 +105,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language" 
+       class = "org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Package"
+       genModel = "org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/xtext/indexTestLanguage" 
        class = "org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage"
        genModel = "org/eclipse/xtext/index/IndexTestLanguage.genmodel" /> 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="inheritanceTest2" nsURI="http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language" nsPrefix="inheritanceTest2">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelX">
+    <eSuperTypes href="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements2" upperBound="-1" eType="//ModelX" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ids" unique="false" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

@@ -145,6 +145,18 @@ public class GrammarUtil {
 		}
 		return null;
 	}
+	
+	public static List<Grammar> allUsedGrammars(Grammar grammar) {
+		List<Grammar> grammars = new ArrayList<Grammar>();
+		collectAllUsedGrammars(grammars, grammar);
+		return grammars;
+	}
+
+	private static void collectAllUsedGrammars(List<Grammar> grammars, Grammar grammar) {
+		grammars.addAll(grammar.getUsedGrammars());
+		for (Grammar g : grammar.getUsedGrammars())
+			collectAllUsedGrammars(grammars, g);
+	}
 
 	public static List<AbstractRule> allRules(Grammar grammar) {
 		final List<AbstractRule> result = new ArrayList<AbstractRule>();

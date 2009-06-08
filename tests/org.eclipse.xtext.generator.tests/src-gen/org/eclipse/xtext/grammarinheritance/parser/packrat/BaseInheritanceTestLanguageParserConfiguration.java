@@ -10,6 +10,7 @@ import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguage
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.BaseInheritanceTestLanguageModelConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.BaseInheritanceTestLanguageFQNConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -22,6 +23,7 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private BaseInheritanceTestLanguageModelConsumer modelConsumer;
+    private BaseInheritanceTestLanguageFQNConsumer fqnConsumer;
 
 	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
 
@@ -40,6 +42,9 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 		modelConsumer = new BaseInheritanceTestLanguageModelConsumer(
     		this, null
     	);
+		fqnConsumer = new BaseInheritanceTestLanguageFQNConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -50,6 +55,7 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getFqnConsumer().setRule(grammarAccess.getFQNAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -61,8 +67,13 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 
 		getModelConsumer().setIdConsumer(getIdConsumer());
 
+		getFqnConsumer().setIdConsumer(getIdConsumer());
+
 		getModelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.keyword$4$Delimiter);
 		getModelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.keyword$12$Delimiter);
+		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -71,6 +82,10 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 	
     public BaseInheritanceTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
+    }
+
+    public BaseInheritanceTestLanguageFQNConsumer getFqnConsumer() {
+    	return fqnConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {
