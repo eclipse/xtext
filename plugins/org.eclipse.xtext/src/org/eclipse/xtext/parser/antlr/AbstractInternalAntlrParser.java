@@ -282,9 +282,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected void handleValueConverterException(ValueConverterException vce) {
 		Exception cause = (Exception) vce.getCause();
 		if (vce != cause) {
-			currentError = cause.getMessage();
+			currentError = cause != null ? cause.getMessage() : vce.getMessage();
 			if (currentError == null)
-				currentError = cause.getClass().getSimpleName();
+				currentError = cause != null ? cause.getClass().getSimpleName() : vce.getClass().getSimpleName();
 			if (vce.getNode() == null) {
 				final List<AbstractNode> children = currentNode.getChildren();
 				if (children.isEmpty()) {
