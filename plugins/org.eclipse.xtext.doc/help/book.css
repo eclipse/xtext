@@ -1,9 +1,13 @@
-code {
+.literallayout .code {
 	display: block;
 	border: 1px solid gray;
 	margin: 1em;
 	padding: 1em;
 	background-color: #F0F0F0;
+}
+
+code {
+	display: inline;
 }
 
 pre.programlisting {

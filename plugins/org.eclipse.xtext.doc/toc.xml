@@ -56,6 +56,10 @@
 <topic href="help/Defaulttokens.html" label="Default tokens"/>
 <topic href="help/generator.html" label="The Generator">
 <topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to the Modeling Workflow Engine (MWE)"/>
+<topic href="help/generator.html#GeneralArchitecture" label="General Architecture">
+<topic href="help/generator.html#GeneratorFragments" label="Generator Fragments"/>
+<topic href="help/generator.html#Configuration" label="Configuration"/>
+</topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
 <topic href="help/dependencyInjection.html#Modules" label="Modules">
@@ -146,5 +150,10 @@
 <topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"/>
 </topic>
 <topic href="help/MigrationSupport.html" label="Migration Support"/>
+</topic>
+<topic href="help/deploying_dsls.html" label="Deploying DSLs">
+<topic href="help/deploying_dsls.html#PrepareyourDSLprojects" label="Prepare your DSL projects"/>
+<topic href="help/CreatingaFeatureforyourDSL.html" label="Creating a Feature for your DSL"/>
+<topic href="help/CreatinganUpdateSiteforyourDSL.html" label="Creating an Update Site for your DSL"/>
 </topic>
 </toc>
