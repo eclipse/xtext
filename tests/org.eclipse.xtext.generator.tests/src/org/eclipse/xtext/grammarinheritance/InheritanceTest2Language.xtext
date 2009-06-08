@@ -5,10 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
- grammar org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage with org.eclipse.xtext.common.Terminals
- 
- generate baseInheritanceTest "http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage"
- 
- Model : "model" name=ID;
- 
- FQN: ID ('.' ID)*;
+grammar org.eclipse.xtext.grammarinheritance.InheritanceTest2Language
+	with org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage
+ 	
+generate inheritanceTest2 "http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language"
+
+Element returns ModelX:
+	"model" name=ID "{"
+		elements2+=Element*
+		ids+=FQN
+	"}"
+;

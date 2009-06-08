@@ -126,6 +126,16 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		return getElementAccess().getRule();
 	}
 
+	//FQN returns ecore::EString:
+	//  ID ("." ID)*;
+	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
+		return gaBaseInheritanceTestLanguage.getFQNAccess();
+	}
+	
+	public ParserRule getFQNRule() {
+		return getFQNAccess().getRule();
+	}
+
 	//terminal ID:
 	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
 	public TerminalRule getIDRule() {
