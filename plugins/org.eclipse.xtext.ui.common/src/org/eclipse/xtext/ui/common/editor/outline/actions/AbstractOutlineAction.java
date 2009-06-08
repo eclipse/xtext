@@ -15,11 +15,11 @@ import org.eclipse.xtext.ui.common.editor.outline.linking.ToggleHelper;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public abstract class OutlineAction extends Action {
+public abstract class AbstractOutlineAction extends Action {
 
 	private final XtextContentOutlinePage outlinePage;
 
-	public OutlineAction(String text, XtextContentOutlinePage outlinePage) {
+	public AbstractOutlineAction(String text, XtextContentOutlinePage outlinePage) {
 		super(text);
 		this.outlinePage = outlinePage;
 

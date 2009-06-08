@@ -8,17 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
 
 import com.google.inject.Inject;
 
@@ -36,9 +32,6 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		}
 	};
 	
-	private boolean sorted = false;
-	private HashMap<Class<?>, IOutlineFilter> filters;
-
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
 		outlineModel.setLabel(INVISIBLE_ROOT_NODE);
@@ -64,26 +57,11 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	private void transformSemanticChildNodes(EObject semanticNode, ContentOutlineNode outlineNode) {
 		if (consumeSemanticChildNodes(semanticNode)) {
-			EObject[] array = sortChildren(semanticNode);
-			for (EObject semanticChildNode : array) {
+			List<EObject> list = getChildNodes(semanticNode);
+			for (EObject semanticChildNode : list) {
 				transformSemanticNode(semanticChildNode, outlineNode);
 			}
 		}
-	}
-
-	private EObject[] sortChildren(EObject semanticNode) {
-		List<EObject> list = getChildNodes(semanticNode);
-		EObject[] result = list.toArray(new EObject[list.size()]);
-		if (sorted) {
-			Arrays.sort(result, new Comparator<EObject>() {
-				public int compare(EObject arg0, EObject arg1) {
-					String txt0 = getText(arg0);
-					String txt1 = getText(arg1);
-					return txt0.compareTo(txt1);
-				}
-			});
-		}
-		return result;
 	}
 
 	protected List<EObject> getChildNodes(EObject semanticNode) {
@@ -93,39 +71,6 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	protected List<EObject> getChildren(EObject semanticNode) {
 		return semanticNode.eContents();
 	}
-
-	public void setSorted(boolean on) {
-		this.sorted = on;
-	}
-
-	public void enableFilter(IOutlineFilter filterSpec) {
-		if (filters == null) {
-			filters = new HashMap<Class<?>, IOutlineFilter>();
-		}
-		filters.put(filterSpec.getClass(), filterSpec);
-	}
-
-	public void disableFilter(IOutlineFilter filterSpec) {
-		if (filters != null) {
-			filters.remove(filterSpec.getClass());
-		}
-	}
-
-	public boolean isFilterActive(IOutlineFilter filterSpec) {
-		if (filters != null) {
-			return filters.containsKey(filterSpec.getClass());
-		}
-		return false;
-	}
-
-	public boolean isFilterActive(Class<?> clazz) {
-		if (filters != null) {
-			return filters.containsKey(clazz);
-		}
-		return false;
-	}
-
-	protected abstract boolean doSortChildren(EObject semanticNode);
 
 	protected abstract ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
 
