@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate serializationerror "http://simple/rewrite/test"
+generate serializationerror "http://www.eclipse.org/2009/tmf/xtext/serializationerror"
 
 Model:
 	test=Test | test=Parenthesis;
