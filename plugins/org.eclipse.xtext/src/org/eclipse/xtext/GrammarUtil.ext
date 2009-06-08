@@ -91,6 +91,9 @@ List[EnumRule] allEnumRules(Grammar this) :
 List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allMetamodelDeclarations(org.eclipse.xtext.Grammar);
 
+List[Grammar] allUsedGrammars(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allUsedGrammars(org.eclipse.xtext.Grammar);
+	
 List[AbstractRule] allRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allRules(org.eclipse.xtext.Grammar);
 	
