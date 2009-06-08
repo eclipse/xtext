@@ -27,7 +27,8 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cCommonTerminalsRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule;
+		//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
+		//;
 		public ParserRule getRule() { return rule; }
 
 		//CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
@@ -273,7 +274,8 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule;
+	//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
+	//;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -389,7 +391,8 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

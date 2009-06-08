@@ -29,8 +29,8 @@ public class SerializationErrorTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
-		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/serializationerror")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/serializationerror", org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

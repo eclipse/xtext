@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="complexrewritetest">
-      <ePackage href="http://complex/rewrite/test#/"/>
+      <ePackage href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Root">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Root"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Root"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -15,7 +15,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Op">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Expression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
@@ -23,7 +23,7 @@
           <groups xsi:type="xtext:Group">
             <tokens xsi:type="xtext:Action" feature="addOperands" operator="+=">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Add"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Add"/>
               </type>
             </tokens>
             <tokens xsi:type="xtext:Keyword" value="+"/>
@@ -34,7 +34,7 @@
           <groups xsi:type="xtext:Group">
             <tokens xsi:type="xtext:Action" feature="minusOperands" operator="+=">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Minus"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Minus"/>
               </type>
             </tokens>
             <tokens xsi:type="xtext:Keyword" value="-"/>
@@ -47,7 +47,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Term">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Expression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
@@ -56,7 +56,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Atom"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Atom"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -64,7 +64,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Parens">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//Expression"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="("/>
@@ -77,7 +77,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyA">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TypeA1"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeA1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TA"/>
@@ -89,7 +89,7 @@
           <groups xsi:type="xtext:Group">
             <tokens xsi:type="xtext:Action" feature="x" operator="=">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TypeB"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeB"/>
               </type>
             </tokens>
             <tokens xsi:type="xtext:Keyword" value="x"/>
@@ -97,7 +97,7 @@
           <groups xsi:type="xtext:Group">
             <tokens xsi:type="xtext:Action" feature="x" operator="=">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TypeC"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeC"/>
               </type>
             </tokens>
             <tokens xsi:type="xtext:Keyword" value="y"/>
@@ -110,7 +110,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyA1">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TypeD"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeD"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="name" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
@@ -118,7 +118,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyB">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyB"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyB"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TB"/>
@@ -137,7 +137,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyC">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyC"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyC"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TC"/>
@@ -147,7 +147,7 @@
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="x" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//C1"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//C1"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Keyword" value="x"/>
@@ -155,7 +155,7 @@
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="y" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//C2"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//C2"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Keyword" value="y"/>
@@ -163,7 +163,7 @@
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="z" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//C3"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//C3"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Keyword" value="z"/>
@@ -172,7 +172,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyD">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyD"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyD"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TD"/>
@@ -202,7 +202,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyE">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyE"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyE"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TE"/>
@@ -230,7 +230,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyF">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyF"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyF"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TF"/>
@@ -254,7 +254,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyG">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyG"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyG"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="TG"/>
@@ -265,7 +265,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyG1">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyG1"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyG1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="["/>
@@ -285,7 +285,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyG2">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://complex/rewrite/test#//TrickyG2"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyG2"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>

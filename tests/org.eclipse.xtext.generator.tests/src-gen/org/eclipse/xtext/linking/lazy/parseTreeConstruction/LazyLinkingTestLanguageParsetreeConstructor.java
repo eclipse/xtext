@@ -100,11 +100,13 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
+ *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
+ *   Property] "in" extends=[Type])? "{" properties+=Property* "}";
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}"
+// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
+// Property] "in" extends=[Type])? "{" properties+=Property* "}"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

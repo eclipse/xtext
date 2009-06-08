@@ -29,8 +29,8 @@ public class SimpleReconstrTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
-		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/simplerewritetest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/simplerewritetest", org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

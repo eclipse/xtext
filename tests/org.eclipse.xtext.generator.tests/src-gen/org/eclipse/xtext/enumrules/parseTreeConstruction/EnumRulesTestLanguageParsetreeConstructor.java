@@ -42,11 +42,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum;
+ *   "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
+ *   generated=GeneratedEnum;
  *
  **/
 
-// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum
+// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
+// generated=GeneratedEnum
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

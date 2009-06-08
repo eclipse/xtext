@@ -54,16 +54,19 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
 		
 		//Op returns Expression:
-		//  Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=current} "-" minusOperands+=Term)*;
+		//  Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=
+		//  current} "-" minusOperands+=Term)*;
 		public ParserRule getRule() { return rule; }
 
-		//Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=current} "-" minusOperands+=Term)*
+		//Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=
+		//current} "-" minusOperands+=Term)*
 		public Group getGroup() { return cGroup; }
 
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=current} "-" minusOperands+=Term)*
+		//({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=current}
+		//"-" minusOperands+=Term)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{Add.addOperands+=current} "+" addOperands+=Term
@@ -145,10 +148,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//Parens returns Expression:
 		//  "(" Op ")" em="!"?; 
 		//
-		//      
-		//	       
+		//     
+		//	      
 		//
-		// / * TODO not working yet
+		/// * TODO not working yet
 		//StrangeStuff :
 		//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
 		// * /
@@ -193,7 +196,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//TrickyA returns TypeA1:
 		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING; 
 		//
-		// / * TODO not working yet
+		/// * TODO not working yet
 		//StrangeStuff :
 		//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
 		// * /
@@ -384,9 +387,9 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//TrickyD:
 		//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*; 
 		//
-		//                                         
+		//                                        
 		//
-		// // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
 		public ParserRule getRule() { return rule; }
 
 		//"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
@@ -459,10 +462,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//TrickyE:
 		//  "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;   
 		//
-		// // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-		//               
+		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+		//              
 		//
-		// //
+		////
 		public ParserRule getRule() { return rule; }
 
 		//"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*
@@ -529,7 +532,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		//TrickyF:
 		//  "TF" (name+=ID type+=INT)* (name+=ID|type+=INT); 
 		//
-		// //
+		////
 		public ParserRule getRule() { return rule; }
 
 		//"TF" (name+=ID type+=INT)* (name+=ID|type+=INT)
@@ -650,29 +653,29 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		
 		//TrickyG2:
 		//  TrickyG1|val=INT; 
-		//       
+		//      
 		//
-		// //TrickyH: x+='a' TrickyH?; 
-		// 
+		////TrickyH: x+='a' TrickyH?; 
 		//
-		// // TrickyG: TrickyG1 | TrickyG2;
-		// // TrickyG1: name=TrickyG3;
-		// // TrickyG2: name=TrickyG4;
-		// // TrickyG3: val=ID {T.x=current} 'x';
-		// // TrickyG4: val=INT {T.x=current} 'y';
+		//
+		//// TrickyG: TrickyG1 | TrickyG2;
+		//// TrickyG1: name=TrickyG3;
+		//// TrickyG2: name=TrickyG4;
+		//// TrickyG3: val=ID {T.x=current} 'x';
+		//// TrickyG4: val=INT {T.x=current} 'y';
 		public ParserRule getRule() { return rule; }
 
 		//TrickyG1|val=INT 
-		//       
+		//      
 		//
-		// //TrickyH: x+='a' TrickyH?; 
-		// 
+		////TrickyH: x+='a' TrickyH?; 
 		//
-		// // TrickyG: TrickyG1 | TrickyG2;
-		// // TrickyG1: name=TrickyG3;
-		// // TrickyG2: name=TrickyG4;
-		// // TrickyG3: val=ID {T.x=current} 'x';
-		// // TrickyG4: val=INT {T.x=current} 'y';
+		//
+		//// TrickyG: TrickyG1 | TrickyG2;
+		//// TrickyG1: name=TrickyG3;
+		//// TrickyG2: name=TrickyG4;
+		//// TrickyG3: val=ID {T.x=current} 'x';
+		//// TrickyG4: val=INT {T.x=current} 'y';
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TrickyG1
@@ -734,7 +737,8 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//Op returns Expression:
-	//  Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=current} "-" minusOperands+=Term)*;
+	//  Term ({Add.addOperands+=current} "+" addOperands+=Term|{Minus.minusOperands+=
+	//  current} "-" minusOperands+=Term)*;
 	public OpElements getOpAccess() {
 		return (pOp != null) ? pOp : (pOp = new OpElements());
 	}
@@ -766,10 +770,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	//Parens returns Expression:
 	//  "(" Op ")" em="!"?; 
 	//
-	//      
-	//	       
+	//     
+	//	      
 	//
-	// / * TODO not working yet
+	/// * TODO not working yet
 	//StrangeStuff :
 	//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
 	// * /
@@ -784,7 +788,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	//TrickyA returns TypeA1:
 	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING; 
 	//
-	// / * TODO not working yet
+	/// * TODO not working yet
 	//StrangeStuff :
 	//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
 	// * /
@@ -829,9 +833,9 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	//TrickyD:
 	//  "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*; 
 	//
-	//                                         
+	//                                        
 	//
-	// // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+	//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
 	public TrickyDElements getTrickyDAccess() {
 		return (pTrickyD != null) ? pTrickyD : (pTrickyD = new TrickyDElements());
 	}
@@ -843,10 +847,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	//TrickyE:
 	//  "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;   
 	//
-	// // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-	//               
+	//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+	//              
 	//
-	// //
+	////
 	public TrickyEElements getTrickyEAccess() {
 		return (pTrickyE != null) ? pTrickyE : (pTrickyE = new TrickyEElements());
 	}
@@ -858,7 +862,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	//TrickyF:
 	//  "TF" (name+=ID type+=INT)* (name+=ID|type+=INT); 
 	//
-	// //
+	////
 	public TrickyFElements getTrickyFAccess() {
 		return (pTrickyF != null) ? pTrickyF : (pTrickyF = new TrickyFElements());
 	}
@@ -889,16 +893,16 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 
 	//TrickyG2:
 	//  TrickyG1|val=INT; 
-	//       
+	//      
 	//
-	// //TrickyH: x+='a' TrickyH?; 
-	// 
+	////TrickyH: x+='a' TrickyH?; 
 	//
-	// // TrickyG: TrickyG1 | TrickyG2;
-	// // TrickyG1: name=TrickyG3;
-	// // TrickyG2: name=TrickyG4;
-	// // TrickyG3: val=ID {T.x=current} 'x';
-	// // TrickyG4: val=INT {T.x=current} 'y';
+	//
+	//// TrickyG: TrickyG1 | TrickyG2;
+	//// TrickyG1: name=TrickyG3;
+	//// TrickyG2: name=TrickyG4;
+	//// TrickyG3: val=ID {T.x=current} 'x';
+	//// TrickyG4: val=INT {T.x=current} 'y';
 	public TrickyG2Elements getTrickyG2Access() {
 		return (pTrickyG2 != null) ? pTrickyG2 : (pTrickyG2 = new TrickyG2Elements());
 	}
@@ -920,7 +924,8 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -52,10 +52,16 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cRulesAbstractRuleParserRuleCall_5_0 = (RuleCall)cRulesAssignment_5.eContents().get(0);
 		
 		//Grammar:
-		//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+		//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
+		//  +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+		//  AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
+		//  AbstractMetamodelDeclaration* rules+=AbstractRule+;
 		public ParserRule getRule() { return rule; }
 
-		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
+		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
+		//+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+		//AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
+		//AbstractMetamodelDeclaration* rules+=AbstractRule+
 		public Group getGroup() { return cGroup; }
 
 		//"grammar"
@@ -67,7 +73,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//GrammarID
 		public RuleCall getNameGrammarIDParserRuleCall_1_0() { return cNameGrammarIDParserRuleCall_1_0; }
 
-		//("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+		//("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)
+		//?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"with"
@@ -97,7 +104,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//GrammarID
 		public RuleCall getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1() { return cUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1; }
 
-		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
+		//[AbstractRule])*)? ")")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//definesHiddenTokens?="hidden"
@@ -213,20 +221,20 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//AbstractMetamodelDeclaration:
 		//  GeneratedMetamodel|ReferencedMetamodel; 
 		//
-		//   
-		//	     
+		//  
+		//	    
 		//	
-		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-		// // generated metamodels have to have different aliases
+		//// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		//// generated metamodels have to have different aliases
 		public ParserRule getRule() { return rule; }
 
 		//GeneratedMetamodel|ReferencedMetamodel 
 		//
-		//   
-		//	     
+		//  
+		//	    
 		//	
-		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-		// // generated metamodels have to have different aliases
+		//// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		//// generated metamodels have to have different aliases
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//GeneratedMetamodel
@@ -253,13 +261,13 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//GeneratedMetamodel:
 		//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
 		//	
-		// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-		// // generated metamodels have to have different aliases
-		//   
-		//	         
+		//// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+		//// generated metamodels have to have different aliases
+		//  
+		//	        
 		//
-		// // referenced metamodels may share aliases with other referenced metamodels
-		// // and with generated metamodels
+		//// referenced metamodels may share aliases with other referenced metamodels
+		//// and with generated metamodels
 		public ParserRule getRule() { return rule; }
 
 		//"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -311,8 +319,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//ReferencedMetamodel:
 		//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
 		//
-		// // referenced metamodels may share aliases with other referenced metamodels
-		// // and with generated metamodels
+		//// referenced metamodels may share aliases with other referenced metamodels
+		//// and with generated metamodels
 		public ParserRule getRule() { return rule; }
 
 		//"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -372,10 +380,14 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ParserRule:
-		//  name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+		//  name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+		//  AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
+		//  Alternatives ";";
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
+		//name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+		//AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
+		//Alternatives ";"
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -396,7 +408,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//TypeRef
 		public RuleCall getTypeTypeRefParserRuleCall_1_1_0() { return cTypeTypeRefParserRuleCall_1_1_0; }
 
-		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+		//(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
+		//[AbstractRule])*)? ")")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//definesHiddenTokens?="hidden"
@@ -867,10 +880,12 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cGroupsAssignableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//AssignableAlternatives returns AbstractElement:
-		//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?;
+		//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
+		//  +)?;
 		public ParserRule getRule() { return rule; }
 
-		//AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?
+		//AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
+		//+)?
 		public Group getGroup() { return cGroup; }
 
 		//AssignableTerminal
@@ -999,10 +1014,12 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//CrossReferenceableAlternatives returns AbstractElement:
-		//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?;
+		//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
+		//  CrossReferenceableTerminal)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?
+		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
+		//CrossReferenceableTerminal)+)?
 		public Group getGroup() { return cGroup; }
 
 		//CrossReferenceableTerminal
@@ -1067,7 +1084,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TerminalRule:
-		//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
+		//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
+		//;
 		public ParserRule getRule() { return rule; }
 
 		//"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
@@ -1225,10 +1243,12 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cWildcardParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//TerminalTokenElement returns AbstractElement:
-		//  CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
+		//  CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
+		//  Wildcard;
 		public ParserRule getRule() { return rule; }
 
-		//CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard
+		//CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
+		//Wildcard
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//CharacterRange
@@ -1463,10 +1483,12 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//EnumLiterals returns AbstractElement:
-		//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+		//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+		//  EnumLiteralDeclaration)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+		//EnumLiteralDeclaration)+)?
 		public Group getGroup() { return cGroup; }
 
 		//EnumLiteralDeclaration
@@ -1593,7 +1615,10 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Grammar:
-	//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+	//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
+	//  +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+	//  AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
+	//  AbstractMetamodelDeclaration* rules+=AbstractRule+;
 	public GrammarElements getGrammarAccess() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	}
@@ -1625,11 +1650,11 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	//AbstractMetamodelDeclaration:
 	//  GeneratedMetamodel|ReferencedMetamodel; 
 	//
-	//   
-	//	     
+	//  
+	//	    
 	//	
-	// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-	// // generated metamodels have to have different aliases
+	//// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+	//// generated metamodels have to have different aliases
 	public AbstractMetamodelDeclarationElements getAbstractMetamodelDeclarationAccess() {
 		return (pAbstractMetamodelDeclaration != null) ? pAbstractMetamodelDeclaration : (pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements());
 	}
@@ -1641,13 +1666,13 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	//GeneratedMetamodel:
 	//  "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
 	//	
-	// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-	// // generated metamodels have to have different aliases
-	//   
-	//	         
+	//// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+	//// generated metamodels have to have different aliases
+	//  
+	//	        
 	//
-	// // referenced metamodels may share aliases with other referenced metamodels
-	// // and with generated metamodels
+	//// referenced metamodels may share aliases with other referenced metamodels
+	//// and with generated metamodels
 	public GeneratedMetamodelElements getGeneratedMetamodelAccess() {
 		return (pGeneratedMetamodel != null) ? pGeneratedMetamodel : (pGeneratedMetamodel = new GeneratedMetamodelElements());
 	}
@@ -1659,8 +1684,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	//ReferencedMetamodel:
 	//  "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
 	//
-	// // referenced metamodels may share aliases with other referenced metamodels
-	// // and with generated metamodels
+	//// referenced metamodels may share aliases with other referenced metamodels
+	//// and with generated metamodels
 	public ReferencedMetamodelElements getReferencedMetamodelAccess() {
 		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
 	}
@@ -1670,7 +1695,9 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ParserRule:
-	//  name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+	//  name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+	//  AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
+	//  Alternatives ";";
 	public ParserRuleElements getParserRuleAccess() {
 		return (pParserRule != null) ? pParserRule : (pParserRule = new ParserRuleElements());
 	}
@@ -1800,7 +1827,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AssignableAlternatives returns AbstractElement:
-	//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?;
+	//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
+	//  +)?;
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
 		return (pAssignableAlternatives != null) ? pAssignableAlternatives : (pAssignableAlternatives = new AssignableAlternativesElements());
 	}
@@ -1840,7 +1868,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//CrossReferenceableAlternatives returns AbstractElement:
-	//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?;
+	//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
+	//  CrossReferenceableTerminal)+)?;
 	public CrossReferenceableAlternativesElements getCrossReferenceableAlternativesAccess() {
 		return (pCrossReferenceableAlternatives != null) ? pCrossReferenceableAlternatives : (pCrossReferenceableAlternatives = new CrossReferenceableAlternativesElements());
 	}
@@ -1860,7 +1889,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TerminalRule:
-	//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
+	//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
+	//;
 	public TerminalRuleElements getTerminalRuleAccess() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
 	}
@@ -1900,7 +1930,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TerminalTokenElement returns AbstractElement:
-	//  CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
+	//  CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
+	//  Wildcard;
 	public TerminalTokenElementElements getTerminalTokenElementAccess() {
 		return (pTerminalTokenElement != null) ? pTerminalTokenElement : (pTerminalTokenElement = new TerminalTokenElementElements());
 	}
@@ -1980,7 +2011,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//EnumLiterals returns AbstractElement:
-	//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+	//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+	//  EnumLiteralDeclaration)+)?;
 	public EnumLiteralsElements getEnumLiteralsAccess() {
 		return (pEnumLiterals != null) ? pEnumLiterals : (pEnumLiterals = new EnumLiteralsElements());
 	}
@@ -2012,7 +2044,8 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 

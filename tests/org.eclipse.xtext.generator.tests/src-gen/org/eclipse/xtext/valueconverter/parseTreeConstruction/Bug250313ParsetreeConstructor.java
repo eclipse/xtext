@@ -45,11 +45,19 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+ *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
+ *   "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
+ *   STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
+ *   multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
+ *   Child2] ))?;
  *
  **/
 
-// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
+// "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
+// STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
+// multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
+// Child2] ))?
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1039,10 +1047,10 @@ protected class Child1_NameAssignment extends AssignmentToken  {
  * Child2:
  *   name=STRING; 
  * 
- *    
+ *   
  * 
- *  // TODO rename test language to ValueConverterTestLanguage
- *  // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+ * // TODO rename test language to ValueConverterTestLanguage
+ * // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
  *
  **/
 

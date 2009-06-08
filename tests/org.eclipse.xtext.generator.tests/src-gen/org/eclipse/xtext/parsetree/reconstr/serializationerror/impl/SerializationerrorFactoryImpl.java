@@ -33,7 +33,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
   {
     try
     {
-      SerializationerrorFactory theSerializationerrorFactory = (SerializationerrorFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/rewrite/test"); 
+      SerializationerrorFactory theSerializationerrorFactory = (SerializationerrorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/serializationerror"); 
       if (theSerializationerrorFactory != null)
       {
         return theSerializationerrorFactory;

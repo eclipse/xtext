@@ -65,10 +65,12 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cConsumed2ParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		
 		//Term returns Expression:
-		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2;
+		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
+		//  Consumed2;
 		public ParserRule getRule() { return rule; }
 
-		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2
+		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
+		//Consumed2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -584,7 +586,8 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Term returns Expression:
-	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|Consumed2;
+	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
+	//  Consumed2;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -716,7 +719,8 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

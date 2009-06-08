@@ -63,10 +63,12 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
+		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
+		//  Property] "in" extends=[Type])? "{" properties+=Property* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}"
+		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
+		//Property] "in" extends=[Type])? "{" properties+=Property* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -218,7 +220,8 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
+	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
+	//  Property] "in" extends=[Type])? "{" properties+=Property* "}";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -250,7 +253,8 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

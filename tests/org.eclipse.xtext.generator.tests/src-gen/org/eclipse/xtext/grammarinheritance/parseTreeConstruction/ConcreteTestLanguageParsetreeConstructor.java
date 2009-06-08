@@ -51,21 +51,23 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule RootRule ****************
  *
  * RootRule:
- *   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2; 
+ *   ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|
+ *   OverridableParserRule2; 
  * 
- *  
- * 	             
  * 
- *  // call InheritedParserRule
+ * 	            
+ * 
+ * // call InheritedParserRule
  *
  **/
 
-// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2 
+// ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|
+// OverridableParserRule2 
 // 
-//  
-// 	             
 // 
-//  // call InheritedParserRule
+// 	            
+// 
+// // call InheritedParserRule
 protected class RootRule_Alternatives extends AlternativesToken {
 
 	public RootRule_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -225,11 +227,11 @@ protected class RootRule_OverridableParserRule2ParserRuleCall_3 extends RuleCall
  * ConcreteParserRule:
  *   "model" magicNumber=REAL ":" elements+=InheritedParserRule*; 
  * 
- *  // call InheritedParserRule
- *    
- * 	       
+ * // call InheritedParserRule
+ *   
+ * 	      
  * 	
- *  // override OverridableParserRule and call it
+ * // override OverridableParserRule and call it
  *
  **/
 
@@ -380,7 +382,7 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
  * OverridableParserRule returns mm::AType:
  *   "overriddenelement" name=ID; 
  * 	
- *  // override OverridableParserRule and call it
+ * // override OverridableParserRule and call it
  *
  **/
 
@@ -467,10 +469,10 @@ protected class OverridableParserRule_NameAssignment_1 extends AssignmentToken  
  * CallOverridenParserRule:
  *   call=AbstractCallOverridenParserRule; 
  * 	
- *  
- * 	 
+ * 
  * 	
- *  // override parser rule and change return type
+ * 	
+ * // override parser rule and change return type
  *
  **/
 
@@ -527,11 +529,11 @@ protected class CallOverridenParserRule_CallAssignment extends AssignmentToken  
  * OverridableParserRule2 returns AType2:
  *   "overridden other element" name=ID "-" age=INT; 
  * 	
- *  // override parser rule and change return type
- *        
- * 	       
+ * // override parser rule and change return type
+ *       
+ * 	      
  * 	
- *  // override and extend ExtendableParserRule and call it
+ * // override and extend ExtendableParserRule and call it
  *
  **/
 
@@ -669,13 +671,13 @@ protected class OverridableParserRule2_AgeAssignment_3 extends AssignmentToken  
  * ExtendableParserRule returns mm::AType:
  *   Subrule1|Subrule2|Subrule3; 
  * 	
- *  // override and extend ExtendableParserRule and call it
+ * // override and extend ExtendableParserRule and call it
  *
  **/
 
 // Subrule1|Subrule2|Subrule3 
 // 	
-//  // override and extend ExtendableParserRule and call it
+// // override and extend ExtendableParserRule and call it
 protected class ExtendableParserRule_Alternatives extends AlternativesToken {
 
 	public ExtendableParserRule_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

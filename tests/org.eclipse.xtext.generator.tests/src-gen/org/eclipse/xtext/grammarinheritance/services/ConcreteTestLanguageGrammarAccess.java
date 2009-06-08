@@ -26,20 +26,22 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cOverridableParserRule2ParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//RootRule:
-		//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2; 
+		//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|
+		//  OverridableParserRule2; 
 		//
-		// 
-		//	             
 		//
-		// // call InheritedParserRule
+		//	            
+		//
+		//// call InheritedParserRule
 		public ParserRule getRule() { return rule; }
 
-		//ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2 
+		//ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|
+		//OverridableParserRule2 
 		//
-		// 
-		//	             
 		//
-		// // call InheritedParserRule
+		//	            
+		//
+		//// call InheritedParserRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ConcreteParserRule
@@ -68,11 +70,11 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//ConcreteParserRule:
 		//  "model" magicNumber=REAL ":" elements+=InheritedParserRule*; 
 		//
-		// // call InheritedParserRule
-		//   
-		//	       
+		//// call InheritedParserRule
+		//  
+		//	      
 		//	
-		// // override OverridableParserRule and call it
+		//// override OverridableParserRule and call it
 		public ParserRule getRule() { return rule; }
 
 		//"model" magicNumber=REAL ":" elements+=InheritedParserRule*
@@ -107,7 +109,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//OverridableParserRule returns mm::AType:
 		//  "overriddenelement" name=ID; 
 		//	
-		// // override OverridableParserRule and call it
+		//// override OverridableParserRule and call it
 		public ParserRule getRule() { return rule; }
 
 		//"overriddenelement" name=ID
@@ -131,10 +133,10 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//CallOverridenParserRule:
 		//  call=AbstractCallOverridenParserRule; 
 		//	
-		// 
-		//	 
+		//
 		//	
-		// // override parser rule and change return type
+		//	
+		//// override parser rule and change return type
 		public ParserRule getRule() { return rule; }
 
 		//call=AbstractCallOverridenParserRule
@@ -157,11 +159,11 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//OverridableParserRule2 returns AType2:
 		//  "overridden other element" name=ID "-" age=INT; 
 		//	
-		// // override parser rule and change return type
-		//       
-		//	       
+		//// override parser rule and change return type
+		//      
+		//	      
 		//	
-		// // override and extend ExtendableParserRule and call it
+		//// override and extend ExtendableParserRule and call it
 		public ParserRule getRule() { return rule; }
 
 		//"overridden other element" name=ID "-" age=INT
@@ -196,12 +198,12 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//ExtendableParserRule returns mm::AType:
 		//  Subrule1|Subrule2|Subrule3; 
 		//	
-		// // override and extend ExtendableParserRule and call it
+		//// override and extend ExtendableParserRule and call it
 		public ParserRule getRule() { return rule; }
 
 		//Subrule1|Subrule2|Subrule3 
 		//	
-		// // override and extend ExtendableParserRule and call it
+		//// override and extend ExtendableParserRule and call it
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Subrule1
@@ -360,12 +362,13 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//RootRule:
-	//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2; 
+	//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|
+	//  OverridableParserRule2; 
 	//
-	// 
-	//	             
 	//
-	// // call InheritedParserRule
+	//	            
+	//
+	//// call InheritedParserRule
 	public RootRuleElements getRootRuleAccess() {
 		return (pRootRule != null) ? pRootRule : (pRootRule = new RootRuleElements());
 	}
@@ -377,11 +380,11 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	//ConcreteParserRule:
 	//  "model" magicNumber=REAL ":" elements+=InheritedParserRule*; 
 	//
-	// // call InheritedParserRule
-	//   
-	//	       
+	//// call InheritedParserRule
+	//  
+	//	      
 	//	
-	// // override OverridableParserRule and call it
+	//// override OverridableParserRule and call it
 	public ConcreteParserRuleElements getConcreteParserRuleAccess() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
 	}
@@ -393,7 +396,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	//OverridableParserRule returns mm::AType:
 	//  "overriddenelement" name=ID; 
 	//	
-	// // override OverridableParserRule and call it
+	//// override OverridableParserRule and call it
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
 	}
@@ -405,10 +408,10 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	//CallOverridenParserRule:
 	//  call=AbstractCallOverridenParserRule; 
 	//	
-	// 
-	//	 
+	//
 	//	
-	// // override parser rule and change return type
+	//	
+	//// override parser rule and change return type
 	public CallOverridenParserRuleElements getCallOverridenParserRuleAccess() {
 		return (pCallOverridenParserRule != null) ? pCallOverridenParserRule : (pCallOverridenParserRule = new CallOverridenParserRuleElements());
 	}
@@ -420,11 +423,11 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	//OverridableParserRule2 returns AType2:
 	//  "overridden other element" name=ID "-" age=INT; 
 	//	
-	// // override parser rule and change return type
-	//       
-	//	       
+	//// override parser rule and change return type
+	//      
+	//	      
 	//	
-	// // override and extend ExtendableParserRule and call it
+	//// override and extend ExtendableParserRule and call it
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
 	}
@@ -436,7 +439,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	//ExtendableParserRule returns mm::AType:
 	//  Subrule1|Subrule2|Subrule3; 
 	//	
-	// // override and extend ExtendableParserRule and call it
+	//// override and extend ExtendableParserRule and call it
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return (pExtendableParserRule != null) ? pExtendableParserRule : (pExtendableParserRule = new ExtendableParserRuleElements());
 	}
@@ -522,7 +525,8 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "\u00F6" | "\u00E4" | "\u00FC" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "\u00F6" | "\u00E4" | "\u00FC" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0"
+	//  .. "9" ) *;
 	public TerminalRule getIDRule() {
 		return gaAbstractTestLanguage.getIDRule();
 	} 
@@ -534,7 +538,8 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaAbstractTestLanguage.getSTRINGRule();
 	} 
