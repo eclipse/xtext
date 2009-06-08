@@ -37,7 +37,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-«FOREACH usedGrammars AS usedGrammar-»
+«FOREACH allUsedGrammars().reject(g|g.rules.typeSelect(ParserRule).isEmpty && !usedGrammars.contains(g)) AS usedGrammar-»
 import «usedGrammar.gaFQName()»;
 «ENDFOREACH-»
 
@@ -143,7 +143,7 @@ public class «gaSimpleName()» implements IGrammarAccess {
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
 	}
 «ELSE-»	
-	public «usedGrammar(original).gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
+	public «containingGrammar().gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
 		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
 	}
 «ENDIF-»
@@ -160,7 +160,7 @@ public class «gaSimpleName()» implements IGrammarAccess {
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
 	}
 «ELSE-»	
-	public «usedGrammar(original).gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
+	public «containingGrammar().gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
 		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
 	}
 «ENDIF-»
