@@ -14,8 +14,10 @@ import static org.eclipse.xtext.XtextPackage.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,10 +43,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -95,9 +100,19 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
+		
 		List<GeneratedMetamodel> list = typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		List<EPackage> packs = collect(list, GENERATED_METAMODEL__EPACKAGE, EPackage.class);
 		if (!packs.isEmpty()){
+			ResourceSet rs = new XtextResourceSet();
+			Copier copier = new EcoreUtil.Copier();
+			copyGeneratedMetamodelsTo(grammar.getUsedGrammars(), rs, copier);
+			List<EPackage> copies = new ArrayList<EPackage>(packs.size());
+			for(EPackage pack: packs) {
+				copies.add((EPackage) copier.copy(pack));
+			}
+			copier.copyReferences();
+			
 			String javaPath, xmiPath;
 			if(javaModelDirectory == null || "".equals(javaModelDirectory))
 				javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
@@ -127,7 +142,30 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 					&& (this.modelPluginID != null)) {
 				this.editorPluginID = this.modelPluginID + ".editor";
 			}
-			generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
+			generateEcoreJavaClasses(rs, copies, getBasePackage(grammar), javaPath, xmiPath, grammar);
+		}
+	}
+
+	private void copyGeneratedMetamodelsTo(List<Grammar> list, ResourceSet rs, Copier copier) {
+		List<EPackage> generatedEPackages = new ArrayList<EPackage>(3);
+		collectGeneratedMetamodels(generatedEPackages, list, new HashSet<Grammar>());
+		Factory factory = new XMIResourceFactoryImpl();
+		for (EPackage copyMe: generatedEPackages) {
+			Resource resource = factory.createResource(URI.createURI(copyMe.getNsURI()));
+			resource.getContents().add(copier.copy(copyMe));
+			rs.getResources().add(resource);
+		}
+	}
+
+	private void collectGeneratedMetamodels(List<EPackage> generatedEPackages, List<Grammar> grammars, Set<Grammar> visited) {
+		for(Grammar g: grammars) {
+			if (visited.add(g)) {
+				for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
+					if (decl instanceof GeneratedMetamodel)
+						generatedEPackages.add(decl.getEPackage());
+				}
+				collectGeneratedMetamodels(generatedEPackages, g.getUsedGrammars(), visited);
+			}
 		}
 	}
 
@@ -139,8 +177,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		this.urisString = uris;
 	}
 
-	private Collection<? extends GenPackage> getUsedGenPackages() {
-		XtextResourceSet rs = new XtextResourceSet();
+	private Collection<? extends GenPackage> getUsedGenPackages(ResourceSet rs) {
 		Set<GenPackage> result = new LinkedHashSet<GenPackage>();
 		if (urisString != null) {
 			for (String uri : urisString.split(",")) {
@@ -161,12 +198,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return result;
 	}
 
-	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, final String basePackage, final String javaPath, final String xmiPath,
+	public void generateEcoreJavaClasses(
+			ResourceSet rs,
+			Collection<? extends EPackage> packs,
+			final String basePackage, final String javaPath, final String xmiPath,
 			final Grammar grammar) throws ConfigurationException {
-
-		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
-
-		ResourceSet rs = new ResourceSetImpl();
 		Resource res2;
 		Resource res;
 		String modelName = grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
@@ -179,7 +215,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
-		genModel.initialize(packs2);
+		genModel.initialize(packs);
 		genModel.setModelDirectory(toGenModelProjectPath(javaPath));
 		genModel.setModelName(modelName);
 		genModel.setModelPluginID(this.modelPluginID);
@@ -200,10 +236,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(basePackage);
 		}
-		genModel.getUsedGenPackages().addAll(getUsedGenPackages());
+		Collection<? extends GenPackage> usedGenPackages = getUsedGenPackages(rs);
+		genModel.getUsedGenPackages().addAll(usedGenPackages);
 		// write genmodel
 		res.getContents().add(genModel);
-		res2.getContents().addAll(packs2);
+		res2.getContents().addAll(packs);
 		try {
 			res2.save(null);
 			res.save(null);
@@ -255,15 +292,26 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 								if (genModelGeneratorAdapter == null)
 							    {
 							      genModelGeneratorAdapter = new GenModelGeneratorAdapter(this) {
-							    	  // we handle these ones on our own
-							    	  protected void generateModelBuildProperties(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
-							    	  }
-							    	  protected void generateModelManifest(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
-							    	  }
-							    	  protected void generateModelPluginProperties(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
-							    	  }
-							    	  protected void generateModelPluginClass(GenModel genModel, org.eclipse.emf.common.util.Monitor monitor) {
-							    	  }
+										// we handle these ones on our own
+										@Override
+										protected void generateModelBuildProperties(GenModel genModel,
+												org.eclipse.emf.common.util.Monitor monitor) {
+										}
+
+										@Override
+										protected void generateModelManifest(GenModel genModel,
+												org.eclipse.emf.common.util.Monitor monitor) {
+										}
+
+										@Override
+										protected void generateModelPluginProperties(GenModel genModel,
+												org.eclipse.emf.common.util.Monitor monitor) {
+										}
+
+										@Override
+										protected void generateModelPluginClass(GenModel genModel,
+												org.eclipse.emf.common.util.Monitor monitor) {
+										}
 							      };
 							    }
 							    return genModelGeneratorAdapter;
