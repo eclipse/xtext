@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,17 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.outline.actions.OutlineAction;
-import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
+import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class FilterParserRulesAction extends OutlineAction {
-
-	private IOutlineFilter filter;
+public class FilterParserRulesAction extends AbstractFilterAction {
 
 	public FilterParserRulesAction(XtextContentOutlinePage outlinePage) {
 		super("Filter Parser Rules", outlinePage);
@@ -32,21 +30,9 @@ public class FilterParserRulesAction extends OutlineAction {
 		return "ParserRulesFilter.isChecked";
 	}
 	
-	protected IOutlineFilter getFilter() {
-		if (filter == null) {
-			filter = new ParserRulesOutlineFilter();
-		}
-		return filter;
-	}
-	
 	@Override
-	protected void performAction(boolean checkedState) {
-		if (checkedState) {
-			getOutlinePage().enableFilter(getFilter());
-		}
-		else {
-			getOutlinePage().disableFilter(getFilter());
-		}
+	protected ViewerFilter createFilter() {
+		return new ParserRulesOutlineFilter();
 	}
 
 }
