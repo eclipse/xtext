@@ -59,6 +59,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/EnumAndReferenceTest" 
+       class = "org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage"
+       genModel = "org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/lowerCaseNamedTestLanguage" 
        class = "org.eclipse.xtext.generator.lowerCaseNamedTestLanguage.LowerCaseNamedTestLanguagePackage"
        genModel = "org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.genmodel" /> 
@@ -90,6 +99,15 @@
        uri = "http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage" 
        class = "org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage"
        genModel = "org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/xtext/indexTestLanguage" 
+       class = "org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage"
+       genModel = "org/eclipse/xtext/index/IndexTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -181,7 +199,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://complex/rewrite/test" 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/complexrewritetest" 
        class = "org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.genmodel" /> 
 	
@@ -190,7 +208,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://simple/rewrite/test" 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest" 
        class = "org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.genmodel" /> 
 	
@@ -202,6 +220,24 @@
        uri = "http://www.eclipse.org/2009/tmf/xtext/SerializationBugTest/269362" 
        class = "org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.SerializationBug269362TestLanguagePackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/serializationerror" 
+       class = "org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage"
+       genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://simple/unassignedtext" 
+       class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
+       genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
 	
   </extension>
 
