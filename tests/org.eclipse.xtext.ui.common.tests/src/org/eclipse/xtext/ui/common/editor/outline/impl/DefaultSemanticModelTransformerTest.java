@@ -1,16 +1,42 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
-import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
+import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
+/**
+ * @author Peter Friese - Initial contribution and API
+ */
 public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
+
+	private static ILocationInFileProvider myLocationProvider = new ILocationInFileProvider() {
+		public Region getLocation(EObject obj) {
+			return new Region(0, 0);
+		}
+	};
+
+	private static ILabelProvider myLabelProvider = new DefaultLabelProvider() {
+		public org.eclipse.swt.graphics.Image getImage(Object element) {
+			return null;
+		}
+	};
 
 	private EObject root;
 	private EObject a1;
@@ -33,8 +59,8 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 
 	protected DefaultSemanticModelTransformer getSemanticModelTransformer() {
 		DefaultSemanticModelTransformer tr = new DefaultSemanticModelTransformer();
-		tr.setLabelProvider(new DefaultLabelProvider());
-		tr.setLocationProvider(new DefaultLocationInFileProvider());
+		tr.setLabelProvider(myLabelProvider);
+		tr.setLocationProvider(myLocationProvider);
 		return tr;
 	}
 
@@ -51,6 +77,15 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 		assertEquals("A1", a1Text);
 		String a2Text = transformer.getText(a2);
 		assertEquals("A2", a2Text);
+	}
+
+	public void testGetUri() {
+		DefaultSemanticModelTransformer transformer = getSemanticModelTransformer();
+		ContentOutlineNode rootNode = transformer.transformSemanticModel(root);
+
+		ContentOutlineNode treeRootNode = rootNode.getChildren().get(0);
+		assertEquals("classpath:/org/eclipse/xtext/ui/common/editor/outline/impl/simplestructure.xmi#/", treeRootNode
+				.getUri().toString());
 	}
 
 }

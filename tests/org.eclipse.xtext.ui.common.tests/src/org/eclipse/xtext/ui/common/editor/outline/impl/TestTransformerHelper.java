@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
 /**
@@ -34,23 +35,12 @@ public class TestTransformerHelper {
 		}
 	};
 	
-	private static ILabelProvider myLabelProvider = new LabelProvider() {
-		public String getText(Object element) {
-			if (element instanceof root) {
-				return "root";
-			}
-			if (element instanceof A) {
-				A a = (A) element;
-				return a.getName();
-			}
-			else if (element instanceof B) {
-				B b = (B) element;
-				return b.getName();
-			}
-			return super.getText(element);
+	private static ILabelProvider myLabelProvider = new DefaultLabelProvider() {
+		public org.eclipse.swt.graphics.Image getImage(Object element) {
+			return null;
 		}
 	};
-	
+
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
 		
 		{
