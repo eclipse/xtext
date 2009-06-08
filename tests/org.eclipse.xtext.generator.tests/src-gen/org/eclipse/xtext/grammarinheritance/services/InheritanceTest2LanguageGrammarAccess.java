@@ -18,24 +18,24 @@ import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguage
 public class InheritanceTest2LanguageGrammarAccess implements IGrammarAccess {
 	
 	
-	public class ElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+	public class ModelElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cElements2Assignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cElements2ElementParserRuleCall_3_0 = (RuleCall)cElements2Assignment_3.eContents().get(0);
+		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElementsElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Assignment cIdsAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cIdsFQNParserRuleCall_4_0 = (RuleCall)cIdsAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Element returns ModelX:
-		//  "model" name=ID "{" elements2+=Element* ids+=FQN "}";
+		//Model:
+		//  "model" name=ID "{" elements+=Element* ids+=FQN "}";
 		public ParserRule getRule() { return rule; }
 
-		//"model" name=ID "{" elements2+=Element* ids+=FQN "}"
+		//"model" name=ID "{" elements+=Element* ids+=FQN "}"
 		public Group getGroup() { return cGroup; }
 
 		//"model"
@@ -50,11 +50,11 @@ public class InheritanceTest2LanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//elements2+=Element*
-		public Assignment getElements2Assignment_3() { return cElements2Assignment_3; }
+		//elements+=Element*
+		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
 		//Element
-		public RuleCall getElements2ElementParserRuleCall_3_0() { return cElements2ElementParserRuleCall_3_0; }
+		public RuleCall getElementsElementParserRuleCall_3_0() { return cElementsElementParserRuleCall_3_0; }
 
 		//ids+=FQN
 		public Assignment getIdsAssignment_4() { return cIdsAssignment_4; }
@@ -67,7 +67,7 @@ public class InheritanceTest2LanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 	
-	private ElementElements pElement;
+	private ModelElements pModel;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -90,24 +90,24 @@ public class InheritanceTest2LanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	
-	//Element returns ModelX:
-	//  "model" name=ID "{" elements2+=Element* ids+=FQN "}";
-	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
-	}
-	
-	public ParserRule getElementRule() {
-		return getElementAccess().getRule();
-	}
-
 	//Model:
-	//  "model" name=ID "{" elements+=Element* "}";
-	public InheritanceTestLanguageGrammarAccess.ModelElements getModelAccess() {
-		return gaInheritanceTestLanguage.getModelAccess();
+	//  "model" name=ID "{" elements+=Element* ids+=FQN "}";
+	public ModelElements getModelAccess() {
+		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
 	
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
+	}
+
+	//Element:
+	//  "element" name=ID;
+	public InheritanceTestLanguageGrammarAccess.ElementElements getElementAccess() {
+		return gaInheritanceTestLanguage.getElementAccess();
+	}
+	
+	public ParserRule getElementRule() {
+		return getElementAccess().getRule();
 	}
 
 	//FQN returns ecore::EString:

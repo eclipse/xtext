@@ -3,15 +3,11 @@
   <genPackages prefix="InheritanceTest2" basePackage="org.eclipse.xtext.grammarinheritance" disposableProviderFactory="true">
     <ecorePackage href="InheritanceTest2Language.ecore#/"/>
     <genClasses>
-      <ecoreClass href="InheritanceTest2Language.ecore#//ModelX"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="InheritanceTest2Language.ecore#//ModelX/elements2"/>
-      </genFeatures>
+      <ecoreClass href="InheritanceTest2Language.ecore#//Model"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="InheritanceTest2Language.ecore#//ModelX/ids"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="InheritanceTest2Language.ecore#//Model/ids"/>
       </genFeatures>
     </genClasses>
   </genPackages>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest"/>
   <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel#//inheritanceTest"/>
 </genmodel:GenModel>

@@ -40,10 +40,14 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Spielplatz:
-		//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
+		//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+		//  Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+		//  "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
+		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+		//Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+		//"}")?
 		public Group getGroup() { return cGroup; }
 
 		//"spielplatz"
@@ -64,7 +68,8 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//(kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+		//(kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types
+		//+=CustomTypeParserRule)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//kinder+=Kind
@@ -268,10 +273,12 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Familie:
-		//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
+		//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+		//  kinder+=[Kind] ("," kinder+=[Kind])* ")";
 		public ParserRule getRule() { return rule; }
 
-		//"familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
+		//"familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+		//kinder+=[Kind] ("," kinder+=[Kind])* ")"
 		public Group getGroup() { return cGroup; }
 
 		//"familie"
@@ -429,7 +436,9 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 
 	
 	//Spielplatz:
-	//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
+	//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
+	//  Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
+	//  "}")?;
 	public SpielplatzElements getSpielplatzAccess() {
 		return (pSpielplatz != null) ? pSpielplatz : (pSpielplatz = new SpielplatzElements());
 	}
@@ -479,7 +488,8 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 	}
 
 	//Familie:
-	//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
+	//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
+	//  kinder+=[Kind] ("," kinder+=[Kind])* ")";
 	public FamilieElements getFamilieAccess() {
 		return (pFamilie != null) ? pFamilie : (pFamilie = new FamilieElements());
 	}
@@ -521,7 +531,8 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

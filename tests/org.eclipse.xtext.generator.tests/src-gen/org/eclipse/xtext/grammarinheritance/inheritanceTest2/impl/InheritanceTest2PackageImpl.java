@@ -8,7 +8,6 @@ package org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -16,7 +15,7 @@ import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPacka
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Factory;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Package;
-import org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX;
+import org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +30,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass modelXEClass = null;
+  private EClass modelEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -104,9 +103,9 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModelX()
+  public EClass getModel()
   {
-    return modelXEClass;
+    return modelEClass;
   }
 
   /**
@@ -114,19 +113,9 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModelX_Elements2()
+  public EAttribute getModel_Ids()
   {
-    return (EReference)modelXEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getModelX_Ids()
-  {
-    return (EAttribute)modelXEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -159,9 +148,8 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     isCreated = true;
 
     // Create classes and their features
-    modelXEClass = createEClass(MODEL_X);
-    createEReference(modelXEClass, MODEL_X__ELEMENTS2);
-    createEAttribute(modelXEClass, MODEL_X__IDS);
+    modelEClass = createEClass(MODEL);
+    createEAttribute(modelEClass, MODEL__IDS);
   }
 
   /**
@@ -196,12 +184,11 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    modelXEClass.getESuperTypes().add(theInheritanceTestPackage.getElement());
+    modelEClass.getESuperTypes().add(theInheritanceTestPackage.getModel());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelXEClass, ModelX.class, "ModelX", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModelX_Elements2(), this.getModelX(), null, "elements2", null, 0, -1, ModelX.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModelX_Ids(), ecorePackage.getEString(), "ids", null, 0, -1, ModelX.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getModel_Ids(), ecorePackage.getEString(), "ids", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

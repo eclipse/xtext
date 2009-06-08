@@ -118,10 +118,14 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//EPackageDecl returns ecore::EPackage:
-		//  eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+		//  eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
+		//  "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+		//  "}";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+		//eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
+		//"=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+		//"}"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -202,10 +206,12 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//SubEPackageDecl returns ecore::EPackage:
-		//  eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+		//  eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|
+		//  eClassifiers+=EClassifierDecl)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+		//eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|
+		//eClassifiers+=EClassifierDecl)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -284,13 +290,16 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cEEnumDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//EDataTypeDecl returns ecore::EDataType:
-		//  eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+		//  eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
+		//  instanceClassName=STRING_OR_QID ";")|EEnumDecl;
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
+		//eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
+		//instanceClassName=STRING_OR_QID ";")|EEnumDecl
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
+		//eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
+		//instanceClassName=STRING_OR_QID ";")
 		public Group getGroup_0() { return cGroup_0; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -436,10 +445,20 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//EClassDecl returns ecore::EClass:
-		//  eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
+		//  eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
+		//  "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
+		//  ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
+		//  ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=
+		//  STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=
+		//  EOperationDecl)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
+		//eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
+		//"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
+		//ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
+		//("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=
+		//STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=
+		//EOperationDecl)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -472,7 +491,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 
-		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
+		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
+		//">")?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"<"
@@ -499,7 +519,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//">"
 		public Keyword getGreaterThanSignKeyword_4_3() { return cGreaterThanSignKeyword_4_3; }
 
-		//("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
+		//("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=
+		//EGenericTypeReferenceDecl)*)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"extends"
@@ -620,10 +641,16 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//EAttributeDecl returns ecore::EAttribute:
-		//  eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+		//  eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=
+		//  Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
+		//  derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=
+		//  INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
+		//eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=
+		//Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
+		//derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=
+		//INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -632,7 +659,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//EAnnotationDecl
 		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		//(iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
+		//(iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|
+		//transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//iD?="ID"
@@ -788,10 +816,18 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//EReferenceDecl returns ecore::EReference:
-		//  eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
+		//  eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
+		//  changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
+		//  "unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=
+		//  EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
+		//  eOpposite=[ecore::EReference])? name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";"
+		//eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
+		//changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
+		//"unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=
+		//EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
+		//eOpposite=[ecore::EReference])? name=ID ";"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -800,7 +836,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//EAnnotationDecl
 		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		//(resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
+		//(resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?=
+		//"volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//resolveProxies=Local
@@ -1084,13 +1121,18 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1 = (RuleCall)cETypeParameterETypeParameterCrossReference_1_1_0.eContents().get(1);
 		
 		//EGenericTypeReferenceDecl returns ecore::EGenericType:
-		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter];
+		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//  eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+		//  ];
 		public ParserRule getRule() { return rule; }
 
-		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+		//]
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//eTypeArguments+=EGenericTypeDecl)* ">")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//eClassifier=[ecore::EClassifier]
@@ -1179,13 +1221,19 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0 = (RuleCall)cELowerBoundAssignment_2_1_1_1.eContents().get(0);
 		
 		//EGenericTypeDecl returns ecore::EGenericType:
-		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl);
+		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//  eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+		//  ]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+		//;
 		public ParserRule getRule() { return rule; }
 
-		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+		//]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+		//eTypeArguments+=EGenericTypeDecl)* ">")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//eClassifier=[ecore::EClassifier]
@@ -1319,10 +1367,20 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//EOperationDecl returns ecore::EOperation:
-		//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
+		//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
+		//  eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
+		//  ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
+		//  +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+		//  eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
+		//  EGenericTypeReferenceDecl)*)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
+		//eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
+		//eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
+		//ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
+		//+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+		//eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
+		//EGenericTypeReferenceDecl)*)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -1367,7 +1425,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_4_0() { return cNameIDTerminalRuleCall_4_0; }
 
-		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
+		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
+		//">")?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"<"
@@ -1421,7 +1480,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//")"
 		public Keyword getRightParenthesisKeyword_8() { return cRightParenthesisKeyword_8; }
 
-		//("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+		//("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
+		//EGenericTypeReferenceDecl)*)?
 		public Group getGroup_9() { return cGroup_9; }
 
 		//"throws"
@@ -1664,7 +1724,9 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EPackageDecl returns ecore::EPackage:
-	//  eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+	//  eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
+	//  "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+	//  "}";
 	public EPackageDeclElements getEPackageDeclAccess() {
 		return (pEPackageDecl != null) ? pEPackageDecl : (pEPackageDecl = new EPackageDeclElements());
 	}
@@ -1674,7 +1736,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//SubEPackageDecl returns ecore::EPackage:
-	//  eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+	//  eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|
+	//  eClassifiers+=EClassifierDecl)* "}";
 	public SubEPackageDeclElements getSubEPackageDeclAccess() {
 		return (pSubEPackageDecl != null) ? pSubEPackageDecl : (pSubEPackageDecl = new SubEPackageDeclElements());
 	}
@@ -1694,7 +1757,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EDataTypeDecl returns ecore::EDataType:
-	//  eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+	//  eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
+	//  instanceClassName=STRING_OR_QID ";")|EEnumDecl;
 	public EDataTypeDeclElements getEDataTypeDeclAccess() {
 		return (pEDataTypeDecl != null) ? pEDataTypeDecl : (pEDataTypeDecl = new EDataTypeDeclElements());
 	}
@@ -1714,7 +1778,12 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EClassDecl returns ecore::EClass:
-	//  eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
+	//  eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
+	//  "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
+	//  ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
+	//  ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=
+	//  STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=
+	//  EOperationDecl)* "}";
 	public EClassDeclElements getEClassDeclAccess() {
 		return (pEClassDecl != null) ? pEClassDecl : (pEClassDecl = new EClassDeclElements());
 	}
@@ -1734,7 +1803,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EAttributeDecl returns ecore::EAttribute:
-	//  eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+	//  eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=
+	//  Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
+	//  derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=
+	//  INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
 	public EAttributeDeclElements getEAttributeDeclAccess() {
 		return (pEAttributeDecl != null) ? pEAttributeDecl : (pEAttributeDecl = new EAttributeDeclElements());
 	}
@@ -1744,7 +1816,11 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EReferenceDecl returns ecore::EReference:
-	//  eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
+	//  eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
+	//  changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
+	//  "unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=
+	//  EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
+	//  eOpposite=[ecore::EReference])? name=ID ";";
 	public EReferenceDeclElements getEReferenceDeclAccess() {
 		return (pEReferenceDecl != null) ? pEReferenceDecl : (pEReferenceDecl = new EReferenceDeclElements());
 	}
@@ -1784,7 +1860,9 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EGenericTypeReferenceDecl returns ecore::EGenericType:
-	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter];
+	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+	//  eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+	//  ];
 	public EGenericTypeReferenceDeclElements getEGenericTypeReferenceDeclAccess() {
 		return (pEGenericTypeReferenceDecl != null) ? pEGenericTypeReferenceDecl : (pEGenericTypeReferenceDecl = new EGenericTypeReferenceDeclElements());
 	}
@@ -1794,7 +1872,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EGenericTypeDecl returns ecore::EGenericType:
-	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl);
+	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
+	//  eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
+	//  ]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+	//;
 	public EGenericTypeDeclElements getEGenericTypeDeclAccess() {
 		return (pEGenericTypeDecl != null) ? pEGenericTypeDecl : (pEGenericTypeDecl = new EGenericTypeDeclElements());
 	}
@@ -1804,7 +1885,12 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EOperationDecl returns ecore::EOperation:
-	//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
+	//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
+	//  eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
+	//  ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
+	//  +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+	//  eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
+	//  EGenericTypeReferenceDecl)*)? ";";
 	public EOperationDeclElements getEOperationDeclAccess() {
 		return (pEOperationDecl != null) ? pEOperationDecl : (pEOperationDecl = new EOperationDeclElements());
 	}
@@ -1906,7 +1992,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

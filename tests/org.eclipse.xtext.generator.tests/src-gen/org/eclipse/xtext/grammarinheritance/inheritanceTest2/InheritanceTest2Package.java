@@ -8,7 +8,6 @@ package org.eclipse.xtext.grammarinheritance.inheritanceTest2;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 
@@ -62,14 +61,14 @@ public interface InheritanceTest2Package extends EPackage
   InheritanceTest2Package eINSTANCE = org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2PackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl <em>Model X</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl <em>Model</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2PackageImpl#getModelX()
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2PackageImpl#getModel()
    * @generated
    */
-  int MODEL_X = 0;
+  int MODEL = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -78,16 +77,16 @@ public interface InheritanceTest2Package extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_X__NAME = InheritanceTestPackage.ELEMENT__NAME;
+  int MODEL__NAME = InheritanceTestPackage.MODEL__NAME;
 
   /**
-   * The feature id for the '<em><b>Elements2</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_X__ELEMENTS2 = InheritanceTestPackage.ELEMENT_FEATURE_COUNT + 0;
+  int MODEL__ELEMENTS = InheritanceTestPackage.MODEL__ELEMENTS;
 
   /**
    * The feature id for the '<em><b>Ids</b></em>' attribute list.
@@ -96,49 +95,38 @@ public interface InheritanceTest2Package extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_X__IDS = InheritanceTestPackage.ELEMENT_FEATURE_COUNT + 1;
+  int MODEL__IDS = InheritanceTestPackage.MODEL_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Model X</em>' class.
+   * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_X_FEATURE_COUNT = InheritanceTestPackage.ELEMENT_FEATURE_COUNT + 2;
+  int MODEL_FEATURE_COUNT = InheritanceTestPackage.MODEL_FEATURE_COUNT + 1;
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX <em>Model X</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Model X</em>'.
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX
+   * @return the meta object for class '<em>Model</em>'.
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model
    * @generated
    */
-  EClass getModelX();
+  EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX#getElements2 <em>Elements2</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements2</em>'.
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX#getElements2()
-   * @see #getModelX()
-   * @generated
-   */
-  EReference getModelX_Elements2();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX#getIds <em>Ids</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model#getIds <em>Ids</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute list '<em>Ids</em>'.
-   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX#getIds()
-   * @see #getModelX()
+   * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model#getIds()
+   * @see #getModel()
    * @generated
    */
-  EAttribute getModelX_Ids();
+  EAttribute getModel_Ids();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -164,22 +152,14 @@ public interface InheritanceTest2Package extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl <em>Model X</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl <em>Model</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl
-     * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2PackageImpl#getModelX()
+     * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl
+     * @see org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.InheritanceTest2PackageImpl#getModel()
      * @generated
      */
-    EClass MODEL_X = eINSTANCE.getModelX();
-
-    /**
-     * The meta object literal for the '<em><b>Elements2</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MODEL_X__ELEMENTS2 = eINSTANCE.getModelX_Elements2();
+    EClass MODEL = eINSTANCE.getModel();
 
     /**
      * The meta object literal for the '<em><b>Ids</b></em>' attribute list feature.
@@ -187,7 +167,7 @@ public interface InheritanceTest2Package extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL_X__IDS = eINSTANCE.getModelX_Ids();
+    EAttribute MODEL__IDS = eINSTANCE.getModel_Ids();
 
   }
 

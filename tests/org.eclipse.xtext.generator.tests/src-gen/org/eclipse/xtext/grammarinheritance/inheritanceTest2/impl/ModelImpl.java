@@ -7,48 +7,30 @@ package org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.xtext.grammarinheritance.inheritanceTest.impl.ElementImpl;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Package;
-import org.eclipse.xtext.grammarinheritance.inheritanceTest2.ModelX;
+import org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model X</b></em>'.
+ * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl#getElements2 <em>Elements2</em>}</li>
- *   <li>{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelXImpl#getIds <em>Ids</em>}</li>
+ *   <li>{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl#getIds <em>Ids</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelXImpl extends ElementImpl implements ModelX
+public class ModelImpl extends org.eclipse.xtext.grammarinheritance.inheritanceTest.impl.ModelImpl implements Model
 {
-  /**
-   * The cached value of the '{@link #getElements2() <em>Elements2</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getElements2()
-   * @generated
-   * @ordered
-   */
-  protected EList<ModelX> elements2;
-
   /**
    * The cached value of the '{@link #getIds() <em>Ids</em>}' attribute list.
    * <!-- begin-user-doc -->
@@ -64,7 +46,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelXImpl()
+  protected ModelImpl()
   {
     super();
   }
@@ -77,21 +59,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
   @Override
   protected EClass eStaticClass()
   {
-    return InheritanceTest2Package.Literals.MODEL_X;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<ModelX> getElements2()
-  {
-    if (elements2 == null)
-    {
-      elements2 = new EObjectContainmentEList<ModelX>(ModelX.class, this, InheritanceTest2Package.MODEL_X__ELEMENTS2);
-    }
-    return elements2;
+    return InheritanceTest2Package.Literals.MODEL;
   }
 
   /**
@@ -103,25 +71,9 @@ public class ModelXImpl extends ElementImpl implements ModelX
   {
     if (ids == null)
     {
-      ids = new EDataTypeEList<String>(String.class, this, InheritanceTest2Package.MODEL_X__IDS);
+      ids = new EDataTypeEList<String>(String.class, this, InheritanceTest2Package.MODEL__IDS);
     }
     return ids;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case InheritanceTest2Package.MODEL_X__ELEMENTS2:
-        return ((InternalEList<?>)getElements2()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -134,9 +86,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
   {
     switch (featureID)
     {
-      case InheritanceTest2Package.MODEL_X__ELEMENTS2:
-        return getElements2();
-      case InheritanceTest2Package.MODEL_X__IDS:
+      case InheritanceTest2Package.MODEL__IDS:
         return getIds();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -153,11 +103,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
   {
     switch (featureID)
     {
-      case InheritanceTest2Package.MODEL_X__ELEMENTS2:
-        getElements2().clear();
-        getElements2().addAll((Collection<? extends ModelX>)newValue);
-        return;
-      case InheritanceTest2Package.MODEL_X__IDS:
+      case InheritanceTest2Package.MODEL__IDS:
         getIds().clear();
         getIds().addAll((Collection<? extends String>)newValue);
         return;
@@ -175,10 +121,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
   {
     switch (featureID)
     {
-      case InheritanceTest2Package.MODEL_X__ELEMENTS2:
-        getElements2().clear();
-        return;
-      case InheritanceTest2Package.MODEL_X__IDS:
+      case InheritanceTest2Package.MODEL__IDS:
         getIds().clear();
         return;
     }
@@ -195,9 +138,7 @@ public class ModelXImpl extends ElementImpl implements ModelX
   {
     switch (featureID)
     {
-      case InheritanceTest2Package.MODEL_X__ELEMENTS2:
-        return elements2 != null && !elements2.isEmpty();
-      case InheritanceTest2Package.MODEL_X__IDS:
+      case InheritanceTest2Package.MODEL__IDS:
         return ids != null && !ids.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -220,4 +161,4 @@ public class ModelXImpl extends ElementImpl implements ModelX
     return result.toString();
   }
 
-} //ModelXImpl
+} //ModelImpl

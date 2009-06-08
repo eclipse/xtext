@@ -9,8 +9,8 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageParserConfiguration; 
-import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTest2LanguageElementConsumer;
-import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageModelConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTest2LanguageModelConsumer;
+import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageElementConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.BaseInheritanceTestLanguageFQNConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class InheritanceTest2LanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final InheritanceTestLanguageParserConfiguration inheritanceTestLanguageConfiguration; 
-    private InheritanceTest2LanguageElementConsumer elementConsumer;
+    private InheritanceTest2LanguageModelConsumer modelConsumer;
 
 	private InheritanceTest2LanguageGrammarAccess grammarAccess;
 
@@ -33,13 +33,13 @@ public class InheritanceTest2LanguageParserConfiguration extends AbstractParserC
 		this.inheritanceTestLanguageConfiguration = new InheritanceTestLanguageParserConfiguration(configuration, null);
 	}
 
-	public InheritanceTest2LanguageElementConsumer getRootConsumer() {
-		return elementConsumer;
+	public InheritanceTest2LanguageModelConsumer getRootConsumer() {
+		return modelConsumer;
 	} 
 
 	public void createNonTerminalConsumers() {
 		getInheritanceTestLanguageConfiguration().createNonTerminalConsumers();
-		elementConsumer = new InheritanceTest2LanguageElementConsumer(
+		modelConsumer = new InheritanceTest2LanguageModelConsumer(
     		this, null
     	);
 	}
@@ -51,8 +51,8 @@ public class InheritanceTest2LanguageParserConfiguration extends AbstractParserC
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getElementConsumer().setRule(grammarAccess.getElementAccess());
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getElementConsumer().setRule(grammarAccess.getElementAccess());
 		getFqnConsumer().setRule(grammarAccess.getFQNAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
@@ -63,23 +63,20 @@ public class InheritanceTest2LanguageParserConfiguration extends AbstractParserC
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
-		getElementConsumer().setElementConsumer(getElementConsumer());
-		getElementConsumer().setFqnConsumer(getFqnConsumer());
-		getElementConsumer().setIdConsumer(getIdConsumer());
-
 		getModelConsumer().setElementConsumer(getElementConsumer());
+		getModelConsumer().setFqnConsumer(getFqnConsumer());
 		getModelConsumer().setIdConsumer(getIdConsumer());
+
+		getElementConsumer().setIdConsumer(getIdConsumer());
 
 		getFqnConsumer().setIdConsumer(getIdConsumer());
 
-		getElementConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
-		getElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$4$Delimiter);
-		getElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
-		getElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.ruleCall$6$Delimiter);
-		getModelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
+		getModelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
 		getModelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$4$Delimiter);
 		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
 		getModelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.ruleCall$6$Delimiter);
+		getElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$4$Delimiter);
+		getElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.ruleCall$6$Delimiter);
 		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.keyword$7$Delimiter);
 		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.ruleCall$6$Delimiter);
 		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguageDelimiters.ruleCall$6$Delimiter);
@@ -89,12 +86,12 @@ public class InheritanceTest2LanguageParserConfiguration extends AbstractParserC
 		return inheritanceTestLanguageConfiguration;
 	} 
 	
-    public InheritanceTest2LanguageElementConsumer getElementConsumer() {
-    	return elementConsumer;
+    public InheritanceTest2LanguageModelConsumer getModelConsumer() {
+    	return modelConsumer;
     }
 
-    public InheritanceTestLanguageModelConsumer getModelConsumer() {
-    	return getInheritanceTestLanguageConfiguration().getModelConsumer();
+    public InheritanceTestLanguageElementConsumer getElementConsumer() {
+    	return getInheritanceTestLanguageConfiguration().getElementConsumer();
     }
 
     public BaseInheritanceTestLanguageFQNConsumer getFqnConsumer() {

@@ -32,221 +32,21 @@ protected class ThisRootNode extends RootToken {
 	
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Element_Group(this, this, 0, inst);
+			case 0: return new Model_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 }
 	
-
-/************ begin Rule Element ****************
- *
- * Element returns ModelX:
- *   "model" name=ID "{" elements2+=Element* ids+=FQN "}";
- *
- **/
-
-// "model" name=ID "{" elements2+=Element* ids+=FQN "}"
-protected class Element_Group extends GroupToken {
-	
-	public Element_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Group getGrammarElement() {
-		return grammarAccess.getElementAccess().getGroup();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_RightCurlyBracketKeyword_5(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
-}
-
-// "model"
-protected class Element_ModelKeyword_0 extends KeywordToken  {
-	
-	public Element_ModelKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getElementAccess().getModelKeyword_0();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
-// name=ID
-protected class Element_NameAssignment_1 extends AssignmentToken  {
-	
-	public Element_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getElementAccess().getNameAssignment_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_ModelKeyword_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// "{"
-protected class Element_LeftCurlyBracketKeyword_2 extends KeywordToken  {
-	
-	public Element_LeftCurlyBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_NameAssignment_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// elements2+=Element*
-protected class Element_Elements2Assignment_3 extends AssignmentToken  {
-	
-	public Element_Elements2Assignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getElementAccess().getElements2Assignment_3();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("elements2",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("elements2");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
-				element = grammarAccess.getElementAccess().getElements2ElementParserRuleCall_3_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new Element_Elements2Assignment_3(parent, next, actIndex, consumed);
-			case 1: return new Element_LeftCurlyBracketKeyword_2(parent, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
-
-// ids+=FQN
-protected class Element_IdsAssignment_4 extends AssignmentToken  {
-	
-	public Element_IdsAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getElementAccess().getIdsAssignment_4();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_Elements2Assignment_3(parent, this, 0, inst);
-			case 1: return new Element_LeftCurlyBracketKeyword_2(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("ids",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("ids");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.DRC;
-			element = grammarAccess.getElementAccess().getIdsFQNParserRuleCall_4_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// "}"
-protected class Element_RightCurlyBracketKeyword_5 extends KeywordToken  {
-	
-	public Element_RightCurlyBracketKeyword_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_IdsAssignment_4(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-
-/************ end Rule Element ****************/
-
 
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=ID "{" elements+=Element* "}";
+ *   "model" name=ID "{" elements+=Element* ids+=FQN "}";
  *
  **/
 
-// "model" name=ID "{" elements+=Element* "}"
+// "model" name=ID "{" elements+=Element* ids+=FQN "}"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -259,7 +59,7 @@ protected class Model_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new Model_RightCurlyBracketKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -383,15 +183,15 @@ protected class Model_ElementsAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "}"
-protected class Model_RightCurlyBracketKeyword_4 extends KeywordToken  {
+// ids+=FQN
+protected class Model_IdsAssignment_4 extends AssignmentToken  {
 	
-	public Model_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Model_IdsAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getRightCurlyBracketKeyword_4();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getIdsAssignment_4();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -402,10 +202,126 @@ protected class Model_RightCurlyBracketKeyword_4 extends KeywordToken  {
 		}	
 	}	
 		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("ids",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ids");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.DRC;
+			element = grammarAccess.getModelAccess().getIdsFQNParserRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "}"
+protected class Model_RightCurlyBracketKeyword_5 extends KeywordToken  {
+	
+	public Model_RightCurlyBracketKeyword_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getRightCurlyBracketKeyword_5();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_IdsAssignment_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 
 /************ end Rule Model ****************/
+
+
+/************ begin Rule Element ****************
+ *
+ * Element:
+ *   "element" name=ID;
+ *
+ **/
+
+// "element" name=ID
+protected class Element_Group extends GroupToken {
+	
+	public Element_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getElementAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "element"
+protected class Element_ElementKeyword_0 extends KeywordToken  {
+	
+	public Element_ElementKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getElementAccess().getElementKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class Element_NameAssignment_1 extends AssignmentToken  {
+	
+	public Element_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getElementAccess().getNameAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_ElementKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule Element ****************/
 
 
 }

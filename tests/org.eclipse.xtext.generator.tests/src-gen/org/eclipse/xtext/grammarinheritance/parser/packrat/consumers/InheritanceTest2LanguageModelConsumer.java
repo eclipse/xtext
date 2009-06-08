@@ -19,11 +19,11 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess.ElementElements;
+import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess.ModelElements;
 
-public final class InheritanceTest2LanguageElementConsumer extends NonTerminalConsumer {
+public final class InheritanceTest2LanguageModelConsumer extends NonTerminalConsumer {
 
-	private ElementElements rule;	
+	private ModelElements rule;	
 
 	private INonTerminalConsumer elementConsumer;
 
@@ -144,7 +144,7 @@ public final class InheritanceTest2LanguageElementConsumer extends NonTerminalCo
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(elementConsumer, "elements2", true, false, false, getElement(), optional);
+			return consumeNonTerminal(elementConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -184,7 +184,7 @@ public final class InheritanceTest2LanguageElementConsumer extends NonTerminalCo
 		}
 	}
 
-	public InheritanceTest2LanguageElementConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public InheritanceTest2LanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
@@ -197,11 +197,11 @@ public final class InheritanceTest2LanguageElementConsumer extends NonTerminalCo
 		return group$1$Consumer.consume();
 	}
 
-	public ElementElements getRule() {
+	public ModelElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(ElementElements rule) {
+	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
@@ -209,8 +209,8 @@ public final class InheritanceTest2LanguageElementConsumer extends NonTerminalCo
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.getElements2Assignment_3());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getElements2ElementParserRuleCall_3_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getElementsAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getElementsElementParserRuleCall_3_0());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.getIdsAssignment_4());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getIdsFQNParserRuleCall_4_0());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.getRightCurlyBracketKeyword_5());
