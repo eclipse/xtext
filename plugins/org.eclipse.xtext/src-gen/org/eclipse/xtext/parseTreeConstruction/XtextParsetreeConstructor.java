@@ -79,11 +79,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Grammar ****************
  *
  * Grammar:
- *   "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+ *   "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
+ *   +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+ *   AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
+ *   AbstractMetamodelDeclaration* rules+=AbstractRule+;
  *
  **/
 
-// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
+// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
+// +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+// AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
+// AbstractMetamodelDeclaration* rules+=AbstractRule+
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -157,7 +163,8 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)
+// ?
 protected class Grammar_Group_2 extends GroupToken {
 	
 	public Grammar_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -309,7 +316,8 @@ protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
+// [AbstractRule])*)? ")")?
 protected class Grammar_Group_3 extends GroupToken {
 	
 	public Grammar_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -766,21 +774,21 @@ protected class AbstractRule_EnumRuleParserRuleCall_2 extends RuleCallToken {
  * AbstractMetamodelDeclaration:
  *   GeneratedMetamodel|ReferencedMetamodel; 
  * 
- *    
- * 	     
+ *   
+ * 	    
  * 	
- *  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
- *  // generated metamodels have to have different aliases
+ * // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+ * // generated metamodels have to have different aliases
  *
  **/
 
 // GeneratedMetamodel|ReferencedMetamodel 
 // 
-//    
-// 	     
+//   
+// 	    
 // 	
-//  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-//  // generated metamodels have to have different aliases
+// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+// // generated metamodels have to have different aliases
 protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesToken {
 
 	public AbstractMetamodelDeclaration_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -876,13 +884,13 @@ protected class AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1
  * GeneratedMetamodel:
  *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
  * 	
- *  // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
- *  // generated metamodels have to have different aliases
- *    
- * 	         
+ * // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+ * // generated metamodels have to have different aliases
+ *   
+ * 	        
  * 
- *  // referenced metamodels may share aliases with other referenced metamodels
- *  // and with generated metamodels
+ * // referenced metamodels may share aliases with other referenced metamodels
+ * // and with generated metamodels
  *
  **/
 
@@ -1076,8 +1084,8 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
  * ReferencedMetamodel:
  *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
  * 
- *  // referenced metamodels may share aliases with other referenced metamodels
- *  // and with generated metamodels
+ * // referenced metamodels may share aliases with other referenced metamodels
+ * // and with generated metamodels
  *
  **/
 
@@ -1238,11 +1246,15 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 /************ begin Rule ParserRule ****************
  *
  * ParserRule:
- *   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+ *   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+ *   AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
+ *   Alternatives ";";
  *
  **/
 
-// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
+// AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
+// Alternatives ";"
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1379,7 +1391,8 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
+// [AbstractRule])*)? ")")?
 protected class ParserRule_Group_2 extends GroupToken {
 	
 	public ParserRule_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3339,11 +3352,13 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 /************ begin Rule AssignableAlternatives ****************
  *
  * AssignableAlternatives returns AbstractElement:
- *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?;
+ *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
+ *   +)?;
  *
  **/
 
-// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?
+// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
+// +)?
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3975,11 +3990,13 @@ protected class ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2
 /************ begin Rule CrossReferenceableAlternatives ****************
  *
  * CrossReferenceableAlternatives returns AbstractElement:
- *   CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?;
+ *   CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
+ *   CrossReferenceableTerminal)+)?;
  *
  **/
 
-// CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?
+// CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
+// CrossReferenceableTerminal)+)?
 protected class CrossReferenceableAlternatives_Group extends GroupToken {
 	
 	public CrossReferenceableAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4281,7 +4298,8 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
+ *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
+ * ;
  *
  **/
 
@@ -4999,11 +5017,13 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 /************ begin Rule TerminalTokenElement ****************
  *
  * TerminalTokenElement returns AbstractElement:
- *   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard;
+ *   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
+ *   Wildcard;
  *
  **/
 
-// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|Wildcard
+// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
+// Wildcard
 protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6098,11 +6118,13 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule EnumLiterals ****************
  *
  * EnumLiterals returns AbstractElement:
- *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+ *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+ *   EnumLiteralDeclaration)+)?;
  *
  **/
 
-// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+// EnumLiteralDeclaration)+)?
 protected class EnumLiterals_Group extends GroupToken {
 	
 	public EnumLiterals_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
