@@ -21,6 +21,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -37,8 +38,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.actions.LexicalSortingAction;
-import org.eclipse.xtext.ui.common.editor.outline.filter.IFilterableContentProvider;
-import org.eclipse.xtext.ui.common.editor.outline.filter.IOutlineFilter;
 import org.eclipse.xtext.ui.common.editor.outline.internal.PreservingContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.linking.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
@@ -70,12 +69,8 @@ import com.google.inject.Inject;
  */
 public class XtextContentOutlinePage extends PreservingContentOutlinePage implements ISourceViewerAware,
 		IXtextEditorAware {
-	public XtextContentOutlinePage() {
-	}
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
-
-	private static final String contextMenuID = "xtextOutlineContextMenu";
 
 	@Inject
 	private ITreeProvider provider;
@@ -84,16 +79,20 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
 
 	private XtextEditor editor;
-
 	private ISourceViewer sourceViewer;
+
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 	private EditorSelectionChangedListener editorSelectionChangedListener;
 
 	private IXtextModelListener modelListener;
 
 	private Menu contextMenu;
+	private static final String contextMenuID = "xtextOutlineContextMenu";
 
 	private ViewerSorter sorter = new TreePathViewerSorter();
+
+	public XtextContentOutlinePage() {
+	}
 
 	@Override
 	public void createControl(Composite parent) {
@@ -102,6 +101,7 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 		configureContextMenu();
 		configureProviders();
 		configureDocument();
+		registerToolbarActions(getSite().getActionBars());
 	}
 
 	private void configureViewer() {
@@ -177,12 +177,6 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
-	}
-
-	@Override
-	public void init(IPageSite pageSite) {
-		super.init(pageSite);
-		registerToolbarActions(getSite().getActionBars());
 	}
 
 	protected void registerToolbarActions(IActionBars actionBars) {
@@ -341,19 +335,21 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 		}
 	}
 
-	public void enableFilter(IOutlineFilter filterSpec) {
-		if (provider instanceof IFilterableContentProvider) {
-			IFilterableContentProvider filterableContentProvider = (IFilterableContentProvider) provider;
-			filterableContentProvider.enableFilter(filterSpec);
-			refresh();
+	public void enableFilter(ViewerFilter filter) {
+		if (getTreeViewer() != null) {
+			ViewerFilter[] filters = getTreeViewer().getFilters();
+			for (ViewerFilter viewerFilter : filters) {
+				if (viewerFilter.equals(filter)) {
+					return;
+				}
+			}
+			getTreeViewer().addFilter(filter);
 		}
 	}
 
-	public void disableFilter(IOutlineFilter filterSpec) {
-		if (provider instanceof IFilterableContentProvider) {
-			IFilterableContentProvider filterableContentProvider = (IFilterableContentProvider) provider;
-			filterableContentProvider.disableFilter(filterSpec);
-			refresh();
+	public void disableFilter(ViewerFilter filter) {
+		if (getTreeViewer() != null) {
+			getTreeViewer().removeFilter(filter);
 		}
 	}
 

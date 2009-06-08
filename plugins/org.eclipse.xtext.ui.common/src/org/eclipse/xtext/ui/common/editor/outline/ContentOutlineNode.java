@@ -107,7 +107,7 @@ public class ContentOutlineNode {
 	public void setEObjectHandle(IEObjectHandle<EObject> handle) {
 		this.handle = handle;
 	}
-	
+
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -115,7 +115,7 @@ public class ContentOutlineNode {
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 	}
-	
+
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -126,7 +126,7 @@ public class ContentOutlineNode {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		
+
 		final ContentOutlineNode other = (ContentOutlineNode) obj;
 		if (label == null) {
 			if (other.label != null) {

@@ -26,10 +26,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
@@ -42,6 +40,8 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
 public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanticModelTransformer {
 
@@ -273,22 +273,12 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 	}
 
 	public List<EObject> getChildren(EnumRule object) {
-		if (isFilterActive(ParserRulesOutlineFilter.class)) {
-			return NO_CHILDREN;
-		}
 		if (object.getAlternatives() instanceof Alternatives) {
 			return getChildren(object.getAlternatives());
 		}
 		return NO_CHILDREN;
 	}
 
-	public List<EObject> getChildren(TerminalRule object) {
-		if (isFilterActive(ParserRulesOutlineFilter.class)) {
-			return NO_CHILDREN;
-		}
-		return super.getChildren(object);
-	}
-	
 	public List<EObject> getChildren(CharacterRange object) {
 		return NO_CHILDREN;
 	}
@@ -301,11 +291,4 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		return NO_CHILDREN;
 	}
 	
-	public List<EObject> getChildren(ParserRule object) {
-		if (isFilterActive(ParserRulesOutlineFilter.class)) {
-			return NO_CHILDREN;
-		}
-		return super.getChildren(object);
-	}
-
 }

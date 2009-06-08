@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
  */
 public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineNodeAdapterFactory {
 
+	@SuppressWarnings("unchecked")
 	private static final Class[] EMPTY_CLASSES = new Class[0];
 	
 	static final Logger logger = Logger.getLogger(DefaultContentOutlineNodeAdapterFactory.class);
@@ -41,6 +42,7 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 	/**
 	 * Subclasses should override this method.
 	 */
+	@SuppressWarnings("unchecked")
 	public Class[] getAdapterList() {
 		return EMPTY_CLASSES;
 	}

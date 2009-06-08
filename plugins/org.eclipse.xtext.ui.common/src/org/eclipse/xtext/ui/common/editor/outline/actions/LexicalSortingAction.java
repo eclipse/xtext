@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.common.editor.outline.actions;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
 
-public class LexicalSortingAction extends OutlineAction {
+public class LexicalSortingAction extends AbstractOutlineAction {
 
 	public LexicalSortingAction(XtextContentOutlinePage outlinePage) {
 		super("Sort", outlinePage);

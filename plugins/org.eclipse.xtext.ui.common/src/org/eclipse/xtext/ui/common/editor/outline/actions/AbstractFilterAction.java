@@ -5,34 +5,44 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.editor.outline;
+package org.eclipse.xtext.ui.common.editor.outline.actions;
 
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;
-import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class FilterParserRulesAction extends AbstractFilterAction {
+public abstract class AbstractFilterAction extends AbstractOutlineAction {
 
-	public FilterParserRulesAction(XtextContentOutlinePage outlinePage) {
-		super("Filter Parser Rules", outlinePage);
-		setToolTipText("Show / hide parser rules");
-		setDescription("Show / hide parser rules");
-		setImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif"));
-		setDisabledImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif"));
+	public AbstractFilterAction(String text, XtextContentOutlinePage outlinePage) {
+		super(text, outlinePage);
 	}
+
+	private ViewerFilter filter;
 
 	@Override
 	protected String getToggleId() {
 		return "ParserRulesFilter.isChecked";
 	}
 	
+	protected ViewerFilter getFilter() {
+		if (filter == null) {
+			filter = createFilter();
+		}
+		return filter;
+	}
+	
+	protected abstract ViewerFilter createFilter();
+	
 	@Override
-	protected ViewerFilter createFilter() {
-		return new ParserRulesOutlineFilter();
+	protected void performAction(boolean checkedState) {
+		if (checkedState) {
+			getOutlinePage().enableFilter(getFilter());
+		}
+		else {
+			getOutlinePage().disableFilter(getFilter());
+		}
 	}
 
 }
