@@ -821,11 +821,13 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 /************ begin Rule InheritingHiddens ****************
  *
  * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
- *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
+ *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
+ *   ) ")" valid?=";";
  *
  **/
 
-// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
+// ) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

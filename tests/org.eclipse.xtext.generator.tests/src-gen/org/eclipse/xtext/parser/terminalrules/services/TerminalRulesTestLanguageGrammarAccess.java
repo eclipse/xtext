@@ -35,10 +35,12 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_6_0 = (RuleCall)cAnyValueAssignment_6.eContents().get(0);
 		
 		//Model:
-		//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+		//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
+		//  slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
 		public ParserRule getRule() { return rule; }
 
-		//idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
+		//idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
+		//slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//idValue=ID
@@ -108,7 +110,8 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+	//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
+	//  slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -130,7 +133,8 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 

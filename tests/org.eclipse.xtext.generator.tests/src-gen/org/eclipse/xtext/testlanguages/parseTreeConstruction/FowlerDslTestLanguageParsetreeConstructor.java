@@ -515,7 +515,8 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+ *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+ * ;
  *
  **/
 

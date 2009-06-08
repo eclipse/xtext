@@ -33,10 +33,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//EPatch:
-		//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
+		//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef*
+		//  "}";
 		public ParserRule getRule() { return rule; }
 
-		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}"
+		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef*
+		//"}"
 		public Group getGroup() { return cGroup; }
 
 		//"epatch"
@@ -305,10 +307,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//NamedResource:
-		//  "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
+		//  "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right"
+		//  ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
 		public ParserRule getRule() { return rule; }
 
-		//"resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}"
+		//"resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right"
+		//("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}"
 		public Group getGroup() { return cGroup; }
 
 		//"resource"
@@ -445,10 +449,16 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
 		
 		//ObjectRef:
-		//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+		//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
+		//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
+		//  ) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left"
+		//  leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+		//"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
+		//NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
+		//) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left"
+		//leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"object"
@@ -460,7 +470,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
+		//leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=
+		//FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//leftRes=[NamedResource] leftFrag=FRAGMENT
@@ -481,7 +492,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//FRAGMENT
 		public RuleCall getLeftFragFRAGMENTTerminalRuleCall_2_0_1_0() { return cLeftFragFRAGMENTTerminalRuleCall_2_0_1_0; }
 
-		//"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
+		//"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+		//rightFrag=FRAGMENT
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"left"
@@ -520,7 +532,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//FRAGMENT
 		public RuleCall getRightFragFRAGMENTTerminalRuleCall_2_1_5_0() { return cRightFragFRAGMENTTerminalRuleCall_2_1_5_0; }
 
-		//("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+		//("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left"
+		//leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"{"
@@ -611,10 +624,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//BiSingleAssignment returns SingleAssignment:
-		//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
+		//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue
+		//  ";";
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
+		//feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue
+		//";"
 		public Group getGroup() { return cGroup; }
 
 		//feature=ID
@@ -671,10 +686,14 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//BiListAssignment returns ListAssignment:
-		//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
+		//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
+		//  ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=
+		//  ListAssignmentValue)*)? "]" ";";
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
+		//feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
+		//ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=
+		//ListAssignmentValue)*)? "]" ";"
 		public Group getGroup() { return cGroup; }
 
 		//feature=ID
@@ -795,10 +814,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MonoListAssignment returns ListAssignment:
-		//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
+		//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
+		//  "]" ";";
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
+		//feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
+		//"]" ";"
 		public Group getGroup() { return cGroup; }
 
 		//feature=ID
@@ -869,10 +890,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cImpFragFRAGMENTTerminalRuleCall_3_1_0 = (RuleCall)cImpFragAssignment_3_1.eContents().get(0);
 		
 		//AssignmentValue:
-		//  value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
+		//  value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|
+		//  newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		//value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
+		//value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|
+		//newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//value=STRING
@@ -982,10 +1005,14 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cImpFragFRAGMENTTerminalRuleCall_2_4_1_0 = (RuleCall)cImpFragAssignment_2_4_1.eContents().get(0);
 		
 		//ListAssignmentValue returns AssignmentValue:
-		//  index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT);
+		//  index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("."
+		//  refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+		//  impFrag=FRAGMENT);
 		public ParserRule getRule() { return rule; }
 
-		//index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT)
+		//index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("."
+		//refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+		//impFrag=FRAGMENT)
 		public Group getGroup() { return cGroup; }
 
 		//index=INT
@@ -997,7 +1024,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//"[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
+		//"[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("["
+		//refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"[" refIndex=INT "]"
@@ -1115,10 +1143,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cImpFragFRAGMENTTerminalRuleCall_4_1_0 = (RuleCall)cImpFragAssignment_4_1.eContents().get(0);
 		
 		//SingleAssignmentValue returns AssignmentValue:
-		//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
+		//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex
+		//  =INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
-		//keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
+		//keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex
+		//=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//keyword="null"
@@ -1217,10 +1247,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//CreatedObject:
-		//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?;
+		//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments
+		//  +=MonoListAssignment)+ leftMig=Migration? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//(ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
+		//(ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments
+		//+=MonoListAssignment)+ leftMig=Migration? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//ObjectNew|ObjectCopy
@@ -1238,7 +1270,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
+		//("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=
+		//Migration? "}")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"{"
@@ -1361,7 +1394,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//Migration:
 		//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
 		//	
-		// // ******************* migration *****************************
+		//// ******************* migration *****************************
 		public ParserRule getRule() { return rule; }
 
 		//"migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
@@ -1525,7 +1558,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//EPatch:
-	//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
+	//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef*
+	//  "}";
 	public EPatchElements getEPatchAccess() {
 		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
 	}
@@ -1595,7 +1629,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//NamedResource:
-	//  "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
+	//  "resource" name=ID "{" "left" ("uri" leftUri=STRING|leftRoot=CreatedObject) ";" "right"
+	//  ("uri" rightUri=STRING|rightRoot=CreatedObject) ";" "}";
 	public NamedResourceElements getNamedResourceAccess() {
 		return (pNamedResource != null) ? pNamedResource : (pNamedResource = new NamedResourceElements());
 	}
@@ -1615,7 +1650,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ObjectRef:
-	//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+	//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
+	//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT
+	//  ) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left"
+	//  leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 	public ObjectRefElements getObjectRefAccess() {
 		return (pObjectRef != null) ? pObjectRef : (pObjectRef = new ObjectRefElements());
 	}
@@ -1635,7 +1673,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//BiSingleAssignment returns SingleAssignment:
-	//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
+	//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue
+	//  ";";
 	public BiSingleAssignmentElements getBiSingleAssignmentAccess() {
 		return (pBiSingleAssignment != null) ? pBiSingleAssignment : (pBiSingleAssignment = new BiSingleAssignmentElements());
 	}
@@ -1645,7 +1684,9 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//BiListAssignment returns ListAssignment:
-	//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
+	//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
+	//  ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=
+	//  ListAssignmentValue)*)? "]" ";";
 	public BiListAssignmentElements getBiListAssignmentAccess() {
 		return (pBiListAssignment != null) ? pBiListAssignment : (pBiListAssignment = new BiListAssignmentElements());
 	}
@@ -1665,7 +1706,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//MonoListAssignment returns ListAssignment:
-	//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
+	//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
+	//  "]" ";";
 	public MonoListAssignmentElements getMonoListAssignmentAccess() {
 		return (pMonoListAssignment != null) ? pMonoListAssignment : (pMonoListAssignment = new MonoListAssignmentElements());
 	}
@@ -1675,7 +1717,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AssignmentValue:
-	//  value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
+	//  value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|
+	//  newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 	public AssignmentValueElements getAssignmentValueAccess() {
 		return (pAssignmentValue != null) ? pAssignmentValue : (pAssignmentValue = new AssignmentValueElements());
 	}
@@ -1685,7 +1728,9 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ListAssignmentValue returns AssignmentValue:
-	//  index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT);
+	//  index=INT ":" ("[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("."
+	//  refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+	//  impFrag=FRAGMENT);
 	public ListAssignmentValueElements getListAssignmentValueAccess() {
 		return (pListAssignmentValue != null) ? pListAssignmentValue : (pListAssignmentValue = new ListAssignmentValueElements());
 	}
@@ -1695,7 +1740,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//SingleAssignmentValue returns AssignmentValue:
-	//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
+	//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("[" refIndex
+	//  =INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=FRAGMENT;
 	public SingleAssignmentValueElements getSingleAssignmentValueAccess() {
 		return (pSingleAssignmentValue != null) ? pSingleAssignmentValue : (pSingleAssignmentValue = new SingleAssignmentValueElements());
 	}
@@ -1705,7 +1751,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//CreatedObject:
-	//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?;
+	//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments
+	//  +=MonoListAssignment)+ leftMig=Migration? "}")?;
 	public CreatedObjectElements getCreatedObjectAccess() {
 		return (pCreatedObject != null) ? pCreatedObject : (pCreatedObject = new CreatedObjectElements());
 	}
@@ -1737,10 +1784,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	//terminal FRAGMENT:
 	//  "#" ( "a" .. "z" | "A" .. "Z" | "0" .. "9" | "_" | "/" | "[" | "]" | "{" | "}" | "." | "@" ) +; 
 	//	
-	//    
-	//	   
+	//   
+	//	  
 	//	
-	// // ******************* migration *****************************
+	//// ******************* migration *****************************
 	public TerminalRule getFRAGMENTRule() {
 		return (tFRAGMENT != null) ? tFRAGMENT : (tFRAGMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FRAGMENT"));
 	} 
@@ -1748,7 +1795,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	//Migration:
 	//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
 	//	
-	// // ******************* migration *****************************
+	//// ******************* migration *****************************
 	public MigrationElements getMigrationAccess() {
 		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
 	}
@@ -1800,7 +1847,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

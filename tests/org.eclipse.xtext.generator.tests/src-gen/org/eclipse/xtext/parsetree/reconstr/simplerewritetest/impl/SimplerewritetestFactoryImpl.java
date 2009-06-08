@@ -45,7 +45,7 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     try
     {
-      SimplerewritetestFactory theSimplerewritetestFactory = (SimplerewritetestFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/rewrite/test"); 
+      SimplerewritetestFactory theSimplerewritetestFactory = (SimplerewritetestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"); 
       if (theSimplerewritetestFactory != null)
       {
         return theSimplerewritetestFactory;

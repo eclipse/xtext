@@ -33,7 +33,7 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
   {
     try
     {
-      ComplexrewritetestFactory theComplexrewritetestFactory = (ComplexrewritetestFactory)EPackage.Registry.INSTANCE.getEFactory("http://complex/rewrite/test"); 
+      ComplexrewritetestFactory theComplexrewritetestFactory = (ComplexrewritetestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/complexrewritetest"); 
       if (theComplexrewritetestFactory != null)
       {
         return theComplexrewritetestFactory;

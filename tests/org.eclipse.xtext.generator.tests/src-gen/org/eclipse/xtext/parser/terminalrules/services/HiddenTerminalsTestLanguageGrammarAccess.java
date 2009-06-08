@@ -212,10 +212,12 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
 		//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
+		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
+		//  ) ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
+		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
+		//) ")" valid?=";"
 		public Group getGroup() { return cGroup; }
 
 		//"inheriting"
@@ -432,7 +434,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
+	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
+	//  ) ")" valid?=";";
 	public InheritingHiddensElements getInheritingHiddensAccess() {
 		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
 	}

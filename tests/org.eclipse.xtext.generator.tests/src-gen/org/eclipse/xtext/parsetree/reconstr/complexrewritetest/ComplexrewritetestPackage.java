@@ -41,7 +41,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://complex/rewrite/test";
+  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/complexrewritetest";
 
   /**
    * The package namespace name.

@@ -317,11 +317,13 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ReducibleRule ****************
  *
  * ReducibleRule returns ReducibleElement:
- *   "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
+ *   "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
+ *   +=TerminalRule)?;
  *
  **/
 
-// "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
+// "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
+// +=TerminalRule)?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

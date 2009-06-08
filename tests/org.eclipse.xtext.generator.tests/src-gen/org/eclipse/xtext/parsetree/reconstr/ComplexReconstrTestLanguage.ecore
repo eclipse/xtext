@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="complexrewritetest" nsURI="http://complex/rewrite/test" nsPrefix="complexrewritetest">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="complexrewritetest" nsURI="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest" nsPrefix="complexrewritetest">
   <eClassifiers xsi:type="ecore:EClass" name="Root"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="//Root">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="em">

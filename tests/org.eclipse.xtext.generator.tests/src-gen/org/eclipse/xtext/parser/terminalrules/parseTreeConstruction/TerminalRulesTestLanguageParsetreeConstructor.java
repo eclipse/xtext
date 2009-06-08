@@ -42,11 +42,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+ *   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
+ *   slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
  *
  **/
 
-// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
+// slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

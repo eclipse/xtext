@@ -77,10 +77,18 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final RuleCall cRefChild2IDTerminalRuleCall_8_1_1_0_1_1 = (RuleCall)cRefChild2CrossReference_8_1_1_0_1.eContents().get(1);
 		
 		//Model:
-		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
+		//  "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
+		//  STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
+		//  multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
+		//  Child2] ))?;
 		public ParserRule getRule() { return rule; }
 
-		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
+		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
+		//STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
+		//multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
+		//Child2] ))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -341,10 +349,10 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		//Child2:
 		//  name=STRING; 
 		//
-		//   
+		//  
 		//
-		// // TODO rename test language to ValueConverterTestLanguage
-		// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+		//// TODO rename test language to ValueConverterTestLanguage
+		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		public ParserRule getRule() { return rule; }
 
 		//name=STRING
@@ -384,7 +392,11 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
+	//  "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
+	//  STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
+	//  multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
+	//  Child2] ))?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -436,10 +448,10 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	//Child2:
 	//  name=STRING; 
 	//
-	//   
+	//  
 	//
-	// // TODO rename test language to ValueConverterTestLanguage
-	// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+	//// TODO rename test language to ValueConverterTestLanguage
+	//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 	public Child2Elements getChild2Access() {
 		return (pChild2 != null) ? pChild2 : (pChild2 = new Child2Elements());
 	}
@@ -461,7 +473,8 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

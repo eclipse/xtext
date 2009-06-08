@@ -41,7 +41,7 @@ public interface SimplerewritetestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://simple/rewrite/test";
+  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest";
 
   /**
    * The package namespace name.
