@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.doc"
+      id="org.eclipse.xtext.docs"
       label="Xtext Documentation (Incubation)"
       version="0.7.0.qualifier"
-      provider-name="Eclipse.org">
+      provider-name="Eclipse.org"
+      plugin="org.eclipse.xtext.doc">
 
    <description url="http://www.example.com/description">
       Xtext documentation
