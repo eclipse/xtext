@@ -106,12 +106,12 @@ bc. grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
 
 declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond and have the file extension ''xtext''. This means that the name needs to be @SecretCompartments.xtext@ and must be placed in package @my.pack@ somewhere on your project's class path.
 
-The first line is also used to declare any used language (for mechanism details cf. "Grammar Mixins":#Grammar Mixins).
+The first line is also used to declare any used language (for mechanism details cf. "Grammar Mixins":#grammarMixins).
 
 h3. EPackage declarations
 
 Xtext parsers instantiate Ecore models (aka meta model). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
-Xtext can infer Ecore models from a grammar (see "Meta-Model Inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this, use multiple existing ECore models and infer some others from one grammar. 
+Xtext can infer Ecore models from a grammar (see "Meta-Model Inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this, use multiple existing Ecore models and infer some others from one grammar. 
 
 h4. EPackage generation
 
@@ -120,11 +120,11 @@ The easiest way to get started is to let Xtext infer the meta model from your gr
 bc. generate secretcompartment http://www.eclipse.org/secretcompartment
 
 Which means: generate an EPackage with name @secretcompartment@ and nsURI @http://www.eclipse.org/secretcompartment@ (these are the properties needed to create an EPackage). 
-The whole algorithm used to derive complete ecore models from Xtext grammars is described in yection "Meta-Model Inference":#metamodelInference.
+The whole algorithm used to derive complete Ecore models from Xtext grammars is described in section "Meta-Model Inference":#metamodelInference.
 
 h4. EPackage import
 
-If you already have created such an EPackage somehow, you can import it using either a namespace URI or a resource URI (URIs are an EMF concept).
+If you already have an existing EPackage, you can import it using either a namespace URI or a resource URI (URIs are an EMF concept).
 
 h5. Using namespace URIs to import existing EPackages
 
@@ -140,18 +140,18 @@ bc.. <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup"
   <registerGeneratedEPackage value="foo.bar.MyPackage"/>
 </bean>
 
-p. using namespace URIs is typically only interesting when using common ecore models, such as Ecore itself or the UML metamodel. If you're developing the EPackage together with the DSL abut don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
+p. using namespace URIs is typically only interesting when using common Ecore models, such as Ecore itself or the UML metamodel. If you're developing the EPackage together with the DSL but don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
 
 h5. Using resource URIs to import existing EPackages
 
 If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
-Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult EMF documentation (we recomend the book) for details.
+Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recomend the book) for details.
 
-An import statement referring to an ecore file by a platform:/resource/ URI looks like so: 
+An import statement referring to an Ecore file by a platform:/resource/ URI looks like so: 
 
 bc. import "platform:/resource/my.project/modelFolder/MyEcore.ecore"
 
-If you want to mix generated and imported ecore models you'll have to configure the generator fragment in your MWE file repsonsible for generating the ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs to the genmodels for the referenced ecore models.
+If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs to the genmodels for the referenced Ecore models.
 Example:
 
 bc. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="platform:/resource/my.project/model/myEcore.genmodel"/>
@@ -164,7 +164,7 @@ bc..
   generate secretcompartment http://www.eclipse.org/secretcompartment
   import http://www.eclipse.org/anotherPackage as another
 
-p. When referring to a type somewhere in the grammar you need to qualify them using that alias (example ''another::CoolType''). We'll see later where such type references occur.
+p. When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example ''another::CoolType''). We'll see later where such type references occur.
 
 It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are no two EClassifiers with the same name. In such cases none of them are referable. It is even possible to have multiple ''import''s and one ''generate'' declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.
 
@@ -181,7 +181,7 @@ p. With the declaration from above
 # a reference to type @ClassB@ would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassB@, 
 # a reference to type @NotYetDefined@ would be linked to a newly created EClass in @http://www.eclipse.org/toBeGenerated@
 
-Note, that using this feature is not recommended, because it might cause problems, which are hard to tackle down.
+Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
 For instance, a reference to ''@classA@'' would as well be linked to a newly created EClass, because the corresponding type in @http://www.eclipse.org/packContainingClassA@ is spelled with a capital letter.
 
 h3. Rules
@@ -198,7 +198,7 @@ h4. Terminal Rules
 
 In the first phase, i.e. lexing, a sequence of characters (the text input) is transformed into a sequence of so called tokens. 
 Each token consists of one or more characters and was matched by a particular terminal rule and represents an atomic symbol.
-In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar org.eclipse.xtext.common.Terminals (cf. "Grammar Mixins":#Grammar Mixins).
+In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar org.eclipse.xtext.common.Terminals (cf. "Grammar Mixins":#grammarMixins).
 Terminal rules are also referred to as token rules or lexer rules. There is an informal naming convention that terminal-rule names are all uppercase.
 
 Therein the ID rule is defined as follows:
@@ -209,7 +209,7 @@ bc..
     
 p. It says that a Token ID starts with an optional '^' character, which is called caret, followed by a letter ('a'..'z'|'A'..'Z') or underscore ('_') followed by any number of letters, underscores and numbers ('0'..'9'). 
 
-The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule's [[Xtext/Documentation/ValueConverter|ValueConverter]]. 
+The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule's "ValueConverter":#valueconverter. 
 
 This is the formal definition of terminal rules:
 
@@ -221,7 +221,7 @@ bc..
 
 p. Note, that the order of terminal rules is crucial for your grammar, as they may hide each other. This is especially important for newly introduced rules in connection with mixed rules from used grammars. 
 
-If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should implement it as a "datatype rule":#Datatype_rules, instead of adding another terminal rule.
+If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should implement it as a "datatype rule":#datatypeRules, instead of adding another terminal rule.
 
 h5. Return types
 
@@ -233,11 +233,11 @@ bc..
    ('0'..'9')+;
 
 p. This means that the terminal rule INT returns instances of ecore::EInt. It is possible to define any kind of data type here, which just needs to be an instance of ecore::EDataType.
-In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 'IValueConverterService' (cf. [[Xtext/Documentation/ValueConverter|value converters]]).
+In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 'IValueConverterService' (cf. "value converters":#valueconverter).
 
-The implementation needs to be registered as a service (cf. "Service Framework":#Service_Framework).
+The implementation needs to be registered as a service (cf. "Service Framework":#serviceFramework).
 
-This is also the point where you can remove things like quotes form string literals or the caret ('^') from identifiers.
+This is also the point where you can remove things like quotes from string literals or the caret ('^') from identifiers.
 
 h4. Extended Backus-Naur form expressions
 
@@ -324,7 +324,7 @@ That is the 4-digit hexadecimal code of ascii characters.
 
 h3. Parser Rules
 
-The parser reads in a sequence of terminals and walks through the parser rules. That's why a parser rule - contrary to a terminal rule - does not produce a single terminal token but a tree of non-terminal and terminal tokens that lead to a so called parse tree (in Xtext it is a.k.a node model). Furthermore, parser rules are handled as kind of a building plan to create EObjects that form the semantic model (the linked! AST). The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
+The parser reads in a sequence of terminals and walks through the parser rules. That's why a parser rule - contrary to a terminal rule - does not produce a single terminal token but a tree of non-terminal and terminal tokens that lead to a so called parse tree (in Xtext it is a.k.a node model). Furthermore, parser rules are handled a as kind of a building plan for how to create EObjects that form the semantic model (the linked! AST). The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
 
 h4. Extended Backus-Naur Form expressions
 
@@ -356,14 +356,14 @@ bc. name=ID
 
 Where the left hand side refers to a feature of the current EClass (in this case EClass 'State'). 
 The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
-The type of the feature needs to be compatible to the type of the expression on the right. As ID returns an EString the feature name needs to be of type EString as well.
+The type of the feature needs to be compatible with the type of the expression on the right. As ID returns an EString the feature name needs to be of type EString as well.
 
 h4. Assignment Operators
 
 There are three different assignment operators, each with different semantics
 # the simple equal sign "=" is the straight forward assignment, and used for features which take only one element
-# the "+=" sign (the add operator) awaits a multiple feature and adds the value on the right hand to that feature, which is, of course, a list feature
-# the "?=" sign (boolean add operator) awaits a feature if type EBoolean and sets it to true if the right hand side was consumed (no matter with what values)
+# the "+=" sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is, of course, a list feature
+# the "?=" sign (boolean add operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed (no matter with what values)
 
 h5. Cross References 
 
@@ -398,11 +398,11 @@ You may even use alternatives as the referencable terminal. This way, either an 
 
 bc. TableRef: table=[Table|(ID|STRING)];
 
-Have a look at the "linking section":#Linking in order to understand how linking is done.
+Have a look at the "linking section":#linking in order to understand how linking is done.
 
 h5. Simple Actions 
 
-By default the object to be returned by parser rule is created lazily on the first assignment. Then the type of the EObject to be created is determined from the specified return type (or the rule name if not explicit return type is specified).
+By default the object to be returned by a parser rule is created lazily on the first assignment. Then the type of the EObject to be created is determined from the specified return type (or the rule name if not explicit return type is specified).
 With Actions however, creation of EObject can be made explicit. Xtext supports two kinds of Actions:
 # simple actions
 # assigned actions.
@@ -457,7 +457,7 @@ bc..
 
 p. Thus, to state the cardinality is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk.
 
-h5(grammar_actions). Tree Rewrite Actions 
+h5(#grammarActions). Tree Rewrite Actions 
 
 LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially Antlr has a very nice generic error recovery mechanism. This allows to have AST constructed even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
 
@@ -479,7 +479,7 @@ TerminalExpression :
    INT 
 
 p. In practice this is always the same pattern and therefore not that problematic. 
-However, by simply applying Xtext's AST construction we know so far like so ...
+However, by simply applying the Xtext AST construction features we've covered so far, a grammar ...
 
 bc.. Expression :
   {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?;
@@ -488,7 +488,7 @@ TerminalExpression returns Expression:
   '(' Expression ')' |
   {IntLiteral} value=INT;
 
-p. ... one would get unwanted elements in the resulting AST.
+p. ... would result in unwanted elements in the AST.
 For instance the expression " ( 42 ) " would result in a tree like this:
 
 bc.. Operation {
@@ -511,8 +511,8 @@ TerminalExpression returns Expression:
   '(' Expression ')' |
   {IntLiteral} value=INT;
 
-p. In the example above @{Operation.left=current}@ is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (current variable) to a feature of the newly created Object (in this case 'left').
-In Java the semantics could be expressed like so:
+p. In the example above @{Operation.left=current}@ is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (@current@ variable) to a feature of the newly created Object (in this case 'left').
+In Java these semantics could be expressed as:
 
 bc.. Operation temp = new Operation();
 temp.setLeft(current);
@@ -520,9 +520,9 @@ current = temp;
 
 h3. Hidden terminal symbols
 
-Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
+Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 
-Hidden terminals may (or may not) appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [[#Grammar_Mixins | reusing a single grammar]] its definition of hidden tokens is reused as well. The grammar org.eclipse.xtext.common.Terminals comes with a reasonable default and hides all comments and whitespace from the parser rules.
+Hidden terminals may (or may not) appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When "reusing a single grammar":#grammarMixins its definition of hidden tokens is reused as well. The grammar org.eclipse.xtext.common.Terminals comes with a reasonable default and hides all comments and whitespace from the parser rules.
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called from the declaring rule uses the same hidden terminals as the calling rule, unless it defines other hidden tokens itself.
   
@@ -533,18 +533,18 @@ bc..
  Fullname: 
    (firstname=ID)? lastname=ID;
 
-p. The sample rule "Person" defines multiple-line comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespaces (WS) to be allowed between the 'Fullname' and the 'age'. Because 'Fullname' does not introduce another set of hidden terminals, it allows the same symbols to appear between 'firstname' and 'lastname' as the calling rule 'pPerson'. Thus, the following input is perfectly valid for the given grammar snippet:
+p. The sample rule "Person" defines multiple-line comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespaces (WS) to be allowed between the 'Fullname' and the 'age'. Because 'Fullname' does not introduce another set of hidden terminals, it allows the same symbols to appear between 'firstname' and 'lastname' as the calling rule 'Person'. Thus, the following input is perfectly valid for the given grammar snippet:
 
 bc.. 
  John /* comment */ Smith // line comment
    /* comment */
    42      ;
 
-p. A list of all default terminals like WS can be found in section "Grammar Mixins":#Grammar_Mixins.
+p. A list of all default terminals like WS can be found in section "Grammar Mixins":#grammarMixins.
 
-h3. Datatype rules
+h3(#datatypeRules). Datatype rules
 
-Datatype rules are parsing-phase rules, which create instances of EDatatype as terminal rules do.
+Datatype rules are parsing-phase rules, which create instances of EDataType as terminal rules do.
 The nice thing about datatype rules is that they are actually parser rules and are therefore 
 
 # context sensitive and 
@@ -569,14 +569,14 @@ bc. QualifiedName returns ecore::EString : ID ('.' ID)*;
 
 Note that if a rule does not call another parser rule and does not contain any actions nor assignments (see parser rules), it is considered a datatype rule and the datatype EString is implied if not explicitly declared differently.
 
-For conversion again value converters are responsible (cf. "value converters":Xtext/Documentation/ValueConverter).
+For conversion again value converters are responsible (cf. "value converters":#valueconverter).
 
 h3. Enum Rules
 
 Enum rules return enumeration literals from strings. They can be seen as a shortcut for datatype rules with specific value converters.
-The main advantage of enum rules is their simplicity, typesafety and therefore nice validation. Furthermore it is possible to infere enums and their respective literals during the metamodel transformation.
+The main advantage of enum rules is their simplicity, typesafety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the metamodel transformation.
 
-If you want to define a ChangeKind [[http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html org.eclipse.emf.ecore.change/model/Change.ecore]] with 'ADD', 'MOVE' and 'REMOVE' you could write:
+If you want to define a ChangeKind "org.eclipse.emf.ecore.change/model/Change.ecore":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html with 'ADD', 'MOVE' and 'REMOVE' you could write:
 
 bc.. 
  enum ChangeKind :
@@ -698,7 +698,7 @@ The following conditions cause an error
 * An undeclared alias is used. 
 * An imported metamodel cannot be loaded.
 
-h2(grammar_import). Importing existing Meta Models
+h2(#grammarImport). Importing existing Meta Models
 
 With the import directive in Xtext you can refer to existing Ecore metamodels and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore datatypes.
 
@@ -708,9 +708,9 @@ Specify an explicit return type to reuse such imported types. Note that this eve
 
 bc. terminal INT returns ecore::EInt : ('0'..'9')+;
 
-h2(grammar_mixins). Grammar Mixins
+h2(#grammarMixins). Grammar Mixins
 
-Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard extend @org.eclipse.xtext.common.Terminals@ by default. 
+Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use @org.eclipse.xtext.common.Terminals@ by default. 
 
 bc.. 
  grammar org.xtext.example.MyDsl with org.eclipse.xtext.common.Terminals
@@ -719,7 +719,7 @@ bc..
  
  ....
 
-p. Inheriting from another grammar makes the rules defined in that grammar referable. It is also possible to overwrite rules from the super grammar. 
+p. Mixing in another grammar makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. 
 
 Example :
 
@@ -760,5 +760,3 @@ bc..  grammar org.eclipse.xtext.common.Terminals
  terminal WS		: (' '|'\t'|'\r'|'\n')+ ;
 
  terminal ANY_OTHER:	. ;
-
- 
