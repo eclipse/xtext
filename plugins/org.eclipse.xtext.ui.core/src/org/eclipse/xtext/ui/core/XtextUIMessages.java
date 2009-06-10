@@ -8,11 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
-import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.eclipse.osgi.util.NLS;
+
+import com.ibm.icu.text.MessageFormat;
 
 /**
  * 
