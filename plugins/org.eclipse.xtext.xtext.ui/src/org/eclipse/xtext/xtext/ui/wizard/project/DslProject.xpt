@@ -56,14 +56,12 @@ projectName=«this.projectName»
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
 				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com 
-			     and falls back to the packrat parser if it's not available. -->
-			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
-				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
-				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
-			</fragment>
-			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> -->
+			<!-- the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://xtext.itemis.com/updates -->
+			<fragment class="org.eclipse.xtext.generator.AntlrDelegatingFragment" />
+			
+			<!-- If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
+			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			 -->
 	
 			«IF xpandBased»
 			<!-- check-based API for validation -->

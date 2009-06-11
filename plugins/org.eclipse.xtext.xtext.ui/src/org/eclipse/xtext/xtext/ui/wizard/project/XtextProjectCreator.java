@@ -102,6 +102,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.xtext.log4j;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.core;resolution:=optional", //$NON-NLS-1$
+				"com.ibm.icu;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.xtext.xtend;resolution:=optional")); //$NON-NLS-1$
 
 		String templateName = pathToTemplates()+"DslProject::main"; //$NON-NLS-1$
