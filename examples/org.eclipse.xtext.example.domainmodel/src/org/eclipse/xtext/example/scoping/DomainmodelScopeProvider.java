@@ -3,37 +3,29 @@
  */
 package org.eclipse.xtext.example.scoping;
 
-import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
+import static org.eclipse.xtext.scoping.Scopes.*;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Reference;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-
-import com.google.common.base.Function;
 
 /**
  * This class contains custom scoping description.
  * 
- * see : http://wiki.eclipse.org/Xtext/Documentation#Scoping
- * on how and when to use it 
- *
+ * see : http://wiki.eclipse.org/Xtext/Documentation#Scoping on how and when to
+ * use it
+ * 
  */
 public class DomainmodelScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_Reference_opposite(Reference ref, EReference eRef) {
-		return new SimpleScope(
-				transform(typeSelect(((Entity)ref.getType().getReferenced()).getFeatures(), Reference.class),
-						new Function<Reference, IScopedElement>(){
-
-							public IScopedElement apply(Reference from) {
-								return ScopedElement.create(from.getName(), from);
-							}
-
-						}));	
+		List<Reference> typeSelect = typeSelect(((Entity) ref.getType().getReferenced()).getFeatures(), Reference.class);
+		return new SimpleScope(scopedElementsFor(typeSelect));
 	}
+
 }
