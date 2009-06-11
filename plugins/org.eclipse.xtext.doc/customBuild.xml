@@ -10,7 +10,7 @@
 		Global vars
 	-->
 	<property name="document.name" value="xtext"/>
-	<property name="document.stylesheet" value="styles/article.xsl"/>
+	<property name="document.stylesheet" value="styles/html.xsl"/>
 	<property name="document.pdf.stylesheet" value="styles/xmpp.xsl"/>
 
 	<property name="document.eclipse.stylesheet" value="styles/eclipsehelp.xsl"/>

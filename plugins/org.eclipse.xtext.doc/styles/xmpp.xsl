@@ -106,6 +106,20 @@
     <xsl:text>pt</xsl:text>
   </xsl:attribute>
 </xsl:attribute-set>
+<xsl:attribute-set name="xref.properties">
+<xsl:attribute name="color">
+  <xsl:choose>
+    <xsl:when test="self::ulink">blue</xsl:when>
+    <xsl:otherwise>inherit</xsl:otherwise>
+  </xsl:choose>
+</xsl:attribute>
+<xsl:attribute name="text-decoration">
+  <xsl:choose>
+    <xsl:when test="self::ulink">underline</xsl:when>
+    <xsl:otherwise>inherit</xsl:otherwise>
+  </xsl:choose>
+</xsl:attribute>
+</xsl:attribute-set>
 
   <xsl:param name="variablelist.as.blocks" select="0"/>
 
@@ -125,11 +139,11 @@
     <xsl:attribute name="padding">5pt</xsl:attribute>
   </xsl:attribute-set>
 
-  <!--<xsl:param name="shade.verbatim" select="1"/>
+  <xsl:param name="shade.verbatim" select="1"/>
   <xsl:attribute-set name="shade.verbatim.style">
     <xsl:attribute name="border">0</xsl:attribute>
     <xsl:attribute name="background-color">#F0F0F0</xsl:attribute>
-  </xsl:attribute-set> -->
+  </xsl:attribute-set>
 
   <xsl:attribute-set name="section.title.chapter.properties">
     <xsl:attribute name="font-size">
