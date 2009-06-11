@@ -4,7 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext;
 
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCo
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
-import org.eclipse.xtext.xtext.ui.editor.outline.FilteringXtextOutlinePage;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -36,11 +36,6 @@ public class XtextUiModule extends AbstractXtextUiModule {
 		return SemanticHighlightingConfiguration.class;
 	}
 	
-	@Override
-	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
-		return FilteringXtextOutlinePage.class;
-	}
-	
 	public Class<? extends IProjectCreator> bindIProjectCreator() {
 		return XtextProjectCreator.class;
 	}
@@ -57,6 +52,11 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory.class;
+	}
+	
+	@Override
+	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
+		return XtextActionBarContributor.class;
 	}
 		
 }

@@ -36,13 +36,12 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
+import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
-import org.eclipse.xtext.ui.common.editor.outline.actions.LexicalSortingAction;
 import org.eclipse.xtext.ui.common.editor.outline.internal.PreservingContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.linking.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.common.editor.outline.linking.OutlineSelectionChangedListener;
-import org.eclipse.xtext.ui.common.editor.outline.linking.ToggleLinkWithEditorAction;
 import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.IXtextEditorAware;
@@ -77,6 +76,9 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 
 	@Inject
 	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
+	
+	@Inject
+	private IActionBarContributor actionbarContributor;
 
 	private XtextEditor editor;
 	private ISourceViewer sourceViewer;
@@ -181,12 +183,11 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 
 	protected void registerToolbarActions(IActionBars actionBars) {
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		if (toolBarManager != null) {
-			toolBarManager.add(new ToggleLinkWithEditorAction(this));
-			toolBarManager.add(new LexicalSortingAction(this));
+		if (actionbarContributor != null) {
+			actionbarContributor.init(toolBarManager, this);
 		}
 	}
-
+	
 	@Override
 	public void dispose() {
 		outlineSelectionChangedListener.uninstall(this);

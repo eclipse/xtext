@@ -43,13 +43,14 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer","org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer")
 		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ITreeProvider","org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider")
 		.addTypeToType("org.eclipse.ui.views.contentoutline.IContentOutlinePage","org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage")
+		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor", "org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor.DefaultActionBarContributor")
 		
 		// syntax coloring
 		.addTypeToType("org.eclipse.jface.text.rules.ITokenScanner","org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner")
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.IDamagerRepairer","org.eclipse.xtext.ui.core.editor.FastLineBasedDamagerRepairer")
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper","org.eclipse.xtext.ui.common.editor.syntaxcoloring.HighlightingHelper")
 		
-		//label provider
+		// label provider
 		.addTypeToType("org.eclipse.jface.viewers.ILabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
 		.addTypeToType("org.eclipse.emf.common.notify.AdapterFactory","org.eclipse.xtext.ui.core.InjectableAdapterFactory")
 		.addTypeToType("org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider","org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider")
