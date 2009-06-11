@@ -78,7 +78,7 @@ bc. IScope scope_<ContextReference>(<ContextType> ctx, EReference ref)
 
 bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EClass type)
 
-The former is used when evaluating the scope for a specific cross reference and here @<ContextReference>@ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). Tthe @ref@ parameter represents this cross reference.
+The former is used when evaluating the scope for a specific cross reference and here @<ContextReference>@ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The @ref@ parameter represents this cross reference.
 
 The latter method signature is used when evaluating the scope of a given element type and is applicable to all cross references of that type. Here @<TypeToReturn>@ is the name of that type which also corresponds to the @type@ parameter. 
 
