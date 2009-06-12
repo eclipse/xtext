@@ -24,6 +24,10 @@ public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormat
 				f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+		c.setLinewrap().after(f.getTestIndentationAccess().getSemiAssignment_4());
+		c.setNoLinewrap().between(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), 
+				                  f.getTestIndentationAccess().getSemiAssignment_4());
+		c.setNoSpace().before(f.getTestIndentationAccess().getSemiAssignment_4());
 		
 		// Assign
 		c.setNoSpace().around(f.getAssignAccess().getOpAssignment_1());

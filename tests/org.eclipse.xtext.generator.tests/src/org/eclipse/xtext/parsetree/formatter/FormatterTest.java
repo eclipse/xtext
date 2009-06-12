@@ -72,5 +72,22 @@ public class FormatterTest extends AbstractGeneratorTest {
 		String res = serialize(m);
 		assertEquals(expected, res);
 	}
+	
+	public void testBetween1() throws Exception {
+		final String model = "test indentation { indentation { x x; }; }";
+		final String expected = "test indentation {\n  indentation {\n    x x;\n  };\n}";
+		EObject m = getModel(model);
+		String res = serialize(m);
+		assertEquals(expected, res);
+	}
+	
+	public void testBetween2() throws Exception {
+		final String model = "test indentation { indentation { x x; } }";
+		final String expected = "test indentation {\n  indentation {\n    x x;\n  }\n}";
+		EObject m = getModel(model);
+		String res = serialize(m);
+		assertEquals(expected, res);
+	}
+
 
 }
