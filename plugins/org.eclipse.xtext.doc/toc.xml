@@ -36,11 +36,11 @@
 <topic href="help/grammarLanguage.html#CrossReferences" label="Cross References"/>
 <topic href="help/grammarLanguage.html#SimpleActions" label="Simple Actions"/>
 <topic href="help/grammarLanguage.html#Unassignedrulecalls" label="Unassigned rule calls"/>
-<topic href="help/grammarLanguage.html#TreeRewriteActions" label="Tree Rewrite Actions"/>
+<topic href="help/grammarLanguage.html#grammarActions" label="Tree Rewrite Actions"/>
 </topic>
 </topic>
 <topic href="help/grammarLanguage.html#Hiddenterminalsymbols" label="Hidden terminal symbols"/>
-<topic href="help/grammarLanguage.html#Datatyperules" label="Datatype rules"/>
+<topic href="help/grammarLanguage.html#datatypeRules" label="Datatype rules"/>
 <topic href="help/grammarLanguage.html#EnumRules" label="Enum Rules"/>
 </topic>
 <topic href="help/metamodelInference.html" label="Meta-Model inference">
@@ -51,14 +51,15 @@
 <topic href="help/metamodelInference.html#CustomizedPostProcessing" label="Customized Post Processing"/>
 <topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"/>
 </topic>
-<topic href="help/ImportingexistingMetaModels.html" label="Importing existing Meta Models"/>
-<topic href="help/GrammarMixins.html" label="Grammar Mixins"/>
+<topic href="help/grammarImport.html" label="Importing existing Meta Models"/>
+<topic href="help/grammarMixins.html" label="Grammar Mixins"/>
 <topic href="help/Defaulttokens.html" label="Default tokens"/>
 <topic href="help/generator.html" label="The Generator">
 <topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to the Modeling Workflow Engine (MWE)"/>
 <topic href="help/generator.html#GeneralArchitecture" label="General Architecture">
 <topic href="help/generator.html#GeneratorFragments" label="Generator Fragments"/>
 <topic href="help/generator.html#Configuration" label="Configuration"/>
+<topic href="help/generator.html#antlr_generator_fragment" label="Antlr Generator Fragment"/>
 </topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
@@ -150,10 +151,5 @@
 <topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"/>
 </topic>
 <topic href="help/MigrationSupport.html" label="Migration Support"/>
-</topic>
-<topic href="help/deploying_dsls.html" label="Deploying DSLs">
-<topic href="help/deploying_dsls.html#PrepareyourDSLprojects" label="Prepare your DSL projects"/>
-<topic href="help/CreatingaFeatureforyourDSL.html" label="Creating a Feature for your DSL"/>
-<topic href="help/CreatinganUpdateSiteforyourDSL.html" label="Creating an Update Site for your DSL"/>
 </topic>
 </toc>

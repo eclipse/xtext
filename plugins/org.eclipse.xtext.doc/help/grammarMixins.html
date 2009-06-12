@@ -5,12 +5,12 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
 <link rel="home" href="index.html" title="Xtext User Guide"/>
 <link rel="up" href="Overview.html" title="Overview"/>
-<link rel="prev" href="ImportingexistingMetaModels.html" title="Importing existing Meta Models"/>
+<link rel="prev" href="grammarImport.html" title="Importing existing Meta Models"/>
 <link rel="next" href="Defaulttokens.html" title="Default tokens"/>
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Grammar Mixins</h1>
-<p>Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard extend 
+<p>Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use 
 				<code class="code">org.eclipse.xtext.common.Terminals</code> by default. 
 			</p>
 <div class="literallayout">
@@ -26,7 +26,7 @@
 </code>
 </p>
 </div>
-<p>Inheriting from another grammar makes the rules defined in that grammar referable. It is also possible to overwrite rules from the super grammar. </p>
+<p>Mixing in another grammar makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. </p>
 <p>Example :</p>
 <div class="literallayout">
 <p>
