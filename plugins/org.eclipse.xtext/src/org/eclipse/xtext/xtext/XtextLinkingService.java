@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -167,7 +167,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 		generatedEPackage.setName(generatedMetamodel.getName());
 		generatedEPackage.setNsPrefix(generatedMetamodel.getName());
 		generatedEPackage.setNsURI(nsURI);
-		final Resource generatedPackageResource = new XMIResourceFactoryImpl().createResource(uri);
+		final Resource generatedPackageResource = new EcoreResourceFactoryImpl().createResource(uri);
 		generatedMetamodel.eResource().getResourceSet().getResources().add(generatedPackageResource);
 		generatedPackageResource.getContents().add(generatedEPackage);
 		return Collections.<EObject>singletonList(generatedEPackage);

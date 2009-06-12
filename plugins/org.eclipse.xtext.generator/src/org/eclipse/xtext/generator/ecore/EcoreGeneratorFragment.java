@@ -8,8 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
-import static org.eclipse.xtext.EcoreUtil2.*;
-import static org.eclipse.xtext.XtextPackage.*;
+import static org.eclipse.xtext.EcoreUtil2.collect;
+import static org.eclipse.xtext.EcoreUtil2.typeSelect;
+import static org.eclipse.xtext.XtextPackage.GENERATED_METAMODEL__EPACKAGE;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +47,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -149,7 +150,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private void copyGeneratedMetamodelsTo(List<Grammar> list, ResourceSet rs, Copier copier) {
 		List<EPackage> generatedEPackages = new ArrayList<EPackage>(3);
 		collectGeneratedMetamodels(generatedEPackages, list, new HashSet<Grammar>());
-		Factory factory = new XMIResourceFactoryImpl();
+		Factory factory = new EcoreResourceFactoryImpl();
 		for (EPackage copyMe: generatedEPackages) {
 			Resource resource = factory.createResource(URI.createURI(copyMe.getNsURI()));
 			resource.getContents().add(copier.copy(copyMe));
