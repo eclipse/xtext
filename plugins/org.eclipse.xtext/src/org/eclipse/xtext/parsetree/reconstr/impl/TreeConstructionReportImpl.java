@@ -166,11 +166,15 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	@Override
 	public String toString() {
+		final int count = 7;
 		StringBuffer b = new StringBuffer();
 		b.append("<# of serialized tokens>: ");
 		b.append("\"<serializable fragment, starting from the end>\":\n");
 		b.append("  -> <possible reasons for not continuing>\n");
-		for (String s : getLikelyErrorReasons()) {
+		List<String> err = getLikelyErrorReasons();
+		if (err.size() > count)
+			err = err.subList(0, count);
+		for (String s : err) {
 			b.append(s);
 			b.append("\n");
 		}
