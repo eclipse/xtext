@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="serializationerror" nsURI="http://www.eclipse.org/2009/tmf/xtext/serializationerror" nsPrefix="serializationerror">
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="serializationerror"
+    nsURI="http://www.eclipse.org/2009/tmf/xtext/serializationerror" nsPrefix="serializationerror">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="//Test" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//Test" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Test">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="one">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="two">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="one" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="two" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TwoRequired" eSuperTypes="//Test"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TwoOptions" eSuperTypes="//Test"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoRequired" eSuperTypes="#//Test"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoOptions" eSuperTypes="#//Test"/>
 </ecore:EPackage>
