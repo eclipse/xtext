@@ -345,6 +345,16 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTestIndentation_Semi()
+  {
+    return (EAttribute)testIndentationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public FormattertestlanguageFactory getFormattertestlanguageFactory()
   {
     return (FormattertestlanguageFactory)getEFactoryInstance();
@@ -396,6 +406,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     testIndentationEClass = createEClass(TEST_INDENTATION);
     createEReference(testIndentationEClass, TEST_INDENTATION__SUB);
+    createEAttribute(testIndentationEClass, TEST_INDENTATION__SEMI);
   }
 
   /**
@@ -460,6 +471,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     initEClass(testIndentationEClass, TestIndentation.class, "TestIndentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTestIndentation_Sub(), this.getTestIndentation(), null, "sub", null, 0, -1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestIndentation_Semi(), ecorePackage.getEBoolean(), "semi", null, 0, 1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

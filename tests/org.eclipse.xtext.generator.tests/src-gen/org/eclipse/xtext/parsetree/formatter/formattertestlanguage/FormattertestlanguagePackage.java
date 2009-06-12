@@ -320,13 +320,22 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_INDENTATION__SUB = ROOT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Semi</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_INDENTATION__SEMI = ROOT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Test Indentation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 1;
+  int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 2;
 
 
   /**
@@ -531,6 +540,17 @@ public interface FormattertestlanguagePackage extends EPackage
   EReference getTestIndentation_Sub();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#isSemi <em>Semi</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Semi</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation#isSemi()
+   * @see #getTestIndentation()
+   * @generated
+   */
+  EAttribute getTestIndentation_Semi();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -720,6 +740,14 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EReference TEST_INDENTATION__SUB = eINSTANCE.getTestIndentation_Sub();
+
+    /**
+     * The meta object literal for the '<em><b>Semi</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TEST_INDENTATION__SEMI = eINSTANCE.getTestIndentation_Semi();
 
   }
 

@@ -136,6 +136,9 @@
           </groups>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="}"/>
+        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="semi" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value=";"/>
+        </tokens>
       </alternatives>
     </rules>
   </xtext:Grammar>

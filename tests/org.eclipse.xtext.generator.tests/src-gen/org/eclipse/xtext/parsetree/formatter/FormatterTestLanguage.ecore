@@ -40,5 +40,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="TestLinewrap" eSuperTypes="//Root"/>
   <eClassifiers xsi:type="ecore:EClass" name="TestIndentation" eSuperTypes="//Root">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sub" upperBound="-1" eType="//TestIndentation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="semi">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

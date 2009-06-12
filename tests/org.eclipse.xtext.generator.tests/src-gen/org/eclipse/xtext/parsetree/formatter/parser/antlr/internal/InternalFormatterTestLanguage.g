@@ -628,7 +628,28 @@ ruleTestIndentation returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), null); 
     }
-);
+(	
+	
+	    lv_semi_5=';' 
+    {
+        createLeafNode(grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_4_0(), "semi"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTestIndentationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "semi", true, ";", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)?);
 
 
 
