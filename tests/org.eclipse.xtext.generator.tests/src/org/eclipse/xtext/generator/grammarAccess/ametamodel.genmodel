@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/emf-gen"
+    modelPluginID="org.eclipse.xtext.generator.tests" modelName="Ametamodel" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>ametamodel.ecore</foreignModel>
+  <genPackages prefix="Ametamodel" basePackage="org.eclipse.xtext.generator.grammarAccess"
+      disposableProviderFactory="true" ecorePackage="ametamodel.ecore#/">
+    <genClasses ecoreClass="ametamodel.ecore#//AType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ametamodel.ecore#//AType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ametamodel.ecore#//AModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ametamodel.ecore#//AModel/elements"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
