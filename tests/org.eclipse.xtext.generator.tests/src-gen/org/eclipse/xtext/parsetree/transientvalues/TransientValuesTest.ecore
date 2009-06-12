@@ -1,25 +1,19 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="transientvaluestest" nsURI="http://simple/transientvaluestest" nsPrefix="transientvaluestest">
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="transientvaluestest"
+    nsURI="http://simple/transientvaluestest" nsPrefix="transientvaluestest">
   <eClassifiers xsi:type="ecore:EClass" name="Root"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TestRequired" eSuperTypes="//Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required1">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required2">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="TestRequired" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TestOptional" eSuperTypes="//Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opt1">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opt2">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="TestOptional" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opt1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opt2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TestList" eSuperTypes="//Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="item" unique="false" upperBound="-1">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="TestList" eSuperTypes="#//Root">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="item" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

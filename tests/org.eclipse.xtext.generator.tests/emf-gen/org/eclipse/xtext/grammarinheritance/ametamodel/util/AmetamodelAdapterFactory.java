@@ -2,17 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AmetamodelAdapterFactory.java,v 1.2 2009/05/05 15:32:36 sefftinge Exp $
+ * $Id: AmetamodelAdapterFactory.java,v 1.3 2009/06/12 17:13:00 szarnekow Exp $
  */
 package org.eclipse.xtext.grammarinheritance.ametamodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AModel;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
+
+import org.eclipse.xtext.grammarinheritance.ametamodel.*;
 
 /**
  * <!-- begin-user-doc -->

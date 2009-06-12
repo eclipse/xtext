@@ -2,19 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AmetamodelFactoryImpl.java,v 1.2 2009/05/05 15:32:30 sefftinge Exp $
+ * $Id: AmetamodelFactoryImpl.java,v 1.3 2009/06/12 17:12:59 szarnekow Exp $
  */
 package org.eclipse.xtext.grammarinheritance.ametamodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AModel;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelFactory;
-import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
+
+import org.eclipse.xtext.grammarinheritance.ametamodel.*;
 
 /**
  * <!-- begin-user-doc -->

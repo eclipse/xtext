@@ -29,13 +29,13 @@ public class FormatterTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
+	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/formattertestlanguage")) {
+		EPackage.Registry.INSTANCE.put("http://simple/formattertestlanguage", org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE);
+	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("formattertestlanguage", resourceFactory);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/formattertestlanguage")) {
-		EPackage.Registry.INSTANCE.put("http://simple/formattertestlanguage", org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE);
-	}
 
 	}
 }
