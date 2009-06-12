@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ametamodel"
+    nsURI="http://www.eclipse.org/xtext/tests/grammarAccess" nsPrefix="ametamodel">
+  <eSubpackages name="asubpackage" nsURI="http://www.eclipse.org/xtext/tests/grammarAccess/subpackage"
+      nsPrefix="asubpackage">
+    <eClassifiers xsi:type="ecore:EClass" name="AType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AModel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+          eType="#//asubpackage/AType" containment="true"/>
+    </eClassifiers>
+    <eSubpackages name="emptyPackage" nsURI="http://www.eclipse.org/xtext/tests/grammarAccess/empty"
+        nsPrefix="empty">
+      <eSubpackages name="subsubpackage" nsURI="http://www.eclipse.org/xtext/tests/grammarAccess/subsubpackage"
+          nsPrefix="subsubpackage">
+        <eClassifiers xsi:type="ecore:EClass" name="AnotherType" eSuperTypes="#//asubpackage/AType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//asubpackage/AType"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
