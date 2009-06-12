@@ -1212,11 +1212,11 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestIndentation ****************
  *
  * TestIndentation:
- *   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
+ *   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
  *
  **/
 
-// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
+// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1229,7 +1229,8 @@ protected class TestIndentation_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new TestIndentation_RightCurlyBracketKeyword_3(parent, this, 0, inst);
+			case 0: return new TestIndentation_SemiAssignment_4(parent, this, 0, inst);
+			case 1: return new TestIndentation_RightCurlyBracketKeyword_3(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -1406,6 +1407,37 @@ protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken 
 		}	
 	}	
 		
+}
+
+// semi?=";"?
+protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
+	
+	public TestIndentation_SemiAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTestIndentationAccess().getSemiAssignment_4();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_RightCurlyBracketKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("semi",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("semi");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_4_0();
+			return obj;
+		}
+		return null;
+	}
+
 }
 
 

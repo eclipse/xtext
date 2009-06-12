@@ -7,12 +7,15 @@ package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -28,6 +31,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentati
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getSub <em>Sub</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#isSemi <em>Semi</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +48,26 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * @ordered
    */
   protected EList<TestIndentation> sub;
+
+  /**
+   * The default value of the '{@link #isSemi() <em>Semi</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSemi()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean SEMI_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isSemi() <em>Semi</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSemi()
+   * @generated
+   * @ordered
+   */
+  protected boolean semi = SEMI_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,6 +109,29 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isSemi()
+  {
+    return semi;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSemi(boolean newSemi)
+  {
+    boolean oldSemi = semi;
+    semi = newSemi;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FormattertestlanguagePackage.TEST_INDENTATION__SEMI, oldSemi, semi));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -108,6 +155,8 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
     {
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         return getSub();
+      case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
+        return isSemi();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -127,6 +176,9 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
         getSub().clear();
         getSub().addAll((Collection<? extends TestIndentation>)newValue);
         return;
+      case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
+        setSemi((Boolean)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -144,6 +196,9 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         getSub().clear();
         return;
+      case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
+        setSemi(SEMI_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -160,8 +215,27 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
     {
       case FormattertestlanguagePackage.TEST_INDENTATION__SUB:
         return sub != null && !sub.isEmpty();
+      case FormattertestlanguagePackage.TEST_INDENTATION__SEMI:
+        return semi != SEMI_EDEFAULT;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (semi: ");
+    result.append(semi);
+    result.append(')');
+    return result.toString();
   }
 
 } //TestIndentationImpl

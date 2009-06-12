@@ -304,12 +304,14 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment cItemsAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
 		private final RuleCall cItemsLineParserRuleCall_2_1_0 = (RuleCall)cItemsAssignment_2_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cSemiAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
 		
 		//TestIndentation:
-		//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
+		//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
 		public ParserRule getRule() { return rule; }
 
-		//"indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
+		//"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?
 		public Group getGroup() { return cGroup; }
 
 		//"indentation"
@@ -335,6 +337,12 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+
+		//semi?=";"?
+		public Assignment getSemiAssignment_4() { return cSemiAssignment_4; }
+
+		//";"
+		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
 	
 	
@@ -439,7 +447,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TestIndentation:
-	//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
+	//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
 	}

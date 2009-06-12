@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -267,6 +268,15 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			else {
 				rel = new ArrayList<ElementLocator>(cfg.getBefore(right));
 				rel.addAll(cfg.getBefore(rass));
+			}
+			for (Iterator<ElementLocator> i = r.iterator(); i.hasNext();) {
+				ElementLocator l = i.next();
+				if (l.getType() == LocatorType.BETWEEN && !rel.contains(l))
+					i.remove();
+			}
+			for (Iterator<ElementLocator> i = rel.iterator(); i.hasNext();) {
+				if (i.next().getType() == LocatorType.BETWEEN)
+					i.remove();
 			}
 			r.addAll(rel);
 			for (ElementLocator l : rel)
