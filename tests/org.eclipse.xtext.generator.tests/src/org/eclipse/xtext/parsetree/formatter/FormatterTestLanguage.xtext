@@ -32,4 +32,4 @@ TestLinewrap:
 	"linewrap" items+=Line*;
 	
 TestIndentation:
-	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}"; 
+	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?; 

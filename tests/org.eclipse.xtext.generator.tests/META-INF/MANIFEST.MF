@@ -271,8 +271,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.reconstr.serializationerror.util,
  org.eclipse.xtext.parsetree.reconstr.parser.packrat,
  org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers,
- org.eclipse.xtext.parsetree.formatter.parser.packrat,
- org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers,
  org.eclipse.xtext.grammarinheritance.inheritanceTest2,
  org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl,
  org.eclipse.xtext.grammarinheritance.inheritanceTest2.util
