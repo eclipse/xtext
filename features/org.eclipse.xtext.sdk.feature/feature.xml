@@ -7,7 +7,7 @@
       plugin="org.eclipse.xtext"
       image="modeling32.png">
 
-   <description url="http://www.example.com/description">
+   <description>
       Xtext SDK Feature
    </description>
 
@@ -110,7 +110,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/milestones/"/>
+      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/"/>
    </url>
 
    <includes
