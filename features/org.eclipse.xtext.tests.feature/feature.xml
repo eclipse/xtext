@@ -5,8 +5,8 @@
       version="0.7.0.qualifier"
       provider-name="Eclipse.org">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description>
+      Xtext Tests (Incubation)
    </description>
 
    <copyright>

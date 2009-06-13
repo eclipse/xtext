@@ -6,7 +6,7 @@
       provider-name="Eclipse.org"
       plugin="org.eclipse.xtext.doc">
 
-   <description url="http://www.example.com/description">
+   <description>
       Xtext documentation
    </description>
 

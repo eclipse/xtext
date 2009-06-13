@@ -5,7 +5,7 @@
       version="0.7.0.qualifier"
       provider-name="%providerName">
 
-   <description url="http://www.example.com/description">
+   <description>
       %description
    </description>
 
