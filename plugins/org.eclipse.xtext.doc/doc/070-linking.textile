@@ -90,28 +90,29 @@ the @ref@ would be linked to the declared entity (@entity Entity01;@).
 
 h4. Default Imports
 
-There is a default implementation for inter-resource referencing, which as well uses convention:
+There is a default implementation for inter-resource referencing, which as well uses convention.
+Each string in a model which is assigned to an EAttribute with the name 'importURI', will be interpreted as a URI and used to be loaded using the ResourceSet of the current Resource.
 
-Given the grammar :
+For example, given the following grammar :
 
 bc.. Model : (imports+=Import)* (stuff+=(Ref|Entity))*;
  Import : 'import' importURI=STRING ';';
  Ref : 'ref' referencedObject=[Entity|ID] ';';
  Entity : 'entity' name=ID ';';
 
-p. With this grammar in place it would be possible to write three files in the new DSL where the first references the other two, like this:
+p. It would be possible to write three files using in that language where the first references the other two, like this:
 
-bc.. --file model.dsl
+bc.. //file model.dsl
  import "model1.dsl";
  import "model2.dsl";
  
  ref Foo;
  entity Bar;
 
-bc.. --file model1.dsl 
+bc.. //file model1.dsl 
  entity Stuff;
 
-bc.. --file model2.dsl
+bc.. //file model2.dsl
  entity Foo;
 
 p. The resulting default scope list is as follows:

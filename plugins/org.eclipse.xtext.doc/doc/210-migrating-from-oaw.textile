@@ -157,7 +157,7 @@ h4(#differences_no_URI_token). No URI terminal rule anymore
 
 We decided to remove the URI terminal. The only reason for the existence was to mark the model somehow so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.
 
-So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name 'importedURI'.
+So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name 'importURI'.
 That is if you've used the URI token like this:
 
 bc. 
@@ -166,7 +166,7 @@ bc.
 you'll have to rewrite it that way
 
 bc. 
-  Import : 'import' importedURI=STRING;
+  Import : 'import' importURI=STRING;
 
 Although this changes your meta model, one usually never used this reference explicitly as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. 
 
@@ -223,7 +223,7 @@ When the linking has to be customized scoping is where most of the semantics typ
 
 The provided default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: 
 # Elements which have an attribute 'name' will be made visible by their name
-# Referenced resources will be put on the (outer) scope by using the 'importedURI'- naming convention (TODO-REF) and will only be loaded if necessary
+# Referenced resources will be put on the (outer) scope by using the 'importURI'- naming convention and will only be loaded if necessary
 # The available elements are filtered by the expected type (i.e. the type of the reference to be linked)
 
 h4(#differences_linking_migration). Migration
