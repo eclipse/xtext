@@ -33,5 +33,5 @@ bc.. public interface IFragmentProvider extends ILanguageService {
   EObject getEObject(Resource resource, String fragment);
  }
 
-p. However, the currently available default fragment provider does nothing.
+p. Note that the currently available default fragment provider does nothing (i.e. refers to the default behavior of EMF).
 

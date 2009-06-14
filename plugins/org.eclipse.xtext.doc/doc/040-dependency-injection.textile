@@ -1,9 +1,12 @@
 
 h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
+Xtext uses Google Guice in order to wire up and configure language infrstructures. This allows for very flexible customization of language infrastructure and at the same time
+makes the different pieces far more testable. 
+
 h3. Modules
 
-The Guice Injector configuration is done through the use of Modules (also a Guice concept).
+The Guice injector configuration is done through the use of modules (also a Guice concept).
 The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
 These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
 By default these modules extend a fully generated module.
@@ -17,7 +20,7 @@ What goes into these modules depends on how your generator is configured.
 
 h4. Default Modules
 
-Finally the fully generated modules extend the @DefaultRuntimeModule@ (resp. @DefaultUiModule@), which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
+Finally the fully generated modules extend the @DefaultRuntimeModule@, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
 Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
 
 h4. Changing Configuration
