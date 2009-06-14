@@ -24,8 +24,17 @@ public class XtextProjectInfo implements IProjectInfo{
 	private String projectName;
 	private String languageName;
 	private String fileExtension;
+	private String encoding;
 	private boolean createGeneratorProject = false;
 
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
+	
+	public String getEncoding() {
+		return encoding;
+	}
+	
 	public boolean isCreateGeneratorProject() {
 		return createGeneratorProject;
 	}
