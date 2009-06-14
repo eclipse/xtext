@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardPage;
@@ -150,6 +151,11 @@ public class NewXtextProjectWizardPage extends WizardPage {
 			setErrorMessage(Messages.NewXtextProjectWizardPage_ProjectNameValidationError);
 			setPageComplete(false);
 			return;
+		}
+		try {
+			xtextProjectInfo.setEncoding(ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
+		} catch (CoreException e1) {
+			xtextProjectInfo.setEncoding(System.getProperty("file.encoding"));
 		}
 		// check whether project already exists
 		final IProject handle = ResourcesPlugin.getWorkspace().getRoot().getProject(xtextProjectInfo.getProjectName());
