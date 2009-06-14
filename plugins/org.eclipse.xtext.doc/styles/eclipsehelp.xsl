@@ -5,7 +5,7 @@
     version="1.0">
 
     <xsl:import href="eclipse.xsl" />
-	<xsl:output method="xml" indent="yes" encoding="ISO-8859-1" omit-xml-declaration="yes" />
+	<xsl:output method="html" indent="yes" encoding="ISO-8859-1" omit-xml-declaration="yes" />
 
     <xsl:param name="manifest.in.base.dir" select="0" />
     <xsl:param name="eclipse.autolabel" select="1" />

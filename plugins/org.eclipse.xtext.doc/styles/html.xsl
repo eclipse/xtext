@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
     <xsl:import href="docbook.xsl" />
-	<xsl:output method="xml" indent="yes" encoding="ISO-8859-1" omit-xml-declaration="yes" />
+	<xsl:output method="html" indent="yes" encoding="ISO-8859-1" omit-xml-declaration="yes" />
 
     <xsl:param name="html.stylesheet">book.css</xsl:param>
     <xsl:param name="chunk.first.sections" select="0" />
