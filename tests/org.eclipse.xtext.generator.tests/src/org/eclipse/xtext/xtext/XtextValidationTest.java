@@ -14,6 +14,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
@@ -133,5 +134,49 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertNotNull("diag", diag);
 		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_280413_01() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
+				"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+				"ParserRule returns xtext::ParserRule: name = ID;");
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+		ReferencedMetamodel metamodel = (ReferencedMetamodel) diag.getChildren().get(0).getData().get(0);
+		assertNotNull(metamodel);
+	}
+	
+	public void testBug_280413_02() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
+				"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+				"ParserRule returns xtext::ParserRule: name = ID;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+	
+	public void testBug_280413_03() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+				"ParserRule returns xtext::ParserRule: name = ID;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 }
