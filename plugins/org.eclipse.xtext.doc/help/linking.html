@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Linking</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
-<link rel="prev" href="validation.html" title="Validation"/>
-<link rel="next" href="scoping.html" title="Scoping"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="validation.html" title="Validation">
+<link rel="next" href="scoping.html" title="Scoping">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Linking</h1>
@@ -27,41 +28,45 @@
 <div>
 <div>
 <h3 class="title">
-<a name="Declarationofcrosslinks"/>Declaration of cross links</h3>
+<a name="Declarationofcrosslinks"></a>Declaration of cross links</h3>
 </div>
 </div>
 </div>
 <p>In the grammar a cross reference is specified using square brackets.</p>
 <div class="literallayout">
 <p>
-<code class="code">CrossReference :<br/>
-   '[' ReferencedEClass ('|' terminal=AbstractTerminal)? ']'<br/>
+<code class="code">CrossReference&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;'['&nbsp;ReferencedEClass&nbsp;('|'&nbsp;terminal=AbstractTerminal)?&nbsp;']'<br>
+
 </code>
 </p>
 </div>
 <p>Example:</p>
 <div class="literallayout">
 <p>
-<code class="code">ReferringType :<br/>
-   'ref' referencedObject=[Entity|(ID|STRING)];<br/>
+<code class="code">ReferringType&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|(ID|STRING)];<br>
+
 </code>
 </p>
 </div>
 <p>The meta model derivation would create an 
-					<code class="code">EClass</code> &#8216;ReferringType&#8217; with an 
-					<code class="code">EReference</code> &#8216;referencedObject&#8217; of type &#8216;Entity&#8217; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see scoping).
+					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
+					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see scoping).
 				</p>
 <p>Example: While parsing a given input string, say</p>
 <div class="literallayout">
 <p>
-<code class="code">ref Entity01<br/>
+<code class="code">ref&nbsp;Entity01<br>
+
 </code>
 </p>
 </div>
-<p>Xtext produces an instance of &#8216;ReferringType&#8217;. After this parsing step it enters the linking phase and tries to find an instance of '&#8216;Entity&#8217;' using the parsed text &#8216;Entity01&#8217;. The input </p>
+<p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p>
 <div class="literallayout">
 <p>
-<code class="code">ref "EntityWithÄÖÜ"<br/>
+<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
+
 </code>
 </p>
 </div>
@@ -72,7 +77,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="Specificationoflinkingsemantics"/>Specification of linking semantics</h3>
+<a name="Specificationoflinkingsemantics"></a>Specification of linking semantics</h3>
 </div>
 </div>
 </div>
@@ -86,35 +91,39 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">@Stable(since = "0.7.0", subClass = AbstractLinkingService.class)<br/>
-public interface ILinkingService {<br/>
-<br/>
-  /**<br/>
-   * Returns all {@link EObject}s referenced by the given link text in the<br/>
-   * given context. But does not set the references or modifies the passed<br/>
-   * information somehow<br/>
-   */<br/>
-  List&lt;EObject&gt; getLinkedObjects(<br/>
-    EObject context, <br/>
-    EReference reference, <br/>
-    AbstractNode node)<br/>
-		throws IllegalNodeException;<br/>
-<br/>
-  /**<br/>
-   * Returns the textual representation of a given object as it would be<br/>
-   * serialized in the given context.<br/>
-   * <br/>
-   * @param object<br/>
-   * @param reference<br/>
-   * @param context<br/>
-   * @return the text representation.<br/>
-   */<br/>
-  String getLinkText(<br/>
-    EObject object, <br/>
-    EReference reference, <br/>
-    EObject context);<br/>
-}<br/>
-<br/>
+<code class="code">@Stable(since&nbsp;=&nbsp;"0.7.0",&nbsp;subClass&nbsp;=&nbsp;AbstractLinkingService.class)<br>
+public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;all&nbsp;{@link&nbsp;EObject}s&nbsp;referenced&nbsp;by&nbsp;the&nbsp;given&nbsp;link&nbsp;text&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;given&nbsp;context.&nbsp;But&nbsp;does&nbsp;not&nbsp;set&nbsp;the&nbsp;references&nbsp;or&nbsp;modifies&nbsp;the&nbsp;passed<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;information&nbsp;somehow<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;List&lt;EObject&gt;&nbsp;getLinkedObjects(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;context,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EReference&nbsp;reference,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AbstractNode&nbsp;node)<br>
+		throws&nbsp;IllegalNodeException;<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;the&nbsp;textual&nbsp;representation&nbsp;of&nbsp;a&nbsp;given&nbsp;object&nbsp;as&nbsp;it&nbsp;would&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;serialized&nbsp;in&nbsp;the&nbsp;given&nbsp;context.<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;text&nbsp;representation.<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;String&nbsp;getLinkText(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;object,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EReference&nbsp;reference,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;context);<br>
+}<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -132,26 +141,29 @@ public interface ILinkingService {<br/>
 <div>
 <div>
 <h3 class="title">
-<a name="Defaultlinkingsemantics"/>Default linking semantics</h3>
+<a name="Defaultlinkingsemantics"></a>Default linking semantics</h3>
 </div>
 </div>
 </div>
-<p>The default implementation for all languages, looks within the current file for an EObject of the respective type (&#8216;Entity&#8217;) which has a name attribute set to &#8216;Entity01&#8217;. </p>
+<p>The default implementation for all languages, looks within the current file for an EObject of the respective type (&lsquo;Entity&rsquo;) which has a name attribute set to &lsquo;Entity01&rsquo;. </p>
 <p>Given the grammar :</p>
 <div class="literallayout">
 <p>
-<code class="code">Model : (stuff+=(Ref|Entity))*;<br/>
- Ref : 'ref' referencedObject=[Entity|ID] ';';<br/>
- Entity : 'entity' name=ID ';';<br/>
-<br/>
+<code class="code">Model&nbsp;:&nbsp;(stuff+=(Ref|Entity))*;<br>
+&nbsp;Ref&nbsp;:&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';';<br>
+&nbsp;Entity&nbsp;:&nbsp;'entity'&nbsp;name=ID&nbsp;';';<br>
+
+<br>
+
 </code>
 </p>
 </div>
 <p>In the following model :</p>
 <div class="literallayout">
 <p>
-<code class="code">ref Entity01;<br/>
- entity Entity01;<br/>
+<code class="code">ref&nbsp;Entity01;<br>
+&nbsp;entity&nbsp;Entity01;<br>
+
 </code>
 </p>
 </div>
@@ -164,60 +176,71 @@ public interface ILinkingService {<br/>
 <div>
 <div>
 <h4 class="title">
-<a name="DefaultImports"/>Default Imports</h4>
+<a name="DefaultImports"></a>Default Imports</h4>
 </div>
 </div>
 </div>
-<p>There is a default implementation for inter-resource referencing, which as well uses convention:</p>
-<p>Given the grammar :</p>
+<p>There is a default implementation for inter-resource referencing, which as well uses convention.
+						Each string in a model which is assigned to an EAttribute with the name &lsquo;importURI&rsquo;, will be interpreted as a URI and used to be loaded using the ResourceSet of the current Resource.</p>
+<p>For example, given the following grammar :</p>
 <div class="literallayout">
 <p>
-<code class="code">Model : (imports+=Import)* (stuff+=(Ref|Entity))*;<br/>
- Import : 'import' importURI=STRING ';';<br/>
- Ref : 'ref' referencedObject=[Entity|ID] ';';<br/>
- Entity : 'entity' name=ID ';';<br/>
-<br/>
+<code class="code">Model&nbsp;:&nbsp;(imports+=Import)*&nbsp;(stuff+=(Ref|Entity))*;<br>
+&nbsp;Import&nbsp;:&nbsp;'import'&nbsp;importURI=STRING&nbsp;';';<br>
+&nbsp;Ref&nbsp;:&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';';<br>
+&nbsp;Entity&nbsp;:&nbsp;'entity'&nbsp;name=ID&nbsp;';';<br>
+
+<br>
+
 </code>
 </p>
 </div>
-<p>With this grammar in place it would be possible to write three files in the new DSL where the first references the other two, like this:</p>
+<p>It would be possible to write three files using in that language where the first references the other two, like this:</p>
 <div class="literallayout">
 <p>
-<code class="code">--file model.dsl<br/>
- import "model1.dsl";<br/>
- import "model2.dsl";<br/>
- <br/>
- ref Foo;<br/>
- entity Bar;<br/>
-<br/>
+<code class="code">//file&nbsp;model.dsl<br>
+&nbsp;import&nbsp;"model1.dsl";<br>
+&nbsp;import&nbsp;"model2.dsl";<br>
+&nbsp;<br>
+&nbsp;ref&nbsp;Foo;<br>
+&nbsp;entity&nbsp;Bar;<br>
+
+<br>
+
 </code>
 </p>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">--file model1.dsl <br/>
- entity Stuff;<br/>
-<br/>
+<code class="code">//file&nbsp;model1.dsl&nbsp;<br>
+&nbsp;entity&nbsp;Stuff;<br>
+
+<br>
+
 </code>
 </p>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">--file model2.dsl<br/>
- entity Foo;<br/>
-<br/>
+<code class="code">//file&nbsp;model2.dsl<br>
+&nbsp;entity&nbsp;Foo;<br>
+
+<br>
+
 </code>
 </p>
 </div>
 <p>The resulting default scope list is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">Scope (model.dsl) {<br/>
-  parent : Scope (model1.dsl) {<br/>
-   parent : Scope (model2.dsl) {}<br/>
-  }<br/>
- }<br/>
-<br/>
+<code class="code">Scope&nbsp;(model.dsl)&nbsp;{<br>
+&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model1.dsl)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model2.dsl)&nbsp;{}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;}<br>
+
+<br>
+
 </code>
 </p>
 </div>

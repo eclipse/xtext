@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Scoping</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
-<link rel="prev" href="linking.html" title="Linking"/>
-<link rel="next" href="valueconverter.html" title="Value Converter"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="linking.html" title="Linking">
+<link rel="next" href="valueconverter.html" title="Value Converter">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Scoping</h1>
@@ -19,32 +20,36 @@
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)<br/>
-public interface IScopeProvider {<br/>
-<br/>
-  /**<br/>
-   * Returns a scope for the given context. The scope provides access to <br/>
-   * the compatible visible EObjects for a given reference.<br/>
-   *<br/>
-   * @param context the element from which an element shall be referenced<br/>
-   * @param reference the reference to be used to filter the elements.<br/>
-   * @return {@link IScope} representing the inner most {@link IScope} for <br/>
-   *         the passed context and reference.<br/>
-   */<br/>
-  public IScope getScope(EObject context, EReference reference);<br/>
-<br/>
-  /**<br/>
-   * Returns a scope for a given context. The scope contains any visible, <br/>
-   * type-compatible element.<br/>
-   * @param context the element from which an element shall be referenced<br/>
-   * @param type the (super)type of the elements.<br/>
-   * @return {@link IScope} representing the inner most {@link IScope} for<br/>
-   *         the passed context and type.<br/>
-   */<br/>
-  public IScope getScope(EObject context, EClass type);<br/>
-}<br/>
-<br/>
+<br>
+@Stable(since&nbsp;=&nbsp;"0.7.0",&nbsp;subClass&nbsp;=&nbsp;AbstractScopeProvider.class)<br>
+public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;provides&nbsp;access&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br>
+&nbsp;&nbsp;&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;elements.<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;a&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;contains&nbsp;any&nbsp;visible,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;type-compatible&nbsp;element.<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;type&nbsp;the&nbsp;(super)type&nbsp;of&nbsp;the&nbsp;elements.<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;type.<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EClass&nbsp;type);<br>
+}<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -56,31 +61,35 @@ public interface IScopeProvider {<br/>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-// file contents scope<br/>
-import static my.Constants.STATIC;<br/>
-<br/>
-public class ScopeExample { // class body scope<br/>
-  private Object field = STATIC;<br/>
-<br/>
-  private void method(String param) { // method body scope<br/>
-    String localVar = "bar";<br/>
-    innerBlock: { // block scope<br/>
-      String innerScopeVar = "foo";<br/>
-      Object field = innerScopeVar;<br/>
-      // the scope hierarchy at this point would look like so:<br/>
-      //blockScope{field,innerScopeVar}-&gt;<br/>
-      //methodScope{localVar,param}-&gt;<br/>
-      //classScope{field}-&gt; ('field' is overlayed)<br/>
-      //fileScope{STATIC}-&gt;<br/>
-      //classpathScope{'all qualified names of accessible static fields'} -&gt;<br/>
-      //NULLSCOPE{}<br/>
-      //<br/>
-    }<br/>
-    field.add(localVar);<br/>
-  }<br/>
-}<br/>
-<br/>
+<br>
+//&nbsp;file&nbsp;contents&nbsp;scope<br>
+import&nbsp;static&nbsp;my.Constants.STATIC;<br>
+
+<br>
+public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;scope<br>
+&nbsp;&nbsp;private&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br>
+
+<br>
+&nbsp;&nbsp;private&nbsp;void&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;//&nbsp;method&nbsp;body&nbsp;scope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;"bar";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;so:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//blockScope{field,innerScopeVar}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//methodScope{localVar,param}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//fileScope{STATIC}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//NULLSCOPE{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -88,11 +97,12 @@ public class ScopeExample { // class body scope<br/>
 				For instance:</p>
 <div class="literallayout">
 <p>
-<code class="code">classpathScope{stuff from bin/}<br/>
--&gt; classpathScope{stuff from foo.jar/}<br/>
--&gt; ...<br/>
--&gt; classpathScope{stuff from JRE System Library}<br/>
--&gt; NULLSCOPE{}<br/>
+<code class="code">classpathScope{stuff&nbsp;from&nbsp;bin/}<br>
+-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}<br>
+-&gt;&nbsp;...<br>
+-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br>
+-&gt;&nbsp;NULLSCOPE{}<br>
+
 </code>
 </p>
 </div>
@@ -104,7 +114,7 @@ public class ScopeExample { // class body scope<br/>
 <div>
 <div>
 <h3 class="title">
-<a name="DeclarativeScopeProvider"/>Declarative Scope Provider</h3>
+<a name="DeclarativeScopeProvider"></a>Declarative Scope Provider</h3>
 </div>
 </div>
 </div>
@@ -113,18 +123,20 @@ public class ScopeExample { // class body scope<br/>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope scope_&lt;ContextReference&gt;(&lt;ContextType&gt; ctx, EReference ref)<br/>
+<code class="code">IScope&nbsp;scope_&lt;ContextReference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+
 </code>
 </p>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">IScope scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt; ctx, EClass type)<br/>
+<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EClass&nbsp;type)<br>
+
 </code>
 </p>
 </div>
 <p>The former is used when evaluating the scope for a specific cross reference and here 
-					<code class="code">&lt;ContextReference&gt;</code> corresponds to the name of this reference (prefixed with the name of the reference&#8217;s declaring type and separated by an underscore). The 
+					<code class="code">&lt;ContextReference&gt;</code> corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and separated by an underscore). The 
 					<code class="code">ref</code> parameter represents this cross reference.
 				</p>
 <p>The latter method signature is used when evaluating the scope of a given element type and is applicable to all cross references of that type. Here 
@@ -132,58 +144,43 @@ public class ScopeExample { // class body scope<br/>
 					<code class="code">type</code> parameter. 
 				</p>
 <p>So if you for example have a state machine with a  
-					<span class="emphasis">
-<em>Transition</em>
-</span> object owned by its source 
-					<span class="emphasis">
-<em>State</em>
-</span> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the 
-					<span class="emphasis">
-<em>Transition</em>
-</span> type and is called 
-					<span class="emphasis">
-<em>target</em>
-</span>):
+					<span class="emphasis"><em>Transition</em></span> object owned by its source 
+					<span class="emphasis"><em>State</em></span> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the 
+					<span class="emphasis"><em>Transition</em></span> type and is called 
+					<span class="emphasis"><em>target</em></span>):
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope scope_Transition_target(Transition this, EReference ref)<br/>
+<code class="code">IScope&nbsp;scope_Transition_target(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
+
 </code>
 </p>
 </div>
-<p>If such a method does not exist, the implementation will try to find one for the context object&#8217;s container. Thus in the example this would match a method with the same name but 
-					<span class="emphasis">
-<em>State</em>
-</span> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the 
-					<span class="emphasis">
-<em>State</em>
-</span> objects could for instance be owned by a containing 
-					<span class="emphasis">
-<em>StateMachine</em>
-</span> object.
+<p>If such a method does not exist, the implementation will try to find one for the context object&rsquo;s container. Thus in the example this would match a method with the same name but 
+					<span class="emphasis"><em>State</em></span> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the 
+					<span class="emphasis"><em>State</em></span> objects could for instance be owned by a containing 
+					<span class="emphasis"><em>StateMachine</em></span> object.
 				</p>
 <p>If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the 
-					<span class="emphasis">
-<em>EClass</em>
-</span> parameter). Again it will first attempt matching the context object. Thus in the example the signature first matched would be:
+					<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt matching the context object. Thus in the example the signature first matched would be:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope scope_State(Transition this, EClass type)<br/>
+<code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+
 </code>
 </p>
 </div>
-<p>If no such method exists, the implementation will again try to find a method matching the context object&#8217;s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p>
+<p>If no such method exists, the implementation will again try to find a method matching the context object&rsquo;s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope scope_State(StateMachine this, EClass type)<br/>
+<code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+
 </code>
 </p>
 </div>
 <p>This scope can now be used for any cross references of type 
-					<span class="emphasis">
-<em>Scope</em>
-</span> for context objects owned by the state machine.
+					<span class="emphasis"><em>Scope</em></span> for context objects owned by the state machine.
 				</p>
 </div>
 </body>

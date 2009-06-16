@@ -1,25 +1,28 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Dependency Injection in Xtext with Google Guice</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="Overview.html" title="Overview"/>
-<link rel="prev" href="generator.html" title="The Generator"/>
-<link rel="next" href="RuntimeConcepts.html" title="Runtime Concepts"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="Overview.html" title="Overview">
+<link rel="prev" href="generator.html" title="The Generator">
+<link rel="next" href="RuntimeConcepts.html" title="Runtime Concepts">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
+<p>Xtext uses Google Guice in order to wire up and configure language infrstructures. This allows for very flexible customization of language infrastructure and at the same time
+				makes the different pieces far more testable. </p>
 <div class="section" title="Modules">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Modules"/>Modules</h3>
+<a name="Modules"></a>Modules</h3>
 </div>
 </div>
 </div>
-<p>The Guice Injector configuration is done through the use of Modules (also a Guice concept).
+<p>The Guice injector configuration is done through the use of modules (also a Guice concept).
 					The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
 					These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
 					By default these modules extend a fully generated module.</p>
@@ -28,7 +31,7 @@
 <div>
 <div>
 <h4 class="title">
-<a name="GeneratedModules"/>Generated Modules</h4>
+<a name="GeneratedModules"></a>Generated Modules</h4>
 </div>
 </div>
 </div>
@@ -42,13 +45,12 @@
 <div>
 <div>
 <h4 class="title">
-<a name="DefaultModules"/>Default Modules</h4>
+<a name="DefaultModules"></a>Default Modules</h4>
 </div>
 </div>
 </div>
 <p>Finally the fully generated modules extend the 
-						<code class="code">DefaultRuntimeModule</code> (resp. 
-						<code class="code">DefaultUiModule</code>), which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
+						<code class="code">DefaultRuntimeModule</code>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
 						Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
 					</p>
 </div>
@@ -57,7 +59,7 @@
 <div>
 <div>
 <h4 class="title">
-<a name="ChangingConfiguration"/>Changing Configuration</h4>
+<a name="ChangingConfiguration"></a>Changing Configuration</h4>
 </div>
 </div>
 </div>
@@ -67,9 +69,10 @@
 						This class allows to write bindings like so:</p>
 <div class="literallayout">
 <p>
-<code class="code">public Class&lt;? extends MyInterface&gt; bind[anyname]() {<br/>
-     return MyInterfaceImpl.class;<br/>
- }<br/>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;MyInterface&gt;&nbsp;bind[anyname]()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyInterfaceImpl.class;<br>
+&nbsp;}<br>
+
 </code>
 </p>
 </div>

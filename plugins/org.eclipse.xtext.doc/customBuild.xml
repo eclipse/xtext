@@ -203,6 +203,7 @@
 			<param name="admon.graphics.extension" expression=".gif"/>
 			<param name="admon.textlabel" expression="0"/>
 			<param name="ulink.target" expression="_new"/>
+			<param name="ignore.image.scaling" expression="1"/>
 		</xslt>
 	</target>
 	
@@ -211,6 +212,14 @@
 		<delete file="manual${file.separator}${document.name}.pdf" failonerror="false"/>
 		<delete file="${build.dir}${file.separator}${document.name}.fo"/>
 		<mkdir dir="manual"/>
+		
+		<!-- HACK! images should rather be copied to build/images -->
+		<copy todir="${basedir}">
+			<fileset dir="doc/">
+				<include name="images/**" />
+			</fileset>
+		</copy>
+
 		
 		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.fo" style="${document.pdf.stylesheet}">
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
@@ -236,6 +245,7 @@
 		<!-- Remove the resulting formatting object. This object isn't necessary in the
 		     result of this build. -->
 		<delete file="${build.dir}${file.separator}${document.name}.fo" />
+		<delete dir="${basedir}/images" />
 	</target>
 	
 	<target name="wikitext2eclipsehelp" depends="assemble" description="Generate Eclipse Help from textile">
@@ -277,6 +287,7 @@
 					location="${docbook.dir}${file.separator}html${file.separator}chunk.xsl"/>
 			</xmlcatalog>
 			<param name="header.rule" expression="1" />
+			<param name="ignore.image.scaling" expression="1" />
 		</xslt>
 		<delete file="${basedir}/xtext.html" />
 	</target>

@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Validation</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
-<link rel="prev" href="SetupwithinEclipseEquinox.html" title="Setup within Eclipse / Equinox"/>
-<link rel="next" href="linking.html" title="Linking"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="SetupwithinEclipseEquinox.html" title="Setup within Eclipse / Equinox">
+<link rel="next" href="linking.html" title="Linking">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Validation</h1>
@@ -18,7 +19,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="syntactical_validation"/>Syntactical Validation</h3>
+<a name="syntactical_validation"></a>Syntactical Validation</h3>
 </div>
 </div>
 </div>
@@ -28,13 +29,17 @@
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>
-							<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
-						</p>
+							
+<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
+						
+</p>
 </li>
 <li class="listitem">
 <p>
-							<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
-						</p>
+							
+<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
+						
+</p>
 </li>
 </ul>
 </div>
@@ -44,24 +49,28 @@
 <div>
 <div>
 <h3 class="title">
-<a name="linking_validation"/>Cross-link Validation</h3>
+<a name="linking_validation"></a>Cross-link Validation</h3>
 </div>
 </div>
 </div>
 <p>Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see linking), any broken links are resolved lazy as well.
-					If you want to validate whether all links are valid, you&#8217;ll have to navigate through the model so that all proxies get resolved. This is done automatically in the editor.</p>
+					If you want to validate whether all links are valid, you&rsquo;ll have to navigate through the model so that all proxies get resolved. This is done automatically in the editor.</p>
 <p>Any unresolvable cross-links will be reported through:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>
-							<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
-						</p>
+							
+<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
+						
+</p>
 </li>
 <li class="listitem">
 <p>
-							<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
-						</p>
+							
+<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
+						
+</p>
 </li>
 </ul>
 </div>
@@ -71,7 +80,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="custom_validation"/>Custom Validation</h3>
+<a name="custom_validation"></a>Custom Validation</h3>
 </div>
 </div>
 </div>
@@ -80,30 +89,33 @@
 					Basically all you need to do is to make sure that an EValidator is registered for your EPackage. The registry for 
 					<code class="code">EValidators</code> (
 					<code class="code">org.eclipse.emf.ecore.EValidator.Registry.INSTANCE</code>) can only be filled programatically,
-					that means that there&#8217;s no equinox extension point similar to the EPackage- and ResourceFactory registries.
+					that means that there&rsquo;s no equinox extension point similar to the EPackage- and ResourceFactory registries.
 				</p>
-<p>For Xtext we provide a generator fragment for the convenient java-based EValidator API. Just add the following fragment to your generator configuration and you&#8217;re good to go:</p>
+<p>For Xtext we provide a generator fragment for the convenient java-based EValidator API. Just add the following fragment to your generator configuration and you&rsquo;re good to go:</p>
 <code class="code">&lt;fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/&gt;</code>
 <p>The generator will provide you with two Java classes. An abstract class generated to src-gen/ which extends the library class AbstractDeclarativeValidator. This one just registers the EPackages for which this validator contains constraints.
-					The other class is a subclass of that abstract class and is generated to the src/ folder in order to be edited by you. That&#8217;s where you put the constraints in.</p>
+					The other class is a subclass of that abstract class and is generated to the src/ folder in order to be edited by you. That&rsquo;s where you put the constraints in.</p>
 <p>The purpose of the AbstractDeclarativeValidator is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the @Check annotation to any method and it will be invoked automatically when validation takes place.
-					Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also let&#8217;s you avoid any castings.  
+					Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also let&rsquo;s you avoid any castings.  
 					In addition to the reflective invocation of test methods  the AbstractDeclarative provides a couple of convenience assertions.</p>
 <p>All in all this is very similar to how Junit work. Example:</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-  public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {<br/>
-    <br/>
-    @Check<br/>
-    public void checkTypeNameStartsWithCapital(Type type) {<br/>
-      if (!Character.isUpperCase(type.getName().charAt(0)))<br/>
-       warning("Name should start with a capital", DomainmodelPackage.TYPE__NAME);<br/>
-    }<br/>
-  }<br/>
-<br/>
-<br/>
+<br>
+&nbsp;&nbsp;public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;extends&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Check<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;DomainmodelPackage.TYPE__NAME);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+
+<br>
+
 </code>
 </p>
 </div>

@@ -1,24 +1,25 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Meta-Model inference</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="Overview.html" title="Overview"/>
-<link rel="prev" href="grammarLanguage.html" title="The Grammar Language"/>
-<link rel="next" href="grammarImport.html" title="Importing existing Meta Models"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="Overview.html" title="Overview">
+<link rel="prev" href="grammarLanguage.html" title="The Grammar Language">
+<link rel="next" href="grammarImport.html" title="Importing existing Meta Models">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Meta-Model inference</h1>
 <p>The meta model of a textual language describes the structure of its abstract syntax trees (AST). </p>
 <p>Xtext uses Ecore EPackages to define meta models. Meta models are declared to be either inferred (generated) from the grammar or imported. 
-				By using the &#8216;generate&#8217; directive, one tells Xtext to derive an EPackage from the grammar. </p>
+				By using the &lsquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
 <div class="section" title="Type and Package Generation">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="TypeandPackageGeneration"/>Type and Package Generation</h3>
+<a name="TypeandPackageGeneration"></a>Type and Package Generation</h3>
 </div>
 </div>
 </div>
@@ -30,7 +31,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each generated package declaration. After the directive '&#8216;generate&#8217;&#8216; a list of parameters follows. The &#8217;&#8216;name&#8217;&#8216; of the EPackage will be set to the first parameter, its &#8217;&#8216;nsURI&#8217;' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+<p>for each generated package declaration. After the directive '&lsquo;generate&rsquo;&lsquo; a list of parameters follows. The &rsquo;&lsquo;name&rsquo;&lsquo; of the EPackage will be set to the first parameter, its &rsquo;&lsquo;nsURI&rsquo;' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
 </li>
 </ul>
 </div>
@@ -77,7 +78,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="FeatureandTypeHierarchyGeneration"/>Feature and Type Hierarchy Generation</h3>
+<a name="FeatureandTypeHierarchyGeneration"></a>Feature and Type Hierarchy Generation</h3>
 </div>
 </div>
 </div>
@@ -103,7 +104,7 @@
 <p>An optional rule call does not modify the set.</p>
 </li>
 <li class="listitem">
-<p>A rule call is optional, if its cardinality is &#8216;?&#8217; or &#8216;*&#8217;.</p>
+<p>A rule call is optional, if its cardinality is &lsquo;?&rsquo; or &lsquo;*&rsquo;.</p>
 </li>
 </ul>
 </div>
@@ -115,10 +116,10 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>of type EBoolean for each feature assignment using the &#8216;?=&#8217; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
+<p>of type EBoolean for each feature assignment using the &lsquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
 </li>
 <li class="listitem">
-<p>for each assignment with the &#8216;=&#8217; or &#8216;+=&#8217; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
+<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
 </li>
 </ul>
 </div>
@@ -128,25 +129,27 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each assignment with the &#8216;=&#8217; or &#8216;+=&#8217; operator in a parser rule calling a parser rule. The EReference type will be the return type of the called parser rule.</p>
+<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference type will be the return type of the called parser rule.</p>
 </li>
 <li class="listitem">
-<p>for each action. The reference&#8217;s type will be set to the return type of the current calling rule. </p>
+<p>for each action. The reference&rsquo;s type will be set to the return type of the current calling rule. </p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<p>Each EAttribute or EReference takes its name from the assignment/action that caused it. Multiplicities will be 0...1 for assignments with the &#8216;=&#8217; operator and 0...* for assignments with the &#8216;+=&#8217; operator. </p>
-<p>Furthermore, each type that is added to the currently possible return types automatically inherits from the current return type of the parser rule. You can specify additional common supertypes by means of &#8220;artificial&#8221; parser rules, that are never called, e.g.</p>
+<p>Each EAttribute or EReference takes its name from the assignment/action that caused it. Multiplicities will be 0...1 for assignments with the &lsquo;=&rsquo; operator and 0...* for assignments with the &lsquo;+=&rsquo; operator. </p>
+<p>Furthermore, each type that is added to the currently possible return types automatically inherits from the current return type of the parser rule. You can specify additional common supertypes by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- CommonSuperType:<br/>
-   SubTypeA | SubTypeB | SubTypeC;<br/>
-<br/>
+<br>
+&nbsp;CommonSuperType:<br>
+&nbsp;&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -156,18 +159,20 @@
 <div>
 <div>
 <h3 class="title">
-<a name="EnumLiteralGeneration"/>Enum Literal Generation</h3>
+<a name="EnumLiteralGeneration"></a>Enum Literal Generation</h3>
 </div>
 </div>
 </div>
-<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another with the same name cannot be found. The &#8216;literal&#8217; property of the generated enum literal is set to the right hand side of the declaration. If it is ommitted, you&#8217;ll get an enum literal with equal &#8216;name&#8217; and &#8216;literal&#8217; attributes.</p>
+<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another with the same name cannot be found. The &lsquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is ommitted, you&rsquo;ll get an enum literal with equal &lsquo;name&rsquo; and &lsquo;literal&rsquo; attributes.</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- enum MyGeneratedEnum:<br/>
-   NAME = 'literal' | EQUAL_NAME_AND_LITERAL;<br/>
-<br/>
+<br>
+&nbsp;enum&nbsp;MyGeneratedEnum:<br>
+&nbsp;&nbsp;&nbsp;NAME&nbsp;=&nbsp;'literal'&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -177,7 +182,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="FeatureNormalization"/>Feature Normalization</h3>
+<a name="FeatureNormalization"></a>Feature Normalization</h3>
 </div>
 </div>
 </div>
@@ -188,7 +193,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="CustomizedPostProcessing"/>Customized Post Processing</h3>
+<a name="CustomizedPostProcessing"></a>Customized Post Processing</h3>
 </div>
 </div>
 </div>
@@ -200,15 +205,17 @@
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- process(xtext::GeneratedMetamodel this) :<br/>
-   process(ePackage)<br/>
- ;<br/>
- <br/>
- process(ecore::EPackage this) :<br/>
-   ...<br/>
- ;<br/>
-<br/>
+<br>
+&nbsp;process(xtext::GeneratedMetamodel&nbsp;this)&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;process(ePackage)<br>
+&nbsp;;<br>
+&nbsp;<br>
+&nbsp;process(ecore::EPackage&nbsp;this)&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;;<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -233,7 +240,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="ErrorConditions"/>Error Conditions</h3>
+<a name="ErrorConditions"></a>Error Conditions</h3>
 </div>
 </div>
 </div>

@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Serialization</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
-<link rel="prev" href="valueconverter.html" title="Value Converter"/>
-<link rel="next" href="fragmentProvider.html" title="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="valueconverter.html" title="Value Converter">
+<link rel="next" href="fragmentProvider.html" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Serialization</h1>
@@ -40,29 +41,29 @@
 <div>
 <div>
 <h3 class="title">
-<a name="serializationcontract"/>The Contract</h3>
+<a name="serializationcontract"></a>The Contract</h3>
 </div>
 </div>
 </div>
 <p>The contract of serialization is that when a model is serialized to its textual representation and then loaded (parsed) again, the loaded model equals the original model. Please be aware that this does 
-					<span class="emphasis">
-<em>not</em>
-</span> imply, that when loading a textual representation and serializing it again that both textual representations equal each other. For example, this is the case when a default value is used in a textual representation and the assignment is optional. Another example is:
+					<span class="emphasis"><em>not</em></span> imply, that when loading a textual representation and serializing it again that both textual representations equal each other. For example, this is the case when a default value is used in a textual representation and the assignment is optional. Another example is:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">MyRule:<br/>
-  (xval+=ID | yval+=INT)*;<br/>
-  <br/>
+<code class="code">MyRule:<br>
+&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;<br>
+&nbsp;&nbsp;<br>
+
 </code>
 </p>
 </div>
 <p>
-					<code class="code">MyRule</code> in this example reads 
+					
+<code class="code">MyRule</code> in this example reads 
 					<code class="code">ID</code>- and 
 					<code class="code">INT</code>-elements which may occur in an arbitrary in the textual representation. However, when serializing the model all 
 					<code class="code">ID</code>-elements will be written first and then all 
-					<code class="code">INT</code>-elements. If the order is important it can be preserved by storing all elements in the same list &#8211; which may require wrapping the 
+					<code class="code">INT</code>-elements. If the order is important it can be preserved by storing all elements in the same list &ndash; which may require wrapping the 
 					<code class="code">ID</code>- and 
 					<code class="code">INT</code>-elements into objects.   
 				</p>
@@ -72,26 +73,24 @@
 <div>
 <div>
 <h3 class="title">
-<a name="parsetreeconstructor"/>Parse Tree Constructor</h3>
+<a name="parsetreeconstructor"></a>Parse Tree Constructor</h3>
 </div>
 </div>
 </div>
-<p>The Parse Tree Constructor usually doesn&#8217;t need to be customized since it is automatically derived from the 
+<p>The Parse Tree Constructor usually doesn&rsquo;t need to be customized since it is automatically derived from the 
 					<a class="link" href="grammarLanguage.html" title="The Grammar Language">Xtext Grammar</a>. However, it can be a good idea to look into it to understand its error messages and its runtime performance.
 				</p>
 <p>For serialization to succeed, the Parse Tree Constructor must be able to 
-					<span class="emphasis">
-<em>consume</em>
-</span> every element of the to-be-serialized EMF model. To 
-					<span class="emphasis">
-<em>consume</em>
-</span> means, in this context, to write it to the textual representation of the model. This can turn out to be a not-so-easy to fulfill requirement, since a Grammar usually introduces implicit constraints to the Ecore model. Example:
+					<span class="emphasis"><em>consume</em></span> every element of the to-be-serialized EMF model. To 
+					<span class="emphasis"><em>consume</em></span> means, in this context, to write it to the textual representation of the model. This can turn out to be a not-so-easy to fulfill requirement, since a Grammar usually introduces implicit constraints to the Ecore model. Example:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">MyRule:<br/>
-  (sval+=ID ival+=INT)*;<br/>
-	<br/>
+<code class="code">MyRule:<br>
+&nbsp;&nbsp;(sval+=ID&nbsp;ival+=INT)*;<br>
+	
+<br>
+
 </code>
 </p>
 </div>
@@ -122,9 +121,7 @@
 </li>
 <li class="listitem">
 <p>an assignment in the grammar has no corresponding model element. The Parse Tree Constructor considers a model element not to be present if it is 
-							<span class="emphasis">
-<em>unset</em>
-</span> or equals its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:
+							<span class="emphasis"><em>unset</em></span> or equals its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:
 						</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
@@ -139,7 +136,7 @@
 </li>
 </ul>
 </div>
-<p>To understand error messages and performance issues of the Parse Tree Constructor it is important to know that it implements a backtracking approach. This basically means that the grammar is used to specify the structure of a tree in which one path (from the root node to a leaf node) is a valid serialization of a specific model. The Parse Tree Constructor&#8217;s task is to find this path &#8211; with the condition, that all model elements are consumed while walking this path. The Parse Tree Constructor&#8217;s strategy is to take the most promising branch first (the one that would consume the most model elements). If the branch leads to a dead end (for example, if a model element needs to be consumed that is not present in the model), the Parse Tree Constructor goes back the path until a different branch can be taken. This behavior has two consequences:</p>
+<p>To understand error messages and performance issues of the Parse Tree Constructor it is important to know that it implements a backtracking approach. This basically means that the grammar is used to specify the structure of a tree in which one path (from the root node to a leaf node) is a valid serialization of a specific model. The Parse Tree Constructor&rsquo;s task is to find this path &ndash; with the condition, that all model elements are consumed while walking this path. The Parse Tree Constructor&rsquo;s strategy is to take the most promising branch first (the one that would consume the most model elements). If the branch leads to a dead end (for example, if a model element needs to be consumed that is not present in the model), the Parse Tree Constructor goes back the path until a different branch can be taken. This behavior has two consequences:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
@@ -156,15 +153,13 @@
 <div>
 <div>
 <h3 class="title">
-<a name="transientvalues"/>Transient Values</h3>
+<a name="transientvalues"></a>Transient Values</h3>
 </div>
 </div>
 </div>
 <p>Transient Values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the 
 					<code class="code">ITransientValueService</code>, or serialization will fail. The default implementation marks all model elements transient, that are 
-					<span class="emphasis">
-<em>unset</em>
-</span> or equal their default value.  
+					<span class="emphasis"><em>unset</em></span> or equal their default value.  
 				</p>
 </div>
 <div class="section" title="Unassigned Text">
@@ -172,19 +167,20 @@
 <div>
 <div>
 <h3 class="title">
-<a name="unassignedtext"/>Unassigned Text</h3>
+<a name="unassignedtext"></a>Unassigned Text</h3>
 </div>
 </div>
 </div>
 <p>Unassigned Text are data rule calls or terminal rule calls which do not reside within an association. Example:</p>
 <div class="literallayout">
 <p>
-<code class="code">PluralRule:<br/>
-  'contents:' count=INT Plural;<br/>
-  <br/>
-terminal Plural: <br/>
-  'item' | 'items';<br/>
-  <br/>
+<code class="code">PluralRule:<br>
+&nbsp;&nbsp;'contents:'&nbsp;count=INT&nbsp;Plural;<br>
+&nbsp;&nbsp;<br>
+terminal&nbsp;Plural:&nbsp;<br>
+&nbsp;&nbsp;'item'&nbsp;|&nbsp;'items';<br>
+&nbsp;&nbsp;<br>
+
 </code>
 </p>
 </div>
@@ -203,7 +199,7 @@ terminal Plural: <br/>
 <div>
 <div>
 <h3 class="title">
-<a name="crossreferenceserializer"/>Cross Reference Serializer</h3>
+<a name="crossreferenceserializer"></a>Cross Reference Serializer</h3>
 </div>
 </div>
 </div>
@@ -217,14 +213,14 @@ terminal Plural: <br/>
 <div>
 <div>
 <h3 class="title">
-<a name="hiddentokenmerger"/>Hidden Token Merger</h3>
+<a name="hiddentokenmerger"></a>Hidden Token Merger</h3>
 </div>
 </div>
 </div>
 <p>After the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (
 					<code class="code">IHiddenTokenMerger</code>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The 
-					<code class="code">IHiddenTokenMerger</code> is the factory for a &#8220;Token Stream&#8221;#tokenstream which is fed by the 
+					<code class="code">IHiddenTokenMerger</code> is the factory for a &ldquo;Token Stream&rdquo;#tokenstream which is fed by the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> and which writes to another Token Stream.  
 				</p>
 </div>
@@ -233,7 +229,7 @@ terminal Plural: <br/>
 <div>
 <div>
 <h3 class="title">
-<a name="tokenstream"/>Token Stream</h3>
+<a name="tokenstream"></a>Token Stream</h3>
 </div>
 </div>
 </div>
@@ -248,14 +244,17 @@ terminal Plural: <br/>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">public interface ITokenStream {<br/>
-  public void close() throws IOException;<br/>
-  public void writeHidden(EObject grammarElement, String value) throws IOException;<br/>
-  public void writeSemantic(EObject grammarElement, String value) throws IOException;<br/>
-}<br/>
-<br/>
- <br/>
-<br/>
+<code class="code">public&nbsp;interface&nbsp;ITokenStream&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;close()&nbsp;throws&nbsp;IOException;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;writeHidden(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value)&nbsp;throws&nbsp;IOException;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;writeSemantic(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value)&nbsp;throws&nbsp;IOException;<br>
+}<br>
+
+<br>
+&nbsp;<br>
+
+<br>
+
 </code>
 </p>
 </div>

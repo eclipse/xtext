@@ -79,7 +79,8 @@
     <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
     <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
     <xsl:attribute name="text-align">start</xsl:attribute>
-    <xsl:attribute name="start-indent">10pt</xsl:attribute>
+    <xsl:attribute name="start-indent">0pt</xsl:attribute>
+    <xsl:attribute name="font-size">9pt</xsl:attribute>
   </xsl:attribute-set>
   
   <!-- PETER -->
@@ -131,7 +132,6 @@
 
   <xsl:attribute-set name="monospace.verbatim.properties">
     <xsl:attribute name="font-size">.8em</xsl:attribute>
-    <xsl:attribute name="padding">5pt</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="nongraphical.admonition.properties">

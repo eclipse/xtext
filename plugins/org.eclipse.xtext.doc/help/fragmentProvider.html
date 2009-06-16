@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Fragment Provider (referencing Xtext models from other EMF artifacts)</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts"/>
-<link rel="prev" href="serialization.html" title="Serialization"/>
-<link rel="next" href="IDEconcepts.html" title="IDE concepts"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="serialization.html" title="Serialization">
+<link rel="next" href="IDEconcepts.html" title="IDE concepts">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Fragment Provider (referencing Xtext models from other EMF artifacts)</h1>
@@ -14,13 +15,11 @@
 				<code class="code">EObject</code> from non-Xtext models.
 				In those cases URIs are used, which are made up of a part identifying the resource. Each 
 				<code class="code">EObject</code> contained in a resource can be identified by a so called 
-				<span class="emphasis">
-<em>fragment</em>
-</span>.
+				<span class="emphasis"><em>fragment</em></span>.
 			</p>
 <p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
 <p>The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.</p>
-<p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&#8217;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
+<p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&rsquo;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
 				<code class="code">EObjects</code>.
 			</p>
 <p>Therefore one can contribute a so called 
@@ -28,30 +27,32 @@
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">public interface IFragmentProvider extends ILanguageService {<br/>
- <br/>
-  /**<br/>
-   * Computes the local ID of the given object. <br/>
-   * @param obj<br/>
-   *            The EObject to compute the fragment for<br/>
-   * @return the fragment, which can be an arbitrary string but must be <br/>
-   *         unique within a resource. Return null to use default <br/>
-   *         implementation<br/>
-   */<br/>
-  String getFragment(EObject obj);<br/>
-  <br/>
-  /**<br/>
-   * Locates an EObject in a resource by its fragment. <br/>
-   * @param resource<br/>
-   * @param fragment<br/>
-   * @return the EObject <br/>
-   */<br/>
-  EObject getEObject(Resource resource, String fragment);<br/>
- }<br/>
-<br/>
+<code class="code">public&nbsp;interface&nbsp;IFragmentProvider&nbsp;extends&nbsp;ILanguageService&nbsp;{<br>
+&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Computes&nbsp;the&nbsp;local&nbsp;ID&nbsp;of&nbsp;the&nbsp;given&nbsp;object.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;obj<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;EObject&nbsp;to&nbsp;compute&nbsp;the&nbsp;fragment&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;fragment,&nbsp;which&nbsp;can&nbsp;be&nbsp;an&nbsp;arbitrary&nbsp;string&nbsp;but&nbsp;must&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique&nbsp;within&nbsp;a&nbsp;resource.&nbsp;Return&nbsp;null&nbsp;to&nbsp;use&nbsp;default&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;String&nbsp;getFragment(EObject&nbsp;obj);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Locates&nbsp;an&nbsp;EObject&nbsp;in&nbsp;a&nbsp;resource&nbsp;by&nbsp;its&nbsp;fragment.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;resource<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;fragment<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;EObject&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment);<br>
+&nbsp;}<br>
+
+<br>
+
 </code>
 </p>
 </div>
-<p>However, the currently available default fragment provider does nothing.</p>
+<p>Note that the currently available default fragment provider does nothing (i.e. refers to the default behavior of EMF).</p>
 </body>
 </html>

@@ -1,25 +1,28 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>The Generator</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="Overview.html" title="Overview"/>
-<link rel="prev" href="Defaulttokens.html" title="Default tokens"/>
-<link rel="next" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="Overview.html" title="Overview">
+<link rel="prev" href="Defaulttokens.html" title="Default tokens">
+<link rel="next" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Generator</h1>
-<p>Xtext provides you with lots of generic implementations for you language&#8217;s infrastructure but also uses code generation to generate some of the components.
+<p>Xtext provides you with lots of generic implementations for you language&rsquo;s infrastructure but also uses code generation to generate some of the components.
 				Those generated components are for instance the parser, the serializer, the Ecore model and a couple of convenient base classes for content assist etc..
-				The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the &#8220;Guice&#8221;#Guice modules.</p>
-<p>Xtext&#8217;s generator leverages the modeling workflow engine (MWE) from EMFT.</p>
-<div class="section" title="A short introduction to the Modeling Workflow Engine (MWE)">
+				The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the &ldquo;Guice&rdquo;#Guice modules.</p>
+<p>Xtext&rsquo;s generator leverages the 
+				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">modeling workflow engine (MWE)</a> from EMFT.
+			</p>
+<div class="section" title="A short introduction to MWE">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="short_intor_to_mwe"/>A short introduction to the Modeling Workflow Engine (MWE)</h3>
+<a name="short_intor_to_mwe"></a>A short introduction to MWE</h3>
 </div>
 </div>
 </div>
@@ -28,59 +31,65 @@
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-  package foo;<br/>
-  <br/>
-  public class Person {<br/>
-     <br/>
-     private String name;<br/>
-     <br/>
-     public void setName(String name) { <br/>
-       this.name = name;<br/>
-     }<br/>
-     <br/>
-     private final List&lt;Person&gt; children = new ArrayList&lt;Person&gt;();<br/>
-     <br/>
-     public void addChild(Person child) {<br/>
-       this.children.add(child);<br/>
-     }<br/>
-  }<br/>
-  <br/>
+<br>
+&nbsp;&nbsp;package&nbsp;foo;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;class&nbsp;Person&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.name&nbsp;=&nbsp;name;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;final&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;new&nbsp;ArrayList&lt;Person&gt;();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;addChild(Person&nbsp;child)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.children.add(child);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+
 </code>
 </p>
 </div>
-<p>one can create a family tree using MWE like this:</p>
+<p>one can create a family tree like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-  &lt;x class="foo.Person"&gt;<br/>
-    &lt;name value="Grandpa"/&gt;<br/>
-    &lt;child class="foo.Person" name="Father"&gt;<br/>
-      &lt;child name="Son"/&gt;<br/>
-    &lt;/child&gt;<br/>
-  &lt;/x&gt;<br/>
-<br/>
+<br>
+&nbsp;&nbsp;&lt;x&nbsp;class="foo.Person"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&nbsp;value="Grandpa"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;class="foo.Person"&nbsp;name="Father"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/child&gt;<br>
+&nbsp;&nbsp;&lt;/x&gt;<br>
+
+<br>
+
 </code>
 </p>
 </div>
-<p>These couple of lines will, when interpreted by MWE, result in an object tree concsisting of three instances of foo.Person:
+<p>These couple of lines will, when interpreted by MWE, result in an object tree consisting of three instances of foo.Person:
 
 					</p>
 <div class="mediaobject">
-<img src="images/family_tree.png"/>
-</div>
+<img src="images/family_tree.png"></div>
 <p>
+				
+</p>
+<p>The name of the root element can have an arbitrary name and doesn&rsquo;t matter, with one exception: If the name is <span style="color: red">&lt;workflow&gt;&lt;/workflow&gt;</span> and no class attribute is provided. It is assumed that an instance of 
+					<code class="code">org.eclipse.emf.mwe.internal.core.Workflow</code> shall be instantiated. This is due to the fact that this is the implementation of the root of the workflow model which we one usually uses when creating generator workflow configurations. However as you can see in the example above one can instantiate arbitrary Java object models. This is conceptually very close to the dependency injection and the XML language in the 
+					<a class="ulink" href="http://www.springframework.org" target="_new">Spring Framework</a>. 
 				</p>
-<p>The name of the root element can have an arbitrary name and doesn&#8217;t matter, with one exception:_ If the name is <span style="color: red">&lt;workflow&gt;&lt;/workflow&gt;</span> and no class attribute is provided. It is assumed that an instance of org.eclipse.emf.mwe.internal.core.Workflow shall be instantiated. This is due to the fact that this is the implementation of the root of the workflow model which we one usually uses when creating generator workflow configurations. However as you can see in the example above one can instantiate arbitrary Java object models. This is conceptually very close to the XML language in Spring. 
-					Back to the sample.</p>
-<p>As outlined and explained the &#8216;x&#8217; is ignored in this case. The class attribute tells MWE which class to use in roder to create the object node. 
-					That created object is populated with information corresponding to the XML: For each attribute a corresponding setter or adder method is looked up and invoked passing in the value (There are configurable value converters, but usually Boolean and String is all you need).  The same is done for each child element. In the case od elements a single attribute &#8216;value&#8217; is used and interpreted as if there was an attribute in the parent element. That is:</p>
+<p>As outlined and explained the &lsquo;x&rsquo; is ignored in this case. The class attribute tells MWE which class to use in order to create the object node. 
+					That created object is populated with information corresponding to the XML: For each attribute a corresponding setter or adder method is looked up and invoked passing in the value (There are configurable value converters, but usually Boolean and String is all you need).  The same is done for each child element. In the case of XML elements a single attribute &lsquo;value&rsquo; is used and interpreted as if there was an attribute in the parent element. That is:</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- &lt;foo&gt; &lt;name value="bar"/&gt;&lt;/foo&gt;<br/>
+<br>
+&nbsp;&lt;foo&gt;&nbsp;&lt;name&nbsp;value="bar"/&gt;&lt;/foo&gt;<br>
+
 </code>
 </p>
 </div>
@@ -88,176 +97,208 @@
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- &lt;foo name="bar"/&gt;<br/>
+<br>
+&nbsp;&lt;foo&nbsp;name="bar"/&gt;<br>
+
 </code>
 </p>
 </div>
-<p>Obviously the latter is far more readable so i general the second syntax is preferred. However as soon as you want to add multiple values to the same &#8216;adder&#8217; method you&#8217;ll need to use the first syntax as in XML having the same attribute twice is not valid.</p>
-<p>If there&#8217;s no value Attribute in an element the engine first looks for a class attribute. If there&#8217;s one it looks up and invokes the default constructor (there&#8217;s no support for factories as of now. Would be easy to add but a need has not yet arisen). IF there&#8217;s no class attribute the class is inferred by looking at the argument&#8217;s type of the current setter method.</p>
-<p>This is why it&#8217;s ok to write:</p>
+<p>Obviously the latter is far more readable so general the second syntax is preferred. However as soon as you want to add multiple values to the same &lsquo;adder&rsquo; method you&rsquo;ll need to use the first syntax as in XML having the same attribute twice is not valid.</p>
+<p>If there&rsquo;s no &lsquo;value=&rsquo; attribute in an element, the engine first looks for a class attribute. If there&rsquo;s one it looks up and invokes the default constructor (there&rsquo;s no support for factories as of now. Would be easy to add but a need has not yet arisen). If there&rsquo;s no class attribute the class is inferred by looking at the argument&rsquo;s type of the current setter method.</p>
+<p>This is why it&rsquo;s ok to write:</p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
- &lt;child name="Son"/&gt;<br/>
+<br>
+&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
+
 </code>
 </p>
 </div>
 <p>The addChild Method takes an foo.Person as argument. As this is a concrete class which has a default constructor it can be instantiated.</p>
 <p>
-					<span class="bold">
-<strong>Tip</strong>
-</span>
+					
+<span class="bold"><strong>Tip</strong></span>
 
-					<span class="italic">'Whenever you&#8217;re in an *.mwe file and wonder what kind of configuration the underlying component may accept. Just use JDT&#8217;s open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+2xO) and type &#8216;set&#8217; or &#8216;add&#8217; and you&#8217;ll see the available modifiers. Note that we plan to replace the XML syntax and the abstinence of tooling with an Xtext implementation as soon as possible.</span>
-				</p>
-<p>So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also haven&#8217;t yet talked about the runtime workflow model. 
-					Please consult the reference documentation for additional information.</p>
+					<span class="italic">'Whenever you&rsquo;re in an *.mwe file and wonder what kind of configuration the underlying component may accept. Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+2xO) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you&rsquo;ll see the available modifiers. Note that we plan to replace the XML syntax and the abstinence of tooling with an Xtext implementation as soon as possible.</span>
+				
+</p>
+<p>So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also haven&rsquo;t yet talked about the runtime workflow model. Please consult the reference documentation (available through eclipse help) for additional information.</p>
 </div>
 <div class="section" title="General Architecture">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="GeneralArchitecture"/>General Architecture </h3>
+<a name="GeneralArchitecture"></a>General Architecture </h3>
 </div>
 </div>
 </div>
-<p>Now what you knwoi a bit about MWE we&#8217;re ready to leran about the concepts and architectureware of Xtext&#8217;s generator. 
-					A generator is configured with general information about src-folders and projects and consists of any number of languages configurations. 
-					For each language a URI pointing to its grammar file and file extensions for the dsl are provided. 
+<p>Now that you know a bit about MWE, we&rsquo;re ready to learn about the concepts and architecture of Xtext&rsquo;s generator. 
+					An instance of Xtext&rsquo;s generator is configured with general information about src-folders and projects and consists of any number of languages configurations. 
+					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s.
-					The whole generator is composed of theses fragments. We have fragments for generating parsers, one for the serilaizer, one for the EMF code, one for the outline view, etc.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
+					The whole generator is composed of theses fragments. We have fragments for generating parsers, one for the serializer, one for the EMF code, one for the outline view, etc.
 
 					</p>
 <div class="mediaobject">
-<img src="images/generator-structure.png"/>
-</div>
+<img src="images/generator-structure.png"></div>
 <p>
-				</p>
+				
+</p>
 <div class="section" title="Generator Fragments">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="GeneratorFragments"/>Generator Fragments</h4>
+<a name="GeneratorFragments"></a>Generator Fragments</h4>
 </div>
 </div>
 </div>
-<p>Each fragment gets passed in the grammar of the language and is asked to generate code in one of the configured locations and contribute several shared artifacts.
-						The main interface is 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a> and is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+<p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment then is able to generate code in one of the configured locations and contribute several shared artifacts. The main interface 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
-<p>We suggest to have a look at the fragment we write for label providers ({org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}). It is pretty trivial and at the same time uses the most important call backs. Also the structure is not cluttered with too much extra noice so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.</p>
+<p>We suggest to have a look at the fragment we&rsquo;ve written for label providers ({org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}). It is pretty trivial and at the same time uses the most important call backs. Also the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.</p>
 </div>
 <div class="section" title="Configuration">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="Configuration"/>Configuration</h4>
+<a name="Configuration"></a>Configuration</h4>
 </div>
 </div>
 </div>
 <p>As already explained we use MWE from EMFT in order to build, configure and execute this structure of components. 
-						In the following we see a typical Xtetx generator configuration written in MWE configuration code:  </p>
+						In the following we see a typical Xtext generator configuration written in MWE configuration code:  </p>
 <div class="literallayout">
 <p>
 <code class="code">
-<br/>
-&lt;workflow&gt;<br/>
-	&lt;property file="org/xtext/example/GenerateMyDsl.properties"/&gt;<br/>
-	<br/>
-	&lt;property name="runtimeProject" value="../${projectName}"/&gt;<br/>
-	<br/>
-	&lt;bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/&gt;<br/>
-	<br/>
-	&lt;component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/&gt;<br/>
-	&lt;component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/&gt;<br/>
-	<br/>
-	&lt;component class="org.eclipse.xtext.generator.Generator"&gt;<br/>
-		&lt;pathRtProject value="${runtimeProject}"/&gt;<br/>
-		&lt;pathUiProject value="${runtimeProject}.ui"/&gt;<br/>
-		&lt;projectNameRt value="${projectName}"/&gt;<br/>
-		&lt;projectNameUi value="${projectName}.ui"/&gt;<br/>
-		<br/>
-		&lt;language uri="${grammarURI}" fileExtensions="${file.extensions}"&gt;<br/>
-			<br/>
-			&lt;!-- Java API to access grammar elements (required by several other fragments) --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br/>
-			<br/>
-			&lt;!-- generates Java API for the generated EPackages --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/&gt;<br/>
-			<br/>
-			&lt;!-- the serialization component --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/&gt;<br/>
-			<br/>
-			&lt;!-- a custom ResourceFactory for use with EMF --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" <br/>
-				fileExtensions="${file.extensions}"/&gt;<br/>
-				<br/>
-			&lt;!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com <br/>
-			     and falls back to the packrat parser if it's not available. --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" <br/>
-				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"<br/>
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones."&gt;<br/>
-				&lt;fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/&gt;<br/>
-			&lt;/fragment&gt;<br/>
-	<br/>
-			<br/>
-			&lt;!-- java-based API for validation --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br/>
-                &lt;composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/&gt;<br/>
-            &lt;/fragment&gt;<br/>
-			<br/>
-            <br/>
-			&lt;!-- scoping API --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;<br/>
-			<br/>
-			&lt;!-- formatter API --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/&gt;<br/>
-<br/>
-			&lt;!-- labeling API --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/&gt;<br/>
-<br/>
-			&lt;!-- outline API --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/&gt;<br/>
-<br/>
-			<br/>
-			&lt;!-- java-based API for content assistance --&gt;<br/>
-			&lt;fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/&gt;<br/>
-			<br/>
-		&lt;/language&gt;<br/>
-	&lt;/component&gt;<br/>
-&lt;/workflow&gt;<br/>
-<br/>
+<br>
+&lt;workflow&gt;<br>
+	&lt;property&nbsp;file="org/xtext/example/GenerateMyDsl.properties"/&gt;<br>
+	
+<br>
+	&lt;property&nbsp;name="runtimeProject"&nbsp;value="../${projectName}"/&gt;<br>
+	
+<br>
+	&lt;bean&nbsp;class="org.eclipse.emf.mwe.utils.StandaloneSetup"&nbsp;platformUri="${runtimeProject}/.."/&gt;<br>
+	
+<br>
+	&lt;component&nbsp;class="org.eclipse.emf.mwe.utils.DirectoryCleaner"&nbsp;directory="${runtimeProject}/src-gen"/&gt;<br>
+	&lt;component&nbsp;class="org.eclipse.emf.mwe.utils.DirectoryCleaner"&nbsp;directory="${runtimeProject}.ui/src-gen"/&gt;<br>
+	
+<br>
+	&lt;component&nbsp;class="org.eclipse.xtext.generator.Generator"&gt;<br>
+		&lt;pathRtProject&nbsp;value="${runtimeProject}"/&gt;<br>
+		&lt;pathUiProject&nbsp;value="${runtimeProject}.ui"/&gt;<br>
+		&lt;projectNameRt&nbsp;value="${projectName}"/&gt;<br>
+		&lt;projectNameUi&nbsp;value="${projectName}.ui"/&gt;<br>
+		
+<br>
+		&lt;language&nbsp;uri="${grammarURI}"&nbsp;fileExtensions="${file.extensions}"&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;generates&nbsp;Java&nbsp;API&nbsp;for&nbsp;the&nbsp;generated&nbsp;EPackages&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;the&nbsp;serialization&nbsp;component&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;a&nbsp;custom&nbsp;ResourceFactory&nbsp;for&nbsp;use&nbsp;with&nbsp;EMF&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"&nbsp;<br>
+				fileExtensions="${file.extensions}"/&gt;<br>
+				
+<br>
+			&lt;!--&nbsp;the&nbsp;following&nbsp;fragment&nbsp;tries&nbsp;to&nbsp;use&nbsp;the&nbsp;Antlr&nbsp;Generator&nbsp;fragment&nbsp;which&nbsp;can&nbsp;be&nbsp;downloaded&nbsp;from&nbsp;http://www.itemis.com&nbsp;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;falls&nbsp;back&nbsp;to&nbsp;the&nbsp;packrat&nbsp;parser&nbsp;if&nbsp;it's&nbsp;not&nbsp;available.&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;java-based&nbsp;API&nbsp;for&nbsp;validation&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;composedCheck&nbsp;value="org.eclipse.xtext.validation.ImportUriValidator"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fragment&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+			&lt;!--&nbsp;scoping&nbsp;API&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;<br>
+			
+<br>
+			&lt;!--&nbsp;formatter&nbsp;API&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.formatting.FormatterFragment"/&gt;<br>
+
+<br>
+			&lt;!--&nbsp;labeling&nbsp;API&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/&gt;<br>
+
+<br>
+			&lt;!--&nbsp;outline&nbsp;API&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/&gt;<br>
+
+<br>
+			&lt;!--&nbsp;java-based&nbsp;API&nbsp;for&nbsp;content&nbsp;assistance&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/&gt;<br>
+			
+<br>
+		&lt;/language&gt;<br>
+	&lt;/component&gt;<br>
+&lt;/workflow&gt;<br>
+
+<br>
+
 </code>
 </p>
 </div>
 <p>Here the root element is a workflow which accepts 
 						<span class="italic">bean</span> s and 
-						<span class="italic">component</span> s. The <span class="property"/> element is a first class concept of the configuration language and can be understood like a preprocessor. Where declared properties (inlined or through property file import) are replaced wherever used. This is done before the actual tree is created. In this examnple we first import a propertis file and after that declare a property &#8216;runtimeProject&#8217; which already uses a property imported from the file previously. 
+						<span class="italic">component</span> s. The <span class="property"></span> element is a first class concept of MWE&rsquo;s configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the configured value for the equally named property. Property declarations can be done inlined (
+						<code class="code">&lt;property name="foo" value="bar"/&gt;</code>) or through property file import (
+						<code class="code">&lt;property file="foo.properties"/&gt;</code>). This is done before the actual tree is created. In this example we first import a properties file and after that declare a property &lsquo;runtimeProject&rsquo; which already uses a property imported from the file previously. 
 					</p>
-<p>The setBean method in workflow does nothing and is only there in order to allow doing global side-effects. Unfortunately this is sometimes required by some projects. In this example we do a so called EMF standalone setup, as we call it. EMF uses lots of registries stored in global singletons. For instance when running in Eclipse EPackages and ResourceFactories are configured via extenions points. When running without equinox theses state somehow has to get initialized and configured. This is done through this standalone setup clazz.</p>
+<p>The setBean method in workflow does nothing and is only there in order to allow doing global side-effects. Unfortunately this is sometimes required by some projects. In this example we do a so called EMF stand alone setup, as we call it. EMF uses lots of registries stored in global singletons. For instance when running in Eclipse EPackages and ResourceFactories are configured via extension points. When running outside equinox the global state somehow has to get initialized and configured as well. This is done through this stand alone setup clazz.</p>
 <p>Following the 
 						<code class="code">&lt;bean/&gt;</code> element there are three 
-						<code class="code">&lt;component/&gt;</code> elements 
+						<code class="code">&lt;component/&gt;</code> elements. The addComponent() method in the class 
+						<code class="code">Workflow</code> awaits instances of IWorkflowComponent, which is the primary concept of MWE&rsquo;s workflow model. Xtext&rsquo;S generator is an instance of IWorkflowComponent and can therefore be used within MWE workflows. 
 					</p>
 </div>
+</div>
+<div class="section" title="Standard generator fragments">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Standardgeneratorfragments"></a>Standard generator fragments</h3>
+</div>
+</div>
+</div>
+<p>In the following the most important standard generator fragments are listed and described.</p>
 <div class="section" title="Antlr Generator Fragment">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="antlr_generator_fragment"/>Antlr Generator Fragment</h4>
+<a name="antlr_generator_fragment"></a>Antlr Generator Fragment</h4>
 </div>
 </div>
 </div>
-<p>The Antlr generator fragment is responsible for generating an Antlr parser and lexer. 
-						Due to IP-Problems with the code generator shipped with Antlr 3 we&#8217;re not allowed to ship this fragment at Eclipse.
-						Therefore you&#8217;ll have to download it separately from http://download.itemis.com or use the updatesite at http://download.itemis.com/updates/.</p>
+<p>The Antlr generator fragment is responsible for generating an Antlr parser and lexer.  It can be configured with some of the options available in Antlr.</p>
+<p>
+						
+<span class="bold"><strong>Important</strong></span>
+
+						<span class="italic">Due to IP-Problems with the code generator shipped with Antlr 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the updatesite at 
+							<span class="bold"><strong>http://download.itemis.com/updates/</strong></span>.
+						</span>
+					
+</p>
 </div>
 </div>
 </body>

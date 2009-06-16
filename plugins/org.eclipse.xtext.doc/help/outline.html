@@ -1,15 +1,273 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Outline View</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="IDEconcepts.html" title="IDE concepts"/>
-<link rel="prev" href="templates.html" title="Template Proposals"/>
-<link rel="next" href="navigation.html" title="Navigation and Hyperlinking"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="IDEconcepts.html" title="IDE concepts">
+<link rel="prev" href="templates.html" title="Template Proposals">
+<link rel="next" href="navigation.html" title="Navigation and Hyperlinking">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Outline View</h1>
-<p>text</p>
+<p>Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the correpsonding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the 
+				<span class="emphasis"><em>Link with Editor</em></span> button.
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/sample_outline.png"></div>
+<p>
+			
+</p>
+<p>You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to customize the various aspects of the outline. </p>
+<div class="section" title="Influencing the outline structure">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Influencingtheoutlinestructure"></a>Influencing the outline structure</h3>
+</div>
+</div>
+</div>
+<p>In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional (artificial / virtual) nodes, you customize the outline by implementing 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&view=co" target="_new">ISemanticModelTransformer</a>.
+				</p>
+<p>The Xtext wizard creates an empty transformer class (
+					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyDslTransformer&nbsp;extends&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;createNode<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;second&nbsp;param:&nbsp;ContentOutlineNode&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;super.newOutlineNode(semanticNode,&nbsp;parentNode);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("special&nbsp;"&nbsp;+&nbsp;node.getLabel());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;node;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;super.newOutlineNode(semanticNode,&nbsp;parentNode);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("pimped&nbsp;"&nbsp;+&nbsp;node.getLabel());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;node;<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+/**<br>
+&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br>
+&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;getChildren<br>
+&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br>
+&nbsp;*/<br>
+&nbsp;&nbsp;public&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Attribute&nbsp;attribute)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;attribute.eContents();<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Property&nbsp;property)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;NO_CHILDREN;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;}<br>
+&nbsp;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: </p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractXtextUiModule&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;ISemanticModelTransformer&gt;&nbsp;bindISemanticModelTransformer()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyDslTransformer.class;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;...<br>
+}<br>
+
+<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Filtering">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Filtering"></a>Filtering</h3>
+</div>
+</div>
+</div>
+<p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&view=co" target="_new">DeclarativeActionBarContributor</a>.
+				</p>
+<p>To register a 
+					<code class="code">DeclarativeActionBarContributor</code>, add the following lines to your 
+					<code class="code">MyDslUiModule</code> class:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+/**<br>
+&nbsp;*&nbsp;Use&nbsp;this&nbsp;class&nbsp;to&nbsp;register&nbsp;components&nbsp;to&nbsp;be&nbsp;used&nbsp;within&nbsp;the&nbsp;IDE.<br>
+&nbsp;*/<br>
+public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;org.xtext.example.AbstractMyDslUiModule&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;...<br>
+
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;IActionBarContributor&gt;&nbsp;bindIActionBarContributor()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyDslActionBarContributor.class;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The action bar contributor will look like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyDslActionBarContributor&nbsp;extends&nbsp;DeclarativeActionBarContributor&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;Action&nbsp;addFilterParserRulesToolbarAction(XtextContentOutlinePage&nbsp;page)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;FilterFooAction(page);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Filter actions must extend 
+					<code class="code">AbstractFilterAction</code> (this ensures that the action toggle state is handled correctly):
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+import&nbsp;org.eclipse.jface.viewers.ViewerFilter;<br>
+import&nbsp;org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;<br>
+import&nbsp;org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;<br>
+import&nbsp;org.eclipse.xtext.xtext.ui.Activator;<br>
+
+<br>
+public&nbsp;class&nbsp;FilterFooAction&nbsp;extends&nbsp;AbstractFilterAction&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;FilterFooAction(XtextContentOutlinePage&nbsp;outlinePage)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super("Filter&nbsp;Foo",&nbsp;outlinePage);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setToolTipText("Show&nbsp;/&nbsp;hide&nbsp;foo");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setDescription("Show&nbsp;/&nbsp;hide&nbsp;foo");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;protected&nbsp;String&nbsp;getToggleId()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"FilterFooAction.isChecked";<br>
+&nbsp;&nbsp;}<br>
+	
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;protected&nbsp;ViewerFilter&nbsp;createFilter()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;FooOutlineFilter();<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The filtering itself will be performed by 
+					<code class="code">FooOutlineFilter</code>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+import&nbsp;org.eclipse.emf.ecore.EClass;<br>
+import&nbsp;org.eclipse.jface.viewers.Viewer;<br>
+import&nbsp;org.eclipse.jface.viewers.ViewerFilter;<br>
+import&nbsp;org.eclipse.xtext.XtextPackage;<br>
+import&nbsp;org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;<br>
+
+<br>
+public&nbsp;class&nbsp;FooOutlineFilter&nbsp;extends&nbsp;ViewerFilter&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;public&nbsp;boolean&nbsp;select(Viewer&nbsp;viewer,&nbsp;Object&nbsp;parentElement,&nbsp;Object&nbsp;element)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((parentElement&nbsp;!=&nbsp;null)&nbsp;&amp;&amp;&nbsp;(parentElement&nbsp;instanceof&nbsp;ContentOutlineNode))&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;parentNode&nbsp;=&nbsp;(ContentOutlineNode)&nbsp;parentElement;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClass&nbsp;clazz&nbsp;=&nbsp;parentNode.getClazz();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(clazz.equals(MyDslPackage.Literals.ATTRIBUTE))&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+}<br>
+
+<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Context menus">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Contextmenus"></a>Context menus</h3>
+</div>
+</div>
+</div>
+<p>(stay tuned)</p>
+</div>
+<div class="section" title="Sorting">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Sorting"></a>Sorting</h3>
+</div>
+</div>
+</div>
+<p>(stay tuned)</p>
+</div>
 </body>
 </html>

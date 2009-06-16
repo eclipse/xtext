@@ -41,7 +41,7 @@ bc..
   </x>
 
 p. These couple of lines will, when interpreted by MWE, result in an object tree consisting of three instances of foo.Person:
-!images/family_tree.png!
+!{width:50%}images/family_tree.png!
 
 The name of the root element can have an arbitrary name and doesn't matter, with one exception: If the name is <workflow/> and no class attribute is provided. It is assumed that an instance of @org.eclipse.emf.mwe.internal.core.Workflow@ shall be instantiated. This is due to the fact that this is the implementation of the root of the workflow model which we one usually uses when creating generator workflow configurations. However as you can see in the example above one can instantiate arbitrary Java object models. This is conceptually very close to the dependency injection and the XML language in the "Spring Framework":http://www.springframework.org. 
 
@@ -79,7 +79,7 @@ An instance of Xtext's generator is configured with general information about sr
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 In addition a language is configured with a list of ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment}s.
 The whole generator is composed of theses fragments. We have fragments for generating parsers, one for the serializer, one for the EMF code, one for the outline view, etc.
-!images/generator-structure.png!
+!{width:50%}images/generator-structure.png!
 
 h4. Generator Fragments
 

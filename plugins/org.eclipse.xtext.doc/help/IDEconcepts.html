@@ -1,49 +1,57 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IDE concepts</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="index.html" title="Xtext User Guide"/>
-<link rel="prev" href="fragmentProvider.html" title="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
-<link rel="next" href="labelProvider.html" title="Label Provider"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="index.html" title="Xtext User Guide">
+<link rel="prev" href="fragmentProvider.html" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">
+<link rel="next" href="labelProvider.html" title="Label Provider">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE concepts</h1>
 <p>For the following part we will refer to a concrete example grammar in order to explain certain aspect of the UI more clearly. The used example grammar is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">grammar org.eclipse.text.documentation.Sample <br/>
-    with org.eclipse.xtext.common.Terminals<br/>
-<br/>
-generate gen 'http://www.eclipse.org/xtext/documentation/Sample' as gen<br/>
-<br/>
-Model :<br/>
-  "model" intAttribute=INT (stringDescription=STRING)? "{" <br/>
-     (rules += AbstractRule)* <br/>
-  "}" <br/>
-;<br/>
-<br/>
-AbstractRule:<br/>
-  RuleA | RuleB<br/>
-;<br/>
-<br/>
-RuleA :<br/>
-   "RuleA" "(" name = ID ")" ;<br/>
-<br/>
-RuleB return gen::CustomType:<br/>
-   "RuleB" "(" ruleA = [RuleA] ")" ;<br/>
-<br/>
+<code class="code">grammar&nbsp;org.eclipse.text.documentation.Sample&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br>
+
+<br>
+generate&nbsp;gen&nbsp;'http://www.eclipse.org/xtext/documentation/Sample'&nbsp;as&nbsp;gen<br>
+
+<br>
+Model&nbsp;:<br>
+&nbsp;&nbsp;"model"&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;"{"&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(rules&nbsp;+=&nbsp;AbstractRule)*&nbsp;<br>
+&nbsp;&nbsp;"}"&nbsp;<br>
+;<br>
+
+<br>
+AbstractRule:<br>
+&nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB<br>
+;<br>
+
+<br>
+RuleA&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;"RuleA"&nbsp;"("&nbsp;name&nbsp;=&nbsp;ID&nbsp;")"&nbsp;;<br>
+
+<br>
+RuleB&nbsp;return&nbsp;gen::CustomType:<br>
+&nbsp;&nbsp;&nbsp;"RuleB"&nbsp;"("&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;")"&nbsp;;<br>
+
+<br>
+
 </code>
 </p>
 </div>
-<p/>
+<p></p>
 <div class="section" title="Managing Concurrency">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="concurrency"/>Managing Concurrency</h2>
+<a name="concurrency"></a>Managing Concurrency</h2>
 </div>
 </div>
 </div>

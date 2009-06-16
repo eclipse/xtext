@@ -1,12 +1,13 @@
 <html>
 <head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Content Assist</title>
-<link href="book.css" rel="stylesheet" type="text/css"/>
-<meta content="DocBook XSL Stylesheets V1.75.1" name="generator"/>
-<link rel="home" href="index.html" title="Xtext User Guide"/>
-<link rel="up" href="IDEconcepts.html" title="IDE concepts"/>
-<link rel="prev" href="labelProvider.html" title="Label Provider"/>
-<link rel="next" href="templates.html" title="Template Proposals"/>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="IDEconcepts.html" title="IDE concepts">
+<link rel="prev" href="labelProvider.html" title="Label Provider">
+<link rel="next" href="templates.html" title="Template Proposals">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Content Assist</h1>
@@ -25,7 +26,8 @@
 						<code class="code">src</code>-folder of the 
 						<code class="code">ui</code> project 
 						<code class="code">ProposalProvider</code>
-					</p>
+					
+</p>
 </li>
 </ul>
 </div>
@@ -37,28 +39,31 @@
 <div>
 <div>
 <h3 class="title">
-<a name="ProposalProvider"/>ProposalProvider</h3>
+<a name="ProposalProvider"></a>ProposalProvider</h3>
 </div>
 </div>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">public void complete[TypeName]_[FeatureName](<br/>
-  EObject model, <br/>
-  Assignment assignment, <br/>
-  ContentAssistContext context, <br/>
-  ICompletionProposalAcceptor acceptor) {<br/>
-  // clients may override<br/>
-}<br/>
-<br/>
-public void complete_[RuleName](<br/>
-  EObject model, <br/>
-  RuleCall ruleCall, <br/>
-  ContentAssistContext context, <br/>
-  ICompletionProposalAcceptor acceptor) {<br/>
-  // clients may override<br/>
-}<br/>
-<br/>
+<code class="code">public&nbsp;void&nbsp;complete[TypeName]_[FeatureName](<br>
+&nbsp;&nbsp;EObject&nbsp;model,&nbsp;<br>
+&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br>
+&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br>
+&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;//&nbsp;clients&nbsp;may&nbsp;override<br>
+}<br>
+
+<br>
+public&nbsp;void&nbsp;complete_[RuleName](<br>
+&nbsp;&nbsp;EObject&nbsp;model,&nbsp;<br>
+&nbsp;&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br>
+&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br>
+&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;//&nbsp;clients&nbsp;may&nbsp;override<br>
+}<br>
+
+<br>
+
 </code>
 </p>
 </div>
@@ -68,49 +73,55 @@ public void complete_[RuleName](<br/>
 <p>Clients who want to customize the behavior may override the methods from the 
 					<code class="code">AbstractProposalProvider</code> or in turn introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 				</p>
-<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&#8216;complete.*&#8217;' may be called.</p>
+<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&lsquo;complete.*&rsquo;' may be called.</p>
 </div>
 <div class="section" title="Sample Implementation">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="SampleImplementation"/>Sample Implementation</h3>
+<a name="SampleImplementation"></a>Sample Implementation</h3>
 </div>
 </div>
 </div>
-<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &#8216;Description for model #7&#8217; for a model with the intAttribute '7'</p>
+<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &lsquo;Description for model #7&rsquo; for a model with the intAttribute '7'</p>
 <div class="literallayout">
 <p>
-<code class="code">public void completeModel_StringDescription (<br/>
-  Model model, <br/>
-  Assignment assignment, <br/>
-  ContentAssistContext context, <br/>
-  ICompletionProposalAcceptor acceptor) {<br/>
-  // call implementation in superclass<br/>
-  super.completeModel_StringDescription(<br/>
-    model, <br/>
-    assignment, <br/>
-    context, <br/>
-    acceptor);<br/>
-<br/>
-  // compute the plain proposal<br/>
-  String proposal = "Description for model #" + model.getIntAttribute();<br/>
-<br/>
-  // convert it to a valid STRING-terminal<br/>
-  proposal = getValueConverter().toString(proposal, "STRING");<br/>
-<br/>
-  // create the completion proposal<br/>
-  // the result may be null as the createCompletionProposal(..) methods <br/>
-  // check for valid prefixes<br/>
-  // and terminal token conflicts<br/>
-  ICompletionProposal completionProposal = <br/>
-    createCompletionProposal(proposal, contentAssistContext);<br/>
-<br/>
-  // register the proposal, the acceptor handles null-values gracefully<br/>
-  acceptor.accept(completionProposal);<br/>
-}<br/>
-<br/>
+<code class="code">public&nbsp;void&nbsp;completeModel_StringDescription&nbsp;(<br>
+&nbsp;&nbsp;Model&nbsp;model,&nbsp;<br>
+&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br>
+&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br>
+&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;//&nbsp;call&nbsp;implementation&nbsp;in&nbsp;superclass<br>
+&nbsp;&nbsp;super.completeModel_StringDescription(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;assignment,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;context,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor);<br>
+
+<br>
+&nbsp;&nbsp;//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal<br>
+&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;"Description&nbsp;for&nbsp;model&nbsp;#"&nbsp;+&nbsp;model.getIntAttribute();<br>
+
+<br>
+&nbsp;&nbsp;//&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;valid&nbsp;STRING-terminal<br>
+&nbsp;&nbsp;proposal&nbsp;=&nbsp;getValueConverter().toString(proposal,&nbsp;"STRING");<br>
+
+<br>
+&nbsp;&nbsp;//&nbsp;create&nbsp;the&nbsp;completion&nbsp;proposal<br>
+&nbsp;&nbsp;//&nbsp;the&nbsp;result&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;methods&nbsp;<br>
+&nbsp;&nbsp;//&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes<br>
+&nbsp;&nbsp;//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts<br>
+&nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;contentAssistContext);<br>
+
+<br>
+&nbsp;&nbsp;//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully<br>
+&nbsp;&nbsp;acceptor.accept(completionProposal);<br>
+}<br>
+
+<br>
+
 </code>
 </p>
 </div>

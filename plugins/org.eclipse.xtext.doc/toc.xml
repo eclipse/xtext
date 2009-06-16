@@ -1,155 +1,162 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
-<topic href="help/Overview.html#WhatsXtext" label="What&#8217;s Xtext?"/>
-<topic href="help/concepts.html" label="Xtext concepts from a bird&#8217;s eye view"/>
+<topic href="help/Overview.html#WhatsXtext" label="What&rsquo;s Xtext?"></topic>
+<topic href="help/concepts.html" label="Xtext concepts from a bird&rsquo;s eye view"></topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
-<topic href="help/grammarLanguage.html#Firstanexample" label="First an example"/>
-<topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"/>
+<topic href="help/grammarLanguage.html#Firstanexample" label="First an example"></topic>
+<topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"></topic>
 <topic href="help/grammarLanguage.html#EPackagedeclarations" label="EPackage declarations">
-<topic href="help/grammarLanguage.html#EPackagegeneration" label="EPackage generation"/>
+<topic href="help/grammarLanguage.html#EPackagegeneration" label="EPackage generation"></topic>
 <topic href="help/grammarLanguage.html#EPackageimport" label="EPackage import">
-<topic href="help/grammarLanguage.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"/>
-<topic href="help/grammarLanguage.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"/>
+<topic href="help/grammarLanguage.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
+<topic href="help/grammarLanguage.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"></topic>
 </topic>
-<topic href="help/grammarLanguage.html#Usingmultiplepackagesmetamodelaliases" label="Using multiple packages / meta model aliases"/>
+<topic href="help/grammarLanguage.html#Usingmultiplepackagesmetamodelaliases" label="Using multiple packages / meta model aliases"></topic>
 </topic>
 <topic href="help/grammarLanguage.html#Rules" label="Rules">
 <topic href="help/grammarLanguage.html#TerminalRules" label="Terminal Rules">
-<topic href="help/grammarLanguage.html#Returntypes" label="Return types"/>
+<topic href="help/grammarLanguage.html#Returntypes" label="Return types"></topic>
 </topic>
 <topic href="help/grammarLanguage.html#ExtendedBackusNaurformexpressions" label="Extended Backus-Naur form expressions">
-<topic href="help/grammarLanguage.html#KeywordsCharacters" label="Keywords / Characters"/>
-<topic href="help/grammarLanguage.html#CharacterRanges" label="Character Ranges"/>
-<topic href="help/grammarLanguage.html#Wildcard" label="Wildcard"/>
-<topic href="help/grammarLanguage.html#UntilToken" label="Until Token"/>
-<topic href="help/grammarLanguage.html#NegatedToken" label="Negated Token"/>
-<topic href="help/grammarLanguage.html#RuleCalls" label="Rule Calls"/>
-<topic href="help/grammarLanguage.html#Alternatives" label="Alternatives"/>
-<topic href="help/grammarLanguage.html#Groups" label="Groups"/>
+<topic href="help/grammarLanguage.html#KeywordsCharacters" label="Keywords / Characters"></topic>
+<topic href="help/grammarLanguage.html#CharacterRanges" label="Character Ranges"></topic>
+<topic href="help/grammarLanguage.html#Wildcard" label="Wildcard"></topic>
+<topic href="help/grammarLanguage.html#UntilToken" label="Until Token"></topic>
+<topic href="help/grammarLanguage.html#NegatedToken" label="Negated Token"></topic>
+<topic href="help/grammarLanguage.html#RuleCalls" label="Rule Calls"></topic>
+<topic href="help/grammarLanguage.html#Alternatives" label="Alternatives"></topic>
+<topic href="help/grammarLanguage.html#Groups" label="Groups"></topic>
 </topic>
 </topic>
 <topic href="help/grammarLanguage.html#ParserRules" label="Parser Rules">
 <topic href="help/grammarLanguage.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
-<topic href="help/grammarLanguage.html#Assignments" label="Assignments"/>
+<topic href="help/grammarLanguage.html#Assignments" label="Assignments"></topic>
 </topic>
 <topic href="help/grammarLanguage.html#AssignmentOperators" label="Assignment Operators">
-<topic href="help/grammarLanguage.html#CrossReferences" label="Cross References"/>
-<topic href="help/grammarLanguage.html#SimpleActions" label="Simple Actions"/>
-<topic href="help/grammarLanguage.html#Unassignedrulecalls" label="Unassigned rule calls"/>
-<topic href="help/grammarLanguage.html#grammarActions" label="Tree Rewrite Actions"/>
+<topic href="help/grammarLanguage.html#CrossReferences" label="Cross References"></topic>
+<topic href="help/grammarLanguage.html#SimpleActions" label="Simple Actions"></topic>
+<topic href="help/grammarLanguage.html#Unassignedrulecalls" label="Unassigned rule calls"></topic>
+<topic href="help/grammarLanguage.html#grammarActions" label="Tree Rewrite Actions"></topic>
 </topic>
 </topic>
-<topic href="help/grammarLanguage.html#Hiddenterminalsymbols" label="Hidden terminal symbols"/>
-<topic href="help/grammarLanguage.html#datatypeRules" label="Datatype rules"/>
-<topic href="help/grammarLanguage.html#EnumRules" label="Enum Rules"/>
+<topic href="help/grammarLanguage.html#Hiddenterminalsymbols" label="Hidden terminal symbols"></topic>
+<topic href="help/grammarLanguage.html#datatypeRules" label="Datatype rules"></topic>
+<topic href="help/grammarLanguage.html#EnumRules" label="Enum Rules"></topic>
 </topic>
 <topic href="help/metamodelInference.html" label="Meta-Model inference">
-<topic href="help/metamodelInference.html#TypeandPackageGeneration" label="Type and Package Generation"/>
-<topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"/>
-<topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"/>
-<topic href="help/metamodelInference.html#FeatureNormalization" label="Feature Normalization"/>
-<topic href="help/metamodelInference.html#CustomizedPostProcessing" label="Customized Post Processing"/>
-<topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"/>
+<topic href="help/metamodelInference.html#TypeandPackageGeneration" label="Type and Package Generation"></topic>
+<topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"></topic>
+<topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"></topic>
+<topic href="help/metamodelInference.html#FeatureNormalization" label="Feature Normalization"></topic>
+<topic href="help/metamodelInference.html#CustomizedPostProcessing" label="Customized Post Processing"></topic>
+<topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"></topic>
 </topic>
-<topic href="help/grammarImport.html" label="Importing existing Meta Models"/>
-<topic href="help/grammarMixins.html" label="Grammar Mixins"/>
-<topic href="help/Defaulttokens.html" label="Default tokens"/>
+<topic href="help/grammarImport.html" label="Importing existing Meta Models"></topic>
+<topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
+<topic href="help/Defaulttokens.html" label="Default tokens"></topic>
 <topic href="help/generator.html" label="The Generator">
-<topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to the Modeling Workflow Engine (MWE)"/>
+<topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to MWE"></topic>
 <topic href="help/generator.html#GeneralArchitecture" label="General Architecture">
-<topic href="help/generator.html#GeneratorFragments" label="Generator Fragments"/>
-<topic href="help/generator.html#Configuration" label="Configuration"/>
-<topic href="help/generator.html#antlr_generator_fragment" label="Antlr Generator Fragment"/>
+<topic href="help/generator.html#GeneratorFragments" label="Generator Fragments"></topic>
+<topic href="help/generator.html#Configuration" label="Configuration"></topic>
+</topic>
+<topic href="help/generator.html#Standardgeneratorfragments" label="Standard generator fragments">
+<topic href="help/generator.html#antlr_generator_fragment" label="Antlr Generator Fragment"></topic>
 </topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
 <topic href="help/dependencyInjection.html#Modules" label="Modules">
-<topic href="help/dependencyInjection.html#GeneratedModules" label="Generated Modules"/>
-<topic href="help/dependencyInjection.html#DefaultModules" label="Default Modules"/>
-<topic href="help/dependencyInjection.html#ChangingConfiguration" label="Changing Configuration"/>
+<topic href="help/dependencyInjection.html#GeneratedModules" label="Generated Modules"></topic>
+<topic href="help/dependencyInjection.html#DefaultModules" label="Default Modules"></topic>
+<topic href="help/dependencyInjection.html#ChangingConfiguration" label="Changing Configuration"></topic>
 </topic>
 </topic>
 </topic>
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
-<topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"/>
-<topic href="help/SetupwithinEclipseEquinox.html" label="Setup within Eclipse / Equinox"/>
+<topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"></topic>
+<topic href="help/SetupwithinEclipseEquinox.html" label="Setup within Eclipse / Equinox"></topic>
 <topic href="help/validation.html" label="Validation">
-<topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"/>
-<topic href="help/validation.html#linking_validation" label="Cross-link Validation"/>
-<topic href="help/validation.html#custom_validation" label="Custom Validation"/>
+<topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
+<topic href="help/validation.html#linking_validation" label="Cross-link Validation"></topic>
+<topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
-<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"/>
-<topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"/>
+<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"></topic>
+<topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"></topic>
 <topic href="help/linking.html#Defaultlinkingsemantics" label="Default linking semantics">
-<topic href="help/linking.html#DefaultImports" label="Default Imports"/>
+<topic href="help/linking.html#DefaultImports" label="Default Imports"></topic>
 </topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
-<topic href="help/scoping.html#DeclarativeScopeProvider" label="Declarative Scope Provider"/>
+<topic href="help/scoping.html#DeclarativeScopeProvider" label="Declarative Scope Provider"></topic>
 </topic>
 <topic href="help/valueconverter.html" label="Value Converter">
-<topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"/>
+<topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"></topic>
 </topic>
 <topic href="help/serialization.html" label="Serialization">
-<topic href="help/serialization.html#serializationcontract" label="The Contract"/>
-<topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"/>
-<topic href="help/serialization.html#transientvalues" label="Transient Values"/>
-<topic href="help/serialization.html#unassignedtext" label="Unassigned Text"/>
-<topic href="help/serialization.html#crossreferenceserializer" label="Cross Reference Serializer"/>
-<topic href="help/serialization.html#hiddentokenmerger" label="Hidden Token Merger"/>
-<topic href="help/serialization.html#tokenstream" label="Token Stream"/>
+<topic href="help/serialization.html#serializationcontract" label="The Contract"></topic>
+<topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"></topic>
+<topic href="help/serialization.html#transientvalues" label="Transient Values"></topic>
+<topic href="help/serialization.html#unassignedtext" label="Unassigned Text"></topic>
+<topic href="help/serialization.html#crossreferenceserializer" label="Cross Reference Serializer"></topic>
+<topic href="help/serialization.html#hiddentokenmerger" label="Hidden Token Merger"></topic>
+<topic href="help/serialization.html#tokenstream" label="Token Stream"></topic>
 </topic>
-<topic href="help/fragmentProvider.html" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"/>
+<topic href="help/fragmentProvider.html" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
-<topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"/>
-<topic href="help/labelProvider.html" label="Label Provider"/>
+<topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"></topic>
+<topic href="help/labelProvider.html" label="Label Provider"></topic>
 <topic href="help/contentAssist.html" label="Content Assist">
-<topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"/>
-<topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"/>
+<topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
+<topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>
 </topic>
 <topic href="help/templates.html" label="Template Proposals">
-<topic href="help/templates.html#CrossReferenceResolver" label="CrossReference Resolver"/>
+<topic href="help/templates.html#CrossReferenceResolver" label="CrossReference Resolver"></topic>
 </topic>
-<topic href="help/outline.html" label="Outline View"/>
-<topic href="help/navigation.html" label="Navigation and Hyperlinking"/>
+<topic href="help/outline.html" label="Outline View">
+<topic href="help/outline.html#Influencingtheoutlinestructure" label="Influencing the outline structure"></topic>
+<topic href="help/outline.html#Filtering" label="Filtering"></topic>
+<topic href="help/outline.html#Contextmenus" label="Context menus"></topic>
+<topic href="help/outline.html#Sorting" label="Sorting"></topic>
+</topic>
+<topic href="help/navigation.html" label="Navigation and Hyperlinking"></topic>
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)">
 <topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
-<topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"/>
-<topic href="help/formatting.html#FormattingConfigRules" label="FormattingConfig Rules"/>
+<topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
+<topic href="help/formatting.html#FormattingConfigRules" label="FormattingConfig Rules"></topic>
 </topic>
 </topic>
 </topic>
 <topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">
-<topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite?"/>
-<topic href="help/migration_overview.html" label="Migration overview"/>
+<topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite?"></topic>
+<topic href="help/migration_overview.html" label="Migration overview"></topic>
 <topic href="help/Xtend_based_apis.html" label="Where are the Xtend-based APIs?">
-<topic href="help/Xtend_based_apis.html#Xtend_is_hard_to_debug" label="Xtend is hard to debug"/>
-<topic href="help/Xtend_based_apis.html#Xtend_is_slow" label="Xtend is slow"/>
-<topic href="help/Xtend_based_apis.html#Convenient_Java" label="Convenient Java"/>
-<topic href="help/Xtend_based_apis.html#conclusion" label="Conclusion"/>
+<topic href="help/Xtend_based_apis.html#Xtend_is_hard_to_debug" label="Xtend is hard to debug"></topic>
+<topic href="help/Xtend_based_apis.html#Xtend_is_slow" label="Xtend is slow"></topic>
+<topic href="help/Xtend_based_apis.html#Convenient_Java" label="Convenient Java"></topic>
+<topic href="help/Xtend_based_apis.html#conclusion" label="Conclusion"></topic>
 </topic>
 <topic href="help/differences.html" label="Differences">
 <topic href="help/differences.html#differenced_grammar_language" label="Differences in the grammar language">
-<topic href="help/differences.html#differences_datatype_rules" label="String rules become Datatype rules"/>
-<topic href="help/differences.html#differences_enum_rules" label="Enum rules"/>
-<topic href="help/differences.html#differences_native_rules" label="Native rules"/>
-<topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"/>
-<topic href="help/differences.html#differences_return_types" label="Return types"/>
+<topic href="help/differences.html#differences_datatype_rules" label="String rules become Datatype rules"></topic>
+<topic href="help/differences.html#differences_enum_rules" label="Enum rules"></topic>
+<topic href="help/differences.html#differences_native_rules" label="Native rules"></topic>
+<topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"></topic>
+<topic href="help/differences.html#differences_return_types" label="Return types"></topic>
 </topic>
-<topic href="help/differences.html#differences_validation" label="Differences in Validation"/>
+<topic href="help/differences.html#differences_validation" label="Differences in Validation"></topic>
 <topic href="help/differences.html#differences_linking" label="Differences in Linking">
-<topic href="help/differences.html#differences_linking_sopes" label="The idea of scopes"/>
-<topic href="help/differences.html#differences_linking_migration" label="Migration"/>
+<topic href="help/differences.html#differences_linking_sopes" label="The idea of scopes"></topic>
+<topic href="help/differences.html#differences_linking_migration" label="Migration"></topic>
 </topic>
-<topic href="help/differences.html#differences_ui" label="Differences in UI customizing"/>
+<topic href="help/differences.html#differences_ui" label="Differences in UI customizing"></topic>
 </topic>
 <topic href="help/NewFeatures.html" label="New Features">
-<topic href="help/NewFeatures.html#DependencyInjectionwithGoogleGuice" label="Dependency Injection with Google Guice"/>
-<topic href="help/NewFeatures.html#ImprovementsonGrammarLevel" label="Improvements on Grammar Level"/>
-<topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"/>
+<topic href="help/NewFeatures.html#DependencyInjectionwithGoogleGuice" label="Dependency Injection with Google Guice"></topic>
+<topic href="help/NewFeatures.html#ImprovementsonGrammarLevel" label="Improvements on Grammar Level"></topic>
+<topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"></topic>
 </topic>
-<topic href="help/MigrationSupport.html" label="Migration Support"/>
+<topic href="help/MigrationSupport.html" label="Migration Support"></topic>
 </topic>
 </toc>

@@ -1,4 +1,155 @@
 
 h2(#outline). Outline View
 
-text
+Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the correpsonding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the _Link with Editor_ button.
+
+!{width:50%}images/sample_outline.png!
+
+You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to customize the various aspects of the outline. 
+
+h3. Influencing the outline structure
+
+In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional (artificial / virtual) nodes, you customize the outline by implementing ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}.
+
+The Xtext wizard creates an empty transformer class (@MyDslTransformer@) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
+
+bc.. 
+public class MyDslTransformer extends AbstractDeclarativeSemanticModelTransformer { 
+  /**
+   * This method will be called by naming convention:
+   * - method name must be createNode
+   * - first param: subclass of EObject
+   * - second param: ContentOutlineNode 
+   */
+  public ContentOutlineNode createNode(Attribute semanticNode, ContentOutlineNode parentNode) {
+    ContentOutlineNode node = super.newOutlineNode(semanticNode, parentNode);
+    node.setLabel("special " + node.getLabel());
+    return node;
+  }
+  
+   public ContentOutlineNode createNode(Property semanticNode, ContentOutlineNode parentNode) {
+    ContentOutlineNode node = super.newOutlineNode(semanticNode, parentNode);
+    node.setLabel("pimped " + node.getLabel());
+    return node;
+  }
+
+/**
+ * This method will be called by naming convention:
+ * - method name must be getChildren
+ * - first param: subclass of EObject
+ */
+  public List<EObject> getChildren(Attribute attribute) {
+    return attribute.eContents();
+  }
+
+  public List<EObject> getChildren(Property property) {
+    return NO_CHILDREN;
+  }
+ }
+ 
+
+p. To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: 
+
+bc.. 
+public class MyDslUiModule extends AbstractXtextUiModule {
+
+  @Override
+  public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
+    return MyDslTransformer.class;
+  }
+  ...
+}
+
+
+h3. Filtering
+
+Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction}s to the outline. Actions can be contributed by implementing and registering a ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributor}.
+
+To register a @DeclarativeActionBarContributor@, add the following lines to your @MyDslUiModule@ class:
+
+bc.. 
+/**
+ * Use this class to register components to be used within the IDE.
+ */
+public class MyDslUiModule extends org.xtext.example.AbstractMyDslUiModule {
+
+  ...
+
+  @Override
+  public Class<? extends IActionBarContributor> bindIActionBarContributor() {
+    return MyDslActionBarContributor.class;
+  }
+}
+
+p. The action bar contributor will look like this:
+
+bc.. 
+public class MyDslActionBarContributor extends DeclarativeActionBarContributor {
+  public Action addFilterParserRulesToolbarAction(XtextContentOutlinePage page) {
+    return new FilterFooAction(page);
+  }
+}
+
+p. Filter actions must extend @AbstractFilterAction@ (this ensures that the action toggle state is handled correctly):
+
+bc.. 
+import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;
+import org.eclipse.xtext.xtext.ui.Activator;
+
+public class FilterFooAction extends AbstractFilterAction {
+
+  public FilterFooAction(XtextContentOutlinePage outlinePage) {
+    super("Filter Foo", outlinePage);
+    setToolTipText("Show / hide foo");
+    setDescription("Show / hide foo");
+    setImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));
+    setDisabledImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));
+  }
+
+  @Override
+  protected String getToggleId() {
+    return "FilterFooAction.isChecked";
+  }
+	
+  @Override
+  protected ViewerFilter createFilter() {
+    return new FooOutlineFilter();
+  }
+
+}
+
+p. The filtering itself will be performed by @FooOutlineFilter@:
+
+bc.. 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+
+public class FooOutlineFilter extends ViewerFilter {
+
+  @Override
+  public boolean select(Viewer viewer, Object parentElement, Object element) {
+    if ((parentElement != null) && (parentElement instanceof ContentOutlineNode)) {
+      ContentOutlineNode parentNode = (ContentOutlineNode) parentElement;
+      EClass clazz = parentNode.getClazz();
+      if (clazz.equals(MyDslPackage.Literals.ATTRIBUTE)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+}
+
+
+h3. Context menus
+
+(stay tuned)
+
+h3. Sorting
+
+(stay tuned)
