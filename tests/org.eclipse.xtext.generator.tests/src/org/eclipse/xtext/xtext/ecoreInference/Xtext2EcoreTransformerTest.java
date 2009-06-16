@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.same;
+import static org.easymock.EasyMock.verify;
 
 import java.io.InputStream;
 import java.util.List;
@@ -1053,5 +1057,47 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		transformer.transform();
 
 		verify(postProcessor);
+	}
+	
+	public void testBug_280413_01() throws Exception {
+		final String grammar =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
+			"EClass returns ecore::EClass: name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testBug_280413_02() throws Exception {
+		final String grammar =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
+			"EClass returns ecore::EClass: name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testBug_280413_03() throws Exception {
+		final String grammar =
+			"grammar test with org.eclipse.xtext.Xtext\n" +
+			"generate test 'http://test'\n" +
+			"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+			"ParserRule returns xtext::ParserRule: name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testBug_280413_04() throws Exception {
+		final String grammar =
+			"grammar test with org.eclipse.xtext.Xtext\n" +
+			"generate test 'http://test'\n" +
+			"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+			"ParserRule returns xtext::ParserRule: name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		TransformationDiagnostic diagnostic = (TransformationDiagnostic) resource.getErrors().get(0);
+		assertEquals(grammar.indexOf("xtext::ParserRule"), diagnostic.getOffset());
+		assertEquals("xtext::ParserRule".length(), diagnostic.getLength());
 	}
 }
