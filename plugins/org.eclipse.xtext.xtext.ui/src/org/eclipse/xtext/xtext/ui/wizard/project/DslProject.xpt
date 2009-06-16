@@ -56,7 +56,7 @@ projectName=«this.projectName»
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
 				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://xtext.itemis.com/updates -->
+			<!-- the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates -->
 			<fragment class="org.eclipse.xtext.generator.AntlrDelegatingFragment" />
 			
 			<!-- If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
@@ -96,7 +96,7 @@ projectName=«this.projectName»
 			     and will be ignored if it's not available. -->
 			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 				delegate="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/milestones.">
 			</fragment>
 			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
 			«ENDIF»

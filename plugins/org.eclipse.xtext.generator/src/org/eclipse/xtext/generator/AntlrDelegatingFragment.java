@@ -45,7 +45,7 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 		StringBuffer buff = new StringBuffer();
 		buff.append("\n\nATTENTION!\nThe Antlr generator fragment couldn't be found on the classpath.\n");
 		buff.append("It is highly recommended to install it using the external updatesite:\n\n");
-		buff.append("\t\t'http://xtext.itemis.com/updates/'.\n\n");
+		buff.append("\t\t'http://download.itemis.com/updates/'.\n\n");
 		buff.append("(see the corresponding section in the documentation for details).\n\n");
 		return buff.toString();
 	}
