@@ -31,6 +31,7 @@
             id="org.eclipse.emf.index.ui.emfIndexBuilder">
       </builder>
    </extension>
+   <!--
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
@@ -74,6 +75,7 @@
          </visibility>
       </objectContribution>
    </extension>
+   -->
    <extension
          id="emfIndexProblem"
          name="EMF Indexer Problem"
@@ -144,11 +146,12 @@
       </menuContribution>
    </extension>
    -->
+   <!--
    <extension
          point="org.eclipse.ui.startup">
       <startup
             class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.IndexStartupInitializer">
       </startup>
    </extension>
-
+   -->
 </plugin>
