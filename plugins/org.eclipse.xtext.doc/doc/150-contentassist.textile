@@ -3,7 +3,7 @@ h2(#contentAssist). Content Assist
 
 The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 
-* an abstract proposal provider class named '@Abstract[Language]ProposalProvider'@ generated into the @src-gen@ folder within the @ui@ project
+* an abstract proposal provider class named @'Abstract[Language]ProposalProvider'@ generated into the @src-gen@ folder within the @ui@ project
 * a concrete descendent in the @src@-folder of the @ui@ project @[Language]ProposalProvider@
 
 First we will investigate the generated @Abstract[Language]ProposalProvider@ with methods that look like this:
