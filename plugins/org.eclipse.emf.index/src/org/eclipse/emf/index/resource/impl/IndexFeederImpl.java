@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,6 +30,7 @@ import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.IndexingException;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
 import org.eclipse.emf.index.impl.EReferenceDescriptorImpl;
 import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
@@ -43,6 +45,9 @@ import com.google.inject.Inject;
 public class IndexFeederImpl implements IndexFeeder {
 
 	private IndexStore index;
+
+	@Inject(optional = true)
+	private EcoreIndexFeeder ecoreIndexFeeder;
 
 	private List<URI> deleteResourceURIs = new ArrayList<URI>();
 
@@ -95,7 +100,8 @@ public class IndexFeederImpl implements IndexFeeder {
 			eObjectData.displayName = displayName;
 			eObjectData.userData = userData;
 			eObjectDataCache.put(eObject, eObjectData);
-		} else {
+		}
+		else {
 			LogFacade.logError("Cannot index an EObject that is not contained in a resource");
 		}
 	}
@@ -173,10 +179,10 @@ public class IndexFeederImpl implements IndexFeeder {
 			else {
 				resourceDesc = findResourceDescriptor(EcoreUtil.getURI(eObject).trimFragment());
 			}
-			EClassDescriptor eClassDescriptor = index.eClassDAO().createQueryEClass(eObject.eClass())
-					.executeSingleResult();
-			if (eClassDescriptor==null) {
-				LogFacade.logError("Couldn't find EClassDescriptor for EClass "+eObject.eClass().getName());
+			EClass eClass = eObject.eClass();
+			EClassDescriptor eClassDescriptor = findEClassDescriptor(eClass);
+			if (eClassDescriptor == null) {
+				LogFacade.logError("Couldn't find EClassDescriptor for EClass " + eClass.getName());
 				continue;
 			}
 			EObjectDescriptor newEObjectDesc = new EObjectDescriptorImpl(resourceDesc, data.fragment, data.name,
@@ -192,6 +198,15 @@ public class IndexFeederImpl implements IndexFeeder {
 				eObjectDescCache.put(eObject, newEObjectDesc);
 			}
 		}
+	}
+
+	private EClassDescriptor findEClassDescriptor(EClass eClass) {
+		EClassDescriptor eClassDescriptor = index.eClassDAO().createQueryEClass(eClass).executeSingleResult();
+		if (eClassDescriptor == null && ecoreIndexFeeder != null && eClass.getEPackage() != null) {
+			ecoreIndexFeeder.index(eClass.getEPackage(), false);
+			eClassDescriptor = index.eClassDAO().createQueryEClass(eClass).executeSingleResult();
+		}
+		return eClassDescriptor;
 	}
 
 	public void commitEReferenceDescriptors() {
