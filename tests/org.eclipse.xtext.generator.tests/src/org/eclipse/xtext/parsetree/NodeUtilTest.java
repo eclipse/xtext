@@ -8,8 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
@@ -41,8 +44,6 @@ public class NodeUtilTest extends AbstractGeneratorTest {
 		nodes = NodeUtil.findNodesForFeature(declaration, XtextPackage.eINSTANCE.getGeneratedMetamodel_Name());
 		assertEquals(1, nodes.size());
 		assertEquals("foo", nodes.get(0).serialize().trim());
-		
-		
 	}
 	
 	public void testFindNodesForFeature_MultipleFeature() throws Exception {
@@ -51,5 +52,30 @@ public class NodeUtilTest extends AbstractGeneratorTest {
 		assertEquals(2, nodes.size());
 		assertEquals("Model : foo=Foo;", nodes.get(0).serialize().trim());
 		assertEquals("Foo : name=ID;", nodes.get(1).serialize().trim());
+	}
+	
+	
+	public void testGetAllContents() throws Exception {
+		CompositeNode rootNode = getRootNode("foo");
+		Iterable<AbstractNode> contents = NodeUtil.getAllContents(rootNode);
+		Iterator<AbstractNode> iterator = contents.iterator();
+		List<AbstractNode> expected = getAllNodes(rootNode, new ArrayList<AbstractNode>());
+		List<AbstractNode> result = new ArrayList<AbstractNode>();
+		while(iterator.hasNext()) 
+			result.add(iterator.next());
+		assertEquals(expected.size(), result.size());
+		assertEquals(expected, result);
+	}
+
+	private List<AbstractNode> getAllNodes(AbstractNode rootNode, ArrayList<AbstractNode> arrayList) {
+		if (rootNode instanceof CompositeNode) {
+			CompositeNode c = (CompositeNode) rootNode;
+			EList<AbstractNode> children = c.getChildren();
+			for (AbstractNode abstractNode : children) {
+				arrayList.add(abstractNode);
+				getAllNodes(abstractNode, arrayList);
+			}
+		}
+		return arrayList;
 	}
 }
