@@ -15,12 +15,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -228,26 +229,12 @@ public class NodeUtil {
 	 * @return
 	 */
 	public static Iterable<AbstractNode> getAllContents(final CompositeNode rootNode) {
-		final TreeIterator<Object> allContents = EcoreUtil.getAllContents(rootNode, false);
-		return new Iterable<AbstractNode>() {
-			public Iterator<AbstractNode> iterator() {
-				return new Iterator<AbstractNode>() {
-
-					public boolean hasNext() {
-						return allContents.hasNext();
-					}
-
-					public AbstractNode next() {
-						return (AbstractNode) allContents.next();
-					}
-
-					public void remove() {
-						throw new UnsupportedOperationException();
-					}
-
-				};
+		Iterable<Object> iterable = new Iterable<Object>() {
+			public Iterator<Object> iterator() {
+				return EcoreUtil.getAllContents(rootNode, false);
 			}
 		};
+		return Iterables.filter(iterable,AbstractNode.class);
 	}
 
 }
