@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The Generator</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Generator</h1>
+<div class="section" title="The Generator">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="generator"></a>The Generator</h2>
+</div>
+</div>
+</div>
 <p>Xtext provides you with lots of generic implementations for you language&rsquo;s infrastructure but also uses code generation to generate some of the components.
 				Those generated components are for instance the parser, the serializer, the Ecore model and a couple of convenient base classes for content assist etc..
 				The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the &ldquo;Guice&rdquo;#Guice modules.</p>
@@ -138,7 +147,7 @@
 					An instance of Xtext&rsquo;s generator is configured with general information about src-folders and projects and consists of any number of languages configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s.
 					The whole generator is composed of theses fragments. We have fragments for generating parsers, one for the serializer, one for the EMF code, one for the outline view, etc.
 
 					</p>
@@ -157,7 +166,7 @@
 </div>
 </div>
 <p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment then is able to generate code in one of the configured locations and contribute several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we&rsquo;ve written for label providers ({org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}). It is pretty trivial and at the same time uses the most important call backs. Also the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.</p>
 </div>
@@ -299,6 +308,7 @@
 						</span>
 					
 </p>
+</div>
 </div>
 </div>
 </body>

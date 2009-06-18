@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Dependency Injection in Xtext with Google Guice</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
+<div class="section" title="Dependency Injection in Xtext with Google Guice">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="dependencyInjection"></a>Dependency Injection in Xtext with Google Guice</h2>
+</div>
+</div>
+</div>
 <p>Xtext uses Google Guice in order to wire up and configure language infrstructures. This allows for very flexible customization of language infrastructure and at the same time
 				makes the different pieces far more testable. </p>
 <div class="section" title="Modules">
@@ -66,7 +75,7 @@
 <p>We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
 						The class is initially empty and has been generated only to allow for arbitrary customization.</p>
 <p>In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
-						This class allows to write bindings like so:</p>
+						This class allows to write bindings like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;MyInterface&gt;&nbsp;bind[anyname]()&nbsp;{<br>
@@ -82,6 +91,7 @@
 						Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method 
 						<code class="code">void bind(Binding)</code> and do what every you want.
 					</p>
+</div>
 </div>
 </div>
 </body>

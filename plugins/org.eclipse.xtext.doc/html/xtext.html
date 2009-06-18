@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Xtext User Guide</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -229,7 +229,7 @@
 </div>
 </div>
 <p>The 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup" target="_new">grammar language</a> 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&amp;view=markup" target="_new">grammar language</a> 
 				is the corner stone of Xtext and is defined in itself &ndash; of course.
 			</p>
 <p>It is a DSL carefully designed for description of textual languages, based on 
@@ -467,7 +467,7 @@
 </div>
 <p>If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
 							Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recomend the book) for details.</p>
-<p>An import statement referring to an Ecore file by a platform:/resource/ URI looks like so: </p>
+<p>An import statement referring to an Ecore file by a platform:/resource/ URI looks like this: </p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;"platform:/resource/my.project/modelFolder/MyEcore.ecore"<br>
@@ -476,7 +476,7 @@
 </p>
 </div>
 <p>If you want to mix generated and imported Ecore models you&rsquo;ll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs to the genmodels for the referenced Ecore models.
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs to the genmodels for the referenced Ecore models.
 							Example:
 						</p>
 <div class="literallayout">
@@ -497,7 +497,7 @@
 </div>
 </div>
 </div>
-<p>If you want to use multiple EPackages you need to specify aliases like so:</p>
+<p>If you want to use multiple EPackages you need to specify aliases in the following way:</p>
 <div class="literallayout">
 <p>
 <code class="code">
@@ -830,7 +830,7 @@
 </div>
 </div>
 <p>Using alternatives one can state multiple different alternatives.
-							For instance, the whitespace rule uses alternatives like so:</p>
+							For instance, the whitespace rule uses alternatives like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">terminal&nbsp;WS&nbsp;:&nbsp;('&nbsp;'|'\t'|'\r'|'\n')+&nbsp;;<br>
@@ -1823,6 +1823,8 @@ current&nbsp;=&nbsp;temp;<br>
 
 <br>
 
+<br>
+
 </code>
 </p>
 </div>
@@ -1963,7 +1965,7 @@ current&nbsp;=&nbsp;temp;<br>
 					An instance of Xtext&rsquo;s generator is configured with general information about src-folders and projects and consists of any number of languages configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s.
 					The whole generator is composed of theses fragments. We have fragments for generating parsers, one for the serializer, one for the EMF code, one for the outline view, etc.
 
 					</p>
@@ -1982,7 +1984,7 @@ current&nbsp;=&nbsp;temp;<br>
 </div>
 </div>
 <p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment then is able to generate code in one of the configured locations and contribute several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class {org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we&rsquo;ve written for label providers ({org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}). It is pretty trivial and at the same time uses the most important call backs. Also the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.</p>
 </div>
@@ -2191,7 +2193,7 @@ current&nbsp;=&nbsp;temp;<br>
 <p>We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
 						The class is initially empty and has been generated only to allow for arbitrary customization.</p>
 <p>In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
-						This class allows to write bindings like so:</p>
+						This class allows to write bindings like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;MyInterface&gt;&nbsp;bind[anyname]()&nbsp;{<br>
@@ -2278,6 +2280,8 @@ current&nbsp;=&nbsp;temp;<br>
 &lt;/extension&gt;<br>
 &nbsp;&nbsp;<br>
 &nbsp;&nbsp;<br>
+
+<br>
 
 <br>
 
@@ -2394,6 +2398,8 @@ current&nbsp;=&nbsp;temp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;DomainmodelPackage.TYPE__NAME);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;}<br>
+
+<br>
 
 <br>
 
@@ -2727,7 +2733,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 &nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;//&nbsp;block&nbsp;scope<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;so:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//blockScope{field,innerScopeVar}-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//methodScope{localVar,param}-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
@@ -2920,6 +2926,8 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;};<br>
 &nbsp;&nbsp;}<br>
+
+<br>
 
 <br>
 
@@ -3304,7 +3312,66 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 </div>
 </div>
 </div>
-<p>text</p>
+<p>A nice part of the Eclipse tooling that comes with Xtext is the outline view. It shows the structure of your model as a tree and allows quick navigation to model elements. Thus it helps to get an overview on the current state in the editor at a glance. To make the appearance of the outline more appealing it is very easy possible to provide customization for the label and the image that is used for an element. Actually this customization will be used at various places in your IDE, for example in the window that displays completion proposals when content assist was invoked. (Customizing the structure of the outline is described in a separate chapter:#outline).</p>
+<p>The LabelProvider is the service which is used to compute the image for model elements of &ndash; as its name suggests &ndash; the label that represents an element. What you basically have to do is to provide an implementation for two methods which read 
+				<code class="code">Image getImage(Object)</code> and 
+				<code class="code">String getText(Object)</code> respectively. As this tends to be cumbersome due to 
+				<code class="code">instanceof</code> and cast orgies, Xtext ships with a reasonable and convenient default implementation.
+			</p>
+<div class="section" title="DefaultLabelProvider">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="DefaultLabelProvider"></a>DefaultLabelProvider</h3>
+</div>
+</div>
+</div>
+<p>The default implementation of the 
+					<code class="code">LabelProvider</code> interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the LabelProvider are kind of a best match for this pattern. It comes down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides a image filename or the text to be used to represent your model element. Have a look at following example to get a more detailed idea about the 
+					<code class="code">DefaultLabelProvider</code>.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;SampleLabelProvider&nbsp;extends&nbsp;DefaultLabelProvider&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"Rule:&nbsp;"&nbsp;+&nbsp;rule.getName();<br>
+	}<br>
+	
+<br>
+	String&nbsp;image(RuleA&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"ruleA.gif";<br>
+	}<br>
+	
+<br>
+	String&nbsp;image(RuleB&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"ruleB.gif";<br>
+	}<br>
+	
+<br>
+}<br>
+	
+<br>
+
+</code>
+</p>
+</div>
+<p></p>
+<p>The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a resource named 
+					<code class="code">icons/&lt;result of image-method&gt;</code> in your plugin. This path is actually configurable by google guice. Have a look at the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&amp;view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
+				</p>
+<p>What&rsquo;s especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for a EAttribute that&rsquo;s called 
+					<code class="code">name</code> and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
+				</p>
+<p>More advanced usage patterns of the 
+					<code class="code">DefaultLabelProvider</code> include a dispatching to an error handler called 
+					<code class="code">String error_text(Object, Exception)</code> and 
+					<code class="code">String error_image(Object, Exception)</code> respectively.  
+				</p>
+</div>
 </div>
 <div class="section" title="Content Assist">
 <div class="titlepage">
@@ -3319,8 +3386,8 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>an abstract proposal provider class named '
-						<code class="code">Abstract[Language]ProposalProvider'</code> generated into the 
+<p>an abstract proposal provider class named 
+						<code class="code">'Abstract[Language]ProposalProvider'</code> generated into the 
 						<code class="code">src-gen</code> folder within the 
 						<code class="code">ui</code> project
 					</p>
@@ -3426,6 +3493,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 
 <br>
 
+<br>
+
 </code>
 </p>
 </div>
@@ -3523,7 +3592,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional (artificial / virtual) nodes, you customize the outline by implementing 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&view=co" target="_new">ISemanticModelTransformer</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&amp;view=co" target="_new">ISemanticModelTransformer</a>.
 				</p>
 <p>The Xtext wizard creates an empty transformer class (
 					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
@@ -3606,8 +3675,8 @@ public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractXtextUiModule&nbs
 </div>
 </div>
 <p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&view=co" target="_new">DeclarativeActionBarContributor</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&amp;view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&amp;view=co" target="_new">DeclarativeActionBarContributor</a>.
 				</p>
 <p>To register a 
 					<code class="code">DeclarativeActionBarContributor</code>, add the following lines to your 
@@ -4450,7 +4519,7 @@ public&nbsp;class&nbsp;DomainModelLabelProvider&nbsp;extends&nbsp;DefaultLabelPr
 </div>
 <p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &ldquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
 <p>When the linking has to be customized scoping is where most of the semantics typically goes into. By implementing an 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&amp;view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
 					</p>
 <p>The provided default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: </p>
 <div class="orderedlist">

@@ -1,7 +1,7 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
-<topic href="help/Overview.html#WhatsXtext" label="What&#8217;s Xtext?"></topic>
-<topic href="help/concepts.html" label="Xtext concepts from a bird&#8217;s eye view"></topic>
+<topic href="help/Overview.html#WhatsXtext" label="What&rsquo;s Xtext?"></topic>
+<topic href="help/concepts.html" label="Xtext concepts from a bird&rsquo;s eye view"></topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
 <topic href="help/grammarLanguage.html#Firstanexample" label="First an example"></topic>
 <topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"></topic>
@@ -106,7 +106,9 @@
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
 <topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"></topic>
-<topic href="help/labelProvider.html" label="Label Provider"></topic>
+<topic href="help/labelProvider.html" label="Label Provider">
+<topic href="help/labelProvider.html#DefaultLabelProvider" label="DefaultLabelProvider"></topic>
+</topic>
 <topic href="help/contentAssist.html" label="Content Assist">
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
 <topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>

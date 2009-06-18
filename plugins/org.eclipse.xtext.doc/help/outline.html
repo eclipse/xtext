@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Outline View</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Outline View</h1>
+<div class="section" title="Outline View">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="outline"></a>Outline View</h2>
+</div>
+</div>
+</div>
 <p>Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the correpsonding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the 
 				<span class="emphasis"><em>Link with Editor</em></span> button.
 			</p>
@@ -33,7 +42,7 @@
 </div>
 </div>
 <p>In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional (artificial / virtual) nodes, you customize the outline by implementing 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&view=co" target="_new">ISemanticModelTransformer</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&amp;view=co" target="_new">ISemanticModelTransformer</a>.
 				</p>
 <p>The Xtext wizard creates an empty transformer class (
 					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
@@ -116,8 +125,8 @@ public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractXtextUiModule&nbs
 </div>
 </div>
 <p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&view=co" target="_new">DeclarativeActionBarContributor</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&amp;view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&amp;view=co" target="_new">DeclarativeActionBarContributor</a>.
 				</p>
 <p>To register a 
 					<code class="code">DeclarativeActionBarContributor</code>, add the following lines to your 
@@ -268,6 +277,7 @@ public&nbsp;class&nbsp;FooOutlineFilter&nbsp;extends&nbsp;ViewerFilter&nbsp;{<br
 </div>
 </div>
 <p>(stay tuned)</p>
+</div>
 </div>
 </body>
 </html>
