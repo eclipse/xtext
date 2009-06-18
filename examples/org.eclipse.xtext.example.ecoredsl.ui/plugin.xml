@@ -97,7 +97,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-   
+   <!--
     <extension
          point="org.eclipse.ui.commands">
          <command
@@ -170,5 +170,5 @@
          </command>  
          </menuContribution>
    </extension>
-
+  -->
 </plugin>
