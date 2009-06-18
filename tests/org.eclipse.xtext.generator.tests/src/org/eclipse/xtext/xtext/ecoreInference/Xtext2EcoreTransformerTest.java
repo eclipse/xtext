@@ -1092,7 +1092,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		final String grammar =
 			"grammar test with org.eclipse.xtext.Xtext\n" +
 			"generate test 'http://test'\n" +
-			"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+			"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
 			"ParserRule returns xtext::ParserRule: name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
