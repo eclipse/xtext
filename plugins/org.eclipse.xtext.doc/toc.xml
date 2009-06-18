@@ -1,7 +1,7 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
-<topic href="help/Overview.html#WhatsXtext" label="What&rsquo;s Xtext?"></topic>
-<topic href="help/concepts.html" label="Xtext concepts from a bird&rsquo;s eye view"></topic>
+<topic href="help/Overview.html#WhatsXtext" label="What's Xtext?"></topic>
+<topic href="help/concepts.html" label="Xtext concepts from a bird's eye view"></topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
 <topic href="help/grammarLanguage.html#Firstanexample" label="First an example"></topic>
 <topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"></topic>
