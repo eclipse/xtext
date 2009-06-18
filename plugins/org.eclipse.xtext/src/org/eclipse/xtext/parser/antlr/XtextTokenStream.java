@@ -25,8 +25,8 @@ import org.antlr.runtime.TokenSource;
  */
 public class XtextTokenStream extends CommonTokenStream {
 
-	private List<Token> lookaheadTokens = new ArrayList<Token>();
-	
+	private final List<Token> lookaheadTokens;
+
 	private Map<String, Integer> rulenameToTokenType;
 	
 	private BitSet hiddenTokens;
@@ -34,16 +34,19 @@ public class XtextTokenStream extends CommonTokenStream {
 	public XtextTokenStream() {
 		super();
 		tokens = new TokenList(500);
+		lookaheadTokens = createLookAheadTokenList();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, int channel) {
 		super(tokenSource, channel);
 		tokens = new TokenList(500);
+		lookaheadTokens = createLookAheadTokenList();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource);
 		tokens = new TokenList(500);
+		lookaheadTokens = createLookAheadTokenList();
 		rulenameToTokenType = new HashMap<String, Integer>(tokenDefProvider.getTokenDefMap().size());
 		for(Map.Entry<Integer, String> entry: tokenDefProvider.getTokenDefMap().entrySet()) {
 			rulenameToTokenType.put(entry.getValue(), entry.getKey());
@@ -115,7 +118,7 @@ public class XtextTokenStream extends CommonTokenStream {
 		if (!lookaheadTokens.contains(lookaheadToken)) {
 			lookaheadTokens.add(lookaheadToken);
 		}
-		// return super.LA(i); // inlined 
+		// return super.LA(i); // inlined
 		return lookaheadToken.getType();
 	}
 
@@ -161,6 +164,10 @@ public class XtextTokenStream extends CommonTokenStream {
 
 	public void removeLastLookaheadToken() {
 		lookaheadTokens.remove(lookaheadTokens.size() - 1);
+	}
+	
+	protected List<Token> createLookAheadTokenList() {
+		return new ArrayList<Token>();
 	}
 
 	public void resetLookahead() {
