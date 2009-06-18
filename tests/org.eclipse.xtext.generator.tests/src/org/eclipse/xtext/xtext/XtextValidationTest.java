@@ -139,7 +139,7 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 	public void testBug_280413_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
-				"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
 				"ParserRule returns xtext::ParserRule: name = ID;");
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -169,7 +169,7 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 	public void testBug_280413_03() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-				"import 'classpath:/org/eclipse/xtext/xtext.ecore' as xtext\n" +
+				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
 				"ParserRule returns xtext::ParserRule: name = ID;");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
