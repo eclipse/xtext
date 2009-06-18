@@ -55,7 +55,7 @@ import com.google.inject.Inject;
  * </code>
  * 
  * For instance if a scope provider is asked to return all Entities which are
- * visible from a certain Property, it looks for a methode like so:</p> <code>
+ * visible from a certain Property, it looks for a methode like this:</p> <code>
  * IScope scope_Entity(Reference ref, EClass clazz)</p>
  * </code>
  * Again the first parameter can also be any super type of the actual type and
