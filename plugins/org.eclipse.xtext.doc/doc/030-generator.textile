@@ -2,8 +2,8 @@
 h2(#generator). The Generator
 
 Xtext provides you with lots of generic implementations for you language's infrastructure but also uses code generation to generate some of the components.
-Those generated components are for instance the parser, the serializer, the Ecore model and a couple of convenient base classes for content assist etc..
-The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the "Guice"#Guice modules.
+Those generated components are for instance the parser, the serializer, the Ecore model and a couple of convenient base classes for content assist etc.
+The generator also contributes to shared project resources such as the plugin.xml, Manifest.MF and the "Guice modules":#Modules.
 
 Xtext's generator leverages the "modeling workflow engine (MWE)":http://www.eclipse.org/modeling/emft/?project=mwe from EMFT.
 
@@ -98,10 +98,13 @@ bc..
 	
 	<property name="runtimeProject" value="../${projectName}"/>
 	
-	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup"
+		platformUri="${runtimeProject}/.."/>
 	
-	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
-	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner"
+		directory="${runtimeProject}/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner"
+		directory="${runtimeProject}.ui/src-gen"/>
 	
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
@@ -110,7 +113,6 @@ bc..
 		<projectNameUi value="${projectName}.ui"/>
 		
 		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
-			
 			<!-- Java API to access grammar elements (required by several other fragments) -->
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			
@@ -124,14 +126,23 @@ bc..
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
 				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com 
-			     and falls back to the packrat parser if it's not available. -->
-			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+			<!-- the following fragment tries to use the Antlr Generator fragment which 
+			     can be downloaded from http://www.itemis.com and falls back to the packrat 
+			     parser if it's not available. -->
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download 
+					and use the plugin 'de.itemis.xtext.antlr' using the update site 
+					http://xtext.itemis.com/updates/milestones.">
+				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			</fragment>
+			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> -->
+	
 			
 			<!-- java-based API for validation -->
 			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
-                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
-            </fragment>
+				<composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
+			</fragment>
             
 			<!-- scoping API -->
 			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
@@ -144,9 +155,21 @@ bc..
 
 			<!-- outline API -->
 			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment"/>
 
+			
 			<!-- java-based API for content assistance -->
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			<!-- the following fragment tries to use the Antlr based content assist 
+					 fragment which can be downloaded from http://www.itemis.com 
+			     and will be ignored if it's not available. -->
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download 
+					and use the plugin 'de.itemis.xtext.antlr' using the update site 
+					http://xtext.itemis.com/updates/milestones.">
+			</fragment>
+			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
 			
 		</language>
 	</component>

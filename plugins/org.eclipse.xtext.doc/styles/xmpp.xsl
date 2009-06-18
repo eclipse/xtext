@@ -110,12 +110,14 @@
 <xsl:attribute-set name="xref.properties">
 <xsl:attribute name="color">
   <xsl:choose>
+    <xsl:when test="self::link">blue</xsl:when>
     <xsl:when test="self::ulink">blue</xsl:when>
     <xsl:otherwise>inherit</xsl:otherwise>
   </xsl:choose>
 </xsl:attribute>
 <xsl:attribute name="text-decoration">
   <xsl:choose>
+    <xsl:when test="self::link">underline</xsl:when>
     <xsl:when test="self::ulink">underline</xsl:when>
     <xsl:otherwise>inherit</xsl:otherwise>
   </xsl:choose>

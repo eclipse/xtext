@@ -38,7 +38,7 @@ The generator will provide you with two Java classes. An abstract class generate
 The other class is a subclass of that abstract class and is generated to the src/ folder in order to be edited by you. That's where you put the constraints in.
 
 The purpose of the AbstractDeclarativeValidator is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the @Check annotation to any method and it will be invoked automatically when validation takes place.
-Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also let's you avoid any castings.  
+Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also lets you avoid any type casts.  
 In addition to the reflective invocation of test methods  the AbstractDeclarative provides a couple of convenience assertions.
 
 All in all this is very similar to how Junit work. Example:

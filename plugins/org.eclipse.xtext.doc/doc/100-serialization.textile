@@ -69,7 +69,7 @@ p. The Cross Reference Serializer specifies which values are to be writting to t
 
 h3(#hiddentokenmerger). Hidden Token Merger
 
-p. After the "Parse Tree Constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (@IHiddenTokenMerger@) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The @IHiddenTokenMerger@ is the factory for a "Token Stream"#tokenstream which is fed by the "Parse Tree Constructor":#parsetreeconstructor and which writes to another Token Stream.  
+p. After the "Parse Tree Constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (@IHiddenTokenMerger@) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The @IHiddenTokenMerger@ is the factory for a "Token Stream":#tokenstream which is fed by the "Parse Tree Constructor":#parsetreeconstructor and which writes to another Token Stream.  
 
 h3(#tokenstream). Token Stream
 

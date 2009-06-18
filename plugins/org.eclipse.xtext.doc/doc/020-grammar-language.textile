@@ -154,7 +154,8 @@ bc. import "platform:/resource/my.project/modelFolder/MyEcore.ecore"
 If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs to the genmodels for the referenced Ecore models.
 Example:
 
-bc. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="platform:/resource/my.project/model/myEcore.genmodel"/>
+bc. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"
+  genModels="platform:/resource/my.project/model/myEcore.genmodel"/>
 
 h4. Using multiple packages / meta model aliases
 
@@ -249,7 +250,7 @@ There are four different quantities
 # any (operator "*")
 # one or more (operator "+")
 
-h5. Keywords / Characters
+h5(#Keywords). Keywords / Characters
 
 Keywords are a kind of token rule literals. 
 The ID rule in org.eclipse.xtext.common.Terminals for instance starts with a keyword :
@@ -333,7 +334,7 @@ Available in parser rules as well as in terminal rules are
 # "groups":#Groups, 
 # "alternatives":#Alternatives, 
 # "keywords":#Keywords and 
-# "rule calls"#RuleCalls.
+# "rule calls":#RuleCalls.
 
 In addition to these elements, there are some expressions used to direct how the AST is constructed, which are listed and explained in the following.
 
