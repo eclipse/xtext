@@ -147,7 +147,7 @@ h5. Using resource URIs to import existing EPackages
 If the EPackage you want to use is somewhere in your workspace you should refer to it using a platform:/resource/ URI.
 Platform URIs are a special EMF construct, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recomend the book) for details.
 
-An import statement referring to an Ecore file by a platform:/resource/ URI looks like so: 
+An import statement referring to an Ecore file by a platform:/resource/ URI looks like this: 
 
 bc. import "platform:/resource/my.project/modelFolder/MyEcore.ecore"
 
@@ -158,7 +158,7 @@ bc. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" g
 
 h4. Using multiple packages / meta model aliases
 
-If you want to use multiple EPackages you need to specify aliases like so:
+If you want to use multiple EPackages you need to specify aliases in the following way:
 
 bc.. 
   generate secretcompartment http://www.eclipse.org/secretcompartment
@@ -307,7 +307,7 @@ bc. terminal QUALIFIED_NAME : ID ('.' ID)*;
 h5. Alternatives 
 
 Using alternatives one can state multiple different alternatives.
-For instance, the whitespace rule uses alternatives like so:
+For instance, the whitespace rule uses alternatives like this:
 
 bc. terminal WS : (' '|'\t'|'\r'|'\n')+ ;
 

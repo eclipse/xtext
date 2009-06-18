@@ -46,7 +46,7 @@ public class ScopeExample { // class body scope
     innerBlock: { // block scope
       String innerScopeVar = "foo";
       Object field = innerScopeVar;
-      // the scope hierarchy at this point would look like so:
+      // the scope hierarchy at this point would look like this:
       //blockScope{field,innerScopeVar}->
       //methodScope{localVar,param}->
       //classScope{field}-> ('field' is overlayed)

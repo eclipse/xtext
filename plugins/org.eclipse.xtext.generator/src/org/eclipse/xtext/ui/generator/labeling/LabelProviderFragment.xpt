@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider{
 /*
 	
-	//Labels and icons can be computed like so:
+	//Labels and icons can be computed like this:
 	
 	String text(MyModel ele) {
 	  return "my "+ele.getName();
