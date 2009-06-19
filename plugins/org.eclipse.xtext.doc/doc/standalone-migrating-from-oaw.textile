@@ -184,25 +184,6 @@ bc.
 
 This is a bit more verbose, but at the same time more readable. And as you don't have to write the return type in most situations, it's good to have a more explicit, readable syntax.
 
-
-h3(#differences_validation). Differences in Validation
-
-TMF Xtext still supports implementing validation using Xpand's Check. However it is no longer using the EMF meta model (typesystem) but now uses the so called JavaBeansMetamodel. This means that the types in Check and Xtend correspond to Java types. This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
-Example: If your Check file looked like this in oAW Xtext :
-
-bc. 
-  import myMetamodel;
-  context Type ERROR "foo" : name!=null;   
-
-it becomes something like the following in TMF Xtext :
-
-bc. 
-  import my::pack::to::myMetaModel;
-  context Type ERROR "foo" : name!=null;
-
-Where @my::pack::to::myMetaModel@ refers to the package the generated EClasses are in. In other words there's a Java class @my.pack.to.myMetaModel.Type@.
-We changed this in order to allow use of any Java API from within Check and Xtend.
-
 h3(#differences_linking). Differences in Linking
 
 The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all 'visible' EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the @id()@ extension. As a side-effect of @link_feature()@ the reference is set.
