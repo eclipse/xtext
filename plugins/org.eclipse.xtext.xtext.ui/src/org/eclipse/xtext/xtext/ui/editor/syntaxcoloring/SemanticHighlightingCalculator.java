@@ -29,6 +29,9 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCa
 public class SemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		if (resource == null)
+			return;
+		
 		Iterator<EObject> iter = EcoreUtil.getAllContents(resource, true);
 		while(iter.hasNext()) {
 			EObject current = iter.next();
