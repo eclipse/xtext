@@ -8,7 +8,6 @@
   <xsl:import href="docbook.xsl"/>
   <xsl:include href="inline.xsl" />
   <xsl:include href="component.xsl" />
-  <xsl:include href="inline.xsl" />
   <xsl:include href="titlepage.xsl"/>
 
   <xsl:param name="section.autolabel" select="'0'"/>
@@ -87,8 +86,7 @@
   <!-- PETER -->
   <xsl:param name="title.margin.left">-3pc</xsl:param>
   <xsl:param name="section.autolabel" select="1"/>
-  <xsl:attribute-set name="section.title.level1.properties"
-                   use-attribute-sets="section.properties">
+  <xsl:attribute-set name="section.title.level1.properties" use-attribute-sets="section.properties">
     <xsl:attribute name="border-bottom-style">solid</xsl:attribute>
     <xsl:attribute name="border-bottom-width">1pt</xsl:attribute>
     <xsl:attribute name="font-size">
@@ -96,33 +94,37 @@
       <xsl:text>pt</xsl:text>
     </xsl:attribute>
   </xsl:attribute-set>
+  
   <xsl:attribute-set name="section.title.level2.properties">
-  <xsl:attribute name="font-size">
-    <xsl:value-of select="$body.font.master * 1.44"/>
-    <xsl:text>pt</xsl:text>
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.44"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  
+  <xsl:attribute-set name="section.title.level3.properties">
+    <xsl:attribute name="font-size">
+      <xsl:value-of select="$body.font.master * 1.2"/>
+      <xsl:text>pt</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+  
+  <xsl:attribute-set name="xref.properties">
+    <xsl:attribute name="color">
+    <xsl:choose>
+      <xsl:when test="self::link">blue</xsl:when>
+      <xsl:when test="self::ulink">blue</xsl:when>
+      <xsl:otherwise>inherit</xsl:otherwise>
+    </xsl:choose>
   </xsl:attribute>
-</xsl:attribute-set>
-<xsl:attribute-set name="section.title.level3.properties">
-  <xsl:attribute name="font-size">
-    <xsl:value-of select="$body.font.master * 1.2"/>
-    <xsl:text>pt</xsl:text>
+  
+  <xsl:attribute name="text-decoration">
+    <xsl:choose>
+      <xsl:when test="self::link">underline</xsl:when>
+      <xsl:when test="self::ulink">underline</xsl:when>
+      <xsl:otherwise>inherit</xsl:otherwise>
+    </xsl:choose>
   </xsl:attribute>
-</xsl:attribute-set>
-<xsl:attribute-set name="xref.properties">
-<xsl:attribute name="color">
-  <xsl:choose>
-    <xsl:when test="self::link">blue</xsl:when>
-    <xsl:when test="self::ulink">blue</xsl:when>
-    <xsl:otherwise>inherit</xsl:otherwise>
-  </xsl:choose>
-</xsl:attribute>
-<xsl:attribute name="text-decoration">
-  <xsl:choose>
-    <xsl:when test="self::link">underline</xsl:when>
-    <xsl:when test="self::ulink">underline</xsl:when>
-    <xsl:otherwise>inherit</xsl:otherwise>
-  </xsl:choose>
-</xsl:attribute>
 </xsl:attribute-set>
 
   <xsl:param name="variablelist.as.blocks" select="0"/>
