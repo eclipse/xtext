@@ -107,6 +107,7 @@
 	</extension>
 	
 	<!-- Outline context menu actions -->
+	<!--
 	<extension
 		point="org.eclipse.ui.menus">
 		<menuContribution
@@ -137,4 +138,5 @@
 			commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand">
 		</handler>
 	</extension>
+	-->
 </plugin>
