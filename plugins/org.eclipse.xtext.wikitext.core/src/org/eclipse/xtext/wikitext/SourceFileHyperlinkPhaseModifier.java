@@ -21,9 +21,9 @@ import org.eclipse.mylyn.wikitext.core.parser.markup.PatternBasedElementProcesso
  */
 public class SourceFileHyperlinkPhaseModifier extends PatternBasedElement {
 
-	private static final String PACKAGE_PART = "(?:[a-z][a-z0-9]*)"; //$NON-NLS-1$
+	private static final String PACKAGE_PART = "(?:[a-z][a-zA-Z0-9]*)"; //$NON-NLS-1$
 
-	private static final String CLASS_PART = "(?:[A-Z][a-z0-9_$]*)+"; //$NON-NLS-1$
+	private static final String CLASS_PART = "(?:[A-Z][a-zA-Z0-9_$]*)+"; //$NON-NLS-1$
 
 	private static final String FQN_PART = PACKAGE_PART + "(?:\\." + PACKAGE_PART + ")*\\.(" + CLASS_PART + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
