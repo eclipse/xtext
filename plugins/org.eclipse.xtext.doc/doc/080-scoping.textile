@@ -1,7 +1,7 @@
 
 h2(#scoping). Scoping
 
-An @IScopeProvider@ is responsible for providing an @IScope@ for a given @EObject@ and its @EReference@, for which all candidates shall be returned. 
+An @IScopeProvider@ is responsible for providing an @IScope@ for a given @EObject@ and @EReference@ (declared or inherited by the object's @EClass@). The returned @IScope@ should contain all target candidates for the given object and cross reference.
 
 bc.. 
 @Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
@@ -96,4 +96,4 @@ If no such method exists, the implementation will again try to find a method mat
 
 bc. IScope scope_State(StateMachine this, EClass type)
 
-This scope can now be used for any cross references of type _Scope_ for context objects owned by the state machine.
+This scope can now be used for any cross references of type _State_ for context objects owned by the state machine.
