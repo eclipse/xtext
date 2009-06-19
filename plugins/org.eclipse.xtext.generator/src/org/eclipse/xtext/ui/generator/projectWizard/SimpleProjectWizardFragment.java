@@ -17,8 +17,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
+ * An {@link IGeneratorFragment} to generate a simple project wizard.
+ *  
  * @author Sven Efftinge - Initial contribution and API
  */
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
@@ -56,6 +59,11 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private String generatorProjectName;
 
+	/**
+	 * Sets the name of the generator project. 
+	 * 
+	 * @param generatorProjectName
+	 */
 	public void setGeneratorProjectName(String generatorProjectName) {
 		if (generatorProjectName == null || "".equals(generatorProjectName.trim())) {
 			return;

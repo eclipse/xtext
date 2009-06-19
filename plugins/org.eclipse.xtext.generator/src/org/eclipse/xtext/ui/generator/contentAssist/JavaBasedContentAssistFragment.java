@@ -9,7 +9,13 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
+/**
+ * A {@link IGeneratorFragment} to generate a java-based content assist for an Xtext language.
+ * 
+ * @author koehnlein
+ */
 public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	
 	private boolean inherit = true;
@@ -46,6 +52,11 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		return Collections.<Object>singletonList(inherit);
 	}
 
+	/**
+	 * Decide whether to inherit content assist from the super language. 
+	 * 
+	 * @param inherit
+	 */
 	public void setInherit(boolean inherit) {
 		this.inherit = inherit;
 	}

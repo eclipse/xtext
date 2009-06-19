@@ -15,11 +15,13 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 /**
+ * An {@link IGeneratorFragment} to create Java-based scoping.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class JavaScopingFragment extends AbstractGeneratorFragment {
 	@Override

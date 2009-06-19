@@ -16,21 +16,21 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
+ * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class FormatterFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-		.addTypeToType(IFormatter.class.getName(), getFormatterName(grammar))
-		.getBindings();
+		return new BindFactory().addTypeToType(IFormatter.class.getName(), getFormatterName(grammar)).getBindings();
 	}
 
 	public static String getFormatterName(Grammar grammar) {
 		return GrammarUtil.getNamespace(grammar) + ".formatting." + GrammarUtil.getName(grammar) + "Formatter";
 	}
-	
+
 }

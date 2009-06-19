@@ -23,16 +23,19 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.FollowerToDot;
 
+/**
+ * An {@link IGeneratorFragment} to generate model-&gt;text services (aka serialzier) for an Xtext language.
+ * 
+ * @author koehnlein - Javadocs
+ */
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
-	protected static final Logger log = Logger
-			.getLogger(ParseTreeConstructorFragment.class);
+	protected static final Logger log = Logger.getLogger(ParseTreeConstructorFragment.class);
 
 	private boolean generateDotDiagram = false;
 
@@ -44,11 +47,8 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 		if (generateDotDiagram || graphvizCommand != null) {
 			try {
 				FollowerToDot ftd = new FollowerToDot();
-				String fn = new File(ctx.getOutput().getOutlet(
-						Generator.SRC_GEN).getPath()
-						+ "/"
-						+ Naming.asPath(getParseTreeConstructorName(grammar)))
-						.getCanonicalPath();
+				String fn = new File(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
+						+ Naming.asPath(getParseTreeConstructorName(grammar))).getCanonicalPath();
 				if (generateDotDiagram) {
 					PrintStream out;
 					out = new PrintStream(fn + ".dot");
@@ -59,7 +59,8 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 					String cmd = graphvizCommand.replace("%1", fn);
 					ftd.draw(grammar, cmd);
 				}
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				log.error("IOError", e);
 			}
 		}
@@ -72,15 +73,24 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToType(
-				IParseTreeConstructor.class.getName(),
+		return new BindFactory().addTypeToType(IParseTreeConstructor.class.getName(),
 				getParseTreeConstructorName(grammar)).getBindings();
 	}
 
+	/**
+	 * Decide whether to produce a Graphviz diagram for debugging.
+	 * 
+	 * @param enable
+	 */
 	public void setGenerateDotDiagram(boolean enable) {
 		generateDotDiagram = enable;
 	}
 
+	/**
+	 * Set the Graphviz command that is issued to paint a debugging diagram.
+	 * 
+	 * @param cmd
+	 */
 	public void setGraphvizCommand(String cmd) {
 		if (cmd != null && cmd.length() == 0)
 			cmd = null;
