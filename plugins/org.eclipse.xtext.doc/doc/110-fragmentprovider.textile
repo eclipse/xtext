@@ -1,5 +1,5 @@
 
-h2(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
+h3(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
 
 Although inter-Xtext linking is not done by URIs, you may want to be able to reference your @EObject@ from non-Xtext models.
 In those cases URIs are used, which are made up of a part identifying the resource. Each @EObject@ contained in a resource can be identified by a so called _fragment_.

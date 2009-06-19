@@ -99,7 +99,7 @@
 <span class="section"><a href="#serialization">Serialization</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#fragmentProvider">Fragment Provider (referencing Xtext models from other EMF artifacts)</a></span>
+<span class="section"><a href="#emf_integration">Integration with EMF</a></span>
 </dt>
 </dl>
 </dd>
@@ -3396,36 +3396,104 @@ terminal&nbsp;Plural:&nbsp;<br>
 <br>
 &nbsp;<br>
 
-<br>
-
 </code>
 </p>
 </div>
+</div>
+</div>
+<div class="section" title="Integration with EMF">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="emf_integration"></a>Integration with EMF</h2>
+</div>
+</div>
+</div>
+<p>Xtext relies heavily on EMF internally, but it can also be used as the serialization backend of other EMF-based tools.</p>
+<div class="section" title="XtextResource Implementation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="XtextResourceImplementation"></a>XtextResource Implementation</h3>
+</div>
+</div>
+</div>
+<p>Xtext provides an implementation of EMF&rsquo;s resource, the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work the same with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
+
+					</p>
+<div class="mediaobject">
+<img src="images/emf-integration.png"></div>
+<p>
+				
+</p>
+<p>The generator fragment 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
+				</p>
+<p>Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>You can use well-known and easy-to-use tools and techniques for manipulation, such as text editors, regular expressions, or stream editors.</p>
+</li>
+<li class="listitem">
+<p>You can use the same tools for version control as you use for source code. Merging and diffing is performed in a syntax the developer is familiar with. </p>
+</li>
+<li class="listitem">
+<p>It is impossible to break the model such that it cannot be reopened in the editor again. </p>
+</li>
+<li class="listitem">
+<p>Models can be fixed using the same tools, even if they have become incompatible with a new version of the meta model.</p>
+</li>
+</ul>
+</div>
+<p>Xtext targets easy to use and naturally feeling languages. It focusses on the lexical aspects of a language a bit more than on the semantic ones. As a consequence, a referenced meta model can contain more concepts than are actually covered by the Xtext grammar. As a result, not everything that is possibly expressed in the Ecore-based model can be serialized back into a textual representation with regards to the grammar. So if you want to use Xtext to serialize your models as described above, it is good to have a couple of things in mind:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Prefer optional rule calls (cardinality 
+							<code class="code">?</code> or 
+							<code class="code">*</code>) to mandatory ones (cardinality 
+							<code class="code">+</code> or none), such that missing references will not obstruct serialization. 
+						</p>
+</li>
+<li class="listitem">
+<p>You should never use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canoncial GMF editor. The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. Additional information, such as graphical properties in the case of GMF, attached these elements are likely to be lost. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors on file changes. </p>
+</li>
+<li class="listitem">
+<p>Implement an 
+							<a class="link" href="#fragmentProvider" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">IFragmentProvider</a> to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.
+						</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">
 <div class="titlepage">
 <div>
 <div>
-<h2 class="title" style="clear: both">
-<a name="fragmentProvider"></a>Fragment Provider (referencing Xtext models from other EMF artifacts)</h2>
+<h3 class="title">
+<a name="fragmentProvider"></a>Fragment Provider (referencing Xtext models from other EMF artifacts)</h3>
 </div>
 </div>
 </div>
 <p>Although inter-Xtext linking is not done by URIs, you may want to be able to reference your 
-				<code class="code">EObject</code> from non-Xtext models.
-				In those cases URIs are used, which are made up of a part identifying the resource. Each 
-				<code class="code">EObject</code> contained in a resource can be identified by a so called 
-				<span class="emphasis"><em>fragment</em></span>.
-			</p>
+					<code class="code">EObject</code> from non-Xtext models.
+					In those cases URIs are used, which are made up of a part identifying the resource. Each 
+					<code class="code">EObject</code> contained in a resource can be identified by a so called 
+					<span class="emphasis"><em>fragment</em></span>.
+				</p>
 <p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
 <p>The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.</p>
 <p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&rsquo;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
-				<code class="code">EObjects</code>.
-			</p>
+					<code class="code">EObjects</code>.
+				</p>
 <p>Therefore one can contribute a so called 
-				<code class="code">IFragmentProvider</code> per language.
-			</p>
+					<code class="code">IFragmentProvider</code> per language.
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;interface&nbsp;IFragmentProvider&nbsp;extends&nbsp;ILanguageService&nbsp;{<br>
@@ -3455,6 +3523,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 </p>
 </div>
 <p>Note that the currently available default fragment provider does nothing (i.e. refers to the default behavior of EMF).</p>
+</div>
 </div>
 </div>
 <div class="chapter" title="Chapter&nbsp;5.&nbsp;IDE concepts">

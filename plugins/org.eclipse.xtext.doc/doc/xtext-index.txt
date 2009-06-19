@@ -12,6 +12,7 @@
 080-scoping.textile
 090-valueconverter.textile
 100-serialization.textile
+105-emf-integration.textile
 110-fragmentprovider.textile
 
 120-heading-UI.textile

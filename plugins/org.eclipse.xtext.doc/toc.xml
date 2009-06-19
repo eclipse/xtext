@@ -106,7 +106,10 @@
 <topic href="help/serialization.html#hiddentokenmerger" label="Hidden Token Merger"></topic>
 <topic href="help/serialization.html#tokenstream" label="Token Stream"></topic>
 </topic>
-<topic href="help/fragmentProvider.html" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
+<topic href="help/emf_integration.html" label="Integration with EMF">
+<topic href="help/emf_integration.html#XtextResourceImplementation" label="XtextResource Implementation"></topic>
+<topic href="help/emf_integration.html#fragmentProvider" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
+</topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
 <topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"></topic>
