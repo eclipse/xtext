@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Serialization</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,15 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Serialization</h1>
-<div class="section" title="Serialization">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="serialization"></a>Serialization</h2>
-</div>
-</div>
-</div>
 <p>Serialization is the process of transforming an EMF model to its textual representation. Thereby, serialization complements parsing and lexing.</p>
 <p>In Xtext, the process of serialization is split into three steps:</p>
 <div class="orderedlist">
@@ -229,7 +220,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 <p>After the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (
 					<code class="code">IHiddenTokenMerger</code>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The 
-					<code class="code">IHiddenTokenMerger</code> is the factory for a &ldquo;Token Stream&rdquo;#tokenstream which is fed by the 
+					<code class="code">IHiddenTokenMerger</code> is the factory for a 
+					<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which is fed by the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> and which writes to another Token Stream.  
 				</p>
 </div>
@@ -266,7 +258,6 @@ terminal&nbsp;Plural:&nbsp;<br>
 
 </code>
 </p>
-</div>
 </div>
 </div>
 </body>

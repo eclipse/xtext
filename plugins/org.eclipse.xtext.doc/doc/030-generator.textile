@@ -1,3 +1,4 @@
+h1(#configuration). Configuration
 
 h2(#generator). The Generator
 
@@ -7,7 +8,7 @@ The generator also contributes to shared project resources such as the plugin.xm
 
 Xtext's generator leverages the "modeling workflow engine (MWE)":http://www.eclipse.org/modeling/emft/?project=mwe from EMFT.
 
-h3(#short_intor_to_mwe). A short introduction to MWE
+h3(#short_intro_to_mwe). A short introduction to MWE
 
 The nice thing about MWE is that it just instantiates java classes and the configuration is done through setter and adder methods.
 Given the following Java class :

@@ -1,8 +1,10 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
-<topic href="help/Overview.html#WhatsXtext" label="What&#8217;s Xtext?"></topic>
-<topic href="help/concepts.html" label="Xtext concepts from a bird&#8217;s eye view"></topic>
+<topic href="help/Overview.html#WhatsXtext" label="What&rsquo;s Xtext?"></topic>
+<topic href="help/concepts.html" label="Xtext concepts from a bird&rsquo;s eye view"></topic>
+</topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
+<topic href="help/grammarLanguage.html#syntax" label="The Syntax">
 <topic href="help/grammarLanguage.html#Firstanexample" label="First an example"></topic>
 <topic href="help/grammarLanguage.html#LanguageDeclaration" label="Language Declaration"></topic>
 <topic href="help/grammarLanguage.html#EPackagedeclarations" label="EPackage declarations">
@@ -18,7 +20,7 @@
 <topic href="help/grammarLanguage.html#Returntypes" label="Return types"></topic>
 </topic>
 <topic href="help/grammarLanguage.html#ExtendedBackusNaurformexpressions" label="Extended Backus-Naur form expressions">
-<topic href="help/grammarLanguage.html#KeywordsCharacters" label="Keywords / Characters"></topic>
+<topic href="help/grammarLanguage.html#Keywords" label="Keywords / Characters"></topic>
 <topic href="help/grammarLanguage.html#CharacterRanges" label="Character Ranges"></topic>
 <topic href="help/grammarLanguage.html#Wildcard" label="Wildcard"></topic>
 <topic href="help/grammarLanguage.html#UntilToken" label="Until Token"></topic>
@@ -54,14 +56,16 @@
 <topic href="help/grammarImport.html" label="Importing existing Meta Models"></topic>
 <topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
 <topic href="help/Defaulttokens.html" label="Default tokens"></topic>
-<topic href="help/generator.html" label="The Generator">
-<topic href="help/generator.html#short_intor_to_mwe" label="A short introduction to MWE"></topic>
-<topic href="help/generator.html#GeneralArchitecture" label="General Architecture">
-<topic href="help/generator.html#GeneratorFragments" label="Generator Fragments"></topic>
-<topic href="help/generator.html#Configuration" label="Configuration"></topic>
 </topic>
-<topic href="help/generator.html#Standardgeneratorfragments" label="Standard generator fragments">
-<topic href="help/generator.html#antlr_generator_fragment" label="Antlr Generator Fragment"></topic>
+<topic href="help/configuration.html" label="Configuration">
+<topic href="help/configuration.html#generator" label="The Generator">
+<topic href="help/configuration.html#short_intor_to_mwe" label="A short introduction to MWE"></topic>
+<topic href="help/configuration.html#GeneralArchitecture" label="General Architecture">
+<topic href="help/configuration.html#GeneratorFragments" label="Generator Fragments"></topic>
+<topic href="help/configuration.html#Configuration" label="Configuration"></topic>
+</topic>
+<topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments">
+<topic href="help/configuration.html#antlr_generator_fragment" label="Antlr Generator Fragment"></topic>
 </topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">

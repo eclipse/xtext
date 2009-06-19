@@ -1,5 +1,5 @@
 
-h2(#grammarLanguage). The Grammar Language
+h1(#grammarLanguage). The Grammar Language
 
 The "grammar language":http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup 
 is the corner stone of Xtext and is defined in itself - of course.
@@ -7,7 +7,7 @@ is the corner stone of Xtext and is defined in itself - of course.
 It is a DSL carefully designed for description of textual languages, based on "LL(*)-Parsing":http://en.wikipedia.org/wiki/LL_parser that is like "Antlr3's parsing strategy":http://www.artima.com/lejava/articles/antlr_3.html and supported by "packrat parsers":http://pdos.csail.mit.edu/~baford/packrat/.
 The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 
-h3. First an example
+h2. First an example
 
 To get an idea of how it works we'll start by implementing a "simple example":http://martinfowler.com/dslwip/Intro.html introduced by Martin Fowler.
 It's mainly about describing state machines used as the (un)lock mechanism of secret compartments. 
@@ -95,8 +95,10 @@ bc..  grammar my.pack.SecretCompartments
  
  Transition :
   event=[Event] '=>' state=[State];
+
+h2(#syntax). The Syntax
   
-p. In the following the different concepts of the grammar language are explained. We refer to this grammar when appropriate.
+p. In the following the different concepts of the grammar language are explained. 
 
 h3. Language Declaration
 

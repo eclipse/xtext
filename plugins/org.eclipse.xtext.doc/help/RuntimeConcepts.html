@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Runtime Concepts</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,43 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Runtime Concepts</h1>
-<div class="chapter" title="Runtime Concepts">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-<a name="RuntimeConcepts"></a>Runtime Concepts</h2>
-</div>
-</div>
-</div>
-<div class="toc">
-<dl>
-<dt>
-<span class="section"><a href="RuntimeConcepts.html#RuntimesetupISetup">Runtime setup (ISetup)</a></span>
-</dt>
-<dt>
-<span class="section"><a href="SetupwithinEclipseEquinox.html">Setup within Eclipse / Equinox</a></span>
-</dt>
-<dt>
-<span class="section"><a href="validation.html">Validation</a></span>
-</dt>
-<dt>
-<span class="section"><a href="linking.html">Linking</a></span>
-</dt>
-<dt>
-<span class="section"><a href="scoping.html">Scoping</a></span>
-</dt>
-<dt>
-<span class="section"><a href="valueconverter.html">Value Converter</a></span>
-</dt>
-<dt>
-<span class="section"><a href="serialization.html">Serialization</a></span>
-</dt>
-<dt>
-<span class="section"><a href="fragmentProvider.html">Fragment Provider (referencing Xtext models from other EMF artifacts)</a></span>
-</dt>
-</dl>
-</div>
 <p>TMF Xtext itself and every language infrastructure developed with TMF Xtext is configured and wired-up using dependency injection (DI).</p>
 <p>We use Google Guice as the underlying framework, and haven&rsquo;t built much on top of it as it pretty much does what we need.
 			So instead of describing how google guice works, we refer to the website, where additional information can be found: 
@@ -73,7 +36,6 @@
 <p>The setup method returns an Injector, which can further be used to obtain a parser, etc.</p>
 <p>The setup method also registers the ResourceFactory and generated EPackage with the respective global registries provided by EMF.</p>
 <p>So basically you can just run the setup and start using EMF API to load and store models of your language.</p>
-</div>
 </div>
 </body>
 </html>
