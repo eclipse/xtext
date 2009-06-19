@@ -1,6 +1,6 @@
 h1. Overview
 
-h2. What's Xtext?
+h2. What is Xtext?
 
 Xtext is a framework for development of "domain-specific language":#DSL. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/EMF and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
 
@@ -20,13 +20,13 @@ From a grammar the following is derived:
 ** outline views
 ** code templates
 
-The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you don't like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via "dependency injection":#dependencyInjection.
+The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you do not like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via "dependency injection":#dependencyInjection.
 
-h3(#DSL). What's a domain-specific language (DSL)
+h3(#DSL). What is a domain-specific language (DSL)
 
 A DSL is a small programming language, which focuses on a particular domain.
-Such a domain can be more or less anything. The idea is that it's concepts and notation is as close as possible to
-what you have in mind when you think about a solution in that domain. Of course we're talking about problems which can
+Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
+what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
 be solved or processed by computers somehow.
 
 The opposite of a DSL is a so called GPL a General Purpose Language such as Java or any other common programming language.
@@ -34,5 +34,5 @@ With a GPL you can solve every computer problem, but it might not always be the 
 
 Imagine you want to remove the core from an apple. You could of course use a swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.
 
-There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately with XML you're not able to change the concrete syntax, which is the major problem with it. The concrete syntax of XML is way too verbose. Also a generic syntax for everything is a compromise.
+There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately with XML you are not able to change the concrete syntax, which is the major problem with it. The concrete syntax of XML is way too verbose. Also a generic syntax for everything is a compromise.
 
