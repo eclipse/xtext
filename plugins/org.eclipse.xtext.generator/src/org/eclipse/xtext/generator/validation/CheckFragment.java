@@ -37,7 +37,8 @@ public class CheckFragment extends AbstractValidatorFragment {
 		BindFactory addTypeToInstance = new BindFactory()
 			.addTypeToType(ExecutionContext.class.getName(), "org.eclipse.xtext.xtend.InjectableExecutionContext")
 			.addTypeToType(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")
-			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()");
+			.addTypeToInstance(ClassLoader.class.getName(), "Abstract" + GrammarUtil.getName(grammar) + 
+			        "RuntimeModule.class.getClassLoader()");
 		return addTypeToInstance
 			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar), getCheckValidatorName(grammar))
 			.getBindings();
