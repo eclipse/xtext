@@ -19,6 +19,9 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCa
 public class SemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 	
 	public void provideHighlightingFor(final XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		if (resource == null)
+			return;
+		
 		Iterable<AbstractNode> allNodes = NodeUtil.getAllContents(resource.getParseResult().getRootNode());
 		for (AbstractNode abstractNode : allNodes) {
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
