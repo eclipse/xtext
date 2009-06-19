@@ -81,6 +81,7 @@
     <xsl:attribute name="text-align">start</xsl:attribute>
     <xsl:attribute name="start-indent">0pt</xsl:attribute>
     <xsl:attribute name="font-size">9pt</xsl:attribute>
+    <xsl:attribute name="keep-together.within-column">always</xsl:attribute>
   </xsl:attribute-set>
   
   <!-- PETER -->
