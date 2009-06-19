@@ -10,8 +10,6 @@
   <xsl:include href="component.xsl" />
   <xsl:include href="titlepage.xsl"/>
 
-  <xsl:param name="section.autolabel" select="'0'"/>
-
   <!-- Images -->
   <xsl:param name="draft.watermark.image" select="''"/>
 
@@ -85,7 +83,12 @@
   
   <!-- PETER -->
   <xsl:param name="title.margin.left">-3pc</xsl:param>
+  <xsl:param name="part.autolabel" select="1"/>
+  <xsl:param name="chapter.autolabel" select="1"/>
   <xsl:param name="section.autolabel" select="1"/>
+  <xsl:param name="section.autolabel.max.depth" select="3"/>
+  <xsl:param name="section.label.includes.component.label" select="1"/>
+  
   <xsl:attribute-set name="section.title.level1.properties" use-attribute-sets="section.properties">
     <xsl:attribute name="border-bottom-style">solid</xsl:attribute>
     <xsl:attribute name="border-bottom-width">1pt</xsl:attribute>
