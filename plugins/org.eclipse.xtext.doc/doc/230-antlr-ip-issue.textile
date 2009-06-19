@@ -1,0 +1,32 @@
+
+h1(#antlr_ip_issue). The Antlr IP issue (or which parser to use?)
+
+In order to be able to parse models written in your language, Xtext needs to provide a special parser for it.
+The parser is generated from the language grammar. 
+
+Currently it is recommended to use the "Antlr-based":http://www.antlr.org parser.
+Antlr is a very sophisticated parser generator framework based on a so called LL(*) algorithm.
+It is fast, simple and at the same time has some very nice and sophisticated features. Especially its 
+support for error recovery is much better than what other parser generators provide.
+
+Antlr comes in two parts: the runtime and the generator.
+Both are shipped under the BSD license and have a clean intellectual property history. 
+However the generator is still implemented in an older version of Antlr (v 2.x), where it was not possible for the Eclipse Foundation 
+to be sure where exactly every line of code orginally comes from. Therefore Antlr v 2.x didn't get the needed approvement.
+Eclipse has a strict IP policy, which makes sure that everything provided by Eclipse can be consumed under the termns of the Eclipse Public Licence.
+The details are described in "this document":http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf.
+
+Unfortunately as the generator of Antlr V3 needs Antlr V2 it is as well not yet IP approved.
+That is why we are not allowed to ship Xtext with the Antlr generator (the runtime is IP approved), but have to provide it separately via updatesite at:
+
+*"http://download.itemis.com/updates/milestones":http://download.itemis.com/updates/milestones
+
+**IMPORTANT**
+__Although If you use the non-IP approved Antlr generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *Antlr runtime is IP approved*__
+
+
+h2. What if I don't want to use non IP-approved code
+
+If you, against all recommendations, need to stick to a fully IP approved generator, you can use the parser generator we've developed.
+But be warned, although it's fully functional and equally fast, it does not have any error recovery.
+This makes the editing experience in the editor more or less unacceptable.
