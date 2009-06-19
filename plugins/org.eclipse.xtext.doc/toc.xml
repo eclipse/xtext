@@ -133,6 +133,10 @@
 <topic href="help/formatting.html#FormattingConfigRules" label="FormattingConfig Rules"></topic>
 </topic>
 </topic>
+<topic href="help/highlighting.html" label="Syntax Coloring">
+<topic href="help/highlighting.html#LexicalHighlighting" label="Lexical Highlighting"></topic>
+<topic href="help/highlighting.html#SemanticHighlighting" label="Semantic Highlighting"></topic>
+</topic>
 </topic>
 <topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">
 <topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite?"></topic>

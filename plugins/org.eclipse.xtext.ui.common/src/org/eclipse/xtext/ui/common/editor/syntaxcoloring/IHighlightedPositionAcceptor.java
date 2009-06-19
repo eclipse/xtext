@@ -8,10 +8,22 @@
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 /**
+ * Xtext uses an {@link IHighlightedPositionAcceptor} to collect any ranges that should
+ * be highlighted based on semantic information of your model. It is passed to a
+ * {@link ISemanticHighlightingCalculator}.
+ * 
+ * This interface is not intended to be implemented by clients.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IHighlightedPositionAcceptor {
 
+	/**
+	 * Associates a text range with a style.
+	 * @param offset the offset of the range.
+	 * @param length the length of the range.
+	 * @param id the id of the highlighting style.
+	 */
 	void addPosition(int offset, int length, String id);
 	
 }

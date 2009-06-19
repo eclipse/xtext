@@ -22,6 +22,7 @@
 170-outline.textile
 180-hyperlinking.textile
 190-formatting.textile
+195-highlighting.textile
 
 200-Appendix.textile
 210-migrating-from-oaw.textile

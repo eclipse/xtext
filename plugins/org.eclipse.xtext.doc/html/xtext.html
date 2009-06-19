@@ -129,6 +129,9 @@
 <dt>
 <span class="section"><a href="#formatting">Formatting (Pretty Printing)</a></span>
 </dt>
+<dt>
+<span class="section"><a href="#highlighting">Syntax Coloring</a></span>
+</dt>
 </dl>
 </dd>
 <dt>
@@ -266,6 +269,13 @@
 </div>
 </div>
 <p>text</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>TODO: use diagram from cg2009 hands-on slide-deck?</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="chapter" title="Chapter&nbsp;2.&nbsp;The Grammar Language">
@@ -726,7 +736,7 @@
 							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>).
 						</p>
 <p>The implementation needs to be registered as a service (cf. 
-							<a class="link" href="#">Service Framework</a>).
+							<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
 <p>This is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers.</p>
 </div>
@@ -2196,39 +2206,11 @@ current&nbsp;=&nbsp;temp;<br>
 </div>
 </div>
 <p>In the following the most important standard generator fragments are listed. Please refer to the Javadocs for more documentation.</p>
-<table id="N1057C">
+<table id="N10580">
 <tr>
 						
 <th>Class</th>
 						<th>Generated Artifacts</th>
-					
-</tr>
-<tr>
-						
-<td>XtextAntlrGeneratorFragment</td>
-						<td>AntLR grammar, parser, lexer and related services.</td>
-					
-</tr>
-<tr>
-						
-<td>XtextAntlrUiGeneratorFragment</td>
-						<td>Content assist based on AntLR</td>
-					
-</tr>
-<tr>
-						
-<td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>
-						</td>
-						<td>Xpand/Check-based model validation</td>
-					
-</tr>
-<tr>
-						
-<td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&view=co" target="_new">JavaValidatorFragment</a>
-						</td>
-						<td>Java-based model validation</td>
 					
 </tr>
 <tr>
@@ -2241,10 +2223,8 @@ current&nbsp;=&nbsp;temp;<br>
 </tr>
 <tr>
 						
-<td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&view=co" target="_new">FormatterFragment</a>
-						</td>
-						<td>Code formatter</td>
+<td>XtextAntlrGeneratorFragment</td>
+						<td>ANTLR grammar, parser, lexer and related services.</td>
 					
 </tr>
 <tr>
@@ -2258,9 +2238,17 @@ current&nbsp;=&nbsp;temp;<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&view=co" target="_new">JavaBasedContentAssistFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a>
 						</td>
-						<td>Java-based content assist</td>
+						<td>EMF resource factory</td>
+					
+</tr>
+<tr>
+						
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&view=co" target="_new">ParseTreeConstructorFragment</a>
+						</td>
+						<td>Model-to-text serialization</td>
 					
 </tr>
 <tr>
@@ -2269,6 +2257,30 @@ current&nbsp;=&nbsp;temp;<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&view=co" target="_new">JavaScopingFragment</a>
 						</td>
 						<td>Java-based scoping</td>
+					
+</tr>
+<tr>
+						
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&view=co" target="_new">JavaValidatorFragment</a>
+						</td>
+						<td>Java-based model validation</td>
+					
+</tr>
+<tr>
+						
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>
+						</td>
+						<td>Xpand/Check-based model validation</td>
+					
+</tr>
+<tr>
+						
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&view=co" target="_new">FormatterFragment</a>
+						</td>
+						<td>Code formatter</td>
 					
 </tr>
 <tr>
@@ -2290,25 +2302,23 @@ current&nbsp;=&nbsp;temp;<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/PackratParserFragment.java?root=Modeling_Project&view=co" target="_new">PackratParserFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&view=co" target="_new">TransformerFragment</a>
 						</td>
-						<td>Packrat parser (experimental)</td>
+						<td>Outline view configuration</td>
 					
 </tr>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&view=co" target="_new">ParseTreeConstructorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&view=co" target="_new">JavaBasedContentAssistFragment</a>
 						</td>
-						<td>Model-to-text serialization</td>
+						<td>Java-based content assist</td>
 					
 </tr>
 <tr>
 						
-<td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a>
-						</td>
-						<td>EMF resource factory</td>
+<td>XtextAntlrUiGeneratorFragment</td>
+						<td>Content assist helper based on ANTLR</td>
 					
 </tr>
 <tr>
@@ -2319,20 +2329,12 @@ current&nbsp;=&nbsp;temp;<br>
 						<td>New project wizard</td>
 					
 </tr>
-<tr>
-						
-<td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&view=co" target="_new">TransformerFragment</a>
-						</td>
-						<td>Outline view configuration</td>
-					
-</tr>
 </table>
 <p>
 					
 <span class="bold"><strong>Important</strong></span>
 
-					<span class="italic">Due to IP-Problems with the code generator shipped with Antlr 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the updatesite at 
+					<span class="italic">Due to IP-Problems with the code generator shipped with ANTLR 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the updatesite at 
 						<span class="bold"><strong>http://download.itemis.com/updates/</strong></span>.
 					</span>
 				
@@ -2679,7 +2681,7 @@ current&nbsp;=&nbsp;temp;<br>
 <p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p>
 <div class="literallayout">
 <p>
-<code class="code">ref&nbsp;"EntityWith&#402;&divide;&lsaquo;"<br>
+<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
 
 </code>
 </p>
@@ -4292,6 +4294,175 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 </ul>
 </div>
 </div>
+</div>
+</div>
+<div class="section" title="Syntax Coloring">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="highlighting"></a>Syntax Coloring</h2>
+</div>
+</div>
+</div>
+<p>Besides the already mentioned advanced features like content assist and code formatting the powerful editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some decent colors for large blocks of comment while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating mark-up does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/highlighting.png"></div>
+<p>
+			
+</p>
+<p>The highlighting is done in two stages. This allows for sophisticated algorithms that are executed asynchronously to provide advanced coloring while simple pattern matching may be used to highlight parts of the text instantaneously. The latter is called lexical highlighting while the first is based on the meaning of your different model elements and therefore called semantic highlighting.</p>
+<p>When you introduce new highlighting styles, the preference page for your DSL is automatically configured and allows the customization of any registered highlighting setting. They are automatically persisted and reloaded on startup.</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/preferences_syntax.png"></div>
+<p>
+			
+</p>
+<div class="section" title="Lexical Highlighting">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="LexicalHighlighting"></a>Lexical Highlighting</h3>
+</div>
+</div>
+</div>
+<p>The lexical highlighting can be customized by providing implementations of the interface 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ILexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ILexicalHighlightingConfiguration</a> and the abstract class 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/AbstractTokenScanner.java?root=Modeling_Project&view=co" target="_new">AbstractTokenScanner</a>. The latter fulfills the interface 
+					<code class="code">ITokenScanner</code> from the underlying JFace Framework, which may be implemented by clients directly.
+				</p>
+<p>The 
+					<code class="code">ILexicalHighlightingConfiguration</code> is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the 
+					<code class="code">ITextAttributeProvider</code>, which in turn is the component that is used to obtain the actual settings for a style&rsquo;s id. An implementation will usually be very similar to the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/DefaultLexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">DefaultLexicalHighlightingConfiguration</a> and read like this: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;DefaultLexicalHighlightingConfiguration&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;ILexicalHighlightingConfiguration&nbsp;{<br>
+
+<br>
+	public&nbsp;static&nbsp;final&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;"keyword";<br>
+	public&nbsp;static&nbsp;final&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;"comment";<br>
+
+<br>
+	public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
+		acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;"Keyword",&nbsp;keywordTextStyle());<br>
+		acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;"Comment",&nbsp;//&nbsp;...<br>
+		//&nbsp;...<br>
+	}<br>
+	
+<br>
+	public&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br>
+		TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
+		textStyle.setColor(new&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br>
+		textStyle.setStyle(SWT.BOLD);<br>
+		return&nbsp;textStyle;<br>
+	}<br>
+	
+<br>
+	//&nbsp;...<br>
+	
+<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Implementations of the 
+					<code class="code">ITokenScanner</code> are responsible for splitting the content of a document into various parts, the so called tokens, and return the highlighting information for each identified range. It is critical that this is done very efficiently because this component is used on each keystroke. Xtext ships with a default implementation that is based on the lexer that is generated by ANTLR which is very lightweight and fast. This default implementation can be customized by clients very easily. They simply have to bind another implementation of the 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/AbstractAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">AbstractAntlrTokenToAttributeIdMapper</a>. To get an idea about it, have a look at the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/DefaultAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">DefaultAntlrTokenToAttributeIdMapper</a>.
+				</p>
+</div>
+<div class="section" title="Semantic Highlighting">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="SemanticHighlighting"></a>Semantic Highlighting</h3>
+</div>
+</div>
+</div>
+<p>The semantic highlighting stage is executed asynchronously in the background and can be used to calculated highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.</p>
+<p>As for the lexical highlighting there exist two interfaces whose implementations work closely together and allow the customization of the semantic highlighting. Namely these are the 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingConfiguration</a> and 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingCalculator.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingCalculator</a>. While the configuration for the semantic highlighting works the same way as the 
+					<code class="code">ILexicalHighlightingConfiguration</code>, the 
+					<code class="code">ISemanticHighlightingCalculator</code> is the primary hook to implement the logic that will compute ranges based on the model elements. 
+				</p>
+<p>The framework will pass the XtextResource and an 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&view=co" target="_new">IHighlightedPositionAcceptor</a> to the calculator. It is ensured, that the resource will not be altered externally until the called method 
+					<code class="code">provideHighlightingsFor</code> returns. The task is to navigate your semantic model and compute various ranges based on the node information and associate styles with them. This may read similar to the following snippet:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;void&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{<br>
+	if&nbsp;(resource&nbsp;==&nbsp;null)<br>
+		return;<br>
+		
+<br>
+	Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br>
+	&nbsp;&nbsp;resource.getParseResult().getRootNode());<br>
+	for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
+		if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
+		&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;SemanticHighlightingConfiguration.CROSS_REF);<br>
+		}<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>This example refers to an implementation of the 
+					<code class="code">ISemanticHighlightingConfiguration</code> that registers a style for a cross reference. It is pretty much the same implementation as for the previously mentioned sample of an 
+					<code class="code">ILexicalHighlightingConfiguration</code>.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;SemanticHighlightingConfiguration&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;ISemanticHighlightingConfiguration&nbsp;{<br>
+	
+<br>
+	public&nbsp;final&nbsp;static&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;"CrossReference";&nbsp;<br>
+
+<br>
+	public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
+		acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br>
+		&nbsp;&nbsp;"Cross&nbsp;References",&nbsp;crossReferenceTextStyle());<br>
+	}<br>
+	
+<br>
+	public&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br>
+		TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
+		textStyle.setStyle(SWT.ITALIC);<br>
+		return&nbsp;textStyle;<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The implementor of an 
+					<code class="code">ISemanticHighlightingCalculator</code> should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext&rsquo;s core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This optimizes the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.
+				</p>
 </div>
 </div>
 </div>

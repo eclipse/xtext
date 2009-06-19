@@ -6,7 +6,7 @@ TMF Xtext itself and every language infrastructure developed with TMF Xtext is c
 We use Google Guice as the underlying framework, and haven't built much on top of it as it pretty much does what we need.
 So instead of describing how google guice works, we refer to the website, where additional information can be found: "http://code.google.com/p/google-guice/":http://code.google.com/p/google-guice/. 
 
-Using DI allows everyone to set up and change all components. This does not mean that everything which gets configured using DI (we use it a lot) is automatically public API. But we don't forbid use of non-public API, as we think you should decide, if you want to rely on stable API only or use things which might be changed (further enhanced ;-)) in future. See "Xtext API Documentation":#XtextAPIDcoumentation.
+Using DI allows everyone to set up and change all components. This does not mean that everything which gets configured using DI (we use it a lot) is automatically public API. But we don't forbid use of non-public API, as we think you should decide, if you want to rely on stable API only or use things which might be changed (further enhanced ;-)) in future. See "Xtext API Documentation":#XtextAPIDocumentation.
 
 h2. Runtime setup (ISetup)
 

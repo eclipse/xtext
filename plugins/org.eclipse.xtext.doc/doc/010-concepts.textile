@@ -2,3 +2,4 @@ h2(#concepts). Xtext concepts from a bird's eye view
 
 text
 
+* TODO: use diagram from cg2009 hands-on slide-deck?

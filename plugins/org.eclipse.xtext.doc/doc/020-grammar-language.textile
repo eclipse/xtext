@@ -238,7 +238,7 @@ bc..
 p. This means that the terminal rule INT returns instances of ecore::EInt. It is possible to define any kind of data type here, which just needs to be an instance of ecore::EDataType.
 In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 'IValueConverterService' (cf. "value converters":#valueconverter).
 
-The implementation needs to be registered as a service (cf. "Service Framework":#serviceFramework).
+The implementation needs to be registered as a service (cf. "Service Framework":#dependencyInjection).
 
 This is also the point where you can remove things like quotes from string literals or the caret ('^') from identifiers.
 
