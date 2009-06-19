@@ -19,7 +19,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
- * {@link IGeneratorFragment} to generate a check based validity checker for a given grammar.
+ * {@link IGeneratorFragment} to generate an Xpand/Check based validity checker for a given grammar.
  * 
  * @author Michael Clay
  */

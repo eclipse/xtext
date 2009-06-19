@@ -15,8 +15,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
+ * An {@link IGeneratorFragment} to generate a adapter factory for outline nodes.
+ * 
  * @author Peter Friese - Initial contribution and API
  */
 public class OutlineNodeAdapterFactoryFragment extends AbstractGeneratorFragment {

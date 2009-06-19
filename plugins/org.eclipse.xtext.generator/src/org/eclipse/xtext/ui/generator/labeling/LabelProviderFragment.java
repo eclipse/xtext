@@ -7,7 +7,13 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
+/**
+ * An {@link IGeneratorFragment} to generate a label provider.
+ * 
+ * @author koehnlein - javadocs
+ */
 public class LabelProviderFragment extends AbstractGeneratorFragment {
 	
 	@Override

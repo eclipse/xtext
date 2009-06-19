@@ -31,6 +31,11 @@ public abstract class AbstractValidatorFragment extends
 	
 	private String basePackage = null;
 
+	/**
+	 * Sets the name of the Java base package for the language.
+	 * 
+	 * @param basePackage
+	 */
 	public void setBasePackage(String basePackage) {
 		if ("".equals(basePackage.trim()))
 			return;

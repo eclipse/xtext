@@ -27,29 +27,34 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  * @author Michael Clay - Initial contribution and API
  */
 public class JavaValidatorFragment extends AbstractValidatorFragment {
-	
+
 	private static Logger log = Logger.getLogger(JavaValidatorFragment.class);
-	
+
 	private final List<String> composedChecks = new ArrayList<String>();
-	
+
+	/**
+	 * Adds a validator that is to be executed additionally.
+	 * 
+	 * @param composedCheckValidator name of a class extending {@link org.eclipse.emf.validation.internal.service.AbstractValidator<T>}.
+	 */
 	public void addComposedCheck(String composedCheckValidator) {
 		this.composedChecks.add(composedCheckValidator);
 	}
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (log.isInfoEnabled())
-			log.info("executing generate for "+getClass().getName());
-		XpandFacade.create(ctx).evaluate(getTemplate()+"::generate", grammar, getParameters(grammar),this.composedChecks);
+			log.info("executing generate for " + getClass().getName());
+		XpandFacade.create(ctx).evaluate(getTemplate() + "::generate", grammar, getParameters(grammar),
+				this.composedChecks);
 	}
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToTypeEagerSingleton(getValidatorName(grammar, ""), getValidatorName(grammar, ""))
-			.getBindings();
+		return new BindFactory().addTypeToTypeEagerSingleton(getValidatorName(grammar, ""),
+				getValidatorName(grammar, "")).getBindings();
 	}
-	
+
 	public static String getValidatorName(Grammar g, String prefix) {
 		return GrammarUtil.getNamespace(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
 	}

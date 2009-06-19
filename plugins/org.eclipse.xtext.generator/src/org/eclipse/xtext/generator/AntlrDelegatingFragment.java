@@ -17,13 +17,19 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * Delegates to an AntLR generator fragment on the classpath. Issues a warning if it cannot be located.
  * 
+ * @author Sven Efftinge - Initial contribution and API
  */
 public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements IGeneratorFragment {
 
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";
 
+	/**
+	 * Set the class name of the generator fragment. 
+	 *  
+	 * @param fragment
+	 */
 	public void setFragment(String fragment) {
 		this.fragment = fragment;
 	}
@@ -33,7 +39,8 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 		super.checkConfiguration(issues);
 		if (getInstance() == null) {
 			issues.addError(getMessage());
-		} else {
+		}
+		else {
 			getInstance().checkConfiguration(issues);
 		}
 	}
@@ -66,7 +73,8 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 		}
 		try {
 			return (IGeneratorFragment) class1.newInstance();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new WrappedException(e);
 		}
 	}

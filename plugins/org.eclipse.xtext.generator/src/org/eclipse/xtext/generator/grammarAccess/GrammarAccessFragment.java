@@ -28,7 +28,13 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
+/**
+ * An {@link IGeneratorFragment} to create a grammar access class for an Xtext language.
+ *  
+ * @author koehnlein
+ */
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private final Logger log = Logger.getLogger(GrammarAccessFragment.class);
