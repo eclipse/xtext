@@ -1,17 +1,17 @@
 
 h2(#formatting). Formatting (Pretty Printing)
 
-p. A formatter can be implemented via the @IFormatter@ service. Technically speaking, a formatter is a "Token Stream":#tokenstream which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
+p. A formatter can be implemented via the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} service. Technically speaking, a formatter is a "Token Stream":#tokenstream which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
 
 The formatter is invoked during the "serialization phase":#serialization and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 
 Xtext ships with two formatters:
-* The @OneWhitespaceFormatter@ simply writes one whitespace between all tokens.
-* The @AbstractDeclarativeFormatter@ allows advanced configuration using a @FormattingConfig@. Both are explained in the "next chapter":#declarativeformatter.
+* The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} simply writes one whitespace between all tokens.
+* The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter} allows advanced configuration using a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}. Both are explained in the "next chapter":#declarativeformatter.
 
 h3(#declarativeformatter). Declarative Formatter   
 
-p. A declarative formatter can be implemented by sub-classing @AbstractDeclarativeFormatter@, as shown in the following example:
+p. A declarative formatter can be implemented by sub-classing {org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:
 
 bc.. 
 public class ExampleFormatter extends AbstractDeclarativeFormatter {
@@ -41,9 +41,9 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
   }
 }
 
-p. The formatter has to implement the method @configureFormatting(...)@ which is supposed to declaratively set up a @FormattingConfig@.
+p. The formatter has to implement the method @configureFormatting(...)@ which is supposed to declaratively set up a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}.
 
-The @FormattingConfig@ consist general settings and a set of rules:
+The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig} consist general settings and a set of rules:
 
 h4. General FormattingConfig Settings
 
@@ -64,7 +64,7 @@ To understand _when_ a rule is applied think of a stream of tokens whereas each 
 * @bounds(ele1, ele2)@: This is the same as @before(ele1)@ combined with  @after(ele2)@.
 * @range(ele1, ele2)@: The rule is enabled when @ele1@ is matched, and disabled when @ele2@ is matched. Thereby, the rule is active for the complete region which is surrounded by @ele1@ and @ele2@. 
 
-p. The parameter @ele@ can be a grammar's @AbstractElement@ or a grammar's @AbstractRule@. However, only elements which represent one token in the textual representation can be matched. This are:
+p. The parameter @ele@ can be a grammar's @AbstractElement@ or a grammar's @AbstractRule@. However, only elements which represent a token in the textual representation can be matched. This are:
 * Terminal rules for comments.
 * Keywords, Associations, Terminal RuleCalls, Datatype RuleCalls.
 
