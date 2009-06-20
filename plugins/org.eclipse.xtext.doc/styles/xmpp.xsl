@@ -2,6 +2,7 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
     version="1.0">
 
   <!-- Include other stylesheets -->
@@ -22,7 +23,82 @@
 
   <!-- Page setup -->
   <xsl:param name="paper.type" select="'A4'"/>
-  <!--<xsl:param name="double.sided"/>-->
+
+  <!-- Paper type, no headers on blank pages, no double sided printing -->
+  <xsl:param name="paper.type" select="'A4'"/>
+  <xsl:param name="double.sided">0</xsl:param>
+  <xsl:param name="headers.on.blank.pages">0</xsl:param>
+  <xsl:param name="footers.on.blank.pages">0</xsl:param>
+  
+  <!--  Custom page footers -->
+  <xsl:template name="footer.content">
+      <xsl:param name="pageclass" select="''"/>
+      <xsl:param name="sequence" select="''"/>
+      <xsl:param name="position" select="''"/>
+      <xsl:param name="gentext-key" select="''"/>
+
+      <xsl:variable name="Version">
+          <xsl:choose>
+              <xsl:when test="//releaseinfo">
+                      <xsl:text>Xtext </xsl:text><xsl:value-of select="//releaseinfo"/>
+              </xsl:when>
+              <xsl:otherwise>
+                  Xtext 0.7
+              </xsl:otherwise>
+          </xsl:choose>
+      </xsl:variable>
+
+      <xsl:choose>
+          <xsl:when test="$sequence='blank'">
+          <xsl:choose>
+            <xsl:when test="$double.sided != 0 and $position = 'left'">
+              <xsl:value-of select="$Version"/>
+            </xsl:when>
+
+            <xsl:when test="$double.sided = 0 and $position = 'center'">
+              <!-- nop -->
+            </xsl:when>
+
+            <xsl:otherwise>
+              <fo:page-number/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+
+        <xsl:when test="$pageclass='titlepage'">
+          <!-- nop: other titlepage sequences have no footer -->
+        </xsl:when>
+
+        <xsl:when test="$double.sided != 0 and $sequence = 'even' and $position='left'">
+          <fo:page-number/>
+        </xsl:when>
+
+        <xsl:when test="$double.sided != 0 and $sequence = 'odd' and $position='right'">
+          <fo:page-number/>
+        </xsl:when>
+
+        <xsl:when test="$double.sided = 0 and $position='right'">
+          <fo:page-number/>
+        </xsl:when>
+
+        <xsl:when test="$double.sided != 0 and $sequence = 'odd' and $position='left'">
+          <xsl:value-of select="$Version"/>
+        </xsl:when>
+
+        <xsl:when test="$double.sided != 0 and $sequence = 'even' and $position='right'">
+          <xsl:value-of select="$Version"/>
+        </xsl:when>
+
+        <xsl:when test="$double.sided = 0 and $position='left'">
+          <xsl:value-of select="$Version"/>
+        </xsl:when>
+
+        <xsl:otherwise>
+          <!-- nop -->
+        </xsl:otherwise>
+      </xsl:choose>
+  </xsl:template>    
+  
 
   <!--<xsl:param name="header.column.widths">0 1 0</xsl:param>-->
   <!--<xsl:attribute-set name="header.content.properties">
@@ -43,8 +119,10 @@
   <xsl:param name="page.margin.inner" select="'4cm'"/>
   <xsl:param name="page.margin.outer" select="'4cm'"/>
   -->
+  
   <xsl:param name="body.start.indent" select="'0'"/>
   <xsl:param name="body.margin.bottom" select="'1.2cm'"/>
+  
   <xsl:attribute-set name="normal.para.spacing">
     <xsl:attribute name="space-before.optimum">0.4em</xsl:attribute>  
     <xsl:attribute name="space-before.minimum">0.3em</xsl:attribute>
@@ -76,13 +154,14 @@
     <xsl:attribute name="white-space-treatment">preserve</xsl:attribute>
     <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
     <xsl:attribute name="text-align">start</xsl:attribute>
-    <xsl:attribute name="start-indent">0pt</xsl:attribute>
+    <xsl:attribute name="start-indent">3pc</xsl:attribute>
     <xsl:attribute name="font-size">9pt</xsl:attribute>
     <xsl:attribute name="keep-together.within-column">always</xsl:attribute>
   </xsl:attribute-set>
   
   <!-- PETER -->
-  <xsl:param name="title.margin.left">-3pc</xsl:param>
+  <!-- <xsl:param name="title.margin.left">-3pc</xsl:param> -->
+  <xsl:param name="body.start.indent">3pc</xsl:param>
   <xsl:param name="part.autolabel" select="1"/>
   <xsl:param name="chapter.autolabel" select="1"/>
   <xsl:param name="section.autolabel" select="1"/>

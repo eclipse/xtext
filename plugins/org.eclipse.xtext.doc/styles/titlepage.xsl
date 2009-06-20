@@ -69,7 +69,11 @@
                                 <xsl:value-of select="title"/> 
                             </fo:block>
                             <fo:block font-family="Helvetica" font-size="12pt">
-                                <xsl:value-of select="bookinfo/releaseinfo"/>  
+                                <!-- <xsl:value-of select="bookinfo/releaseinfo"/> -->
+                                <xsl:text>Sven Efftinge, Sebastian Zarnekow, Jan Köhnlein, Heiko Behrens, Moritz Eysholdt, Peter Friese</xsl:text>
+                            </fo:block>
+                            <fo:block font-family="Helvetica" font-size="12pt" padding="10mm">
+                                <xsl:text>Copyright 2008 - 2009</xsl:text>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -83,38 +87,6 @@
     </xsl:template>
     
     <xsl:template name="book.titlepage.verso">
-        <fo:block>
-            <fo:table table-layout="fixed" width="175mm">
-                <fo:table-column column-width="175mm"/>
-                <fo:table-body>
-                    <fo:table-row>
-                        <fo:table-cell text-align="center">
-                            <fo:block font-family="Helvetica" font-size="14pt" padding-before="200mm">
-                                <xsl:value-of select="bookinfo/pubdate"/> 
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                    <fo:table-row>
-                        <fo:table-cell text-align="center">
-                            <fo:block font-family="Helvetica" font-size="12pt" padding="10mm">
-								<xsl:text>Copyright 2008 - 2009</xsl:text>
-                                <xsl:for-each select="bookinfo/authorgroup/author">
-                                    <xsl:if test="position() > 1">
-                                        <xsl:text>, </xsl:text>
-                                    </xsl:if>
-                                    <xsl:value-of select="firstname"/>
-                                    <xsl:text> </xsl:text>
-                                    <xsl:value-of select="surname"/>
-                                </xsl:for-each>
-                            </fo:block>
-                            <fo:block font-family="Helvetica" font-size="10pt" padding="1mm">
-                                <xsl:value-of select="bookinfo/legalnotice"/>  
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </fo:table-body>
-            </fo:table>
-        </fo:block>
     </xsl:template>
     <xsl:template name="book.titlepage.separator">
     </xsl:template>
