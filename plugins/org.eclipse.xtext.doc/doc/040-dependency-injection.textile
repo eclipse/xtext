@@ -1,32 +1,82 @@
 
 h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
-Xtext uses Google Guice in order to wire up and configure language infrstructures. This allows for very flexible customization of language infrastructure and at the same time
-makes the different pieces far more testable. 
+In Xtext, there are many state-less Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where  Xtext utilizes "Google Guice":http://code.google.com/p/google-guice/: 
+* Guice manages the instantiation of the classes: instead of constructing a class with @new@, the <code>@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceserevice.
+* Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called "modules":#guicemodules.
 
-h3. Modules
+h3(#guiceserevice). Services
 
-The Guice injector configuration is done through the use of modules (also a Guice concept).
-The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
-These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
-By default these modules extend a fully generated module.
+The most parts of Xtext are implemented as _services_. A service is a state-less object which implements a certain interface and which is managed by Guice.
 
-h4. Generated Modules
+Xtext ships with generic default implementations for the most services or runs "generator fragments":#generator to automatically generate service implementations from a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to sub-class existing services and configure them for their languages using "modules":#guicemodules.  
 
-The fully generated modules (never touch them!) are called Abstract[MyLanguage]RuntimeModule and Abstract[MyLanguage]UiModule respectively. 
-They contain all components which have been generated specifically for the language at hand.
-Examples are: the generated parsers, serializer or for UI a proposal provider for content assist is generated.
-What goes into these modules depends on how your generator is configured.
+When Guice instantiates a service, it also supplies this instance with all its dependent services. All a service does is to request "some implementation for a certain interface" using the <code>@Inject</code>-annotation. Based on the "modules":#guicemodules Guice decides which class to instantiate or which object to reuse. 
 
-h4. Default Modules
+For example, Guice can automatically initialize member variables with the needed services. 
 
-Finally the fully generated modules extend the @DefaultRuntimeModule@, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
-Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
+bc.. 
+public class MyLanguageLinker extends Linker {
 
-h4. Changing Configuration
+  @Inject
+  private IScopeProvider scopeProvider;
+
+  @Inject(optional=true)
+  private IXtext2EcorePostProcessor postProcessor;
+  
+  (...)
+}
+
+p. Furthermore, Guice can pass the needed services as constructor parameters.
+
+bc.. 
+public class MyLanguageGrammarAccess implements IGrammarAccess {
+	
+  private final GrammarProvider grammarProvider;
+
+  private TerminalsGrammarAccess gaTerminals;
+
+  @Inject
+  public MyLanguageGrammarAccess(GrammarProvider grammarProvider,
+    TerminalsGrammarAccess gaTerminals) {
+    this.grammarProvider = grammarProvider;
+    this.gaTerminals = gaTerminals;
+  }
+	
+  (...)
+}
+
+p. For further details, please refer to the "Google Guice Documentation":http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide
+
+h3(#guicemodules). Modules
+
+The configuration of services for an Xtext-Language is done via modules:
+* Modules map (bind) Java-Interfaces to their Implementation-Classes.
+* A module itself is a Java-Class.
+* Modules can inherit from each other and override bindings that are declared in super-modules.
+* In Xtext, there is a "generic default module":#guicedefaultmodule for all languages, there are automatically "generated modules":#guicegeneratedmodule and there are modules which are "intended to be customized manually":#guicemanualmodules.  
+* Furthermore, Xtext distinguishes between modules for runtime-services and modules related to service needed for the user interface.
+
+In total, this leads to a total of five modules for a typical Xtext Language. They are visualized in the image below. The image is furhter explained in the following subsections. 
+
+!images/modules_hierarchy.png!
+
+h4(#guicemanualmodules). Modules intended for customization
+
+When the "generatior":#generator runs the first time, it creates two modules named @[MyLanguage]RuntimeModule@ and @[MyLanguage]UIModule@. They are placed in laguage's root-package the @src/@-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":guicecustomiz. By default, they extend a "generated module":#guicegeneratedmodule.  
+
+h4(#guicegeneratedmodule). Generated Modules
+
+The fully generated modules (never touch them!) are called @Abstract[MyLanguage]RuntimeModule@ and @Abstract[MyLanguage]UiModule@ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on how your generator is configured.
+
+h4(#guicedefaultmodule). Default Modules
+
+Finally the fully generated modules extend the ${org.eclipse.xtext/src/org.eclipse.xtext.service.DefaultRuntimeModule}, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
+
+h4(#guicecustomiz). Changing Configuration
 
 We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
-The class is initially empty and has been generated only to allow for arbitrary customization.
+The class is initially empty and has been generated to allow customization.
 
 In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
 This class allows to write bindings like this:
@@ -35,5 +85,5 @@ bc. public Class<? extends MyInterface> bind[anyname]() {
      return MyInterfaceImpl.class;
  }
 
-Such a method will be interpreted as a binding from @MyInterface@ to @MyInterfaceImpl@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding.
+Such a method will be interpreted as a binding from @MyInterface@ to @MyInterfaceImpl@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the @DefaultRuntimeModule@ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} and @AbstractMyLanaugeModule@ overrides this binding by binding the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to @MyLanguageFormatter@.
 Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method @void bind(Binding)@ and do what every you want.
