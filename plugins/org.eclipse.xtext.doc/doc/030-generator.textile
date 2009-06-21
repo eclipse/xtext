@@ -110,7 +110,7 @@ In addition, a language is configured with a list of ${org.eclipse.xtext.generat
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
 !{width:50%}images/generator-structure.png!
 
-h4. Generator Fragments
+h4(#generator_fragment). Generator Fragments
 
 Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment} is supported by a convenient abstract base class ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 

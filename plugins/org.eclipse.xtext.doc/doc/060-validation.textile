@@ -3,7 +3,7 @@ h2(#validation). Validation
 
 Static analysis or validation is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful
 if they get informative feedback as they type. 
-In Xtext there are basically three different kinds of validation
+In Xtext there are basically three different kinds of validation.
 
 h3(#syntactical_validation). Syntactical Validation
 
@@ -15,10 +15,10 @@ Any syntax errors can be retrieved from the Resource using the common EMF API:
  
 h3(#linking_validation). Cross-link Validation
 
-Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see linking), any broken links are resolved lazy as well.
+Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see "linking":#linking), any broken links are resolved lazily as well.
 If you want to validate whether all links are valid, you'll have to navigate through the model so that all proxies get resolved. This is done automatically in the editor.
 
-Any unresolvable cross-links will be reported through:
+Any unresolvable cross-links will be reported and can be obtained through:
 
 * @org.eclipse.emf.ecore.resource.Resource.getErrors()@
 * @org.eclipse.emf.ecore.resource.Resource.getWarnings()@
@@ -26,11 +26,11 @@ Any unresolvable cross-links will be reported through:
 h3(#custom_validation). Custom Validation
 
 In addition to the afore mentioned kinds of validations, which are more or less done automatically, you can specify additional constraints specific for your Ecore model.
-We leverage existing EMF API (mainly EValidator) and have put some convenience stuff on top. 
-Basically all you need to do is to make sure that an EValidator is registered for your EPackage. The registry for @EValidators@ (@EValidator.Registry.INSTANCE@) can only be filled programatically,
-that means that there's no Equinox extension point similar to the EPackage- and ResourceFactory registries.
+We leverage existing EMF API (mainly @EValidator@) and have put some convenience stuff on top. 
+Basically all you need to do is to make sure that an @EValidator@ is registered for your @EPackage@. The registry for @EValidators@ (@EValidator.Registry.INSTANCE@) can only be filled programatically,
+that means that there is no Equinox extension point similar to the @EPackage@ and @Resource.Factory@ registries.
 
-For Xtext we provide a generator fragment for the convenient java-based EValidator API. Just add the following fragment to your generator configuration and you're good to go:
+For Xtext we provide a "generator fragment":#generator_fragment for the convenient java-based @EValidator@ API. Just add the following fragment to your generator configuration and you're good to go:
 
 bc.. <fragment class=
 	"org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
@@ -38,11 +38,11 @@ bc.. <fragment class=
 p. The generator will provide you with two Java classes. An abstract class generated to @src-gen/@ which extends the library class @AbstractDeclarativeValidator@. This one just registers the EPackages for which this validator introduces constraints.
 The other class is a subclass of that abstract class and is generated to the @src/@ folder in order to be edited by you. That's where you put the constraints in.
 
-The purpose of the @AbstractDeclarativeValidator@ is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the @Check annotation to any method and it will be invoked automatically when validation takes place.
+The purpose of the @AbstractDeclarativeValidator@ is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the <code>@Check</code> annotation to any method and it will be invoked automatically when validation takes place.
 Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also lets you avoid any type casts.  
 In addition to the reflective invocation of validation methods the @AbstractDeclarativeValidator@ provides a couple of convenience assertions.
 
-All in all this is very similar to how Junit works. Example:
+All in all this is very similar to how Junit works. Here is an example:
 
 bc.. 
 public class DomainmodelJavaValidator 
@@ -56,10 +56,10 @@ public class DomainmodelJavaValidator
   }
 }
 
-h3(#check_based_validation). Validation with Check
+h3(#check_based_validation). Validation with Xpand's Check
 
-In addition to the Java-based validation code you can use the language Check to implement validations against your model. To do so, you have to call the
-${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment} from your "generator":#generator.
+In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the "generator":#generator with the
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment}.
 Please note, that you can combine both types of validations in your project. 
 
 bc.. <fragment class=
@@ -73,5 +73,4 @@ context Type#name WARNING "Name should start with a capital":
 
 Each check works in a specific context (here: @Type@) and can further denote a feature to which a warning or error should be attached to (here: @name@). Each check could either be a @WARNING@ or an @ERROR@ with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it does not the check will produce an issue with the provided explanation.
 
- Please read more about the Check language as well as the underlying Expression language at the "documentation of openArchitectureWare":http://www.openArchitectureWare.org.
- Also, you will find an example on how to implement checks in each of the generated files.   
+ Please read more about the Check language as well as the underlying expression language in Xpand's reference documentation which is shipped as Eclipse help. 
