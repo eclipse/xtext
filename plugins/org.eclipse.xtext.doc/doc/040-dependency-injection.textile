@@ -5,13 +5,13 @@ In Xtext, there are many Java classes which implement logic, behavior, or supply
 * Guice manages the instantiation of the classes: instead of constructing a class with @new@, the <code>@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceserevice.
 * Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called "modules":#guicemodules.
 
-h3(#guiceserevice). Services
+h3(#guiceservice). Services
 
 The most parts of Xtext are implemented as _services_. A service is an object which implements a certain interface and which is instantiated and provided by Guice.
 
 Xtext ships with generic default implementations for the most services or uses "generator fragments":#generator to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to sub-class existing services and configure them for their languages in their "modules":#guicemodules.  
 
-When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request "some implementation for a certain interface" using the <code>@Inject</code>-annotation. Based on the "modules":#guicemodules Guice decides which class to instantiate or which object to reuse. 
+When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request "some implementation for a certain interface" using the <code>@Inject</code>-annotation. Based on the "modules configuration":#guicemodules Guice decides which class to instantiate or which object to reuse. 
 
 For example, Guice can automatically initialize member variables with the needed services. 
 
@@ -50,7 +50,7 @@ p. For further details, please refer to the "Google Guice Documentation":http://
 
 h3(#guicemodules). Modules
 
-The configuration of services for an Xtext-Language is done via modules:
+The configuration of services for a language built with  Xtext is done via modules:
 * Modules map (bind) arbitrary Java interfaces to their implementation classes or directly to instances of their implementation classes.
 * A module itself is a plain Java class.
 * Modules can inherit from each other and override bindings that are declared in super-modules.
@@ -63,27 +63,43 @@ In total, this leads to five modules for a typical Xtext Language. They are visu
 
 h4(#guicemanualmodules). Modules intended for customization
 
-When the "generator":#generator runs the first time, it creates two modules named @[MyLanguage]RuntimeModule@ and @[MyLanguage]UIModule@. They are placed in the language's root-package in the @src/@-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
+When the "generator":#generator runs the first time, it creates two modules named @<MyLanguage>RuntimeModule@ and @<MyLanguage>UIModule@. They are placed in the language's root-package in the @src/@-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
 
 h4(#guicegeneratedmodule). Generated Modules
 
-The fully generated modules (never touch them!) are called @Abstract[MyLanguage]RuntimeModule@ and @Abstract[MyLanguage]UiModule@ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on how your generator is configured.
+The fully generated modules (never touch them!) are called @Abstract<MyLanguage>RuntimeModule@ and @Abstract<MyLanguage>UiModule@ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
 
-h4(#guicedefaultmodule). Default Modules
+h4(#guicedefaultmodule). Default Module
 
 Finally the fully generated modules extend the ${org.eclipse.xtext/src/org.eclipse.xtext.service.DefaultRuntimeModule}, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations. 
 
 h4(#guicecustomize). Changing Configuration
 
-We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
+We use the primary modules (@<MyLanguage>RuntimeModule@ and @<MyLanguage>UiModule@) in order to change the configuration. 
 These classes are initially empty and have been generated to allow customization.
 
-In order to provide a simple and convenient way, in Xtext every module extends AbstractXtextModule. 
-This class allows to write bindings like this:
+In order to provide a simple and convenient way, the DefaultModule extends ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule}. 
+Which does not provide any bindings but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
+This is also very readable but does not allow sub modules to change any of the bindings.   
+The ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule} allows to declare and override bindings in all subclasses like this:
 
-bc.. public Class<? extends IService> bindIService() {
-     return MyServiceImpl.class;
+bc.. public Class<? extends IFooService> bindIFooService() {
+     return MyFooServiceImpl.class;
 }
 
-p. Such a method will be interpreted as a binding from @IService@ to @MyServiceImpl.class@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the @DefaultRuntimeModule@ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} and @AbstractMyLanguageModule@ overrides this binding by binding the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to @MyLanguageFormatter@.
-Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method @void configure(Binder)@ and do whatever you want.
+p. Such a method will be interpreted as a binding from @IFooService@ to @MyFooServiceImpl.class@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the @DefaultRuntimeModule@ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} and @AbstractMyLanguageModule@ overrides this binding by binding the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to @MyLanguageFormatter@.
+
+It is not only possible to do type to type mappings, but type to object mappings are as well possible:
+
+bc.. public IFooService bindIFooService() {
+     return new MyFooServiceImpl();
+}
+
+p. In this case for any service, which declares a dependency to IFooService (through @Inject) the instance created by the body of the method above will be injected. If you for some reason even wnat this to be created eager (that is when the injector is created) you can add a corresponding annotation:
+
+bc.. @SingletonBinding(eager=true)
+public IFooService bindIFooService() {
+     return new MyFooServiceImpl();
+}
+
+p. __Note that, although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method @void configure(Binder)@ and use the afore mentioned fluent API to do whatever you want.__
