@@ -19,10 +19,6 @@
 
   <!-- Do not print out URLs -->
   <xsl:param name="ulink.show" select="0"/>
-  <!--<xsl:param name="show.comments" select="0"/>-->
-
-  <!-- Page setup -->
-  <xsl:param name="paper.type" select="'A4'"/>
 
   <!-- Paper type, no headers on blank pages, no double sided printing -->
   <xsl:param name="paper.type" select="'A4'"/>
@@ -128,6 +124,7 @@
     <xsl:attribute name="space-before.minimum">0.3em</xsl:attribute>
     <xsl:attribute name="space-before.maximum">0.5em</xsl:attribute>
   </xsl:attribute-set>
+  
   <xsl:attribute-set name="list.block.spacing">
     <xsl:attribute name="space-before.optimum">0.4em</xsl:attribute>
     <xsl:attribute name="space-before.minimum">0.3em</xsl:attribute>
@@ -136,11 +133,13 @@
     <xsl:attribute name="space-after.minimum">0.3em</xsl:attribute>
     <xsl:attribute name="space-after.maximum">0.5em</xsl:attribute>
   </xsl:attribute-set>
+  
   <xsl:attribute-set name="list.item.spacing">
     <xsl:attribute name="space-before.optimum">0.4em</xsl:attribute>
     <xsl:attribute name="space-before.minimum">0.3em</xsl:attribute>
     <xsl:attribute name="space-before.maximum">0.5em</xsl:attribute>
   </xsl:attribute-set>
+  
   <xsl:attribute-set name="verbatim.properties">
     <xsl:attribute name="space-before.minimum">0.3em</xsl:attribute>
     <xsl:attribute name="space-before.optimum">0.4em</xsl:attribute>
