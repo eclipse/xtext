@@ -60,6 +60,8 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	}
 
 	protected String checkUnconsumed(AbstractToken t, IInstanceDescription inst) {
+		if (t.getGrammarElement() == null)
+			return null;
 		boolean finalNode = ParseTreeConstructorUtil.isRuleEnd(t
 				.getGrammarElement());
 		if (!finalNode || inst.isConsumed())
