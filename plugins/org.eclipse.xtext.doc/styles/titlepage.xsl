@@ -56,6 +56,11 @@
             <fo:table table-layout="fixed" width="175mm">
                 <fo:table-column column-width="175mm"/>
                 <fo:table-body>
+                    <fo:table-row height="20pc">
+                        <fo:table-cell text-align="center">
+                            <fo:block> </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell text-align="center">
                             <fo:block>
