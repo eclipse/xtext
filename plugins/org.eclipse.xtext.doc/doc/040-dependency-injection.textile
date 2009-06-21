@@ -88,17 +88,23 @@ bc.. public Class<? extends IFooService> bindIFooService() {
 }
 
 p. Such a method will be interpreted as a binding from @IFooService@ to @MyFooServiceImpl.class@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the @DefaultRuntimeModule@ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} and @AbstractMyLanguageModule@ overrides this binding by binding the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to @MyLanguageFormatter@.
+The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton, so that only one instance is created and reused for all dependencies you can add the following annotation:
 
-It is not only possible to do type to type mappings, but type to object mappings are as well possible:
-
-bc.. public IFooService bindIFooService() {
-     return new MyFooServiceImpl();
+bc.. @SingletonBinding
+public Class<? extends IFooService> bindIFooService() {
+     return MyFooServiceImpl.class;
 }
 
-p. In this case for any service, which declares a dependency to IFooService (through @Inject) the instance created by the body of the method above will be injected. If you for some reason even wnat this to be created eager (that is when the injector is created) you can add a corresponding annotation:
+p. In addition if the creation of the type causes any needed side effects, so you want it to be instantiated eagerly, you can set the @eager@ property to true. Like shown in the following snippet:
 
 bc.. @SingletonBinding(eager=true)
-public IFooService bindIFooService() {
+public Class<? extends IFooService> bindIFooService() {
+     return MyFooServiceImpl.class;
+}
+
+p. One more way of specify a binding is currently supported: If you need to control the way, the instance is created, you can have a type to object mapping:
+
+bc.. public IFooService bindIFooService() {
      return new MyFooServiceImpl();
 }
 
