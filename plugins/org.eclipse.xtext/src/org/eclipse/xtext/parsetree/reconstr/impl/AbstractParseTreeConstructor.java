@@ -47,8 +47,8 @@ public abstract class AbstractParseTreeConstructor implements
 		protected final int no;
 		protected final AbstractToken parent;
 
-		public AbstractToken(AbstractToken parent, AbstractToken next,
-				int no, IInstanceDescription current) {
+		public AbstractToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
 			this.next = next;
 			this.parent = parent;
 			this.no = no;
@@ -66,8 +66,7 @@ public abstract class AbstractParseTreeConstructor implements
 			return false;
 		}
 
-		public AbstractToken createFollower(int index,
-				IInstanceDescription inst) {
+		public AbstractToken createFollower(int index, IInstanceDescription inst) {
 			return null;
 		}
 
@@ -194,6 +193,11 @@ public abstract class AbstractParseTreeConstructor implements
 			if (!consumable) {
 				EStructuralFeature f = current.getDelegate().eClass()
 						.getEStructuralFeature(ass.getFeature());
+				if (f == null)
+					return "The current object of type '"
+							+ current.getDelegate().eClass().getName()
+							+ "' does not have a feature named '"
+							+ ass.getFeature() + "'";
 				String cls = f.getEContainingClass() == current.getDelegate()
 						.eClass() ? f.getEContainingClass().getName() : f
 						.getEContainingClass().getName()
@@ -312,8 +316,8 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class RuleCallToken extends AbstractToken {
 
-		public RuleCallToken(AbstractToken parent, AbstractToken next,
-				int no, IInstanceDescription current) {
+		public RuleCallToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
 			super(parent, next, no, current);
 		}
 	}
