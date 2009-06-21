@@ -2,7 +2,7 @@ h1(#configuration). Configuration
 
 h2(#generator). The Generator
 
-Xtext provides lots of generic implementations for you language's
+Xtext provides lots of generic implementations for your language's
 infrastructure but also uses code generation to generate some of the 
 components. Those generated components are for instance the parser, the 
 serializer, the Ecore model and a couple of convenient base classes for 
