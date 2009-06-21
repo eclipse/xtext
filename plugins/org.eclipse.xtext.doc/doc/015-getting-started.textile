@@ -34,58 +34,51 @@ Ignore the generated sample grammar, delete everything from "@Model :@" to the e
 The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
 As we can have one ore more entities within a model, the cardinality is "+". Each rule is terminated with a semicolon. So our first rule reads as
 
-bc. 
-Model :
+bc.. Model :
 	Entity+; 
 
-*Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine. 
+p. *Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine. 
 
-An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type’s name is the same as the rule name, it can be omitted as in our case.
+An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type's name is the same as the rule name, it can be omitted as in our case.
 
 The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference entities. We specify it using the assignment operator "+=", which denotes a multi valued feature. 
 
 As a result, we modify the first rule to
 
-bc. 
-Model :
+bc.. Model :
 	(entities += Entity)+;
 	
-The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity’s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity’s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
 
-bc. 
-Entity returns Entity:
+bc.. Entity returns Entity:
 	'entity' name=ID '{'
 		(properties+=Property)*
 	'}';
 	
-Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "=" denotes a single valued feature, and the asterisk a cardinality of 0..n.
+p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "=" denotes a single valued feature, and the asterisk a cardinality of 0..n.
 In our target syntax, some entities refer to an existing entity as their super type after the keyword extends. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads as
 
-bc. 
-Entity returns Entity:
+bc.. Entity returns Entity:
 	'entity' name=ID ('extends' superType=[Entity])? '{'
 		(properties+=Property)*
 	'}';
 	
-We have not specified the rule @Property@, yet. In our target syntax, properties come in two flavors: @SimpleProperties@ starting with the keyword @property@ and @AssociationProperties@ using the @associates@ keyword. As they are referring to different artifacts, we should make separate rules for them. Our rule Property will just delegate to either of them, using the "|" separator:
+p. We have not specified the rule @Property@, yet. In our target syntax, properties come in two flavors: @SimpleProperties@ starting with the keyword @property@ and @AssociationProperties@ using the @associates@ keyword. As they are referring to different artifacts, we should make separate rules for them. Our rule Property will just delegate to either of them, using the "|" separator:
 
-bc. 
-Property:
+bc.. Property:
 	SimpleProperty | AssociationProperty;
 	
-A @SimpleProperty@ consists of a keyword, a name, a colon, and a type. The type will be one of String, Number, or Bool. That results in the following parser rule:
+p. A @SimpleProperty@ consists of a keyword, a name, a colon, and a type. The type will be one of String, Number, or Bool. That results in the following parser rule:
 
-bc. 
-SimpleProperty:
+bc.. SimpleProperty:
 	'property' name=ID ':' type=('String'|'Number'|'Bool');
 	
-An @AssociatioProperty@ consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@“. Our last parser rule is:
+p. An @AssociatioProperty@ consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@. Our last parser rule is:
 
-bc. 
-AssociationProperty :
+bc.. AssociationProperty :
 	name=ID 'associates' ('one' | many?='many')? type=[Entity];
 	
-In the end your grammar editor should look like this:
+p. In the end your grammar editor should look like this:
 
 !images/getting-started-grammar.png!
 	

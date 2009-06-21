@@ -4,7 +4,6 @@ h2(#scoping). Scoping
 An @IScopeProvider@ is responsible for providing an @IScope@ for a given @EObject@ and @EReference@ (declared or inherited by the object's @EClass@). The returned @IScope@ should contain all target candidates for the given object and cross reference.
 
 bc.. 
-@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
 public interface IScopeProvider {
 
   /**
@@ -70,6 +69,29 @@ bc. classpathScope{stuff from bin/}
 
 Please find the motivation behind this and some additional details in "this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
 
+The default implementation would produce this hierarchy of scopes for the model from the last example in the "previous chapter":#defaultImports:
+
+bc.. //file model.dsl
+import "model1.dsl";
+import "model2.dsl";
+ 
+ref Foo;
+entity Bar;
+
+bc.. //file model1.dsl 
+entity Stuff;
+
+bc.. //file model2.dsl
+entity Foo;
+
+bc.. Scope (model.dsl) {
+  parent : Scope (model1.dsl) {
+   parent : Scope (model2.dsl) {}
+  }
+}
+
+p. When enumerating the scope's content, the first, most specialized scope would return @Bar@, it's parent would provide @Stuff@ and the outermost scope adds @Foo@. The linker will iterate the scope in that order and abort when it finds a matching @ScopedElement@. 
+
 h3. Declarative Scope Provider
 
 As always there is an implementation allowing to specify scoping in a declarative way (extend @org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider@ for this purpose). It looks up methods which have either of the following two signatures:
@@ -80,7 +102,7 @@ bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EClass type)
 
 The former is used when evaluating the scope for a specific cross reference and here @<ContextReference>@ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The @ref@ parameter represents this cross reference.
 
-The latter method signature is used when evaluating the scope of a given element type and is applicable to all cross references of that type. Here @<TypeToReturn>@ is the name of that type which also corresponds to the @type@ parameter. 
+The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here @<TypeToReturn>@ is the name of that type which also corresponds to the @type@ parameter. 
 
 So if you for example have a state machine with a  _Transition_ object owned by its source _State_ and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the _Transition_ type and is called _target_):
 

@@ -9,7 +9,7 @@ serializer, the Ecore model and a couple of convenient base classes for
 content assist etc.
 
 The generator also contributes to shared project resources such as the 
-plugin.xml, Manifest.MF and the "Guice modules":#Modules.
+plugin.xml, Manifest.MF and the "Guice modules":#guicemodules.
 
 Xtext's generator leverages the "modeling workflow engine (MWE)":http://www.eclipse.org/modeling/emft/?project=mwe from EMFT.
 
@@ -63,7 +63,7 @@ As explained above the @x@ is ignored in this case. The attribute @class@
 tells MWE which class to use in order to create the object node. That 
 created object is populated according to the XML description: 
 For each XML attribute MWE calls a corresponding setter or adder method 
-passing in the value (There are configurable value 
+passing in the value (there are configurable value 
 converters, but usually Boolean and String is all you need). The same 
 procedure is applied for each child element. In the case of XML elements 
 a single attribute @value@ is used and interpreted as if there was an 
@@ -84,7 +84,7 @@ attribute twice in XML.
 
 If an element does not have an attribute @value@, the engine looks for an 
 attribute called @class@. If it finds one, the class is instantiated by means 
-of the the default constructor (there is no support for factories as of now.). 
+of the default constructor (there is no support for factories as of now.). 
 If not, the class is inferred by looking at the argument's type of the current 
 setter method.
 
@@ -99,7 +99,7 @@ concrete class which has a default constructor it can be instantiated.
 *Tip*
 __Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT's open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+O CTRL+O) and type 'set' or 'add' and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.__
 
-So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the reference documentation (available through Eclipse help) for additional information.
+So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.
 
 h3. General Architecture 
 
@@ -142,32 +142,35 @@ bc..
 		<projectNameUi value="${projectName}.ui"/>
 		
 		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
-			<!-- Java API to access grammar elements (required by several other fragments) -->
-			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<!-- Java API to access grammar elements 
+				(required by several other fragments) -->
+			<fragment class=
+				"org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			
 			<!-- a lot more simple fragments -->
 			<!-- ...  -->
 		
 			<!-- a sample fragment with a property -->
-			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
+			<fragment class=
+				"org.eclipse.xtext.generator.validation.JavaValidatorFragment">
 				<composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
 			</fragment>
-            
-			<!-- java-based API for content assistance -->
-			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+      
+      <!-- more simple fragments -->
+			<!-- ...  -->      
 		</language>
 	</component>
 </workflow>
 
-p. Here the root element is a workflow which accepts __bean__ s and __component__ s. The @<property/>@ element is a first class concept of MWE's configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the given value. Property declarations can be inlined (@<property name="foo" value="bar"/>@) or by means of a property file import (@<property file="foo.properties"/>@) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property @runtimeProject@ which already uses a property imported from the file previously. 
+p. Here the root element is a workflow which accepts __bean__ s and __component__ s. The @<property/>@ element is a first class concept of MWE's configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the given value. Property declarations can be inlined (@<property name="foo" value="bar"/>@) or by means of a property file import (@<property file="foo.properties"/>@) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property @runtimeProject@ which already uses a property imported from the previously imported file. 
 
-The method @Workflow.setBean()@ does nothing but provides a means to apply global side-effects, which unfortunately is required by some projects. In this example we do a so called __EMF stand alone setup__. This class initializes a bunch of things for a non-Equinox environment that are otherwise configured by means of extension points, e.g. EMF's @EPackage.Registry@.
+The method @Workflow.setBean()@ does nothing but provides a means to apply global side-effects, which unfortunately is required by some projects. In this example we do a so called __EMF stand alone setup__. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. EMF's @EPackage.Registry@.
 
 Following the @<bean/>@ element there are three @<component/>@ elements. The @Workflow.addComponent()@ method awaits instances of @IWorkflowComponent@, which is the primary concept of MWE's workflow model. Xtext's generator is an instance of @IWorkflowComponent@ and can therefore be used within MWE workflows. 
 
 h3. Standard generator fragments
 
-In the following the most important standard generator fragments are listed. Please refer to the Javadocs for more documentation.
+In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.
 
 |_.Class|_.Generated Artifacts|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|
