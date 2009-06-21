@@ -53,3 +53,21 @@ bc..
     }
   }
 
+h3(#check_based_validation). Validation with Check
+
+In addition to the Java-based validation code you can use the language Check to implement validations against your model. To do so, you have to call the
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment} from your "generator":#generator.
+Please note, that you can combine both types of validations in your project. 
+
+@<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>@
+  
+After regenerating your language artifacts you will find three new files "YourLanguageChecks.chk", "YourLanguagFastChecks.chk" and "YourLanguageExpensiveChecks.chk" in the src/ folder in the sub-package @validation@.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the validation of the previous chapter could be written like this.
+
+bc. 
+context Type#name WARNING "Name should start with a capital":
+  name.toFirstUpper() == name;  
+
+Each check works in a specific context (here: @Type@) and can further denote a feature to which a warning or error should be attached to (here: @name@). Each check could either be a @WARNING@ or an @ERROR@ with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it does not the check will produce an issue with the provided explanation.
+
+ Please read more about the Check language as well as the underlying Expression language at the "documentation of openArchitectureWare":http://www.openArchitectureWare.org.
+ Also, you will find an example on how to implement checks in each of the generated files.   
