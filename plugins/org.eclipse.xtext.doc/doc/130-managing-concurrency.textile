@@ -1,4 +1,0 @@
-
-h2(#concurrency). Managing Concurrency
-
-text

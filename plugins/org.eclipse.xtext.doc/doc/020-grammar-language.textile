@@ -4,7 +4,7 @@ h1(#grammarLanguage). The Grammar Language
 The "grammar language":http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup 
 is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create DSLs, so what would be more helpful as to develop the Xtext language with Xtext?
 
-The grammar language is a domain specific language, carefully designed for the description of textual languages based on "LL(*)-Parsing":http://en.wikipedia.org/wiki/LL_parser that is like "Antlr3's parsing strategy":http://www.artima.com/lejava/articles/antlr_3.html.
+The grammar language is a domain specific language, carefully designed for the description of textual languages based on "LL(*)-Parsing":http://en.wikipedia.org/wiki/LL_parser that is like "ANTLR3's parsing strategy":http://www.artima.com/lejava/articles/antlr_3.html.
 The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 
 h2. First an example
@@ -459,7 +459,7 @@ p. This way the cardinality is optional (last question mark) and can be represen
 
 h5(#grammarActions). Assigned Actions 
 
-LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially Antlr has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
+LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
 
 However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
 For instance, the following is not allowed in LL based grammars, because "Expression '+' Expression" is left recursive:

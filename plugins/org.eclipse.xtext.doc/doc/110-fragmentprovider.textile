@@ -26,12 +26,10 @@ bc.. public interface IFragmentProvider extends ILanguageService {
   
   /**
    * Locates an EObject in a resource by its fragment. 
-   * @param resource
-   * @param fragment
    * @return the EObject 
    */
   EObject getEObject(Resource resource, String fragment);
- }
+}
 
-p. Note that the currently available default fragment provider does nothing (i.e. refers to the default behavior of EMF).
+p. Note that the currently available default fragment provider does nothing (i.e. falls back to the default behavior of EMF).
 

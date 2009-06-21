@@ -6,8 +6,8 @@ p. Serialization is the process of transforming an EMF model into its textual re
 In Xtext, the process of serialization is split into three steps:
 
 # Matching the model elements with the grammar rules and creating a stream of tokens. This is done by the "Parse Tree Constructor":#parsetreeconstructor.
-# Mixing existing hidden tokens (whitespaces, comments, etc.) into the token stream. This is done by the "Hidden Token Merger":#hiddentokenmerger.
-# Adding needed whitespaces or replacing all whitespaces using a "Formatter":#formatting.  
+# Mixing existing hidden tokens (whitespace, comments, etc.) into the token stream. This is done by the "Hidden Token Merger":#hiddentokenmerger.
+# Adding needed whitespace or replacing all whitespace using a "Formatter":#formatting.  
 
 p. Serialization is invoked when calling ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}@.save(...)@. Furthermore, ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.SerializerUtil} provides resource-independent support for serialization.
 
@@ -31,28 +31,28 @@ bc.. MyRule:
 	
 p.  This example introduces the constraint  @sval.size() == ival.size()@. Models which violate this constraint are valid EMF models, but they can not be serialized. To check whether a model complies with all constraints introduced by the grammar, the only way is currently to invoke the Parse Tree Constructor. If this changes at some day, there will be news in "bugzilla 239565":https://bugs.eclipse.org/bugs/show_bug.cgi?id=239565.
 
-For the Parse Tree Constructor, this can lead to the scenarios, that
+For the Parse Tree Constructor, this can lead to the scenarios, where
 
 * a model element can not be consumed. This can have the following reasons/solutions:
 ** The model element should not be stored in the model.
 ** The grammar needs an assignment which would consume the model element.
-** The "Transient Value":#transientvalues service could be used to indicate that this models element should not be consumed. 
+** The "Transient Value":#transientvalues service could be used to indicate that this model element should not be consumed. 
 * an assignment in the grammar has no corresponding model element. The Parse Tree Constructor considers a model element not to be present if it is _unset_ or equals its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:
 ** A model element should be added to the model.
 ** The assignment in the grammar should be made optional.
 
 To understand error messages and performance issues of the Parse Tree Constructor it is important to know that it implements a backtracking approach. This basically means that the grammar is used to specify the structure of a tree in which one path (from the root node to a leaf node) is a valid serialization of a specific model. The Parse Tree Constructor's task is to find this path - with the condition, that all model elements are consumed while walking this path. The Parse Tree Constructor's strategy is to take the most promising branch first (the one that would consume the most model elements). If the branch leads to a dead end (for example, if a model element needs to be consumed that is not present in the model), the Parse Tree Constructor goes back the path until a different branch can be taken. This behavior has two consequences:
 * In case of an error, the Parse Tree Constructor has found only dead ends but no leaf. It can not tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the longs paths, a fragment of their serialization and the reason why the path could not be continued at this point. The developer has to judge on his own which reason is the actual error.
-*  For reasons of performance, it is critical that the Parse Tree Constructor takes the right branch first and detects wrong branches early. One way to archive this is to avoid having many rules which return the same type and which are called from within the same grammar-alternative.   
+*  For reasons of performance, it is critical that the Parse Tree Constructor takes the right branch first and detects wrong branches early. One way to achieve this is to avoid having many rules which return the same type and which are called from within the same grammar-alternative.   
 
 
 h3(#transientvalues). Transient Values
 
-p. Transient Values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITransientValueService}, or serialization will fail. The default implementation marks all model elements transient, that are _unset_ or equal their default value.  
+p. Transient Values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITransientValueService}, or serialization will fail. The default implementation marks all model elements transient, that are _unset_ or equal to their default value.  
 
 h3(#unassignedtext). Unassigned Text
 
-p. Unassigned Text are data rule calls or terminal rule calls which do not reside within an association. Example:
+p. Unassigned Text can be necessary due to data rule calls or terminal rule calls which do not reside within an assignment. Example:
 
 bc.. PluralRule:
   'contents:' count=INT Plural;
@@ -60,8 +60,7 @@ bc.. PluralRule:
 terminal Plural: 
   'item' | 'items';
   
-p. Valid DSL-Scripts for this example are @contents 1 item@ or @contents 5 items@. However, it is not stored in the semantic model whether the keyword @item@ or @items@ has been parsed. This is due to the fact that the rule call @Plural@ is unassigned. However, the "Parse Tree Constructor":#parsetreeconstructor needs a decision which value to write during serialization. This decision can be be made by implementing the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer}.  
-
+p. Valid models for this example are @contents 1 item@ or @contents 5 items@. However, it is not stored in the semantic model whether the keyword @item@ or @items@ has been parsed. This is due to the fact that the rule call @Plural@ is unassigned. However, the "Parse Tree Constructor":#parsetreeconstructor needs to decide which value to write during serialization. This decision can be be made by implementing the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer}.  
 
 h3(#crossreferenceserializer). Cross Reference Serializer
 
@@ -69,11 +68,11 @@ p. The Cross Reference Serializer specifies which values are to be written to th
 
 h3(#hiddentokenmerger). Hidden Token Merger
 
-p. After the "Parse Tree Constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger}) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger} is the factory for a "Token Stream":#tokenstream which is fed by the "Parse Tree Constructor":#parsetreeconstructor and which writes to another Token Stream.  
+p. After the "Parse Tree Constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger}) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespace, line-breaks, comments) from the node model. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger} is the factory for a "Token Stream":#tokenstream which is fed by the "Parse Tree Constructor":#parsetreeconstructor and which writes to another Token Stream.  
 
 h3(#tokenstream). Token Stream
 
-p. The "Parse Tree Constructor":#parsetreeconstructor, the "Hidden Token Merger":#hiddentokenmerger and the "Formatter":#formatting use ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenStream} for their output, and the latter two for their input as well. This makes them chainable. Token Streams can be converted to @String@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer} and to @java.io.OutputStream@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenOutputStream}. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, Token Streams allow easy manipulation of the stream, such as mixing in whitespaces or manipulating them.    
+p. The "Parse Tree Constructor":#parsetreeconstructor, the "Hidden Token Merger":#hiddentokenmerger and the "Formatter":#formatting use an ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenStream} for their output, and the latter two for their input as well. This makes them chainable. Token Streams can be converted to a @String@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer} and to @java.io.OutputStream@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenOutputStream}. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, Token Streams allow easy manipulation of the stream, such as mixing in whitespace or manipulating them.    
 
 bc.. public interface ITokenStream {
   public void close() throws IOException;

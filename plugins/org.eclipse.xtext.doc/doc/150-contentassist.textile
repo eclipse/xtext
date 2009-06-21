@@ -26,11 +26,11 @@ public void complete_[RuleName](
   // clients may override
 }
 
-p. The snippet above indicates that the generated ProposalProvider class contains a @complete*@-method for each assigned feature in the grammar and for each rule. The brackets are placeholders that should give a clue about the naming scheme, that is used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
+p. The snippet above indicates that the generated ProposalProvider class contains a @complete*@-method for each assigned feature in the grammar and for each rule. The brackets are place-holders that should give a clue about the naming scheme used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
 
-Clients who want to customize the behavior may override the methods from the @AbstractProposalProvider@ or in turn introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
+Clients who want to customize the behavior may override the methods from the @AbstractProposalProvider@ or introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 
-It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of ''complete.*'' may be called.
+It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of ''complete.*'' methods may be called.
 
 h3. Sample Implementation
 

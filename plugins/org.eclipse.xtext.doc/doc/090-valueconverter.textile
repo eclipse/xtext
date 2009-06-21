@@ -1,30 +1,21 @@
 
 h2(#valueconverter). Value Converter
 
-Value converters are registered to convert parsed text into a certain data type instance and back.
-The primary hook is called org.eclipse.xtext.conversion.IValueConverterService and the concrete implementation can be registered via the runtime Guice module (TODO reference to framework description).
+Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
+The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module"#guicemanualmodules.
 
 h3. Annotation based value converters
 
-The most simple way to register additional value converters is to make use of @org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService@, which allows to
-declaratively register @IValueConverter@ via annotated methods. 
+The most simple way to register additional value converters is to make use of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService}, which allows to
+declaratively register an @IValueConverter@ via an annotated method. 
 
 The implementation for the default token grammar looks like 
 
 bc.. public class DefaultTerminalConverters 
     extends AbstractAnnotationBasedValueConverterService {
   
-  private Grammar grammar;
-  	
-  @Inject
-  public void setGrammar(IGrammarAccess grammarAccess) {
-    this.grammar = grammarAccess.getGrammar();
-  }
-  	
-  protected Grammar getGrammar() {
-    return grammar;
-  }
-
+  (..)
+  
   @ValueConverter(rule = "ID")
   public IValueConverter<String> ID() {
     return new AbstractNullSafeConverter<String>() {
@@ -42,10 +33,9 @@ bc.. public class DefaultTerminalConverters
       }
     };
   }
-  
        ...  some other value converter
 
-p. If you use the common terminals grammar (@org.eclipse.xtext.common.Terminals@) you should subclass @DefaultTerminalConverters@ and overwrite or add addition value converter by adding the respective methods.
+p. If you use the common terminals grammar @org.eclipse.xtext.common.Terminals@ you should subclass @DefaultTerminalConverters@ and override or add additional value converters by adding the respective methods.
 
 Imagine, you would want to add a rule creating BigDecimals:
 

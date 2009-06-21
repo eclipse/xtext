@@ -5,13 +5,13 @@ Xtext-based editors automatically support code templates. That means that you ge
 
 !{width:50%}images/preferences_templates.png!
 
-By default Xtext registers ContextTypes for each Rule (@[languageName].[RuleName]@) and for each keyword (@[languageName].kw_[keyword]@), as long as the keywords are valid identifiers. If you don't like these defaults you'll have to subclass @org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry@ and configure it via Guice. 
+By default Xtext registers ContextTypes for each Rule (@[languageName].[RuleName]@) and for each keyword (@[languageName].kw_[keyword]@), as long as the keywords are valid identifiers. If you don't like these defaults you'll have to subclass ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry} and configure it via "Guice":#guicemanualmodules. 
 
-In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolver to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in @org.eclipse.jface.text.templates.GlobalTemplateVariables@ like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type @CrossReferences@) and Enumerations (type @Enum@) like it is explained in the following sections.
+In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in @org.eclipse.jface.text.templates.GlobalTemplateVariables@ like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type @CrossReferences@) and Enumerations (type @Enum@) like it is explained in the following sections.
 
 h3. CrossReference TemplateVariableResolver
 
-Xtext comes with a specific template variable resolver @org.eclipse.jface.text.templates.TemplateVariableResolver@) called @CrossReferenceResolver@, which can be used to place cross refs within a template.
+Xtext comes with a specific template variable resolver @org.eclipse.jface.text.templates.TemplateVariableResolver@) called @CrossReferenceResolver@, which can be used to place cross references within a template.
 
 The syntax is as follows:
 
@@ -19,18 +19,19 @@ bc. ${displayText:CrossReference('MyType.myRef')}
 
 For example the following template:
 
-bc. <template name="transition" description="event transition" id="transition"
+bc.. <template name="transition" description="event transition" id="transition"
     context="org.eclipse.xtext.example.FowlerDsl.Transition" enabled="true">
-    ${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')
-    </template>
+    ${event:CrossReference('Transition.event')} => 
+    	${state:CrossReference('Transition.state')
+</template>
 
-yields the text @event => state@ and allows selecting any events and states using a drop down.
+p. yields the text @event => state@ and allows selecting any events and states using a drop down.
 
 !{width:50%}images/templates_crossref.png!
 
 h3. Enumeration TemplateVariableResolver
 
-The @org.eclipse.xtext.ui.common.editor.templates.EnumTemplateVariableResolver@ resolves a template variable to @EEnumLiteral@ literals
+The ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.templates.EnumTemplateVariableResolver} resolves a template variable to @EEnumLiteral@ literals
 which are assignment-compatible to the enumeration type declared as the first parameter of the the @Enum@ @TemplateVariable@. 
  
  The syntax is as follows:   
@@ -39,12 +40,13 @@ bc. ${displayText:Enum('Visibility')
 
 For example the following template (taken from the domainmodel example):
 
-bc. <template name="Operation" description="template for an Operation"
+bc.. <template name="Operation" description="template for an Operation"
         id="org.eclipse.xtext.example.Domainmodel.Operation"
-        context="org.eclipse.xtext.example.Domainmodel.Operation" enabled="true">
+        context="org.eclipse.xtext.example.Domainmodel.Operation" 
+        	enabled="true">
         ${visibility:Enum('Visibility')} op ${name}
-    </template>
+</template>
 
-yields the text @visibility op name@ where the display text 'visibility' is replaced with a drop down filled with the literal values as defined in the Visibility @EENumeration@.
+p. yields the text @visibility op name@ where the display text 'visibility' is replaced with a drop down filled with the literal values as defined in the Visibility @EENumeration@.
 
 !{width:50%}images/templates_enum.png!

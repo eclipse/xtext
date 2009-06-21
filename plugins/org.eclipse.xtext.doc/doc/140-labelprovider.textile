@@ -3,7 +3,7 @@ h2(#labelProvider). Label Provider
 
 A nice part of the Eclipse tooling that comes with Xtext is the outline view. It shows the structure of your model as a tree and allows quick navigation to model elements. Thus it helps to get an overview on the current state in the editor at a glance. To make the appearance of the outline more appealing it is very easy possible to provide customization for the label and the image that is used for an element. Actually this customization will be used at various places in your IDE, for example in the window that displays completion proposals when content assist was invoked. (Customizing the structure of the outline is described in a separate "chapter":#outline).
 
-The LabelProvider is the service which is used to compute the image for model elements of - as its name suggests - the label that represents an element. What you basically have to do is to provide an implementation for two methods which read @Image getImage(Object)@ and @String getText(Object)@ respectively. As this tends to be cumbersome due to @instanceof@ and cast orgies, Xtext ships with a reasonable and convenient default implementation.
+The LabelProvider is the service which is used to compute the image for model elements and - as its name suggests - the label that represents an element. What you basically have to do is to provide an implementation for two methods which read @Image getImage(Object)@ and @String getText(Object)@ respectively. As this tends to be cumbersome due to @instanceof@ and cast orgies, Xtext ships with a reasonable and convenient default implementation.
 
 h3. DefaultLabelProvider
 
@@ -27,8 +27,8 @@ bc.. public class SampleLabelProvider extends DefaultLabelProvider {
 	
 p. 
 
-The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a resource named @icons/<result of image-method>@ in your plugin. This path is actually configurable by google guice. Have a look at the ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.PluginImageHelper} to learn about the customizing possibilities.
+The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a file named @icons/<result of image-method>@ in your plugin. This path is actually configurable by google guice. Have a look at the ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.PluginImageHelper} to learn about the customizing possibilities.
 
-What's especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for a EAttribute that's called @name@ and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
+What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an EAttribute that is called @name@ and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
 
 More advanced usage patterns of the @DefaultLabelProvider@ include a dispatching to an error handler called @String error_text(Object, Exception)@ and @String error_image(Object, Exception)@ respectively.  

@@ -1,7 +1,7 @@
 
 h2(#outline). Outline View
 
-Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the correpsonding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the _Link with Editor_ button.
+Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the corresponding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the _Link with Editor_ button.
 
 !{width:50%}images/sample_outline.png!
 
@@ -9,12 +9,11 @@ You can customize various aspects of the outline by providing implementation for
 
 h3. Influencing the outline structure
 
-In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional (artificial / virtual) nodes, you customize the outline by implementing ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}.
+In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional even virtual nodes, you customize the outline by implementing ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}.
 
 The Xtext wizard creates an empty transformer class (@MyDslTransformer@) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
 
-bc.. 
-public class MyDslTransformer extends 
+bc.. public class MyDslTransformer extends 
     AbstractDeclarativeSemanticModelTransformer { 
   /**
    * This method will be called by naming convention:
@@ -36,11 +35,11 @@ public class MyDslTransformer extends
     return node;
   }
 
-/**
- * This method will be called by naming convention:
- * - method name must be getChildren
- * - first param: subclass of EObject
- */
+  /**
+   * This method will be called by naming convention:
+   * - method name must be getChildren
+   * - first param: subclass of EObject
+   */
   public List<EObject> getChildren(Attribute attribute) {
     return attribute.eContents();
   }
@@ -48,21 +47,19 @@ public class MyDslTransformer extends
   public List<EObject> getChildren(Property property) {
     return NO_CHILDREN;
   }
- }
- 
+}
 
 p. To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: 
 
-bc.. 
-public class MyDslUiModule extends AbstractXtextUiModule {
+bc.. public class MyDslUiModule extends AbstractXtextUiModule {
 
   @Override
-  public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
+  public Class<? extends ISemanticModelTransformer> 
+  		bindISemanticModelTransformer() {
     return MyDslTransformer.class;
   }
   ...
 }
-
 
 h3. Filtering
 
@@ -70,8 +67,7 @@ Often, you want to allow users to filter the contents of the outline to make it 
 
 To register a @DeclarativeActionBarContributor@, add the following lines to your @MyDslUiModule@ class:
 
-bc.. 
-/**
+bc.. /**
  * Use this class to register components to be used within the IDE.
  */
 public class MyDslUiModule extends org.xtext.example.AbstractMyDslUiModule {
@@ -86,8 +82,7 @@ public class MyDslUiModule extends org.xtext.example.AbstractMyDslUiModule {
 
 p. The action bar contributor will look like this:
 
-bc.. 
-public class MyDslActionBarContributor extends
+bc.. public class MyDslActionBarContributor extends
     DeclarativeActionBarContributor {
   public Action addFilterParserRulesToolbarAction(
       XtextContentOutlinePage page) {
@@ -97,21 +92,15 @@ public class MyDslActionBarContributor extends
 
 p. Filter actions must extend @AbstractFilterAction@ (this ensures that the action toggle state is handled correctly):
 
-bc.. 
-import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import 
-  org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;
-import org.eclipse.xtext.xtext.ui.Activator;
-
-public class FilterFooAction extends AbstractFilterAction {
+bc.. public class FilterFooAction extends AbstractFilterAction {
 
   public FilterFooAction(XtextContentOutlinePage outlinePage) {
     super("Filter Foo", outlinePage);
     setToolTipText("Show / hide foo");
     setDescription("Show / hide foo");
     setImageDescriptor(Activator.getImageDescriptor("icons/foo.gif"));
-    setDisabledImageDescriptor(Activator.getImageDescriptor("icons/foo.gif"));
+    setDisabledImageDescriptor(
+    	Activator.getImageDescriptor("icons/foo.gif"));
   }
 
   @Override
@@ -128,14 +117,7 @@ public class FilterFooAction extends AbstractFilterAction {
 
 p. The filtering itself will be performed by @FooOutlineFilter@:
 
-bc.. 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-
-public class FooOutlineFilter extends ViewerFilter {
+bc.. public class FooOutlineFilter extends ViewerFilter {
 
   @Override
   public boolean select(
@@ -153,7 +135,6 @@ public class FooOutlineFilter extends ViewerFilter {
 
 }
 
-
 h3. Context menus
 
 You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s, you cannot easily register an "Object contribution":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm. (Besides, using the extension point @org.eclipse.ui.popupMenus@ is regarded somewhat old school - you should rather use the new command and expression framework, as depicted below).
@@ -165,10 +146,9 @@ So to register context menus for specific node types of your meta model, you nee
 
 h4. Registering an @IContentOutlineNodeAdapterFactory@
 
-Create a subclass of ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory} - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you nded to override @getAdapterList()@ and return an array of classes. This is the list of classes you want to add context menus to:
+Create a subclass of ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory} - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override @getAdapterList()@ and return an array of classes. This is the list of classes you want to add context menus to:
 
-bc.. 
-public class MyDslContentOutlineNodeAdapterFactory extends 
+bc.. public class MyDslContentOutlineNodeAdapterFactory extends 
     DefaultContentOutlineNodeAdapterFactory {
   @SuppressWarnings("unchecked")
   private static final Class[] types = { Attribute.class };
@@ -181,8 +161,7 @@ public class MyDslContentOutlineNodeAdapterFactory extends
 
 p. Register this class with your @MyDslUiModule@ to make it available to your DSL editor:
 
-bc.. 
-public class MyDslUiModule extends AbstractMyDslUiModule {
+bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
   ...
   public Class<? extends IContentOutlineNodeAdapterFactory>
       bindIContentOutlineNodeAdapterFactory() {
@@ -218,7 +197,7 @@ bc..
   </handler>
 </extension>
 
-p. Finally, define a "menuContribution":org.example.mydsl.ui.editor.outline.SampleOutlineCommand to add the command to the context menu:
+p. Finally, define a @menuContribution@ to add the command to the context menu:
 
 bc.. 
 <extension
