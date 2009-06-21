@@ -234,12 +234,12 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected boolean preserveSpaces;
 
-	public FormattingConfigBasedStream(ITokenStream out,
-			String initialIndentation, FormattingConfig cfg,
-			boolean preserveSpaces) {
+	public FormattingConfigBasedStream(ITokenStream out, String indentation,
+			FormattingConfig cfg, boolean preserveSpaces) {
 		super(out);
 		this.cfg = cfg;
 		this.preserveSpaces = preserveSpaces;
+		this.indentationPrefix = indentation == null ? "" : indentation;
 	}
 
 	public Set<ElementLocator> collectLocators(EObject left, EObject right) {
