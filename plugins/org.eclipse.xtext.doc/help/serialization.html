@@ -11,7 +11,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Serialization</h1>
-<p>Serialization is the process of transforming an EMF model to its textual representation. Thereby, serialization complements parsing and lexing.</p>
+<p>Serialization is the process of transforming an EMF model into its textual representation. Thereby, serialization complements parsing and lexing.</p>
 <p>In Xtext, the process of serialization is split into three steps:</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -22,7 +22,7 @@
 </li>
 <li class="listitem">
 <p>Mixing existing hidden tokens (whitespaces, comments, etc.) into the token stream. This is done by the 
-						<a class="link" href="serialization.html#hiddentokenmerger" title="Hidden Token Merger">Hidden TOken Merger</a>.
+						<a class="link" href="serialization.html#hiddentokenmerger" title="Hidden Token Merger">Hidden Token Merger</a>.
 					</p>
 </li>
 <li class="listitem">
@@ -33,8 +33,9 @@
 </ol>
 </div>
 <p>Serialization is invoked when calling 
-				<code class="code">XtextResource.save(...)</code>. Furthermore, 
-				<code class="code">SerializerUtil</code> provides resource-independent support for serialization.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>
+				<code class="code">.save(...)</code>. Furthermore, 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/SerializerUtil.java?root=Modeling_Project&view=co" target="_new">SerializerUtil</a> provides resource-independent support for serialization.
 			</p>
 <div class="section" title="The Contract">
 <div class="titlepage">
@@ -82,7 +83,7 @@
 				</p>
 <p>For serialization to succeed, the Parse Tree Constructor must be able to 
 					<span class="emphasis"><em>consume</em></span> every element of the to-be-serialized EMF model. To 
-					<span class="emphasis"><em>consume</em></span> means, in this context, to write it to the textual representation of the model. This can turn out to be a not-so-easy to fulfill requirement, since a Grammar usually introduces implicit constraints to the Ecore model. Example:
+					<span class="emphasis"><em>consume</em></span> means, in this context, to write the element to the textual representation of the model. This can turn out to be a not-so-easy to fulfill requirement, since a Grammar usually introduces implicit constraints to the Ecore model. Example:
 				</p>
 <div class="literallayout">
 <p>
@@ -95,7 +96,7 @@
 </p>
 </div>
 <p>This example introduces the constraint  
-					<code class="code">sval.size() == ival.size()</code>. Models which violate this constraint are valid EMF models, but they can not be serialized. To check whether a model complies with all constraints introduced by the grammar, there is currently only the way to invoke the Parse Tree Constructor. If this changes at some day, there will be news in 
+					<code class="code">sval.size() == ival.size()</code>. Models which violate this constraint are valid EMF models, but they can not be serialized. To check whether a model complies with all constraints introduced by the grammar, the only way is currently to invoke the Parse Tree Constructor. If this changes at some day, there will be news in 
 					<a class="ulink" href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=239565" target="_new">bugzilla 239565</a>.
 				</p>
 <p>For the Parse Tree Constructor, this can lead to the scenarios, that</p>
@@ -126,7 +127,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>A model element is missing in the model.</p>
+<p>A model element should be added to the model.</p>
 </li>
 <li class="listitem">
 <p>The assignment in the grammar should be made optional.</p>
@@ -158,7 +159,7 @@
 </div>
 </div>
 <p>Transient Values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the 
-					<code class="code">ITransientValueService</code>, or serialization will fail. The default implementation marks all model elements transient, that are 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java?root=Modeling_Project&view=co" target="_new">ITransientValueService</a>, or serialization will fail. The default implementation marks all model elements transient, that are 
 					<span class="emphasis"><em>unset</em></span> or equal their default value.  
 				</p>
 </div>
@@ -191,7 +192,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 					<code class="code">items</code> has been parsed. This is due to the fact that the rule call 
 					<code class="code">Plural</code> is unassigned. However, the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> needs a decision which value to write during serialization. This decision can be be made by implementing the 
-					<code class="code">IUnassignedTextSerializer</code>.  
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IUnassignedTextSerializer.java?root=Modeling_Project&view=co" target="_new">IUnassignedTextSerializer</a>.  
 				</p>
 </div>
 <div class="section" title="Cross Reference Serializer">
@@ -203,9 +204,9 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 </div>
 </div>
-<p>The Cross Reference Serializer specifies which values are to be writting to the textual representation for cross references. This behavior can be customized by implementing 
-					<code class="code">ICrossReferenceSerializer</code>. The default implementation delegates to 
-					<code class="code">ILinkingService</code>, which may be the better place for customization.
+<p>The Cross Reference Serializer specifies which values are to be written to the textual representation for cross references. This behavior can be customized by implementing 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICrossReferenceSerializer.java?root=Modeling_Project&view=co" target="_new">ICrossReferenceSerializer</a>. The default implementation delegates to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java?root=Modeling_Project&view=co" target="_new">ILinkingService</a>, which may be the better place for customization.
 				</p>
 </div>
 <div class="section" title="Hidden Token Merger">
@@ -219,8 +220,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 <p>After the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, the Hidden Token Merger (
-					<code class="code">IHiddenTokenMerger</code>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The 
-					<code class="code">IHiddenTokenMerger</code> is the factory for a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&view=co" target="_new">IHiddenTokenMerger</a>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespaces, linebreaks, comments) from the node model. The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&view=co" target="_new">IHiddenTokenMerger</a> is the factory for a 
 					<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which is fed by the 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a> and which writes to another Token Stream.  
 				</p>
@@ -237,11 +238,12 @@ terminal&nbsp;Plural:&nbsp;<br>
 <p>The 
 					<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">Parse Tree Constructor</a>, the 
 					<a class="link" href="serialization.html#hiddentokenmerger" title="Hidden Token Merger">Hidden Token Merger</a> and the 
-					<a class="link" href="formatting.html" title="Formatting (Pretty Printing)">Formatter</a> use Token Streams for their output, and the latter two for their input as well. This makes them chainable. Token Streams can be converted to 
+					<a class="link" href="formatting.html" title="Formatting (Pretty Printing)">Formatter</a> use 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java?root=Modeling_Project&view=co" target="_new">ITokenStream</a> for their output, and the latter two for their input as well. This makes them chainable. Token Streams can be converted to 
 					<code class="code">String</code> using the 
-					<code class="code">TokenStringBuffer</code> and to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java?root=Modeling_Project&view=co" target="_new">TokenStringBuffer</a> and to 
 					<code class="code">java.io.OutputStream</code> using the 
-					<code class="code">TokenOutputStream</code>. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, Token Streams allow easy manipulation of the stream, such as mixing in whitespaces or manipulating them.    
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenOutputStream.java?root=Modeling_Project&view=co" target="_new">TokenOutputStream</a>. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, Token Streams allow easy manipulation of the stream, such as mixing in whitespaces or manipulating them.    
 				</p>
 <div class="literallayout">
 <p>

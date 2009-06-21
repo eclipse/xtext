@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="index.html" title="Xtext User Guide">
-<link rel="next" href="concepts.html" title="Xtext concepts from a bird&rsquo;s eye view">
+<link rel="next" href="DSL.html" title="What is a domain-specific language (DSL)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Overview</h1>
@@ -20,50 +20,51 @@
 </div>
 </div>
 </div>
-<p>Xtext is a framework for development of 
-				<a class="link" href="Overview.html#DSL" title="What is a domain-specific language (DSL)">domain-specific language</a>. It is tightly integrated with the 
+<p>Xtext is a framework for the development of 
+				<a class="link" href="DSL.html" title="What is a domain-specific language (DSL)">domain-specific languages</a>. It is tightly integrated with the 
 				<a class="ulink" href="http://www.eclipse.org/EMF" target="_new">Eclipse Modeling Framework (EMF)</a> and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
 			</p>
-<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), the grammar language is used to derive much more than just a parser and lexer (lexical analyzer). </p>
-<p>From a grammar the following is derived:</p>
+<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), the Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
+				The grammar language is used to describe and generate:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>incremental, ANTLR 3 based parser and lexer</p>
+<p>an incremental, ANTLR 3 based parser and lexer to read your models from text,</p>
 </li>
 <li class="listitem">
 <p>Ecore-based meta models (optional)</p>
 </li>
 <li class="listitem">
-<p>a serializer, used to serialize instances of such meta models back to a parseable textual representation</p>
+<p>a serializer to write your models back to text,</p>
 </li>
 <li class="listitem">
-<p>a linker</p>
+<p>a linker, to establish cross links between model elements,</p>
 </li>
 <li class="listitem">
-<p>an implementation of the EMF Resource interface (based on the parser and the serializer)</p>
+<p>an implementation of the EMF Resource interface (based on the parser and the serializer) and</p>
 </li>
 <li class="listitem">
-<p>a full-fledged integration of the language into Eclipse IDE</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="circle">
-<li class="listitem">
-<p>syntax coloring</p>
-</li>
-<li class="listitem">
-<p>navigation (F3, etc.) </p>
-</li>
-<li class="listitem">
-<p>code completion</p>
-</li>
-<li class="listitem">
-<p>outline views</p>
-</li>
-<li class="listitem">
-<p>code templates</p>
+<p>a full-fledged integration of the language into the Eclipse IDE.</p>
 </li>
 </ul>
 </div>
+<p>Some of the IDE features, that are either derived from the grammar or easily implementable, are</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>syntax coloring,</p>
+</li>
+<li class="listitem">
+<p>model navigation (F3, etc.),</p>
+</li>
+<li class="listitem">
+<p>code completion,</p>
+</li>
+<li class="listitem">
+<p>outline views and</p>
+</li>
+<li class="listitem">
+<p>code templates.</p>
 </li>
 </ul>
 </div>
@@ -71,24 +72,6 @@
 				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you do not like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via 
 				<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>.
 			</p>
-<div class="section" title="What is a domain-specific language (DSL)">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="DSL"></a>What is a domain-specific language (DSL)</h3>
-</div>
-</div>
-</div>
-<p>A DSL is a small programming language, which focuses on a particular domain.
-					Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
-					what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
-					be solved or processed by computers somehow.</p>
-<p>The opposite of a DSL is a so called GPL a General Purpose Language such as Java or any other common programming language.
-					With a GPL you can solve every computer problem, but it might not always be the best way to solve it.</p>
-<p>Imagine you want to remove the core from an apple. You could of course use a swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.</p>
-<p>There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately with XML you are not able to change the concrete syntax, which is the major problem with it. The concrete syntax of XML is way too verbose. Also a generic syntax for everything is a compromise.</p>
-</div>
 </div>
 </body>
 </html>

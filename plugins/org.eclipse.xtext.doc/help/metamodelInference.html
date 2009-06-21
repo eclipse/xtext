@@ -31,7 +31,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each generated package declaration. After the directive '&lsquo;generate&rsquo;&lsquo; a list of parameters follows. The &rsquo;&lsquo;name&rsquo;&lsquo; of the EPackage will be set to the first parameter, its &rsquo;&lsquo;nsURI&rsquo;' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+<p>for each generate-package declaration. After the directive '&lsquo;generate&rsquo;&lsquo; a list of parameters follows. The &rsquo;&lsquo;name&rsquo;&lsquo; of the EPackage will be set to the first parameter, its &rsquo;&lsquo;nsURI&rsquo;' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
 </li>
 </ul>
 </div>
@@ -41,7 +41,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.</p>
+<p>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.</p>
 </li>
 <li class="listitem">
 <p>for each type defined in an action or a cross-reference.</p>
@@ -193,7 +193,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="CustomizedPostProcessing"></a>Customized Post Processing</h3>
+<a name="customPostProcessing"></a>Customized Post Processing</h3>
 </div>
 </div>
 </div>

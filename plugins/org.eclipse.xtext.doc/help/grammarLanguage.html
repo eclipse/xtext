@@ -6,19 +6,18 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
-<link rel="prev" href="concepts.html" title="Xtext concepts from a bird&rsquo;s eye view">
+<link rel="prev" href="getting-started.html" title="Getting Started">
 <link rel="next" href="syntax.html" title="The Syntax">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Grammar Language</h1>
 <p>The 
 			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup" target="_new">grammar language</a> 
-			is the corner stone of Xtext and is defined in itself &ndash; of course.
+			is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create DSLs, so what would be more helpful as to develop the Xtext language with Xtext?
 		</p>
-<p>It is a DSL carefully designed for description of textual languages, based on 
+<p>The grammar language is a domain specific language, carefully designed for the description of textual languages based on 
 			<a class="ulink" href="http://en.wikipedia.org/wiki/LL_parser" target="_new">LL(*)-Parsing</a> that is like 
-			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">Antlr3's parsing strategy</a> and supported by 
-			<a class="ulink" href="http://pdos.csail.mit.edu/~baford/packrat/" target="_new">packrat parsers</a>.
+			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">Antlr3's parsing strategy</a>.
 			The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 		</p>
 <div class="section" title="First an example">
@@ -32,11 +31,8 @@
 </div>
 <p>To get an idea of how it works we&rsquo;ll start by implementing a 
 				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">simple example</a> introduced by Martin Fowler.
-				It&rsquo;s mainly about describing state machines used as the (un)lock mechanism of secret compartments. 
-				People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards.  
+				It&rsquo;s mainly about describing state machines used as the (un)lock mechanism of secret compartments. People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines could look like this:
 			</p>
-<p>Then the secret compartment, for instance a panel, opens up.</p>
-<p>One of those state machines could look like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">

@@ -1,0 +1,257 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Getting Started</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="Overview.html" title="Overview">
+<link rel="prev" href="DSL.html" title="What is a domain-specific language (DSL)">
+<link rel="next" href="grammarLanguage.html" title="The Grammar Language">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
+<p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
+				<a class="ulink" href="http://www.eclipse.org/Xtext/downloads" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  
+			</p>
+<div class="section" title="Create an Xtext project">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="CreateanXtextproject"></a>Create an Xtext project</h3>
+</div>
+</div>
+</div>
+<p>Use the Xtext wizard to create a new project</p>
+<p>	File &rarr; New &rarr; Project  &rarr; Xtext &rarr; Xtext project</p>
+<p>Choose a sensible project name, language name and file extension, e.g.</p>
+<table id="N1006A">
+<tr>
+						
+<td>Main project name: 	</td>
+						<td>org.xtext.example.start	</td>
+					
+</tr>
+<tr>
+						
+<td>Language name: 		</td>
+						<td>org.xtext.example.Entities	</td>
+					
+</tr>
+<tr>
+						
+<td>DSL-File extension: 	</td>
+						<td>entity	</td>
+					
+</tr>
+</table>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/getting-started-wizard.png"></div>
+<p>
+				
+</p>
+<p>Uncheck &ldquo;Generate Generator project&rdquo;, you will not need it this time. Click on Finish.</p>
+</div>
+<div class="section" title="Project layout">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Projectlayout"></a>Project layout</h3>
+</div>
+</div>
+</div>
+<p>In the Package Explorer you can see two new projects. In 
+					<code class="code">org.xtext.example.start</code> you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into 
+					<code class="code">org.xtext.example.start.ui</code>. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/getting-started-project-layout.png"></div>
+<p>
+				
+</p>
+<p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be seperated from the manual code. We follow this pattern by giving a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They would be overwritten in the next generation process.</p>
+</div>
+<div class="section" title="Build you own grammar">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Buildyouowngrammar"></a>Build you own grammar</h3>
+</div>
+</div>
+</div>
+<p>If everything went well, the example grammar file 
+					<code class="code">Entities.xtext</code> from the first project is opened with the Xtext Editor. This grammar has two purposes. First, it describes the concrete syntax of text files that can be processed by the tools of your new language. Second, it equates the meta level, i.e. the model which describes your model.
+				</p>
+<p>Ignore the generated sample grammar, delete everything from "
+					<code class="code">Model :</code>" to the end.
+					The entry rule for the parser will be called 
+					<code class="code">Model</code>. As a 
+					<code class="code">Model</code> consists of one or more 
+					<code class="code">Entity</code> entries, this rule delegates to another rule named 
+					<code class="code">Entity</code>, which will be defined later on.
+					As we can have one ore more entities within a model, the cardinality is &ldquo;+&rdquo;. Each rule is terminated with a semicolon. So our first rule reads as
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+Model&nbsp;:<br>
+	Entity+;&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>
+					
+<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine. 
+				</p>
+<p>An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type&rsquo;s name is the same as the rule name, it can be omitted as in our case.</p>
+<p>The parser will create a new element of type 
+					<code class="code">Model</code> when it enters the rule 
+					<code class="code">Model</code>, and a new element of type 
+					<code class="code">Entity</code> every time it enters the rule 
+					<code class="code">Entity</code>. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference entities. We specify it using the assignment operator &ldquo;+=&rdquo;, which denotes a multi valued feature. 
+				</p>
+<p>As a result, we modify the first rule to</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+Model&nbsp;:<br>
+	(entities&nbsp;+=&nbsp;Entity)+;<br>
+
+</code>
+</p>
+</div>
+<p>The next rule on our list is the rule 
+					<code class="code">Entity</code>. Looking at our target syntax, each entity begins with the keyword entity followed by the entity&rsquo;s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+Entity&nbsp;returns&nbsp;Entity:<br>
+	'entity'&nbsp;name=ID&nbsp;'{'<br>
+		(properties+=Property)*<br>
+	'}';<br>
+
+</code>
+</p>
+</div>
+<p>Instead of creating a new AST node for the name, we rather want the name to be an attribute of the 
+					<code class="code">Entity</code> class. Therefore we use the terminal rule 
+					<code class="code">ID</code>, which results in a string. The assignment operator &ldquo;=&rdquo; denotes a single valued feature, and the asterisk a cardinality of 0..n.
+					In our target syntax, some entities refer to an existing entity as their super type after the keyword extends. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &ldquo;?&rdquo;. The complete rule now reads as
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+Entity&nbsp;returns&nbsp;Entity:<br>
+	'entity'&nbsp;name=ID&nbsp;('extends'&nbsp;superType=[Entity])?&nbsp;'{'<br>
+		(properties+=Property)*<br>
+	'}';<br>
+
+</code>
+</p>
+</div>
+<p>We have not specified the rule 
+					<code class="code">Property</code>, yet. In our target syntax, properties come in two flavors: 
+					<code class="code">SimpleProperties</code> starting with the keyword 
+					<code class="code">property</code> and 
+					<code class="code">AssociationProperties</code> using the 
+					<code class="code">associates</code> keyword. As they are referring to different artifacts, we should make separate rules for them. Our rule Property will just delegate to either of them, using the &ldquo;|&rdquo; separator:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+Property:<br>
+	SimpleProperty&nbsp;|&nbsp;AssociationProperty;<br>
+
+</code>
+</p>
+</div>
+<p>A 
+					<code class="code">SimpleProperty</code> consists of a keyword, a name, a colon, and a type. The type will be one of String, Number, or Bool. That results in the following parser rule:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+SimpleProperty:<br>
+	'property'&nbsp;name=ID&nbsp;':'&nbsp;type=('String'|'Number'|'Bool');<br>
+
+</code>
+</p>
+</div>
+<p>An 
+					<code class="code">AssociatioProperty</code> consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
+					<code class="code">?=</code>&ldquo;. Our last parser rule is:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+AssociationProperty&nbsp;:<br>
+	name=ID&nbsp;'associates'&nbsp;('one'&nbsp;|&nbsp;many?='many')?&nbsp;type=[Entity];<br>
+
+</code>
+</p>
+</div>
+<p>In the end your grammar editor should look like this:</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/getting-started-grammar.png"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Generate language artifacts">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Generatelanguageartifacts"></a>Generate language artifacts</h3>
+</div>
+</div>
+</div>
+<p>Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose</p>
+<p>	Run As &rarr; MWE Workflow.</p>
+<p>That will trigger the Xtext language generator. You will see its logging messages in the Console view.</p>
+</div>
+<div class="section" title="Test the generated editor">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Testthegeneratededitor"></a>Test the generated editor</h3>
+</div>
+</div>
+</div>
+<p>If code generation succeeded, right-click on the Xtext project and choose</p>
+<p>	Run As &rarr; Eclipse Application.</p>
+<p>This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
+					In the new workbench, create a new project (File &rarr; New &rarr; Project  &rarr; General &rarr; Project) and in there a new file with the file extension you chose in the beginning. This will open the generated entity editor. Now play a bit with its features, like outline, content assist, syntax coloring, navigation etc.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/getting-started-editor.png"></div>
+<p>
+				
+</p>
+</div>
+</body>
+</html>

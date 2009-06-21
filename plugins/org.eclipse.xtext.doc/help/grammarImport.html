@@ -11,7 +11,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Importing existing Meta Models</h1>
-<p>With the import directive in Xtext you can refer to existing Ecore metamodels and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore datatypes.</p>
+<p>With the import directive in Xtext you can refer to existing Ecore meta models and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore datatypes.</p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;as&nbsp;ecore<br>
@@ -19,7 +19,7 @@
 </code>
 </p>
 </div>
-<p>Specify an explicit return type to reuse such imported types. Note that this even works for lexer rules.</p>
+<p>Specify an explicit return type to reuse such imported types. Note that this even works for terminal rules.</p>
 <div class="literallayout">
 <p>
 <code class="code">terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt&nbsp;:&nbsp;('0'..'9')+;<br>

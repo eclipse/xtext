@@ -1,9 +1,14 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
-<topic href="help/Overview.html#WhatisXtext" label="What is Xtext?">
-<topic href="help/Overview.html#DSL" label="What is a domain-specific language (DSL)"></topic>
+<topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
+<topic href="help/DSL.html" label="What is a domain-specific language (DSL)"></topic>
+<topic href="help/getting-started.html" label="Getting Started">
+<topic href="help/getting-started.html#CreateanXtextproject" label="Create an Xtext project"></topic>
+<topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
+<topic href="help/getting-started.html#Buildyouowngrammar" label="Build you own grammar"></topic>
+<topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
+<topic href="help/getting-started.html#Testthegeneratededitor" label="Test the generated editor"></topic>
 </topic>
-<topic href="help/concepts.html" label="Xtext concepts from a bird&rsquo;s eye view"></topic>
 </topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
 <topic href="help/grammarLanguage.html#Firstanexample" label="First an example"></topic>
@@ -15,7 +20,7 @@
 <topic href="help/syntax.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
 <topic href="help/syntax.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"></topic>
 </topic>
-<topic href="help/syntax.html#Usingmultiplepackagesmetamodelaliases" label="Using multiple packages / meta model aliases"></topic>
+<topic href="help/syntax.html#Metamodelaliasesforpackages" label="Meta model aliases for packages"></topic>
 </topic>
 <topic href="help/syntax.html#Rules" label="Rules">
 <topic href="help/syntax.html#TerminalRules" label="Terminal Rules">
@@ -34,13 +39,11 @@
 </topic>
 <topic href="help/syntax.html#ParserRules" label="Parser Rules">
 <topic href="help/syntax.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
-<topic href="help/syntax.html#Assignments" label="Assignments"></topic>
-</topic>
-<topic href="help/syntax.html#AssignmentOperators" label="Assignment Operators">
+<topic href="help/syntax.html#assignments" label="Assignments"></topic>
 <topic href="help/syntax.html#CrossReferences" label="Cross References"></topic>
 <topic href="help/syntax.html#SimpleActions" label="Simple Actions"></topic>
 <topic href="help/syntax.html#Unassignedrulecalls" label="Unassigned rule calls"></topic>
-<topic href="help/syntax.html#grammarActions" label="Tree Rewrite Actions"></topic>
+<topic href="help/syntax.html#grammarActions" label="Assigned Actions"></topic>
 </topic>
 </topic>
 <topic href="help/syntax.html#Hiddenterminalsymbols" label="Hidden terminal symbols"></topic>
@@ -52,7 +55,7 @@
 <topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"></topic>
 <topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"></topic>
 <topic href="help/metamodelInference.html#FeatureNormalization" label="Feature Normalization"></topic>
-<topic href="help/metamodelInference.html#CustomizedPostProcessing" label="Customized Post Processing"></topic>
+<topic href="help/metamodelInference.html#customPostProcessing" label="Customized Post Processing"></topic>
 <topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"></topic>
 </topic>
 <topic href="help/grammarImport.html" label="Importing existing Meta Models"></topic>
@@ -69,10 +72,12 @@
 <topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#Modules" label="Modules">
-<topic href="help/dependencyInjection.html#GeneratedModules" label="Generated Modules"></topic>
-<topic href="help/dependencyInjection.html#DefaultModules" label="Default Modules"></topic>
-<topic href="help/dependencyInjection.html#ChangingConfiguration" label="Changing Configuration"></topic>
+<topic href="help/dependencyInjection.html#guiceserevice" label="Services"></topic>
+<topic href="help/dependencyInjection.html#guicemodules" label="Modules">
+<topic href="help/dependencyInjection.html#guicemanualmodules" label="Modules intended for customization"></topic>
+<topic href="help/dependencyInjection.html#guicegeneratedmodule" label="Generated Modules"></topic>
+<topic href="help/dependencyInjection.html#guicedefaultmodule" label="Default Modules"></topic>
+<topic href="help/dependencyInjection.html#guicecustomiz" label="Changing Configuration"></topic>
 </topic>
 </topic>
 </topic>
@@ -83,6 +88,7 @@
 <topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
 <topic href="help/validation.html#linking_validation" label="Cross-link Validation"></topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
+<topic href="help/validation.html#check_based_validation" label="Validation with Check"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"></topic>
@@ -121,13 +127,16 @@
 <topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>
 </topic>
 <topic href="help/templates.html" label="Template Proposals">
-<topic href="help/templates.html#CrossReferenceResolver" label="CrossReference Resolver"></topic>
+<topic href="help/templates.html#CrossReferenceTemplateVariableResolver" label="CrossReference TemplateVariableResolver"></topic>
+<topic href="help/templates.html#EnumerationTemplateVariableResolver" label="Enumeration TemplateVariableResolver"></topic>
 </topic>
 <topic href="help/outline.html" label="Outline View">
 <topic href="help/outline.html#Influencingtheoutlinestructure" label="Influencing the outline structure"></topic>
 <topic href="help/outline.html#Filtering" label="Filtering"></topic>
-<topic href="help/outline.html#Contextmenus" label="Context menus"></topic>
-<topic href="help/outline.html#Sorting" label="Sorting"></topic>
+<topic href="help/outline.html#Contextmenus" label="Context menus">
+<topic href="help/outline.html#RegisteringanIContentOutlineNodeAdapterFactory" label="Registering an IContentOutlineNodeAdapterFactory"></topic>
+<topic href="help/outline.html#Registeringamenucontribution" label="Registering a menu contribution"></topic>
+</topic>
 </topic>
 <topic href="help/navigation.html" label="Navigation and Hyperlinking"></topic>
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)">

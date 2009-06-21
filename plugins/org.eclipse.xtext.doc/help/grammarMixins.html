@@ -12,7 +12,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Grammar Mixins</h1>
 <p>Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use 
-				<code class="code">org.eclipse.xtext.common.Terminals</code> by default. 
+				<code class="code">org.eclipse.xtext.common.Terminals</code> by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 			</p>
 <div class="literallayout">
 <p>
@@ -47,7 +47,7 @@
 &nbsp;Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br>
 
 <br>
-&nbsp;//&nbsp;overwrites&nbsp;my.SuperGrammar.RuleB<br>
+&nbsp;//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br>
 &nbsp;RuleB&nbsp;:&nbsp;'['&nbsp;name=ID&nbsp;']';<br>
 
 <br>
@@ -55,6 +55,6 @@
 </code>
 </p>
 </div>
-<p>Note that declared terminal rules always come before any imported / mixed-in terminal rules.</p>
+<p>Note that declared terminal rules always get a higher priority then imported terminal rules.</p>
 </body>
 </html>

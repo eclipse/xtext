@@ -1,0 +1,109 @@
+h2(#getting-started). Getting Started
+
+In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/downloads, set up a fresh workspace, take a deep breath and follow the instructions.  
+
+h3. Create an Xtext project
+
+Use the Xtext wizard to create a new project
+
+	File ==&rarr;== New ==&rarr;== Project  ==&rarr;== Xtext ==&rarr;== Xtext project
+
+Choose a sensible project name, language name and file extension, e.g.
+
+| Main project name: 	|	org.xtext.example.start	|
+| Language name: 		|	org.xtext.example.Entities	|
+| DSL-File extension: 	|	entity	|
+
+!images/getting-started-wizard.png!
+
+Uncheck "Generate Generator project", you will not need it this time. Click on Finish.
+
+h3. Project layout
+
+In the Package Explorer you can see two new projects. In @org.xtext.example.start@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.xtext.example.start.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
+
+!images/getting-started-project-layout.png!
+
+It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be seperated from the manual code. We follow this pattern by giving a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They would be overwritten in the next generation process.
+
+h3. Build you own grammar
+
+If everything went well, the example grammar file @Entities.xtext@ from the first project is opened with the Xtext Editor. This grammar has two purposes. First, it describes the concrete syntax of text files that can be processed by the tools of your new language. Second, it equates the meta level, i.e. the model which describes your model.
+
+Ignore the generated sample grammar, delete everything from "@Model :@" to the end.
+The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
+As we can have one ore more entities within a model, the cardinality is "+". Each rule is terminated with a semicolon. So our first rule reads as
+
+bc. 
+Model :
+	Entity+; 
+
+*Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine. 
+
+An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type’s name is the same as the rule name, it can be omitted as in our case.
+
+The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference entities. We specify it using the assignment operator "+=", which denotes a multi valued feature. 
+
+As a result, we modify the first rule to
+
+bc. 
+Model :
+	(entities += Entity)+;
+	
+The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity’s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+
+bc. 
+Entity returns Entity:
+	'entity' name=ID '{'
+		(properties+=Property)*
+	'}';
+	
+Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "=" denotes a single valued feature, and the asterisk a cardinality of 0..n.
+In our target syntax, some entities refer to an existing entity as their super type after the keyword extends. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads as
+
+bc. 
+Entity returns Entity:
+	'entity' name=ID ('extends' superType=[Entity])? '{'
+		(properties+=Property)*
+	'}';
+	
+We have not specified the rule @Property@, yet. In our target syntax, properties come in two flavors: @SimpleProperties@ starting with the keyword @property@ and @AssociationProperties@ using the @associates@ keyword. As they are referring to different artifacts, we should make separate rules for them. Our rule Property will just delegate to either of them, using the "|" separator:
+
+bc. 
+Property:
+	SimpleProperty | AssociationProperty;
+	
+A @SimpleProperty@ consists of a keyword, a name, a colon, and a type. The type will be one of String, Number, or Bool. That results in the following parser rule:
+
+bc. 
+SimpleProperty:
+	'property' name=ID ':' type=('String'|'Number'|'Bool');
+	
+An @AssociatioProperty@ consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@“. Our last parser rule is:
+
+bc. 
+AssociationProperty :
+	name=ID 'associates' ('one' | many?='many')? type=[Entity];
+	
+In the end your grammar editor should look like this:
+
+!images/getting-started-grammar.png!
+	
+h3. Generate language artifacts
+
+Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose
+
+	Run As ==&rarr;== MWE Workflow.
+	
+That will trigger the Xtext language generator. You will see its logging messages in the Console view.
+
+h3. Test the generated editor
+
+If code generation succeeded, right-click on the Xtext project and choose
+ 
+	Run As ==&rarr;== Eclipse Application.
+	
+This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
+In the new workbench, create a new project (File ==&rarr;== New ==&rarr;== Project  ==&rarr;== General ==&rarr;== Project) and in there a new file with the file extension you chose in the beginning. This will open the generated entity editor. Now play a bit with its features, like outline, content assist, syntax coloring, navigation etc.
+
+!images/getting-started-editor.png!

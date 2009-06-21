@@ -22,7 +22,7 @@
 <p>
 			
 </p>
-<p>You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to customize the various aspects of the outline. </p>
+<p>You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to do this.</p>
 <div class="section" title="Influencing the outline structure">
 <div class="titlepage">
 <div>
@@ -42,20 +42,23 @@
 <p>
 <code class="code">
 <br>
-public&nbsp;class&nbsp;MyDslTransformer&nbsp;extends&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br>
+public&nbsp;class&nbsp;MyDslTransformer&nbsp;extends&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;/**<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;createNode<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;second&nbsp;param:&nbsp;ContentOutlineNode&nbsp;<br>
 &nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;super.newOutlineNode(semanticNode,&nbsp;parentNode);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("special&nbsp;"&nbsp;+&nbsp;node.getLabel());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;node;<br>
 &nbsp;&nbsp;}<br>
 &nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;ContentOutlineNode&nbsp;createNode(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;super.newOutlineNode(semanticNode,&nbsp;parentNode);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;node.setLabel("pimped&nbsp;"&nbsp;+&nbsp;node.getLabel());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;node;<br>
@@ -152,8 +155,10 @@ public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;org.xtext.example.Abstrac
 <p>
 <code class="code">
 <br>
-public&nbsp;class&nbsp;MyDslActionBarContributor&nbsp;extends&nbsp;DeclarativeActionBarContributor&nbsp;{<br>
-&nbsp;&nbsp;public&nbsp;Action&nbsp;addFilterParserRulesToolbarAction(XtextContentOutlinePage&nbsp;page)&nbsp;{<br>
+public&nbsp;class&nbsp;MyDslActionBarContributor&nbsp;extends<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DeclarativeActionBarContributor&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;Action&nbsp;addFilterParserRulesToolbarAction(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XtextContentOutlinePage&nbsp;page)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;FilterFooAction(page);<br>
 &nbsp;&nbsp;}<br>
 }<br>
@@ -172,7 +177,8 @@ public&nbsp;class&nbsp;MyDslActionBarContributor&nbsp;extends&nbsp;DeclarativeAc
 <br>
 import&nbsp;org.eclipse.jface.viewers.ViewerFilter;<br>
 import&nbsp;org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;<br>
-import&nbsp;org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;<br>
+import&nbsp;<br>
+&nbsp;&nbsp;org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;<br>
 import&nbsp;org.eclipse.xtext.xtext.ui.Activator;<br>
 
 <br>
@@ -183,8 +189,8 @@ public&nbsp;class&nbsp;FilterFooAction&nbsp;extends&nbsp;AbstractFilterAction&nb
 &nbsp;&nbsp;&nbsp;&nbsp;super("Filter&nbsp;Foo",&nbsp;outlinePage);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;setToolTipText("Show&nbsp;/&nbsp;hide&nbsp;foo");<br>
 &nbsp;&nbsp;&nbsp;&nbsp;setDescription("Show&nbsp;/&nbsp;hide&nbsp;foo");<br>
-&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));<br>
-&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(Activator.getImageDescriptor("icons/fltr_foo.gif"));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor("icons/foo.gif"));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(Activator.getImageDescriptor("icons/foo.gif"));<br>
 &nbsp;&nbsp;}<br>
 
 <br>
@@ -225,8 +231,10 @@ public&nbsp;class&nbsp;FooOutlineFilter&nbsp;extends&nbsp;ViewerFilter&nbsp;{<br
 
 <br>
 &nbsp;&nbsp;@Override<br>
-&nbsp;&nbsp;public&nbsp;boolean&nbsp;select(Viewer&nbsp;viewer,&nbsp;Object&nbsp;parentElement,&nbsp;Object&nbsp;element)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((parentElement&nbsp;!=&nbsp;null)&nbsp;&amp;&amp;&nbsp;(parentElement&nbsp;instanceof&nbsp;ContentOutlineNode))&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;boolean&nbsp;select(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viewer&nbsp;viewer,&nbsp;Object&nbsp;parentElement,&nbsp;Object&nbsp;element)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((parentElement&nbsp;!=&nbsp;null)&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(parentElement&nbsp;instanceof&nbsp;ContentOutlineNode))&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;parentNode&nbsp;=&nbsp;(ContentOutlineNode)&nbsp;parentElement;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClass&nbsp;clazz&nbsp;=&nbsp;parentNode.getClazz();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(clazz.equals(MyDslPackage.Literals.ATTRIBUTE))&nbsp;{<br>
@@ -256,18 +264,169 @@ public&nbsp;class&nbsp;FooOutlineFilter&nbsp;extends&nbsp;ViewerFilter&nbsp;{<br
 </div>
 </div>
 </div>
-<p>(stay tuned)</p>
+<p>You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s, you cannot easily register an 
+					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm" target="_new">Object contribution</a>. (Besides, using the extension point 
+					<code class="code">org.eclipse.ui.popupMenus</code> is regarded somewhat old school &ndash; you should rather use the new command and expression framework, as depicted below).
+				</p>
+<p>So to register context menus for specific node types of your meta model, you need to do the following:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>register a 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a> which will translate 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s to their underlying node type
+						</p>
+</li>
+<li class="listitem">
+<p>register a menu contribution to add a command / handler pair to the context menu for the specific node types you&rsquo;re interested in.</p>
+</li>
+</ul>
 </div>
-<div class="section" title="Sorting">
+<div class="section" title="Registering an IContentOutlineNodeAdapterFactory">
 <div class="titlepage">
 <div>
 <div>
-<h3 class="title">
-<a name="Sorting"></a>Sorting</h3>
+<h4 class="title">
+<a name="RegisteringanIContentOutlineNodeAdapterFactory"></a>Registering an 
+						<code class="code">IContentOutlineNodeAdapterFactory</code>
+					
+</h4>
 </div>
 </div>
 </div>
-<p>(stay tuned)</p>
+<p>Create a subclass of 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a> - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you nded to override 
+						<code class="code">getAdapterList()</code> and return an array of classes. This is the list of classes you want to add context menus to:
+					</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyDslContentOutlineNodeAdapterFactory&nbsp;extends&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DefaultContentOutlineNodeAdapterFactory&nbsp;{<br>
+&nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
+&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;Class[]&nbsp;types&nbsp;=&nbsp;{&nbsp;Attribute.class&nbsp;};<br>
+
+<br>
+&nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
+&nbsp;&nbsp;public&nbsp;Class[]&nbsp;getAdapterList()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;types;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Register this class with your 
+						<code class="code">MyDslUiModule</code> to make it available to your DSL editor:
+					</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractMyDslUiModule&nbsp;{<br>
+&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContentOutlineNodeAdapterFactory&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIContentOutlineNodeAdapterFactory()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;org.example.myDSLContentOutlineNodeAdapterFactory.class;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;...<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Registering a menu contribution">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Registeringamenucontribution"></a>Registering a menu contribution</h4>
+</div>
+</div>
+</div>
+<p>After you have registered the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a>, you can add command / handler pairs to the context menu.
+					</p>
+<p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler and the menu contribution:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&lt;extension<br>
+&nbsp;&nbsp;point="org.eclipse.ui.commands"&gt;<br>
+&nbsp;&nbsp;&lt;command<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name="Sample&nbsp;Command"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description="Just&nbsp;a&nbsp;sample&nbsp;command"&gt;<br>
+&nbsp;&nbsp;&lt;/command&gt;<br>
+&lt;/extension&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Next, you need to define a handler which will eventually execute the code to operate on the selected node. Please pay special attention to the attribute 
+						<code class="code">commandId</code> - it must match the 
+						<code class="code">id</code> attribute of your command. 
+					</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&lt;extension<br>
+&nbsp;&nbsp;point="org.eclipse.ui.handlers"&gt;<br>
+&nbsp;&nbsp;&lt;handler<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class="org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"&gt;<br>
+&nbsp;&nbsp;&lt;/handler&gt;<br>
+&lt;/extension&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Finally, define a 
+						<a class="ulink" href="org.example.mydsl.ui.editor.outline.SampleOutlineCommand" target="_new">menuContribution</a> to add the command to the context menu:
+					</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&lt;extension<br>
+&nbsp;&nbsp;point="org.eclipse.ui.menus"&gt;<br>
+&nbsp;&nbsp;&lt;menuContribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;visibleWhen&nbsp;checkEnabled="false"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;iterate&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;adapt&nbsp;type="org.example.mydsl.Attribute"&nbsp;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/iterate&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/visibleWhen&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/command&gt;<br>
+&nbsp;&nbsp;&lt;/menuContribution&gt;<br>
+&lt;/extension&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Again, pay attention to the 
+						<code class="code">commandId</code> attribute. The connection between your node type(s) and the menu contribution is made by the part 
+						<code class="code">&lt;adapt type="org.example.mydsl.Attribute" /&gt;</code>. 
+					</p>
+</div>
 </div>
 </body>
 </html>

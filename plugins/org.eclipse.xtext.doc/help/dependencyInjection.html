@@ -11,47 +11,186 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
-<p>Xtext uses Google Guice in order to wire up and configure language infrstructures. This allows for very flexible customization of language infrastructure and at the same time
-				makes the different pieces far more testable. </p>
+<p>In Xtext, there are many state-less Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where  Xtext utilizes 
+				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>: 
+			</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Guice manages the instantiation of the classes: instead of constructing a class with 
+						<code class="code">new</code>, the <code class="code">@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called 
+						<a class="link" href="dependencyInjection.html#guiceserevice" title="Services">Service</a>.
+					</p>
+</li>
+<li class="listitem">
+<p>Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called 
+						<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a>.
+					</p>
+</li>
+</ul>
+</div>
+<div class="section" title="Services">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="guiceserevice"></a>Services</h3>
+</div>
+</div>
+</div>
+<p>The most parts of Xtext are implemented as 
+					<span class="emphasis"><em>services</em></span>. A service is a state-less object which implements a certain interface and which is managed by Guice.
+				</p>
+<p>Xtext ships with generic default implementations for the most services or runs 
+					<a class="link" href="configuration.html#generator" title="The Generator">generator fragments</a> to automatically generate service implementations from a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to sub-class existing services and configure them for their languages using 
+					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a>.  
+				</p>
+<p>When Guice instantiates a service, it also supplies this instance with all its dependent services. All a service does is to request &ldquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
+					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a> Guice decides which class to instantiate or which object to reuse. 
+				</p>
+<p>For example, Guice can automatically initialize member variables with the needed services. </p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyLanguageLinker&nbsp;extends&nbsp;Linker&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;@Inject<br>
+&nbsp;&nbsp;private&nbsp;IScopeProvider&nbsp;scopeProvider;<br>
+
+<br>
+&nbsp;&nbsp;@Inject(optional=true)<br>
+&nbsp;&nbsp;private&nbsp;IXtext2EcorePostProcessor&nbsp;postProcessor;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;(...)<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Furthermore, Guice can pass the needed services as constructor parameters.</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAccess&nbsp;{<br>
+	
+<br>
+&nbsp;&nbsp;private&nbsp;final&nbsp;GrammarProvider&nbsp;grammarProvider;<br>
+
+<br>
+&nbsp;&nbsp;private&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals;<br>
+
+<br>
+&nbsp;&nbsp;@Inject<br>
+&nbsp;&nbsp;public&nbsp;MyLanguageGrammarAccess(GrammarProvider&nbsp;grammarProvider,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.grammarProvider&nbsp;=&nbsp;grammarProvider;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.gaTerminals&nbsp;=&nbsp;gaTerminals;<br>
+&nbsp;&nbsp;}<br>
+	
+<br>
+&nbsp;&nbsp;(...)<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>For further details, please refer to the 
+					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide" target="_new">Google Guice Documentation</a>
+				
+</p>
+</div>
 <div class="section" title="Modules">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Modules"></a>Modules</h3>
+<a name="guicemodules"></a>Modules</h3>
 </div>
 </div>
 </div>
-<p>The Guice injector configuration is done through the use of modules (also a Guice concept).
-					The generator provides two modules when first called, one for runtime ([MyLanguage]RuntimeModule) and one for UI ([MyLanguage]UIModule).
-					These modules are initially empty and intended to be manually edited when needed. These are also the modules used directly by the setup methods. 
-					By default these modules extend a fully generated module.</p>
+<p>The configuration of services for an Xtext-Language is done via modules:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Modules map (bind) Java-Interfaces to their Implementation-Classes.</p>
+</li>
+<li class="listitem">
+<p>A module itself is a Java-Class.</p>
+</li>
+<li class="listitem">
+<p>Modules can inherit from each other and override bindings that are declared in super-modules.</p>
+</li>
+<li class="listitem">
+<p>In Xtext, there is a 
+							<a class="link" href="dependencyInjection.html#guicedefaultmodule" title="Default Modules">generic default module</a> for all languages, there are automatically 
+							<a class="link" href="dependencyInjection.html#guicegeneratedmodule" title="Generated Modules">generated modules</a> and there are modules which are 
+							<a class="link" href="dependencyInjection.html#guicemanualmodules" title="Modules intended for customization">intended to be customized manually</a>.  
+						</p>
+</li>
+<li class="listitem">
+<p>Furthermore, Xtext distinguishes between modules for runtime-services and modules related to service needed for the user interface.</p>
+</li>
+</ul>
+</div>
+<p>In total, this leads to a total of five modules for a typical Xtext Language. They are visualized in the image below. The image is furhter explained in the following subsections. </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/modules_hierarchy.png"></div>
+<p>
+				
+</p>
+<div class="section" title="Modules intended for customization">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="guicemanualmodules"></a>Modules intended for customization</h4>
+</div>
+</div>
+</div>
+<p>When the 
+						<a class="link" href="configuration.html#generator" title="The Generator">generatior</a> runs the first time, it creates two modules named 
+						<code class="code">RuntimeModule</code> and 
+						<code class="code">UIModule</code>. They are placed in laguage&rsquo;s root-package the 
+						<code class="code">src/</code>-folder of the language&rsquo;s runtime-project and the language&rsquo;s UI-project. Both are initially empty and will never be overwritten by the generator. They are 
+						<a class="ulink" href="guicecustomiz" target="_new">intended for customization</a>. By default, they extend a 
+						<a class="link" href="dependencyInjection.html#guicegeneratedmodule" title="Generated Modules">generated module</a>.  
+					</p>
+</div>
 <div class="section" title="Generated Modules">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="GeneratedModules"></a>Generated Modules</h4>
+<a name="guicegeneratedmodule"></a>Generated Modules</h4>
 </div>
 </div>
 </div>
-<p>The fully generated modules (never touch them!) are called Abstract[MyLanguage]RuntimeModule and Abstract[MyLanguage]UiModule respectively. 
-						They contain all components which have been generated specifically for the language at hand.
-						Examples are: the generated parsers, serializer or for UI a proposal provider for content assist is generated.
-						What goes into these modules depends on how your generator is configured.</p>
+<p>The fully generated modules (never touch them!) are called 
+						<code class="code">Abstract[MyLanguage]RuntimeModule</code> and 
+						<code class="code">Abstract[MyLanguage]UiModule</code> respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on how your generator is configured.
+					</p>
 </div>
 <div class="section" title="Default Modules">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="DefaultModules"></a>Default Modules</h4>
+<a name="guicedefaultmodule"></a>Default Modules</h4>
 </div>
 </div>
 </div>
 <p>Finally the fully generated modules extend the 
-						<code class="code">DefaultRuntimeModule</code>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
-						Examples are all the components used in linking, the outline view, hyperlinking and navigation. 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations (interpreting as opposed to generated). 
 					</p>
 </div>
 <div class="section" title="Changing Configuration">
@@ -59,12 +198,12 @@
 <div>
 <div>
 <h4 class="title">
-<a name="ChangingConfiguration"></a>Changing Configuration</h4>
+<a name="guicecustomiz"></a>Changing Configuration</h4>
 </div>
 </div>
 </div>
 <p>We use the primary modules ([MyLanguage]RuntimeModule and [MyLanguage]UiModule) in order to change the configuration. 
-						The class is initially empty and has been generated only to allow for arbitrary customization.</p>
+						The class is initially empty and has been generated to allow customization.</p>
 <p>In order to provide a simple and convenient way, in TMF Xtext every module extends AbstractXtextModule. 
 						This class allows to write bindings like this:</p>
 <div class="literallayout">
@@ -78,7 +217,13 @@
 </div>
 <p>Such a method will be interpreted as a binding from 
 						<code class="code">MyInterface</code> to 
-						<code class="code">MyInterfaceImpl</code>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding.
+						<code class="code">MyInterfaceImpl</code>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the 
+						<code class="code">DefaultRuntimeModule</code> configures the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to be implemented by the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a> and 
+						<code class="code">AbstractMyLanaugeModule</code> overrides this binding by binding the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to 
+						<code class="code">MyLanguageFormatter</code>.
 						Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method 
 						<code class="code">void bind(Binding)</code> and do what every you want.
 					</p>

@@ -114,11 +114,51 @@
 
 <br>
 
-<br>
-
 </code>
 </p>
 </div>
 </div>
+<div class="section" title="Validation with Check">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="check_based_validation"></a>Validation with Check</h3>
+</div>
+</div>
+</div>
+<p>In addition to the Java-based validation code you can use the language Check to implement validations against your model. To do so, you have to call the
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a> from your 
+					<a class="link" href="configuration.html#generator" title="The Generator">generator</a>.
+					Please note, that you can combine both types of validations in your project. 
+				</p>
+<p>
+					
+<code class="code">&lt;fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/&gt;</code>
+				
+</p>
+<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguagFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the src/ folder in the sub-package 
+					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the validation of the previous chapter could be written like this.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+context&nbsp;Type#name&nbsp;WARNING&nbsp;"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital":<br>
+&nbsp;&nbsp;name.toFirstUpper()&nbsp;==&nbsp;name;&nbsp;&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>Each check works in a specific context (here: 
+					<code class="code">Type</code>) and can further denote a feature to which a warning or error should be attached to (here: 
+					<code class="code">name</code>). Each check could either be a 
+					<code class="code">WARNING</code> or an 
+					<code class="code">ERROR</code> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it does not the check will produce an issue with the provided explanation.
+				</p>Please read more about the Check language as well as the underlying Expression language at the 
+				<a class="ulink" href="http://www.openArchitectureWare.org" target="_new">documentation of openArchitectureWare</a>.
+				 Also, you will find an example on how to implement checks in each of the generated files.   
+			</div>
 </body>
 </html>

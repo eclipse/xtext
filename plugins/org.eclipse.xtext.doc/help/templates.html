@@ -11,23 +11,32 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Template Proposals</h1>
-<p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file under 
-				<code class="code">templates/templates.xml</code> containing templates in a format described in the 
-				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_new">eclipse help</a>  .
+<p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named <span style="color: red">&lt;em&gt;templates.xml&lt;/em&gt;</span> inside the 
+				<code class="code">templates</code> directory of the generated ui-plugin. This file contains templates in a format as described in 
+				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_new">eclipse help</a> .
 			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/preferences_templates.png"></div>
+<p>
+			
+</p>
 <p>By default Xtext registers ContextTypes for each Rule (
 				<code class="code">.[RuleName]</code>) and for each keyword (
-				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers.
+				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
+				<code class="code">org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry</code> and configure it via Guice. 
 			</p>
-<p>If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
-				<code class="code">org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry</code> and configure it via Guice.
+<p>In addition to the standard Template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolver to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
+				<code class="code">org.eclipse.jface.text.templates.GlobalTemplateVariables</code> like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type <span style="color: red">&lt;em&gt;CrossReferences&lt;/em&gt;</span>) and Enumerations (type <span style="color: red">&lt;em&gt;Enum&lt;/em&gt;</span>) like it is explained in the following sections.
 			</p>
-<div class="section" title="CrossReference Resolver">
+<div class="section" title="CrossReference TemplateVariableResolver">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="CrossReferenceResolver"></a>CrossReference Resolver</h3>
+<a name="CrossReferenceTemplateVariableResolver"></a>CrossReference TemplateVariableResolver</h3>
 </div>
 </div>
 </div>
@@ -38,7 +47,7 @@
 <p>The syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">${someText:CrossReference('MyType.myRef')}<br>
+<code class="code">${displayText:CrossReference('MyType.myRef')}<br>
 
 </code>
 </p>
@@ -46,21 +55,72 @@
 <p>For example the following template:</p>
 <div class="literallayout">
 <p>
-<code class="code">&lt;template&nbsp;name="transition"&nbsp;description="event&nbsp;transition"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;id="transition"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.FowlerDsl.Transition"&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;enabled="true"<br>
-&nbsp;&nbsp;&gt;${event:CrossReference('Transition.event')}&nbsp;=&gt;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;${state:CrossReference('Transition.state')&lt;/<br>
-&nbsp;&nbsp;template&gt;<br>
+<code class="code">&lt;template&nbsp;name="transition"&nbsp;description="event&nbsp;transition"&nbsp;id="transition"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.FowlerDsl.Transition"&nbsp;enabled="true"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference('Transition.event')}&nbsp;=&gt;&nbsp;${state:CrossReference('Transition.state')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/template&gt;<br>
 
 </code>
 </p>
 </div>
-<p>yields the text
-
+<p>yields the text 
 					<code class="code">event =&gt; state</code> and allows selecting any events and states using a drop down.
 				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/templates_crossref.png"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Enumeration TemplateVariableResolver">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EnumerationTemplateVariableResolver"></a>Enumeration TemplateVariableResolver</h3>
+</div>
+</div>
+</div>
+<p>The 
+					<code class="code">org.eclipse.xtext.ui.common.editor.templates.EnumTemplateVariableResolver</code> resolves a template variable to 
+					<code class="code">EEnumLiteral</code> literals
+					which are assignment-compatible to the enumeration type declared as the first parameter of the the <span style="color: red">&lt;em&gt;Enum&lt;/em&gt;</span> 
+					<code class="code">TemplateVariable</code>. 
+				</p>The syntax is as follows:   
+				<div class="literallayout">
+<p>
+<code class="code">${displayText:Enum('Visibility')<br>
+
+</code>
+</p>
+</div>
+<p>For example the following template (taken from the domainmodel example):</p>
+<div class="literallayout">
+<p>
+<code class="code">&lt;template&nbsp;name="Operation"&nbsp;description="template&nbsp;for&nbsp;an&nbsp;Operation"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id="org.eclipse.xtext.example.Domainmodel.Operation"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.Domainmodel.Operation"&nbsp;enabled="true"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum('Visibility')}&nbsp;op&nbsp;${name}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/template&gt;<br>
+
+</code>
+</p>
+</div>
+<p>yields the text 
+					<code class="code">visibility op name</code> where the display text &lsquo;visibility&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
+					<code class="code">EENumeration</code>.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/templates_enum.png"></div>
+<p>
+				
+</p>
 </div>
 </body>
 </html>

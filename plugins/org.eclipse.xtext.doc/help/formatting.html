@@ -12,7 +12,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Formatting (Pretty Printing)</h1>
 <p>A formatter can be implemented via the 
-				<code class="code">IFormatter</code> service. Technically speaking, a formatter is a 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> service. Technically speaking, a formatter is a 
 				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
 			</p>
 <p>The formatter is invoked during the 
@@ -23,13 +23,13 @@
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>The 
-						<code class="code">OneWhitespaceFormatter</code> simply writes one whitespace between all tokens.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a> simply writes one whitespace between all tokens.
 					</p>
 </li>
 <li class="listitem">
 <p>The 
-						<code class="code">AbstractDeclarativeFormatter</code> allows advanced configuration using a 
-						<code class="code">FormattingConfig</code>. Both are explained in the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeFormatter</a> allows advanced configuration using a 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>. Both are explained in the 
 						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">next chapter</a>.
 					</p>
 </li>
@@ -44,9 +44,7 @@
 </div>
 </div>
 </div>
-<p>A declarative formatter can be implemented by sub-classing 
-					<code class="code">AbstractDeclarativeFormatter</code>, as shown in the following example:
-				</p>
+<p>A declarative formatter can be implemented by sub-classing {org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:</p>
 <div class="literallayout">
 <p>
 <code class="code">
@@ -87,10 +85,10 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 </div>
 <p>The formatter has to implement the method 
 					<code class="code">configureFormatting(...)</code> which is supposed to declaratively set up a 
-					<code class="code">FormattingConfig</code>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>.
 				</p>
 <p>The 
-					<code class="code">FormattingConfig</code> consist general settings and a set of rules:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist general settings and a set of rules:
 				</p>
 <div class="section" title="General FormattingConfig Settings">
 <div class="titlepage">
@@ -205,7 +203,7 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <p>The parameter 
 						<code class="code">ele</code> can be a grammar&rsquo;s 
 						<code class="code">AbstractElement</code> or a grammar&rsquo;s 
-						<code class="code">AbstractRule</code>. However, only elements which represent one token in the textual representation can be matched. This are:
+						<code class="code">AbstractRule</code>. However, only elements which represent a token in the textual representation can be matched. This are:
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
