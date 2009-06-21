@@ -24,11 +24,11 @@ In the Package Explorer you can see two new projects. In @org.xtext.example.star
 
 !images/getting-started-project-layout.png!
 
-It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be seperated from the manual code. We follow this pattern by giving a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They would be overwritten in the next generation process.
+It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by teh generator.
 
-h3. Build you own grammar
+h3. Build your own grammar
 
-If everything went well, the example grammar file @Entities.xtext@ from the first project is opened with the Xtext Editor. This grammar has two purposes. First, it describes the concrete syntax of text files that can be processed by the tools of your new language. Second, it equates the meta level, i.e. the model which describes your model.
+The wizard will automatically open the example grammar file @Entities.xtext@ from the first project in the editor. A grammar has two purposes. First, it is used to describe the concrete syntax of your language. Second, it contains information about how a parser shall create a model during parsing.
 
 Ignore the generated sample grammar, delete everything from "@Model :@" to the end.
 The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
@@ -73,7 +73,9 @@ p. A @SimpleProperty@ consists of a keyword, a name, a colon, and a type. The ty
 bc.. SimpleProperty:
 	'property' name=ID ':' type=('String'|'Number'|'Bool');
 	
-p. An @AssociatioProperty@ consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@. Our last parser rule is:
+p. __Note that it's considered bad practice to hard-code the types into the language, like we do in the SimpleProperty rule. Usually one should refer to types which have been declared somewhere else as library. We did so, because we wanted to keep this tutorial as simple as possible.__
+	
+An @AssociatioProperty@ consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
 
 bc.. AssociationProperty :
 	name=ID 'associates' ('one' | many?='many')? type=[Entity];
@@ -97,6 +99,6 @@ If code generation succeeded, right-click on the Xtext project and choose
 	Run As ==&rarr;== Eclipse Application.
 	
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-In the new workbench, create a new project (File ==&rarr;== New ==&rarr;== Project  ==&rarr;== General ==&rarr;== Project) and in there a new file with the file extension you chose in the beginning. This will open the generated entity editor. Now play a bit with its features, like outline, content assist, syntax coloring, navigation etc.
+In the new workbench, create a new project (File ==&rarr;== New ==&rarr;== Project  ==&rarr;== General ==&rarr;== Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
 
 !images/getting-started-editor.png!
