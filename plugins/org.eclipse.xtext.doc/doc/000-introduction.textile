@@ -2,26 +2,28 @@ h1. Overview
 
 h2. What is Xtext?
 
-Xtext is a framework for the development of "domain-specific languages":#DSL. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/EMF and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
+Xtext is a framework for the development of "domain-specific languages":#DSL and other textual programming languages. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/EMF and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
 
-In contrast to common parser generators (like e.g. JavaCC or ANTLR), the Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
+In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
 The grammar language is used to describe and generate:
 
 * an incremental, ANTLR 3 based parser and lexer to read your models from text,
-* Ecore-based meta models (optional)
+* Ecore models (optional)
 * a serializer to write your models back to text,
 * a linker, to establish cross links between model elements,
-* an implementation of the EMF Resource interface (based on the parser and the serializer) and
-* a full-fledged integration of the language into the Eclipse IDE.
+* an implementation of the EMF Resource interface with full support for loading and saving EMF models,
+* an integration of the language into your Eclipse IDE.
 
 Some of the IDE features, that are either derived from the grammar or easily implementable, are
-* syntax coloring,
-* model navigation (F3, etc.),
-* code completion,
-* outline views and
-* code templates.
+* "syntax coloring":#highlighting,
+* "model navigation (F3, etc.)":#navigation,
+* "code completion":#contentAssist,
+* "outline view":#outline and
+* "code templates":#templates.
 
-The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you do not like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via "dependency injection":#dependencyInjection.
+The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner.
+
+Although Xtext aims at supporting fast iterative development of domain-specific languages, it can be used to implement IDEs for general purpose programming languages as well.
 
 h2(#DSL). What is a domain-specific language (DSL)
 
