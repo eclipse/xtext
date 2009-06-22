@@ -308,7 +308,7 @@ Example:
 
 bc. terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');
 
-That is the 4-digit hexadecimal code of ascii characters.
+That is the 2-digit hexadecimal code of ascii characters.
 
 h3. Parser Rules
 
@@ -321,7 +321,7 @@ Not all the expressions that are available in terminal rules can be used in pars
 The elements that are available in parser rules as well as in terminal rules are
 # "groups":#Groups, 
 # "alternatives":#Alternatives, 
-# "keywords":#Keywords, and 
+# "keywords":#Keywords and 
 # "rule calls":#RuleCalls.
 
 In addition to these elements, there are some expressions used to direct how the AST is constructed, which are listed and explained in the following.
