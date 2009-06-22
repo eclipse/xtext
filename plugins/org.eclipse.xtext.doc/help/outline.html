@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="IDEconcepts.html" title="IDE concepts">
 <link rel="prev" href="templates.html" title="Template Proposals">
-<link rel="next" href="formatting.html" title="Formatting (Pretty Printing)">
+<link rel="next" href="hyperlinking.html" title="Hyperlinking">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Outline View</h1>
@@ -36,7 +36,7 @@
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&view=co" target="_new">ISemanticModelTransformer</a>.
 				</p>
 <p>The Xtext wizard creates an empty transformer class (
-					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
+					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the EClasses that are of interest:
 				</p>
 <div class="literallayout">
 <p>
@@ -86,7 +86,7 @@
 <p>To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: </p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractXtextUiModule&nbsp;{<br>
+<code class="code">public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractMyDslUiModule&nbsp;{<br>
 
 <br>
 &nbsp;&nbsp;@Override<br>
@@ -122,19 +122,14 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">/**<br>
-&nbsp;*&nbsp;Use&nbsp;this&nbsp;class&nbsp;to&nbsp;register&nbsp;components&nbsp;to&nbsp;be&nbsp;used&nbsp;within&nbsp;the&nbsp;IDE.<br>
-&nbsp;*/<br>
-public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;org.xtext.example.AbstractMyDslUiModule&nbsp;{<br>
-
-<br>
-&nbsp;&nbsp;...<br>
+<code class="code">public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractMyDslUiModule&nbsp;{<br>
 
 <br>
 &nbsp;&nbsp;@Override<br>
 &nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;IActionBarContributor&gt;&nbsp;bindIActionBarContributor()&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyDslActionBarContributor.class;<br>
 &nbsp;&nbsp;}<br>
+&nbsp;&nbsp;...<br>
 }<br>
 
 <br>
@@ -240,7 +235,7 @@ public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;org.xtext.example.Abstrac
 					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm" target="_new">Object contribution</a>. (Besides, using the extension point 
 					<code class="code">org.eclipse.ui.popupMenus</code> is regarded somewhat old school &ndash; you should rather use the new command and expression framework, as depicted below).
 				</p>
-<p>So to register context menus for specific node types of your meta model, you need to do the following:</p>
+<p>So to register context menus for specific node types of your Ecore model, you need to do the following:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">

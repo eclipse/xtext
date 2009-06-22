@@ -1,7 +1,7 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
 <topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
-<topic href="help/DSL.html" label="What is a domain-specific language (DSL)"></topic>
+<topic href="help/DSL.html" label="What is a domain-specific language"></topic>
 <topic href="help/getting-started.html" label="Getting Started">
 <topic href="help/getting-started.html#CreateanXtextproject" label="Create an Xtext project"></topic>
 <topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
@@ -20,7 +20,7 @@
 <topic href="help/syntax.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
 <topic href="help/syntax.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"></topic>
 </topic>
-<topic href="help/syntax.html#Metamodelaliasesforpackages" label="Meta model aliases for packages"></topic>
+<topic href="help/syntax.html#Ecoremodelaliasesforpackages" label="Ecore model aliases for packages"></topic>
 </topic>
 <topic href="help/syntax.html#Rules" label="Rules">
 <topic href="help/syntax.html#TerminalRules" label="Terminal Rules">
@@ -47,10 +47,10 @@
 </topic>
 </topic>
 <topic href="help/syntax.html#Hiddenterminalsymbols" label="Hidden terminal symbols"></topic>
-<topic href="help/syntax.html#datatypeRules" label="Datatype rules"></topic>
+<topic href="help/syntax.html#datatypeRules" label="Data type rules"></topic>
 <topic href="help/syntax.html#EnumRules" label="Enum Rules"></topic>
 </topic>
-<topic href="help/metamodelInference.html" label="Meta-Model inference">
+<topic href="help/metamodelInference.html" label="Ecore model inference">
 <topic href="help/metamodelInference.html#TypeandPackageGeneration" label="Type and Package Generation"></topic>
 <topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"></topic>
 <topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"></topic>
@@ -58,7 +58,7 @@
 <topic href="help/metamodelInference.html#customPostProcessing" label="Customized Post Processing"></topic>
 <topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"></topic>
 </topic>
-<topic href="help/grammarImport.html" label="Importing existing Meta Models"></topic>
+<topic href="help/grammarImport.html" label="Importing existing Ecore models"></topic>
 <topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
 <topic href="help/Defaulttokens.html" label="Default tokens"></topic>
 </topic>
@@ -86,12 +86,12 @@
 <topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
 <topic href="help/validation.html" label="Validation">
 <topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
-<topic href="help/validation.html#linking_validation" label="Cross-link Validation"></topic>
+<topic href="help/validation.html#linking_validation" label="Crosslink Validation"></topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
 <topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
-<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"></topic>
+<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of crosslinks"></topic>
 <topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"></topic>
 <topic href="help/linking.html#Defaultlinkingsemantics" label="Default linking semantics">
 <topic href="help/linking.html#defaultImports" label="Default Imports"></topic>
@@ -137,6 +137,11 @@
 <topic href="help/outline.html#Registeringamenucontribution" label="Registering a menu contribution"></topic>
 </topic>
 </topic>
+<topic href="help/hyperlinking.html" label="Hyperlinking">
+<topic href="help/hyperlinking.html#locationProvider" label="Location Provider">
+<topic href="help/hyperlinking.html#CustomizedLocationProvider" label="Customized Location Provider"></topic>
+</topic>
+</topic>
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)">
 <topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
 <topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
@@ -165,7 +170,6 @@
 <topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"></topic>
 <topic href="help/differences.html#differences_return_types" label="Return types"></topic>
 </topic>
-<topic href="help/differences.html#differences_validation" label="Differences in Validation"></topic>
 <topic href="help/differences.html#differences_linking" label="Differences in Linking">
 <topic href="help/differences.html#differences_linking_sopes" label="The idea of scopes"></topic>
 <topic href="help/differences.html#differences_linking_migration" label="Migration"></topic>
@@ -175,7 +179,7 @@
 <topic href="help/NewFeatures.html" label="New Features">
 <topic href="help/NewFeatures.html#DependencyInjectionwithGoogleGuice" label="Dependency Injection with Google Guice"></topic>
 <topic href="help/NewFeatures.html#ImprovementsonGrammarLevel" label="Improvements on Grammar Level"></topic>
-<topic href="help/NewFeatures.html#Finegrainedcontrolforvalidation" label="Fine-grained control for validation"></topic>
+<topic href="help/NewFeatures.html#differences_validation" label="Fine-grained control for validation"></topic>
 </topic>
 <topic href="help/MigrationSupport.html" label="Migration Support"></topic>
 </topic>

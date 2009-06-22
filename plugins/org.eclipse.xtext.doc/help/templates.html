@@ -112,7 +112,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id="org.eclipse.xtext.example.Domainmodel.Operation"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.Domainmodel.Operation"&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	enabled="true"&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum('Visibility')}&nbsp;op&nbsp;${name}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum('Visibility')}&nbsp;op&nbsp;${name}(${cursor}):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference('Operation.type')}<br>
 &lt;/template&gt;<br>
 
 <br>
@@ -121,8 +122,8 @@
 </p>
 </div>
 <p>yields the text 
-					<code class="code">visibility op name</code> where the display text &lsquo;visibility&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
-					<code class="code">EENumeration</code>.
+					<code class="code">public op name(): type</code> where the display text &lsquo;public&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
+					<code class="code">EENumeration</code>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; are placeholders.
 				</p>
 <p>
 					

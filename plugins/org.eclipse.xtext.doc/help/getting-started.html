@@ -6,14 +6,47 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="Overview.html" title="Overview">
-<link rel="prev" href="DSL.html" title="What is a domain-specific language (DSL)">
+<link rel="prev" href="DSL.html" title="What is a domain-specific language">
 <link rel="next" href="grammarLanguage.html" title="The Grammar Language">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
 <p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
-				<a class="ulink" href="http://www.eclipse.org/Xtext/downloads" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  
+				<a class="ulink" href="http://www.eclipse.org/Xtext/download" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
+<div class="literallayout">
+<p>
+<code class="code">type&nbsp;String<br>
+type&nbsp;Bool<br>
+
+<br>
+entity&nbsp;Session&nbsp;{<br>
+&nbsp;&nbsp;property&nbsp;Title:&nbsp;String<br>
+&nbsp;&nbsp;property&nbsp;IsTutorial&nbsp;:&nbsp;Bool<br>
+}<br>
+
+<br>
+entity&nbsp;Conference&nbsp;{<br>
+&nbsp;&nbsp;property&nbsp;Name&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;property&nbsp;Attendees&nbsp;:&nbsp;Person[]<br>
+&nbsp;&nbsp;property&nbsp;Speakers&nbsp;:&nbsp;Speakers[]<br>
+}<br>
+
+<br>
+entity&nbsp;Person&nbsp;{<br>
+&nbsp;&nbsp;property&nbsp;Name&nbsp;:&nbsp;String<br>
+}<br>
+
+<br>
+entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
+&nbsp;&nbsp;property&nbsp;Sessions&nbsp;:&nbsp;Session[]<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
 <div class="section" title="Create an Xtext project">
 <div class="titlepage">
 <div>
@@ -26,7 +59,7 @@
 <p>Use the Xtext wizard to create a new project</p>
 <p>	File -&gt; New -&gt; Project  -&gt; Xtext -&gt; Xtext project</p>
 <p>Choose a sensible project name, language name and file extension, e.g.</p>
-<table id="N1007C">
+<table id="N10081">
 <tr>
 						
 <td>Main project name: 	</td>
@@ -46,6 +79,7 @@
 					
 </tr>
 </table>
+<p>Uncheck &ldquo;Generate Generator project&rdquo;, you will not need it this time. Click on Finish.</p>
 <p>
 					
 </p>
@@ -54,7 +88,6 @@
 <p>
 				
 </p>
-<p>Uncheck &ldquo;Generate Generator project&rdquo;, you will not need it this time. Click on Finish.</p>
 </div>
 <div class="section" title="Project layout">
 <div class="titlepage">
@@ -92,7 +125,7 @@
 					<code class="code">Entities.xtext</code> from the first project in the editor. A grammar has two purposes. First, it is used to describe the concrete syntax of your language. Second, it contains information about how a parser shall create a model during parsing.
 				</p>
 <p>Ignore the generated sample grammar, delete everything from "
-					<code class="code">Model :</code>" to the end.
+					<code class="code">Model :</code>" to the end. 
 					The entry rule for the parser will be called 
 					<code class="code">Model</code>. As a 
 					<code class="code">Model</code> consists of one or more 
@@ -103,7 +136,7 @@
 <div class="literallayout">
 <p>
 <code class="code">Model&nbsp;:<br>
-	Entity+;&nbsp;<br>
+&nbsp;&nbsp;Entity+;&nbsp;<br>
 
 <br>
 
@@ -112,8 +145,11 @@
 </div>
 <p>
 					
-<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine. 
-				</p>
+<span class="italic">
+						<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine.
+					</span> 
+				
+</p>
 <p>An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type&rsquo;s name is the same as the rule name, it can be omitted as in our case.</p>
 <p>The parser will create a new element of type 
 					<code class="code">Model</code> when it enters the rule 
@@ -125,7 +161,7 @@
 <div class="literallayout">
 <p>
 <code class="code">Model&nbsp;:<br>
-	(entities&nbsp;+=&nbsp;Entity)+;<br>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;Entity)+;<br>
 	
 <br>
 
@@ -133,14 +169,15 @@
 </p>
 </div>
 <p>The next rule on our list is the rule 
-					<code class="code">Entity</code>. Looking at our target syntax, each entity begins with the keyword entity followed by the entity&Otilde;s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+					<code class="code">Entity</code>. Looking at our target syntax, each entity begins with the keyword entity followed by the entity&rsquo;s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">Entity&nbsp;returns&nbsp;Entity:<br>
-	'entity'&nbsp;name=ID&nbsp;'{'<br>
-		(properties+=Property)*<br>
-	'}';<br>
+&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;'{'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(properties+=Property)*<br>
+&nbsp;&nbsp;'}'<br>
+;<br>
 	
 <br>
 
@@ -155,9 +192,10 @@
 <div class="literallayout">
 <p>
 <code class="code">Entity&nbsp;returns&nbsp;Entity:<br>
-	'entity'&nbsp;name=ID&nbsp;('extends'&nbsp;superType=[Entity])?&nbsp;'{'<br>
-		(properties+=Property)*<br>
-	'}';<br>
+&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;('extends'&nbsp;extends=[Entity])?&nbsp;'{'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(properties+=Property)*<br>
+&nbsp;&nbsp;'}'<br>
+;<br>
 	
 <br>
 
@@ -165,48 +203,50 @@
 </p>
 </div>
 <p>We have not specified the rule 
-					<code class="code">Property</code>, yet. In our target syntax, properties come in two flavors: 
-					<code class="code">SimpleProperties</code> starting with the keyword 
-					<code class="code">property</code> and 
-					<code class="code">AssociationProperties</code> using the 
-					<code class="code">associates</code> keyword. As they are referring to different artifacts, we should make separate rules for them. Our rule Property will just delegate to either of them, using the &ldquo;|&rdquo; separator:
+					<code class="code">Property</code>, yet. In our target syntax, properties can refer to simple types such as &ldquo;String&rdquo; or &ldquo;Bool&rdquo; as well as entities. To make this easy we will first introduce a common supertype 
+					<code class="code">Type</code> each 
+					<code class="code">Property</code> can refer to.
+				</p>
+<p>Change  the rule 
+					<code class="code">Model</code> and introduce a new rule 
+					<code class="code">Type</code> and 
+					<code class="code">SimpleType</code>:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">Property:<br>
-	SimpleProperty&nbsp;|&nbsp;AssociationProperty;<br>
+<code class="code">Model&nbsp;:<br>
+&nbsp;&nbsp;(elements+=Type)*;<br>
+
+<br>
+Type:<br>
+&nbsp;&nbsp;SimpleType&nbsp;|&nbsp;Entity;<br>
 	
 <br>
+SimpleType:<br>
+&nbsp;&nbsp;'type'&nbsp;name=ID;<br>
+&nbsp;<br>
 
 </code>
 </p>
 </div>
+<p>Models new consist of types where a 
+					<code class="code">Type</code> can either be a 
+					<code class="code">SimpleType</code>  or the 
+					<code class="code">Entity</code> you already know. Our rule 
+					<code class="code">Type</code> will just delegate to either of them, using the &ldquo;|&rdquo; separator. The combination of simple data types and entites this way introduces a common super type 
+					<code class="code">Type</code> both 
+					<code class="code">Entity</code> and 
+					<code class="code">SimpleType</code> derive from. This allows you to refer to both types of elemets with a single cross-reference.
+				</p>
 <p>A 
-					<code class="code">SimpleProperty</code> consists of a keyword, a name, a colon, and a type. The type will be one of String, Number, or Bool. That results in the following parser rule:
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">SimpleProperty:<br>
-	'property'&nbsp;name=ID&nbsp;':'&nbsp;type=('String'|'Number'|'Bool');<br>
-	
-<br>
-
-</code>
-</p>
-</div>
-<p>
-					
-<span class="italic">Note that it&rsquo;s considered bad practice to hard-code the types into the language, like we do in the SimpleProperty rule. Usually one should refer to types which have been declared somewhere else as library. We did so, because we wanted to keep this tutorial as simple as possible.</span>
-				
-</p>
-<p>An 
-					<code class="code">AssociatioProperty</code> consists of a name, several keywords, and a cross-reference to another Entity. The multiplicity is either many or one. The presence of the keyword many should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
+					<code class="code">Property</code> consist of a keyword, a name, a colon and a cross-reference to an arbitrary 
+					<code class="code">Type</code>. The multiplicity is either many or one. The presence of the postfix &ldquo;[]&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
 					<code class="code">?=</code>". Our last parser rule is:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">AssociationProperty&nbsp;:<br>
-	name=ID&nbsp;'associates'&nbsp;('one'&nbsp;|&nbsp;many?='many')?&nbsp;type=[Entity];<br>
+<code class="code">Property:<br>
+&nbsp;&nbsp;'property'&nbsp;name=ID&nbsp;':'&nbsp;type=[Type]&nbsp;(many?='[]')?;<br>
 	
 <br>
 
@@ -233,7 +273,7 @@
 </div>
 </div>
 <p>Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose</p>
-<p>	Run As --&gt; MWE Workflow.</p>
+<p>	Run As -&gt; MWE Workflow.</p>
 <p>That will trigger the Xtext language generator. You will see its logging messages in the Console view.</p>
 </div>
 <div class="section" title="Test the generated editor">

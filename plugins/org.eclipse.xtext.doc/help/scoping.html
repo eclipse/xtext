@@ -13,7 +13,7 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Scoping</h1>
 <p>An 
 				<code class="code">IScopeProvider</code> is responsible for providing an 
-				<code class="code">IScope</code> for a given 
+				<code class="code">IScope</code> for a given context 
 				<code class="code">EObject</code> and 
 				<code class="code">EReference</code> (declared or inherited by the object&rsquo;s 
 				<code class="code">EClass</code>). The returned 
@@ -21,9 +21,7 @@
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
+<code class="code">public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
 
 <br>
 &nbsp;&nbsp;/**<br>
@@ -54,16 +52,14 @@ public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>An 
+<p>A single 
 				<code class="code">IScope</code> represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
 				For instance Java has multiple kinds of scopes (object scope, type scope, etc.).
 			</p>
 <p>For Java one would create the scope hierarchy as commented in the following example:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-//&nbsp;file&nbsp;contents&nbsp;scope<br>
+<code class="code">//&nbsp;file&nbsp;contents&nbsp;scope<br>
 import&nbsp;static&nbsp;my.Constants.STATIC;<br>
 
 <br>
@@ -77,12 +73,12 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;"foo";<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//blockScope{field,innerScopeVar}-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//methodScope{localVar,param}-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//fileScope{STATIC}-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//NULLSCOPE{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;NULLSCOPE{}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br>
@@ -103,6 +99,8 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 -&gt;&nbsp;...<br>
 -&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br>
 -&gt;&nbsp;NULLSCOPE{}<br>
+
+<br>
 
 </code>
 </p>
@@ -151,7 +149,7 @@ entity&nbsp;Foo;<br>
 <p>
 <code class="code">Scope&nbsp;(model.dsl)&nbsp;{<br>
 &nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model1.dsl)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model2.dsl)&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model2.dsl)&nbsp;{}<br>
 &nbsp;&nbsp;}<br>
 }<br>
 
@@ -161,7 +159,7 @@ entity&nbsp;Foo;<br>
 </p>
 </div>
 <p>When enumerating the scope&rsquo;s content, the first, most specialized scope would return 
-				<code class="code">Bar</code>, it&rsquo;s parent would provide 
+				<code class="code">Bar</code>, its parent would provide 
 				<code class="code">Stuff</code> and the outermost scope adds 
 				<code class="code">Foo</code>. The linker will iterate the scope in that order and abort when it finds a matching 
 				<code class="code">ScopedElement</code>. 
@@ -175,8 +173,8 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>As always there is an implementation allowing to specify scoping in a declarative way (extend 
-					<code class="code">org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider</code> for this purpose). It looks up methods which have either of the following two signatures:
+<p>As always there is an implementation that allows to specify scoping in a declarative way (extend 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> for this purpose). It looks up methods which have either of the following two signatures:
 				</p>
 <div class="literallayout">
 <p>
@@ -219,7 +217,7 @@ entity&nbsp;Foo;<br>
 					<span class="emphasis"><em>StateMachine</em></span> object.
 				</p>
 <p>If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the 
-					<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt matching the context object. Thus in the example the signature first matched would be:
+					<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
 				</p>
 <div class="literallayout">
 <p>

@@ -6,7 +6,7 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="grammarLanguage.html" title="The Grammar Language">
-<link rel="prev" href="grammarImport.html" title="Importing existing Meta Models">
+<link rel="prev" href="grammarImport.html" title="Importing existing Ecore models">
 <link rel="next" href="Defaulttokens.html" title="Default tokens">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -16,13 +16,11 @@
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;grammar&nbsp;org.xtext.example.MyDsl&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br>
+<code class="code">grammar&nbsp;org.xtext.example.MyDsl&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br>
 &nbsp;<br>
-&nbsp;generate&nbsp;myDsl&nbsp;"http://www.xtext.org/example/MyDsl"<br>
+generate&nbsp;myDsl&nbsp;'http://www.xtext.org/example/MyDsl'<br>
 &nbsp;<br>
-&nbsp;....<br>
+...&nbsp;some&nbsp;rules<br>
 
 <br>
 
@@ -33,22 +31,20 @@
 <p>Example :</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;grammar&nbsp;my.SuperGrammar<br>
-&nbsp;...<br>
-&nbsp;RuleA&nbsp;:&nbsp;"a"&nbsp;stuff=RuleB;<br>
-&nbsp;RuleB&nbsp;:&nbsp;"{"&nbsp;name=ID&nbsp;"}";<br>
+<code class="code">grammar&nbsp;my.SuperGrammar<br>
+...<br>
+RuleA&nbsp;:&nbsp;"a"&nbsp;stuff=RuleB;<br>
+RuleB&nbsp;:&nbsp;"{"&nbsp;name=ID&nbsp;"}";<br>
 
 <br>
-&nbsp;grammar&nbsp;my.SubGrammar&nbsp;with&nbsp;my.SuperGrammar<br>
+grammar&nbsp;my.SubGrammar&nbsp;with&nbsp;my.SuperGrammar<br>
 
 <br>
-&nbsp;Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br>
+Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br>
 
 <br>
-&nbsp;//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br>
-&nbsp;RuleB&nbsp;:&nbsp;'['&nbsp;name=ID&nbsp;']';<br>
+//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br>
+RuleB&nbsp;:&nbsp;'['&nbsp;name=ID&nbsp;']';<br>
 
 <br>
 

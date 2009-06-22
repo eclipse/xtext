@@ -11,20 +11,23 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Setup within Eclipse-Equinox (OSGi)</h1>
-<p>Within Eclipse we have a generated Activator, which creates a guice injector using the modules.
-				In addition an IExecutableExtensionFactory is generated for each language, which is used to create ExecutableExtensions.
-				This means that everything which is created via extension points is managed by guice as well, i.e. you can declare dependencies and get them injected upon creation. </p>
+<p>Within Eclipse we have a generated 
+				<code class="code">Activator</code>, which creates a Guice injector using the 
+				<a class="ulink" href="guicemodules" target="_new">modules</a>.
+				In addition an 
+				<code class="code">IExecutableExtensionFactory</code> is generated for each language, which is used to create 
+				<code class="code">ExecutableExtensions</code>.
+				This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
+			</p>
 <p>The only thing you have to do in order to use this factory is to prefix the class with the factory 
-				<code class="code">ExecutableExtensionFactory</code> name followed by a colon.
+				<code class="code">&lt;MyLanguageName&gt;ExecutableExtensionFactory</code> name followed by a colon.
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&lt;extension<br>
+<code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.editors"&gt;<br>
 &nbsp;&nbsp;&lt;editor<br>
-&nbsp;&nbsp;&nbsp;&nbsp;class="[MyLanguageName]ExecutableExtensionFactory:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class="&lt;MyLanguageName&gt;ExecutableExtensionFactory:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.core.editor.XtextEditor"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.ui.editors.text.TextEditorActionContributor"<br>

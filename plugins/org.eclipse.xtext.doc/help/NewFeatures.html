@@ -41,12 +41,12 @@
 					
 <a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar mixins</a> allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the Ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
 				</p>
-<p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_SOMMENT and WS (whitespace) were hard coded into the grammar language and couldn&rsquo;t be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar 
+<p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_COMMENT and WS (whitespace) were hard coded into the grammar language and couldn&rsquo;t be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar 
 					<code class="code">org.eclipse.xtext.common.Terminals</code> per default. This means that they are still there but reside in a libraries now. You don&rsquo;t have to use them and you can come up with your own set of reusable rules. 
 				</p>
 <p>
 					
-<a class="link" href="grammarImport.html" title="Importing existing Meta Models">Reusing existing Ecore models</a> in oAW Xtext didn&rsquo;t work well and we communicated this by flagging this feature as &lsquo;experimental&rsquo;. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
+<a class="link" href="grammarImport.html" title="Importing existing Ecore models">Reusing existing Ecore models</a> in oAW Xtext didn&rsquo;t work well and we communicated this by flagging this feature as &lsquo;experimental&rsquo;. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
 				</p>
 <p>The grammar language gained one new concept that is of great value when writing left-factored grammars (e.g. expressions). With actions one can do minor AST rewritings within a rule to overcome degenerated ASTs. You will find an 
 					<a class="link" href="syntax.html#grammarActions" title="Assigned Actions">in-depth explanation of actions</a> in the dedicated chapter in the reference documentation.
@@ -57,7 +57,7 @@
 <div>
 <div>
 <h3 class="title">
-<a name="Finegrainedcontrolforvalidation"></a>Fine-grained control for validation</h3>
+<a name="differences_validation"></a>Fine-grained control for validation</h3>
 </div>
 </div>
 </div>

@@ -16,19 +16,19 @@
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>declaration of a cross link in the grammar (at least in the meta model)</p>
+<p>declaration of a crosslink in the grammar (at least in the Ecore model)</p>
 </li>
 <li class="listitem">
 <p>specification of linking semantics</p>
 </li>
 </ol>
 </div>
-<div class="section" title="Declaration of cross links">
+<div class="section" title="Declaration of crosslinks">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Declarationofcrosslinks"></a>Declaration of cross links</h3>
+<a name="Declarationofcrosslinks"></a>Declaration of crosslinks</h3>
 </div>
 </div>
 </div>
@@ -36,7 +36,10 @@
 <div class="literallayout">
 <p>
 <code class="code">CrossReference&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;'['&nbsp;ReferencedEClass&nbsp;('|'&nbsp;terminal=AbstractTerminal)?&nbsp;']'<br>
+&nbsp;&nbsp;'['&nbsp;ReferencedEClass&nbsp;('|'&nbsp;terminal=AbstractTerminal)?&nbsp;']'<br>
+;<br>
+
+<br>
 
 </code>
 </p>
@@ -45,15 +48,19 @@
 <div class="literallayout">
 <p>
 <code class="code">ReferringType&nbsp;:<br>
-&nbsp;&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|(ID|STRING)];<br>
+&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|(ID|STRING)]<br>
+;<br>
+
+<br>
 
 </code>
 </p>
 </div>
-<p>The meta model inference would create an 
+<p>The 
+					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a> would create an 
 					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
-					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see 
-					<a class="link" href="scoping.html" title="Scoping">scoping</a>).
+					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
+					<a class="link" href="scoping.html" title="Scoping">scoping</a>). 
 				</p>
 <p>Example: While parsing a given input string, say</p>
 <div class="literallayout">
@@ -66,7 +73,7 @@
 <p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p>
 <div class="literallayout">
 <p>
-<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
+<code class="code">ref&nbsp;"EntityWith&#402;&divide;&lsaquo;"<br>
 
 </code>
 </p>
@@ -85,7 +92,7 @@
 <p>The 
 					<code class="code">ILinker</code> implementation that is used by default is the 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a>. It installs 
-					<code class="code">EObject</code> proxies for all cross-links, which are then resolved on demand.
+					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
 					The actual cross reference resolution is done by 
 					<code class="code">LazyLinkingResource.getEObject(String)</code> and delegates to an implementation of the 
 					<code class="code">ILinkingService</code>.
@@ -93,9 +100,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
+<code class="code">public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
 
 <br>
 &nbsp;&nbsp;/**<br>
@@ -126,8 +131,8 @@ public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
 					<code class="code">getLinkedObjects</code> is directly related to this topic whereas 
 					<code class="code">getLinkText</code> addresses complementary functionality: it is used for serialization.
 				</p>
-<p>A simple implementation of the linking service ( the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and is used for any grammar per default. It uses the default implementation of 
+<p>A simple implementation of the linking service (the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
 					<code class="code">IScopeProvider</code> to compute the linking candidates.
 				</p>
 </div>
@@ -140,26 +145,38 @@ public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>The default implementation for all languages, looks within the current file for an EObject of the respective type (&lsquo;Entity&rsquo;) which by convention has a 
+<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &ldquo;Entity&rdquo; which by convention has a 
 					<code class="code">name</code> attribute set to &lsquo;Entity01&rsquo;. 
 				</p>
 <p>Given the grammar :</p>
 <div class="literallayout">
 <p>
-<code class="code">Model&nbsp;:&nbsp;(stuff+=(Ref|Entity))*;<br>
-Ref&nbsp;:&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';';<br>
-Entity&nbsp;:&nbsp;'entity'&nbsp;name=ID&nbsp;';';<br>
+<code class="code">Model&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
+;<br>
+
+<br>
+Ref&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
+;<br>
+
+<br>
+Entity&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
+;<br>
 
 <br>
 
 </code>
 </p>
 </div>
-<p>In the following model :</p>
+<p>In the following model:</p>
 <div class="literallayout">
 <p>
 <code class="code">ref&nbsp;Entity01;<br>
 entity&nbsp;Entity01;<br>
+
+<br>
 
 </code>
 </p>
@@ -185,10 +202,25 @@ entity&nbsp;Entity01;<br>
 <p>For example, given the following grammar :</p>
 <div class="literallayout">
 <p>
-<code class="code">Model&nbsp;:&nbsp;(imports+=Import)*&nbsp;(stuff+=(Ref|Entity))*;<br>
-&nbsp;Import&nbsp;:&nbsp;'import'&nbsp;importURI=STRING&nbsp;';';<br>
-&nbsp;Ref&nbsp;:&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';';<br>
-&nbsp;Entity&nbsp;:&nbsp;'entity'&nbsp;name=ID&nbsp;';';<br>
+<code class="code">Model&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;(imports+=Import)*<br>
+&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
+;<br>
+
+<br>
+Import&nbsp;:<br>
+&nbsp;&nbsp;'import'&nbsp;importURI=STRING&nbsp;';'<br>
+;<br>
+
+<br>
+Ref&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
+;<br>
+
+<br>
+Entity&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
+;<br>
 
 <br>
 
@@ -234,7 +266,7 @@ entity&nbsp;Foo;<br>
 						<code class="code">Foo</code> will be 
 						<code class="code">Bar</code>, 
 						<code class="code">Stuff</code> and 
-						<code class="code">Foo</code> in that order. They will computed by the 
+						<code class="code">Foo</code> in that order. They will be computed by the 
 						<a class="link" href="scoping.html" title="Scoping">ScopeProvider</a>. 
 					</p>
 </div>

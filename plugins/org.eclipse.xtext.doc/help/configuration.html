@@ -41,44 +41,40 @@
 </div>
 </div>
 </div>
-<p>The nice thing about MWE is that it just instantiates java classes and the configuration is done through setter and adder methods.
+<p>The nice thing about MWE is that it just instantiates Java classes and the configuration is done through setter and adder methods.
 					Given the following Java class :</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&nbsp;package&nbsp;foo;<br>
+<code class="code">package&nbsp;foo;<br>
 &nbsp;&nbsp;<br>
-&nbsp;&nbsp;public&nbsp;class&nbsp;Person&nbsp;{<br>
+public&nbsp;class&nbsp;Person&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;name;<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;name;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.name&nbsp;=&nbsp;name;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;final&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;new&nbsp;ArrayList&lt;Person&gt;();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;addChild(Person&nbsp;child)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.children.add(child);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.name&nbsp;=&nbsp;name;<br>
 &nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;private&nbsp;final&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;new&nbsp;ArrayList&lt;Person&gt;();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;addChild(Person&nbsp;child)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.children.add(child);<br>
+&nbsp;&nbsp;}<br>
+}<br>
 &nbsp;&nbsp;<br>
 
 </code>
 </p>
 </div>
-<p>one can create a family tree like this:</p>
+<p>one can create a family tree this way:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&nbsp;&lt;x&nbsp;class="foo.Person"&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&nbsp;value="Grandpa"/&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;class="foo.Person"&nbsp;name="Father"&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/child&gt;<br>
-&nbsp;&nbsp;&lt;/x&gt;<br>
+<code class="code">&lt;x&nbsp;class="foo.Person"&gt;<br>
+&nbsp;&nbsp;&lt;name&nbsp;value="Grandpa"/&gt;<br>
+&nbsp;&nbsp;&lt;child&nbsp;class="foo.Person"&nbsp;name="Father"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
+&nbsp;&nbsp;&lt;/child&gt;<br>
+&lt;/x&gt;<br>
 
 <br>
 
@@ -86,7 +82,8 @@
 </p>
 </div>
 <p>These couple of lines will, when interpreted by MWE, result in an 
-					object tree consisting of three instances of foo.Person:
+					object tree consisting of three instances of 
+					<code class="code">foo.Person</code>:
 
 					</p>
 <div class="mediaobject">
@@ -106,24 +103,23 @@
 					in the 
 					<a class="ulink" href="http://www.springframework.org" target="_new">Spring Framework</a>. 
 				</p>
-<p>As explained above the 
-					<code class="code">x</code> is ignored in this case. The attribute 
+<p>As explained above the element 
+					<span class="emphasis"><em>name</em></span> '
+					<code class="code">x</code>' is ignored in this case. The attribute 
 					<code class="code">class</code>
-					tells MWE which class to use in order to create the object node. That 
+					tells MWE which class to use in order to create the object node. The 
 					created object is populated according to the XML description: 
 					For each XML attribute MWE calls a corresponding setter or adder method 
 					passing in the value (there are configurable value 
 					converters, but usually Boolean and String is all you need). The same 
 					procedure is applied for each child element. In the case of XML elements 
 					a single attribute 
-					<code class="code">value</code> is used and interpreted as if there was an 
+					<code class="code">value</code> is used and interpreted as if it was an 
 					attribute in the parent element. That is:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&lt;foo&gt;&lt;name&nbsp;value="bar"/&gt;&lt;/foo&gt;<br>
+<code class="code">&lt;foo&gt;&lt;name&nbsp;value="bar"/&gt;&lt;/foo&gt;<br>
 
 </code>
 </p>
@@ -131,9 +127,7 @@
 <p>means the same as</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&lt;foo&nbsp;name="bar"/&gt;<br>
+<code class="code">&lt;foo&nbsp;name="bar"/&gt;<br>
 
 </code>
 </p>
@@ -150,12 +144,10 @@
 					If not, the class is inferred by looking at the argument&rsquo;s type of the current 
 					setter method.
 				</p>
-<p>This is why it is ok to write:</p>
+<p>Due to this shortcut it is valid to write:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
+<code class="code">&lt;child&nbsp;name="Son"/&gt;<br>
 
 </code>
 </p>
@@ -169,10 +161,10 @@
 					
 <span class="bold"><strong>Tip</strong></span>
 
-					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+O CTRL+O) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
+					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the quick outline view (CTRL+O, use CTRL+O twice to see inherited members as well) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
 				
 </p>
-<p>So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.</p>
+<p>This is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.</p>
 </div>
 <div class="section" title="General Architecture">
 <div class="titlepage">
@@ -183,7 +175,7 @@
 </div>
 </div>
 </div>
-<p>Now that you know a bit about MWE, you are ready to learn about the concepts and architecture of Xtext&rsquo;s generator. 
+<p>Now that you know a bit about MWE, you are ready to learn about the concepts and architecture of Xtext&rsquo;s language generator. 
 					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
@@ -222,7 +214,7 @@
 </div>
 </div>
 </div>
-<p>As already explained we use MWE from EMFT in order to build, configure and execute this structure of components. 
+<p>As already explained we use MWE from EMFT in order to instantiate, configure and execute this structure of components. 
 						In the following we see an exemplary Xtext generator configuration written in MWE configuration code:  </p>
 <div class="literallayout">
 <p>
@@ -283,7 +275,8 @@
 <p>Here the root element is a workflow which accepts 
 						<span class="italic">bean</span> s and 
 						<span class="italic">component</span> s. The 
-						<code class="code">&lt;property/&gt;</code> element is a first class concept of MWE&rsquo;s configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the given value. Property declarations can be inlined (
+						<code class="code">&lt;property/&gt;</code> element is a first class concept of MWE&rsquo;s configuration language and essentially acts as a preprocessor, which replaces all occurrences of 
+						<code class="code">${propertyName}</code> with the given value. Property declarations can be defined in-line (
 						<code class="code">&lt;property name="foo" value="bar"/&gt;</code>) or by means of a property file import (
 						<code class="code">&lt;property file="foo.properties"/&gt;</code>) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property 
 						<code class="code">runtimeProject</code> which already uses a property imported from the previously imported file. 
@@ -312,7 +305,7 @@
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N106B7">
+<table id="N106EC">
 <tr>
 						
 <th>Class</th>
@@ -438,9 +431,11 @@
 </table>
 <p>
 					
-<span class="bold"><strong>Important</strong></span>
-
-					<span class="italic">Due to IP-Problems with the code generator shipped with ANTLR 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the updatesite at 
+<span class="italic">
+						<span class="bold"><strong>Important</strong></span> Due to
+					</span> 
+					<a class="link" href="antlr_ip_issue.html" title="The ANTLR IP issue (or which parser to use?)">IP-Problems</a> 
+					<span class="italic">with the code generator shipped with ANTLR 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the update site at 
 						<span class="bold"><strong>http://download.itemis.com/updates/</strong></span>.
 					</span>
 				

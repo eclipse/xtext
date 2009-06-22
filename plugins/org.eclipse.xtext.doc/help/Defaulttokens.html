@@ -15,27 +15,22 @@
 <div class="literallayout">
 <p>
 <code class="code">grammar&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br>
-&nbsp;&nbsp;&nbsp;hidden(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br>
+&nbsp;&nbsp;hidden(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br>
 
 <br>
-&nbsp;import&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;as&nbsp;ecore<br>
+import&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;as&nbsp;ecore<br>
 
 <br>
-&nbsp;terminal&nbsp;ID&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;'^'?('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*&nbsp;;<br>
-&nbsp;terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt:&nbsp;('0'..'9')+&nbsp;;<br>
-&nbsp;terminal&nbsp;STRING	:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;'"'&nbsp;(&nbsp;'\\'&nbsp;('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\')&nbsp;|&nbsp;!('\\'|'"')&nbsp;)*&nbsp;'"'&nbsp;|<br>
-&nbsp;&nbsp;&nbsp;"'"&nbsp;(&nbsp;'\\'&nbsp;('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\')&nbsp;|&nbsp;!('\\'|"'")&nbsp;)*&nbsp;"'"<br>
-&nbsp;&nbsp;&nbsp;;&nbsp;<br>
-&nbsp;terminal&nbsp;ML_COMMENT	:&nbsp;'/*'&nbsp;-&gt;&nbsp;'*/'&nbsp;;<br>
-&nbsp;terminal&nbsp;SL_COMMENT&nbsp;	:&nbsp;'//'&nbsp;!('\n'|'\r')*&nbsp;('\r'?&nbsp;'\n')?&nbsp;;<br>
-
-<br>
-&nbsp;terminal&nbsp;WS		:&nbsp;('&nbsp;'|'\t'|'\r'|'\n')+&nbsp;;<br>
-
-<br>
-&nbsp;terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
+terminal&nbsp;ID&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;'^'?('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*&nbsp;;<br>
+terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt:&nbsp;('0'..'9')+&nbsp;;<br>
+terminal&nbsp;STRING	:&nbsp;<br>
+&nbsp;&nbsp;'"'&nbsp;(&nbsp;'\\'&nbsp;('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\')&nbsp;|&nbsp;!('\\'|'"')&nbsp;)*&nbsp;'"'&nbsp;|<br>
+&nbsp;&nbsp;"'"&nbsp;(&nbsp;'\\'&nbsp;('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\')&nbsp;|&nbsp;!('\\'|"'")&nbsp;)*&nbsp;"'";&nbsp;<br>
+terminal&nbsp;ML_COMMENT	:&nbsp;'/*'&nbsp;-&gt;&nbsp;'*/'&nbsp;;<br>
+terminal&nbsp;SL_COMMENT&nbsp;	:&nbsp;'//'&nbsp;!('\n'|'\r')*&nbsp;('\r'?&nbsp;'\n')?&nbsp;;<br>
+terminal&nbsp;WS		:&nbsp;('&nbsp;'|'\t'|'\r'|'\n')+&nbsp;;<br>
+terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 
 </code>
 </p>

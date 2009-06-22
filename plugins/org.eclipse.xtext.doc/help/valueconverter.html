@@ -13,8 +13,21 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Value Converter</h1>
 <p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
 				The primary hook is called 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicemanualmodules.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicecustomize.
+				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIValueConverterService()&nbsp;{<br>
+&nbsp;&nbsp;return&nbsp;MySpecialValueConverterService.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
 <div class="section" title="Annotation based value converters">
 <div class="titlepage">
 <div>
@@ -54,7 +67,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;};<br>
 &nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;some&nbsp;other&nbsp;value&nbsp;converter<br>
+&nbsp;&nbsp;...&nbsp;&nbsp;some&nbsp;other&nbsp;value&nbsp;converter<br>
+}<br>
 
 <br>
 
@@ -65,18 +79,18 @@
 					<code class="code">org.eclipse.xtext.common.Terminals</code> you should subclass 
 					<code class="code">DefaultTerminalConverters</code> and override or add additional value converters by adding the respective methods.
 				</p>
-<p>Imagine, you would want to add a rule creating BigDecimals:</p>
+<p>Imagine, you would want to add a rule BIG_DECIMAL creating BigDecimals, it would look like this one:</p>
 <div class="literallayout">
 <p>
 <code class="code">@ValueConverter(rule&nbsp;=&nbsp;"BIG_DECIMAL")<br>
-&nbsp;&nbsp;public&nbsp;IValueConverter&lt;String&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;AbstractToStringConverter&lt;BigDecimal&gt;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;BigDecimal&nbsp;internalToValue(String&nbsp;string,&nbsp;AbstractNode&nbsp;node)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;BigDecimal.valueOf(string);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;};<br>
-&nbsp;&nbsp;}<br>
+public&nbsp;IValueConverter&lt;BigDecimal&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
+&nbsp;&nbsp;return&nbsp;new&nbsp;AbstractToStringConverter&lt;BigDecimal&gt;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;BigDecimal&nbsp;internalToValue(String&nbsp;string,&nbsp;AbstractNode&nbsp;node)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;BigDecimal.valueOf(string);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;};<br>
+}<br>
 
 <br>
 
