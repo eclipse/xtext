@@ -33,18 +33,19 @@ bc.. public class DefaultTerminalConverters
       }
     };
   }
-       ...  some other value converter
+  ...  some other value converter
+}
 
 p. If you use the common terminals grammar @org.eclipse.xtext.common.Terminals@ you should subclass @DefaultTerminalConverters@ and override or add additional value converters by adding the respective methods.
 
-Imagine, you would want to add a rule creating BigDecimals:
+Imagine, you would want to add a rule BIG_DECIMAL creating BigDecimals, it would look like this one:
 
-bc..  @ValueConverter(rule = "BIG_DECIMAL")
-  public IValueConverter<String> BIG_DECIMAL() {
-    return new AbstractToStringConverter<BigDecimal>() {
-      @Override
-      protected BigDecimal internalToValue(String string, AbstractNode node) {
-        return BigDecimal.valueOf(string);
-      }
-    };
-  }
+bc.. @ValueConverter(rule = "BIG_DECIMAL")
+public IValueConverter<BigDecimal> BIG_DECIMAL() {
+  return new AbstractToStringConverter<BigDecimal>() {
+    @Override
+    protected BigDecimal internalToValue(String string, AbstractNode node) {
+      return BigDecimal.valueOf(string);
+    }
+  };
+}

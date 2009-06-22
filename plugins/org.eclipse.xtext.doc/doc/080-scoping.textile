@@ -1,10 +1,9 @@
 
 h2(#scoping). Scoping
 
-An @IScopeProvider@ is responsible for providing an @IScope@ for a given @EObject@ and @EReference@ (declared or inherited by the object's @EClass@). The returned @IScope@ should contain all target candidates for the given object and cross reference.
+An @IScopeProvider@ is responsible for providing an @IScope@ for a given context @EObject@ and @EReference@ (declared or inherited by the object's @EClass@). The returned @IScope@ should contain all target candidates for the given object and cross reference.
 
-bc.. 
-public interface IScopeProvider {
+bc.. public interface IScopeProvider {
 
   /**
    * Returns a scope for the given context. The scope provides access to 
@@ -28,13 +27,12 @@ public interface IScopeProvider {
   public IScope getScope(EObject context, EClass type);
 }
 
-p. An @IScope@ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
+p. A single @IScope@ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.
 For instance Java has multiple kinds of scopes (object scope, type scope, etc.).
 
 For Java one would create the scope hierarchy as commented in the following example:
 
-bc.. 
-// file contents scope
+bc.. // file contents scope
 import static my.Constants.STATIC;
 
 public class ScopeExample { // class body scope
@@ -46,12 +44,12 @@ public class ScopeExample { // class body scope
       String innerScopeVar = "foo";
       Object field = innerScopeVar;
       // the scope hierarchy at this point would look like this:
-      //blockScope{field,innerScopeVar}->
-      //methodScope{localVar,param}->
-      //classScope{field}-> ('field' is overlayed)
-      //fileScope{STATIC}->
-      //classpathScope{'all qualified names of accessible static fields'} ->
-      //NULLSCOPE{}
+      //  blockScope{field,innerScopeVar}->
+      //  methodScope{localVar, param}->
+      //  classScope{field}-> ('field' is overlayed)
+      //  fileScope{STATIC}->
+      //  classpathScope{'all qualified names of accessible static fields'} ->
+      //  NULLSCOPE{}
       //
     }
     field.add(localVar);
@@ -61,13 +59,13 @@ public class ScopeExample { // class body scope
 p. In fact the class path scope should also reflect the order of class path entries.
 For instance:
 
-bc. classpathScope{stuff from bin/}
+bc.. classpathScope{stuff from bin/}
 -> classpathScope{stuff from foo.jar/}
 -> ...
 -> classpathScope{stuff from JRE System Library}
 -> NULLSCOPE{}
 
-Please find the motivation behind this and some additional details in "this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
+p. Please find the motivation behind this and some additional details in "this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
 
 The default implementation would produce this hierarchy of scopes for the model from the last example in the "previous chapter":#defaultImports:
 
@@ -86,15 +84,15 @@ entity Foo;
 
 bc.. Scope (model.dsl) {
   parent : Scope (model1.dsl) {
-   parent : Scope (model2.dsl) {}
+    parent : Scope (model2.dsl) {}
   }
 }
 
-p. When enumerating the scope's content, the first, most specialized scope would return @Bar@, it's parent would provide @Stuff@ and the outermost scope adds @Foo@. The linker will iterate the scope in that order and abort when it finds a matching @ScopedElement@. 
+p. When enumerating the scope's content, the first, most specialized scope would return @Bar@, its parent would provide @Stuff@ and the outermost scope adds @Foo@. The linker will iterate the scope in that order and abort when it finds a matching @ScopedElement@. 
 
 h3. Declarative Scope Provider
 
-As always there is an implementation allowing to specify scoping in a declarative way (extend @org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider@ for this purpose). It looks up methods which have either of the following two signatures:
+As always there is an implementation that allows to specify scoping in a declarative way (extend ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider} for this purpose). It looks up methods which have either of the following two signatures:
 
 bc. IScope scope_<ContextReference>(<ContextType> ctx, EReference ref)
 
@@ -110,7 +108,7 @@ bc. IScope scope_Transition_target(Transition this, EReference ref)
 
 If such a method does not exist, the implementation will try to find one for the context object's container. Thus in the example this would match a method with the same name but _State_ as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the _State_ objects could for instance be owned by a containing _StateMachine_ object.
 
-If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the _EClass_ parameter). Again it will first attempt matching the context object. Thus in the example the signature first matched would be:
+If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the _EClass_ parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
 
 bc. IScope scope_State(Transition this, EClass type)
 

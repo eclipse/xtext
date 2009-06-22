@@ -183,7 +183,7 @@ For instance, a reference to @classA@ would as well be linked to a newly created
 
 h3. Rules
 
-The default parsing is based on a home-grown packrat parser. It is advised to substitute it by an ANTLR parser through the Xtext service mechanism. ANTLR is a sophisticated parser generator framework based on an LL(*) "parsing algorithm":http://bit.ly/ANTLR_LL_star_algorithm, that works quite well for Xtext. Please download the plugin de.itemis.xtext.antlr (from update site @http://download.itemis.com/updates/@) and use the ANTLR Parser instead of the packrat parser (cf. "Xtext Workspace Setup":Xtext_Workspace_Setup).
+The default parsing is based on a home-grown packrat parser. It is advised to substitute it by an ANTLR parser through the Xtext service mechanism. ANTLR is a sophisticated parser generator framework based on an LL(*) "parsing algorithm":http://bit.ly/ANTLR_LL_star_algorithm, that works quite well for Xtext. Please download the plugin de.itemis.xtext.antlr (from update site @http://download.itemis.com/updates/@) and use the ANTLR Parser instead of the packrat parser (cf. "Xtext Workspace Setup":http://www.eclipse.org/Xtext/developers/workspaceSetup.php).
 
 Basically parsing can be separated in the following phases. 
 # lexing
