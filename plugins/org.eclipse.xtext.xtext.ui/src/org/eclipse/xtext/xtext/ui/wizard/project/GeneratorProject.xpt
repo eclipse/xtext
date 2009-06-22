@@ -19,25 +19,25 @@
 /*
  * This is an example model
  */
-datatype String;
+type String
 
-class Leaf extends Composable {
-  attr name: String;
+entity Leaf extends Composable {
+  property name: String
 }
 
-class Composite extends Composable {
-  ref content: Composable;
+entity Composite extends Composable {
+  property content: Composable[]
 }
 
-class Composable {
+entity Composable {
 }
 «ENDFILE»
 
 «FILE "templates/Extensions.ext"-»
 import «languageNameAbbreviation.toFirstLower()»;
 
-listSubclasses(Class this) :
-	let subclasses = this.eRootContainer.eAllContents.typeSelect(Class).select(e|e.superClass == this).name:
+listSubclasses(Entity this) :
+	let subclasses = this.eRootContainer.eAllContents.typeSelect(Entity).select(e|e.extends == this).name:
 		switch (subclasses.size) { 
 			case 0: "no subclasses"
 			case 1: "subclass: " + subclasses.toString(", ")
@@ -52,7 +52,7 @@ listSubclasses(Class this) :
 
 «OP()»DEFINE main FOR Model-«CL()»
 «OP()»FILE "output.txt"-«CL()»
-«OP()»FOREACH this.elements.typeSelect(Class).sortBy(e|e.name) AS e-«CL()»
+«OP()»FOREACH this.elements.typeSelect(Entity).sortBy(e|e.name) AS e-«CL()»
 «OP()»e.name«CL()» has «OP()»e.listSubclasses()«CL()».
 «OP()»ENDFOREACH-«CL()»
 «OP()»ENDFILE-«CL()»

@@ -113,7 +113,6 @@ grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 
 generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
 
-
 Model :
 	(imports+=Import)*
 	(elements+=Type)*;
@@ -122,23 +121,18 @@ Import :
 	'import' importURI=STRING;
 	
 Type:
-	DataType | Class;
+	SimpleType | Entity;
 	
-DataType:
-	'datatype' name=ID ';'?;
+SimpleType:
+	'type' name=ID;
 	
-Class :
-	'class' name=ID ('extends' superClass=[Class])? '{'
+Entity :
+	'entity' name=ID ('extends' extends=[Entity])? '{'
 		properties+=Property*
 	'}';
 
 Property:
-	Attribute | Reference;
+	'property' name=ID ':' type=[Type] (many?='[]')?;
 	
-Attribute:
-	'attr' name=ID ':' type=[DataType] ';'?;
-	
-Reference:
-	'ref' name=ID ':' type=[Class] ';'?;
 «ENDFILE»
 «ENDDEFINE»
