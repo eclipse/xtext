@@ -68,7 +68,7 @@ p. The cross reference serializer specifies which values are to be written to th
 
 h3(#hiddentokenmerger). Hidden Token Merger
 
-p. After the "parse tree constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the hidden token merger (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger}) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespace, line-breaks, comments) from the node model. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger} is the factory for a "token stream":#tokenstream which is fed by the "parse tree constructor":#parsetreeconstructor and which writes to another token stream.  
+p. After the "parse tree constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, the hidden token merger (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger}) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespace, line breaks, comments) from the node model. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger} is the factory for a "token stream":#tokenstream which is fed by the "parse tree constructor":#parsetreeconstructor and which writes to another token stream.  
 
 h3(#tokenstream). Token Stream
 
