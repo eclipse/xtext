@@ -131,21 +131,6 @@
 		<antcall target="docbook2eclipsehelp"/>
 	</target>
 	
-	<target name="build-standalone-migrating" depends="init, install-wikitext, get-docbook-xsl, get-fop">
-		<echo>Building Standalone Migration Guide...</echo>
-		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
-			booktitle="Migrate from oAW to TMF Xtext"
-			validate="true">
-			<fileset dir="doc">
-	 			<include name="standalone-migrating-from-oaw.textile"/>
-			</fileset>
-		</wikitext-to-docbook>
-		<move file="doc/standalone-migrating-from-oaw.xml" tofile="${build.dir}${file.separator}${document.name}.xml" />
-		
-		<antcall target="docbook2pdf"/>
-		
-	</target>
-		
 	<target name="check-docbook">
 		<condition property="hasDocbook">
 			<and>
