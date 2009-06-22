@@ -1,1 +1,28 @@
 
+h2(#hyperlinking). Hyperlinking
+
+The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your grammar definition. This means that you can either control-click on any of these tokens or hit F3 while the cursor position is at the token in question and this will take you to the referenced model element. As you'd expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.
+
+h3(#locationProvider). Location Provider
+
+When navigating a hyperlink Xtext will also select the text region corresponding to the referenced model element. Determining this text region is the responsibility of the ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.ILocationInFileProvider}. The default implementation (${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.DefaultLocationInFileProvider}) implements a best effort strategy which can be summarized as:
+
+# If the model element's type (i.e. EClass) declares a feature _name_ then return the region of the corresponding token(s). As a fallback also check for a feature _id_.
+# If the model element's parse tree contains any top-level tokens corresponding to _ID_ rule calls in the grammar then return a region spanning all those tokens.
+# As a last resort return the region corresponding to the first keyword token of the referenced model element.
+
+h4. Customized Location Provider
+
+As the default strategy is a best effort it may not always result in the selection you want. If that's the case you can "override":#guicecustomize the @ILocationInFileProvider@ binding in the UI module as in the following example:
+
+bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
+
+  @Override
+  public Class<? extends ILocationInFileProvider> 
+  		bindILocationInFileProvider() {
+    return MyDslLocationInFileProvider.class;
+  }
+  ...
+}
+
+p. Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another feature than _name_). In that case you can simply subclass @DefaultLocationInFileProvider@ and override the methods @getIdentifierFeature@ and / or @useKeyword@ to guide the first and last steps of the strategy as described above (see ${org.eclipse.xtext.xtext.ui/src/org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider} for an example).

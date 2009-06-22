@@ -51,7 +51,7 @@ bc.. public class MyDslTransformer extends
 
 p. To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: 
 
-bc.. public class MyDslUiModule extends AbstractXtextUiModule {
+bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 
   @Override
   public Class<? extends ISemanticModelTransformer> 
@@ -67,17 +67,13 @@ Often, you want to allow users to filter the contents of the outline to make it 
 
 To register a @DeclarativeActionBarContributor@, add the following lines to your @MyDslUiModule@ class:
 
-bc.. /**
- * Use this class to register components to be used within the IDE.
- */
-public class MyDslUiModule extends org.xtext.example.AbstractMyDslUiModule {
-
-  ...
+bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 
   @Override
   public Class<? extends IActionBarContributor> bindIActionBarContributor() {
     return MyDslActionBarContributor.class;
   }
+  ...
 }
 
 p. The action bar contributor will look like this:

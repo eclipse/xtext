@@ -2,7 +2,7 @@
 h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
 In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes "Google Guice":http://code.google.com/p/google-guice/: 
-* Guice manages the instantiation of the classes: instead of constructing a class with @new@, the <code>@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceserevice.
+* Guice manages the instantiation of the classes: instead of constructing a class with @new@, the <code>@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceservice.
 * Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called "modules":#guicemodules.
 
 h3(#guiceservice). Services

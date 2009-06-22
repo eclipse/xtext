@@ -16,7 +16,7 @@ The grammar language is used to describe and generate:
 
 Some of the IDE features, that are either derived from the grammar or easily implementable, are
 * "syntax coloring":#highlighting,
-* "model navigation (F3, etc.)":#navigation,
+* "model navigation (F3, etc.)":#hyperlinking,
 * "code completion":#contentAssist,
 * "outline view":#outline and
 * "code templates":#templates.
