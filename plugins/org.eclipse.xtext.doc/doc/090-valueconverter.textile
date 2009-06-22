@@ -2,7 +2,13 @@
 h2(#valueconverter). Value Converter
 
 Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
-The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module"#guicemanualmodules.
+The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module"#guicecustomize.
+To do so override the corresponding binding in your runtime module like shown in this example:
+
+bc.. @Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return MySpecialValueConverterService.class;
+	}
 
 h3. Annotation based value converters
 
