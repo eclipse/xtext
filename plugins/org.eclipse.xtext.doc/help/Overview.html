@@ -21,10 +21,10 @@
 </div>
 </div>
 <p>Xtext is a framework for the development of 
-				<a class="link" href="DSL.html" title="What is a domain-specific language (DSL)">domain-specific languages</a>. It is tightly integrated with the 
+				<a class="link" href="DSL.html" title="What is a domain-specific language (DSL)">domain-specific languages</a> and other textual programming languages. It is tightly integrated with the 
 				<a class="ulink" href="http://www.eclipse.org/EMF" target="_new">Eclipse Modeling Framework (EMF)</a> and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
 			</p>
-<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), the Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
+<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
 				The grammar language is used to describe and generate:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
@@ -32,7 +32,7 @@
 <p>an incremental, ANTLR 3 based parser and lexer to read your models from text,</p>
 </li>
 <li class="listitem">
-<p>Ecore-based meta models (optional)</p>
+<p>Ecore models (optional)</p>
 </li>
 <li class="listitem">
 <p>a serializer to write your models back to text,</p>
@@ -41,10 +41,10 @@
 <p>a linker, to establish cross links between model elements,</p>
 </li>
 <li class="listitem">
-<p>an implementation of the EMF Resource interface (based on the parser and the serializer) and</p>
+<p>an implementation of the EMF Resource interface with full support for loading and saving EMF models,</p>
 </li>
 <li class="listitem">
-<p>a full-fledged integration of the language into the Eclipse IDE.</p>
+<p>an integration of the language into your Eclipse IDE.</p>
 </li>
 </ul>
 </div>
@@ -52,26 +52,41 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>syntax coloring,</p>
+<p>
+						
+<a class="link" href="highlighting.html" title="Syntax Coloring">syntax coloring</a>,
+					</p>
 </li>
 <li class="listitem">
-<p>model navigation (F3, etc.),</p>
+<p>
+						
+<a class="link" href="">model navigation (F3, etc.)</a>,
+					</p>
 </li>
 <li class="listitem">
-<p>code completion,</p>
+<p>
+						
+<a class="link" href="contentAssist.html" title="Content Assist">code completion</a>,
+					</p>
 </li>
 <li class="listitem">
-<p>outline views and</p>
+<p>
+						
+<a class="link" href="outline.html" title="Outline View">outline view</a> and
+					</p>
 </li>
 <li class="listitem">
-<p>code templates.</p>
+<p>
+						
+<a class="link" href="templates.html" title="Template Proposals">code templates</a>.
+					</p>
 </li>
 </ul>
 </div>
 <p>The generated artifacts are wired up through 
-				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner. For example if you do not like the default code assistant implementation, all you need to do is to come up with an alternative implementation of the corresponding service and configure it via 
-				<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>.
+				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner.
 			</p>
+<p>Although Xtext aims at supporting fast iterative development of domain-specific languages, it can be used to implement IDEs for general purpose programming languages as well.</p>
 </div>
 </body>
 </html>

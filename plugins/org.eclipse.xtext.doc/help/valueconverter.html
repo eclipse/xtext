@@ -11,8 +11,10 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Value Converter</h1>
-<p>Value converters are registered to convert parsed text into a certain data type instance and back.
-				The primary hook is called org.eclipse.xtext.conversion.IValueConverterService and the concrete implementation can be registered via the runtime Guice module (TODO reference to framework description).</p>
+<p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
+				The primary hook is called 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicemanualmodules.
+			</p>
 <div class="section" title="Annotation based value converters">
 <div class="titlepage">
 <div>
@@ -23,9 +25,9 @@
 </div>
 </div>
 <p>The most simple way to register additional value converters is to make use of 
-					<code class="code">org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService</code>, which allows to
-					declaratively register 
-					<code class="code">IValueConverter</code> via annotated methods. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractAnnotationBasedValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractAnnotationBasedValueConverterService</a>, which allows to
+					declaratively register an 
+					<code class="code">IValueConverter</code> via an annotated method. 
 				</p>
 <p>The implementation for the default token grammar looks like </p>
 <div class="literallayout">
@@ -33,18 +35,8 @@
 <code class="code">public&nbsp;class&nbsp;DefaultTerminalConverters&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;AbstractAnnotationBasedValueConverterService&nbsp;{<br>
 &nbsp;&nbsp;<br>
-&nbsp;&nbsp;private&nbsp;Grammar&nbsp;grammar;<br>
-&nbsp;&nbsp;	<br>
-&nbsp;&nbsp;@Inject<br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;setGrammar(IGrammarAccess&nbsp;grammarAccess)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.grammar&nbsp;=&nbsp;grammarAccess.getGrammar();<br>
-&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;	<br>
-&nbsp;&nbsp;protected&nbsp;Grammar&nbsp;getGrammar()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;grammar;<br>
-&nbsp;&nbsp;}<br>
-
-<br>
+&nbsp;&nbsp;(..)<br>
+&nbsp;&nbsp;<br>
 &nbsp;&nbsp;@ValueConverter(rule&nbsp;=&nbsp;"ID")<br>
 &nbsp;&nbsp;public&nbsp;IValueConverter&lt;String&gt;&nbsp;ID()&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;AbstractNullSafeConverter&lt;String&gt;()&nbsp;{<br>
@@ -62,7 +54,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;};<br>
 &nbsp;&nbsp;}<br>
-&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;some&nbsp;other&nbsp;value&nbsp;converter<br>
 
 <br>
@@ -70,9 +61,9 @@
 </code>
 </p>
 </div>
-<p>If you use the common terminals grammar (
-					<code class="code">org.eclipse.xtext.common.Terminals</code>) you should subclass 
-					<code class="code">DefaultTerminalConverters</code> and overwrite or add addition value converter by adding the respective methods.
+<p>If you use the common terminals grammar 
+					<code class="code">org.eclipse.xtext.common.Terminals</code> you should subclass 
+					<code class="code">DefaultTerminalConverters</code> and override or add additional value converters by adding the respective methods.
 				</p>
 <p>Imagine, you would want to add a rule creating BigDecimals:</p>
 <div class="literallayout">

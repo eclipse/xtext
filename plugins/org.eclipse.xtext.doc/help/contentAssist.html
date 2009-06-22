@@ -6,7 +6,7 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="IDEconcepts.html" title="IDE concepts">
-<link rel="prev" href="labelProvider.html" title="Label Provider">
+<link rel="prev" href="IDEconcepts.html" title="IDE concepts">
 <link rel="next" href="templates.html" title="Template Proposals">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -68,12 +68,12 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </p>
 </div>
 <p>The snippet above indicates that the generated ProposalProvider class contains a 
-					<code class="code">complete*</code>-method for each assigned feature in the grammar and for each rule. The brackets are placeholders that should give a clue about the naming scheme, that is used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
+					<code class="code">complete*</code>-method for each assigned feature in the grammar and for each rule. The brackets are place-holders that should give a clue about the naming scheme used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
 				</p>
 <p>Clients who want to customize the behavior may override the methods from the 
-					<code class="code">AbstractProposalProvider</code> or in turn introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
+					<code class="code">AbstractProposalProvider</code> or introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 				</p>
-<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&lsquo;complete.*&rsquo;' may be called.</p>
+<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&lsquo;complete.*&rsquo;' methods may be called.</p>
 </div>
 <div class="section" title="Sample Implementation">
 <div class="titlepage">

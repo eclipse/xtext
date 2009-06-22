@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="emf_integration.html" title="Integration with EMF">
-<link rel="next" href="labelProvider.html" title="Label Provider">
+<link rel="next" href="contentAssist.html" title="Content Assist">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE concepts</h1>
@@ -46,16 +46,77 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 </p>
 </div>
 <p></p>
-<div class="section" title="Managing Concurrency">
+<div class="section" title="Label Provider">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="concurrency"></a>Managing Concurrency</h2>
+<a name="labelProvider"></a>Label Provider</h2>
 </div>
 </div>
 </div>
-<p>text</p>
+<p>A nice part of the Eclipse tooling that comes with Xtext is the outline view. It shows the structure of your model as a tree and allows quick navigation to model elements. Thus it helps to get an overview on the current state in the editor at a glance. To make the appearance of the outline more appealing it is very easy possible to provide customization for the label and the image that is used for an element. Actually this customization will be used at various places in your IDE, for example in the window that displays completion proposals when content assist was invoked. (Customizing the structure of the outline is described in a separate 
+				<a class="link" href="outline.html" title="Outline View">chapter</a>).
+			</p>
+<p>The LabelProvider is the service which is used to compute the image for model elements and &ndash; as its name suggests &ndash; the label that represents an element. What you basically have to do is to provide an implementation for two methods which read 
+				<code class="code">Image getImage(Object)</code> and 
+				<code class="code">String getText(Object)</code> respectively. As this tends to be cumbersome due to 
+				<code class="code">instanceof</code> and cast orgies, Xtext ships with a reasonable and convenient default implementation.
+			</p>
+<div class="section" title="DefaultLabelProvider">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="DefaultLabelProvider"></a>DefaultLabelProvider</h3>
+</div>
+</div>
+</div>
+<p>The default implementation of the 
+					<code class="code">LabelProvider</code> interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the LabelProvider are kind of a best match for this pattern. It comes down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides a image filename or the text to be used to represent your model element. Have a look at following example to get a more detailed idea about the 
+					<code class="code">DefaultLabelProvider</code>.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;SampleLabelProvider&nbsp;extends&nbsp;DefaultLabelProvider&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"Rule:&nbsp;"&nbsp;+&nbsp;rule.getName();<br>
+	}<br>
+	
+<br>
+	String&nbsp;image(RuleA&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"ruleA.gif";<br>
+	}<br>
+	
+<br>
+	String&nbsp;image(RuleB&nbsp;rule)&nbsp;{<br>
+		return&nbsp;"ruleB.gif";<br>
+	}<br>
+	
+<br>
+}<br>
+	
+<br>
+
+</code>
+</p>
+</div>
+<p></p>
+<p>The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a file named 
+					<code class="code">icons/&lt;result of image-method&gt;</code> in your plugin. This path is actually configurable by google guice. Have a look at the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
+				</p>
+<p>What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an EAttribute that is called 
+					<code class="code">name</code> and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
+				</p>
+<p>More advanced usage patterns of the 
+					<code class="code">DefaultLabelProvider</code> include a dispatching to an error handler called 
+					<code class="code">String error_text(Object, Exception)</code> and 
+					<code class="code">String error_image(Object, Exception)</code> respectively.  
+				</p>
+</div>
 </div>
 </body>
 </html>

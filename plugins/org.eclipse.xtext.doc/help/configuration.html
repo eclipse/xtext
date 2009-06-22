@@ -27,7 +27,7 @@
 				content assist etc.</p>
 <p>The generator also contributes to shared project resources such as the 
 				plugin.xml, Manifest.MF and the 
-				<a class="link" href="">Guice modules</a>.
+				<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">Guice modules</a>.
 			</p>
 <p>Xtext&rsquo;s generator leverages the 
 				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">modeling workflow engine (MWE)</a> from EMFT.
@@ -112,7 +112,7 @@
 					tells MWE which class to use in order to create the object node. That 
 					created object is populated according to the XML description: 
 					For each XML attribute MWE calls a corresponding setter or adder method 
-					passing in the value (There are configurable value 
+					passing in the value (there are configurable value 
 					converters, but usually Boolean and String is all you need). The same 
 					procedure is applied for each child element. In the case of XML elements 
 					a single attribute 
@@ -146,7 +146,7 @@
 					<code class="code">value</code>, the engine looks for an 
 					attribute called 
 					<code class="code">class</code>. If it finds one, the class is instantiated by means 
-					of the the default constructor (there is no support for factories as of now.). 
+					of the default constructor (there is no support for factories as of now.). 
 					If not, the class is inferred by looking at the argument&rsquo;s type of the current 
 					setter method.
 				</p>
@@ -172,7 +172,7 @@
 					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+O CTRL+O) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
 				
 </p>
-<p>So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the reference documentation (available through Eclipse help) for additional information.</p>
+<p>So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.</p>
 </div>
 <div class="section" title="General Architecture">
 <div class="titlepage">
@@ -201,7 +201,7 @@
 <div>
 <div>
 <h4 class="title">
-<a name="GeneratorFragments"></a>Generator Fragments</h4>
+<a name="generator_fragment"></a>Generator Fragments</h4>
 </div>
 </div>
 </div>
@@ -253,8 +253,10 @@
 		
 <br>
 		&lt;language&nbsp;uri="${grammarURI}"&nbsp;fileExtensions="${file.extensions}"&gt;<br>
-			&lt;!--&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)&nbsp;--&gt;<br>
-			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br>
+			&lt;!--&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;<br>
+				(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)&nbsp;--&gt;<br>
+			&lt;fragment&nbsp;class=<br>
+				"org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br>
 			
 <br>
 			&lt;!--&nbsp;a&nbsp;lot&nbsp;more&nbsp;simple&nbsp;fragments&nbsp;--&gt;<br>
@@ -262,12 +264,13 @@
 		
 <br>
 			&lt;!--&nbsp;a&nbsp;sample&nbsp;fragment&nbsp;with&nbsp;a&nbsp;property&nbsp;--&gt;<br>
-			&lt;fragment&nbsp;class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br>
+			&lt;fragment&nbsp;class=<br>
+				"org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br>
 				&lt;composedCheck&nbsp;value="org.eclipse.xtext.validation.ImportUriValidator"/&gt;<br>
 			&lt;/fragment&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-			&lt;!--&nbsp;java-based&nbsp;API&nbsp;for&nbsp;content&nbsp;assistance&nbsp;--&gt;<br>
-			&lt;fragment&nbsp;class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;more&nbsp;simple&nbsp;fragments&nbsp;--&gt;<br>
+			&lt;!--&nbsp;...&nbsp;&nbsp;--&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 		&lt;/language&gt;<br>
 	&lt;/component&gt;<br>
 &lt;/workflow&gt;<br>
@@ -283,11 +286,11 @@
 						<code class="code">&lt;property/&gt;</code> element is a first class concept of MWE&rsquo;s configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the given value. Property declarations can be inlined (
 						<code class="code">&lt;property name="foo" value="bar"/&gt;</code>) or by means of a property file import (
 						<code class="code">&lt;property file="foo.properties"/&gt;</code>) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property 
-						<code class="code">runtimeProject</code> which already uses a property imported from the file previously. 
+						<code class="code">runtimeProject</code> which already uses a property imported from the previously imported file. 
 					</p>
 <p>The method 
 						<code class="code">Workflow.setBean()</code> does nothing but provides a means to apply global side-effects, which unfortunately is required by some projects. In this example we do a so called 
-						<span class="italic">EMF stand alone setup</span>. This class initializes a bunch of things for a non-Equinox environment that are otherwise configured by means of extension points, e.g. EMF&rsquo;s 
+						<span class="italic">EMF stand alone setup</span>. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. EMF&rsquo;s 
 						<code class="code">EPackage.Registry</code>.
 					</p>
 <p>Following the 
@@ -308,8 +311,8 @@
 </div>
 </div>
 </div>
-<p>In the following the most important standard generator fragments are listed. Please refer to the Javadocs for more documentation.</p>
-<table id="N1069F">
+<p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
+<table id="N106B7">
 <tr>
 						
 <th>Class</th>

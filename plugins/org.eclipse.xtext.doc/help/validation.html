@@ -6,14 +6,14 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
-<link rel="prev" href="SetupwithinEclipseEquinox.html" title="Setup within Eclipse / Equinox">
+<link rel="prev" href="SetupwithinEclipseEquinoxOSGi.html" title="Setup within Eclipse-Equinox (OSGi)">
 <link rel="next" href="linking.html" title="Linking">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Validation</h1>
-<p>Validation (a.k.a Static Analysis) is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful
+<p>Static analysis or validation is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful
 				if they get informative feedback as they type. 
-				In Xtext there are basically three different kinds of validation</p>
+				In Xtext there are basically three different kinds of validation.</p>
 <div class="section" title="Syntactical Validation">
 <div class="titlepage">
 <div>
@@ -53,9 +53,11 @@
 </div>
 </div>
 </div>
-<p>Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see linking), any broken links are resolved lazy as well.
-					If you want to validate whether all links are valid, you&rsquo;ll have to navigate through the model so that all proxies get resolved. This is done automatically in the editor.</p>
-<p>Any unresolvable cross-links will be reported through:</p>
+<p>Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see 
+					<a class="link" href="linking.html" title="Linking">linking</a>), any broken links are resolved lazily as well.
+					If you want to validate whether all links are valid, you&rsquo;ll have to navigate through the model so that all proxies get resolved. This is done automatically in the editor.
+				</p>
+<p>Any unresolvable cross-links will be reported and can be obtained through:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
@@ -84,33 +86,59 @@
 </div>
 </div>
 </div>
-<p>In addition to the afore mentioned kinds of validations, which are more or less done automatically, you can specify additional constraints specific for your ecore model.
-					We leverage existing EMF API (mainly EValidator) and have put some convenience stuff on top. 
-					Basically all you need to do is to make sure that an EValidator is registered for your EPackage. The registry for 
+<p>In addition to the afore mentioned kinds of validations, which are more or less done automatically, you can specify additional constraints specific for your Ecore model.
+					We leverage existing EMF API (mainly 
+					<code class="code">EValidator</code>) and have put some convenience stuff on top. 
+					Basically all you need to do is to make sure that an 
+					<code class="code">EValidator</code> is registered for your 
+					<code class="code">EPackage</code>. The registry for 
 					<code class="code">EValidators</code> (
-					<code class="code">org.eclipse.emf.ecore.EValidator.Registry.INSTANCE</code>) can only be filled programatically,
-					that means that there&rsquo;s no equinox extension point similar to the EPackage- and ResourceFactory registries.
+					<code class="code">EValidator.Registry.INSTANCE</code>) can only be filled programatically,
+					that means that there is no Equinox extension point similar to the 
+					<code class="code">EPackage</code> and 
+					<code class="code">Resource.Factory</code> registries.
 				</p>
-<p>For Xtext we provide a generator fragment for the convenient java-based EValidator API. Just add the following fragment to your generator configuration and you&rsquo;re good to go:</p>
-<code class="code">&lt;fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/&gt;</code>
-<p>The generator will provide you with two Java classes. An abstract class generated to src-gen/ which extends the library class AbstractDeclarativeValidator. This one just registers the EPackages for which this validator contains constraints.
-					The other class is a subclass of that abstract class and is generated to the src/ folder in order to be edited by you. That&rsquo;s where you put the constraints in.</p>
-<p>The purpose of the AbstractDeclarativeValidator is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the @Check annotation to any method and it will be invoked automatically when validation takes place.
+<p>For Xtext we provide a 
+					<a class="link" href="configuration.html#generator_fragment" title="Generator Fragments">generator fragment</a> for the convenient java-based 
+					<code class="code">EValidator</code> API. Just add the following fragment to your generator configuration and you&rsquo;re good to go:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">&lt;fragment&nbsp;class=<br>
+	"org.eclipse.xtext.generator.validation.JavaValidatorFragment"/&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The generator will provide you with two Java classes. An abstract class generated to 
+					<code class="code">src-gen/</code> which extends the library class 
+					<code class="code">AbstractDeclarativeValidator</code>. This one just registers the EPackages for which this validator introduces constraints.
+					The other class is a subclass of that abstract class and is generated to the 
+					<code class="code">src/</code> folder in order to be edited by you. That&rsquo;s where you put the constraints in.
+				</p>
+<p>The purpose of the 
+					<code class="code">AbstractDeclarativeValidator</code> is to allow you to write constraints in a (the name says it) declarative way. That is instead of writing exhaustive if else constructs or extending the generated EMF switch you just have to add the <code class="code">@Check</code> annotation to any method and it will be invoked automatically when validation takes place.
 					Moreover you can state for what type the respective constraints method is, just by declaring a typed parameter. This also lets you avoid any type casts.  
-					In addition to the reflective invocation of test methods  the AbstractDeclarative provides a couple of convenience assertions.</p>
-<p>All in all this is very similar to how Junit work. Example:</p>
+					In addition to the reflective invocation of validation methods the 
+					<code class="code">AbstractDeclarativeValidator</code> provides a couple of convenience assertions.
+				</p>
+<p>All in all this is very similar to how Junit works. Here is an example:</p>
 <div class="literallayout">
 <p>
 <code class="code">
 <br>
-&nbsp;&nbsp;public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;extends&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br>
+public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
+	extends&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;@Check<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;DomainmodelPackage.TYPE__NAME);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;@Check<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DomainmodelPackage.TYPE__NAME);<br>
 &nbsp;&nbsp;}<br>
+}<br>
 
 <br>
 
@@ -118,28 +146,33 @@
 </p>
 </div>
 </div>
-<div class="section" title="Validation with Check">
+<div class="section" title="Validation with the Check language">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="check_based_validation"></a>Validation with Check</h3>
+<a name="check_based_validation"></a>Validation with the Check language</h3>
 </div>
 </div>
 </div>
-<p>In addition to the Java-based validation code you can use the language Check to implement validations against your model. To do so, you have to call the
+<p>In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the 
+					<a class="link" href="configuration.html#generator" title="The Generator">generator</a> with the
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a> from your 
-					<a class="link" href="configuration.html#generator" title="The Generator">generator</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>.
 					Please note, that you can combine both types of validations in your project. 
 				</p>
+<div class="literallayout">
 <p>
-					
-<code class="code">&lt;fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/&gt;</code>
-				
+<code class="code">&lt;fragment&nbsp;class=<br>
+	"org.eclipse.xtext.generator.validation.CheckFragment"/&gt;<br>
+&nbsp;&nbsp;<br>
+
+</code>
 </p>
-<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguagFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the src/ folder in the sub-package 
-					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the validation of the previous chapter could be written like this.
+</div>
+<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+					<code class="code">src/</code> folder in the sub-package 
+					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
 <div class="literallayout">
 <p>
@@ -156,9 +189,7 @@ context&nbsp;Type#name&nbsp;WARNING&nbsp;"Name&nbsp;should&nbsp;start&nbsp;with&
 					<code class="code">name</code>). Each check could either be a 
 					<code class="code">WARNING</code> or an 
 					<code class="code">ERROR</code> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it does not the check will produce an issue with the provided explanation.
-				</p>Please read more about the Check language as well as the underlying Expression language at the 
-				<a class="ulink" href="http://www.openArchitectureWare.org" target="_new">documentation of openArchitectureWare</a>.
-				 Also, you will find an example on how to implement checks in each of the generated files.   
+				</p>Please read more about the Check language as well as the underlying expression language in Xpand&rsquo;s reference documentation which is shipped as Eclipse help. 
 			</div>
 </body>
 </html>

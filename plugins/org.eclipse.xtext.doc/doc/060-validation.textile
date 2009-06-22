@@ -56,7 +56,7 @@ public class DomainmodelJavaValidator
   }
 }
 
-h3(#check_based_validation). Validation with Xpand's Check
+h3(#check_based_validation). Validation with the Check language
 
 In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the "generator":#generator with the
 ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment}.

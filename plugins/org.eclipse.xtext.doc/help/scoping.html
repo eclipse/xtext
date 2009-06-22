@@ -23,7 +23,6 @@
 <p>
 <code class="code">
 <br>
-@Stable(since&nbsp;=&nbsp;"0.7.0",&nbsp;subClass&nbsp;=&nbsp;AbstractScopeProvider.class)<br>
 public&nbsp;interface&nbsp;IScopeProvider&nbsp;{<br>
 
 <br>
@@ -111,6 +110,62 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 <p>Please find the motivation behind this and some additional details in 
 				<a class="ulink" href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html" target="_new">this blog post</a> .
 			</p>
+<p>The default implementation would produce this hierarchy of scopes for the model from the last example in the 
+				<a class="link" href="linking.html#defaultImports" title="Default Imports">previous chapter</a>:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">//file&nbsp;model.dsl<br>
+import&nbsp;"model1.dsl";<br>
+import&nbsp;"model2.dsl";<br>
+&nbsp;<br>
+ref&nbsp;Foo;<br>
+entity&nbsp;Bar;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">//file&nbsp;model1.dsl&nbsp;<br>
+entity&nbsp;Stuff;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">//file&nbsp;model2.dsl<br>
+entity&nbsp;Foo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">Scope&nbsp;(model.dsl)&nbsp;{<br>
+&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model1.dsl)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model2.dsl)&nbsp;{}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>When enumerating the scope&rsquo;s content, the first, most specialized scope would return 
+				<code class="code">Bar</code>, it&rsquo;s parent would provide 
+				<code class="code">Stuff</code> and the outermost scope adds 
+				<code class="code">Foo</code>. The linker will iterate the scope in that order and abort when it finds a matching 
+				<code class="code">ScopedElement</code>. 
+			</p>
 <div class="section" title="Declarative Scope Provider">
 <div class="titlepage">
 <div>
@@ -141,7 +196,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 					<code class="code">&lt;ContextReference&gt;</code> corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and separated by an underscore). The 
 					<code class="code">ref</code> parameter represents this cross reference.
 				</p>
-<p>The latter method signature is used when evaluating the scope of a given element type and is applicable to all cross references of that type. Here 
+<p>The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here 
 					<code class="code">&lt;TypeToReturn&gt;</code> is the name of that type which also corresponds to the 
 					<code class="code">type</code> parameter. 
 				</p>

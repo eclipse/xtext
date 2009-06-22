@@ -6,7 +6,7 @@ h3. Create an Xtext project
 
 Use the Xtext wizard to create a new project
 
-	File ==&rarr;== New ==&rarr;== Project  ==&rarr;== Xtext ==&rarr;== Xtext project
+	File -> New -> Project  -> Xtext -> Xtext project
 
 Choose a sensible project name, language name and file extension, e.g.
 
@@ -88,7 +88,7 @@ h3. Generate language artifacts
 
 Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose
 
-	Run As ==&rarr;== MWE Workflow.
+	Run As --> MWE Workflow.
 	
 That will trigger the Xtext language generator. You will see its logging messages in the Console view.
 
@@ -96,9 +96,9 @@ h3. Test the generated editor
 
 If code generation succeeded, right-click on the Xtext project and choose
  
-	Run As ==&rarr;== Eclipse Application.
+	Run As -> Eclipse Application.
 	
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-In the new workbench, create a new project (File ==&rarr;== New ==&rarr;== Project  ==&rarr;== General ==&rarr;== Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+In the new workbench, create a new project (File -> New -> Project  -> General -> Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
 
 !images/getting-started-editor.png!

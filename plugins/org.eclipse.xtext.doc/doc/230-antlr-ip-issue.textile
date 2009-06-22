@@ -25,7 +25,7 @@ That is why we are not allowed to ship Xtext with the ANTLR generator (the runti
 __Although If you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
 
 
-h2. What if I don't want to use non IP-approved code
+h2. What if I do not want to use non IP-approved code
 
 If you, against all recommendations, need to stick to a fully IP approved generator, you can use the parser generator we've developed.
 But be warned, although it's fully functional and equally fast, it does not have any error recovery.

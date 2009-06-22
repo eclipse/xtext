@@ -1,7 +1,7 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>The Antlr IP issue (or which parser to use?)</title>
+<title>The ANTLR IP issue (or which parser to use?)</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
@@ -9,44 +9,44 @@
 <link rel="prev" href="MigrationSupport.html" title="Migration Support">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Antlr IP issue (or which parser to use?)</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The ANTLR IP issue (or which parser to use?)</h1>
 <p>In order to be able to parse models written in your language, Xtext needs to provide a special parser for it.
 			The parser is generated from the language grammar. </p>
 <p>Currently it is recommended to use the 
-			<a class="ulink" href="http://www.antlr.org" target="_new">Antlr-based</a> parser.
-			Antlr is a very sophisticated parser generator framework based on a so called LL(*) algorithm.
+			<a class="ulink" href="http://www.antlr.org" target="_new">ANTLR-based</a> parser.
+			ANTLR is a very sophisticated parser generator framework based on a so called LL(*) algorithm.
 			It is fast, simple and at the same time has some very nice and sophisticated features. Especially its 
 			support for error recovery is much better than what other parser generators provide.
 		</p>
-<p>Antlr comes in two parts: the runtime and the generator.
+<p>ANTLR comes in two parts: the runtime and the generator.
 			Both are shipped under the BSD license and have a clean intellectual property history. 
-			However the generator is still implemented in an older version of Antlr (v 2.x), where it was not possible for the Eclipse Foundation 
-			to be sure where exactly every line of code orginally comes from. Therefore Antlr v 2.x didn&rsquo;t get the needed approvement.
-			Eclipse has a strict IP policy, which makes sure that everything provided by Eclipse can be consumed under the termns of the Eclipse Public Licence.
+			However the generator is still implemented in an older version of ANTLR (v 2.x), where it was not possible for the Eclipse Foundation 
+			to be sure where exactly every line of code originated. Therefore ANTLR v 2.x didn&rsquo;t get the required approval.
+			Eclipse has a strict IP policy, which makes sure that everything provided by Eclipse can be consumed under the terms of the Eclipse Public License.
 			The details are described in 
 			<a class="ulink" href="http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf" target="_new">this document</a>.
 		</p>
-<p>Unfortunately as the generator of Antlr V3 needs Antlr V2 it is as well not yet IP approved.
-			That is why we are not allowed to ship Xtext with the Antlr generator (the runtime is IP approved), but have to provide it separately via updatesite at:</p>
+<p>Unfortunately as the generator of ANTLR V3 needs ANTLR V2 it is as well not yet IP approved.
+			That is why we are not allowed to ship Xtext with the ANTLR generator (the runtime is IP approved), but have to provide it separately via update-site at:</p>
 <p>*
-			<a class="ulink" href="http://download.itemis.com/updates/milestones" target="_new">http://download.itemis.com/updates/milestones</a>
+			<a class="ulink" href="http://download.itemis.com/updates/" target="_new">http://download.itemis.com/updates/</a>
 		
 </p>
 <p>
 			
 <span class="bold"><strong>IMPORTANT</strong></span>
 
-			<span class="italic">Although If you use the non-IP approved Antlr generator, you can still ship any languages and the IDEs you&rsquo;ve developed with Xtext without any worrying, because the 
-				<span class="bold"><strong>Antlr runtime is IP approved</strong></span>
+			<span class="italic">Although If you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you&rsquo;ve developed with Xtext without any worrying, because the 
+				<span class="bold"><strong>ANTLR runtime is IP approved</strong></span>
 			</span>
 		
 </p>
-<div class="section" title="What if I don&rsquo;t want to use non IP-approved code">
+<div class="section" title="What if I do not want to use non IP-approved code">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="WhatifIdontwanttousenonIPapprovedcode"></a>What if I don&rsquo;t want to use non IP-approved code</h2>
+<a name="WhatifIdonotwanttousenonIPapprovedcode"></a>What if I do not want to use non IP-approved code</h2>
 </div>
 </div>
 </div>

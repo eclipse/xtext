@@ -7,17 +7,13 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">
-<link rel="next" href="SetupwithinEclipseEquinox.html" title="Setup within Eclipse / Equinox">
+<link rel="next" href="SetupwithinEclipseEquinoxOSGi.html" title="Setup within Eclipse-Equinox (OSGi)">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Runtime Concepts</h1>
-<p>TMF Xtext itself and every language infrastructure developed with TMF Xtext is configured and wired-up using dependency injection (DI).</p>
-<p>We use Google Guice as the underlying framework, and haven&rsquo;t built much on top of it as it pretty much does what we need.
-			So instead of describing how google guice works, we refer to the website, where additional information can be found: 
-			<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">http://code.google.com/p/google-guice/</a>. 
-		</p>
-<p>Using DI allows everyone to set up and change all components. This does not mean that everything which gets configured using DI (we use it a lot) is automatically public API. But we don&rsquo;t forbid use of non-public API, as we think you should decide, if you want to rely on stable API only or use things which might be changed (further enhanced ;-)) in future. See 
-			<a class="link" href="">Xtext API Documentation</a>.
+<p>TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
+			<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla java programs. To honor these differences Xtext uses the concept of 
+			<code class="code">ISetup</code>-implementations in normal mode and uses Eclipse&rsquo;s extension mechanism when it should be configured by a container.   
 		</p>
 <div class="section" title="Runtime setup (ISetup)">
 <div class="titlepage">
@@ -33,8 +29,10 @@
 				<code class="code">doSetup()</code>, which can be called to do the initialization of the language infrastructure.
 			</p>
 <p>This class is intended to be used for runtime and unit testing, only.</p>
-<p>The setup method returns an Injector, which can further be used to obtain a parser, etc.</p>
-<p>The setup method also registers the ResourceFactory and generated EPackage with the respective global registries provided by EMF.</p>
+<p>The setup method returns an 
+				<code class="code">Injector</code>, which can further be used to obtain a parser, etc.
+			</p>
+<p>The setup method also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF.</p>
 <p>So basically you can just run the setup and start using EMF API to load and store models of your language.</p>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <topic href="help/getting-started.html" label="Getting Started">
 <topic href="help/getting-started.html#CreateanXtextproject" label="Create an Xtext project"></topic>
 <topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
-<topic href="help/getting-started.html#Buildyouowngrammar" label="Build you own grammar"></topic>
+<topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
 <topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
 <topic href="help/getting-started.html#Testthegeneratededitor" label="Test the generated editor"></topic>
 </topic>
@@ -66,35 +66,35 @@
 <topic href="help/configuration.html#generator" label="The Generator">
 <topic href="help/configuration.html#short_intro_to_mwe" label="A short introduction to MWE"></topic>
 <topic href="help/configuration.html#GeneralArchitecture" label="General Architecture">
-<topic href="help/configuration.html#GeneratorFragments" label="Generator Fragments"></topic>
+<topic href="help/configuration.html#generator_fragment" label="Generator Fragments"></topic>
 <topic href="help/configuration.html#Configuration" label="Configuration"></topic>
 </topic>
 <topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#guiceserevice" label="Services"></topic>
+<topic href="help/dependencyInjection.html#guiceservice" label="Services"></topic>
 <topic href="help/dependencyInjection.html#guicemodules" label="Modules">
 <topic href="help/dependencyInjection.html#guicemanualmodules" label="Modules intended for customization"></topic>
 <topic href="help/dependencyInjection.html#guicegeneratedmodule" label="Generated Modules"></topic>
-<topic href="help/dependencyInjection.html#guicedefaultmodule" label="Default Modules"></topic>
-<topic href="help/dependencyInjection.html#guicecustomiz" label="Changing Configuration"></topic>
+<topic href="help/dependencyInjection.html#guicedefaultmodule" label="Default Module"></topic>
+<topic href="help/dependencyInjection.html#guicecustomize" label="Changing Configuration"></topic>
 </topic>
 </topic>
 </topic>
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
 <topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"></topic>
-<topic href="help/SetupwithinEclipseEquinox.html" label="Setup within Eclipse / Equinox"></topic>
+<topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
 <topic href="help/validation.html" label="Validation">
 <topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
 <topic href="help/validation.html#linking_validation" label="Cross-link Validation"></topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
-<topic href="help/validation.html#check_based_validation" label="Validation with Check"></topic>
+<topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of cross links"></topic>
 <topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"></topic>
 <topic href="help/linking.html#Defaultlinkingsemantics" label="Default linking semantics">
-<topic href="help/linking.html#DefaultImports" label="Default Imports"></topic>
+<topic href="help/linking.html#defaultImports" label="Default Imports"></topic>
 </topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
@@ -118,9 +118,8 @@
 </topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
-<topic href="help/IDEconcepts.html#concurrency" label="Managing Concurrency"></topic>
-<topic href="help/labelProvider.html" label="Label Provider">
-<topic href="help/labelProvider.html#DefaultLabelProvider" label="DefaultLabelProvider"></topic>
+<topic href="help/IDEconcepts.html#labelProvider" label="Label Provider">
+<topic href="help/IDEconcepts.html#DefaultLabelProvider" label="DefaultLabelProvider"></topic>
 </topic>
 <topic href="help/contentAssist.html" label="Content Assist">
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
@@ -138,7 +137,6 @@
 <topic href="help/outline.html#Registeringamenucontribution" label="Registering a menu contribution"></topic>
 </topic>
 </topic>
-<topic href="help/navigation.html" label="Navigation and Hyperlinking"></topic>
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)">
 <topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
 <topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
@@ -181,7 +179,7 @@
 </topic>
 <topic href="help/MigrationSupport.html" label="Migration Support"></topic>
 </topic>
-<topic href="help/antlr_ip_issue.html" label="The Antlr IP issue (or which parser to use?)">
-<topic href="help/antlr_ip_issue.html#WhatifIdontwanttousenonIPapprovedcode" label="What if I don&rsquo;t want to use non IP-approved code"></topic>
+<topic href="help/antlr_ip_issue.html" label="The ANTLR IP issue (or which parser to use?)">
+<topic href="help/antlr_ip_issue.html#WhatifIdonotwanttousenonIPapprovedcode" label="What if I do not want to use non IP-approved code"></topic>
 </topic>
 </toc>

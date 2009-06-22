@@ -836,7 +836,7 @@
 </div>
 </div>
 </div>
-<p>LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially Antlr has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
+<p>LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors and especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
 							For instance, the following is not allowed in LL based grammars, because &ldquo;Expression '+' Expression&rdquo; is left recursive:</p>
 <div class="literallayout">

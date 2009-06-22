@@ -6,14 +6,14 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="IDEconcepts.html" title="IDE concepts">
-<link rel="prev" href="navigation.html" title="Navigation and Hyperlinking">
+<link rel="prev" href="outline.html" title="Outline View">
 <link rel="next" href="highlighting.html" title="Syntax Coloring">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Formatting (Pretty Printing)</h1>
 <p>A formatter can be implemented via the 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> service. Technically speaking, a formatter is a 
-				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespaces, linebreaks, comments).
+				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
 			</p>
 <p>The formatter is invoked during the 
 				<a class="link" href="serialization.html" title="Serialization">serialization phase</a> and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
@@ -54,7 +54,7 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <br>
 &nbsp;&nbsp;@Override<br>
 &nbsp;&nbsp;protected&nbsp;void&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;(ExampleLanguageGrammarAccess)&nbsp;getGrammarAccess();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br>
 
@@ -64,10 +64,13 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 &nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TestIndentation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentation(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Param<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br>
@@ -104,29 +107,29 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <li class="listitem">
 <p>
 								
-<code class="code">setAutoLinewrap(int)</code>  defines the amount of characters after which a linebreak should be dynamically inserted between two tokens. The rule 
+<code class="code">setAutoLinewrap(int)</code>  defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The rule 
 								<code class="code">setNoLinewrap()</code> can be used to suppress this behavior locally. The default is 80.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setIndentationSpace(String)</code> defines the string which is used for a single degree of indentation. The default is two whitespaces.
+<code class="code">setIndentationSpace(String)</code> defines the string which is used for a single degree of indentation. The default is two whitespace.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setWhitespaceRule(AbstractRule)</code> defines the grammar rule which is used to match whitespaces. This is needed by the formatter to identify whitespaces and to insert whitespaces. The default is the rule named 
+<code class="code">setWhitespaceRule(AbstractRule)</code> defines the grammar rule which is used to match whitespace. This is needed by the formatter to identify whitespace and to insert whitespace. The default is the rule named 
 								<code class="code">WS</code>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setIndentation(startele, endele)</code> increases the level of indentation when 
-								<code class="code">startele</code> is matched and decreases the level when 
-								<code class="code">endele</code> is matched. The matching of elements happens in the same way as it does for formatting rules.
+<code class="code">setIndentation(start, end)</code> increases the level of indentation when the element 
+								<code class="code">start</code> is matched and decreases the level when element 
+								<code class="code">end</code> is matched. The matching of elements happens in the same way as it does for formatting rules.
 							</p>
 </li>
 </ul>
@@ -147,7 +150,7 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 						<span class="emphasis"><em>what</em></span> to do.
 					</p>
 <p>To understand 
-						<span class="emphasis"><em>when</em></span> a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching constructs exist.
+						<span class="emphasis"><em>when</em></span> a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching criteria exist.
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
@@ -155,13 +158,13 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <p>
 								
 <code class="code">after(ele)</code>: The rule is executed after the grammar element 
-								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a linebreak after the semicolon.  
+								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line-break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you this can instruct the formatter to suppress the whitespace before the comma.
+<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -208,10 +211,10 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>Terminal rules for comments.</p>
+<p>terminal rules for comments.</p>
 </li>
 <li class="listitem">
-<p>Keywords, Associations, Terminal RuleCalls, Datatype RuleCalls.</p>
+<p>keywords, assignments, call to terminal or data-type rules.</p>
 </li>
 </ul>
 </div>
@@ -221,13 +224,13 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap()</code>: Inserts a linebreak at this position.
+<code class="code">setLinewrap()</code>: Inserts a line-break at this position.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap(int)</code>: Inserts the specified number of linebreak at this position.
+<code class="code">setLinewrap(int)</code>: Inserts the specified number of line-breaks at this position.
 							</p>
 </li>
 <li class="listitem">
