@@ -1,33 +1,26 @@
 
 h1. Runtime Concepts
 
-TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using "dependency injection":#dependencyInjection. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla java programs. To honor these differences Xtext uses the concept of @ISetup@-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured by a container.   
+TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using "dependency injection":#dependencyInjection. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of @ISetup@-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment.   
 
 h2. Runtime setup (ISetup)
 
-For each language there is an implementation of @ISetup@ generated. It implements a method called @doSetup()@, which can be called to do the initialization of the language infrastructure.
+For each language there is an implementation of @ISetup@ generated. It implements a method called @doSetup()@, which can be called to do the initialization of the language infrastructure. This class is intended to be used for runtime and unit testing, only.
 
-This class is intended to be used for runtime and unit testing, only.
-
-The setup method returns an @Injector@, which can further be used to obtain a parser, etc.
-
-The setup method also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF.
-
-So basically you can just run the setup and start using EMF API to load and store models of your language.
+The setup method returns an @Injector@, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
 
 h2. Setup within Eclipse-Equinox (OSGi)
 
-Within Eclipse we have a generated Activator, which creates a guice injector using the modules.
-In addition an IExecutableExtensionFactory is generated for each language, which is used to create ExecutableExtensions.
-This means that everything which is created via extension points is managed by guice as well, i.e. you can declare dependencies and get them injected upon creation. 
+Within Eclipse we have a generated @Activator@, which creates a Guice injector using the "modules":guicemodules.
+In addition an @IExecutableExtensionFactory@ is generated for each language, which is used to create @ExecutableExtensions@.
+This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
 
-The only thing you have to do in order to use this factory is to prefix the class with the factory @[MyLanguageName]ExecutableExtensionFactory@ name followed by a colon.
+The only thing you have to do in order to use this factory is to prefix the class with the factory @<MyLanguageName>ExecutableExtensionFactory@ name followed by a colon.
 
-bc.. 
-<extension
+bc.. <extension
   point="org.eclipse.ui.editors">
   <editor
-    class="[MyLanguageName]ExecutableExtensionFactory:
+    class="<MyLanguageName>ExecutableExtensionFactory:
       org.eclipse.xtext.ui.core.editor.XtextEditor"
     contributorClass=
       "org.eclipse.ui.editors.text.TextEditorActionContributor"

@@ -4,22 +4,24 @@ h2(#linking). Linking
 The linking feature allows for specification of cross references within an Xtext grammar.
 The following things are needed for the linking:
 
-# declaration of a cross link in the grammar (at least in the Ecore model)
+# declaration of a crosslink in the grammar (at least in the Ecore model)
 # specification of linking semantics
 
-h3. Declaration of cross links
+h3. Declaration of crosslinks
 
 In the grammar a cross reference is specified using square brackets.
 
-bc. CrossReference :
-   '[' ReferencedEClass ('|' terminal=AbstractTerminal)? ']'
+bc.. CrossReference :
+  '[' ReferencedEClass ('|' terminal=AbstractTerminal)? ']'
+;
 
-Example:
+p. Example:
   
-bc. ReferringType :
-   'ref' referencedObject=[Entity|(ID|STRING)];
+bc.. ReferringType :
+  'ref' referencedObject=[Entity|(ID|STRING)]
+;
 
-The "Ecore model inference":#metamodelInference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see "scoping":#scoping).
+p. The "Ecore model inference":#metamodelInference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see "scoping":#scoping). 
 
 Example: While parsing a given input string, say
 
@@ -34,12 +36,11 @@ would work analogously. This is not an ID (umlauts are not allowed), but a STRIN
 
 h3. Specification of linking semantics
 
-The @ILinker@ implementation that is used by default is the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.lazy.LazyLinker}. It installs @EObject@ proxies for all cross-links, which are then resolved on demand.
+The @ILinker@ implementation that is used by default is the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.lazy.LazyLinker}. It installs @EObject@ proxies for all crosslinks, which are then resolved on demand.
 The actual cross reference resolution is done by @LazyLinkingResource.getEObject(String)@ and delegates to an implementation of the @ILinkingService@.
 Although the default linking behavior is appropriate in many cases there might be scenarios where this is not sufficient. For each grammar a custom linking service can be implemented and configured. It fulfills the following interface:
 
-bc.. 
-public interface ILinkingService {
+bc.. public interface ILinkingService {
 
   /**
    * Returns all {@link EObject}s referenced by the given link text in the
@@ -61,24 +62,32 @@ public interface ILinkingService {
 
 p. The method @getLinkedObjects@ is directly related to this topic whereas @getLinkText@ addresses complementary functionality: it is used for serialization.
 
-A simple implementation of the linking service ( the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.impl.DefaultLinkingService}) is shipped with Xtext and is used for any grammar per default. It uses the default implementation of @IScopeProvider@ to compute the linking candidates.
+A simple implementation of the linking service (the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.impl.DefaultLinkingService}) is shipped with Xtext and used for any grammar per default. It uses the default implementation of @IScopeProvider@ to compute the linking candidates.
 
 h3. Default linking semantics
 
-The default implementation for all languages, looks within the current file for an EObject of the respective type ('Entity') which by convention has a @name@ attribute set to 'Entity01'. 
+The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an "Entity" which by convention has a @name@ attribute set to 'Entity01'. 
 
 Given the grammar :
 
-bc.. Model : (stuff+=(Ref|Entity))*;
-Ref : 'ref' referencedObject=[Entity|ID] ';';
-Entity : 'entity' name=ID ';';
+bc.. Model : 
+  (stuff+=(Ref|Entity))*
+;
 
-p. In the following model :
+Ref : 
+  'ref' referencedObject=[Entity|ID] ';'
+;
 
-bc. ref Entity01;
+Entity : 
+  'entity' name=ID ';'
+;
+
+p. In the following model:
+
+bc.. ref Entity01;
 entity Entity01;
 
-the @ref@ would be linked to the declared entity (@entity Entity01;@). Nearly any aspect is configurable, especially the name of the identifying attribute may be overridden for a particular type.
+p. the @ref@ would be linked to the declared entity (@entity Entity01;@). Nearly any aspect is configurable, especially the name of the identifying attribute may be overridden for a particular type.
 
 h4(#defaultImports). Default Imports
 
@@ -87,10 +96,22 @@ Each string in a model which is assigned to an EAttribute with the name @importU
 
 For example, given the following grammar :
 
-bc.. Model : (imports+=Import)* (stuff+=(Ref|Entity))*;
- Import : 'import' importURI=STRING ';';
- Ref : 'ref' referencedObject=[Entity|ID] ';';
- Entity : 'entity' name=ID ';';
+bc.. Model : 
+  (imports+=Import)*
+  (stuff+=(Ref|Entity))*
+;
+
+Import :
+  'import' importURI=STRING ';'
+;
+
+Ref : 
+  'ref' referencedObject=[Entity|ID] ';'
+;
+
+Entity : 
+  'entity' name=ID ';'
+;
 
 p. It would be possible to write three files in that language where the first references the other two, like this:
 
@@ -107,4 +128,4 @@ entity Stuff;
 bc.. //file model2.dsl
 entity Foo;
 
-p. The linking candidates for the reference @Foo@ will be @Bar@, @Stuff@ and @Foo@ in that order. They will computed by the "ScopeProvider":#scoping. 
+p. The linking candidates for the reference @Foo@ will be @Bar@, @Stuff@ and @Foo@ in that order. They will be computed by the "ScopeProvider":#scoping. 

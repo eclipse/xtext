@@ -15,39 +15,37 @@ Xtext's generator leverages the "modeling workflow engine (MWE)":http://www.ecli
 
 h3(#short_intro_to_mwe). A short introduction to MWE
 
-The nice thing about MWE is that it just instantiates java classes and the configuration is done through setter and adder methods.
+The nice thing about MWE is that it just instantiates Java classes and the configuration is done through setter and adder methods.
 Given the following Java class :
 
-bc.. 
-  package foo;
+bc.. package foo;
   
-  public class Person {
+public class Person {
      
-     private String name;
+  private String name;
      
-     public void setName(String name) { 
-       this.name = name;
-     }
-     
-     private final List<Person> children = new ArrayList<Person>();
-     
-     public void addChild(Person child) {
-       this.children.add(child);
-     }
+  public void setName(String name) { 
+    this.name = name;
   }
+     
+  private final List<Person> children = new ArrayList<Person>();
+     
+  public void addChild(Person child) {
+    this.children.add(child);
+  }
+}
   
-p. one can create a family tree like this:
+p. one can create a family tree this way:
 
-bc.. 
-  <x class="foo.Person">
-    <name value="Grandpa"/>
-    <child class="foo.Person" name="Father">
-      <child name="Son"/>
-    </child>
-  </x>
+bc.. <x class="foo.Person">
+  <name value="Grandpa"/>
+  <child class="foo.Person" name="Father">
+    <child name="Son"/>
+  </child>
+</x>
 
 p. These couple of lines will, when interpreted by MWE, result in an 
-object tree consisting of three instances of foo.Person:
+object tree consisting of three instances of @foo.Person@:
 !{width:50%}images/family_tree.png!
 
 The root element can have an arbitrary name, with one exception: If the
@@ -59,23 +57,21 @@ above one can instantiate arbitrary Java object models. This is
 conceptually very close to the dependency injection and the XML language 
 in the "Spring Framework":http://www.springframework.org. 
 
-As explained above the @x@ is ignored in this case. The attribute @class@
-tells MWE which class to use in order to create the object node. That 
+As explained above the element _name_ '@x@' is ignored in this case. The attribute @class@
+tells MWE which class to use in order to create the object node. The 
 created object is populated according to the XML description: 
 For each XML attribute MWE calls a corresponding setter or adder method 
 passing in the value (there are configurable value 
 converters, but usually Boolean and String is all you need). The same 
 procedure is applied for each child element. In the case of XML elements 
-a single attribute @value@ is used and interpreted as if there was an 
+a single attribute @value@ is used and interpreted as if it was an 
 attribute in the parent element. That is:
 
-bc. 
- <foo><name value="bar"/></foo>
+bc. <foo><name value="bar"/></foo>
 
 p. means the same as
 
-bc. 
- <foo name="bar"/>
+bc. <foo name="bar"/>
 
 Obviously the latter is far more readable and should be preferred. However, 
 as soon as you want to add multiple values to the same 'adder' method you 
@@ -88,22 +84,21 @@ of the default constructor (there is no support for factories as of now.).
 If not, the class is inferred by looking at the argument's type of the current 
 setter method.
 
-This is why it is ok to write:
+Due to this shortcut it is valid to write:
 
-bc. 
- <child name="Son"/>
+bc. <child name="Son"/>
  
 p. The @addChild@ method takes a @foo.Person@ as an argument. As this is a 
 concrete class which has a default constructor it can be instantiated.
 
 *Tip*
-__Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT's open type action (CTRL+Shift+T) open the source file of the class in question, use the outline view (CTRL+O CTRL+O) and type 'set' or 'add' and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.__
+__Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT's open type action (CTRL+Shift+T) open the source file of the class in question, use the quick outline view (CTRL+O, use CTRL+O twice to see inherited members as well) and type 'set' or 'add' and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.__
 
-So this is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.
+This is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.
 
 h3. General Architecture 
 
-Now that you know a bit about MWE, you are ready to learn about the concepts and architecture of Xtext's generator. 
+Now that you know a bit about MWE, you are ready to learn about the concepts and architecture of Xtext's language generator. 
 An instance of Xtext's generator is configured with general information about source folders and projects and consists of any number of language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 In addition, a language is configured with a list of ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment}s.
@@ -118,7 +113,7 @@ We suggest to have a look at the fragment we have written for label providers ($
 
 h4. Configuration
  
-As already explained we use MWE from EMFT in order to build, configure and execute this structure of components. 
+As already explained we use MWE from EMFT in order to instantiate, configure and execute this structure of components. 
 In the following we see an exemplary Xtext generator configuration written in MWE configuration code:  
 
 bc.. 
@@ -162,7 +157,7 @@ bc..
 	</component>
 </workflow>
 
-p. Here the root element is a workflow which accepts __bean__ s and __component__ s. The @<property/>@ element is a first class concept of MWE's configuration language and essentially acts as a preprocessor, which replaces all occurences of ${propertyName} with the given value. Property declarations can be inlined (@<property name="foo" value="bar"/>@) or by means of a property file import (@<property file="foo.properties"/>@) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property @runtimeProject@ which already uses a property imported from the previously imported file. 
+p. Here the root element is a workflow which accepts __bean__ s and __component__ s. The @<property/>@ element is a first class concept of MWE's configuration language and essentially acts as a preprocessor, which replaces all occurrences of @${propertyName}@ with the given value. Property declarations can be defined in-line (@<property name="foo" value="bar"/>@) or by means of a property file import (@<property file="foo.properties"/>@) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property @runtimeProject@ which already uses a property imported from the previously imported file. 
 
 The method @Workflow.setBean()@ does nothing but provides a means to apply global side-effects, which unfortunately is required by some projects. In this example we do a so called __EMF stand alone setup__. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. EMF's @EPackage.Registry@.
 
@@ -191,7 +186,7 @@ In the following table the most important standard generator fragments are liste
 
 
 *Important*
-__Due to "IP-Problems":#antlr_ip_issue with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the updatesite at *http://download.itemis.com/updates/*.__
+__Due to "IP-Problems":#antlr_ip_issue with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the update site at *http://download.itemis.com/updates/*.__
 
 
 
