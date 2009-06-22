@@ -8,26 +8,26 @@ In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext deriv
 The grammar language is used to describe and generate:
 
 * an incremental, ANTLR 3 based parser and lexer to read your models from text,
-* Ecore models (optional)
+* Ecore models (optional),
 * a serializer to write your models back to text,
 * a linker, to establish cross links between model elements,
-* an implementation of the EMF Resource interface with full support for loading and saving EMF models,
+* an implementation of the EMF Resource interface with full support for loading and saving EMF models, and
 * an integration of the language into your Eclipse IDE.
 
 Some of the IDE features, that are either derived from the grammar or easily implementable, are
 * "syntax coloring":#highlighting,
 * "model navigation (F3, etc.)":#hyperlinking,
 * "code completion":#contentAssist,
-* "outline view":#outline and
+* "outline view":#outline, and
 * "code templates":#templates.
 
 The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner.
 
 Although Xtext aims at supporting fast iterative development of domain-specific languages, it can be used to implement IDEs for general purpose programming languages as well.
 
-h2(#DSL). What is a domain-specific language (DSL)
+h2(#DSL). What is a domain-specific language
 
-A DSL is a small programming language, which focuses on a particular domain.
+A domain-specific language (DSL) is a small programming language, which focuses on a particular domain.
 Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
 what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
 be solved or processed by computers somehow.
@@ -35,7 +35,7 @@ be solved or processed by computers somehow.
 The opposite of a DSL is a so called GPL, a General Purpose Language such as Java or any other common programming language.
 With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
 
-Imagine you want to remove the core from an apple. You could of course use a swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.
+Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.
 
 There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately with XML you are not able to change the concrete syntax, which is the major problem with it. The concrete syntax of XML is way too verbose. Also a generic syntax for everything is a compromise.
 
