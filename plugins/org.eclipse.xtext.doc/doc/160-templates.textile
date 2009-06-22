@@ -3,7 +3,7 @@ h2(#templates). Template Proposals
 
 Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named @templates.xml@ inside the @templates@ directory of the generated ui-plugin. This file contains templates in a format as described in the "Eclipse online help":http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm .
 
-!{width:50%}images/preferences_templates.png!
+!images/preferences_templates.png!
 
 By default Xtext registers ContextTypes for each Rule (@[languageName].[RuleName]@) and for each keyword (@[languageName].kw_[keyword]@), as long as the keywords are valid identifiers. If you don't like these defaults you'll have to subclass ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry} and configure it via "Guice":#guicemanualmodules. 
 
@@ -27,7 +27,7 @@ bc.. <template name="transition" description="event transition" id="transition"
 
 p. yields the text @event => state@ and allows selecting any events and states using a drop down.
 
-!{width:50%}images/templates_crossref.png!
+!images/templates_crossref.png!
 
 h3. Enumeration TemplateVariableResolver
 
@@ -44,9 +44,10 @@ bc.. <template name="Operation" description="template for an Operation"
         id="org.eclipse.xtext.example.Domainmodel.Operation"
         context="org.eclipse.xtext.example.Domainmodel.Operation" 
         	enabled="true">
-        ${visibility:Enum('Visibility')} op ${name}
+        ${visibility:Enum('Visibility')} op ${name}(${cursor}):
+           ${type:CrossReference('Operation.type')}
 </template>
 
-p. yields the text @visibility op name@ where the display text 'visibility' is replaced with a drop down filled with the literal values as defined in the Visibility @EENumeration@.
+p. yields the text @public op name(): type@ where the display text 'public' is replaced with a drop down filled with the literal values as defined in the Visibility @EENumeration@. Also, 'name' and 'type' are placeholders.
 
-!{width:50%}images/templates_enum.png!
+!images/templates_enum.png!

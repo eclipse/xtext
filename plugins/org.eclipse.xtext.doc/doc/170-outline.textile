@@ -3,7 +3,7 @@ h2(#outline). Outline View
 
 Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the corresponding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the _Link with Editor_ button.
 
-!{width:50%}images/sample_outline.png!
+!images/sample_outline.png!
 
 You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to do this.
 
