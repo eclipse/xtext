@@ -2,7 +2,7 @@ h1. Overview
 
 h2. What is Xtext?
 
-Xtext is a framework for the development of "domain-specific languages":#DSL and other textual programming languages. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/EMF and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
+Xtext is a framework for the development of "domain-specific languages":#DSL and other textual programming languages. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/emf and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
 
 In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
 The grammar language is used to describe and generate:
