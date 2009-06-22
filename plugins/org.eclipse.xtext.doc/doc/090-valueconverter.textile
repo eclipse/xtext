@@ -6,9 +6,9 @@ The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.
 To do so override the corresponding binding in your runtime module like shown in this example:
 
 bc.. @Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return MySpecialValueConverterService.class;
-	}
+public Class<? extends IValueConverterService> bindIValueConverterService() {
+  return MySpecialValueConverterService.class;
+}
 
 h3. Annotation based value converters
 
