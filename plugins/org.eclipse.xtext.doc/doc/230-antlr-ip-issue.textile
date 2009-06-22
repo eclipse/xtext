@@ -19,9 +19,9 @@ The details are described in "this document":http://www.eclipse.org/org/document
 Unfortunately as the generator of ANTLR V3 needs ANTLR V2 it is as well not yet IP approved.
 That is why we are not allowed to ship Xtext with the ANTLR generator (the runtime is IP approved), but have to provide it separately via update-site at:
 
-*"http://download.itemis.com/updates/":http://download.itemis.com/updates/
+* "http://download.itemis.com/updates/":http://download.itemis.com/updates/
 
-**IMPORTANT : **
+**IMPORTANT** :
 __Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
 
 

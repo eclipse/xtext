@@ -1,6 +1,6 @@
 h2(#getting-started). Getting Started
 
-In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/downloads, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
+In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
 
 bc.. 
 type String
@@ -71,7 +71,7 @@ As a result, we modify the first rule to
 bc.. Model :
 	(elements += Entity)+;
 	
-p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity’s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity's name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
 
 bc. Entity returns Entity:
 	'entity' name=ID '{'
