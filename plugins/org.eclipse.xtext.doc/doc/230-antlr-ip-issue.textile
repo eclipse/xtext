@@ -21,8 +21,8 @@ That is why we are not allowed to ship Xtext with the ANTLR generator (the runti
 
 *"http://download.itemis.com/updates/":http://download.itemis.com/updates/
 
-**IMPORTANT**
-__Although If you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
+**IMPORTANT : **
+__Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
 
 
 h2. What if I do not want to use non IP-approved code

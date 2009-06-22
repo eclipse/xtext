@@ -174,7 +174,7 @@ In the following table the most important standard generator fragments are liste
 
 |_.Class|_.Generated Artifacts|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|
-|(#antlr_generator_fragment)XtextAntlrGeneratorFragment|ANTLR grammar, parser, lexer and related services.|
+|XtextAntlrGeneratorFragment|ANTLR grammar, parser, lexer and related services.|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment}|Model-to-text serialization|
@@ -191,7 +191,7 @@ In the following table the most important standard generator fragments are liste
 
 
 *Important*
-__Due to IP-Problems with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the updatesite at *http://download.itemis.com/updates/*.__
+__Due to "IP-Problems":#antlr_ip_issue with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the updatesite at *http://download.itemis.com/updates/*.__
 
 
 
