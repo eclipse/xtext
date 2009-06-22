@@ -64,7 +64,8 @@
                     <fo:table-row>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                <fo:external-graphic src="file:images/logo/Xtext-logo-dark-300.png"/>
+                                <fo:external-graphic src="file:images/logo/Xtext-logo-dark-1600.png" content-width="10cm"/>
+                                <!-- <fo:external-graphic src="file:images/logo/Xtext-logo-dark.pdf" content-width="5cm"/>-->
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
@@ -75,7 +76,7 @@
                             </fo:block>
                             <fo:block font-family="Helvetica" font-size="12pt">
                                 <!-- <xsl:value-of select="bookinfo/releaseinfo"/> -->
-                                <xsl:text>Sven Efftinge, Sebastian Zarnekow, Jan Köhnlein, Heiko Behrens, Moritz Eysholdt, Peter Friese</xsl:text>
+                                <xsl:text>Heiko Behrens, Michael Clay, Sven Efftinge, Moritz Eysholdt, Peter Friese, Jan Köhnlein, Knut Wannheden, Sebastian Zarnekow and contributors</xsl:text>
                             </fo:block>
                             <fo:block font-family="Helvetica" font-size="12pt" padding="10mm">
                                 <xsl:text>Copyright 2008 - 2009</xsl:text>
