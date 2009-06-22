@@ -11,7 +11,7 @@ h3. Influencing the outline structure
 
 In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional even virtual nodes, you customize the outline by implementing ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}.
 
-The Xtext wizard creates an empty transformer class (@MyDslTransformer@) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the meta classes that are of interest:
+The Xtext wizard creates an empty transformer class (@MyDslTransformer@) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the EClasses that are of interest:
 
 bc.. public class MyDslTransformer extends 
     AbstractDeclarativeSemanticModelTransformer { 
@@ -135,7 +135,7 @@ h3. Context menus
 
 You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s, you cannot easily register an "Object contribution":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm. (Besides, using the extension point @org.eclipse.ui.popupMenus@ is regarded somewhat old school - you should rather use the new command and expression framework, as depicted below).
 
-So to register context menus for specific node types of your meta model, you need to do the following:
+So to register context menus for specific node types of your Ecore model, you need to do the following:
 
 * register a ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory} which will translate ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s to their underlying node type
 * register a menu contribution to add a command / handler pair to the context menu for the specific node types you're interested in.

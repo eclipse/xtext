@@ -4,7 +4,7 @@ h2(#linking). Linking
 The linking feature allows for specification of cross references within an Xtext grammar.
 The following things are needed for the linking:
 
-# declaration of a cross link in the grammar (at least in the meta model)
+# declaration of a cross link in the grammar (at least in the Ecore model)
 # specification of linking semantics
 
 h3. Declaration of cross links
@@ -19,7 +19,7 @@ Example:
 bc. ReferringType :
    'ref' referencedObject=[Entity|(ID|STRING)];
 
-The meta model inference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see "scoping":#scoping).
+The "Ecore model inference":#metamodelInference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information (see "scoping":#scoping).
 
 Example: While parsing a given input string, say
 
