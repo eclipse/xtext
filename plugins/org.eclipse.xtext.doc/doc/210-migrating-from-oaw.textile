@@ -22,7 +22,7 @@ h2(#migration_overview). Migration overview
 
 Although a couple of things have changed we tried to keep good ideas and left many things unchanged. At the same time we wanted to clean up poor concepts and solve the main problems we and you had with oAW Xtext.
 From a bird's eye view if you want to migrate an existing oAW Xtext project to TMF Xtext, you mainly just need to rename the old grammar from *.xtxt to *.xtext and add two lines to the beginning of that document (see below for details). You might also have to change a few keywords, but all in all this is pretty easy and we've migrated a couple of oAW Xtext projects this way without problems.
-The other aspect where lots of code might have been written for is validation. In oAW Xtext we used Xpand's Check language to define constraints on the meta model. Even though this has been one major reason for the lack of scalability in Xtext we decided to keep the Check language as an option for compatibility reasons (see "'Differences in Validation'":#differences_validation). Therefore, you do not need to translate your existing checks to a different language. Even better, you can overcome some performance issues by leveraging the newly introduced hooks to control the time of validation (while you type, on save, or on triggering an explicit action). 
+The other aspect where lots of code might have been written for is validation. In oAW Xtext we used Xpand's Check language to define constraints on the Ecore model. Even though this has been one major reason for the lack of scalability in Xtext we decided to keep the Check language as an option for compatibility reasons (see "'Differences in Validation'":#differences_validation). Therefore, you do not need to translate your existing checks to a different language. Even better, you can overcome some performance issues by leveraging the newly introduced hooks to control the time of validation (while you type, on save, or on triggering an explicit action). 
 Anyway, if you want to provide a slick user experience validation should run fast while you type. Therefore, we strongly encourage you to implement validation using our declarative Java approach (TODO: ref).
 
 We've developed and reviewed a lot of oAW Xtext projects and saw that most of the work was done in the grammar and in the validation view point. 
@@ -38,7 +38,7 @@ h2(#Xtend_based_apis). Where are the Xtend-based APIs?
 One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure.
 Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand). It provides a nicer expression syntax than Java.
 Especially the existence of higher-order functions for collections is extremely handy when working with models.
-In addition to the nice syntax, it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for a meta model is very convenient and type safe at the same time.
+In addition to the nice syntax, it provides dynamic polymorphic dispatch, which means that declaring e.g. label computation for an Ecore model is very convenient and type safe at the same time.
 In Java one usually has to write instanceof and cast orgies. 
 
 h3(#Xtend_is_hard_to_debug). Xtend is hard to debug
@@ -95,7 +95,7 @@ In this section differences between oAW Xtext and TMF Xtext are outlined and exp
 
 h3(#differenced_grammar_language). Differences in the grammar language
 
-When looking at a TMF Xtext grammar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated meta models:
+When looking at a TMF Xtext grammar the first time it looks like one has to provide additional information which was not necessary in oAW Xtext. In oAW Xtext *.xtxt files started with the first production rule where in TMF Xtext one has to declare the name of the language followed by declaration of one or more used/generated Ecore models:
 
 TMF Xtext heading information
 
@@ -168,7 +168,7 @@ you'll have to rewrite it that way
 bc. 
   Import : 'import' importURI=STRING;
 
-Although this changes your meta model, one usually never used this reference explicitly as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. 
+Although this changes your Ecore model, one usually never used this reference explicitly as it was only there to be used by the default import mechanism. So we assume and hope that changing the reference is not a big deal for you. 
 
 h4(#differences_return_types). Return types
 
@@ -183,25 +183,6 @@ bc.
   MyRule returns MyType : foo=ID;
 
 This is a bit more verbose, but at the same time more readable. And as you don't have to write the return type in most situations, it's good to have a more explicit, readable syntax.
-
-
-h3(#differences_validation). Differences in Validation
-
-TMF Xtext still supports implementing validation using Xpand's Check. However it is no longer using the EMF meta model (typesystem) but now uses the so called JavaBeansMetamodel. This means that the types in Check and Xtend correspond to Java types. This requires minor changes (namely the namespaces to be imported are now the qualified name of the generated Java classes). 
-Example: If your Check file looked like this in oAW Xtext :
-
-bc. 
-  import myMetamodel;
-  context Type ERROR "foo" : name!=null;   
-
-it becomes something like the following in TMF Xtext :
-
-bc. 
-  import my::pack::to::myMetaModel;
-  context Type ERROR "foo" : name!=null;
-
-Where @my::pack::to::myMetaModel@ refers to the package the generated EClasses are in. In other words there's a Java class @my.pack.to.myMetaModel.Type@.
-We changed this in order to allow use of any Java API from within Check and Xtend.
 
 h3(#differences_linking). Differences in Linking
 
