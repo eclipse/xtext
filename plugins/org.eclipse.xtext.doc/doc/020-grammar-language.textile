@@ -153,7 +153,7 @@ Example:
 
 bc.. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"
   genModels=
-    "platform:/resource/project/src/my/pack/SecretCompartments.ecore"/>
+    "platform:/resource/project/src/my/pack/SecretCompartments.genmodel"/>
 
 h4. Ecore model aliases for packages
 
