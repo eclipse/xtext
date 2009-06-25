@@ -25,6 +25,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/CrossReferenceProposalTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/DatatypeRuleTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>

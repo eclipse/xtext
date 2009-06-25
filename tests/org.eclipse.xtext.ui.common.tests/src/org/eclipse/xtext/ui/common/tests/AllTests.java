@@ -34,6 +34,7 @@ public class AllTests {
 		suite.addTestSuite(JavaContentAssistProcessorTest.class);
 		suite.addTestSuite(ParserBasedContentAssistProcessorTest.class);
 		suite.addTestSuite(InternalParserTest.class);
+		suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug281198ParserTest.class);
 		suite.addTestSuite(ParserTest.class);
 		suite.addTestSuite(ParserBasedContentAssistProcessorTest.class);
 		suite.addTestSuite(TwoContextsContentAssistTest.class);
