@@ -695,6 +695,14 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	    	.assertText("Name");
     }
     
+    public void testBug281198_01() throws Exception {
+    	newBuilder(setup.getDatatypeRuleTestLanguageSetup())
+    		.append("Types\n" +
+    				"Type StringType;\n" +
+    				"Composite error base ")
+    		.assertText("StringType", "error");
+    }
+    
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);

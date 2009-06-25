@@ -266,7 +266,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				ParserRule rule = EcoreUtil2.getContainerOfType(element.getGrammarElement(), ParserRule.class);
 				if (rule != null && GrammarUtil.isDatatypeRule(rule)) {
 					for (int i = element.getLocalTrace().size() - 1; i >= 0; i--) {
-						AbstractElement grammarElement = element.getTrace().get(i);
+						AbstractElement grammarElement = element.getLocalTrace().get(i);
 						if (grammarElement instanceof Assignment) {
 							calculator.doSwitch(grammarElement);
 							return;

@@ -155,4 +155,18 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		};
 	}
 
+	public ISetup getDatatypeRuleTestLanguageSetup() {
+		return new DatatypeRuleTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new DatatypeRuleTestLanguageUiModule() {
+					@Override
+					public Class<? extends ContentAssistContext.Factory> bindContentAssistContext$Factory() {
+						return DefaultContentAssistContextFactory.class;
+					}
+				}, new UIPluginModule(Activator.getInstance()));
+			}
+		};
+	}
+
 }
