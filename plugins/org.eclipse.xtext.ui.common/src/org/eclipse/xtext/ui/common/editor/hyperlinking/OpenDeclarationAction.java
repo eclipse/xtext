@@ -96,6 +96,7 @@ public class OpenDeclarationAction extends Action {
 			final XtextEditor edit = (XtextEditor) openEditor;
 			if (uri.fragment()!=null) {
 				edit.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>(){
+				@Override
 				public void process(XtextResource resource) throws Exception {
 					EObject object = resource.getEObject(uri.fragment());
 					Region region = locationProvider.getLocation(object);
