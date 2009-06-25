@@ -14,14 +14,22 @@ import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenWithCardinalit
 import org.eclipse.xtext.services.XtextGrammarAccess.ActionElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AlternativesElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.CharacterRangeElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.EnumLiteralDeclarationElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.EnumRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GeneratedMetamodelElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GrammarIDElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.NegatedTokenElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedTerminalElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ReferencedMetamodelElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.TerminalTokenElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.UntilTokenElements;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -34,7 +42,12 @@ public class XtextFormattingTokenSerializer extends
 		XtextGrammarAccess g = (XtextGrammarAccess) getGrammarAccess();
 
 		// Grammar
-		// GrammarElements gr = g.getGrammarAccess();
+		GrammarElements gr = g.getGrammarAccess();
+		cfg.setLinewrap().between(g.getML_COMMENTRule(), gr.getGrammarKeyword_0());
+		cfg.setNoSpace().after(gr.getLeftParenthesisKeyword_3_1());
+		cfg.setNoSpace().before(gr.getRightParenthesisKeyword_3_3());
+		cfg.setNoSpace().before(gr.getCommaKeyword_2_2_0());
+		cfg.setNoSpace().before(gr.getCommaKeyword_3_2_1_0());
 		// cfg.setLinewrap(2).after(gr.getGroup_2());
 		// cfg.setLinewrap(2).after(gr.getMetamodelDeclarationsAssignment_4());
 		// cfg.setLinewrap(2).after(gr.getRulesAssignment_5());
@@ -61,6 +74,7 @@ public class XtextFormattingTokenSerializer extends
 
 		// TerminalRule
 		TerminalRuleElements tr = g.getTerminalRuleAccess();
+		cfg.setLinewrap(2).before(tr.getTerminalKeyword_0());
 		cfg.setLinewrap().after(tr.getColonKeyword_3());
 		cfg.setIndentation(tr.getColonKeyword_3(), tr.getSemicolonKeyword_5());
 		cfg.setNoSpace().before(tr.getColonKeyword_3());
@@ -104,8 +118,42 @@ public class XtextFormattingTokenSerializer extends
 		cfg.setNoSpace().around(
 				ac.getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
 
+		// TypeRef
 		TypeRefElements typeRef = g.getTypeRefAccess();
 		cfg.setNoSpace().around(typeRef.getColonColonKeyword_0_1());
+		
+		// EnumRule
+		EnumRuleElements er = g.getEnumRuleAccess();
+		cfg.setLinewrap(2).before(er.getEnumKeyword_0());
+		cfg.setNoSpace().before(er.getColonKeyword_3());
+		cfg.setLinewrap().after(er.getColonKeyword_3());
+		cfg.setIndentation(er.getColonKeyword_3(), er.getSemicolonKeyword_5());
+		cfg.setNoSpace().before(er.getSemicolonKeyword_5());
+		
+		// EnumLiteralDeclaration
+		EnumLiteralDeclarationElements eld = g.getEnumLiteralDeclarationAccess();
+		cfg.setNoSpace().around(eld.getEqualsSignKeyword_1_0());
+		
+		// TerminalToken
+		TerminalTokenElements tt = g.getTerminalTokenAccess();
+		cfg.setNoSpace().before(tt.getCardinalityAssignment_1());
+		
+		// ParenthesizedTerminalElement
+		ParenthesizedTerminalElementElements pte = g.getParenthesizedTerminalElementAccess();
+		cfg.setNoSpace().after(pte.getLeftParenthesisKeyword_0());
+		cfg.setNoSpace().before(pte.getRightParenthesisKeyword_2());
+		
+		// CharacterRange
+		CharacterRangeElements cre = g.getCharacterRangeAccess();
+		cfg.setNoSpace().around(cre.getFullStopFullStopKeyword_1_1());
+		
+		// NegatedToken
+		NegatedTokenElements ne = g.getNegatedTokenAccess();
+		cfg.setNoSpace().after(ne.getExclamationMarkKeyword_0());
+		
+		// UntilToken
+		UntilTokenElements ut = g.getUntilTokenAccess();
+		cfg.setNoSpace().around(ut.getHyphenMinusGreaterThanSignKeyword_0());
 	}
 
 }
