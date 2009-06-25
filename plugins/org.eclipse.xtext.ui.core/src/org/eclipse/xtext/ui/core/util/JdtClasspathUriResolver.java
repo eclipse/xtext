@@ -125,9 +125,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 					resource = jarPackageFragmentRoot.getUnderlyingResource();
 					if (resource == null) {
 						String name = zipFile.getName();
-						name = name.replace('\\', '/');
-						String uri = "jar:file:" + name + "!" + projectRelativePath;
-						return URI.createURI(uri);
+						return getZipEntryUri(projectRelativePath, name);
 					}
 				}
 				return URI.createURI(
@@ -135,6 +133,18 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Have a look at the JdtClasspahtUriResolverTest to get an idea about the semantics
+	 * of this method. The tests are actually deactivated, because this implementation is
+	 * sort of platform dependent.
+	 */
+	public static URI getZipEntryUri(String projectRelativePath, String osDependentName) {
+		String name = osDependentName.replace('\\', '/');
+		URI fileURI = URI.createFileURI(name);
+		String uri = "jar:" + fileURI + "!" + projectRelativePath;
+		return URI.createURI(uri);
 	}
 
 }

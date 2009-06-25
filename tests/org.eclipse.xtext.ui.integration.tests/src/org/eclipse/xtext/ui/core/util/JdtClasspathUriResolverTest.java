@@ -69,5 +69,19 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
+	
+//	public void testGetZipEntryUri_Windows() {
+//		String osDependent = "c:\\eclipse\\archive.jar";
+//		String projectDependent = "/org/foo/bar.suffix";
+//		URI uri = JdtClasspathUriResolver.getZipEntryUri(projectDependent, osDependent);
+//		assertEquals("jar:file:///c:/eclipse/archive.jar!org/foo/bar.suffix", uri);
+//	}
+//
+//	public void testGetUpEntryUri_Mac() {
+//		String osDependent = "/Applications/eclipse/archive.jar";
+//		String projectDependent = "/org/foo/bar.suffix";
+//		URI uri = JdtClasspathUriResolver.getZipEntryUri(projectDependent, osDependent);
+//		assertEquals("jar:file:/Applications/eclipse/archive.jar!/org/foo/bar.suffix", uri.toString());
+//	}
 
 }
