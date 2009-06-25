@@ -28,7 +28,7 @@ h3. Create an Xtext project
 
 Use the Xtext wizard to create a new project
 
-	File -> New -> Project  -> Xtext -> Xtext project
+	File -> New -> Project...  -> Xtext -> Xtext project
 
 Choose a sensible project name, language name and file extension, e.g.
 
@@ -46,13 +46,13 @@ In the Package Explorer you can see two new projects. In @org.xtext.example.star
 
 !images/getting-started-project-layout.png!
 
-It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by teh generator.
+It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.
 
 h3. Build your own grammar
 
 The wizard will automatically open the example grammar file @Entities.xtext@ from the first project in the editor. A grammar has two purposes. First, it is used to describe the concrete syntax of your language. Second, it contains information about how a parser shall create a model during parsing.
 
-Ignore the generated sample grammar, delete everything from "@Model :@" to the end. 
+Ignore the generated sample grammar, delete everything after "@Model :@" to the end. 
 The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
 As we can have one ore more entities within a model, the cardinality is "+". Each rule is terminated with a semicolon. So our first rule reads as
 
@@ -61,16 +61,16 @@ bc.. Model :
 
 p. __*Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine.__ 
 
-An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type's name is the same as the rule name, it can be omitted as in our case.
+An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword @returns@. If the type's name is the same as the rule name, it can be omitted as in our case.
 
-The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference entities. We specify it using the assignment operator "+=", which denotes a multi valued feature. 
+The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference _entities_. We specify it using the assignment operator "@+=@", which denotes a multi valued feature. 
 
 As a result, we modify the first rule to
 
 bc.. Model :
   (elements += Entity)+;
 	
-p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword entity followed by the entity's name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword @entity@ followed by the entity's name and an opening curly brace (we will handle the @extends@ clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
 
 bc.. Entity returns Entity:
   'entity' name=ID '{'
@@ -78,8 +78,8 @@ bc.. Entity returns Entity:
   '}'
 ;
 	
-p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "=" denotes a single valued feature, and the asterisk a cardinality of 0..n.
-In our target syntax, some entities refer to an existing entity as their super type after the keyword extends. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads as
+p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "@=@" denotes a single valued feature, and the asterisk a cardinality of 0..n.
+In our target syntax, some entities refer to an existing entity as their super type after the keyword @extends@. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads:
 
 bc.. Entity returns Entity:
   'entity' name=ID ('extends' extends=[Entity])? '{'
@@ -100,7 +100,7 @@ Type:
 SimpleType:
   'type' name=ID;
  
-p. Models new consist of types where a @Type@ can either be a @SimpleType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "|" separator. The combination of simple data types and entites this way introduces a common super type @Type@ both @Entity@ and @SimpleType@ derive from. This allows you to refer to both types of elemets with a single cross-reference.
+p. Models new consist of types where a @Type@ can either be a @SimpleType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "@|@" alternatives operator. The combination of simple data types and entites this way introduces a common super type @Type@ both @Entity@ and @SimpleType@ derive from. This allows you to refer to both types of elements with a single cross-reference.
 
 A @Property@ consist of a keyword, a name, a colon and a cross-reference to an arbitrary @Type@. The multiplicity is either many or one. The presence of the postfix "[]" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
 
@@ -126,6 +126,6 @@ If code generation succeeded, right-click on the Xtext project and choose
 	Run As -> Eclipse Application.
 	
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-In the new workbench, create a new project (File -> New -> Project  -> General -> Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+In the new workbench, create a new project (File -> New -> Project...  -> General -> Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
 
 !images/getting-started-editor.png!
