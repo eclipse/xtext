@@ -46,7 +46,7 @@ import org.eclipse.xtext.xtext.XtextLinker;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
- * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
+ * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
 public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 

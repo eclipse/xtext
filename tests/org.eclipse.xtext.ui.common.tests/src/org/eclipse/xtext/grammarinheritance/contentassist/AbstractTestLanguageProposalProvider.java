@@ -5,7 +5,7 @@ package org.eclipse.xtext.grammarinheritance.contentassist;
 
 import org.eclipse.xtext.grammarinheritance.contentassist.AbstractAbstractTestLanguageProposalProvider;
 /**
- * see http://wiki.eclipse.org/Xtext/Documentation#Content_Assist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class AbstractTestLanguageProposalProvider extends AbstractAbstractTestLanguageProposalProvider {
 
