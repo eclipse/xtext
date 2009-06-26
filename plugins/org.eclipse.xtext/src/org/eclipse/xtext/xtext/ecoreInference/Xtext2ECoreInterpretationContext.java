@@ -31,7 +31,7 @@ import com.google.common.base.Function;
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  *
- * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
+ * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
 public class Xtext2ECoreInterpretationContext {
 

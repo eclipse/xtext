@@ -18,7 +18,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 /**
  * This class contains custom scoping description.
  * 
- * see : http://wiki.eclipse.org/Xtext/Documentation#Scoping on how and when to
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on how and when to
  * use it
  * 
  */

@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist.contentassist;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.AbstractCrossReferenceProposalTestLanguageProposalProvider;
 /**
- * see http://wiki.eclipse.org/Xtext/Documentation#Content_Assist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class CrossReferenceProposalTestLanguageProposalProvider extends AbstractCrossReferenceProposalTestLanguageProposalProvider {
 
