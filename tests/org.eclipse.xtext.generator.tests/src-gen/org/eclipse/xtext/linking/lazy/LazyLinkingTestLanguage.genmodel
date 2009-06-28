@@ -22,6 +22,9 @@
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="LazyLinkingTestLanguage.ecore#//Type/properties"/>
       </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="LazyLinkingTestLanguage.ecore#//Type/unresolvedProxyProperty"/>
+      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="LazyLinkingTestLanguage.ecore#//Property"/>
@@ -30,6 +33,15 @@
       </genFeatures>
       <genFeatures createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="LazyLinkingTestLanguage.ecore#//Property/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="LazyLinkingTestLanguage.ecore#//UnresolvedProxyProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="LazyLinkingTestLanguage.ecore#//UnresolvedProxyProperty/type"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="LazyLinkingTestLanguage.ecore#//UnresolvedProxyProperty/name"/>
       </genFeatures>
     </genClasses>
   </genPackages>

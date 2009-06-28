@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'type'", "'extends'", "'.'", "'for'", "'in'", "'{'", "'}'", "';'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'type'", "'extends'", "'.'", "'for'", "'in'", "'{'", "'}'", "';'", "'unresolved'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
@@ -214,22 +214,24 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start ruleType
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:122:1: ruleType returns [EObject current=null] : ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* '}' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:122:1: ruleType returns [EObject current=null] : ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )* '}' ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1=null;
         EObject lv_properties_11 = null;
 
+        EObject lv_unresolvedProxyProperty_12 = null;
+
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:127:6: ( ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* '}' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:1: ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:127:6: ( ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )* '}' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:1: ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )* '}' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:1: ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* '}' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:2: 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* '}'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:1: ( 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )* '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:128:2: 'type' (lv_name_1= RULE_ID ) ( 'extends' ( RULE_ID ) '.' ( RULE_ID ) )? ( 'for' ( RULE_ID ) 'in' ( RULE_ID ) )? '{' (lv_properties_11= ruleProperty )* (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )* '}'
             {
             match(input,11,FOLLOW_11_in_ruleType222); 
 
@@ -420,9 +422,53 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
                 }
             } while (true);
 
-            match(input,17,FOLLOW_17_in_ruleType451); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:257:3: (lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
 
-                    createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_6(), null); 
+                if ( (LA5_0==19) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:260:6: lv_unresolvedProxyProperty_12= ruleUnresolvedProxyProperty
+            	    {
+            	     
+            	    	        currentNode=createCompositeNode(grammarAccess.getTypeAccess().getUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0(), currentNode); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleUnresolvedProxyProperty_in_ruleType476);
+            	    lv_unresolvedProxyProperty_12=ruleUnresolvedProxyProperty();
+            	    _fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	    	        }
+            	    	        
+            	    	        try {
+            	    	       		add(current, "unresolvedProxyProperty", lv_unresolvedProxyProperty_12, "UnresolvedProxyProperty", currentNode);
+            	    	        } catch (ValueConverterException vce) {
+            	    				handleValueConverterException(vce);
+            	    	        }
+            	    	        currentNode = currentNode.getParent();
+            	    	    
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+            match(input,17,FOLLOW_17_in_ruleType490); 
+
+                    createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7(), null); 
                 
 
             }
@@ -447,7 +493,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start entryRuleProperty
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:268:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:289:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -455,16 +501,16 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:268:50: (iv_ruleProperty= ruleProperty EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:269:2: iv_ruleProperty= ruleProperty EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:289:50: (iv_ruleProperty= ruleProperty EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:290:2: iv_ruleProperty= ruleProperty EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPropertyRule(), currentNode); 
-            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty484);
+            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty523);
             iv_ruleProperty=ruleProperty();
             _fsp--;
 
              current =iv_ruleProperty; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty494); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty533); 
 
             }
 
@@ -482,7 +528,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start ruleProperty
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:276:1: ruleProperty returns [EObject current=null] : ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:297:1: ruleProperty returns [EObject current=null] : ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -491,33 +537,33 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:281:6: ( ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:282:1: ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:302:6: ( ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:303:1: ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:282:1: ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:282:2: ( RULE_ID )+ (lv_name_1= RULE_ID ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:303:1: ( ( RULE_ID )+ (lv_name_1= RULE_ID ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:303:2: ( RULE_ID )+ (lv_name_1= RULE_ID ) ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:282:2: ( RULE_ID )+
-            int cnt5=0;
-            loop5:
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:303:2: ( RULE_ID )+
+            int cnt6=0;
+            loop6:
             do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA5_0==RULE_ID) ) {
-                    int LA5_1 = input.LA(2);
+                if ( (LA6_0==RULE_ID) ) {
+                    int LA6_1 = input.LA(2);
 
-                    if ( (LA5_1==RULE_ID) ) {
-                        alt5=1;
+                    if ( (LA6_1==RULE_ID) ) {
+                        alt6=1;
                     }
 
 
                 }
 
 
-                switch (alt5) {
+                switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:285:3: RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:306:3: RULE_ID
             	    {
 
             	    			if (current==null) {
@@ -525,7 +571,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProperty541); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProperty580); 
 
             	    		createLeafNode(grammarAccess.getPropertyAccess().getTypeTypeCrossReference_0_0(), "type"); 
             	    	
@@ -534,19 +580,19 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
             	    break;
 
             	default :
-            	    if ( cnt5 >= 1 ) break loop5;
+            	    if ( cnt6 >= 1 ) break loop6;
                         EarlyExitException eee =
-                            new EarlyExitException(5, input);
+                            new EarlyExitException(6, input);
                         throw eee;
                 }
-                cnt5++;
+                cnt6++;
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:298:3: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:300:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:319:3: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProperty567); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProperty606); 
 
             		createLeafNode(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
@@ -565,7 +611,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleProperty584); 
+            match(input,18,FOLLOW_18_in_ruleProperty623); 
 
                     createLeafNode(grammarAccess.getPropertyAccess().getSemicolonKeyword_2(), null); 
                 
@@ -591,6 +637,155 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
     // $ANTLR end ruleProperty
 
 
+    // $ANTLR start entryRuleUnresolvedProxyProperty
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:350:1: entryRuleUnresolvedProxyProperty returns [EObject current=null] : iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF ;
+    public final EObject entryRuleUnresolvedProxyProperty() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleUnresolvedProxyProperty = null;
+
+
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:350:65: (iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:351:2: iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getUnresolvedProxyPropertyRule(), currentNode); 
+            pushFollow(FOLLOW_ruleUnresolvedProxyProperty_in_entryRuleUnresolvedProxyProperty656);
+            iv_ruleUnresolvedProxyProperty=ruleUnresolvedProxyProperty();
+            _fsp--;
+
+             current =iv_ruleUnresolvedProxyProperty; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleUnresolvedProxyProperty666); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleUnresolvedProxyProperty
+
+
+    // $ANTLR start ruleUnresolvedProxyProperty
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:358:1: ruleUnresolvedProxyProperty returns [EObject current=null] : ( 'unresolved' ( RULE_ID )+ (lv_name_2= RULE_ID ) ';' ) ;
+    public final EObject ruleUnresolvedProxyProperty() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name_2=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:363:6: ( ( 'unresolved' ( RULE_ID )+ (lv_name_2= RULE_ID ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:364:1: ( 'unresolved' ( RULE_ID )+ (lv_name_2= RULE_ID ) ';' )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:364:1: ( 'unresolved' ( RULE_ID )+ (lv_name_2= RULE_ID ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:364:2: 'unresolved' ( RULE_ID )+ (lv_name_2= RULE_ID ) ';'
+            {
+            match(input,19,FOLLOW_19_in_ruleUnresolvedProxyProperty700); 
+
+                    createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getUnresolvedKeyword_0(), null); 
+                
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:368:1: ( RULE_ID )+
+            int cnt7=0;
+            loop7:
+            do {
+                int alt7=2;
+                int LA7_0 = input.LA(1);
+
+                if ( (LA7_0==RULE_ID) ) {
+                    int LA7_1 = input.LA(2);
+
+                    if ( (LA7_1==RULE_ID) ) {
+                        alt7=1;
+                    }
+
+
+                }
+
+
+                switch (alt7) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:371:3: RULE_ID
+            	    {
+
+            	    			if (current==null) {
+            	    	            current = factory.create(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier());
+            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	        }
+            	            
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleUnresolvedProxyProperty722); 
+
+            	    		createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getTypeTypeCrossReference_1_0(), "type"); 
+            	    	
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt7 >= 1 ) break loop7;
+                        EarlyExitException eee =
+                            new EarlyExitException(7, input);
+                        throw eee;
+                }
+                cnt7++;
+            } while (true);
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:384:3: (lv_name_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:386:6: lv_name_2= RULE_ID
+            {
+            lv_name_2=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleUnresolvedProxyProperty748); 
+
+            		createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+            	
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        try {
+            	       		set(current, "name", lv_name_2, "ID", lastConsumedNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
+
+            }
+
+            match(input,18,FOLLOW_18_in_ruleUnresolvedProxyProperty765); 
+
+                    createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3(), null); 
+                
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleUnresolvedProxyProperty
+
+
  
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
@@ -608,13 +803,20 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
     public static final BitSet FOLLOW_RULE_ID_in_ruleType355 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_15_in_ruleType367 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleType389 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleType403 = new BitSet(new long[]{0x0000000000020010L});
-    public static final BitSet FOLLOW_ruleProperty_in_ruleType437 = new BitSet(new long[]{0x0000000000020010L});
-    public static final BitSet FOLLOW_17_in_ruleType451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty484 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProperty494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleProperty541 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleProperty567 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleProperty584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleType403 = new BitSet(new long[]{0x00000000000A0010L});
+    public static final BitSet FOLLOW_ruleProperty_in_ruleType437 = new BitSet(new long[]{0x00000000000A0010L});
+    public static final BitSet FOLLOW_ruleUnresolvedProxyProperty_in_ruleType476 = new BitSet(new long[]{0x00000000000A0000L});
+    public static final BitSet FOLLOW_17_in_ruleType490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty523 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProperty533 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleProperty580 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleProperty606 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleProperty623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnresolvedProxyProperty_in_entryRuleUnresolvedProxyProperty656 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleUnresolvedProxyProperty666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleUnresolvedProxyProperty700 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleUnresolvedProxyProperty722 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleUnresolvedProxyProperty748 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleUnresolvedProxyProperty765 = new BitSet(new long[]{0x0000000000000002L});
 
 }

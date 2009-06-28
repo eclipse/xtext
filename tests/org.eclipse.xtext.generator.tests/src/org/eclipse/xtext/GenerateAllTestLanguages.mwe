@@ -20,7 +20,7 @@
 		<language uri="classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/linking/lazy/ImportUriTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext">

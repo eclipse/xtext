@@ -70,7 +70,8 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 		private final EnumLiteralDeclaration cAnotherEnumLiteralEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0 = (Keyword)cAnotherEnumLiteralEnumLiteralDeclaration_1.eContents().get(0);
 		
-		//enum KindOfKeyword returns KindOfKeyword : kindOfKeyword | anotherEnumLiteral ;
+		//enum KindOfKeyword:
+		//  kindOfKeyword | anotherEnumLiteral;
 		public EnumRule getRule() { return rule; }
 
 		//kindOfKeyword | anotherEnumLiteral
@@ -123,7 +124,8 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 		return getEntityWithEnumAndReferenceAccess().getRule();
 	}
 
-	//enum KindOfKeyword returns KindOfKeyword : kindOfKeyword | anotherEnumLiteral ;
+	//enum KindOfKeyword:
+	//  kindOfKeyword | anotherEnumLiteral;
 	public KindOfKeywordElements getKindOfKeywordAccess() {
 		return (unknownRuleKindOfKeyword != null) ? unknownRuleKindOfKeyword : (unknownRuleKindOfKeyword = new KindOfKeywordElements());
 	}
@@ -133,38 +135,38 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 	}
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0" .. "9" +;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

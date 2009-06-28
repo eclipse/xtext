@@ -78,7 +78,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 				}
 				if (!eRef.isResolveProxies()) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
-					settingsToLink.put(setting, abstractNode);
+					settingsToLink.put(new SettingDelegate(setting), abstractNode);
 				}
 				else {
 					createAndSetProxy(obj, abstractNode, eRef);

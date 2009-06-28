@@ -45,7 +45,7 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
+		return AbstractTreeTestLanguageRuntimeModule.class.getClassLoader();
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment

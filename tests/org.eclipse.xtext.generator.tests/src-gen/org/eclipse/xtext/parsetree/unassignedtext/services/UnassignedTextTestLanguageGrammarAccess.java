@@ -295,7 +295,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal CaseInsensitiveKeyword:
-	//  ( "k" | "K" ) ( "e" | "E" ) ( "y" | "Y" ) ( "w" | "W" ) ( "o" | "O" ) ( "r" | "R" ) ( "d" | "D" );
+	//  ("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
 	public TerminalRule getCaseInsensitiveKeywordRule() {
 		return (tCaseInsensitiveKeyword != null) ? tCaseInsensitiveKeyword : (tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword"));
 	} 
@@ -327,7 +327,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal Multi:
-	//  "a" "b" ? "c" + "d" * ( "e" | "f" ) ( ( "g" | "h" ) | "i" + ) Multi2 "0" .. "9" "0" .. "9" +;
+	//  "a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
 	public TerminalRule getMultiRule() {
 		return (tMulti != null) ? tMulti : (tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi"));
 	} 
@@ -379,38 +379,38 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0" .. "9" +;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

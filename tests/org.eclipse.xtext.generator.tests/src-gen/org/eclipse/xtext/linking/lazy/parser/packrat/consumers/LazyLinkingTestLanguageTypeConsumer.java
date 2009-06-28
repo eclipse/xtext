@@ -30,6 +30,8 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 
 	private INonTerminalConsumer propertyConsumer;
 
+	private INonTerminalConsumer unresolvedProxyPropertyConsumer;
+
 	private IElementConsumer group$1$Consumer;
 
 	private IElementConsumer keyword$2$Consumer;
@@ -72,7 +74,11 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 
 	private IElementConsumer ruleCall$29$Consumer;
 
-	private IElementConsumer keyword$30$Consumer;
+	private IElementConsumer assignment$30$Consumer;
+
+	private IElementConsumer ruleCall$31$Consumer;
+
+	private IElementConsumer keyword$32$Consumer;
 
 	private ICharacterClass keyword$6$Delimiter;
 
@@ -84,7 +90,7 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 
 	private ICharacterClass keyword$27$Delimiter;
 
-	private ICharacterClass keyword$30$Delimiter;
+	private ICharacterClass keyword$32$Delimiter;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -112,7 +118,8 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 			acceptor.accept(group$16$Consumer);
 			acceptor.accept(keyword$27$Consumer);
 			acceptor.accept(assignment$28$Consumer);
-			acceptor.accept(keyword$30$Consumer);
+			acceptor.accept(assignment$30$Consumer);
+			acceptor.accept(keyword$32$Consumer);
 		}
 	}
 
@@ -362,15 +369,39 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		}
 	}
 
-	protected class Keyword$30$Consumer extends ElementConsumer<Keyword> {
+	protected class Assignment$30$Consumer extends LoopAssignmentConsumer {
 		
-		protected Keyword$30$Consumer(final Keyword keyword) {
+		protected Assignment$30$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$31$Consumer;
+		}
+	}
+
+	protected class RuleCall$31$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$31$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(unresolvedProxyPropertyConsumer, "unresolvedProxyProperty", true, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Keyword$32$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$32$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$30$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter(), optional);
 		}
 	}
 
@@ -381,7 +412,7 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$22$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$30$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$32$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
@@ -423,7 +454,9 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		keyword$27$Consumer = new Keyword$27$Consumer(rule.getLeftCurlyBracketKeyword_4());
 		assignment$28$Consumer = new Assignment$28$Consumer(rule.getPropertiesAssignment_5());
 		ruleCall$29$Consumer = new RuleCall$29$Consumer(rule.getPropertiesPropertyParserRuleCall_5_0());
-		keyword$30$Consumer = new Keyword$30$Consumer(rule.getRightCurlyBracketKeyword_6());
+		assignment$30$Consumer = new Assignment$30$Consumer(rule.getUnresolvedProxyPropertyAssignment_6());
+		ruleCall$31$Consumer = new RuleCall$31$Consumer(rule.getUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0());
+		keyword$32$Consumer = new Keyword$32$Consumer(rule.getRightCurlyBracketKeyword_7());
 	}
 	
 	@Override
@@ -442,6 +475,10 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 	
 	public void setPropertyConsumer(INonTerminalConsumer propertyConsumer) {
 		this.propertyConsumer = propertyConsumer;
+	}
+	
+	public void setUnresolvedProxyPropertyConsumer(INonTerminalConsumer unresolvedProxyPropertyConsumer) {
+		this.unresolvedProxyPropertyConsumer = unresolvedProxyPropertyConsumer;
 	}
 	
 	public ICharacterClass getKeyword$6$Delimiter() {
@@ -484,12 +521,12 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		keyword$27$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$30$Delimiter() {
-		return keyword$30$Delimiter;
+	public ICharacterClass getKeyword$32$Delimiter() {
+		return keyword$32$Delimiter;
 	}
 	
-	public void setKeyword$30$Delimiter(ICharacterClass characterClass) {
-		keyword$30$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$32$Delimiter(ICharacterClass characterClass) {
+		keyword$32$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

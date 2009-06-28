@@ -108,37 +108,37 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal STRING:
-	//  "#" "B" +;
+	//  "#" "B"+;
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0" .. "9" +;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

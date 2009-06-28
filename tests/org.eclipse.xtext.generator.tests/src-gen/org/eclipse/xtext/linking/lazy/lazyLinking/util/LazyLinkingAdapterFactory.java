@@ -93,6 +93,11 @@ public class LazyLinkingAdapterFactory extends AdapterFactoryImpl
         return createPropertyAdapter();
       }
       @Override
+      public Adapter caseUnresolvedProxyProperty(UnresolvedProxyProperty object)
+      {
+        return createUnresolvedProxyPropertyAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -155,6 +160,21 @@ public class LazyLinkingAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createPropertyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty <em>Unresolved Proxy Property</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty
+   * @generated
+   */
+  public Adapter createUnresolvedProxyPropertyAdapter()
   {
     return null;
   }

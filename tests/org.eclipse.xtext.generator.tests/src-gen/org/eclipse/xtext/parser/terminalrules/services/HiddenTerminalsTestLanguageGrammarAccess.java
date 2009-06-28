@@ -485,19 +485,19 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 

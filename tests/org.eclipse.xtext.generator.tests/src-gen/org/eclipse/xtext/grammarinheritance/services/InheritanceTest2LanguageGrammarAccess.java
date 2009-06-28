@@ -121,38 +121,38 @@ public class InheritanceTest2LanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0" .. "9" +;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaInheritanceTestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaInheritanceTestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaInheritanceTestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaInheritanceTestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaInheritanceTestLanguage.getWSRule();
 	} 

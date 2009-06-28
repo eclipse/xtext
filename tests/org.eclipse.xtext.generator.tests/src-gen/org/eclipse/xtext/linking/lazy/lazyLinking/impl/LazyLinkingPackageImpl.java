@@ -17,6 +17,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
+import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +47,13 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
    * @generated
    */
   private EClass propertyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unresolvedProxyPropertyEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -185,6 +193,16 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getType_UnresolvedProxyProperty()
+  {
+    return (EReference)typeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getProperty()
   {
     return propertyEClass;
@@ -208,6 +226,36 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
   public EAttribute getProperty_Name()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnresolvedProxyProperty()
+  {
+    return unresolvedProxyPropertyEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnresolvedProxyProperty_Type()
+  {
+    return (EReference)unresolvedProxyPropertyEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnresolvedProxyProperty_Name()
+  {
+    return (EAttribute)unresolvedProxyPropertyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -248,10 +296,15 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
     createEReference(typeEClass, TYPE__EXTENDS);
     createEReference(typeEClass, TYPE__PARENT_ID);
     createEReference(typeEClass, TYPE__PROPERTIES);
+    createEReference(typeEClass, TYPE__UNRESOLVED_PROXY_PROPERTY);
 
     propertyEClass = createEClass(PROPERTY);
     createEReference(propertyEClass, PROPERTY__TYPE);
     createEAttribute(propertyEClass, PROPERTY__NAME);
+
+    unresolvedProxyPropertyEClass = createEClass(UNRESOLVED_PROXY_PROPERTY);
+    createEReference(unresolvedProxyPropertyEClass, UNRESOLVED_PROXY_PROPERTY__TYPE);
+    createEAttribute(unresolvedProxyPropertyEClass, UNRESOLVED_PROXY_PROPERTY__NAME);
   }
 
   /**
@@ -293,10 +346,15 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
     initEReference(getType_Extends(), this.getType(), null, "extends", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getType_ParentId(), this.getProperty(), null, "parentId", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getType_Properties(), this.getProperty(), null, "properties", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getType_UnresolvedProxyProperty(), this.getUnresolvedProxyProperty(), null, "unresolvedProxyProperty", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProperty_Type(), this.getType(), null, "type", null, 0, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unresolvedProxyPropertyEClass, UnresolvedProxyProperty.class, "UnresolvedProxyProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getUnresolvedProxyProperty_Type(), this.getType(), null, "type", null, 0, -1, UnresolvedProxyProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnresolvedProxyProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, UnresolvedProxyProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

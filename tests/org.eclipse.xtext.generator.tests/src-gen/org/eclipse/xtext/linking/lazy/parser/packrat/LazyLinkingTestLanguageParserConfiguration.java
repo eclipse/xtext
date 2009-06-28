@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration;
 import org.eclipse.xtext.linking.lazy.parser.packrat.consumers.LazyLinkingTestLanguageModelConsumer;
 import org.eclipse.xtext.linking.lazy.parser.packrat.consumers.LazyLinkingTestLanguageTypeConsumer;
 import org.eclipse.xtext.linking.lazy.parser.packrat.consumers.LazyLinkingTestLanguagePropertyConsumer;
+import org.eclipse.xtext.linking.lazy.parser.packrat.consumers.LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -26,6 +27,7 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
     private LazyLinkingTestLanguageModelConsumer modelConsumer;
     private LazyLinkingTestLanguageTypeConsumer typeConsumer;
     private LazyLinkingTestLanguagePropertyConsumer propertyConsumer;
+    private LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer unresolvedProxyPropertyConsumer;
 
 	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
 
@@ -50,6 +52,9 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 		propertyConsumer = new LazyLinkingTestLanguagePropertyConsumer(
     		this, null
     	);
+		unresolvedProxyPropertyConsumer = new LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -62,6 +67,7 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
 		getTypeConsumer().setRule(grammarAccess.getTypeAccess());
 		getPropertyConsumer().setRule(grammarAccess.getPropertyAccess());
+		getUnresolvedProxyPropertyConsumer().setRule(grammarAccess.getUnresolvedProxyPropertyAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -75,15 +81,18 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 
 		getTypeConsumer().setIdConsumer(getIdConsumer());
 		getTypeConsumer().setPropertyConsumer(getPropertyConsumer());
+		getTypeConsumer().setUnresolvedProxyPropertyConsumer(getUnresolvedProxyPropertyConsumer());
 
 		getPropertyConsumer().setIdConsumer(getIdConsumer());
+
+		getUnresolvedProxyPropertyConsumer().setIdConsumer(getIdConsumer());
 
 		getTypeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$8$Delimiter);
 		getTypeConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
 		getTypeConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$8$Delimiter);
 		getTypeConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$8$Delimiter);
 		getTypeConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
-		getTypeConsumer().setKeyword$30$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
+		getTypeConsumer().setKeyword$32$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
 		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$8$Delimiter);
 		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getTypeConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
@@ -93,6 +102,10 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 		getPropertyConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
 		getPropertyConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getPropertyConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getUnresolvedProxyPropertyConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$8$Delimiter);
+		getUnresolvedProxyPropertyConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
+		getUnresolvedProxyPropertyConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getUnresolvedProxyPropertyConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.linking.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -109,6 +122,10 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 
     public LazyLinkingTestLanguagePropertyConsumer getPropertyConsumer() {
     	return propertyConsumer;
+    }
+
+    public LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer getUnresolvedProxyPropertyConsumer() {
+    	return unresolvedProxyPropertyConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

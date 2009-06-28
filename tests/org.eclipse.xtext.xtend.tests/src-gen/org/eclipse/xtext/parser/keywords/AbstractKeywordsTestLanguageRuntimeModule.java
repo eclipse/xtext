@@ -45,7 +45,7 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
+		return AbstractKeywordsTestLanguageRuntimeModule.class.getClassLoader();
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getParentId <em>Parent Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,5 +124,21 @@ public interface Type extends EObject
    * @generated
    */
   EList<Property> getProperties();
+
+  /**
+   * Returns the value of the '<em><b>Unresolved Proxy Property</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Unresolved Proxy Property</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Unresolved Proxy Property</em>' containment reference list.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage#getType_UnresolvedProxyProperty()
+   * @model containment="true"
+   * @generated
+   */
+  EList<UnresolvedProxyProperty> getUnresolvedProxyProperty();
 
 } // Type
