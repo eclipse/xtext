@@ -27,7 +27,9 @@ public class XtextFormatterTest extends AbstractGeneratorTest {
 		String path = getClass().getPackage().getName().replace('.', '/');
 		URI u = URI.createURI("classpath:/" + path
 				+ "/XtextFormatterMessy.xtext");
-		Resource r = new XtextResourceSet().getResource(u, true);
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet.setClasspathURIContext(getClass());
+		Resource r = resourceSet.getResource(u, true);
 		// System.out.println(r.getWarnings());
 		// System.out.println(r.getErrors());
 		ByteArrayOutputStream formatted = new ByteArrayOutputStream();

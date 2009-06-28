@@ -1,0 +1,13 @@
+process(xtext::GeneratedMetamodel this) :
+  process(ePackage)
+;
+
+process(ecore::EPackage this) :
+  ((ecore::EClass)this.getEClassifier('UnresolvedProxyProperty')).eReferences.process()
+;
+
+process(ecore::EReference this) :
+	if (this.name == 'type') then (
+		this.setResolveProxies(false)
+	)
+;
