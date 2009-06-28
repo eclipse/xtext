@@ -18,6 +18,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
+import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -91,6 +92,57 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		assertEquals(t2, types.get(1));
 		assertEquals(t1, types.get(2));
 	}
+	
+	public void testBug281775_01() throws Exception {
+		String model = "type A {\n" +
+				"  A B a;\n" +
+				"}\n" +
+				"type B {\n" +
+				"  B A b;\n" +
+				"}";
+		XtextResource resource = getResource(new StringInputStream(model));
+		Model m = (Model) resource.getContents().get(0);
+		Type t1 = m.getTypes().get(0);
+		assertEquals("A", t1.getName());
+		Type t2 = m.getTypes().get(1);
+		assertEquals("B", t2.getName());
+		
+		Property propA = t1.getProperties().get(0);
+		assertEquals(2, propA.getType().size());
+		assertEquals(t1, propA.getType().get(0));
+		assertEquals(t2, propA.getType().get(1));
+		
+		Property propB = t2.getProperties().get(0);
+		assertEquals(2, propB.getType().size());
+		assertEquals(t2, propB.getType().get(0));
+		assertEquals(t1, propB.getType().get(1));
+	}
+	
+	public void testBug281775_02() throws Exception {
+		String model = "type A {\n" +
+				"  unresolved A B a;\n" +
+				"}\n" +
+				"type B {\n" +
+				"  unresolved B A b;\n" +
+				"}";
+		XtextResource resource = getResource(new StringInputStream(model));
+		Model m = (Model) resource.getContents().get(0);
+		Type t1 = m.getTypes().get(0);
+		assertEquals("A", t1.getName());
+		Type t2 = m.getTypes().get(1);
+		assertEquals("B", t2.getName());
+		
+		UnresolvedProxyProperty propA = t1.getUnresolvedProxyProperty().get(0);
+		assertEquals(2, propA.getType().size());
+		assertEquals(t1, propA.getType().get(0));
+		assertEquals(t2, propA.getType().get(1));
+		
+		UnresolvedProxyProperty propB = t2.getUnresolvedProxyProperty().get(0);
+		assertEquals(2, propB.getType().size());
+		assertEquals(t2, propB.getType().get(0));
+		assertEquals(t1, propB.getType().get(1));
+	}
+
 	
 	@Override
 	public XtextResource getResource(InputStream in) throws Exception {
