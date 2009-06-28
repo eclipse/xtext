@@ -45,7 +45,7 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
+		return AbstractEnumRulesTestLanguageRuntimeModule.class.getClassLoader();
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment

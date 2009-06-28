@@ -45,7 +45,7 @@ public abstract class AbstractReferenceGrammarTestLanguageRuntimeModule extends 
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
+		return AbstractReferenceGrammarTestLanguageRuntimeModule.class.getClassLoader();
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment

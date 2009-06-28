@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
+import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +37,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getParentId <em>Parent Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,6 +94,16 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * @ordered
    */
   protected EList<Property> properties;
+
+  /**
+   * The cached value of the '{@link #getUnresolvedProxyProperty() <em>Unresolved Proxy Property</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUnresolvedProxyProperty()
+   * @generated
+   * @ordered
+   */
+  protected EList<UnresolvedProxyProperty> unresolvedProxyProperty;
 
   /**
    * <!-- begin-user-doc -->
@@ -242,6 +254,20 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<UnresolvedProxyProperty> getUnresolvedProxyProperty()
+  {
+    if (unresolvedProxyProperty == null)
+    {
+      unresolvedProxyProperty = new EObjectContainmentEList<UnresolvedProxyProperty>(UnresolvedProxyProperty.class, this, LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY);
+    }
+    return unresolvedProxyProperty;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -249,6 +275,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
     {
       case LazyLinkingPackage.TYPE__PROPERTIES:
         return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+      case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
+        return ((InternalEList<?>)getUnresolvedProxyProperty()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -273,6 +301,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         return basicGetParentId();
       case LazyLinkingPackage.TYPE__PROPERTIES:
         return getProperties();
+      case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
+        return getUnresolvedProxyProperty();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -301,6 +331,10 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         getProperties().clear();
         getProperties().addAll((Collection<? extends Property>)newValue);
         return;
+      case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
+        getUnresolvedProxyProperty().clear();
+        getUnresolvedProxyProperty().addAll((Collection<? extends UnresolvedProxyProperty>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -327,6 +361,9 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
       case LazyLinkingPackage.TYPE__PROPERTIES:
         getProperties().clear();
         return;
+      case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
+        getUnresolvedProxyProperty().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -349,6 +386,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         return parentId != null;
       case LazyLinkingPackage.TYPE__PROPERTIES:
         return properties != null && !properties.isEmpty();
+      case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
+        return unresolvedProxyProperty != null && !unresolvedProxyProperty.isEmpty();
     }
     return super.eIsSet(featureID);
   }

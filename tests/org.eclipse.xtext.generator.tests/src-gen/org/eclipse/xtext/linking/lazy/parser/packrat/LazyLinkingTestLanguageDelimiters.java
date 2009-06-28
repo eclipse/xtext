@@ -24,6 +24,6 @@ public final class LazyLinkingTestLanguageDelimiters {
 	);
 
 	public static final ISequenceMatcher ruleCall$10$Delimiter = new SetBasedKeywordMatcher(
-		"type", "extends", "for", "in");
+		"type", "extends", "for", "in", "unresolved");
 
 }

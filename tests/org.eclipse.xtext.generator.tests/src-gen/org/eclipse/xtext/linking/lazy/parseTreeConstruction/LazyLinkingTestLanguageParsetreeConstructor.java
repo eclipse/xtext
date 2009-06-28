@@ -35,6 +35,7 @@ protected class ThisRootNode extends RootToken {
 			case 0: return new Model_TypesAssignment(this, this, 0, inst);
 			case 1: return new Type_Group(this, this, 1, inst);
 			case 2: return new Property_Group(this, this, 2, inst);
+			case 3: return new UnresolvedProxyProperty_Group(this, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -101,12 +102,14 @@ protected class Model_TypesAssignment extends AssignmentToken  {
  *
  * Type:
  *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
- *   Property] "in" extends=[Type])? "{" properties+=Property* "}";
+ *   Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
+ *   UnresolvedProxyProperty* "}";
  *
  **/
 
 // "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
-// Property] "in" extends=[Type])? "{" properties+=Property* "}"
+// Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
+// UnresolvedProxyProperty* "}"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -119,7 +122,7 @@ protected class Type_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Type_RightCurlyBracketKeyword_6(parent, this, 0, inst);
+			case 0: return new Type_RightCurlyBracketKeyword_7(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -504,21 +507,66 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 	}	
 }
 
-// "}"
-protected class Type_RightCurlyBracketKeyword_6 extends KeywordToken  {
+// unresolvedProxyProperty+=UnresolvedProxyProperty*
+protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken  {
 	
-	public Type_RightCurlyBracketKeyword_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Type_UnresolvedProxyPropertyAssignment_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_6();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getUnresolvedProxyPropertyAssignment_6();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Type_PropertiesAssignment_5(parent, this, 0, inst);
-			case 1: return new Type_LeftCurlyBracketKeyword_4(parent, this, 1, inst);
+			case 0: return new UnresolvedProxyProperty_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("unresolvedProxyProperty",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("unresolvedProxyProperty");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTypeAccess().getUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Type_UnresolvedProxyPropertyAssignment_6(parent, next, actIndex, consumed);
+			case 1: return new Type_PropertiesAssignment_5(parent, next, actIndex, consumed);
+			case 2: return new Type_LeftCurlyBracketKeyword_4(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "}"
+protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
+	
+	public Type_RightCurlyBracketKeyword_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_UnresolvedProxyPropertyAssignment_6(parent, this, 0, inst);
+			case 1: return new Type_PropertiesAssignment_5(parent, this, 1, inst);
+			case 2: return new Type_LeftCurlyBracketKeyword_4(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -647,5 +695,145 @@ protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 
 
 /************ end Rule Property ****************/
+
+
+/************ begin Rule UnresolvedProxyProperty ****************
+ *
+ * UnresolvedProxyProperty:
+ *   "unresolved" type+=[Type]+ name=ID ";";
+ *
+ **/
+
+// "unresolved" type+=[Type]+ name=ID ";"
+protected class UnresolvedProxyProperty_Group extends GroupToken {
+	
+	public UnresolvedProxyProperty_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getUnresolvedProxyPropertyAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnresolvedProxyProperty_SemicolonKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "unresolved"
+protected class UnresolvedProxyProperty_UnresolvedKeyword_0 extends KeywordToken  {
+	
+	public UnresolvedProxyProperty_UnresolvedKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getUnresolvedProxyPropertyAccess().getUnresolvedKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// type+=[Type]+
+protected class UnresolvedProxyProperty_TypeAssignment_1 extends AssignmentToken  {
+	
+	public UnresolvedProxyProperty_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnresolvedProxyPropertyAccess().getTypeAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnresolvedProxyProperty_TypeAssignment_1(parent, this, 0, inst);
+			case 1: return new UnresolvedProxyProperty_UnresolvedKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("type",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("type");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getUnresolvedProxyPropertyAccess().getTypeTypeCrossReference_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getUnresolvedProxyPropertyAccess().getTypeTypeCrossReference_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// name=ID
+protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken  {
+	
+	public UnresolvedProxyProperty_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnresolvedProxyPropertyAccess().getNameAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnresolvedProxyProperty_TypeAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getUnresolvedProxyPropertyAccess().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class UnresolvedProxyProperty_SemicolonKeyword_3 extends KeywordToken  {
+	
+	public UnresolvedProxyProperty_SemicolonKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnresolvedProxyProperty_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule UnresolvedProxyProperty ****************/
 
 }

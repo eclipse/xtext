@@ -134,13 +134,22 @@ public interface LazyLinkingPackage extends EPackage
   int TYPE__PROPERTIES = 3;
 
   /**
+   * The feature id for the '<em><b>Unresolved Proxy Property</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE__UNRESOLVED_PROXY_PROPERTY = 4;
+
+  /**
    * The number of structural features of the '<em>Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = 4;
+  int TYPE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl <em>Property</em>}' class.
@@ -178,6 +187,43 @@ public interface LazyLinkingPackage extends EPackage
    * @ordered
    */
   int PROPERTY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.UnresolvedProxyPropertyImpl <em>Unresolved Proxy Property</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.impl.UnresolvedProxyPropertyImpl
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.impl.LazyLinkingPackageImpl#getUnresolvedProxyProperty()
+   * @generated
+   */
+  int UNRESOLVED_PROXY_PROPERTY = 3;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNRESOLVED_PROXY_PROPERTY__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNRESOLVED_PROXY_PROPERTY__NAME = 1;
+
+  /**
+   * The number of structural features of the '<em>Unresolved Proxy Property</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNRESOLVED_PROXY_PROPERTY_FEATURE_COUNT = 2;
 
 
   /**
@@ -256,6 +302,17 @@ public interface LazyLinkingPackage extends EPackage
   EReference getType_Properties();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Unresolved Proxy Property</em>'.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.Type#getUnresolvedProxyProperty()
+   * @see #getType()
+   * @generated
+   */
+  EReference getType_UnresolvedProxyProperty();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Property <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -286,6 +343,38 @@ public interface LazyLinkingPackage extends EPackage
    * @generated
    */
   EAttribute getProperty_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty <em>Unresolved Proxy Property</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unresolved Proxy Property</em>'.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty
+   * @generated
+   */
+  EClass getUnresolvedProxyProperty();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Type</em>'.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getType()
+   * @see #getUnresolvedProxyProperty()
+   * @generated
+   */
+  EReference getUnresolvedProxyProperty_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty#getName()
+   * @see #getUnresolvedProxyProperty()
+   * @generated
+   */
+  EAttribute getUnresolvedProxyProperty_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -371,6 +460,14 @@ public interface LazyLinkingPackage extends EPackage
     EReference TYPE__PROPERTIES = eINSTANCE.getType_Properties();
 
     /**
+     * The meta object literal for the '<em><b>Unresolved Proxy Property</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TYPE__UNRESOLVED_PROXY_PROPERTY = eINSTANCE.getType_UnresolvedProxyProperty();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl <em>Property</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -395,6 +492,32 @@ public interface LazyLinkingPackage extends EPackage
      * @generated
      */
     EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.UnresolvedProxyPropertyImpl <em>Unresolved Proxy Property</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.linking.lazy.lazyLinking.impl.UnresolvedProxyPropertyImpl
+     * @see org.eclipse.xtext.linking.lazy.lazyLinking.impl.LazyLinkingPackageImpl#getUnresolvedProxyProperty()
+     * @generated
+     */
+    EClass UNRESOLVED_PROXY_PROPERTY = eINSTANCE.getUnresolvedProxyProperty();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNRESOLVED_PROXY_PROPERTY__TYPE = eINSTANCE.getUnresolvedProxyProperty_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNRESOLVED_PROXY_PROPERTY__NAME = eINSTANCE.getUnresolvedProxyProperty_Name();
 
   }
 

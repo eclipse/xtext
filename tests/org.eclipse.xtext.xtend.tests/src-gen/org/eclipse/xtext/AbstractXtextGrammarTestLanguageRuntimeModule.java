@@ -45,7 +45,7 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
+		return AbstractXtextGrammarTestLanguageRuntimeModule.class.getClassLoader();
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.CheckFragment

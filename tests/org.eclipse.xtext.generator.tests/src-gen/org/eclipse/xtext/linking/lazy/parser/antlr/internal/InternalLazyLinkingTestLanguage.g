@@ -254,9 +254,30 @@ ruleType returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
+)*(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getTypeAccess().getUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0(), currentNode); 
+	    }
+	    lv_unresolvedProxyProperty_12=ruleUnresolvedProxyProperty 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "unresolvedProxyProperty", lv_unresolvedProxyProperty_12, "UnresolvedProxyProperty", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
 )*'}' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_6(), null); 
+        createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7(), null); 
     }
 );
 
@@ -318,6 +339,71 @@ ruleProperty returns [EObject current=null]
 )';' 
     {
         createLeafNode(grammarAccess.getPropertyAccess().getSemicolonKeyword_2(), null); 
+    }
+);
+
+
+
+
+
+// Entry rule entryRuleUnresolvedProxyProperty
+entryRuleUnresolvedProxyProperty returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getUnresolvedProxyPropertyRule(), currentNode); }
+	 iv_ruleUnresolvedProxyProperty=ruleUnresolvedProxyProperty 
+	 { $current=$iv_ruleUnresolvedProxyProperty.current; } 
+	 EOF 
+;
+
+// Rule UnresolvedProxyProperty
+ruleUnresolvedProxyProperty returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('unresolved' 
+    {
+        createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getUnresolvedKeyword_0(), null); 
+    }
+(	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getTypeTypeCrossReference_1_0(), "type"); 
+	}
+
+		// TODO assign feature to currentNode
+	
+)+(	
+	
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_2, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)';' 
+    {
+        createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3(), null); 
     }
 );
 

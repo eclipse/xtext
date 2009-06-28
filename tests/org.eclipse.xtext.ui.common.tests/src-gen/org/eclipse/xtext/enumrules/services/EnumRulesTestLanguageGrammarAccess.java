@@ -90,11 +90,11 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final EnumLiteralDeclaration cDifferentNameEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cDifferentNameDifferentLiteralKeyword_2_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" |
-		//DifferentName ;
+		//enum ExistingEnum:
+		//  SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 		public EnumRule getRule() { return rule; }
 
-		//SameName | OverriddenLiteral = "overridden" | DifferentName
+		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SameName
@@ -103,13 +103,13 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 
-		//OverriddenLiteral = "overridden"
+		//OverriddenLiteral="overridden"
 		public EnumLiteralDeclaration getOverriddenLiteralEnumLiteralDeclaration_1() { return cOverriddenLiteralEnumLiteralDeclaration_1; }
 
 		//"overridden"
 		public Keyword getOverriddenLiteralOverriddenKeyword_1_0() { return cOverriddenLiteralOverriddenKeyword_1_0; }
 
-		//DifferentName
+		//DifferentName="DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_2() { return cDifferentNameEnumLiteralDeclaration_2; }
 
 		//"DifferentLiteral"
@@ -124,10 +124,11 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final EnumLiteralDeclaration cDifferentNameEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cDifferentNameDifferentLiteralKeyword_1_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_1.eContents().get(0);
 		
-		//enum GeneratedEnum returns GeneratedEnum : SameName | DifferentName ;
+		//enum GeneratedEnum:
+		//  SameName | DifferentName="DifferentLiteral";
 		public EnumRule getRule() { return rule; }
 
-		//SameName | DifferentName
+		//SameName | DifferentName="DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SameName
@@ -136,7 +137,7 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 
-		//DifferentName
+		//DifferentName="DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_1() { return cDifferentNameEnumLiteralDeclaration_1; }
 
 		//"DifferentLiteral"
@@ -179,8 +180,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		return getModelAccess().getRule();
 	}
 
-	//enum ExistingEnum returns ExistingEnum : SameName | OverriddenLiteral = "overridden" |
-	//DifferentName ;
+	//enum ExistingEnum:
+	//  SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 	public ExistingEnumElements getExistingEnumAccess() {
 		return (unknownRuleExistingEnum != null) ? unknownRuleExistingEnum : (unknownRuleExistingEnum = new ExistingEnumElements());
 	}
@@ -189,7 +190,8 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		return getExistingEnumAccess().getRule();
 	}
 
-	//enum GeneratedEnum returns GeneratedEnum : SameName | DifferentName ;
+	//enum GeneratedEnum:
+	//  SameName | DifferentName="DifferentLiteral";
 	public GeneratedEnumElements getGeneratedEnumAccess() {
 		return (unknownRuleGeneratedEnum != null) ? unknownRuleGeneratedEnum : (unknownRuleGeneratedEnum = new GeneratedEnumElements());
 	}
@@ -199,38 +201,38 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0" .. "9" +;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
+	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *" -> "* /";
+	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  ( " " | "\t" | "\r" | "\n" ) +;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

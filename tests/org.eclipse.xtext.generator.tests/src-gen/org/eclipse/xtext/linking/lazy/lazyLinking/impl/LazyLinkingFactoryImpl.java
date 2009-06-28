@@ -70,6 +70,7 @@ public class LazyLinkingFactoryImpl extends EFactoryImpl implements LazyLinkingF
       case LazyLinkingPackage.MODEL: return createModel();
       case LazyLinkingPackage.TYPE: return createType();
       case LazyLinkingPackage.PROPERTY: return createProperty();
+      case LazyLinkingPackage.UNRESOLVED_PROXY_PROPERTY: return createUnresolvedProxyProperty();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -106,6 +107,17 @@ public class LazyLinkingFactoryImpl extends EFactoryImpl implements LazyLinkingF
   {
     PropertyImpl property = new PropertyImpl();
     return property;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnresolvedProxyProperty createUnresolvedProxyProperty()
+  {
+    UnresolvedProxyPropertyImpl unresolvedProxyProperty = new UnresolvedProxyPropertyImpl();
+    return unresolvedProxyProperty;
   }
 
   /**
