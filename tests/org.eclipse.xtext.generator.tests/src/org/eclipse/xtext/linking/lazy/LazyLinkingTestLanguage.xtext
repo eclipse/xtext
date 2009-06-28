@@ -15,7 +15,11 @@ Model :
 Type :
 	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
 		(properties+=Property)* 
+		(unresolvedProxyProperty+=UnresolvedProxyProperty)* 
 	'}';
 	
 Property :
 	(type+=[Type])+ name=ID ';';
+	
+UnresolvedProxyProperty :
+	'unresolved' (type+=[Type])+ name=ID ';';
