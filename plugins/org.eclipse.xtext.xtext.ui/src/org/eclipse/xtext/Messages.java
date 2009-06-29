@@ -18,11 +18,14 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.messages"; //$NON-NLS-1$
 	public static String NewXtextProjectWizard_WindowTitle;
 	public static String NewXtextProjectWizardPage_Title;
+	public static String NewXtextProjectWizardPage_LanguageMustStartWithPackageName;
 	public static String NewXtextProjectWizardPage_LanguageNameMandatory;
 	public static String NewXtextProjectWizardPage_InvalidURI;
 	public static String NewXtextProjectWizardPage_Description;
 	public static String NewXtextProjectWizardPage_MainProjectName;
 	public static String NewXtextProjectWizardPage_LanguageName;
+	public static String NewXtextProjectWizardPage_LanguageProjectNameDifference;
+	public static String NewXtextProjectWizardPage_LastElementMustStartWithUppercase;
 	public static String NewXtextProjectWizardPage_FileExtension;
 	public static String NewXtextProjectWizardPage_GeneratorProject;
 	public static String NewXtextProjectWizardPage_ProjectNameValidationError;

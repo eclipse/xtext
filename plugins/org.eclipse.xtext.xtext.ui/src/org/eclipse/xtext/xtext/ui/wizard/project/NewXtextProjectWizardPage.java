@@ -178,7 +178,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		final String languageName = xtextProjectInfo.getLanguageName();
 
 		if (languageName.length() > 0 && !validatePackageName(languagePackage)) {
-			errorMessage("The language name must start with a valid Java package name");
+			errorMessage(Messages.NewXtextProjectWizardPage_LanguageMustStartWithPackageName);
 			return;
 		}
 
@@ -187,13 +187,13 @@ public class NewXtextProjectWizardPage extends WizardPage {
 				errorMessage(Messages.NewXtextProjectWizardPage_LanguageNameMandatory);
 			}
 			else {
-				errorMessage("The last segment of the language name must start with an uppercase letter");
+				errorMessage(Messages.NewXtextProjectWizardPage_LastElementMustStartWithUppercase);
 			}
 			return;
 		}
 
 		if (!projectPrefix.equals(languagePackage)) {
-			warningMessage("The project name for this language should start with '" + languagePackage + "'");
+			warningMessage(Messages.NewXtextProjectWizardPage_LanguageProjectNameDifference + languagePackage + "'");
 			return;
 		}
 
