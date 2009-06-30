@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -36,8 +39,8 @@ public abstract class EClassifierInfo {
 		this.eClassifier = metaType;
 	}
 
-	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated) {
-		return new EClassInfo(eClass, isGenerated);
+	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated, Set<String> generatedEPackageURIs) {
+		return new EClassInfo(eClass, isGenerated, generatedEPackageURIs);
 	}
 
 	public static EClassifierInfo createEDataTypeInfo(EDataType eDataType, boolean isGenerated) {
@@ -63,8 +66,11 @@ public abstract class EClassifierInfo {
 
 	public static class EClassInfo extends EClassifierInfo {
 
-		public EClassInfo(EClassifier metaType, boolean isGenerated) {
+		private Set<String> generatedEPackageURIs;
+		
+		public EClassInfo(EClassifier metaType, boolean isGenerated, Set<String> generatedEPackageURIs) {
 			super(metaType, isGenerated);
+			this.generatedEPackageURIs = generatedEPackageURIs;
 		}
 
 		@Override
@@ -131,7 +137,8 @@ public abstract class EClassifierInfo {
 			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
 					isContainment);
 
-			switch (EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature)) {
+			FindResult containsSemanticallyEqualFeature = EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature);
+			switch (containsSemanticallyEqualFeature) {
 				case FeatureDoesNotExist:
 					if (!isGenerated())
 						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
@@ -143,8 +150,8 @@ public abstract class EClassifierInfo {
 					// do nothing
 			}
 
-			// feature with same name exists, but have a different, potentially
-			// incompatible configuration
+			// feature with same name exists, but has a different, 
+			// potentially incompatible configuration
 			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(featureName);
 
 			if (!EcoreUtil2.isFeatureSemanticallyEqualApartFromType(newFeature, existingFeature))
@@ -157,12 +164,22 @@ public abstract class EClassifierInfo {
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
 						"Cannot find compatible type for features", parserElement);
-
-			// TODO check, whether existing feature can be changed (feature's
-			// declaring type isGenerated==true)
-			// try to avoid coupling between this class and EClassifierInfos
-			existingFeature.setEType(compatibleType);
+			
+			if (isGenerated(existingFeature)) {
+				existingFeature.setEType(compatibleType);
+			} else {
+				throw new TransformationException(TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
+						"Incompatible return type to existing feature", parserElement);
+			}
 			return true;
+		}
+
+		/**
+		 * @param existingFeature
+		 * @return
+		 */
+		private boolean isGenerated(EStructuralFeature existingFeature) {
+			return generatedEPackageURIs.contains(existingFeature.getEContainingClass().getEPackage().getNsURI());
 		}
 
 		private EStructuralFeature createFeatureWith(String featureName, EClassifier featureClassifier,
