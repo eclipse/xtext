@@ -30,10 +30,12 @@ import org.eclipse.ui.IWorkbenchListener;
 import org.eclipse.ui.PlatformUI;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
+@Singleton
 public class IndexStartupInitializer implements IStartup {
 
 	@Inject
@@ -61,6 +63,32 @@ public class IndexStartupInitializer implements IStartup {
 			EmfIndexUIPlugin.logError("Error indexing EPackage registry", exc);
 		}
 
+		buildAll();
+
+		if (index instanceof IPersistableIndexStore) {
+			IWorkbench workbench = PlatformUI.getWorkbench();
+			if (workbench != null) {
+				workbench.addWorkbenchListener(new IWorkbenchListener() {
+					public boolean preShutdown(IWorkbench workbench, boolean forced) {
+						try {
+							((IPersistableIndexStore) index)
+									.save(new FileOutputStream(EmfIndexUIPlugin.getIndexFile()));
+						}
+						catch (Exception e) {
+							EmfIndexUIPlugin.logError("Error saving EMF index", e);
+						}
+						return true;
+					}
+
+					public void postShutdown(IWorkbench workbench) {
+						// do nothing.
+					}
+				});
+			}
+		}
+	}
+
+	public static void buildAll() {
 		for (final IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			try {
 				if (project.isAccessible()) {
@@ -88,28 +116,6 @@ public class IndexStartupInitializer implements IStartup {
 			}
 			catch (CoreException ce) {
 				EmfIndexUIPlugin.logError("Error getting project description of " + project.getName(), ce);
-			}
-		}
-
-		if (index instanceof IPersistableIndexStore) {
-			IWorkbench workbench = PlatformUI.getWorkbench();
-			if (workbench != null) {
-				workbench.addWorkbenchListener(new IWorkbenchListener() {
-					public boolean preShutdown(IWorkbench workbench, boolean forced) {
-						try {
-							((IPersistableIndexStore) index)
-									.save(new FileOutputStream(EmfIndexUIPlugin.getIndexFile()));
-						}
-						catch (Exception e) {
-							EmfIndexUIPlugin.logError("Error saving EMF index", e);
-						}
-						return true;
-					}
-
-					public void postShutdown(IWorkbench workbench) {
-						// do nothing.
-					}
-				});
 			}
 		}
 	}

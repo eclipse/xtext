@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ui.EmfIndexUIModule;
+import org.eclipse.emf.index.ui.builder.IndexStartupInitializer;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -45,6 +46,7 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 		injector = Guice.createInjector(new EmfIndexUIModule());
 		indexStore = injector.getInstance(IndexStore.class); 
 		plugin = this;
+		IndexStartupInitializer.buildAll();
 	}
 
 	public void stop(BundleContext context) throws Exception {
