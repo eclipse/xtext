@@ -1100,4 +1100,23 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(grammar.indexOf("xtext::ParserRule"), diagnostic.getOffset());
 		assertEquals("xtext::ParserRule".length(), diagnostic.getLength());
 	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=280393
+	 */
+	public void testBug_280393() throws Exception {
+		final String grammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n" + 
+				"\n" + 
+				"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" + 
+				"generate bar \"http://www.Bar.foo\"\n" + 
+				"\n" + 
+				"Foo returns ecore::EClass : \n" + 
+				"	Bar | eSuperTypes+=[ecore::EClass];\n" + 
+				"\n" + 
+				"Bar :\n" + 
+				" 	'bar' eSuperTypes+=[ecore::EAttribute];";
+		
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
 }

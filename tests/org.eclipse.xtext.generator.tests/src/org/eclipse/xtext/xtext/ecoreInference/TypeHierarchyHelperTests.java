@@ -9,6 +9,9 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import static org.easymock.EasyMock.*;
+
+import java.util.Collections;
+
 import junit.framework.TestCase;
 
 import org.easymock.EasyMock;
@@ -62,7 +65,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 	private EClassInfo addClass(String name, boolean isGenerated) {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(name);
-		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated);
+		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated, Collections.<String>emptySet());
 		infos.addInfo(metamodel, name, info);
 		return info;
 	}
