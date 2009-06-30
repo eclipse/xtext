@@ -62,6 +62,7 @@ import org.eclipse.xtext.util.XtextSwitch;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -753,7 +754,7 @@ public class Xtext2EcoreTransformer {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated);
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, generated, getGeneratedEPackageURIs());
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
@@ -763,6 +764,18 @@ public class Xtext2EcoreTransformer {
 				target.addInfo(metaModel, eClassifier.getName(), info);
 			}
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	private Set<String> getGeneratedEPackageURIs() {
+		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
+		return Sets.newHashSet(Iterables.transform(list, new Function<GeneratedMetamodel, String>() {
+			public String apply(GeneratedMetamodel from) {
+				return from.getEPackage()!=null?from.getEPackage().getNsURI() : null;
+			}
+		}));
 	}
 
 	private void reportError(TransformationErrorCode errorCode, String message, EObject erroneousElement) {
@@ -848,7 +861,7 @@ public class Xtext2EcoreTransformer {
 
 			EClassifierInfo result;
 			if (classifier instanceof EClass)
-				result = EClassifierInfo.createEClassInfo((EClass) classifier, true);
+				result = EClassifierInfo.createEClassInfo((EClass) classifier, true, getGeneratedEPackageURIs());
 			else // datatype or enum
 				result = EClassifierInfo.createEDataTypeInfo((EDataType) classifier, true);
 
