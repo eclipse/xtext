@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
+import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
-import org.eclipse.xtext.ui.common.editor.outline.internal.PreservingContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.linking.EditorSelectionChangedListener;
 import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.common.editor.outline.linking.OutlineSelectionChangedListener;
@@ -66,7 +66,7 @@ import com.google.inject.Inject;
  * 
  * @author Peter Friese - Initial contribution and API
  */
-public class XtextContentOutlinePage extends PreservingContentOutlinePage implements ISourceViewerAware,
+public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware,
 		IXtextEditorAware {
 
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
@@ -108,7 +108,7 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(1);
+		viewer.setAutoExpandLevel(2);
 		viewer.setUseHashlookup(false);
 	}
 
@@ -144,7 +144,7 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 			// installing a model listener.
 			installModelListener();
 
-			internalSetInput(xtextDocument);
+			internalSetInput(xtextDocument, true);
 		}
 	}
 
@@ -218,10 +218,16 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 		}
 	}
 
-	private void internalSetInput(IXtextDocument xtextDocument) {
+	private void internalSetInput(IXtextDocument xtextDocument, boolean initial) {
 		TreeViewer tree = getTreeViewer();
 		if (tree != null) {
+			Object[] expandedElements = null;
+			expandedElements = tree.getExpandedElements();
+
 			tree.setInput(xtextDocument);
+			
+			if (expandedElements != null && expandedElements.length > 0)
+				tree.setExpandedElements(expandedElements);
 		}
 	}
 
@@ -360,7 +366,7 @@ public class XtextContentOutlinePage extends PreservingContentOutlinePage implem
 				TreeViewer tv = getTreeViewer();
 				if (tv != null) {
 					IDocument document = sourceViewer.getDocument();
-					internalSetInput(XtextDocumentUtil.get(document));
+					internalSetInput(XtextDocumentUtil.get(document), false);
 					tv.refresh();
 				}
 			}
