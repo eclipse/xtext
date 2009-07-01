@@ -71,6 +71,18 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.FormatAction"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
@@ -83,7 +95,7 @@
    </extension>
    <extension
          point="org.eclipse.ui.commands">
-	  <command
+      <command
             name="Format"
             description="Format text"
             categoryId="org.eclipse.ui.category.textEditor"
