@@ -48,8 +48,20 @@
    <extension
          point="org.eclipse.ui.menus">
         <menuContribution
-            locationURI="popup:#TextEditorContext?after=additions">
+            locationURI="popup:#TextEditorContext?after=group.edit">
          <command commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.ToggleCommentAction"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -93,24 +105,24 @@
       class="org.eclipse.xtext.ui.core.editor.XtextEditorPropertyTester">
     </propertyTester>
   </extension>
- <extension
-         point="org.eclipse.ui.bindings">
-		<key sequence="M1+M2+F"
-            contextId="org.eclipse.ui.textEditorScope"
-            commandId="org.eclipse.xtext.ui.FormatAction"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-        <key sequence="M1+7"
-            contextId="org.eclipse.ui.textEditorScope"
-            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-        <key sequence="M1+/"
-            contextId="org.eclipse.ui.textEditorScope"
-            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-        <key sequence="M1+M2+C"
-            contextId="org.eclipse.ui.textEditorScope"
-            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+  <extension
+      point="org.eclipse.ui.bindings">
+    <key sequence="M1+M2+F"
+      contextId="org.eclipse.ui.textEditorScope"
+      commandId="org.eclipse.xtext.ui.FormatAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+7"
+      contextId="org.eclipse.ui.textEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+/"
+      contextId="org.eclipse.ui.textEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+C"
+        contextId="org.eclipse.ui.textEditorScope"
+        commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
   <extension
          id="fast"
