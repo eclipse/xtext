@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Where are the Xtend-based APIs?</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Where are the Xtend-based APIs?</h1>
+<div class="section" title="Where are the Xtend-based APIs?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Xtend_based_apis"></a>Where are the Xtend-based APIs?</h2>
+</div>
+</div>
+</div>
 <p>One of the nice things with oAW Xtext was the use of Xtend to allow customizing different aspects of the generated language infrastructure.
 				Xtend is a part of the template language Xpand, which is shipped with oAW (and now is included in M2T Xpand). It provides a nicer expression syntax than Java.
 				Especially the existence of higher-order functions for collections is extremely handy when working with models.
@@ -101,6 +110,7 @@ public&nbsp;class&nbsp;DomainModelLabelProvider&nbsp;extends&nbsp;DefaultLabelPr
 </div>
 <p>Just to get it right, Xtend is a very powerful language and we still use it for its main purpose: code generation and model transformation. The whole generator in TMF Xtext is written in Xpand and Xtend and its performance is at least in our experience sufficient for that use case. Actually we were able to increase the runtime performance of Xpand by about 60% for the Galileo release of M2T Xpand. But still, live execution in the IDE and on typing is very critical and one has to think about every millisecond in this area. </p>
 <p>As an alternative to the Java APIs we also considered other JVM languages. We like static typing and think it is especially important when processing typed models (which evolve heavily). That&rsquo;s why Groovy or JRuby were no alternatives. Using Scala would have been a very good match, but we didn&rsquo;t want to require knowledge of Scala so we didn&rsquo;t use it and stuck to Java. </p>
+</div>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Getting Started</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
+<div class="section" title="Getting Started">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="getting-started"></a>Getting Started</h2>
+</div>
+</div>
+</div>
 <p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
 				<a class="ulink" href="http://www.eclipse.org/Xtext/download" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
@@ -57,7 +66,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>Use the Xtext wizard to create a new project</p>
-<p>	File -&gt; New -&gt; Project  -&gt; Xtext -&gt; Xtext project</p>
+<p>	File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</p>
 <p>Choose a sensible project name, language name and file extension, e.g.</p>
 <table id="N10081">
 <tr>
@@ -110,7 +119,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>
 				
 </p>
-<p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by teh generator.</p>
+<p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.</p>
 </div>
 <div class="section" title="Build your own grammar">
 <div class="titlepage">
@@ -124,7 +133,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>The wizard will automatically open the example grammar file 
 					<code class="code">Entities.xtext</code> from the first project in the editor. A grammar has two purposes. First, it is used to describe the concrete syntax of your language. Second, it contains information about how a parser shall create a model during parsing.
 				</p>
-<p>Ignore the generated sample grammar, delete everything from "
+<p>Ignore the generated sample grammar, delete everything after "
 					<code class="code">Model :</code>" to the end. 
 					The entry rule for the parser will be called 
 					<code class="code">Model</code>. As a 
@@ -150,12 +159,16 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					</span> 
 				
 </p>
-<p>An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword returns. If the type&rsquo;s name is the same as the rule name, it can be omitted as in our case.</p>
+<p>An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword 
+					<code class="code">returns</code>. If the type&rsquo;s name is the same as the rule name, it can be omitted as in our case.
+				</p>
 <p>The parser will create a new element of type 
 					<code class="code">Model</code> when it enters the rule 
 					<code class="code">Model</code>, and a new element of type 
 					<code class="code">Entity</code> every time it enters the rule 
-					<code class="code">Entity</code>. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference entities. We specify it using the assignment operator &ldquo;+=&rdquo;, which denotes a multi valued feature. 
+					<code class="code">Entity</code>. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference 
+					<span class="emphasis"><em>entities</em></span>. We specify it using the assignment operator "
+					<code class="code">+=</code>", which denotes a multi valued feature. 
 				</p>
 <p>As a result, we modify the first rule to</p>
 <div class="literallayout">
@@ -169,7 +182,9 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </p>
 </div>
 <p>The next rule on our list is the rule 
-					<code class="code">Entity</code>. Looking at our target syntax, each entity begins with the keyword entity followed by the entity&rsquo;s name and an opening curly brace (we will handle the extends clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+					<code class="code">Entity</code>. Looking at our target syntax, each entity begins with the keyword 
+					<code class="code">entity</code> followed by the entity&rsquo;s name and an opening curly brace (we will handle the 
+					<code class="code">extends</code> clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
 				</p>
 <div class="literallayout">
 <p>
@@ -186,8 +201,10 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 <p>Instead of creating a new AST node for the name, we rather want the name to be an attribute of the 
 					<code class="code">Entity</code> class. Therefore we use the terminal rule 
-					<code class="code">ID</code>, which results in a string. The assignment operator &ldquo;=&rdquo; denotes a single valued feature, and the asterisk a cardinality of 0..n.
-					In our target syntax, some entities refer to an existing entity as their super type after the keyword extends. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &ldquo;?&rdquo;. The complete rule now reads as
+					<code class="code">ID</code>, which results in a string. The assignment operator "
+					<code class="code">=</code>" denotes a single valued feature, and the asterisk a cardinality of 0..n.
+					In our target syntax, some entities refer to an existing entity as their super type after the keyword 
+					<code class="code">extends</code>. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &ldquo;?&rdquo;. The complete rule now reads:
 				</p>
 <div class="literallayout">
 <p>
@@ -233,10 +250,11 @@ SimpleType:<br>
 					<code class="code">Type</code> can either be a 
 					<code class="code">SimpleType</code>  or the 
 					<code class="code">Entity</code> you already know. Our rule 
-					<code class="code">Type</code> will just delegate to either of them, using the &ldquo;|&rdquo; separator. The combination of simple data types and entites this way introduces a common super type 
+					<code class="code">Type</code> will just delegate to either of them, using the "
+					<code class="code">|</code>" alternatives operator. The combination of simple data types and entites this way introduces a common super type 
 					<code class="code">Type</code> both 
 					<code class="code">Entity</code> and 
-					<code class="code">SimpleType</code> derive from. This allows you to refer to both types of elemets with a single cross-reference.
+					<code class="code">SimpleType</code> derive from. This allows you to refer to both types of elements with a single cross-reference.
 				</p>
 <p>A 
 					<code class="code">Property</code> consist of a keyword, a name, a colon and a cross-reference to an arbitrary 
@@ -288,7 +306,7 @@ SimpleType:<br>
 <p>If code generation succeeded, right-click on the Xtext project and choose</p>
 <p>	Run As -&gt; Eclipse Application.</p>
 <p>This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-					In the new workbench, create a new project (File -&gt; New -&gt; Project  -&gt; General -&gt; Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.</p>
+					In the new workbench, create a new project (File -&gt; New -&gt; Project...  -&gt; General -&gt; Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.</p>
 <p>
 					
 </p>
@@ -297,6 +315,7 @@ SimpleType:<br>
 <p>
 				
 </p>
+</div>
 </div>
 </body>
 </html>

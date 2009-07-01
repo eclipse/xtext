@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Integration with EMF</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Integration with EMF</h1>
+<div class="section" title="Integration with EMF">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="emf_integration"></a>Integration with EMF</h2>
+</div>
+</div>
+</div>
 <p>Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools.</p>
 <div class="section" title="XtextResource Implementation">
 <div class="titlepage">
@@ -22,7 +31,7 @@
 </div>
 </div>
 <p>Xtext provides an implementation of EMF&rsquo;s resource, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
 				</p>
 <p>
 					
@@ -33,8 +42,8 @@
 				
 </p>
 <p>The generator fragment 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
 				</p>
 <p>Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g.</p>
 <div class="itemizedlist">
@@ -124,6 +133,7 @@
 </p>
 </div>
 <p>Note that the currently available default fragment provider does nothing (i.e. falls back to the default behavior of EMF).</p>
+</div>
 </div>
 </body>
 </html>

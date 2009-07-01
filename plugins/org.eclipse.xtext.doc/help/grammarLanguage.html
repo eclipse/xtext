@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The Grammar Language</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,8 +11,39 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Grammar Language</h1>
+<div class="chapter" title="The Grammar Language">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="grammarLanguage"></a>The Grammar Language</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="grammarLanguage.html#Afirstexample">A first example</a></span>
+</dt>
+<dt>
+<span class="section"><a href="syntax.html">The Syntax</a></span>
+</dt>
+<dt>
+<span class="section"><a href="metamodelInference.html">Ecore model inference</a></span>
+</dt>
+<dt>
+<span class="section"><a href="grammarImport.html">Importing existing Ecore models</a></span>
+</dt>
+<dt>
+<span class="section"><a href="grammarMixins.html">Grammar Mixins</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Defaulttokens.html">Default tokens</a></span>
+</dt>
+</dl>
+</div>
 <p>The 
-			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup" target="_new">grammar language</a> 
+			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&amp;view=markup" target="_new">grammar language</a> 
 			is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create DSLs, so what would be more helpful than developing the Xtext language with Xtext?
 		</p>
 <p>The grammar language is a domain-specific language, carefully designed for the description of textual languages based on 
@@ -20,12 +51,12 @@
 			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">ANTLR3's parsing strategy</a>.
 			The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 		</p>
-<div class="section" title="First an example">
+<div class="section" title="A first example">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="Firstanexample"></a>First an example</h2>
+<a name="Afirstexample"></a>A first example</h2>
 </div>
 </div>
 </div>
@@ -126,6 +157,7 @@ Transition&nbsp;:<br>
 
 </code>
 </p>
+</div>
 </div>
 </div>
 </body>

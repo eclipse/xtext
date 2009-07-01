@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Validation</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Validation</h1>
+<div class="section" title="Validation">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="validation"></a>Validation</h2>
+</div>
+</div>
+</div>
 <p>Static analysis or validation is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful
 				if they get informative feedback as they type. 
 				In Xtext there are basically three different kinds of validation.</p>
@@ -157,7 +166,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 <p>In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the 
 					<a class="link" href="configuration.html#generator" title="The Generator">generator</a> with the
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&amp;view=co" target="_new">CheckFragment</a>.
 					Please note, that you can combine both types of validation in your project. 
 				</p>
 <div class="literallayout">
@@ -190,5 +199,6 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 					<code class="code">ERROR</code> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
 				</p>Please read more about the Check language as well as the underlying expression language in Xpand&rsquo;s reference documentation which is shipped as Eclipse help. 
 			</div>
+</div>
 </body>
 </html>

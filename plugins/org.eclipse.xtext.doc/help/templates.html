@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Template Proposals</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Template Proposals</h1>
+<div class="section" title="Template Proposals">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="templates"></a>Template Proposals</h2>
+</div>
+</div>
+</div>
 <p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named 
 				<code class="code">templates.xml</code> inside the 
 				<code class="code">templates</code> directory of the generated ui-plugin. This file contains templates in a format as described in the 
@@ -27,7 +36,7 @@
 <p>By default Xtext registers ContextTypes for each Rule (
 				<code class="code">.[RuleName]</code>) and for each keyword (
 				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&amp;view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
 				<a class="link" href="dependencyInjection.html#guicemanualmodules" title="Modules intended for customization">Guice</a>. 
 			</p>
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
@@ -92,7 +101,7 @@
 </div>
 </div>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&view=co" target="_new">EnumTemplateVariableResolver</a> resolves a template variable to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&amp;view=co" target="_new">EnumTemplateVariableResolver</a> resolves a template variable to 
 					<code class="code">EEnumLiteral</code> literals
 					which are assignment-compatible to the enumeration type declared as the first parameter of the the 
 					<code class="code">Enum</code> 
@@ -133,6 +142,7 @@
 <p>
 				
 </p>
+</div>
 </div>
 </body>
 </html>

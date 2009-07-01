@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Linking</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Linking</h1>
+<div class="section" title="Linking">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="linking"></a>Linking</h2>
+</div>
+</div>
+</div>
 <p>The linking feature allows for specification of cross references within an Xtext grammar.
 				The following things are needed for the linking:</p>
 <div class="orderedlist">
@@ -73,7 +82,7 @@
 <p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p>
 <div class="literallayout">
 <p>
-<code class="code">ref&nbsp;"EntityWith&#402;&divide;&lsaquo;"<br>
+<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
 
 </code>
 </p>
@@ -91,7 +100,7 @@
 </div>
 <p>The 
 					<code class="code">ILinker</code> implementation that is used by default is the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a>. It installs 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&amp;view=co" target="_new">LazyLinker</a>. It installs 
 					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
 					The actual cross reference resolution is done by 
 					<code class="code">LazyLinkingResource.getEObject(String)</code> and delegates to an implementation of the 
@@ -132,7 +141,7 @@
 					<code class="code">getLinkText</code> addresses complementary functionality: it is used for serialization.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&amp;view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
 					<code class="code">IScopeProvider</code> to compute the linking candidates.
 				</p>
 </div>
@@ -269,6 +278,7 @@ entity&nbsp;Foo;<br>
 						<code class="code">Foo</code> in that order. They will be computed by the 
 						<a class="link" href="scoping.html" title="Scoping">ScopeProvider</a>. 
 					</p>
+</div>
 </div>
 </div>
 </body>

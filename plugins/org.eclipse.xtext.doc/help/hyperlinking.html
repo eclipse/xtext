@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hyperlinking</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,6 +11,15 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Hyperlinking</h1>
+<div class="section" title="Hyperlinking">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="hyperlinking"></a>Hyperlinking</h2>
+</div>
+</div>
+</div>
 <p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your grammar definition. This means that you can either control-click on any of these tokens or hit F3 while the cursor position is at the token in question and this will take you to the referenced model element. As you&rsquo;d expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.</p>
 <div class="section" title="Location Provider">
 <div class="titlepage">
@@ -22,8 +31,8 @@
 </div>
 </div>
 <p>When navigating a hyperlink Xtext will also select the text region corresponding to the referenced model element. Determining this text region is the responsibility of the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/ILocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">ILocationInFileProvider</a>. The default implementation (
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/DefaultLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">DefaultLocationInFileProvider</a>) implements a best effort strategy which can be summarized as:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/ILocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">ILocationInFileProvider</a>. The default implementation (
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/DefaultLocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">DefaultLocationInFileProvider</a>) implements a best effort strategy which can be summarized as:
 				</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -79,8 +88,9 @@
 						<code class="code">DefaultLocationInFileProvider</code> and override the methods 
 						<code class="code">getIdentifierFeature</code> and / or 
 						<code class="code">useKeyword</code> to guide the first and last steps of the strategy as described above (see 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">XtextLocationInFileProvider</a> for an example).
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">XtextLocationInFileProvider</a> for an example).
 					</p>
+</div>
 </div>
 </div>
 </body>
