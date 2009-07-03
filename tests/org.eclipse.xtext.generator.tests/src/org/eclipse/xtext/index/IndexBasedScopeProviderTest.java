@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.PersistableIndexStore;
 import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.xtext.index.DefaultIndexBasedScopeProvider.DefaultImportNormalizer;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
@@ -31,6 +32,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -290,6 +294,41 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		} while (scope!=IScope.NULLSCOPE);
 	}
 	
+	public void testImportsWithoutWildcard() throws Exception {
+		final XtextResource resource = getResource(new StringInputStream(
+				"foo { " +
+				"  import bar.Bar" +
+				"  entity Foo {" +
+				"  }" +
+				"}" +
+				"bar {" +
+				"  entity Bar{}" +
+				"}" +
+		"}"), URI.createURI("withoutwildcard.indextestlanguage"));
+		IndexFeederImpl feeder = new IndexFeederImpl(store);
+		indexer.resourceChanged(resource, feeder);
+		feeder.commit();
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return resource.getAllContents();
+			}
+		};
+		Iterator<Entity> iterator = Iterables.filter(allContents, Entity.class).iterator();
+		Entity foo = iterator.next();
+		assertEquals("Foo", foo.getName());
+		
+		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		for (IScopedElement ele : scope.getAllContents()) {
+			if (ele.name().equals("Bar"))
+				return;
+		}
+		fail("No entity 'Bar' found");
+	}
+	
+	public void testDefaultImportNormalizer() throws Exception {
+		DefaultImportNormalizer normalizer = new DefaultImportNormalizer(Lists.newArrayList("foo","Bar"),new DefaultDeclarativeQualifiedNameProvider());
+		assertEquals("foo.Bar",normalizer.apply("Bar"));
+	}
 	
 	
 	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
