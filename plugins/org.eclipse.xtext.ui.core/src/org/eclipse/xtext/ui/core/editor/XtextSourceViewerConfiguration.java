@@ -19,10 +19,12 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
+import org.eclipse.xtext.ui.core.editor.hover.ProblemHover;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ISingleLineCommentHelper;
 
 import com.google.inject.Inject;
@@ -53,6 +55,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Inject
 	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
+
+	/**
+	 * @see org.eclipse.ui.editors.text.TextSourceViewerConfiguration#getAnnotationHover(org.eclipse.jface.text.source.ISourceViewer)
+	 */
+	@Override
+	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+		return new ProblemHover(sourceViewer);
+	}
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -133,4 +143,5 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public Provider<XtextPresentationReconciler> getPresentationReconcilerProvider() {
 		return presentationReconcilerProvider;
 	}
+	
 }

@@ -68,6 +68,11 @@ public class XtextUIMessages extends NLS {
 	}
 
 	/**
+	 * messages for hovers
+	 */
+	public static String AbstractHover_MultipleMarkers;
+
+	/**
 	 * messages for tasktag preferences page
 	 */
 	public static String TodoTaskPreferencePage_title;

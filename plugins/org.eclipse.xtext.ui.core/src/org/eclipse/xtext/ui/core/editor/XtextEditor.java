@@ -8,20 +8,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.IAnnotationModelExtension2;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -30,6 +42,7 @@ import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -81,6 +94,8 @@ public class XtextEditor extends TextEditor {
 	private ValidationJob.Factory validationJobFactory;
 
 	private ValidationJob validationJob;
+
+	private ISelectionChangedListener selectionChangedListener;
 
 	private String languageName;
 
@@ -269,6 +284,19 @@ public class XtextEditor extends TextEditor {
 		// TODO Folding stuff
 		
 		installHighlightingHelper();
+		selectionChangedListener = new ISelectionChangedListener() {
+			public void selectionChanged(final SelectionChangedEvent event) {
+				updateStatusLine();
+			}
+		};
+		final ISelectionProvider selectionProvider = getSelectionProvider();
+		if (selectionProvider instanceof IPostSelectionProvider) {
+			final IPostSelectionProvider postSelectionProvider = (IPostSelectionProvider) selectionProvider;
+			postSelectionProvider.addPostSelectionChangedListener(selectionChangedListener);
+		}
+		else {
+			getSelectionProvider().addSelectionChangedListener(selectionChangedListener);
+		}
 	}
 	
 	private void installHighlightingHelper() {
@@ -291,6 +319,16 @@ public class XtextEditor extends TextEditor {
 			outlinePage = null;
 		}
 		uninstallHighlightingHelper();
+		if (selectionChangedListener != null) {
+			final ISelectionProvider selectionProvider = getSelectionProvider();
+			if (selectionProvider instanceof IPostSelectionProvider) {
+				final IPostSelectionProvider postSelectionProvider = (IPostSelectionProvider) selectionProvider;
+				postSelectionProvider.removePostSelectionChangedListener(selectionChangedListener);
+			}
+			else {
+				getSelectionProvider().removeSelectionChangedListener(selectionChangedListener);
+			}
+		}
 	}
 
 	/**
@@ -360,4 +398,49 @@ public class XtextEditor extends TextEditor {
 		return more;
 	}
 
+	protected void updateStatusLine() {
+		final ITextSelection selection = (ITextSelection) getSelectionProvider().getSelection();
+		final Annotation annotation = getAnnotation(selection.getOffset(), selection.getLength());
+		String message = null;
+		if (annotation != null) {
+			updateMarkerViews(annotation);
+			if (isProblemMarkerAnnotation(annotation)) {
+				message = annotation.getText();
+			}
+		}
+		setStatusLineMessage(message);
+	}
+	
+	private Annotation getAnnotation(final int offset, final int length) {
+		final IAnnotationModel model = getDocumentProvider().getAnnotationModel(getEditorInput());
+		if (model == null)
+			return null;
+
+		Iterator iterator;
+		if (model instanceof IAnnotationModelExtension2) {
+			iterator = ((IAnnotationModelExtension2) model).getAnnotationIterator(offset, length, true, true);
+		}
+		else {
+			iterator = model.getAnnotationIterator();
+		}
+
+		while (iterator.hasNext()) {
+			final Annotation a = (Annotation) iterator.next();
+			final Position p = model.getPosition(a);
+			if (p != null && p.overlapsWith(offset, length))
+				return a;
+		}
+		return null;
+	}
+	
+	private boolean isProblemMarkerAnnotation(final Annotation annotation) {
+		if (!(annotation instanceof MarkerAnnotation))
+			return false;
+		try {
+			return (((MarkerAnnotation) annotation).getMarker().isSubtypeOf(IMarker.PROBLEM));
+		}
+		catch (final CoreException e) {
+			return false;
+		}
+	}
 }
