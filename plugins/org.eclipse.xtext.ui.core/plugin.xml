@@ -98,15 +98,20 @@
       <command
             name="Format"
             description="Format text"
-            categoryId="org.eclipse.ui.category.textEditor"
+            categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
             id="org.eclipse.xtext.ui.FormatAction">
       </command>
       <command
             name="Toggle Comment"
             description="Toggle comment"
-            categoryId="org.eclipse.ui.category.textEditor"
+            categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
             id="org.eclipse.xtext.ui.ToggleCommentAction">
       </command>
+      <category
+            description="Xtext Editing Commands"
+            id="org.eclipse.xtext.ui.core.category.XtextEditor"
+            name="Xtext Editing">
+      </category>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
     <propertyTester
@@ -120,19 +125,19 @@
   <extension
       point="org.eclipse.ui.bindings">
     <key sequence="M1+M2+F"
-      contextId="org.eclipse.ui.textEditorScope"
+      contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
       commandId="org.eclipse.xtext.ui.FormatAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+7"
-      contextId="org.eclipse.ui.textEditorScope"
+      contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
       commandId="org.eclipse.xtext.ui.ToggleCommentAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+/"
-      contextId="org.eclipse.ui.textEditorScope"
+      contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
       commandId="org.eclipse.xtext.ui.ToggleCommentAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+M2+C"
-        contextId="org.eclipse.ui.textEditorScope"
+        contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
         commandId="org.eclipse.xtext.ui.ToggleCommentAction"
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
