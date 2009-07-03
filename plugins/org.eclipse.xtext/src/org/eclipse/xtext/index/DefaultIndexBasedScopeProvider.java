@@ -48,14 +48,27 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	private final class DefaultImportNormalizer implements Function<String, String> {
+	public static class DefaultImportNormalizer implements Function<String, String> {
 		private final List<String> elements;
+		private IQualifiedNameProvider nameProvider;
+		private boolean isWildCard;
 
-		private DefaultImportNormalizer(List<String> elements) {
-			this.elements = elements;
+		public DefaultImportNormalizer(List<String> importedNamespace, IQualifiedNameProvider nameProvider) {
+			this.elements = importedNamespace;
+			this.isWildCard = nameProvider.getWildcard().equals(lastElement(importedNamespace));
+			this.nameProvider = nameProvider;
+		}
+
+		private String lastElement(List<String> importedNamespace) {
+			return importedNamespace.get(importedNamespace.size() - 1);
 		}
 
 		public String apply(String from) {
+			if (!isWildCard) {
+				if (lastElement(elements).equals(from)) {
+					return Strings.concat(nameProvider.getDelimiter(), elements);
+				}
+			}
 			List<String> split = Strings.split(from, nameProvider.getDelimiter());
 			if (split.size() >= elements.size()) {
 				Iterator<String> i1 = elements.iterator(), i2 = split.iterator();
@@ -145,13 +158,13 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 				return EcoreUtil.getAllProperContents(context.eResource(), true);
 			}
 		};
-		eObjects = filter(eObjects, new Predicate<EObject>(){
+		eObjects = filter(eObjects, new Predicate<EObject>() {
 
 			public boolean apply(EObject input) {
 				return type.isInstance(input);
 			}
 		});
-		
+
 		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
 
 			public IScopedElement apply(EObject from) {
@@ -204,12 +217,14 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 			String value = importResolver.getValue(child);
 			if (value != null) {
 				final List<String> elements = org.eclipse.xtext.util.Strings.split(value, nameProvider.getDelimiter());
-				if (elements.get(elements.size() - 1).equals(nameProvider.getWildcard())) {
-					namespaceImports.add(new DefaultImportNormalizer(elements));
-				}
+				namespaceImports.add(createImportNormalizer(elements));
 			}
 		}
 		return namespaceImports;
+	}
+
+	protected DefaultImportNormalizer createImportNormalizer(final List<String> elements) {
+		return new DefaultImportNormalizer(elements, nameProvider);
 	}
 
 	protected Iterable<IScopedElement> getImportedElements(IScope local, final EObject context, final EClass type) {
