@@ -13,16 +13,16 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.CreateNode;
 import org.eclipse.xtext.ui.common.editor.outline.GetChildren;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
-import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+
+import com.google.inject.Provider;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -36,8 +36,15 @@ public class TestTransformerHelper {
 	};
 	
 	private static ILabelProvider myLabelProvider = new DefaultLabelProvider() {
+		@Override
 		public org.eclipse.swt.graphics.Image getImage(Object element) {
 			return null;
+		}
+	};
+	
+	private static Provider<ContentOutlineNode> myNodeProvider = new Provider<ContentOutlineNode>() {
+		public ContentOutlineNode get() {
+			return new ContentOutlineNode();
 		}
 	};
 
@@ -46,6 +53,7 @@ public class TestTransformerHelper {
 		{
 			setLocationProvider(myLocationProvider);
 			setLabelProvider(myLabelProvider);
+			setOutlineNodeProvider(myNodeProvider);
 		}
 		
 		/**
@@ -85,6 +93,7 @@ public class TestTransformerHelper {
 		{
 			setLocationProvider(myLocationProvider);
 			setLabelProvider(myLabelProvider);
+			setOutlineNodeProvider(myNodeProvider);
 		}
 		
 		/**
