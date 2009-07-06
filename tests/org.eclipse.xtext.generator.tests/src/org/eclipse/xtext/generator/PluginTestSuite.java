@@ -23,7 +23,6 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.enumrules.EnumAndReferenceTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.EnumAndReferenceTest.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);
-		suite.addTestSuite(org.eclipse.xtext.generator.ParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragmentTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
