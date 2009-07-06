@@ -68,16 +68,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/lowerCaseNamedTestLanguage" 
-       class = "org.eclipse.xtext.generator.lowerCaseNamedTestLanguage.LowerCaseNamedTestLanguagePackage"
-       genModel = "org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage" 
        class = "org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage"
        genModel = "org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel" /> 
