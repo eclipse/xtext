@@ -42,8 +42,11 @@ public class TwoContextsTestLanguageParser extends AbstractContentAssistParser {
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
-					put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group");
-					put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1");
+					put(grammarAccess.getAnElementAccess().getGroup(), "rule__AnElement__Group__0");
+					put(grammarAccess.getAnElementAccess().getGroup_1(), "rule__AnElement__Group_1__0");
+					put(grammarAccess.getMainModelAccess().getElementsAssignment(), "rule__MainModel__ElementsAssignment");
+					put(grammarAccess.getAnElementAccess().getNameAssignment_0(), "rule__AnElement__NameAssignment_0");
+					put(grammarAccess.getAnElementAccess().getReferredAssignment_1_1(), "rule__AnElement__ReferredAssignment_1_1");
 				}
 			};
 		}

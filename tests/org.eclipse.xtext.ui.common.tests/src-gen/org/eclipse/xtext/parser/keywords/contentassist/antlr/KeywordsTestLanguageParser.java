@@ -43,6 +43,10 @@ public class KeywordsTestLanguageParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
 					put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+					put(grammarAccess.getModelAccess().getFirstAssignment_0(), "rule__Model__FirstAssignment_0");
+					put(grammarAccess.getModelAccess().getSecondAssignment_1(), "rule__Model__SecondAssignment_1");
+					put(grammarAccess.getModelAccess().getThirdAssignment_2(), "rule__Model__ThirdAssignment_2");
+					put(grammarAccess.getModelAccess().getForthAssignment_3(), "rule__Model__ForthAssignment_3");
 				}
 			};
 		}

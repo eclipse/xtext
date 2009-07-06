@@ -21,4 +21,5 @@
       </genFeatures>
     </genClasses>
   </genPackages>
+  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel#//enums"/>
 </genmodel:GenModel>

@@ -5,8 +5,6 @@
  */
 package org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl;
 
-import enums.ExistingEnum;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -17,6 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
+
+import org.eclipse.xtext.enumrules.enums.ExistingEnum;
 
 /**
  * <!-- begin-user-doc -->

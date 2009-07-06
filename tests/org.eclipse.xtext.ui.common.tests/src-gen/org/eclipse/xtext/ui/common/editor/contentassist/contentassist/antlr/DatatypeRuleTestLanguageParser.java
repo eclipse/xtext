@@ -43,12 +43,17 @@ public class DatatypeRuleTestLanguageParser extends AbstractContentAssistParser 
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
-					put(grammarAccess.getTypesAccess().getGroup(), "rule__Types__Group");
-					put(grammarAccess.getSimpleTypeAccess().getGroup(), "rule__SimpleType__Group");
-					put(grammarAccess.getCompositeTypeAccess().getGroup(), "rule__CompositeType__Group");
-					put(grammarAccess.getTypeIdAccess().getGroup(), "rule__TypeId__Group");
-					put(grammarAccess.getTypeIdAccess().getGroup_1(), "rule__TypeId__Group_1");
-					put(grammarAccess.getTypeIdAccess().getGroup_1_2(), "rule__TypeId__Group_1_2");
+					put(grammarAccess.getTypesAccess().getGroup(), "rule__Types__Group__0");
+					put(grammarAccess.getSimpleTypeAccess().getGroup(), "rule__SimpleType__Group__0");
+					put(grammarAccess.getCompositeTypeAccess().getGroup(), "rule__CompositeType__Group__0");
+					put(grammarAccess.getTypeIdAccess().getGroup(), "rule__TypeId__Group__0");
+					put(grammarAccess.getTypeIdAccess().getGroup_1(), "rule__TypeId__Group_1__0");
+					put(grammarAccess.getTypeIdAccess().getGroup_1_2(), "rule__TypeId__Group_1_2__0");
+					put(grammarAccess.getTypesAccess().getTypesAssignment_1(), "rule__Types__TypesAssignment_1");
+					put(grammarAccess.getSimpleTypeAccess().getNameAssignment_1(), "rule__SimpleType__NameAssignment_1");
+					put(grammarAccess.getCompositeTypeAccess().getNameAssignment_1(), "rule__CompositeType__NameAssignment_1");
+					put(grammarAccess.getCompositeTypeAccess().getBaseTypeAssignment_3(), "rule__CompositeType__BaseTypeAssignment_3");
+					put(grammarAccess.getCompositeTypeEntryAccess().getDataTypeAssignment(), "rule__CompositeTypeEntry__DataTypeAssignment");
 				}
 			};
 		}

@@ -42,7 +42,11 @@ public class TreeTestLanguageParser extends AbstractContentAssistParser {
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
-					put(grammarAccess.getNodeAccess().getGroup(), "rule__Node__Group");
+					put(grammarAccess.getNodeAccess().getGroup(), "rule__Node__Group__0");
+					put(grammarAccess.getModelAccess().getChildrenAssignment(), "rule__Model__ChildrenAssignment");
+					put(grammarAccess.getNodeAccess().getNameAssignment_0(), "rule__Node__NameAssignment_0");
+					put(grammarAccess.getNodeAccess().getAttribAssignment_2(), "rule__Node__AttribAssignment_2");
+					put(grammarAccess.getNodeAccess().getChildrenAssignment_5(), "rule__Node__ChildrenAssignment_5");
 				}
 			};
 		}

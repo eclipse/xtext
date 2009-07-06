@@ -61,7 +61,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 				grammarAccess.getGrammarAccess().getGroup_2(),
 				grammarAccess.getGrammarAccess().getGroup_3(),
 				grammarAccess.getGrammarAccess().getMetamodelDeclarationsAssignment_4(),
-				grammarAccess.getGrammarAccess().getRulesAssignment_5()
+				grammarAccess.getAbstractRuleAccess().getAlternatives()
 		);
 		assertFollowers(input, expected);
 	}
@@ -81,7 +81,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 				grammarAccess.getGrammarAccess().getGroup_2(),
 				grammarAccess.getGrammarAccess().getGroup_3(),
 				grammarAccess.getGrammarAccess().getMetamodelDeclarationsAssignment_4(),
-				grammarAccess.getGrammarAccess().getRulesAssignment_5()
+				grammarAccess.getAbstractRuleAccess().getAlternatives()
 		);
 		assertFollowers(input, expected);
 	}
@@ -109,6 +109,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 				grammarAccess.getGrammarAccess().getGroup_2(),
 				grammarAccess.getGrammarAccess().getGroup_3(),
 				grammarAccess.getGrammarAccess().getMetamodelDeclarationsAssignment_4(),
+				grammarAccess.getAbstractRuleAccess().getAlternatives(),
 				grammarAccess.getGrammarAccess().getRulesAssignment_5()
 		);
 		assertFollowers(input, expected);
@@ -129,7 +130,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 				grammarAccess.getGrammarAccess().getGroup_2(),
 				grammarAccess.getGrammarAccess().getGroup_3(),
 				grammarAccess.getGrammarAccess().getMetamodelDeclarationsAssignment_4(),
-				grammarAccess.getGrammarAccess().getRulesAssignment_5()
+				grammarAccess.getAbstractRuleAccess().getAlternatives()
 		);
 		assertFollowers(input, expected);
 	}
@@ -194,6 +195,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 //		Collection<FollowElement> followList = com.google.common.collect.Lists.newArrayList(getFollowSet(input));
 		assertEquals(expected.size(), followSet.size());
 		Set<AbstractElement> grammarElements = computeSearchElements(followSet);
+//		Collection<AbstractElement> followElementList = Lists.newArrayList(grammarElements);
 		assertEquals(expected, grammarElements);
 	}
 

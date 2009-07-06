@@ -31,4 +31,6 @@ public interface IContentAssistProcessorTestSetup {
 	ISetup getCrossReferenceProposalTestLanguageSetup();
 
 	ISetup getDatatypeRuleTestLanguageSetup();
+	
+	ISetup getLookAheadContentAssistTestLanguageSetup();
 }

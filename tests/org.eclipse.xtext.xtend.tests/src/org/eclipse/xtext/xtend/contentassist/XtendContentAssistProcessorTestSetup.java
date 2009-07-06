@@ -27,6 +27,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTe
 import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistProcessorTestSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.xtend.tests.Activator;
 
@@ -123,6 +125,16 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new DatatypeRuleTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
+			}
+		};
+	}
+
+	public ISetup getLookAheadContentAssistTestLanguageSetup() {
+		return new LookAheadContentAssistTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new LookAheadContentAssistTestLanguageUiModule(), 
 						new UIPluginModule(Activator.getDefault()));
 			}
 		};

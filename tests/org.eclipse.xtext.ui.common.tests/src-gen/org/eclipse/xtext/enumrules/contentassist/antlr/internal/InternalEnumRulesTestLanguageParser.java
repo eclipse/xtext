@@ -132,23 +132,23 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start ruleExistingEnum
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:82:1: ruleExistingEnum : ( ( rule__ExistingEnum__Alternatives ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:83:1: ruleExistingEnum : ( ( rule__ExistingEnum__Alternatives ) ) ;
     public final void ruleExistingEnum() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:86:1: ( ( ( rule__ExistingEnum__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:87:1: ( ( rule__ExistingEnum__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:87:1: ( ( ( rule__ExistingEnum__Alternatives ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:88:1: ( ( rule__ExistingEnum__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:87:1: ( ( rule__ExistingEnum__Alternatives ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:88:1: ( rule__ExistingEnum__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:88:1: ( ( rule__ExistingEnum__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:89:1: ( rule__ExistingEnum__Alternatives )
             {
              before(grammarAccess.getExistingEnumAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:89:1: ( rule__ExistingEnum__Alternatives )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:89:2: rule__ExistingEnum__Alternatives
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:90:1: ( rule__ExistingEnum__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:90:2: rule__ExistingEnum__Alternatives
             {
-            pushFollow(FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum130);
+            pushFollow(FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131);
             rule__ExistingEnum__Alternatives();
             _fsp--;
 
@@ -178,23 +178,23 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start ruleGeneratedEnum
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:100:1: ruleGeneratedEnum : ( ( rule__GeneratedEnum__Alternatives ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:102:1: ruleGeneratedEnum : ( ( rule__GeneratedEnum__Alternatives ) ) ;
     public final void ruleGeneratedEnum() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:104:1: ( ( ( rule__GeneratedEnum__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:105:1: ( ( rule__GeneratedEnum__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:106:1: ( ( ( rule__GeneratedEnum__Alternatives ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:107:1: ( ( rule__GeneratedEnum__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:105:1: ( ( rule__GeneratedEnum__Alternatives ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:106:1: ( rule__GeneratedEnum__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:107:1: ( ( rule__GeneratedEnum__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:108:1: ( rule__GeneratedEnum__Alternatives )
             {
              before(grammarAccess.getGeneratedEnumAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:107:1: ( rule__GeneratedEnum__Alternatives )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:107:2: rule__GeneratedEnum__Alternatives
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:109:1: ( rule__GeneratedEnum__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:109:2: rule__GeneratedEnum__Alternatives
             {
-            pushFollow(FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum165);
+            pushFollow(FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167);
             rule__GeneratedEnum__Alternatives();
             _fsp--;
 
@@ -224,13 +224,13 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Model__Alternatives
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:117:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0 ) ) | ( ( rule__Model__Group_1 ) ) );
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:120:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:121:1: ( ( ( rule__Model__Group_0 ) ) | ( ( rule__Model__Group_1 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:124:1: ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -242,23 +242,23 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("117:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0 ) ) | ( ( rule__Model__Group_1 ) ) );", 1, 0, input);
+                    new NoViableAltException("120:1: rule__Model__Alternatives : ( ( ( rule__Model__Group_0__0 ) ) | ( ( rule__Model__Group_1__0 ) ) );", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:122:1: ( ( rule__Model__Group_0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:125:1: ( ( rule__Model__Group_0__0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:122:1: ( ( rule__Model__Group_0 ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:123:1: ( rule__Model__Group_0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:125:1: ( ( rule__Model__Group_0__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:126:1: ( rule__Model__Group_0__0 )
                     {
                      before(grammarAccess.getModelAccess().getGroup_0()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:124:1: ( rule__Model__Group_0 )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:124:2: rule__Model__Group_0
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:127:1: ( rule__Model__Group_0__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:127:2: rule__Model__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_0_in_rule__Model__Alternatives199);
-                    rule__Model__Group_0();
+                    pushFollow(FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202);
+                    rule__Model__Group_0__0();
                     _fsp--;
 
 
@@ -272,17 +272,17 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:127:6: ( ( rule__Model__Group_1 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:131:6: ( ( rule__Model__Group_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:127:6: ( ( rule__Model__Group_1 ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:128:1: ( rule__Model__Group_1 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:131:6: ( ( rule__Model__Group_1__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:132:1: ( rule__Model__Group_1__0 )
                     {
                      before(grammarAccess.getModelAccess().getGroup_1()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:129:1: ( rule__Model__Group_1 )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:129:2: rule__Model__Group_1
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:133:1: ( rule__Model__Group_1__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:133:2: rule__Model__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_1_in_rule__Model__Alternatives216);
-                    rule__Model__Group_1();
+                    pushFollow(FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220);
+                    rule__Model__Group_1__0();
                     _fsp--;
 
 
@@ -313,13 +313,13 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__ExistingEnum__Alternatives
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:137:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:142:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );
     public final void rule__ExistingEnum__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:141:1: ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:146:1: ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 11:
@@ -339,23 +339,23 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("137:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );", 2, 0, input);
+                    new NoViableAltException("142:1: rule__ExistingEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'overridden' ) ) | ( ( 'DifferentLiteral' ) ) );", 2, 0, input);
 
                 throw nvae;
             }
 
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:142:1: ( ( 'SameName' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:147:1: ( ( 'SameName' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:142:1: ( ( 'SameName' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:143:1: ( 'SameName' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:147:1: ( ( 'SameName' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:148:1: ( 'SameName' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:144:1: ( 'SameName' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:144:3: 'SameName'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:149:1: ( 'SameName' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:149:3: 'SameName'
                     {
-                    match(input,11,FOLLOW_11_in_rule__ExistingEnum__Alternatives249); 
+                    match(input,11,FOLLOW_11_in_rule__ExistingEnum__Alternatives254); 
 
                     }
 
@@ -367,16 +367,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:148:6: ( ( 'overridden' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:154:6: ( ( 'overridden' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:148:6: ( ( 'overridden' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:149:1: ( 'overridden' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:154:6: ( ( 'overridden' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:155:1: ( 'overridden' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:150:1: ( 'overridden' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:150:3: 'overridden'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:156:1: ( 'overridden' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:156:3: 'overridden'
                     {
-                    match(input,12,FOLLOW_12_in_rule__ExistingEnum__Alternatives269); 
+                    match(input,12,FOLLOW_12_in_rule__ExistingEnum__Alternatives275); 
 
                     }
 
@@ -388,16 +388,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:154:6: ( ( 'DifferentLiteral' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:161:6: ( ( 'DifferentLiteral' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:154:6: ( ( 'DifferentLiteral' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:155:1: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:161:6: ( ( 'DifferentLiteral' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:162:1: ( 'DifferentLiteral' )
                     {
                      before(grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:156:1: ( 'DifferentLiteral' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:156:3: 'DifferentLiteral'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:163:1: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:163:3: 'DifferentLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_rule__ExistingEnum__Alternatives289); 
+                    match(input,13,FOLLOW_13_in_rule__ExistingEnum__Alternatives296); 
 
                     }
 
@@ -426,13 +426,13 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__GeneratedEnum__Alternatives
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:165:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:173:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );
     public final void rule__GeneratedEnum__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:169:1: ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:177:1: ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -444,22 +444,22 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("165:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );", 3, 0, input);
+                    new NoViableAltException("173:1: rule__GeneratedEnum__Alternatives : ( ( ( 'SameName' ) ) | ( ( 'DifferentLiteral' ) ) );", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:170:1: ( ( 'SameName' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:178:1: ( ( 'SameName' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:170:1: ( ( 'SameName' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:171:1: ( 'SameName' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:178:1: ( ( 'SameName' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:179:1: ( 'SameName' )
                     {
                      before(grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:172:1: ( 'SameName' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:172:3: 'SameName'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:180:1: ( 'SameName' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:180:3: 'SameName'
                     {
-                    match(input,11,FOLLOW_11_in_rule__GeneratedEnum__Alternatives324); 
+                    match(input,11,FOLLOW_11_in_rule__GeneratedEnum__Alternatives332); 
 
                     }
 
@@ -471,16 +471,16 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:176:6: ( ( 'DifferentLiteral' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:185:6: ( ( 'DifferentLiteral' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:176:6: ( ( 'DifferentLiteral' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:177:1: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:185:6: ( ( 'DifferentLiteral' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:186:1: ( 'DifferentLiteral' )
                     {
                      before(grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:178:1: ( 'DifferentLiteral' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:178:3: 'DifferentLiteral'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:187:1: ( 'DifferentLiteral' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:187:3: 'DifferentLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_rule__GeneratedEnum__Alternatives344); 
+                    match(input,13,FOLLOW_13_in_rule__GeneratedEnum__Alternatives353); 
 
                     }
 
@@ -508,43 +508,67 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
     // $ANTLR end rule__GeneratedEnum__Alternatives
 
 
-    // $ANTLR start rule__Model__Group_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:188:1: rule__Model__Group_0 : ( 'existing' ) ( ( ( ruleExistingEnum ) ) ) ( ( rule__Model__Group_0_2 )? ) ;
-    public final void rule__Model__Group_0() throws RecognitionException {
+    // $ANTLR start rule__Model__Group_0__0
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:199:1: rule__Model__Group_0__0 : ( 'existing' ) rule__Model__Group_0__1 ;
+    public final void rule__Model__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:192:1: ( ( 'existing' ) ( ( ( ruleExistingEnum ) ) ) ( ( rule__Model__Group_0_2 )? ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:193:1: ( 'existing' ) ( ( ( ruleExistingEnum ) ) ) ( ( rule__Model__Group_0_2 )? )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:203:1: ( ( 'existing' ) rule__Model__Group_0__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:204:1: ( 'existing' ) rule__Model__Group_0__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:193:1: ( 'existing' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:194:1: 'existing'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:204:1: ( 'existing' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:205:1: 'existing'
             {
              before(grammarAccess.getModelAccess().getExistingKeyword_0_0()); 
-            match(input,14,FOLLOW_14_in_rule__Model__Group_0380); 
+            match(input,14,FOLLOW_14_in_rule__Model__Group_0__0391); 
              after(grammarAccess.getModelAccess().getExistingKeyword_0_0()); 
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:199:1: ( ( ( ruleExistingEnum ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:200:1: ( ( ruleExistingEnum ) )
-            {
-             before(grammarAccess.getModelAccess().getExistingAssignment_0_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:201:1: ( ( ruleExistingEnum ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:202:1: ( ruleExistingEnum )
-            {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:202:1: ( ruleExistingEnum )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:203:1: ruleExistingEnum
-            {
-             before(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
-            pushFollow(FOLLOW_ruleExistingEnum_in_rule__Model__Group_0399);
-            ruleExistingEnum();
+            pushFollow(FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401);
+            rule__Model__Group_0__1();
             _fsp--;
 
-             after(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
 
             }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__Group_0__0
+
+
+    // $ANTLR start rule__Model__Group_0__1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:219:1: rule__Model__Group_0__1 : ( ( rule__Model__ExistingAssignment_0_1 ) ) rule__Model__Group_0__2 ;
+    public final void rule__Model__Group_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:223:1: ( ( ( rule__Model__ExistingAssignment_0_1 ) ) rule__Model__Group_0__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:224:1: ( ( rule__Model__ExistingAssignment_0_1 ) ) rule__Model__Group_0__2
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:224:1: ( ( rule__Model__ExistingAssignment_0_1 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:225:1: ( rule__Model__ExistingAssignment_0_1 )
+            {
+             before(grammarAccess.getModelAccess().getExistingAssignment_0_1()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:226:1: ( rule__Model__ExistingAssignment_0_1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:226:2: rule__Model__ExistingAssignment_0_1
+            {
+            pushFollow(FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429);
+            rule__Model__ExistingAssignment_0_1();
+            _fsp--;
 
 
             }
@@ -553,11 +577,43 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:209:1: ( ( rule__Model__Group_0_2 )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:210:1: ( rule__Model__Group_0_2 )?
+            pushFollow(FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438);
+            rule__Model__Group_0__2();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__Group_0__1
+
+
+    // $ANTLR start rule__Model__Group_0__2
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:237:1: rule__Model__Group_0__2 : ( ( rule__Model__Group_0_2__0 )? ) ;
+    public final void rule__Model__Group_0__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:241:1: ( ( ( rule__Model__Group_0_2__0 )? ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:242:1: ( ( rule__Model__Group_0_2__0 )? )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:242:1: ( ( rule__Model__Group_0_2__0 )? )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:243:1: ( rule__Model__Group_0_2__0 )?
             {
              before(grammarAccess.getModelAccess().getGroup_0_2()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:211:1: ( rule__Model__Group_0_2 )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:244:1: ( rule__Model__Group_0_2__0 )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -566,10 +622,10 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:211:2: rule__Model__Group_0_2
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:244:2: rule__Model__Group_0_2__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_0_2_in_rule__Model__Group_0416);
-                    rule__Model__Group_0_2();
+                    pushFollow(FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466);
+                    rule__Model__Group_0_2__0();
                     _fsp--;
 
 
@@ -597,46 +653,70 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__Model__Group_0
+    // $ANTLR end rule__Model__Group_0__2
 
 
-    // $ANTLR start rule__Model__Group_0_2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:219:1: rule__Model__Group_0_2 : ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) ) ;
-    public final void rule__Model__Group_0_2() throws RecognitionException {
+    // $ANTLR start rule__Model__Group_0_2__0
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:260:1: rule__Model__Group_0_2__0 : ( 'generated' ) rule__Model__Group_0_2__1 ;
+    public final void rule__Model__Group_0_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:223:1: ( ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:224:1: ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:264:1: ( ( 'generated' ) rule__Model__Group_0_2__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:265:1: ( 'generated' ) rule__Model__Group_0_2__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:224:1: ( 'generated' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:225:1: 'generated'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:265:1: ( 'generated' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:266:1: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0()); 
-            match(input,15,FOLLOW_15_in_rule__Model__Group_0_2450); 
+            match(input,15,FOLLOW_15_in_rule__Model__Group_0_2__0508); 
              after(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0()); 
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:230:1: ( ( ( ruleGeneratedEnum ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:231:1: ( ( ruleGeneratedEnum ) )
-            {
-             before(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:232:1: ( ( ruleGeneratedEnum ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:233:1: ( ruleGeneratedEnum )
-            {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:233:1: ( ruleGeneratedEnum )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:234:1: ruleGeneratedEnum
-            {
-             before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
-            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__Group_0_2469);
-            ruleGeneratedEnum();
+            pushFollow(FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518);
+            rule__Model__Group_0_2__1();
             _fsp--;
 
-             after(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
 
             }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__Group_0_2__0
+
+
+    // $ANTLR start rule__Model__Group_0_2__1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:280:1: rule__Model__Group_0_2__1 : ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) ;
+    public final void rule__Model__Group_0_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:284:1: ( ( ( rule__Model__GeneratedAssignment_0_2_1 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:285:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:285:1: ( ( rule__Model__GeneratedAssignment_0_2_1 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:286:1: ( rule__Model__GeneratedAssignment_0_2_1 )
+            {
+             before(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:287:1: ( rule__Model__GeneratedAssignment_0_2_1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:287:2: rule__Model__GeneratedAssignment_0_2_1
+            {
+            pushFollow(FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546);
+            rule__Model__GeneratedAssignment_0_2_1();
+            _fsp--;
 
 
             }
@@ -660,46 +740,70 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__Model__Group_0_2
+    // $ANTLR end rule__Model__Group_0_2__1
 
 
-    // $ANTLR start rule__Model__Group_1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:246:1: rule__Model__Group_1 : ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) ) ;
-    public final void rule__Model__Group_1() throws RecognitionException {
+    // $ANTLR start rule__Model__Group_1__0
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:301:1: rule__Model__Group_1__0 : ( 'generated' ) rule__Model__Group_1__1 ;
+    public final void rule__Model__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:250:1: ( ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:251:1: ( 'generated' ) ( ( ( ruleGeneratedEnum ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:305:1: ( ( 'generated' ) rule__Model__Group_1__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:306:1: ( 'generated' ) rule__Model__Group_1__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:251:1: ( 'generated' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:252:1: 'generated'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:306:1: ( 'generated' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:307:1: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_1_0()); 
-            match(input,15,FOLLOW_15_in_rule__Model__Group_1508); 
+            match(input,15,FOLLOW_15_in_rule__Model__Group_1__0585); 
              after(grammarAccess.getModelAccess().getGeneratedKeyword_1_0()); 
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:257:1: ( ( ( ruleGeneratedEnum ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:258:1: ( ( ruleGeneratedEnum ) )
-            {
-             before(grammarAccess.getModelAccess().getGeneratedAssignment_1_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:259:1: ( ( ruleGeneratedEnum ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:260:1: ( ruleGeneratedEnum )
-            {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:260:1: ( ruleGeneratedEnum )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:261:1: ruleGeneratedEnum
-            {
-             before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__Group_1527);
-            ruleGeneratedEnum();
+            pushFollow(FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595);
+            rule__Model__Group_1__1();
             _fsp--;
 
-             after(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
 
             }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__Group_1__0
+
+
+    // $ANTLR start rule__Model__Group_1__1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:321:1: rule__Model__Group_1__1 : ( ( rule__Model__GeneratedAssignment_1_1 ) ) ;
+    public final void rule__Model__Group_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:325:1: ( ( ( rule__Model__GeneratedAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:326:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:326:1: ( ( rule__Model__GeneratedAssignment_1_1 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:327:1: ( rule__Model__GeneratedAssignment_1_1 )
+            {
+             before(grammarAccess.getModelAccess().getGeneratedAssignment_1_1()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:328:1: ( rule__Model__GeneratedAssignment_1_1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:328:2: rule__Model__GeneratedAssignment_1_1
+            {
+            pushFollow(FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623);
+            rule__Model__GeneratedAssignment_1_1();
+            _fsp--;
 
 
             }
@@ -723,7 +827,127 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__Model__Group_1
+    // $ANTLR end rule__Model__Group_1__1
+
+
+    // $ANTLR start rule__Model__ExistingAssignment_0_1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:342:1: rule__Model__ExistingAssignment_0_1 : ( ruleExistingEnum ) ;
+    public final void rule__Model__ExistingAssignment_0_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:346:1: ( ( ruleExistingEnum ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:347:1: ( ruleExistingEnum )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:347:1: ( ruleExistingEnum )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:348:1: ruleExistingEnum
+            {
+             before(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
+            pushFollow(FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661);
+            ruleExistingEnum();
+            _fsp--;
+
+             after(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__ExistingAssignment_0_1
+
+
+    // $ANTLR start rule__Model__GeneratedAssignment_0_2_1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:357:1: rule__Model__GeneratedAssignment_0_2_1 : ( ruleGeneratedEnum ) ;
+    public final void rule__Model__GeneratedAssignment_0_2_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:361:1: ( ( ruleGeneratedEnum ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:362:1: ( ruleGeneratedEnum )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:362:1: ( ruleGeneratedEnum )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:363:1: ruleGeneratedEnum
+            {
+             before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
+            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692);
+            ruleGeneratedEnum();
+            _fsp--;
+
+             after(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__GeneratedAssignment_0_2_1
+
+
+    // $ANTLR start rule__Model__GeneratedAssignment_1_1
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:372:1: rule__Model__GeneratedAssignment_1_1 : ( ruleGeneratedEnum ) ;
+    public final void rule__Model__GeneratedAssignment_1_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:376:1: ( ( ruleGeneratedEnum ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:377:1: ( ruleGeneratedEnum )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:377:1: ( ruleGeneratedEnum )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesTestLanguage.g:378:1: ruleGeneratedEnum
+            {
+             before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
+            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723);
+            ruleGeneratedEnum();
+            _fsp--;
+
+             after(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__GeneratedAssignment_1_1
 
 
  
@@ -731,21 +955,28 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalContent
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Model__Alternatives_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_0_in_rule__Model__Alternatives199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_1_in_rule__Model__Alternatives216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__ExistingEnum__Alternatives249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__ExistingEnum__Alternatives269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__ExistingEnum__Alternatives289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__GeneratedEnum__Alternatives324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__GeneratedEnum__Alternatives344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Model__Group_0380 = new BitSet(new long[]{0x0000000000003800L});
-    public static final BitSet FOLLOW_ruleExistingEnum_in_rule__Model__Group_0399 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_rule__Model__Group_0_2_in_rule__Model__Group_0416 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Model__Group_0_2450 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__Group_0_2469 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Model__Group_1508 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__Group_1527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_rule__ExistingEnum__Alternatives254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__ExistingEnum__Alternatives275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__ExistingEnum__Alternatives296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_rule__GeneratedEnum__Alternatives332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__GeneratedEnum__Alternatives353 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Model__Group_0__0391 = new BitSet(new long[]{0x0000000000003800L});
+    public static final BitSet FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Model__Group_0_2__0508 = new BitSet(new long[]{0x0000000000002800L});
+    public static final BitSet FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Model__Group_1__0585 = new BitSet(new long[]{0x0000000000002800L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723 = new BitSet(new long[]{0x0000000000000002L});
 
 }

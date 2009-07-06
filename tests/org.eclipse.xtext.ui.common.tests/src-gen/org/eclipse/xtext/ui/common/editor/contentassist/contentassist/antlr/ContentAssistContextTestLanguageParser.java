@@ -42,13 +42,23 @@ public class ContentAssistContextTestLanguageParser extends AbstractContentAssis
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
-					put(grammarAccess.getFirstLevelAccess().getGroup(), "rule__FirstLevel__Group");
-					put(grammarAccess.getSecondLevelAAccess().getGroup(), "rule__SecondLevelA__Group");
-					put(grammarAccess.getSecondLevelBAccess().getGroup(), "rule__SecondLevelB__Group");
-					put(grammarAccess.getThirdLevelA1Access().getGroup(), "rule__ThirdLevelA1__Group");
-					put(grammarAccess.getThirdLevelA2Access().getGroup(), "rule__ThirdLevelA2__Group");
-					put(grammarAccess.getThirdLevelB1Access().getGroup(), "rule__ThirdLevelB1__Group");
-					put(grammarAccess.getThirdLevelB2Access().getGroup(), "rule__ThirdLevelB2__Group");
+					put(grammarAccess.getFirstLevelAccess().getGroup(), "rule__FirstLevel__Group__0");
+					put(grammarAccess.getSecondLevelAAccess().getGroup(), "rule__SecondLevelA__Group__0");
+					put(grammarAccess.getSecondLevelBAccess().getGroup(), "rule__SecondLevelB__Group__0");
+					put(grammarAccess.getThirdLevelA1Access().getGroup(), "rule__ThirdLevelA1__Group__0");
+					put(grammarAccess.getThirdLevelA2Access().getGroup(), "rule__ThirdLevelA2__Group__0");
+					put(grammarAccess.getThirdLevelB1Access().getGroup(), "rule__ThirdLevelB1__Group__0");
+					put(grammarAccess.getThirdLevelB2Access().getGroup(), "rule__ThirdLevelB2__Group__0");
+					put(grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0(), "rule__FirstLevel__SecondLevelAAssignment_0");
+					put(grammarAccess.getFirstLevelAccess().getSecondLevelBAssignment_1(), "rule__FirstLevel__SecondLevelBAssignment_1");
+					put(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0(), "rule__SecondLevelA__ThirdLevelA1Assignment_0");
+					put(grammarAccess.getSecondLevelAAccess().getThirdLevelA2Assignment_1(), "rule__SecondLevelA__ThirdLevelA2Assignment_1");
+					put(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0(), "rule__SecondLevelB__ThirdLevelB1Assignment_0");
+					put(grammarAccess.getSecondLevelBAccess().getThirdLevelB2Assignment_1(), "rule__SecondLevelB__ThirdLevelB2Assignment_1");
+					put(grammarAccess.getThirdLevelA1Access().getNameAssignment_2(), "rule__ThirdLevelA1__NameAssignment_2");
+					put(grammarAccess.getThirdLevelA2Access().getNameAssignment_2(), "rule__ThirdLevelA2__NameAssignment_2");
+					put(grammarAccess.getThirdLevelB1Access().getNameAssignment_2(), "rule__ThirdLevelB1__NameAssignment_2");
+					put(grammarAccess.getThirdLevelB2Access().getNameAssignment_2(), "rule__ThirdLevelB2__NameAssignment_2");
 				}
 			};
 		}

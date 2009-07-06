@@ -703,6 +703,102 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     		.assertText("StringType", "error");
     }
     
+    public void testBug282031_01() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("( values1 ")
+    		.assertText("=", ")", "Value", "Name");
+    }
+    
+    public void testBug282031_02() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("(")
+    		.assertText("(", ")", "Value", "Name");
+    }
+    
+    public void testBug282031_03() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("( ")
+    		.assertText(")", "Value", "Name");
+    }
+    
+    public void testBug282031_04() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("( values1")
+    		.assertText("=", ")");
+    }
+    
+    public void testBug282031_05() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[ values1 ")
+    		.assertText("]", "Value", "Name");
+    }
+    
+    public void testBug282031_06() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[")
+    		.assertText("[", "Value");
+    }
+    
+    public void testBug282031_07() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[ ")
+    		.assertText("Value");
+    }
+    
+    public void testBug282031_08() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[ values1")
+    		.assertText("]");
+    }
+    
+    public void testBug282031_09() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("< values1 ")
+    		.assertText("=", "Value", "Name");
+    }
+    
+    public void testBug282031_10() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("<")
+    		.assertText("<", "Value", "Name");
+    }
+    
+    public void testBug282031_11() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("< ")
+    		.assertText("Value", "Name");
+    }
+    
+    public void testBug282031_12() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("< values1")
+    		.assertText("=");
+    }
+    
+    public void testBug282031_13() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("{ values1 ")
+    		.assertText("Value", "Name");
+    }
+    
+    public void testBug282031_14() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("{")
+    		.assertText("{", "Value");
+    }
+    
+    public void testBug282031_15() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("{ ")
+    		.assertText("Value");
+    }
+    
+    public void testBug282031_16() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("{ values1")
+    		.assertText();
+    }
+    
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);

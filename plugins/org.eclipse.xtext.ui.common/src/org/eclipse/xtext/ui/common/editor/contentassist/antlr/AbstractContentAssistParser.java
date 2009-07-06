@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
@@ -19,7 +20,10 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer;
 
@@ -30,53 +34,116 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	public Collection<FollowElement> getFollowElements(FollowElement element) {
 		if (element.getLookAhead() <= 1)
-			throw new IllegalArgumentException("lookahead my not be less than or equal to 1");
+			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
 		Collection<FollowElement> result = new ArrayList<FollowElement>();
 		for(AbstractElement elementToParse: getElementsToParse(element)) {
-			AbstractInternalContentAssistParser parser = createParser();
-			final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
-			ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
-				public Token nextToken() {
-					if (iter.hasNext()) {
-						LookAheadTerminal lookAhead = iter.next();
-						return lookAhead.getToken();
-					}
-					return Token.EOF_TOKEN;
+			String ruleName = getRuleName(elementToParse);
+			String[][] allRuleNames = getRequiredRuleNames(ruleName, elementToParse);
+			for (String[] ruleNames: allRuleNames) {
+				for(int i = 0; i < ruleNames.length; i++) {
+					AbstractInternalContentAssistParser parser = createParser();
+					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
+					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
+						public Token nextToken() {
+							if (iter.hasNext()) {
+								LookAheadTerminal lookAhead = iter.next();
+								return lookAhead.getToken();
+							}
+							return Token.EOF_TOKEN;
+						}
+					}, parser);
+					parser.setTokenStream(tokens);
+					tokens.setListener(parser);
+					parser.getGrammarElements().addAll(element.getTrace());
+					parser.getGrammarElements().add(elementToParse);
+					parser.getLocalTrace().addAll(element.getLocalTrace());
+					parser.getLocalTrace().add(elementToParse);
+					Collection<FollowElement> elements = getFollowElements(parser, elementToParse, ruleNames, i);
+					result.addAll(elements);
 				}
-			}, parser);
-			parser.setTokenStream(tokens);
-			tokens.setListener(parser);
-			result.addAll(getFollowElements(parser, elementToParse));
+			}
 		}
 		return result;
 	}
 	
-	private Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser,
-			AbstractElement elementToParse) {
-		String ruleName = getRuleName(elementToParse);
-		if (ruleName == null) {
-			if (elementToParse instanceof RuleCall) {
-				ruleName = "rule" + ((RuleCall) elementToParse).getRule().getName();
-			} else {
-				return Collections.emptyList();
-			}
-		}
+	private Collection<FollowElement> getFollowElements(final AbstractInternalContentAssistParser parser,
+			AbstractElement elementToParse, String[] ruleNames, int startIndex) {
 		try {
-			Method method = parser.getClass().getDeclaredMethod(ruleName);
-			method.setAccessible(true);
-			method.invoke(parser);
-			return parser.getFollowElements();
+			final boolean[] wasEof = new boolean[] { false };
+			final boolean[] consumedSomething = new boolean[] { true };
+			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
+			stream.setListener(new StreamListener() {
+				public void announceEof(int lookAhead) {
+					parser.announceEof(lookAhead);
+					wasEof[0] = true;
+				}
+				
+				public void announceConsume() {
+					parser.announceConsume();
+					consumedSomething[0] = true;
+				}
+			});
+			int i = startIndex;
+			Collection<FollowElement> result = null;
+			while(i < ruleNames.length && !wasEof[0] && consumedSomething[0]) {
+				consumedSomething[0] = false;
+				Method method = parser.getClass().getDeclaredMethod(ruleNames[i]);
+				method.setAccessible(true);
+				method.invoke(parser);
+				result = parser.getFollowElements();
+				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse))
+					return result;
+				if (!wasEof[0] && ruleNames.length != 1)
+					i++;
+				if (ruleNames.length > 2)
+					throw new IllegalArgumentException("The following lines assume that we have at most two rules to call.");
+				int lastGrammarElement = parser.getGrammarElements().size() - 1;
+				if (parser.getGrammarElements().get(lastGrammarElement) != elementToParse)
+					throw new IllegalStateException("Stack of grammar elements seems to be corrupt.");
+				parser.getGrammarElements().remove(lastGrammarElement);
+				int lastLocalTrace = parser.getLocalTrace().size() - 1;
+				if (lastLocalTrace != -1) {
+					parser.getLocalTrace().remove(lastLocalTrace);
+				}
+			}
+			return result;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
+	private String[][] getRequiredRuleNames(String ruleName, AbstractElement elementToParse) {
+		if (ruleName == null) {
+			if (elementToParse instanceof RuleCall)
+				return new String[][] {{ "rule" + ((RuleCall) elementToParse).getRule().getName() }};
+			else
+				return new String[0][];
+		}
+		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse)))
+			return new String[][] {{ ruleName }};
+		if ((elementToParse.eContainer() instanceof Group)) {
+			List<AbstractElement> tokens = ((Group) elementToParse.eContainer()).getTokens();
+			int idx = tokens.indexOf(elementToParse) + 1;
+			if (idx != tokens.size()) {
+				String secondRule = getRuleName((AbstractElement) elementToParse.eContainer());
+				secondRule = secondRule.substring(0, secondRule.length() - Integer.toString(idx - 1).length()) + idx;
+				if (GrammarUtil.isMultipleCardinality(elementToParse))
+					return new String[][] {{ ruleName }, {ruleName, secondRule}};
+				return new String[][] { {ruleName, secondRule} };
+			}
+		}
+		return new String[][] {{ ruleName }};
+	}
+
 	private Collection<AbstractElement> getElementsToParse(FollowElement element) {
 		AbstractElement root = element.getGrammarElement();
-		if (root instanceof Alternatives) {
+		return getElementsToParse(root);
+	}
+
+	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
+		if (root instanceof Alternatives)
 			return ((Alternatives) root).getGroups();
-		}
 		return Collections.singleton(root);
 	}
 

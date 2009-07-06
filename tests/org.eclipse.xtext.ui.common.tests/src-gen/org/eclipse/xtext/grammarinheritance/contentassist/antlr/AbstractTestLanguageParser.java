@@ -42,12 +42,18 @@ public class AbstractTestLanguageParser extends AbstractContentAssistParser {
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
-					put(grammarAccess.getInheritedParserRuleAccess().getGroup(), "rule__InheritedParserRule__Group");
-					put(grammarAccess.getAbstractCallOverridenParserRuleAccess().getGroup(), "rule__AbstractCallOverridenParserRule__Group");
-					put(grammarAccess.getOverridableParserRuleAccess().getGroup(), "rule__OverridableParserRule__Group");
-					put(grammarAccess.getOverridableParserRule2Access().getGroup(), "rule__OverridableParserRule2__Group");
-					put(grammarAccess.getAbstractCallExtendedParserRuleAccess().getGroup(), "rule__AbstractCallExtendedParserRule__Group");
-					put(grammarAccess.getExtendableParserRuleAccess().getGroup(), "rule__ExtendableParserRule__Group");
+					put(grammarAccess.getInheritedParserRuleAccess().getGroup(), "rule__InheritedParserRule__Group__0");
+					put(grammarAccess.getAbstractCallOverridenParserRuleAccess().getGroup(), "rule__AbstractCallOverridenParserRule__Group__0");
+					put(grammarAccess.getOverridableParserRuleAccess().getGroup(), "rule__OverridableParserRule__Group__0");
+					put(grammarAccess.getOverridableParserRule2Access().getGroup(), "rule__OverridableParserRule2__Group__0");
+					put(grammarAccess.getAbstractCallExtendedParserRuleAccess().getGroup(), "rule__AbstractCallExtendedParserRule__Group__0");
+					put(grammarAccess.getExtendableParserRuleAccess().getGroup(), "rule__ExtendableParserRule__Group__0");
+					put(grammarAccess.getInheritedParserRuleAccess().getNameAssignment_1(), "rule__InheritedParserRule__NameAssignment_1");
+					put(grammarAccess.getAbstractCallOverridenParserRuleAccess().getElementsAssignment_1(), "rule__AbstractCallOverridenParserRule__ElementsAssignment_1");
+					put(grammarAccess.getOverridableParserRuleAccess().getNameAssignment_1(), "rule__OverridableParserRule__NameAssignment_1");
+					put(grammarAccess.getOverridableParserRule2Access().getNameAssignment_1(), "rule__OverridableParserRule2__NameAssignment_1");
+					put(grammarAccess.getAbstractCallExtendedParserRuleAccess().getElementsAssignment_1(), "rule__AbstractCallExtendedParserRule__ElementsAssignment_1");
+					put(grammarAccess.getExtendableParserRuleAccess().getNameAssignment_1(), "rule__ExtendableParserRule__NameAssignment_1");
 				}
 			};
 		}

@@ -67,7 +67,8 @@ ruleModel
  :
 (
 { before(grammarAccess.getModelAccess().getAlternatives()); }
-(rule__Model__Alternatives){ after(grammarAccess.getModelAccess().getAlternatives()); }
+(rule__Model__Alternatives)
+{ after(grammarAccess.getModelAccess().getAlternatives()); }
 )
 
 ;
@@ -85,74 +86,26 @@ rule__Model__Alternatives
 :
 (
 { before(grammarAccess.getModelAccess().getFirstAssignment_0()); }
-(	
-(
-{ before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
-(
-{ before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
-
-	'foo\\bar' 
-{ after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
-)
-
-{ after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
-)
- 
-){ after(grammarAccess.getModelAccess().getFirstAssignment_0()); }
+(rule__Model__FirstAssignment_0)
+{ after(grammarAccess.getModelAccess().getFirstAssignment_0()); }
 )
 
     |(
 { before(grammarAccess.getModelAccess().getSecondAssignment_1()); }
-(	
-(
-{ before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
-(
-{ before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
-
-	'foo\\' 
-{ after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
-)
-
-{ after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
-)
- 
-){ after(grammarAccess.getModelAccess().getSecondAssignment_1()); }
+(rule__Model__SecondAssignment_1)
+{ after(grammarAccess.getModelAccess().getSecondAssignment_1()); }
 )
 
     |(
 { before(grammarAccess.getModelAccess().getThirdAssignment_2()); }
-(	
-(
-{ before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
-(
-{ before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
-
-	'\\bar' 
-{ after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
-)
-
-{ after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
-)
- 
-){ after(grammarAccess.getModelAccess().getThirdAssignment_2()); }
+(rule__Model__ThirdAssignment_2)
+{ after(grammarAccess.getModelAccess().getThirdAssignment_2()); }
 )
 
     |(
 { before(grammarAccess.getModelAccess().getForthAssignment_3()); }
-(	
-(
-{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
-(
-{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
-
-	'\\' 
-{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
-)
-
-{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
-)
- 
-){ after(grammarAccess.getModelAccess().getForthAssignment_3()); }
+(rule__Model__ForthAssignment_3)
+{ after(grammarAccess.getModelAccess().getForthAssignment_3()); }
 )
 
 ;
@@ -160,6 +113,99 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+
+
+rule__Model__FirstAssignment_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
+(
+{ before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
+
+	'foo\\bar' 
+
+{ after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
+)
+
+{ after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Model__SecondAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
+(
+{ before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
+
+	'foo\\' 
+
+{ after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
+)
+
+{ after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Model__ThirdAssignment_2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
+(
+{ before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
+
+	'\\bar' 
+
+{ after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
+)
+
+{ after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Model__ForthAssignment_3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+(
+{ before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+
+	'\\' 
+
+{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+)
+
+{ after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

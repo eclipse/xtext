@@ -14,7 +14,7 @@
 		<projectNameRt value="${projectName}"/>
 		
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
-			<fragment file="${standardFragments}" genmodels="${enums.genmodel}"/>
+			<fragment file="${standardFragments}" genModels="${enums.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>

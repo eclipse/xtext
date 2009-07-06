@@ -115,5 +115,8 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.enumrules.services,
  org.eclipse.xtext.ui.common.editor.contentassist.datatypeRuleTest,
  org.eclipse.xtext.ui.common.editor.contentassist.datatypeRuleTest.impl,
- org.eclipse.xtext.ui.common.editor.contentassist.datatypeRuleTest.util
+ org.eclipse.xtext.ui.common.editor.contentassist.datatypeRuleTest.util,
+ org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest,
+ org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.util
 

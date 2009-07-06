@@ -5,9 +5,9 @@
  */
 package org.eclipse.xtext.enumrules.enumRulesTestLanguage;
 
-import enums.ExistingEnum;
-
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.xtext.enumrules.enums.ExistingEnum;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ public interface Model extends EObject
 {
   /**
    * Returns the value of the '<em><b>Existing</b></em>' attribute.
-   * The literals are from the enumeration {@link enums.ExistingEnum}.
+   * The literals are from the enumeration {@link org.eclipse.xtext.enumrules.enums.ExistingEnum}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Existing</em>' attribute isn't clear,
@@ -38,7 +38,7 @@ public interface Model extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Existing</em>' attribute.
-   * @see enums.ExistingEnum
+   * @see org.eclipse.xtext.enumrules.enums.ExistingEnum
    * @see #setExisting(ExistingEnum)
    * @see org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage#getModel_Existing()
    * @model
@@ -51,7 +51,7 @@ public interface Model extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Existing</em>' attribute.
-   * @see enums.ExistingEnum
+   * @see org.eclipse.xtext.enumrules.enums.ExistingEnum
    * @see #getExisting()
    * @generated
    */
