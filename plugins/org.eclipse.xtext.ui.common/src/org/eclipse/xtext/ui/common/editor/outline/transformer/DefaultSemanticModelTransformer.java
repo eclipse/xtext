@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -31,6 +32,9 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	private ILocationInFileProvider locationProvider;
 
 	private XtextDocument document;
+	
+	@Inject
+	private Provider<ContentOutlineNode> outlineNodeProvider;
 
 	@Inject
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
@@ -62,7 +66,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	}
 
 	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
-		ContentOutlineNode outlineNode = new ContentOutlineNode();
+		ContentOutlineNode outlineNode = outlineNodeProvider.get();
 		outlineNode.setClazz(semanticNode.eClass());
 		
 		IEObjectHandle<EObject> handle = new IEObjectHandle.DefaultImpl<EObject>(semanticNode, document);
@@ -112,6 +116,14 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 	public void setDocument(XtextDocument document) {
 		this.document = document;
+	}
+
+	public void setOutlineNodeProvider(Provider<ContentOutlineNode> outlineNodeProvider) {
+		this.outlineNodeProvider = outlineNodeProvider;
+	}
+
+	public Provider<ContentOutlineNode> getOutlineNodeProvider() {
+		return outlineNodeProvider;
 	}
 
 }

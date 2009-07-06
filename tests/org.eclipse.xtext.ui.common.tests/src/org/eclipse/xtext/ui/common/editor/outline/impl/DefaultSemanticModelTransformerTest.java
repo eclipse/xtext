@@ -21,6 +21,8 @@ import org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticMod
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
+import com.google.inject.Provider;
+
 /**
  * @author Peter Friese - Initial contribution and API
  */
@@ -33,8 +35,15 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 	};
 
 	private static ILabelProvider myLabelProvider = new DefaultLabelProvider() {
+		@Override
 		public org.eclipse.swt.graphics.Image getImage(Object element) {
 			return null;
+		}
+	};
+	
+	private static Provider<ContentOutlineNode> myNodeProvider = new Provider<ContentOutlineNode>() {
+		public ContentOutlineNode get() {
+			return new ContentOutlineNode();
 		}
 	};
 
@@ -61,6 +70,7 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 		DefaultSemanticModelTransformer tr = new DefaultSemanticModelTransformer();
 		tr.setLabelProvider(myLabelProvider);
 		tr.setLocationProvider(myLocationProvider);
+		tr.setOutlineNodeProvider(myNodeProvider);
 		return tr;
 	}
 
