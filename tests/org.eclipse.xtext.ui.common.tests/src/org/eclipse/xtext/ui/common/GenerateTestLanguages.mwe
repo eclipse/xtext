@@ -28,6 +28,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/DatatypeRuleTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/LookAheadContentAssistTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
@@ -44,7 +47,7 @@
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
-			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe" genmodels="${enums.genmodel}"/>
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe" genModels="${enums.genmodel}"/>
 		</language>
 	</component>
 </workflow>

@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserBasedContent
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.ContentAssistContextTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.CrossReferenceProposalTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.DatatypeRuleTestLanguageParser;
+import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.SimpleLabelProvider;
@@ -214,6 +215,25 @@ public class ParserBasedContentAssistProcessorTestSetup implements IContentAssis
 					@Override
 					public Class<? extends IContentAssistParser> bindIContentAssistParser() {
 						return DatatypeRuleTestLanguageParser.class;
+					}
+				}, new UIPluginModule(Activator.getInstance()));
+			}
+		};
+	}
+
+	public ISetup getLookAheadContentAssistTestLanguageSetup() {
+		return new LookAheadContentAssistTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new LookAheadContentAssistTestLanguageUiModule() {
+					@Override
+					public Class<? extends Factory> bindContentAssistContext$Factory() {
+						return ParserBasedContentAssistContextFactory.class;
+					}
+
+					@Override
+					public Class<? extends IContentAssistParser> bindIContentAssistParser() {
+						return LookAheadContentAssistTestLanguageParser.class;
 					}
 				}, new UIPluginModule(Activator.getInstance()));
 			}

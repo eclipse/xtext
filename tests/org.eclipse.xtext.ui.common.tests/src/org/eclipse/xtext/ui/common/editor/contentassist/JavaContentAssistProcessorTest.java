@@ -219,4 +219,58 @@ public class JavaContentAssistProcessorTest extends AbstractContentAssistProcess
         		"(",
         		"{");
     }
+    
+    @Override
+	public void testBug282031_01() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("( values1 ")
+    		.assertText("="
+    				// , ")", "Value", "Name"
+    		);
+    }
+    
+    @Override
+	public void testBug282031_04() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("( values1")
+    		.assertText("="
+    				// , ")"
+    		);
+    }
+    
+    @Override
+	public void testBug282031_05() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[ values1 ")
+    		.assertText(//"]", 
+    				"Value"
+    				//, "Name"
+    		);
+    }
+    
+    @Override
+	public void testBug282031_08() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("[ values1")
+    		.assertText(//"]"
+    				);
+    }
+    
+    @Override
+	public void testBug282031_09() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("< values1 ")
+    		.assertText("="
+    				//, "Value", "Name"
+    			);
+    }
+    
+    @Override
+	public void testBug282031_13() throws Exception {
+    	newBuilder(setup.getLookAheadContentAssistTestLanguageSetup())
+    		.append("{ values1 ")
+    		.assertText("Value"
+    				//, "Name"
+    		);
+    }
 }

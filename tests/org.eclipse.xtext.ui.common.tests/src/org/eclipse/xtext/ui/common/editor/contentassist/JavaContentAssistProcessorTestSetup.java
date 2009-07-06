@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.SimpleLabelProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -162,6 +163,20 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 				return Guice.createInjector(new DatatypeRuleTestLanguageUiModule() {
 					@Override
 					public Class<? extends ContentAssistContext.Factory> bindContentAssistContext$Factory() {
+						return DefaultContentAssistContextFactory.class;
+					}
+				}, new UIPluginModule(Activator.getInstance()));
+			}
+		};
+	}
+
+	public ISetup getLookAheadContentAssistTestLanguageSetup() {
+		return new LookAheadContentAssistTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new LookAheadContentAssistTestLanguageUiModule() {
+					@Override
+					public Class<? extends Factory> bindContentAssistContext$Factory() {
 						return DefaultContentAssistContextFactory.class;
 					}
 				}, new UIPluginModule(Activator.getInstance()));

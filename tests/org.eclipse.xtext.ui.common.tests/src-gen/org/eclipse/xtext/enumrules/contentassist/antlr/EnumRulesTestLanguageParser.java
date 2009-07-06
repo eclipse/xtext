@@ -45,9 +45,12 @@ public class EnumRulesTestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
 					put(grammarAccess.getExistingEnumAccess().getAlternatives(), "rule__ExistingEnum__Alternatives");
 					put(grammarAccess.getGeneratedEnumAccess().getAlternatives(), "rule__GeneratedEnum__Alternatives");
-					put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0");
-					put(grammarAccess.getModelAccess().getGroup_0_2(), "rule__Model__Group_0_2");
-					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1");
+					put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
+					put(grammarAccess.getModelAccess().getGroup_0_2(), "rule__Model__Group_0_2__0");
+					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
+					put(grammarAccess.getModelAccess().getExistingAssignment_0_1(), "rule__Model__ExistingAssignment_0_1");
+					put(grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1(), "rule__Model__GeneratedAssignment_0_2_1");
+					put(grammarAccess.getModelAccess().getGeneratedAssignment_1_1(), "rule__Model__GeneratedAssignment_1_1");
 				}
 			};
 		}

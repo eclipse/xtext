@@ -46,12 +46,29 @@ public class ReferenceGrammarTestLanguageParser extends AbstractContentAssistPar
 					put(grammarAccess.getPersonAccess().getAlternatives(), "rule__Person__Alternatives");
 					put(grammarAccess.getFarbeAccess().getAlternatives(), "rule__Farbe__Alternatives");
 					put(grammarAccess.getFamilieAccess().getNameAlternatives_2_0(), "rule__Familie__NameAlternatives_2_0");
-					put(grammarAccess.getSpielplatzAccess().getGroup(), "rule__Spielplatz__Group");
-					put(grammarAccess.getKindAccess().getGroup(), "rule__Kind__Group");
-					put(grammarAccess.getErwachsenerAccess().getGroup(), "rule__Erwachsener__Group");
-					put(grammarAccess.getSpielzeugAccess().getGroup(), "rule__Spielzeug__Group");
-					put(grammarAccess.getFamilieAccess().getGroup(), "rule__Familie__Group");
-					put(grammarAccess.getFamilieAccess().getGroup_6(), "rule__Familie__Group_6");
+					put(grammarAccess.getSpielplatzAccess().getGroup(), "rule__Spielplatz__Group__0");
+					put(grammarAccess.getKindAccess().getGroup(), "rule__Kind__Group__0");
+					put(grammarAccess.getErwachsenerAccess().getGroup(), "rule__Erwachsener__Group__0");
+					put(grammarAccess.getSpielzeugAccess().getGroup(), "rule__Spielzeug__Group__0");
+					put(grammarAccess.getFamilieAccess().getGroup(), "rule__Familie__Group__0");
+					put(grammarAccess.getFamilieAccess().getGroup_6(), "rule__Familie__Group_6__0");
+					put(grammarAccess.getSpielplatzAccess().getGroesseAssignment_1(), "rule__Spielplatz__GroesseAssignment_1");
+					put(grammarAccess.getSpielplatzAccess().getBeschreibungAssignment_2(), "rule__Spielplatz__BeschreibungAssignment_2");
+					put(grammarAccess.getSpielplatzAccess().getKinderAssignment_4_0(), "rule__Spielplatz__KinderAssignment_4_0");
+					put(grammarAccess.getSpielplatzAccess().getErzieherAssignment_4_1(), "rule__Spielplatz__ErzieherAssignment_4_1");
+					put(grammarAccess.getSpielplatzAccess().getSpielzeugeAssignment_4_2(), "rule__Spielplatz__SpielzeugeAssignment_4_2");
+					put(grammarAccess.getSpielplatzAccess().getFamilieAssignment_4_3(), "rule__Spielplatz__FamilieAssignment_4_3");
+					put(grammarAccess.getKindAccess().getNameAssignment_2(), "rule__Kind__NameAssignment_2");
+					put(grammarAccess.getKindAccess().getAgeAssignment_3(), "rule__Kind__AgeAssignment_3");
+					put(grammarAccess.getErwachsenerAccess().getNameAssignment_2(), "rule__Erwachsener__NameAssignment_2");
+					put(grammarAccess.getErwachsenerAccess().getAgeAssignment_3(), "rule__Erwachsener__AgeAssignment_3");
+					put(grammarAccess.getSpielzeugAccess().getNameAssignment_2(), "rule__Spielzeug__NameAssignment_2");
+					put(grammarAccess.getSpielzeugAccess().getFarbeAssignment_3(), "rule__Spielzeug__FarbeAssignment_3");
+					put(grammarAccess.getFamilieAccess().getNameAssignment_2(), "rule__Familie__NameAssignment_2");
+					put(grammarAccess.getFamilieAccess().getMutterAssignment_3(), "rule__Familie__MutterAssignment_3");
+					put(grammarAccess.getFamilieAccess().getVaterAssignment_4(), "rule__Familie__VaterAssignment_4");
+					put(grammarAccess.getFamilieAccess().getKinderAssignment_5(), "rule__Familie__KinderAssignment_5");
+					put(grammarAccess.getFamilieAccess().getKinderAssignment_6_1(), "rule__Familie__KinderAssignment_6_1");
 				}
 			};
 		}

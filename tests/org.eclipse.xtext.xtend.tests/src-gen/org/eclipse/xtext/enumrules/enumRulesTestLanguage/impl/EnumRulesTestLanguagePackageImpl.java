@@ -5,10 +5,6 @@
  */
 package org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl;
 
-import enums.EnumsPackage;
-
-import enums.impl.EnumsPackageImpl;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -20,6 +16,8 @@ import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFa
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
+
+import org.eclipse.xtext.enumrules.enums.EnumsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,16 +89,14 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
 
     isInited = true;
 
-    // Obtain or create and register interdependencies
-    EnumsPackageImpl theEnumsPackage = (EnumsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnumsPackage.eNS_URI) instanceof EnumsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnumsPackage.eNS_URI) : EnumsPackage.eINSTANCE);
+    // Initialize simple dependencies
+    EnumsPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theEnumRulesTestLanguagePackage.createPackageContents();
-    theEnumsPackage.createPackageContents();
 
     // Initialize created meta-data
     theEnumRulesTestLanguagePackage.initializePackageContents();
-    theEnumsPackage.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
     theEnumRulesTestLanguagePackage.freeze();

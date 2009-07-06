@@ -67,13 +67,8 @@ ruleMainModel
  :
 (
 { before(grammarAccess.getMainModelAccess().getElementsAssignment()); }
-(	
-(
-{ before(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); }
-	ruleAnElement{ after(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); }
-)
- 
-)*{ after(grammarAccess.getMainModelAccess().getElementsAssignment()); }
+(rule__MainModel__ElementsAssignment)*
+{ after(grammarAccess.getMainModelAccess().getElementsAssignment()); }
 )
 
 ;
@@ -99,7 +94,8 @@ ruleAnElement
  :
 (
 { before(grammarAccess.getAnElementAccess().getGroup()); }
-(rule__AnElement__Group){ after(grammarAccess.getAnElementAccess().getGroup()); }
+(rule__AnElement__Group__0)
+{ after(grammarAccess.getAnElementAccess().getGroup()); }
 )
 
 ;
@@ -111,29 +107,53 @@ finally {
 
 
 
-rule__AnElement__Group
+
+rule__AnElement__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
 { before(grammarAccess.getAnElementAccess().getNameAssignment_0()); }
-(	
-(
-{ before(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); }
-	RULE_ID{ after(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); }
+(rule__AnElement__NameAssignment_0)
+{ after(grammarAccess.getAnElementAccess().getNameAssignment_0()); }
 )
- 
-){ after(grammarAccess.getAnElementAccess().getNameAssignment_0()); }
-)
+
+	rule__AnElement__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__AnElement__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getGroup_1()); }
-(rule__AnElement__Group_1)?{ after(grammarAccess.getAnElementAccess().getGroup_1()); }
+(rule__AnElement__Group_1__0)?
+{ after(grammarAccess.getAnElementAccess().getGroup_1()); }
 )
+
+	rule__AnElement__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__AnElement__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getSemicolonKeyword_2()); }
 
 	';' 
+
 { after(grammarAccess.getAnElementAccess().getSemicolonKeyword_2()); }
 )
 
@@ -142,7 +162,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__AnElement__Group_1
+
+
+
+
+
+
+
+rule__AnElement__Group_1__0
     @init {
 		int stackSize = keepStackSize();
     }
@@ -151,11 +178,73 @@ rule__AnElement__Group_1
 { before(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); }
 
 	'refersTo' 
+
 { after(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); }
 )
+
+	rule__AnElement__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__AnElement__Group_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getReferredAssignment_1_1()); }
-(	
+(rule__AnElement__ReferredAssignment_1_1)
+{ after(grammarAccess.getAnElementAccess().getReferredAssignment_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__MainModel__ElementsAssignment
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); }
+	ruleAnElement{ after(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__NameAssignment_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); }
+	RULE_ID{ after(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__ReferredAssignment_1_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); }
 (
@@ -163,9 +252,6 @@ rule__AnElement__Group_1
 	RULE_ID{ after(grammarAccess.getAnElementAccess().getReferredAnElementIDTerminalRuleCall_1_1_0_1()); }
 )
 { after(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); }
-)
- 
-){ after(grammarAccess.getAnElementAccess().getReferredAssignment_1_1()); }
 )
 
 ;

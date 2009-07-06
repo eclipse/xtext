@@ -42,8 +42,11 @@ public class CrossReferenceProposalTestLanguageParser extends AbstractContentAss
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
-					put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group");
-					put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0");
+					put(grammarAccess.getClassAccess().getGroup(), "rule__Class__Group__0");
+					put(grammarAccess.getClassAccess().getGroup_0(), "rule__Class__Group_0__0");
+					put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
+					put(grammarAccess.getClassAccess().getSuperClassAssignment_0_0(), "rule__Class__SuperClassAssignment_0_0");
+					put(grammarAccess.getClassAccess().getNameAssignment_1(), "rule__Class__NameAssignment_1");
 				}
 			};
 		}

@@ -15,12 +15,12 @@ public class InternalXtextLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int T29=29;
-    public static final int RULE_ID=5;
+    public static final int RULE_ID=4;
     public static final int T33=33;
     public static final int T22=22;
     public static final int T11=11;
     public static final int T36=36;
-    public static final int RULE_STRING=4;
+    public static final int RULE_STRING=5;
     public static final int T12=12;
     public static final int T28=28;
     public static final int T23=23;
@@ -227,11 +227,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:19:5: ( 'hidden' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:19:7: 'hidden'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:19:5: ( '(' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:19:7: '('
             {
-            match("hidden"); 
-
+            match('('); 
 
             }
 
@@ -246,10 +245,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:20:5: ( '(' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:20:7: '('
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:20:5: ( ')' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:20:7: ')'
             {
-            match('('); 
+            match(')'); 
 
             }
 
@@ -264,10 +263,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:21:5: ( ')' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:21:7: ')'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:21:5: ( '.' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:21:7: '.'
             {
-            match(')'); 
+            match('.'); 
 
             }
 
@@ -282,10 +281,11 @@ public class InternalXtextLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:22:5: ( '.' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:22:7: '.'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:22:5: ( 'generate' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:22:7: 'generate'
             {
-            match('.'); 
+            match("generate"); 
+
 
             }
 
@@ -300,10 +300,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:23:5: ( 'generate' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:23:7: 'generate'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:23:5: ( 'as' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:23:7: 'as'
             {
-            match("generate"); 
+            match("as"); 
 
 
             }
@@ -319,10 +319,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:24:5: ( 'as' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:24:7: 'as'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:24:5: ( 'import' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:24:7: 'import'
             {
-            match("as"); 
+            match("import"); 
 
 
             }
@@ -338,11 +338,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:25:5: ( 'import' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:25:7: 'import'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:25:5: ( ':' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:25:7: ':'
             {
-            match("import"); 
-
+            match(':'); 
 
             }
 
@@ -357,10 +356,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:26:5: ( ':' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:26:7: ':'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:26:5: ( ';' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:26:7: ';'
             {
-            match(':'); 
+            match(';'); 
 
             }
 
@@ -375,10 +374,11 @@ public class InternalXtextLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:27:5: ( ';' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:27:7: ';'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:27:5: ( 'returns' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:27:7: 'returns'
             {
-            match(';'); 
+            match("returns"); 
+
 
             }
 
@@ -393,10 +393,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:28:5: ( 'returns' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:28:7: 'returns'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:28:5: ( '::' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:28:7: '::'
             {
-            match("returns"); 
+            match("::"); 
 
 
             }
@@ -412,11 +412,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:29:5: ( '::' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:29:7: '::'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:29:5: ( '|' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:29:7: '|'
             {
-            match("::"); 
-
+            match('|'); 
 
             }
 
@@ -431,10 +430,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:30:5: ( '|' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:30:7: '|'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:30:5: ( '{' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:30:7: '{'
             {
-            match('|'); 
+            match('{'); 
 
             }
 
@@ -449,10 +448,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:31:5: ( '{' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:31:7: '{'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:31:5: ( '}' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:31:7: '}'
             {
-            match('{'); 
+            match('}'); 
 
             }
 
@@ -467,10 +466,11 @@ public class InternalXtextLexer extends Lexer {
     public final void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:32:5: ( '}' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:32:7: '}'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:32:5: ( 'current' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:32:7: 'current'
             {
-            match('}'); 
+            match("current"); 
+
 
             }
 
@@ -485,11 +485,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT34() throws RecognitionException {
         try {
             int _type = T34;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:33:5: ( 'current' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:33:7: 'current'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:33:5: ( '[' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:33:7: '['
             {
-            match("current"); 
-
+            match('['); 
 
             }
 
@@ -504,10 +503,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT35() throws RecognitionException {
         try {
             int _type = T35;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:34:5: ( '[' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:34:7: '['
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:34:5: ( ']' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:34:7: ']'
             {
-            match('['); 
+            match(']'); 
 
             }
 
@@ -522,10 +521,11 @@ public class InternalXtextLexer extends Lexer {
     public final void mT36() throws RecognitionException {
         try {
             int _type = T36;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:35:5: ( ']' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:35:7: ']'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:35:5: ( 'terminal' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:35:7: 'terminal'
             {
-            match(']'); 
+            match("terminal"); 
+
 
             }
 
@@ -540,11 +540,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT37() throws RecognitionException {
         try {
             int _type = T37;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:36:5: ( 'terminal' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:36:7: 'terminal'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:36:5: ( '!' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:36:7: '!'
             {
-            match("terminal"); 
-
+            match('!'); 
 
             }
 
@@ -559,10 +558,11 @@ public class InternalXtextLexer extends Lexer {
     public final void mT38() throws RecognitionException {
         try {
             int _type = T38;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:37:5: ( '!' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:37:7: '!'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:37:5: ( '->' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:37:7: '->'
             {
-            match('!'); 
+            match("->"); 
+
 
             }
 
@@ -577,10 +577,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT39() throws RecognitionException {
         try {
             int _type = T39;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:38:5: ( '->' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:38:7: '->'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:38:5: ( '..' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:38:7: '..'
             {
-            match("->"); 
+            match(".."); 
 
 
             }
@@ -596,10 +596,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT40() throws RecognitionException {
         try {
             int _type = T40;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:39:5: ( '..' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:39:7: '..'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:39:5: ( 'enum' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:39:7: 'enum'
             {
-            match(".."); 
+            match("enum"); 
 
 
             }
@@ -615,10 +615,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mT41() throws RecognitionException {
         try {
             int _type = T41;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:40:5: ( 'enum' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:40:7: 'enum'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:40:5: ( 'hidden' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:40:7: 'hidden'
             {
-            match("enum"); 
+            match("hidden"); 
 
 
             }
@@ -634,10 +634,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3184:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3184:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5554:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5554:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3184:11: ( '^' )?
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5554:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -646,7 +646,7 @@ public class InternalXtextLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3184:11: '^'
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5554:11: '^'
                     {
                     match('^'); 
 
@@ -665,7 +665,7 @@ public class InternalXtextLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3184:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5554:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -713,10 +713,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3186:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3186:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5556:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5556:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3186:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5556:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -730,7 +730,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3186:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5556:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -760,10 +760,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -775,16 +775,16 @@ public class InternalXtextLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3188:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("5558:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -800,7 +800,7 @@ public class InternalXtextLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -817,7 +817,7 @@ public class InternalXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -843,10 +843,10 @@ public class InternalXtextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -862,7 +862,7 @@ public class InternalXtextLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -879,7 +879,7 @@ public class InternalXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3188:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5558:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -921,12 +921,12 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3190:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3190:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5560:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5560:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3190:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5560:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -951,7 +951,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3190:52: .
+            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5560:52: .
             	    {
             	    matchAny(); 
 
@@ -979,12 +979,12 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -997,7 +997,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1018,7 +1018,7 @@ public class InternalXtextLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1027,9 +1027,9 @@ public class InternalXtextLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1038,7 +1038,7 @@ public class InternalXtextLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3192:41: '\\r'
+                            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5562:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1068,10 +1068,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3194:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3194:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5564:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5564:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3194:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5564:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1124,8 +1124,8 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3196:16: ( . )
-            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:3196:18: .
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5566:16: ( . )
+            // ../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g:5566:18: .
             {
             matchAny(); 
 
@@ -1236,7 +1236,7 @@ public class InternalXtextLexer extends Lexer {
                                             alt12=32;
                                         }
                                         else {
-                                            alt12=14;}
+                                            alt12=13;}
                                     }
                                     else {
                                         alt12=32;}
@@ -1291,98 +1291,59 @@ public class InternalXtextLexer extends Lexer {
         else if ( (LA12_0==',') ) {
             alt12=9;
         }
-        else if ( (LA12_0=='h') ) {
-            int LA12_8 = input.LA(2);
+        else if ( (LA12_0=='(') ) {
+            alt12=10;
+        }
+        else if ( (LA12_0==')') ) {
+            alt12=11;
+        }
+        else if ( (LA12_0=='.') ) {
+            int LA12_10 = input.LA(2);
 
-            if ( (LA12_8=='i') ) {
-                int LA12_46 = input.LA(3);
+            if ( (LA12_10=='.') ) {
+                alt12=29;
+            }
+            else {
+                alt12=12;}
+        }
+        else if ( (LA12_0=='a') ) {
+            int LA12_11 = input.LA(2);
 
-                if ( (LA12_46=='d') ) {
-                    int LA12_75 = input.LA(4);
+            if ( (LA12_11=='s') ) {
+                int LA12_50 = input.LA(3);
 
-                    if ( (LA12_75=='d') ) {
+                if ( ((LA12_50>='0' && LA12_50<='9')||(LA12_50>='A' && LA12_50<='Z')||LA12_50=='_'||(LA12_50>='a' && LA12_50<='z')) ) {
+                    alt12=32;
+                }
+                else {
+                    alt12=14;}
+            }
+            else {
+                alt12=32;}
+        }
+        else if ( (LA12_0=='i') ) {
+            int LA12_12 = input.LA(2);
+
+            if ( (LA12_12=='m') ) {
+                int LA12_51 = input.LA(3);
+
+                if ( (LA12_51=='p') ) {
+                    int LA12_76 = input.LA(4);
+
+                    if ( (LA12_76=='o') ) {
                         int LA12_85 = input.LA(5);
 
-                        if ( (LA12_85=='e') ) {
+                        if ( (LA12_85=='r') ) {
                             int LA12_94 = input.LA(6);
 
-                            if ( (LA12_94=='n') ) {
+                            if ( (LA12_94=='t') ) {
                                 int LA12_102 = input.LA(7);
 
                                 if ( ((LA12_102>='0' && LA12_102<='9')||(LA12_102>='A' && LA12_102<='Z')||LA12_102=='_'||(LA12_102>='a' && LA12_102<='z')) ) {
                                     alt12=32;
                                 }
                                 else {
-                                    alt12=10;}
-                            }
-                            else {
-                                alt12=32;}
-                        }
-                        else {
-                            alt12=32;}
-                    }
-                    else {
-                        alt12=32;}
-                }
-                else {
-                    alt12=32;}
-            }
-            else {
-                alt12=32;}
-        }
-        else if ( (LA12_0=='(') ) {
-            alt12=11;
-        }
-        else if ( (LA12_0==')') ) {
-            alt12=12;
-        }
-        else if ( (LA12_0=='.') ) {
-            int LA12_11 = input.LA(2);
-
-            if ( (LA12_11=='.') ) {
-                alt12=30;
-            }
-            else {
-                alt12=13;}
-        }
-        else if ( (LA12_0=='a') ) {
-            int LA12_12 = input.LA(2);
-
-            if ( (LA12_12=='s') ) {
-                int LA12_51 = input.LA(3);
-
-                if ( ((LA12_51>='0' && LA12_51<='9')||(LA12_51>='A' && LA12_51<='Z')||LA12_51=='_'||(LA12_51>='a' && LA12_51<='z')) ) {
-                    alt12=32;
-                }
-                else {
-                    alt12=15;}
-            }
-            else {
-                alt12=32;}
-        }
-        else if ( (LA12_0=='i') ) {
-            int LA12_13 = input.LA(2);
-
-            if ( (LA12_13=='m') ) {
-                int LA12_52 = input.LA(3);
-
-                if ( (LA12_52=='p') ) {
-                    int LA12_77 = input.LA(4);
-
-                    if ( (LA12_77=='o') ) {
-                        int LA12_86 = input.LA(5);
-
-                        if ( (LA12_86=='r') ) {
-                            int LA12_95 = input.LA(6);
-
-                            if ( (LA12_95=='t') ) {
-                                int LA12_103 = input.LA(7);
-
-                                if ( ((LA12_103>='0' && LA12_103<='9')||(LA12_103>='A' && LA12_103<='Z')||LA12_103=='_'||(LA12_103>='a' && LA12_103<='z')) ) {
-                                    alt12=32;
-                                }
-                                else {
-                                    alt12=16;}
+                                    alt12=15;}
                             }
                             else {
                                 alt12=32;}
@@ -1400,43 +1361,43 @@ public class InternalXtextLexer extends Lexer {
                 alt12=32;}
         }
         else if ( (LA12_0==':') ) {
-            int LA12_14 = input.LA(2);
+            int LA12_13 = input.LA(2);
 
-            if ( (LA12_14==':') ) {
-                alt12=20;
+            if ( (LA12_13==':') ) {
+                alt12=19;
             }
             else {
-                alt12=17;}
+                alt12=16;}
         }
         else if ( (LA12_0==';') ) {
-            alt12=18;
+            alt12=17;
         }
         else if ( (LA12_0=='r') ) {
-            int LA12_16 = input.LA(2);
+            int LA12_15 = input.LA(2);
 
-            if ( (LA12_16=='e') ) {
-                int LA12_56 = input.LA(3);
+            if ( (LA12_15=='e') ) {
+                int LA12_55 = input.LA(3);
 
-                if ( (LA12_56=='t') ) {
-                    int LA12_78 = input.LA(4);
+                if ( (LA12_55=='t') ) {
+                    int LA12_77 = input.LA(4);
 
-                    if ( (LA12_78=='u') ) {
-                        int LA12_87 = input.LA(5);
+                    if ( (LA12_77=='u') ) {
+                        int LA12_86 = input.LA(5);
 
-                        if ( (LA12_87=='r') ) {
-                            int LA12_96 = input.LA(6);
+                        if ( (LA12_86=='r') ) {
+                            int LA12_95 = input.LA(6);
 
-                            if ( (LA12_96=='n') ) {
-                                int LA12_104 = input.LA(7);
+                            if ( (LA12_95=='n') ) {
+                                int LA12_103 = input.LA(7);
 
-                                if ( (LA12_104=='s') ) {
-                                    int LA12_111 = input.LA(8);
+                                if ( (LA12_103=='s') ) {
+                                    int LA12_110 = input.LA(8);
 
-                                    if ( ((LA12_111>='0' && LA12_111<='9')||(LA12_111>='A' && LA12_111<='Z')||LA12_111=='_'||(LA12_111>='a' && LA12_111<='z')) ) {
+                                    if ( ((LA12_110>='0' && LA12_110<='9')||(LA12_110>='A' && LA12_110<='Z')||LA12_110=='_'||(LA12_110>='a' && LA12_110<='z')) ) {
                                         alt12=32;
                                     }
                                     else {
-                                        alt12=19;}
+                                        alt12=18;}
                                 }
                                 else {
                                     alt12=32;}
@@ -1457,40 +1418,40 @@ public class InternalXtextLexer extends Lexer {
                 alt12=32;}
         }
         else if ( (LA12_0=='|') ) {
-            alt12=21;
+            alt12=20;
         }
         else if ( (LA12_0=='{') ) {
-            alt12=22;
+            alt12=21;
         }
         else if ( (LA12_0=='}') ) {
-            alt12=23;
+            alt12=22;
         }
         else if ( (LA12_0=='c') ) {
-            int LA12_20 = input.LA(2);
+            int LA12_19 = input.LA(2);
 
-            if ( (LA12_20=='u') ) {
-                int LA12_60 = input.LA(3);
+            if ( (LA12_19=='u') ) {
+                int LA12_59 = input.LA(3);
 
-                if ( (LA12_60=='r') ) {
-                    int LA12_79 = input.LA(4);
+                if ( (LA12_59=='r') ) {
+                    int LA12_78 = input.LA(4);
 
-                    if ( (LA12_79=='r') ) {
-                        int LA12_88 = input.LA(5);
+                    if ( (LA12_78=='r') ) {
+                        int LA12_87 = input.LA(5);
 
-                        if ( (LA12_88=='e') ) {
-                            int LA12_97 = input.LA(6);
+                        if ( (LA12_87=='e') ) {
+                            int LA12_96 = input.LA(6);
 
-                            if ( (LA12_97=='n') ) {
-                                int LA12_105 = input.LA(7);
+                            if ( (LA12_96=='n') ) {
+                                int LA12_104 = input.LA(7);
 
-                                if ( (LA12_105=='t') ) {
-                                    int LA12_112 = input.LA(8);
+                                if ( (LA12_104=='t') ) {
+                                    int LA12_111 = input.LA(8);
 
-                                    if ( ((LA12_112>='0' && LA12_112<='9')||(LA12_112>='A' && LA12_112<='Z')||LA12_112=='_'||(LA12_112>='a' && LA12_112<='z')) ) {
+                                    if ( ((LA12_111>='0' && LA12_111<='9')||(LA12_111>='A' && LA12_111<='Z')||LA12_111=='_'||(LA12_111>='a' && LA12_111<='z')) ) {
                                         alt12=32;
                                     }
                                     else {
-                                        alt12=24;}
+                                        alt12=23;}
                                 }
                                 else {
                                     alt12=32;}
@@ -1511,40 +1472,40 @@ public class InternalXtextLexer extends Lexer {
                 alt12=32;}
         }
         else if ( (LA12_0=='[') ) {
-            alt12=25;
+            alt12=24;
         }
         else if ( (LA12_0==']') ) {
-            alt12=26;
+            alt12=25;
         }
         else if ( (LA12_0=='t') ) {
-            int LA12_23 = input.LA(2);
+            int LA12_22 = input.LA(2);
 
-            if ( (LA12_23=='e') ) {
-                int LA12_63 = input.LA(3);
+            if ( (LA12_22=='e') ) {
+                int LA12_62 = input.LA(3);
 
-                if ( (LA12_63=='r') ) {
-                    int LA12_80 = input.LA(4);
+                if ( (LA12_62=='r') ) {
+                    int LA12_79 = input.LA(4);
 
-                    if ( (LA12_80=='m') ) {
-                        int LA12_89 = input.LA(5);
+                    if ( (LA12_79=='m') ) {
+                        int LA12_88 = input.LA(5);
 
-                        if ( (LA12_89=='i') ) {
-                            int LA12_98 = input.LA(6);
+                        if ( (LA12_88=='i') ) {
+                            int LA12_97 = input.LA(6);
 
-                            if ( (LA12_98=='n') ) {
-                                int LA12_106 = input.LA(7);
+                            if ( (LA12_97=='n') ) {
+                                int LA12_105 = input.LA(7);
 
-                                if ( (LA12_106=='a') ) {
-                                    int LA12_113 = input.LA(8);
+                                if ( (LA12_105=='a') ) {
+                                    int LA12_112 = input.LA(8);
 
-                                    if ( (LA12_113=='l') ) {
+                                    if ( (LA12_112=='l') ) {
                                         int LA12_118 = input.LA(9);
 
                                         if ( ((LA12_118>='0' && LA12_118<='9')||(LA12_118>='A' && LA12_118<='Z')||LA12_118=='_'||(LA12_118>='a' && LA12_118<='z')) ) {
                                             alt12=32;
                                         }
                                         else {
-                                            alt12=27;}
+                                            alt12=26;}
                                     }
                                     else {
                                         alt12=32;}
@@ -1568,34 +1529,73 @@ public class InternalXtextLexer extends Lexer {
                 alt12=32;}
         }
         else if ( (LA12_0=='!') ) {
-            alt12=28;
+            alt12=27;
         }
         else if ( (LA12_0=='-') ) {
-            int LA12_25 = input.LA(2);
+            int LA12_24 = input.LA(2);
 
-            if ( (LA12_25=='>') ) {
-                alt12=29;
+            if ( (LA12_24=='>') ) {
+                alt12=28;
             }
             else {
                 alt12=38;}
         }
         else if ( (LA12_0=='e') ) {
-            int LA12_26 = input.LA(2);
+            int LA12_25 = input.LA(2);
 
-            if ( (LA12_26=='n') ) {
-                int LA12_66 = input.LA(3);
+            if ( (LA12_25=='n') ) {
+                int LA12_65 = input.LA(3);
 
-                if ( (LA12_66=='u') ) {
-                    int LA12_81 = input.LA(4);
+                if ( (LA12_65=='u') ) {
+                    int LA12_80 = input.LA(4);
 
-                    if ( (LA12_81=='m') ) {
-                        int LA12_90 = input.LA(5);
+                    if ( (LA12_80=='m') ) {
+                        int LA12_89 = input.LA(5);
 
-                        if ( ((LA12_90>='0' && LA12_90<='9')||(LA12_90>='A' && LA12_90<='Z')||LA12_90=='_'||(LA12_90>='a' && LA12_90<='z')) ) {
+                        if ( ((LA12_89>='0' && LA12_89<='9')||(LA12_89>='A' && LA12_89<='Z')||LA12_89=='_'||(LA12_89>='a' && LA12_89<='z')) ) {
                             alt12=32;
                         }
                         else {
-                            alt12=31;}
+                            alt12=30;}
+                    }
+                    else {
+                        alt12=32;}
+                }
+                else {
+                    alt12=32;}
+            }
+            else {
+                alt12=32;}
+        }
+        else if ( (LA12_0=='h') ) {
+            int LA12_26 = input.LA(2);
+
+            if ( (LA12_26=='i') ) {
+                int LA12_66 = input.LA(3);
+
+                if ( (LA12_66=='d') ) {
+                    int LA12_81 = input.LA(4);
+
+                    if ( (LA12_81=='d') ) {
+                        int LA12_90 = input.LA(5);
+
+                        if ( (LA12_90=='e') ) {
+                            int LA12_99 = input.LA(6);
+
+                            if ( (LA12_99=='n') ) {
+                                int LA12_106 = input.LA(7);
+
+                                if ( ((LA12_106>='0' && LA12_106<='9')||(LA12_106>='A' && LA12_106<='Z')||LA12_106=='_'||(LA12_106>='a' && LA12_106<='z')) ) {
+                                    alt12=32;
+                                }
+                                else {
+                                    alt12=31;}
+                            }
+                            else {
+                                alt12=32;}
+                        }
+                        else {
+                            alt12=32;}
                     }
                     else {
                         alt12=32;}

@@ -593,6 +593,124 @@
 	</extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/tmf/tests/2009/lookAheadContentAssistTest" 
+       class = "org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.LookAheadContentAssistTestPackage"
+       genModel = "org/eclipse/xtext/ui/common/editor/contentassist/LookAheadContentAssistTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="lookaheadcontentassisttestlanguage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage"
+            name="LookAheadContentAssistTestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage"
+            name="LookAheadContentAssistTestLanguage"
+            category="org.eclipse.xtext.languages">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"
+            label="LookAheadContentAssistTestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="lookaheadcontentassisttestlanguage">
+		</parser>
+	</extension>
+
+
 
     <extension
             point="org.eclipse.ui.editors">

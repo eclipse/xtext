@@ -43,9 +43,15 @@ public class ContentAssistTestLanguageParser extends AbstractContentAssistParser
 			nameMappings = new HashMap<AbstractElement, String>() {
 				{
 					put(grammarAccess.getAbstractRuleAccess().getAlternatives(), "rule__AbstractRule__Alternatives");
-					put(grammarAccess.getStartAccess().getGroup(), "rule__Start__Group");
-					put(grammarAccess.getFirstAbstractRuleChildAccess().getGroup(), "rule__FirstAbstractRuleChild__Group");
-					put(grammarAccess.getSecondAbstractRuleChildAccess().getGroup(), "rule__SecondAbstractRuleChild__Group");
+					put(grammarAccess.getStartAccess().getGroup(), "rule__Start__Group__0");
+					put(grammarAccess.getFirstAbstractRuleChildAccess().getGroup(), "rule__FirstAbstractRuleChild__Group__0");
+					put(grammarAccess.getSecondAbstractRuleChildAccess().getGroup(), "rule__SecondAbstractRuleChild__Group__0");
+					put(grammarAccess.getStartAccess().getRulesAssignment_1(), "rule__Start__RulesAssignment_1");
+					put(grammarAccess.getFirstAbstractRuleChildAccess().getNameAssignment_0(), "rule__FirstAbstractRuleChild__NameAssignment_0");
+					put(grammarAccess.getFirstAbstractRuleChildAccess().getElementsAssignment_2(), "rule__FirstAbstractRuleChild__ElementsAssignment_2");
+					put(grammarAccess.getSecondAbstractRuleChildAccess().getNameAssignment_0(), "rule__SecondAbstractRuleChild__NameAssignment_0");
+					put(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAssignment_3(), "rule__SecondAbstractRuleChild__RuleAssignment_3");
+					put(grammarAccess.getAbstractRuleCallAccess().getRuleAssignment(), "rule__AbstractRuleCall__RuleAssignment");
 				}
 			};
 		}

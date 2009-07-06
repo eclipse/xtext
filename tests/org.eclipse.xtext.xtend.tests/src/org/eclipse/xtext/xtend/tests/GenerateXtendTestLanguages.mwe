@@ -29,7 +29,7 @@
 			<fragment file="org/eclipse/xtext/xtend/tests/XtendSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
-			<fragment file="org/eclipse/xtext/xtend/tests/XtendSetup.mwe" genmodels="${enums.genmodel}"/>
+			<fragment file="org/eclipse/xtext/xtend/tests/XtendSetup.mwe" genModels="${enums.genmodel}"/>
 		</language>
 	</component>
 </workflow>

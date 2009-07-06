@@ -26,11 +26,11 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.LookAheadTerminal;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.LookAheadTerminalRuleCall;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.LookAheadTerminal;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -57,12 +57,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		this.followElements = new LinkedHashSet<FollowElement>();
 	}
 
-	protected void before(EObject grammarElement) {
+	public void before(EObject grammarElement) {
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
 	}
 
-	protected void after(EObject grammarElement) {
+	public void after(EObject grammarElement) {
 		EObject foundGrammarElement = grammarElements.remove(grammarElements.size() - 1);
 		if (grammarElement != foundGrammarElement)
 			throw new IllegalStateException("expected element: '" + grammarElement + "', but was: '"
@@ -145,7 +145,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				public void announceEof(int lookAhead) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null
-							&& (lastAddedElement == null || !EcoreUtil.isAncestor(current, lastAddedElement))) {
+							&& (lastAddedElement == null || 
+								!EcoreUtil.isAncestor(current, lastAddedElement))) {
 						followElements.add(createFollowElement(current, lookAhead));
 						lastAddedElement = current;
 					}
@@ -251,5 +252,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			result.put(i, names[i]);
 		}
 		return result;
+	}
+
+	public List<EObject> getGrammarElements() {
+		return grammarElements;
+	}
+
+	public List<EObject> getLocalTrace() {
+		return localTrace;
 	}
 }
