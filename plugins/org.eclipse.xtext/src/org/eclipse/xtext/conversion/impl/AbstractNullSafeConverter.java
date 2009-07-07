@@ -20,7 +20,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 @Stable(since="0.7.0")
 public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverter<T> {
 
-	public final String toString(T value) {
+	public String toString(T value) {
 		if (value == null)
 			return null;
 		return internalToString(value);
@@ -28,7 +28,7 @@ public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverte
 
 	protected abstract String internalToString(T value);
 
-	public final T toValue(String string, AbstractNode node) throws ValueConverterException {
+	public T toValue(String string, AbstractNode node) throws ValueConverterException {
 		if (string == null)
 			return null;
 		return internalToValue(string, node);

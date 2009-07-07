@@ -15,7 +15,6 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
-import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
@@ -72,9 +71,9 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 
 	@ValueConverter(rule = "INT")
 	public IValueConverter<Integer> INT() {
-		return new AbstractToStringConverter<Integer>() {
-			@Override
-			public Integer internalToValue(String string, AbstractNode node) {
+		return new IValueConverter<Integer>() {
+			
+			public Integer toValue(String string, AbstractNode node) {
 				if (Strings.isEmpty(string))
 					throw new ValueConverterException("Couldn't convert empty string to int", node, null);
 				try {
@@ -83,6 +82,11 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 					throw new ValueConverterException("Couldn't convert '"+string+"' to int", node, e);
 				}
 			}
+
+			public String toString(Integer value) {
+				return value.toString();
+			}
+
 		};
 	}
 
