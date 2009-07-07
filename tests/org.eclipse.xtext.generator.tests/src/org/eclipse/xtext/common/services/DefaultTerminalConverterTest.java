@@ -38,6 +38,12 @@ public class DefaultTerminalConverterTest extends TestCase {
 		} catch (ValueConverterException e) {
 			// expected
 		}
+		try {
+			valueConverter.toValue(null, null);
+			fail("exception epxected");
+		} catch (ValueConverterException e) {
+			// expected
+		}
 		assertEquals(42,(int) valueConverter.toValue("42", null));
 	}
 }
