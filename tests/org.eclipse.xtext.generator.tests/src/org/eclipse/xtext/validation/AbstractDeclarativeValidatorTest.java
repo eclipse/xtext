@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
@@ -17,7 +20,7 @@ import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * @author Michael Clay
  */
 public class AbstractDeclarativeValidatorTest extends TestCase {
 
@@ -115,5 +118,67 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		}
 		fail("CheckMode with wrong type, should throw an IllegalArgumentException");
 	}
+	
+	public void testAssertThreadLocalState() throws Exception {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
+			@Override
+			@Check
+			public void foo(Object x) {
+				Assert.assertNotNull("currentObject must not be null", getCurrentObject());
+				Assert.assertNotNull("currentMethod must not be null", getCurrentMethod());
+				Assert.assertNotNull("chain must not be null", getChain());
+				Assert.assertNotNull("checkMode must not be null", getCheckMode());
+				Assert.assertNotNull("context must not be null", getContext());
+				
+			}
+		};
+		TestChain chain = helper.chain();
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
+	}
+	
+	public void testCurrentObjectAndMethod() throws Exception {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
+			@Override
+			@Check
+			public void foo(Object x) {
+				Assert.assertEquals(EcorePackage.eINSTANCE.getEClass(), getCurrentObject());
+				try {
+					Assert.assertEquals(getClass().getMethod("foo", Object.class), getCurrentMethod());
+				} catch (Exception e) {
+					fail("unexpected");
+				} 
+			}
+		};
+		TestChain chain = helper.chain();
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
+	}
+	
+	public void testContext() throws Exception {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
+			@Override
+			@Check
+			public void foo(Object x) {
+				Assert.assertEquals(1, getContext().size());
+				Assert.assertEquals(CheckMode.EXPENSIVE_ONLY, getContext().get(CheckMode.KEY));
+			}
+		};
+		TestChain chain = helper.chain();
+		Map singletonMap = Collections.singletonMap(CheckMode.KEY, CheckMode.EXPENSIVE_ONLY);
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, singletonMap);
+	}
+	
+	public void testCheckMode() throws Exception {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
+			@Override
+			@Check
+			public void foo(Object x) {
+				Assert.assertEquals(CheckMode.EXPENSIVE_ONLY, getCheckMode());
+			}
+		};
+		TestChain chain = helper.chain();
+		Map singletonMap = Collections.singletonMap(CheckMode.KEY, CheckMode.EXPENSIVE_ONLY);
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, singletonMap);
+	}
+	
 
 }
