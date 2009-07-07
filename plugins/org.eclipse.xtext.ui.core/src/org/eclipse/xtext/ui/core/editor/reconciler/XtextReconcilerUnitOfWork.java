@@ -52,10 +52,14 @@ class XtextReconcilerUnitOfWork extends IUnitOfWork.Void<XtextResource> {
 					replaceRegionToBeProcessed.getText());
 			EcoreUtil.resolveAll(resource);
 		}
-		catch (Throwable t) {
+		catch (Exception t) {
 			if (log.isDebugEnabled())
 				log.debug("Partial parsing failed. Performing full reparse", t);
-			resource.reparse(document.get());
+			try {
+				resource.reparse(document.get());
+			} catch (Exception e) {
+				log.error("Parsing in reconciler failed.", e);
+			}
 		}
 	}
 }
