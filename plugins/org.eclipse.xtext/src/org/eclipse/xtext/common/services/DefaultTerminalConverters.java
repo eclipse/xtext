@@ -12,6 +12,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
@@ -26,16 +27,16 @@ import com.google.inject.Inject;
 public class DefaultTerminalConverters extends AbstractDeclarativeValueConverterService {
 
 	private Grammar grammar;
-	
+
 	@Inject
 	public void setGrammar(IGrammarAccess grammarAccess) {
 		this.grammar = grammarAccess.getGrammar();
 	}
-	
+
 	protected Grammar getGrammar() {
 		return grammar;
 	}
-	
+
 	@ValueConverter(rule = "ID")
 	public IValueConverter<String> ID() {
 		return new AbstractNullSafeConverter<String>() {
@@ -47,7 +48,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 			@Override
 			protected String internalToString(String value) {
 				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
-					return "^"+value;
+					return "^" + value;
 				}
 				return value;
 			}
@@ -74,7 +75,13 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 		return new AbstractToStringConverter<Integer>() {
 			@Override
 			public Integer internalToValue(String string, AbstractNode node) {
-				return Integer.valueOf(string);
+				if (Strings.isEmpty(string))
+					throw new ValueConverterException("Couldn't convert empty string to int", node, null);
+				try {
+					return Integer.valueOf(string);
+				} catch (NumberFormatException e) {
+					throw new ValueConverterException("Couldn't convert '"+string+"' to int", node, e);
+				}
 			}
 		};
 	}

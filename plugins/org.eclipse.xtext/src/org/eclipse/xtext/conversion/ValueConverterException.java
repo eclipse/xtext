@@ -15,7 +15,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  */
 @SuppressWarnings("serial")
 @Stable(since="0.7.0")
-public final class ValueConverterException extends Exception {
+public final class ValueConverterException extends RuntimeException {
 
 	private final AbstractNode node;
 	
