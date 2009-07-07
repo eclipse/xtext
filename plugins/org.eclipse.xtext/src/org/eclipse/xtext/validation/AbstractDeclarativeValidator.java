@@ -34,6 +34,7 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  *
  *
  *         Allows subclasses to specify invariants in a declarative manner using
@@ -225,6 +226,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private CheckMode checkMode = null;
 		private CheckType currentCheckType = null;
 		private boolean hasErrors = false;
+		private Map<Object, Object> context;
 	}
 
 	private final ThreadLocal<State> state;
@@ -244,6 +246,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected CheckMode getCheckMode() {
 		return state.get().checkMode;
 	}
+	
+	protected Map<Object, Object> getContext() {
+		return state.get().context;
+	}
 
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
@@ -262,6 +268,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		state.chain = diagnostics;
 		state.currentObject = object;
 		state.checkMode = checkMode;
+		state.context=context;
 
 		for (MethodWrapper method : methodsForType.get(object.getClass())) {
 			method.invoke(state);
