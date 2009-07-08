@@ -179,4 +179,19 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
+	
+	public void testBug_281660() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : foo += [RuleB] ('->' foo+=RuleB)*;\n" +
+				"RuleB : 'holla' name=ID;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().size()==1);
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
 }
