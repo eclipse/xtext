@@ -278,52 +278,92 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void warning(String string, Integer feature) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.get().currentObject, feature,  state.get().currentCheckType));
+		warning(string, state.get().currentObject, feature);
+	}
+
+	protected void warning(String string, EObject source, Integer feature) {
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, source, feature,  state.get().currentCheckType));
 	}
 
 	protected void error(String string, Integer feature) {
+		error(string, state.get().currentObject, feature);
+	}
+
+	protected void error(String string, EObject source, Integer feature) {
 		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.get().currentObject, feature, state.get().currentCheckType));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, source, feature, state.get().currentCheckType));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
+		assertTrue(message, state.get().currentObject, feature, executedPredicate);
+	}
+
+	protected void assertTrue(String message, EObject source, Integer feature, boolean executedPredicate) {
 		if (!executedPredicate)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertFalse(String message, Integer feature, boolean executedPredicate) {
+		assertFalse(message, state.get().currentObject, feature, executedPredicate);
+	}
+
+	protected void assertFalse(String message, EObject source, Integer feature, boolean executedPredicate) {
 		if (executedPredicate)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertNull(String message, int feature, Object object) {
+		assertNull(message, state.get().currentObject, feature, object);
+	}
+
+	protected void assertNull(String message, EObject source, int feature, Object object) {
 		if (object != null)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertNotNull(String message, int feature, Object object) {
+		assertNotNull(message, state.get().currentObject, feature, object);
+	}
+
+	protected void assertNotNull(String message, EObject source, int feature, Object object) {
 		if (object == null)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertEquals(String message, int feature, Object expected, Object actual) {
+		assertEquals(message, state.get().currentObject, feature, expected, actual);
+	}
+
+	protected void assertEquals(String message, EObject source, int feature, Object expected, Object actual) {
 		if (!expected.equals(actual))
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertNotEquals(String message, int feature, Object expected, Object actual) {
+		assertNotEquals(message, state.get().currentObject, feature, expected, actual);
+	}
+
+	protected void assertNotEquals(String message, EObject source, int feature, Object expected, Object actual) {
 		if (expected.equals(actual))
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertEmpty(String message, int feature, String string) {
+		assertEmpty(message, state.get().currentObject, feature, string);
+	}
+
+	protected void assertEmpty(String message, EObject source, int feature, String string) {
 		if (string != null && string.trim().length() > 0)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	protected void assertNotEmpty(String message, int feature, String string) {
+		assertNotEmpty(message, state.get().currentObject, feature, string);
+	}
+
+	protected void assertNotEmpty(String message, EObject source, int feature, String string) {
 		if (string == null || string.trim().length() == 0)
-			error(message, feature);
+			error(message, source, feature);
 	}
 
 	/**
