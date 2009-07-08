@@ -273,5 +273,14 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.util,
  org.eclipse.xtext.xtextTest,
  org.eclipse.xtext.xtextTest.impl,
- org.eclipse.xtext.xtextTest.util
+ org.eclipse.xtext.xtextTest.util,
+ org.eclipse.xtext.parser.assignments.parser.antlr,
+ org.eclipse.xtext.parser.assignments,
+ org.eclipse.xtext.parser.assignments.services,
+ org.eclipse.xtext.parser.assignments.assignmentsTestLanguage,
+ org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl,
+ org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.util,
+ org.eclipse.xtext.parser.assignments.parseTreeConstruction,
+ org.eclipse.xtext.parser.assignments.parser.packrat,
+ org.eclipse.xtext.parser.assignments.parser.packrat.consumers
 
