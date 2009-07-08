@@ -1,8 +1,6 @@
 package org.eclipse.xtext.parsetree.unassignedtext;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormatter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

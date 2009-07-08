@@ -149,6 +149,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (lexerRule == null) {
 			String fixedLexerRule = getFixedRule(node);
 			Object val = lastConsumedDatatypeToken == null ? value : lastConsumedDatatypeToken;
+			if (val == null) {
+				if (node instanceof LeafNode)
+					val = ((LeafNode) node).getText();
+				else
+					val = node.getElement();
+			}
 			factory.set(_this, feature, val, fixedLexerRule, node);
 			lastConsumedDatatypeToken = null;
 			return;
@@ -161,6 +167,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (lexerRule == null) {
 			String fixedLexerRule = getFixedRule(node);
 			Object val = lastConsumedDatatypeToken == null ? value : lastConsumedDatatypeToken;
+			if (val == null) {
+				if (node instanceof LeafNode)
+					val = ((LeafNode) node).getText();
+				else
+					val = node.getElement();
+			}
 			factory.add(_this, feature, val, fixedLexerRule, node);
 			lastConsumedDatatypeToken = null;
 			return;
