@@ -25,6 +25,11 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.validation.CancelIndicator;
+import org.eclipse.xtext.validation.CancellableDiagnostician;
+
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -33,13 +38,16 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
 	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
 
+	@Inject
+	private Diagnostician diagnostician;
+	
 	/**
 	 * Checks an {@link XtextResource}
 	 * 
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
-	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor) {
+	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
 		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
 		try {
 			// Syntactical errors
@@ -63,7 +71,13 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
 			for (EObject ele : resource.getContents()) {
 				try {
-					Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ele, context);
+					Map<Object, Object> options = Maps.newHashMap(context);
+					options.put(CancellableDiagnostician.CANCEL_INDICATOR, new CancelIndicator() {
+						public boolean isCancelled() {
+							return monitor.isCanceled();
+						}
+					});
+					Diagnostic diagnostic = diagnostician.validate(ele, options);
 					if (monitor.isCanceled())
 						return null;
 					if (!diagnostic.getChildren().isEmpty()) {
@@ -168,6 +182,14 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 			return ele.eClass().getEStructuralFeature((Integer) feature);
 		}
 		return null;
+	}
+
+	public void setDiagnostician(Diagnostician diagnostician) {
+		this.diagnostician = diagnostician;
+	}
+
+	public Diagnostician getDiagnostician() {
+		return diagnostician;
 	}
 
 }

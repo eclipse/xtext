@@ -135,6 +135,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		try {
+			synchronized (validationLock) {
+				if (validationJob != null)
+					validationJob.cancel();
+			}
 			return stateAccess.modify(work);
 		} finally {
 			checkAndUpdateMarkers();
@@ -241,7 +245,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
 	private final Object validationLock = new Object();
-	private Job validationJob;
+	private transient Job validationJob;
 
 	private void checkAndUpdateMarkers() {
 		synchronized (validationLock) {
