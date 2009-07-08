@@ -42,7 +42,8 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest.class);
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parser.OffsetInformationTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.DefaultEcoreElementFactoryTest.class);
+        suite.addTestSuite(org.eclipse.xtext.parser.OffsetInformationTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParserReplaceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPerformanceTest.class);
