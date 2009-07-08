@@ -234,9 +234,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
 		boolean result = f1.getName().equals(f1.getName());
 		result &= f1.isMany() == f2.isMany();
-//TODO SE: I think the following requirement is too strict.
-//		if (f1 instanceof EReference && f2 instanceof EReference)
-//			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
+		if (f1 instanceof EReference && f2 instanceof EReference)
+			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 		return result;
 	}
 
