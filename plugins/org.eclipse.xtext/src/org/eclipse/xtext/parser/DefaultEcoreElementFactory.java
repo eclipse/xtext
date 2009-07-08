@@ -64,8 +64,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
 		try {
 			Object value = getTokenAsStringIfPossible(tokenOrValue);
-			if (value instanceof CharSequence && ruleName != null) {
-				value = converterService.toValue(value.toString(), ruleName, node);
+			if ((value == null || value instanceof CharSequence) && ruleName != null) {
+				value = converterService.toValue(value == null ? null : value.toString(), ruleName, node);
 			}
 			return value;
 		} catch(ValueConverterException e) {
