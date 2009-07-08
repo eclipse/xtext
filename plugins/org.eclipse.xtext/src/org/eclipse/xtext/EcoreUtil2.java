@@ -232,7 +232,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
-		boolean result = f1.getName().equals(f1.getName());
+		boolean result = f1.getName().equals(f2.getName());
 		result &= f1.isMany() == f2.isMany();
 		if (f1 instanceof EReference && f2 instanceof EReference)
 			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
