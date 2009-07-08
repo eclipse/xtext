@@ -7,16 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.xtext.ui.common.editor.preferencepage.IScopedPreferenceStoreAccessor;
 import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -52,6 +54,40 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 	public TextAttribute getAttribute(String id) {
 		return attributes.get(id);
 	}
+	
+	public TextAttribute getMergedAttributes(String[] ids) {
+		if (ids.length < 2)
+			throw new IllegalStateException();
+		String mergedIds = getMergedIds(ids);
+		TextAttribute result = getAttribute(mergedIds);
+		if (result == null) {
+			for(String id: ids) {
+				result = merge(result, getAttribute(id));
+			}
+			attributes.put(mergedIds, result);
+		}
+		return result;
+	}
+	
+	private TextAttribute merge(TextAttribute first, TextAttribute second) {
+		if (first == null)
+			return second;
+		int style = first.getStyle() | second.getStyle();
+		Color fgColor = second.getForeground();
+		if (fgColor == null)
+			fgColor = first.getForeground();
+		Color bgColor = second.getBackground();
+		if (bgColor == null)
+			bgColor = first.getBackground();
+		Font font = second.getFont();
+		if (font == null)
+			font = first.getFont();
+		return new TextAttribute(fgColor, bgColor, style, font);
+	}
+
+	public String getMergedIds(String[] ids) {
+		return "$$$Merged:" + Strings.concat("/", Arrays.asList(ids)) + "$$$";
+	}
 
 	public void propertyChange(PropertyChangeEvent event) {
 		initialize();
@@ -66,15 +102,11 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 		TextStyle textStyle = new TextStyle();
 		preferencesAccessor.populateTextStyle(id, textStyle, defaultTextStyle);
 		int style = textStyle.getStyle();
-		Font fontFromFontData = null;
-		if (style == SWT.NORMAL) {
-			fontFromFontData = EditorUtils.fontFromFontData(textStyle.getFontData());
-		}
+		Font fontFromFontData = EditorUtils.fontFromFontData(textStyle.getFontData());
 		return new TextAttribute(
 				EditorUtils.colorFromRGB(textStyle.getColor()),
 				EditorUtils.colorFromRGB(textStyle.getBackgroundColor()),
 				style, fontFromFontData);
 	}
-	
 	
 }
