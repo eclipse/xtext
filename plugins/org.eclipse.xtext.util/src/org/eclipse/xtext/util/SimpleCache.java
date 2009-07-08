@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import com.google.common.base.Function;
@@ -17,7 +16,7 @@ import com.google.common.base.Function;
  */
 public class SimpleCache<Key, Value> {
 
-	private final Map<Key, Value> content;
+	private final WeakHashMap<Key, Value> content;
 	private final Function<Key, Value> f;
 
 	public SimpleCache(Function<Key, Value> f) {
@@ -28,7 +27,7 @@ public class SimpleCache<Key, Value> {
 		this.content = new WeakHashMap<Key, Value>();
 	}
 
-	public Value get(Key k) {
+	public synchronized Value get(Key k) {
 		Value result = content.get(k);
 		if (result == null && !content.containsKey(k)) {
 			result = f.apply(k);
@@ -37,25 +36,25 @@ public class SimpleCache<Key, Value> {
 		return result;
 	}
 
-	public void clear() {
+	public synchronized void clear() {
 		content.clear();
 	}
 
-	public void discard(Key k) {
+	public synchronized void discard(Key k) {
 		content.remove(k);
 	}
 	
 	// for testing purpose
 	
-	public boolean hasCachedValue(Key key) {
+	public synchronized boolean hasCachedValue(Key key) {
 		return content.containsKey(key);
 	}
 	
-	public int getSize() {
+	public synchronized int getSize() {
 		return content.size();
 	}
 
-	public boolean isEmpty() {
+	public synchronized boolean isEmpty() {
 		return content.isEmpty();
 	}
 
