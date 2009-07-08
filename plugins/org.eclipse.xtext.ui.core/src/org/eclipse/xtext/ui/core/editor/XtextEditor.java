@@ -67,6 +67,7 @@ import com.google.inject.name.Named;
  * @author Dennis Huebner - Initial contribution and API
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
+ * @author Michael Clay
  * @author Dan Stefanescu - Fix for bug 278279
  */
 public class XtextEditor extends TextEditor {
@@ -290,6 +291,10 @@ public class XtextEditor extends TextEditor {
 		// TODO Folding stuff
 		
 		installHighlightingHelper();
+		installSelectionChangedListener();
+	}
+
+	private void installSelectionChangedListener() {
 		selectionChangedListener = new ISelectionChangedListener() {
 			public void selectionChanged(final SelectionChangedEvent event) {
 				updateStatusLine();
@@ -325,14 +330,18 @@ public class XtextEditor extends TextEditor {
 			outlinePage = null;
 		}
 		uninstallHighlightingHelper();
-		if (selectionChangedListener != null) {
-			final ISelectionProvider selectionProvider = getSelectionProvider();
+		uninstallSelectionChangedListener();
+	}
+
+	private void uninstallSelectionChangedListener() {
+		ISelectionProvider selectionProvider = getSelectionProvider();
+		if (selectionProvider != null) {
 			if (selectionProvider instanceof IPostSelectionProvider) {
 				final IPostSelectionProvider postSelectionProvider = (IPostSelectionProvider) selectionProvider;
 				postSelectionProvider.removePostSelectionChangedListener(selectionChangedListener);
 			}
 			else {
-				getSelectionProvider().removeSelectionChangedListener(selectionChangedListener);
+				selectionProvider.removeSelectionChangedListener(selectionChangedListener);
 			}
 		}
 	}
