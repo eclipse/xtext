@@ -9,6 +9,7 @@ package org.eclipse.xtext.service;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
+import org.eclipse.xtext.validation.CancellableDiagnostician;
 
 import com.google.inject.Binder;
 
@@ -57,6 +59,11 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public EPackage.Registry bindEPackageRegistry() {
 		return EPackage.Registry.INSTANCE;
+	}
+	
+	@SingletonBinding
+	public Class<? extends Diagnostician> bindDiagnostician() {
+		return CancellableDiagnostician.class;
 	}
 
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {

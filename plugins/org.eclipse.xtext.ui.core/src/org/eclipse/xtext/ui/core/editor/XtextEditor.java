@@ -426,6 +426,7 @@ public class XtextEditor extends TextEditor {
 		setStatusLineMessage(message);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Annotation getAnnotation(final int offset, final int length) {
 		final IAnnotationModel model = getDocumentProvider().getAnnotationModel(getEditorInput());
 		if (model == null)
