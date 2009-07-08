@@ -83,8 +83,9 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	private void reconcilePositions(XtextResource resource) {
 		//		for (int i= 0, n= subtrees.length; i < n; i++)
 		//			subtrees[i].accept(fCollector);
-		
-		calculator.provideHighlightingFor(resource, this);
+		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(calculator);
+		acceptor.provideHighlightingFor(resource, this);
+//		calculator.provideHighlightingFor(resource, this);
 		List<AttributedPosition> oldPositions = removedPositions;
 		List<AttributedPosition> newPositions = new ArrayList<AttributedPosition>(removedPositionCount);
 		for (int i = 0, n = oldPositions.size(); i < n; i++) {
@@ -96,13 +97,15 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 	
 	/**
-	 * Add a position with the given range and highlighting iff it does not exist already.
+	 * Add a position with the given range and highlighting if it does not exist already.
 	 * @param offset The range offset
 	 * @param length The range length
 	 * @param highlighting The highlighting
 	 */
-	public void addPosition(int offset, int length, String id) {
-		TextAttribute highlighting = attributeProvider.getAttribute(id);
+	public void addPosition(int offset, int length, String... ids) {
+		TextAttribute highlighting = ids.length == 1 ? 
+				attributeProvider.getAttribute(ids[0])
+			:	attributeProvider.getMergedAttributes(ids);
 		boolean isExisting= false;
 		// TODO: use binary search
 		for (int i= 0, n= removedPositions.size(); i < n; i++) {

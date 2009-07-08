@@ -22,8 +22,8 @@ public interface IHighlightedPositionAcceptor {
 	 * Associates a text range with a style.
 	 * @param offset the offset of the range.
 	 * @param length the length of the range.
-	 * @param id the id of the highlighting style.
+	 * @param id the ids of the highlighting style, that should be applied.
 	 */
-	void addPosition(int offset, int length, String id);
+	void addPosition(int offset, int length, String... id);
 	
 }

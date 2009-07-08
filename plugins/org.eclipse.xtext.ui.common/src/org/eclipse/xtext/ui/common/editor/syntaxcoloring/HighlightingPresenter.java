@@ -601,9 +601,8 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	 */
 	public void applyTextPresentation(TextPresentation textPresentation) {
 		IRegion region = textPresentation.getExtent();
-		int i = computeIndexAtOffset(fPositions, region.getOffset()), n = computeIndexAtOffset(fPositions, region
-				.getOffset()
-				+ region.getLength());
+		int i = computeIndexAtOffset(fPositions, region.getOffset());
+		int n = computeIndexAtOffset(fPositions, region.getOffset()	+ region.getLength());
 		if (n - i > 2) {
 			List<StyleRange> ranges = new ArrayList<StyleRange>(n - i);
 			for (; i < n; i++) {
