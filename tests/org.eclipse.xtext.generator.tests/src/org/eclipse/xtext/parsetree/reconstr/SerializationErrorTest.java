@@ -13,10 +13,12 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
+import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.EmfFormatter;
 
 public class SerializationErrorTest extends AbstractGeneratorTest {
 
@@ -48,9 +50,11 @@ public class SerializationErrorTest extends AbstractGeneratorTest {
 		((TwoRequired) m.getTest()).setOne(null);
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
-		assertEquals(2, r.getLikelyErrorReasons().size());
-		assertTrue(r.toString(), r.getLikelyErrorReasons().get(0).contains(
-				"Test(TwoRequired).one is not set"));
+		// assertEquals(2, r.getLikelyErrorReasons(3).size());
+		// assertTrue(r.toString(), r.getLikelyErrorReasons(1).get(0).contains(
+		// "Test(TwoRequired).one is not set"));
+		assertTrue(r.toString(), r.toString().contains(
+				"TwoRequired.one is not set"));
 	}
 
 	public void testElementToMuch() throws Exception {
@@ -59,11 +63,32 @@ public class SerializationErrorTest extends AbstractGeneratorTest {
 		((TwoOptions) m.getTest()).setTwo("b");
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
-		assertTrue(r.toString(), r.getLikelyErrorReasons().get(0).contains(
+		assertTrue(r.toString(), r.toString().contains(
 				"Can not leave rule 'Parenthesis' "
 						+ "since the current object "
 						+ "'TwoOptions' has features with "
 						+ "unconsumed values: 'two':1"));
+		// assertTrue(r.toString(), r.getLikelyErrorReasons(1).get(0).contains(
+		// "Can not leave rule 'Parenthesis' "
+		// + "since the current object "
+		// + "'TwoOptions' has features with "
+		// + "unconsumed values: 'two':1"));
 
+	}
+
+	public void testDeepToMuch() throws Exception {
+		Model m = (Model) getModel("{ twooptions one a { twooptions one a { twooptions one a }}}");
+		// System.out.println(EmfFormatter.objToStr(m));
+		Indent i = ((Indent) m.getTest()).getIndent().get(0).getIndent().get(0);
+		i.getOpt().setTwo("b");
+		TreeConstructionReport r = ser(m);
+		assertFalse(r.isSuccess());
+		String msg = r.toString();
+		assertTrue(msg, msg.contains("Model {"));
+		assertTrue(msg, msg.contains("indent[0] = Indent"));
+		assertTrue(msg, msg.contains("Can not leave rule 'TwoOptions' "
+				+ "since the current object "
+				+ "'TwoOptions' has features with "
+				+ "unconsumed values: 'two':1"));
 	}
 }

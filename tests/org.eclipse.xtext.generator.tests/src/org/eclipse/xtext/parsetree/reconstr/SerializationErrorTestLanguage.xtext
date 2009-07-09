@@ -17,10 +17,13 @@ Parenthesis returns Test:
 	"(" Test ")";
 
 Test:
-	TwoRequired | TwoOptions;
+	TwoRequired | TwoOptions | Indent;
 
 TwoRequired:
 	"tworequired" one=ID two=ID;
 
 TwoOptions:
 	"twooptions" ("one" one=ID | "two" two=ID);
+
+Indent:
+	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
