@@ -354,8 +354,8 @@ public abstract class AbstractParseTreeConstructor implements
 	@Inject
 	protected IUnassignedTextSerializer unassTextSerializer;
 
-	protected TreeConstructionReportImpl createReport() {
-		return new TreeConstructionReportImpl();
+	protected TreeConstructionReportImpl createReport(EObject root) {
+		return new TreeConstructionReportImpl(root);
 	}
 
 	protected String debug(AbstractToken t, IInstanceDescription i) {
@@ -374,7 +374,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public TreeConstructionReport serialize(EObject object, ITokenStream out)
 			throws IOException {
-		TreeConstructionReportImpl rep = createReport();
+		TreeConstructionReportImpl rep = createReport(object);
 		AbstractToken token = serialize(object, rep);
 		while (token != null) {
 			String s = token.serializeThis();
