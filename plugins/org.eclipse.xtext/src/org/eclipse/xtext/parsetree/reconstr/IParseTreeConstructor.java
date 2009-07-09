@@ -9,6 +9,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +25,12 @@ public interface IParseTreeConstructor {
 
 	public interface TreeConstructionReport {
 		public boolean isSuccess();
-		public List<String> getLikelyErrorReasons();
-
+		public TreeConstructionDiagnostic getDiagnostic();
 	}
+	
+	public interface TreeConstructionDiagnostic {
+		public EObject getEObject();
+		public List<String> getLikelyErrorReasons(int count);
+		public Collection<? extends TreeConstructionDiagnostic> getSubDiagnostics();
+	} 
 }

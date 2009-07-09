@@ -98,6 +98,11 @@ public class SerializationerrorAdapterFactory extends AdapterFactoryImpl
         return createTwoOptionsAdapter();
       }
       @Override
+      public Adapter caseIndent(Indent object)
+      {
+        return createIndentAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -175,6 +180,21 @@ public class SerializationerrorAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTwoOptionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent <em>Indent</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent
+   * @generated
+   */
+  public Adapter createIndentAdapter()
   {
     return null;
   }

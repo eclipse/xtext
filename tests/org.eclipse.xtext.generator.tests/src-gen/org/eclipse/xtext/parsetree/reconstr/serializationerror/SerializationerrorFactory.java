@@ -62,6 +62,15 @@ public interface SerializationerrorFactory extends EFactory
   TwoOptions createTwoOptions();
 
   /**
+   * Returns a new object of class '<em>Indent</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Indent</em>'.
+   * @generated
+   */
+  Indent createIndent();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

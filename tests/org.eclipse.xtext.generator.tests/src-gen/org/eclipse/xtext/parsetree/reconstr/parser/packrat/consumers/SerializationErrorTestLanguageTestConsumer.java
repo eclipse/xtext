@@ -21,6 +21,8 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 
 	private TestElements rule;	
 
+	private INonTerminalConsumer indentConsumer;
+
 	private INonTerminalConsumer twoOptionsConsumer;
 
 	private INonTerminalConsumer twoRequiredConsumer;
@@ -30,6 +32,8 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 	private IElementConsumer ruleCall$2$Consumer;
 
 	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -41,6 +45,7 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 		}
 	}
 
@@ -68,6 +73,18 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 		}
 	}
 
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(indentConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SerializationErrorTestLanguageTestConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -87,6 +104,7 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTwoRequiredParserRuleCall_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTwoOptionsParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getIndentParserRuleCall_2());
 	}
 	
 	@Override
@@ -97,6 +115,10 @@ public final class SerializationErrorTestLanguageTestConsumer extends NonTermina
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setIndentConsumer(INonTerminalConsumer indentConsumer) {
+		this.indentConsumer = indentConsumer;
 	}
 	
 	public void setTwoOptionsConsumer(INonTerminalConsumer twoOptionsConsumer) {

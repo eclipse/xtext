@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorFactory;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage;
@@ -54,6 +55,13 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * @generated
    */
   private EClass twoOptionsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass indentEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -153,26 +161,6 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTest_One()
-  {
-    return (EAttribute)testEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTest_Two()
-  {
-    return (EAttribute)testEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getTwoRequired()
   {
     return twoRequiredEClass;
@@ -183,9 +171,89 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTwoRequired_One()
+  {
+    return (EAttribute)twoRequiredEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoRequired_Two()
+  {
+    return (EAttribute)twoRequiredEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTwoOptions()
   {
     return twoOptionsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoOptions_One()
+  {
+    return (EAttribute)twoOptionsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoOptions_Two()
+  {
+    return (EAttribute)twoOptionsEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIndent()
+  {
+    return indentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndent_Req()
+  {
+    return (EReference)indentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndent_Opt()
+  {
+    return (EReference)indentEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndent_Indent()
+  {
+    return (EReference)indentEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -222,12 +290,19 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
     createEReference(modelEClass, MODEL__TEST);
 
     testEClass = createEClass(TEST);
-    createEAttribute(testEClass, TEST__ONE);
-    createEAttribute(testEClass, TEST__TWO);
 
     twoRequiredEClass = createEClass(TWO_REQUIRED);
+    createEAttribute(twoRequiredEClass, TWO_REQUIRED__ONE);
+    createEAttribute(twoRequiredEClass, TWO_REQUIRED__TWO);
 
     twoOptionsEClass = createEClass(TWO_OPTIONS);
+    createEAttribute(twoOptionsEClass, TWO_OPTIONS__ONE);
+    createEAttribute(twoOptionsEClass, TWO_OPTIONS__TWO);
+
+    indentEClass = createEClass(INDENT);
+    createEReference(indentEClass, INDENT__REQ);
+    createEReference(indentEClass, INDENT__OPT);
+    createEReference(indentEClass, INDENT__INDENT);
   }
 
   /**
@@ -261,18 +336,26 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
     // Add supertypes to classes
     twoRequiredEClass.getESuperTypes().add(this.getTest());
     twoOptionsEClass.getESuperTypes().add(this.getTest());
+    indentEClass.getESuperTypes().add(this.getTest());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_Test(), this.getTest(), null, "test", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testEClass, Test.class, "Test", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTest_One(), ecorePackage.getEString(), "one", null, 0, 1, Test.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTest_Two(), ecorePackage.getEString(), "two", null, 0, 1, Test.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(twoRequiredEClass, TwoRequired.class, "TwoRequired", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTwoRequired_One(), ecorePackage.getEString(), "one", null, 0, 1, TwoRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoRequired_Two(), ecorePackage.getEString(), "two", null, 0, 1, TwoRequired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(twoOptionsEClass, TwoOptions.class, "TwoOptions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTwoOptions_One(), ecorePackage.getEString(), "one", null, 0, 1, TwoOptions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoOptions_Two(), ecorePackage.getEString(), "two", null, 0, 1, TwoOptions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(indentEClass, Indent.class, "Indent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getIndent_Req(), this.getTwoRequired(), null, "req", null, 0, 1, Indent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIndent_Opt(), this.getTwoOptions(), null, "opt", null, 0, 1, Indent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIndent_Indent(), this.getIndent(), null, "indent", null, 0, -1, Indent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -37,6 +37,7 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new Test_Alternatives(this, this, 2, inst);
 			case 3: return new TwoRequired_Group(this, this, 3, inst);
 			case 4: return new TwoOptions_Group(this, this, 4, inst);
+			case 5: return new Indent_Group(this, this, 5, inst);
 			default: return null;
 		}	
 	}	
@@ -270,11 +271,11 @@ protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule Test ****************
  *
  * Test:
- *   TwoRequired|TwoOptions;
+ *   TwoRequired|TwoOptions|Indent;
  *
  **/
 
-// TwoRequired|TwoOptions
+// TwoRequired|TwoOptions|Indent
 protected class Test_Alternatives extends AlternativesToken {
 
 	public Test_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -289,6 +290,7 @@ protected class Test_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Test_TwoRequiredParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Test_TwoOptionsParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new Test_IndentParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -351,6 +353,37 @@ protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TwoOptions_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTwoOptionsRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Indent
+protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
+	
+	public Test_IndentParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTestAccess().getIndentParserRuleCall_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Indent_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Indent_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -699,5 +732,212 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 
 
 /************ end Rule TwoOptions ****************/
+
+
+/************ begin Rule Indent ****************
+ *
+ * Indent:
+ *   "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+ *
+ **/
+
+// "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
+protected class Indent_Group extends GroupToken {
+	
+	public Indent_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getIndentAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Indent_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "{"
+protected class Indent_LeftCurlyBracketKeyword_0 extends KeywordToken  {
+	
+	public Indent_LeftCurlyBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getIndentAccess().getLeftCurlyBracketKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// req=TwoRequired?
+protected class Indent_ReqAssignment_1 extends AssignmentToken  {
+	
+	public Indent_ReqAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getIndentAccess().getReqAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoRequired_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("req",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("req");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTwoRequiredRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getIndentAccess().getReqTwoRequiredParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// opt=TwoOptions?
+protected class Indent_OptAssignment_2 extends AssignmentToken  {
+	
+	public Indent_OptAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getIndentAccess().getOptAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoOptions_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("opt",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("opt");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTwoOptionsRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getIndentAccess().getOptTwoOptionsParserRuleCall_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Indent_ReqAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// indent+=Indent*
+protected class Indent_IndentAssignment_3 extends AssignmentToken  {
+	
+	public Indent_IndentAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getIndentAccess().getIndentAssignment_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Indent_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("indent",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("indent");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getIndentAccess().getIndentIndentParserRuleCall_3_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Indent_IndentAssignment_3(parent, next, actIndex, consumed);
+			case 1: return new Indent_OptAssignment_2(parent, next, actIndex, consumed);
+			case 2: return new Indent_ReqAssignment_1(parent, next, actIndex, consumed);
+			case 3: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "}"
+protected class Indent_RightCurlyBracketKeyword_4 extends KeywordToken  {
+	
+	public Indent_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Indent_IndentAssignment_3(parent, this, 0, inst);
+			case 1: return new Indent_OptAssignment_2(parent, this, 1, inst);
+			case 2: return new Indent_ReqAssignment_1(parent, this, 2, inst);
+			case 3: return new Indent_LeftCurlyBracketKeyword_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Indent ****************/
 
 }

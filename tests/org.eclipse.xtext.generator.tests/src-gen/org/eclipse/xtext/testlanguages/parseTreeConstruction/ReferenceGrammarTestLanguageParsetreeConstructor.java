@@ -981,11 +981,11 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   "ROT"|"BLAU"|"GELB"|"GR\u00DCN";
+ *   "ROT"|"BLAU"|"GELB"|"GR\u2039N";
  *
  **/
 
-// "ROT"|"BLAU"|"GELB"|"GR\u00DCN"
+// "ROT"|"BLAU"|"GELB"|"GR\u2039N"
 protected class Farbe_Alternatives extends AlternativesToken {
 
 	public Farbe_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1001,7 +1001,7 @@ protected class Farbe_Alternatives extends AlternativesToken {
 			case 0: return new Farbe_ROTKeyword_0(parent, this, 0, inst);
 			case 1: return new Farbe_BLAUKeyword_1(parent, this, 1, inst);
 			case 2: return new Farbe_GELBKeyword_2(parent, this, 2, inst);
-			case 3: return new Farbe_GRÜNKeyword_3(parent, this, 3, inst);
+			case 3: return new Farbe_GRNKeyword_3(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -1069,15 +1069,15 @@ protected class Farbe_GELBKeyword_2 extends KeywordToken  {
 		
 }
 
-// "GR\u00DCN"
-protected class Farbe_GRÜNKeyword_3 extends KeywordToken  {
+// "GR\u2039N"
+protected class Farbe_GRNKeyword_3 extends KeywordToken  {
 	
-	public Farbe_GRÜNKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Farbe_GRNKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getGRÜNKeyword_3();
+		return grammarAccess.getFarbeAccess().getGRNKeyword_3();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {

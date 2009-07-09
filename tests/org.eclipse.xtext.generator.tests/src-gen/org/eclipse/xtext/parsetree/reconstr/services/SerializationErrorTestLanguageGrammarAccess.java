@@ -74,12 +74,13 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTwoRequiredParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTwoOptionsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIndentParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Test:
-		//  TwoRequired|TwoOptions;
+		//  TwoRequired|TwoOptions|Indent;
 		public ParserRule getRule() { return rule; }
 
-		//TwoRequired|TwoOptions
+		//TwoRequired|TwoOptions|Indent
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TwoRequired
@@ -87,6 +88,9 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 
 		//TwoOptions
 		public RuleCall getTwoOptionsParserRuleCall_1() { return cTwoOptionsParserRuleCall_1; }
+
+		//Indent
+		public RuleCall getIndentParserRuleCall_2() { return cIndentParserRuleCall_2; }
 	}
 
 	public class TwoRequiredElements implements IParserRuleAccess {
@@ -172,6 +176,50 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		//ID
 		public RuleCall getTwoIDTerminalRuleCall_1_1_1_0() { return cTwoIDTerminalRuleCall_1_1_1_0; }
 	}
+
+	public class IndentElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Indent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cReqAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cReqTwoRequiredParserRuleCall_1_0 = (RuleCall)cReqAssignment_1.eContents().get(0);
+		private final Assignment cOptAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOptTwoOptionsParserRuleCall_2_0 = (RuleCall)cOptAssignment_2.eContents().get(0);
+		private final Assignment cIndentAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cIndentIndentParserRuleCall_3_0 = (RuleCall)cIndentAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//Indent:
+		//  "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+		public ParserRule getRule() { return rule; }
+
+		//"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
+		public Group getGroup() { return cGroup; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+
+		//req=TwoRequired?
+		public Assignment getReqAssignment_1() { return cReqAssignment_1; }
+
+		//TwoRequired
+		public RuleCall getReqTwoRequiredParserRuleCall_1_0() { return cReqTwoRequiredParserRuleCall_1_0; }
+
+		//opt=TwoOptions?
+		public Assignment getOptAssignment_2() { return cOptAssignment_2; }
+
+		//TwoOptions
+		public RuleCall getOptTwoOptionsParserRuleCall_2_0() { return cOptTwoOptionsParserRuleCall_2_0; }
+
+		//indent+=Indent*
+		public Assignment getIndentAssignment_3() { return cIndentAssignment_3; }
+
+		//Indent
+		public RuleCall getIndentIndentParserRuleCall_3_0() { return cIndentIndentParserRuleCall_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -179,6 +227,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 	private TestElements pTest;
 	private TwoRequiredElements pTwoRequired;
 	private TwoOptionsElements pTwoOptions;
+	private IndentElements pIndent;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -222,7 +271,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 	}
 
 	//Test:
-	//  TwoRequired|TwoOptions;
+	//  TwoRequired|TwoOptions|Indent;
 	public TestElements getTestAccess() {
 		return (pTest != null) ? pTest : (pTest = new TestElements());
 	}
@@ -249,6 +298,16 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 	
 	public ParserRule getTwoOptionsRule() {
 		return getTwoOptionsAccess().getRule();
+	}
+
+	//Indent:
+	//  "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+	public IndentElements getIndentAccess() {
+		return (pIndent != null) ? pIndent : (pIndent = new IndentElements());
+	}
+	
+	public ParserRule getIndentRule() {
+		return getIndentAccess().getRule();
 	}
 
 	//terminal ID:
