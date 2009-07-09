@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui.common;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.7.1.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",

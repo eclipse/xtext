@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend API Tests Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.xtend.tests;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.7.1.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext;bundle-version="0.7.0",
