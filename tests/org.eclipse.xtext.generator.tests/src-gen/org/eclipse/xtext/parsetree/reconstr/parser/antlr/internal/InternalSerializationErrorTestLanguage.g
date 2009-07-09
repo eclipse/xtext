@@ -204,6 +204,16 @@ ruleTest returns [EObject current=null]
         $current = $this_TwoOptions_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTestAccess().getIndentParserRuleCall_2(), currentNode); 
+    }
+    this_Indent_2=ruleIndent
+    { 
+        $current = $this_Indent_2.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -344,6 +354,98 @@ ruleTwoOptions returns [EObject current=null]
 	    }
 	
 ))));
+
+
+
+
+
+// Entry rule entryRuleIndent
+entryRuleIndent returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getIndentRule(), currentNode); }
+	 iv_ruleIndent=ruleIndent 
+	 { $current=$iv_ruleIndent.current; } 
+	 EOF 
+;
+
+// Rule Indent
+ruleIndent returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('{' 
+    {
+        createLeafNode(grammarAccess.getIndentAccess().getLeftCurlyBracketKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getIndentAccess().getReqTwoRequiredParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_req_1=ruleTwoRequired 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "req", lv_req_1, "TwoRequired", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)?(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getIndentAccess().getOptTwoOptionsParserRuleCall_2_0(), currentNode); 
+	    }
+	    lv_opt_2=ruleTwoOptions 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "opt", lv_opt_2, "TwoOptions", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)?(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getIndentAccess().getIndentIndentParserRuleCall_3_0(), currentNode); 
+	    }
+	    lv_indent_3=ruleIndent 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIndentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "indent", lv_indent_3, "Indent", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)*'}' 
+    {
+        createLeafNode(grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4(), null); 
+    }
+);
 
 
 

@@ -71,6 +71,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
       case SerializationerrorPackage.TEST: return createTest();
       case SerializationerrorPackage.TWO_REQUIRED: return createTwoRequired();
       case SerializationerrorPackage.TWO_OPTIONS: return createTwoOptions();
+      case SerializationerrorPackage.INDENT: return createIndent();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -118,6 +119,17 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
   {
     TwoOptionsImpl twoOptions = new TwoOptionsImpl();
     return twoOptions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Indent createIndent()
+  {
+    IndentImpl indent = new IndentImpl();
+    return indent;
   }
 
   /**

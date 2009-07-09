@@ -16,14 +16,14 @@ public final class SerializationErrorTestLanguageDelimiters {
 	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$22$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$23$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$24$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$25$Delimiter = new SetBasedKeywordMatcher(
 		"tworequired", "twooptions", "one", "two");
 
 }

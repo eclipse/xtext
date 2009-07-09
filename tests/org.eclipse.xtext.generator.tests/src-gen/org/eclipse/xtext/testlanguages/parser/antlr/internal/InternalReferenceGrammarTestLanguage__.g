@@ -18,7 +18,7 @@ T18 : 'spielzeug' ;
 T19 : 'ROT' ;
 T20 : 'BLAU' ;
 T21 : 'GELB' ;
-T22 : 'GR\u00DCN' ;
+T22 : 'GR\u2039N' ;
 T23 : 'familie' ;
 T24 : 'keyword' ;
 T25 : ',' ;

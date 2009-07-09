@@ -10,18 +10,36 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="SerializationErrorTestLanguage.ecore#//Test"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//Test/one"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//Test/two"/>
-      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoRequired"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoRequired/one"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoRequired/two"/>
+      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoOptions"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoOptions/one"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoOptions/two"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Indent"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/req"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/opt"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/indent"/>
+      </genFeatures>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -14,6 +14,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.Serializati
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SerializationErrorTestLanguageTestConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SerializationErrorTestLanguageTwoRequiredConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SerializationErrorTestLanguageTwoOptionsConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SerializationErrorTestLanguageIndentConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -30,6 +31,7 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
     private SerializationErrorTestLanguageTestConsumer testConsumer;
     private SerializationErrorTestLanguageTwoRequiredConsumer twoRequiredConsumer;
     private SerializationErrorTestLanguageTwoOptionsConsumer twoOptionsConsumer;
+    private SerializationErrorTestLanguageIndentConsumer indentConsumer;
 
 	private SerializationErrorTestLanguageGrammarAccess grammarAccess;
 
@@ -60,6 +62,9 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
 		twoOptionsConsumer = new SerializationErrorTestLanguageTwoOptionsConsumer(
     		this, null
     	);
+		indentConsumer = new SerializationErrorTestLanguageIndentConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -74,6 +79,7 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
 		getTestConsumer().setRule(grammarAccess.getTestAccess());
 		getTwoRequiredConsumer().setRule(grammarAccess.getTwoRequiredAccess());
 		getTwoOptionsConsumer().setRule(grammarAccess.getTwoOptionsAccess());
+		getIndentConsumer().setRule(grammarAccess.getIndentAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -88,6 +94,7 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
 
 		getParenthesisConsumer().setTestConsumer(getTestConsumer());
 
+		getTestConsumer().setIndentConsumer(getIndentConsumer());
 		getTestConsumer().setTwoOptionsConsumer(getTwoOptionsConsumer());
 		getTestConsumer().setTwoRequiredConsumer(getTwoRequiredConsumer());
 
@@ -95,16 +102,22 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
 
 		getTwoOptionsConsumer().setIdConsumer(getIdConsumer());
 
+		getIndentConsumer().setIndentConsumer(getIndentConsumer());
+		getIndentConsumer().setTwoOptionsConsumer(getTwoOptionsConsumer());
+		getIndentConsumer().setTwoRequiredConsumer(getTwoRequiredConsumer());
+
 		getParenthesisConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$11$Delimiter);
 		getParenthesisConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$11$Delimiter);
-		getTwoRequiredConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$22$Delimiter);
-		getTwoRequiredConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getTwoRequiredConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getTwoOptionsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$22$Delimiter);
-		getTwoOptionsConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$22$Delimiter);
-		getTwoOptionsConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$22$Delimiter);
-		getTwoOptionsConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getTwoOptionsConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$24$Delimiter);
+		getTwoRequiredConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$23$Delimiter);
+		getTwoRequiredConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getTwoRequiredConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getTwoOptionsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$23$Delimiter);
+		getTwoOptionsConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$23$Delimiter);
+		getTwoOptionsConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$23$Delimiter);
+		getTwoOptionsConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getTwoOptionsConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getIndentConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$11$Delimiter);
+		getIndentConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguageDelimiters.keyword$11$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -129,6 +142,10 @@ public class SerializationErrorTestLanguageParserConfiguration extends AbstractP
 
     public SerializationErrorTestLanguageTwoOptionsConsumer getTwoOptionsConsumer() {
     	return twoOptionsConsumer;
+    }
+
+    public SerializationErrorTestLanguageIndentConsumer getIndentConsumer() {
+    	return indentConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

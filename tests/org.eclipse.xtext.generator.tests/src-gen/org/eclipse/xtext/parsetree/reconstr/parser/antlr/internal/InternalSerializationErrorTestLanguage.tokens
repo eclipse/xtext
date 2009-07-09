@@ -9,5 +9,7 @@ RULE_SL_COMMENT=8
 '('=11
 ')'=12
 'one'=15
+'}'=18
+'{'=17
 'twooptions'=14
 'tworequired'=13
