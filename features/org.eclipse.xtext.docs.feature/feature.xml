@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.docs"
       label="Xtext Documentation (Incubation)"
-      version="0.7.0.qualifier"
+      version="0.7.1.qualifier"
       provider-name="Eclipse.org"
       plugin="org.eclipse.xtext.doc">
 

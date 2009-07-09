@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Common UI Tests (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.ui.common.tests;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.7.1.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.common.tests.Activator
 Bundle-Vendor: Eclipse.org
 Require-Bundle: org.eclipse.ui,
