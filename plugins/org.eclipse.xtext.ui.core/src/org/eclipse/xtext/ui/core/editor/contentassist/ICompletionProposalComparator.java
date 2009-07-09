@@ -16,11 +16,14 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(ICompletionProposalComparator.DisplayString.class)
+@ImplementedBy(ICompletionProposalComparator.NaturalOrder.class)
 public interface ICompletionProposalComparator extends Comparator<ICompletionProposal> {
 
-	class DisplayString implements ICompletionProposalComparator {
+	class NaturalOrder implements ICompletionProposalComparator {
+		@SuppressWarnings("unchecked")
 		public int compare(ICompletionProposal o1, ICompletionProposal o2) {
+			if (o1 instanceof Comparable<?> && o2 instanceof Comparable<?>)
+				return ((Comparable<ICompletionProposal>) o1).compareTo(o2);
 			return o1.getDisplayString().compareTo(o2.getDisplayString());
 		}
 	}

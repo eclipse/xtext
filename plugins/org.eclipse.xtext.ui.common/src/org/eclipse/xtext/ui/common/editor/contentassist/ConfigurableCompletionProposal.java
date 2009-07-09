@@ -34,7 +34,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ConfigurableCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension4 {
+public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension4 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
@@ -333,6 +333,14 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 
 	public int getPriority() {
 		return priority;
+	}
+	
+	public int compareTo(ConfigurableCompletionProposal other) {
+		if (priority < other.getPriority())
+			return 1;
+		if (priority > other.getPriority())
+			return -1;
+		return getDisplayString().compareTo(other.getDisplayString());
 	}
 	
 	// copied from AbstractJavaCompletionProposal
