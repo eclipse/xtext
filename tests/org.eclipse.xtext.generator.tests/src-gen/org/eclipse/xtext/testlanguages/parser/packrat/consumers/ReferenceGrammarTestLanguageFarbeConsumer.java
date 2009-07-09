@@ -126,7 +126,7 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.getROTKeyword_0());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.getBLAUKeyword_1());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getGELBKeyword_2());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.getGRNKeyword_3());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getGRÜNKeyword_3());
 	}
 	
 	@Override
