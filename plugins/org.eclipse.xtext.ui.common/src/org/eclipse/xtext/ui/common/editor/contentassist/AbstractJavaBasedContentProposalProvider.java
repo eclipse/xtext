@@ -55,11 +55,15 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		}
 
 		public ICompletionProposal apply(IScopedElement candidate) {
+			ICompletionProposal result = null;
 			if (ruleName != null) {
 				String proposal = getValueConverter().toString(getDisplayString(candidate), ruleName);
-				return createCompletionProposal(candidate.element(), proposal, getDisplayString(candidate), contentAssistContext);
+				result = createCompletionProposal(candidate.element(), proposal, getDisplayString(candidate), contentAssistContext);
+			} else {
+				result = createCompletionProposal(candidate, contentAssistContext);
 			}
-			return createCompletionProposal(candidate,	contentAssistContext);
+			adjustPriority(result, contentAssistContext.getPrefix(), getCrossReferencePriority());			
+			return result;
 		}
 
 	}
@@ -81,7 +85,25 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			logger.debug("completeKeyword '" + keyword.getValue()+ "' for model '" + contentAssistContext.getCurrentModel()
 				+ "' and prefix '"+ contentAssistContext.getPrefix() + "'");
 		}
-		acceptor.accept(createCompletionProposal(keyword, keyword.getValue(), contentAssistContext));
+		ICompletionProposal proposal = createCompletionProposal(keyword, keyword.getValue(), contentAssistContext);
+		adjustPriority(proposal, contentAssistContext.getPrefix(), getKeywordPriority());
+		acceptor.accept(proposal);
+	}
+
+	public void adjustPriority(ICompletionProposal proposal, String prefix, int priority) {
+		if (proposal == null || !(proposal instanceof ConfigurableCompletionProposal))
+			return;
+		ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
+		if (castedProposal.getPriority() != getDefaultPriority())
+			return;
+		int adjustedPriority = priority;
+		if (!Strings.isEmpty(prefix)) {
+			if (castedProposal.getReplacementString().equals(prefix))
+				adjustedPriority = (int) (adjustedPriority * getSameTextMultiplier());
+			else
+				adjustedPriority = adjustedPriority * getProposalWithPrefixMultiplier();
+		}
+		castedProposal.setPriority(adjustedPriority);
 	}
 
 	@Override

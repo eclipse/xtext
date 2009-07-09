@@ -70,6 +70,16 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			return Boolean.TRUE;
 		}
 	}
+	
+	private int crossReferencePriority = 500;
+	
+	private int keywordPriority = 300;
+	
+	private int defaultPriority = 400;
+	
+	private int proposalWithPrefixMultiplier = 2;
+	
+	private double sameTextMultiplier = 0.75;
 
 	@Inject
 	protected ILabelProvider labelProvider;
@@ -197,14 +207,14 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, proposal, null, 100, contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, proposal, null, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, Image image, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, proposal, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, proposal, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
@@ -212,7 +222,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, image, 100, contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
@@ -220,7 +230,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, image, 100, prefix, contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, getDefaultPriority(), prefix, contentAssistContext);
 	}
 	
 	/**
@@ -234,13 +244,13 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			int priority, String prefix, ContentAssistContext context) {
 		int replacementOffset = context.getReplaceRegion().getOffset();
 		int replacementLength = context.getReplaceRegion().getLength();
-		return createCompletionProposal(proposal, displayString, image, replacementOffset, replacementLength, prefix, context);
+		return createCompletionProposal(proposal, displayString, image, priority, replacementOffset, replacementLength, prefix, context);
 	}
 
 	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
-			int replacementOffset, int replacementLength, String prefix, ContentAssistContext context) {
+			int priority, int replacementOffset, int replacementLength, String prefix, ContentAssistContext context) {
 		if (isValidProposal(proposal, prefix, context))
-			return doCreateProposal(proposal, displayString, image, replacementOffset, replacementLength, context);
+			return doCreateProposal(proposal, displayString, image, priority, replacementOffset, replacementLength, context);
 		return null;
 	}
 
@@ -253,8 +263,9 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	}
 
 	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
-			int replacementOffset, int replacementLength, ContentAssistContext context) {
+			int priority, int replacementOffset, int replacementLength, ContentAssistContext context) {
 		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, proposal.length(), image, displayString, null, null);
+		result.setPriority(priority);
 		result.setMatcher(context.getMatcher());
 		int replaceContextLength = context.getCurrentNode().getLength() - (replacementOffset - context.getCurrentNode().getOffset());
 		result.setReplaceContextLength(replaceContextLength);
@@ -294,4 +305,45 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public IProposalConflictHelper getConflictHelper() {
 		return conflictHelper;
 	}
+	
+	public void setCrossReferencePriority(int crossReferencePriority) {
+		this.crossReferencePriority = crossReferencePriority;
+	}
+
+	public int getCrossReferencePriority() {
+		return crossReferencePriority;
+	}
+
+	public void setKeywordPriority(int keywordPriority) {
+		this.keywordPriority = keywordPriority;
+	}
+
+	public int getKeywordPriority() {
+		return keywordPriority;
+	}
+
+	public void setDefaultPriority(int defaultPriority) {
+		this.defaultPriority = defaultPriority;
+	}
+
+	public int getDefaultPriority() {
+		return defaultPriority;
+	}
+
+	public void setProposalWithPrefixMultiplier(int proposalWithPrefixMultiplier) {
+		this.proposalWithPrefixMultiplier = proposalWithPrefixMultiplier;
+	}
+
+	public int getProposalWithPrefixMultiplier() {
+		return proposalWithPrefixMultiplier;
+	}
+
+	public void setSameTextMultiplier(double sameTextMultiplier) {
+		this.sameTextMultiplier = sameTextMultiplier;
+	}
+
+	public double getSameTextMultiplier() {
+		return sameTextMultiplier;
+	}
+
 }
