@@ -1,6 +1,6 @@
 h2(#getting-started). Getting Started
 
-In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
+In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
 
 bc.. type String
 type Bool
@@ -13,7 +13,7 @@ entity Session {
 entity Conference {
   property Name : String
   property Attendees : Person[]
-  property Speakers : Speakers[]
+  property Speakers : Speaker[]
 }
 
 entity Person {
@@ -32,11 +32,11 @@ Use the Xtext wizard to create a new project
 
 Choose a sensible project name, language name and file extension, e.g.
 
-| Main project name: 	|	org.xtext.example.start	|
-| Language name: 		|	org.xtext.example.Entities	|
-| DSL-File extension: 	|	entity	|
+| *Main project name:* 	|	org.xtext.example.start	|
+| *Language name:* 		|	org.xtext.example.Entities	|
+| *DSL-File extension:* 	|	entity	|
 
-Uncheck "Generate Generator project", you will not need it this time. Click on Finish.
+Uncheck "Create generator project", you will not need it this time. Click on Finish.
 
 !images/getting-started-wizard.png!
 
