@@ -36,6 +36,7 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.ecore.xmi,org.eclipse.emf.ecore.xmi"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit,org.eclipse.emf.edit"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf/plugins/org.eclipse.emf.edit.ui,org.eclipse.emf.edit.ui"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.emfindex.releng,org.eclipse.emf.emfindex.releng"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/examples/org.eclipse.emf.generic.editor,org.eclipse.emf.generic.editor"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.emfindex/plugins/org.eclipse.emf.index,org.eclipse.emf.index"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.emfindex/features/org.eclipse.emf.index.feature,org.eclipse.emf.index.feature"/>
@@ -83,6 +84,7 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/tests/org.eclipse.xtend.shared.ui.test,org.eclipse.xtend.shared.ui.test"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.tests,org.eclipse.xtend.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.emf,org.eclipse.xtend.typesystem.emf"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/features/org.eclipse.xtend.typesystem.emf-feature,org.eclipse.xtend.typesystem.emf-feature"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/tests/org.eclipse.xtend.typesystem.emf.tests,org.eclipse.xtend.typesystem.emf.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.emf.ui,org.eclipse.xtend.typesystem.emf.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.uml2,org.eclipse.xtend.typesystem.uml2"/>
@@ -143,8 +145,8 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.common" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.edit.ui" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.ecore.change.edit" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.ecore.change" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.ecore.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.ecore.change" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.codegen.ecore.ui" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.converter" type="4"/>
@@ -153,6 +155,7 @@
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_1" label="EMF Index" name="EMF Index">
 <item elementID="=org.eclipse.emf.index.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.index.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfindex.releng" type="4"/>
 <item elementID="=org.eclipse.emf.index" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_2" label="Features" name="Features">
@@ -168,37 +171,38 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.runtime.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend-feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.ui.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.ui-feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.uml2-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.ui.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.examples.feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.ui-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.uml2-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.examples-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.ui-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.xsd-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.ui-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.sdk-feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.index.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.dependencies-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.index.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.emf-feature" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_3" label="MWE" name="MWE">
 <item elementID="=org.eclipse.emf.mwe.examples" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.emf.mwe.utils" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.emf.mwe.utils" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.doc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_4" label="MWE 3rdParty" name="MWE 3rdParty">
+<item elementID="=org.apache.xml.resolver" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=javax.xml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.apache.commons.cli" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.apache.commons.lang" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.apache.xml.serializer" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.apache.commons.logging" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.apache.xerces" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.apache.xml.resolver" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.apache.xml.serializer" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=javax.xml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614043185_5" label="MWE UI" name="MWE UI">
-<item elementID="=org.eclipse.emf.mwe.activities" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui.editor.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.emf.mwe.activities" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.ui.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
@@ -206,6 +210,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.releng" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.releng" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.mwe.releng" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfindex.releng" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1241614043191_7" label="Xpand" name="Xpand">
 <item elementID="=org.eclipse.xtend.typesystem.uml2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -221,8 +226,8 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2m.ecore2xsd" type="4"/>
 <item elementID="=org.eclipse.xpand" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.generic.editor" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2t.xml2javawizard" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.generic.editor" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2m.xml2svg" type="4"/>
 <item elementID="=org.eclipse.xtend.typesystem.emf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2t.genmodel" type="4"/>
@@ -230,32 +235,32 @@
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045920_8" label="Xpand UI" name="Xpand UI">
 <item elementID="=org.eclipse.xtend.check.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtend.typesystem.xsd.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend.shared.ui.test" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.typesystem.xsd.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xpand.activities" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend.shared.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend.typesystem.emf.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xpand.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtend.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend.typesystem.uml2.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtend.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045926_9" label="Xtext 3rdParty" name="Xtext 3rdParty">
 <item elementID="=org.antlr" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/de.itemis.xtext.antlr.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/de.itemis.antlr.xtext.updatesite" type="4"/>
 <item elementID="=org.eclipse.xtext.log4j" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.antlr.runtime" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=de.itemis.xtext.antlr" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=com.google.guice" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=com.google.collect" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.antlr.runtime" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045927_10" label="Xtext Core" name="Xtext Core">
-<item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.junit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.log4j" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.xtend" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.bootstrap" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -264,8 +269,8 @@
 <item elementID="=org.eclipse.xtext.doc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045928_12" label="Xtext PM" name="Xtext PM">
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/develop" type="4"/>
 <item elementID="=develop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/develop" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045929_13" label="Xtext Samples" name="Xtext Samples">
 <item elementID="=org.eclipse.xtext.example.domainmodel.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -274,18 +279,18 @@
 <item elementID="=org.eclipse.xtext.reference" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.reference.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.example.ecoredsl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.example.ecoredsl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.example.fowlerdsl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.ecoredsl.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1241614045930_14" label="Xtext UI" name="Xtext UI">
 <item elementID="=org.eclipse.xtext.ui.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.common.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.core.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.integration.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.xtend" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.integration.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.easymock" type="4"/>
 <item elementID="=org.eclipse.xtext.activities" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.logging" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
