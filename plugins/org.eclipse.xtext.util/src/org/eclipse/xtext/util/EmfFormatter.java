@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.FeatureMap;
 
 public class EmfFormatter {
 
@@ -86,6 +87,15 @@ public class EmfFormatter {
 			}
 			buf.append(indent).append("}");
 			return;
+		}
+		if(obj instanceof FeatureMap.Entry) {
+			FeatureMap.Entry e = (FeatureMap.Entry)obj;
+			buf.append(e.getEStructuralFeature().getEContainingClass().getName());
+			buf.append(".");
+			buf.append(e.getEStructuralFeature().getName());
+			buf.append("->");
+			objToStrImpl(e.getValue(), innerIdent, buf, ignoreUs);
+			return ;
 		}
 		if (obj instanceof Collection<?>) {
 			int counter = 0;
