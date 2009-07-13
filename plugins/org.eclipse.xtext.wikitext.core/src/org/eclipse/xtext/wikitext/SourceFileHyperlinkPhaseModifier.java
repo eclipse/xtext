@@ -21,6 +21,8 @@ import org.eclipse.mylyn.wikitext.core.parser.markup.PatternBasedElementProcesso
  */
 public class SourceFileHyperlinkPhaseModifier extends PatternBasedElement {
 
+	private static final String SRC_PART = "(src|src-gen)"; //$NON-NLS-1$
+
 	private static final String PACKAGE_PART = "(?:[a-z][a-zA-Z0-9]*)"; //$NON-NLS-1$
 
 	private static final String CLASS_PART = "(?:[A-Z][a-zA-Z0-9_$]*)+"; //$NON-NLS-1$
@@ -30,12 +32,12 @@ public class SourceFileHyperlinkPhaseModifier extends PatternBasedElement {
 	@Override
 	protected String getPattern(int groupOffset) {
 		// ${org.eclipse.xtext/src/org.eclipse.xtext.crossref.IScope}
-		return "\\$\\{([^/]+/src/)(" + FQN_PART + ")\\}"; //$NON-NLS-1$ //$NON-NLS-2$
+		return "\\$\\{([^/]+)/" + SRC_PART + "/(" + FQN_PART + ")\\}"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	@Override
 	protected int getPatternGroupCount() {
-		return 3;
+		return 4;
 	}
 
 	@Override
@@ -47,11 +49,13 @@ public class SourceFileHyperlinkPhaseModifier extends PatternBasedElement {
 		@Override
 		public void emit() {
 			String projectPath = group(1);
-			String fqn = group(2);
-			String className = group(3);
+			String src = group(2);
+			String fqn = group(3);
+			String className = group(4);
 
 			builder.link("http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/" //$NON-NLS-1$
-					+ projectPath + fqn.replace('.', '/') + ".java?root=Modeling_Project&view=co", className); //$NON-NLS-1$
+					+ projectPath + "/" + src + "/" //$NON-NLS-1$ //$NON-NLS-2$
+					+ fqn.replace('.', '/') + ".java?root=Modeling_Project&view=co", className); //$NON-NLS-1$
 		}
 	}
 
