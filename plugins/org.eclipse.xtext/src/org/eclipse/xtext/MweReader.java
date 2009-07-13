@@ -67,12 +67,21 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		set.setClasspathURIContext(getClasspathURIContext());
 		set.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = set.getResource(URI.createURI(uri), true);
-		EObject value = resource.getContents().get(0);
+		Object value = getContent(resource);
 		ctx.set(outputSlot, value);
 		registerIssues(set,issues);
 
+		doValidate(issues, resource);
+	}
+
+	protected EObject getContent(Resource resource) {
+		return resource.getContents().get(0);
+	}
+
+	protected void doValidate(Issues issues, Resource resource) {
 		if (validate) {
-			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(value, getContext());
+			EObject toCheck = getContent(resource);
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(toCheck, getContext());
 			registerIssues(diagnostic, issues);
 		}
 	}
