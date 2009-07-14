@@ -8,23 +8,29 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextValidationTest extends AbstractGeneratorTest {
+public class XtextValidationTest extends AbstractGeneratorTest implements ValidationMessageAcceptor {
 
+	private String lastMessage;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -74,6 +80,142 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertNotNull("diag", diag);
 		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_282852_01() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: name=ID ref='bar';\n" +
+				"Model: name=ID ref='foo';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_282852_02() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: name=ID ref='bar';\n" +
+				"terminal Id: 'a'..'z'+;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+
+	public void testBug_282852_03() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		Grammar child = XtextFactory.eINSTANCE.createGrammar();
+		child.getUsedGrammars().add(base);
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("Foo");
+		child.getRules().add(subRuleFoo);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this);
+		validator.checkRuleName(subRuleFoo);
+		assertNull(lastMessage);
+	}
+	
+	public void testBug_282852_04() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		Grammar child = XtextFactory.eINSTANCE.createGrammar();
+		child.getUsedGrammars().add(base);
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("foo");
+		child.getRules().add(subRuleFoo);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		validator.checkRuleName(subRuleFoo);
+		assertEquals("A rule's name has to be unique even case insensitive. A used grammar contains another rule 'Foo'.", lastMessage);
+	}
+	
+	public void testBug_282852_05() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("foo");
+		base.getRules().add(subRuleFoo);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		validator.checkRuleName(subRuleFoo);
+		assertEquals("A rule's name has to be unique even case insensitive. This grammar contains another rule 'Foo'.", lastMessage);
+	}
+	
+	public void testBug_282852_06() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("Foo");
+		base.getRules().add(subRuleFoo);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		validator.checkRuleName(subRuleFoo);
+		assertEquals("A rule's name has to be unique.", lastMessage);
+	}
+	
+	public void testBug_282852_07() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("foo");
+		AbstractRule subRuleFoo2 = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo2.setName("Foo");
+		AbstractRule subRuleFoo3 = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo3.setName("FOO");
+		base.getRules().add(subRuleFoo);
+		base.getRules().add(subRuleFoo2);
+		base.getRules().add(subRuleFoo3);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		validator.checkRuleName(subRuleFoo);
+		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO' and 'Foo'.", lastMessage);
+	}
+	
+	public void testBug_282852_08() throws Exception {
+		Grammar base = XtextFactory.eINSTANCE.createGrammar();
+		AbstractRule ruleFoo = XtextFactory.eINSTANCE.createParserRule();
+		ruleFoo.setName("Foo");
+		base.getRules().add(ruleFoo);
+		AbstractRule subRuleFoo = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo.setName("foo");
+		AbstractRule subRuleFoo2 = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo2.setName("fOO");
+		AbstractRule subRuleFoo3 = XtextFactory.eINSTANCE.createParserRule();
+		subRuleFoo3.setName("FOO");
+		base.getRules().add(subRuleFoo);
+		base.getRules().add(subRuleFoo2);
+		base.getRules().add(subRuleFoo3);
+
+		XtextValidator validator = get(XtextValidator.class);
+		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		validator.checkRuleName(subRuleFoo);
+		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO', 'Foo' and 'fOO'.", lastMessage);
 	}
 	
 	public void testDuplicateEnumLiterals() throws Exception {
@@ -193,5 +335,14 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertNotNull("diag", diag);
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+
+	public void acceptError(String message, EObject object, Integer feature) {
+		assertNull(lastMessage);
+		lastMessage = message;
+	}
+
+	public void acceptWarning(String message, EObject object, Integer feature) {
+		fail("Unexpected call to acceptWarning(..)");
 	}
 }
