@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -46,6 +47,8 @@ import org.eclipse.xtext.validation.CheckType;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -158,25 +161,77 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkRuleName(AbstractRule rule) {
 		final Grammar grammar = GrammarUtil.getGrammar(rule);
-		final TreeSet<String> foundNames = new TreeSet<String>();
-		for(AbstractRule otherRule: GrammarUtil.allRules(grammar)) {
-			if (rule.getName().equalsIgnoreCase(otherRule.getName()) && rule != otherRule) {
-				foundNames.add(otherRule.getName());
+		Multimap<String, AbstractRule> rules = getAllRules(grammar, rule.getName());
+		rules.remove(rule.getName(), rule);
+		if (!rules.isEmpty()) {
+			TreeSet<String> names = Sets.newTreeSet(rules.keySet());
+			if (names.size() == 1) {
+				String name = names.first();
+				if (name.equals(rule.getName())) {
+					final String message = "A rule's name has to be unique.";
+					error(message, XtextPackage.ABSTRACT_RULE__NAME);
+					return;
+				} else {
+					String message = "A rule's name has to be unique even case insensitive.";
+					boolean superGrammar = false;
+					for(AbstractRule otherRule: rules.get(name)) {
+						if (GrammarUtil.getGrammar(otherRule) != grammar) {
+							message = message + " A used grammar contains another rule '" + name + "'.";
+							superGrammar = true;
+							break;
+						}
+					}
+					if (!superGrammar)
+						message = message + " This grammar contains another rule '" + name + "'.";
+					error(message, XtextPackage.ABSTRACT_RULE__NAME);
+				}
+			} else {
+				String message = "A rule's name has to be unique even case insensitive.";
+				final StringBuilder builder = new StringBuilder((rule.getName().length() + 4) * names.size() - 2);
+				int i = 0;
+				for(String name: names) {
+					if (builder.length() != 0) {
+						if (i < names.size() - 1)
+							builder.append(", ");
+						else 
+							builder.append(" and ");
+					}
+					i++;
+					builder.append("'").append(name).append("'");
+				}
+				error(message + " The conflicting rules are " + builder + ".", XtextPackage.ABSTRACT_RULE__NAME);
 			}
 		}
-		if (!foundNames.isEmpty()) {
-			final String message = "Rulename has to be unique even case insensitive.";
-			if (foundNames.size() == 1)
-				error(message + "\nOther rule was: " + foundNames.first(), XtextPackage.ABSTRACT_RULE__NAME);
-			else {
-				final StringBuilder builder = new StringBuilder((rule.getName().length() + 2) * foundNames.size() - 2);
-				for(String name: foundNames) {
-					if (builder.length() != 0)
-						builder.append(", ");
-					builder.append(name);
-				}
-				error(message + "\nOther rules were: " + builder + ".", XtextPackage.ABSTRACT_RULE__NAME);
+//		for(AbstractRule otherRule: getAllRules(grammar)) {
+//			if (rule.getName().equalsIgnoreCase(otherRule.getName()) && rule != otherRule) {
+//				foundNames.put(otherRule.getName(), otherRule);
+//			}
+//		}
+	}
+	
+	private Multimap<String, AbstractRule> getAllRules(Grammar grammar, String name) {
+		final Multimap<String, AbstractRule> result = Multimaps.newArrayListMultimap();
+		final Set<Grammar> grammars = new HashSet<Grammar>();
+		final Set<String> validNames = new HashSet<String>();
+		collectRules(grammar, result, grammars, name, validNames);
+		return result;
+	}
+	
+	private void collectRules(Grammar grammar, Multimap<String, AbstractRule> result, Set<Grammar> visited, String name, Set<String> validNames) {
+		if (!visited.add(grammar))
+			return;
+		
+		List<String> allNames = new ArrayList<String>();
+		for(AbstractRule rule: grammar.getRules()) {
+			if (!validNames.contains(rule.getName())) {
+				allNames.add(rule.getName());
+				if (rule.getName().equalsIgnoreCase(name))
+					result.put(rule.getName(), rule);
 			}
+		}
+		validNames.addAll(allNames);
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			collectRules(usedGrammar, result, visited, name, validNames);
 		}
 	}
 

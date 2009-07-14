@@ -51,9 +51,28 @@ import com.google.inject.Injector;
  * }
  * </pre>
  */
-public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator {
+public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements ValidationMessageAcceptor {
 
 	public static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
+	
+	public static class StateAccess {
+		
+		private AbstractDeclarativeValidator validator;
+		
+		private StateAccess(AbstractDeclarativeValidator validator) {
+			this.validator = validator;
+		}
+
+		public State getState() {
+			State result = validator.state.get();
+			if (result == null) {
+				result = new State();
+				validator.state.set(result);
+			}
+			return result;
+		}
+		
+	}
 
 	static class MethodWrapper {
 		public final Method method;
@@ -124,12 +143,15 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	private volatile HashSet<MethodWrapper> checkMethods = null;
+	
+	private ValidationMessageAcceptor messageAcceptor;
 
 	@Inject
 	private Injector injector;
 	
 	public AbstractDeclarativeValidator() {
 		this.state = new ThreadLocal<State>();
+		this.messageAcceptor = this;
 	}
 
 	private List<MethodWrapper> collectMethods(Class<? extends AbstractDeclarativeValidator> clazz) {
@@ -220,13 +242,13 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			});
 
 	public static class State {
-		private DiagnosticChain chain = null;
-		private EObject currentObject = null;
-		private Method currentMethod = null;
-		private CheckMode checkMode = null;
-		private CheckType currentCheckType = null;
-		private boolean hasErrors = false;
-		private Map<Object, Object> context;
+		public DiagnosticChain chain = null;
+		public EObject currentObject = null;
+		public Method currentMethod = null;
+		public CheckMode checkMode = null;
+		public CheckType currentCheckType = null;
+		public boolean hasErrors = false;
+		public Map<Object, Object> context;
 	}
 
 	private final ThreadLocal<State> state;
@@ -282,7 +304,11 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void warning(String string, EObject source, Integer feature) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, source, feature,  state.get().currentCheckType));
+		getMessageAcceptor().acceptWarning(string, source, feature);
+	}
+	
+	public void acceptWarning(String message, EObject object, Integer feature) {
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature,  state.get().currentCheckType));
 	}
 
 	protected void error(String string, Integer feature) {
@@ -290,8 +316,12 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void error(String string, EObject source, Integer feature) {
+		getMessageAcceptor().acceptError(string, source, feature);
+	}
+	
+	public void acceptError(String message, EObject object, Integer feature) {
 		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, source, feature, state.get().currentCheckType));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, state.get().currentCheckType));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
@@ -400,6 +430,15 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	public Injector getInjector() {
 		return injector;
+	}
+
+	public StateAccess setMessageAcceptor(ValidationMessageAcceptor messageAcceptor) {
+		this.messageAcceptor = messageAcceptor;
+		return new StateAccess(this);
+	}
+
+	public ValidationMessageAcceptor getMessageAcceptor() {
+		return messageAcceptor;
 	}
 
 	public static class DiagnosticImpl implements Diagnostic {
