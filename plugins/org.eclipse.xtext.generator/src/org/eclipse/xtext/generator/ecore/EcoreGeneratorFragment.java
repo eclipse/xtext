@@ -342,6 +342,20 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 		if (diagnostic.getSeverity() != Diagnostic.OK)
 			log.info(diagnostic);
+		
+		if(generateEdit) {
+			Diagnostic editDiag = generator.generate(genModel, GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE,
+					new BasicMonitor());
+			if (editDiag.getSeverity() != Diagnostic.OK)
+				log.info(editDiag);
+		}
+		
+		if(generateEditor) {
+			Diagnostic editorDiag = generator.generate(genModel, GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE,
+					new BasicMonitor());
+			if (editorDiag.getSeverity() != Diagnostic.OK)
+				log.info(editorDiag);
+		}
 	}
 
 	public OutputStream createOutputStream(OutputStream stream) throws Exception {
@@ -363,6 +377,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private String editorDirectory = null;
 	private String editPluginID = null;
 	private String editorPluginID = null;
+	private boolean generateEdit = false;
+	private boolean generateEditor = false;
+	
 
 	/**
 	 * Set the target Java package for the generated EMF-model code.
@@ -451,5 +468,27 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
 		return getBasePackage(g) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName()) + "Package";
+	}
+	
+	/**
+	 * If true, the EMF-edit code will be generated as well.
+	 * 
+	 * @param gen
+	 * @see #setEditDirectory(String)
+	 * @see #setEditPluginID(String)
+	 */
+	public void setGenerateEdit(boolean gen) {
+		this.generateEdit = gen;
+	}
+	
+	/**
+	 * If true, the EMF editor code will be generated as well.
+	 * 
+	 * @param gen
+	 * @see #setEditorDirectory(String)
+	 * @see #setEditorPluginID(String)
+	 */
+	public void setGenerateEditor(boolean gen) {
+		this.generateEditor = gen;
 	}
 }
