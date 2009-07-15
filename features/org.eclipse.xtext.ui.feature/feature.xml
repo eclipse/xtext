@@ -108,7 +108,9 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="0.7.0.qualifier"/>
+      <import feature="org.eclipse.xtext.runtime" version="0.7.1.qualifier"/>
+      <import feature="org.eclipse.emf.mwe.ui" version="0.7.1.qualifier"/>
+      <import feature="org.eclipse.xpand.ui" version="0.7.1.qualifier"/>
    </requires>
 
    <plugin
