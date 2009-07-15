@@ -24,9 +24,9 @@ package «qualifiedName().toJavaPackage()»;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 
 /**
- * 
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider{
+public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider {
 /*
 	
 	//Labels and icons can be computed like this:
@@ -36,12 +36,11 @@ public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider{
 	}
 	 
     String image(MyModel ele) {
-      return "icons/MyModel.jpg";
+      return "MyModel.gif";
     }
 	 
 */
 }
-
 «ENDFILE»
 «ENDDEFINE»
 
