@@ -34,7 +34,7 @@
 			     and falls back to the packrat parser if it's not available. -->
 			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://xtext.itemis.com/updates/milestones.">
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
 				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			</fragment>
 	
