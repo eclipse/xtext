@@ -6,15 +6,15 @@ Bundle-Version: 0.7.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.generator.tests;bundle-version="0.7.0",
- org.eclipse.xtext.example.fowlerdsl;bundle-version="0.7.0",
- org.eclipse.xtext.reference;bundle-version="0.7.0",
- org.eclipse.xtext.ui.common.tests;bundle-version="0.7.0",
- org.eclipse.xtext.ui.core.tests;bundle-version="0.7.0",
- org.eclipse.xtext.example.domainmodel;bundle-version="0.7.0",
- org.eclipse.xtext.ui.integration.tests;bundle-version="0.7.0",
- org.eclipse.xtext.example.ecoredsl;bundle-version="0.7.0",
+Require-Bundle: org.eclipse.xtext.generator.tests;bundle-version="0.7.1",
+ org.eclipse.xtext.example.fowlerdsl;bundle-version="0.7.1",
+ org.eclipse.xtext.reference;bundle-version="0.7.1",
+ org.eclipse.xtext.ui.common.tests;bundle-version="0.7.1",
+ org.eclipse.xtext.ui.core.tests;bundle-version="0.7.1",
+ org.eclipse.xtext.example.domainmodel;bundle-version="0.7.1",
+ org.eclipse.xtext.ui.integration.tests;bundle-version="0.7.1",
+ org.eclipse.xtext.example.ecoredsl;bundle-version="0.7.1",
  org.eclipse.xtext.xtend.tests;bundle-version="0.0.7",
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.emf.mwe.core;bundle-version="0.7.0",
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0"
+ org.eclipse.emf.mwe.core;bundle-version="0.7.1",
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.1"
