@@ -9,6 +9,8 @@ By default Xtext registers ContextTypes for each Rule (@[languageName].[RuleName
 
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in @org.eclipse.jface.text.templates.GlobalTemplateVariables@ like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type @CrossReferences@) and Enumerations (type @Enum@) like it is explained in the following sections.
 
+It is best practice to edit the templates in the preferences page, export them into the @templates.xml@-file and put this one into the @templates@ folder of your ui-plugin. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an ID attribute for each template element.
+
 h3. CrossReference TemplateVariableResolver
 
 Xtext comes with a specific template variable resolver @org.eclipse.jface.text.templates.TemplateVariableResolver@) called @CrossReferenceResolver@, which can be used to place cross references within a template.

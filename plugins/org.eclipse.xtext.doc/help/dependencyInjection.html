@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Dependency Injection in Xtext with Google Guice</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,15 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
-<div class="section" title="Dependency Injection in Xtext with Google Guice">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="dependencyInjection"></a>Dependency Injection in Xtext with Google Guice</h2>
-</div>
-</div>
-</div>
 <p>In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes 
 				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>: 
 			</p>
@@ -50,10 +41,10 @@
 <p>The most parts of Xtext are implemented as 
 					<span class="emphasis"><em>services</em></span>. A service is an object which implements a certain interface and which is instantiated and provided by Guice. Nearly every concept of the Xtext framework can be understood as this sort of 
 					<span class="emphasis"><em>service</em></span>: The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&amp;view=co" target="_new">XtextEditor</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&amp;view=co" target="_new">IParser</a> and even fine grained concepts as the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&amp;view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&view=co" target="_new">XtextEditor</a>, the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>, the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&view=co" target="_new">IParser</a> and even fine grained concepts as the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
 				</p>
 <p>Xtext ships with generic default implementations for most or the services or uses 
 					<a class="link" href="configuration.html#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
@@ -116,7 +107,7 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 </p>
 </div>
 <p>For further details, please refer to the 
-					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&amp;s=google-guice&amp;t=UsersGuide" target="_new">Google Guice Documentation</a>
+					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide" target="_new">Google Guice Documentation</a>
 				
 </p>
 </div>
@@ -212,7 +203,7 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 </div>
 </div>
 <p>Finally the fully generated modules extend the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&amp;view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
 					</p>
 </div>
 <div class="section" title="Changing Configuration">
@@ -230,11 +221,11 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 						These classes are initially empty and have been generated to allow customization.
 					</p>
 <p>In order to provide a simple and convenient way, the default module extends the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGenericModule</a>. 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a>. 
 						It does not provide any bindings itself but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
 						This is also very readable but does not allow submodules to change any of the bindings.   
 						The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
 					</p>
 <div class="literallayout">
 <p>
@@ -251,10 +242,10 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 						<code class="code">IFooService</code> to 
 						<code class="code">MyFooServiceImpl.class</code>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the 
 						<code class="code">DefaultRuntimeModule</code> configures the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&amp;view=co" target="_new">IFormatter</a> to be implemented by the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&amp;view=co" target="_new">OneWhitespaceFormatter</a>. The 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to be implemented by the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a>. The 
 						<code class="code">AbstractMyLanguageModule</code> overrides this binding by mapping the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&amp;view=co" target="_new">IFormatter</a> to 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to 
 						<code class="code">MyLanguageFormatter</code>.
 						The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
 					</p>
@@ -304,7 +295,6 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&
 						</span>
 					
 </p>
-</div>
 </div>
 </div>
 </body>

@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Xtext User Guide</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -286,7 +286,7 @@
 </div>
 </div>
 <p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
-				<a class="ulink" href="http://www.eclipse.org/Xtext/download" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
+				<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -303,7 +303,7 @@ entity&nbsp;Session&nbsp;{<br>
 entity&nbsp;Conference&nbsp;{<br>
 &nbsp;&nbsp;property&nbsp;Name&nbsp;:&nbsp;String<br>
 &nbsp;&nbsp;property&nbsp;Attendees&nbsp;:&nbsp;Person[]<br>
-&nbsp;&nbsp;property&nbsp;Speakers&nbsp;:&nbsp;Speakers[]<br>
+&nbsp;&nbsp;property&nbsp;Speakers&nbsp;:&nbsp;Speaker[]<br>
 }<br>
 
 <br>
@@ -336,24 +336,30 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <table id="N10081">
 <tr>
 						
-<td>Main project name: 	</td>
+<td>
+							<span class="bold"><strong>Main project name:</strong></span> 	
+						</td>
 						<td>org.xtext.example.start	</td>
 					
 </tr>
 <tr>
 						
-<td>Language name: 		</td>
+<td>
+							<span class="bold"><strong>Language name:</strong></span> 		
+						</td>
 						<td>org.xtext.example.Entities	</td>
 					
 </tr>
 <tr>
 						
-<td>DSL-File extension: 	</td>
+<td>
+							<span class="bold"><strong>DSL-File extension:</strong></span> 	
+						</td>
 						<td>entity	</td>
 					
 </tr>
 </table>
-<p>Uncheck &ldquo;Generate Generator project&rdquo;, you will not need it this time. Click on Finish.</p>
+<p>Uncheck &ldquo;Create generator project&rdquo;, you will not need it this time. Click on Finish.</p>
 <p>
 					
 </p>
@@ -593,7 +599,7 @@ SimpleType:<br>
 </div>
 </div>
 <p>The 
-			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&amp;view=markup" target="_new">grammar language</a> 
+			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup" target="_new">grammar language</a> 
 			is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create DSLs, so what would be more helpful than developing the Xtext language with Xtext?
 		</p>
 <p>The grammar language is a domain-specific language, carefully designed for the description of textual languages based on 
@@ -851,7 +857,7 @@ Transition&nbsp;:<br>
 </p>
 </div>
 <p>If you want to mix generated and imported Ecore models you&rsquo;ll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs that point to the genmodels for the referenced Ecore models.
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs that point to the genmodels for the referenced Ecore models.
 							Example:
 						</p>
 <div class="literallayout">
@@ -1039,7 +1045,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 							<code class="code">ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of 
 							<code class="code">ecore::EDataType</code>.
 							In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&amp;view=co" target="_new">IValueConverterService</a> (cf. 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
 							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
 							<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
@@ -2191,8 +2197,6 @@ terminal&nbsp;SL_COMMENT&nbsp;	:&nbsp;'//'&nbsp;!('\n'|'\r')*&nbsp;('\r'?&nbsp;'
 terminal&nbsp;WS		:&nbsp;('&nbsp;'|'\t'|'\r'|'\n')+&nbsp;;<br>
 terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 
-<br>
-
 </code>
 </p>
 </div>
@@ -2375,7 +2379,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
 					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
 
 					</p>
@@ -2394,11 +2398,11 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we have written for label providers (
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&amp;view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.
 					</p>
 </div>
 <div class="section" title="Configuration">
@@ -2501,7 +2505,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10704">
+<table id="N10710">
 <tr>
 						
 <th>Class</th>
@@ -2511,7 +2515,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">EcoreGeneratorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>
 						</td>
 						<td>EMF code for generated models</td>
 					
@@ -2525,7 +2529,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java?root=Modeling_Project&amp;view=co" target="_new">GrammarAccessFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java?root=Modeling_Project&view=co" target="_new">GrammarAccessFragment</a>
 						</td>
 						<td>Access to the grammar</td>
 					
@@ -2533,7 +2537,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">ResourceFactoryFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a>
 						</td>
 						<td>EMF resource factory</td>
 					
@@ -2541,7 +2545,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&amp;view=co" target="_new">ParseTreeConstructorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&view=co" target="_new">ParseTreeConstructorFragment</a>
 						</td>
 						<td>Model-to-text serialization</td>
 					
@@ -2549,7 +2553,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaScopingFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&view=co" target="_new">JavaScopingFragment</a>
 						</td>
 						<td>Java-based scoping</td>
 					
@@ -2557,7 +2561,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaValidatorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&view=co" target="_new">JavaValidatorFragment</a>
 						</td>
 						<td>Java-based model validation</td>
 					
@@ -2565,7 +2569,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&amp;view=co" target="_new">CheckFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>
 						</td>
 						<td>Xpand/Check-based model validation</td>
 					
@@ -2573,7 +2577,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&amp;view=co" target="_new">FormatterFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&view=co" target="_new">FormatterFragment</a>
 						</td>
 						<td>Code formatter</td>
 					
@@ -2581,7 +2585,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&amp;view=co" target="_new">LabelProviderFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>
 						</td>
 						<td>Label provider</td>
 					
@@ -2589,7 +2593,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineNodeAdapterFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">OutlineNodeAdapterFactoryFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineNodeAdapterFactoryFragment.java?root=Modeling_Project&view=co" target="_new">OutlineNodeAdapterFactoryFragment</a>
 						</td>
 						<td>Outline view configuration</td>
 					
@@ -2597,7 +2601,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&amp;view=co" target="_new">TransformerFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&view=co" target="_new">TransformerFragment</a>
 						</td>
 						<td>Outline view configuration</td>
 					
@@ -2605,7 +2609,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaBasedContentAssistFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&view=co" target="_new">JavaBasedContentAssistFragment</a>
 						</td>
 						<td>Java-based content assist</td>
 					
@@ -2619,7 +2623,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&amp;view=co" target="_new">SimpleProjectWizardFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&view=co" target="_new">SimpleProjectWizardFragment</a>
 						</td>
 						<td>New project wizard</td>
 					
@@ -2677,10 +2681,10 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <p>The most parts of Xtext are implemented as 
 					<span class="emphasis"><em>services</em></span>. A service is an object which implements a certain interface and which is instantiated and provided by Guice. Nearly every concept of the Xtext framework can be understood as this sort of 
 					<span class="emphasis"><em>service</em></span>: The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&amp;view=co" target="_new">XtextEditor</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&amp;view=co" target="_new">IParser</a> and even fine grained concepts as the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&amp;view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&view=co" target="_new">XtextEditor</a>, the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>, the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&view=co" target="_new">IParser</a> and even fine grained concepts as the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
 				</p>
 <p>Xtext ships with generic default implementations for most or the services or uses 
 					<a class="link" href="#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
@@ -2743,7 +2747,7 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 </p>
 </div>
 <p>For further details, please refer to the 
-					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&amp;s=google-guice&amp;t=UsersGuide" target="_new">Google Guice Documentation</a>
+					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide" target="_new">Google Guice Documentation</a>
 				
 </p>
 </div>
@@ -2839,7 +2843,7 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 </div>
 </div>
 <p>Finally the fully generated modules extend the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&amp;view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
 					</p>
 </div>
 <div class="section" title="Changing Configuration">
@@ -2857,11 +2861,11 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 						These classes are initially empty and have been generated to allow customization.
 					</p>
 <p>In order to provide a simple and convenient way, the default module extends the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGenericModule</a>. 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a>. 
 						It does not provide any bindings itself but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
 						This is also very readable but does not allow submodules to change any of the bindings.   
 						The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
 					</p>
 <div class="literallayout">
 <p>
@@ -2878,10 +2882,10 @@ public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAcce
 						<code class="code">IFooService</code> to 
 						<code class="code">MyFooServiceImpl.class</code>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the 
 						<code class="code">DefaultRuntimeModule</code> configures the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&amp;view=co" target="_new">IFormatter</a> to be implemented by the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&amp;view=co" target="_new">OneWhitespaceFormatter</a>. The 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to be implemented by the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a>. The 
 						<code class="code">AbstractMyLanguageModule</code> overrides this binding by mapping the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&amp;view=co" target="_new">IFormatter</a> to 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to 
 						<code class="code">MyLanguageFormatter</code>.
 						The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
 					</p>
@@ -3000,8 +3004,6 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&
 &nbsp;&nbsp;&nbsp;&nbsp;name="EcoreDsl&nbsp;Editor"&gt;<br>
 &nbsp;&nbsp;&lt;/editor&gt;<br>
 &lt;/extension&gt;<br>
-
-<br>
 
 <br>
 
@@ -3164,7 +3166,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 <p>In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the 
 					<a class="link" href="#generator" title="The Generator">generator</a> with the
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&amp;view=co" target="_new">CheckFragment</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>.
 					Please note, that you can combine both types of validation in your project. 
 				</p>
 <div class="literallayout">
@@ -3287,7 +3289,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 </div>
 <p>The 
 					<code class="code">ILinker</code> implementation that is used by default is the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&amp;view=co" target="_new">LazyLinker</a>. It installs 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a>. It installs 
 					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
 					The actual cross reference resolution is done by 
 					<code class="code">LazyLinkingResource.getEObject(String)</code> and delegates to an implementation of the 
@@ -3328,7 +3330,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 					<code class="code">getLinkText</code> addresses complementary functionality: it is used for serialization.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&amp;view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
 					<code class="code">IScopeProvider</code> to compute the linking candidates.
 				</p>
 </div>
@@ -3640,7 +3642,7 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 <p>As always there is an implementation that allows to specify scoping in a declarative way (extend 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&amp;view=co" target="_new">AbstractDeclarativeScopeProvider</a> for this purpose). It looks up methods which have either of the following two signatures:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> for this purpose). It looks up methods which have either of the following two signatures:
 				</p>
 <div class="literallayout">
 <p>
@@ -3716,7 +3718,7 @@ entity&nbsp;Foo;<br>
 </div>
 <p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
 				The primary hook is called 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&amp;view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicecustomize.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicecustomize.
 				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
 <div class="literallayout">
@@ -3741,7 +3743,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 </div>
 </div>
 <p>The most simple way to register additional value converters is to make use of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractAnnotationBasedValueConverterService.java?root=Modeling_Project&amp;view=co" target="_new">AbstractAnnotationBasedValueConverterService</a>, which allows to
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractAnnotationBasedValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractAnnotationBasedValueConverterService</a>, which allows to
 					declaratively register an 
 					<code class="code">IValueConverter</code> via an annotated method. 
 				</p>
@@ -3797,8 +3799,6 @@ public&nbsp;IValueConverter&lt;BigDecimal&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
 
 <br>
 
-<br>
-
 </code>
 </p>
 </div>
@@ -3835,9 +3835,9 @@ public&nbsp;IValueConverter&lt;BigDecimal&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
 </ol>
 </div>
 <p>Serialization is invoked when calling 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a>
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>
 				<code class="code">.save(...)</code>. Furthermore, 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/SerializerUtil.java?root=Modeling_Project&amp;view=co" target="_new">SerializerUtil</a> provides resource-independent support for serialization.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/SerializerUtil.java?root=Modeling_Project&view=co" target="_new">SerializerUtil</a> provides resource-independent support for serialization.
 			</p>
 <div class="section" title="The Contract">
 <div class="titlepage">
@@ -3961,7 +3961,7 @@ public&nbsp;IValueConverter&lt;BigDecimal&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
 </div>
 </div>
 <p>Transient values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java?root=Modeling_Project&amp;view=co" target="_new">ITransientValueService</a>, or serialization will fail. The default implementation marks all model elements transient, that are 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java?root=Modeling_Project&view=co" target="_new">ITransientValueService</a>, or serialization will fail. The default implementation marks all model elements transient, that are 
 					<span class="emphasis"><em>unset</em></span> or equal to their default value.  
 				</p>
 </div>
@@ -3994,7 +3994,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 					<code class="code">items</code> has been parsed. This is due to the fact that the rule call 
 					<code class="code">Plural</code> is unassigned. However, the 
 					<a class="link" href="#parsetreeconstructor" title="Parse Tree Constructor">parse tree constructor</a> needs to decide which value to write during serialization. This decision can be be made by implementing the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IUnassignedTextSerializer.java?root=Modeling_Project&amp;view=co" target="_new">IUnassignedTextSerializer</a>.  
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IUnassignedTextSerializer.java?root=Modeling_Project&view=co" target="_new">IUnassignedTextSerializer</a>.  
 				</p>
 </div>
 <div class="section" title="Cross Reference Serializer">
@@ -4007,8 +4007,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 </div>
 <p>The cross reference serializer specifies which values are to be written to the textual representation for cross references. This behavior can be customized by implementing 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICrossReferenceSerializer.java?root=Modeling_Project&amp;view=co" target="_new">ICrossReferenceSerializer</a>. The default implementation delegates to 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java?root=Modeling_Project&amp;view=co" target="_new">ILinkingService</a>, which may be the better place for customization.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ICrossReferenceSerializer.java?root=Modeling_Project&view=co" target="_new">ICrossReferenceSerializer</a>. The default implementation delegates to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java?root=Modeling_Project&view=co" target="_new">ILinkingService</a>, which may be the better place for customization.
 				</p>
 </div>
 <div class="section" title="Hidden Token Merger">
@@ -4022,8 +4022,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 <p>After the 
 					<a class="link" href="#parsetreeconstructor" title="Parse Tree Constructor">parse tree constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, the hidden token merger (
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&amp;view=co" target="_new">IHiddenTokenMerger</a>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespace, line breaks, comments) from the node model. The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&amp;view=co" target="_new">IHiddenTokenMerger</a> is the factory for a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&view=co" target="_new">IHiddenTokenMerger</a>) mixes existing hidden tokens into this token stream. The default implementation uses the hidden tokens (whitespace, line breaks, comments) from the node model. The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/IHiddenTokenMerger.java?root=Modeling_Project&view=co" target="_new">IHiddenTokenMerger</a> is the factory for a 
 					<a class="link" href="#tokenstream" title="Token Stream">token stream</a> which is fed by the 
 					<a class="link" href="#parsetreeconstructor" title="Parse Tree Constructor">parse tree constructor</a> and which writes to another token stream.  
 				</p>
@@ -4041,11 +4041,11 @@ terminal&nbsp;Plural:&nbsp;<br>
 					<a class="link" href="#parsetreeconstructor" title="Parse Tree Constructor">parse tree constructor</a>, the 
 					<a class="link" href="#hiddentokenmerger" title="Hidden Token Merger">hidden token merger</a> and the 
 					<a class="link" href="#formatting" title="Formatting (Pretty Printing)">formatter</a> use an 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java?root=Modeling_Project&amp;view=co" target="_new">ITokenStream</a> for their output, and the latter two for their input as well. This makes them chainable. Token streams can be converted to a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenStream.java?root=Modeling_Project&view=co" target="_new">ITokenStream</a> for their output, and the latter two for their input as well. This makes them chainable. Token streams can be converted to a 
 					<code class="code">String</code> using the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java?root=Modeling_Project&amp;view=co" target="_new">TokenStringBuffer</a> and to an 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenStringBuffer.java?root=Modeling_Project&view=co" target="_new">TokenStringBuffer</a> and to an 
 					<code class="code">OutputStream</code> using the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenOutputStream.java?root=Modeling_Project&amp;view=co" target="_new">TokenOutputStream</a>. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, token streams allow easy manipulation of the stream, such as mixing in whitespace or manipulating them.    
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/TokenOutputStream.java?root=Modeling_Project&view=co" target="_new">TokenOutputStream</a>. Maybe there will be an implementation to reconstruct a node model as well at some point in the future. While providing fast output due to the stream pattern, token streams allow easy manipulation of the stream, such as mixing in whitespace or manipulating them.    
 				</p>
 <div class="literallayout">
 <p>
@@ -4085,7 +4085,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 </div>
 <p>Xtext provides an implementation of EMF&rsquo;s resource, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
 				</p>
 <p>
 					
@@ -4096,8 +4096,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 				
 </p>
 <p>The generator fragment 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&amp;view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
 				</p>
 <p>Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g.</p>
 <div class="itemizedlist">
@@ -4294,7 +4294,7 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 <p></p>
 <p>The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a file named 
 					<code class="code">icons/&lt;result of image-method&gt;</code> in your plugin. This path is actually configurable by google guice. Have a look at the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&amp;view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
 				</p>
 <p>What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an EAttribute that is called 
 					<code class="code">name</code> and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
@@ -4426,8 +4426,6 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 
 <br>
 
-<br>
-
 </code>
 </p>
 </div>
@@ -4458,13 +4456,17 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <p>By default Xtext registers ContextTypes for each Rule (
 				<code class="code">.[RuleName]</code>) and for each keyword (
 				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&amp;view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
 				<a class="link" href="#guicemanualmodules" title="Modules intended for customization">Guice</a>. 
 			</p>
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
 				<code class="code">org.eclipse.jface.text.templates.GlobalTemplateVariables</code> like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type 
 				<code class="code">CrossReferences</code>) and Enumerations (type 
 				<code class="code">Enum</code>) like it is explained in the following sections.
+			</p>
+<p>It is best practice to edit the templates in the preferences page, export them into the 
+				<code class="code">templates.xml</code>-file and put this one into the 
+				<code class="code">templates</code> folder of your ui-plugin. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an ID attribute for each template element.
 			</p>
 <div class="section" title="CrossReference TemplateVariableResolver">
 <div class="titlepage">
@@ -4523,7 +4525,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&amp;view=co" target="_new">EnumTemplateVariableResolver</a> resolves a template variable to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&view=co" target="_new">EnumTemplateVariableResolver</a> resolves a template variable to 
 					<code class="code">EEnumLiteral</code> literals
 					which are assignment-compatible to the enumeration type declared as the first parameter of the the 
 					<code class="code">Enum</code> 
@@ -4597,7 +4599,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional even virtual nodes, you customize the outline by implementing 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&amp;view=co" target="_new">ISemanticModelTransformer</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/transformer/ISemanticModelTransformer.java?root=Modeling_Project&view=co" target="_new">ISemanticModelTransformer</a>.
 				</p>
 <p>The Xtext wizard creates an empty transformer class (
 					<code class="code">MyDslTransformer</code>) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the EClasses that are of interest:
@@ -4677,8 +4679,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&amp;view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&amp;view=co" target="_new">DeclarativeActionBarContributor</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/AbstractFilterAction.java?root=Modeling_Project&view=co" target="_new">AbstractFilterAction</a>s to the outline. Actions can be contributed by implementing and registering a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DeclarativeActionBarContributor.java?root=Modeling_Project&view=co" target="_new">DeclarativeActionBarContributor</a>.
 				</p>
 <p>To register a 
 					<code class="code">DeclarativeActionBarContributor</code>, add the following lines to your 
@@ -4795,7 +4797,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&amp;view=co" target="_new">ContentOutlineNode</a>s, you cannot easily register an 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s, you cannot easily register an 
 					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm" target="_new">Object contribution</a>. (Besides, using the extension point 
 					<code class="code">org.eclipse.ui.popupMenus</code> is regarded somewhat old school &ndash; you should rather use the new command and expression framework, as depicted below).
 				</p>
@@ -4804,8 +4806,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>register a 
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&amp;view=co" target="_new">IContentOutlineNodeAdapterFactory</a> which will translate 
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&amp;view=co" target="_new">ContentOutlineNode</a>s to their underlying node type
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a> which will translate 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s to their underlying node type
 						</p>
 </li>
 <li class="listitem">
@@ -4826,7 +4828,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>Create a subclass of 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&amp;view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a> - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a> - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override 
 						<code class="code">getAdapterList()</code> and return an array of classes. This is the list of classes you want to add context menus to:
 					</p>
 <div class="literallayout">
@@ -4878,7 +4880,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>After you have registered the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&amp;view=co" target="_new">IContentOutlineNodeAdapterFactory</a>, you can add command / handler pairs to the context menu.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a>, you can add command / handler pairs to the context menu.
 					</p>
 <p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler and the menu contribution:</p>
 <div class="literallayout">
@@ -4975,8 +4977,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>When navigating a hyperlink Xtext will also select the text region corresponding to the referenced model element. Determining this text region is the responsibility of the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/ILocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">ILocationInFileProvider</a>. The default implementation (
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/DefaultLocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">DefaultLocationInFileProvider</a>) implements a best effort strategy which can be summarized as:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/ILocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">ILocationInFileProvider</a>. The default implementation (
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/DefaultLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">DefaultLocationInFileProvider</a>) implements a best effort strategy which can be summarized as:
 				</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -5032,7 +5034,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 						<code class="code">DefaultLocationInFileProvider</code> and override the methods 
 						<code class="code">getIdentifierFeature</code> and / or 
 						<code class="code">useKeyword</code> to guide the first and last steps of the strategy as described above (see 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&amp;view=co" target="_new">XtextLocationInFileProvider</a> for an example).
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">XtextLocationInFileProvider</a> for an example).
 					</p>
 </div>
 </div>
@@ -5047,7 +5049,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>A formatter can be implemented via the 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&amp;view=co" target="_new">IFormatter</a> service. Technically speaking, a formatter is a 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> service. Technically speaking, a formatter is a 
 				<a class="link" href="#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
 			</p>
 <p>The formatter is invoked during the 
@@ -5058,13 +5060,13 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&amp;view=co" target="_new">OneWhitespaceFormatter</a> simply writes one whitespace between all tokens.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a> simply writes one whitespace between all tokens.
 					</p>
 </li>
 <li class="listitem">
 <p>The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&amp;view=co" target="_new">AbstractDeclarativeFormatter</a> allows advanced configuration using a 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&amp;view=co" target="_new">FormattingConfig</a>. Both are explained in the 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeFormatter</a> allows advanced configuration using a 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>. Both are explained in the 
 						<a class="link" href="#declarativeformatter" title="Declarative Formatter">next chapter</a>.
 					</p>
 </li>
@@ -5123,10 +5125,10 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 </div>
 <p>The formatter has to implement the method 
 					<code class="code">configureFormatting(...)</code> which is supposed to declaratively set up a 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&amp;view=co" target="_new">FormattingConfig</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>.
 				</p>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&amp;view=co" target="_new">FormattingConfig</a> consist general settings and a set of rules:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist general settings and a set of rules:
 				</p>
 <div class="section" title="General FormattingConfig Settings">
 <div class="titlepage">
@@ -5323,14 +5325,14 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 </div>
 </div>
 <p>The lexical highlighting can be customized by providing implementations of the interface 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ILexicalHighlightingConfiguration.java?root=Modeling_Project&amp;view=co" target="_new">ILexicalHighlightingConfiguration</a> and the abstract class 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/AbstractTokenScanner.java?root=Modeling_Project&amp;view=co" target="_new">AbstractTokenScanner</a>. The latter fulfills the interface 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ILexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ILexicalHighlightingConfiguration</a> and the abstract class 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/AbstractTokenScanner.java?root=Modeling_Project&view=co" target="_new">AbstractTokenScanner</a>. The latter fulfills the interface 
 					<code class="code">ITokenScanner</code> from the underlying JFace Framework, which may be implemented by clients directly.
 				</p>
 <p>The 
 					<code class="code">ILexicalHighlightingConfiguration</code> is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the 
 					<code class="code">ITextAttributeProvider</code>, which in turn is the component that is used to obtain the actual settings for a style&rsquo;s id. An implementation will usually be very similar to the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/DefaultLexicalHighlightingConfiguration.java?root=Modeling_Project&amp;view=co" target="_new">DefaultLexicalHighlightingConfiguration</a> and read like this: 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/DefaultLexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">DefaultLexicalHighlightingConfiguration</a> and read like this: 
 				</p>
 <div class="literallayout">
 <p>
@@ -5369,8 +5371,8 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <p>Implementations of the 
 					<code class="code">ITokenScanner</code> are responsible for splitting the content of a document into various parts, the so called tokens, and return the highlighting information for each identified range. It is critical that this is done very efficiently because this component is used on each keystroke. Xtext ships with a default implementation that is based on the lexer that is generated by ANTLR which is very lightweight and fast. This default implementation can be customized by clients easily. They simply have to bind another implementation of the 
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/AbstractAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&amp;view=co" target="_new">AbstractAntlrTokenToAttributeIdMapper</a>. To get an idea about it, have a look at the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/DefaultAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&amp;view=co" target="_new">DefaultAntlrTokenToAttributeIdMapper</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/AbstractAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">AbstractAntlrTokenToAttributeIdMapper</a>. To get an idea about it, have a look at the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/DefaultAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">DefaultAntlrTokenToAttributeIdMapper</a>.
 				</p>
 </div>
 <div class="section" title="Semantic Highlighting">
@@ -5385,13 +5387,13 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <p>The semantic highlighting stage is executed asynchronously in the background and can be used to calculated highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.</p>
 <p>As for the lexical highlighting there exist two interfaces whose implementations work closely together and allow the customization of the semantic highlighting. Namely these are the 
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingConfiguration.java?root=Modeling_Project&amp;view=co" target="_new">ISemanticHighlightingConfiguration</a> and 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingCalculator.java?root=Modeling_Project&amp;view=co" target="_new">ISemanticHighlightingCalculator</a>. While the configuration for the semantic highlighting works the same way as the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingConfiguration</a> and 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingCalculator.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingCalculator</a>. While the configuration for the semantic highlighting works the same way as the 
 					<code class="code">ILexicalHighlightingConfiguration</code>, the 
 					<code class="code">ISemanticHighlightingCalculator</code> is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements. 
 				</p>
 <p>The framework will pass the XtextResource and an 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&amp;view=co" target="_new">IHighlightedPositionAcceptor</a> to the calculator. It is ensured, that the resource will not be altered externally until the called method 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&view=co" target="_new">IHighlightedPositionAcceptor</a> to the calculator. It is ensured, that the resource will not be altered externally until the called method 
 					<code class="code">provideHighlightingsFor</code> returns. The task is to navigate your semantic model and compute various ranges based on the node information and associate styles with them. This may read similar to the following snippet:
 				</p>
 <div class="literallayout">
@@ -5851,7 +5853,7 @@ public&nbsp;class&nbsp;DomainModelLabelProvider&nbsp;extends&nbsp;DefaultLabelPr
 </div>
 <p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &ldquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
 <p>When the linking has to be customized scoping is where most of the semantics typically goes into. By implementing an 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&amp;view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
 					</p>
 <p>The provided default implementation is semantically mostly identical to how the default linking worked in oAW Xtext: </p>
 <div class="orderedlist">

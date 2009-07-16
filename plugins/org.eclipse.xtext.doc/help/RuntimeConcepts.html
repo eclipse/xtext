@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Runtime Concepts</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,43 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Runtime Concepts</h1>
-<div class="chapter" title="Runtime Concepts">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-<a name="RuntimeConcepts"></a>Runtime Concepts</h2>
-</div>
-</div>
-</div>
-<div class="toc">
-<dl>
-<dt>
-<span class="section"><a href="RuntimeConcepts.html#RuntimesetupISetup">Runtime setup (ISetup)</a></span>
-</dt>
-<dt>
-<span class="section"><a href="SetupwithinEclipseEquinoxOSGi.html">Setup within Eclipse-Equinox (OSGi)</a></span>
-</dt>
-<dt>
-<span class="section"><a href="validation.html">Validation</a></span>
-</dt>
-<dt>
-<span class="section"><a href="linking.html">Linking</a></span>
-</dt>
-<dt>
-<span class="section"><a href="scoping.html">Scoping</a></span>
-</dt>
-<dt>
-<span class="section"><a href="valueconverter.html">Value Converter</a></span>
-</dt>
-<dt>
-<span class="section"><a href="serialization.html">Serialization</a></span>
-</dt>
-<dt>
-<span class="section"><a href="emf_integration.html">Integration with EMF</a></span>
-</dt>
-</dl>
-</div>
 <p>TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
 			<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of 
 			<code class="code">ISetup</code>-implementations in normal mode and uses Eclipse&rsquo;s extension mechanism when it should be configured in an OSGi environment.   
@@ -68,7 +31,6 @@
 <p>The setup method returns an 
 				<code class="code">Injector</code>, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
 			</p>
-</div>
 </div>
 </body>
 </html>

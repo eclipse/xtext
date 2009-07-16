@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Configuration</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,25 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Configuration</h1>
-<div class="chapter" title="Configuration">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-<a name="configuration"></a>Configuration</h2>
-</div>
-</div>
-</div>
-<div class="toc">
-<dl>
-<dt>
-<span class="section"><a href="configuration.html#generator">The Generator</a></span>
-</dt>
-<dt>
-<span class="section"><a href="dependencyInjection.html">Dependency Injection in Xtext with Google Guice</a></span>
-</dt>
-</dl>
-</div>
 <div class="section" title="The Generator">
 <div class="titlepage">
 <div>
@@ -198,7 +179,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a>s.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
 					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
 
 					</p>
@@ -217,11 +198,11 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we have written for label providers (
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&amp;view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.
 					</p>
 </div>
 <div class="section" title="Configuration">
@@ -324,7 +305,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10704">
+<table id="N10710">
 <tr>
 						
 <th>Class</th>
@@ -334,7 +315,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&amp;view=co" target="_new">EcoreGeneratorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>
 						</td>
 						<td>EMF code for generated models</td>
 					
@@ -348,7 +329,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java?root=Modeling_Project&amp;view=co" target="_new">GrammarAccessFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java?root=Modeling_Project&view=co" target="_new">GrammarAccessFragment</a>
 						</td>
 						<td>Access to the grammar</td>
 					
@@ -356,7 +337,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">ResourceFactoryFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a>
 						</td>
 						<td>EMF resource factory</td>
 					
@@ -364,7 +345,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&amp;view=co" target="_new">ParseTreeConstructorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&view=co" target="_new">ParseTreeConstructorFragment</a>
 						</td>
 						<td>Model-to-text serialization</td>
 					
@@ -372,7 +353,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaScopingFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&view=co" target="_new">JavaScopingFragment</a>
 						</td>
 						<td>Java-based scoping</td>
 					
@@ -380,7 +361,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaValidatorFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&view=co" target="_new">JavaValidatorFragment</a>
 						</td>
 						<td>Java-based model validation</td>
 					
@@ -388,7 +369,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&amp;view=co" target="_new">CheckFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>
 						</td>
 						<td>Xpand/Check-based model validation</td>
 					
@@ -396,7 +377,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&amp;view=co" target="_new">FormatterFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&view=co" target="_new">FormatterFragment</a>
 						</td>
 						<td>Code formatter</td>
 					
@@ -404,7 +385,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&amp;view=co" target="_new">LabelProviderFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>
 						</td>
 						<td>Label provider</td>
 					
@@ -412,7 +393,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineNodeAdapterFactoryFragment.java?root=Modeling_Project&amp;view=co" target="_new">OutlineNodeAdapterFactoryFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineNodeAdapterFactoryFragment.java?root=Modeling_Project&view=co" target="_new">OutlineNodeAdapterFactoryFragment</a>
 						</td>
 						<td>Outline view configuration</td>
 					
@@ -420,7 +401,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&amp;view=co" target="_new">TransformerFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&view=co" target="_new">TransformerFragment</a>
 						</td>
 						<td>Outline view configuration</td>
 					
@@ -428,7 +409,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&amp;view=co" target="_new">JavaBasedContentAssistFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&view=co" target="_new">JavaBasedContentAssistFragment</a>
 						</td>
 						<td>Java-based content assist</td>
 					
@@ -442,7 +423,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <td>
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&amp;view=co" target="_new">SimpleProjectWizardFragment</a>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&view=co" target="_new">SimpleProjectWizardFragment</a>
 						</td>
 						<td>New project wizard</td>
 					
@@ -459,7 +440,6 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 					</span>
 				
 </p>
-</div>
 </div>
 </div>
 </body>

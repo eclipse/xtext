@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Getting Started</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,17 +11,8 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
-<div class="section" title="Getting Started">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="getting-started"></a>Getting Started</h2>
-</div>
-</div>
-</div>
 <p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
-				<a class="ulink" href="http://www.eclipse.org/Xtext/download" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
+				<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -38,7 +29,7 @@ entity&nbsp;Session&nbsp;{<br>
 entity&nbsp;Conference&nbsp;{<br>
 &nbsp;&nbsp;property&nbsp;Name&nbsp;:&nbsp;String<br>
 &nbsp;&nbsp;property&nbsp;Attendees&nbsp;:&nbsp;Person[]<br>
-&nbsp;&nbsp;property&nbsp;Speakers&nbsp;:&nbsp;Speakers[]<br>
+&nbsp;&nbsp;property&nbsp;Speakers&nbsp;:&nbsp;Speaker[]<br>
 }<br>
 
 <br>
@@ -71,24 +62,30 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <table id="N10081">
 <tr>
 						
-<td>Main project name: 	</td>
+<td>
+							<span class="bold"><strong>Main project name:</strong></span> 	
+						</td>
 						<td>org.xtext.example.start	</td>
 					
 </tr>
 <tr>
 						
-<td>Language name: 		</td>
+<td>
+							<span class="bold"><strong>Language name:</strong></span> 		
+						</td>
 						<td>org.xtext.example.Entities	</td>
 					
 </tr>
 <tr>
 						
-<td>DSL-File extension: 	</td>
+<td>
+							<span class="bold"><strong>DSL-File extension:</strong></span> 	
+						</td>
 						<td>entity	</td>
 					
 </tr>
 </table>
-<p>Uncheck &ldquo;Generate Generator project&rdquo;, you will not need it this time. Click on Finish.</p>
+<p>Uncheck &ldquo;Create generator project&rdquo;, you will not need it this time. Click on Finish.</p>
 <p>
 					
 </p>
@@ -315,7 +312,6 @@ SimpleType:<br>
 <p>
 				
 </p>
-</div>
 </div>
 </body>
 </html>

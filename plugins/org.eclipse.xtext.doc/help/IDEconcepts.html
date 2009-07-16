@@ -1,6 +1,6 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IDE concepts</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
@@ -11,40 +11,6 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE concepts</h1>
-<div class="chapter" title="IDE concepts">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-<a name="IDEconcepts"></a>IDE concepts</h2>
-</div>
-</div>
-</div>
-<div class="toc">
-<dl>
-<dt>
-<span class="section"><a href="IDEconcepts.html#labelProvider">Label Provider</a></span>
-</dt>
-<dt>
-<span class="section"><a href="contentAssist.html">Content Assist</a></span>
-</dt>
-<dt>
-<span class="section"><a href="templates.html">Template Proposals</a></span>
-</dt>
-<dt>
-<span class="section"><a href="outline.html">Outline View</a></span>
-</dt>
-<dt>
-<span class="section"><a href="hyperlinking.html">Hyperlinking</a></span>
-</dt>
-<dt>
-<span class="section"><a href="formatting.html">Formatting (Pretty Printing)</a></span>
-</dt>
-<dt>
-<span class="section"><a href="highlighting.html">Syntax Coloring</a></span>
-</dt>
-</dl>
-</div>
 <p>For the following part we will refer to a concrete example grammar in order to explain certain aspect of the UI more clearly. The used example grammar is as follows:</p>
 <div class="literallayout">
 <p>
@@ -140,7 +106,7 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 <p></p>
 <p>The declarative implementation of the label itself is pretty straightforward. The image in turn is expected to be found in a file named 
 					<code class="code">icons/&lt;result of image-method&gt;</code> in your plugin. This path is actually configurable by google guice. Have a look at the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&amp;view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&view=co" target="_new">PluginImageHelper</a> to learn about the customizing possibilities.
 				</p>
 <p>What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an EAttribute that is called 
 					<code class="code">name</code> and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
@@ -150,7 +116,6 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 					<code class="code">String error_text(Object, Exception)</code> and 
 					<code class="code">String error_image(Object, Exception)</code> respectively.  
 				</p>
-</div>
 </div>
 </div>
 </body>
