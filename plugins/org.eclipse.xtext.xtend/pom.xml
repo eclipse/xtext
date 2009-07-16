@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-xtend</artifactId>
+  <version>0.7.1</version>
+  <name>Xtext Xtend</name>
+  <description>Manually created POM</description>
+  
+  <dependencies>
+  	<!-- own stuff -->
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xpand</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend-typesystem-emf</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend-util-stdlib</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-ui-common</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-ui-core</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+  	
+	<!-- Eclipse stuff -->
+	<dependency>
+		<groupId>org.eclipse.jface</groupId>
+		<artifactId>text</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	
+	<!-- other stuff -->
+	<dependency>
+		<groupId>com.google</groupId>
+		<artifactId>collect</artifactId>
+		<version>0.8.0</version>
+	</dependency>
+
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Eclipse</name>
+    <url>http://www.eclipse.org</url>
+  </organization>
+</project>

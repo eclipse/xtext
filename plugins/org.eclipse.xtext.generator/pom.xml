@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-generator</artifactId>
+  <version>0.7.1</version>
+  <name>Xtext Generator</name>
+  <description>Manually created POM</description>
+
+
+  <dependencies>
+  	<!-- own stuff -->
+	<dependency>
+		<groupId>org.eclipse.emf.mwe</groupId>
+		<artifactId>emf-mwe-utils</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xpand</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend-typesystem-emf</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend-util-stdlib</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-core</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-util</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	
+	<!-- Eclipse stuff -->
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>codegen</artifactId>
+		<version>2.5.0</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>codegen-ecore</artifactId>
+		<version>2.5.0</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- other stuff -->
+	<dependency>
+		<groupId>com.ibm</groupId>
+		<artifactId>icu</artifactId>
+		<version>4.0.1</version>
+	</dependency>
+	
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Eclipse</name>
+    <url>http://www.eclipse.org</url>
+  </organization>
+</project>

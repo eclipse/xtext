@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-util</artifactId>
+  <version>0.7.1</version>
+  <name>Xtext Util</name>
+  <description>Manually created POM</description>
+  
+  <dependencies>
+	<!-- own stuff -->
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- Eclipse stuff -->
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>ecore</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	
+	<!-- other stuff -->  
+	<dependency>
+		<groupId>com.google</groupId>
+		<artifactId>collect</artifactId>
+		<version>0.8.0</version>
+	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>3.8.2</version>
+		<scope>test</scope>
+	</dependency>
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Eclipse</name>
+    <url>http://www.eclipse.org</url>
+  </organization>
+</project>

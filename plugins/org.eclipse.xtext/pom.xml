@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-core</artifactId>
+  <version>0.7.1</version>
+  <name>Xtext Core</name>
+  <description>Manually created POM</description>
+  
+  <dependencies>
+
+	<!-- own stuff -->
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>xtext-util</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf.mwe</groupId>
+		<artifactId>emf-mwe-core</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf.mwe</groupId>
+		<artifactId>emf-mwe-utils</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.m2t.xpand</groupId>
+		<artifactId>m2t-xpand-xtend-typesystem-emf</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+
+	<!-- Eclipse stuff -->
+	<dependency>
+		<groupId>org.eclipse.emf.ecore</groupId>
+		<artifactId>xmi</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>codegen</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>codegen-ecore</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>common</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>ecore</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>index</artifactId>
+		<version>0.7.1</version>
+	</dependency>
+	
+	<!-- Other stuff -->		  
+	<dependency>
+		<groupId>org.antlr</groupId>
+		<artifactId>antlr</artifactId>
+		<version>3.0.1</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google</groupId>
+		<artifactId>guice</artifactId>
+		<version>1.0_patched</version>
+	</dependency>
+
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Eclipse</name>
+    <url>http://www.eclipse.org</url>
+  </organization>
+</project>
