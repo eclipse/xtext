@@ -249,11 +249,15 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		String[] names = getTokenNames();
 		Map<Integer, String> result = Maps.newHashMapWithExpectedSize(names.length - Token.MIN_TOKEN_TYPE);
 		for (int i = Token.MIN_TOKEN_TYPE; i < names.length; i++) {
-			result.put(i, names[i]);
+			result.put(i, getValueForTokenName(names[i]));
 		}
 		return result;
 	}
-
+	
+	protected String getValueForTokenName(String tokenName) {
+		return tokenName;
+	}
+		
 	public List<EObject> getGrammarElements() {
 		return grammarElements;
 	}

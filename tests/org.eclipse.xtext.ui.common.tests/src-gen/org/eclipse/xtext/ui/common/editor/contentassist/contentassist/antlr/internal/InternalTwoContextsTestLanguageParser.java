@@ -52,16 +52,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         protected Grammar getGrammar() {
         	return grammarAccess.getGrammar();
         }
+        
+        @Override
+        protected String getValueForTokenName(String tokenName) {
+        	return tokenName;
+        }
 
 
 
 
     // $ANTLR start entryRuleMainModel
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:55:1: entryRuleMainModel : ruleMainModel EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:60:1: entryRuleMainModel : ruleMainModel EOF ;
     public final void entryRuleMainModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:55:20: ( ruleMainModel EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:56:1: ruleMainModel EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:60:20: ( ruleMainModel EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:61:1: ruleMainModel EOF
             {
              before(grammarAccess.getMainModelRule()); 
             pushFollow(FOLLOW_ruleMainModel_in_entryRuleMainModel60);
@@ -86,20 +91,20 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start ruleMainModel
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:63:1: ruleMainModel : ( ( rule__MainModel__ElementsAssignment )* ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:68:1: ruleMainModel : ( ( rule__MainModel__ElementsAssignment )* ) ;
     public final void ruleMainModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:67:2: ( ( ( rule__MainModel__ElementsAssignment )* ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:68:1: ( ( rule__MainModel__ElementsAssignment )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:72:2: ( ( ( rule__MainModel__ElementsAssignment )* ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:73:1: ( ( rule__MainModel__ElementsAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:68:1: ( ( rule__MainModel__ElementsAssignment )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:69:1: ( rule__MainModel__ElementsAssignment )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:73:1: ( ( rule__MainModel__ElementsAssignment )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:74:1: ( rule__MainModel__ElementsAssignment )*
             {
              before(grammarAccess.getMainModelAccess().getElementsAssignment()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:70:1: ( rule__MainModel__ElementsAssignment )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:75:1: ( rule__MainModel__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -112,7 +117,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:70:2: rule__MainModel__ElementsAssignment
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:75:2: rule__MainModel__ElementsAssignment
             	    {
             	    pushFollow(FOLLOW_rule__MainModel__ElementsAssignment_in_ruleMainModel94);
             	    rule__MainModel__ElementsAssignment();
@@ -150,11 +155,11 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start entryRuleAnElement
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:82:1: entryRuleAnElement : ruleAnElement EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:87:1: entryRuleAnElement : ruleAnElement EOF ;
     public final void entryRuleAnElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:82:20: ( ruleAnElement EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:83:1: ruleAnElement EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:87:20: ( ruleAnElement EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:88:1: ruleAnElement EOF
             {
              before(grammarAccess.getAnElementRule()); 
             pushFollow(FOLLOW_ruleAnElement_in_entryRuleAnElement121);
@@ -179,21 +184,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start ruleAnElement
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:90:1: ruleAnElement : ( ( rule__AnElement__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:95:1: ruleAnElement : ( ( rule__AnElement__Group__0 ) ) ;
     public final void ruleAnElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:94:2: ( ( ( rule__AnElement__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:95:1: ( ( rule__AnElement__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:99:2: ( ( ( rule__AnElement__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:100:1: ( ( rule__AnElement__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:95:1: ( ( rule__AnElement__Group__0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:96:1: ( rule__AnElement__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:100:1: ( ( rule__AnElement__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:101:1: ( rule__AnElement__Group__0 )
             {
              before(grammarAccess.getAnElementAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:97:1: ( rule__AnElement__Group__0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:97:2: rule__AnElement__Group__0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:102:1: ( rule__AnElement__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:102:2: rule__AnElement__Group__0
             {
             pushFollow(FOLLOW_rule__AnElement__Group__0_in_ruleAnElement155);
             rule__AnElement__Group__0();
@@ -225,21 +230,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__Group__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:111:1: rule__AnElement__Group__0 : ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:116:1: rule__AnElement__Group__0 : ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1 ;
     public final void rule__AnElement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:115:1: ( ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:116:1: ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:120:1: ( ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:121:1: ( ( rule__AnElement__NameAssignment_0 ) ) rule__AnElement__Group__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:116:1: ( ( rule__AnElement__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:117:1: ( rule__AnElement__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:121:1: ( ( rule__AnElement__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:122:1: ( rule__AnElement__NameAssignment_0 )
             {
              before(grammarAccess.getAnElementAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:118:1: ( rule__AnElement__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:118:2: rule__AnElement__NameAssignment_0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:123:1: ( rule__AnElement__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:123:2: rule__AnElement__NameAssignment_0
             {
             pushFollow(FOLLOW_rule__AnElement__NameAssignment_0_in_rule__AnElement__Group__0193);
             rule__AnElement__NameAssignment_0();
@@ -275,20 +280,20 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__Group__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:129:1: rule__AnElement__Group__1 : ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:134:1: rule__AnElement__Group__1 : ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2 ;
     public final void rule__AnElement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:133:1: ( ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:134:1: ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:138:1: ( ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:139:1: ( ( rule__AnElement__Group_1__0 )? ) rule__AnElement__Group__2
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:134:1: ( ( rule__AnElement__Group_1__0 )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:135:1: ( rule__AnElement__Group_1__0 )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:139:1: ( ( rule__AnElement__Group_1__0 )? )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:140:1: ( rule__AnElement__Group_1__0 )?
             {
              before(grammarAccess.getAnElementAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:136:1: ( rule__AnElement__Group_1__0 )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:141:1: ( rule__AnElement__Group_1__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -297,7 +302,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:136:2: rule__AnElement__Group_1__0
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:141:2: rule__AnElement__Group_1__0
                     {
                     pushFollow(FOLLOW_rule__AnElement__Group_1__0_in_rule__AnElement__Group__1230);
                     rule__AnElement__Group_1__0();
@@ -336,17 +341,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__Group__2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:147:1: rule__AnElement__Group__2 : ( ';' ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:152:1: rule__AnElement__Group__2 : ( ';' ) ;
     public final void rule__AnElement__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:151:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:152:1: ( ';' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:156:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:157:1: ( ';' )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:152:1: ( ';' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:153:1: ';'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:157:1: ( ';' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:158:1: ';'
             {
              before(grammarAccess.getAnElementAccess().getSemicolonKeyword_2()); 
             match(input,11,FOLLOW_11_in_rule__AnElement__Group__2269); 
@@ -373,17 +378,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__Group_1__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:172:1: rule__AnElement__Group_1__0 : ( 'refersTo' ) rule__AnElement__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:177:1: rule__AnElement__Group_1__0 : ( 'refersTo' ) rule__AnElement__Group_1__1 ;
     public final void rule__AnElement__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:176:1: ( ( 'refersTo' ) rule__AnElement__Group_1__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:177:1: ( 'refersTo' ) rule__AnElement__Group_1__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:181:1: ( ( 'refersTo' ) rule__AnElement__Group_1__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:182:1: ( 'refersTo' ) rule__AnElement__Group_1__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:177:1: ( 'refersTo' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:178:1: 'refersTo'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:182:1: ( 'refersTo' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:183:1: 'refersTo'
             {
              before(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); 
             match(input,12,FOLLOW_12_in_rule__AnElement__Group_1__0311); 
@@ -414,21 +419,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__Group_1__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:192:1: rule__AnElement__Group_1__1 : ( ( rule__AnElement__ReferredAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:197:1: rule__AnElement__Group_1__1 : ( ( rule__AnElement__ReferredAssignment_1_1 ) ) ;
     public final void rule__AnElement__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:196:1: ( ( ( rule__AnElement__ReferredAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:197:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:201:1: ( ( ( rule__AnElement__ReferredAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:202:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:197:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:198:1: ( rule__AnElement__ReferredAssignment_1_1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:202:1: ( ( rule__AnElement__ReferredAssignment_1_1 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:203:1: ( rule__AnElement__ReferredAssignment_1_1 )
             {
              before(grammarAccess.getAnElementAccess().getReferredAssignment_1_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:199:1: ( rule__AnElement__ReferredAssignment_1_1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:199:2: rule__AnElement__ReferredAssignment_1_1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:204:1: ( rule__AnElement__ReferredAssignment_1_1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:204:2: rule__AnElement__ReferredAssignment_1_1
             {
             pushFollow(FOLLOW_rule__AnElement__ReferredAssignment_1_1_in_rule__AnElement__Group_1__1349);
             rule__AnElement__ReferredAssignment_1_1();
@@ -460,17 +465,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__MainModel__ElementsAssignment
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:213:1: rule__MainModel__ElementsAssignment : ( ruleAnElement ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:218:1: rule__MainModel__ElementsAssignment : ( ruleAnElement ) ;
     public final void rule__MainModel__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:217:1: ( ( ruleAnElement ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:218:1: ( ruleAnElement )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:222:1: ( ( ruleAnElement ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:223:1: ( ruleAnElement )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:218:1: ( ruleAnElement )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:219:1: ruleAnElement
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:223:1: ( ruleAnElement )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:224:1: ruleAnElement
             {
              before(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
             pushFollow(FOLLOW_ruleAnElement_in_rule__MainModel__ElementsAssignment387);
@@ -500,17 +505,17 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__NameAssignment_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:228:1: rule__AnElement__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:233:1: rule__AnElement__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__AnElement__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:232:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:233:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:237:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:238:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:233:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:234:1: RULE_ID
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:238:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:239:1: RULE_ID
             {
              before(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__AnElement__NameAssignment_0418); 
@@ -537,21 +542,21 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start rule__AnElement__ReferredAssignment_1_1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:243:1: rule__AnElement__ReferredAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:248:1: rule__AnElement__ReferredAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__AnElement__ReferredAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:247:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:248:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:252:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:253:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:248:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:249:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:253:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:254:1: ( RULE_ID )
             {
              before(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:250:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:251:1: RULE_ID
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:255:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:256:1: RULE_ID
             {
              before(grammarAccess.getAnElementAccess().getReferredAnElementIDTerminalRuleCall_1_1_0_1()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__AnElement__ReferredAssignment_1_1453); 

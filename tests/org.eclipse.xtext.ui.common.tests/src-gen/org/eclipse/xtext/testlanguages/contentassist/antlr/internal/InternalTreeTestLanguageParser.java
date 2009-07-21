@@ -52,16 +52,21 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
         protected Grammar getGrammar() {
         	return grammarAccess.getGrammar();
         }
+        
+        @Override
+        protected String getValueForTokenName(String tokenName) {
+        	return tokenName;
+        }
 
 
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:55:1: entryRuleModel : ruleModel EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:55:16: ( ruleModel EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:56:1: ruleModel EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:60:16: ( ruleModel EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:61:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel60);
@@ -86,20 +91,20 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:63:1: ruleModel : ( ( rule__Model__ChildrenAssignment )* ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:68:1: ruleModel : ( ( rule__Model__ChildrenAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:67:2: ( ( ( rule__Model__ChildrenAssignment )* ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:68:1: ( ( rule__Model__ChildrenAssignment )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:72:2: ( ( ( rule__Model__ChildrenAssignment )* ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:73:1: ( ( rule__Model__ChildrenAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:68:1: ( ( rule__Model__ChildrenAssignment )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:69:1: ( rule__Model__ChildrenAssignment )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:73:1: ( ( rule__Model__ChildrenAssignment )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:74:1: ( rule__Model__ChildrenAssignment )*
             {
              before(grammarAccess.getModelAccess().getChildrenAssignment()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:70:1: ( rule__Model__ChildrenAssignment )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:75:1: ( rule__Model__ChildrenAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -112,7 +117,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:70:2: rule__Model__ChildrenAssignment
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:75:2: rule__Model__ChildrenAssignment
             	    {
             	    pushFollow(FOLLOW_rule__Model__ChildrenAssignment_in_ruleModel94);
             	    rule__Model__ChildrenAssignment();
@@ -150,11 +155,11 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start entryRuleNode
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:82:1: entryRuleNode : ruleNode EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:87:1: entryRuleNode : ruleNode EOF ;
     public final void entryRuleNode() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:82:15: ( ruleNode EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:83:1: ruleNode EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:87:15: ( ruleNode EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:88:1: ruleNode EOF
             {
              before(grammarAccess.getNodeRule()); 
             pushFollow(FOLLOW_ruleNode_in_entryRuleNode121);
@@ -179,21 +184,21 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start ruleNode
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:90:1: ruleNode : ( ( rule__Node__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:95:1: ruleNode : ( ( rule__Node__Group__0 ) ) ;
     public final void ruleNode() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:94:2: ( ( ( rule__Node__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:95:1: ( ( rule__Node__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:99:2: ( ( ( rule__Node__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:100:1: ( ( rule__Node__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:95:1: ( ( rule__Node__Group__0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:96:1: ( rule__Node__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:100:1: ( ( rule__Node__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:101:1: ( rule__Node__Group__0 )
             {
              before(grammarAccess.getNodeAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:97:1: ( rule__Node__Group__0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:97:2: rule__Node__Group__0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:102:1: ( rule__Node__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:102:2: rule__Node__Group__0
             {
             pushFollow(FOLLOW_rule__Node__Group__0_in_ruleNode155);
             rule__Node__Group__0();
@@ -225,21 +230,21 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:111:1: rule__Node__Group__0 : ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:116:1: rule__Node__Group__0 : ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1 ;
     public final void rule__Node__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:115:1: ( ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:116:1: ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:120:1: ( ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:121:1: ( ( rule__Node__NameAssignment_0 ) ) rule__Node__Group__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:116:1: ( ( rule__Node__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:117:1: ( rule__Node__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:121:1: ( ( rule__Node__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:122:1: ( rule__Node__NameAssignment_0 )
             {
              before(grammarAccess.getNodeAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:118:1: ( rule__Node__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:118:2: rule__Node__NameAssignment_0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:123:1: ( rule__Node__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:123:2: rule__Node__NameAssignment_0
             {
             pushFollow(FOLLOW_rule__Node__NameAssignment_0_in_rule__Node__Group__0193);
             rule__Node__NameAssignment_0();
@@ -275,17 +280,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:129:1: rule__Node__Group__1 : ( '(' ) rule__Node__Group__2 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:134:1: rule__Node__Group__1 : ( '(' ) rule__Node__Group__2 ;
     public final void rule__Node__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:133:1: ( ( '(' ) rule__Node__Group__2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:134:1: ( '(' ) rule__Node__Group__2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:138:1: ( ( '(' ) rule__Node__Group__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:139:1: ( '(' ) rule__Node__Group__2
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:134:1: ( '(' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:135:1: '('
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:139:1: ( '(' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:140:1: '('
             {
              before(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1()); 
             match(input,11,FOLLOW_11_in_rule__Node__Group__1231); 
@@ -316,21 +321,21 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:149:1: rule__Node__Group__2 : ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:154:1: rule__Node__Group__2 : ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3 ;
     public final void rule__Node__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:153:1: ( ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:154:1: ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:158:1: ( ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:159:1: ( ( rule__Node__AttribAssignment_2 ) ) rule__Node__Group__3
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:154:1: ( ( rule__Node__AttribAssignment_2 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:155:1: ( rule__Node__AttribAssignment_2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:159:1: ( ( rule__Node__AttribAssignment_2 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:160:1: ( rule__Node__AttribAssignment_2 )
             {
              before(grammarAccess.getNodeAccess().getAttribAssignment_2()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:156:1: ( rule__Node__AttribAssignment_2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:156:2: rule__Node__AttribAssignment_2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:161:1: ( rule__Node__AttribAssignment_2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:161:2: rule__Node__AttribAssignment_2
             {
             pushFollow(FOLLOW_rule__Node__AttribAssignment_2_in_rule__Node__Group__2269);
             rule__Node__AttribAssignment_2();
@@ -366,17 +371,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__3
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:167:1: rule__Node__Group__3 : ( ')' ) rule__Node__Group__4 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:172:1: rule__Node__Group__3 : ( ')' ) rule__Node__Group__4 ;
     public final void rule__Node__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:171:1: ( ( ')' ) rule__Node__Group__4 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:172:1: ( ')' ) rule__Node__Group__4
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:176:1: ( ( ')' ) rule__Node__Group__4 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:177:1: ( ')' ) rule__Node__Group__4
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:172:1: ( ')' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:173:1: ')'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:177:1: ( ')' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:178:1: ')'
             {
              before(grammarAccess.getNodeAccess().getRightParenthesisKeyword_3()); 
             match(input,12,FOLLOW_12_in_rule__Node__Group__3307); 
@@ -407,17 +412,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__4
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:187:1: rule__Node__Group__4 : ( '{' ) rule__Node__Group__5 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:192:1: rule__Node__Group__4 : ( '{' ) rule__Node__Group__5 ;
     public final void rule__Node__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:191:1: ( ( '{' ) rule__Node__Group__5 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:192:1: ( '{' ) rule__Node__Group__5
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:196:1: ( ( '{' ) rule__Node__Group__5 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:197:1: ( '{' ) rule__Node__Group__5
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:192:1: ( '{' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:193:1: '{'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:197:1: ( '{' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:198:1: '{'
             {
              before(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4()); 
             match(input,13,FOLLOW_13_in_rule__Node__Group__4346); 
@@ -448,20 +453,20 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__5
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:207:1: rule__Node__Group__5 : ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:212:1: rule__Node__Group__5 : ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6 ;
     public final void rule__Node__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:211:1: ( ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:212:1: ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:216:1: ( ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:217:1: ( ( rule__Node__ChildrenAssignment_5 )* ) rule__Node__Group__6
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:212:1: ( ( rule__Node__ChildrenAssignment_5 )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:213:1: ( rule__Node__ChildrenAssignment_5 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:217:1: ( ( rule__Node__ChildrenAssignment_5 )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:218:1: ( rule__Node__ChildrenAssignment_5 )*
             {
              before(grammarAccess.getNodeAccess().getChildrenAssignment_5()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:214:1: ( rule__Node__ChildrenAssignment_5 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:219:1: ( rule__Node__ChildrenAssignment_5 )*
             loop2:
             do {
                 int alt2=2;
@@ -474,7 +479,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:214:2: rule__Node__ChildrenAssignment_5
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:219:2: rule__Node__ChildrenAssignment_5
             	    {
             	    pushFollow(FOLLOW_rule__Node__ChildrenAssignment_5_in_rule__Node__Group__5384);
             	    rule__Node__ChildrenAssignment_5();
@@ -516,17 +521,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__Group__6
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:225:1: rule__Node__Group__6 : ( '};' ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:230:1: rule__Node__Group__6 : ( '};' ) ;
     public final void rule__Node__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:229:1: ( ( '};' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:230:1: ( '};' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:234:1: ( ( '};' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:235:1: ( '};' )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:230:1: ( '};' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:231:1: '};'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:235:1: ( '};' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:236:1: '};'
             {
              before(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6()); 
             match(input,14,FOLLOW_14_in_rule__Node__Group__6423); 
@@ -553,17 +558,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Model__ChildrenAssignment
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:258:1: rule__Model__ChildrenAssignment : ( ruleNode ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:263:1: rule__Model__ChildrenAssignment : ( ruleNode ) ;
     public final void rule__Model__ChildrenAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:262:1: ( ( ruleNode ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:263:1: ( ruleNode )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:267:1: ( ( ruleNode ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:268:1: ( ruleNode )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:263:1: ( ruleNode )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:264:1: ruleNode
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:268:1: ( ruleNode )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:269:1: ruleNode
             {
              before(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0()); 
             pushFollow(FOLLOW_ruleNode_in_rule__Model__ChildrenAssignment472);
@@ -593,17 +598,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__NameAssignment_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:273:1: rule__Node__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:278:1: rule__Node__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Node__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:277:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:278:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:282:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:283:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:278:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:279:1: RULE_ID
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:283:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:284:1: RULE_ID
             {
              before(grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Node__NameAssignment_0503); 
@@ -630,17 +635,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__AttribAssignment_2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:288:1: rule__Node__AttribAssignment_2 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:293:1: rule__Node__AttribAssignment_2 : ( RULE_STRING ) ;
     public final void rule__Node__AttribAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:292:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:293:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:297:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:298:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:293:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:294:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:298:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:299:1: RULE_STRING
             {
              before(grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0()); 
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Node__AttribAssignment_2534); 
@@ -667,17 +672,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start rule__Node__ChildrenAssignment_5
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:303:1: rule__Node__ChildrenAssignment_5 : ( ruleNode ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:308:1: rule__Node__ChildrenAssignment_5 : ( ruleNode ) ;
     public final void rule__Node__ChildrenAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:307:1: ( ( ruleNode ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:308:1: ( ruleNode )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:312:1: ( ( ruleNode ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:313:1: ( ruleNode )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:308:1: ( ruleNode )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:309:1: ruleNode
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:313:1: ( ruleNode )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/contentassist/antlr/internal/InternalTreeTestLanguage.g:314:1: ruleNode
             {
              before(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0()); 
             pushFollow(FOLLOW_ruleNode_in_rule__Node__ChildrenAssignment_5565);
