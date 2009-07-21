@@ -45,6 +45,11 @@ import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
     protected Grammar getGrammar() {
     	return grammarAccess.getGrammar();
     }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
 
 }
 

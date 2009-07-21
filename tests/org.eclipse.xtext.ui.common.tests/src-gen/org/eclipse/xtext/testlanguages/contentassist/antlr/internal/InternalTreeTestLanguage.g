@@ -45,6 +45,11 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
     protected Grammar getGrammar() {
     	return grammarAccess.getGrammar();
     }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
 
 }
 

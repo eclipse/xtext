@@ -39,25 +39,25 @@ T39 : '..' ;
 T40 : 'enum' ;
 T41 : 'hidden' ;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5554
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5559
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5556
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5561
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5558
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5563
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5560
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5565
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5562
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5567
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5564
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5569
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5566
+// $ANTLR src "../org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtext.g" 5571
 RULE_ANY_OTHER : .;
 
 

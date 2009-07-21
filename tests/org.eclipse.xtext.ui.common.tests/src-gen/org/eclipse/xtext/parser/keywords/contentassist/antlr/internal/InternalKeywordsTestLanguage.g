@@ -45,6 +45,11 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAcc
     protected Grammar getGrammar() {
     	return grammarAccess.getGrammar();
     }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
 
 }
 

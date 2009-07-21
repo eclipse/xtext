@@ -45,6 +45,11 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.DatatypeRuleTes
     protected Grammar getGrammar() {
     	return grammarAccess.getGrammar();
     }
+    
+    @Override
+    protected String getValueForTokenName(String tokenName) {
+    	return tokenName;
+    }
 
 }
 
