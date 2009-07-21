@@ -30,7 +30,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	private static final Logger log = Logger.getLogger(AntlrTokenDefProvider.class);
 	
 	@Inject
-	protected IAntlrTokenFileProvider antlrTokenFileProvider;
+	private IAntlrTokenFileProvider antlrTokenFileProvider;
 	
 	protected Map<Integer, String> tokenDefMap;
 	
@@ -68,5 +68,13 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 			}
 		}
 		return tokenDefMap;
+	}
+	
+	public void setAntlrTokenFileProvider(IAntlrTokenFileProvider antlrTokenFileProvider) {
+		this.antlrTokenFileProvider = antlrTokenFileProvider;
+	}
+
+	public IAntlrTokenFileProvider getAntlrTokenFileProvider() {
+		return antlrTokenFileProvider;
 	}
 }

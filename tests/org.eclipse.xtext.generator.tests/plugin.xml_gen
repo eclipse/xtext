@@ -14,6 +14,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" 
+       class = "org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage"
+       genModel = "org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
        class = "org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage"
        genModel = "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel" /> 
