@@ -38,8 +38,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
@@ -279,9 +277,6 @@ public class XtextEditor extends TextEditor {
 
 		super.createPartControl(parent);
 
-		IContextService contextService = (IContextService) PlatformUI.getWorkbench().getService(IContextService.class);
-		contextService.activateContext("org.eclipse.xtext.ui.core.XtextEditorScope");
-		
 		// We need ProjectionViewer to support Folding
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
 		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
