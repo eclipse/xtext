@@ -110,7 +110,7 @@
       <category
             description="Xtext Editing Commands"
             id="org.eclipse.xtext.ui.core.category.XtextEditor"
-            name="Xtext Editing">
+            name="Source">
       </category>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
