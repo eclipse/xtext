@@ -73,7 +73,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	}
 
 	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
-		String projectName = getXtextProjectInfo().getProjectName()+".ui"; //$NON-NLS-1$
+		String projectName = getXtextProjectInfo().getUiProjectName();
 
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
 				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport", //$NON-NLS-1$
@@ -87,8 +87,6 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,false,
 				monitor);
 	}
-
-
 
 	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getProjectName();
@@ -111,7 +109,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	}
 
 	private IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
-		String projectName = getXtextProjectInfo().getProjectName()+".generator"; //$NON-NLS-1$
+		String projectName = getXtextProjectInfo().getGeneratorProjectName();
 
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
 				getXtextProjectInfo().getProjectName().toLowerCase(), "org.eclipse.xpand", "org.eclipse.xtend", //$NON-NLS-1$ //$NON-NLS-2$
