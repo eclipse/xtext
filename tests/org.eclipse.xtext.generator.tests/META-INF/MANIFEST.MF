@@ -289,5 +289,14 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.lexer.backtrackingTestLanguage,
  org.eclipse.xtext.lexer.backtrackingTestLanguage.impl,
  org.eclipse.xtext.lexer.backtrackingTestLanguage.util,
- org.eclipse.xtext.lexer.parseTreeConstruction
+ org.eclipse.xtext.lexer.parseTreeConstruction,
+ org.eclipse.xtext.generator.ecore,
+ org.eclipse.xtext.generator.ecore.services,
+ org.eclipse.xtext.generator.ecore.parser.packrat,
+ org.eclipse.xtext.generator.ecore.parser.packrat.consumers,
+ org.eclipse.xtext.generator.ecore.parseTreeConstruction,
+ org.eclipse.xtext.generator.ecore.parser.antlr,
+ org.eclipse.xtext.generator.ecore.second,
+ org.eclipse.xtext.generator.ecore.second.impl,
+ org.eclipse.xtext.generator.ecore.second.util
 
