@@ -9,12 +9,13 @@ package org.eclipse.xtext.ui.common.editor.contentassist.antlr;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewer;
@@ -144,7 +145,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			CompositeNode rootNode, AbstractNode lastCompleteNode, AbstractNode currentNode,
 			List<ContentAssistContext> result, String prefix,
 			EObject previousModel, Collection<FollowElement> followElements) {
-		Multimap<EObject, FollowElement> contextMap = computeCurrentModel(previousModel, followElements);
+		Multimap<EObject, FollowElement> contextMap = computeCurrentModel(previousModel, lastCompleteNode, followElements);
 		for (Entry<EObject, Collection<FollowElement>> entry : contextMap.asMap().entrySet()) {
 			ContentAssistContext context = createContext(viewer, completionOffset, parseResult, rootNode,
 					lastCompleteNode, entry.getKey(), currentNode, prefix);
@@ -152,8 +153,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			result.add(context);
 		}
 	}
-	
-	private Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel,
+
+	private Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
 			Collection<FollowElement> followElements) {
 		Multimap<EObject, FollowElement> result = Multimaps.newArrayListMultimap();
 		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
@@ -161,27 +162,164 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			result.putAll(currentModel, followElements);
 			return result;
 		}
-		CompositeNode currentNode = adapter.getParserNode();
-		EObject currentGrammarElement = currentNode.getGrammarElement();
+		CompositeNode currentParserNode = adapter.getParserNode();
+		EObject currentGrammarElement = currentParserNode.getGrammarElement();
 		AbstractRule currentRule = getRule(currentGrammarElement);
-		for(FollowElement element: followElements) {
+		for (FollowElement element : followElements) {
 			AbstractElement grammarElement = element.getGrammarElement();
 			if (!element.getLocalTrace().isEmpty())
-			   grammarElement = (AbstractElement) element.getLocalTrace().get(0);
+				grammarElement = element.getLocalTrace().get(0);
 			EObject loopGrammarElement = currentGrammarElement;
 			AbstractRule rule = currentRule;
-			CompositeNode node = currentNode;
-			while (!EcoreUtil.isAncestor(rule, grammarElement) && node.getParent() != null) {
-				node = node.getParent();
-				while(node.getGrammarElement() == null && node.getParent() != null)
-					node = node.getParent();
-				loopGrammarElement = node.getGrammarElement();
+			CompositeNode loopParserNode = currentParserNode;
+			EObject loopLastGrammarElement = lastCompleteNode.getGrammarElement();
+			while (!canBeCalledAfter(rule, loopLastGrammarElement, grammarElement) && loopParserNode.getParent() != null) {
+				loopLastGrammarElement = loopParserNode.getGrammarElement();
+				loopParserNode = loopParserNode.getParent();
+				while (loopParserNode.getGrammarElement() == null && loopParserNode.getParent() != null)
+					loopParserNode = loopParserNode.getParent();
+				loopGrammarElement = loopParserNode.getGrammarElement();
 				rule = getRule(loopGrammarElement);
 			}
-			EObject context = NodeUtil.getNearestSemanticObject(node);
+			EObject context = NodeUtil.getNearestSemanticObject(loopParserNode);
 			result.put(context, element);
 		}
 		return result;
+	}
+
+	private boolean canBeCalledAfter(AbstractRule rule, final EObject previousGrammarElement, final EObject nextGrammarElement) {
+		return new XtextSwitch<Boolean>() {
+			private Set<AbstractRule> visiting = new HashSet<AbstractRule>();
+			private EObject grammarElement = previousGrammarElement;
+			private Boolean result = Boolean.FALSE;
+			
+			@Override
+			public Boolean caseAbstractRule(AbstractRule object) {
+				if (!checkFurther(object))
+					return result;
+				if (!visiting.add(object))
+					return false;
+				Boolean result = doSwitch(object.getAlternatives());
+				visiting.remove(object);
+				return result;
+			}
+
+			private boolean checkFurther(EObject object) {
+				if (object == grammarElement) {
+					if (grammarElement == previousGrammarElement) {
+						grammarElement = nextGrammarElement;
+						return true;
+					}
+					result = Boolean.TRUE;
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public Boolean caseTerminalRule(TerminalRule object) {
+				checkFurther(object);
+				return result;
+			}
+
+			@Override
+			public Boolean caseGroup(Group object) {
+				if (!checkFurther(object))
+					return result;
+				for (AbstractElement token : object.getTokens())
+					if (doSwitch(token))
+						return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					for (AbstractElement token : object.getTokens())
+						if (doSwitch(token))
+							return true;
+				}
+				return false;
+			}
+
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				if (!checkFurther(object))
+					return result;
+				for (AbstractElement group : object.getGroups())
+					if (doSwitch(group))
+						return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					for (AbstractElement group : object.getGroups())
+						if (doSwitch(group))
+							return true;
+				}
+				return Boolean.FALSE;
+			}
+
+			@Override
+			public Boolean caseAbstractElement(AbstractElement object) {
+				if (!checkFurther(object))
+					return result;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+				}
+				return Boolean.FALSE;
+			};
+
+			@Override
+			public Boolean caseAssignment(Assignment object) {
+				if (!checkFurther(object))
+					return result;
+				if (doSwitch(object.getTerminal()))
+					return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					if (doSwitch(object.getTerminal()))
+						return true;
+				}
+				return Boolean.FALSE;
+			}
+
+			@Override
+			public Boolean caseCrossReference(CrossReference object) {
+				if (!checkFurther(object))
+					return result;
+				if (doSwitch(object.getTerminal()))
+					return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					if (doSwitch(object.getTerminal()))
+						return true;
+				}
+				return Boolean.FALSE;
+			}
+
+			@Override
+			public Boolean caseRuleCall(RuleCall object) {
+				if (!checkFurther(object))
+					return result;
+				if (doSwitch(object.getRule()))
+					return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					if (doSwitch(object.getRule()))
+						return true;
+				}
+				return Boolean.FALSE;
+			}
+
+			@Override
+			public Boolean caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+				if (!checkFurther(object))
+					return result;
+				return doSwitch(object.getLiteral());
+			}
+			
+		}.doSwitch(rule);
 	}
 
 	private AbstractRule getRule(EObject currentGrammarElement) {
