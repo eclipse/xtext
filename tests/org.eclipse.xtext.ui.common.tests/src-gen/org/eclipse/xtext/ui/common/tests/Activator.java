@@ -62,6 +62,11 @@ public class Activator extends AbstractUIPlugin {
 			createUIPluginModule()
 		));
 		
+		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguage", Guice.createInjector(
+			new org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageUiModule(),
+			createUIPluginModule()
+		));
+		
 		injectors.put("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage", Guice.createInjector(
 			new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule(),
 			createUIPluginModule()

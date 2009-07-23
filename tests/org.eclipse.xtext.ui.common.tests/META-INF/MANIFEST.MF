@@ -118,5 +118,8 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.ui.common.editor.contentassist.datatypeRuleTest.util,
  org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest,
  org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.impl,
- org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.util
+ org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.util,
+ org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest,
+ org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.util
 

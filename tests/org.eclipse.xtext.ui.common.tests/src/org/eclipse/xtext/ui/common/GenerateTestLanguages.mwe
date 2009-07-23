@@ -31,6 +31,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/LookAheadContentAssistTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/DomainModelTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
