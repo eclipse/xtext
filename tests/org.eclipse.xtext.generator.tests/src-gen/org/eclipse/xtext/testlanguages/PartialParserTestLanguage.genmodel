@@ -1,69 +1,43 @@
-<?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen" editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src" modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="PartialParserTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit" editorPluginID="org.eclipse.xtext.generator.tests.editor">
-  <genPackages prefix="PartialParserTestLanguage" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
-    <ecorePackage href="PartialParserTestLanguage.ecore#/"/>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//SomeContainer"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="PartialParserTestLanguage.ecore#//SomeContainer/name"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//SomeContainer/nested"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//SomeContainer/content"/>
-      </genFeatures>
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="PartialParserTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
+    editorPluginID="org.eclipse.xtext.generator.tests.editor">
+  <genPackages prefix="PartialParserTestLanguage" basePackage="org.eclipse.xtext.testlanguages"
+      disposableProviderFactory="true" ecorePackage="PartialParserTestLanguage.ecore#/">
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//SomeContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialParserTestLanguage.ecore#//SomeContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SomeContainer/nested"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SomeContainer/content"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//Nested"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//Nested/nested"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Nested">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Nested/nested"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//Content"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Content"/>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Children">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Children/children"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//Children"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//Children/children"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Child">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//Child/value"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//Child"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//Child/value"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//AbstractChildren">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//AbstractChildren/abstractChildren"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//AbstractChildren"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//AbstractChildren/abstractChildren"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//AbstractChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//AbstractChild/value"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//AbstractChild"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//AbstractChild/value"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//FirstConcrete">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//FirstConcrete/referencedContainer"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//FirstConcrete"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//FirstConcrete/referencedContainer"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//SecondConcrete">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialParserTestLanguage.ecore#//SecondConcrete/referencedChildren"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//SecondConcrete"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="PartialParserTestLanguage.ecore#//SecondConcrete/referencedChildren"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="PartialParserTestLanguage.ecore#//Named"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="PartialParserTestLanguage.ecore#//Named/name"/>
-      </genFeatures>
+    <genClasses ecoreClass="PartialParserTestLanguage.ecore#//Named">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialParserTestLanguage.ecore#//Named/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

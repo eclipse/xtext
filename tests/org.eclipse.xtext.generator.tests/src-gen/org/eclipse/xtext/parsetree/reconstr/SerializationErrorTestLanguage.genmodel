@@ -1,45 +1,30 @@
-<?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen" editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src" modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="SerializationErrorTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit" editorPluginID="org.eclipse.xtext.generator.tests.editor">
-  <genPackages prefix="Serializationerror" basePackage="org.eclipse.xtext.parsetree.reconstr" disposableProviderFactory="true">
-    <ecorePackage href="SerializationErrorTestLanguage.ecore#/"/>
-    <genClasses>
-      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Model"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Model/test"/>
-      </genFeatures>
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="SerializationErrorTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
+    editorPluginID="org.eclipse.xtext.generator.tests.editor">
+  <genPackages prefix="Serializationerror" basePackage="org.eclipse.xtext.parsetree.reconstr"
+      disposableProviderFactory="true" ecorePackage="SerializationErrorTestLanguage.ecore#/">
+    <genClasses ecoreClass="SerializationErrorTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SerializationErrorTestLanguage.ecore#//Model/test"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Test"/>
+    <genClasses ecoreClass="SerializationErrorTestLanguage.ecore#//Test"/>
+    <genClasses ecoreClass="SerializationErrorTestLanguage.ecore#//TwoRequired">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationErrorTestLanguage.ecore#//TwoRequired/one"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationErrorTestLanguage.ecore#//TwoRequired/two"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoRequired"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoRequired/one"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoRequired/two"/>
-      </genFeatures>
+    <genClasses ecoreClass="SerializationErrorTestLanguage.ecore#//TwoOptions">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationErrorTestLanguage.ecore#//TwoOptions/one"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SerializationErrorTestLanguage.ecore#//TwoOptions/two"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="SerializationErrorTestLanguage.ecore#//TwoOptions"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoOptions/one"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="SerializationErrorTestLanguage.ecore#//TwoOptions/two"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="SerializationErrorTestLanguage.ecore#//Indent"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/req"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/opt"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="SerializationErrorTestLanguage.ecore#//Indent/indent"/>
-      </genFeatures>
+    <genClasses ecoreClass="SerializationErrorTestLanguage.ecore#//Indent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SerializationErrorTestLanguage.ecore#//Indent/req"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SerializationErrorTestLanguage.ecore#//Indent/opt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SerializationErrorTestLanguage.ecore#//Indent/indent"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
