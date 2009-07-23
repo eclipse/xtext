@@ -38,6 +38,7 @@ import com.google.inject.Inject;
  * Additionally, we simplify the reconciler by using the Job API.
  *
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Michael Clay
  */
 public class XtextReconciler extends Job implements IReconciler {
 
@@ -171,6 +172,11 @@ public class XtextReconciler extends Job implements IReconciler {
 
 	public void setDelay(int delay) {
 		this.delay = delay;
+	}
+
+	@Override
+	public boolean belongsTo(Object family) {
+		return XtextReconciler.class.getName().equals(family);
 	}
 
 	@Override

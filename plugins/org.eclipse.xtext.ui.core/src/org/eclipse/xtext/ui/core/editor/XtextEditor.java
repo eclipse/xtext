@@ -16,6 +16,8 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.ITextSelection;
@@ -352,27 +354,28 @@ public class XtextEditor extends TextEditor {
 	@Override
 	protected void performSaveAs(IProgressMonitor progressMonitor) {
 		super.performSaveAs(progressMonitor);
-		doOnSaveValidation();
+		doOnSaveValidation(progressMonitor);
 	}
 
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
 		super.performSave(overwrite, progressMonitor);
-		doOnSaveValidation();
+		doOnSaveValidation(progressMonitor);
 	}
 
 	@Override
 	protected void performRevert() {
 		super.performRevert();
-		doOnSaveValidation();
+		doOnSaveValidation(new NullProgressMonitor());
 	}
 
-	private void doOnSaveValidation() {
+	private void doOnSaveValidation(IProgressMonitor progressMonitor) {
 		if (validationJob == null)
 			validationJob = validationJobFactory.create(this.getDocument(), (IFile) this.getResource(), CheckMode.NORMAL_AND_FAST, true);
 		validationJob.cancel();
 		try {
 			validationJob.join();
+			Job.getJobManager().join(org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler.class.getName(), progressMonitor);
 		}
 		catch (InterruptedException e) {
 			log.error("Error joining canceled ValidationJob", e);
