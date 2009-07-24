@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser;
 
 import java.util.Collection;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,8 @@ import com.google.inject.Inject;
  */
 public class DefaultEcoreElementFactory implements IAstFactory {
 
+	private static final Logger log = Logger.getLogger(DefaultEcoreElementFactory.class);
+	
 	@Inject
 	private IValueConverterService converterService;
 
@@ -57,22 +60,25 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(feature + " object was: " + object);
-		final Object tokenValue = getTokenValue(value, ruleName, node);
-		object.eSet(structuralFeature, tokenValue);
-	}
-
-	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
 		try {
-			Object value = getTokenAsStringIfPossible(tokenOrValue);
-			if ((value == null || value instanceof CharSequence) && ruleName != null) {
-				value = converterService.toValue(value == null ? null : value.toString(), ruleName, node);
-			}
-			return value;
+			final Object tokenValue = getTokenValue(value, ruleName, node);
+			object.eSet(structuralFeature, tokenValue);
 		} catch(ValueConverterException e) {
 			throw e;
+		} catch(NullPointerException e) {
+			log.error(e.getMessage(), e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
 		} catch(Exception e) {
 			throw new ValueConverterException(null, node, e);
 		}
+	}
+
+	private Object getTokenValue(Object tokenOrValue, String ruleName, AbstractNode node) throws ValueConverterException {
+		Object value = getTokenAsStringIfPossible(tokenOrValue);
+		if ((value == null || value instanceof CharSequence) && ruleName != null) {
+			value = converterService.toValue(value == null ? null : value.toString(), ruleName, node);
+		}
+		return value;
 	}
 
 	protected Object getTokenAsStringIfPossible(Object tokenOrValue) {
@@ -88,7 +94,18 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
 			throw new IllegalArgumentException(feature);
-		((Collection<Object>) object.eGet(structuralFeature)).add(getTokenValue(value, ruleName, node));
+		
+		try {
+			final Object tokenValue = getTokenValue(value, ruleName, node);
+			((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
+		} catch(ValueConverterException e) {
+			throw e;
+		} catch(NullPointerException e) {
+			log.error(e.getMessage(), e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
+		} catch(Exception e) {
+			throw new ValueConverterException(null, node, e);
+		}
 	}
 
 }
