@@ -296,6 +296,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (vce != cause) {
 			currentError = cause != null ? cause.getMessage() : vce.getMessage();
 			if (currentError == null)
+				currentError = vce.getMessage();
+			if (currentError == null)
 				currentError = cause != null ? cause.getClass().getSimpleName() : vce.getClass().getSimpleName();
 			if (vce.getNode() == null) {
 				final List<AbstractNode> children = currentNode.getChildren();
