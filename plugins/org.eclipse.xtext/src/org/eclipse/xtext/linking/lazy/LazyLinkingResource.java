@@ -36,10 +36,19 @@ public class LazyLinkingResource extends XtextResource {
 	@Inject
 	private LazyURIEncoder encoder;
 
+	private boolean eagerLinking = false;
+
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		super.doLoad(inputStream, options);
 		if (options != null && Boolean.TRUE.equals(options.get(OPTION_RESOLVE_ALL)))
+			EcoreUtil.resolveAll(this);
+	}
+	
+	@Override
+	protected void doLinking() {
+		super.doLinking();
+		if(isEagerLinking())
 			EcoreUtil.resolveAll(this);
 	}
 	
@@ -97,5 +106,14 @@ public class LazyLinkingResource extends XtextResource {
 
 	public LazyURIEncoder getEncoder() {
 		return encoder;
+	}
+
+	public void setEagerLinking(boolean eagerLinking) {
+		this.eagerLinking = eagerLinking;
+	}
+	
+
+	public boolean isEagerLinking() {
+		return eagerLinking;
 	}
 }
