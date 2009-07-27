@@ -291,13 +291,22 @@ public interface ReferenceGrammarPackage extends EPackage
   int FARBE = 5;
 
   /**
+   * The feature id for the '<em><b>Wert</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FARBE__WERT = 0;
+
+  /**
    * The number of structural features of the '<em>Farbe</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FARBE_FEATURE_COUNT = 0;
+  int FARBE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl <em>Familie</em>}' class.
@@ -526,6 +535,17 @@ public interface ReferenceGrammarPackage extends EPackage
   EClass getFarbe();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.referenceGrammar.Farbe#getWert <em>Wert</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Wert</em>'.
+   * @see org.eclipse.xtext.testlanguages.referenceGrammar.Farbe#getWert()
+   * @see #getFarbe()
+   * @generated
+   */
+  EAttribute getFarbe_Wert();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.referenceGrammar.Familie <em>Familie</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -741,6 +761,14 @@ public interface ReferenceGrammarPackage extends EPackage
      * @generated
      */
     EClass FARBE = eINSTANCE.getFarbe();
+
+    /**
+     * The meta object literal for the '<em><b>Wert</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FARBE__WERT = eINSTANCE.getFarbe_Wert();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl <em>Familie</em>}' class.

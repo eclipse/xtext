@@ -35,14 +35,18 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 				"StartId returns ecore::EInt: ID '.' (ID|INT);\n" +
 				"RecursiveId: ID ('/' RecursiveId)?;\n" +
 				"CalledId: StartId '-' ID;\n" +
-				"Value: name=StartId;";
+				"Value: name=StartId;\n" +
+				"OnlyKeywords: 'foo';\n" +
+				"AssignmentWithAlternative: foo=('1'|'2');\n" +
+				"Farbe :\n" + 
+				"	 wert=(\"ROT\" | \"BLAU\" | \"GELB\" | \"GRÜN\");";
 		grammar = (Grammar) getModel(model);
 		pack = grammar.getMetamodelDeclarations().get(1).getEPackage();
 	}
 
 	public void testSetUp() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
-		assertEquals(5, grammar.getRules().size());
+		assertEquals(8, grammar.getRules().size());
 		assertNotNull(pack);
 	}
 
@@ -72,6 +76,27 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 		assertNotNull(rule);
 		assertEquals("Value", rule.getName());
 		assertEquals(pack.getEClassifier("Value"), rule.getType().getClassifier());
+	}
+	
+	public void testOnlyKeywords() {
+		ParserRule rule = (ParserRule) grammar.getRules().get(5);
+		assertNotNull(rule);
+		assertEquals("OnlyKeywords", rule.getName());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
+	}
+	
+	public void testAssignmentWithAlternative() {
+		ParserRule rule = (ParserRule) grammar.getRules().get(6);
+		assertNotNull(rule);
+		assertEquals("AssignmentWithAlternative", rule.getName());
+		assertEquals(pack.getEClassifier("AssignmentWithAlternative"), rule.getType().getClassifier());
+	}
+	
+	public void testFarbe() {
+		ParserRule rule = (ParserRule) grammar.getRules().get(7);
+		assertNotNull(rule);
+		assertEquals("Farbe", rule.getName());
+		assertEquals(pack.getEClassifier("Farbe"), rule.getType().getClassifier());
 	}
 
 }

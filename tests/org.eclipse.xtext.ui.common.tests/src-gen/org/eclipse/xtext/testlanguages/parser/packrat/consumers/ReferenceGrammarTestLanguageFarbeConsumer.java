@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
@@ -21,9 +22,9 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 
 	private FarbeElements rule;	
 
-	private IElementConsumer alternatives$1$Consumer;
+	private IElementConsumer assignment$1$Consumer;
 
-	private IElementConsumer keyword$2$Consumer;
+	private IElementConsumer alternatives$2$Consumer;
 
 	private IElementConsumer keyword$3$Consumer;
 
@@ -31,7 +32,7 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 
 	private IElementConsumer keyword$5$Consumer;
 
-	private ICharacterClass keyword$2$Delimiter;
+	private IElementConsumer keyword$6$Consumer;
 
 	private ICharacterClass keyword$3$Delimiter;
 
@@ -39,30 +40,32 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 
 	private ICharacterClass keyword$5$Delimiter;
 
-	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+	private ICharacterClass keyword$6$Delimiter;
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
 		
-		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return alternatives$2$Consumer;
+		}
+	}
+
+	protected class Alternatives$2$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$2$Consumer(final Alternatives alternatives) {
 			super(alternatives);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(keyword$3$Consumer);
 			acceptor.accept(keyword$4$Consumer);
 			acceptor.accept(keyword$5$Consumer);
-		}
-	}
-
-	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$2$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
+			acceptor.accept(keyword$6$Consumer);
 		}
 	}
 
@@ -74,7 +77,7 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -86,7 +89,7 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -98,21 +101,33 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$5$Delimiter(), optional);
+		}
+	}
+
+	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$6$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
 	public ReferenceGrammarTestLanguageFarbeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
 	protected int doConsume() throws Exception {
-		return alternatives$1$Consumer.consume();
+		return assignment$1$Consumer.consume();
 	}
 
 	public FarbeElements getRule() {
@@ -122,11 +137,16 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	public void setRule(FarbeElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.getROTKeyword_0());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.getBLAUKeyword_1());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.getGELBKeyword_2());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.getGRÜNKeyword_3());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getWertAssignment());
+		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.getWertAlternatives_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRÜNKeyword_0_3());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRÜNKeyword_0_3());
 	}
 	
 	@Override
@@ -137,14 +157,6 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
-	}
-	
-	public ICharacterClass getKeyword$2$Delimiter() {
-		return keyword$2$Delimiter;
-	}
-	
-	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
-		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$3$Delimiter() {
@@ -169,6 +181,14 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 	
 	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

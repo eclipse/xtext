@@ -237,30 +237,34 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 
 	public class FarbeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Farbe");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cROTKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cBLAUKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cGELBKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cGRÜNKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Assignment cWertAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cWertAlternatives_0 = (Alternatives)cWertAssignment.eContents().get(0);
+		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
+		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
+		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
+		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
-		//  "ROT"|"BLAU"|"GELB"|"GR\u00DCN";
+		//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
 		public ParserRule getRule() { return rule; }
 
+		//wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
+		public Assignment getWertAssignment() { return cWertAssignment; }
+
 		//"ROT"|"BLAU"|"GELB"|"GR\u00DCN"
-		public Alternatives getAlternatives() { return cAlternatives; }
+		public Alternatives getWertAlternatives_0() { return cWertAlternatives_0; }
 
 		//"ROT"
-		public Keyword getROTKeyword_0() { return cROTKeyword_0; }
+		public Keyword getWertROTKeyword_0_0() { return cWertROTKeyword_0_0; }
 
 		//"BLAU"
-		public Keyword getBLAUKeyword_1() { return cBLAUKeyword_1; }
+		public Keyword getWertBLAUKeyword_0_1() { return cWertBLAUKeyword_0_1; }
 
 		//"GELB"
-		public Keyword getGELBKeyword_2() { return cGELBKeyword_2; }
+		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
 
 		//"GR\u00DCN"
-		public Keyword getGRÜNKeyword_3() { return cGRÜNKeyword_3; }
+		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
 	}
 
 	public class FamilieElements implements IParserRuleAccess {
@@ -447,7 +451,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 	}
 
 	//Farbe:
-	//  "ROT"|"BLAU"|"GELB"|"GR\u00DCN";
+	//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
 	public FarbeElements getFarbeAccess() {
 		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
 	}

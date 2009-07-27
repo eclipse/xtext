@@ -44,7 +44,7 @@ public class ReferenceGrammarTestLanguageParser extends AbstractContentAssistPar
 				{
 					put(grammarAccess.getSpielplatzAccess().getAlternatives_4(), "rule__Spielplatz__Alternatives_4");
 					put(grammarAccess.getPersonAccess().getAlternatives(), "rule__Person__Alternatives");
-					put(grammarAccess.getFarbeAccess().getAlternatives(), "rule__Farbe__Alternatives");
+					put(grammarAccess.getFarbeAccess().getWertAlternatives_0(), "rule__Farbe__WertAlternatives_0");
 					put(grammarAccess.getFamilieAccess().getNameAlternatives_2_0(), "rule__Familie__NameAlternatives_2_0");
 					put(grammarAccess.getSpielplatzAccess().getGroup(), "rule__Spielplatz__Group__0");
 					put(grammarAccess.getKindAccess().getGroup(), "rule__Kind__Group__0");
@@ -64,6 +64,7 @@ public class ReferenceGrammarTestLanguageParser extends AbstractContentAssistPar
 					put(grammarAccess.getErwachsenerAccess().getAgeAssignment_3(), "rule__Erwachsener__AgeAssignment_3");
 					put(grammarAccess.getSpielzeugAccess().getNameAssignment_2(), "rule__Spielzeug__NameAssignment_2");
 					put(grammarAccess.getSpielzeugAccess().getFarbeAssignment_3(), "rule__Spielzeug__FarbeAssignment_3");
+					put(grammarAccess.getFarbeAccess().getWertAssignment(), "rule__Farbe__WertAssignment");
 					put(grammarAccess.getFamilieAccess().getNameAssignment_2(), "rule__Familie__NameAssignment_2");
 					put(grammarAccess.getFamilieAccess().getMutterAssignment_3(), "rule__Familie__MutterAssignment_3");
 					put(grammarAccess.getFamilieAccess().getVaterAssignment_4(), "rule__Familie__VaterAssignment_4");

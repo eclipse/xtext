@@ -92,6 +92,12 @@ List[ICompletionProposal] completeSpielzeug_Farbe(EObject model, Assignment assi
 					+ contentAssistContext.prefix + "'") ->
 	{};
 	 
+List[ICompletionProposal] completeFarbe_Wert(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
+	debug("completeFarbe_Wert feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.prefix + "'") ->
+	{};
+	 
 List[ICompletionProposal] completeFamilie_Name(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
 	debug("completeFamilie_Name feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"

@@ -181,9 +181,9 @@ ruleFarbe
     }
  :
 (
-{ before(grammarAccess.getFarbeAccess().getAlternatives()); }
-(rule__Farbe__Alternatives)
-{ after(grammarAccess.getFarbeAccess().getAlternatives()); }
+{ before(grammarAccess.getFarbeAccess().getWertAssignment()); }
+(rule__Farbe__WertAssignment)
+{ after(grammarAccess.getFarbeAccess().getWertAssignment()); }
 )
 
 ;
@@ -256,41 +256,41 @@ finally {
 }
 
 
-rule__Farbe__Alternatives
+rule__Farbe__WertAlternatives_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFarbeAccess().getROTKeyword_0()); }
+{ before(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0()); }
 
 	'ROT' 
 
-{ after(grammarAccess.getFarbeAccess().getROTKeyword_0()); }
+{ after(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0()); }
 )
 
     |(
-{ before(grammarAccess.getFarbeAccess().getBLAUKeyword_1()); }
+{ before(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1()); }
 
 	'BLAU' 
 
-{ after(grammarAccess.getFarbeAccess().getBLAUKeyword_1()); }
+{ after(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1()); }
 )
 
     |(
-{ before(grammarAccess.getFarbeAccess().getGELBKeyword_2()); }
+{ before(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2()); }
 
 	'GELB' 
 
-{ after(grammarAccess.getFarbeAccess().getGELBKeyword_2()); }
+{ after(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2()); }
 )
 
     |(
-{ before(grammarAccess.getFarbeAccess().getGRÜNKeyword_3()); }
+{ before(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3()); }
 
 	'GR\u00DCN' 
 
-{ after(grammarAccess.getFarbeAccess().getGRÜNKeyword_3()); }
+{ after(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3()); }
 )
 
 ;
@@ -1149,6 +1149,22 @@ rule__Spielzeug__FarbeAssignment_3
 (
 { before(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0()); }
 	ruleFarbe{ after(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Farbe__WertAssignment
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getFarbeAccess().getWertAlternatives_0()); }
+(rule__Farbe__WertAlternatives_0)
+{ after(grammarAccess.getFarbeAccess().getWertAlternatives_0()); }
 )
 
 ;

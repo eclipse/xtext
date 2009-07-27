@@ -465,25 +465,46 @@ ruleFarbe returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('ROT' 
+(	
+	
+	    lv_wert_0=('ROT' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getROTKeyword_0(), null); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0(), "wert"); 
     }
+
 
     |'BLAU' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getBLAUKeyword_1(), null); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1(), "wert"); 
     }
+
 
     |'GELB' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getGELBKeyword_2(), null); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2(), "wert"); 
     }
+
 
     |'GR\u00DCN' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getGRÜNKeyword_3(), null); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
     }
+
+)
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getFarbeRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "wert", /* lv_wert_0 */ input.LT(-1), null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
 );
 
 

@@ -95,11 +95,13 @@
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/reference/ReferenceGrammar#//Farbe"/>
       </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Keyword" value="ROT"/>
-        <groups xsi:type="xtext:Keyword" value="BLAU"/>
-        <groups xsi:type="xtext:Keyword" value="GELB"/>
-        <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
+      <alternatives xsi:type="xtext:Assignment" feature="wert" operator="=">
+        <terminal xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="ROT"/>
+          <groups xsi:type="xtext:Keyword" value="BLAU"/>
+          <groups xsi:type="xtext:Keyword" value="GELB"/>
+          <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
+        </terminal>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Familie">
