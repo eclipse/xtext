@@ -148,6 +148,46 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getModel_Fifth()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_Sixth()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_Seventh()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_Eighth()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public KeywordsTestLanguageFactory getKeywordsTestLanguageFactory()
   {
     return (KeywordsTestLanguageFactory)getEFactoryInstance();
@@ -178,6 +218,10 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     createEAttribute(modelEClass, MODEL__SECOND);
     createEAttribute(modelEClass, MODEL__THIRD);
     createEAttribute(modelEClass, MODEL__FORTH);
+    createEAttribute(modelEClass, MODEL__FIFTH);
+    createEAttribute(modelEClass, MODEL__SIXTH);
+    createEAttribute(modelEClass, MODEL__SEVENTH);
+    createEAttribute(modelEClass, MODEL__EIGHTH);
   }
 
   /**
@@ -216,6 +260,10 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     initEAttribute(getModel_Second(), ecorePackage.getEBoolean(), "second", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Third(), ecorePackage.getEBoolean(), "third", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Forth(), ecorePackage.getEBoolean(), "forth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Fifth(), ecorePackage.getEBoolean(), "fifth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Sixth(), ecorePackage.getEBoolean(), "sixth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Seventh(), ecorePackage.getEBoolean(), "seventh", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Eighth(), ecorePackage.getEBoolean(), "eighth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

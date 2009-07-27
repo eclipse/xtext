@@ -550,7 +550,9 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     }
 
     public void testKeywordWithBackslashes() throws Exception {
-		newBuilder(setup.getKeywordsLangSetup()).assertText("foo\\bar", "foo\\", "\\bar", "\\");
+		newBuilder(setup.getKeywordsLangSetup()).assertText(
+				"foo\\bar", "foo\\", "\\bar", "\\",
+				"\"a\"", "'b'", "'c'", "\"d\"");
 	}
     
     public void testEnumCompletion_01() throws Exception {

@@ -19,6 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isThird <em>Third</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isForth <em>Forth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isFifth <em>Fifth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSixth <em>Sixth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSeventh <em>Seventh</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isEighth <em>Eighth</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,5 +135,109 @@ public interface Model extends EObject
    * @generated
    */
   void setForth(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Fifth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Fifth</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Fifth</em>' attribute.
+   * @see #setFifth(boolean)
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage#getModel_Fifth()
+   * @model
+   * @generated
+   */
+  boolean isFifth();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isFifth <em>Fifth</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Fifth</em>' attribute.
+   * @see #isFifth()
+   * @generated
+   */
+  void setFifth(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Sixth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Sixth</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Sixth</em>' attribute.
+   * @see #setSixth(boolean)
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage#getModel_Sixth()
+   * @model
+   * @generated
+   */
+  boolean isSixth();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSixth <em>Sixth</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Sixth</em>' attribute.
+   * @see #isSixth()
+   * @generated
+   */
+  void setSixth(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Seventh</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Seventh</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Seventh</em>' attribute.
+   * @see #setSeventh(boolean)
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage#getModel_Seventh()
+   * @model
+   * @generated
+   */
+  boolean isSeventh();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSeventh <em>Seventh</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Seventh</em>' attribute.
+   * @see #isSeventh()
+   * @generated
+   */
+  void setSeventh(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Eighth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Eighth</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Eighth</em>' attribute.
+   * @see #setEighth(boolean)
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage#getModel_Eighth()
+   * @model
+   * @generated
+   */
+  boolean isEighth();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isEighth <em>Eighth</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Eighth</em>' attribute.
+   * @see #isEighth()
+   * @generated
+   */
+  void setEighth(boolean value);
 
 } // Model

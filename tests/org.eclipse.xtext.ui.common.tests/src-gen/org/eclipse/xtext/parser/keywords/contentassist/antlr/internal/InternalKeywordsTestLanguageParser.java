@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class InternalKeywordsTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foo\\\\bar'", "'foo\\\\'", "'\\\\bar'", "'\\\\'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foo\\\\bar'", "'foo\\\\'", "'\\\\bar'", "'\\\\'", "'\"a\"'", "'\\'b\\''", "'\\'c\\''", "'\"d\"'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
@@ -137,14 +137,14 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start rule__Model__Alternatives
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:87:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) );
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:87:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) | ( ( rule__Model__FifthAssignment_4 ) ) | ( ( rule__Model__SixthAssignment_5 ) ) | ( ( rule__Model__SeventhAssignment_6 ) ) | ( ( rule__Model__EighthAssignment_7 ) ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:91:1: ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) )
-            int alt1=4;
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:91:1: ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) | ( ( rule__Model__FifthAssignment_4 ) ) | ( ( rule__Model__SixthAssignment_5 ) ) | ( ( rule__Model__SeventhAssignment_6 ) ) | ( ( rule__Model__EighthAssignment_7 ) ) )
+            int alt1=8;
             switch ( input.LA(1) ) {
             case 11:
                 {
@@ -166,9 +166,29 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
                 alt1=4;
                 }
                 break;
+            case 15:
+                {
+                alt1=5;
+                }
+                break;
+            case 16:
+                {
+                alt1=6;
+                }
+                break;
+            case 17:
+                {
+                alt1=7;
+                }
+                break;
+            case 18:
+                {
+                alt1=8;
+                }
+                break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("87:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) );", 1, 0, input);
+                    new NoViableAltException("87:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) | ( ( rule__Model__FifthAssignment_4 ) ) | ( ( rule__Model__SixthAssignment_5 ) ) | ( ( rule__Model__SeventhAssignment_6 ) ) | ( ( rule__Model__EighthAssignment_7 ) ) );", 1, 0, input);
 
                 throw nvae;
             }
@@ -270,6 +290,102 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
                     }
                     break;
+                case 5 :
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:116:6: ( ( rule__Model__FifthAssignment_4 ) )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:116:6: ( ( rule__Model__FifthAssignment_4 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:117:1: ( rule__Model__FifthAssignment_4 )
+                    {
+                     before(grammarAccess.getModelAccess().getFifthAssignment_4()); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:118:1: ( rule__Model__FifthAssignment_4 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:118:2: rule__Model__FifthAssignment_4
+                    {
+                    pushFollow(FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202);
+                    rule__Model__FifthAssignment_4();
+                    _fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getModelAccess().getFifthAssignment_4()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:122:6: ( ( rule__Model__SixthAssignment_5 ) )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:122:6: ( ( rule__Model__SixthAssignment_5 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:123:1: ( rule__Model__SixthAssignment_5 )
+                    {
+                     before(grammarAccess.getModelAccess().getSixthAssignment_5()); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:124:1: ( rule__Model__SixthAssignment_5 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:124:2: rule__Model__SixthAssignment_5
+                    {
+                    pushFollow(FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220);
+                    rule__Model__SixthAssignment_5();
+                    _fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getModelAccess().getSixthAssignment_5()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 7 :
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:128:6: ( ( rule__Model__SeventhAssignment_6 ) )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:128:6: ( ( rule__Model__SeventhAssignment_6 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:129:1: ( rule__Model__SeventhAssignment_6 )
+                    {
+                     before(grammarAccess.getModelAccess().getSeventhAssignment_6()); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:130:1: ( rule__Model__SeventhAssignment_6 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:130:2: rule__Model__SeventhAssignment_6
+                    {
+                    pushFollow(FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238);
+                    rule__Model__SeventhAssignment_6();
+                    _fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getModelAccess().getSeventhAssignment_6()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 8 :
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:134:6: ( ( rule__Model__EighthAssignment_7 ) )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:134:6: ( ( rule__Model__EighthAssignment_7 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:135:1: ( rule__Model__EighthAssignment_7 )
+                    {
+                     before(grammarAccess.getModelAccess().getEighthAssignment_7()); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:136:1: ( rule__Model__EighthAssignment_7 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:136:2: rule__Model__EighthAssignment_7
+                    {
+                    pushFollow(FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256);
+                    rule__Model__EighthAssignment_7();
+                    _fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getModelAccess().getEighthAssignment_7()); 
+
+                    }
+
+
+                    }
+                    break;
 
             }
         }
@@ -288,24 +404,24 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start rule__Model__FirstAssignment_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:123:1: rule__Model__FirstAssignment_0 : ( ( 'foo\\\\bar' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:147:1: rule__Model__FirstAssignment_0 : ( ( 'foo\\\\bar' ) ) ;
     public final void rule__Model__FirstAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:127:1: ( ( ( 'foo\\\\bar' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:128:1: ( ( 'foo\\\\bar' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:151:1: ( ( ( 'foo\\\\bar' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:152:1: ( ( 'foo\\\\bar' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:128:1: ( ( 'foo\\\\bar' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:129:1: ( 'foo\\\\bar' )
-            {
-             before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:130:1: ( 'foo\\\\bar' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:131:1: 'foo\\\\bar'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:152:1: ( ( 'foo\\\\bar' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:153:1: ( 'foo\\\\bar' )
             {
              before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
-            match(input,11,FOLLOW_11_in_rule__Model__FirstAssignment_0224); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:154:1: ( 'foo\\\\bar' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:155:1: 'foo\\\\bar'
+            {
+             before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
+            match(input,11,FOLLOW_11_in_rule__Model__FirstAssignment_0296); 
              after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
 
             }
@@ -333,24 +449,24 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start rule__Model__SecondAssignment_1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:146:1: rule__Model__SecondAssignment_1 : ( ( 'foo\\\\' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:170:1: rule__Model__SecondAssignment_1 : ( ( 'foo\\\\' ) ) ;
     public final void rule__Model__SecondAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:150:1: ( ( ( 'foo\\\\' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:151:1: ( ( 'foo\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:174:1: ( ( ( 'foo\\\\' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:175:1: ( ( 'foo\\\\' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:151:1: ( ( 'foo\\\\' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:152:1: ( 'foo\\\\' )
-            {
-             before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:153:1: ( 'foo\\\\' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:154:1: 'foo\\\\'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:175:1: ( ( 'foo\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:176:1: ( 'foo\\\\' )
             {
              before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
-            match(input,12,FOLLOW_12_in_rule__Model__SecondAssignment_1268); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:177:1: ( 'foo\\\\' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:178:1: 'foo\\\\'
+            {
+             before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
+            match(input,12,FOLLOW_12_in_rule__Model__SecondAssignment_1340); 
              after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
 
             }
@@ -378,24 +494,24 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start rule__Model__ThirdAssignment_2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:169:1: rule__Model__ThirdAssignment_2 : ( ( '\\\\bar' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:193:1: rule__Model__ThirdAssignment_2 : ( ( '\\\\bar' ) ) ;
     public final void rule__Model__ThirdAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:173:1: ( ( ( '\\\\bar' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:174:1: ( ( '\\\\bar' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:197:1: ( ( ( '\\\\bar' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:198:1: ( ( '\\\\bar' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:174:1: ( ( '\\\\bar' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:175:1: ( '\\\\bar' )
-            {
-             before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:176:1: ( '\\\\bar' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:177:1: '\\\\bar'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:198:1: ( ( '\\\\bar' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:199:1: ( '\\\\bar' )
             {
              before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
-            match(input,13,FOLLOW_13_in_rule__Model__ThirdAssignment_2312); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:200:1: ( '\\\\bar' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:201:1: '\\\\bar'
+            {
+             before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
+            match(input,13,FOLLOW_13_in_rule__Model__ThirdAssignment_2384); 
              after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
 
             }
@@ -423,24 +539,24 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start rule__Model__ForthAssignment_3
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:192:1: rule__Model__ForthAssignment_3 : ( ( '\\\\' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:216:1: rule__Model__ForthAssignment_3 : ( ( '\\\\' ) ) ;
     public final void rule__Model__ForthAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:196:1: ( ( ( '\\\\' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:197:1: ( ( '\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:220:1: ( ( ( '\\\\' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:221:1: ( ( '\\\\' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:197:1: ( ( '\\\\' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:198:1: ( '\\\\' )
-            {
-             before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:199:1: ( '\\\\' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:200:1: '\\\\'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:221:1: ( ( '\\\\' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:222:1: ( '\\\\' )
             {
              before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
-            match(input,14,FOLLOW_14_in_rule__Model__ForthAssignment_3356); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:223:1: ( '\\\\' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:224:1: '\\\\'
+            {
+             before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
+            match(input,14,FOLLOW_14_in_rule__Model__ForthAssignment_3428); 
              after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
 
             }
@@ -467,6 +583,186 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
     // $ANTLR end rule__Model__ForthAssignment_3
 
 
+    // $ANTLR start rule__Model__FifthAssignment_4
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:239:1: rule__Model__FifthAssignment_4 : ( ( '\"a\"' ) ) ;
+    public final void rule__Model__FifthAssignment_4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:243:1: ( ( ( '\"a\"' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:244:1: ( ( '\"a\"' ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:244:1: ( ( '\"a\"' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:245:1: ( '\"a\"' )
+            {
+             before(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:246:1: ( '\"a\"' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:247:1: '\"a\"'
+            {
+             before(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
+            match(input,15,FOLLOW_15_in_rule__Model__FifthAssignment_4472); 
+             after(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
+
+            }
+
+             after(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__FifthAssignment_4
+
+
+    // $ANTLR start rule__Model__SixthAssignment_5
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:262:1: rule__Model__SixthAssignment_5 : ( ( '\\'b\\'' ) ) ;
+    public final void rule__Model__SixthAssignment_5() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:266:1: ( ( ( '\\'b\\'' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:267:1: ( ( '\\'b\\'' ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:267:1: ( ( '\\'b\\'' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:268:1: ( '\\'b\\'' )
+            {
+             before(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:269:1: ( '\\'b\\'' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:270:1: '\\'b\\''
+            {
+             before(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
+            match(input,16,FOLLOW_16_in_rule__Model__SixthAssignment_5516); 
+             after(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
+
+            }
+
+             after(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__SixthAssignment_5
+
+
+    // $ANTLR start rule__Model__SeventhAssignment_6
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:285:1: rule__Model__SeventhAssignment_6 : ( ( '\\'c\\'' ) ) ;
+    public final void rule__Model__SeventhAssignment_6() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:289:1: ( ( ( '\\'c\\'' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:290:1: ( ( '\\'c\\'' ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:290:1: ( ( '\\'c\\'' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:291:1: ( '\\'c\\'' )
+            {
+             before(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:292:1: ( '\\'c\\'' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:293:1: '\\'c\\''
+            {
+             before(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
+            match(input,17,FOLLOW_17_in_rule__Model__SeventhAssignment_6560); 
+             after(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
+
+            }
+
+             after(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__SeventhAssignment_6
+
+
+    // $ANTLR start rule__Model__EighthAssignment_7
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:308:1: rule__Model__EighthAssignment_7 : ( ( '\"d\"' ) ) ;
+    public final void rule__Model__EighthAssignment_7() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:312:1: ( ( ( '\"d\"' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:313:1: ( ( '\"d\"' ) )
+            {
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:313:1: ( ( '\"d\"' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:314:1: ( '\"d\"' )
+            {
+             before(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:315:1: ( '\"d\"' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsTestLanguage.g:316:1: '\"d\"'
+            {
+             before(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
+            match(input,18,FOLLOW_18_in_rule__Model__EighthAssignment_7604); 
+             after(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
+
+            }
+
+             after(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Model__EighthAssignment_7
+
+
  
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
@@ -476,9 +772,17 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalContentA
     public static final BitSet FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__Model__FirstAssignment_0224 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__Model__SecondAssignment_1268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Model__ThirdAssignment_2312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Model__ForthAssignment_3356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_rule__Model__FirstAssignment_0296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__Model__SecondAssignment_1340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Model__ThirdAssignment_2384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Model__ForthAssignment_3428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Model__FifthAssignment_4472 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__Model__SixthAssignment_5516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Model__SeventhAssignment_6560 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Model__EighthAssignment_7604 = new BitSet(new long[]{0x0000000000000002L});
 
 }

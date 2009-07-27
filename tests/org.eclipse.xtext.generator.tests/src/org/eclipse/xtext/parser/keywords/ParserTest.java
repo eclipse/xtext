@@ -29,6 +29,10 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 	private EStructuralFeature second;
 	private EStructuralFeature third;
 	private EStructuralFeature forth;
+	private EStructuralFeature fifth;
+	private EStructuralFeature sixth;
+	private EStructuralFeature seventh;
+	private EStructuralFeature eighth;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -41,6 +45,10 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 		second = clazz.getEStructuralFeature("second");
 		third = clazz.getEStructuralFeature("third");
 		forth = clazz.getEStructuralFeature("forth");
+		fifth = clazz.getEStructuralFeature("fifth");
+		sixth = clazz.getEStructuralFeature("sixth");
+		seventh = clazz.getEStructuralFeature("seventh");
+		eighth = clazz.getEStructuralFeature("eighth");
 	}
 
 	protected abstract IParser getParserUnderTest();
@@ -76,6 +84,30 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 		checkModel(resource, forth);
 	}
 
+	public void testFifth() throws Exception {
+		XtextResource resource = helper.getResourceFromString("\"a\"");
+		assertTrue(resource.getErrors().isEmpty());
+		checkModel(resource, fifth);
+	}
+	
+	public void testSixth() throws Exception {
+		XtextResource resource = helper.getResourceFromString("'b'");
+		assertTrue(resource.getErrors().isEmpty());
+		checkModel(resource, sixth);
+	}
+	
+	public void testSeventh() throws Exception {
+		XtextResource resource = helper.getResourceFromString("'c'");
+		assertTrue(resource.getErrors().isEmpty());
+		checkModel(resource, seventh);
+	}
+	
+	public void testEighth() throws Exception {
+		XtextResource resource = helper.getResourceFromString("\"d\"");
+		assertTrue(resource.getErrors().isEmpty());
+		checkModel(resource, eighth);
+	}
+	
 	public static class Antlr extends ParserTest {
 
 		@Override
