@@ -23,7 +23,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.internal.xtend.type.impl.java.JavaMetaModel;
+import org.eclipse.internal.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
@@ -34,6 +34,7 @@ import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtext.Messages;
 import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
+
 /**
  * XtextProjectCreator handles the actual creation of the new Xtext project.
  * 
@@ -79,8 +80,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common", //$NON-NLS-1$ //$NON-NLS-2$
 				"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", //$NON-NLS-1$
-				"org.eclipse.ui.editors;bundle-version=\"3.4.0\"", //$NON-NLS-1$
-				"org.eclipse.ui.ide;bundle-version=\"3.4.0\"")); //$NON-NLS-1$
+				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
+				"org.eclipse.ui.ide;bundle-version=\"3.5.0\"")); //$NON-NLS-1$
 
 		String templateName = pathToTemplates()+"DslUiProject::main"; //$NON-NLS-1$
 
@@ -112,9 +113,13 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		String projectName = getXtextProjectInfo().getGeneratorProjectName();
 
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
-				getXtextProjectInfo().getProjectName().toLowerCase(), "org.eclipse.xpand", "org.eclipse.xtend", //$NON-NLS-1$ //$NON-NLS-2$
-				"org.eclipse.xtext", "org.eclipse.emf.mwe.core", "org.eclipse.emf.mwe.utils", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				"org.eclipse.xtend.typesystem.emf")); //$NON-NLS-1$
+				getXtextProjectInfo().getProjectName().toLowerCase(),
+				"org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.xtend;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.emf.mwe.core;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
+				"org.eclipse.xtend.typesystem.emf;visibility:=reexport")); //$NON-NLS-1$
 
 		String templateName = pathToTemplates()+"GeneratorProject::main"; //$NON-NLS-1$
 
@@ -142,7 +147,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
 		execCtx.setFileEncoding("iso-8859-1"); //$NON-NLS-1$
-		execCtx.registerMetaModel(new JavaMetaModel());
+		execCtx.registerMetaModel(new JavaBeansMetaModel());
 
 		// generate generator and activator for dsl and dsl.ui project
 		XpandFacade facade = XpandFacade.create(execCtx);
