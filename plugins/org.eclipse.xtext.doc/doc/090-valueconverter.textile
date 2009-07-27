@@ -2,7 +2,7 @@
 h2(#valueconverter). Value Converter
 
 Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
-The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module"#guicecustomize.
+The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module":#guicecustomize.
 To do so override the corresponding binding in your runtime module like shown in this example:
 
 bc.. @Override
@@ -12,13 +12,13 @@ public Class<? extends IValueConverterService> bindIValueConverterService() {
 
 h3. Annotation based value converters
 
-The most simple way to register additional value converters is to make use of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService}, which allows to
+The most simple way to register additional value converters is to make use of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, which allows to
 declaratively register an @IValueConverter@ via an annotated method. 
 
 The implementation for the default token grammar looks like 
 
 bc.. public class DefaultTerminalConverters 
-    extends AbstractAnnotationBasedValueConverterService {
+    extends AbstractDeclarativeValueConverterService {
   
   (..)
   
@@ -33,7 +33,7 @@ bc.. public class DefaultTerminalConverters
       @Override
       protected String internalToString(String value) {
         if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
-          return "^"+value;
+          return "^" + value;
         }
         return value;
       }
