@@ -35,6 +35,7 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.concurrent.IEObjectHandle;
 import org.eclipse.xtext.concurrent.IStateAccess;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
@@ -101,6 +102,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 			throw new IllegalStateException("The resource factory registered for " + path
 					+ " is not an XtextResourceFactory. Make sure the right resource factory has been registered.");
 		resource = (XtextResource) aResource;
+		if (resource instanceof LazyLinkingResource)
+			((LazyLinkingResource) resource).setEagerLinking(true);
 		resource.setValidationDisabled(file == null);
 	}
 
