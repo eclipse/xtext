@@ -89,10 +89,28 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			return;
 		AbstractRule firstRule = g.getRules().get(0);
 		if (!(firstRule instanceof ParserRule)) {
+			if (!containsAnyParserRule(g, new HashSet<Grammar>()))
+				return;
 			error("The first rule must be a parser rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
 		} else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
+			if (!containsAnyParserRule(g, new HashSet<Grammar>()))
+				return;
 			error("The first rule must be a parser rule, but is a data type rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
 		}
+	}
+	
+	private boolean containsAnyParserRule(Grammar g, Set<Grammar> visited) {
+		if (!visited.add(g))
+			return false;
+		for(AbstractRule rule: g.getRules()) {
+			if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule))
+				return true;
+		}
+		for(Grammar used: g.getUsedGrammars()) {
+			if (containsAnyParserRule(used, visited))
+				return true;
+		}
+		return false;
 	}
 
 	@Check

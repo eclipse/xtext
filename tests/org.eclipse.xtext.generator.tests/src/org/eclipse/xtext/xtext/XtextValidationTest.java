@@ -236,7 +236,8 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
-				"enum EnumRule: Zonk;\n");
+				"enum EnumRule: Zonk;\n"+
+				"Model: name=STRING;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -250,7 +251,8 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
-				"terminal TERMINAL: ID;\n");
+				"terminal TERMINAL: ID;\n" +
+				"Model: name=STRING;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -264,7 +266,8 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
-				"Model: ID;\n");
+				"Model: ID;\n" +
+				"SecondModel: name=STRING;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -272,6 +275,48 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertNotNull("diag", diag);
 		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_283534_05() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"enum EnumRule: Zonk;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
+	}
+	
+	public void testBug_283534_06() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"terminal TERMINAL: ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
+	}
+	
+	public void testBug_283534_07() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
 	}
 	
 	public void testDuplicateEnumLiterals() throws Exception {
