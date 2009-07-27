@@ -8,5 +8,11 @@ projectInfoClassName(Grammar this) :
 projectCreatorClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"ProjectCreator";
 	
+newProjectTemplateName(Grammar this) :
+	getNamespace().replaceAll('\\.', '::')+"::ui::wizard::"+getName()+"NewProject";
+
 projectWizardClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"NewProjectWizard";
+
+OP() : "«";
+CL() : "»";

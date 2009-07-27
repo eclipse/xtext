@@ -8,16 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.projectWizard;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGeneratorFragment;
+
+import com.google.common.collect.Lists;
 
 /**
  * An {@link IGeneratorFragment} to generate a simple project wizard.
@@ -26,13 +28,20 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  */
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
+	private final static Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);
+
+	private String generatorProjectName;
+	private String modelFileExtension;
+
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] {
 				"org.eclipse.ui",
 				"org.eclipse.core.runtime",
 				"org.eclipse.core.resources",
-				"org.eclipse.ui.ide"
+				"org.eclipse.ui.ide",
+				"org.eclipse.xtend",
+				"org.eclipse.xpand"
 			};
 	}
 
@@ -46,7 +55,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.singletonList((Object) getGeneratorProjectName(grammar));
+		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getModelFileExtension(grammar));
 	}
 
 	private String getGeneratorProjectName(Grammar g) {
@@ -57,7 +66,15 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 				+ " : The property 'generatorProjectName' is mandatory but has not been configured.");
 	}
 
-	private String generatorProjectName;
+	public String getModelFileExtension(Grammar g) {
+		if (modelFileExtension != null) {
+			return modelFileExtension;
+		}
+		String lowerCase = GrammarUtil.getName(g).toLowerCase();
+		if (LOG.isInfoEnabled())
+			LOG.info("No explicit modelFileExtension configured. Using '*." + lowerCase + "'.");
+		return lowerCase;
+	}
 
 	/**
 	 * Sets the name of the generator project. 
@@ -70,4 +87,17 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		}
 		this.generatorProjectName = generatorProjectName.trim();
 	}
+
+	/**
+	 * Sets the file extension used when creating the initial sample model.
+	 * 
+	 * @param modelFileExtension
+	 */
+	public void setModelFileExtension(String modelFileExtension) {
+		if (modelFileExtension == null || "".equals(modelFileExtension.trim())) {
+			return;
+		}
+		this.modelFileExtension = modelFileExtension.trim();
+	}
+
 }
