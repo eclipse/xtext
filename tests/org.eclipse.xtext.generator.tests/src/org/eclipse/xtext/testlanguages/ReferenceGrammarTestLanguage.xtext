@@ -26,7 +26,7 @@ generate referenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 		 "spielzeug" "(" name = ID farbe = Farbe ")" ;
 	
 	Farbe :
-		 "ROT" | "BLAU" | "GELB" | "GRÜN" ;
+		 wert=("ROT" | "BLAU" | "GELB" | "GRÜN") ;
 	
 	Familie :
 	 	"familie" "(" name=("keyword" | STRING | ID)  mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")" ;
