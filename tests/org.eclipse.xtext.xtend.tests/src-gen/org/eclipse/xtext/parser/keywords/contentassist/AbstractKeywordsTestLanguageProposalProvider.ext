@@ -43,6 +43,30 @@ List[ICompletionProposal] completeModel_Forth(EObject model, Assignment assignme
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.prefix + "'") ->
 	{};
+	 
+List[ICompletionProposal] completeModel_Fifth(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
+	debug("completeModel_Fifth feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.prefix + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeModel_Sixth(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
+	debug("completeModel_Sixth feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.prefix + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeModel_Seventh(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
+	debug("completeModel_Seventh feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.prefix + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeModel_Eighth(EObject model, Assignment assignment, ContentAssistContext contentAssistContext) :
+	debug("completeModel_Eighth feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.prefix + "'") ->
+	{};
 	 	  
 List[ICompletionProposal] complete_Model(EObject model, RuleCall ruleCall, ContentAssistContext contentAssistContext) :
 	{};

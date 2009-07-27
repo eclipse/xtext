@@ -11,4 +11,5 @@ grammar org.eclipse.xtext.parser.keywords.KeywordsTestLanguage with org.eclipse.
 generate keywordsTestLanguage "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage"
  
 Model:
-  first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\"; 
+  first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" |
+  fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'" | eighth?='"d"'; 

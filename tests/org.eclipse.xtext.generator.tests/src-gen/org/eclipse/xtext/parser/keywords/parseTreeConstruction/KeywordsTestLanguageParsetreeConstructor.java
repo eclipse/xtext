@@ -42,11 +42,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
+ *   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
+ *   sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\"";
  *
  **/
 
-// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
+// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
+// sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\""
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -63,6 +65,10 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_SecondAssignment_1(parent, this, 1, inst);
 			case 2: return new Model_ThirdAssignment_2(parent, this, 2, inst);
 			case 3: return new Model_ForthAssignment_3(parent, this, 3, inst);
+			case 4: return new Model_FifthAssignment_4(parent, this, 4, inst);
+			case 5: return new Model_SixthAssignment_5(parent, this, 5, inst);
+			case 6: return new Model_SeventhAssignment_6(parent, this, 6, inst);
+			case 7: return new Model_EighthAssignment_7(parent, this, 7, inst);
 			default: return null;
 		}	
 	}	
@@ -186,6 +192,126 @@ protected class Model_ForthAssignment_3 extends AssignmentToken  {
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// fifth?="\"a\""
+protected class Model_FifthAssignment_4 extends AssignmentToken  {
+	
+	public Model_FifthAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getFifthAssignment_4();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("fifth",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("fifth");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getModelAccess().getFifthAKeyword_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// sixth?="\'b\'"
+protected class Model_SixthAssignment_5 extends AssignmentToken  {
+	
+	public Model_SixthAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getSixthAssignment_5();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("sixth",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("sixth");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getModelAccess().getSixthBKeyword_5_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// seventh?="\'c\'"
+protected class Model_SeventhAssignment_6 extends AssignmentToken  {
+	
+	public Model_SeventhAssignment_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getSeventhAssignment_6();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("seventh",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("seventh");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getModelAccess().getSeventhCKeyword_6_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// eighth?="\"d\""
+protected class Model_EighthAssignment_7 extends AssignmentToken  {
+	
+	public Model_EighthAssignment_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getEighthAssignment_7();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("eighth",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("eighth");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getModelAccess().getEighthDKeyword_7_0();
 			return obj;
 		}
 		return null;

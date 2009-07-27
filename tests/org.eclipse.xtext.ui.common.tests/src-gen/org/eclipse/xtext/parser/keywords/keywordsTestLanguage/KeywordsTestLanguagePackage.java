@@ -105,13 +105,49 @@ public interface KeywordsTestLanguagePackage extends EPackage
   int MODEL__FORTH = 3;
 
   /**
+   * The feature id for the '<em><b>Fifth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__FIFTH = 4;
+
+  /**
+   * The feature id for the '<em><b>Sixth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__SIXTH = 5;
+
+  /**
+   * The feature id for the '<em><b>Seventh</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__SEVENTH = 6;
+
+  /**
+   * The feature id for the '<em><b>Eighth</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__EIGHTH = 7;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
+  int MODEL_FEATURE_COUNT = 8;
 
 
   /**
@@ -167,6 +203,50 @@ public interface KeywordsTestLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getModel_Forth();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isFifth <em>Fifth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Fifth</em>'.
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isFifth()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Fifth();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSixth <em>Sixth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Sixth</em>'.
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSixth()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Sixth();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSeventh <em>Seventh</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Seventh</em>'.
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSeventh()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Seventh();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isEighth <em>Eighth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Eighth</em>'.
+   * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isEighth()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Eighth();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -232,6 +312,38 @@ public interface KeywordsTestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute MODEL__FORTH = eINSTANCE.getModel_Forth();
+
+    /**
+     * The meta object literal for the '<em><b>Fifth</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__FIFTH = eINSTANCE.getModel_Fifth();
+
+    /**
+     * The meta object literal for the '<em><b>Sixth</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__SIXTH = eINSTANCE.getModel_Sixth();
+
+    /**
+     * The meta object literal for the '<em><b>Seventh</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__SEVENTH = eINSTANCE.getModel_Seventh();
+
+    /**
+     * The meta object literal for the '<em><b>Eighth</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__EIGHTH = eINSTANCE.getModel_Eighth();
 
   }
 

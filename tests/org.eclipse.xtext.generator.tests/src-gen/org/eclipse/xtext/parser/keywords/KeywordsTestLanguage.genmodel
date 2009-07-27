@@ -14,6 +14,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/second"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/third"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/forth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/fifth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/sixth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/seventh"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsTestLanguage.ecore#//Model/eighth"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

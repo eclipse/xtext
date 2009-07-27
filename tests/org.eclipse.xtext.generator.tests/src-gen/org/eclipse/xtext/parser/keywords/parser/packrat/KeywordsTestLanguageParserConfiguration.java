@@ -60,6 +60,10 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 
 
 		getModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);
+		getModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);
+		getModelConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);
+		getModelConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);
+		getModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);
 		getModelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$5$Delimiter);
 		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$5$Delimiter);
 		getModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$9$Delimiter);

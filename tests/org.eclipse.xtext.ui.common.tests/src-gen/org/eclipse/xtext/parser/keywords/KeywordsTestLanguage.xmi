@@ -21,6 +21,18 @@
         <groups xsi:type="xtext:Assignment" feature="forth" operator="?=">
           <terminal xsi:type="xtext:Keyword" value="\"/>
         </groups>
+        <groups xsi:type="xtext:Assignment" feature="fifth" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="&quot;a&quot;"/>
+        </groups>
+        <groups xsi:type="xtext:Assignment" feature="sixth" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="'b'"/>
+        </groups>
+        <groups xsi:type="xtext:Assignment" feature="seventh" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="'c'"/>
+        </groups>
+        <groups xsi:type="xtext:Assignment" feature="eighth" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="&quot;d&quot;"/>
+        </groups>
       </alternatives>
     </rules>
   </xtext:Grammar>

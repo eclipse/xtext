@@ -28,12 +28,22 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cThirdBarKeyword_2_0 = (Keyword)cThirdAssignment_2.eContents().get(0);
 		private final Assignment cForthAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
 		private final Keyword cForthReverseSolidusKeyword_3_0 = (Keyword)cForthAssignment_3.eContents().get(0);
+		private final Assignment cFifthAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
+		private final Keyword cFifthAKeyword_4_0 = (Keyword)cFifthAssignment_4.eContents().get(0);
+		private final Assignment cSixthAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
+		private final Keyword cSixthBKeyword_5_0 = (Keyword)cSixthAssignment_5.eContents().get(0);
+		private final Assignment cSeventhAssignment_6 = (Assignment)cAlternatives.eContents().get(6);
+		private final Keyword cSeventhCKeyword_6_0 = (Keyword)cSeventhAssignment_6.eContents().get(0);
+		private final Assignment cEighthAssignment_7 = (Assignment)cAlternatives.eContents().get(7);
+		private final Keyword cEighthDKeyword_7_0 = (Keyword)cEighthAssignment_7.eContents().get(0);
 		
 		//Model:
-		//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
+		//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
+		//  sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\"";
 		public ParserRule getRule() { return rule; }
 
-		//first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
+		//first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
+		//sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\""
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//first?="foo\\bar"
@@ -59,6 +69,30 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//"\\"
 		public Keyword getForthReverseSolidusKeyword_3_0() { return cForthReverseSolidusKeyword_3_0; }
+
+		//fifth?="\"a\""
+		public Assignment getFifthAssignment_4() { return cFifthAssignment_4; }
+
+		//"\"a\""
+		public Keyword getFifthAKeyword_4_0() { return cFifthAKeyword_4_0; }
+
+		//sixth?="\'b\'"
+		public Assignment getSixthAssignment_5() { return cSixthAssignment_5; }
+
+		//"\'b\'"
+		public Keyword getSixthBKeyword_5_0() { return cSixthBKeyword_5_0; }
+
+		//seventh?="\'c\'"
+		public Assignment getSeventhAssignment_6() { return cSeventhAssignment_6; }
+
+		//"\'c\'"
+		public Keyword getSeventhCKeyword_6_0() { return cSeventhCKeyword_6_0; }
+
+		//eighth?="\"d\""
+		public Assignment getEighthAssignment_7() { return cEighthAssignment_7; }
+
+		//"\"d\""
+		public Keyword getEighthDKeyword_7_0() { return cEighthDKeyword_7_0; }
 	}
 	
 	
@@ -86,7 +120,8 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
+	//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
+	//  sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\"";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
