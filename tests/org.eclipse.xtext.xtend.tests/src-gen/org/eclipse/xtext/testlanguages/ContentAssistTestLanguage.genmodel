@@ -1,36 +1,28 @@
-<?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend.tests/src-gen" editDirectory="/org.eclipse.xtext.xtend.tests.edit/src" editorDirectory="/org.eclipse.xtext.xtend.tests.editor/src" modelPluginID="org.eclipse.xtext.xtend.tests" forceOverwrite="true" modelName="ContentAssistTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtend.tests.edit" editorPluginID="org.eclipse.xtext.xtend.tests.editor">
-  <genPackages prefix="ContentAssistTestLanguage" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
-    <ecorePackage href="ContentAssistTestLanguage.ecore#/"/>
-    <genClasses>
-      <ecoreClass href="ContentAssistTestLanguage.ecore#//Start"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistTestLanguage.ecore#//Start/rules"/>
-      </genFeatures>
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.xtend.tests.edit/src" editorDirectory="/org.eclipse.xtext.xtend.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.xtend.tests" forceOverwrite="true" modelName="ContentAssistTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtend.tests.edit"
+    editorPluginID="org.eclipse.xtext.xtend.tests.editor">
+  <genPackages prefix="ContentAssistTestLanguage" basePackage="org.eclipse.xtext.testlanguages"
+      disposableProviderFactory="true" ecorePackage="ContentAssistTestLanguage.ecore#/">
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//Start">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Start/rules"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="ContentAssistTestLanguage.ecore#//AbstractRule"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="ContentAssistTestLanguage.ecore#//AbstractRule/name"/>
-      </genFeatures>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//AbstractRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistTestLanguage.ecore#//AbstractRule/name"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="ContentAssistTestLanguage.ecore#//FirstAbstractRuleChild"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistTestLanguage.ecore#//FirstAbstractRuleChild/elements"/>
-      </genFeatures>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//FirstAbstractRuleChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//FirstAbstractRuleChild/elements"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="ContentAssistTestLanguage.ecore#//SecondAbstractRuleChild"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistTestLanguage.ecore#//SecondAbstractRuleChild/rule"/>
-      </genFeatures>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//SecondAbstractRuleChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//SecondAbstractRuleChild/rule"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="ContentAssistTestLanguage.ecore#//AbstractRuleCall"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ContentAssistTestLanguage.ecore#//AbstractRuleCall/rule"/>
-      </genFeatures>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//AbstractRuleCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//AbstractRuleCall/rule"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

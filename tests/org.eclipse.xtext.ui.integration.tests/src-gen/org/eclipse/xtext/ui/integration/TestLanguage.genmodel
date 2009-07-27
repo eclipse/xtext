@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.integration.tests/src-gen" editDirectory="/org.eclipse.xtext.ui.integration.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.integration.tests.editor/src" modelPluginID="org.eclipse.xtext.ui.integration.tests" forceOverwrite="true" modelName="TestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.integration.tests.edit" editorPluginID="org.eclipse.xtext.ui.integration.tests.editor">
-  <genPackages prefix="Foo" basePackage="org.eclipse.xtext.ui.integration" disposableProviderFactory="true">
-    <ecorePackage href="TestLanguage.ecore#/"/>
-    <genClasses>
-      <ecoreClass href="TestLanguage.ecore#//File"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="TestLanguage.ecore#//File/stuff"/>
-      </genFeatures>
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.integration.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.integration.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.integration.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.integration.tests" forceOverwrite="true" modelName="TestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.integration.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.integration.tests.editor">
+  <genPackages prefix="Foo" basePackage="org.eclipse.xtext.ui.integration" disposableProviderFactory="true"
+      ecorePackage="TestLanguage.ecore#/">
+    <genClasses ecoreClass="TestLanguage.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//File/stuff"/>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="TestLanguage.ecore#//Stuff"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="TestLanguage.ecore#//Stuff/name"/>
-      </genFeatures>
+    <genClasses ecoreClass="TestLanguage.ecore#//Stuff">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Stuff/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

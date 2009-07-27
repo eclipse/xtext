@@ -1,25 +1,21 @@
-<?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend.tests/src-gen" editDirectory="/org.eclipse.xtext.xtend.tests.edit/src" editorDirectory="/org.eclipse.xtext.xtend.tests.editor/src" modelPluginID="org.eclipse.xtext.xtend.tests" forceOverwrite="true" modelName="EnumRulesTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtend.tests.edit" editorPluginID="org.eclipse.xtext.xtend.tests.editor">
-  <genPackages prefix="EnumRulesTestLanguage" basePackage="org.eclipse.xtext.enumrules" disposableProviderFactory="true">
-    <ecorePackage href="EnumRulesTestLanguage.ecore#/"/>
-    <genEnums typeSafeEnumCompatible="false">
-      <ecoreEnum href="EnumRulesTestLanguage.ecore#//GeneratedEnum"/>
-      <genEnumLiterals>
-        <ecoreEnumLiteral href="EnumRulesTestLanguage.ecore#//GeneratedEnum/SameName"/>
-      </genEnumLiterals>
-      <genEnumLiterals>
-        <ecoreEnumLiteral href="EnumRulesTestLanguage.ecore#//GeneratedEnum/DifferentName"/>
-      </genEnumLiterals>
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.xtend.tests.edit/src" editorDirectory="/org.eclipse.xtext.xtend.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.xtend.tests" forceOverwrite="true" modelName="EnumRulesTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtend.tests.edit"
+    editorPluginID="org.eclipse.xtext.xtend.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel#//enums">
+  <genPackages prefix="EnumRulesTestLanguage" basePackage="org.eclipse.xtext.enumrules"
+      disposableProviderFactory="true" ecorePackage="EnumRulesTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EnumRulesTestLanguage.ecore#//GeneratedEnum">
+      <genEnumLiterals ecoreEnumLiteral="EnumRulesTestLanguage.ecore#//GeneratedEnum/SameName"/>
+      <genEnumLiterals ecoreEnumLiteral="EnumRulesTestLanguage.ecore#//GeneratedEnum/DifferentName"/>
     </genEnums>
-    <genClasses>
-      <ecoreClass href="EnumRulesTestLanguage.ecore#//Model"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EnumRulesTestLanguage.ecore#//Model/existing"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EnumRulesTestLanguage.ecore#//Model/generated"/>
-      </genFeatures>
+    <genClasses ecoreClass="EnumRulesTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumRulesTestLanguage.ecore#//Model/existing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumRulesTestLanguage.ecore#//Model/generated"/>
     </genClasses>
   </genPackages>
-  <usedGenPackages href="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel#//enums"/>
 </genmodel:GenModel>
