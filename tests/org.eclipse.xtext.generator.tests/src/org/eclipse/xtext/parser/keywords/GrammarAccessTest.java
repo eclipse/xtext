@@ -18,6 +18,7 @@ public class GrammarAccessTest extends AbstractXtextTests {
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
 
 	private KeywordsTestLanguageGrammarAccess.ModelElements modelElements;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -31,5 +32,9 @@ public class GrammarAccessTest extends AbstractXtextTests {
 		assertEquals("foo\\", modelElements.getSecondFooKeyword_1_0().getValue());
 		assertEquals("\\bar", modelElements.getThirdBarKeyword_2_0().getValue());
 		assertEquals("\\", modelElements.getForthReverseSolidusKeyword_3_0().getValue());
+		assertEquals("\"a\"", modelElements.getFifthAKeyword_4_0().getValue());
+		assertEquals("'b'", modelElements.getSixthBKeyword_5_0().getValue());
+		assertEquals("'c'", modelElements.getSeventhCKeyword_6_0().getValue());
+		assertEquals("\"d\"", modelElements.getEighthDKeyword_7_0().getValue());
 	}
 }
