@@ -82,6 +82,18 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (!Character.isUpperCase(ele.charAt(0)))
 			error("The last element should start with an upper case letter.", XtextPackage.GRAMMAR__NAME);
 	}
+	
+	@Check
+	public void checkFirstRule(Grammar g) {
+		if (g.getRules().isEmpty())
+			return;
+		AbstractRule firstRule = g.getRules().get(0);
+		if (!(firstRule instanceof ParserRule)) {
+			error("The first rule must be a parser rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
+		} else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
+			error("The first rule must be a parser rule, but is a data type rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
+		}
+	}
 
 	@Check
 	public void checkGeneratedMetamodel(GeneratedMetamodel metamodel) {
