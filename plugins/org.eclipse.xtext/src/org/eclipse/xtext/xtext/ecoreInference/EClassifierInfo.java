@@ -156,9 +156,10 @@ public abstract class EClassifierInfo {
 
 			if (!EcoreUtil2.isFeatureSemanticallyEqualApartFromType(newFeature, existingFeature))
 				throw new TransformationException(TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
-						"feature with different cardinality or containment configuration already exists " + newFeature,
+						"A feature '" + newFeature.getName() + "' with a different cardinality or containment " +
+								"configuration already exists in type '" + getEClass().getName() + "'.",
 						parserElement);
-
+			
 			EClassifier compatibleType = EcoreUtil2
 			.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
 			if (compatibleType == null)
