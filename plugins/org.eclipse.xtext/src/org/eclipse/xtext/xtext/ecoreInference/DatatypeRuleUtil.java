@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.XtextSwitch;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
-
+	
 	static boolean isDatatypeRule(ParserRule rule) {
 		DatatypeRuleFinder finder = new DatatypeRuleFinder();
 		return finder.doSwitch(rule) && finder.indicatorFound;
@@ -44,6 +44,12 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		public Boolean caseTerminalRule(TerminalRule object) {
 			indicatorFound = true;
 			return super.caseTerminalRule(object);
+		}
+		
+		@Override
+		public Boolean caseKeyword(Keyword object) {
+			indicatorFound = true;
+			return super.caseKeyword(object);
 		}
 
 		@Override

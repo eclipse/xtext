@@ -26,7 +26,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="farbe" eType="#//Farbe"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Farbe"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Farbe">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wert" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Familie">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mutter" eType="#//Erwachsener"/>

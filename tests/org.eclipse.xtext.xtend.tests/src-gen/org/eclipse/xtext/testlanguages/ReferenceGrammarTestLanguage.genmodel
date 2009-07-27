@@ -27,7 +27,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarTestLanguage.ecore#//Spielzeug/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ReferenceGrammarTestLanguage.ecore#//Spielzeug/farbe"/>
     </genClasses>
-    <genClasses ecoreClass="ReferenceGrammarTestLanguage.ecore#//Farbe"/>
+    <genClasses ecoreClass="ReferenceGrammarTestLanguage.ecore#//Farbe">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarTestLanguage.ecore#//Farbe/wert"/>
+    </genClasses>
     <genClasses ecoreClass="ReferenceGrammarTestLanguage.ecore#//Familie">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ReferenceGrammarTestLanguage.ecore#//Familie/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ReferenceGrammarTestLanguage.ecore#//Familie/mutter"/>

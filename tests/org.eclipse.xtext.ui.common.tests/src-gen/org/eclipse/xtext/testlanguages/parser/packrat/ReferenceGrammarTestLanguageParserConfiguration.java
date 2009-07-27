@@ -136,10 +136,10 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getSpielzeugConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getSpielzeugConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getSpielzeugConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getFarbeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFarbeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFarbeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFarbeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
+		getFarbeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFamilieConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFamilieConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getFamilieConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);

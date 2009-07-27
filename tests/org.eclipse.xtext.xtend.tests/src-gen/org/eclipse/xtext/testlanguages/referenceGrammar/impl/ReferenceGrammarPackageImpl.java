@@ -307,6 +307,16 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getFarbe_Wert()
+  {
+    return (EAttribute)farbeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getFamilie()
   {
     return familieEClass;
@@ -403,6 +413,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     createEReference(spielzeugEClass, SPIELZEUG__FARBE);
 
     farbeEClass = createEClass(FARBE);
+    createEAttribute(farbeEClass, FARBE__WERT);
 
     familieEClass = createEClass(FAMILIE);
     createEAttribute(familieEClass, FAMILIE__NAME);
@@ -465,6 +476,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     initEReference(getSpielzeug_Farbe(), this.getFarbe(), null, "farbe", null, 0, 1, Spielzeug.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(farbeEClass, Farbe.class, "Farbe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFarbe_Wert(), ecorePackage.getEString(), "wert", null, 0, 1, Farbe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(familieEClass, Familie.class, "Familie", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFamilie_Name(), ecorePackage.getEString(), "name", null, 0, 1, Familie.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

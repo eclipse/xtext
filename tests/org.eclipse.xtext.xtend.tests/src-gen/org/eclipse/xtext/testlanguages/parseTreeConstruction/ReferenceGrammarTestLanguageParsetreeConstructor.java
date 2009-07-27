@@ -37,7 +37,7 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new Kind_Group(this, this, 2, inst);
 			case 3: return new Erwachsener_Group(this, this, 3, inst);
 			case 4: return new Spielzeug_Group(this, this, 4, inst);
-			case 5: return new Farbe_Alternatives(this, this, 5, inst);
+			case 5: return new Farbe_WertAssignment(this, this, 5, inst);
 			case 6: return new Familie_Group(this, this, 6, inst);
 			default: return null;
 		}	
@@ -925,7 +925,7 @@ protected class Spielzeug_FarbeAssignment_3 extends AssignmentToken  {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Farbe_Alternatives(this, this, 0, inst);
+			case 0: return new Farbe_WertAssignment(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -981,28 +981,24 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   "ROT"|"BLAU"|"GELB"|"GR\u00DCN";
+ *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
  *
  **/
 
-// "ROT"|"BLAU"|"GELB"|"GR\u00DCN"
-protected class Farbe_Alternatives extends AlternativesToken {
-
-	public Farbe_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
+protected class Farbe_WertAssignment extends AssignmentToken  {
+	
+	public Farbe_WertAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getAlternatives();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFarbeAccess().getWertAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Farbe_ROTKeyword_0(parent, this, 0, inst);
-			case 1: return new Farbe_BLAUKeyword_1(parent, this, 1, inst);
-			case 2: return new Farbe_GELBKeyword_2(parent, this, 2, inst);
-			case 3: return new Farbe_GRÜNKeyword_3(parent, this, 3, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1010,84 +1006,33 @@ protected class Farbe_Alternatives extends AlternativesToken {
 		if(!current.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("wert",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("wert");
+		if("ROT".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getFarbeAccess().getWertROTKeyword_0_0();
+			return obj;
+		}
+		if("BLAU".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1();
+			return obj;
+		}
+		if("GELB".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2();
+			return obj;
+		}
+		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
+			return obj;
+		}
+		return null;
+	}
+
 }
-
-// "ROT"
-protected class Farbe_ROTKeyword_0 extends KeywordToken  {
-	
-	public Farbe_ROTKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getROTKeyword_0();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
-// "BLAU"
-protected class Farbe_BLAUKeyword_1 extends KeywordToken  {
-	
-	public Farbe_BLAUKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getBLAUKeyword_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
-// "GELB"
-protected class Farbe_GELBKeyword_2 extends KeywordToken  {
-	
-	public Farbe_GELBKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getGELBKeyword_2();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
-// "GR\u00DCN"
-protected class Farbe_GRÜNKeyword_3 extends KeywordToken  {
-	
-	public Farbe_GRÜNKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getGRÜNKeyword_3();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
 
 /************ end Rule Farbe ****************/
 
