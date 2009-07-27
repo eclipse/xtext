@@ -20,10 +20,12 @@ public class SemanticHighlightingConfiguration implements ISemanticHighlightingC
 
 	public static final String RULE_DECLARATION_ID = "RuleDeclaration";
 	public static final String TYPE_REFERENCE_ID = "TypeReference";
+	public static final String DATA_TYPE_RULE_ID = "DataTypeIndicator";
 	
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(RULE_DECLARATION_ID, "Rule Declaration", defaultTextStyle());
 		acceptor.acceptDefaultHighlighting(TYPE_REFERENCE_ID, "Type Reference", typeReference());
+		acceptor.acceptDefaultHighlighting(DATA_TYPE_RULE_ID, "Data Type Rule", dataTypeRule());
 	}
 
 	public TextStyle defaultTextStyle() {
@@ -36,6 +38,12 @@ public class SemanticHighlightingConfiguration implements ISemanticHighlightingC
 	public TextStyle typeReference() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setStyle(SWT.ITALIC);
+		return textStyle;
+	}
+	
+	public TextStyle dataTypeRule() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(0, 0, 192));
 		return textStyle;
 	}
 	
