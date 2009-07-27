@@ -26,6 +26,7 @@
 180-hyperlinking.textile
 190-formatting.textile
 195-highlighting.textile
+198-wizards.textile
 
 200-Appendix.textile
 210-migrating-from-oaw.textile

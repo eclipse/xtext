@@ -167,22 +167,22 @@ h3. Standard generator fragments
 
 In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.
 
-|_.Class|_.Generated Artifacts|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|
-|XtextAntlrGeneratorFragment|ANTLR grammar, parser, lexer and related services.|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment}|Model-to-text serialization|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.scoping.JavaScopingFragment}|Java-based scoping|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.JavaValidatorFragment}|Java-based model validation|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment}|Xpand/Check-based model validation|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.formatting.FormatterFragment}|Code formatter|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}|Label provider|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment}|Outline view configuration|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.TransformerFragment}|Outline view configuration|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment}| Java-based content assist|
-|XtextAntlrUiGeneratorFragment|Content assist helper based on ANTLR|
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment}|New project wizard|
+|_.Class|_.Generated Artifacts|_.Related Documentation|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|"Model inference":#metamodelInference|
+|XtextAntlrGeneratorFragment|ANTLR grammar, parser, lexer and related services||
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar||
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory||
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment}|Model-to-text serialization|"Serialization":#serialization|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.scoping.JavaScopingFragment}|Java-based scoping|"Java-based scoping":#scoping|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.JavaValidatorFragment}|Java-based model validation|"Java-based validation":#custom_validation|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment}|Xpand/Check-based model validation|"Check-based validation":#check_based_validation|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.formatting.FormatterFragment}|Code formatter|"Declarative formatter":declarativeformatter|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}|Label provider|"Label provider":#labelProvider|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment}|Outline view configuration|"Outline":#outline|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.TransformerFragment}|Outline view configuration|"Outline":#outline|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment}| Java-based content assist|"Content assist":#contentAssist|
+|XtextAntlrUiGeneratorFragment|Content assist helper based on ANTLR|"Content assist":#contentAssist|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment}|New project wizard|"Project wizard":#projectwizard|
 
 
 __*Important* Due to__ "IP-Problems":#antlr_ip_issue __with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the update site at *http://download.itemis.com/updates/*.__
