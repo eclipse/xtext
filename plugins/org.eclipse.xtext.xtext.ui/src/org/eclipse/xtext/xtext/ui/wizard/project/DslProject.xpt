@@ -100,6 +100,12 @@ projectName=«this.projectName»
 			</fragment>
 			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
 			«ENDIF»
+
+			<!-- project wizard (optional) -->
+			<!--
+			<fragment class="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment"
+				generatorProjectName="${projectName}.generator" modelFileExtension="«this.firstFileExtension»"/>
+			-->
 		</language>
 	</component>
 </workflow>
