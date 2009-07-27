@@ -55,8 +55,7 @@ public class InternalXtextLexer extends Lexer {
     public InternalXtextLexer(CharStream input) {
         super(input);
     }
-    @Override
-	public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
 
     // $ANTLR start T11
     public final void mT11() throws RecognitionException {
@@ -1139,8 +1138,7 @@ public class InternalXtextLexer extends Lexer {
     }
     // $ANTLR end RULE_ANY_OTHER
 
-    @Override
-	public void mTokens() throws RecognitionException {
+    public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=38;
         int LA12_0 = input.LA(1);
