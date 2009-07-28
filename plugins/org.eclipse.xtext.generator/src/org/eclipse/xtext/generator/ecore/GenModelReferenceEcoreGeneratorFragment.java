@@ -97,7 +97,7 @@ public class GenModelReferenceEcoreGeneratorFragment extends AbstractEcoreGenera
 				if (genModelURI.isPlatform()) {
 					genModelURI = EcorePlugin.resolvePlatformResourcePath(
 							genModelURI.toPlatformString(true));
-					ecoreResourceURI = ecoreResourceURI.deresolve(genModelURI);
+					ecoreResourceURI = ecoreResourceURI.deresolve(genModelURI, true, true, true);
 					rs.getURIConverter().getURIMap().put(ecoreResourceURI.resolve(genModelResource.getURI()), ecoreResourceURI);
 					ecoreResource.setURI(ecoreResourceURI);
 				}

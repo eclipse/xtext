@@ -73,7 +73,7 @@ public class LineFilterOutputStream extends FilterOutputStream {
 					index = 0;
 					super.write(b);
 				}
-			} else if (index > pattern.length || pattern[index] != b) {
+			} else if (index >= pattern.length || pattern[index] != b) {
 				// eol to late, flush buffer
 				for (int i = 0; i < index; i++) {
 					super.write(buffer[i]);
@@ -114,7 +114,5 @@ public class LineFilterOutputStream extends FilterOutputStream {
 			}
 		super.flush();
 	}
-
-
 
 }

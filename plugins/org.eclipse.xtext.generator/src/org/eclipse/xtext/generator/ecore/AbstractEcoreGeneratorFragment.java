@@ -119,7 +119,7 @@ public class AbstractEcoreGeneratorFragment extends AbstractGeneratorFragment {
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return AbstractEcoreGeneratorFragment.this.createOutputStream(super
-												.createOutputStream(workspacePath));
+												.createOutputStream(workspacePath), getLineDelimiter());
 									}
 								};
 							}
@@ -130,7 +130,7 @@ public class AbstractEcoreGeneratorFragment extends AbstractGeneratorFragment {
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return AbstractEcoreGeneratorFragment.this.createOutputStream(super
-												.createOutputStream(workspacePath));
+												.createOutputStream(workspacePath), getLineDelimiter());
 									}
 								};
 							}
@@ -141,7 +141,7 @@ public class AbstractEcoreGeneratorFragment extends AbstractGeneratorFragment {
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
 										return AbstractEcoreGeneratorFragment.this.createOutputStream(super
-												.createOutputStream(workspacePath));
+												.createOutputStream(workspacePath), getLineDelimiter());
 									}
 
 								};
@@ -200,8 +200,8 @@ public class AbstractEcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 	}
 
-	public OutputStream createOutputStream(OutputStream stream) throws Exception {
-		return new LineFilterOutputStream(stream, " * $Id" + "$");
+	public OutputStream createOutputStream(OutputStream stream, String lineDelimiter) throws Exception {
+		return new LineFilterOutputStream(stream, " * $Id" + "$", lineDelimiter != null ? lineDelimiter : Strings.newLine());
 	}
 
 	private String basePackage = null;
