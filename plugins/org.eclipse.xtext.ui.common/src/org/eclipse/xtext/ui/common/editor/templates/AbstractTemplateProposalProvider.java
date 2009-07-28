@@ -75,7 +75,18 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 	
 	protected TemplateProposal createProposal(Template template, TemplateContext templateContext,
 			ContentAssistContext context, Image image, int relevance) {
-		return new TemplateProposal(template, templateContext, context.getReplaceRegion(), image, relevance);
+		if (!validate(template, context))
+			return null;
+		return doCreateProposal(template, templateContext, context, image, relevance);
+	}
+
+	protected TemplateProposal doCreateProposal(Template template, TemplateContext templateContext,
+			ContentAssistContext context, Image image, int relevance) {
+		return new XtextTemplateProposal(template, templateContext, context.getReplaceRegion(), image, relevance);
+	}
+	
+	protected boolean validate(Template template, ContentAssistContext context) {
+		return context.getMatcher().isCandidateMatchingPrefix(template.getName(), context.getPrefix());
 	}
 	
 	protected boolean validate(Template template, TemplateContext context) {
