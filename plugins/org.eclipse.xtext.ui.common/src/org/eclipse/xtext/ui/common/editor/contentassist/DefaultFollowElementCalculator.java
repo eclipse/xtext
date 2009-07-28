@@ -40,11 +40,15 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		Set<AbstractElement> nextValidElementSet = getValidElementSet(rootNode, lastCompleteNode, offset);
 		if (nextValidElementSet != null && !nextValidElementSet.isEmpty()) {
 			IFollowElementAcceptor nullSafeAcceptor = new NullSafeElementAcceptor(acceptor);
-			FirstSetCalculator elementSwitch = new FirstSetCalculator(nullSafeAcceptor);
+			FirstSetCalculator elementSwitch = createFirstSetCalculator(nullSafeAcceptor);
 			for (AbstractElement element: nextValidElementSet) {
 				elementSwitch.doSwitch(element);
 			}
 		}
+	}
+
+	protected FirstSetCalculator createFirstSetCalculator(IFollowElementAcceptor acceptor) {
+		return new FirstSetCalculator(acceptor);
 	}
 	
 	public Set<AbstractElement> getValidElementSet(CompositeNode rootNode, AbstractNode lastCompleteNode, int offset) {
@@ -68,7 +72,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 	
 	public static class FirstSetCalculator extends XtextSwitch<FirstSetCalculator> {
 		
-		private final IFollowElementAcceptor acceptor;
+		protected final IFollowElementAcceptor acceptor;
 
 		public FirstSetCalculator(IFollowElementAcceptor acceptor) {
 			this.acceptor = acceptor;
