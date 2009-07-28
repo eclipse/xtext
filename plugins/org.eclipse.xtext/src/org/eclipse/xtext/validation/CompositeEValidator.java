@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -32,7 +32,7 @@ public class CompositeEValidator implements EValidator {
 
 	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR";
 	
-	private Set<EValidatorEqualitySupport> contents;
+	private List<EValidatorEqualitySupport> contents;
 	
 	@Inject(optional=true)
 	@Named(value=USE_EOBJECT_VALIDATOR)
@@ -81,18 +81,24 @@ public class CompositeEValidator implements EValidator {
 	}
 
 	public void addValidator(EValidator validator) {
-		if (validator instanceof CompositeEValidator)
-			getContents().addAll(((CompositeEValidator) validator).getContents());
-		else {
+		if (this == validator)
+			return;
+		if (validator instanceof CompositeEValidator) {
+			CompositeEValidator other = (CompositeEValidator) validator;
+			for(int i = 0; i < other.getContents().size(); i++)
+				addValidator(other.getContents().get(i).delegate);
+		} else {
 			EValidatorEqualitySupport equalitySupport = equalitySupportProvider.get();
 			equalitySupport.setDelegate(validator);
-			this.getContents().add(equalitySupport);
+			if (!getContents().contains(equalitySupport))
+				this.getContents().add(equalitySupport);
 		}
 	}
 
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : getContents()) {
+		for (int i = 0; i < getContents().size(); i++) {
+			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result = result && val.getDelegate().validate(eObject, diagnostics, context);
 			}
@@ -105,7 +111,8 @@ public class CompositeEValidator implements EValidator {
 
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : getContents()) {
+		for (int i = 0; i < getContents().size(); i++) {
+			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result = result && val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
@@ -118,7 +125,8 @@ public class CompositeEValidator implements EValidator {
 
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : getContents()) {
+		for (int i = 0; i < getContents().size(); i++) {
+			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result = result && val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
@@ -142,9 +150,9 @@ public class CompositeEValidator implements EValidator {
 		this.useEObjectValidator = useEObjectValidator;
 	}
 
-	public Set<EValidatorEqualitySupport> getContents() {
+	public List<EValidatorEqualitySupport> getContents() {
 		if (contents == null) {
-			contents = new LinkedHashSet<EValidatorEqualitySupport>();
+			contents = new ArrayList<EValidatorEqualitySupport>(4);
 			initDefaults();
 		}
 		return contents;
