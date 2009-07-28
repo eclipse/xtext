@@ -326,7 +326,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	}
 
 	public void close() throws IOException {
-		line.flush();
+		if (line != null)
+			line.flush();
 	}
 
 	public void writeSemantic(EObject grammarElement, String value)
