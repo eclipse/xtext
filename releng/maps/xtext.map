@@ -1,0 +1,72 @@
+!***************  PROJECT CONTRIBUTION  ******************************************************** 
+
+!*** Special entries from eclipse
+
+plugin@org.eclipse.test=v20070226,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=v20050226,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+
+!*** Project's plugins, features and fragments (sorted by working set)
+
+!*** Xtext Features
+feature@org.eclipse.xtext.docs=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.docs.feature
+feature@org.eclipse.xtext.examples=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.examples.feature
+feature@org.eclipse.xtext.runtime=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.runtime.feature
+feature@org.eclipse.xtext.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.ui.feature
+feature@org.eclipse.xtext.sdk=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.sdk.feature
+feature@org.eclipse.xtext.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.tests.feature
+
+!*** EMF Index Feature Temporal 
+feature@org.eclipse.emf.index.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.emfindex/features/org.eclipse.emf.index.feature
+
+!*** Xtext 3rd Party
+!***plugin@org.antlr=HEAD,:pserver:anonymous@architecturware.cvs.sourceforge.net:/cvsroot/architecturware,,xtext_external/org.antlr
+plugin@com.google.guice=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.guice
+plugin@com.google.collect=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.collect
+plugin@org.antlr.runtime=v3_0_0,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.orbit/org.antlr.runtime
+plugin@org.eclipse.xtext.log4j=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.log4j
+!***plugin@org.eclipse.mylyn.wikitext.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.mylyn/org.eclipse.mylyn.wikitext.core
+!***plugin@org.eclipse.mylyn.wikitext.textile.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.mylyn/org.eclipse.mylyn.wikitext.textile.core
+
+!*** Xtext Core 
+plugin@org.eclipse.xtext=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext
+plugin@org.eclipse.xtext.bootstrap=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.bootstrap
+plugin@org.eclipse.xtext.generator=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator
+plugin@org.eclipse.xtext.generator.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.generator.tests
+plugin@org.eclipse.xtext.junit=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.junit
+plugin@org.eclipse.xtext.util=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util
+plugin@org.eclipse.xtext.xtend=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtend
+plugin@org.eclipse.xtext.xtend.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.xtend.tests
+!*** plugin@org.eclipse.xtext.index=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.index
+!*** plugin@org.eclipse.xtext.index.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.index.tests
+
+!*** Xtext Documentation
+plugin@org.eclipse.xtext.doc=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.doc
+
+!*** Xtext PM (not needed in map file)
+!*** plugin@org.eclipse.xtext.releng=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext.releng
+plugin@develop=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/develop
+
+!*** Xtext Reference
+plugin@org.eclipse.xtext.example.domainmodel=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel
+plugin@org.eclipse.xtext.example.domainmodel.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.domainmodel.ui
+plugin@org.eclipse.xtext.example.ecoredsl=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.ecoredsl
+plugin@org.eclipse.xtext.example.ecoredsl.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.ecoredsl.ui
+plugin@org.eclipse.xtext.reference=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.reference
+plugin@org.eclipse.xtext.reference.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.reference.ui
+plugin@org.eclipse.xtext.example.fowlerdsl=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl
+plugin@org.eclipse.xtext.example.fowlerdsl.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl.ui
+
+!*** Xtext UI
+plugin@org.eclipse.xtext.logging=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.logging
+plugin@org.eclipse.xtext.ui.common=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common
+plugin@org.eclipse.xtext.ui.common.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.common.tests
+plugin@org.eclipse.xtext.ui.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core
+plugin@org.eclipse.xtext.ui.core.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.core.tests
+plugin@org.eclipse.xtext.ui.integration.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.integration.tests
+plugin@org.eclipse.xtext.xtext.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui
+plugin@org.eclipse.xtext.activities=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.activities
+
+!*** EMF Index
+plugin@org.eclipse.emf.index=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.emfindex/plugins/org.eclipse.emf.index
+plugin@org.eclipse.emf.index.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.emfindex/plugins/org.eclipse.emf.index.ui
+plugin@org.eclipse.emf.index.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.emfindex/tests/org.eclipse.emf.index.tests
