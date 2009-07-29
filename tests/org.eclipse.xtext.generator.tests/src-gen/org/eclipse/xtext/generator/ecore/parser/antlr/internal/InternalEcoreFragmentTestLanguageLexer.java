@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalEcoreFragmentTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int T11=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int Tokens=12;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int T11=11;
+    public static final int RULE_WS=9;
+    public static final int Tokens=12;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
     public InternalEcoreFragmentTestLanguageLexer() {;} 
     public InternalEcoreFragmentTestLanguageLexer(CharStream input) {
         super(input);
@@ -627,14 +627,14 @@ public class InternalEcoreFragmentTestLanguageLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=6;
-                }
-                break;
             case '*':
                 {
                 alt12=5;
+                }
+                break;
+            case '/':
+                {
+                alt12=6;
                 }
                 break;
             default:

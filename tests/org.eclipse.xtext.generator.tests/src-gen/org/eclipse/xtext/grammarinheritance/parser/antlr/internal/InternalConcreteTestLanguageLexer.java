@@ -11,25 +11,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalConcreteTestLanguageLexer extends Lexer {
-    public static final int T21=21;
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T14=14;
     public static final int RULE_ID=5;
-    public static final int RULE_STRING=7;
-    public static final int T12=12;
-    public static final int RULE_REAL=4;
-    public static final int T13=13;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int Tokens=22;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int T21=21;
     public static final int T20=20;
-    public static final int T18=18;
+    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_STRING=7;
+    public static final int RULE_INT=6;
+    public static final int RULE_REAL=4;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T14=14;
     public static final int RULE_WS=10;
     public static final int T15=15;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
-    public static final int T17=17;
-    public static final int Tokens=22;
-    public static final int RULE_ANY_OTHER=11;
     public static final int T16=16;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int T17=17;
+    public static final int T18=18;
     public static final int T19=19;
     public InternalConcreteTestLanguageLexer() {;} 
     public InternalConcreteTestLanguageLexer(CharStream input) {
@@ -893,7 +893,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
         "\1\uffff\1\20\1\uffff\1\20\1\uffff\2\20\1\27\1\16\1\uffff\3\16\2"+
-        "\uffff\1\20\2\uffff\1\20\1\uffff\3\20\1\uffff\1\27\5\uffff\12\20"+
+        "\uffff\1\20\2\uffff\1\20\1\uffff\3\20\2\uffff\1\27\4\uffff\12\20"+
         "\1\55\4\20\1\uffff\6\20\1\72\3\20\1\76\1\77\1\uffff\3\20\2\uffff"+
         "\5\20\1\uffff\5\20\1\116\1\20\1\120\1\uffff\1\20\1\uffff\2\20\1"+
         "\124\1\uffff";
@@ -902,7 +902,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     static final String DFA12_minS =
         "\1\0\1\157\1\uffff\1\166\1\uffff\1\165\1\154\1\56\1\101\1\uffff"+
         "\2\0\1\52\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1\145\1\164"+
-        "\1\uffff\1\56\5\uffff\1\145\2\162\1\155\1\145\1\154\1\162\1\165"+
+        "\2\uffff\1\56\4\uffff\1\145\2\162\1\155\1\145\1\154\1\162\1\165"+
         "\1\145\1\156\1\60\1\151\1\154\1\156\1\144\1\uffff\1\144\1\145\1"+
         "\164\1\145\1\144\1\61\1\60\1\144\1\155\1\145\2\60\1\uffff\1\155"+
         "\1\157\1\156\2\uffff\1\157\1\144\1\40\1\144\1\145\1\uffff\1\154"+
@@ -911,7 +911,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     static final String DFA12_maxS =
         "\1\ufffe\1\157\1\uffff\1\166\1\uffff\1\165\1\170\1\71\1\u00fc\1"+
         "\uffff\2\ufffe\1\57\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1"+
-        "\145\1\164\1\uffff\1\71\5\uffff\1\145\2\162\1\155\1\145\1\154\1"+
+        "\145\1\164\2\uffff\1\71\4\uffff\1\145\2\162\1\155\1\145\1\154\1"+
         "\162\1\165\1\145\1\156\1\172\1\151\1\154\1\156\1\144\1\uffff\1\144"+
         "\1\145\1\164\2\145\1\63\1\172\1\144\1\155\1\145\2\172\1\uffff\1"+
         "\155\1\157\1\156\2\uffff\1\157\1\144\1\145\1\144\1\145\1\uffff\1"+
@@ -919,7 +919,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
         "\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
         "\2\uffff\1\2\1\uffff\1\5\4\uffff\1\14\3\uffff\1\21\1\22\1\uffff"+
-        "\1\14\1\2\1\uffff\1\5\3\uffff\1\15\1\uffff\1\13\1\16\1\17\1\20\1"+
+        "\1\14\1\2\1\uffff\1\5\3\uffff\1\15\1\13\1\uffff\1\16\1\20\1\17\1"+
         "\21\17\uffff\1\1\14\uffff\1\10\3\uffff\1\7\1\6\5\uffff\1\4\10\uffff"+
         "\1\11\1\uffff\1\12\3\uffff\1\3";
     static final String DFA12_specialS =
@@ -935,13 +935,13 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "",
             "\1\24",
             "\1\25\13\uffff\1\26",
-            "\1\31\1\uffff\12\30",
+            "\1\30\1\uffff\12\31",
             "\32\20\4\uffff\1\20\1\uffff\32\20\151\uffff\1\20\21\uffff\1"+
             "\20\5\uffff\1\20",
             "",
             "\uffff\32",
             "\uffff\32",
-            "\1\33\4\uffff\1\34",
+            "\1\34\4\uffff\1\33",
             "",
             "",
             "\1\36",
@@ -953,8 +953,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "\1\41",
             "\1\42",
             "",
-            "\1\31\1\uffff\12\30",
             "",
+            "\1\30\1\uffff\12\31",
             "",
             "",
             "",

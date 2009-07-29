@@ -27,23 +27,23 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FRAGMENT_KEYWORD_1", "FRAGMENT_KEYWORD_2", "FRAGMENT_RULE_CHARA", "FRAGMENT_RULE_CHARB", "FRAGMENT_RULE_CHARX", "FRAGMENT_RULE_WS", "FRAGMENT_RULE_SL_COMMENT", "SYNTHETIC_ALL_KEYWORDS", "KEYWORD_1", "KEYWORD_2", "RULE_CHARA", "RULE_CHARB", "RULE_CHARX", "RULE_WS", "RULE_SL_COMMENT", "Tokens", "' '", "'\t'", "'\r'", "'\n'"
     };
+    public static final int FRAGMENT_KEYWORD_1=4;
+    public static final int FRAGMENT_KEYWORD_2=5;
+    public static final int KEYWORD_1=12;
     public static final int FRAGMENT_RULE_CHARA=6;
     public static final int FRAGMENT_RULE_CHARX=8;
-    public static final int KEYWORD_1=12;
-    public static final int FRAGMENT_RULE_SL_COMMENT=10;
     public static final int KEYWORD_2=13;
-    public static final int RULE_CHARA=14;
-    public static final int RULE_CHARX=16;
-    public static final int FRAGMENT_KEYWORD_2=5;
-    public static final int RULE_WS=17;
     public static final int EOF=-1;
-    public static final int Tokens=19;
-    public static final int SYNTHETIC_ALL_KEYWORDS=11;
     public static final int RULE_SL_COMMENT=18;
-    public static final int FRAGMENT_KEYWORD_1=4;
+    public static final int Tokens=19;
     public static final int FRAGMENT_RULE_CHARB=7;
-    public static final int RULE_CHARB=15;
+    public static final int SYNTHETIC_ALL_KEYWORDS=11;
+    public static final int RULE_CHARX=16;
+    public static final int FRAGMENT_RULE_SL_COMMENT=10;
     public static final int FRAGMENT_RULE_WS=9;
+    public static final int RULE_CHARA=14;
+    public static final int RULE_WS=17;
+    public static final int RULE_CHARB=15;
 
         public InternalBacktrackingLexerTestLanguageParser(TokenStream input) {
             super(input);

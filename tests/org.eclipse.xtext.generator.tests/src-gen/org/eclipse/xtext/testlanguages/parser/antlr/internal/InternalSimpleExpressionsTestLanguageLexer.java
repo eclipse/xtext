@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalSimpleExpressionsTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int T11=11;
-    public static final int T15=15;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int T12=12;
-    public static final int Tokens=17;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int T11=11;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T14=14;
+    public static final int T15=15;
+    public static final int RULE_WS=9;
+    public static final int Tokens=17;
     public static final int T16=16;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T13=13;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
     public InternalSimpleExpressionsTestLanguageLexer() {;} 
     public InternalSimpleExpressionsTestLanguageLexer(CharStream input) {
         super(input);
@@ -664,14 +664,14 @@ public class InternalSimpleExpressionsTestLanguageLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '*':
-                {
-                alt12=10;
-                }
-                break;
             case '/':
                 {
                 alt12=11;
+                }
+                break;
+            case '*':
+                {
+                alt12=10;
                 }
                 break;
             default:

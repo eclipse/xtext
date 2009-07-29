@@ -11,45 +11,45 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalEpatchTestLanguageLexer extends Lexer {
-    public static final int T21=21;
-    public static final int RULE_ML_COMMENT=8;
-    public static final int T14=14;
-    public static final int T29=29;
     public static final int RULE_ID=4;
-    public static final int T33=33;
-    public static final int T22=22;
-    public static final int T36=36;
-    public static final int RULE_STRING=5;
-    public static final int T12=12;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int T29=29;
     public static final int T28=28;
+    public static final int T27=27;
+    public static final int T26=26;
+    public static final int T25=25;
+    public static final int Tokens=41;
+    public static final int T24=24;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=9;
     public static final int T23=23;
     public static final int T40=40;
-    public static final int T35=35;
-    public static final int T13=13;
-    public static final int T34=34;
+    public static final int T22=22;
+    public static final int T21=21;
     public static final int T20=20;
-    public static final int T25=25;
-    public static final int T37=37;
-    public static final int T18=18;
-    public static final int RULE_WS=10;
-    public static final int T26=26;
-    public static final int T15=15;
-    public static final int RULE_INT=7;
-    public static final int EOF=-1;
-    public static final int T32=32;
-    public static final int T17=17;
-    public static final int Tokens=41;
-    public static final int T31=31;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int T16=16;
-    public static final int T38=38;
-    public static final int T27=27;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_FRAGMENT=6;
-    public static final int T30=30;
-    public static final int T24=24;
-    public static final int T19=19;
+    public static final int RULE_STRING=5;
+    public static final int RULE_INT=7;
+    public static final int T38=38;
+    public static final int T37=37;
+    public static final int T12=12;
+    public static final int T13=13;
     public static final int T39=39;
+    public static final int T14=14;
+    public static final int T34=34;
+    public static final int RULE_WS=10;
+    public static final int T15=15;
+    public static final int T33=33;
+    public static final int T16=16;
+    public static final int T36=36;
+    public static final int T17=17;
+    public static final int T35=35;
+    public static final int T18=18;
+    public static final int T30=30;
+    public static final int T19=19;
+    public static final int T32=32;
+    public static final int T31=31;
     public InternalEpatchTestLanguageLexer() {;} 
     public InternalEpatchTestLanguageLexer(CharStream input) {
         super(input);
@@ -1350,15 +1350,27 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         }
         else if ( (LA13_0=='n') ) {
             switch ( input.LA(2) ) {
-            case 's':
+            case 'u':
                 {
                 int LA13_41 = input.LA(3);
 
-                if ( ((LA13_41>='0' && LA13_41<='9')||(LA13_41>='A' && LA13_41<='Z')||LA13_41=='_'||(LA13_41>='a' && LA13_41<='z')) ) {
-                    alt13=31;
+                if ( (LA13_41=='l') ) {
+                    int LA13_74 = input.LA(4);
+
+                    if ( (LA13_74=='l') ) {
+                        int LA13_90 = input.LA(5);
+
+                        if ( ((LA13_90>='0' && LA13_90<='9')||(LA13_90>='A' && LA13_90<='Z')||LA13_90=='_'||(LA13_90>='a' && LA13_90<='z')) ) {
+                            alt13=31;
+                        }
+                        else {
+                            alt13=22;}
+                    }
+                    else {
+                        alt13=31;}
                 }
                 else {
-                    alt13=6;}
+                    alt13=31;}
                 }
                 break;
             case 'e':
@@ -1378,27 +1390,15 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     alt13=31;}
                 }
                 break;
-            case 'u':
+            case 's':
                 {
                 int LA13_43 = input.LA(3);
 
-                if ( (LA13_43=='l') ) {
-                    int LA13_76 = input.LA(4);
-
-                    if ( (LA13_76=='l') ) {
-                        int LA13_91 = input.LA(5);
-
-                        if ( ((LA13_91>='0' && LA13_91<='9')||(LA13_91>='A' && LA13_91<='Z')||LA13_91=='_'||(LA13_91>='a' && LA13_91<='z')) ) {
-                            alt13=31;
-                        }
-                        else {
-                            alt13=22;}
-                    }
-                    else {
-                        alt13=31;}
+                if ( ((LA13_43>='0' && LA13_43<='9')||(LA13_43>='A' && LA13_43<='Z')||LA13_43=='_'||(LA13_43>='a' && LA13_43<='z')) ) {
+                    alt13=31;
                 }
                 else {
-                    alt13=31;}
+                    alt13=6;}
                 }
                 break;
             default:
@@ -1446,23 +1446,52 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         }
         else if ( (LA13_0=='r') ) {
             switch ( input.LA(2) ) {
-            case 'e':
+            case 'i':
                 {
                 int LA13_48 = input.LA(3);
 
-                if ( (LA13_48=='s') ) {
+                if ( (LA13_48=='g') ) {
                     int LA13_78 = input.LA(4);
 
-                    if ( (LA13_78=='o') ) {
+                    if ( (LA13_78=='h') ) {
                         int LA13_93 = input.LA(5);
 
-                        if ( (LA13_93=='u') ) {
+                        if ( (LA13_93=='t') ) {
                             int LA13_105 = input.LA(6);
 
-                            if ( (LA13_105=='r') ) {
-                                int LA13_114 = input.LA(7);
+                            if ( ((LA13_105>='0' && LA13_105<='9')||(LA13_105>='A' && LA13_105<='Z')||LA13_105=='_'||(LA13_105>='a' && LA13_105<='z')) ) {
+                                alt13=31;
+                            }
+                            else {
+                                alt13=14;}
+                        }
+                        else {
+                            alt13=31;}
+                    }
+                    else {
+                        alt13=31;}
+                }
+                else {
+                    alt13=31;}
+                }
+                break;
+            case 'e':
+                {
+                int LA13_49 = input.LA(3);
 
-                                if ( (LA13_114=='c') ) {
+                if ( (LA13_49=='s') ) {
+                    int LA13_79 = input.LA(4);
+
+                    if ( (LA13_79=='o') ) {
+                        int LA13_94 = input.LA(5);
+
+                        if ( (LA13_94=='u') ) {
+                            int LA13_106 = input.LA(6);
+
+                            if ( (LA13_106=='r') ) {
+                                int LA13_115 = input.LA(7);
+
+                                if ( (LA13_115=='c') ) {
                                     int LA13_121 = input.LA(8);
 
                                     if ( (LA13_121=='e') ) {
@@ -1482,35 +1511,6 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                             }
                             else {
                                 alt13=31;}
-                        }
-                        else {
-                            alt13=31;}
-                    }
-                    else {
-                        alt13=31;}
-                }
-                else {
-                    alt13=31;}
-                }
-                break;
-            case 'i':
-                {
-                int LA13_49 = input.LA(3);
-
-                if ( (LA13_49=='g') ) {
-                    int LA13_79 = input.LA(4);
-
-                    if ( (LA13_79=='h') ) {
-                        int LA13_94 = input.LA(5);
-
-                        if ( (LA13_94=='t') ) {
-                            int LA13_106 = input.LA(6);
-
-                            if ( ((LA13_106>='0' && LA13_106<='9')||(LA13_106>='A' && LA13_106<='Z')||LA13_106=='_'||(LA13_106>='a' && LA13_106<='z')) ) {
-                                alt13=31;
-                            }
-                            else {
-                                alt13=14;}
                         }
                         else {
                             alt13=31;}
@@ -1747,14 +1747,14 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         }
         else if ( (LA13_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt13=35;
-                }
-                break;
             case '*':
                 {
                 alt13=34;
+                }
+                break;
+            case '/':
+                {
+                alt13=35;
                 }
                 break;
             default:
