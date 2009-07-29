@@ -145,9 +145,8 @@
          id="check"
          name="Xtext Check"
          point="org.eclipse.core.resources.markers">
-      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.emf.ecore.diagnostic"/>
       <persistent value="true"/>
-      <attribute name="uri"/>
    </extension>
   <extension
          id="org.eclipse.xtext.ui.core.check.fast"
@@ -155,7 +154,6 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
-      <attribute name="uri"/>
    </extension>
   <extension
          id="org.eclipse.xtext.ui.core.check.normal"
@@ -163,7 +161,6 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
-      <attribute name="uri"/>
    </extension>
   <extension
          id="org.eclipse.xtext.ui.core.check.expensive"
@@ -171,7 +168,6 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
-      <attribute name="uri"/>
    </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
