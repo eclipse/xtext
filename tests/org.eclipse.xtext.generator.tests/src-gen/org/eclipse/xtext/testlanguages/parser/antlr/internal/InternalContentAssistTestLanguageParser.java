@@ -25,14 +25,14 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract rules'", "'end'", "'('", "')'", "';'", "'rule'", "':'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalContentAssistTestLanguageParser(TokenStream input) {
             super(input);
@@ -255,11 +255,11 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             if ( (LA2_0==RULE_ID) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==13) ) {
-                    alt2=1;
-                }
-                else if ( (LA2_1==16) ) {
+                if ( (LA2_1==16) ) {
                     alt2=2;
+                }
+                else if ( (LA2_1==13) ) {
+                    alt2=1;
                 }
                 else {
                     NoViableAltException nvae =
