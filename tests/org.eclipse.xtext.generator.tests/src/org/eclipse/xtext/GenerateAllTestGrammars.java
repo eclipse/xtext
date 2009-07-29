@@ -29,10 +29,7 @@ import org.eclipse.xtext.parser.keywords.KeywordsTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage;
-import org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage;
-import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
-import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
-import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest;
+
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
@@ -70,8 +67,6 @@ public class GenerateAllTestGrammars {
 			MultiGenMMTestLanguage.class,
 			DummyTestLanguage.class,
 			TestLanguage.class,
-			SimpleReconstrTestLanguage.class,
-			ComplexReconstrTestLanguage.class,
 			LexerTestLanguage.class,
 			SimpleExpressionsTestLanguage.class,
 			ActionTestLanguage.class,
@@ -84,8 +79,6 @@ public class GenerateAllTestGrammars {
 			ImportUriTestLanguage.class,
 			PartialParserTestLanguage.class,
 			ContentAssistTestLanguage.class,
-			TransientValuesTest.class,
-			FormatterTestLanguage.class,
 			DatatypeRulesTestLanguage.class,
 			MultiValueFeatureTestLanguage.class,
 			TerminalRulesTestLanguage.class,
