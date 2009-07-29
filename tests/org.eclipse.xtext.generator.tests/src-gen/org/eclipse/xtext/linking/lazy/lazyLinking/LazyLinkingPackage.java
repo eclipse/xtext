@@ -143,13 +143,22 @@ public interface LazyLinkingPackage extends EPackage
   int TYPE__UNRESOLVED_PROXY_PROPERTY = 4;
 
   /**
+   * The feature id for the '<em><b>Subtypes</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE__SUBTYPES = 5;
+
+  /**
    * The number of structural features of the '<em>Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = 5;
+  int TYPE_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl <em>Property</em>}' class.
@@ -313,6 +322,17 @@ public interface LazyLinkingPackage extends EPackage
   EReference getType_UnresolvedProxyProperty();
 
   /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getSubtypes <em>Subtypes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Subtypes</em>'.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.Type#getSubtypes()
+   * @see #getType()
+   * @generated
+   */
+  EReference getType_Subtypes();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Property <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -466,6 +486,14 @@ public interface LazyLinkingPackage extends EPackage
      * @generated
      */
     EReference TYPE__UNRESOLVED_PROXY_PROPERTY = eINSTANCE.getType_UnresolvedProxyProperty();
+
+    /**
+     * The meta object literal for the '<em><b>Subtypes</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TYPE__SUBTYPES = eINSTANCE.getType_Subtypes();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.PropertyImpl <em>Property</em>}' class.

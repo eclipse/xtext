@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getParentId <em>Parent Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}</li>
+ *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getSubtypes <em>Subtypes</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,7 @@ public interface Type extends EObject
 
   /**
    * Returns the value of the '<em><b>Extends</b></em>' reference.
+   * It is bidirectional and its opposite is '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getSubtypes <em>Subtypes</em>}'.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Extends</em>' reference isn't clear,
@@ -68,7 +70,8 @@ public interface Type extends EObject
    * @return the value of the '<em>Extends</em>' reference.
    * @see #setExtends(Type)
    * @see org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage#getType_Extends()
-   * @model
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.Type#getSubtypes
+   * @model opposite="subtypes"
    * @generated
    */
   Type getExtends();
@@ -140,5 +143,23 @@ public interface Type extends EObject
    * @generated
    */
   EList<UnresolvedProxyProperty> getUnresolvedProxyProperty();
+
+  /**
+   * Returns the value of the '<em><b>Subtypes</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.xtext.linking.lazy.lazyLinking.Type}.
+   * It is bidirectional and its opposite is '{@link org.eclipse.xtext.linking.lazy.lazyLinking.Type#getExtends <em>Extends</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Subtypes</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Subtypes</em>' reference list.
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage#getType_Subtypes()
+   * @see org.eclipse.xtext.linking.lazy.lazyLinking.Type#getExtends
+   * @model opposite="extends"
+   * @generated
+   */
+  EList<Type> getSubtypes();
 
 } // Type
