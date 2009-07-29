@@ -66,7 +66,9 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
 		set.setClasspathURIContext(getClasspathURIContext());
 		set.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		Resource resource = set.getResource(URI.createURI(uri), true);
+		URI resourceURI = URI.createURI(uri);
+		URI normalized = set.getURIConverter().normalize(resourceURI);
+		Resource resource = set.getResource(normalized, true);
 		Object value = getContent(resource);
 		ctx.set(outputSlot, value);
 		registerIssues(set,issues);
