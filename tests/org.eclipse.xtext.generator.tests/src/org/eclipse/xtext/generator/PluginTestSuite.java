@@ -87,12 +87,12 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.LinuxAndMac.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.Windows.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest2.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.WhitespacePreservingCallbackTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.XtextGrammarReconcilationTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.WhitespacePreservingCallbackTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.XtextGrammarReconcilationTest.class);
+//		suite.addTestSuite(org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.class);
 		suite.addTestSuite(org.eclipse.xtext.reference.CommentOnEofBug_234135_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
