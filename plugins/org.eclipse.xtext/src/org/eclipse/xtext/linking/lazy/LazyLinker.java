@@ -39,6 +39,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Knut Wannheden
  */
 public class LazyLinker extends AbstractCleaningLinker {
 
@@ -76,7 +77,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
 				}
-				if (!eRef.isResolveProxies()) {
+				if (!eRef.isResolveProxies() || eRef.getEOpposite() != null) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
 					settingsToLink.put(new SettingDelegate(setting), abstractNode);
 				}

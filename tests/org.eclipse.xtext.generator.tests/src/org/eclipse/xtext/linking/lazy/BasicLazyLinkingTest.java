@@ -9,12 +9,14 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.io.InputStream;
+import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
@@ -144,6 +146,19 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 	}
 
 	
+    // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486
+    @SuppressWarnings("unchecked")
+    public void testReferenceWithOpposite() throws Exception {
+        XtextResource resource = getResource(new StringInputStream("type foo {} type bar extends foo {}"));
+        Model model = (Model) resource.getContents().get(0);
+        Type typeFoo = model.getTypes().get(0);
+        Type typeBar = model.getTypes().get(1);
+        assertEquals(typeFoo, typeBar.eGet(LazyLinkingPackage.Literals.TYPE__EXTENDS, false));
+        List<Type> fooSubtypes = (List<Type>) typeFoo.eGet(LazyLinkingPackage.Literals.TYPE__SUBTYPES, false);
+        assertEquals(1, fooSubtypes.size());
+        assertEquals(typeBar, fooSubtypes.get(0));
+    }
+
 	@Override
 	public XtextResource getResource(InputStream in) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);

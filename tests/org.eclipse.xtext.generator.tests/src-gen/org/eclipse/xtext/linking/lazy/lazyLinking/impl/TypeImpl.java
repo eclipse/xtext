@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getParentId <em>Parent Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}</li>
+ *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getSubtypes <em>Subtypes</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +106,16 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * @ordered
    */
   protected EList<UnresolvedProxyProperty> unresolvedProxyProperty;
+
+  /**
+   * The cached value of the '{@link #getSubtypes() <em>Subtypes</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSubtypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<Type> subtypes;
 
   /**
    * <!-- begin-user-doc -->
@@ -184,12 +196,37 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExtends(Type newExtends)
+  public NotificationChain basicSetExtends(Type newExtends, NotificationChain msgs)
   {
     Type oldExtends = extends_;
     extends_ = newExtends;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LazyLinkingPackage.TYPE__EXTENDS, oldExtends, extends_));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LazyLinkingPackage.TYPE__EXTENDS, oldExtends, newExtends);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setExtends(Type newExtends)
+  {
+    if (newExtends != extends_)
+    {
+      NotificationChain msgs = null;
+      if (extends_ != null)
+        msgs = ((InternalEObject)extends_).eInverseRemove(this, LazyLinkingPackage.TYPE__SUBTYPES, Type.class, msgs);
+      if (newExtends != null)
+        msgs = ((InternalEObject)newExtends).eInverseAdd(this, LazyLinkingPackage.TYPE__SUBTYPES, Type.class, msgs);
+      msgs = basicSetExtends(newExtends, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LazyLinkingPackage.TYPE__EXTENDS, newExtends, newExtends));
   }
 
   /**
@@ -268,15 +305,54 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Type> getSubtypes()
+  {
+    if (subtypes == null)
+    {
+      subtypes = new EObjectWithInverseResolvingEList<Type>(Type.class, this, LazyLinkingPackage.TYPE__SUBTYPES, LazyLinkingPackage.TYPE__EXTENDS);
+    }
+    return subtypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case LazyLinkingPackage.TYPE__EXTENDS:
+        if (extends_ != null)
+          msgs = ((InternalEObject)extends_).eInverseRemove(this, LazyLinkingPackage.TYPE__SUBTYPES, Type.class, msgs);
+        return basicSetExtends((Type)otherEnd, msgs);
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubtypes()).basicAdd(otherEnd, msgs);
+    }
+    return super.eInverseAdd(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
+      case LazyLinkingPackage.TYPE__EXTENDS:
+        return basicSetExtends(null, msgs);
       case LazyLinkingPackage.TYPE__PROPERTIES:
         return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
       case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
         return ((InternalEList<?>)getUnresolvedProxyProperty()).basicRemove(otherEnd, msgs);
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        return ((InternalEList<?>)getSubtypes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -303,6 +379,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         return getProperties();
       case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
         return getUnresolvedProxyProperty();
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        return getSubtypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -335,6 +413,10 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         getUnresolvedProxyProperty().clear();
         getUnresolvedProxyProperty().addAll((Collection<? extends UnresolvedProxyProperty>)newValue);
         return;
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        getSubtypes().clear();
+        getSubtypes().addAll((Collection<? extends Type>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -364,6 +446,9 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
       case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
         getUnresolvedProxyProperty().clear();
         return;
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        getSubtypes().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -388,6 +473,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
         return properties != null && !properties.isEmpty();
       case LazyLinkingPackage.TYPE__UNRESOLVED_PROXY_PROPERTY:
         return unresolvedProxyProperty != null && !unresolvedProxyProperty.isEmpty();
+      case LazyLinkingPackage.TYPE__SUBTYPES:
+        return subtypes != null && !subtypes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -908,7 +908,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,22,FOLLOW_22_in_ruleFarbe982); 
 
-                            createLeafNode(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3(), "wert"); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
                         
 
                     }

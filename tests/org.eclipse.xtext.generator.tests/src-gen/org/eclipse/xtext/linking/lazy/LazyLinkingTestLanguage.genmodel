@@ -18,6 +18,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LazyLinkingTestLanguage.ecore#//Type/parentId"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LazyLinkingTestLanguage.ecore#//Type/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LazyLinkingTestLanguage.ecore#//Type/unresolvedProxyProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LazyLinkingTestLanguage.ecore#//Type/subtypes"/>
     </genClasses>
     <genClasses ecoreClass="LazyLinkingTestLanguage.ecore#//Property">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LazyLinkingTestLanguage.ecore#//Property/type"/>
