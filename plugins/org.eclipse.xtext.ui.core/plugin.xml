@@ -142,26 +142,34 @@
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
   <extension
-         id="fast"
+         id="check"
+         name="Xtext Check"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+      <attribute name="uri"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.core.check.fast"
          name="Xtext Check (fast)"
          point="org.eclipse.core.resources.markers">
-      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
       <attribute name="uri"/>
    </extension>
   <extension
-         id="normal"
+         id="org.eclipse.xtext.ui.core.check.normal"
          name="Xtext Check (normal)"
          point="org.eclipse.core.resources.markers">
-      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
       <attribute name="uri"/>
    </extension>
   <extension
-         id="expensive"
+         id="org.eclipse.xtext.ui.core.check.expensive"
          name="Xtext Check (expensive)"
          point="org.eclipse.core.resources.markers">
-      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.xtext.ui.core.check"/>
       <persistent value="true"/>
       <attribute name="uri"/>
    </extension>

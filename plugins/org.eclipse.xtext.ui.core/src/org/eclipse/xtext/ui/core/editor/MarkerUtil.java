@@ -37,11 +37,13 @@ public class MarkerUtil {
 	
 	private static final Logger log = Logger.getLogger(MarkerUtil.class);
 
-	public static final String EXPENSIVE_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.expensive";
+	public static final String CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check";
 
-	public static final String NORMAL_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.normal";
+	public static final String EXPENSIVE_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.expensive";
 
-	public static final String FAST_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.fast";
+	public static final String NORMAL_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.normal";
+
+	public static final String FAST_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.fast";
 
 	public static final String DEFAULT_MARKER_ID = EValidator.MARKER;
 
