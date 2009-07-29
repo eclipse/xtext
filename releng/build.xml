@@ -1,0 +1,73 @@
+<project default="run" name="org.eclipse.xtext.releng/build.xml - Run a xtext build using the Athena CBI">
+	<target name="run">
+		<!-- 
+			1. You must check out the following projects to your workspace:
+		
+				org.eclipse.releng.basebuilder
+				org.eclipse.dash.common.releng 
+				org.eclipse.myproject.releng
+				
+			2. You must provide Ant-Contrib in one of four places:
+			
+				org.eclipse.dash.common.releng/lib/ant-contrib.jar
+				org.eclipse.myproject.releng/lib/ant-contrib.jar
+				${thirdPartyJarsDir}/ant-contrib.jar (path can be customized below) 
+				/usr/share/java/ant-contrib.jar (may require a symlink)
+			
+				You can install Ant-Contrib 1.0b2 via RPM, or download it here:
+			
+				http://downloads.sourceforge.net/ant-contrib/ant-contrib-1.0b2-bin.zip
+			
+			3. If your project's sources are in SVN, you must unpack this zip into the basebuilder project's plugins/ folder:
+			
+				http://downloads.sourceforge.net/svn-pde-build/org.eclipse.pde.build.svn-1.0.1RC2.zip
+				
+			4. To run automated JUnit tests headlessly, you will require Xvfb or Xvnc; without this, 
+				UI tests will be launched into your current OS session (ie., on view port :0) and you may
+				inadvertently interact with them. (Non-UI tests can be run without fear of accidental 
+				interaction and do not have this requirement.) 
+				
+			5. You must also ensure that the path specified for Java, and the version of Eclipse stated in build.properties
+				are correct for your machine. Edit these properties to suit your needs. Note that JAVA*_HOME variables are for 
+				convenience, set in common.releng/server.properties. You can override them in your build.properties, or define 
+				different defaults in server.properties, if you intend to run more than one build on this server.  
+				
+					dependencyURLs=http://download.eclipse.org/eclipse/downloads/drops/S-3.5M5-200902021535/eclipse-SDK-3.5M5-linux-gtk.tar.gz 
+					JAVA_HOME=${JAVA14_HOME}
+		-->
+
+		<!-- load properties and set timestamp for the build -->
+		<property file="build.properties" />
+		<tstamp>
+			<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
+		</tstamp>
+		
+		<!-- 
+		to build from HEAD, uncomment these lines 
+		-->
+		<property name="forceContextQualifier" value="v${buildTimestamp}" />
+		<property name="fetchTag" value="HEAD" />
+
+		<!-- calculate workspaceDir as parent of this folder, the project's .releng folder (relengBuilderDir) -->
+		<property name="relengBuilderDir" value="${basedir}" />
+		<dirname file="${relengBuilderDir}" property="workspaceDir" />
+
+		<!-- 
+			can build in /tmp, eg., in /tmp/build, or in workspace, eg.,
+			${WORKSPACE}/build
+		-->
+		<property name="writableBuildRoot" value="/tmp/build" />
+
+		<!-- 
+			can be simple path, eg., 
+			${writableBuildRoot}/${buildType}${buildTimestamp} or longer, eg.,
+			${writableBuildRoot}/${topprojectName}/${projectName}/downloads/drops/${version}/${buildType}${buildTimestamp} or
+			${writableBuildRoot}/${topprojectName}/${projectName}/${subprojectName}/downloads/drops/${version}/${buildType}${buildTimestamp}
+		-->
+		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
+
+		<!-- invoke a new Eclipse process and launch the build from the common.releng folder -->
+		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
+		<ant antfile="${relengCommonBuilderDir}/buildAll.xml" target="runEclipse" dir="${relengCommonBuilderDir}" />
+	</target>
+</project>
