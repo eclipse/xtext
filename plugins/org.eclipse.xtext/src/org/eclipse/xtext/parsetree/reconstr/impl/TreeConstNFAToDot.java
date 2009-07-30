@@ -8,50 +8,43 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.util.List;
-
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.GrammarToDot;
+import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class FollowerToDot extends GrammarToDot {
+public class TreeConstNFAToDot extends GrammarToDot {
+
+	protected IGrammarNFAProvider<TreeConstState, TreeConstTransition> nfaProvider = new TreeConstructionNFAProvider();
 
 	@Override
 	protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
 		Node n = super.drawAbstractElementTree(ele, d);
-		List<Follower> followers = ParseTreeConstructorUtil.calcFollowers(ele);
-		boolean isEnd = false;
-		for (int i = 0; i < followers.size(); i++) {
-			if (followers.get(i).isRuleEnd())
-				isEnd = true;
-			else
-				d.add(drawFollowerEdge(ele, followers.get(i), false, i));
-		}
-		List<Follower> followers2 = ParseTreeConstructorUtil
-				.calcParentFollowers(ele);
-		for (int i = 0; i < followers2.size(); i++) {
-			if (followers2.get(i).isRuleEnd())
-				isEnd = true;
-			else
-				d.add(drawFollowerEdge(ele, followers2.get(i), true, i));
-		}
-		if (followers.size() == 0 && followers2.size() == 0)
+		TreeConstState nfas = nfaProvider.getNFA(ele);
+
+		for (TreeConstTransition t : nfas.getFollowers())
+			d.add(drawFollowerEdge(ele, t, false));
+		for (TreeConstTransition t : nfas.getParentFollowers())
+			d.add(drawFollowerEdge(ele, t, true));
+
+		if (nfas.getFollowers().size() == 0
+				&& nfas.getParentFollowers().size() == 0 && !nfas.isEndState())
 			n.setStyle("dotted");
-		if (isEnd)
+		if (nfas.isEndState())
 			n.put("peripheries", "2");
 		return n;
 	}
 
-	protected Edge drawFollowerEdge(AbstractElement ele, Follower fol,
-			boolean isParent, int i) {
-		Edge e = new Edge(ele, fol.getFollower());
-		e.setLabel(String.valueOf(i));
+	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t,
+			boolean isParent) {
+		Edge e = new Edge(ele, t.getTarget().getElement());
+		e.setLabel(String.valueOf(t.getPrecedence()));
 		e.setStyle("dotted");
 		if (isParent)
 			e.put("arrowtail", "odot");
-		if (fol.isRuleCall())
+		if (t.isRuleCall())
 			e.put("arrowhead", "onormalonormal");
 		else
 			e.put("arrowhead", "onormal");
