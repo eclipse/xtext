@@ -11,17 +11,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalAbstractTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_STRING=7;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_INT=5;
-    public static final int T12=12;
-    public static final int RULE_REAL=6;
-    public static final int RULE_WS=10;
-    public static final int Tokens=13;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=10;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int RULE_STRING=7;
+    public static final int T12=12;
+    public static final int Tokens=13;
+    public static final int RULE_REAL=6;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_SL_COMMENT=9;
     public InternalAbstractTestLanguageLexer() {;} 
     public InternalAbstractTestLanguageLexer(CharStream input) {
         super(input);
@@ -663,7 +663,7 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
         "\uffff\1\71\5\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
         "\4\uffff\1\3\3\uffff\1\10\1\11\1\uffff\1\3\1\4\1\uffff\1\2\1\5\1"+
-        "\7\1\6\1\10\5\uffff\1\1";
+        "\6\1\7\1\10\5\uffff\1\1";
     static final String DFA12_specialS =
         "\31\uffff}>";
     static final String[] DFA12_transitionS = {
@@ -677,7 +677,7 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
             "",
             "\uffff\17",
             "\uffff\17",
-            "\1\21\4\uffff\1\20",
+            "\1\20\4\uffff\1\21",
             "",
             "",
             "\1\23",

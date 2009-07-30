@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalLexerTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_STRING=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
-    public static final int Tokens=11;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int RULE_STRING=5;
+    public static final int Tokens=11;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
     public InternalLexerTestLanguageLexer() {;} 
     public InternalLexerTestLanguageLexer(CharStream input) {
         super(input);
