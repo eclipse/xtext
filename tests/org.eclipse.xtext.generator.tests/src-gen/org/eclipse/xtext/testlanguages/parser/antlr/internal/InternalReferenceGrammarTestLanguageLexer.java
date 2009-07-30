@@ -11,29 +11,29 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T25=25;
-    public static final int Tokens=26;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=5;
-    public static final int RULE_INT=4;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
+    public static final int RULE_ID=6;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=5;
+    public static final int T12=12;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T25=25;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=4;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=26;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T24=24;
     public static final int T19=19;
     public InternalReferenceGrammarTestLanguageLexer() {;} 
     public InternalReferenceGrammarTestLanguageLexer(CharStream input) {
@@ -848,30 +848,24 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
 
                         if ( (LA12_50=='l') ) {
                             switch ( input.LA(6) ) {
-                            case 'p':
+                            case 'z':
                                 {
                                 int LA12_65 = input.LA(7);
 
-                                if ( (LA12_65=='l') ) {
+                                if ( (LA12_65=='e') ) {
                                     int LA12_70 = input.LA(8);
 
-                                    if ( (LA12_70=='a') ) {
+                                    if ( (LA12_70=='u') ) {
                                         int LA12_75 = input.LA(9);
 
-                                        if ( (LA12_75=='t') ) {
+                                        if ( (LA12_75=='g') ) {
                                             int LA12_80 = input.LA(10);
 
-                                            if ( (LA12_80=='z') ) {
-                                                int LA12_83 = input.LA(11);
-
-                                                if ( ((LA12_83>='0' && LA12_83<='9')||(LA12_83>='A' && LA12_83<='Z')||LA12_83=='_'||(LA12_83>='a' && LA12_83<='z')) ) {
-                                                    alt12=16;
-                                                }
-                                                else {
-                                                    alt12=1;}
+                                            if ( ((LA12_80>='0' && LA12_80<='9')||(LA12_80>='A' && LA12_80<='Z')||LA12_80=='_'||(LA12_80>='a' && LA12_80<='z')) ) {
+                                                alt12=16;
                                             }
                                             else {
-                                                alt12=16;}
+                                                alt12=8;}
                                         }
                                         else {
                                             alt12=16;}
@@ -883,24 +877,30 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
                                     alt12=16;}
                                 }
                                 break;
-                            case 'z':
+                            case 'p':
                                 {
                                 int LA12_66 = input.LA(7);
 
-                                if ( (LA12_66=='e') ) {
+                                if ( (LA12_66=='l') ) {
                                     int LA12_71 = input.LA(8);
 
-                                    if ( (LA12_71=='u') ) {
+                                    if ( (LA12_71=='a') ) {
                                         int LA12_76 = input.LA(9);
 
-                                        if ( (LA12_76=='g') ) {
+                                        if ( (LA12_76=='t') ) {
                                             int LA12_81 = input.LA(10);
 
-                                            if ( ((LA12_81>='0' && LA12_81<='9')||(LA12_81>='A' && LA12_81<='Z')||LA12_81=='_'||(LA12_81>='a' && LA12_81<='z')) ) {
-                                                alt12=16;
+                                            if ( (LA12_81=='z') ) {
+                                                int LA12_84 = input.LA(11);
+
+                                                if ( ((LA12_84>='0' && LA12_84<='9')||(LA12_84>='A' && LA12_84<='Z')||LA12_84=='_'||(LA12_84>='a' && LA12_84<='z')) ) {
+                                                    alt12=16;
+                                                }
+                                                else {
+                                                    alt12=1;}
                                             }
                                             else {
-                                                alt12=8;}
+                                                alt12=16;}
                                         }
                                         else {
                                             alt12=16;}
@@ -936,43 +936,20 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
         }
         else if ( (LA12_0=='k') ) {
             switch ( input.LA(2) ) {
-            case 'i':
+            case 'e':
                 {
                 int LA12_25 = input.LA(3);
 
-                if ( (LA12_25=='n') ) {
+                if ( (LA12_25=='y') ) {
                     int LA12_42 = input.LA(4);
 
-                    if ( (LA12_42=='d') ) {
+                    if ( (LA12_42=='w') ) {
                         int LA12_51 = input.LA(5);
 
-                        if ( ((LA12_51>='0' && LA12_51<='9')||(LA12_51>='A' && LA12_51<='Z')||LA12_51=='_'||(LA12_51>='a' && LA12_51<='z')) ) {
-                            alt12=16;
-                        }
-                        else {
-                            alt12=4;}
-                    }
-                    else {
-                        alt12=16;}
-                }
-                else {
-                    alt12=16;}
-                }
-                break;
-            case 'e':
-                {
-                int LA12_26 = input.LA(3);
+                        if ( (LA12_51=='o') ) {
+                            int LA12_59 = input.LA(6);
 
-                if ( (LA12_26=='y') ) {
-                    int LA12_43 = input.LA(4);
-
-                    if ( (LA12_43=='w') ) {
-                        int LA12_52 = input.LA(5);
-
-                        if ( (LA12_52=='o') ) {
-                            int LA12_60 = input.LA(6);
-
-                            if ( (LA12_60=='r') ) {
+                            if ( (LA12_59=='r') ) {
                                 int LA12_67 = input.LA(7);
 
                                 if ( (LA12_67=='d') ) {
@@ -992,6 +969,29 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
                         }
                         else {
                             alt12=16;}
+                    }
+                    else {
+                        alt12=16;}
+                }
+                else {
+                    alt12=16;}
+                }
+                break;
+            case 'i':
+                {
+                int LA12_26 = input.LA(3);
+
+                if ( (LA12_26=='n') ) {
+                    int LA12_43 = input.LA(4);
+
+                    if ( (LA12_43=='d') ) {
+                        int LA12_52 = input.LA(5);
+
+                        if ( ((LA12_52>='0' && LA12_52<='9')||(LA12_52>='A' && LA12_52<='Z')||LA12_52=='_'||(LA12_52>='a' && LA12_52<='z')) ) {
+                            alt12=16;
+                        }
+                        else {
+                            alt12=4;}
                     }
                     else {
                         alt12=16;}
@@ -1129,25 +1129,14 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
         }
         else if ( (LA12_0=='G') ) {
             switch ( input.LA(2) ) {
-            case 'R':
+            case 'E':
                 {
                 int LA12_32 = input.LA(3);
 
-                if ( (LA12_32=='\u00DC') ) {
-                    alt12=12;
-                }
-                else {
-                    alt12=16;}
-                }
-                break;
-            case 'E':
-                {
-                int LA12_33 = input.LA(3);
+                if ( (LA12_32=='L') ) {
+                    int LA12_47 = input.LA(4);
 
-                if ( (LA12_33=='L') ) {
-                    int LA12_48 = input.LA(4);
-
-                    if ( (LA12_48=='B') ) {
+                    if ( (LA12_47=='B') ) {
                         int LA12_56 = input.LA(5);
 
                         if ( ((LA12_56>='0' && LA12_56<='9')||(LA12_56>='A' && LA12_56<='Z')||LA12_56=='_'||(LA12_56>='a' && LA12_56<='z')) ) {
@@ -1158,6 +1147,17 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
                     }
                     else {
                         alt12=16;}
+                }
+                else {
+                    alt12=16;}
+                }
+                break;
+            case 'R':
+                {
+                int LA12_33 = input.LA(3);
+
+                if ( (LA12_33=='\u00DC') ) {
+                    alt12=12;
                 }
                 else {
                     alt12=16;}

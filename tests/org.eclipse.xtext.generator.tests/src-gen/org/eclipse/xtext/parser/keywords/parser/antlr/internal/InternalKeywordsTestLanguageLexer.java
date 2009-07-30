@@ -11,23 +11,23 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalKeywordsTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int Tokens=19;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int RULE_INT=5;
+    public static final int T14=14;
+    public static final int RULE_ID=4;
     public static final int T11=11;
+    public static final int RULE_STRING=6;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T14=14;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=19;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
     public InternalKeywordsTestLanguageLexer() {;} 
     public InternalKeywordsTestLanguageLexer(CharStream input) {
         super(input);
@@ -778,11 +778,11 @@ public class InternalKeywordsTestLanguageLexer extends Lexer {
         else if ( (LA12_0=='\'') ) {
             int LA12_4 = input.LA(2);
 
-            if ( (LA12_4=='b') ) {
+            if ( (LA12_4=='c') ) {
                 int LA12_18 = input.LA(3);
 
                 if ( (LA12_18=='\'') ) {
-                    alt12=6;
+                    alt12=7;
                 }
                 else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFE')) ) {
                     alt12=11;
@@ -794,11 +794,11 @@ public class InternalKeywordsTestLanguageLexer extends Lexer {
                     throw nvae;
                 }
             }
-            else if ( (LA12_4=='c') ) {
+            else if ( (LA12_4=='b') ) {
                 int LA12_19 = input.LA(3);
 
                 if ( (LA12_19=='\'') ) {
-                    alt12=7;
+                    alt12=6;
                 }
                 else if ( ((LA12_19>='\u0000' && LA12_19<='&')||(LA12_19>='(' && LA12_19<='\uFFFE')) ) {
                     alt12=11;

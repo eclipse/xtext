@@ -25,15 +25,15 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_REAL", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'model'", "':'", "'overriddenelement'", "'overridden other element'", "'-'", "'subrule1'", "'subrule3'", "'element'", "'overridemodel'", "'extendedmodel'"
     };
-    public static final int RULE_ID=5;
-    public static final int RULE_STRING=7;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_INT=6;
-    public static final int RULE_REAL=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=10;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int RULE_STRING=7;
+    public static final int RULE_REAL=4;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_SL_COMMENT=9;
 
         public InternalConcreteTestLanguageParser(TokenStream input) {
             super(input);
@@ -781,11 +781,11 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                 if ( (LA3_2==RULE_ID) ) {
                     int LA3_3 = input.LA(3);
 
-                    if ( (LA3_3==RULE_STRING) ) {
-                        alt3=2;
-                    }
-                    else if ( (LA3_3==RULE_INT) ) {
+                    if ( (LA3_3==RULE_INT) ) {
                         alt3=3;
+                    }
+                    else if ( (LA3_3==RULE_STRING) ) {
+                        alt3=2;
                     }
                     else {
                         NoViableAltException nvae =

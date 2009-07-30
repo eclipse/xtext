@@ -11,23 +11,23 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalFowlerDslTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int Tokens=20;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int RULE_INT=5;
+    public static final int T14=14;
+    public static final int RULE_ID=4;
     public static final int T11=11;
+    public static final int RULE_STRING=6;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T14=14;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=20;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T19=19;
     public InternalFowlerDslTestLanguageLexer() {;} 
     public InternalFowlerDslTestLanguageLexer(CharStream input) {
@@ -719,17 +719,34 @@ public class InternalFowlerDslTestLanguageLexer extends Lexer {
 
         if ( (LA12_0=='e') ) {
             switch ( input.LA(2) ) {
-            case 'v':
+            case 'n':
                 {
                 int LA12_17 = input.LA(3);
 
-                if ( (LA12_17=='e') ) {
+                if ( (LA12_17=='d') ) {
                     int LA12_32 = input.LA(4);
 
-                    if ( (LA12_32=='n') ) {
-                        int LA12_38 = input.LA(5);
+                    if ( ((LA12_32>='0' && LA12_32<='9')||(LA12_32>='A' && LA12_32<='Z')||LA12_32=='_'||(LA12_32>='a' && LA12_32<='z')) ) {
+                        alt12=10;
+                    }
+                    else {
+                        alt12=2;}
+                }
+                else {
+                    alt12=10;}
+                }
+                break;
+            case 'v':
+                {
+                int LA12_18 = input.LA(3);
 
-                        if ( (LA12_38=='t') ) {
+                if ( (LA12_18=='e') ) {
+                    int LA12_33 = input.LA(4);
+
+                    if ( (LA12_33=='n') ) {
+                        int LA12_39 = input.LA(5);
+
+                        if ( (LA12_39=='t') ) {
                             int LA12_44 = input.LA(6);
 
                             if ( (LA12_44=='s') ) {
@@ -749,23 +766,6 @@ public class InternalFowlerDslTestLanguageLexer extends Lexer {
                     }
                     else {
                         alt12=10;}
-                }
-                else {
-                    alt12=10;}
-                }
-                break;
-            case 'n':
-                {
-                int LA12_18 = input.LA(3);
-
-                if ( (LA12_18=='d') ) {
-                    int LA12_33 = input.LA(4);
-
-                    if ( ((LA12_33>='0' && LA12_33<='9')||(LA12_33>='A' && LA12_33<='Z')||LA12_33=='_'||(LA12_33>='a' && LA12_33<='z')) ) {
-                        alt12=10;
-                    }
-                    else {
-                        alt12=2;}
                 }
                 else {
                     alt12=10;}
