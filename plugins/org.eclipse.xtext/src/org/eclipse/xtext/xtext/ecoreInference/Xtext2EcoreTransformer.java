@@ -370,7 +370,8 @@ public class Xtext2EcoreTransformer {
 					// announced during the first iteration
 					if (calledRule != null && calledRule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) calledRule)) {
 						try {
-							return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), object);
+							EClassifierInfo eClassifierInfo = findOrCreateEClassifierInfo(calledRule);
+							return context.spawnContextWithCalledRule(eClassifierInfo, object);
 						}
 						catch (TransformationException e) {
 							reportError(e);
@@ -721,7 +722,7 @@ public class Xtext2EcoreTransformer {
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
 			if (parent != null)
-				this.getEClassifierInfos().addParent(parent);
+				this.getEClassifierInfos().addParent(usedGrammar, parent);
 		}
 
 	}
@@ -739,7 +740,7 @@ public class Xtext2EcoreTransformer {
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
 			if (parent != null)
-				result.addParent(parent);
+				result.addParent(usedGrammar, parent);
 		}
 		return result;
 	}
