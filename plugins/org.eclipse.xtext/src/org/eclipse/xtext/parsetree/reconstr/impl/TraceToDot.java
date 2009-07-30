@@ -20,7 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TraceToDot extends FollowerToDot {
+public class TraceToDot extends TreeConstNFAToDot {
 
 	protected Props drawObject(Object obj) {
 		if (obj instanceof TreeConstructionReportImpl)

@@ -53,7 +53,14 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
-«EXPAND createFollowerMethod FOR calcRootFollowers()-»
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+«FOREACH calcRootFollowers() AS e ITERATOR i-»
+			case «i.counter0»: return new «e.elementMethodName()»(this, this, «i.counter0», inst);
+«ENDFOREACH-»
+			default: return null;
+		}	
+	}	
 }
 	
 «EXPAND rule FOREACH allParserRules()-»
@@ -83,9 +90,9 @@ protected class ThisRootNode extends RootToken {
 		return grammarAccess.«gaRuleElementAccessor()»;
 	}
 
-«EXPAND createFollowerMethod FOR calcFollowers()-»
+«EXPAND createFollowerMethod FOR getTreeConstState()-»
 		
-«IF isElementCallable()-»
+«IF getTreeConstState().startState-»
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -94,16 +101,15 @@ protected class ThisRootNode extends RootToken {
 «ENDDEFINE»
 
 
-
-«DEFINE createFollowerMethod FOR List[Follower]-»
-«IF size > 0-»
+«DEFINE createFollowerMethod FOR TreeConstState-»
+«IF followers.size > 0 || endState-»
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-«FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
-			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «i.counter0», inst);
+«FOREACH followers AS e-»
+			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «e.precedence», inst);
 «ENDFOREACH-»
-«IF exists(e|e.ruleEnd)-»
-			default: return parent.createParentFollower(this, index, index«size > 1 ? (" - " + (size - 1)) : ""», inst);
+«IF endState && !followers.exists(e|e.ruleCall)-»
+			default: return parent.createParentFollower(this, index, index«followers.size > 0 ? (" - " + followers.size) : ""», inst);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -113,18 +119,18 @@ protected class ThisRootNode extends RootToken {
 «ENDDEFINE»
 
 
-«DEFINE createParentFollowerMethod(boolean isAss) FOR List[Follower]-»
-«IF size > 0-»
+«DEFINE createParentFollowerMethod(boolean isAss) FOR TreeConstState-»
+«IF followers.exists(e|e.ruleCall)-»
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 «IF isAss-»
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 «ENDIF-»	
 		switch(index) {
-«FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
-			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
+«FOREACH parentFollowers AS e-»
+			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
 «ENDFOREACH-»
-«IF exists(e|e.ruleEnd)-»
-			default: return parent.createParentFollower(next, actIndex , index«size > 1 ? (" - " + (size - 1)) : ""», «isAss ? "consumed" : "inst"»);
+«IF endState-»
+			default: return parent.createParentFollower(next, actIndex , index«parentFollowers.size > 0 ? (" - " + parentFollowers.size) : ""», «isAss ? "consumed" : "inst"»);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -183,7 +189,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 		return current;
 	}
 	
-«EXPAND createParentFollowerMethod(false) FOR calcParentFollowers()-»
+«EXPAND createParentFollowerMethod(false) FOR getTreeConstState()-»
 }
 «ELSE-»
 protected class «elementMethodName()» extends UnassignedTextToken {
@@ -274,7 +280,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 		return null;
 	}
 
-«EXPAND createParentFollowerMethod(true) FOR calcParentFollowers()-»
+«EXPAND createParentFollowerMethod(true) FOR getTreeConstState()-»
 }
 «ENDDEFINE»
 

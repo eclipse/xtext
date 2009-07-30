@@ -13,25 +13,19 @@ extension org::eclipse::xtext::GrammarUtil;
 extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess; 
 
 String getParseTreeConstructorName(Grammar g):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.getParseTreeConstructorName(org.eclipse.xtext.Grammar);
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName(org.eclipse.xtext.Grammar);
 
 String elementMethodName(AbstractElement ele):
 	ele.containingRule().gaRuleIdentifyer() + "_" + ele.gaElementIdentifyer();
 
 List[AbstractElement] getNestedElementsFromAssignment(Assignment ass):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.getNestedElementsFromAssignment(org.eclipse.xtext.Assignment);
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getNestedElementsFromAssignment(org.eclipse.xtext.Assignment);
 	
 boolean isAssignmentRequired(Assignment ass):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.isAssignmentRequired(org.eclipse.xtext.Assignment);
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.isAssignmentRequired(org.eclipse.xtext.Assignment);
 	
-boolean isElementCallable(AbstractElement ele):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.isElementCallable(org.eclipse.xtext.AbstractElement);
+List[AbstractElement] calcRootFollowers(Grammar g):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.calcRootFollowers(org.eclipse.xtext.Grammar);
 	
-List[Follower] calcRootFollowers(Grammar g):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.calcRootFollowers(org.eclipse.xtext.Grammar);
-	
-List[Follower] calcParentFollowers(AbstractElement ele):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.calcParentFollowers(org.eclipse.xtext.AbstractElement);
-
-List[Follower] calcFollowers(AbstractElement ele):
-	JAVA org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.calcFollowers(org.eclipse.xtext.AbstractElement);
+TreeConstState getTreeConstState(AbstractElement e): 
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getTreeConstState(org.eclipse.xtext.AbstractElement);

@@ -178,8 +178,10 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	protected TreeConstructionDiagnosticImpl diagnostic;
 
-	protected EObject root;
+	protected TreeConstructionNFAProvider nfaProvider = new TreeConstructionNFAProvider();
 
+	protected EObject root;
+	
 	protected AbstractToken success;
 
 	public TreeConstructionReportImpl(EObject root) {
@@ -194,8 +196,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	protected String checkUnconsumed(AbstractToken t, IInstanceDescription inst) {
 		if (t.getGrammarElement() == null)
 			return null;
-		boolean finalNode = ParseTreeConstructorUtil.isRuleEnd(t
-				.getGrammarElement());
+		boolean finalNode = nfaProvider.getNFA(t.getGrammarElement()).isEndState();
 		if (!finalNode || inst.isConsumed())
 			return null;
 		ParserRule pr = GrammarUtil.containingParserRule(t.getGrammarElement());

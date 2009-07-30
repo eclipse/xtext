@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parseTreeConstructor;
 
-import static org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.getPackage;
-import static org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil.getParseTreeConstructorName;
+import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getPackage;
+import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.FollowerToDot;
+import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
 
 /**
  * An {@link IGeneratorFragment} to generate model-&gt;text services (aka serialzier) for an Xtext language.
@@ -46,7 +46,7 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 		super.generate(grammar, ctx);
 		if (generateDotDiagram || graphvizCommand != null) {
 			try {
-				FollowerToDot ftd = new FollowerToDot();
+				TreeConstNFAToDot ftd = new TreeConstNFAToDot();
 				String fn = new File(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
 						+ Naming.asPath(getParseTreeConstructorName(grammar))).getCanonicalPath();
 				if (generateDotDiagram) {
