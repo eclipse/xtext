@@ -10,6 +10,9 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @SuppressWarnings("serial")
 public class XtextSerializationException extends RuntimeException {
 	private TreeConstructionReport rep;
