@@ -39,11 +39,11 @@ public class MarkerUtil {
 
 	public static final String CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check";
 
-	public static final String EXPENSIVE_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.expensive";
+	public static final String EXPENSIVE_CHECK_MARKER_ID = CHECK_MARKER_ID + ".expensive";
 
-	public static final String NORMAL_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.normal";
+	public static final String NORMAL_CHECK_MARKER_ID = CHECK_MARKER_ID + ".normal";
 
-	public static final String FAST_CHECK_MARKER_ID = "org.eclipse.xtext.ui.core.check.fast";
+	public static final String FAST_CHECK_MARKER_ID = CHECK_MARKER_ID + ".fast";
 
 	public static final String DEFAULT_MARKER_ID = EValidator.MARKER;
 
@@ -72,15 +72,14 @@ public class MarkerUtil {
 				return;
 			if (deleteMarkers)
 				for (String markerID : getMarkerIDs(checkMode)) {
-					file.deleteMarkers(markerID, true, IResource.DEPTH_INFINITE);
+					file.deleteMarkers(markerID, false, IResource.DEPTH_INFINITE);
 				}
 			if (!issues.isEmpty()) {
 				// update
 				for (Map<String, Object> map : issues) {
 					if (monitor.isCanceled())
 						return;
-					Diagnostic diagnostic = (Diagnostic) map.get(IXtextResourceChecker.DIAGNOSTIC_KEY);
-					map.remove(IXtextResourceChecker.DIAGNOSTIC_KEY);
+					Diagnostic diagnostic = (Diagnostic) map.remove(IXtextResourceChecker.DIAGNOSTIC_KEY);
 					String markerID = getMarkerID(diagnostic);
 					IMarker marker = file.createMarker(markerID);
 					Object lNr = map.get(IMarker.LINE_NUMBER);
@@ -138,7 +137,9 @@ public class MarkerUtil {
 			markerIDs = new ArrayList<String>();
 			for (CheckType checkType : CheckType.values()) {
 				if (checkMode.shouldCheck(checkType)) {
-					markerIDs.add(getMarkerID(checkType));
+					String markerID = getMarkerID(checkType);
+					if (markerID != null)
+						markerIDs.add(markerID);
 				}
 			}
 			markerIDs.add(DEFAULT_MARKER_ID);
