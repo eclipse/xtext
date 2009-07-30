@@ -24,7 +24,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
-import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -132,6 +131,8 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	protected void doLinking() {
+		if (parseResult == null)
+			return;
 		if (parseResult.getRootASTElement() == null && !validationDisabled)
 			return;
 
