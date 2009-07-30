@@ -23,12 +23,15 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
+
+import com.google.common.collect.Lists;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
@@ -42,19 +45,20 @@ public class EClassifierInfos {
 
 	private final Map<Triple<String, String, String>, EClassifierInfo> infoMap;
 
-	private final List<EClassifierInfos> parents;
+	private final Map<Grammar, EClassifierInfos> parents;
 
 	public List<EClassifierInfos> getParents() {
-		return parents;
+		return Lists.newArrayList(parents.values());
 	}
 
 	public EClassifierInfos() {
 		infoMap = new LinkedHashMap<Triple<String, String, String>, EClassifierInfo>();
-		parents = new ArrayList<EClassifierInfos>();
+		parents = new LinkedHashMap<Grammar, EClassifierInfos>();
 	}
 
-	public void addParent(EClassifierInfos parent) {
-		this.parents.add(parent);
+	public void addParent(Grammar grammar, EClassifierInfos parent) {
+		if (this.parents.put(grammar, parent) != null)
+			throw new IllegalStateException();
 	}
 
 	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
@@ -76,6 +80,10 @@ public class EClassifierInfos {
 	public EClassifierInfo getInfo(TypeRef typeRef) {
 		if (typeRef.getClassifier() == null)
 			return null;
+		Grammar grammar = GrammarUtil.getGrammar(typeRef);
+		EClassifierInfos parentInfos = parents.get(grammar);
+		if (parentInfos != null)
+			return parentInfos.getInfo(typeRef);
 		return getInfo(typeRef.getMetamodel(), typeRef.getClassifier().getName());
 	}
 
@@ -83,7 +91,7 @@ public class EClassifierInfos {
 		EClassifierInfo result = getInfo(typeRef);
 		if (result != null)
 			return result;
-		for(EClassifierInfos parent: parents) {
+		for(EClassifierInfos parent: parents.values()) {
 			result = parent.getInfoOrNull(typeRef);
 			if (result != null)
 				return result;
@@ -92,10 +100,11 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
-		return getInfo(getKey(alias, name));
+		Triple<String, String, String> key = getKey(alias, name);
+		return getInfo(key);
 	}
 
-	private EClassifierInfo getInfo(Pair<String, String> qualifiedName) {
+	private EClassifierInfo getInfo(Triple<String, String, String> qualifiedName) {
 		return infoMap.get(qualifiedName);
 	}
 
@@ -111,7 +120,7 @@ public class EClassifierInfos {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		}
-		for(EClassifierInfos parent: parents) {
+		for(EClassifierInfos parent: parents.values()) {
 			EClassifierInfo result = parent.getInfoOrNull(eClassifier);
 			if (result != null)
 				return result;
