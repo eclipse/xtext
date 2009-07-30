@@ -1119,4 +1119,17 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
+	
+	public void testBug_285140() throws Exception {
+		final String grammar = "grammar org.sublang with org.eclipse.xtext.testlanguages.ActionTestLanguage\n" + 
+		"\n" + 
+		"import \"http://www.eclipse.org/2008/tmf/xtext/ActionLang\" as actionLang\n" + 
+		"generate sub \"http://www.sublang.org\"\n" + 
+		"\n" + 
+		"Model returns actionLang::Model:\n" + 
+		"	Child ({actionLang::Parent.left=current} right=Child)?;";
+
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
 }
