@@ -249,12 +249,17 @@ public class XtextLinker extends Linker {
 		}
 
 		public boolean isPackageReferenced(ResourceSet set, EPackage pack, Collection<AbstractMetamodelDeclaration> knownReferences) {
-			for(Resource resource: set.getResources()) {
-				for(EObject content: resource.getContents()) {
-					if (content instanceof Grammar) {
-						for (AbstractMetamodelDeclaration decl: ((Grammar) content).getMetamodelDeclarations()) {
-							if (pack.equals(decl.getEPackage()) && !knownReferences.contains(decl))
-								return true;
+			for(int i = 0; i < set.getResources().size(); i++) { // cannot use foreach since we may get
+																 // a CME due to proxy resolution and transparent
+																 // loading of resources
+				Resource resource = set.getResources().get(i);
+				if (resource != null) {
+					for(EObject content: resource.getContents()) {
+						if (content instanceof Grammar) {
+							for (AbstractMetamodelDeclaration decl: ((Grammar) content).getMetamodelDeclarations()) {
+								if (pack.equals(decl.getEPackage()) && !knownReferences.contains(decl))
+									return true;
+							}
 						}
 					}
 				}
