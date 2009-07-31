@@ -14,7 +14,7 @@ import org.eclipse.xtext.grammaranalysis.INFATransition;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractNFATransition<S,T> implements INFATransition<S,T> {
+public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATransition<S, T>> implements INFATransition<S,T> {
 
 	protected boolean ruleCall;
 
@@ -30,8 +30,8 @@ public class AbstractNFATransition<S,T> implements INFATransition<S,T> {
 		this.ruleCall = ruleCall;
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
+	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof AbstractNFATransition) {
 			AbstractNFATransition a = (AbstractNFATransition)obj;
@@ -40,9 +40,8 @@ public class AbstractNFATransition<S,T> implements INFATransition<S,T> {
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	public int getPrecedence() {
-		INFAState<S, T> s = (INFAState<S, T>) source;
+		INFAState<S, T> s = source;
 		int i = s.getFollowers().indexOf(this);
 		return i > -1 ? i : s.getParentFollowers().indexOf(this);
 	}

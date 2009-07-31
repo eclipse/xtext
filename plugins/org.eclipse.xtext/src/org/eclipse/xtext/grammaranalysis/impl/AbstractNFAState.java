@@ -23,12 +23,13 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.INFAState;
+import org.eclipse.xtext.grammaranalysis.INFATransition;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractNFAState<S, T> extends AdapterImpl implements
+public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransition<S, T>> extends AdapterImpl implements
 		INFAState<S, T> {
 
 	protected NFABuilder<S, T> builder;

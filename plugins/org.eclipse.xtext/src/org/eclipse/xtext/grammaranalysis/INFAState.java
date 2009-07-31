@@ -16,7 +16,8 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface INFAState<S, T> {
+@SuppressWarnings("unchecked")
+public interface INFAState<S extends INFAState, T extends INFATransition> {
 	public NFABuilder<S, T> getBuilder();
 
 	public AbstractElement getElement();
