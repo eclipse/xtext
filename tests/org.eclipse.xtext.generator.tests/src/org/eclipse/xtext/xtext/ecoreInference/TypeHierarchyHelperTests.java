@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
@@ -33,9 +34,9 @@ import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 public class TypeHierarchyHelperTests extends TestCase {
 
 	private TypeHierarchyHelper helper;
-	private EClassifierInfos infos = new EClassifierInfos();
-	private EDataType INT = EcoreFactory.eINSTANCE.createEDataType();
-	private EDataType STRING = EcoreFactory.eINSTANCE.createEDataType();
+	private EClassifierInfos infos;
+	private EDataType INT;
+	private EDataType STRING;
 	private ErrorAcceptor errorAcceptorMock;
 	private GeneratedMetamodel metamodel;
 
@@ -44,6 +45,11 @@ public class TypeHierarchyHelperTests extends TestCase {
 		super.setUp();
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		metamodel = XtextFactory.eINSTANCE.createGeneratedMetamodel();
+		Grammar grammar = XtextFactory.eINSTANCE.createGrammar();
+		grammar.getMetamodelDeclarations().add(metamodel);
+		infos = new EClassifierInfos(grammar);
+		INT = EcoreFactory.eINSTANCE.createEDataType();
+		STRING = EcoreFactory.eINSTANCE.createEDataType();
 		EPackage pack = EcoreFactory.eINSTANCE.createEPackage();
 		pack.setNsURI("myURI");
 		pack.setName("myName");

@@ -128,7 +128,7 @@ public class Xtext2EcoreTransformer {
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
 	public void transform() {
-		eClassifierInfos = new EClassifierInfos();
+		eClassifierInfos = new EClassifierInfos(grammar);
 		generatedEPackages = new HashMap<String, EPackage>();
 
 		collectEClassInfosOfUsedGrammars();
@@ -718,29 +718,28 @@ public class Xtext2EcoreTransformer {
 
 	private void collectEClassInfosOfUsedGrammars() {
 		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
-		Set<String> knownPackages = new HashSet<String>();
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
-			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
+			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars);
 			if (parent != null)
-				this.getEClassifierInfos().addParent(usedGrammar, parent);
+				this.getEClassifierInfos().addParent(parent);
 		}
 
 	}
 
-	private EClassifierInfos createClassifierInfosFor(Grammar grammar, Set<Grammar> visitedGrammars, Set<String> knownPackages) {
+	private EClassifierInfos createClassifierInfosFor(Grammar grammar, Set<Grammar> visitedGrammars) {
 		if (!visitedGrammars.add(grammar))
 			return null;
-		final EClassifierInfos result = new EClassifierInfos();
+		final EClassifierInfos result = new EClassifierInfos(grammar);
 		for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
 			final EPackage referencedEPackage = declaration.getEPackage();
-			if (referencedEPackage != null && knownPackages.add(referencedEPackage.getNsURI())) {
+			if (referencedEPackage != null) {
 				collectClassInfosOf(result, referencedEPackage, declaration, false);
 			}
 		}
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
-			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
+			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars);
 			if (parent != null)
-				result.addParent(usedGrammar, parent);
+				result.addParent(parent);
 		}
 		return result;
 	}
