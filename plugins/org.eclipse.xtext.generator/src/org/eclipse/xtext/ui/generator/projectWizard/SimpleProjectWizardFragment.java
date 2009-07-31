@@ -67,13 +67,12 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	}
 
 	public String getModelFileExtension(Grammar g) {
-		if (modelFileExtension != null) {
-			return modelFileExtension;
+		if (modelFileExtension == null) {
+			modelFileExtension = GrammarUtil.getName(g).toLowerCase();
+			if (LOG.isInfoEnabled())
+				LOG.info("No explicit 'modelFileExtension' configured. Using '" + modelFileExtension + "'.");
 		}
-		String lowerCase = GrammarUtil.getName(g).toLowerCase();
-		if (LOG.isInfoEnabled())
-			LOG.info("No explicit modelFileExtension configured. Using '*." + lowerCase + "'.");
-		return lowerCase;
+		return modelFileExtension;
 	}
 
 	/**
