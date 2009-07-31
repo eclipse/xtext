@@ -45,20 +45,22 @@ public class EClassifierInfos {
 
 	private final Map<Triple<String, String, String>, EClassifierInfo> infoMap;
 
-	private final Map<Grammar, EClassifierInfos> parents;
+	private final List<EClassifierInfos> parents;
+	
+	private final Grammar grammar;
 
 	public List<EClassifierInfos> getParents() {
-		return Lists.newArrayList(parents.values());
+		return parents;
 	}
 
-	public EClassifierInfos() {
+	public EClassifierInfos(Grammar grammar) {
+		this.grammar = grammar;
 		infoMap = new LinkedHashMap<Triple<String, String, String>, EClassifierInfo>();
-		parents = new LinkedHashMap<Grammar, EClassifierInfos>();
+		parents = Lists.newArrayList();
 	}
 
-	public void addParent(Grammar grammar, EClassifierInfos parent) {
-		if (this.parents.put(grammar, parent) != null)
-			throw new IllegalStateException();
+	public void addParent(EClassifierInfos parent) {
+		parents.add(parent);
 	}
 
 	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
@@ -80,18 +82,25 @@ public class EClassifierInfos {
 	public EClassifierInfo getInfo(TypeRef typeRef) {
 		if (typeRef.getClassifier() == null)
 			return null;
-		Grammar grammar = GrammarUtil.getGrammar(typeRef);
-		EClassifierInfos parentInfos = parents.get(grammar);
-		if (parentInfos != null)
-			return parentInfos.getInfo(typeRef);
-		return getInfo(typeRef.getMetamodel(), typeRef.getClassifier().getName());
+		EClassifierInfo result = getInfo(typeRef.getMetamodel(), typeRef.getClassifier().getName());
+		if (result == null) {
+			Grammar declaringGrammar = GrammarUtil.getGrammar(typeRef);
+			if (grammar.equals(declaringGrammar))
+				return result;
+			for(EClassifierInfos parent: parents) {
+				result = parent.getInfo(typeRef);
+				if (result != null)
+					return result;
+			}
+		}
+		return result;
 	}
 
 	public EClassifierInfo getInfoOrNull(TypeRef typeRef) {
 		EClassifierInfo result = getInfo(typeRef);
 		if (result != null)
 			return result;
-		for(EClassifierInfos parent: parents.values()) {
+		for(EClassifierInfos parent: parents) {
 			result = parent.getInfoOrNull(typeRef);
 			if (result != null)
 				return result;
@@ -120,7 +129,7 @@ public class EClassifierInfos {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		}
-		for(EClassifierInfos parent: parents.values()) {
+		for(EClassifierInfos parent: parents) {
 			EClassifierInfo result = parent.getInfoOrNull(eClassifier);
 			if (result != null)
 				return result;
