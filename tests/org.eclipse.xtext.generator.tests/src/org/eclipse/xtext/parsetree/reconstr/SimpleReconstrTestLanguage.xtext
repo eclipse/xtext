@@ -14,7 +14,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4;
 	
 Atom: 
 	name=ID;
@@ -48,3 +48,16 @@ Consumed1:
 	 
 Consumed2:
 	'#7' child=Consumed1; 
+	
+Loop1:
+	'kw0'? '#8' id+=ID 'kw1'? id+=ID ('kw2'* 'kw30')+;
+	
+Loop2:
+	'#9' id+=ID ('kw1'| (id+=ID 'kw2')) ('kw3'| (id+=ID 'kw4'))? ('kw5' | 'kw6');
+	
+Loop3:
+	('kw1'|'kw2'|'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*;  
+	
+Loop4:
+	'#11' ('kw1' | 'kw2' | ('kw3' 'kw4')) id+=ID ('kw5' ('kw6' 'kw7'?)?)+;
+

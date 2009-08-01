@@ -102,14 +102,14 @@ protected class ThisRootNode extends RootToken {
 
 
 «DEFINE createFollowerMethod FOR TreeConstState-»
-«IF followers.size > 0 || endState-»
+«IF enabledFollowers.size > 0 || endState-»
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-«FOREACH followers AS e-»
+«FOREACH enabledFollowers AS e-»
 			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «e.precedence», inst);
 «ENDFOREACH-»
-«IF endState && !followers.exists(e|e.ruleCall)-»
-			default: return parent.createParentFollower(this, index, index«followers.size > 0 ? (" - " + followers.size) : ""», inst);
+«IF endState && !enabledFollowers.exists(e|e.ruleCall)-»
+			default: return parent.createParentFollower(this, index, index«enabledFollowers.size > 0 ? (" - " + enabledFollowers.size) : ""», inst);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -120,17 +120,17 @@ protected class ThisRootNode extends RootToken {
 
 
 «DEFINE createParentFollowerMethod(boolean isAss) FOR TreeConstState-»
-«IF followers.exists(e|e.ruleCall)-»
+«IF enabledFollowers.exists(e|e.ruleCall)-»
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 «IF isAss-»
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 «ENDIF-»	
 		switch(index) {
-«FOREACH parentFollowers AS e-»
+«FOREACH enabledParentFollowers AS e-»
 			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
 «ENDFOREACH-»
 «IF endState-»
-			default: return parent.createParentFollower(next, actIndex , index«parentFollowers.size > 0 ? (" - " + parentFollowers.size) : ""», «isAss ? "consumed" : "inst"»);
+			default: return parent.createParentFollower(next, actIndex , index«enabledParentFollowers.size > 0 ? (" - " + enabledParentFollowers.size) : ""», «isAss ? "consumed" : "inst"»);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -158,7 +158,7 @@ protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
 }
-«EXPAND element FOREACH tokens»
+«EXPAND element FOREACH tokens.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 
@@ -170,7 +170,7 @@ protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
 }
-«EXPAND element FOREACH groups»
+«EXPAND element FOREACH groups.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 
