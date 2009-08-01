@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
+import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState.Status;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -29,18 +30,20 @@ public class TreeConstNFAToDot extends GrammarToDot {
 		for (TreeConstTransition t : nfas.getParentFollowers())
 			d.add(drawFollowerEdge(ele, t, true));
 
-		if (nfas.getFollowers().size() == 0
-				&& nfas.getParentFollowers().size() == 0 && !nfas.isEndState())
-			n.setStyle("dotted");
+		if (nfas.getStatInt() != Status.ENABLED)
+			n.setStyle("dashed");
 		if (nfas.isEndState())
 			n.put("peripheries", "2");
+		setStatusStyle(n, nfas.getStatus());
+		// n.setLabel(nfas + n.get("label"));
 		return n;
 	}
 
 	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t,
 			boolean isParent) {
 		Edge e = new Edge(ele, t.getTarget().getElement());
-		e.setLabel(String.valueOf(t.getPrecedence()));
+		if (t.getPrecedence() > -1)
+			e.setLabel(String.valueOf(t.getPrecedence()));
 		e.setStyle("dotted");
 		if (isParent)
 			e.put("arrowtail", "odot");
@@ -48,6 +51,24 @@ public class TreeConstNFAToDot extends GrammarToDot {
 			e.put("arrowhead", "onormalonormal");
 		else
 			e.put("arrowhead", "onormal");
+		setStatusStyle(e, t.getStatus());
 		return e;
+	}
+
+	protected void setStatusStyle(Props p, Status s) {
+		switch (s) {
+		case AMBIGIOUS:
+			p.put("color", "green");
+			break;
+		case DETOUR_OR_LOOP:
+			p.put("color", "blue");
+			break;
+		case ORPHAN:
+			p.put("color", "grey");
+			break;
+		case UNKNOWN:
+			p.put("color", "red");
+			break;
+		}
 	}
 }
