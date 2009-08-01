@@ -18,7 +18,6 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormatter;
 
 public class SerializationErrorTest extends AbstractGeneratorTest {
 

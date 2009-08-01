@@ -199,6 +199,8 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	}
 
 	public boolean isEndState() {
+		if (followers == null || ruleCalls == null)
+			collectAllFollowers();
 		return endState;
 	}
 
