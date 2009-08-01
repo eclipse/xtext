@@ -205,6 +205,26 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "#7 #6 v2 a b 2";
 		assertEquals(model, parseAndSerialize(model));
 	}
+	
+	public void testLoop1() throws Exception {
+		String model = "kw0 #8 abc kw1 ab kw30";
+		assertEquals(" #8 abc  ab kw30", parseAndSerialize(model));
+	}
+	
+	public void testLoop2() throws Exception {
+		String model = "#9 abc adad kw2 kw3 kw6";
+		assertEquals("#9 abc kw1 adad kw4 kw5    ", parseAndSerialize(model));
+	}
+	
+	public void testLoop3() throws Exception {
+		String model = "kw3 #10 adad kw4 abcde kw5 kw4 abc kw5";
+		assertEquals("kw1 #10 adad kw4 abcde kw5 kw4 abc kw5", parseAndSerialize(model));
+	}
+	
+	public void testLoop4() throws Exception {
+		String model = "#11 kw2 asd kw5 kw6";
+		assertEquals("#11 kw1  asd kw5 ", parseAndSerialize(model));
+	}
 
 	@Override
 	protected void setUp() throws Exception {
