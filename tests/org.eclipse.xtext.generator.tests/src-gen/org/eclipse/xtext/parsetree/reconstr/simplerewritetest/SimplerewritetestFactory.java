@@ -125,6 +125,42 @@ public interface SimplerewritetestFactory extends EFactory
   Consumed2 createConsumed2();
 
   /**
+   * Returns a new object of class '<em>Loop1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Loop1</em>'.
+   * @generated
+   */
+  Loop1 createLoop1();
+
+  /**
+   * Returns a new object of class '<em>Loop2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Loop2</em>'.
+   * @generated
+   */
+  Loop2 createLoop2();
+
+  /**
+   * Returns a new object of class '<em>Loop3</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Loop3</em>'.
+   * @generated
+   */
+  Loop3 createLoop3();
+
+  /**
+   * Returns a new object of class '<em>Loop4</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Loop4</em>'.
+   * @generated
+   */
+  Loop4 createLoop4();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

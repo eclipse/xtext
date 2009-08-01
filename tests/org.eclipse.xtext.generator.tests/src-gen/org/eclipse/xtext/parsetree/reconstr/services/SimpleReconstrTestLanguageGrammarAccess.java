@@ -63,14 +63,18 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTransient1ParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		private final RuleCall cConsumed1ParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
 		private final RuleCall cConsumed2ParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
+		private final RuleCall cLoop1ParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
+		private final RuleCall cLoop2ParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
+		private final RuleCall cLoop3ParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
+		private final RuleCall cLoop4ParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//  Consumed2;
+		//  Consumed2|Loop1|Loop2|Loop3|Loop4;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//Consumed2
+		//Consumed2|Loop1|Loop2|Loop3|Loop4
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -105,6 +109,18 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Consumed2
 		public RuleCall getConsumed2ParserRuleCall_10() { return cConsumed2ParserRuleCall_10; }
+
+		//Loop1
+		public RuleCall getLoop1ParserRuleCall_11() { return cLoop1ParserRuleCall_11; }
+
+		//Loop2
+		public RuleCall getLoop2ParserRuleCall_12() { return cLoop2ParserRuleCall_12; }
+
+		//Loop3
+		public RuleCall getLoop3ParserRuleCall_13() { return cLoop3ParserRuleCall_13; }
+
+		//Loop4
+		public RuleCall getLoop4ParserRuleCall_14() { return cLoop4ParserRuleCall_14; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -538,6 +554,270 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//Consumed1
 		public RuleCall getChildConsumed1ParserRuleCall_1_0() { return cChildConsumed1ParserRuleCall_1_0; }
 	}
+
+	public class Loop1Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw0Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cNumberSignDigitEightKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cIdIDTerminalRuleCall_2_0 = (RuleCall)cIdAssignment_2.eContents().get(0);
+		private final Keyword cKw1Keyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cIdAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cIdIDTerminalRuleCall_4_0 = (RuleCall)cIdAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cKw2Keyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cKw30Keyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		
+		//Loop1:
+		//  "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+		public ParserRule getRule() { return rule; }
+
+		//"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+
+		public Group getGroup() { return cGroup; }
+
+		//"kw0"?
+		public Keyword getKw0Keyword_0() { return cKw0Keyword_0; }
+
+		//"#8"
+		public Keyword getNumberSignDigitEightKeyword_1() { return cNumberSignDigitEightKeyword_1; }
+
+		//id+=ID
+		public Assignment getIdAssignment_2() { return cIdAssignment_2; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
+
+		//"kw1"?
+		public Keyword getKw1Keyword_3() { return cKw1Keyword_3; }
+
+		//id+=ID
+		public Assignment getIdAssignment_4() { return cIdAssignment_4; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_4_0() { return cIdIDTerminalRuleCall_4_0; }
+
+		//("kw2"* "kw30")+
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"kw2"*
+		public Keyword getKw2Keyword_5_0() { return cKw2Keyword_5_0; }
+
+		//"kw30"
+		public Keyword getKw30Keyword_5_1() { return cKw30Keyword_5_1; }
+	}
+
+	public class Loop2Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIdIDTerminalRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Keyword cKw1Keyword_2_0 = (Keyword)cAlternatives_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Assignment cIdAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cIdIDTerminalRuleCall_2_1_0_0 = (RuleCall)cIdAssignment_2_1_0.eContents().get(0);
+		private final Keyword cKw2Keyword_2_1_1 = (Keyword)cGroup_2_1.eContents().get(1);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Keyword cKw3Keyword_3_0 = (Keyword)cAlternatives_3.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Assignment cIdAssignment_3_1_0 = (Assignment)cGroup_3_1.eContents().get(0);
+		private final RuleCall cIdIDTerminalRuleCall_3_1_0_0 = (RuleCall)cIdAssignment_3_1_0.eContents().get(0);
+		private final Keyword cKw4Keyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Keyword cKw5Keyword_4_0 = (Keyword)cAlternatives_4.eContents().get(0);
+		private final Keyword cKw6Keyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
+		
+		//Loop2:
+		//  "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6");
+		public ParserRule getRule() { return rule; }
+
+		//"#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6")
+		public Group getGroup() { return cGroup; }
+
+		//"#9"
+		public Keyword getNumberSignDigitNineKeyword_0() { return cNumberSignDigitNineKeyword_0; }
+
+		//id+=ID
+		public Assignment getIdAssignment_1() { return cIdAssignment_1; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
+
+		//"kw1"|id+=ID "kw2"
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
+
+		//id+=ID "kw2"
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//id+=ID
+		public Assignment getIdAssignment_2_1_0() { return cIdAssignment_2_1_0; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_2_1_0_0() { return cIdIDTerminalRuleCall_2_1_0_0; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_2_1_1() { return cKw2Keyword_2_1_1; }
+
+		//("kw3"|id+=ID "kw4")?
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_3_0() { return cKw3Keyword_3_0; }
+
+		//id+=ID "kw4"
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//id+=ID
+		public Assignment getIdAssignment_3_1_0() { return cIdAssignment_3_1_0; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_3_1_0_0() { return cIdIDTerminalRuleCall_3_1_0_0; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_3_1_1() { return cKw4Keyword_3_1_1; }
+
+		//"kw5"|"kw6"
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+
+		//"kw5"
+		public Keyword getKw5Keyword_4_0() { return cKw5Keyword_4_0; }
+
+		//"kw6"
+		public Keyword getKw6Keyword_4_1() { return cKw6Keyword_4_1; }
+	}
+
+	public class Loop3Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop3");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Keyword cKw1Keyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
+		private final Keyword cKw2Keyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
+		private final Keyword cKw3Keyword_0_2 = (Keyword)cAlternatives_0.eContents().get(2);
+		private final Keyword cNumberSignDigitOneDigitZeroKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cIdIDTerminalRuleCall_2_0 = (RuleCall)cIdAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cKw4Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cIdAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cIdIDTerminalRuleCall_3_1_0 = (RuleCall)cIdAssignment_3_1.eContents().get(0);
+		private final Keyword cKw5Keyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		
+		//Loop3:
+		//  ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+		public ParserRule getRule() { return rule; }
+
+		//("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
+		public Group getGroup() { return cGroup; }
+
+		//"kw1"|"kw2"|"kw3"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_0_0() { return cKw1Keyword_0_0; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_0_1() { return cKw2Keyword_0_1; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_0_2() { return cKw3Keyword_0_2; }
+
+		//"#10"
+		public Keyword getNumberSignDigitOneDigitZeroKeyword_1() { return cNumberSignDigitOneDigitZeroKeyword_1; }
+
+		//id+=ID
+		public Assignment getIdAssignment_2() { return cIdAssignment_2; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
+
+		//("kw4" id+=ID "kw5")*
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_3_0() { return cKw4Keyword_3_0; }
+
+		//id+=ID
+		public Assignment getIdAssignment_3_1() { return cIdAssignment_3_1; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_3_1_0() { return cIdIDTerminalRuleCall_3_1_0; }
+
+		//"kw5"
+		public Keyword getKw5Keyword_3_2() { return cKw5Keyword_3_2; }
+	}
+
+	public class Loop4Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop4");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cKw1Keyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cKw2Keyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
+		private final Keyword cKw3Keyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Keyword cKw4Keyword_1_2_1 = (Keyword)cGroup_1_2.eContents().get(1);
+		private final Assignment cIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cIdIDTerminalRuleCall_2_0 = (RuleCall)cIdAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cKw5Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cKw6Keyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Keyword cKw7Keyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
+		
+		//Loop4:
+		//  "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+		public ParserRule getRule() { return rule; }
+
+		//"#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
+		public Group getGroup() { return cGroup; }
+
+		//"#11"
+		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
+
+		//"kw1"|"kw2"|"kw3" "kw4"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_0() { return cKw1Keyword_1_0; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_1_1() { return cKw2Keyword_1_1; }
+
+		//"kw3" "kw4"
+		public Group getGroup_1_2() { return cGroup_1_2; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_1_2_0() { return cKw3Keyword_1_2_0; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_1_2_1() { return cKw4Keyword_1_2_1; }
+
+		//id+=ID
+		public Assignment getIdAssignment_2() { return cIdAssignment_2; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
+
+		//("kw5" ("kw6" "kw7"?)?)+
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"kw5"
+		public Keyword getKw5Keyword_3_0() { return cKw5Keyword_3_0; }
+
+		//("kw6" "kw7"?)?
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//"kw6"
+		public Keyword getKw6Keyword_3_1_0() { return cKw6Keyword_3_1_0; }
+
+		//"kw7"?
+		public Keyword getKw7Keyword_3_1_1() { return cKw7Keyword_3_1_1; }
+	}
 	
 	
 	private OpElements pOp;
@@ -553,6 +833,10 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private Transient1Elements pTransient1;
 	private Consumed1Elements pConsumed1;
 	private Consumed2Elements pConsumed2;
+	private Loop1Elements pLoop1;
+	private Loop2Elements pLoop2;
+	private Loop3Elements pLoop3;
+	private Loop4Elements pLoop4;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -587,7 +871,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-	//  Consumed2;
+	//  Consumed2|Loop1|Loop2|Loop3|Loop4;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -704,6 +988,46 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getConsumed2Rule() {
 		return getConsumed2Access().getRule();
+	}
+
+	//Loop1:
+	//  "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+	public Loop1Elements getLoop1Access() {
+		return (pLoop1 != null) ? pLoop1 : (pLoop1 = new Loop1Elements());
+	}
+	
+	public ParserRule getLoop1Rule() {
+		return getLoop1Access().getRule();
+	}
+
+	//Loop2:
+	//  "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6");
+	public Loop2Elements getLoop2Access() {
+		return (pLoop2 != null) ? pLoop2 : (pLoop2 = new Loop2Elements());
+	}
+	
+	public ParserRule getLoop2Rule() {
+		return getLoop2Access().getRule();
+	}
+
+	//Loop3:
+	//  ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+	public Loop3Elements getLoop3Access() {
+		return (pLoop3 != null) ? pLoop3 : (pLoop3 = new Loop3Elements());
+	}
+	
+	public ParserRule getLoop3Rule() {
+		return getLoop3Access().getRule();
+	}
+
+	//Loop4:
+	//  "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+	public Loop4Elements getLoop4Access() {
+		return (pLoop4 != null) ? pLoop4 : (pLoop4 = new Loop4Elements());
+	}
+	
+	public ParserRule getLoop4Rule() {
+		return getLoop4Access().getRule();
 	}
 
 	//terminal ID:

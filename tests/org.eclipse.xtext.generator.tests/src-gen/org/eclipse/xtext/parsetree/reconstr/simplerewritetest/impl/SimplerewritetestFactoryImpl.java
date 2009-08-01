@@ -17,6 +17,10 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -90,6 +94,10 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.TRANSIENT1: return createTransient1();
       case SimplerewritetestPackage.CONSUMED1: return createConsumed1();
       case SimplerewritetestPackage.CONSUMED2: return createConsumed2();
+      case SimplerewritetestPackage.LOOP1: return createLoop1();
+      case SimplerewritetestPackage.LOOP2: return createLoop2();
+      case SimplerewritetestPackage.LOOP3: return createLoop3();
+      case SimplerewritetestPackage.LOOP4: return createLoop4();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -215,6 +223,50 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     Consumed2Impl consumed2 = new Consumed2Impl();
     return consumed2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Loop1 createLoop1()
+  {
+    Loop1Impl loop1 = new Loop1Impl();
+    return loop1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Loop2 createLoop2()
+  {
+    Loop2Impl loop2 = new Loop2Impl();
+    return loop2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Loop3 createLoop3()
+  {
+    Loop3Impl loop3 = new Loop3Impl();
+    return loop3;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Loop4 createLoop4()
+  {
+    Loop4Impl loop4 = new Loop4Impl();
+    return loop4;
   }
 
   /**

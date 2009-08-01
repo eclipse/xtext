@@ -109,25 +109,6 @@ protected class Model_Group_0 extends GroupToken {
 		
 }
 
-// "1"?
-protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
-	
-	public Model_DigitOneKeyword_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getDigitOneKeyword_0_0();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
 // value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
 protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 	
@@ -141,8 +122,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_DigitOneKeyword_0_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		

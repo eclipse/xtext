@@ -14,6 +14,10 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -190,6 +194,38 @@ public class SimplerewritetestSwitch<T>
         Consumed2 consumed2 = (Consumed2)theEObject;
         T result = caseConsumed2(consumed2);
         if (result == null) result = caseExpression(consumed2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.LOOP1:
+      {
+        Loop1 loop1 = (Loop1)theEObject;
+        T result = caseLoop1(loop1);
+        if (result == null) result = caseExpression(loop1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.LOOP2:
+      {
+        Loop2 loop2 = (Loop2)theEObject;
+        T result = caseLoop2(loop2);
+        if (result == null) result = caseExpression(loop2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.LOOP3:
+      {
+        Loop3 loop3 = (Loop3)theEObject;
+        T result = caseLoop3(loop3);
+        if (result == null) result = caseExpression(loop3);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.LOOP4:
+      {
+        Loop4 loop4 = (Loop4)theEObject;
+        T result = caseLoop4(loop4);
+        if (result == null) result = caseExpression(loop4);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -377,6 +413,70 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseConsumed2(Consumed2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoop1(Loop1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoop2(Loop2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop3</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop3</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoop3(Loop3 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop4</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop4</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoop4(Loop4 object)
   {
     return null;
   }

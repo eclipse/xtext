@@ -55,13 +55,13 @@ public final class SimpleReconstrTestLanguageTransient1Consumer extends NonTermi
 
 	private IElementConsumer ruleCall$14$Consumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+
 	private ICharacterClass keyword$5$Delimiter;
 
 	private ICharacterClass keyword$9$Delimiter;
 
 	private ICharacterClass keyword$12$Delimiter;
-
-	private ICharacterClass keyword$2$Delimiter;
 
 	private ISequenceMatcher ruleCall$7$Delimiter;
 
@@ -242,10 +242,10 @@ public final class SimpleReconstrTestLanguageTransient1Consumer extends NonTermi
 
 	public SimpleReconstrTestLanguageTransient1Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
@@ -292,6 +292,14 @@ public final class SimpleReconstrTestLanguageTransient1Consumer extends NonTermi
 		this.intConsumer = intConsumer;
 	}
 	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$5$Delimiter() {
 		return keyword$5$Delimiter;
 	}
@@ -314,14 +322,6 @@ public final class SimpleReconstrTestLanguageTransient1Consumer extends NonTermi
 	
 	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
 		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$2$Delimiter() {
-		return keyword$2$Delimiter;
-	}
-	
-	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
-		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$7$Delimiter() {

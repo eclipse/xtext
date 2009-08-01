@@ -539,6 +539,154 @@ public interface SimplerewritetestPackage extends EPackage
   int CONSUMED2_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop1Impl <em>Loop1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop1()
+   * @generated
+   */
+  int LOOP1 = 11;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP1__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP1__ID = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Loop1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP1_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop2Impl <em>Loop2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop2Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop2()
+   * @generated
+   */
+  int LOOP2 = 12;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP2__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP2__ID = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Loop2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP2_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop3Impl <em>Loop3</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop3Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop3()
+   * @generated
+   */
+  int LOOP3 = 13;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP3__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP3__ID = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Loop3</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP3_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop4Impl <em>Loop4</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop4Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop4()
+   * @generated
+   */
+  int LOOP4 = 14;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP4__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP4__ID = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Loop4</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP4_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -546,7 +694,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 11;
+  int OP = 15;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -907,6 +1055,90 @@ public interface SimplerewritetestPackage extends EPackage
   EReference getConsumed2_Child();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1 <em>Loop1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1
+   * @generated
+   */
+  EClass getLoop1();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Id</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1#getId()
+   * @see #getLoop1()
+   * @generated
+   */
+  EAttribute getLoop1_Id();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2 <em>Loop2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2
+   * @generated
+   */
+  EClass getLoop2();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Id</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2#getId()
+   * @see #getLoop2()
+   * @generated
+   */
+  EAttribute getLoop2_Id();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3 <em>Loop3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop3</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3
+   * @generated
+   */
+  EClass getLoop3();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Id</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3#getId()
+   * @see #getLoop3()
+   * @generated
+   */
+  EAttribute getLoop3_Id();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4 <em>Loop4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop4</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4
+   * @generated
+   */
+  EClass getLoop4();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Id</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4#getId()
+   * @see #getLoop4()
+   * @generated
+   */
+  EAttribute getLoop4_Id();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1219,6 +1451,78 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EReference CONSUMED2__CHILD = eINSTANCE.getConsumed2_Child();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop1Impl <em>Loop1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop1()
+     * @generated
+     */
+    EClass LOOP1 = eINSTANCE.getLoop1();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP1__ID = eINSTANCE.getLoop1_Id();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop2Impl <em>Loop2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop2Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop2()
+     * @generated
+     */
+    EClass LOOP2 = eINSTANCE.getLoop2();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP2__ID = eINSTANCE.getLoop2_Id();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop3Impl <em>Loop3</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop3Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop3()
+     * @generated
+     */
+    EClass LOOP3 = eINSTANCE.getLoop3();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP3__ID = eINSTANCE.getLoop3_Id();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop4Impl <em>Loop4</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Loop4Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoop4()
+     * @generated
+     */
+    EClass LOOP4 = eINSTANCE.getLoop4();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP4__ID = eINSTANCE.getLoop4_Id();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

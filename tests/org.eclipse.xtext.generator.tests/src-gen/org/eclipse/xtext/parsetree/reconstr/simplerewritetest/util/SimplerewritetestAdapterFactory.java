@@ -16,6 +16,10 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -142,6 +146,26 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseConsumed2(Consumed2 object)
       {
         return createConsumed2Adapter();
+      }
+      @Override
+      public Adapter caseLoop1(Loop1 object)
+      {
+        return createLoop1Adapter();
+      }
+      @Override
+      public Adapter caseLoop2(Loop2 object)
+      {
+        return createLoop2Adapter();
+      }
+      @Override
+      public Adapter caseLoop3(Loop3 object)
+      {
+        return createLoop3Adapter();
+      }
+      @Override
+      public Adapter caseLoop4(Loop4 object)
+      {
+        return createLoop4Adapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -331,6 +355,66 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConsumed2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1 <em>Loop1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1
+   * @generated
+   */
+  public Adapter createLoop1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2 <em>Loop2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2
+   * @generated
+   */
+  public Adapter createLoop2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3 <em>Loop3</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3
+   * @generated
+   */
+  public Adapter createLoop3Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4 <em>Loop4</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4
+   * @generated
+   */
+  public Adapter createLoop4Adapter()
   {
     return null;
   }
