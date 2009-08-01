@@ -51,6 +51,18 @@
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Consumed2">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Consumed2/child"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Loop1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Loop1/id"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Loop2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Loop2/id"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Loop3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Loop3/id"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Loop4">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Loop4/id"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

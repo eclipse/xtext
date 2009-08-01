@@ -370,8 +370,7 @@ protected class DataType_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new DataType_SemicolonKeyword_2(parent, this, 0, inst);
-			case 1: return new DataType_NameAssignment_1(parent, this, 1, inst);
+			case 0: return new DataType_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -430,26 +429,6 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-}
-
-// ";"?
-protected class DataType_SemicolonKeyword_2 extends KeywordToken  {
-	
-	public DataType_SemicolonKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getDataTypeAccess().getSemicolonKeyword_2();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new DataType_NameAssignment_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 
@@ -866,8 +845,7 @@ protected class Attribute_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Attribute_SemicolonKeyword_4(parent, this, 0, inst);
-			case 1: return new Attribute_TypeAssignment_3(parent, this, 1, inst);
+			case 0: return new Attribute_TypeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -982,26 +960,6 @@ protected class Attribute_TypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// ";"?
-protected class Attribute_SemicolonKeyword_4 extends KeywordToken  {
-	
-	public Attribute_SemicolonKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getSemicolonKeyword_4();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Attribute_TypeAssignment_3(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
 
 /************ end Rule Attribute ****************/
 
@@ -1026,8 +984,7 @@ protected class Reference_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Reference_SemicolonKeyword_4(parent, this, 0, inst);
-			case 1: return new Reference_TypeAssignment_3(parent, this, 1, inst);
+			case 0: return new Reference_TypeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1140,26 +1097,6 @@ protected class Reference_TypeAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-}
-
-// ";"?
-protected class Reference_SemicolonKeyword_4 extends KeywordToken  {
-	
-	public Reference_SemicolonKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getReferenceAccess().getSemicolonKeyword_4();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Reference_TypeAssignment_3(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 

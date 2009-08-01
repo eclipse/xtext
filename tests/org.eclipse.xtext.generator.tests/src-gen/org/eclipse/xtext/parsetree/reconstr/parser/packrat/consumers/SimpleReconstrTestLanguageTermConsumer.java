@@ -29,6 +29,14 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer consumed2Consumer;
 
+	private INonTerminalConsumer loop1Consumer;
+
+	private INonTerminalConsumer loop2Consumer;
+
+	private INonTerminalConsumer loop3Consumer;
+
+	private INonTerminalConsumer loop4Consumer;
+
 	private INonTerminalConsumer manyStringsConsumer;
 
 	private INonTerminalConsumer parensConsumer;
@@ -67,6 +75,14 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$12$Consumer;
 
+	private IElementConsumer ruleCall$13$Consumer;
+
+	private IElementConsumer ruleCall$14$Consumer;
+
+	private IElementConsumer ruleCall$15$Consumer;
+
+	private IElementConsumer ruleCall$16$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -86,6 +102,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$10$Consumer);
 			acceptor.accept(ruleCall$11$Consumer);
 			acceptor.accept(ruleCall$12$Consumer);
+			acceptor.accept(ruleCall$13$Consumer);
+			acceptor.accept(ruleCall$14$Consumer);
+			acceptor.accept(ruleCall$15$Consumer);
+			acceptor.accept(ruleCall$16$Consumer);
 		}
 	}
 
@@ -221,6 +241,54 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loop1Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loop2Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loop3Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loop4Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -249,6 +317,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getTransient1ParserRuleCall_8());
 		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getConsumed1ParserRuleCall_9());
 		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getConsumed2ParserRuleCall_10());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getLoop1ParserRuleCall_11());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getLoop2ParserRuleCall_12());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getLoop3ParserRuleCall_13());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getLoop4ParserRuleCall_14());
 	}
 	
 	@Override
@@ -275,6 +347,22 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setConsumed2Consumer(INonTerminalConsumer consumed2Consumer) {
 		this.consumed2Consumer = consumed2Consumer;
+	}
+	
+	public void setLoop1Consumer(INonTerminalConsumer loop1Consumer) {
+		this.loop1Consumer = loop1Consumer;
+	}
+	
+	public void setLoop2Consumer(INonTerminalConsumer loop2Consumer) {
+		this.loop2Consumer = loop2Consumer;
+	}
+	
+	public void setLoop3Consumer(INonTerminalConsumer loop3Consumer) {
+		this.loop3Consumer = loop3Consumer;
+	}
+	
+	public void setLoop4Consumer(INonTerminalConsumer loop4Consumer) {
+		this.loop4Consumer = loop4Consumer;
 	}
 	
 	public void setManyStringsConsumer(INonTerminalConsumer manyStringsConsumer) {

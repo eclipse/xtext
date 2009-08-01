@@ -45,6 +45,10 @@ protected class ThisRootNode extends RootToken {
 			case 10: return new Transient1_Group(this, this, 10, inst);
 			case 11: return new Consumed1_Group(this, this, 11, inst);
 			case 12: return new Consumed2_Group(this, this, 12, inst);
+			case 13: return new Loop1_Group(this, this, 13, inst);
+			case 14: return new Loop2_Group(this, this, 14, inst);
+			case 15: return new Loop3_Group(this, this, 15, inst);
+			case 16: return new Loop4_Group(this, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -214,12 +218,12 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  *
  * Term returns Expression:
  *   Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
- *   Consumed2;
+ *   Consumed2|Loop1|Loop2|Loop3|Loop4;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-// Consumed2
+// Consumed2|Loop1|Loop2|Loop3|Loop4
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -243,6 +247,10 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 8: return new Term_Transient1ParserRuleCall_8(parent, this, 8, inst);
 			case 9: return new Term_Consumed1ParserRuleCall_9(parent, this, 9, inst);
 			case 10: return new Term_Consumed2ParserRuleCall_10(parent, this, 10, inst);
+			case 11: return new Term_Loop1ParserRuleCall_11(parent, this, 11, inst);
+			case 12: return new Term_Loop2ParserRuleCall_12(parent, this, 12, inst);
+			case 13: return new Term_Loop3ParserRuleCall_13(parent, this, 13, inst);
+			case 14: return new Term_Loop4ParserRuleCall_14(parent, this, 14, inst);
 			default: return null;
 		}	
 	}	
@@ -584,6 +592,130 @@ protected class Term_Consumed2ParserRuleCall_10 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Consumed2_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getConsumed2Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Loop1
+protected class Term_Loop1ParserRuleCall_11 extends RuleCallToken {
+	
+	public Term_Loop1ParserRuleCall_11(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getLoop1ParserRuleCall_11();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Loop1_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getLoop1Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Loop2
+protected class Term_Loop2ParserRuleCall_12 extends RuleCallToken {
+	
+	public Term_Loop2ParserRuleCall_12(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getLoop2ParserRuleCall_12();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Loop2_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getLoop2Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Loop3
+protected class Term_Loop3ParserRuleCall_13 extends RuleCallToken {
+	
+	public Term_Loop3ParserRuleCall_13(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getLoop3ParserRuleCall_13();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Loop3_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getLoop3Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Loop4
+protected class Term_Loop4ParserRuleCall_14 extends RuleCallToken {
+	
+	public Term_Loop4ParserRuleCall_14(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getLoop4ParserRuleCall_14();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Loop4_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getLoop4Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2242,5 +2374,883 @@ protected class Consumed2_ChildAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Consumed2 ****************/
+
+
+/************ begin Rule Loop1 ****************
+ *
+ * Loop1:
+ *   "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+ *
+ **/
+
+// "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+
+protected class Loop1_Group extends GroupToken {
+	
+	public Loop1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop1Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_Group_5(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoop1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#8"
+protected class Loop1_NumberSignDigitEightKeyword_1 extends KeywordToken  {
+	
+	public Loop1_NumberSignDigitEightKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop1Access().getNumberSignDigitEightKeyword_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop1_IdAssignment_2 extends AssignmentToken  {
+	
+	public Loop1_IdAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop1Access().getIdAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_NumberSignDigitEightKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// id+=ID
+protected class Loop1_IdAssignment_4 extends AssignmentToken  {
+	
+	public Loop1_IdAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop1Access().getIdAssignment_4();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_IdAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("kw2"* "kw30")+
+protected class Loop1_Group_5 extends GroupToken {
+	
+	public Loop1_Group_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop1Access().getGroup_5();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_Kw30Keyword_5_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw30"
+protected class Loop1_Kw30Keyword_5_1 extends KeywordToken  {
+	
+	public Loop1_Kw30Keyword_5_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop1Access().getKw30Keyword_5_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop1_IdAssignment_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+/************ end Rule Loop1 ****************/
+
+
+/************ begin Rule Loop2 ****************
+ *
+ * Loop2:
+ *   "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6");
+ *
+ **/
+
+// "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6")
+protected class Loop2_Group extends GroupToken {
+	
+	public Loop2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop2Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Alternatives_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoop2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#9"
+protected class Loop2_NumberSignDigitNineKeyword_0 extends KeywordToken  {
+	
+	public Loop2_NumberSignDigitNineKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop2Access().getNumberSignDigitNineKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop2_IdAssignment_1 extends AssignmentToken  {
+	
+	public Loop2_IdAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop2Access().getIdAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_NumberSignDigitNineKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw1"|id+=ID "kw2"
+protected class Loop2_Alternatives_2 extends AlternativesToken {
+
+	public Loop2_Alternatives_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoop2Access().getAlternatives_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Kw1Keyword_2_0(parent, this, 0, inst);
+			case 1: return new Loop2_Group_2_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw1"
+protected class Loop2_Kw1Keyword_2_0 extends KeywordToken  {
+	
+	public Loop2_Kw1Keyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop2Access().getKw1Keyword_2_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_IdAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID "kw2"
+protected class Loop2_Group_2_1 extends GroupToken {
+	
+	public Loop2_Group_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop2Access().getGroup_2_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Kw2Keyword_2_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop2_IdAssignment_2_1_0 extends AssignmentToken  {
+	
+	public Loop2_IdAssignment_2_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop2Access().getIdAssignment_2_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_IdAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_2_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw2"
+protected class Loop2_Kw2Keyword_2_1_1 extends KeywordToken  {
+	
+	public Loop2_Kw2Keyword_2_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop2Access().getKw2Keyword_2_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_IdAssignment_2_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+// ("kw3"|id+=ID "kw4")?
+protected class Loop2_Alternatives_3 extends AlternativesToken {
+
+	public Loop2_Alternatives_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoop2Access().getAlternatives_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Group_3_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID "kw4"
+protected class Loop2_Group_3_1 extends GroupToken {
+	
+	public Loop2_Group_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop2Access().getGroup_3_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Kw4Keyword_3_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop2_IdAssignment_3_1_0 extends AssignmentToken  {
+	
+	public Loop2_IdAssignment_3_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop2Access().getIdAssignment_3_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Alternatives_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_3_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw4"
+protected class Loop2_Kw4Keyword_3_1_1 extends KeywordToken  {
+	
+	public Loop2_Kw4Keyword_3_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop2Access().getKw4Keyword_3_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_IdAssignment_3_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+// "kw5"|"kw6"
+protected class Loop2_Alternatives_4 extends AlternativesToken {
+
+	public Loop2_Alternatives_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoop2Access().getAlternatives_4();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Kw5Keyword_4_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw5"
+protected class Loop2_Kw5Keyword_4_0 extends KeywordToken  {
+	
+	public Loop2_Kw5Keyword_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop2Access().getKw5Keyword_4_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop2_Alternatives_3(parent, this, 0, inst);
+			case 1: return new Loop2_Alternatives_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+/************ end Rule Loop2 ****************/
+
+
+/************ begin Rule Loop3 ****************
+ *
+ * Loop3:
+ *   ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+ *
+ **/
+
+// ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
+protected class Loop3_Group extends GroupToken {
+	
+	public Loop3_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop3Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Group_3(parent, this, 0, inst);
+			case 1: return new Loop3_IdAssignment_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoop3Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "kw1"|"kw2"|"kw3"
+protected class Loop3_Alternatives_0 extends AlternativesToken {
+
+	public Loop3_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoop3Access().getAlternatives_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Kw1Keyword_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw1"
+protected class Loop3_Kw1Keyword_0_0 extends KeywordToken  {
+	
+	public Loop3_Kw1Keyword_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop3Access().getKw1Keyword_0_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+
+// "#10"
+protected class Loop3_NumberSignDigitOneDigitZeroKeyword_1 extends KeywordToken  {
+	
+	public Loop3_NumberSignDigitOneDigitZeroKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop3Access().getNumberSignDigitOneDigitZeroKeyword_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Alternatives_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop3_IdAssignment_2 extends AssignmentToken  {
+	
+	public Loop3_IdAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop3Access().getIdAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_NumberSignDigitOneDigitZeroKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("kw4" id+=ID "kw5")*
+protected class Loop3_Group_3 extends GroupToken {
+	
+	public Loop3_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop3Access().getGroup_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Kw5Keyword_3_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw4"
+protected class Loop3_Kw4Keyword_3_0 extends KeywordToken  {
+	
+	public Loop3_Kw4Keyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop3Access().getKw4Keyword_3_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Group_3(parent, this, 0, inst);
+			case 1: return new Loop3_IdAssignment_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// id+=ID
+protected class Loop3_IdAssignment_3_1 extends AssignmentToken  {
+	
+	public Loop3_IdAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop3Access().getIdAssignment_3_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_Kw4Keyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw5"
+protected class Loop3_Kw5Keyword_3_2 extends KeywordToken  {
+	
+	public Loop3_Kw5Keyword_3_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop3Access().getKw5Keyword_3_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop3_IdAssignment_3_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+/************ end Rule Loop3 ****************/
+
+
+/************ begin Rule Loop4 ****************
+ *
+ * Loop4:
+ *   "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+ *
+ **/
+
+// "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
+protected class Loop4_Group extends GroupToken {
+	
+	public Loop4_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop4Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_Group_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoop4Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#11"
+protected class Loop4_NumberSignDigitOneDigitOneKeyword_0 extends KeywordToken  {
+	
+	public Loop4_NumberSignDigitOneDigitOneKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop4Access().getNumberSignDigitOneDigitOneKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// "kw1"|"kw2"|"kw3" "kw4"
+protected class Loop4_Alternatives_1 extends AlternativesToken {
+
+	public Loop4_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoop4Access().getAlternatives_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_Kw1Keyword_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw1"
+protected class Loop4_Kw1Keyword_1_0 extends KeywordToken  {
+	
+	public Loop4_Kw1Keyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop4Access().getKw1Keyword_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_NumberSignDigitOneDigitOneKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// id+=ID
+protected class Loop4_IdAssignment_2 extends AssignmentToken  {
+	
+	public Loop4_IdAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoop4Access().getIdAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoop4Access().getIdIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("kw5" ("kw6" "kw7"?)?)+
+protected class Loop4_Group_3 extends GroupToken {
+	
+	public Loop4_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoop4Access().getGroup_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_Kw5Keyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw5"
+protected class Loop4_Kw5Keyword_3_0 extends KeywordToken  {
+	
+	public Loop4_Kw5Keyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoop4Access().getKw5Keyword_3_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Loop4_IdAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+
+/************ end Rule Loop4 ****************/
 
 }

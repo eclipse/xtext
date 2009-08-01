@@ -38,6 +38,10 @@
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -224,6 +228,108 @@
         <tokens xsi:type="xtext:Keyword" value="#7"/>
         <tokens xsi:type="xtext:Assignment" feature="child" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Loop1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//Loop1"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" cardinality="?" value="kw0"/>
+        <tokens xsi:type="xtext:Keyword" value="#8"/>
+        <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+        <tokens xsi:type="xtext:Keyword" cardinality="?" value="kw1"/>
+        <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="+">
+          <tokens xsi:type="xtext:Keyword" cardinality="*" value="kw2"/>
+          <tokens xsi:type="xtext:Keyword" value="kw30"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Loop2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//Loop2"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#9"/>
+        <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="kw1"/>
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </tokens>
+            <tokens xsi:type="xtext:Keyword" value="kw2"/>
+          </groups>
+        </tokens>
+        <tokens xsi:type="xtext:Alternatives" cardinality="?">
+          <groups xsi:type="xtext:Keyword" value="kw3"/>
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </tokens>
+            <tokens xsi:type="xtext:Keyword" value="kw4"/>
+          </groups>
+        </tokens>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="kw5"/>
+          <groups xsi:type="xtext:Keyword" value="kw6"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Loop3">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//Loop3"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="kw1"/>
+          <groups xsi:type="xtext:Keyword" value="kw2"/>
+          <groups xsi:type="xtext:Keyword" value="kw3"/>
+        </tokens>
+        <tokens xsi:type="xtext:Keyword" value="#10"/>
+        <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="*">
+          <tokens xsi:type="xtext:Keyword" value="kw4"/>
+          <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="kw5"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Loop4">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//Loop4"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#11"/>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="kw1"/>
+          <groups xsi:type="xtext:Keyword" value="kw2"/>
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Keyword" value="kw3"/>
+            <tokens xsi:type="xtext:Keyword" value="kw4"/>
+          </groups>
+        </tokens>
+        <tokens xsi:type="xtext:Assignment" feature="id" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="+">
+          <tokens xsi:type="xtext:Keyword" value="kw5"/>
+          <tokens xsi:type="xtext:Group" cardinality="?">
+            <tokens xsi:type="xtext:Keyword" value="kw6"/>
+            <tokens xsi:type="xtext:Keyword" cardinality="?" value="kw7"/>
+          </tokens>
         </tokens>
       </alternatives>
     </rules>

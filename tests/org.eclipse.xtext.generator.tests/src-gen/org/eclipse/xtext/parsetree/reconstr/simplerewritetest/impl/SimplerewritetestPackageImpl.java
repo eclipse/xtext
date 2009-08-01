@@ -16,6 +16,10 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -110,6 +114,34 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass consumed2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loop1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loop2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loop3EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loop4EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -496,6 +528,86 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLoop1()
+  {
+    return loop1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop1_Id()
+  {
+    return (EAttribute)loop1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLoop2()
+  {
+    return loop2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop2_Id()
+  {
+    return (EAttribute)loop2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLoop3()
+  {
+    return loop3EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop3_Id()
+  {
+    return (EAttribute)loop3EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLoop4()
+  {
+    return loop4EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop4_Id()
+  {
+    return (EAttribute)loop4EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -583,6 +695,18 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     consumed2EClass = createEClass(CONSUMED2);
     createEReference(consumed2EClass, CONSUMED2__CHILD);
 
+    loop1EClass = createEClass(LOOP1);
+    createEAttribute(loop1EClass, LOOP1__ID);
+
+    loop2EClass = createEClass(LOOP2);
+    createEAttribute(loop2EClass, LOOP2__ID);
+
+    loop3EClass = createEClass(LOOP3);
+    createEAttribute(loop3EClass, LOOP3__ID);
+
+    loop4EClass = createEClass(LOOP4);
+    createEAttribute(loop4EClass, LOOP4__ID);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -626,6 +750,10 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     transient1EClass.getESuperTypes().add(this.getExpression());
     consumed1EClass.getESuperTypes().add(this.getExpression());
     consumed2EClass.getESuperTypes().add(this.getExpression());
+    loop1EClass.getESuperTypes().add(this.getExpression());
+    loop2EClass.getESuperTypes().add(this.getExpression());
+    loop3EClass.getESuperTypes().add(this.getExpression());
+    loop4EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -670,6 +798,18 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     initEClass(consumed2EClass, Consumed2.class, "Consumed2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConsumed2_Child(), this.getConsumed1(), null, "child", null, 0, 1, Consumed2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loop1EClass, Loop1.class, "Loop1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoop1_Id(), ecorePackage.getEString(), "id", null, 0, -1, Loop1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loop2EClass, Loop2.class, "Loop2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoop2_Id(), ecorePackage.getEString(), "id", null, 0, -1, Loop2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loop3EClass, Loop3.class, "Loop3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoop3_Id(), ecorePackage.getEString(), "id", null, 0, -1, Loop3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loop4EClass, Loop4.class, "Loop4", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoop4_Id(), ecorePackage.getEString(), "id", null, 0, -1, Loop4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
