@@ -120,27 +120,29 @@ public class TreeConstState extends
 	protected void consume(Map<TreeConstState, Integer> dist) {
 		if (isConsumingElement())
 			dist.remove(this);
-		for (Map.Entry<TreeConstState, Integer> e : distances.entrySet()) {
-			Integer i = dist.get(e.getKey());
-			if (i != null && i > e.getValue())
-				dist.remove(e.getKey());
-		}
+		else
+			for (Map.Entry<TreeConstState, Integer> e : distances.entrySet()) {
+				Integer i = dist.get(e.getKey());
+				if (i != null && i > e.getValue())
+					dist.remove(e.getKey());
+			}
 	}
-	
+
 	public List<TreeConstTransition> getEnabledFollowers() {
-		if(enabledFollowers == null) {
+		if (enabledFollowers == null) {
 			enabledFollowers = new ArrayList<TreeConstTransition>();
-			for(TreeConstTransition t: getFollowers())
-				if(!t.isDisabled())
+			for (TreeConstTransition t : getFollowers())
+				if (!t.isDisabled())
 					enabledFollowers.add(t);
 		}
 		return enabledFollowers;
 	}
+
 	public List<TreeConstTransition> getEnabledParentFollowers() {
-		if(enabledParentFollowers == null) {
+		if (enabledParentFollowers == null) {
 			enabledParentFollowers = new ArrayList<TreeConstTransition>();
-			for(TreeConstTransition t:getParentFollowers())
-				if(!t.isDisabled())
+			for (TreeConstTransition t : getParentFollowers())
+				if (!t.isDisabled())
 					enabledParentFollowers.add(t);
 		}
 		return enabledParentFollowers;
