@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext;singleton:=true
-Bundle-Version: 0.7.1.qualifier
+Bundle-Version: 0.7.2.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -59,9 +59,9 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  com.google.guice;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.emf.codegen;bundle-version="2.5.0";resolution:=optional,
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0";resolution:=optional,
- org.eclipse.emf.mwe.core;bundle-version="0.7.1";resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="0.7.1";resolution:=optional,
+ org.eclipse.emf.mwe.core;bundle-version="0.7.2";resolution:=optional,
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.2";resolution:=optional,
  org.eclipse.emf.common,
- org.eclipse.xtend;bundle-version="0.7.1";resolution:=optional,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.1";resolution:=optional
+ org.eclipse.xtend;bundle-version="0.7.2";resolution:=optional,
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.7.2";resolution:=optional
 
