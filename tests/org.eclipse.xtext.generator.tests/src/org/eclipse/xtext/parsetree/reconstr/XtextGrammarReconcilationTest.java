@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
@@ -28,7 +29,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 
 		// load grammar model
 		XtextResourceSet rs = get(XtextResourceSet.class);
-		Resource resource = rs.createResource(URI.createURI("foo.xtext"));
+		Resource resource = rs.createResource(URI.createURI("foo.xtext"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		resource.load(new StringInputStream(model), null);
 		Grammar object = (Grammar) resource.getContents().get(0);
 

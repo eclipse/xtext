@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -74,7 +75,7 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 
 	public void _testXtestSerializationSelfTest() throws Exception {
 		Resource res = get(XtextResourceSet.class).createResource(URI
-				.createURI("myfile.xtext"));
+				.createURI("myfile.xtext"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		res.getContents().add(get(XtextGrammarAccess.class).getGrammar());
 		OutputStream outputStream = new ByteArrayOutputStream();
 		res.save(outputStream, Collections.emptyMap());
