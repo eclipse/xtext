@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -42,8 +43,8 @@ public class EcoreUtil2Test extends TestCase {
 		EPackage.Registry.INSTANCE.put(EcorePackage.eINSTANCE.getNsURI(), EcorePackage.eINSTANCE);
 		
 		ResourceSetImpl rs = new ResourceSetImpl();
-		Resource r1 = rs.createResource(URI.createURI("foo.xmi"));
-		Resource r2 = rs.createResource(URI.createURI("bar.xmi"));
+		Resource r1 = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		Resource r2 = rs.createResource(URI.createURI("bar.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		EClass a = EcoreFactory.eINSTANCE.createEClass();
 		a.setName("a");
 		EClass b = EcoreFactory.eINSTANCE.createEClass();
