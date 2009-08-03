@@ -9,8 +9,6 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +17,8 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.validation.CancelIndicator;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
@@ -36,10 +30,29 @@ import com.google.inject.Inject;
  */
 public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	protected static class ListBasedMarkerAcceptor implements IDiagnosticConverter.Acceptor {
+		private final List<Map<String, Object>> result;
+
+		protected ListBasedMarkerAcceptor(List<Map<String, Object>> result) {
+			this.result = result;
+		}
+
+		public void accept(Map<String, Object> marker) {
+			if (marker != null)
+				result.add(marker);
+		}
+	}
+
 	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
 
 	@Inject
 	private Diagnostician diagnostician;
+	
+	@Inject
+	private IDiagnosticConverter converter;
 	
 	/**
 	 * Checks an {@link XtextResource}
@@ -48,19 +61,20 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
 	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
-		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
+		final List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
+		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
-			// Syntactical errors
+			// Syntactical and linking errors
 			// Collect EMF Resource Diagnostics
 			for (int i = 0; i < resource.getErrors().size(); i++) {
-				markers.add(markerFromXtextResourceDiagnostic(resource.getErrors().get(i), IMarker.SEVERITY_ERROR));
+				markerFromXtextResourceDiagnostic(resource.getErrors().get(i), IMarker.SEVERITY_ERROR, acceptor);
 			}
 
 			if (monitor.isCanceled())
 				return null;
 
 			for (int i = 0; i < resource.getWarnings().size(); i++) {
-				markers.add(markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), IMarker.SEVERITY_WARNING));
+				markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), IMarker.SEVERITY_WARNING, acceptor);
 			}
 
 			if (monitor.isCanceled())
@@ -69,6 +83,8 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 			boolean syntaxDiagFail = !markers.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
+			// Validation errors
+			// Collect Validator Diagnostics
 			for (EObject ele : resource.getContents()) {
 				try {
 					Map<Object, Object> options = Maps.newHashMap(context);
@@ -82,17 +98,11 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 						return null;
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							Map<String, Object> marker = markerFromEValidatorDiagnostic(childDiagnostic);
-							if (marker != null) {
-								markers.add(marker);
-							}
+							markerFromEValidatorDiagnostic(childDiagnostic, acceptor);
 						}
 					}
 					else {
-						Map<String, Object> marker = markerFromEValidatorDiagnostic(diagnostic);
-						if (marker != null) {
-							markers.add(marker);
-						}
+						markerFromEValidatorDiagnostic(diagnostic, acceptor);
 					}
 				}
 				catch (RuntimeException e) {
@@ -106,82 +116,23 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 		return markers;
 	}
 
+	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Map<String, Object>> result) {
+		return new ListBasedMarkerAcceptor(result);
+	}
+
 	private void logCheckStatus(final Resource resource, boolean parserDiagFail, String string) {
 		if (log.isDebugEnabled()) {
 			log.debug(string + " check " + (parserDiagFail ? "FAIL" : "OK") + "! Resource: " + resource.getURI());
 		}
 	}
 
-	private Map<String, Object> markerFromXtextResourceDiagnostic(
-			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IMarker.SEVERITY, severity);
-		map.put(IMarker.LINE_NUMBER, diagnostic.getLine());
-		map.put(IMarker.MESSAGE, diagnostic.getMessage());
-		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
-
-		if (diagnostic instanceof org.eclipse.xtext.diagnostics.Diagnostic) {
-			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;
-			map.put(IMarker.CHAR_START, xtextDiagnostic.getOffset());
-			map.put(IMarker.CHAR_END, xtextDiagnostic.getOffset() + xtextDiagnostic.getLength());
-		}
-
-		return map;
+	protected void markerFromXtextResourceDiagnostic(
+			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity, IDiagnosticConverter.Acceptor acceptor) {
+		converter.convertResourceDiagnostic(diagnostic, severity, acceptor);
 	}
 
-	private Map<String, Object> markerFromEValidatorDiagnostic(Diagnostic diagnostic) {
-		if (diagnostic.getSeverity() == Diagnostic.OK)
-			return null;
-		Map<String, Object> map = new HashMap<String, Object>();
-		int sever = IMarker.SEVERITY_ERROR;
-		switch (diagnostic.getSeverity()) {
-			case Diagnostic.WARNING:
-				sever = IMarker.SEVERITY_WARNING;
-				break;
-			case Diagnostic.INFO:
-				sever = IMarker.SEVERITY_INFO;
-				break;
-		}
-		map.put(IMarker.SEVERITY, sever);
-		Iterator<?> data = diagnostic.getData().iterator();
-		// causer is the first element see Diagnostician.getData
-		Object causer = data.next();
-		if (causer instanceof EObject) {
-			EObject ele = (EObject) causer;
-			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
-			if (nodeAdapter != null) {
-				AbstractNode parserNode = nodeAdapter.getParserNode();
-				// feature is the second element see Diagnostician.getData
-				Object feature = data.hasNext() ? data.next() : null;
-				EStructuralFeature structuralFeature = resolveStructuralFeature(ele, feature);
-				if (structuralFeature != null) {
-					List<AbstractNode> nodes = NodeUtil.findNodesForFeature(ele, structuralFeature);
-					if (!nodes.isEmpty())
-						parserNode = nodes.iterator().next();
-				}
-				map.put(IMarker.LINE_NUMBER, Integer.valueOf(parserNode.getLine()));
-				int offset = parserNode.getOffset();
-				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
-				map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.getLength()));
-				map.put(DIAGNOSTIC_KEY, diagnostic);
-			}
-		}
-		map.put(IMarker.MESSAGE, diagnostic.getMessage());
-		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
-		return map;
-	}
-
-	private EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
-		if (feature instanceof String) {
-			return ele.eClass().getEStructuralFeature((String) feature);
-		}
-		else if (feature instanceof EStructuralFeature) {
-			return (EStructuralFeature) feature;
-		}
-		else if (feature instanceof Integer) {
-			return ele.eClass().getEStructuralFeature((Integer) feature);
-		}
-		return null;
+	protected void markerFromEValidatorDiagnostic(Diagnostic diagnostic, IDiagnosticConverter.Acceptor acceptor) {
+		converter.convertValidatorDiagnostic(diagnostic, acceptor);
 	}
 
 	public void setDiagnostician(Diagnostician diagnostician) {
@@ -190,6 +141,14 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 
 	public Diagnostician getDiagnostician() {
 		return diagnostician;
+	}
+
+	public void setDiagnosticConverter(IDiagnosticConverter converter) {
+		this.converter = converter;
+	}
+
+	public IDiagnosticConverter getDiagnosticConverter() {
+		return converter;
 	}
 
 }
