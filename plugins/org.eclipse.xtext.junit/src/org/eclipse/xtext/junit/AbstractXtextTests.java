@@ -9,11 +9,9 @@
 
 package org.eclipse.xtext.junit;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -40,7 +38,6 @@ import org.eclipse.xtext.parser.ISwitchingParser;
 import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -71,7 +68,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		//EMF Standalone setup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
