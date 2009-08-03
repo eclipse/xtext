@@ -2,12 +2,21 @@
 <topic href="help/Overview.html" label="Overview">
 <topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
 <topic href="help/DSL.html" label="What is a domain-specific language"></topic>
+</topic>
 <topic href="help/getting-started.html" label="Getting Started">
+<topic href="help/getting-started.html#getting-started-xtext" label="Creating a DSL">
 <topic href="help/getting-started.html#CreateanXtextproject" label="Create an Xtext project"></topic>
 <topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
 <topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
 <topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
-<topic href="help/getting-started.html#Testthegeneratededitor" label="Test the generated editor"></topic>
+<topic href="help/getting-started.html#Runthegeneratededitor" label="Run the generated editor"></topic>
+</topic>
+<topic href="help/getting-started-xpand.html" label="Writing a code generator">
+<topic href="help/getting-started-xpand.html#Creatingthemaintemplate" label="Creating the main template"></topic>
+<topic href="help/getting-started-xpand.html#Creatingthetemplatefortheentity" label="Creating the template for the entity"></topic>
+<topic href="help/getting-started-xpand.html#CreatingthetemplatefortheDAO" label="Creating the template for the DAO"></topic>
+<topic href="help/getting-started-xpand.html#Adjustingthegeneratorworkflow" label="Adjusting the generator workflow"></topic>
+<topic href="help/getting-started-xpand.html#Runningthegenerator" label="Running the generator"></topic>
 </topic>
 </topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
@@ -151,6 +160,9 @@
 <topic href="help/highlighting.html" label="Syntax Coloring">
 <topic href="help/highlighting.html#LexicalHighlighting" label="Lexical Highlighting"></topic>
 <topic href="help/highlighting.html#SemanticHighlighting" label="Semantic Highlighting"></topic>
+</topic>
+<topic href="help/projectwizard.html" label="Project Wizard">
+<topic href="help/projectwizard.html#Customizingtheprojectwizard" label="Customizing the project wizard"></topic>
 </topic>
 </topic>
 <topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">

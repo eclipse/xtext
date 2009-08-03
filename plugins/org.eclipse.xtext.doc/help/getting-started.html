@@ -5,14 +5,25 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="Overview.html" title="Overview">
+<link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="DSL.html" title="What is a domain-specific language">
-<link rel="next" href="grammarLanguage.html" title="The Grammar Language">
+<link rel="next" href="getting-started-xpand.html" title="Writing a code generator">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
-<p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
-				<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
+<p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them.</p>
+<div class="section" title="Creating a DSL">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="getting-started-xtext"></a>Creating a DSL  </h2>
+</div>
+</div>
+</div>
+<p>
+				
+<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -57,9 +68,13 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>Use the Xtext wizard to create a new project</p>
-<p>	File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</p>
-<p>Choose a sensible project name, language name and file extension, e.g.</p>
-<table id="N10081">
+<p>	
+					
+<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</em></span>
+				
+</p>
+<p>Choose a meaningful project name, language name and file extension, e.g.</p>
+<table id="N1008A">
 <tr>
 						
 <td>
@@ -85,7 +100,10 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Uncheck &ldquo;Create generator project&rdquo;, you will not need it this time. Click on Finish.</p>
+<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
+<p>Click on 
+					<span class="emphasis"><em>Finish</em></span> to create the projects. 
+				</p>
 <p>
 					
 </p>
@@ -104,7 +122,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>In the Package Explorer you can see two new projects. In 
+<p>In the Package Explorer you can see three new projects. In 
 					<code class="code">org.xtext.example.start</code> you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into 
 					<code class="code">org.xtext.example.start.ui</code>. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
 				</p>
@@ -117,6 +135,9 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 				
 </p>
 <p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.</p>
+<p>A third project, 
+					<code class="code">org.xtext.example.start.generator</code> will later contain a code generator that leverages the model created with the DSL editor.
+				</p>
 </div>
 <div class="section" title="Build your own grammar">
 <div class="titlepage">
@@ -288,22 +309,31 @@ SimpleType:<br>
 </div>
 </div>
 <p>Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose</p>
-<p>	Run As -&gt; MWE Workflow.</p>
+<p>	
+					
+<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span>.
+				</p>
 <p>That will trigger the Xtext language generator. You will see its logging messages in the Console view.</p>
 </div>
-<div class="section" title="Test the generated editor">
+<div class="section" title="Run the generated editor">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Testthegeneratededitor"></a>Test the generated editor</h3>
+<a name="Runthegeneratededitor"></a>Run the generated editor</h3>
 </div>
 </div>
 </div>
 <p>If code generation succeeded, right-click on the Xtext project and choose</p>
-<p>	Run As -&gt; Eclipse Application.</p>
+<p>	
+					
+<span class="emphasis"><em>Run As -&gt; Eclipse Application</em></span>.
+				</p>
 <p>This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-					In the new workbench, create a new project (File -&gt; New -&gt; Project...  -&gt; General -&gt; Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.</p>
+					In the new workbench, create a new project (
+					<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; General -&gt; Project</em></span>) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+				</p>
+<p>To get some hands-on experience with your new DSL editor, type in the following model:</p>
 <p>
 					
 </p>
@@ -312,6 +342,7 @@ SimpleType:<br>
 <p>
 				
 </p>
+</div>
 </div>
 </body>
 </html>

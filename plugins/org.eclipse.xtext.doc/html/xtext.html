@@ -32,13 +32,23 @@
 <dt>
 <span class="section"><a href="#DSL">What is a domain-specific language</a></span>
 </dt>
+</dl>
+</dd>
 <dt>
-<span class="section"><a href="#getting-started">Getting Started</a></span>
+<span class="chapter"><a href="#getting-started">2. Getting Started</a></span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section"><a href="#getting-started-xtext">Creating a DSL  </a></span>
+</dt>
+<dt>
+<span class="section"><a href="#getting-started-xpand">Writing a code generator</a></span>
 </dt>
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#grammarLanguage">2. The Grammar Language</a></span>
+<span class="chapter"><a href="#grammarLanguage">3. The Grammar Language</a></span>
 </dt>
 <dd>
 <dl>
@@ -63,7 +73,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#configuration">3. Configuration</a></span>
+<span class="chapter"><a href="#configuration">4. Configuration</a></span>
 </dt>
 <dd>
 <dl>
@@ -76,7 +86,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#RuntimeConcepts">4. Runtime Concepts</a></span>
+<span class="chapter"><a href="#RuntimeConcepts">5. Runtime Concepts</a></span>
 </dt>
 <dd>
 <dl>
@@ -107,7 +117,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#IDEconcepts">5. IDE concepts</a></span>
+<span class="chapter"><a href="#IDEconcepts">6. IDE concepts</a></span>
 </dt>
 <dd>
 <dl>
@@ -132,10 +142,13 @@
 <dt>
 <span class="section"><a href="#highlighting">Syntax Coloring</a></span>
 </dt>
+<dt>
+<span class="section"><a href="#projectwizard">Project Wizard</a></span>
+</dt>
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#from_oaw_to_tmf">6. From oAW to TMF</a></span>
+<span class="chapter"><a href="#from_oaw_to_tmf">7. From oAW to TMF</a></span>
 </dt>
 <dd>
 <dl>
@@ -160,7 +173,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#antlr_ip_issue">7. The ANTLR IP issue (or which parser to use?)</a></span>
+<span class="chapter"><a href="#antlr_ip_issue">8. The ANTLR IP issue (or which parser to use?)</a></span>
 </dt>
 <dd>
 <dl>
@@ -276,17 +289,29 @@
 <p>There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on querying relational databases. Other DSLs are regular expressions or even languages provided by tools like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is to allow for easy creation of new languages. Unfortunately with XML you are not able to change the concrete syntax, which is the major problem with it. The concrete syntax of XML is way too verbose. Also a generic syntax for everything is a compromise.</p>
 <p>Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may be as concise and suggestive as possible being a best match for your particular domain. The hard task of reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.</p>
 </div>
-<div class="section" title="Getting Started">
+</div>
+<div class="chapter" title="Chapter&nbsp;2.&nbsp;Getting Started">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="getting-started"></a>Chapter&nbsp;2.&nbsp;Getting Started</h2>
+</div>
+</div>
+</div>
+<p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them.</p>
+<div class="section" title="Creating a DSL">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="getting-started"></a>Getting Started</h2>
+<a name="getting-started-xtext"></a>Creating a DSL  </h2>
 </div>
 </div>
 </div>
-<p>In this mini-tutorial you will implement your first language with Xtext and create an editor from that. 
-				<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
+<p>
+				
+<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -331,9 +356,13 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>Use the Xtext wizard to create a new project</p>
-<p>	File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</p>
-<p>Choose a sensible project name, language name and file extension, e.g.</p>
-<table id="N10081">
+<p>	
+					
+<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</em></span>
+				
+</p>
+<p>Choose a meaningful project name, language name and file extension, e.g.</p>
+<table id="N1008A">
 <tr>
 						
 <td>
@@ -359,7 +388,10 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Uncheck &ldquo;Create generator project&rdquo;, you will not need it this time. Click on Finish.</p>
+<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
+<p>Click on 
+					<span class="emphasis"><em>Finish</em></span> to create the projects. 
+				</p>
 <p>
 					
 </p>
@@ -378,7 +410,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>In the Package Explorer you can see two new projects. In 
+<p>In the Package Explorer you can see three new projects. In 
 					<code class="code">org.xtext.example.start</code> you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into 
 					<code class="code">org.xtext.example.start.ui</code>. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
 				</p>
@@ -391,6 +423,9 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 				
 </p>
 <p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.</p>
+<p>A third project, 
+					<code class="code">org.xtext.example.start.generator</code> will later contain a code generator that leverages the model created with the DSL editor.
+				</p>
 </div>
 <div class="section" title="Build your own grammar">
 <div class="titlepage">
@@ -562,22 +597,31 @@ SimpleType:<br>
 </div>
 </div>
 <p>Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose</p>
-<p>	Run As -&gt; MWE Workflow.</p>
+<p>	
+					
+<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span>.
+				</p>
 <p>That will trigger the Xtext language generator. You will see its logging messages in the Console view.</p>
 </div>
-<div class="section" title="Test the generated editor">
+<div class="section" title="Run the generated editor">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Testthegeneratededitor"></a>Test the generated editor</h3>
+<a name="Runthegeneratededitor"></a>Run the generated editor</h3>
 </div>
 </div>
 </div>
 <p>If code generation succeeded, right-click on the Xtext project and choose</p>
-<p>	Run As -&gt; Eclipse Application.</p>
+<p>	
+					
+<span class="emphasis"><em>Run As -&gt; Eclipse Application</em></span>.
+				</p>
 <p>This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-					In the new workbench, create a new project (File -&gt; New -&gt; Project...  -&gt; General -&gt; Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.</p>
+					In the new workbench, create a new project (
+					<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; General -&gt; Project</em></span>) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+				</p>
+<p>To get some hands-on experience with your new DSL editor, type in the following model:</p>
 <p>
 					
 </p>
@@ -588,13 +632,290 @@ SimpleType:<br>
 </p>
 </div>
 </div>
+<div class="section" title="Writing a code generator">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="getting-started-xpand"></a>Writing a code generator</h2>
 </div>
-<div class="chapter" title="Chapter&nbsp;2.&nbsp;The Grammar Language">
+</div>
+</div>
+<p>In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed  in the previous section.</p>
+<div class="section" title="Creating the main template">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Creatingthemaintemplate"></a>Creating the main template </h3>
+</div>
+</div>
+</div>
+<p>One of the major goals of model driven software development is to raise the level of abstraction. The concepts in your meta model usually map to several artifacts in your source code. In our sample, we will generate the following things for each entity:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>a data access object (DAO), capable of loading and storing the entities</p>
+</li>
+<li class="listitem">
+<p>a class holding all the attributes of the entity, annotated with JPA annotations</p>
+</li>
+</ul>
+</div>
+<p>To provide for a better overview and to easier manage our code templates, we will choose the following template structure:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Main.xpt &ndash; the main entry point, will dispatch to all other templates</p>
+</li>
+<li class="listitem">
+<p>DAO.xpt &ndash; will generate the 
+							<span class="emphasis"><em>DAO</em></span> class
+						</p>
+</li>
+<li class="listitem">
+<p>Entity.xpt &ndash; will generate the 
+							<span class="emphasis"><em>Entity</em></span> class
+						</p>
+</li>
+</ul>
+</div>
+<p>In the project navigator, right click on 
+					<span class="emphasis"><em>org.xtext.example.start.generator/templates</em></span> and select 
+					<span class="emphasis"><em>New -&gt; Other... -&gt; Xpand Template</em></span>. Name the new template 
+					<code class="code">Main.xpt</code> and click on 
+					<span class="emphasis"><em>Finish</em></span>.
+				</p>
+<p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+</code>
+</p>
+</div>
+<p>Next, we need to define a main template which will be invoked by the code generator. This template will then dispatch to two sub templates, 
+					<code class="code">DAO::dao</code> and 
+					<code class="code">Entity::entity</code>: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>By using the expression 
+					<code class="code">this.types.typeSelect(Entity)</code>, we make sure we only iterate over 
+					<code class="code">Entity</code> elements, and skip 
+					<code class="code">SimpleType</code> elements.
+				</p>
+<p>Your template 
+					<code class="code">Main.xpt</code> should now look like this: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Creating the template for the entity">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Creatingthetemplatefortheentity"></a>Creating the template for the entity</h3>
+</div>
+</div>
+</div>
+<p>Every data-oriented application needs a bunch of classes to hold the data. Usually referred to as entities, these classes are POJOs in our case. So, let&rsquo;s now create a template which helps us to create POJOs from our model.</p>
+<p>Please add another Xpand template to your project by selecting 
+					<span class="emphasis"><em>File -&gt; New -&gt; Other ... -&gt; Xpand Template</em></span>. Name the new file 
+					<code class="code">Entity.xpt</code>, making sure to save it to the same folder as 
+					<code class="code">Main.xpt</code>.
+				</p>
+<p>Add the following code to 
+					<code class="code">Entity.xpt</code>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
+&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;}<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Creating the template for the DAO">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="CreatingthetemplatefortheDAO"></a>Creating the template for the DAO</h3>
+</div>
+</div>
+</div>
+<p>To load entities from a database and save them back, we will need to write some entities, but again, this is something the generator can do for us.</p>
+<p>Create a template 
+					<code class="code">DAO.xpt</code> and insert this text:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
+&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
+&nbsp;&nbsp;}&nbsp;&nbsp;<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
+&nbsp;&nbsp;}<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Adjusting the generator workflow">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Adjustingthegeneratorworkflow"></a>Adjusting the generator workflow</h3>
+</div>
+</div>
+</div>
+<p>You might have noticed the generator workflow 
+					<code class="code">org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> will invoke a template named 
+					<code class="code">Template.xpt</code>, so we need to change this to make sure the right templates get invoked. Open 
+					<code class="code">/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> and make sure it invokes 
+					<code class="code">Main.xpt</code>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+	&lt;component&nbsp;class="org.eclipse.xpand2.Generator"&gt;<br>
+		&lt;metaModel&nbsp;class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/&gt;<br>
+		&lt;fileEncoding&nbsp;value="ISO-8859-1"/&gt;<br>
+		&lt;expand&nbsp;value="templates::Main::main&nbsp;FOR&nbsp;model"/&gt;<br>
+		&lt;genPath&nbsp;value="${targetDir}"/&gt;<br>
+	&lt;/component&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Running the generator">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Runningthegenerator"></a>Running the generator</h3>
+</div>
+</div>
+</div>
+<p>In order to invoke the generator, select 
+					<code class="code">EntitiesGenerator.mwe</code> (in 
+					<code class="code">org.xtext.example.start.generator/src/workflow/</code>) and choose 
+					<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span> from the context menu. You&rsquo;ll see a bunch of log messages in the console view, and after a few seconds, you&rsquo;ll find a number of just generated files in 
+					<code class="code">org.xtext.example.entity.generator/src-gen</code>.
+				</p>
+<p>Please note that you&rsquo;ll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.</p>
+</div>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;3.&nbsp;The Grammar Language">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="grammarLanguage"></a>Chapter&nbsp;2.&nbsp;The Grammar Language</h2>
+<a name="grammarLanguage"></a>Chapter&nbsp;3.&nbsp;The Grammar Language</h2>
 </div>
 </div>
 </div>
@@ -2202,12 +2523,12 @@ terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;3.&nbsp;Configuration">
+<div class="chapter" title="Chapter&nbsp;4.&nbsp;Configuration">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="configuration"></a>Chapter&nbsp;3.&nbsp;Configuration</h2>
+<a name="configuration"></a>Chapter&nbsp;4.&nbsp;Configuration</h2>
 </div>
 </div>
 </div>
@@ -2505,11 +2826,12 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10710">
+<table id="N107E0">
 <tr>
 						
 <th>Class</th>
 						<th>Generated Artifacts</th>
+						<th>Related Documentation</th>
 					
 </tr>
 <tr>
@@ -2518,12 +2840,15 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>
 						</td>
 						<td>EMF code for generated models</td>
+						<td>
+							<a class="link" href="#metamodelInference" title="Ecore model inference">Model inference</a>
+						</td>
 					
 </tr>
 <tr>
 						
 <td>XtextAntlrGeneratorFragment</td>
-						<td>ANTLR grammar, parser, lexer and related services.</td>
+						<td>ANTLR grammar, parser, lexer and related services</td>
 					
 </tr>
 <tr>
@@ -2548,6 +2873,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java?root=Modeling_Project&view=co" target="_new">ParseTreeConstructorFragment</a>
 						</td>
 						<td>Model-to-text serialization</td>
+						<td>
+							<a class="link" href="#serialization" title="Serialization">Serialization</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2556,6 +2884,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/JavaScopingFragment.java?root=Modeling_Project&view=co" target="_new">JavaScopingFragment</a>
 						</td>
 						<td>Java-based scoping</td>
+						<td>
+							<a class="link" href="#scoping" title="Scoping">Java-based scoping</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2564,6 +2895,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java?root=Modeling_Project&view=co" target="_new">JavaValidatorFragment</a>
 						</td>
 						<td>Java-based model validation</td>
+						<td>
+							<a class="link" href="#custom_validation" title="Custom Validation">Java-based validation</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2572,6 +2906,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/CheckFragment.java?root=Modeling_Project&view=co" target="_new">CheckFragment</a>
 						</td>
 						<td>Xpand/Check-based model validation</td>
+						<td>
+							<a class="link" href="#check_based_validation" title="Validation with the Check language">Check-based validation</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2580,6 +2917,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java?root=Modeling_Project&view=co" target="_new">FormatterFragment</a>
 						</td>
 						<td>Code formatter</td>
+						<td>
+							<a class="ulink" href="declarativeformatter" target="_new">Declarative formatter</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2588,6 +2928,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>
 						</td>
 						<td>Label provider</td>
+						<td>
+							<a class="link" href="#labelProvider" title="Label Provider">Label provider</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2596,6 +2939,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineNodeAdapterFactoryFragment.java?root=Modeling_Project&view=co" target="_new">OutlineNodeAdapterFactoryFragment</a>
 						</td>
 						<td>Outline view configuration</td>
+						<td>
+							<a class="link" href="#outline" title="Outline View">Outline</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2604,6 +2950,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/TransformerFragment.java?root=Modeling_Project&view=co" target="_new">TransformerFragment</a>
 						</td>
 						<td>Outline view configuration</td>
+						<td>
+							<a class="link" href="#outline" title="Outline View">Outline</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2612,12 +2961,18 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java?root=Modeling_Project&view=co" target="_new">JavaBasedContentAssistFragment</a>
 						</td>
 						<td>Java-based content assist</td>
+						<td>
+							<a class="link" href="#contentAssist" title="Content Assist">Content assist</a>
+						</td>
 					
 </tr>
 <tr>
 						
 <td>XtextAntlrUiGeneratorFragment</td>
 						<td>Content assist helper based on ANTLR</td>
+						<td>
+							<a class="link" href="#contentAssist" title="Content Assist">Content assist</a>
+						</td>
 					
 </tr>
 <tr>
@@ -2626,6 +2981,9 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&view=co" target="_new">SimpleProjectWizardFragment</a>
 						</td>
 						<td>New project wizard</td>
+						<td>
+							<a class="link" href="#projectwizard" title="Project Wizard">Project wizard</a>
+						</td>
 					
 </tr>
 </table>
@@ -2634,7 +2992,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <span class="italic">
 						<span class="bold"><strong>Important</strong></span> Due to
 					</span> 
-					<a class="link" href="#antlr_ip_issue" title="Chapter&nbsp;7.&nbsp;The ANTLR IP issue (or which parser to use?)">IP-Problems</a> 
+					<a class="link" href="#antlr_ip_issue" title="Chapter&nbsp;8.&nbsp;The ANTLR IP issue (or which parser to use?)">IP-Problems</a> 
 					<span class="italic">with the code generator shipped with ANTLR 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the update site at 
 						<span class="bold"><strong>http://download.itemis.com/updates/</strong></span>.
 					</span>
@@ -2939,12 +3297,12 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;4.&nbsp;Runtime Concepts">
+<div class="chapter" title="Chapter&nbsp;5.&nbsp;Runtime Concepts">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="RuntimeConcepts"></a>Chapter&nbsp;4.&nbsp;Runtime Concepts</h2>
+<a name="RuntimeConcepts"></a>Chapter&nbsp;5.&nbsp;Runtime Concepts</h2>
 </div>
 </div>
 </div>
@@ -3718,7 +4076,8 @@ entity&nbsp;Foo;<br>
 </div>
 <p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
 				The primary hook is called 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicecustomize.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime 
+				<a class="link" href="#guicecustomize" title="Changing Configuration">Guice module</a>.
 				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
 <div class="literallayout">
@@ -3743,7 +4102,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 </div>
 </div>
 <p>The most simple way to register additional value converters is to make use of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractAnnotationBasedValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractAnnotationBasedValueConverterService</a>, which allows to
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValueConverterService</a>, which allows to
 					declaratively register an 
 					<code class="code">IValueConverter</code> via an annotated method. 
 				</p>
@@ -3751,7 +4110,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;class&nbsp;DefaultTerminalConverters&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;AbstractAnnotationBasedValueConverterService&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;AbstractDeclarativeValueConverterService&nbsp;{<br>
 &nbsp;&nbsp;<br>
 &nbsp;&nbsp;(..)<br>
 &nbsp;&nbsp;<br>
@@ -3766,7 +4125,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;String&nbsp;internalToString(String&nbsp;value)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(GrammarUtil.getAllKeywords(getGrammar()).contains(value))&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"^"+value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"^"&nbsp;+&nbsp;value;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;value;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
@@ -3881,7 +4240,7 @@ public&nbsp;IValueConverter&lt;BigDecimal&gt;&nbsp;BIG_DECIMAL()&nbsp;{<br>
 </div>
 </div>
 <p>The parse tree constructor usually does not need to be customized since it is automatically derived from the 
-					<a class="link" href="#grammarLanguage" title="Chapter&nbsp;2.&nbsp;The Grammar Language">Xtext Grammar</a>. However, it can be a good idea to look into it to understand its error messages and its runtime performance.
+					<a class="link" href="#grammarLanguage" title="Chapter&nbsp;3.&nbsp;The Grammar Language">Xtext Grammar</a>. However, it can be a good idea to look into it to understand its error messages and its runtime performance.
 				</p>
 <p>For serialization to succeed, the parse tree constructor must be able to 
 					<span class="emphasis"><em>consume</em></span> every element of the to-be-serialized EMF model. To 
@@ -4190,12 +4549,12 @@ terminal&nbsp;Plural:&nbsp;<br>
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;5.&nbsp;IDE concepts">
+<div class="chapter" title="Chapter&nbsp;6.&nbsp;IDE concepts">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="IDEconcepts"></a>Chapter&nbsp;5.&nbsp;IDE concepts</h2>
+<a name="IDEconcepts"></a>Chapter&nbsp;6.&nbsp;IDE concepts</h2>
 </div>
 </div>
 </div>
@@ -5455,13 +5814,86 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 				</p>
 </div>
 </div>
+<div class="section" title="Project Wizard">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="projectwizard"></a>Project Wizard</h2>
 </div>
-<div class="chapter" title="Chapter&nbsp;6.&nbsp;From oAW to TMF">
+</div>
+</div>
+<p>Optionally Xtext can also generate a project wizard for your DSL. Using this wizard a user can then with only a few clicks create a new project containing a sample model file and workflow. You enable the project wizard generation by adding the 
+				<code class="code">SimpleProjectWizardFragment</code> fragment to the 
+				<a class="link" href="#generator_fragment" title="Generator Fragments">workflow</a>:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&lt;!--&nbsp;project&nbsp;wizard&nbsp;fragment&nbsp;--&gt;<br>
+&lt;fragment&nbsp;class="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment"<br>
+	generatorProjectName="${projectName}.generator"<br>
+	modelFileExtension="mydsl"/&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Here:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>the 
+						<code class="code">generatorProjectName</code> attribute is used to specify the generator project containing the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project
+					</p>
+</li>
+<li class="listitem">
+<p>and the 
+						<code class="code">modelFileExtension</code> specifies the default file extension associated with your DSL. When the user clicks the 
+						<span class="emphasis"><em>Finish</em></span> button the project wizard will look for a file with the given extension in the created project and open it in the DSL editor. 
+					</p>
+</li>
+</ul>
+</div>
+<p>After running the Xtext generator the DSL&rsquo;s UI project will contain a new Xpand template 
+				<code class="code">MyDslNewProject.xpt</code> inside the 
+				<code class="code">src</code> folder (under the package 
+				<code class="code">&lt;base-package&gt;.ui.wizard</code>). This workflow will be run by the project wizard when the user clicks the 
+				<span class="emphasis"><em>Finish</em></span> button and it is responsible for initializing the project with some sample content. The default Xpand template generated by the fragment will when executed by the wizard create a sample model file and a simple workflow to run the model through the generator project&rsquo;s 
+				<code class="code">MyDslGenerator.mwe</code> workflow. As the Xpand template is in the 
+				<code class="code">src</code> source folder you may of course modify it to generate whatever files you want. Just make sure to leave the top-level 
+				<code class="code">main</code> definition in place, as that is the interface for the project wizard.
+			</p>
+<div class="section" title="Customizing the project wizard">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Customizingtheprojectwizard"></a>Customizing the project wizard</h3>
+</div>
+</div>
+</div>
+<p>To further customize the creation of the project (e.g. add a nature and a builder or some additional dependencies) you can implement your own 
+					<span class="emphasis"><em>project creator</em></span>. The default project creator is represented by the generated class 
+					<code class="code">MyDslProjectCreator</code> (suitable for subclassing) and will simply create a new project with Java and plug-in natures and execute the 
+					<code class="code">main</code> definition of the Xpand template as described above.
+				</p>
+<p>To add more pages or input fields to the project wizard you should subclass the class 
+					<code class="code">MyDslNewProjectWizard</code> as appropriate. Don&rsquo;t forget to register the subclass in the UI project&rsquo;s 
+					<code class="code">plugin.xml</code>. You may also want to make this additional project info available to the Xpand template, in which case you should create a subclass for 
+					<code class="code">MyDslProjectInfo</code> to hold that information, as this is the context object which gets passed to the template when it&rsquo;s executed.
+				</p>
+</div>
+</div>
+</div>
+<div class="chapter" title="Chapter&nbsp;7.&nbsp;From oAW to TMF">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="from_oaw_to_tmf"></a>Chapter&nbsp;6.&nbsp;From oAW to TMF</h2>
+<a name="from_oaw_to_tmf"></a>Chapter&nbsp;7.&nbsp;From oAW to TMF</h2>
 </div>
 </div>
 </div>
@@ -5929,7 +6361,7 @@ public&nbsp;class&nbsp;DomainModelLabelProvider&nbsp;extends&nbsp;DefaultLabelPr
 </div>
 </div>
 <p>The Xtext grammar language introduces some new features, too. Read the chapter 
-					<a class="link" href="#grammarLanguage" title="Chapter&nbsp;2.&nbsp;The Grammar Language">grammar language</a> to understand the details about all the improvements that have been implemented.
+					<a class="link" href="#grammarLanguage" title="Chapter&nbsp;3.&nbsp;The Grammar Language">grammar language</a> to understand the details about all the improvements that have been implemented.
 				</p>
 <p>
 					
@@ -5997,12 +6429,12 @@ public&nbsp;class&nbsp;DomainModelLabelProvider&nbsp;extends&nbsp;DefaultLabelPr
 <p>That said you might not have the time to do the migration and wished to have advice for migrating, especially from oAW linking to TMF linking. You&rsquo;re welcome to ask any questions in the newsgroup and we&rsquo;ll try to help you as much as possible in order to get your projects migrated. Also, if you don&rsquo;t want to do the migration yourself we (itemis AG) can do the work for you or help you with that. </p>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;7.&nbsp;The ANTLR IP issue (or which parser to use?)">
+<div class="chapter" title="Chapter&nbsp;8.&nbsp;The ANTLR IP issue (or which parser to use?)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="antlr_ip_issue"></a>Chapter&nbsp;7.&nbsp;The ANTLR IP issue (or which parser to use?)</h2>
+<a name="antlr_ip_issue"></a>Chapter&nbsp;8.&nbsp;The ANTLR IP issue (or which parser to use?)</h2>
 </div>
 </div>
 </div>

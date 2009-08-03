@@ -1,0 +1,282 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Writing a code generator</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="getting-started.html" title="Getting Started">
+<link rel="prev" href="getting-started.html" title="Getting Started">
+<link rel="next" href="grammarLanguage.html" title="The Grammar Language">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Writing a code generator</h1>
+<p>In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed  in the previous section.</p>
+<div class="section" title="Creating the main template">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Creatingthemaintemplate"></a>Creating the main template </h3>
+</div>
+</div>
+</div>
+<p>One of the major goals of model driven software development is to raise the level of abstraction. The concepts in your meta model usually map to several artifacts in your source code. In our sample, we will generate the following things for each entity:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>a data access object (DAO), capable of loading and storing the entities</p>
+</li>
+<li class="listitem">
+<p>a class holding all the attributes of the entity, annotated with JPA annotations</p>
+</li>
+</ul>
+</div>
+<p>To provide for a better overview and to easier manage our code templates, we will choose the following template structure:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Main.xpt &ndash; the main entry point, will dispatch to all other templates</p>
+</li>
+<li class="listitem">
+<p>DAO.xpt &ndash; will generate the 
+							<span class="emphasis"><em>DAO</em></span> class
+						</p>
+</li>
+<li class="listitem">
+<p>Entity.xpt &ndash; will generate the 
+							<span class="emphasis"><em>Entity</em></span> class
+						</p>
+</li>
+</ul>
+</div>
+<p>In the project navigator, right click on 
+					<span class="emphasis"><em>org.xtext.example.start.generator/templates</em></span> and select 
+					<span class="emphasis"><em>New -&gt; Other... -&gt; Xpand Template</em></span>. Name the new template 
+					<code class="code">Main.xpt</code> and click on 
+					<span class="emphasis"><em>Finish</em></span>.
+				</p>
+<p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+</code>
+</p>
+</div>
+<p>Next, we need to define a main template which will be invoked by the code generator. This template will then dispatch to two sub templates, 
+					<code class="code">DAO::dao</code> and 
+					<code class="code">Entity::entity</code>: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>By using the expression 
+					<code class="code">this.types.typeSelect(Entity)</code>, we make sure we only iterate over 
+					<code class="code">Entity</code> elements, and skip 
+					<code class="code">SimpleType</code> elements.
+				</p>
+<p>Your template 
+					<code class="code">Main.xpt</code> should now look like this: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Creating the template for the entity">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Creatingthetemplatefortheentity"></a>Creating the template for the entity</h3>
+</div>
+</div>
+</div>
+<p>Every data-oriented application needs a bunch of classes to hold the data. Usually referred to as entities, these classes are POJOs in our case. So, let&rsquo;s now create a template which helps us to create POJOs from our model.</p>
+<p>Please add another Xpand template to your project by selecting 
+					<span class="emphasis"><em>File -&gt; New -&gt; Other ... -&gt; Xpand Template</em></span>. Name the new file 
+					<code class="code">Entity.xpt</code>, making sure to save it to the same folder as 
+					<code class="code">Main.xpt</code>.
+				</p>
+<p>Add the following code to 
+					<code class="code">Entity.xpt</code>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
+&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;}<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Creating the template for the DAO">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="CreatingthetemplatefortheDAO"></a>Creating the template for the DAO</h3>
+</div>
+</div>
+</div>
+<p>To load entities from a database and save them back, we will need to write some entities, but again, this is something the generator can do for us.</p>
+<p>Create a template 
+					<code class="code">DAO.xpt</code> and insert this text:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
+&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
+&nbsp;&nbsp;}&nbsp;&nbsp;<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
+&nbsp;&nbsp;}<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Adjusting the generator workflow">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Adjustingthegeneratorworkflow"></a>Adjusting the generator workflow</h3>
+</div>
+</div>
+</div>
+<p>You might have noticed the generator workflow 
+					<code class="code">org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> will invoke a template named 
+					<code class="code">Template.xpt</code>, so we need to change this to make sure the right templates get invoked. Open 
+					<code class="code">/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> and make sure it invokes 
+					<code class="code">Main.xpt</code>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+	&lt;component&nbsp;class="org.eclipse.xpand2.Generator"&gt;<br>
+		&lt;metaModel&nbsp;class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/&gt;<br>
+		&lt;fileEncoding&nbsp;value="ISO-8859-1"/&gt;<br>
+		&lt;expand&nbsp;value="templates::Main::main&nbsp;FOR&nbsp;model"/&gt;<br>
+		&lt;genPath&nbsp;value="${targetDir}"/&gt;<br>
+	&lt;/component&gt;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Running the generator">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Runningthegenerator"></a>Running the generator</h3>
+</div>
+</div>
+</div>
+<p>In order to invoke the generator, select 
+					<code class="code">EntitiesGenerator.mwe</code> (in 
+					<code class="code">org.xtext.example.start.generator/src/workflow/</code>) and choose 
+					<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span> from the context menu. You&rsquo;ll see a bunch of log messages in the console view, and after a few seconds, you&rsquo;ll find a number of just generated files in 
+					<code class="code">org.xtext.example.entity.generator/src-gen</code>.
+				</p>
+<p>Please note that you&rsquo;ll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.</p>
+</div>
+</body>
+</html>

@@ -13,7 +13,8 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Value Converter</h1>
 <p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
 				The primary hook is called 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime &ldquo;Guice module&rdquo;#guicecustomize.
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime 
+				<a class="link" href="dependencyInjection.html#guicecustomize" title="Changing Configuration">Guice module</a>.
 				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
 <div class="literallayout">
@@ -38,7 +39,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 </div>
 </div>
 <p>The most simple way to register additional value converters is to make use of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractAnnotationBasedValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractAnnotationBasedValueConverterService</a>, which allows to
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValueConverterService</a>, which allows to
 					declaratively register an 
 					<code class="code">IValueConverter</code> via an annotated method. 
 				</p>
@@ -46,7 +47,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;class&nbsp;DefaultTerminalConverters&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;AbstractAnnotationBasedValueConverterService&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;AbstractDeclarativeValueConverterService&nbsp;{<br>
 &nbsp;&nbsp;<br>
 &nbsp;&nbsp;(..)<br>
 &nbsp;&nbsp;<br>
@@ -61,7 +62,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;String&nbsp;internalToString(String&nbsp;value)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(GrammarUtil.getAllKeywords(getGrammar()).contains(value))&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"^"+value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;"^"&nbsp;+&nbsp;value;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;value;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
