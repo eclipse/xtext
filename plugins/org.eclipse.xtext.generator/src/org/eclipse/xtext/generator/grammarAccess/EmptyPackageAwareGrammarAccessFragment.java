@@ -15,6 +15,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -65,7 +66,8 @@ public class EmptyPackageAwareGrammarAccessFragment extends AbstractGeneratorFra
 		// save grammar model
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(copy);
 		Resource resource = set.createResource(
-				URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + xmiPath));
+				URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + xmiPath), 
+				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copy, new HashSet<Grammar>());
 		isSaving.set(Boolean.TRUE);
 		try {
@@ -128,7 +130,9 @@ public class EmptyPackageAwareGrammarAccessFragment extends AbstractGeneratorFra
 				if (sub.getEClassifiers().isEmpty()) {
 					moveSubpackagesToNewResource(sub, set);
 				} else {
-					Resource resource = set.createResource(URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX));
+					Resource resource = set.createResource(
+							URI.createURI("___temp___." + FragmentFakingEcoreResourceFactoryImpl.ECORE_SUFFIX), 
+							ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 					resource.setURI(URI.createURI(sub.getNsURI()));
 					resource.getContents().add(sub);
 					pack.getESubpackages().remove(i);

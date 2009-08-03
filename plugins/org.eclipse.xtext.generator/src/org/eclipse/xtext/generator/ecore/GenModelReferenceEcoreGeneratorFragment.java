@@ -23,6 +23,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -88,7 +89,7 @@ public class GenModelReferenceEcoreGeneratorFragment extends AbstractEcoreGenera
 		try {
 			String prefix = new File(xmiPath).getCanonicalPath() + "/" + modelName;
 			URI ecoreResourceURI = URI.createFileURI(prefix + ".ecore");
-			ecoreResource = rs.createResource(ecoreResourceURI);
+			ecoreResource = rs.createResource(ecoreResourceURI, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 			ecoreResource.getContents().addAll(packs);
 			ecoreResource.save(null);
 			if (getReferencedGenModel() != null) {
