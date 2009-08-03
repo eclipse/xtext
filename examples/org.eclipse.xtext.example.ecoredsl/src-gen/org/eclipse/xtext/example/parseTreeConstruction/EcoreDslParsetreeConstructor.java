@@ -1867,6 +1867,7 @@ protected class EClassDecl_Alternatives_2 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EClassDecl_InterfaceAssignment_2_0(parent, this, 0, inst);
+			case 1: return new EClassDecl_ClassKeyword_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -1903,6 +1904,27 @@ protected class EClassDecl_InterfaceAssignment_2_0 extends AssignmentToken  {
 		return null;
 	}
 
+}
+
+// "class"
+protected class EClassDecl_ClassKeyword_2_1 extends KeywordToken  {
+	
+	public EClassDecl_ClassKeyword_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEClassDeclAccess().getClassKeyword_2_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EClassDecl_AbstractAssignment_1(parent, this, 0, inst);
+			case 1: return new EClassDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
+			default: return parent.createParentFollower(this, index, index - 2, inst);
+		}	
+	}	
+		
 }
 
 
@@ -3725,6 +3747,7 @@ protected class EReferenceDecl_Alternatives_2 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EReferenceDecl_ContainmentAssignment_2_0(parent, this, 0, inst);
+			case 1: return new EReferenceDecl_RefKeyword_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -3761,6 +3784,27 @@ protected class EReferenceDecl_ContainmentAssignment_2_0 extends AssignmentToken
 		return null;
 	}
 
+}
+
+// "ref"
+protected class EReferenceDecl_RefKeyword_2_1 extends KeywordToken  {
+	
+	public EReferenceDecl_RefKeyword_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEReferenceDeclAccess().getRefKeyword_2_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
+			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
+			default: return parent.createParentFollower(this, index, index - 2, inst);
+		}	
+	}	
+		
 }
 
 
@@ -5848,6 +5892,7 @@ protected class EOperationDecl_Alternatives_3 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EOperationDecl_EGenericTypeAssignment_3_0(parent, this, 0, inst);
+			case 1: return new EOperationDecl_VoidKeyword_3_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -5894,6 +5939,26 @@ protected class EOperationDecl_EGenericTypeAssignment_3_0 extends AssignmentToke
 			default: return null;
 		}	
 	}	
+}
+
+// "void"
+protected class EOperationDecl_VoidKeyword_3_1 extends KeywordToken  {
+	
+	public EOperationDecl_VoidKeyword_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEOperationDeclAccess().getVoidKeyword_3_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EOperationDecl_OpKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 
