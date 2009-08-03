@@ -1,0 +1,133 @@
+h2(#getting-started-xpand). Writing a code generator
+
+In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed  in the previous section.
+
+h3. Creating the main template 
+
+One of the major goals of model driven software development is to raise the level of abstraction. The concepts in your meta model usually map to several artifacts in your source code. In our sample, we will generate the following things for each entity:
+* a data access object (DAO), capable of loading and storing the entities
+* a class holding all the attributes of the entity, annotated with JPA annotations
+
+To provide for a better overview and to easier manage our code templates, we will choose the following template structure:
+* Main.xpt - the main entry point, will dispatch to all other templates
+* DAO.xpt - will generate the _DAO_ class
+* Entity.xpt - will generate the _Entity_ class
+
+In the project navigator, right click on _org.xtext.example.start.generator/templates_ and select _New -> Other... -> Xpand Template_. Name the new template @Main.xpt@ and click on _Finish_.
+
+First, we need to import the meta model, as we're going to be working with the concepts from the meta model:
+
+bc. 
+«IMPORT entities»
+
+Next, we need to define a main template which will be invoked by the code generator. This template will then dispatch to two sub templates, @DAO::dao@ and @Entity::entity@: 
+
+bc.. 
+«DEFINE main FOR Model»
+  «EXPAND DAO::dao FOREACH this.types.typeSelect(Entity)»
+  «EXPAND Entity::entity FOREACH this.types.typeSelect(Entity)»
+«ENDDEFINE»
+
+p. By using the expression @this.types.typeSelect(Entity)@, we make sure we only iterate over @Entity@ elements, and skip @SimpleType@ elements.
+
+p. Your template @Main.xpt@ should now look like this: 
+
+bc.. 
+«IMPORT entities»
+«DEFINE main FOR Model»
+  «EXPAND DAO::dao FOREACH this.types.typeSelect(Entity)»
+  «EXPAND Entity::entity FOREACH this.types.typeSelect(Entity)»
+«ENDDEFINE»
+
+
+h3. Creating the template for the entity
+
+Every data-oriented application needs a bunch of classes to hold the data. Usually referred to as entities, these classes are POJOs in our case. So, let's now create a template which helps us to create POJOs from our model.
+
+Please add another Xpand template to your project by selecting _File -> New -> Other ... -> Xpand Template_. Name the new file @Entity.xpt@, making sure to save it to the same folder as @Main.xpt@.
+
+Add the following code to @Entity.xpt@:
+
+bc.. 
+«IMPORT entities»
+
+«DEFINE entity FOR Entity»
+  «FILE this.name + ".java"»
+    public class «this.name» {
+      «EXPAND property FOREACH this.properties»
+    }
+  «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE property FOR Property»
+  private «this.type.name» «this.name»;
+
+  public void set«this.name.toFirstUpper()»(«this.type.name» «this.name») {
+    this.«this.name» = «this.name»;
+  }
+
+  public «this.type.name» get«this.name.toFirstUpper()»() {
+    return this.«this.name»;
+  }
+«ENDDEFINE»
+
+h3. Creating the template for the DAO
+
+To load entities from a database and save them back, we will need to write some entities, but again, this is something the generator can do for us.
+
+Create a template @DAO.xpt@ and insert this text:
+
+bc.. 
+«IMPORT entities»
+
+«DEFINE dao FOR Entity»
+  «FILE this.name + "DAO.java"»
+    import java.util.Collection;
+    import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+    public class «this.name»DAO
+      extends HibernateDaoSupport {
+      «EXPAND crud FOR this»
+    }
+  «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE crud FOR Entity»
+  public «this.name» load(Long id) {
+    return («this.name»)getHibernateTemplate().get(«this.name».class, id);
+  }
+
+  @SuppressWarnings("unchecked")
+  public Collection<«this.name»> loadAll() {
+    return getHibernateTemplate().loadAll(«this.name».class);
+  }  
+
+  public «this.name» create(«this.name» entity) {
+    return («this.name») getHibernateTemplate().save(entity);
+  }
+
+  public void update(«this.name» entity) {
+    getHibernateTemplate().update(entity);
+  }
+
+  public void remove(«this.name» entity) {
+    getHibernateTemplate().delete(entity);
+  }
+«ENDDEFINE»
+
+h3. Adjusting the generator workflow
+
+You might have noticed the generator workflow @org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ will invoke a template named @Template.xpt@, so we need to change this to make sure the right templates get invoked. Open @/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ and make sure it invokes @Main.xpt@:
+
+bc.. 
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+		<fileEncoding value="ISO-8859-1"/>
+		<expand value="templates::Main::main FOR model"/>
+		<genPath value="${targetDir}"/>
+	</component>
+
+h3. Running the generator
+
+In order to invoke the generator, select @EntitiesGenerator.mwe@ (in @org.xtext.example.start.generator/src/workflow/@) and choose _Run As -> MWE Workflow_ from the context menu. You'll see a bunch of log messages in the console view, and after a few seconds, you'll find a number of just generated files in @org.xtext.example.entity.generator/src-gen@.
+
+Please note that you'll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.

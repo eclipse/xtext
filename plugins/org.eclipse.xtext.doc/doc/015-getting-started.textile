@@ -1,6 +1,10 @@
-h2(#getting-started). Getting Started
+h1(#getting-started). Getting Started
 
-In this mini-tutorial you will implement your first language with Xtext and create an editor from that. "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
+In this mini-tutorial you will implement your first language with Xtext and create an editor from that. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them.
+
+h2(#getting-started-xtext). Creating a DSL  
+
+"Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
 
 bc.. type String
 type Bool
@@ -28,25 +32,29 @@ h3. Create an Xtext project
 
 Use the Xtext wizard to create a new project
 
-	File -> New -> Project...  -> Xtext -> Xtext project
+	_File -> New -> Project...  -> Xtext -> Xtext project_
 
-Choose a sensible project name, language name and file extension, e.g.
+Choose a meaningful project name, language name and file extension, e.g.
 
 | *Main project name:* 	|	org.xtext.example.start	|
 | *Language name:* 		|	org.xtext.example.Entities	|
 | *DSL-File extension:* 	|	entity	|
 
-Uncheck "Create generator project", you will not need it this time. Click on Finish.
+Keep "Create generator project" checked, as we will also create a code generator in a second step.
+
+Click on _Finish_ to create the projects. 
 
 !images/getting-started-wizard.png!
 
 h3. Project layout
 
-In the Package Explorer you can see two new projects. In @org.xtext.example.start@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.xtext.example.start.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
+In the Package Explorer you can see three new projects. In @org.xtext.example.start@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.xtext.example.start.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
 
 !images/getting-started-project-layout.png!
 
 It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.
+
+A third project, @org.xtext.example.start.generator@ will later contain a code generator that leverages the model created with the DSL editor.
 
 h3. Build your own grammar
 
@@ -115,17 +123,20 @@ h3. Generate language artifacts
 
 Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose
 
-	Run As -> MWE Workflow.
+	_Run As -> MWE Workflow_.
 	
 That will trigger the Xtext language generator. You will see its logging messages in the Console view.
 
-h3. Test the generated editor
+h3. Run the generated editor
 
 If code generation succeeded, right-click on the Xtext project and choose
  
-	Run As -> Eclipse Application.
+	_Run As -> Eclipse Application_.
 	
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-In the new workbench, create a new project (File -> New -> Project...  -> General -> Project) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+In the new workbench, create a new project (_File -> New -> Project...  -> General -> Project_) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
+
+To get some hands-on experience with your new DSL editor, type in the following model:
 
 !images/getting-started-editor.png!
+

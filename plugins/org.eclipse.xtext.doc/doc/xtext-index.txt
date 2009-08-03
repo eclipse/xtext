@@ -2,6 +2,7 @@
 010-concepts.textile
 
 015-getting-started.textile
+017-getting-started-xpand.textile
 
 020-grammar-language.textile
 
