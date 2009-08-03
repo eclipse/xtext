@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
-Bundle-Version: 0.7.1.qualifier
+Bundle-Version: 0.7.2.qualifier
 Bundle-Activator: org.eclipse.xtext.logging.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui,
