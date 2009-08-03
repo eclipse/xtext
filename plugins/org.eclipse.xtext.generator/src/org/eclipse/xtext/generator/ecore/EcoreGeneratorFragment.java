@@ -28,6 +28,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -144,8 +145,8 @@ public class EcoreGeneratorFragment extends AbstractEcoreGeneratorFragment {
 		String modelName = grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
 		try {
 			String prefix = new File(xmiPath).getCanonicalPath() + "/" + modelName;
-			res2 = rs.createResource(URI.createFileURI(prefix + ".ecore"));
-			res = rs.createResource(URI.createFileURI(prefix + ".genmodel"));
+			res2 = rs.createResource(URI.createFileURI(prefix + ".ecore"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+			res = rs.createResource(URI.createFileURI(prefix + ".genmodel"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		}
 		catch (IOException e1) {
 			throw new IllegalStateException("Couldn't compute canonical path for "

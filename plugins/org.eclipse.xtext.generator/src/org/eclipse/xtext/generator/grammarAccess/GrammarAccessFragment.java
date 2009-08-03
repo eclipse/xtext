@@ -15,6 +15,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -28,10 +29,9 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
- * An {@link IGeneratorFragment} to create a grammar access class for an Xtext language.
+ * An {@link org.eclipse.xtext.generator.IGeneratorFragment} to create a grammar access class for an Xtext language.
  *  
  * @author koehnlein
  */
@@ -61,7 +61,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		// save grammar model
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
 		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
-				+ "/" + xmiPath));
+				+ "/" + xmiPath), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, grammar, new HashSet<Grammar>());
 		try {
 			resource.save(null);

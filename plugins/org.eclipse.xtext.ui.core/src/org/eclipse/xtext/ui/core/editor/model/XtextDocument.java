@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -97,10 +98,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 			}
 		}
 
-		aResource = resourceSet.createResource(uri);
+		aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + path
-					+ " is not an XtextResourceFactory. Make sure the right resource factory has been registered.");
+					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
 		resource = (XtextResource) aResource;
 		if (resource instanceof LazyLinkingResource)
 			((LazyLinkingResource) resource).setEagerLinking(true);

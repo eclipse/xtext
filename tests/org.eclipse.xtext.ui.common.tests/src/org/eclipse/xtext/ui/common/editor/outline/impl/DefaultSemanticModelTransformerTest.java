@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.text.Region;
@@ -59,7 +60,8 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		Resource resource = resourceSet.createResource(URI
-				.createURI("classpath:/org/eclipse/xtext/ui/common/editor/outline/impl/simplestructure.xmi"));
+				.createURI("classpath:/org/eclipse/xtext/ui/common/editor/outline/impl/simplestructure.xmi"), 
+				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		resource.load(null);
 		root = resource.getContents().get(0);
 		a1 = root.eContents().get(0);
