@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -942,7 +943,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		with(new XtextStandaloneSetup());
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("classpath:/"+getClass().getPackage().getName().replace('.', '/')+"/Test.xtext"));
+		XtextResource resource = (XtextResource) rs.createResource(
+				URI.createURI("classpath:/"+getClass().getPackage().getName().replace('.', '/')+"/Test.xtext"), 
+				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		resource.load(null);
 		for(Diagnostic d: resource.getErrors()) {
 			fail(d.getMessage());

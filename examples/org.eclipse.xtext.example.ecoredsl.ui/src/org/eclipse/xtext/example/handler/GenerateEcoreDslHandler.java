@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
@@ -52,7 +53,7 @@ public class GenerateEcoreDslHandler extends AbstractHandler {
 		URI fileURI = URI.createFileURI(new java.io.File(ecoreFile.getParent().getLocation().toFile(),
 				fileNameWithExtension.substring(0, fileNameWithExtension.indexOf(".")) + "_test.ecoredsl")
 				.getAbsolutePath());
-		XtextResource poResource = (XtextResource) resourceSet.createResource(fileURI);
+		XtextResource poResource = (XtextResource) resourceSet.createResource(fileURI, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		poResource.getContents().add(ecorePackage);
 		try {
 			poResource.save(null);

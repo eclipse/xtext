@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -94,7 +95,7 @@ public class GenerateEcoreHandler extends AbstractHandler {
 		String fileNameWithExtension = ecoreDslFile.getName();
 		URI fileURI = URI.createFileURI(new java.io.File(ecoreDslFile.getParent().getLocation().toFile(),
 				fileNameWithExtension.substring(0, fileNameWithExtension.indexOf(".")) + ".ecore").getAbsolutePath());
-		Resource ecoreModelResource = resourceSet.createResource(fileURI);
+		Resource ecoreModelResource = resourceSet.createResource(fileURI, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		return ecoreModelResource;
 	}
 
