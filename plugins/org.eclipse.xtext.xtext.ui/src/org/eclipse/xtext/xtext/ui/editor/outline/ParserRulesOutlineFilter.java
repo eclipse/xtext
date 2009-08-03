@@ -23,7 +23,7 @@ public class ParserRulesOutlineFilter extends ViewerFilter {
 		if ((parentElement != null) && (parentElement instanceof ContentOutlineNode)) {
 			ContentOutlineNode parentNode = (ContentOutlineNode) parentElement;
 			EClass clazz = parentNode.getClazz();
-			if (clazz.equals(XtextPackage.Literals.PARSER_RULE)) {
+			if (clazz != null && clazz.equals(XtextPackage.Literals.PARSER_RULE)) {
 				return false;
 			}
 			

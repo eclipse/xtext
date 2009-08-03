@@ -64,29 +64,32 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		}
 		return false;
 	}
+	
+	protected ContentOutlineNode newOutlineNode(ContentOutlineNode parent, String label, Image image, Region location) {
+		ContentOutlineNode result = outlineNodeProvider.get();
+		result.setLabel(label);
+		if (image != null)
+			result.setImage(image);
+		result.setSelectionOffset(location.getOffset());
+		result.setSelectionLength(location.getLength());
+		// link with parent
+		if (parent != null) {
+			parent.getChildren().add(result);
+			result.setParent(parent);
+		}
+		return result;
+	}
 
 	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
-		ContentOutlineNode outlineNode = outlineNodeProvider.get();
+		Region location = locationProvider.getLocation(semanticNode);
+		String label = getText(semanticNode);
+		Image image = getImage(semanticNode);
+		
+		ContentOutlineNode outlineNode = newOutlineNode(outlineParentNode, label, image, location);
 		outlineNode.setClazz(semanticNode.eClass());
 		
 		IEObjectHandle<EObject> handle = new IEObjectHandle.DefaultImpl<EObject>(semanticNode, document);
 		outlineNode.setEObjectHandle(handle);
-		
-		outlineNode.setLabel(getText(semanticNode));
-		Image image = getImage(semanticNode);
-		if (image != null) {
-			outlineNode.setImage(image);
-		}
-		
-		Region location = locationProvider.getLocation(semanticNode);
-		outlineNode.setSelectionOffset(location.getOffset());
-		outlineNode.setSelectionLength(location.getLength());
-		
-		// link with parent
-		if (outlineParentNode != null) {
-			outlineParentNode.getChildren().add(outlineNode);
-			outlineNode.setParent(outlineParentNode);
-		}
 		
 		/*
 		 * This adapter will be added to the semantic node in order to later be

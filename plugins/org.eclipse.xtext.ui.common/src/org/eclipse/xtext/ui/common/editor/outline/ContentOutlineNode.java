@@ -101,13 +101,20 @@ public class ContentOutlineNode {
 	}
 
 	public URI getUri() {
-		return handle.getURI();
+		if (handle != null)
+			return handle.getURI();
+		return null;
 	}
 
+	public IEObjectHandle<EObject> getEObjectHandle() {
+		return handle;
+	}
+	
 	public void setEObjectHandle(IEObjectHandle<EObject> handle) {
 		this.handle = handle;
 	}
 
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -116,6 +123,7 @@ public class ContentOutlineNode {
 		return result;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
