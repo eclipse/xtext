@@ -225,6 +225,16 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "#11 kw2 asd kw5 kw6";
 		assertEquals("#11 kw1  asd kw5 ", parseAndSerialize(model));
 	}
+	
+	public void testLoopBug285452a() throws Exception {
+		String model = "#12 interface test";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testLoopBug285452b() throws Exception {
+		String model = "#12 class test";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	@Override
 	protected void setUp() throws Exception {

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -98,6 +99,7 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.LOOP2: return createLoop2();
       case SimplerewritetestPackage.LOOP3: return createLoop3();
       case SimplerewritetestPackage.LOOP4: return createLoop4();
+      case SimplerewritetestPackage.LOOP_BUG285452: return createLoopBug285452();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -267,6 +269,17 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     Loop4Impl loop4 = new Loop4Impl();
     return loop4;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LoopBug285452 createLoopBug285452()
+  {
+    LoopBug285452Impl loopBug285452 = new LoopBug285452Impl();
+    return loopBug285452;
   }
 
   /**

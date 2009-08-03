@@ -49,6 +49,7 @@ protected class ThisRootNode extends RootToken {
 			case 14: return new Loop2_Group(this, this, 14, inst);
 			case 15: return new Loop3_Group(this, this, 15, inst);
 			case 16: return new Loop4_Group(this, this, 16, inst);
+			case 17: return new LoopBug285452_Group(this, this, 17, inst);
 			default: return null;
 		}	
 	}	
@@ -218,12 +219,12 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  *
  * Term returns Expression:
  *   Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
- *   Consumed2|Loop1|Loop2|Loop3|Loop4;
+ *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-// Consumed2|Loop1|Loop2|Loop3|Loop4
+// Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -251,6 +252,7 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 12: return new Term_Loop2ParserRuleCall_12(parent, this, 12, inst);
 			case 13: return new Term_Loop3ParserRuleCall_13(parent, this, 13, inst);
 			case 14: return new Term_Loop4ParserRuleCall_14(parent, this, 14, inst);
+			case 15: return new Term_LoopBug285452ParserRuleCall_15(parent, this, 15, inst);
 			default: return null;
 		}	
 	}	
@@ -716,6 +718,37 @@ protected class Term_Loop4ParserRuleCall_14 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Loop4_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getLoop4Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// LoopBug285452
+protected class Term_LoopBug285452ParserRuleCall_15 extends RuleCallToken {
+	
+	public Term_LoopBug285452ParserRuleCall_15(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getLoopBug285452ParserRuleCall_15();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(LoopBug285452_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getLoopBug285452Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3252,5 +3285,163 @@ protected class Loop4_Kw5Keyword_3_0 extends KeywordToken  {
 
 
 /************ end Rule Loop4 ****************/
+
+
+/************ begin Rule LoopBug285452 ****************
+ *
+ * LoopBug285452:
+ *   "#12" (interface?="interface"|"class") name=ID;
+ *
+ **/
+
+// "#12" (interface?="interface"|"class") name=ID
+protected class LoopBug285452_Group extends GroupToken {
+	
+	public LoopBug285452_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoopBug285452Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#12"
+protected class LoopBug285452_NumberSignDigitOneDigitTwoKeyword_0 extends KeywordToken  {
+	
+	public LoopBug285452_NumberSignDigitOneDigitTwoKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getNumberSignDigitOneDigitTwoKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// interface?="interface"|"class"
+protected class LoopBug285452_Alternatives_1 extends AlternativesToken {
+
+	public LoopBug285452_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getAlternatives_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_InterfaceAssignment_1_0(parent, this, 0, inst);
+			case 1: return new LoopBug285452_ClassKeyword_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// interface?="interface"
+protected class LoopBug285452_InterfaceAssignment_1_0 extends AssignmentToken  {
+	
+	public LoopBug285452_InterfaceAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getInterfaceAssignment_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_NumberSignDigitOneDigitTwoKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("interface",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("interface");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopBug285452Access().getInterfaceInterfaceKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "class"
+protected class LoopBug285452_ClassKeyword_1_1 extends KeywordToken  {
+	
+	public LoopBug285452_ClassKeyword_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getClassKeyword_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_NumberSignDigitOneDigitTwoKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// name=ID
+protected class LoopBug285452_NameAssignment_2 extends AssignmentToken  {
+	
+	public LoopBug285452_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopBug285452Access().getNameAssignment_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopBug285452_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule LoopBug285452 ****************/
 
 }

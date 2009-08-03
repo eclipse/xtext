@@ -67,14 +67,15 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cLoop2ParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
 		private final RuleCall cLoop3ParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
 		private final RuleCall cLoop4ParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
+		private final RuleCall cLoopBug285452ParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//  Consumed2|Loop1|Loop2|Loop3|Loop4;
+		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//Consumed2|Loop1|Loop2|Loop3|Loop4
+		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -121,6 +122,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Loop4
 		public RuleCall getLoop4ParserRuleCall_14() { return cLoop4ParserRuleCall_14; }
+
+		//LoopBug285452
+		public RuleCall getLoopBug285452ParserRuleCall_15() { return cLoopBug285452ParserRuleCall_15; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -818,6 +822,46 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//"kw7"?
 		public Keyword getKw7Keyword_3_1_1() { return cKw7Keyword_3_1_1; }
 	}
+
+	public class LoopBug285452Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LoopBug285452");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cInterfaceAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cInterfaceInterfaceKeyword_1_0_0 = (Keyword)cInterfaceAssignment_1_0.eContents().get(0);
+		private final Keyword cClassKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		
+		//LoopBug285452:
+		//  "#12" (interface?="interface"|"class") name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"#12" (interface?="interface"|"class") name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#12"
+		public Keyword getNumberSignDigitOneDigitTwoKeyword_0() { return cNumberSignDigitOneDigitTwoKeyword_0; }
+
+		//interface?="interface"|"class"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//interface?="interface"
+		public Assignment getInterfaceAssignment_1_0() { return cInterfaceAssignment_1_0; }
+
+		//"interface"
+		public Keyword getInterfaceInterfaceKeyword_1_0_0() { return cInterfaceInterfaceKeyword_1_0_0; }
+
+		//"class"
+		public Keyword getClassKeyword_1_1() { return cClassKeyword_1_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -837,6 +881,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private Loop2Elements pLoop2;
 	private Loop3Elements pLoop3;
 	private Loop4Elements pLoop4;
+	private LoopBug285452Elements pLoopBug285452;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -871,7 +916,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-	//  Consumed2|Loop1|Loop2|Loop3|Loop4;
+	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1028,6 +1073,16 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getLoop4Rule() {
 		return getLoop4Access().getRule();
+	}
+
+	//LoopBug285452:
+	//  "#12" (interface?="interface"|"class") name=ID;
+	public LoopBug285452Elements getLoopBug285452Access() {
+		return (pLoopBug285452 != null) ? pLoopBug285452 : (pLoopBug285452 = new LoopBug285452Elements());
+	}
+	
+	public ParserRule getLoopBug285452Rule() {
+		return getLoopBug285452Access().getRule();
 	}
 
 	//terminal ID:

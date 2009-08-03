@@ -37,6 +37,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer loop4Consumer;
 
+	private INonTerminalConsumer loopBug285452Consumer;
+
 	private INonTerminalConsumer manyStringsConsumer;
 
 	private INonTerminalConsumer parensConsumer;
@@ -83,6 +85,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$16$Consumer;
 
+	private IElementConsumer ruleCall$17$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -106,6 +110,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$14$Consumer);
 			acceptor.accept(ruleCall$15$Consumer);
 			acceptor.accept(ruleCall$16$Consumer);
+			acceptor.accept(ruleCall$17$Consumer);
 		}
 	}
 
@@ -289,6 +294,18 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$17$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$17$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loopBug285452Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -321,6 +338,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getLoop2ParserRuleCall_12());
 		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getLoop3ParserRuleCall_13());
 		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getLoop4ParserRuleCall_14());
+		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getLoopBug285452ParserRuleCall_15());
 	}
 	
 	@Override
@@ -363,6 +381,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setLoop4Consumer(INonTerminalConsumer loop4Consumer) {
 		this.loop4Consumer = loop4Consumer;
+	}
+	
+	public void setLoopBug285452Consumer(INonTerminalConsumer loopBug285452Consumer) {
+		this.loopBug285452Consumer = loopBug285452Consumer;
 	}
 	
 	public void setManyStringsConsumer(INonTerminalConsumer manyStringsConsumer) {

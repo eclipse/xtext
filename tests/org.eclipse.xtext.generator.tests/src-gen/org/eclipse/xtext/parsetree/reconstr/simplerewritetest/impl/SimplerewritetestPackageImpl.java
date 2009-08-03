@@ -20,6 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -142,6 +143,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass loop4EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loopBug285452EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -608,6 +616,36 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLoopBug285452()
+  {
+    return loopBug285452EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopBug285452_Interface()
+  {
+    return (EAttribute)loopBug285452EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopBug285452_Name()
+  {
+    return (EAttribute)loopBug285452EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -707,6 +745,10 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loop4EClass = createEClass(LOOP4);
     createEAttribute(loop4EClass, LOOP4__ID);
 
+    loopBug285452EClass = createEClass(LOOP_BUG285452);
+    createEAttribute(loopBug285452EClass, LOOP_BUG285452__INTERFACE);
+    createEAttribute(loopBug285452EClass, LOOP_BUG285452__NAME);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -754,6 +796,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loop2EClass.getESuperTypes().add(this.getExpression());
     loop3EClass.getESuperTypes().add(this.getExpression());
     loop4EClass.getESuperTypes().add(this.getExpression());
+    loopBug285452EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -810,6 +853,10 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     initEClass(loop4EClass, Loop4.class, "Loop4", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLoop4_Id(), ecorePackage.getEString(), "id", null, 0, -1, Loop4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loopBug285452EClass, LoopBug285452.class, "LoopBug285452", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoopBug285452_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, LoopBug285452.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopBug285452_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopBug285452.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

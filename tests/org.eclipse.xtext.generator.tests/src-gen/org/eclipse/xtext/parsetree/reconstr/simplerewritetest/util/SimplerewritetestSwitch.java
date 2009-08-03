@@ -18,6 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -226,6 +227,14 @@ public class SimplerewritetestSwitch<T>
         Loop4 loop4 = (Loop4)theEObject;
         T result = caseLoop4(loop4);
         if (result == null) result = caseExpression(loop4);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.LOOP_BUG285452:
+      {
+        LoopBug285452 loopBug285452 = (LoopBug285452)theEObject;
+        T result = caseLoopBug285452(loopBug285452);
+        if (result == null) result = caseExpression(loopBug285452);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -477,6 +486,22 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseLoop4(Loop4 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop Bug285452</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop Bug285452</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoopBug285452(LoopBug285452 object)
   {
     return null;
   }
