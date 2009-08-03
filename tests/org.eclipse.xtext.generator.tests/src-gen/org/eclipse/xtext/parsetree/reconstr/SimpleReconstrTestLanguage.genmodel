@@ -63,6 +63,10 @@
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Loop4">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Loop4/id"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//LoopBug285452">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//LoopBug285452/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//LoopBug285452/name"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

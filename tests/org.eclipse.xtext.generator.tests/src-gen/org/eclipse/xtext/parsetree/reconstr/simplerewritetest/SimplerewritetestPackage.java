@@ -687,6 +687,52 @@ public interface SimplerewritetestPackage extends EPackage
   int LOOP4_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.LoopBug285452Impl <em>Loop Bug285452</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.LoopBug285452Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoopBug285452()
+   * @generated
+   */
+  int LOOP_BUG285452 = 15;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP_BUG285452__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Interface</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP_BUG285452__INTERFACE = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP_BUG285452__NAME = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Loop Bug285452</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP_BUG285452_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -694,7 +740,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 15;
+  int OP = 16;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1139,6 +1185,38 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getLoop4_Id();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452 <em>Loop Bug285452</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop Bug285452</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452
+   * @generated
+   */
+  EClass getLoopBug285452();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452#isInterface <em>Interface</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Interface</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452#isInterface()
+   * @see #getLoopBug285452()
+   * @generated
+   */
+  EAttribute getLoopBug285452_Interface();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452#getName()
+   * @see #getLoopBug285452()
+   * @generated
+   */
+  EAttribute getLoopBug285452_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1523,6 +1601,32 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute LOOP4__ID = eINSTANCE.getLoop4_Id();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.LoopBug285452Impl <em>Loop Bug285452</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.LoopBug285452Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getLoopBug285452()
+     * @generated
+     */
+    EClass LOOP_BUG285452 = eINSTANCE.getLoopBug285452();
+
+    /**
+     * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP_BUG285452__INTERFACE = eINSTANCE.getLoopBug285452_Interface();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP_BUG285452__NAME = eINSTANCE.getLoopBug285452_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

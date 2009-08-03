@@ -299,6 +299,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_Loop4_14.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getLoopBug285452ParserRuleCall_15(), currentNode); 
+    }
+    this_LoopBug285452_15=ruleLoopBug285452
+    { 
+        $current = $this_LoopBug285452_15.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -1440,6 +1450,77 @@ ruleLoop4 returns [EObject current=null]
         createLeafNode(grammarAccess.getLoop4Access().getKw7Keyword_3_1_1(), null); 
     }
 )?)?)+);
+
+
+
+
+
+// Entry rule entryRuleLoopBug285452
+entryRuleLoopBug285452 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getLoopBug285452Rule(), currentNode); }
+	 iv_ruleLoopBug285452=ruleLoopBug285452 
+	 { $current=$iv_ruleLoopBug285452.current; } 
+	 EOF 
+;
+
+// Rule LoopBug285452
+ruleLoopBug285452 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#12' 
+    {
+        createLeafNode(grammarAccess.getLoopBug285452Access().getNumberSignDigitOneDigitTwoKeyword_0(), null); 
+    }
+((	
+	
+	    lv_interface_1='interface' 
+    {
+        createLeafNode(grammarAccess.getLoopBug285452Access().getInterfaceInterfaceKeyword_1_0_0(), "interface"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopBug285452Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "interface", true, "interface", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)
+    |'class' 
+    {
+        createLeafNode(grammarAccess.getLoopBug285452Access().getClassKeyword_1_1(), null); 
+    }
+)(	
+	
+	    lv_name_3=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopBug285452Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_3, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+));
 
 
 

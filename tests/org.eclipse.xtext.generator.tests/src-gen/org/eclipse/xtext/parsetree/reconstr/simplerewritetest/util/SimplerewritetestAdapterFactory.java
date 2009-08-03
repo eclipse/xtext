@@ -20,6 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
@@ -166,6 +167,11 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseLoop4(Loop4 object)
       {
         return createLoop4Adapter();
+      }
+      @Override
+      public Adapter caseLoopBug285452(LoopBug285452 object)
+      {
+        return createLoopBug285452Adapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -415,6 +421,21 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLoop4Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452 <em>Loop Bug285452</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452
+   * @generated
+   */
+  public Adapter createLoopBug285452Adapter()
   {
     return null;
   }
