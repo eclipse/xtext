@@ -13,11 +13,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
-
 /**
  * This annotation can be used to mark methods in classes implementing
- * {@link ISemanticModelTransformer}. Use it to express that the annotated method will
+ * {@link org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}. Use it to express that the annotated method will
  * return a list of children of the given semantic node. 
  * 
  * @author Peter Friese - Initial contribution and API

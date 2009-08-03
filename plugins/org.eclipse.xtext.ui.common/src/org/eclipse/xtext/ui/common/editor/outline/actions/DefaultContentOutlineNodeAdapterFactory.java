@@ -31,7 +31,7 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 		if (adaptableObject instanceof ContentOutlineNode) {
 			ContentOutlineNode node = (ContentOutlineNode) adaptableObject;
 			EClass clazz = node.getClazz();
-			if (clazz.getInstanceClass().equals(adapterType)) {
+			if (clazz != null && clazz.getInstanceClass().equals(adapterType)) {
 				return Boolean.TRUE;
 			}
 
