@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext DSL Example UI (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui;singleton:=true
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 0.7.1.qualifier
+Bundle-Version: 0.7.2.qualifier
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j,org.eclipse.xtext.service.ui,org.eclipse.xtext.service
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example,
@@ -11,7 +11,7 @@ Export-Package: org.eclipse.xtext.example,
 Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.xtend;bundle-version="0.7.1";resolution:=optional,
+ org.eclipse.xtext.xtend;bundle-version="0.7.2";resolution:=optional,
  org.eclipse.ui.editors,
  org.eclipse.ui
 Bundle-Activator: org.eclipse.xtext.example.FowlerDslActivator

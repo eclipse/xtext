@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Domainmodel Example (Incubation)
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 0.7.1.qualifier
+Bundle-Version: 0.7.2.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.xtend;bundle-version="0.7.1",
+ org.eclipse.xtext.xtend;bundle-version="0.7.2",
  org.eclipse.emf.index;bundle-version="0.7.0"
 Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.domainmodel,

@@ -3,20 +3,20 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui;singleton:=true
-Bundle-Version: 0.7.1.qualifier
+Bundle-Version: 0.7.2.qualifier
 Bundle-Activator: org.eclipse.xtext.xtext.ui.Activator
-Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.7.1",
- org.eclipse.xtext.ui.common;bundle-version="0.7.1",
+Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.7.2",
+ org.eclipse.xtext.ui.common;bundle-version="0.7.2",
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.ui.ide,
  org.eclipse.jdt.core,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xpand;bundle-version="0.7.1",
- org.eclipse.xtend;bundle-version="0.7.1",
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.1",
- org.eclipse.xtend.util.stdlib;bundle-version="0.7.1",
+ org.eclipse.xpand;bundle-version="0.7.2",
+ org.eclipse.xtend;bundle-version="0.7.2",
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.7.2",
+ org.eclipse.xtend.util.stdlib;bundle-version="0.7.2",
  org.eclipse.emf.ecore,
  org.eclipse.xtext.xtend,
  org.eclipse.emf.ecore.edit,
