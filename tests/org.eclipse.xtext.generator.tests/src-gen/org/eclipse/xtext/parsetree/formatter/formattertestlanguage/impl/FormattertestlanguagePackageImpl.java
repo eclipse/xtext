@@ -16,6 +16,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param;
@@ -86,6 +87,13 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * @generated
    */
   private EClass testIndentationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fqnRefEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -355,6 +363,26 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getFqnRef()
+  {
+    return fqnRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFqnRef_Fqn()
+  {
+    return (EAttribute)fqnRefEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public FormattertestlanguageFactory getFormattertestlanguageFactory()
   {
     return (FormattertestlanguageFactory)getEFactoryInstance();
@@ -407,6 +435,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     testIndentationEClass = createEClass(TEST_INDENTATION);
     createEReference(testIndentationEClass, TEST_INDENTATION__SUB);
     createEAttribute(testIndentationEClass, TEST_INDENTATION__SEMI);
+
+    fqnRefEClass = createEClass(FQN_REF);
+    createEAttribute(fqnRefEClass, FQN_REF__FQN);
   }
 
   /**
@@ -443,6 +474,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     methEClass.getESuperTypes().add(this.getLine());
     testLinewrapEClass.getESuperTypes().add(this.getRoot());
     testIndentationEClass.getESuperTypes().add(this.getRoot());
+    fqnRefEClass.getESuperTypes().add(this.getLine());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -472,6 +504,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEClass(testIndentationEClass, TestIndentation.class, "TestIndentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTestIndentation_Sub(), this.getTestIndentation(), null, "sub", null, 0, -1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTestIndentation_Semi(), ecorePackage.getEBoolean(), "semi", null, 0, 1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fqnRefEClass, FqnRef.class, "FqnRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFqnRef_Fqn(), ecorePackage.getEString(), "fqn", null, 0, -1, FqnRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

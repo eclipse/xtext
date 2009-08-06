@@ -40,6 +40,7 @@ protected class ThisRootNode extends RootToken {
 			case 5: return new Param_Group(this, this, 5, inst);
 			case 6: return new TestLinewrap_Group(this, this, 6, inst);
 			case 7: return new TestIndentation_Group(this, this, 7, inst);
+			case 8: return new FqnRef_Group(this, this, 8, inst);
 			default: return null;
 		}	
 	}	
@@ -189,11 +190,11 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 /************ begin Rule Line ****************
  *
  * Line:
- *   (Decl|Assign|Meth) ";";
+ *   (Decl|Assign|Meth|FqnRef) ";";
  *
  **/
 
-// (Decl|Assign|Meth) ";"
+// (Decl|Assign|Meth|FqnRef) ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -217,7 +218,7 @@ protected class Line_Group extends GroupToken {
 	}
 }
 
-// Decl|Assign|Meth
+// Decl|Assign|Meth|FqnRef
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -233,6 +234,7 @@ protected class Line_Alternatives_0 extends AlternativesToken {
 			case 0: return new Line_DeclParserRuleCall_0_0(parent, this, 0, inst);
 			case 1: return new Line_AssignParserRuleCall_0_1(parent, this, 1, inst);
 			case 2: return new Line_MethParserRuleCall_0_2(parent, this, 2, inst);
+			case 3: return new Line_FqnRefParserRuleCall_0_3(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -322,6 +324,37 @@ protected class Line_MethParserRuleCall_0_2 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Meth_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getMethRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// FqnRef
+protected class Line_FqnRefParserRuleCall_0_3 extends RuleCallToken {
+	
+	public Line_FqnRefParserRuleCall_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnRef_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(FqnRef_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getFqnRefRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1442,5 +1475,91 @@ protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
 
 
 /************ end Rule TestIndentation ****************/
+
+
+/************ begin Rule FqnRef ****************
+ *
+ * FqnRef:
+ *   "fqn" fqn+=FQN;
+ *
+ **/
+
+// "fqn" fqn+=FQN
+protected class FqnRef_Group extends GroupToken {
+	
+	public FqnRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getFqnRefAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnRef_FqnAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getFqnRefRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "fqn"
+protected class FqnRef_FqnKeyword_0 extends KeywordToken  {
+	
+	public FqnRef_FqnKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getFqnRefAccess().getFqnKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// fqn+=FQN
+protected class FqnRef_FqnAssignment_1 extends AssignmentToken  {
+	
+	public FqnRef_FqnAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFqnRefAccess().getFqnAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnRef_FqnKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("fqn",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("fqn");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.DRC;
+			element = grammarAccess.getFqnRefAccess().getFqnFQNParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule FqnRef ****************/
+
 
 }

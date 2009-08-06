@@ -156,6 +156,16 @@ ruleLine returns [EObject current=null]
         $current = $this_Meth_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_3(), currentNode); 
+    }
+    this_FqnRef_3=ruleFqnRef
+    { 
+        $current = $this_FqnRef_3.current; 
+        currentNode = currentNode.getParent();
+    }
 )';' 
     {
         createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_1(), null); 
@@ -650,6 +660,95 @@ ruleTestIndentation returns [EObject current=null]
 	    }
 	
 )?);
+
+
+
+
+
+// Entry rule entryRuleFqnRef
+entryRuleFqnRef returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getFqnRefRule(), currentNode); }
+	 iv_ruleFqnRef=ruleFqnRef 
+	 { $current=$iv_ruleFqnRef.current; } 
+	 EOF 
+;
+
+// Rule FqnRef
+ruleFqnRef returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('fqn' 
+    {
+        createLeafNode(grammarAccess.getFqnRefAccess().getFqnKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getFqnRefAccess().getFqnFQNParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_fqn_1=ruleFQN 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getFqnRefRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "fqn", lv_fqn_1, "FQN", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+));
+
+
+
+
+
+// Entry rule entryRuleFQN
+entryRuleFQN returns [String current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); } 
+	 iv_ruleFQN=ruleFQN 
+	 { $current=$iv_ruleFQN.current.getText(); }  
+	 EOF 
+;
+
+// Rule FQN
+ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+	    lastConsumedDatatypeToken = $current;
+    }:
+(    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+    }
+(
+	kw='.' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+    }
+    this_ID_2=RULE_ID    {
+		$current.merge(this_ID_2);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+    }
+)*)
+    ;
 
 
 

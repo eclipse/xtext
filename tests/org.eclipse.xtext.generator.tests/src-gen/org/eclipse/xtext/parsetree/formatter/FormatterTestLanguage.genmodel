@@ -35,5 +35,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//TestIndentation/sub"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//TestIndentation/semi"/>
     </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//FqnRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//FqnRef/fqn"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

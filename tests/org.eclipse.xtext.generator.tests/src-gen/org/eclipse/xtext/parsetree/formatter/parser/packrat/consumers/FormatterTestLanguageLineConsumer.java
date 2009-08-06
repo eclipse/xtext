@@ -28,6 +28,8 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 
 	private INonTerminalConsumer declConsumer;
 
+	private INonTerminalConsumer fqnRefConsumer;
+
 	private INonTerminalConsumer methConsumer;
 
 	private IElementConsumer group$1$Consumer;
@@ -40,9 +42,11 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 
 	private IElementConsumer ruleCall$5$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer ruleCall$6$Consumer;
 
-	private ICharacterClass keyword$6$Delimiter;
+	private IElementConsumer keyword$7$Consumer;
+
+	private ICharacterClass keyword$7$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -53,7 +57,7 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(alternatives$2$Consumer);
-			acceptor.accept(keyword$6$Consumer);
+			acceptor.accept(keyword$7$Consumer);
 		}
 	}
 
@@ -68,6 +72,7 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
+			acceptor.accept(ruleCall$6$Consumer);
 		}
 	}
 
@@ -107,21 +112,33 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(fqnRefConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
 	public FormatterTestLanguageLineConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -141,7 +158,8 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getDeclParserRuleCall_0_0());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getAssignParserRuleCall_0_1());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getMethParserRuleCall_0_2());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.getSemicolonKeyword_1());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getFqnRefParserRuleCall_0_3());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getSemicolonKeyword_1());
 	}
 	
 	@Override
@@ -162,16 +180,20 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		this.declConsumer = declConsumer;
 	}
 	
+	public void setFqnRefConsumer(INonTerminalConsumer fqnRefConsumer) {
+		this.fqnRefConsumer = fqnRefConsumer;
+	}
+	
 	public void setMethConsumer(INonTerminalConsumer methConsumer) {
 		this.methConsumer = methConsumer;
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

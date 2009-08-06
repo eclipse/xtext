@@ -25,6 +25,7 @@
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+          <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
@@ -138,6 +139,29 @@
         <tokens xsi:type="xtext:Keyword" value="}"/>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="semi" operator="?=">
           <terminal xsi:type="xtext:Keyword" value=";"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FqnRef">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//FqnRef"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="fqn"/>
+        <tokens xsi:type="xtext:Assignment" feature="fqn" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FQN">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        <tokens xsi:type="xtext:Group" cardinality="*">
+          <tokens xsi:type="xtext:Keyword" value="."/>
+          <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
       </alternatives>
     </rules>
