@@ -52,16 +52,17 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cDeclParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
 		private final RuleCall cAssignParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
 		private final RuleCall cMethParserRuleCall_0_2 = (RuleCall)cAlternatives_0.eContents().get(2);
+		private final RuleCall cFqnRefParserRuleCall_0_3 = (RuleCall)cAlternatives_0.eContents().get(3);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth) ";";
+		//  (Decl|Assign|Meth|FqnRef) ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth) ";"
+		//(Decl|Assign|Meth|FqnRef) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth
+		//Decl|Assign|Meth|FqnRef
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -72,6 +73,9 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Meth
 		public RuleCall getMethParserRuleCall_0_2() { return cMethParserRuleCall_0_2; }
+
+		//FqnRef
+		public RuleCall getFqnRefParserRuleCall_0_3() { return cFqnRefParserRuleCall_0_3; }
 
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
@@ -344,6 +348,58 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		//";"
 		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
+
+	public class FqnRefElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFqnKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cFqnAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cFqnFQNParserRuleCall_1_0 = (RuleCall)cFqnAssignment_1.eContents().get(0);
+		
+		//FqnRef:
+		//  "fqn" fqn+=FQN;
+		public ParserRule getRule() { return rule; }
+
+		//"fqn" fqn+=FQN
+		public Group getGroup() { return cGroup; }
+
+		//"fqn"
+		public Keyword getFqnKeyword_0() { return cFqnKeyword_0; }
+
+		//fqn+=FQN
+		public Assignment getFqnAssignment_1() { return cFqnAssignment_1; }
+
+		//FQN
+		public RuleCall getFqnFQNParserRuleCall_1_0() { return cFqnFQNParserRuleCall_1_0; }
+	}
+
+	public class FQNElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//FQN returns ecore::EString:
+		//  ID ("." ID)*;
+		public ParserRule getRule() { return rule; }
+
+		//ID ("." ID)*
+		public Group getGroup() { return cGroup; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+
+		//("." ID)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+	}
 	
 	
 	private RootElements pRoot;
@@ -354,6 +410,8 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	private ParamElements pParam;
 	private TestLinewrapElements pTestLinewrap;
 	private TestIndentationElements pTestIndentation;
+	private FqnRefElements pFqnRef;
+	private FQNElements pFQN;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -387,7 +445,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth) ";";
+	//  (Decl|Assign|Meth|FqnRef) ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -454,6 +512,26 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getTestIndentationRule() {
 		return getTestIndentationAccess().getRule();
+	}
+
+	//FqnRef:
+	//  "fqn" fqn+=FQN;
+	public FqnRefElements getFqnRefAccess() {
+		return (pFqnRef != null) ? pFqnRef : (pFqnRef = new FqnRefElements());
+	}
+	
+	public ParserRule getFqnRefRule() {
+		return getFqnRefAccess().getRule();
+	}
+
+	//FQN returns ecore::EString:
+	//  ID ("." ID)*;
+	public FQNElements getFQNAccess() {
+		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+	}
+	
+	public ParserRule getFQNRule() {
+		return getFQNAccess().getRule();
 	}
 
 	//terminal ID:

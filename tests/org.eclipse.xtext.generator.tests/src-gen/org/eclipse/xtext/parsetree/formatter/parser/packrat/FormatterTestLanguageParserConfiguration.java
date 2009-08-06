@@ -17,6 +17,8 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterT
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageParamConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestLinewrapConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestIndentationConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageFqnRefConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageFQNConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -36,6 +38,8 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
     private FormatterTestLanguageParamConsumer paramConsumer;
     private FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer;
     private FormatterTestLanguageTestIndentationConsumer testIndentationConsumer;
+    private FormatterTestLanguageFqnRefConsumer fqnRefConsumer;
+    private FormatterTestLanguageFQNConsumer fqnConsumer;
 
 	private FormatterTestLanguageGrammarAccess grammarAccess;
 
@@ -75,6 +79,12 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		testIndentationConsumer = new FormatterTestLanguageTestIndentationConsumer(
     		this, null
     	);
+		fqnRefConsumer = new FormatterTestLanguageFqnRefConsumer(
+    		this, null
+    	);
+		fqnConsumer = new FormatterTestLanguageFQNConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -92,6 +102,8 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getParamConsumer().setRule(grammarAccess.getParamAccess());
 		getTestLinewrapConsumer().setRule(grammarAccess.getTestLinewrapAccess());
 		getTestIndentationConsumer().setRule(grammarAccess.getTestIndentationAccess());
+		getFqnRefConsumer().setRule(grammarAccess.getFqnRefAccess());
+		getFqnConsumer().setRule(grammarAccess.getFQNAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -106,6 +118,7 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 
 		getLineConsumer().setAssignConsumer(getAssignConsumer());
 		getLineConsumer().setDeclConsumer(getDeclConsumer());
+		getLineConsumer().setFqnRefConsumer(getFqnRefConsumer());
 		getLineConsumer().setMethConsumer(getMethConsumer());
 
 		getDeclConsumer().setIdConsumer(getIdConsumer());
@@ -123,31 +136,39 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getTestIndentationConsumer().setLineConsumer(getLineConsumer());
 		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
 
+		getFqnRefConsumer().setFqnConsumer(getFqnConsumer());
+
+		getFqnConsumer().setIdConsumer(getIdConsumer());
+
 		getRootConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getLineConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getDeclConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getDeclConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getAssignConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getAssignConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getAssignConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getAssignConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getAssignConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getAssignConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getAssignConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$35$Delimiter);
-		getAssignConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$35$Delimiter);
+		getLineConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getDeclConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getDeclConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getAssignConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getAssignConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getAssignConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$36$Delimiter);
+		getAssignConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$36$Delimiter);
 		getMethConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getMethConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getMethConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getMethConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getMethConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getParamConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getParamConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getParamConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getMethConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getMethConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getMethConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getMethConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getParamConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getParamConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getParamConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
 		getTestLinewrapConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
 		getTestIndentationConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getTestIndentationConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getTestIndentationConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
-		getTestIndentationConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
+		getTestIndentationConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getTestIndentationConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getTestIndentationConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getFqnRefConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$21$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -184,6 +205,14 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 
     public FormatterTestLanguageTestIndentationConsumer getTestIndentationConsumer() {
     	return testIndentationConsumer;
+    }
+
+    public FormatterTestLanguageFqnRefConsumer getFqnRefConsumer() {
+    	return fqnRefConsumer;
+    }
+
+    public FormatterTestLanguageFQNConsumer getFqnConsumer() {
+    	return fqnConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

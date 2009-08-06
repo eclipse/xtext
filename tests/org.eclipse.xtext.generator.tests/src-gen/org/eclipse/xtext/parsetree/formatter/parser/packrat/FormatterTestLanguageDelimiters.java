@@ -21,11 +21,11 @@ public final class FormatterTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$20$Delimiter = new SetBasedKeywordMatcher(
-		"test", "void", "linewrap", "indentation");
+	public static final ISequenceMatcher ruleCall$21$Delimiter = new SetBasedKeywordMatcher(
+		"test", "void", "linewrap", "indentation", "fqn");
 
-	public static final ISequenceMatcher ruleCall$35$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$36$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

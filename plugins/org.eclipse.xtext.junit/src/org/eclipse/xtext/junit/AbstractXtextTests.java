@@ -31,6 +31,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
@@ -168,6 +169,10 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected SerializerUtil getSerializer() {
 		return injector.getInstance(SerializerUtil.class);
+	}
+	
+	protected INodeModelFormatter getNodeModelFormatter() {
+		return injector.getInstance(INodeModelFormatter.class);
 	}
 
 	protected IScopeProvider getScopeProvider() {

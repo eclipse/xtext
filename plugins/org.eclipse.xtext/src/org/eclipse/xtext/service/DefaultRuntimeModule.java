@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting.INodeModelFormatter;
+import org.eclipse.xtext.formatting.impl.DefaultNodeModelFormatter;
 import org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
@@ -84,6 +86,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends IFormatter> bindIFormatter() {
 		return OneWhitespaceFormatter.class;
+	}
+	
+	public Class<? extends INodeModelFormatter> bindINodeModelFormatter() {
+		return DefaultNodeModelFormatter.class;
 	}
 
 	public Class<? extends IHiddenTokenMerger> bindIHiddenTokenMerger() {
