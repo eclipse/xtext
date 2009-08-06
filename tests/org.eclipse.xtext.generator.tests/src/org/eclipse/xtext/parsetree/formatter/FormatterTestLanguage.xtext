@@ -14,7 +14,7 @@ Root:
 	"test" (TestLinewrap | TestIndentation);
 	
 Line:
-	(Decl | Assign | Meth) ";";
+	(Decl | Assign | Meth | FqnRef) ";";
 	
 Decl:	
 	type+=ID name+=ID;
@@ -32,4 +32,10 @@ TestLinewrap:
 	"linewrap" items+=Line*;
 	
 TestIndentation:
-	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?; 
+	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
+	
+FqnRef:
+	"fqn" fqn+=FQN;
+	
+FQN:
+	ID ("." ID)*; 
