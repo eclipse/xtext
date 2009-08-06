@@ -68,14 +68,15 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cLoop3ParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
 		private final RuleCall cLoop4ParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		private final RuleCall cLoopBug285452ParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
+		private final RuleCall cDuplicateBug284491ParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
+		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452
+		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -125,6 +126,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//LoopBug285452
 		public RuleCall getLoopBug285452ParserRuleCall_15() { return cLoopBug285452ParserRuleCall_15; }
+
+		//DuplicateBug284491
+		public RuleCall getDuplicateBug284491ParserRuleCall_16() { return cDuplicateBug284491ParserRuleCall_16; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -862,6 +866,50 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
+
+	public class DuplicateBug284491Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DuplicateBug284491");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cStaticAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cStaticStaticKeyword_1_0_0 = (Keyword)cStaticAssignment_1_0.eContents().get(0);
+		private final Assignment cFinalAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cFinalFinalKeyword_1_1_0 = (Keyword)cFinalAssignment_1_1.eContents().get(0);
+		private final Assignment cTransientAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final Keyword cTransientTransientKeyword_1_2_0 = (Keyword)cTransientAssignment_1_2.eContents().get(0);
+		
+		//DuplicateBug284491:
+		//  "#13" (static?="static"|final?="final"|transient?="transient")*;
+		public ParserRule getRule() { return rule; }
+
+		//"#13" (static?="static"|final?="final"|transient?="transient")*
+		public Group getGroup() { return cGroup; }
+
+		//"#13"
+		public Keyword getNumberSignDigitOneDigitThreeKeyword_0() { return cNumberSignDigitOneDigitThreeKeyword_0; }
+
+		//(static?="static"|final?="final"|transient?="transient")*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//static?="static"
+		public Assignment getStaticAssignment_1_0() { return cStaticAssignment_1_0; }
+
+		//"static"
+		public Keyword getStaticStaticKeyword_1_0_0() { return cStaticStaticKeyword_1_0_0; }
+
+		//final?="final"
+		public Assignment getFinalAssignment_1_1() { return cFinalAssignment_1_1; }
+
+		//"final"
+		public Keyword getFinalFinalKeyword_1_1_0() { return cFinalFinalKeyword_1_1_0; }
+
+		//transient?="transient"
+		public Assignment getTransientAssignment_1_2() { return cTransientAssignment_1_2; }
+
+		//"transient"
+		public Keyword getTransientTransientKeyword_1_2_0() { return cTransientTransientKeyword_1_2_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -882,6 +930,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private Loop3Elements pLoop3;
 	private Loop4Elements pLoop4;
 	private LoopBug285452Elements pLoopBug285452;
+	private DuplicateBug284491Elements pDuplicateBug284491;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -916,7 +965,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
+	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1083,6 +1132,16 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getLoopBug285452Rule() {
 		return getLoopBug285452Access().getRule();
+	}
+
+	//DuplicateBug284491:
+	//  "#13" (static?="static"|final?="final"|transient?="transient")*;
+	public DuplicateBug284491Elements getDuplicateBug284491Access() {
+		return (pDuplicateBug284491 != null) ? pDuplicateBug284491 : (pDuplicateBug284491 = new DuplicateBug284491Elements());
+	}
+	
+	public ParserRule getDuplicateBug284491Rule() {
+		return getDuplicateBug284491Access().getRule();
 	}
 
 	//terminal ID:

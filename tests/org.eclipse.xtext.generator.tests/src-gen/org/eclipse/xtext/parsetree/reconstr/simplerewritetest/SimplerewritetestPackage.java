@@ -733,6 +733,61 @@ public interface SimplerewritetestPackage extends EPackage
   int LOOP_BUG285452_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl <em>Duplicate Bug284491</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getDuplicateBug284491()
+   * @generated
+   */
+  int DUPLICATE_BUG284491 = 16;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DUPLICATE_BUG284491__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DUPLICATE_BUG284491__STATIC = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DUPLICATE_BUG284491__FINAL = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Transient</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DUPLICATE_BUG284491__TRANSIENT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Duplicate Bug284491</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DUPLICATE_BUG284491_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -740,7 +795,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 16;
+  int OP = 17;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1217,6 +1272,49 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getLoopBug285452_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491 <em>Duplicate Bug284491</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Duplicate Bug284491</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491
+   * @generated
+   */
+  EClass getDuplicateBug284491();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Static</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isStatic()
+   * @see #getDuplicateBug284491()
+   * @generated
+   */
+  EAttribute getDuplicateBug284491_Static();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isFinal <em>Final</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Final</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isFinal()
+   * @see #getDuplicateBug284491()
+   * @generated
+   */
+  EAttribute getDuplicateBug284491_Final();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isTransient <em>Transient</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Transient</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491#isTransient()
+   * @see #getDuplicateBug284491()
+   * @generated
+   */
+  EAttribute getDuplicateBug284491_Transient();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1627,6 +1725,40 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute LOOP_BUG285452__NAME = eINSTANCE.getLoopBug285452_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl <em>Duplicate Bug284491</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getDuplicateBug284491()
+     * @generated
+     */
+    EClass DUPLICATE_BUG284491 = eINSTANCE.getDuplicateBug284491();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DUPLICATE_BUG284491__STATIC = eINSTANCE.getDuplicateBug284491_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DUPLICATE_BUG284491__FINAL = eINSTANCE.getDuplicateBug284491_Final();
+
+    /**
+     * The meta object literal for the '<em><b>Transient</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DUPLICATE_BUG284491__TRANSIENT = eINSTANCE.getDuplicateBug284491_Transient();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

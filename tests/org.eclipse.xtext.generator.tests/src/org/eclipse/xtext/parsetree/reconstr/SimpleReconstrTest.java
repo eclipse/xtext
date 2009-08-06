@@ -235,6 +235,11 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "#12 class test";
 		assertEquals(model, parseAndSerialize(model));
 	}
+	
+	public void testDuplicateBug284491() throws Exception {
+		String model = "#13 final static";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	@Override
 	protected void setUp() throws Exception {
