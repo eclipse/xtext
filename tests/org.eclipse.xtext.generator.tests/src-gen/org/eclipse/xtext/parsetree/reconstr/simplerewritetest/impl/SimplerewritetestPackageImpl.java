@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -150,6 +151,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass loopBug285452EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass duplicateBug284491EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -646,6 +654,46 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getDuplicateBug284491()
+  {
+    return duplicateBug284491EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDuplicateBug284491_Static()
+  {
+    return (EAttribute)duplicateBug284491EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDuplicateBug284491_Final()
+  {
+    return (EAttribute)duplicateBug284491EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDuplicateBug284491_Transient()
+  {
+    return (EAttribute)duplicateBug284491EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -749,6 +797,11 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     createEAttribute(loopBug285452EClass, LOOP_BUG285452__INTERFACE);
     createEAttribute(loopBug285452EClass, LOOP_BUG285452__NAME);
 
+    duplicateBug284491EClass = createEClass(DUPLICATE_BUG284491);
+    createEAttribute(duplicateBug284491EClass, DUPLICATE_BUG284491__STATIC);
+    createEAttribute(duplicateBug284491EClass, DUPLICATE_BUG284491__FINAL);
+    createEAttribute(duplicateBug284491EClass, DUPLICATE_BUG284491__TRANSIENT);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -797,6 +850,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loop3EClass.getESuperTypes().add(this.getExpression());
     loop4EClass.getESuperTypes().add(this.getExpression());
     loopBug285452EClass.getESuperTypes().add(this.getExpression());
+    duplicateBug284491EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -857,6 +911,11 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEClass(loopBug285452EClass, LoopBug285452.class, "LoopBug285452", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLoopBug285452_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, LoopBug285452.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLoopBug285452_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopBug285452.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(duplicateBug284491EClass, DuplicateBug284491.class, "DuplicateBug284491", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDuplicateBug284491_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDuplicateBug284491_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDuplicateBug284491_Transient(), ecorePackage.getEBoolean(), "transient", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -170,6 +170,15 @@ public interface SimplerewritetestFactory extends EFactory
   LoopBug285452 createLoopBug285452();
 
   /**
+   * Returns a new object of class '<em>Duplicate Bug284491</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Duplicate Bug284491</em>'.
+   * @generated
+   */
+  DuplicateBug284491 createDuplicateBug284491();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

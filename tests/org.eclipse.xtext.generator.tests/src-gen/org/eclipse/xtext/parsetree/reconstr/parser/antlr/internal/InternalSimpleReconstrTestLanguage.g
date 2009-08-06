@@ -309,6 +309,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_LoopBug285452_15.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getDuplicateBug284491ParserRuleCall_16(), currentNode); 
+    }
+    this_DuplicateBug284491_16=ruleDuplicateBug284491
+    { 
+        $current = $this_DuplicateBug284491_16.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -1521,6 +1531,96 @@ ruleLoopBug285452 returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+// Entry rule entryRuleDuplicateBug284491
+entryRuleDuplicateBug284491 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getDuplicateBug284491Rule(), currentNode); }
+	 iv_ruleDuplicateBug284491=ruleDuplicateBug284491 
+	 { $current=$iv_ruleDuplicateBug284491.current; } 
+	 EOF 
+;
+
+// Rule DuplicateBug284491
+ruleDuplicateBug284491 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#13' 
+    {
+        createLeafNode(grammarAccess.getDuplicateBug284491Access().getNumberSignDigitOneDigitThreeKeyword_0(), null); 
+    }
+((	
+	
+	    lv_static_1='static' 
+    {
+        createLeafNode(grammarAccess.getDuplicateBug284491Access().getStaticStaticKeyword_1_0_0(), "static"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getDuplicateBug284491Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "static", true, "static", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)
+    |(	
+	
+	    lv_final_2='final' 
+    {
+        createLeafNode(grammarAccess.getDuplicateBug284491Access().getFinalFinalKeyword_1_1_0(), "final"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getDuplicateBug284491Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "final", true, "final", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)
+    |(	
+	
+	    lv_transient_3='transient' 
+    {
+        createLeafNode(grammarAccess.getDuplicateBug284491Access().getTransientTransientKeyword_1_2_0(), "transient"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getDuplicateBug284491Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "transient", true, "transient", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))*);
 
 
 

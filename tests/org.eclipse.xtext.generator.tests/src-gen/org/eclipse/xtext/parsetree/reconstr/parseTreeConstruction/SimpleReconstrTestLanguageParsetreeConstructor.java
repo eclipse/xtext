@@ -50,6 +50,7 @@ protected class ThisRootNode extends RootToken {
 			case 15: return new Loop3_Group(this, this, 15, inst);
 			case 16: return new Loop4_Group(this, this, 16, inst);
 			case 17: return new LoopBug285452_Group(this, this, 17, inst);
+			case 18: return new DuplicateBug284491_Group(this, this, 18, inst);
 			default: return null;
 		}	
 	}	
@@ -219,12 +220,12 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  *
  * Term returns Expression:
  *   Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
- *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452;
+ *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-// Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452
+// Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -253,6 +254,7 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 13: return new Term_Loop3ParserRuleCall_13(parent, this, 13, inst);
 			case 14: return new Term_Loop4ParserRuleCall_14(parent, this, 14, inst);
 			case 15: return new Term_LoopBug285452ParserRuleCall_15(parent, this, 15, inst);
+			case 16: return new Term_DuplicateBug284491ParserRuleCall_16(parent, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -749,6 +751,37 @@ protected class Term_LoopBug285452ParserRuleCall_15 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LoopBug285452_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getLoopBug285452Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// DuplicateBug284491
+protected class Term_DuplicateBug284491ParserRuleCall_16 extends RuleCallToken {
+	
+	public Term_DuplicateBug284491ParserRuleCall_16(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getDuplicateBug284491ParserRuleCall_16();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(DuplicateBug284491_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getDuplicateBug284491Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3443,5 +3476,179 @@ protected class LoopBug285452_NameAssignment_2 extends AssignmentToken  {
 
 
 /************ end Rule LoopBug285452 ****************/
+
+
+/************ begin Rule DuplicateBug284491 ****************
+ *
+ * DuplicateBug284491:
+ *   "#13" (static?="static"|final?="final"|transient?="transient")*;
+ *
+ **/
+
+// "#13" (static?="static"|final?="final"|transient?="transient")*
+protected class DuplicateBug284491_Group extends GroupToken {
+	
+	public DuplicateBug284491_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_Alternatives_1(parent, this, 0, inst);
+			case 1: return new DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getDuplicateBug284491Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#13"
+protected class DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0 extends KeywordToken  {
+	
+	public DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getNumberSignDigitOneDigitThreeKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// (static?="static"|final?="final"|transient?="transient")*
+protected class DuplicateBug284491_Alternatives_1 extends AlternativesToken {
+
+	public DuplicateBug284491_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getAlternatives_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_StaticAssignment_1_0(parent, this, 0, inst);
+			case 1: return new DuplicateBug284491_FinalAssignment_1_1(parent, this, 1, inst);
+			case 2: return new DuplicateBug284491_TransientAssignment_1_2(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// static?="static"
+protected class DuplicateBug284491_StaticAssignment_1_0 extends AssignmentToken  {
+	
+	public DuplicateBug284491_StaticAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getStaticAssignment_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_Alternatives_1(parent, this, 0, inst);
+			case 1: return new DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("static",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getDuplicateBug284491Access().getStaticStaticKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// final?="final"
+protected class DuplicateBug284491_FinalAssignment_1_1 extends AssignmentToken  {
+	
+	public DuplicateBug284491_FinalAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getFinalAssignment_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_Alternatives_1(parent, this, 0, inst);
+			case 1: return new DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("final",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("final");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getDuplicateBug284491Access().getFinalFinalKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// transient?="transient"
+protected class DuplicateBug284491_TransientAssignment_1_2 extends AssignmentToken  {
+	
+	public DuplicateBug284491_TransientAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDuplicateBug284491Access().getTransientAssignment_1_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DuplicateBug284491_Alternatives_1(parent, this, 0, inst);
+			case 1: return new DuplicateBug284491_NumberSignDigitOneDigitThreeKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("transient",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("transient");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getDuplicateBug284491Access().getTransientTransientKeyword_1_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule DuplicateBug284491 ****************/
 
 }

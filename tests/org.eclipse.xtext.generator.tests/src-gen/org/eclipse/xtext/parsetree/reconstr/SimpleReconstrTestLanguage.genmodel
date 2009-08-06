@@ -67,6 +67,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//LoopBug285452/interface"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//LoopBug285452/name"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//DuplicateBug284491">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//DuplicateBug284491/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//DuplicateBug284491/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//DuplicateBug284491/transient"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

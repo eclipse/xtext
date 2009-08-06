@@ -142,13 +142,15 @@ public class InstanceDescription implements IInstanceDescription {
 
 	private int nextID(EStructuralFeature f, int lastId) {
 		int myLastId = lastId;
-		if (f.isMany() && multiFeatures != null
-				&& multiFeatures.get(f.getFeatureID())) {
-			myLastId--;
-			while (myLastId >= 0 && tv.isTransient(described, f, myLastId))
+		if (f.isMany()) {
+			if (multiFeatures != null && multiFeatures.get(f.getFeatureID())) {
 				myLastId--;
-			return myLastId;
-		}
+				while (myLastId >= 0 && tv.isTransient(described, f, myLastId))
+					myLastId--;
+				return myLastId;
+			}
+		} else if (lastId == 0)
+			return -2;
 		return myLastId - 1;
 	}
 

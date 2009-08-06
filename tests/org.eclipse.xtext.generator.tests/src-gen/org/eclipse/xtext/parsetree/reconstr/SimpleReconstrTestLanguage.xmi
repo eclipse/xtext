@@ -43,6 +43,7 @@
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -348,6 +349,25 @@
         </tokens>
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="DuplicateBug284491">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//DuplicateBug284491"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#13"/>
+        <tokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Assignment" feature="static" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="static"/>
+          </groups>
+          <groups xsi:type="xtext:Assignment" feature="final" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="final"/>
+          </groups>
+          <groups xsi:type="xtext:Assignment" feature="transient" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="transient"/>
+          </groups>
         </tokens>
       </alternatives>
     </rules>
