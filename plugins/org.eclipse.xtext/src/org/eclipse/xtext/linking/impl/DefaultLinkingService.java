@@ -77,6 +77,10 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 
 	public String getCrossRefNodeAsString(AbstractNode node) throws IllegalNodeException {
+		return getCrossRefNodeAsString(node, true);
+	}
+
+	protected String getCrossRefNodeAsString(AbstractNode node, boolean convert) {
 		String convertMe = null;
 		if (node instanceof LeafNode)
 			convertMe = ((LeafNode) node).getText();
@@ -95,6 +99,10 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			}
 			convertMe = builder.toString();
 		}
+
+		if (!convert)
+			return convertMe;
+
 		try {
 			String ruleName = getRuleNameFrom(node.getGrammarElement());
 			if (ruleName == null)
@@ -127,7 +135,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 */
 	public String getLinkText(EObject object, EReference reference, EObject context) {
 		String unconverted = getUnconvertedLinkText(object, reference, context);
-		return getConvertedValue(unconverted, object, reference, context);
+		if (unconverted != null)
+			return getConvertedValue(unconverted, object, reference, context);
+		return getNodeModelLinkText(object, reference, context);
 	}
 
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
@@ -135,9 +145,10 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		if (scope == null)
 			return null;
 		IScopedElement scopedElement = getScopedElement(scope,object);
-		if (scopedElement == null)
-			return null;
-		return scopedElement.name();
+		if (scopedElement != null) {
+			return scopedElement.name();
+		}
+		return null;
 	}
 
 	private IScopedElement getScopedElement(IScope scope, EObject element) {
@@ -181,6 +192,21 @@ public class DefaultLinkingService extends AbstractLinkingService {
 							return ((RuleCall) xrefTerminal).getRule().getName();
 					}
 				}
+			}
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private String getNodeModelLinkText(EObject object, EReference reference, EObject context) {
+		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(context, reference);
+		if (!nodes.isEmpty()) {
+			if (reference.isMany()) {
+				int index = ((List<? extends EObject>) context.eGet(reference, false)).indexOf(object);
+				if (index >= 0 && index < nodes.size())
+					return getCrossRefNodeAsString(nodes.get(index), false);
+			} else {
+				return getCrossRefNodeAsString(nodes.get(0), false);
 			}
 		}
 		return null;

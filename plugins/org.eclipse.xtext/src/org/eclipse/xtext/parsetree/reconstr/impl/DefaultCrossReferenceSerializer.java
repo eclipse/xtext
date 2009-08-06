@@ -36,7 +36,7 @@ public class DefaultCrossReferenceSerializer extends
 		if (text == null)
 			throw new XtextSerializationException(
 					"Error serializing CrossRefs: "
-							+ "Unable to create a string represenation for reference '"
+							+ "Unable to create a string representation for reference '"
 							+ grammarElement.getType().getClassifier()
 									.getName() + "' using "
 							+ linkingService.getClass().getName()
