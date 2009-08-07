@@ -14,7 +14,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850;
 	
 Atom: 
 	name=ID;
@@ -66,4 +66,13 @@ LoopBug285452:
 	
 DuplicateBug284491:
 	'#13' (static?='static' | final?='final' | transient?='transient')*;
+	
+EmptyObjectBug284850:
+	'#14' items=EmptyObjectItems;
+	
+EmptyObjectItems:
+	list+=EmptyObjectItem*;
+	
+EmptyObjectItem:
+	'item' name=ID;
 
