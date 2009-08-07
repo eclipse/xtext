@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -239,6 +240,15 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	public void testDuplicateBug284491() throws Exception {
 		String model = "#13 final static";
 		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void _testEmptyObjectBug284850() throws Exception {
+		String model = "#14 item test";
+		EmptyObjectBug284850 result = (EmptyObjectBug284850)getModel(model);
+		result.getItems().getList().clear();
+		System.out.println(EmfFormatter.objToStr(result));
+		String actual = getSerializer().serialize(result, false);
+		assertEquals(model, actual);
 	}
 
 	@Override
