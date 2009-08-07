@@ -5,7 +5,6 @@ import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormatter;
 
 public class FormatterTest extends AbstractGeneratorTest {
 
@@ -27,7 +26,7 @@ public class FormatterTest extends AbstractGeneratorTest {
 	private void assertFormattedNM(String expected, String model, int offset,
 			int lengt) throws Exception {
 		CompositeNode node = NodeUtil.getRootNode(getModel(model));
-		System.out.println(EmfFormatter.objToStr(node));
+		// System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter()
 				.format(node, offset, lengt);
 		String actual = model.substring(0, r.getOffset())
