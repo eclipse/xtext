@@ -59,8 +59,9 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 						fmt.writeSemantic(n.getGrammarElement(), l.getText());
 				} else {
 					RuleCall rc = (RuleCall) n.getGrammarElement();
-					Object val = valueConverter.toValue(n.serialize(), rc
-							.getRule().getName(), n);
+					Object val = valueConverter.toValue(
+							nodeToStr((CompositeNode) n), rc.getRule()
+									.getName(), n);
 					String text = valueConverter.toString(val, rc.getRule()
 							.getName());
 					fmt.writeSemantic(rc, text);
@@ -168,6 +169,26 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 				return GrammarUtil.isDatatypeRule((ParserRule) rc.getRule());
 		}
 		return false;
+	}
+
+	protected String nodeToStr(CompositeNode node) {
+		Iterator<EObject> it = node.eAllContents();
+		StringBuffer text = new StringBuffer();
+		StringBuffer hidden = new StringBuffer();
+		while (it.hasNext()) {
+			EObject o = it.next();
+			if (o instanceof LeafNode) {
+				LeafNode l = (LeafNode) o;
+				if (l.isHidden())
+					hidden.append(l.getText());
+				else {
+					if (text.length() > 0)
+						text.append(hidden);
+					text.append(l.getText());
+				}
+			}
+		}
+		return text.toString();
 	}
 
 }
