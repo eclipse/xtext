@@ -40,7 +40,8 @@ protected class ThisRootNode extends RootToken {
 			case 5: return new Param_Group(this, this, 5, inst);
 			case 6: return new TestLinewrap_Group(this, this, 6, inst);
 			case 7: return new TestIndentation_Group(this, this, 7, inst);
-			case 8: return new FqnRef_Group(this, this, 8, inst);
+			case 8: return new FqnObj_Group(this, this, 8, inst);
+			case 9: return new FqnRef_Group(this, this, 9, inst);
 			default: return null;
 		}	
 	}	
@@ -190,11 +191,11 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 /************ begin Rule Line ****************
  *
  * Line:
- *   (Decl|Assign|Meth|FqnRef) ";";
+ *   (Decl|Assign|Meth|FqnObj|FqnRef) ";";
  *
  **/
 
-// (Decl|Assign|Meth|FqnRef) ";"
+// (Decl|Assign|Meth|FqnObj|FqnRef) ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -218,7 +219,7 @@ protected class Line_Group extends GroupToken {
 	}
 }
 
-// Decl|Assign|Meth|FqnRef
+// Decl|Assign|Meth|FqnObj|FqnRef
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -234,7 +235,8 @@ protected class Line_Alternatives_0 extends AlternativesToken {
 			case 0: return new Line_DeclParserRuleCall_0_0(parent, this, 0, inst);
 			case 1: return new Line_AssignParserRuleCall_0_1(parent, this, 1, inst);
 			case 2: return new Line_MethParserRuleCall_0_2(parent, this, 2, inst);
-			case 3: return new Line_FqnRefParserRuleCall_0_3(parent, this, 3, inst);
+			case 3: return new Line_FqnObjParserRuleCall_0_3(parent, this, 3, inst);
+			case 4: return new Line_FqnRefParserRuleCall_0_4(parent, this, 4, inst);
 			default: return null;
 		}	
 	}	
@@ -334,15 +336,46 @@ protected class Line_MethParserRuleCall_0_2 extends RuleCallToken {
 	}	
 }
 
-// FqnRef
-protected class Line_FqnRefParserRuleCall_0_3 extends RuleCallToken {
+// FqnObj
+protected class Line_FqnObjParserRuleCall_0_3 extends RuleCallToken {
 	
-	public Line_FqnRefParserRuleCall_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Line_FqnObjParserRuleCall_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_3();
+		return grammarAccess.getLineAccess().getFqnObjParserRuleCall_0_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnObj_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(FqnObj_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getFqnObjRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// FqnRef
+protected class Line_FqnRefParserRuleCall_0_4 extends RuleCallToken {
+	
+	public Line_FqnRefParserRuleCall_0_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_4();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1477,14 +1510,100 @@ protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
 /************ end Rule TestIndentation ****************/
 
 
-/************ begin Rule FqnRef ****************
+/************ begin Rule FqnObj ****************
  *
- * FqnRef:
- *   "fqn" fqn+=FQN;
+ * FqnObj:
+ *   "fqn" name=FQN;
  *
  **/
 
-// "fqn" fqn+=FQN
+// "fqn" name=FQN
+protected class FqnObj_Group extends GroupToken {
+	
+	public FqnObj_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getFqnObjAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnObj_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getFqnObjRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "fqn"
+protected class FqnObj_FqnKeyword_0 extends KeywordToken  {
+	
+	public FqnObj_FqnKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getFqnObjAccess().getFqnKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=FQN
+protected class FqnObj_NameAssignment_1 extends AssignmentToken  {
+	
+	public FqnObj_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFqnObjAccess().getNameAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new FqnObj_FqnKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.DRC;
+			element = grammarAccess.getFqnObjAccess().getNameFQNParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule FqnObj ****************/
+
+
+
+/************ begin Rule FqnRef ****************
+ *
+ * FqnRef:
+ *   "fqnref" ref=[FqnObj|FQN];
+ *
+ **/
+
+// "fqnref" ref=[FqnObj|FQN]
 protected class FqnRef_Group extends GroupToken {
 	
 	public FqnRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1497,7 +1616,7 @@ protected class FqnRef_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FqnRef_FqnAssignment_1(parent, this, 0, inst);
+			case 0: return new FqnRef_RefAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1508,15 +1627,15 @@ protected class FqnRef_Group extends GroupToken {
 	}
 }
 
-// "fqn"
-protected class FqnRef_FqnKeyword_0 extends KeywordToken  {
+// "fqnref"
+protected class FqnRef_FqnrefKeyword_0 extends KeywordToken  {
 	
-	public FqnRef_FqnKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public FqnRef_FqnrefKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFqnRefAccess().getFqnKeyword_0();
+		return grammarAccess.getFqnRefAccess().getFqnrefKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1527,31 +1646,34 @@ protected class FqnRef_FqnKeyword_0 extends KeywordToken  {
 		
 }
 
-// fqn+=FQN
-protected class FqnRef_FqnAssignment_1 extends AssignmentToken  {
+// ref=[FqnObj|FQN]
+protected class FqnRef_RefAssignment_1 extends AssignmentToken  {
 	
-	public FqnRef_FqnAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public FqnRef_RefAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFqnRefAccess().getFqnAssignment_1();
+		return grammarAccess.getFqnRefAccess().getRefAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FqnRef_FqnKeyword_0(parent, this, 0, inst);
+			case 0: return new FqnRef_FqnrefKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("fqn",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("fqn");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
-			type = AssignmentType.DRC;
-			element = grammarAccess.getFqnRefAccess().getFqnFQNParserRuleCall_1_0();
-			return obj;
+		if((value = current.getConsumable("ref",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getFqnRefAccess().getRefFqnObjCrossReference_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getFqnRefAccess().getRefFqnObjCrossReference_1_0(); 
+				return obj;
+			}
 		}
 		return null;
 	}
@@ -1560,6 +1682,5 @@ protected class FqnRef_FqnAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule FqnRef ****************/
-
 
 }

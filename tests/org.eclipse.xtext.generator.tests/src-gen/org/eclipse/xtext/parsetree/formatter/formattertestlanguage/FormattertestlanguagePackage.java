@@ -338,6 +338,34 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_INDENTATION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl <em>Fqn Obj</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getFqnObj()
+   * @generated
+   */
+  int FQN_OBJ = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FQN_OBJ__NAME = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Fqn Obj</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FQN_OBJ_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnRefImpl <em>Fqn Ref</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -345,16 +373,16 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getFqnRef()
    * @generated
    */
-  int FQN_REF = 8;
+  int FQN_REF = 9;
 
   /**
-   * The feature id for the '<em><b>Fqn</b></em>' attribute list.
+   * The feature id for the '<em><b>Ref</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FQN_REF__FQN = LINE_FEATURE_COUNT + 0;
+  int FQN_REF__REF = LINE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Fqn Ref</em>' class.
@@ -579,6 +607,27 @@ public interface FormattertestlanguagePackage extends EPackage
   EAttribute getTestIndentation_Semi();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj <em>Fqn Obj</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fqn Obj</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj
+   * @generated
+   */
+  EClass getFqnObj();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj#getName()
+   * @see #getFqnObj()
+   * @generated
+   */
+  EAttribute getFqnObj_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef <em>Fqn Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -589,15 +638,15 @@ public interface FormattertestlanguagePackage extends EPackage
   EClass getFqnRef();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getFqn <em>Fqn</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getRef <em>Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Fqn</em>'.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getFqn()
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getRef()
    * @see #getFqnRef()
    * @generated
    */
-  EAttribute getFqnRef_Fqn();
+  EReference getFqnRef_Ref();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -799,6 +848,24 @@ public interface FormattertestlanguagePackage extends EPackage
     EAttribute TEST_INDENTATION__SEMI = eINSTANCE.getTestIndentation_Semi();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl <em>Fqn Obj</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getFqnObj()
+     * @generated
+     */
+    EClass FQN_OBJ = eINSTANCE.getFqnObj();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FQN_OBJ__NAME = eINSTANCE.getFqnObj_Name();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnRefImpl <em>Fqn Ref</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -809,12 +876,12 @@ public interface FormattertestlanguagePackage extends EPackage
     EClass FQN_REF = eINSTANCE.getFqnRef();
 
     /**
-     * The meta object literal for the '<em><b>Fqn</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FQN_REF__FQN = eINSTANCE.getFqnRef_Fqn();
+    EReference FQN_REF__REF = eINSTANCE.getFqnRef_Ref();
 
   }
 

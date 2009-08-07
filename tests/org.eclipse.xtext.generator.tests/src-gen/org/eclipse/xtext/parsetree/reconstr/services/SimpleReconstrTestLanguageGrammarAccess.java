@@ -69,14 +69,17 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cLoop4ParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		private final RuleCall cLoopBug285452ParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
 		private final RuleCall cDuplicateBug284491ParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
+		private final RuleCall cEmptyObjectBug284850ParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491;
+		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
+		//  EmptyObjectBug284850;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491
+		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
+		//EmptyObjectBug284850
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -129,6 +132,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//DuplicateBug284491
 		public RuleCall getDuplicateBug284491ParserRuleCall_16() { return cDuplicateBug284491ParserRuleCall_16; }
+
+		//EmptyObjectBug284850
+		public RuleCall getEmptyObjectBug284850ParserRuleCall_17() { return cEmptyObjectBug284850ParserRuleCall_17; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -910,6 +916,70 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//"transient"
 		public Keyword getTransientTransientKeyword_1_2_0() { return cTransientTransientKeyword_1_2_0; }
 	}
+
+	public class EmptyObjectBug284850Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectBug284850");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemsEmptyObjectItemsParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
+		
+		//EmptyObjectBug284850:
+		//  "#14" items=EmptyObjectItems;
+		public ParserRule getRule() { return rule; }
+
+		//"#14" items=EmptyObjectItems
+		public Group getGroup() { return cGroup; }
+
+		//"#14"
+		public Keyword getNumberSignDigitOneDigitFourKeyword_0() { return cNumberSignDigitOneDigitFourKeyword_0; }
+
+		//items=EmptyObjectItems
+		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
+
+		//EmptyObjectItems
+		public RuleCall getItemsEmptyObjectItemsParserRuleCall_1_0() { return cItemsEmptyObjectItemsParserRuleCall_1_0; }
+	}
+
+	public class EmptyObjectItemsElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItems");
+		private final Assignment cListAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cListEmptyObjectItemParserRuleCall_0 = (RuleCall)cListAssignment.eContents().get(0);
+		
+		//EmptyObjectItems:
+		//  list+=EmptyObjectItem*;
+		public ParserRule getRule() { return rule; }
+
+		//list+=EmptyObjectItem*
+		public Assignment getListAssignment() { return cListAssignment; }
+
+		//EmptyObjectItem
+		public RuleCall getListEmptyObjectItemParserRuleCall_0() { return cListEmptyObjectItemParserRuleCall_0; }
+	}
+
+	public class EmptyObjectItemElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItem");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cItemKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//EmptyObjectItem:
+		//  "item" name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"item" name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"item"
+		public Keyword getItemKeyword_0() { return cItemKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -931,6 +1001,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private Loop4Elements pLoop4;
 	private LoopBug285452Elements pLoopBug285452;
 	private DuplicateBug284491Elements pDuplicateBug284491;
+	private EmptyObjectBug284850Elements pEmptyObjectBug284850;
+	private EmptyObjectItemsElements pEmptyObjectItems;
+	private EmptyObjectItemElements pEmptyObjectItem;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -965,7 +1038,8 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491;
+	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
+	//  EmptyObjectBug284850;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1142,6 +1216,36 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getDuplicateBug284491Rule() {
 		return getDuplicateBug284491Access().getRule();
+	}
+
+	//EmptyObjectBug284850:
+	//  "#14" items=EmptyObjectItems;
+	public EmptyObjectBug284850Elements getEmptyObjectBug284850Access() {
+		return (pEmptyObjectBug284850 != null) ? pEmptyObjectBug284850 : (pEmptyObjectBug284850 = new EmptyObjectBug284850Elements());
+	}
+	
+	public ParserRule getEmptyObjectBug284850Rule() {
+		return getEmptyObjectBug284850Access().getRule();
+	}
+
+	//EmptyObjectItems:
+	//  list+=EmptyObjectItem*;
+	public EmptyObjectItemsElements getEmptyObjectItemsAccess() {
+		return (pEmptyObjectItems != null) ? pEmptyObjectItems : (pEmptyObjectItems = new EmptyObjectItemsElements());
+	}
+	
+	public ParserRule getEmptyObjectItemsRule() {
+		return getEmptyObjectItemsAccess().getRule();
+	}
+
+	//EmptyObjectItem:
+	//  "item" name=ID;
+	public EmptyObjectItemElements getEmptyObjectItemAccess() {
+		return (pEmptyObjectItem != null) ? pEmptyObjectItem : (pEmptyObjectItem = new EmptyObjectItemElements());
+	}
+	
+	public ParserRule getEmptyObjectItemRule() {
+		return getEmptyObjectItemAccess().getRule();
 	}
 
 	//terminal ID:

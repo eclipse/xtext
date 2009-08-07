@@ -5,6 +5,7 @@ import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.EmfFormatter;
 
 public class FormatterTest extends AbstractGeneratorTest {
 
@@ -26,6 +27,7 @@ public class FormatterTest extends AbstractGeneratorTest {
 	private void assertFormattedNM(String expected, String model, int offset,
 			int lengt) throws Exception {
 		CompositeNode node = NodeUtil.getRootNode(getModel(model));
+		System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter()
 				.format(node, offset, lengt);
 		String actual = model.substring(0, r.getOffset())
@@ -120,4 +122,10 @@ public class FormatterTest extends AbstractGeneratorTest {
 		assertFormattedNM(expected, model, 25, 12);
 	}
 
+	public void _testLinewrapDatatypeRuleRef() throws Exception {
+		final String model = "test linewrap fqn ab  .cd .ef; fqnref ab. cd. ef;";
+		final String expected = "test linewrap\nfqn\nab.cd.ef;\nfqnref\nab.cd.ef;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+	}
 }

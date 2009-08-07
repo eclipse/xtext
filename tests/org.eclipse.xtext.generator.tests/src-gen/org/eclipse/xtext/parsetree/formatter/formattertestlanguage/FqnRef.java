@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getFqn <em>Fqn</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,19 +25,29 @@ import org.eclipse.emf.common.util.EList;
 public interface FqnRef extends Line
 {
   /**
-   * Returns the value of the '<em><b>Fqn</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Ref</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Fqn</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Ref</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Fqn</em>' attribute list.
-   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage#getFqnRef_Fqn()
-   * @model unique="false"
+   * @return the value of the '<em>Ref</em>' reference.
+   * @see #setRef(FqnObj)
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage#getFqnRef_Ref()
+   * @model
    * @generated
    */
-  EList<String> getFqn();
+  FqnObj getRef();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef#getRef <em>Ref</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ref</em>' reference.
+   * @see #getRef()
+   * @generated
+   */
+  void setRef(FqnObj value);
 
 } // FqnRef

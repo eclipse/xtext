@@ -98,6 +98,15 @@ public interface FormattertestlanguageFactory extends EFactory
   TestIndentation createTestIndentation();
 
   /**
+   * Returns a new object of class '<em>Fqn Obj</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Fqn Obj</em>'.
+   * @generated
+   */
+  FqnObj createFqnObj();
+
+  /**
    * Returns a new object of class '<em>Fqn Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

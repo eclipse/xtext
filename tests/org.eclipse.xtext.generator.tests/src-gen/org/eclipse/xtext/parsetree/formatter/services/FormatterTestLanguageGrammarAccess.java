@@ -52,17 +52,18 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cDeclParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
 		private final RuleCall cAssignParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
 		private final RuleCall cMethParserRuleCall_0_2 = (RuleCall)cAlternatives_0.eContents().get(2);
-		private final RuleCall cFqnRefParserRuleCall_0_3 = (RuleCall)cAlternatives_0.eContents().get(3);
+		private final RuleCall cFqnObjParserRuleCall_0_3 = (RuleCall)cAlternatives_0.eContents().get(3);
+		private final RuleCall cFqnRefParserRuleCall_0_4 = (RuleCall)cAlternatives_0.eContents().get(4);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth|FqnRef) ";";
+		//  (Decl|Assign|Meth|FqnObj|FqnRef) ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnRef) ";"
+		//(Decl|Assign|Meth|FqnObj|FqnRef) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnRef
+		//Decl|Assign|Meth|FqnObj|FqnRef
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -74,8 +75,11 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		//Meth
 		public RuleCall getMethParserRuleCall_0_2() { return cMethParserRuleCall_0_2; }
 
+		//FqnObj
+		public RuleCall getFqnObjParserRuleCall_0_3() { return cFqnObjParserRuleCall_0_3; }
+
 		//FqnRef
-		public RuleCall getFqnRefParserRuleCall_0_3() { return cFqnRefParserRuleCall_0_3; }
+		public RuleCall getFqnRefParserRuleCall_0_4() { return cFqnRefParserRuleCall_0_4; }
 
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
@@ -349,28 +353,28 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
 
-	public class FqnRefElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnRef");
+	public class FqnObjElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnObj");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFqnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cFqnAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cFqnFQNParserRuleCall_1_0 = (RuleCall)cFqnAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameFQNParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//FqnRef:
-		//  "fqn" fqn+=FQN;
+		//FqnObj:
+		//  "fqn" name=FQN;
 		public ParserRule getRule() { return rule; }
 
-		//"fqn" fqn+=FQN
+		//"fqn" name=FQN
 		public Group getGroup() { return cGroup; }
 
 		//"fqn"
 		public Keyword getFqnKeyword_0() { return cFqnKeyword_0; }
 
-		//fqn+=FQN
-		public Assignment getFqnAssignment_1() { return cFqnAssignment_1; }
+		//name=FQN
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//FQN
-		public RuleCall getFqnFQNParserRuleCall_1_0() { return cFqnFQNParserRuleCall_1_0; }
+		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 	}
 
 	public class FQNElements implements IParserRuleAccess {
@@ -400,6 +404,34 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
+
+	public class FqnRefElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFqnrefKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefFqnObjCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
+		private final RuleCall cRefFqnObjFQNParserRuleCall_1_0_1 = (RuleCall)cRefFqnObjCrossReference_1_0.eContents().get(1);
+		
+		//FqnRef:
+		//  "fqnref" ref=[FqnObj|FQN];
+		public ParserRule getRule() { return rule; }
+
+		//"fqnref" ref=[FqnObj|FQN]
+		public Group getGroup() { return cGroup; }
+
+		//"fqnref"
+		public Keyword getFqnrefKeyword_0() { return cFqnrefKeyword_0; }
+
+		//ref=[FqnObj|FQN]
+		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
+
+		//[FqnObj|FQN]
+		public CrossReference getRefFqnObjCrossReference_1_0() { return cRefFqnObjCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getRefFqnObjFQNParserRuleCall_1_0_1() { return cRefFqnObjFQNParserRuleCall_1_0_1; }
+	}
 	
 	
 	private RootElements pRoot;
@@ -410,8 +442,9 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	private ParamElements pParam;
 	private TestLinewrapElements pTestLinewrap;
 	private TestIndentationElements pTestIndentation;
-	private FqnRefElements pFqnRef;
+	private FqnObjElements pFqnObj;
 	private FQNElements pFQN;
+	private FqnRefElements pFqnRef;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -445,7 +478,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth|FqnRef) ";";
+	//  (Decl|Assign|Meth|FqnObj|FqnRef) ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -514,14 +547,14 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		return getTestIndentationAccess().getRule();
 	}
 
-	//FqnRef:
-	//  "fqn" fqn+=FQN;
-	public FqnRefElements getFqnRefAccess() {
-		return (pFqnRef != null) ? pFqnRef : (pFqnRef = new FqnRefElements());
+	//FqnObj:
+	//  "fqn" name=FQN;
+	public FqnObjElements getFqnObjAccess() {
+		return (pFqnObj != null) ? pFqnObj : (pFqnObj = new FqnObjElements());
 	}
 	
-	public ParserRule getFqnRefRule() {
-		return getFqnRefAccess().getRule();
+	public ParserRule getFqnObjRule() {
+		return getFqnObjAccess().getRule();
 	}
 
 	//FQN returns ecore::EString:
@@ -532,6 +565,16 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
+	}
+
+	//FqnRef:
+	//  "fqnref" ref=[FqnObj|FQN];
+	public FqnRefElements getFqnRefAccess() {
+		return (pFqnRef != null) ? pFqnRef : (pFqnRef = new FqnRefElements());
+	}
+	
+	public ParserRule getFqnRefRule() {
+		return getFqnRefAccess().getRule();
 	}
 
 	//terminal ID:

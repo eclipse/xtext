@@ -44,6 +44,7 @@
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -368,6 +369,36 @@
           <groups xsi:type="xtext:Assignment" feature="transient" operator="?=">
             <terminal xsi:type="xtext:Keyword" value="transient"/>
           </groups>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="EmptyObjectBug284850">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//EmptyObjectBug284850"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#14"/>
+        <tokens xsi:type="xtext:Assignment" feature="items" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="EmptyObjectItems">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//EmptyObjectItems"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="list" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="EmptyObjectItem">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/simplerewritetest#//EmptyObjectItem"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="item"/>
+        <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
       </alternatives>
     </rules>

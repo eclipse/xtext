@@ -26,6 +26,7 @@
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
@@ -142,13 +143,13 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="FqnRef">
+    <rules xsi:type="xtext:ParserRule" name="FqnObj">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//FqnRef"/>
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//FqnObj"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="fqn"/>
-        <tokens xsi:type="xtext:Assignment" feature="fqn" operator="+=">
+        <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
         </tokens>
       </alternatives>
@@ -162,6 +163,22 @@
         <tokens xsi:type="xtext:Group" cardinality="*">
           <tokens xsi:type="xtext:Keyword" value="."/>
           <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FqnRef">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//FqnRef"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="fqnref"/>
+        <tokens xsi:type="xtext:Assignment" feature="ref" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//FqnObj"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+          </terminal>
         </tokens>
       </alternatives>
     </rules>

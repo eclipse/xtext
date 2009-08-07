@@ -319,6 +319,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_DuplicateBug284491_16.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getEmptyObjectBug284850ParserRuleCall_17(), currentNode); 
+    }
+    this_EmptyObjectBug284850_17=ruleEmptyObjectBug284850
+    { 
+        $current = $this_EmptyObjectBug284850_17.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -1621,6 +1631,139 @@ ruleDuplicateBug284491 returns [EObject current=null]
 	    }
 	
 ))*);
+
+
+
+
+
+// Entry rule entryRuleEmptyObjectBug284850
+entryRuleEmptyObjectBug284850 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectBug284850Rule(), currentNode); }
+	 iv_ruleEmptyObjectBug284850=ruleEmptyObjectBug284850 
+	 { $current=$iv_ruleEmptyObjectBug284850.current; } 
+	 EOF 
+;
+
+// Rule EmptyObjectBug284850
+ruleEmptyObjectBug284850 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#14' 
+    {
+        createLeafNode(grammarAccess.getEmptyObjectBug284850Access().getNumberSignDigitOneDigitFourKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEmptyObjectBug284850Access().getItemsEmptyObjectItemsParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_items_1=ruleEmptyObjectItems 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "items", lv_items_1, "EmptyObjectItems", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+));
+
+
+
+
+
+// Entry rule entryRuleEmptyObjectItems
+entryRuleEmptyObjectItems returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectItemsRule(), currentNode); }
+	 iv_ruleEmptyObjectItems=ruleEmptyObjectItems 
+	 { $current=$iv_ruleEmptyObjectItems.current; } 
+	 EOF 
+;
+
+// Rule EmptyObjectItems
+ruleEmptyObjectItems returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEmptyObjectItemsAccess().getListEmptyObjectItemParserRuleCall_0(), currentNode); 
+	    }
+	    lv_list_0=ruleEmptyObjectItem 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEmptyObjectItemsRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "list", lv_list_0, "EmptyObjectItem", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)*;
+
+
+
+
+
+// Entry rule entryRuleEmptyObjectItem
+entryRuleEmptyObjectItem returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectItemRule(), currentNode); }
+	 iv_ruleEmptyObjectItem=ruleEmptyObjectItem 
+	 { $current=$iv_ruleEmptyObjectItem.current; } 
+	 EOF 
+;
+
+// Rule EmptyObjectItem
+ruleEmptyObjectItem returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('item' 
+    {
+        createLeafNode(grammarAccess.getEmptyObjectItemAccess().getItemKeyword_0(), null); 
+    }
+(	
+	
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getEmptyObjectItemAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEmptyObjectItemRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+));
 
 
 

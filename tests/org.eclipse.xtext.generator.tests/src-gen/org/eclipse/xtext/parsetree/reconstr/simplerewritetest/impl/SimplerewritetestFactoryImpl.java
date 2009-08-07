@@ -17,6 +17,9 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -102,6 +105,9 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.LOOP4: return createLoop4();
       case SimplerewritetestPackage.LOOP_BUG285452: return createLoopBug285452();
       case SimplerewritetestPackage.DUPLICATE_BUG284491: return createDuplicateBug284491();
+      case SimplerewritetestPackage.EMPTY_OBJECT_BUG284850: return createEmptyObjectBug284850();
+      case SimplerewritetestPackage.EMPTY_OBJECT_ITEMS: return createEmptyObjectItems();
+      case SimplerewritetestPackage.EMPTY_OBJECT_ITEM: return createEmptyObjectItem();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -293,6 +299,39 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     DuplicateBug284491Impl duplicateBug284491 = new DuplicateBug284491Impl();
     return duplicateBug284491;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmptyObjectBug284850 createEmptyObjectBug284850()
+  {
+    EmptyObjectBug284850Impl emptyObjectBug284850 = new EmptyObjectBug284850Impl();
+    return emptyObjectBug284850;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmptyObjectItems createEmptyObjectItems()
+  {
+    EmptyObjectItemsImpl emptyObjectItems = new EmptyObjectItemsImpl();
+    return emptyObjectItems;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmptyObjectItem createEmptyObjectItem()
+  {
+    EmptyObjectItemImpl emptyObjectItem = new EmptyObjectItemImpl();
+    return emptyObjectItem;
   }
 
   /**

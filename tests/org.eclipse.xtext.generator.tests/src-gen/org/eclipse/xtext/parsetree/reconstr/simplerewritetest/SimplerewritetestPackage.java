@@ -788,6 +788,99 @@ public interface SimplerewritetestPackage extends EPackage
   int DUPLICATE_BUG284491_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectBug284850Impl <em>Empty Object Bug284850</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectBug284850Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectBug284850()
+   * @generated
+   */
+  int EMPTY_OBJECT_BUG284850 = 17;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_BUG284850__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Items</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_BUG284850__ITEMS = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Empty Object Bug284850</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_BUG284850_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemsImpl <em>Empty Object Items</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemsImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectItems()
+   * @generated
+   */
+  int EMPTY_OBJECT_ITEMS = 18;
+
+  /**
+   * The feature id for the '<em><b>List</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_ITEMS__LIST = 0;
+
+  /**
+   * The number of structural features of the '<em>Empty Object Items</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_ITEMS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemImpl <em>Empty Object Item</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectItem()
+   * @generated
+   */
+  int EMPTY_OBJECT_ITEM = 19;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_ITEM__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Empty Object Item</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_OBJECT_ITEM_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -795,7 +888,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 17;
+  int OP = 20;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1315,6 +1408,69 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getDuplicateBug284491_Transient();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850 <em>Empty Object Bug284850</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Empty Object Bug284850</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850
+   * @generated
+   */
+  EClass getEmptyObjectBug284850();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Items</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850#getItems()
+   * @see #getEmptyObjectBug284850()
+   * @generated
+   */
+  EReference getEmptyObjectBug284850_Items();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems <em>Empty Object Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Empty Object Items</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems
+   * @generated
+   */
+  EClass getEmptyObjectItems();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems#getList <em>List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>List</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems#getList()
+   * @see #getEmptyObjectItems()
+   * @generated
+   */
+  EReference getEmptyObjectItems_List();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem <em>Empty Object Item</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Empty Object Item</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem
+   * @generated
+   */
+  EClass getEmptyObjectItem();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem#getName()
+   * @see #getEmptyObjectItem()
+   * @generated
+   */
+  EAttribute getEmptyObjectItem_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1759,6 +1915,60 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute DUPLICATE_BUG284491__TRANSIENT = eINSTANCE.getDuplicateBug284491_Transient();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectBug284850Impl <em>Empty Object Bug284850</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectBug284850Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectBug284850()
+     * @generated
+     */
+    EClass EMPTY_OBJECT_BUG284850 = eINSTANCE.getEmptyObjectBug284850();
+
+    /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EMPTY_OBJECT_BUG284850__ITEMS = eINSTANCE.getEmptyObjectBug284850_Items();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemsImpl <em>Empty Object Items</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemsImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectItems()
+     * @generated
+     */
+    EClass EMPTY_OBJECT_ITEMS = eINSTANCE.getEmptyObjectItems();
+
+    /**
+     * The meta object literal for the '<em><b>List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EMPTY_OBJECT_ITEMS__LIST = eINSTANCE.getEmptyObjectItems_List();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemImpl <em>Empty Object Item</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEmptyObjectItem()
+     * @generated
+     */
+    EClass EMPTY_OBJECT_ITEM = eINSTANCE.getEmptyObjectItem();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EMPTY_OBJECT_ITEM__NAME = eINSTANCE.getEmptyObjectItem_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

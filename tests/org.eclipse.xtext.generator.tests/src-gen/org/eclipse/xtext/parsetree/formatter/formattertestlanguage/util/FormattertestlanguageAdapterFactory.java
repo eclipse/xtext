@@ -118,6 +118,11 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createTestIndentationAdapter();
       }
       @Override
+      public Adapter caseFqnObj(FqnObj object)
+      {
+        return createFqnObjAdapter();
+      }
+      @Override
       public Adapter caseFqnRef(FqnRef object)
       {
         return createFqnRefAdapter();
@@ -260,6 +265,21 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTestIndentationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj <em>Fqn Obj</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj
+   * @generated
+   */
+  public Adapter createFqnObjAdapter()
   {
     return null;
   }

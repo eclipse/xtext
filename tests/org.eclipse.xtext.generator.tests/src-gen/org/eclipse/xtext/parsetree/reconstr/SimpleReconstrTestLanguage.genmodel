@@ -72,6 +72,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//DuplicateBug284491/final"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//DuplicateBug284491/transient"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EmptyObjectBug284850">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//EmptyObjectBug284850/items"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EmptyObjectItems">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//EmptyObjectItems/list"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EmptyObjectItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//EmptyObjectItem/name"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

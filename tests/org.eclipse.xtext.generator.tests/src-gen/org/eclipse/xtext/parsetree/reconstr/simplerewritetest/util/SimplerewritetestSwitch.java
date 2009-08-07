@@ -14,6 +14,9 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -244,6 +247,28 @@ public class SimplerewritetestSwitch<T>
         DuplicateBug284491 duplicateBug284491 = (DuplicateBug284491)theEObject;
         T result = caseDuplicateBug284491(duplicateBug284491);
         if (result == null) result = caseExpression(duplicateBug284491);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.EMPTY_OBJECT_BUG284850:
+      {
+        EmptyObjectBug284850 emptyObjectBug284850 = (EmptyObjectBug284850)theEObject;
+        T result = caseEmptyObjectBug284850(emptyObjectBug284850);
+        if (result == null) result = caseExpression(emptyObjectBug284850);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.EMPTY_OBJECT_ITEMS:
+      {
+        EmptyObjectItems emptyObjectItems = (EmptyObjectItems)theEObject;
+        T result = caseEmptyObjectItems(emptyObjectItems);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.EMPTY_OBJECT_ITEM:
+      {
+        EmptyObjectItem emptyObjectItem = (EmptyObjectItem)theEObject;
+        T result = caseEmptyObjectItem(emptyObjectItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -527,6 +552,54 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseDuplicateBug284491(DuplicateBug284491 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Empty Object Bug284850</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Empty Object Bug284850</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmptyObjectBug284850(EmptyObjectBug284850 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Empty Object Items</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Empty Object Items</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmptyObjectItems(EmptyObjectItems object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Empty Object Item</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Empty Object Item</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmptyObjectItem(EmptyObjectItem object)
   {
     return null;
   }
