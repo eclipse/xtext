@@ -184,6 +184,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 				else {
 					if (text.length() > 0)
 						text.append(hidden);
+					hidden.delete(0, hidden.length());
 					text.append(l.getText());
 				}
 			}
