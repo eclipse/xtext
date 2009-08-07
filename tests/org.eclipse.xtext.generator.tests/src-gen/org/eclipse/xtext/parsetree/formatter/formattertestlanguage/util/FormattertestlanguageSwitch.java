@@ -156,6 +156,14 @@ public class FormattertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FormattertestlanguagePackage.FQN_OBJ:
+      {
+        FqnObj fqnObj = (FqnObj)theEObject;
+        T result = caseFqnObj(fqnObj);
+        if (result == null) result = caseLine(fqnObj);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FormattertestlanguagePackage.FQN_REF:
       {
         FqnRef fqnRef = (FqnRef)theEObject;
@@ -292,6 +300,22 @@ public class FormattertestlanguageSwitch<T>
    * @generated
    */
   public T caseTestIndentation(TestIndentation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Fqn Obj</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Fqn Obj</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFqnObj(FqnObj object)
   {
     return null;
   }

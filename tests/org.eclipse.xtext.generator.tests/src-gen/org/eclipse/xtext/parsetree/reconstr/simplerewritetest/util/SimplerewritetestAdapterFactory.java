@@ -16,6 +16,9 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -178,6 +181,21 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDuplicateBug284491(DuplicateBug284491 object)
       {
         return createDuplicateBug284491Adapter();
+      }
+      @Override
+      public Adapter caseEmptyObjectBug284850(EmptyObjectBug284850 object)
+      {
+        return createEmptyObjectBug284850Adapter();
+      }
+      @Override
+      public Adapter caseEmptyObjectItems(EmptyObjectItems object)
+      {
+        return createEmptyObjectItemsAdapter();
+      }
+      @Override
+      public Adapter caseEmptyObjectItem(EmptyObjectItem object)
+      {
+        return createEmptyObjectItemAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -457,6 +475,51 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDuplicateBug284491Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850 <em>Empty Object Bug284850</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850
+   * @generated
+   */
+  public Adapter createEmptyObjectBug284850Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems <em>Empty Object Items</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems
+   * @generated
+   */
+  public Adapter createEmptyObjectItemsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem <em>Empty Object Item</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem
+   * @generated
+   */
+  public Adapter createEmptyObjectItemAdapter()
   {
     return null;
   }

@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -19,11 +18,11 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.FqnRefElements;
+import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.FqnObjElements;
 
-public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsumer {
+public final class FormatterTestLanguageFqnObjConsumer extends NonTerminalConsumer {
 
-	private FqnRefElements rule;	
+	private FqnObjElements rule;	
 
 	private INonTerminalConsumer fqnConsumer;
 
@@ -33,7 +32,7 @@ public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsum
 
 	private IElementConsumer assignment$3$Consumer;
 
-	private IElementConsumer crossReference$4$Consumer;
+	private IElementConsumer ruleCall$4$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -70,23 +69,23 @@ public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsum
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return crossReference$4$Consumer;
+			return ruleCall$4$Consumer;
 		}
 	}
 
-	protected class CrossReference$4$Consumer extends ElementConsumer<CrossReference> {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected CrossReference$4$Consumer(final CrossReference crossReference) {
-			super(crossReference);
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(fqnConsumer, "ref", false, true, false, getElement(), optional);
+			return consumeNonTerminal(fqnConsumer, "name", false, true, false, getElement(), optional);
 		}
 	}
 
-	public FormatterTestLanguageFqnRefConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public FormatterTestLanguageFqnObjConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -96,17 +95,17 @@ public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsum
 		return group$1$Consumer.consume();
 	}
 
-	public FqnRefElements getRule() {
+	public FqnObjElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(FqnRefElements rule) {
+	public void setRule(FqnObjElements rule) {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.getFqnrefKeyword_0());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.getRefAssignment_1());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getRefFqnObjCrossReference_1_0());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getFqnKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameFQNParserRuleCall_1_0());
 	}
 	
 	@Override

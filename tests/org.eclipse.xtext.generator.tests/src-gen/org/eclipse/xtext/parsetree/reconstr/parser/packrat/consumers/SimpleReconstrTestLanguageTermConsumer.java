@@ -31,6 +31,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer duplicateBug284491Consumer;
 
+	private INonTerminalConsumer emptyObjectBug284850Consumer;
+
 	private INonTerminalConsumer loop1Consumer;
 
 	private INonTerminalConsumer loop2Consumer;
@@ -91,6 +93,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$18$Consumer;
 
+	private IElementConsumer ruleCall$19$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -116,6 +120,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$16$Consumer);
 			acceptor.accept(ruleCall$17$Consumer);
 			acceptor.accept(ruleCall$18$Consumer);
+			acceptor.accept(ruleCall$19$Consumer);
 		}
 	}
 
@@ -323,6 +328,18 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$19$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$19$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(emptyObjectBug284850Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -357,6 +374,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getLoop4ParserRuleCall_14());
 		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getLoopBug285452ParserRuleCall_15());
 		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.getDuplicateBug284491ParserRuleCall_16());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.getEmptyObjectBug284850ParserRuleCall_17());
 	}
 	
 	@Override
@@ -387,6 +405,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setDuplicateBug284491Consumer(INonTerminalConsumer duplicateBug284491Consumer) {
 		this.duplicateBug284491Consumer = duplicateBug284491Consumer;
+	}
+	
+	public void setEmptyObjectBug284850Consumer(INonTerminalConsumer emptyObjectBug284850Consumer) {
+		this.emptyObjectBug284850Consumer = emptyObjectBug284850Consumer;
 	}
 	
 	public void setLoop1Consumer(INonTerminalConsumer loop1Consumer) {

@@ -8,45 +8,53 @@ package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj;
-import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnRef;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Fqn Ref</b></em>'.
+ * An implementation of the model object '<em><b>Fqn Obj</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnRefImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FqnRefImpl extends LineImpl implements FqnRef
+public class FqnObjImpl extends LineImpl implements FqnObj
 {
   /**
-   * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRef()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected FqnObj ref;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FqnRefImpl()
+  protected FqnObjImpl()
   {
     super();
   }
@@ -59,7 +67,7 @@ public class FqnRefImpl extends LineImpl implements FqnRef
   @Override
   protected EClass eStaticClass()
   {
-    return FormattertestlanguagePackage.Literals.FQN_REF;
+    return FormattertestlanguagePackage.Literals.FQN_OBJ;
   }
 
   /**
@@ -67,19 +75,9 @@ public class FqnRefImpl extends LineImpl implements FqnRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public FqnObj getRef()
+  public String getName()
   {
-    if (ref != null && ref.eIsProxy())
-    {
-      InternalEObject oldRef = (InternalEObject)ref;
-      ref = (FqnObj)eResolveProxy(oldRef);
-      if (ref != oldRef)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FormattertestlanguagePackage.FQN_REF__REF, oldRef, ref));
-      }
-    }
-    return ref;
+    return name;
   }
 
   /**
@@ -87,22 +85,12 @@ public class FqnRefImpl extends LineImpl implements FqnRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public FqnObj basicGetRef()
+  public void setName(String newName)
   {
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(FqnObj newRef)
-  {
-    FqnObj oldRef = ref;
-    ref = newRef;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FormattertestlanguagePackage.FQN_REF__REF, oldRef, ref));
+      eNotify(new ENotificationImpl(this, Notification.SET, FormattertestlanguagePackage.FQN_OBJ__NAME, oldName, name));
   }
 
   /**
@@ -115,9 +103,8 @@ public class FqnRefImpl extends LineImpl implements FqnRef
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.FQN_REF__REF:
-        if (resolve) return getRef();
-        return basicGetRef();
+      case FormattertestlanguagePackage.FQN_OBJ__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +119,8 @@ public class FqnRefImpl extends LineImpl implements FqnRef
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.FQN_REF__REF:
-        setRef((FqnObj)newValue);
+      case FormattertestlanguagePackage.FQN_OBJ__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +136,8 @@ public class FqnRefImpl extends LineImpl implements FqnRef
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.FQN_REF__REF:
-        setRef((FqnObj)null);
+      case FormattertestlanguagePackage.FQN_OBJ__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -166,10 +153,27 @@ public class FqnRefImpl extends LineImpl implements FqnRef
   {
     switch (featureID)
     {
-      case FormattertestlanguagePackage.FQN_REF__REF:
-        return ref != null;
+      case FormattertestlanguagePackage.FQN_OBJ__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //FqnRefImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //FqnObjImpl

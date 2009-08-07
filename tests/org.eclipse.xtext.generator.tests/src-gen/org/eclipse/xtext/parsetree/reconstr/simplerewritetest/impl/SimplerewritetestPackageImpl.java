@@ -16,6 +16,9 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -158,6 +161,27 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass duplicateBug284491EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emptyObjectBug284850EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emptyObjectItemsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emptyObjectItemEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -694,6 +718,66 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEmptyObjectBug284850()
+  {
+    return emptyObjectBug284850EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEmptyObjectBug284850_Items()
+  {
+    return (EReference)emptyObjectBug284850EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEmptyObjectItems()
+  {
+    return emptyObjectItemsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEmptyObjectItems_List()
+  {
+    return (EReference)emptyObjectItemsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEmptyObjectItem()
+  {
+    return emptyObjectItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEmptyObjectItem_Name()
+  {
+    return (EAttribute)emptyObjectItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -802,6 +886,15 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     createEAttribute(duplicateBug284491EClass, DUPLICATE_BUG284491__FINAL);
     createEAttribute(duplicateBug284491EClass, DUPLICATE_BUG284491__TRANSIENT);
 
+    emptyObjectBug284850EClass = createEClass(EMPTY_OBJECT_BUG284850);
+    createEReference(emptyObjectBug284850EClass, EMPTY_OBJECT_BUG284850__ITEMS);
+
+    emptyObjectItemsEClass = createEClass(EMPTY_OBJECT_ITEMS);
+    createEReference(emptyObjectItemsEClass, EMPTY_OBJECT_ITEMS__LIST);
+
+    emptyObjectItemEClass = createEClass(EMPTY_OBJECT_ITEM);
+    createEAttribute(emptyObjectItemEClass, EMPTY_OBJECT_ITEM__NAME);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -851,6 +944,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loop4EClass.getESuperTypes().add(this.getExpression());
     loopBug285452EClass.getESuperTypes().add(this.getExpression());
     duplicateBug284491EClass.getESuperTypes().add(this.getExpression());
+    emptyObjectBug284850EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -916,6 +1010,15 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEAttribute(getDuplicateBug284491_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDuplicateBug284491_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDuplicateBug284491_Transient(), ecorePackage.getEBoolean(), "transient", null, 0, 1, DuplicateBug284491.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(emptyObjectBug284850EClass, EmptyObjectBug284850.class, "EmptyObjectBug284850", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEmptyObjectBug284850_Items(), this.getEmptyObjectItems(), null, "items", null, 0, 1, EmptyObjectBug284850.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(emptyObjectItemsEClass, EmptyObjectItems.class, "EmptyObjectItems", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEmptyObjectItems_List(), this.getEmptyObjectItem(), null, "list", null, 0, -1, EmptyObjectItems.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(emptyObjectItemEClass, EmptyObjectItem.class, "EmptyObjectItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEmptyObjectItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, EmptyObjectItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

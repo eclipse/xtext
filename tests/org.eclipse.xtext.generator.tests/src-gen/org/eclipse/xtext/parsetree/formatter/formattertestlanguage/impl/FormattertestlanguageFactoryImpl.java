@@ -75,6 +75,7 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
       case FormattertestlanguagePackage.PARAM: return createParam();
       case FormattertestlanguagePackage.TEST_LINEWRAP: return createTestLinewrap();
       case FormattertestlanguagePackage.TEST_INDENTATION: return createTestIndentation();
+      case FormattertestlanguagePackage.FQN_OBJ: return createFqnObj();
       case FormattertestlanguagePackage.FQN_REF: return createFqnRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -167,6 +168,17 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     TestIndentationImpl testIndentation = new TestIndentationImpl();
     return testIndentation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FqnObj createFqnObj()
+  {
+    FqnObjImpl fqnObj = new FqnObjImpl();
+    return fqnObj;
   }
 
   /**

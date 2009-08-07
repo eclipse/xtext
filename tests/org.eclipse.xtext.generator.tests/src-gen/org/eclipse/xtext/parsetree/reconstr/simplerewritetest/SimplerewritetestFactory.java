@@ -179,6 +179,33 @@ public interface SimplerewritetestFactory extends EFactory
   DuplicateBug284491 createDuplicateBug284491();
 
   /**
+   * Returns a new object of class '<em>Empty Object Bug284850</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Empty Object Bug284850</em>'.
+   * @generated
+   */
+  EmptyObjectBug284850 createEmptyObjectBug284850();
+
+  /**
+   * Returns a new object of class '<em>Empty Object Items</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Empty Object Items</em>'.
+   * @generated
+   */
+  EmptyObjectItems createEmptyObjectItems();
+
+  /**
+   * Returns a new object of class '<em>Empty Object Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Empty Object Item</em>'.
+   * @generated
+   */
+  EmptyObjectItem createEmptyObjectItem();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
