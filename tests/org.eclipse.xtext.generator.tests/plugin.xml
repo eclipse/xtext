@@ -14,15 +14,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" 
-       class = "org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage"
-       genModel = "org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
        class = "org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage"
        genModel = "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel" /> 
@@ -73,17 +64,6 @@
        genModel = "org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" 
-       class = "org.eclipse.xtext.generator.ecore.second.SecondPackage"
-       genModel = "org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -149,15 +129,6 @@
        uri = "http://eclipse.org/xtext/tests/OtherTest" 
        class = "org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage"
        genModel = "org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" 
-       class = "org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.genmodel" /> 
 	
   </extension>
 
