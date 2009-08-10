@@ -14,6 +14,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" 
+       class = "org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage"
+       genModel = "org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
        class = "org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage"
        genModel = "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel" /> 
@@ -64,6 +73,17 @@
        genModel = "org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.genmodel" /> 
 	
   </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" 
+       class = "org.eclipse.xtext.generator.ecore.second.SecondPackage"
+       genModel = "org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -135,6 +155,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" 
+       class = "org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage"
+       genModel = "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest" 
        class = "org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.genmodel" /> 
@@ -183,69 +212,6 @@
        uri = "http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage" 
        class = "org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://simple/formattertestlanguage" 
-       class = "org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage"
-       genModel = "org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/complexrewritetest" 
-       class = "org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest" 
-       class = "org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/SerializationBugTest/269362" 
-       class = "org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.SerializationBug269362TestLanguagePackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/serializationerror" 
-       class = "org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://simple/unassignedtext" 
-       class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
-       genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://simple/transientvaluestest" 
-       class = "org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage"
-       genModel = "org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.genmodel" /> 
 	
   </extension>
 
