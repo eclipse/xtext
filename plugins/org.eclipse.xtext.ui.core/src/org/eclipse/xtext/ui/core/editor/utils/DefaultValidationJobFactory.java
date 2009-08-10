@@ -10,15 +10,19 @@ import com.google.inject.Inject;
 
 public class DefaultValidationJobFactory implements ValidationJob.Factory {
 
-	private IXtextResourceChecker xtextResourceChecker;
-
 	@Inject
-	public DefaultValidationJobFactory(IXtextResourceChecker xtextResourceChecker) {
-		this.xtextResourceChecker = xtextResourceChecker;
-	}
+	private IXtextResourceChecker xtextResourceChecker;
 
 	public ValidationJob create(IStateAccess<XtextResource> xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
 		return new ValidationJob(xtextResourceChecker, xtextDocument, iFile, checkMode, deleteOldMarkers);
+	}
+
+	public void setXtextResourceChecker(IXtextResourceChecker xtextResourceChecker) {
+		this.xtextResourceChecker = xtextResourceChecker;
+	}
+
+	public IXtextResourceChecker getXtextResourceChecker() {
+		return xtextResourceChecker;
 	}
 
 }
