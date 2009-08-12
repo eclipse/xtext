@@ -113,7 +113,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		String projectName = getXtextProjectInfo().getGeneratorProjectName();
 
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
-				getXtextProjectInfo().getProjectName().toLowerCase(),
+				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport",
 				"org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtend;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
