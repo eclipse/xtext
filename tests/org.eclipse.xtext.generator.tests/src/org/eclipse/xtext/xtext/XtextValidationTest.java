@@ -26,6 +26,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
 public class XtextValidationTest extends AbstractGeneratorTest implements ValidationMessageAcceptor {
 
@@ -438,6 +439,147 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertNotNull("diag", diag);
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+	
+	public void testBug_285605_01() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleA=RuleA;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_02() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleA=RuleA;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_03() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleC=RuleC;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_04() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : RuleA|RuleB;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_05() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : ruleA=RuleA ruleB=RuleB;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_06() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (ruleA=RuleA)? ruleB=RuleB;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_07() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (ruleA=RuleA | '_')*;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testBug_285605_08() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : '_' (ruleA=RuleA)*;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+	
+	public void testBug_285605_09() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : '_'?  ( ( '__' | ruleA=RuleA )* '___')?;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 
 	public void acceptError(String message, EObject object, Integer feature) {
