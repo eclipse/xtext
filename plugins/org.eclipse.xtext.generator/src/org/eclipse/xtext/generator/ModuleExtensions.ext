@@ -2,7 +2,7 @@ import org::eclipse::xtext::generator;
 extension org::eclipse::xtend::util::stdlib::io;
 
 bindMethodName(Binding this) :
-	'bind'+simpleMethodName(key.type)+(value.expression!=null?'ToInstance':'');
+	((!value.provider)?'bind':'provide')+simpleMethodName(key.type)+(value.expression!=null?(!value.provider?'ToInstance':''):'');
 	
 private simpleMethodName(String qn) :
 	qn.split('\\.').select(e|e.matches('[A-Z].*')).toString('$');

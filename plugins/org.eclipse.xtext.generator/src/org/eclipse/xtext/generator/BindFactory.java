@@ -31,6 +31,10 @@ public class BindFactory {
 		bindings.add(binding(BindKey.type(s1), BindValue.expr(s2)));
 		return this;
 	}
+	public BindFactory addTypeToProviderInstance(String s1, String s2) {
+		bindings.add(binding(BindKey.type(s1), BindValue.providerExpr(s2)));
+		return this;
+	}
 	/**
 	 * @param type
 	 * @param expr
@@ -44,10 +48,6 @@ public class BindFactory {
 		return new Binding(type, expr, isFinal, getContributedBy());
 	}
 
-	public BindFactory addTypeToType(String s1, String s2){
-		add(binding(BindKey.type(s1), BindValue.type(s2)));
-		return this;
-	}
 	/**
 	 * @param binding
 	 */
@@ -56,13 +56,29 @@ public class BindFactory {
 			throw new IllegalArgumentException("Duplicate binding for "+binding.getKey()+" in "+getContributedBy());
 		bindings.add(binding);
 	}
-	
+
+	public BindFactory addTypeToType(String s1, String s2){
+		add(binding(BindKey.type(s1), BindValue.type(s2)));
+		return this;
+	}
 	public BindFactory addTypeToTypeSingleton(String s1, String s2){
 		add(binding(BindKey.singleton(s1), BindValue.type(s2)));
 		return this;
 	}
 	public BindFactory addTypeToTypeEagerSingleton(String s1, String s2){
 		add(binding(BindKey.eagerSingleton(s1), BindValue.type(s2)));
+		return this;
+	}
+	public BindFactory addTypeToProvider(String s1, String s2){
+		add(binding(BindKey.type(s1), BindValue.provider(s2)));
+		return this;
+	}
+	public BindFactory addTypeToProviderSingleton(String s1, String s2){
+		add(binding(BindKey.singleton(s1), BindValue.provider(s2)));
+		return this;
+	}
+	public BindFactory addTypeToProviderEagerSingleton(String s1, String s2){
+		add(binding(BindKey.eagerSingleton(s1), BindValue.provider(s2)));
 		return this;
 	}
 	public BindFactory addfinalTypeToType(String s1, String s2){
@@ -75,6 +91,18 @@ public class BindFactory {
 	}
 	public BindFactory addfinalTypeToTypeEagerSingleton(String s1, String s2){
 		add(binding(BindKey.eagerSingleton(s1), BindValue.type(s2),true));
+		return this;
+	}
+	public BindFactory addfinalTypeToProvider(String s1, String s2){
+		add(binding(BindKey.type(s1), BindValue.provider(s2),true));
+		return this;
+	}
+	public BindFactory addfinalTypeToProviderSingleton(String s1, String s2){
+		add(binding(BindKey.singleton(s1), BindValue.provider(s2),true));
+		return this;
+	}
+	public BindFactory addfinalTypeToProviderEagerSingleton(String s1, String s2){
+		add(binding(BindKey.eagerSingleton(s1), BindValue.provider(s2),true));
 		return this;
 	}
 
