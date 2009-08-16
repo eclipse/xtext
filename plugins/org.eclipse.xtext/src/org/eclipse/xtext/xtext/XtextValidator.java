@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import static org.eclipse.xtext.GrammarUtil.isOptionalCardinality;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -52,6 +53,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -70,25 +72,25 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void checkGrammarUsesMaxOneOther(Grammar grammar) {
-		assertTrue("You may not use more than one other grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS,
-				grammar.getUsedGrammars().size() <= 1);
+		assertTrue("You may not use more than one other grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS, grammar
+				.getUsedGrammars().size() <= 1);
 	}
 
 	@Check
 	public void checkGrammarName(Grammar g) {
 		String[] split = g.getName().split("\\.");
-		if (split.length==1)
+		if (split.length == 1)
 			warning("You should use a namespace.", XtextPackage.GRAMMAR__NAME);
-		for (int i=0;i<split.length-1;i++) {
+		for (int i = 0; i < split.length - 1; i++) {
 			String nsEle = split[i];
 			if (Character.isUpperCase(nsEle.charAt(0)))
 				warning("Namespace elements should start with a lower case letter.", XtextPackage.GRAMMAR__NAME);
 		}
-		String ele = split[split.length-1];
+		String ele = split[split.length - 1];
 		if (!Character.isUpperCase(ele.charAt(0)))
 			error("The last element should start with an upper case letter.", XtextPackage.GRAMMAR__NAME);
 	}
-	
+
 	@Check
 	public void checkFirstRule(Grammar g) {
 		if (g.getRules().isEmpty())
@@ -98,21 +100,23 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			if (!containsAnyParserRule(g, new HashSet<Grammar>()))
 				return;
 			error("The first rule must be a parser rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
-		} else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
+		}
+		else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
 			if (!containsAnyParserRule(g, new HashSet<Grammar>()))
 				return;
-			error("The first rule must be a parser rule, but is a data type rule.", firstRule, XtextPackage.ABSTRACT_RULE__NAME);
+			error("The first rule must be a parser rule, but is a data type rule.", firstRule,
+					XtextPackage.ABSTRACT_RULE__NAME);
 		}
 	}
-	
+
 	private boolean containsAnyParserRule(Grammar g, Set<Grammar> visited) {
 		if (!visited.add(g))
 			return false;
-		for(AbstractRule rule: g.getRules()) {
+		for (AbstractRule rule : g.getRules()) {
 			if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule))
 				return true;
 		}
-		for(Grammar used: g.getUsedGrammars()) {
+		for (Grammar used : g.getUsedGrammars()) {
 			if (containsAnyParserRule(used, visited))
 				return true;
 		}
@@ -123,12 +127,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkGeneratedMetamodel(GeneratedMetamodel metamodel) {
 		if (metamodel.getName() != null && metamodel.getName().length() != 0)
 			if (Character.isUpperCase(metamodel.getName().charAt(0)))
-				warning("Metamodel names should start with a lower case letter.", XtextPackage.GENERATED_METAMODEL__NAME);
+				warning("Metamodel names should start with a lower case letter.",
+						XtextPackage.GENERATED_METAMODEL__NAME);
 	}
-	
+
 	@Inject
 	private IValueConverterService valueConverter;
-	
+
 	@Check
 	public void checkReferencedMetamodel(ReferencedMetamodel metamodel) throws ValueConverterException {
 		if (metamodel.getEPackage() == null)
@@ -137,28 +142,29 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		List<GeneratedMetamodel> allGeneratedMetamodels = new ArrayList<GeneratedMetamodel>();
 		Grammar grammar = GrammarUtil.getGrammar(metamodel);
 		Set<Grammar> visited = Sets.newHashSet();
-		for(Grammar usedGrammar: grammar.getUsedGrammars())
+		for (Grammar usedGrammar : grammar.getUsedGrammars())
 			Iterables.addAll(allGeneratedMetamodels, getAllGeneratedMetamodels(usedGrammar, visited));
 		if (allGeneratedMetamodels.isEmpty())
 			return;
-		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(metamodel, XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
-		if(nodes.size() != 1)
+		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(metamodel,
+				XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
+		if (nodes.size() != 1)
 			throw new IllegalArgumentException();
 		String text = nodes.get(0).serialize();
 		text = (String) valueConverter.toValue(text, "STRING", nodes.get(0));
-		for(GeneratedMetamodel generatedMetamodel: allGeneratedMetamodels) {
+		for (GeneratedMetamodel generatedMetamodel : allGeneratedMetamodels) {
 			EPackage generatedPackage = generatedMetamodel.getEPackage();
-			if(generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {
-				assertEquals("Metamodels that have been generated by a super grammar must be referenced by nsURI: " +
-						nsURI,
-						XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, text, nsURI);
+			if (generatedPackage != null && nsURI.equals((generatedPackage.getNsURI()))) {
+				assertEquals("Metamodels that have been generated by a super grammar must be referenced by nsURI: "
+						+ nsURI, XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, text, nsURI);
 			}
 		}
 	}
-	
+
 	private Iterable<GeneratedMetamodel> getAllGeneratedMetamodels(Grammar grammar, Set<Grammar> visited) {
-		Iterable<GeneratedMetamodel> result = Iterables.filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
-		for(Grammar gr: grammar.getUsedGrammars()) {
+		Iterable<GeneratedMetamodel> result = Iterables.filter(grammar.getMetamodelDeclarations(),
+				GeneratedMetamodel.class);
+		for (Grammar gr : grammar.getUsedGrammars()) {
 			if (visited.add(gr))
 				result = Iterables.concat(result, getAllGeneratedMetamodels(gr, visited));
 		}
@@ -170,27 +176,28 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		guard(declaration.getEPackage().getNsURI() != null);
 
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
-		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(), new Function<AbstractMetamodelDeclaration, String>() {
-			public String apply(AbstractMetamodelDeclaration param) {
-				if (param.getEPackage() != null)
-					return param.getEPackage().getNsURI();
-				return null;
-			}
-		});
+		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(),
+				new Function<AbstractMetamodelDeclaration, String>() {
+					public String apply(AbstractMetamodelDeclaration param) {
+						if (param.getEPackage() != null)
+							return param.getEPackage().getNsURI();
+						return null;
+					}
+				});
 		int count = Iterables.size(Iterables.filter(nsUris, new Predicate<String>() {
 			public boolean apply(String param) {
 				return declaration.getEPackage().getNsURI().equals(param);
 			}
 		}));
-		assertTrue("EPackage with ns-uri '"+ declaration.getEPackage().getNsURI() + "' is used twice.",
-			XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, count == 1);
+		assertTrue("EPackage with ns-uri '" + declaration.getEPackage().getNsURI() + "' is used twice.",
+				XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, count == 1);
 	}
 
 	@Check
 	public void checkCrossReferenceTerminal(CrossReference reference) {
 		if (reference.getTerminal() != null && !(reference.getTerminal() instanceof RuleCall))
-			warning("Your grammar will not work with the default linking implementation, " +
-					"because Alternatives are currently not handled properly in CrossReferences.",
+			warning("Your grammar will not work with the default linking implementation, "
+					+ "because Alternatives are currently not handled properly in CrossReferences.",
 					XtextPackage.CROSS_REFERENCE__TERMINAL);
 	}
 
@@ -207,10 +214,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					final String message = "A rule's name has to be unique.";
 					error(message, XtextPackage.ABSTRACT_RULE__NAME);
 					return;
-				} else {
+				}
+				else {
 					String message = "A rule's name has to be unique even case insensitive.";
 					boolean superGrammar = false;
-					for(AbstractRule otherRule: rules.get(name)) {
+					for (AbstractRule otherRule : rules.get(name)) {
 						if (GrammarUtil.getGrammar(otherRule) != grammar) {
 							message = message + " A used grammar contains another rule '" + name + "'.";
 							superGrammar = true;
@@ -221,15 +229,16 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 						message = message + " This grammar contains another rule '" + name + "'.";
 					error(message, XtextPackage.ABSTRACT_RULE__NAME);
 				}
-			} else {
+			}
+			else {
 				String message = "A rule's name has to be unique even case insensitive.";
 				final StringBuilder builder = new StringBuilder((rule.getName().length() + 4) * names.size() - 2);
 				int i = 0;
-				for(String name: names) {
+				for (String name : names) {
 					if (builder.length() != 0) {
 						if (i < names.size() - 1)
 							builder.append(", ");
-						else 
+						else
 							builder.append(" and ");
 					}
 					i++;
@@ -238,13 +247,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				error(message + " The conflicting rules are " + builder + ".", XtextPackage.ABSTRACT_RULE__NAME);
 			}
 		}
-//		for(AbstractRule otherRule: getAllRules(grammar)) {
-//			if (rule.getName().equalsIgnoreCase(otherRule.getName()) && rule != otherRule) {
-//				foundNames.put(otherRule.getName(), otherRule);
-//			}
-//		}
 	}
-	
+
 	private Multimap<String, AbstractRule> getAllRules(Grammar grammar, String name) {
 		final Multimap<String, AbstractRule> result = Multimaps.newArrayListMultimap();
 		final Set<Grammar> grammars = new HashSet<Grammar>();
@@ -252,13 +256,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		collectRules(grammar, result, grammars, name, validNames);
 		return result;
 	}
-	
-	private void collectRules(Grammar grammar, Multimap<String, AbstractRule> result, Set<Grammar> visited, String name, Set<String> validNames) {
+
+	private void collectRules(Grammar grammar, Multimap<String, AbstractRule> result, Set<Grammar> visited,
+			String name, Set<String> validNames) {
 		if (!visited.add(grammar))
 			return;
-		
+
 		List<String> allNames = new ArrayList<String>();
-		for(AbstractRule rule: grammar.getRules()) {
+		for (AbstractRule rule : grammar.getRules()) {
 			if (!validNames.contains(rule.getName())) {
 				allNames.add(rule.getName());
 				if (rule.getName().equalsIgnoreCase(name))
@@ -266,7 +271,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			}
 		}
 		validNames.addAll(allNames);
-		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
 			collectRules(usedGrammar, result, visited, name, validNames);
 		}
 	}
@@ -285,7 +290,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			if (call.getRule() instanceof ParserRule) {
 				if (container instanceof TerminalRule) {
 					error("Cannot call parser rule from terminal rule.", null);
-				} else if (!GrammarUtil.isDatatypeRule((ParserRule) call.getRule()))
+				}
+				else if (!GrammarUtil.isDatatypeRule((ParserRule) call.getRule()))
 					checkCurrentMustBeUnassigned(call);
 			}
 		}
@@ -307,7 +313,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			public Boolean caseAlternatives(Alternatives object) {
 				final boolean wasIsNull = isNull;
 				boolean localIsNull = wasIsNull;
-				for(AbstractElement element: object.getGroups()) {
+				for (AbstractElement element : object.getGroups()) {
 					isNull = wasIsNull;
 					localIsNull &= doSwitch(element);
 				}
@@ -323,7 +329,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 			@Override
 			public Boolean caseGroup(Group object) {
-				for(AbstractElement element: object.getTokens())
+				for (AbstractElement element : object.getTokens())
 					doSwitch(element);
 				return isNull;
 			}
@@ -331,8 +337,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			@Override
 			public Boolean caseAction(Action object) {
 				if (object == element) {
-					assertTrue("An unassigned action is not allowed, when the 'current' was already created.",
-							null, isNull && !isMany(object));
+					assertTrue("An unassigned action is not allowed, when the 'current' was already created.", null,
+							isNull && !isMany(object));
 					checkDone();
 				}
 				isNull = false;
@@ -342,7 +348,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			@Override
 			public Boolean caseRuleCall(RuleCall object) {
 				if (object == element) {
-					assertTrue("An unassigned rule call is not allowed, when the 'current' was already created.", null, isNull && !isMany(object));
+					assertTrue("An unassigned rule call is not allowed, when the 'current' was already created.", null,
+							isNull && !isMany(object));
 					checkDone();
 				}
 				return doSwitch(object.getRule());
@@ -361,8 +368,9 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			}
 
 			public boolean isMany(AbstractElement element) {
-				return GrammarUtil.isMultipleCardinality(element) ||
-					((element.eContainer() instanceof AbstractElement) && isMany((AbstractElement) element.eContainer()));
+				return GrammarUtil.isMultipleCardinality(element)
+						|| ((element.eContainer() instanceof AbstractElement) && isMany((AbstractElement) element
+								.eContainer()));
 			}
 
 		};
@@ -385,11 +393,12 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				public Boolean caseAlternatives(Alternatives object) {
 					boolean wasActionAllowed = assignedActionAllowed;
 					boolean localActionAllowed = true;
-					for(AbstractElement element: object.getGroups()) {
+					for (AbstractElement element : object.getGroups()) {
 						assignedActionAllowed = wasActionAllowed;
 						localActionAllowed &= doSwitch(element);
 					}
-					assignedActionAllowed = wasActionAllowed || (localActionAllowed && !GrammarUtil.isOptionalCardinality(object));
+					assignedActionAllowed = wasActionAllowed
+							|| (localActionAllowed && !GrammarUtil.isOptionalCardinality(object));
 					return assignedActionAllowed;
 				}
 
@@ -402,17 +411,18 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				@Override
 				public Boolean caseGroup(Group object) {
 					boolean wasAssignedActionAllowed = assignedActionAllowed;
-					for(AbstractElement element: object.getTokens())
+					for (AbstractElement element : object.getTokens())
 						doSwitch(element);
-					assignedActionAllowed = wasAssignedActionAllowed || (assignedActionAllowed && !GrammarUtil.isOptionalCardinality(object));
+					assignedActionAllowed = wasAssignedActionAllowed
+							|| (assignedActionAllowed && !GrammarUtil.isOptionalCardinality(object));
 					return assignedActionAllowed;
 				}
 
 				@Override
 				public Boolean caseAction(Action object) {
 					if (object == action) {
-						assertTrue("An action is not allowed, when the current may still be unassigned.",
-								null, assignedActionAllowed);
+						assertTrue("An action is not allowed, when the current may still be unassigned.", null,
+								assignedActionAllowed);
 						checkDone();
 					}
 					assignedActionAllowed = true;
@@ -421,7 +431,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 				@Override
 				public Boolean caseRuleCall(RuleCall object) {
-					assignedActionAllowed = assignedActionAllowed || doSwitch(object.getRule()) && !GrammarUtil.isOptionalCardinality(object);
+					assignedActionAllowed = assignedActionAllowed || doSwitch(object.getRule())
+							&& !GrammarUtil.isOptionalCardinality(object);
 					return assignedActionAllowed;
 				}
 
@@ -446,14 +457,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		EnumRule rule = GrammarUtil.containingEnumRule(decl);
 		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
 		String literal = decl.getLiteral().getValue();
-		for(EnumLiteralDeclaration otherDecl: declarations) {
+		for (EnumLiteralDeclaration otherDecl : declarations) {
 			if (otherDecl != decl && literal.equals(otherDecl.getLiteral().getValue())) {
 				error("Enum literal '" + literal + "' is used multiple times in enum rule '" + rule.getName() + "'.",
 						XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL);
 			}
 		}
 	}
-	
+
 	@Check
 	public void checkGeneratedEnumIsValid(EnumLiteralDeclaration decl) {
 		EnumRule rule = GrammarUtil.containingEnumRule(decl);
@@ -461,71 +472,203 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
 		EEnum eEnum = (EEnum) rule.getType().getClassifier();
 		guard(declarations.size() != eEnum.getELiterals().size());
-		for(EnumLiteralDeclaration otherDecl: declarations) {
+		for (EnumLiteralDeclaration otherDecl : declarations) {
 			if (decl == otherDecl) {
 				return;
 			}
 			if (otherDecl.getEnumLiteral() == decl.getEnumLiteral()) {
 				if (!decl.getEnumLiteral().getLiteral().equals(decl.getLiteral().getValue()))
-					warning("Enum literal '" + decl.getEnumLiteral().getName() +
-							"' has already been defined with literal '" + decl.getEnumLiteral().getLiteral() + "'.",
+					warning("Enum literal '" + decl.getEnumLiteral().getName()
+							+ "' has already been defined with literal '" + decl.getEnumLiteral().getLiteral() + "'.",
 							XtextPackage.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
 				return;
 			}
 		}
 	}
-	
+
 	@Check
 	public void checkEnumLiteralIsValid(EnumLiteralDeclaration decl) {
-		if("".equals(decl.getLiteral().getValue()))
+		if ("".equals(decl.getLiteral().getValue()))
 			error("Enum literal must not be an empty string.", XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL);
 	}
-	
+
+	@Check
+	public void checkOverriddenValue(final ParserRule rule) {
+		if (GrammarUtil.isDatatypeRule(rule) || rule.getAlternatives() == null)
+			return;
+		OverriddenValueIdentifier strategy = new OverriddenValueIdentifier(this, rule);
+		strategy.doSwitch(rule.getAlternatives());
+	}
+
+	public static class OverriddenValueIdentifier extends XtextSwitch<Void> {
+
+		private final ValidationMessageAcceptor acceptor;
+
+		private Multimap<String, AbstractElement> assignedFeatures;
+
+		private Collection<AbstractRule> visitedRules;
+
+		public OverriddenValueIdentifier(ValidationMessageAcceptor acceptor, AbstractRule startRule) {
+			this.acceptor = acceptor;
+			assignedFeatures = newMultimap();
+			visitedRules = Sets.newHashSet(startRule);
+		}
+
+		protected Multimap<String, AbstractElement> newMultimap() {
+			return Multimaps.newLinkedHashMultimap();
+		}
+
+		@Override
+		public Void caseAssignment(Assignment object) {
+			if (GrammarUtil.isMultipleAssignment(object))
+				return null;
+			checkAssignment(object, object.getFeature());
+			if (GrammarUtil.isMultipleCardinality(object))
+				checkAssignment(object, object.getFeature());
+			return null;
+		}
+
+		@Override
+		public Void caseAction(Action object) {
+			if (GrammarUtil.isMultipleAssignment(object))
+				return null;
+			assignedFeatures = newMultimap();
+			if (object.getFeature() == null)
+				return null;
+			checkAssignment(object, object.getFeature());
+			return null;
+		}
+
+		private void checkAssignment(AbstractElement object, String feature) {
+			if (assignedFeatures.containsKey(feature)) {
+				Collection<AbstractElement> sources = Lists.newArrayList(assignedFeatures.get(feature));
+				assignedFeatures.replaceValues(feature, Iterables.<AbstractElement> emptyIterable());
+				if (sources != null && sources.equals(Collections.singletonList(object))) {
+					acceptor.acceptWarning("The assigned value of feature '" + feature
+							+ "' will possibly override itself because it is used inside of a loop.", object, null);
+				}
+				else {
+					if (sources != null) {
+						for (AbstractElement source : sources)
+							acceptor.acceptWarning("The possibly assigned value of feature '" + feature
+									+ "' may be overridden by subsequent assignments.", source, null);
+					}
+					acceptor.acceptWarning("This assignment will override the possibly assigned value of feature '"
+							+ feature + "'.", object, null);
+				}
+			}
+			else {
+				assignedFeatures.put(feature, object);
+			}
+		}
+
+		@Override
+		public Void caseRuleCall(RuleCall object) {
+			AbstractRule calledRule = object.getRule();
+			if (calledRule == null || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
+				return null;
+			ParserRule parserRule = (ParserRule) calledRule;
+			if (GrammarUtil.isDatatypeRule(parserRule))
+				return null;
+			if (!visitedRules.add(parserRule))
+				return null;
+			Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
+			assignedFeatures = newMultimap();
+			doSwitch(parserRule.getAlternatives());
+			for (String feature : assignedFeatures.keySet())
+				prevAssignedFeatures.put(feature, object);
+			assignedFeatures = prevAssignedFeatures;
+			visitedRules.remove(parserRule);
+			return null;
+		}
+
+		@Override
+		public Void caseAlternatives(Alternatives object) {
+			Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
+			Multimap<String, AbstractElement> mergedAssignedFeatures = newMultimap(prevAssignedFeatures);
+			for (AbstractElement element : object.getGroups()) {
+				assignedFeatures = newMultimap(prevAssignedFeatures);
+				doSwitch(element);
+				mergedAssignedFeatures.putAll(assignedFeatures);
+			}
+			assignedFeatures = mergedAssignedFeatures;
+			if (GrammarUtil.isMultipleCardinality(object)) {
+				prevAssignedFeatures = assignedFeatures;
+				for (AbstractElement element : object.getGroups()) {
+					assignedFeatures = newMultimap(prevAssignedFeatures);
+					doSwitch(element);
+					mergedAssignedFeatures.putAll(assignedFeatures);
+				}
+				assignedFeatures = mergedAssignedFeatures;
+			}
+			return null;
+		}
+
+		private Multimap<String, AbstractElement> newMultimap(Multimap<String, AbstractElement> from) {
+			return Multimaps.newLinkedHashMultimap(from);
+		}
+
+		@Override
+		public Void caseGroup(Group object) {
+			Multimap<String, AbstractElement> prevAssignedFeatures = newMultimap(assignedFeatures);
+			for (AbstractElement element : object.getTokens()) {
+				doSwitch(element);
+			}
+			if (GrammarUtil.isMultipleCardinality(object)) {
+				for (AbstractElement element : object.getTokens()) {
+					doSwitch(element);
+				}
+			}
+			if (GrammarUtil.isOptionalCardinality(object))
+				assignedFeatures.putAll(prevAssignedFeatures);
+			return null;
+		}
+	}
+
 	@Check
 	public void checkIfGrammarIsLeftRecursionFree(final Grammar grammar) {
 		new LeftRecursiveGrammarSwitch(this).doSwitch(grammar);
-		
+
 	}
-	
+
 	private final class LeftRecursiveGrammarSwitch extends XtextSwitch<Void> {
 		private final ValidationMessageAcceptor validationMessageAcceptor;
 		private ParserRule parserRule;
-		private Set<RuleCall> validatedRuleCalls= Sets.newHashSet();
-		private Set<RuleCall> leftRecursiveRuleCalls= Sets.newLinkedHashSet();
+		private Set<RuleCall> validatedRuleCalls = Sets.newHashSet();
+		private Set<RuleCall> leftRecursiveRuleCalls = Sets.newLinkedHashSet();
 
 		private LeftRecursiveGrammarSwitch(ValidationMessageAcceptor validationMessageAcceptor) {
-			this.validationMessageAcceptor=validationMessageAcceptor;
+			this.validationMessageAcceptor = validationMessageAcceptor;
 		}
 
 		@Override
 		public Void caseGrammar(Grammar grammar) {
-			EList<AbstractRule> rules= grammar.getRules();
+			EList<AbstractRule> rules = grammar.getRules();
 			for (AbstractRule abstractRule : rules) {
 				doSwitch(abstractRule);
 			}
-			for (RuleCall ruleCall: leftRecursiveRuleCalls) {
-				this.validationMessageAcceptor.acceptError("The following rule call is left-recursive '"+
-						ruleCall.getRule().getName()+"'", ruleCall, XtextPackage.RULE_CALL__RULE);
+			for (RuleCall ruleCall : leftRecursiveRuleCalls) {
+				this.validationMessageAcceptor.acceptError("The following rule call is left-recursive '"
+						+ ruleCall.getRule().getName() + "'", ruleCall, XtextPackage.RULE_CALL__RULE);
 			}
 			return null;
 		}
-		
+
 		@Override
 		public Void caseParserRule(ParserRule parserRule) {
-			this.parserRule= parserRule;
-			this.validatedRuleCalls= Sets.newHashSet();
+			this.parserRule = parserRule;
+			this.validatedRuleCalls = Sets.newHashSet();
 			doSwitch(parserRule.getAlternatives());
 			return null;
 		}
-		
+
 		@Override
 		public Void caseGroup(Group group) {
-			boolean isOptional= true;
-			for (Iterator<AbstractElement> iterator= group.getTokens().iterator(); iterator.hasNext()
-					&& isOptional;) {
-				AbstractElement groupElement= iterator.next();
+			boolean isOptional = true;
+			for (Iterator<AbstractElement> iterator = group.getTokens().iterator(); iterator.hasNext() && isOptional;) {
+				AbstractElement groupElement = iterator.next();
 				doSwitch(groupElement);
-				isOptional= isOptionalGroupElement(groupElement);
+				isOptional = isOptionalGroupElement(groupElement);
 			}
 			return null;
 		}
@@ -540,9 +683,9 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 		@Override
 		public Void caseAssignment(Assignment assignment) {
-			AbstractElement terminal= assignment.getTerminal();
+			AbstractElement terminal = assignment.getTerminal();
 			if (terminal instanceof RuleCall) {
-				RuleCall ruleCall= (RuleCall) terminal;
+				RuleCall ruleCall = (RuleCall) terminal;
 				doSwitch(ruleCall);
 			}
 			return null;
@@ -552,36 +695,39 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		public Void caseRuleCall(RuleCall ruleCall) {
 			if (null == ruleCall.getRule() || null == parserRule) {
 				return null;
-			} 
-			boolean isLeftRecursive= false;
+			}
+			boolean isLeftRecursive = false;
 			if (ruleCall.getRule().equals(parserRule)) {
-				isLeftRecursive= true;
-			} else {
+				isLeftRecursive = true;
+			}
+			else {
 				if (validatedRuleCalls.contains(ruleCall)) {
-					isLeftRecursive= true;
-				} else {
+					isLeftRecursive = true;
+				}
+				else {
 					validatedRuleCalls.add(ruleCall);
 					doSwitch(ruleCall.getRule().getAlternatives());
-				} 
+				}
 			}
 			if (isLeftRecursive) {
 				leftRecursiveRuleCalls.add(ruleCall);
 			}
 			return null;
 		}
-		
+
 		private boolean isOptionalGroupElement(AbstractElement groupElement) {
-			boolean isOptional= true;
-			if ((groupElement instanceof Group || groupElement instanceof Alternatives) && !isOptionalCardinality(groupElement)) {
-				EList<AbstractElement> abstractTokens= groupElement instanceof Group ? 
-						((Group) groupElement).getTokens() : ((Alternatives) groupElement).getGroups();
-				for (Iterator<AbstractElement> iterator= abstractTokens.iterator(); isOptional && iterator.hasNext();) {
-					AbstractElement abstractElement= iterator.next();
-					isOptional= isOptionalGroupElement(abstractElement);
+			boolean isOptional = true;
+			if ((groupElement instanceof Group || groupElement instanceof Alternatives)
+					&& !isOptionalCardinality(groupElement)) {
+				EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
+						.getTokens() : ((Alternatives) groupElement).getGroups();
+				for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
+					AbstractElement abstractElement = iterator.next();
+					isOptional = isOptionalGroupElement(abstractElement);
 				}
 			}
 			else {
-				isOptional= isOptionalCardinality(groupElement);
+				isOptional = isOptionalCardinality(groupElement);
 			}
 			return isOptional;
 		}
