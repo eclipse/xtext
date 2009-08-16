@@ -152,9 +152,8 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		 * @return
 		 */
 		private TokenIterator iterator(String string) {
-			// workaround since the no-arg constructor of the lexer does not init
-			// the memoization array
-			Lexer l = lexer.get().getNewInstance(new ANTLRStringStream(string));
+			Lexer l = lexer.get();
+			l.setCharStream(new ANTLRStringStream(string));
 			return new TokenIterator(l);
 		}
 	});

@@ -66,9 +66,17 @@ public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()»
 
 
 «DEFINE bindingMethod FOR Binding»
+«IF !value.provider-»
 	// contributed by «contributedBy»
 	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF-»
 	public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName(this)»() {
 		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
 	}
+«ELSE-»
+	// contributed by «contributedBy»
+	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF-»
+	public «IF value.expression==null»Class<? extends com.google.inject.Provider<«key.type»>>«ELSE»com.google.inject.Provider<«key.type»>«ENDIF» «bindMethodName(this)»() {
+		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+	}
+«ENDIF-»
 «ENDDEFINE»
