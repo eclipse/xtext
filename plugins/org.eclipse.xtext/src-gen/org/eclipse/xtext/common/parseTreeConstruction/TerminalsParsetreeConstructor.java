@@ -30,6 +30,11 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return null;
+		}	
+	}	
 }
 	
 }
