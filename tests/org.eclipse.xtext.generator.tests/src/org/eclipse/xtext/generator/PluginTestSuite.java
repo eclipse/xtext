@@ -39,6 +39,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyURIEncoderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkerTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkingResourceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest.class);
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);

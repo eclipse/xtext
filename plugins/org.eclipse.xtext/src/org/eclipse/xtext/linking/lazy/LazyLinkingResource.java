@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
@@ -57,7 +58,8 @@ public class LazyLinkingResource extends XtextResource {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, AbstractNode> triple = getEncoder().decode(this, uriFragment);
-				List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), triple.getSecond(),
+				EReference reference = triple.getSecond();
+                List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 						triple.getThird());
 				if (linkedObjects.isEmpty()) {
 					XtextLinkingDiagnostic diag = createDiagnostic(triple);
@@ -69,7 +71,7 @@ public class LazyLinkingResource extends XtextResource {
 					throw new IllegalStateException("linkingService returned more than one object for fragment "
 							+ uriFragment);
 				EObject result = linkedObjects.get(0);
-				if (!triple.getSecond().getEReferenceType().isSuperTypeOf(result.eClass())) {
+				if (!reference.getEReferenceType().isSuperTypeOf(result.eClass()) && EcorePackage.Literals.EOBJECT != reference.getEReferenceType()) {
 					XtextLinkingDiagnostic diag = createDiagnostic(triple);
 					if (!getErrors().contains(diag))
 						getErrors().add(diag);
