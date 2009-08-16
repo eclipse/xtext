@@ -51,6 +51,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextGrammarComparingTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextParserBugsTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextParserTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parser.antlr.LexerProviderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.GrammarTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTransformationErrorTest.class);
