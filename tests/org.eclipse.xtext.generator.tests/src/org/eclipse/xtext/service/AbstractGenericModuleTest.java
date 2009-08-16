@@ -10,6 +10,7 @@ import org.eclipse.xtext.service.AbstractGenericModule.Binding;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 public class AbstractGenericModuleTest extends TestCase {
 	
@@ -17,18 +18,18 @@ public class AbstractGenericModuleTest extends TestCase {
 		AbstractGenericModule module = new TestModule();
 		Set<Binding> bindings = module.getBindings();
 		assertEquals(3,bindings.size());
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, String.class,false,false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Class.class,false,false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, AbstractGenericModuleTest.class,false,false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, String.class,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Class.class,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, AbstractGenericModuleTest.class,false,false, false)));
 	}
 	
 	public void testOverride() throws Exception {
 		AbstractGenericModule module = new MyModule();
 		Set<Binding> bindings = module.getBindings();
 		assertEquals(4,bindings.size());
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, StringBuffer.class,false,false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Class.class,false,false)));
-		assertFalse(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, String.class,false,false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, StringBuffer.class,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Class.class,false,false, false)));
+		assertFalse(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, String.class,false,false, false)));
 	}
 	
 	
@@ -44,7 +45,62 @@ public class AbstractGenericModuleTest extends TestCase {
 		Set<Binding> bindings = m.getBindings();
 		assertEquals(1,bindings.size());
 		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class,
-				date,false,false)));
+				date,false,false, false)));
+	}
+	
+	public static class DateProvider implements Provider<Date> {
+
+		public Date get() {
+			return null;
+		}
+		
+	}
+	
+	public void testProviderClassBinding() throws Exception {
+		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
+			public Class<? extends Provider<Date>> provideDate() {
+				return DateProvider.class;
+			}
+		};
+		
+		Set<Binding> bindings = m.getBindings();
+		assertEquals(1,bindings.size());
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class,
+				DateProvider.class, false,false, true)));
+	}
+	
+	public void testProviderClassDeactivation() throws Exception {
+		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
+			public Class<? extends Provider<Date>> provideDate() {
+				return null;
+			}
+		};
+		
+		Set<Binding> bindings = m.getBindings();
+		assertEquals(1,bindings.size());
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class,
+				Void.TYPE, false,false, true)));
+	}
+	
+	public void testProviderInstanceBinding() throws Exception {
+		final Provider<Date> provider = new Provider<Date>() {
+			public Date get() {
+				return null;
+			}
+		};
+		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
+			public Provider<Date> provideDate() {
+				return provider;
+			}
+		};
+		
+		Set<Binding> bindings = m.getBindings();
+		assertEquals(1,bindings.size());
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class,
+				provider, false,false, true)));
 	}
 	
 	public void testDeactivation() throws Exception {
@@ -65,9 +121,9 @@ public class AbstractGenericModuleTest extends TestCase {
 		
 		Set<Binding> bindings = module.getBindings();
 		assertEquals(3,bindings.size());
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, Void.TYPE,false,false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Void.TYPE,false,false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, Void.TYPE,false,false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, Void.TYPE,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Void.TYPE,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, Void.TYPE,false,false, false)));
 	}
 	
 	public void testSingletonBinding() throws Exception {

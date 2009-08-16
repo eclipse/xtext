@@ -38,17 +38,6 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 		super(input);
 	}
 
-	// workaround as the default constructor that is generated
-	// by ANTLR does not init the memoization data correctly
-	public Lexer getNewInstance(CharStream stream) {
-		try {
-			return getClass().getConstructor(CharStream.class).newInstance(stream);
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	private final Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
 	@Override
