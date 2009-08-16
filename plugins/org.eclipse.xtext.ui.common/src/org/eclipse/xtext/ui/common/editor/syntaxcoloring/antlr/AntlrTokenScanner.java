@@ -25,6 +25,7 @@ import com.google.inject.Inject;
  */
 public class AntlrTokenScanner extends AbstractTokenScanner {
 
+	@Inject
 	private Lexer lexer;
 
 	@Inject
@@ -70,11 +71,8 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 		return tokenIdMapper;
 	}
 
-	@Inject
 	public void setLexer(Lexer lexer) {
-	    // workaround as the default constructor that is generated
-	    // by ANTLR does not init the memoization data correctly
-		this.lexer = lexer.getNewInstance(null);
+		this.lexer = lexer;
 	}
 
 	public Lexer getLexer() {

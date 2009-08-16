@@ -54,8 +54,8 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer.class;
+	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
+		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

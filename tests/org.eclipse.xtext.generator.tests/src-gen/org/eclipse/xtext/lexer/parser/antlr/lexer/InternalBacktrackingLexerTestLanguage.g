@@ -17,13 +17,6 @@ package org.eclipse.xtext.lexer.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-@members {
-	@Override
-	public InternalBacktrackingLexerTestLanguageLexer getNewInstance(CharStream stream) {
-		return new InternalBacktrackingLexerTestLanguageLexer(stream);
-	}
-}
-
 
 
 SYNTHETIC_ALL_KEYWORDS :

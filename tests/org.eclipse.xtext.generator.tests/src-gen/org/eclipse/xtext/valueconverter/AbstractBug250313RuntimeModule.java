@@ -54,8 +54,8 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer.class;
+	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
+		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
