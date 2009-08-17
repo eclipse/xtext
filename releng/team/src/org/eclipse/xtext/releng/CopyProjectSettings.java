@@ -1,4 +1,3 @@
-package org.eclipse.xtext.releng;
 /*******************************************************************************
  * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -6,6 +5,7 @@ package org.eclipse.xtext.releng;
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
+package org.eclipse.xtext.releng;
 
 import java.io.BufferedReader;
 import java.io.File;

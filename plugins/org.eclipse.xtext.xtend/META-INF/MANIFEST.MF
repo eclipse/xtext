@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Xtend Extensions Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.xtend
-Bundle-Version: 0.7.2.qualifier
+Bundle-Version: 0.8.0.qualifier
 Bundle-Activator: org.eclipse.xtext.xtend.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.xtext.ui.common;bundle-version="0.7.2",
- org.eclipse.xtend;bundle-version="0.7.2",
- org.eclipse.xtext;bundle-version="0.7.2",
+ org.eclipse.xtext.ui.common;bundle-version="0.8.0",
+ org.eclipse.xtend;bundle-version="0.8.0",
+ org.eclipse.xtext;bundle-version="0.8.0",
  org.eclipse.jface.text,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.2",
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0",
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtend.util.stdlib;bundle-version="0.7.2";visibility:=reexport,
+ org.eclipse.xtend.util.stdlib;bundle-version="0.8.0";visibility:=reexport,
  com.google.collect;bundle-version="0.8.0";visibility:=reexport,
  org.eclipse.xtext.ui.core
 Bundle-ActivationPolicy: lazy
