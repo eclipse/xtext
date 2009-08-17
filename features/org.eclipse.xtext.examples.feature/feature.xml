@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.examples"
       label="%featureName"
-      version="0.7.2.qualifier"
+      version="0.8.0.qualifier"
       provider-name="%providerName">
 
    <description>
