@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Core UI Tests (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.ui.core.tests;singleton:=true
-Bundle-Version: 0.7.2.qualifier
+Bundle-Version: 0.8.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.7.2",
+Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.8.0",
  org.junit,
  org.eclipse.core.filesystem;bundle-version="1.2.0",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
  org.eclipse.ui.ide;bundle-version="3.4.0",
- org.eclipse.xtext.generator;bundle-version="0.7.2",
+ org.eclipse.xtext.generator;bundle-version="0.8.0",
  org.eclipse.jdt.core;bundle-version="3.4.0",
  org.eclipse.jdt.launching;bundle-version="3.4.0",
  org.eclipse.xtext
