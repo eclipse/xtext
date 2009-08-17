@@ -1,0 +1,15 @@
+<workflow>
+	<!-- test languages -->
+	<component file="org/eclipse/xtext/GenerateAllTestLanguages.mwe"/>
+	<component file="org/eclipse/xtext/xtend/tests/GenerateXtendTestLanguages.mwe"/>
+	<component file="org/eclipse/xtext/ui/common/GenerateTestLanguages.mwe"/>
+	<component file="org/eclipse/xtext/ui/integration/GenerateUiIntegrationTestLanguage.mwe"/>
+	<component file="org/eclipse/xtext/xtend/tests/GenerateXtendTestLanguages.mwe"/>
+	
+	
+	<!-- sample languages -->
+	<component file="org/eclipse/xtext/example/GenerateDomainmodelLanguage.mwe"/>
+	<component file="org/eclipse/xtext/example/GenerateEcoreDsl.mwe"/>
+	<component file="org/eclipse/xtext/example/GenerateFowlerDsl.mwe"/>
+	<component file="org/eclipse/xtext/reference/GenerateReferenceLanguage.mwe"/>
+</workflow>
