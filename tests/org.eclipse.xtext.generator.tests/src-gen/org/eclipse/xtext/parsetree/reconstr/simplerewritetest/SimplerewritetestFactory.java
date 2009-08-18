@@ -206,6 +206,42 @@ public interface SimplerewritetestFactory extends EFactory
   EmptyObjectItem createEmptyObjectItem();
 
   /**
+   * Returns a new object of class '<em>Multi Inheritance Bug280439</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Multi Inheritance Bug280439</em>'.
+   * @generated
+   */
+  MultiInheritanceBug280439 createMultiInheritanceBug280439();
+
+  /**
+   * Returns a new object of class '<em>Abstract Multi1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Multi1</em>'.
+   * @generated
+   */
+  AbstractMulti1 createAbstractMulti1();
+
+  /**
+   * Returns a new object of class '<em>Abstract Multi2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Multi2</em>'.
+   * @generated
+   */
+  AbstractMulti2 createAbstractMulti2();
+
+  /**
+   * Returns a new object of class '<em>Concrete Multi</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Concrete Multi</em>'.
+   * @generated
+   */
+  ConcreteMulti createConcreteMulti();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

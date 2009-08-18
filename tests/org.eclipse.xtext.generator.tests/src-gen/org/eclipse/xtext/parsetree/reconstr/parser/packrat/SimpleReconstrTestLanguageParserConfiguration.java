@@ -31,6 +31,10 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageEmptyObjectBug284850Consumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageEmptyObjectItemsConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageEmptyObjectItemConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageMultiInheritanceBug280439Consumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAbstractMulti1Consumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAbstractMulti2Consumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageConcreteMultiConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -64,6 +68,10 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
     private SimpleReconstrTestLanguageEmptyObjectBug284850Consumer emptyObjectBug284850Consumer;
     private SimpleReconstrTestLanguageEmptyObjectItemsConsumer emptyObjectItemsConsumer;
     private SimpleReconstrTestLanguageEmptyObjectItemConsumer emptyObjectItemConsumer;
+    private SimpleReconstrTestLanguageMultiInheritanceBug280439Consumer multiInheritanceBug280439Consumer;
+    private SimpleReconstrTestLanguageAbstractMulti1Consumer abstractMulti1Consumer;
+    private SimpleReconstrTestLanguageAbstractMulti2Consumer abstractMulti2Consumer;
+    private SimpleReconstrTestLanguageConcreteMultiConsumer concreteMultiConsumer;
 
 	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
 
@@ -145,6 +153,18 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		emptyObjectItemConsumer = new SimpleReconstrTestLanguageEmptyObjectItemConsumer(
     		this, null
     	);
+		multiInheritanceBug280439Consumer = new SimpleReconstrTestLanguageMultiInheritanceBug280439Consumer(
+    		this, null
+    	);
+		abstractMulti1Consumer = new SimpleReconstrTestLanguageAbstractMulti1Consumer(
+    		this, null
+    	);
+		abstractMulti2Consumer = new SimpleReconstrTestLanguageAbstractMulti2Consumer(
+    		this, null
+    	);
+		concreteMultiConsumer = new SimpleReconstrTestLanguageConcreteMultiConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -176,6 +196,10 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getEmptyObjectBug284850Consumer().setRule(grammarAccess.getEmptyObjectBug284850Access());
 		getEmptyObjectItemsConsumer().setRule(grammarAccess.getEmptyObjectItemsAccess());
 		getEmptyObjectItemConsumer().setRule(grammarAccess.getEmptyObjectItemAccess());
+		getMultiInheritanceBug280439Consumer().setRule(grammarAccess.getMultiInheritanceBug280439Access());
+		getAbstractMulti1Consumer().setRule(grammarAccess.getAbstractMulti1Access());
+		getAbstractMulti2Consumer().setRule(grammarAccess.getAbstractMulti2Access());
+		getConcreteMultiConsumer().setRule(grammarAccess.getConcreteMultiAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -244,6 +268,16 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getEmptyObjectItemsConsumer().setEmptyObjectItemConsumer(getEmptyObjectItemConsumer());
 
 		getEmptyObjectItemConsumer().setIdConsumer(getIdConsumer());
+
+		getMultiInheritanceBug280439Consumer().setConcreteMultiConsumer(getConcreteMultiConsumer());
+
+		getAbstractMulti1Consumer().setConcreteMultiConsumer(getConcreteMultiConsumer());
+		getAbstractMulti1Consumer().setIdConsumer(getIdConsumer());
+
+		getAbstractMulti2Consumer().setConcreteMultiConsumer(getConcreteMultiConsumer());
+		getAbstractMulti2Consumer().setIdConsumer(getIdConsumer());
+
+		getConcreteMultiConsumer().setIdConsumer(getIdConsumer());
 
 		getAtomConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
 		getParensConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$38$Delimiter);
@@ -331,6 +365,11 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getEmptyObjectBug284850Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$38$Delimiter);
 		getEmptyObjectItemConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$65$Delimiter);
 		getEmptyObjectItemConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
+		getMultiInheritanceBug280439Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$38$Delimiter);
+		getAbstractMulti1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
+		getAbstractMulti2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
+		getConcreteMultiConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
+		getConcreteMultiConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$34$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -423,6 +462,22 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 
     public SimpleReconstrTestLanguageEmptyObjectItemConsumer getEmptyObjectItemConsumer() {
     	return emptyObjectItemConsumer;
+    }
+
+    public SimpleReconstrTestLanguageMultiInheritanceBug280439Consumer getMultiInheritanceBug280439Consumer() {
+    	return multiInheritanceBug280439Consumer;
+    }
+
+    public SimpleReconstrTestLanguageAbstractMulti1Consumer getAbstractMulti1Consumer() {
+    	return abstractMulti1Consumer;
+    }
+
+    public SimpleReconstrTestLanguageAbstractMulti2Consumer getAbstractMulti2Consumer() {
+    	return abstractMulti2Consumer;
+    }
+
+    public SimpleReconstrTestLanguageConcreteMultiConsumer getConcreteMultiConsumer() {
+    	return concreteMultiConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

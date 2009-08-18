@@ -12,7 +12,10 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
@@ -196,6 +200,26 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEmptyObjectItem(EmptyObjectItem object)
       {
         return createEmptyObjectItemAdapter();
+      }
+      @Override
+      public Adapter caseMultiInheritanceBug280439(MultiInheritanceBug280439 object)
+      {
+        return createMultiInheritanceBug280439Adapter();
+      }
+      @Override
+      public Adapter caseAbstractMulti1(AbstractMulti1 object)
+      {
+        return createAbstractMulti1Adapter();
+      }
+      @Override
+      public Adapter caseAbstractMulti2(AbstractMulti2 object)
+      {
+        return createAbstractMulti2Adapter();
+      }
+      @Override
+      public Adapter caseConcreteMulti(ConcreteMulti object)
+      {
+        return createConcreteMultiAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -520,6 +544,66 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEmptyObjectItemAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439 <em>Multi Inheritance Bug280439</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439
+   * @generated
+   */
+  public Adapter createMultiInheritanceBug280439Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1 <em>Abstract Multi1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1
+   * @generated
+   */
+  public Adapter createAbstractMulti1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2 <em>Abstract Multi2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2
+   * @generated
+   */
+  public Adapter createAbstractMulti2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti <em>Concrete Multi</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti
+   * @generated
+   */
+  public Adapter createConcreteMultiAdapter()
   {
     return null;
   }

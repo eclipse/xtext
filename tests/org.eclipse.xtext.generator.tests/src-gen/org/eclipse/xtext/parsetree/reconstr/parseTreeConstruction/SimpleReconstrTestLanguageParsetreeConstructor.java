@@ -54,6 +54,10 @@ protected class ThisRootNode extends RootToken {
 			case 19: return new EmptyObjectBug284850_Group(this, this, 19, inst);
 			case 20: return new EmptyObjectItems_ListAssignment(this, this, 20, inst);
 			case 21: return new EmptyObjectItem_Group(this, this, 21, inst);
+			case 22: return new MultiInheritanceBug280439_Group(this, this, 22, inst);
+			case 23: return new AbstractMulti1_Alternatives(this, this, 23, inst);
+			case 24: return new AbstractMulti2_Alternatives(this, this, 24, inst);
+			case 25: return new ConcreteMulti_Group(this, this, 25, inst);
 			default: return null;
 		}	
 	}	
@@ -3924,5 +3928,391 @@ protected class EmptyObjectItem_NameAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule EmptyObjectItem ****************/
+
+
+/************ begin Rule MultiInheritanceBug280439 ****************
+ *
+ * MultiInheritanceBug280439:
+ *   "#15" val=ConcreteMulti;
+ *
+ **/
+
+// "#15" val=ConcreteMulti
+protected class MultiInheritanceBug280439_Group extends GroupToken {
+	
+	public MultiInheritanceBug280439_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getMultiInheritanceBug280439Access().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MultiInheritanceBug280439_ValAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#15"
+protected class MultiInheritanceBug280439_NumberSignDigitOneDigitFiveKeyword_0 extends KeywordToken  {
+	
+	public MultiInheritanceBug280439_NumberSignDigitOneDigitFiveKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMultiInheritanceBug280439Access().getNumberSignDigitOneDigitFiveKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// val=ConcreteMulti
+protected class MultiInheritanceBug280439_ValAssignment_1 extends AssignmentToken  {
+	
+	public MultiInheritanceBug280439_ValAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMultiInheritanceBug280439Access().getValAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ConcreteMulti_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getConcreteMultiRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMultiInheritanceBug280439Access().getValConcreteMultiParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new MultiInheritanceBug280439_NumberSignDigitOneDigitFiveKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule MultiInheritanceBug280439 ****************/
+
+
+/************ begin Rule AbstractMulti1 ****************
+ *
+ * AbstractMulti1:
+ *   ConcreteMulti|m1=ID;
+ *
+ **/
+
+// ConcreteMulti|m1=ID
+protected class AbstractMulti1_Alternatives extends AlternativesToken {
+
+	public AbstractMulti1_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAbstractMulti1Access().getAlternatives();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AbstractMulti1_ConcreteMultiParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new AbstractMulti1_M1Assignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAbstractMulti1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// ConcreteMulti
+protected class AbstractMulti1_ConcreteMultiParserRuleCall_0 extends RuleCallToken {
+	
+	public AbstractMulti1_ConcreteMultiParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractMulti1Access().getConcreteMultiParserRuleCall_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ConcreteMulti_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(ConcreteMulti_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getConcreteMultiRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// m1=ID
+protected class AbstractMulti1_M1Assignment_1 extends AssignmentToken  {
+	
+	public AbstractMulti1_M1Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAbstractMulti1Access().getM1Assignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("m1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("m1");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAbstractMulti1Access().getM1IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule AbstractMulti1 ****************/
+
+
+/************ begin Rule AbstractMulti2 ****************
+ *
+ * AbstractMulti2:
+ *   ConcreteMulti|m2=ID;
+ *
+ **/
+
+// ConcreteMulti|m2=ID
+protected class AbstractMulti2_Alternatives extends AlternativesToken {
+
+	public AbstractMulti2_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAbstractMulti2Access().getAlternatives();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AbstractMulti2_ConcreteMultiParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new AbstractMulti2_M2Assignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAbstractMulti2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// ConcreteMulti
+protected class AbstractMulti2_ConcreteMultiParserRuleCall_0 extends RuleCallToken {
+	
+	public AbstractMulti2_ConcreteMultiParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractMulti2Access().getConcreteMultiParserRuleCall_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ConcreteMulti_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(ConcreteMulti_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getConcreteMultiRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// m2=ID
+protected class AbstractMulti2_M2Assignment_1 extends AssignmentToken  {
+	
+	public AbstractMulti2_M2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAbstractMulti2Access().getM2Assignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("m2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("m2");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAbstractMulti2Access().getM2IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule AbstractMulti2 ****************/
+
+
+/************ begin Rule ConcreteMulti ****************
+ *
+ * ConcreteMulti:
+ *   m1=ID m2=ID;
+ *
+ **/
+
+// m1=ID m2=ID
+protected class ConcreteMulti_Group extends GroupToken {
+	
+	public ConcreteMulti_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getConcreteMultiAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ConcreteMulti_M2Assignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getConcreteMultiRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// m1=ID
+protected class ConcreteMulti_M1Assignment_0 extends AssignmentToken  {
+	
+	public ConcreteMulti_M1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getConcreteMultiAccess().getM1Assignment_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("m1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("m1");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// m2=ID
+protected class ConcreteMulti_M2Assignment_1 extends AssignmentToken  {
+	
+	public ConcreteMulti_M2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getConcreteMultiAccess().getM2Assignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ConcreteMulti_M1Assignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("m2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("m2");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule ConcreteMulti ****************/
 
 }

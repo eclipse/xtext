@@ -88,6 +88,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="EmptyObjectItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiInheritanceBug280439">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ConcreteMulti"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMulti1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="m1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMulti2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="m2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteMulti" eSuperTypes="#//AbstractMulti1 #//AbstractMulti2"/>
   <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Expression" containment="true"/>

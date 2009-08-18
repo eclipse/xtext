@@ -881,6 +881,127 @@ public interface SimplerewritetestPackage extends EPackage
   int EMPTY_OBJECT_ITEM_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.MultiInheritanceBug280439Impl <em>Multi Inheritance Bug280439</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.MultiInheritanceBug280439Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getMultiInheritanceBug280439()
+   * @generated
+   */
+  int MULTI_INHERITANCE_BUG280439 = 20;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_INHERITANCE_BUG280439__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Multi Inheritance Bug280439</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_INHERITANCE_BUG280439_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl <em>Abstract Multi1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getAbstractMulti1()
+   * @generated
+   */
+  int ABSTRACT_MULTI1 = 21;
+
+  /**
+   * The feature id for the '<em><b>M1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_MULTI1__M1 = 0;
+
+  /**
+   * The number of structural features of the '<em>Abstract Multi1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_MULTI1_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti2Impl <em>Abstract Multi2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti2Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getAbstractMulti2()
+   * @generated
+   */
+  int ABSTRACT_MULTI2 = 22;
+
+  /**
+   * The feature id for the '<em><b>M2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_MULTI2__M2 = 0;
+
+  /**
+   * The number of structural features of the '<em>Abstract Multi2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_MULTI2_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ConcreteMultiImpl <em>Concrete Multi</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ConcreteMultiImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getConcreteMulti()
+   * @generated
+   */
+  int CONCRETE_MULTI = 23;
+
+  /**
+   * The feature id for the '<em><b>M1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCRETE_MULTI__M1 = ABSTRACT_MULTI1__M1;
+
+  /**
+   * The feature id for the '<em><b>M2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCRETE_MULTI__M2 = ABSTRACT_MULTI1_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Concrete Multi</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCRETE_MULTI_FEATURE_COUNT = ABSTRACT_MULTI1_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -888,7 +1009,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 20;
+  int OP = 24;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1471,6 +1592,79 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getEmptyObjectItem_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439 <em>Multi Inheritance Bug280439</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Multi Inheritance Bug280439</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439
+   * @generated
+   */
+  EClass getMultiInheritanceBug280439();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Val</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439#getVal()
+   * @see #getMultiInheritanceBug280439()
+   * @generated
+   */
+  EReference getMultiInheritanceBug280439_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1 <em>Abstract Multi1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Multi1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1
+   * @generated
+   */
+  EClass getAbstractMulti1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1#getM1 <em>M1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>M1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1#getM1()
+   * @see #getAbstractMulti1()
+   * @generated
+   */
+  EAttribute getAbstractMulti1_M1();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2 <em>Abstract Multi2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Multi2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2
+   * @generated
+   */
+  EClass getAbstractMulti2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2#getM2 <em>M2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>M2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2#getM2()
+   * @see #getAbstractMulti2()
+   * @generated
+   */
+  EAttribute getAbstractMulti2_M2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti <em>Concrete Multi</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Concrete Multi</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti
+   * @generated
+   */
+  EClass getConcreteMulti();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1969,6 +2163,70 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute EMPTY_OBJECT_ITEM__NAME = eINSTANCE.getEmptyObjectItem_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.MultiInheritanceBug280439Impl <em>Multi Inheritance Bug280439</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.MultiInheritanceBug280439Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getMultiInheritanceBug280439()
+     * @generated
+     */
+    EClass MULTI_INHERITANCE_BUG280439 = eINSTANCE.getMultiInheritanceBug280439();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTI_INHERITANCE_BUG280439__VAL = eINSTANCE.getMultiInheritanceBug280439_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl <em>Abstract Multi1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getAbstractMulti1()
+     * @generated
+     */
+    EClass ABSTRACT_MULTI1 = eINSTANCE.getAbstractMulti1();
+
+    /**
+     * The meta object literal for the '<em><b>M1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_MULTI1__M1 = eINSTANCE.getAbstractMulti1_M1();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti2Impl <em>Abstract Multi2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti2Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getAbstractMulti2()
+     * @generated
+     */
+    EClass ABSTRACT_MULTI2 = eINSTANCE.getAbstractMulti2();
+
+    /**
+     * The meta object literal for the '<em><b>M2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_MULTI2__M2 = eINSTANCE.getAbstractMulti2_M2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ConcreteMultiImpl <em>Concrete Multi</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ConcreteMultiImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getConcreteMulti()
+     * @generated
+     */
+    EClass CONCRETE_MULTI = eINSTANCE.getConcreteMulti();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

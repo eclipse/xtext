@@ -13,9 +13,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting.impl.BaseTokenStream;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -30,12 +34,12 @@ import com.google.inject.Inject;
  */
 public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 
-	protected static class BackwardLeafIterator implements Iterator<LeafNode> {
+	protected class BackwardNodeIterator implements Iterator<AbstractNode> {
 
 		private int index;
 		private CompositeNode parent;
 
-		public BackwardLeafIterator(AbstractNode start) {
+		public BackwardNodeIterator(AbstractNode start) {
 			parent = start.getParent();
 			if (parent != null)
 				index = parent.getChildren().indexOf(start);
@@ -52,7 +56,8 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 					return hasNext();
 				}
 				return false;
-			} else if (parent.getChildren().get(index) instanceof CompositeNode) {
+			}
+			else if (!includeNode(parent.getChildren().get(index))) {
 				parent = (CompositeNode) parent.getChildren().get(index);
 				index = parent.getChildren().size();
 				return hasNext();
@@ -60,8 +65,8 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 			return true;
 		}
 
-		public LeafNode next() {
-			return (LeafNode) parent.getChildren().get(index);
+		public AbstractNode next() {
+			return parent.getChildren().get(index);
 		}
 
 		public void remove() {
@@ -69,12 +74,12 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 
 	}
 
-	protected static class ForwardLeafIterator implements Iterator<LeafNode> {
+	protected class ForwardNodeIterator implements Iterator<AbstractNode> {
 
 		private int index;
 		private CompositeNode parent;
 
-		public ForwardLeafIterator(AbstractNode start) {
+		public ForwardNodeIterator(AbstractNode start) {
 			parent = start.getParent();
 			if (parent != null)
 				index = parent.getChildren().indexOf(start);
@@ -91,7 +96,8 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 					return hasNext();
 				}
 				return false;
-			} else if (parent.getChildren().get(index) instanceof CompositeNode) {
+			}
+			else if (!includeNode(parent.getChildren().get(index))) {
 				parent = (CompositeNode) parent.getChildren().get(index);
 				index = -1;
 				return hasNext();
@@ -99,8 +105,8 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 			return true;
 		}
 
-		public LeafNode next() {
-			return (LeafNode) parent.getChildren().get(index);
+		public AbstractNode next() {
+			return parent.getChildren().get(index);
 		}
 
 		public void remove() {
@@ -109,20 +115,22 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 	}
 
 	protected class HiddenTokenMergerStream extends BaseTokenStream {
-		private List<LeafNode> allLeafs;
+		private List<AbstractNode> allLeafs;
 
 		private int lastLeaf;
 
 		public HiddenTokenMergerStream(ITokenStream out, CompositeNode rootnode) {
 			super(out);
 			this.allLeafs = getAllLeafs(rootnode);
-			// for (LeafNode n : allLeafs)
-			// System.out.println("Leaf: '" + n.getText() + "'");
+//			for (AbstractNode n : allLeafs)
+//				if (n instanceof LeafNode)
+//					System.out.println("Leaf: '" + ((LeafNode) n).getText() + "'");
+//				else
+//					System.out.println("Comp: " + n.getGrammarElement().eClass().getName());
 			this.lastLeaf = -1;
 		}
 
-		protected void beforeElement(EObject grammarElement, String value)
-				throws IOException {
+		protected void beforeElement(EObject grammarElement, String value) throws IOException {
 			int i = lastLeaf, last = findLeafNodeFor(grammarElement, value);
 			if (last >= 0)
 				writeHidden(i, last);
@@ -148,47 +156,62 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 			return -1;
 		}
 
-		protected List<LeafNode> getAllLeafs(CompositeNode root) {
+		protected List<AbstractNode> getAllLeafs(CompositeNode root) {
 			if (root == null)
 				return null;
-			if (root.getParent() == null)
-				return root.getLeafNodes();
-			ArrayList<LeafNode> r = new ArrayList<LeafNode>();
-			BackwardLeafIterator bi = new BackwardLeafIterator(root);
-			while (bi.hasNext() && bi.next().isHidden())
-				r.add(bi.next());
-			Collections.reverse(r);
-			r.addAll(root.getLeafNodes());
-			ForwardLeafIterator fi = new ForwardLeafIterator(root);
-			while (fi.hasNext() && fi.next().isHidden())
-				r.add(fi.next());
+			ArrayList<AbstractNode> r = new ArrayList<AbstractNode>();
+			if (root.getParent() == null) {
+				TreeIterator<EObject> it = root.eAllContents();
+				while (it.hasNext()) {
+					EObject o = it.next();
+					if (includeNode(o)) {
+						if (o instanceof CompositeNode) {
+							List<LeafNode> ch = ((CompositeNode) o).getLeafNodes();
+							for (LeafNode n : ch)
+								if (n.isHidden())
+									r.add(n);
+								else
+									break;
+						}
+						r.add((AbstractNode) o);
+						it.prune();
+					}
+				}
+			}
+			else {
+				BackwardNodeIterator bi = new BackwardNodeIterator(root);
+				while (bi.hasNext() && bi.next() instanceof LeafNode && ((LeafNode) bi.next()).isHidden())
+					r.add(bi.next());
+				Collections.reverse(r);
+				r.addAll(root.getLeafNodes());
+				ForwardNodeIterator fi = new ForwardNodeIterator(root);
+				while (fi.hasNext() && fi.next() instanceof LeafNode && ((LeafNode) fi.next()).isHidden())
+					r.add(fi.next());
+			}
 			return r;
 		}
 
-		protected boolean nodeMatches(EObject grammarElement, String value,
-				LeafNode leaf) {
-			return grammarElement == leaf.getGrammarElement();
+		protected boolean nodeMatches(EObject grammarElement, String value, AbstractNode node) {
+			return grammarElement == node.getGrammarElement();
 		}
 
 		@Override
-		public void writeHidden(EObject grammarElement, String value)
-				throws IOException {
+		public void writeHidden(EObject grammarElement, String value) throws IOException {
 			out.writeHidden(grammarElement, value);
 		}
 
-		protected void writeHidden(int leftBorder, int rightBorder)
-				throws IOException {
+		protected void writeHidden(int leftBorder, int rightBorder) throws IOException {
 			if (leftBorder + 1 == rightBorder)
 				out.writeHidden(getWSRule(), "");
 			else {
 				boolean ws = false;
 				int i = leftBorder;
 				while (++i < rightBorder) {
-					LeafNode n = allLeafs.get(i);
-					if (n.isHidden()) {
+					AbstractNode n = allLeafs.get(i);
+					if (n instanceof LeafNode && ((LeafNode) n).isHidden()) {
 						if (!ws && n.getGrammarElement() != getWSRule())
 							out.writeHidden(getWSRule(), "");
-						out.writeHidden(n.getGrammarElement(), n.getText());
+						out.writeHidden(n.getGrammarElement(), ((LeafNode) n).getText());
 						ws = n.getGrammarElement() == getWSRule();
 					}
 				}
@@ -198,9 +221,9 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 		}
 
 		@Override
-		public void writeSemantic(EObject grammarElement, String value)
-				throws IOException {
+		public void writeSemantic(EObject grammarElement, String value) throws IOException {
 			beforeElement(grammarElement, value);
+//			System.out.println("Semantic" + grammarElement.eClass().getName() + " -> " + value);
 			out.writeSemantic(grammarElement, value);
 		}
 	}
@@ -208,15 +231,30 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 	@Inject
 	protected IGrammarAccess grammar;
 
-	public ITokenStream createHiddenTokenMerger(ITokenStream out,
-			CompositeNode rootNode) {
+	protected boolean includeNode(EObject node) {
+		if (node instanceof LeafNode)
+			return true;
+		if (node instanceof CompositeNode) {
+			EObject e = ((CompositeNode) node).getGrammarElement();
+			if (e instanceof RuleCall) {
+				RuleCall rc = (RuleCall) ((CompositeNode) node).getGrammarElement();
+				if (rc.getRule() instanceof ParserRule)
+					return GrammarUtil.isDatatypeRule((ParserRule) rc.getRule());
+			}
+			if (e instanceof CrossReference)
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public ITokenStream createHiddenTokenMerger(ITokenStream out, CompositeNode rootNode) {
 		return new HiddenTokenMergerStream(out, rootNode);
 	}
 
 	protected TerminalRule getWSRule() {
 		// FIXME: make this configurable
-		return (TerminalRule) GrammarUtil.findRuleForName(grammar.getGrammar(),
-				"WS");
+		return (TerminalRule) GrammarUtil.findRuleForName(grammar.getGrammar(), "WS");
 	}
 
 }
