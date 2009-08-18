@@ -117,7 +117,7 @@ public class CopyProjectSettings {
 		File settingsDir = new File(".settings");
 		return settingsDir.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
-				return !name.toLowerCase().contains("CVS");
+				return !name.toLowerCase().contains("cvs");
 			}
 		});
 	}
