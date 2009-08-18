@@ -298,5 +298,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.generator.ecore.parser.antlr,
  org.eclipse.xtext.generator.ecore.second,
  org.eclipse.xtext.generator.ecore.second.impl,
- org.eclipse.xtext.generator.ecore.second.util
+ org.eclipse.xtext.generator.ecore.second.util,
+ org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest,
+ org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl,
+ org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.util
 

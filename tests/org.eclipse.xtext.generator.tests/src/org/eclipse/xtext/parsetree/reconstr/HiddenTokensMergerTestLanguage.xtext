@@ -1,0 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate hiddentokenmergertest "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"
+
+Model:
+	DatatypeBug286557;
+
+DatatypeBug286557:
+	'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";";
+	
+FQN: ID ('.' ID)*;
