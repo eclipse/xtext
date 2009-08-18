@@ -581,6 +581,21 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
+	
+	public void testBug_285605_10() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"Y: x+=X? x+=X;\n" +
+				"X: name=ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
 
 	public void acceptError(String message, EObject object, Integer feature) {
 		assertNull(lastMessage);
