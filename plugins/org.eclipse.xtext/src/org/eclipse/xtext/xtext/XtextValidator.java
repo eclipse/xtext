@@ -704,7 +704,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				if (validatedRuleCalls.contains(ruleCall)) {
 					isLeftRecursive = true;
 				}
-				else {
+				else if (ruleCall.getRule() instanceof ParserRule) {
 					validatedRuleCalls.add(ruleCall);
 					doSwitch(ruleCall.getRule().getAlternatives());
 				}
