@@ -11,5 +11,4 @@
 	<component file="org/eclipse/xtext/example/GenerateDomainmodelLanguage.mwe"/>
 	<component file="org/eclipse/xtext/example/GenerateEcoreDsl.mwe"/>
 	<component file="org/eclipse/xtext/example/GenerateFowlerDsl.mwe"/>
-	<component file="org/eclipse/xtext/reference/GenerateReferenceLanguage.mwe"/>
 </workflow>
