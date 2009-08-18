@@ -263,6 +263,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest" 
+       class = "org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage"
+       genModel = "org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://simple/unassignedtext" 
        class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
        genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
