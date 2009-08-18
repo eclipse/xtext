@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>xtext-generator</artifactId>
-  <version>0.7.2</version>
+  <version>0.8.0-SNAPSHOT</version>
   <name>Xtext Generator</name>
   <description>Manually created POM</description>
 
@@ -13,27 +13,27 @@
 	<dependency>
 		<groupId>org.eclipse.emf.mwe</groupId>
 		<artifactId>emf-mwe-utils</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.m2t.xpand</groupId>
 		<artifactId>m2t-xpand-xpand</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.m2t.xpand</groupId>
 		<artifactId>m2t-xpand-xtend</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.m2t.xpand</groupId>
 		<artifactId>m2t-xpand-xtend-typesystem-emf</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.m2t.xpand</groupId>
 		<artifactId>m2t-xpand-xtend-util-stdlib</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.xtext</groupId>
@@ -43,12 +43,12 @@
 	<dependency>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>xtext-core</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	<dependency>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>xtext-util</artifactId>
-		<version>0.7.2</version>
+		<version>0.8.0-SNAPSHOT</version>
 	</dependency>
 	
 	<!-- Eclipse stuff -->
