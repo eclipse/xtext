@@ -7,7 +7,6 @@ Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.generator.tests;bundle-version="0.8.0",
  org.eclipse.xtext.example.fowlerdsl;bundle-version="0.8.0",
- org.eclipse.xtext.reference;bundle-version="0.8.0",
  org.eclipse.xtext.ui.common.tests;bundle-version="0.8.0",
  org.eclipse.xtext.ui.core.tests;bundle-version="0.8.0",
  org.eclipse.xtext.example.domainmodel;bundle-version="0.8.0",
