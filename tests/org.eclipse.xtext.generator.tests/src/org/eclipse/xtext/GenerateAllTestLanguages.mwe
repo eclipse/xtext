@@ -105,7 +105,6 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<!--
 		<language uri="classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
@@ -127,7 +126,6 @@
 		<language uri="classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		-->
 		<language uri="classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
