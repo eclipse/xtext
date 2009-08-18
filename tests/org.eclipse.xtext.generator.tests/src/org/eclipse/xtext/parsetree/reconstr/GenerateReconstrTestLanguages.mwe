@@ -70,6 +70,20 @@
 				generateDotDiagram="${generateDotDiagram}"
 				graphvizCommand="${graphvizCommand}" />
 		</language>
+		
+		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
+				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment" />
+			</fragment>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"
+				generateDotDiagram="${generateDotDiagram}"
+				graphvizCommand="${graphvizCommand}" />
+		</language>
 
 	</component>
 </workflow>
