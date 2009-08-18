@@ -980,6 +980,106 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
+
+	public class MultiInheritanceBug280439Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiInheritanceBug280439");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValConcreteMultiParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		
+		//MultiInheritanceBug280439:
+		//  "#15" val=ConcreteMulti;
+		public ParserRule getRule() { return rule; }
+
+		//"#15" val=ConcreteMulti
+		public Group getGroup() { return cGroup; }
+
+		//"#15"
+		public Keyword getNumberSignDigitOneDigitFiveKeyword_0() { return cNumberSignDigitOneDigitFiveKeyword_0; }
+
+		//val=ConcreteMulti
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//ConcreteMulti
+		public RuleCall getValConcreteMultiParserRuleCall_1_0() { return cValConcreteMultiParserRuleCall_1_0; }
+	}
+
+	public class AbstractMulti1Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti1");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Assignment cM1Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cM1IDTerminalRuleCall_1_0 = (RuleCall)cM1Assignment_1.eContents().get(0);
+		
+		//AbstractMulti1:
+		//  ConcreteMulti|m1=ID;
+		public ParserRule getRule() { return rule; }
+
+		//ConcreteMulti|m1=ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ConcreteMulti
+		public RuleCall getConcreteMultiParserRuleCall_0() { return cConcreteMultiParserRuleCall_0; }
+
+		//m1=ID
+		public Assignment getM1Assignment_1() { return cM1Assignment_1; }
+
+		//ID
+		public RuleCall getM1IDTerminalRuleCall_1_0() { return cM1IDTerminalRuleCall_1_0; }
+	}
+
+	public class AbstractMulti2Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti2");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Assignment cM2Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cM2IDTerminalRuleCall_1_0 = (RuleCall)cM2Assignment_1.eContents().get(0);
+		
+		//AbstractMulti2:
+		//  ConcreteMulti|m2=ID;
+		public ParserRule getRule() { return rule; }
+
+		//ConcreteMulti|m2=ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ConcreteMulti
+		public RuleCall getConcreteMultiParserRuleCall_0() { return cConcreteMultiParserRuleCall_0; }
+
+		//m2=ID
+		public Assignment getM2Assignment_1() { return cM2Assignment_1; }
+
+		//ID
+		public RuleCall getM2IDTerminalRuleCall_1_0() { return cM2IDTerminalRuleCall_1_0; }
+	}
+
+	public class ConcreteMultiElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteMulti");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cM1Assignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cM1IDTerminalRuleCall_0_0 = (RuleCall)cM1Assignment_0.eContents().get(0);
+		private final Assignment cM2Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cM2IDTerminalRuleCall_1_0 = (RuleCall)cM2Assignment_1.eContents().get(0);
+		
+		//ConcreteMulti:
+		//  m1=ID m2=ID;
+		public ParserRule getRule() { return rule; }
+
+		//m1=ID m2=ID
+		public Group getGroup() { return cGroup; }
+
+		//m1=ID
+		public Assignment getM1Assignment_0() { return cM1Assignment_0; }
+
+		//ID
+		public RuleCall getM1IDTerminalRuleCall_0_0() { return cM1IDTerminalRuleCall_0_0; }
+
+		//m2=ID
+		public Assignment getM2Assignment_1() { return cM2Assignment_1; }
+
+		//ID
+		public RuleCall getM2IDTerminalRuleCall_1_0() { return cM2IDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -1004,6 +1104,10 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private EmptyObjectBug284850Elements pEmptyObjectBug284850;
 	private EmptyObjectItemsElements pEmptyObjectItems;
 	private EmptyObjectItemElements pEmptyObjectItem;
+	private MultiInheritanceBug280439Elements pMultiInheritanceBug280439;
+	private AbstractMulti1Elements pAbstractMulti1;
+	private AbstractMulti2Elements pAbstractMulti2;
+	private ConcreteMultiElements pConcreteMulti;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1246,6 +1350,46 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getEmptyObjectItemRule() {
 		return getEmptyObjectItemAccess().getRule();
+	}
+
+	//MultiInheritanceBug280439:
+	//  "#15" val=ConcreteMulti;
+	public MultiInheritanceBug280439Elements getMultiInheritanceBug280439Access() {
+		return (pMultiInheritanceBug280439 != null) ? pMultiInheritanceBug280439 : (pMultiInheritanceBug280439 = new MultiInheritanceBug280439Elements());
+	}
+	
+	public ParserRule getMultiInheritanceBug280439Rule() {
+		return getMultiInheritanceBug280439Access().getRule();
+	}
+
+	//AbstractMulti1:
+	//  ConcreteMulti|m1=ID;
+	public AbstractMulti1Elements getAbstractMulti1Access() {
+		return (pAbstractMulti1 != null) ? pAbstractMulti1 : (pAbstractMulti1 = new AbstractMulti1Elements());
+	}
+	
+	public ParserRule getAbstractMulti1Rule() {
+		return getAbstractMulti1Access().getRule();
+	}
+
+	//AbstractMulti2:
+	//  ConcreteMulti|m2=ID;
+	public AbstractMulti2Elements getAbstractMulti2Access() {
+		return (pAbstractMulti2 != null) ? pAbstractMulti2 : (pAbstractMulti2 = new AbstractMulti2Elements());
+	}
+	
+	public ParserRule getAbstractMulti2Rule() {
+		return getAbstractMulti2Access().getRule();
+	}
+
+	//ConcreteMulti:
+	//  m1=ID m2=ID;
+	public ConcreteMultiElements getConcreteMultiAccess() {
+		return (pConcreteMulti != null) ? pConcreteMulti : (pConcreteMulti = new ConcreteMultiElements());
+	}
+	
+	public ParserRule getConcreteMultiRule() {
+		return getConcreteMultiAccess().getRule();
 	}
 
 	//terminal ID:

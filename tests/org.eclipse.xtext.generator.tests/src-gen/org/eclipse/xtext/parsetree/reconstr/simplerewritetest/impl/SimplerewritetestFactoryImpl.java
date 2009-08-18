@@ -13,7 +13,10 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
@@ -27,6 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestFactory;
@@ -108,6 +112,10 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.EMPTY_OBJECT_BUG284850: return createEmptyObjectBug284850();
       case SimplerewritetestPackage.EMPTY_OBJECT_ITEMS: return createEmptyObjectItems();
       case SimplerewritetestPackage.EMPTY_OBJECT_ITEM: return createEmptyObjectItem();
+      case SimplerewritetestPackage.MULTI_INHERITANCE_BUG280439: return createMultiInheritanceBug280439();
+      case SimplerewritetestPackage.ABSTRACT_MULTI1: return createAbstractMulti1();
+      case SimplerewritetestPackage.ABSTRACT_MULTI2: return createAbstractMulti2();
+      case SimplerewritetestPackage.CONCRETE_MULTI: return createConcreteMulti();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -332,6 +340,50 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     EmptyObjectItemImpl emptyObjectItem = new EmptyObjectItemImpl();
     return emptyObjectItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MultiInheritanceBug280439 createMultiInheritanceBug280439()
+  {
+    MultiInheritanceBug280439Impl multiInheritanceBug280439 = new MultiInheritanceBug280439Impl();
+    return multiInheritanceBug280439;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AbstractMulti1 createAbstractMulti1()
+  {
+    AbstractMulti1Impl abstractMulti1 = new AbstractMulti1Impl();
+    return abstractMulti1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AbstractMulti2 createAbstractMulti2()
+  {
+    AbstractMulti2Impl abstractMulti2 = new AbstractMulti2Impl();
+    return abstractMulti2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConcreteMulti createConcreteMulti()
+  {
+    ConcreteMultiImpl concreteMulti = new ConcreteMultiImpl();
+    return concreteMulti;
   }
 
   /**

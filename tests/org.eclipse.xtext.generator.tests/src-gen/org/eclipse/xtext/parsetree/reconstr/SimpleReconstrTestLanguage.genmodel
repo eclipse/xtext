@@ -81,6 +81,16 @@
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EmptyObjectItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//EmptyObjectItem/name"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//MultiInheritanceBug280439">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//MultiInheritanceBug280439/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//AbstractMulti1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//AbstractMulti1/m1"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//AbstractMulti2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//AbstractMulti2/m2"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//ConcreteMulti"/>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

@@ -10,7 +10,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
@@ -24,6 +27,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
@@ -269,6 +273,36 @@ public class SimplerewritetestSwitch<T>
       {
         EmptyObjectItem emptyObjectItem = (EmptyObjectItem)theEObject;
         T result = caseEmptyObjectItem(emptyObjectItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.MULTI_INHERITANCE_BUG280439:
+      {
+        MultiInheritanceBug280439 multiInheritanceBug280439 = (MultiInheritanceBug280439)theEObject;
+        T result = caseMultiInheritanceBug280439(multiInheritanceBug280439);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.ABSTRACT_MULTI1:
+      {
+        AbstractMulti1 abstractMulti1 = (AbstractMulti1)theEObject;
+        T result = caseAbstractMulti1(abstractMulti1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.ABSTRACT_MULTI2:
+      {
+        AbstractMulti2 abstractMulti2 = (AbstractMulti2)theEObject;
+        T result = caseAbstractMulti2(abstractMulti2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.CONCRETE_MULTI:
+      {
+        ConcreteMulti concreteMulti = (ConcreteMulti)theEObject;
+        T result = caseConcreteMulti(concreteMulti);
+        if (result == null) result = caseAbstractMulti1(concreteMulti);
+        if (result == null) result = caseAbstractMulti2(concreteMulti);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -600,6 +634,70 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseEmptyObjectItem(EmptyObjectItem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multi Inheritance Bug280439</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multi Inheritance Bug280439</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMultiInheritanceBug280439(MultiInheritanceBug280439 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Multi1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Multi1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractMulti1(AbstractMulti1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Multi2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Multi2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractMulti2(AbstractMulti2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Concrete Multi</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Concrete Multi</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConcreteMulti(ConcreteMulti object)
   {
     return null;
   }

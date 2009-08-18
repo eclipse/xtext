@@ -75,4 +75,15 @@ EmptyObjectItems:
 	
 EmptyObjectItem:
 	'item' name=ID;
+	
+MultiInheritanceBug280439:
+	'#15' val=ConcreteMulti;
 
+AbstractMulti1:
+	ConcreteMulti | m1=ID;
+	
+AbstractMulti2:
+	ConcreteMulti | m2=ID;
+	
+ConcreteMulti:
+	m1=ID m2=ID;

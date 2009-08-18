@@ -4104,6 +4104,126 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
     // $ANTLR end ruleEmptyObjectItem
 
 
+    // $ANTLR start entryRuleConcreteMulti
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1779:1: entryRuleConcreteMulti returns [EObject current=null] : iv_ruleConcreteMulti= ruleConcreteMulti EOF ;
+    public final EObject entryRuleConcreteMulti() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleConcreteMulti = null;
+
+
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1779:55: (iv_ruleConcreteMulti= ruleConcreteMulti EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1780:2: iv_ruleConcreteMulti= ruleConcreteMulti EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getConcreteMultiRule(), currentNode); 
+            pushFollow(FOLLOW_ruleConcreteMulti_in_entryRuleConcreteMulti3980);
+            iv_ruleConcreteMulti=ruleConcreteMulti();
+            _fsp--;
+
+             current =iv_ruleConcreteMulti; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleConcreteMulti3990); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleConcreteMulti
+
+
+    // $ANTLR start ruleConcreteMulti
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1787:1: ruleConcreteMulti returns [EObject current=null] : ( (lv_m1_0= RULE_ID ) (lv_m2_1= RULE_ID ) ) ;
+    public final EObject ruleConcreteMulti() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_m1_0=null;
+        Token lv_m2_1=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1792:6: ( ( (lv_m1_0= RULE_ID ) (lv_m2_1= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1793:1: ( (lv_m1_0= RULE_ID ) (lv_m2_1= RULE_ID ) )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1793:1: ( (lv_m1_0= RULE_ID ) (lv_m2_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1793:2: (lv_m1_0= RULE_ID ) (lv_m2_1= RULE_ID )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1793:2: (lv_m1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1795:6: lv_m1_0= RULE_ID
+            {
+            lv_m1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleConcreteMulti4037); 
+
+            		createLeafNode(grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0(), "m1"); 
+            	
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getConcreteMultiRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        try {
+            	       		set(current, "m1", lv_m1_0, "ID", lastConsumedNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
+
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1813:2: (lv_m2_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1815:6: lv_m2_1= RULE_ID
+            {
+            lv_m2_1=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleConcreteMulti4067); 
+
+            		createLeafNode(grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0(), "m2"); 
+            	
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getConcreteMultiRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        try {
+            	       		set(current, "m2", lv_m2_1, "ID", lastConsumedNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleConcreteMulti
+
+
  
 
     public static final BitSet FOLLOW_ruleOp_in_entryRuleOp73 = new BitSet(new long[]{0x0000000000000000L});
@@ -4260,5 +4380,9 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
     public static final BitSet FOLLOW_EOF_in_entryRuleEmptyObjectItem3877 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_54_in_ruleEmptyObjectItem3911 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleEmptyObjectItem3933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleConcreteMulti_in_entryRuleConcreteMulti3980 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleConcreteMulti3990 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleConcreteMulti4037 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleConcreteMulti4067 = new BitSet(new long[]{0x0000000000000002L});
 
 }

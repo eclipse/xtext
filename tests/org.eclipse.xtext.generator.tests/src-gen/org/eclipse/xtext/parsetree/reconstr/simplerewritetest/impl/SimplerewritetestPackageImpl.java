@@ -12,7 +12,10 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop3;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop4;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.LoopBug285452;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ManyStrings;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestFactory;
@@ -182,6 +186,34 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass emptyObjectItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass multiInheritanceBug280439EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractMulti1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractMulti2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass concreteMultiEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -778,6 +810,76 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMultiInheritanceBug280439()
+  {
+    return multiInheritanceBug280439EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMultiInheritanceBug280439_Val()
+  {
+    return (EReference)multiInheritanceBug280439EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAbstractMulti1()
+  {
+    return abstractMulti1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractMulti1_M1()
+  {
+    return (EAttribute)abstractMulti1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAbstractMulti2()
+  {
+    return abstractMulti2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractMulti2_M2()
+  {
+    return (EAttribute)abstractMulti2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConcreteMulti()
+  {
+    return concreteMultiEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -895,6 +997,17 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     emptyObjectItemEClass = createEClass(EMPTY_OBJECT_ITEM);
     createEAttribute(emptyObjectItemEClass, EMPTY_OBJECT_ITEM__NAME);
 
+    multiInheritanceBug280439EClass = createEClass(MULTI_INHERITANCE_BUG280439);
+    createEReference(multiInheritanceBug280439EClass, MULTI_INHERITANCE_BUG280439__VAL);
+
+    abstractMulti1EClass = createEClass(ABSTRACT_MULTI1);
+    createEAttribute(abstractMulti1EClass, ABSTRACT_MULTI1__M1);
+
+    abstractMulti2EClass = createEClass(ABSTRACT_MULTI2);
+    createEAttribute(abstractMulti2EClass, ABSTRACT_MULTI2__M2);
+
+    concreteMultiEClass = createEClass(CONCRETE_MULTI);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -945,6 +1058,8 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loopBug285452EClass.getESuperTypes().add(this.getExpression());
     duplicateBug284491EClass.getESuperTypes().add(this.getExpression());
     emptyObjectBug284850EClass.getESuperTypes().add(this.getExpression());
+    concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti1());
+    concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti2());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1019,6 +1134,17 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     initEClass(emptyObjectItemEClass, EmptyObjectItem.class, "EmptyObjectItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEmptyObjectItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, EmptyObjectItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(multiInheritanceBug280439EClass, MultiInheritanceBug280439.class, "MultiInheritanceBug280439", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMultiInheritanceBug280439_Val(), this.getConcreteMulti(), null, "val", null, 0, 1, MultiInheritanceBug280439.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(abstractMulti1EClass, AbstractMulti1.class, "AbstractMulti1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractMulti1_M1(), ecorePackage.getEString(), "m1", null, 0, 1, AbstractMulti1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(abstractMulti2EClass, AbstractMulti2.class, "AbstractMulti2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractMulti2_M2(), ecorePackage.getEString(), "m2", null, 0, 1, AbstractMulti2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(concreteMultiEClass, ConcreteMulti.class, "ConcreteMulti", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

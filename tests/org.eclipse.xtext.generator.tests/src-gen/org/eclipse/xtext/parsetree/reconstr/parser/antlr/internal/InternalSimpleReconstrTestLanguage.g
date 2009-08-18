@@ -1769,6 +1769,73 @@ ruleEmptyObjectItem returns [EObject current=null]
 
 
 
+
+
+
+
+
+
+// Entry rule entryRuleConcreteMulti
+entryRuleConcreteMulti returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getConcreteMultiRule(), currentNode); }
+	 iv_ruleConcreteMulti=ruleConcreteMulti 
+	 { $current=$iv_ruleConcreteMulti.current; } 
+	 EOF 
+;
+
+// Rule ConcreteMulti
+ruleConcreteMulti returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	
+	
+	    lv_m1_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0(), "m1"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConcreteMultiRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "m1", lv_m1_0, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)(	
+	
+	    lv_m2_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0(), "m2"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConcreteMultiRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "m2", lv_m2_1, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+));
+
+
+
+
+
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
