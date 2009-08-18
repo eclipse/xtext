@@ -12,7 +12,7 @@
 «IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
-«EXTENSION org::eclipse::xtext::GrammarUtil»
+
 
 «DEFINE pre FOR Grammar-»
 package «setup().toJavaPackage()»;
