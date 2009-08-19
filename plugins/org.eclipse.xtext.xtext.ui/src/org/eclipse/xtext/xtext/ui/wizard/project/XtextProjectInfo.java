@@ -10,31 +10,45 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkingSet;
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * Simple value object class containing all relevant attributes necessary for the
- * creation of new Xtext projects.
+ * Simple value object class containing all relevant attributes necessary for the creation of new Xtext projects.
  * 
  * @author Michael Clay - Initial contribution and API
  */
-public class XtextProjectInfo implements IProjectInfo{
+public class XtextProjectInfo implements IProjectInfo {
 
 	private String projectName;
 	private String languageName;
 	private String fileExtension;
 	private String encoding;
 	private boolean createGeneratorProject = false;
-
+	private IWorkingSet[] workingSets;
+	private IWorkbench workbench;
+	private IPath location;
+	private WizardContribution wizardContribution;
+	
+	public void setWizardContribution(WizardContribution wizardContribution) {
+		this.wizardContribution = wizardContribution;
+	}
+	
+	public WizardContribution getWizardContribution() {
+		return wizardContribution;
+	}
+	
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
-	
+
 	public String getEncoding() {
 		return encoding;
 	}
-	
+
 	public boolean isCreateGeneratorProject() {
 		return createGeneratorProject;
 	}
@@ -66,42 +80,38 @@ public class XtextProjectInfo implements IProjectInfo{
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	
+
 	public String getGeneratorProjectName() {
-		return getProjectName() + ".generator";
-	}
-	
-	public String getUiProjectName() {
-		return getProjectName() + ".ui";
+		return getProjectName() + ".generator"; //$NON-NLS-1$
 	}
 
-//	public String getGrammarName() {
-//		return getLanguageName().replaceAll("\\s", "_") + ".xtxt";
-//	}
+	public String getUiProjectName() {
+		return getProjectName() + ".ui"; //$NON-NLS-1$
+	}
 
 	public String getBasePackagePath() {
-		return getBasePackage().replaceAll("\\.", "/");
+		return getBasePackage().replaceAll("\\.", "/"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-	
+
 	public String getBasePackage() {
-		int lastIndexOf = getLanguageName().lastIndexOf(".");
-		String result = getLanguageName().substring(0,(lastIndexOf==-1?getLanguageName().length():lastIndexOf));
+		int lastIndexOf = getLanguageName().lastIndexOf("."); //$NON-NLS-1$
+		String result = getLanguageName().substring(0, (lastIndexOf == -1 ? getLanguageName().length() : lastIndexOf));
 		return result.toLowerCase();
 	}
 
 	public String getLanguageNameAbbreviation() {
-		String[] packageNames = languageName.split("\\.");
+		String[] packageNames = languageName.split("\\."); //$NON-NLS-1$
 		return Strings.toFirstUpper(packageNames[packageNames.length - 1]);
 	}
-	
+
 	public String getNsURI() {
-		String[] strings = languageName.split("\\.");
-		if (strings.length<2) {
-			return "http://www."+languageName;
+		String[] strings = languageName.split("\\."); //$NON-NLS-1$
+		if (strings.length < 2) {
+			return "http://www." + languageName; //$NON-NLS-1$
 		}
-		String s = "http://www."+strings[1]+"."+strings[0];
-		for (int i=2;i<strings.length;i++) {
-			s+="/"+strings[i];
+		String s = "http://www." + strings[1] + "." + strings[0]; //$NON-NLS-1$ //$NON-NLS-2$
+		for (int i = 2; i < strings.length; i++) {
+			s += "/" + strings[i]; //$NON-NLS-1$
 		}
 		return s;
 	}
@@ -110,7 +120,7 @@ public class XtextProjectInfo implements IProjectInfo{
 	 * @return the firstFileExtension
 	 */
 	public String getFirstFileExtension() {
-		String delim = ",";
+		String delim = ","; //$NON-NLS-1$
 		if (getFileExtension() != null && getFileExtension().contains(delim)) {
 			StringTokenizer tokenizer = new StringTokenizer(getFileExtension(), delim, false);
 			if (tokenizer.hasMoreTokens())
@@ -119,5 +129,28 @@ public class XtextProjectInfo implements IProjectInfo{
 		return fileExtension;
 	}
 
-	
+	public void setWorkingSets(IWorkingSet[] workingSets) {
+		this.workingSets = workingSets;
+	}
+
+	public IWorkingSet[] getWorkingSets() {
+		return workingSets;
+	}
+
+	public void setWorkbench(IWorkbench workbench) {
+		this.workbench = workbench;
+	}
+
+	public IWorkbench getWorkbench() {
+		return workbench;
+	}
+
+	public void setLocation(IPath location) {
+		this.location = location;
+	}
+
+	public IPath getLocation() {
+		return location;
+	}
+
 }

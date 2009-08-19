@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::Extensions»
 
-«DEFINE main(Boolean isXpandAPI) FOR XtextProjectInfo»
+«DEFINE main FOR XtextProjectInfo»
 
 «FILE "model/MyModel."+fileExtension-»
 /*
