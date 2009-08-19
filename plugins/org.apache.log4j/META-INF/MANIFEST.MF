@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Log4j
+Bundle-SymbolicName: org.apache.log4j
+Bundle-Version: 1.2.15
+Export-Package: org.apache.log4j;version="1.2.15",
+ org.apache.log4j.spi;version="1.2.15"
+Eclipse-BuddyPolicy: registered
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: http://www.apache.org
