@@ -38,6 +38,7 @@ public class MergeableManifest extends Manifest {
 	public static final Attributes.Name BUNDLE_REQUIRED_EXECUTION_ENV = new Attributes.Name(
 			"Bundle-RequiredExecutionEnvironment");
 	public static final Attributes.Name EXPORT_PACKAGE = new Attributes.Name("Export-Package");
+	public static final Attributes.Name IMPORT_PACKAGE = new Attributes.Name("Import-Package");
 	public static final Attributes.Name REQUIRE_BUNDLE = new Attributes.Name("Require-Bundle");
 	public static final Attributes.Name BUNDLE_ACTIVATION_POLICY = new Attributes.Name("Bundle-ActivationPolicy");
 	public static final Attributes.Name BUNDLE_LOCALIZATION = new Attributes.Name("Bundle-Localization");
@@ -247,12 +248,20 @@ public class MergeableManifest extends Manifest {
 	 *
 	 * @param packages - passing parameterized packages is not supported
 	 */
-	public void addExportedPackages(Set<String> bundles) {
+	public void addExportedPackages(Set<String> packages) {
 		String s = (String) getMainAttributes().get(EXPORT_PACKAGE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
-		String result = mergeIntoCommaSeparatedList(s, bundles, modified);
+		String result = mergeIntoCommaSeparatedList(s, packages, modified);
 		this.modified = modified.get();
 		getMainAttributes().put(EXPORT_PACKAGE, result);
+	}
+	
+	public void addImportedPackages(Set<String> packages) {
+		String s = (String) getMainAttributes().get(IMPORT_PACKAGE);
+		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
+		String result = mergeIntoCommaSeparatedList(s, packages, modified);
+		this.modified = modified.get();
+		getMainAttributes().put(IMPORT_PACKAGE, result);
 	}
 
 	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
