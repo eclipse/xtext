@@ -65,3 +65,4 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.testlanguages.services,
  org.eclipse.xtext.enumrules.services
 Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator
+Import-Package: org.apache.log4j

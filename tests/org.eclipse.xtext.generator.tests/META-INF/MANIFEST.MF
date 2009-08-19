@@ -8,7 +8,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator,
  org.junit,
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
@@ -302,4 +301,5 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest,
  org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl,
  org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.util
+Import-Package: org.apache.log4j
 

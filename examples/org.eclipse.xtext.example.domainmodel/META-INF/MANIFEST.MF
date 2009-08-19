@@ -6,7 +6,7 @@ Bundle-Version: 0.8.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
+Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.xtext,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.xtend,

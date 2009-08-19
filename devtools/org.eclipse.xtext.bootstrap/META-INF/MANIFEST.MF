@@ -7,7 +7,7 @@ Bundle-Version: 0.8.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lastversion.jar,
  .
-Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
+Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.xpand,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
