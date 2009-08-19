@@ -329,6 +329,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_EmptyObjectBug284850_17.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getMultiInheritanceBug280439ParserRuleCall_18(), currentNode); 
+    }
+    this_MultiInheritanceBug280439_18=ruleMultiInheritanceBug280439
+    { 
+        $current = $this_MultiInheritanceBug280439_18.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -1766,6 +1776,50 @@ ruleEmptyObjectItem returns [EObject current=null]
 ));
 
 
+
+
+
+// Entry rule entryRuleMultiInheritanceBug280439
+entryRuleMultiInheritanceBug280439 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getMultiInheritanceBug280439Rule(), currentNode); }
+	 iv_ruleMultiInheritanceBug280439=ruleMultiInheritanceBug280439 
+	 { $current=$iv_ruleMultiInheritanceBug280439.current; } 
+	 EOF 
+;
+
+// Rule MultiInheritanceBug280439
+ruleMultiInheritanceBug280439 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#15' 
+    {
+        createLeafNode(grammarAccess.getMultiInheritanceBug280439Access().getNumberSignDigitOneDigitFiveKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getMultiInheritanceBug280439Access().getValConcreteMultiParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_val_1=ruleConcreteMulti 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "val", lv_val_1, "ConcreteMulti", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+));
 
 
 

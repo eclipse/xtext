@@ -228,13 +228,13 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  * Term returns Expression:
  *   Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
  *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
- *   EmptyObjectBug284850;
+ *   EmptyObjectBug284850|MultiInheritanceBug280439;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 // Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-// EmptyObjectBug284850
+// EmptyObjectBug284850|MultiInheritanceBug280439
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -265,6 +265,7 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 15: return new Term_LoopBug285452ParserRuleCall_15(parent, this, 15, inst);
 			case 16: return new Term_DuplicateBug284491ParserRuleCall_16(parent, this, 16, inst);
 			case 17: return new Term_EmptyObjectBug284850ParserRuleCall_17(parent, this, 17, inst);
+			case 18: return new Term_MultiInheritanceBug280439ParserRuleCall_18(parent, this, 18, inst);
 			default: return null;
 		}	
 	}	
@@ -823,6 +824,37 @@ protected class Term_EmptyObjectBug284850ParserRuleCall_17 extends RuleCallToken
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(EmptyObjectBug284850_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// MultiInheritanceBug280439
+protected class Term_MultiInheritanceBug280439ParserRuleCall_18 extends RuleCallToken {
+	
+	public Term_MultiInheritanceBug280439ParserRuleCall_18(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getMultiInheritanceBug280439ParserRuleCall_18();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MultiInheritanceBug280439_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(MultiInheritanceBug280439_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	

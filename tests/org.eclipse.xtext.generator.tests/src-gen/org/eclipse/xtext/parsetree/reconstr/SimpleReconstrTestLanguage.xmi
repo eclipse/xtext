@@ -45,6 +45,7 @@
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">

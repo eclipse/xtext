@@ -88,7 +88,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EmptyObjectItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiInheritanceBug280439">
+  <eClassifiers xsi:type="ecore:EClass" name="MultiInheritanceBug280439" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//ConcreteMulti"
         containment="true"/>
   </eClassifiers>

@@ -70,16 +70,17 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cLoopBug285452ParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
 		private final RuleCall cDuplicateBug284491ParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		private final RuleCall cEmptyObjectBug284850ParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
+		private final RuleCall cMultiInheritanceBug280439ParserRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//  EmptyObjectBug284850;
+		//  EmptyObjectBug284850|MultiInheritanceBug280439;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//EmptyObjectBug284850
+		//EmptyObjectBug284850|MultiInheritanceBug280439
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -135,6 +136,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//EmptyObjectBug284850
 		public RuleCall getEmptyObjectBug284850ParserRuleCall_17() { return cEmptyObjectBug284850ParserRuleCall_17; }
+
+		//MultiInheritanceBug280439
+		public RuleCall getMultiInheritanceBug280439ParserRuleCall_18() { return cMultiInheritanceBug280439ParserRuleCall_18; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -1143,7 +1147,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-	//  EmptyObjectBug284850;
+	//  EmptyObjectBug284850|MultiInheritanceBug280439;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}

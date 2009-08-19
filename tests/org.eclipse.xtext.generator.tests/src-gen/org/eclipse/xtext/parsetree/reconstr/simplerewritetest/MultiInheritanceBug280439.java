@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface MultiInheritanceBug280439 extends EObject
+public interface MultiInheritanceBug280439 extends Expression
 {
   /**
    * Returns the value of the '<em><b>Val</b></em>' containment reference.

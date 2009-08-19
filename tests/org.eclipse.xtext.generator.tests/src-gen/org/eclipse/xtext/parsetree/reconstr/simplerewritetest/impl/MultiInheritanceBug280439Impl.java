@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439;
@@ -31,7 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  *
  * @generated
  */
-public class MultiInheritanceBug280439Impl extends MinimalEObjectImpl.Container implements MultiInheritanceBug280439
+public class MultiInheritanceBug280439Impl extends ExpressionImpl implements MultiInheritanceBug280439
 {
   /**
    * The cached value of the '{@link #getVal() <em>Val</em>}' containment reference.
