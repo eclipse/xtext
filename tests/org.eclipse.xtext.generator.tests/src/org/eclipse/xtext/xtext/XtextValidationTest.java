@@ -540,7 +540,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 				"generate foo 'http://foo/bar'\n" +
 				"RuleA : ruleB=RuleB;\n" +
 				"RuleB : ruleC=RuleC;\n" +
-				"RuleC : (ruleA+=RuleA | '_')*;\n");
+				"RuleC : (ruleA+=RuleA | '_')* name=ID;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -556,7 +556,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 				"generate foo 'http://foo/bar'\n" +
 				"RuleA : ruleB=RuleB;\n" +
 				"RuleB : ruleC=RuleC;\n" +
-				"RuleC : '_' (ruleA+=RuleA)*;\n");
+				"RuleC : '_' (ruleA+=RuleA)* name=ID;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -572,7 +572,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 				"generate foo 'http://foo/bar'\n" +
 				"RuleA : ruleB=RuleB;\n" +
 				"RuleB : ruleC=RuleC;\n" +
-				"RuleC : '_'?  ( ( '__' | ruleA+=RuleA )* '___')?;\n");
+				"RuleC : '_'?  ( ( '__' | ruleA+=RuleA )* '___')? name=ID;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 

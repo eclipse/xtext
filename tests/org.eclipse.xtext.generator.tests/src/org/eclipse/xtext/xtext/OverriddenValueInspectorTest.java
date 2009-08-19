@@ -7,57 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xtext.XtextValidator.OverriddenValueIdentifier;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OverriddenValueIdentifierTest extends AbstractXtextTests implements ValidationMessageAcceptor {
-
-	private List<Triple<String, EObject, Integer>> warnings;
+public class OverriddenValueInspectorTest extends XtextRuleInspectorTest<Void, ParserRule> {
 
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		with(XtextStandaloneSetup.class);
-		warnings = Lists.newArrayList();
-	}
-	
-	@Override
-	protected void tearDown() throws Exception {
-		warnings = null;
-		super.tearDown();
-	}
-	
-	public void validateRule(AbstractRule rule) {
-		assertNotNull("rule", rule);
-		warnings.clear();
-		OverriddenValueIdentifier strategy = new OverriddenValueIdentifier(this, rule);
-		strategy.doSwitch(rule.getAlternatives());
-	}
-
-	public void acceptError(String message, EObject object, Integer feature) {
-		fail("unexpected call to acceptError");
-	}
-
-	public void acceptWarning(String message, EObject object, Integer feature) {
-		Triple<String,EObject,Integer> warning = Tuples.create(message, object, feature);
-		warnings.add(warning);
+	protected XtextRuleInspector<Void, ParserRule> createInspector() {
+		return new OverriddenValueInspector(this);
 	}
 	
 	public void testBug280011_01() throws Exception {
@@ -276,10 +237,4 @@ public class OverriddenValueIdentifierTest extends AbstractXtextTests implements
 		assertEquals(warnings.toString(), 2, warnings.size());
 	}
 	
-	
-	private Grammar getGrammar(String grammar) throws Exception {
-		XtextResource resourceFromString = getResourceFromString(grammar);
-		assertTrue(resourceFromString.getErrors().toString(), resourceFromString.getErrors().isEmpty());
-		return (Grammar) resourceFromString.getContents().get(0);
-	}
 }
