@@ -78,7 +78,6 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
 						.<IProject> emptyList(),
 				new LinkedHashSet<String>(Arrays.asList(
 						"com.ibm.icu",
-						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 						"org.eclipse.xtext", 
 						"org.eclipse.xtext.generator",
 						"org.eclipse.xtend",
@@ -88,7 +87,9 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
 						"de.itemis.xtext.antlr;resolution:=optional",
 						"org.eclipse.emf.codegen.ecore;resolution:=optional",
 						"org.eclipse.xtend.util.stdlib",
-						DSL_GENERATOR_PROJECT_NAME)), null, null, null,
+						DSL_GENERATOR_PROJECT_NAME)), 
+				new LinkedHashSet<String>(Arrays.asList(
+						"org.apache.log4j"), null, null,
 				monitor, null,
 				new String[] {"org.eclipse.jdt.core.javanature", "org.eclipse.pde.PluginNature"});
 

@@ -4,7 +4,6 @@ Bundle-Name: Xtext Reference (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.reference;singleton:=true
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 0.8.0.qualifier
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: ReferenceModel,
@@ -17,8 +16,7 @@ Export-Package: ReferenceModel,
  org.eclipse.xtext.reference.parser.antlr,
  org.eclipse.xtext.reference.referenceGrammar.impl,
  org.eclipse.xtext.reference.validation
-Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator;resolution:=optional,
  de.itemis.xtext.antlr;resolution:=optional,
  org.eclipse.emf.mwe.core;bundle-version="0.8.0",

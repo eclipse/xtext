@@ -224,7 +224,6 @@ public class EclipseResourceUtil {
 		mainContent.append("Bundle-Vendor: My Company\n");
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
-		mainContent.append("Eclipse-RegisterBuddy: org.eclipse.xtext.log4j\n");
 //		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
 		if (null != activatorClassName) {
 			mainContent.append("Bundle-Activator: " + activatorClassName + "\n");
