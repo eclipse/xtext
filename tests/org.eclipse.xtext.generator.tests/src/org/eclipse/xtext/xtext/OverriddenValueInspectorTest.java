@@ -237,4 +237,15 @@ public class OverriddenValueInspectorTest extends XtextRuleInspectorTest<Void, P
 		assertEquals(warnings.toString(), 2, warnings.size());
 	}
 	
+	public void testRuleCall_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"First returns Object: (Third|Second) cardinality=('+'|'*')?;\n" +
+				"Second returns Object: '(' First ')';\n" +
+				"Third returns Object: name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "First");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
 }
