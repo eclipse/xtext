@@ -891,13 +891,22 @@ public interface SimplerewritetestPackage extends EPackage
   int MULTI_INHERITANCE_BUG280439 = 20;
 
   /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_INHERITANCE_BUG280439__EM = EXPRESSION__EM;
+
+  /**
    * The feature id for the '<em><b>Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MULTI_INHERITANCE_BUG280439__VAL = 0;
+  int MULTI_INHERITANCE_BUG280439__VAL = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Multi Inheritance Bug280439</em>' class.
@@ -906,7 +915,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MULTI_INHERITANCE_BUG280439_FEATURE_COUNT = 1;
+  int MULTI_INHERITANCE_BUG280439_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl <em>Abstract Multi1</em>}' class.

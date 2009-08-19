@@ -1058,6 +1058,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     loopBug285452EClass.getESuperTypes().add(this.getExpression());
     duplicateBug284491EClass.getESuperTypes().add(this.getExpression());
     emptyObjectBug284850EClass.getESuperTypes().add(this.getExpression());
+    multiInheritanceBug280439EClass.getESuperTypes().add(this.getExpression());
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti1());
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti2());
     opEClass.getESuperTypes().add(this.getExpression());

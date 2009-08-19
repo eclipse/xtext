@@ -45,6 +45,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer manyStringsConsumer;
 
+	private INonTerminalConsumer multiInheritanceBug280439Consumer;
+
 	private INonTerminalConsumer parensConsumer;
 
 	private INonTerminalConsumer ref2Consumer;
@@ -95,6 +97,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$19$Consumer;
 
+	private IElementConsumer ruleCall$20$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -121,6 +125,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$17$Consumer);
 			acceptor.accept(ruleCall$18$Consumer);
 			acceptor.accept(ruleCall$19$Consumer);
+			acceptor.accept(ruleCall$20$Consumer);
 		}
 	}
 
@@ -340,6 +345,18 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(multiInheritanceBug280439Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -375,6 +392,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getLoopBug285452ParserRuleCall_15());
 		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.getDuplicateBug284491ParserRuleCall_16());
 		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.getEmptyObjectBug284850ParserRuleCall_17());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getMultiInheritanceBug280439ParserRuleCall_18());
 	}
 	
 	@Override
@@ -433,6 +451,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setManyStringsConsumer(INonTerminalConsumer manyStringsConsumer) {
 		this.manyStringsConsumer = manyStringsConsumer;
+	}
+	
+	public void setMultiInheritanceBug280439Consumer(INonTerminalConsumer multiInheritanceBug280439Consumer) {
+		this.multiInheritanceBug280439Consumer = multiInheritanceBug280439Consumer;
 	}
 	
 	public void setParensConsumer(INonTerminalConsumer parensConsumer) {

@@ -280,6 +280,7 @@ public class SimplerewritetestSwitch<T>
       {
         MultiInheritanceBug280439 multiInheritanceBug280439 = (MultiInheritanceBug280439)theEObject;
         T result = caseMultiInheritanceBug280439(multiInheritanceBug280439);
+        if (result == null) result = caseExpression(multiInheritanceBug280439);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
