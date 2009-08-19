@@ -57,7 +57,7 @@ plugin@org.eclipse.xtext.example.fowlerdsl=HEAD,:pserver:anonymous@dev.eclipse.o
 plugin@org.eclipse.xtext.example.fowlerdsl.ui=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.example.fowlerdsl.ui
 
 !*** Xtext UI
-fragment@org.eclipse.xtext.logging=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.logging
+!*** fragment@org.eclipse.xtext.logging=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.logging
 plugin@org.eclipse.xtext.ui.common=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common
 plugin@org.eclipse.xtext.ui.common.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.common.tests
 plugin@org.eclipse.xtext.ui.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core
