@@ -37,6 +37,5 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j

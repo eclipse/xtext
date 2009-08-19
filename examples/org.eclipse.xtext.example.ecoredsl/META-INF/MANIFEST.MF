@@ -4,7 +4,6 @@ Bundle-Name: Xtext Ecore DSL Example (Incubation)
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 0.8.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.ecoredsl;singleton:=true
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,

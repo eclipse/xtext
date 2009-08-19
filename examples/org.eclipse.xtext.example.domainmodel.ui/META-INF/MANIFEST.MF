@@ -4,7 +4,6 @@ Bundle-Name: Xtext Domainmodel Example UI (Incubation)
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 0.8.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui; singleton:=true
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.ui.core,

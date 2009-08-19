@@ -15,3 +15,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
 Export-Package: org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.contentassist
+Import-Package: org.apache.log4j
