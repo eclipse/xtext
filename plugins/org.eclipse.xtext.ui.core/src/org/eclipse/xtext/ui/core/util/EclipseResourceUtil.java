@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -36,7 +37,9 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
@@ -54,11 +57,13 @@ public class EclipseResourceUtil {
 
 	public static final String ISO_8859_1 = "iso-8859-1";
 
-	public static IProject createProject(final String projectName, final List<String> srcFolders,
+	public static IProject createProject(final String projectName, final IPath location, final List<String> srcFolders,
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
 			final List<String> exportedPackages, final List<String> importedPackages,
 			final String activatorClassName,
-			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures) {
+			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures,
+			IWorkingSet[] workingSets, IWorkbench workbench) {
+
 		IProject project = null;
 		try {
 			progressMonitor.beginTask("", 10);
@@ -86,7 +91,7 @@ public class EclipseResourceUtil {
 			final IJavaProject javaProject = JavaCore.create(project);
 			final IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(
 					projectName);
-			projectDescription.setLocation(null);
+			projectDescription.setLocation(location);
 			project.create(projectDescription, new SubProgressMonitor(progressMonitor, 1));
 			final List<IClasspathEntry> classpathEntries = new ArrayList<IClasspathEntry>();
 			if (referencedProjects.size() != 0) {
@@ -143,7 +148,21 @@ public class EclipseResourceUtil {
 			progressMonitor.done();
 		}
 
-		return project;
+		if (workbench != null && workingSets != null)
+			workbench.getWorkingSetManager().addToWorkingSets(project,
+				workingSets);
+		return project ;
+		
+	}
+	
+	public static IProject createProject(final String projectName, final List<String> srcFolders,
+			final List<IProject> referencedProjects, final Set<String> requiredBundles,
+			final List<String> exportedPackages, final List<String> importedPackages,
+			final String activatorClassName,
+			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures) {
+		return createProject(projectName, null, srcFolders, referencedProjects, requiredBundles, exportedPackages,
+					importedPackages, activatorClassName, progressMonitor, theShell, projectNatures,
+					null, null);
 	}
 
 	public static IFile createFile(final String name, final IContainer container, final String content,

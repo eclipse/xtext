@@ -80,6 +80,8 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 	@Inject
 	private IProjectCreator creator;
 
+	private IWorkbench workbench;
+
 	private void doFinish(final IProjectInfo projectInfo, final IProgressMonitor monitor) {
 		try {
 			creator.setProjectInfo(projectInfo);
@@ -95,7 +97,12 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.workbench = workbench;
 		this.selection = selection;
+	}
+
+	public IWorkbench getWorkbench() {
+		return workbench;
 	}
 
 }
