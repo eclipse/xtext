@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.match,
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
@@ -27,3 +26,4 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.grammarinheritance.ametamodel,
  org.eclipse.xtext.parser.keywords,
  org.eclipse.xtext.testlanguages
+Import-Package: org.apache.log4j

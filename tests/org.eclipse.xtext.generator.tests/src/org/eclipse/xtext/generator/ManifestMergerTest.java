@@ -47,7 +47,10 @@ public class ManifestMergerTest extends TestCase {
 		manifest.addExportedPackages(Collections.singleton("org.eclipse.xtext"));
 		assertFalse(manifest.isModified());
 
-		manifest.addRequiredBundles(Collections.singleton("org.eclipse.xtext.log4j"));
+		manifest.addRequiredBundles(Collections.singleton("org.eclipse.xtend"));
+		assertFalse(manifest.isModified());
+		
+		manifest.addImportedPackages(Collections.singleton("org.apache.log4j"));
 		assertFalse(manifest.isModified());
 	}
 
