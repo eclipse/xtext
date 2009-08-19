@@ -23,7 +23,7 @@ feature@org.eclipse.emf.index.feature=HEAD,:pserver:anonymous@dev.eclipse.org:/c
 plugin@com.google.guice=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.guice
 plugin@com.google.collect=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.collect
 plugin@org.antlr.runtime=v3_0_0,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.orbit/org.antlr.runtime
-plugin@org.eclipse.xtext.log4j=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.log4j
+plugin@org.apache.log4j=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.tmf/org.eclipse.xtext/plugins/org.apache.log4j
 !***plugin@org.eclipse.mylyn.wikitext.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.mylyn/org.eclipse.mylyn.wikitext.core
 !***plugin@org.eclipse.mylyn.wikitext.textile.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,,org.eclipse.mylyn/org.eclipse.mylyn.wikitext.textile.core
 
