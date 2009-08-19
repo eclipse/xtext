@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.xtext.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.xtext.xtext.ui" id="org.eclipse.xtext.xtext.ui.wizardContribution" name="Wizard Contribution"/>
+      </appInfo>
+      <documentation>
+         This extension point is used to add new alternative Xtext generator configurations, to the wizard.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="generatorConfiguration" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified identifier of the target extension point
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  an optional identifier of the extension instance
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  an optional name of the extension instance
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="generatorConfiguration">
+      <complexType>
+         <sequence>
+            <element ref="MweSnippet"/>
+         </sequence>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name like it should be displayed in the wizard.
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="requiredBundles" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="MweSnippet" type="string">
+      <annotation>
+         <documentation>
+            MWE snippet which will be placed like this: 
+&lt;workflow&gt;
+  &lt;property file=&quot;path/to/myprops.properties&quot;/&gt;
+  ${MweSnippet}
+&lt;/workflow&gt;
+         </documentation>
+      </annotation>
+   </element>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         The following is an example markup for a fragment generator:
+
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension
+         point=&quot;org.eclipse.xtext.wizardContribution&quot;&gt;
+      &lt;generatorConfiguration name=&quot;Default Java-based setup&quot;&gt;
+         &lt;MweSnippet&gt;
+         &lt;![CDATA[
+   &lt;property name=&quot;runtimeProject&quot; value=&quot;../${projectName}&quot;/&gt;
+ 
+   &lt;bean class=&quot;org.eclipse.emf.mwe.utils.StandaloneSetup&quot; platformUri=&quot;${runtimeProject}/..&quot;/&gt;
+   
+   &lt;component class=&quot;org.eclipse.emf.mwe.utils.DirectoryCleaner&quot; directory=&quot;${runtimeProject}/src-gen&quot;/&gt;
+   &lt;component class=&quot;org.eclipse.emf.mwe.utils.DirectoryCleaner&quot; directory=&quot;${runtimeProject}.ui/src-gen&quot;/&gt;
+   
+   &lt;component class=&quot;org.eclipse.xtext.generator.Generator&quot;&gt;
+    &lt;pathRtProject value=&quot;${runtimeProject}&quot;/&gt;
+    &lt;pathUiProject value=&quot;${runtimeProject}.ui&quot;/&gt;
+    &lt;projectNameRt value=&quot;${projectName}&quot;/&gt;
+    &lt;projectNameUi value=&quot;${projectName}.ui&quot;/&gt;
+    
+    &lt;language uri=&quot;${grammarURI}&quot; fileExtensions=&quot;${file.extensions}&quot;&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment&quot;/&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&quot;/&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment&quot;/&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment&quot; 
+      fileExtensions=&quot;${file.extensions}&quot;/&gt;
+     &lt;fragment class=&quot;de.itemis.xtext.antlr.XtextAntlrGeneratorFragment&quot; &gt;
+      &lt;options backtrack=&quot;true&quot;/&gt;
+     &lt;/fragment&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.scoping.JavaScopingFragment&quot;/&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.validation.JavaValidatorFragment&quot;/&gt;
+     
+     &lt;fragment class=&quot;org.eclipse.xtext.generator.formatting.FormatterFragment&quot;/&gt;
+     &lt;fragment class=&quot;org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment&quot;/&gt;
+    &lt;/language&gt;
+   &lt;/component&gt;
+   ]]&gt;
+         &lt;/MweSnippet&gt;
+      &lt;/generatorConfiguration&gt;
+   &lt;/extension&gt;
+&lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         The Xtext project plugin org.eclipse.xtext.xtext.ui contains implementations of this extension point.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+      </documentation>
+   </annotation>
+
+</schema>

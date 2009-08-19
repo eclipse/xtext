@@ -1,4 +1,4 @@
 «IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
 
-«DEFINE main(Boolean isXpandAPI) FOR XtextProjectInfo»
+«DEFINE main FOR XtextProjectInfo»
 «ENDDEFINE»

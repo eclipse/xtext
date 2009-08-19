@@ -31,7 +31,7 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtext.Messages;
+import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
 
@@ -85,8 +85,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		String templateName = pathToTemplates()+"DslUiProject::main"; //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,false,
-				monitor);
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,monitor);
 	}
 
 	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
@@ -103,9 +102,14 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.mwe.core;resolution:=optional", //$NON-NLS-1$
 				"com.ibm.icu;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.xtext.xtend;resolution:=optional")); //$NON-NLS-1$
+		
+		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
+		for (String bundleId : bundles) {
+			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
+		}
 
 		String templateName = pathToTemplates()+"DslProject::main"; //$NON-NLS-1$
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName, false,
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
 				monitor);
 	}
 
@@ -123,17 +127,16 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		String templateName = pathToTemplates()+"GeneratorProject::main"; //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName, false,
-				monitor);
+		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName, monitor);
 	}
 
 	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName,
-			Set<String> requiredBundles, List<String> srcFolderList, String templateName, boolean isXpandBasedAPI,
+			Set<String> requiredBundles, List<String> srcFolderList, String templateName,
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage + projectName, 3);
-		final IProject dslProject = EclipseResourceUtil.createProject(projectName,
+		final IProject dslProject = EclipseResourceUtil.createProject(projectName,xtextProjectInfo.getLocation(),
 				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, null, null, monitor,
-				null,PROJECT_NATURES);
+				null,PROJECT_NATURES,xtextProjectInfo.getWorkingSets(),xtextProjectInfo.getWorkbench());
 
 		if (dslProject == null) {
 			return null;
@@ -151,7 +154,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		// generate generator and activator for dsl and dsl.ui project
 		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate(templateName, xtextProjectInfo,isXpandBasedAPI);
+		facade.evaluate(templateName, xtextProjectInfo);
 
 		monitor.worked(1);
 
