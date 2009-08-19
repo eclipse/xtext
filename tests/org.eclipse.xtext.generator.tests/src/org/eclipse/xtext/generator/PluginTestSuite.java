@@ -121,7 +121,9 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.xtext.ResourceLoadTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.parser.packrat.XtextPackratParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.XtextValidationTest.class);
-		suite.addTestSuite(org.eclipse.xtext.xtext.OverriddenValueIdentifierTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext.OverriddenValueInspectorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext.ValidEntryRuleInspectorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext.RuleWithoutInstantiationInspectorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.XtextScopingTest.class);
 		return suite;
 	}
