@@ -78,8 +78,13 @@ public class XtextTokenStream extends CommonTokenStream {
 		HiddenTokens result = new MyHiddenTokens(hiddenTokens);
 		BitSet newHiddens = new BitSet();
 		for(String lexerRule: lexerRules) {
-			int idx = rulenameToTokenType.get(lexerRule);
-			newHiddens.set(idx);
+			Integer idxObj = rulenameToTokenType.get(lexerRule);
+			if (idxObj != null) {
+				newHiddens.set(idxObj.intValue());
+			} else {
+				throw new IllegalStateException("unknown rule: " + lexerRule + 
+						" - if this is a keyword and not a rulename, it seems to hide a lexer rule.");
+			}
 		}
 		hiddenTokens = newHiddens;
 		return result;
@@ -88,8 +93,13 @@ public class XtextTokenStream extends CommonTokenStream {
 	public void setInitialHiddenTokens(String... lexerRules) {
 		BitSet newHiddens = new BitSet();
 		for(String lexerRule: lexerRules) {
-			int idx = rulenameToTokenType.get(lexerRule);
-			newHiddens.set(idx);
+			Integer idxObj = rulenameToTokenType.get(lexerRule);
+			if (idxObj != null) {
+				newHiddens.set(idxObj.intValue());
+			} else {
+				throw new IllegalStateException("unknown rule: " + lexerRule + 
+						" - if this is a keyword and not a rulename, it seems to hide a lexer rule.");
+			}
 		}
 		hiddenTokens = newHiddens;
 	}
