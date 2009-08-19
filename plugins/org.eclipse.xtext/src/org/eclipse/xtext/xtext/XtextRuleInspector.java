@@ -36,9 +36,14 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 	public void inspect(RuleType rule) {
 		if (!canInspect(rule))
 			return;
+		Result r = doInspect(rule);
+		handleResult(r, rule);
+	}
+
+	protected Result doInspect(RuleType rule) {
 		visitedRules.add(rule);
 		Result r = doSwitch(rule.getAlternatives());
-		handleResult(r, rule);
+		return r;
 	}
 	
 	protected boolean canInspect(RuleType rule) {

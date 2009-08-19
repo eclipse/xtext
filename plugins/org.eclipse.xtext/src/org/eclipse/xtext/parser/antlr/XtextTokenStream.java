@@ -83,7 +83,7 @@ public class XtextTokenStream extends CommonTokenStream {
 				newHiddens.set(idxObj.intValue());
 			} else {
 				throw new IllegalStateException("unknown rule: " + lexerRule + 
-						" - if this is a keyword and not a rulename, it seems to hide a lexer rule.");
+						" - the rule seems to be hidden by a keyword.");
 			}
 		}
 		hiddenTokens = newHiddens;
@@ -98,7 +98,7 @@ public class XtextTokenStream extends CommonTokenStream {
 				newHiddens.set(idxObj.intValue());
 			} else {
 				throw new IllegalStateException("unknown rule: " + lexerRule + 
-						" - if this is a keyword and not a rulename, it seems to hide a lexer rule.");
+						" - the rule seems to be hidden by a keyword.");
 			}
 		}
 		hiddenTokens = newHiddens;
