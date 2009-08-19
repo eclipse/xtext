@@ -122,4 +122,5 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest,
  org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.impl,
  org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.util
+Import-Package: org.apache.log4j
 

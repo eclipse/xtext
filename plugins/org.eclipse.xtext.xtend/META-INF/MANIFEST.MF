@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.xtext;bundle-version="0.8.0",
  org.eclipse.jface.text,
  org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0",
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtend.util.stdlib;bundle-version="0.8.0";visibility:=reexport,
  com.google.collect;bundle-version="0.8.0";visibility:=reexport,
  org.eclipse.xtext.ui.core
@@ -22,3 +21,4 @@ Export-Package: org.eclipse.xtext.check,
  org.eclipse.xtext.xtend.contentassist,
  org.eclipse.xtext.xtend.scoping
 Bundle-Vendor: Eclipse Modeling Project
+Import-Package: org.apache.log4j
