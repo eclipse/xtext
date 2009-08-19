@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext;
 import static org.eclipse.xtext.GrammarUtil.isOptionalCardinality;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,7 +52,6 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -357,13 +355,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 			@Override
 			public Boolean caseParserRule(ParserRule object) {
-				isNull = false;
+				isNull = GrammarUtil.isDatatypeRule(object);
 				return isNull;
 			}
 
 			@Override
 			public Boolean caseTerminalRule(TerminalRule object) {
-				isNull = false;
+				isNull = true;
 				return isNull;
 			}
 
@@ -493,136 +491,21 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check
-	public void checkOverriddenValue(final ParserRule rule) {
-		if (GrammarUtil.isDatatypeRule(rule) || rule.getAlternatives() == null)
-			return;
-		OverriddenValueIdentifier strategy = new OverriddenValueIdentifier(this, rule);
-		strategy.doSwitch(rule.getAlternatives());
+	public void checkForOverriddenValue(final ParserRule rule) {
+		OverriddenValueInspector inspection = new OverriddenValueInspector(this);
+		inspection.inspect(rule);
 	}
-
-	public static class OverriddenValueIdentifier extends XtextSwitch<Void> {
-
-		private final ValidationMessageAcceptor acceptor;
-
-		private Multimap<String, AbstractElement> assignedFeatures;
-
-		private Collection<AbstractRule> visitedRules;
-
-		public OverriddenValueIdentifier(ValidationMessageAcceptor acceptor, AbstractRule startRule) {
-			this.acceptor = acceptor;
-			assignedFeatures = newMultimap();
-			visitedRules = Sets.newHashSet(startRule);
-		}
-
-		protected Multimap<String, AbstractElement> newMultimap() {
-			return Multimaps.newLinkedHashMultimap();
-		}
-
-		@Override
-		public Void caseAssignment(Assignment object) {
-			if (GrammarUtil.isMultipleAssignment(object))
-				return null;
-			checkAssignment(object, object.getFeature());
-			if (GrammarUtil.isMultipleCardinality(object))
-				checkAssignment(object, object.getFeature());
-			return null;
-		}
-
-		@Override
-		public Void caseAction(Action object) {
-			if (GrammarUtil.isMultipleAssignment(object))
-				return null;
-			assignedFeatures = newMultimap();
-			if (object.getFeature() == null)
-				return null;
-			checkAssignment(object, object.getFeature());
-			return null;
-		}
-
-		private void checkAssignment(AbstractElement object, String feature) {
-			if (assignedFeatures.containsKey(feature)) {
-				Collection<AbstractElement> sources = Lists.newArrayList(assignedFeatures.get(feature));
-				assignedFeatures.replaceValues(feature, Iterables.<AbstractElement> emptyIterable());
-				if (sources != null && sources.equals(Collections.singletonList(object))) {
-					acceptor.acceptWarning("The assigned value of feature '" + feature
-							+ "' will possibly override itself because it is used inside of a loop.", object, null);
-				}
-				else {
-					if (sources != null) {
-						for (AbstractElement source : sources)
-							acceptor.acceptWarning("The possibly assigned value of feature '" + feature
-									+ "' may be overridden by subsequent assignments.", source, null);
-					}
-					acceptor.acceptWarning("This assignment will override the possibly assigned value of feature '"
-							+ feature + "'.", object, null);
-				}
-			}
-			else {
-				assignedFeatures.put(feature, object);
-			}
-		}
-
-		@Override
-		public Void caseRuleCall(RuleCall object) {
-			AbstractRule calledRule = object.getRule();
-			if (calledRule == null || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
-				return null;
-			ParserRule parserRule = (ParserRule) calledRule;
-			if (GrammarUtil.isDatatypeRule(parserRule))
-				return null;
-			if (!visitedRules.add(parserRule))
-				return null;
-			Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
-			assignedFeatures = newMultimap();
-			doSwitch(parserRule.getAlternatives());
-			for (String feature : assignedFeatures.keySet())
-				prevAssignedFeatures.put(feature, object);
-			assignedFeatures = prevAssignedFeatures;
-			visitedRules.remove(parserRule);
-			return null;
-		}
-
-		@Override
-		public Void caseAlternatives(Alternatives object) {
-			Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
-			Multimap<String, AbstractElement> mergedAssignedFeatures = newMultimap(prevAssignedFeatures);
-			for (AbstractElement element : object.getGroups()) {
-				assignedFeatures = newMultimap(prevAssignedFeatures);
-				doSwitch(element);
-				mergedAssignedFeatures.putAll(assignedFeatures);
-			}
-			assignedFeatures = mergedAssignedFeatures;
-			if (GrammarUtil.isMultipleCardinality(object)) {
-				prevAssignedFeatures = assignedFeatures;
-				for (AbstractElement element : object.getGroups()) {
-					assignedFeatures = newMultimap(prevAssignedFeatures);
-					doSwitch(element);
-					mergedAssignedFeatures.putAll(assignedFeatures);
-				}
-				assignedFeatures = mergedAssignedFeatures;
-			}
-			return null;
-		}
-
-		private Multimap<String, AbstractElement> newMultimap(Multimap<String, AbstractElement> from) {
-			return Multimaps.newLinkedHashMultimap(from);
-		}
-
-		@Override
-		public Void caseGroup(Group object) {
-			Multimap<String, AbstractElement> prevAssignedFeatures = newMultimap(assignedFeatures);
-			for (AbstractElement element : object.getTokens()) {
-				doSwitch(element);
-			}
-			if (GrammarUtil.isMultipleCardinality(object)) {
-				for (AbstractElement element : object.getTokens()) {
-					doSwitch(element);
-				}
-			}
-			if (GrammarUtil.isOptionalCardinality(object))
-				assignedFeatures.putAll(prevAssignedFeatures);
-			return null;
-		}
+	
+	@Check
+	public void checkInstanceCreated(final ParserRule rule) {
+		RuleWithoutInstantiationInspector inspection = new RuleWithoutInstantiationInspector(this);
+		inspection.inspect(rule);
+	}
+	
+	@Check
+	public void checkInstanceCreatedForEntryRule(final ParserRule rule) {
+		ValidEntryRuleInspector inspection = new ValidEntryRuleInspector(this);
+		inspection.inspect(rule);
 	}
 
 	@Check
@@ -631,7 +514,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	}
 
-	private final class LeftRecursiveGrammarSwitch extends XtextSwitch<Void> {
+	public static class LeftRecursiveGrammarSwitch extends XtextSwitch<Void> {
 		private final ValidationMessageAcceptor validationMessageAcceptor;
 		private ParserRule parserRule;
 		private Set<RuleCall> validatedRuleCalls = Sets.newHashSet();
