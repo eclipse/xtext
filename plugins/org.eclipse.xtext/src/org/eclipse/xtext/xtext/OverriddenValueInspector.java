@@ -47,6 +47,11 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 		return super.canInspect(rule);
 	}
 	
+	@Override
+	protected Void doInspect(ParserRule rule) {
+		return doSwitch(rule.getAlternatives());
+	}
+	
 	protected Multimap<String, AbstractElement> newMultimap() {
 		return Multimaps.newLinkedHashMultimap();
 	}

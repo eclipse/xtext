@@ -34,6 +34,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -63,6 +64,11 @@ import com.google.inject.Inject;
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
 
+	@Inject
+	private IValueConverterService valueConverter;
+	
+	private KeywordInspector keywordHidesTerminalInspector;
+	
 	@Override
 	protected List<? extends EPackage> getEPackages() {
 		return Collections.singletonList(XtextPackage.eINSTANCE);
@@ -128,9 +134,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				warning("Metamodel names should start with a lower case letter.",
 						XtextPackage.GENERATED_METAMODEL__NAME);
 	}
-
-	@Inject
-	private IValueConverterService valueConverter;
 
 	@Check
 	public void checkReferencedMetamodel(ReferencedMetamodel metamodel) throws ValueConverterException {
@@ -507,11 +510,17 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		ValidEntryRuleInspector inspection = new ValidEntryRuleInspector(this);
 		inspection.inspect(rule);
 	}
+	
+	@Check
+	public void checkKeywordHidesTerminalRule(final Keyword keyword) {
+		if (keywordHidesTerminalInspector == null)
+			keywordHidesTerminalInspector = new KeywordInspector(this);
+		keywordHidesTerminalInspector.inspectKeywordHidesTerminalRule(keyword);
+	}
 
 	@Check
 	public void checkIfGrammarIsLeftRecursionFree(final Grammar grammar) {
 		new LeftRecursiveGrammarSwitch(this).doSwitch(grammar);
-
 	}
 
 	public static class LeftRecursiveGrammarSwitch extends XtextSwitch<Void> {

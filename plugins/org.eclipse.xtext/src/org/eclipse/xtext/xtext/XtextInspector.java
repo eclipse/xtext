@@ -7,29 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.AbstractRule;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class XtextRuleInspectorTest<Result, Rule extends AbstractRule> extends XtextInspectorTest {
+public class XtextInspector {
 
-	public void validateRule(Rule rule) {
-		assertNotNull("rule", rule);
-		warnings.clear();
-		XtextRuleInspector<Result, Rule> inspector = createInspector();
-		inspector.inspect(rule);
-	}
-	
-	protected abstract XtextRuleInspector<Result, Rule> createInspector();
-	
-	@Override
-	protected boolean isExpectingErrors() {
-		return false;
-	}
-	
-	@Override
-	protected boolean isExpectingWarnings() {
-		return true;
-	}
 }
