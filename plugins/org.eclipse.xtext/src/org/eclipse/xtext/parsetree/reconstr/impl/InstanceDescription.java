@@ -41,27 +41,27 @@ public class InstanceDescription implements IInstanceDescription {
 	public InstanceDescription(ITransientValueService t, EObject desc) {
 		described = desc;
 		tv = t;
-		EList<EStructuralFeature> features = described.eClass()
-				.getEAllStructuralFeatures();
+		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
 		next = new int[features.size()];
 		for (int id = 0; id < features.size(); id++) {
 			EStructuralFeature f = features.get(id);
 			if (f.isMany() && tv.isMixedList(desc, f)) {
 				if (multiFeatures == null)
 					multiFeatures = new BitSet();
-				multiFeatures.set(f.getFeatureID());
+				multiFeatures.set(id);
 				next[id] = firstID(f);
-			} else if (!tv.isTransient(described, f, -1)) {
+			}
+			else if (!tv.isTransient(described, f, -1)) {
 				next[id] = firstID(f);
-			} else
+			}
+			else
 				next[id] = -1;
 			// System.out.println(id + ":" + f.getName() + " -> " + next[id]);
 		}
 		// System.out.println("x");
 	}
 
-	private InstanceDescription(ITransientValueService tv, EObject described,
-			int[] next, BitSet multi) {
+	private InstanceDescription(ITransientValueService tv, EObject described, int[] next, BitSet multi) {
 		super();
 		this.tv = tv;
 		this.described = described;
@@ -73,7 +73,8 @@ public class InstanceDescription implements IInstanceDescription {
 		EStructuralFeature f = getFeature(feature);
 		int[] con = new int[next.length];
 		System.arraycopy(next, 0, con, 0, next.length);
-		con[f.getFeatureID()] = nextID(f, con[f.getFeatureID()]);
+		int fid = described.eClass().getFeatureID(f);
+		con[fid] = nextID(f, con[fid]);
 		return new InstanceDescription(tv, described, con, multiFeatures);
 	}
 
@@ -87,7 +88,7 @@ public class InstanceDescription implements IInstanceDescription {
 			Object get = described.eGet(f);
 			if (f.isMany()) {
 				List<?> list = (List<?>) get;
-				get = list.get(next[f.getFeatureID()]);
+				get = list.get(next[described.eClass().getFeatureID(f)]);
 			}
 			return get;
 		}
@@ -104,8 +105,7 @@ public class InstanceDescription implements IInstanceDescription {
 
 	public Map<EStructuralFeature, Integer> getUnconsumed() {
 		Map<EStructuralFeature, Integer> m = new HashMap<EStructuralFeature, Integer>();
-		EList<EStructuralFeature> features = described.eClass()
-				.getEAllStructuralFeatures();
+		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
 		for (int id = 0; id < features.size(); id++) {
 			if (next[id] > -1)
 				m.put(features.get(id), next[id] + 1);
@@ -114,8 +114,7 @@ public class InstanceDescription implements IInstanceDescription {
 	}
 
 	public boolean isConsumable(EStructuralFeature f, boolean allowDefault) {
-		return next[f.getFeatureID()] > ((allowDefault && !f.isMany()) ? -2
-				: -1);
+		return next[described.eClass().getFeatureID(f)] > ((allowDefault && !f.isMany()) ? -2 : -1);
 	}
 
 	public boolean isConsumed() {
@@ -127,7 +126,7 @@ public class InstanceDescription implements IInstanceDescription {
 
 	public boolean isConsumedWithLastConsumtion(String feature) {
 		EStructuralFeature f = getFeature(feature);
-		int id = f.getFeatureID();
+		int id = described.eClass().getFeatureID(f);
 		for (int i = 0; i < next.length; i++)
 			if (((i == id) ? nextID(f, next[i]) : next[i]) > -1)
 				return false;
@@ -143,13 +142,14 @@ public class InstanceDescription implements IInstanceDescription {
 	private int nextID(EStructuralFeature f, int lastId) {
 		int myLastId = lastId;
 		if (f.isMany()) {
-			if (multiFeatures != null && multiFeatures.get(f.getFeatureID())) {
+			if (multiFeatures != null && multiFeatures.get(described.eClass().getFeatureID(f))) {
 				myLastId--;
 				while (myLastId >= 0 && tv.isTransient(described, f, myLastId))
 					myLastId--;
 				return myLastId;
 			}
-		} else if (lastId == 0)
+		}
+		else if (lastId == 0)
 			return -2;
 		return myLastId - 1;
 	}
@@ -165,8 +165,8 @@ public class InstanceDescription implements IInstanceDescription {
 			// l.add(f.getName() + ":" + next[f.getFeatureID()] + "/" + count);
 			l.add(f.getKey().getName() + ":" + f.getValue().intValue());
 		}
-		return /* hashCode() + "/" + */described.eClass().getName() + ":"
-				+ described.hashCode() + (l.size() > 0 ? (":" + l) : "");
+		return /* hashCode() + "/" + */described.eClass().getName() + ":" + described.hashCode()
+				+ (l.size() > 0 ? (":" + l) : "");
 	}
 
 }

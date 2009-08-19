@@ -18,8 +18,7 @@ import org.eclipse.xtext.util.EmfFormatter;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger
-			.getLogger(SimpleReconstrTest.class);
+	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -46,8 +45,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		if (logger.isTraceEnabled()) {
 			logger.trace(EmfFormatter.objToStr(result));
 			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
-			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)
-					.getLeafNodes()));
+			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		}
 		return getSerializer().serialize(result, false);
 	}
@@ -196,59 +194,65 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "#6 v2 a b 2";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testConsume21() throws Exception {
 		String model = "#7 #6 v1 1 2 a";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testConsume22() throws Exception {
 		String model = "#7 #6 v2 a b 2";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testLoop1() throws Exception {
 		String model = "kw0 #8 abc kw1 ab kw30";
 		assertEquals(" #8 abc  ab kw30", parseAndSerialize(model));
 	}
-	
+
 	public void testLoop2() throws Exception {
 		String model = "#9 abc adad kw2 kw3 kw6";
 		assertEquals("#9 abc kw1 adad kw4 kw5    ", parseAndSerialize(model));
 	}
-	
+
 	public void testLoop3() throws Exception {
 		String model = "kw3 #10 adad kw4 abcde kw5 kw4 abc kw5";
 		assertEquals("kw1 #10 adad kw4 abcde kw5 kw4 abc kw5", parseAndSerialize(model));
 	}
-	
+
 	public void testLoop4() throws Exception {
 		String model = "#11 kw2 asd kw5 kw6";
 		assertEquals("#11 kw1  asd kw5 ", parseAndSerialize(model));
 	}
-	
+
 	public void testLoopBug285452a() throws Exception {
 		String model = "#12 interface test";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testLoopBug285452b() throws Exception {
 		String model = "#12 class test";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testDuplicateBug284491() throws Exception {
 		String model = "#13 final static";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void _testEmptyObjectBug284850() throws Exception {
 		String model = "#14 item test";
-		EmptyObjectBug284850 result = (EmptyObjectBug284850)getModel(model);
+		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
 		System.out.println(EmfFormatter.objToStr(result));
 		String actual = getSerializer().serialize(result, false);
 		assertEquals(model, actual);
+	}
+
+	public void testMultiInheritanceBug280439() throws Exception {
+		String model = "#15 a b";
+		EObject result = getModel(model);
+		assertEquals(model, getSerializer().serialize(result, false));
 	}
 
 	@Override
