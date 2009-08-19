@@ -1,14 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Localization: plugin
-Bundle-Name: %pluginName
+Bundle-Localization: fragment
+Bundle-Name: Xtext log4j fragment
+Fragment-Host: org.apache.log4j;bundle-version="1.2.15"
 Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
-Bundle-Version: 0.8.0.qualifier
-Bundle-Activator: org.eclipse.xtext.logging.Activator
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.xtext.log4j;bundle-version="1.2.8";visibility:=reexport
+Bundle-Version: 1.2.15
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ActivationPolicy: lazy
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Import-Package: org.eclipse.core.runtime,
+ org.osgi.framework;version="1.5.0"

@@ -8,15 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.logging;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
+import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
@@ -25,20 +20,26 @@ import org.osgi.framework.Bundle;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class EclipseLogAppender extends AppenderSkeleton {
 
-	private ArrayList<LoggerMapEntry> mappings = new ArrayList<LoggerMapEntry>();
-	private Map<String, Bundle> bundleMap = new HashMap<String, Bundle>();
-	private Map<String, ILog> loggerMap = new HashMap<String, ILog>();
+	private static final String ORG_APACHE_LOG4J = "org.apache.log4j";
+	private ILog log = null;
 
-	{
-		initializeMappings();
+	private synchronized ILog getLog(String loggerName) {
+		if (log == null) {
+			Bundle[] bundles = Platform.getBundles(ORG_APACHE_LOG4J,"1.2.15");
+			if (bundles.length==0)
+				throw new IllegalStateException("Host bundle not found!");
+			log = Platform.getLog(bundles[0]);
+		}
+		return log;
 	}
 
 	@Override
 	protected void append(LoggingEvent event) {
-		if (doLog(event.getLevel())) {
+		if (isDoLog(event.getLevel())) {
 			String logString = layout.format(event);
 			String loggerName = event.getLoggerName();
 
@@ -46,7 +47,6 @@ public class EclipseLogAppender extends AppenderSkeleton {
 			if (myLog != null) {
 				int severity = mapLevel(event.getLevel());
 				IStatus status = createStatus(severity, loggerName, logString);
-
 				myLog.log(status);
 			}
 			else {
@@ -57,27 +57,25 @@ public class EclipseLogAppender extends AppenderSkeleton {
 		}
 	}
 
-	private boolean doLog(Level level) {
-		// TODO: later, we might decide to allow users to specify the allowed
-		// log levels via an extension point attribute
-		return (level.toInt() >= Level.WARN_INT);
+	private boolean isDoLog(Level level) {
+		return (level.toInt() >= Priority.WARN_INT);
 	}
 
 	private int mapLevel(Level level) {
 		switch (level.toInt()) {
-			case Level.DEBUG_INT:
+			case Priority.DEBUG_INT:
 				return IStatus.INFO;
 
-			case Level.INFO_INT:
+			case Priority.INFO_INT:
 				return IStatus.INFO;
 
-			case Level.WARN_INT:
+			case Priority.WARN_INT:
 				return IStatus.WARNING;
 
-			case Level.ERROR_INT:
+			case Priority.ERROR_INT:
 				return IStatus.ERROR;
 
-			case Level.FATAL_INT:
+			case Priority.FATAL_INT:
 				return IStatus.ERROR;
 
 			default:
@@ -85,52 +83,12 @@ public class EclipseLogAppender extends AppenderSkeleton {
 		}
 	}
 
-	private ILog getLog(String loggerName) {
-		ILog log = loggerMap.get(loggerName);
-		if (log == null) {
-			Bundle myBundle = getBundle(loggerName);
-			if (myBundle != null) {
-				log = Platform.getLog(myBundle);
-				loggerMap.put(loggerName, log);
-			}
-		}
-		return log;
-	}
-
-	public void initializeMappings() {
-		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-		IConfigurationElement[] configurationElementsFor = extensionRegistry
-				.getConfigurationElementsFor("org.eclipse.xtext.logging.loggermap");
-		for (IConfigurationElement configurationElement : configurationElementsFor) {
-			String bundleID = configurationElement.getAttribute("bundleId");
-			String loggername = configurationElement.getAttribute("loggername");
-
-			mappings.add(new LoggerMapEntry(bundleID, loggername));
-		}
-	}
-
-	private Bundle getBundle(String loggerName) {
-		Bundle bundle = bundleMap.get(loggerName);
-		if (bundle == null) {
-			for (LoggerMapEntry loggerMapEntry : mappings) {
-				if (loggerMapEntry.matches(loggerName)) {
-					String bundleName = loggerMapEntry.getBundleId();
-					bundle = Platform.getBundle(bundleName);
-					if (bundle != null) {
-						bundleMap.put(loggerName, bundle);
-					}
-				}
-			}
-		}
-		return bundle;
-	}
-
 	private IStatus createStatus(int severity, String loggerName, String message) {
 		return createStatus(severity, loggerName, message, null);
 	}
 
 	private IStatus createStatus(int severity, String loggerName, String message, Throwable throwable) {
-		return new Status(severity, getBundle(loggerName).getSymbolicName(), message, throwable);
+		return new Status(severity, ORG_APACHE_LOG4J, message, throwable);
 	}
 
 	public void close() {
