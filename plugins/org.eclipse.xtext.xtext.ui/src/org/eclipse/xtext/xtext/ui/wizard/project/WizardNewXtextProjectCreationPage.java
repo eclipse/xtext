@@ -45,7 +45,7 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	private Text extensionsField;
 	private Button generatorProjectField;
 	private Combo generatorConfigurationField;
-
+	
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
 	 * 
@@ -104,9 +104,10 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 		List<String> names = new ArrayList<String>(contributions.keySet());
 
 		Collections.sort(names);
-
-		generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
-		generatorConfigurationField.select(indexOfDefault(names));
+		if (generatorConfigurationField != null) {
+			generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
+			generatorConfigurationField.select(indexOfDefault(names));
+		}
 	}
 
 	public static int indexOfDefault(List<String> contributions) {
@@ -195,15 +196,16 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 		textData.horizontalIndent = 0;
 		extensionsField.setLayoutData(textData);
 
-		Label generatorConfigLabel = new Label(composite, SWT.NONE);
-		generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
+		if (WizardContribution.getFromRegistry().size() > 1) {
+			Label generatorConfigLabel = new Label(composite, SWT.NONE);
+			generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
 
-		generatorConfigurationField = new Combo(composite, SWT.NONE);
-		data = new GridData(GridData.FILL_HORIZONTAL);
-		data.horizontalSpan = 1;
-		generatorConfigurationField.setLayoutData(data);
-		generatorConfigurationField.setFont(parent.getFont());
-
+			generatorConfigurationField = new Combo(composite, SWT.NONE);
+			data = new GridData(GridData.FILL_HORIZONTAL);
+			data.horizontalSpan = 1;
+			generatorConfigurationField.setLayoutData(data);
+			generatorConfigurationField.setFont(parent.getFont());
+		}
 		new Label(composite, SWT.NONE);
 		generatorProjectField = new Button(composite, SWT.CHECK);
 		data = new GridData(GridData.FILL_HORIZONTAL);
@@ -243,6 +245,8 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	}
 
 	public String getGeneratorConfig() {
+		if (generatorConfigurationField==null)
+			return WizardContribution.getFromRegistry().values().iterator().next().getName();
 		return generatorConfigurationField.getItems()[generatorConfigurationField.getSelectionIndex()];
 	}
 }
