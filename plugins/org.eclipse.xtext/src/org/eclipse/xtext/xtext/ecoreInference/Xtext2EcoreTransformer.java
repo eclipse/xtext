@@ -166,7 +166,6 @@ public class Xtext2EcoreTransformer {
 		for(EClassifier classifier: pack.getEClassifiers()) {
 			InternalEObject internalEObject = (InternalEObject) classifier;
 			internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));
-			internalEObject.eAdapters().clear();
 		}
 		pack.getEClassifiers().clear();
 	}
