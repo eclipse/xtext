@@ -43,7 +43,6 @@ public class XtextReferableElementsUnloader implements IReferableElementsUnloade
 		InternalEObject internalEObject = (InternalEObject) object;
 		Resource resource = object.eResource();
 		internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));
-		internalEObject.eAdapters().clear();
 	}
 
 }
