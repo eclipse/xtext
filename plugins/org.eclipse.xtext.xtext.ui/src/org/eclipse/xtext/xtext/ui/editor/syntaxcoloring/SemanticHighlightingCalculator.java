@@ -12,8 +12,12 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -46,6 +50,17 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 			} else if (current instanceof TypeRef) {
 				AbstractNode node = getFirstFeatureNode(current, null);
 				highlightNode(node, SemanticHighlightingConfiguration.TYPE_REFERENCE_ID, acceptor);
+			} else if (current instanceof RuleCall) {
+				RuleCall call = (RuleCall) current;
+				if ((call.getRule() instanceof TerminalRule ||
+					call.getRule() instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) call.getRule())) &&
+					EcoreUtil2.getContainerOfType(call, Assignment.class) == null) {
+					ParserRule container = GrammarUtil.containingParserRule(call);
+					if (container != null && !GrammarUtil.isDatatypeRule(container)) {
+						AbstractNode node = getFirstFeatureNode(call, null);
+						highlightNode(node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID, acceptor);
+					}
+				}
 			}
 		}
 	}
