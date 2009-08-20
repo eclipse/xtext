@@ -88,7 +88,7 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
 						"org.eclipse.emf.codegen.ecore;resolution:=optional",
 						"org.eclipse.xtend.util.stdlib",
 						DSL_GENERATOR_PROJECT_NAME)), 
-				new LinkedHashSet<String>(Arrays.asList(
+				Arrays.asList(
 						"org.apache.log4j"), null, null,
 				monitor, null,
 				new String[] {"org.eclipse.jdt.core.javanature", "org.eclipse.pde.PluginNature"});
