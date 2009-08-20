@@ -1,0 +1,18 @@
+# ATTENTION! 
+# please modify the build.properties to reflect your local environment.
+# The build.proerties will be used to materialize the target platform and to configure local build.
+
+*Local Workspace Setup*
+1) change build.properties (uncomment JAVA_HOME properties etc. appropriate for our platform)
+2) Materialize Target platform
+
+ Execute org.eclipse.xtext.releng.MaterializeTargetPlatform.
+ It will download all the required target platform libraried and extract them to targetplatform/.
+ You'll have to point your PDE tooling to the materialized target platform, by using the 
+ corresponding preference page (type 'Target Platform' into the search field).
+ Add a new definition, start with 'nothing' and add aa 'Directory' location
+ pointing to ${workspace_loc}/releng/team/targetplatform/eclipse
+ 
+3) Import Team project set from team/projectset/extssh/xtext.psf
+
+
