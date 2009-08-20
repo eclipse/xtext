@@ -12,8 +12,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.Wrapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -101,6 +103,18 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 		assertTrue(parseResult.getRootASTElement().eIsProxy());
 	}
 
+	public void testUnloadReferables() throws Exception {
+		resource.reparse(simpleModel);
+		final Wrapper<Boolean> unloaded = Wrapper.wrap(Boolean.FALSE);
+		resource.setUnloader(new IReferableElementsUnloader() {
+			public void unloadRoot(EObject root) {
+				unloaded.set(Boolean.TRUE);
+			}
+		});
+		resource.reparse(simpleModel);
+		assertTrue("unloaded", unloaded.get());
+	}
+	
 	public void testUpdate() throws Exception {
 		resource.update(0, 0, simpleModel);
 

@@ -172,7 +172,10 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	
 	public void unloadNode(AbstractNode rootNode) {
 		if (rootNode != null) {
-			unloadSemanticObject(rootNode.getElement());
+			EObject semantic = rootNode.getElement();
+			if (rootNode instanceof CompositeNode && semantic == null)
+				semantic = NodeUtil.getASTElementForRootNode((CompositeNode) rootNode);
+			unloadSemanticObject(semantic);
 		}	
 	}
 	
