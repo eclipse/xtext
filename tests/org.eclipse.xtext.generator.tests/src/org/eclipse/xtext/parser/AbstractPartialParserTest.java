@@ -9,6 +9,7 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfStructureComparator;
@@ -20,10 +21,12 @@ public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 
 	protected static final boolean DEBUG = true;
 	protected EmfStructureComparator comparator;
+	protected PartialParsingHelper partialParser;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		partialParser = new PartialParsingHelper();
 		comparator = new EmfStructureComparator() {
 			@Override
 			protected boolean isRelevantChild(EObject container, EObject child) {
@@ -32,4 +35,10 @@ public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 		};
 	}
 
+	@Override
+	protected void tearDown() throws Exception {
+		comparator = null;
+		partialParser = null;
+		super.tearDown();
+	}
 }

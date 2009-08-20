@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
-import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -69,7 +68,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue(leaf.getSyntaxError() != null);
 		// resource.update(23, 0, ")");
 		// assertTrue(resource.getParseResult().getParseErrors().isEmpty());
-		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, 23, 0, ")");
+		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, 23, 0, ")");
 		rootNode = reparse.getRootNode();
 		String expectedFixedModel = "spielplatz 1 {kind (k 1)}";
 		String fixedModel = rootNode.serialize();
@@ -85,7 +84,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		XtextResource resource = getResourceFromString(model);
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		checkGrammarAssigned(rootNode);
-		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, model.length() - 2, 0, "\n");
+		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.length() - 2, 0, "\n");
 		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
@@ -215,7 +214,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			}
 		}
 		assertTrue("node c found", found);
-		IParseResult reparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, model.indexOf('c'), 1, "xy");
+		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.indexOf('c'), 1, "xy");
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 		iter = rootNode.getLeafNodes().iterator();
 		found = false;
@@ -231,7 +230,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	private void partiallyParseAndCompare(CompositeNode rootNode, int offset, int length) throws Exception {
-		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset,
+		PartialParsingPointers parsingPointers = partialParser.calculatePartialParsingPointers(rootNode, offset,
 				length);
 		String entryRuleName = parsingPointers.findEntryRuleName();
 		IParseResult parseResult = getAntlrParser().parse(entryRuleName, new StringInputStream(

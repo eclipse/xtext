@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
-import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -119,7 +118,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 			}
 			logger.debug(line);
 		}
-		PartialParsingPointers partialParsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode,
+		PartialParsingPointers partialParsingPointers = partialParser.calculatePartialParsingPointers(rootNode,
 				changeRegionStart, changeRegionSize);
 		return partialParsingPointers;
 	}
