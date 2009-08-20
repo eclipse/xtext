@@ -24,6 +24,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -38,6 +39,8 @@ import com.google.inject.Inject;
  * @author Jan Köhnlein
  * @author Heiko Behrens
  * @author Dennis Hübner
+ * @author Moritz Eysholdt
+ * @author Sebastian Zarnekow
  */
 public class XtextResource extends ResourceImpl {
 
@@ -57,7 +60,10 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private SerializerUtil serializer;
-
+	
+	@Inject
+	private IReferableElementsUnloader unloader;
+	
 	private IParseResult parseResult;
 
 	@Inject
@@ -126,6 +132,11 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	private void clearOutput() {
+		if (unloader != null) {
+			for(EObject content: getContents()) {
+				unloader.unloadRoot(content);
+			}
+		}
 		getContents().clear();
 		getErrors().clear();
 	}
@@ -254,5 +265,13 @@ public class XtextResource extends ResourceImpl {
 			getWarnings().clear();
 			getErrors().clear();
 		}
+	}
+
+	public void setUnloader(IReferableElementsUnloader unloader) {
+		this.unloader = unloader;
+	}
+
+	public IReferableElementsUnloader getUnloader() {
+		return unloader;
 	}
 }

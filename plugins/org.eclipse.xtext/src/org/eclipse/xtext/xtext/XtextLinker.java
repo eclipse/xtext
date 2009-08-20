@@ -42,6 +42,7 @@ import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -49,6 +50,7 @@ import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -177,16 +179,21 @@ public class XtextLinker extends Linker {
 			model.eResource().eAdapters().add(packageRemover);
 	}
 
-	private final PackageRemover packageRemover = new PackageRemover();
+	@Inject
+	private PackageRemover packageRemover;
 
-	private static class PackageRemover extends EContentAdapter {
+	public static class PackageRemover extends EContentAdapter {
 
+		@Inject
+		private IReferableElementsUnloader unloader;
+		
 		@SuppressWarnings("unchecked")
 		@Override
 		public void notifyChanged(Notification msg) {
 			super.notifyChanged(msg);
 			if (!msg.isTouch() && msg.getOldValue() != null) {
 				ResourceSet set;
+				Resource notifyingResource;
 				if (!(msg.getNotifier() instanceof Resource)) {
 					Object feature = msg.getFeature();
 					if (!(feature instanceof EReference))
@@ -194,10 +201,13 @@ public class XtextLinker extends Linker {
 					EReference ref = (EReference) feature;
 					if (!ref.isContainment())
 						return;
-					set = ((EObject) msg.getNotifier()).eResource().getResourceSet();
+					notifyingResource = ((EObject) msg.getNotifier()).eResource();
 				} else {
-					set = ((Resource) msg.getNotifier()).getResourceSet();
+					notifyingResource = ((Resource) msg.getNotifier());
 				}
+				if (notifyingResource == null)
+					return;
+				set = notifyingResource.getResourceSet();
 				if (set == null)
 					return;
 				switch (msg.getEventType()) {
@@ -205,7 +215,7 @@ public class XtextLinker extends Linker {
 					case Notification.REMOVE:
 					case Notification.SET:
 						Object oldValue = msg.getOldValue();
-						Collection<Resource> referencedResources = new HashSet<Resource>();
+						Collection<Resource> referencedResources = Sets.newHashSet(notifyingResource);
 						Collection<Resource> resourcesToRemove = new HashSet<Resource>();
 						if (oldValue instanceof Grammar) {
 							for(AbstractMetamodelDeclaration declaration: ((Grammar)oldValue).getMetamodelDeclarations()) {
@@ -240,6 +250,12 @@ public class XtextLinker extends Linker {
 							}
 						}
 						resourcesToRemove.removeAll(referencedResources);
+						if (unloader != null) {
+							for(Resource resource: resourcesToRemove) {
+								for(EObject content: resource.getContents())
+									unloader.unloadRoot(content);
+							}
+						}
 						set.getResources().removeAll(resourcesToRemove);
 						break;
 					default:
@@ -266,6 +282,14 @@ public class XtextLinker extends Linker {
 			}
 			return false;
 		}
+
+		public void setUnloader(IReferableElementsUnloader unloader) {
+			this.unloader = unloader;
+		}
+
+		public IReferableElementsUnloader getUnloader() {
+			return unloader;
+		}
 	}
 
 	protected void updateOverriddenRules(Grammar grammar) {
@@ -275,6 +299,7 @@ public class XtextLinker extends Linker {
 		for (AbstractRule rule: grammar.getRules())
 			rulePerName.put(rule.getName(), rule);
 		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		visitedGrammars.add(grammar);
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			updateOverriddenRules(usedGrammar, rulePerName, visitedGrammars);
 		}
@@ -323,12 +348,6 @@ public class XtextLinker extends Linker {
 	 */
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
-//		TODO Remove me, this is already done in org.eclipse.xtext.xtext.XtextLinker.PackageRemover
-//
-//		if (obj instanceof GeneratedMetamodel && ref.equals(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE) && obj.eIsSet(ref)) {
-//			EPackage pack = ((AbstractMetamodelDeclaration) obj).getEPackage();
-//			pack.eResource().getResourceSet().getResources().remove(pack.eResource());
-//		}
 		super.clearReference(obj, ref);
 		if (obj.eIsSet(ref) && ref.getEType().equals(XtextPackage.Literals.TYPE_REF)) {
 			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
@@ -340,6 +359,14 @@ public class XtextLinker extends Linker {
 			if (adapter == null || adapter.getParserNode() == null)
 				obj.eUnset(ref);
 		}
+	}
+
+	public void setPackageRemover(PackageRemover packageRemover) {
+		this.packageRemover = packageRemover;
+	}
+
+	public PackageRemover getPackageRemover() {
+		return packageRemover;
 	}
 
 }

@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
@@ -154,11 +155,20 @@ public class Xtext2EcoreTransformer {
 			Resource r = resourceIter.next();
 			CONTENT: for (EObject content : r.getContents()) {
 				if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
-					((EPackage)content).getEClassifiers().clear();
+					clearPackage(r, (EPackage) content);
 					break CONTENT;
 				}
 			}
 		}
+	}
+	
+	protected void clearPackage(Resource resource, EPackage pack) {
+		for(EClassifier classifier: pack.getEClassifiers()) {
+			InternalEObject internalEObject = (InternalEObject) classifier;
+			internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));
+			internalEObject.eAdapters().clear();
+		}
+		pack.getEClassifiers().clear();
 	}
 
 	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
@@ -219,7 +229,7 @@ public class Xtext2EcoreTransformer {
 		EDataType datatype = (EDataType) rule.getType().getClassifier();
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			AbstractRule parentRule = GrammarUtil.findRuleForName(usedGrammar, rule.getName());
-			if (parentRule != null) {
+			if (parentRule != null && parentRule != rule) {
 				if (parentRule.getType() == null || parentRule.getType().getClassifier() == null)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot determine return type of overridden rule.", rule.getType());
@@ -616,19 +626,16 @@ public class Xtext2EcoreTransformer {
 		}.doSwitch(element);
 		if (ex != null)
 			throw ex;
-		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
 		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
-			if (deriveTypeHierarchyFromOverridden(rule, usedGrammar, visitedGrammars))
+			if (deriveTypeHierarchyFromOverridden(rule, usedGrammar))
 				return;
 		}
 
 	}
 
-	private boolean deriveTypeHierarchyFromOverridden(ParserRule rule, Grammar grammar, Set<Grammar> visitedGrammars) throws TransformationException {
-		if (!visitedGrammars.add(grammar))
-			return false;
+	private boolean deriveTypeHierarchyFromOverridden(ParserRule rule, Grammar grammar) throws TransformationException {
 		AbstractRule parentRule = GrammarUtil.findRuleForName(grammar, rule.getName());
-		if (parentRule != null) {
+		if (parentRule != null && parentRule.getType() != null && parentRule != rule) {
 			if (parentRule.getType().getClassifier() instanceof EDataType)
 				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 						"Cannot inherit from datatype rule and return another type.", rule.getType());
@@ -664,7 +671,6 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void collectEPackages() {
-		// TODO derive alias configuration from supergrammar
 		final List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
 		final Map<String, GeneratedMetamodel> generateUs = new LinkedHashMap<String, GeneratedMetamodel>();
 
@@ -718,6 +724,7 @@ public class Xtext2EcoreTransformer {
 
 	private void collectEClassInfosOfUsedGrammars() {
 		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		visitedGrammars.add(grammar);
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars);
 			if (parent != null)

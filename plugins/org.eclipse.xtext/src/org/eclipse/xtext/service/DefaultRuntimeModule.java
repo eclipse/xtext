@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
+import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger;
@@ -130,6 +131,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return SwitchingParser.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.parser.antlr.IPartialParsingHelper> bindIPartialParserHelper() {
+		return PartialParsingHelper.class;
 	}
 
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {

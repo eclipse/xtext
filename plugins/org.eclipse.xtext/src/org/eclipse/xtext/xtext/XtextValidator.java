@@ -44,6 +44,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -79,7 +80,30 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		assertTrue("You may not use more than one other grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS, grammar
 				.getUsedGrammars().size() <= 1);
 	}
-
+	
+	@Check(CheckType.FAST)
+	public void checkGrammarRecursiveReference(Grammar grammar) {
+		Set<Grammar> visitedGrammars = Sets.newHashSet(grammar);
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			if(!doCheckGrammarRecursiveReference(grammar, usedGrammar, visitedGrammars))
+				return;
+		}
+	}
+	
+	private boolean doCheckGrammarRecursiveReference(Grammar grammarToCheck, Grammar currentGrammar, Set<Grammar> visitedGrammars) {
+		if (Strings.equal(grammarToCheck.getName(), currentGrammar.getName())) {
+			error("Invalid recursive reference of grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS);
+			return false;
+		}
+		if (!visitedGrammars.add(currentGrammar))
+			return true;
+		for(Grammar usedGrammar: currentGrammar.getUsedGrammars()) {
+			if (!doCheckGrammarRecursiveReference(grammarToCheck, usedGrammar, visitedGrammars))
+				return false;
+		}
+		return true;
+	}
+	
 	@Check
 	public void checkGrammarName(Grammar g) {
 		String[] split = g.getName().split("\\.");

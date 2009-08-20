@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -28,6 +27,9 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 
 	@Inject
 	private IAstFactory elementFactory;
+	
+	@Inject(optional=true)
+	private IPartialParsingHelper partialParser;
 
 	@Override
 	public IParseResult doParse(InputStream in) {
@@ -57,7 +59,7 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 
 	@Override
 	protected IParseResult doReparse(CompositeNode originalRootNode, int offset, int length, String change) {
-		return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change);
+		return partialParser.reparse(this, originalRootNode, offset, length, change);
 	}
 
 	@Override
@@ -72,7 +74,15 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 
 	@Override
 	protected boolean isReparseSupported() {
-		return true;
+		return partialParser != null;
+	}
+
+	public void setPartialParser(IPartialParsingHelper partialParser) {
+		this.partialParser = partialParser;
+	}
+
+	public IPartialParsingHelper getPartialParser() {
+		return partialParser;
 	}
 
 }

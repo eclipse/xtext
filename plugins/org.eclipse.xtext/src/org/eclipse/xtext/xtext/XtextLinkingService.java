@@ -41,6 +41,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -78,6 +79,16 @@ public class XtextLinkingService extends DefaultLinkingService {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
 			if (grammarName != null) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+				for(Resource resource: resourceSet.getResources()) {
+					if (!resource.getContents().isEmpty()) {
+						EObject content = resource.getContents().get(0);
+						if (content instanceof Grammar) {
+							Grammar otherGrammar = (Grammar) content;
+							if (grammarName.equals(otherGrammar.getName()))
+								return Collections.<EObject>singletonList(otherGrammar);
+						}
+					}
+				}
 				final Resource resource = resourceSet.getResource(URI.createURI(
 						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
 				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
@@ -175,7 +186,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private boolean isReferencedByUsedGrammar(GeneratedMetamodel generatedMetamodel, String nsURI) {
 		final Grammar grammar = GrammarUtil.getGrammar(generatedMetamodel);
-		final Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		final Set<Grammar> visitedGrammars = Sets.newHashSet(grammar);
 		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
 			if (isReferencedByUsedGrammar(usedGrammar, nsURI, visitedGrammars))
 				return true;
@@ -184,6 +195,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 
 	private boolean isReferencedByUsedGrammar(Grammar grammar, String nsURI, Set<Grammar> visitedGrammars) {
+		if (!visitedGrammars.add(grammar)) 
+			return false;
 		for(AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
 			EPackage pack = decl.getEPackage();
 			if (pack != null && nsURI.equals(pack.getNsURI())) {
