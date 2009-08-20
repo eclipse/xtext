@@ -43,6 +43,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtext.XtextLinker;
+import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -108,6 +109,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		};
 		linker.setScopeProvider(((XtextLinker) resource.getLinker()).getScopeProvider());
 		linker.setLinkingService(((Linker) resource.getLinker()).getLinkingService());
+		linker.setPackageRemover(new PackageRemover());
 		resource.setLinker(linker);
 		resource.load(in, null);
 
@@ -1171,6 +1173,13 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 	
-	
-	// 
+	public void testBug_286285_01() throws Exception {
+		final String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" + 
+			"generate lang \"http://www.language.org\"\n" + 
+			"Model:\n" + 
+			"	Class | ID;\n" +
+			"Class: name = ID;\n";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
 }
