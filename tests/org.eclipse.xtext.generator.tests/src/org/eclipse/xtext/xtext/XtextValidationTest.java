@@ -596,7 +596,20 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
+	
+	public void testBug_286683() throws Exception {
+		XtextResource resource = getResourceFromString("grammar org.xtext.example.MyDsl with org.xtext.example.MyDsl\n"+
+				"generate myDsl 'http://www.xtext.org/example/MyDsl'\n"+
+				"Model : {Model} 'name';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.ERROR);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+	}
+	
 	public void acceptError(String message, EObject object, Integer feature) {
 		assertNull(lastMessage);
 		lastMessage = message;

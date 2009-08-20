@@ -11,7 +11,6 @@ package org.eclipse.xtext.parser;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
-import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -53,12 +52,12 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		if (DEBUG) {
 			NodeUtil.dumpCompositeNodes("", rootNode);
 		}
-		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset,
+		PartialParsingPointers parsingPointers = partialParser.calculatePartialParsingPointers(rootNode, offset,
 				length);
-		String reparseRegion = PartialParsingUtil.insertChangeIntoReplaceRegion(parsingPointers
+		String reparseRegion = partialParser.insertChangeIntoReplaceRegion(parsingPointers
 				.getDefaultReplaceRootNode(), offset, length, change);
 		assertEquals(expectedReparseRegion, reparseRegion);
-		IParseResult partiallyReparse = PartialParsingUtil.reparse(getAntlrParser(), rootNode, offset, length, change);
+		IParseResult partiallyReparse = partialParser.reparse(getAntlrParser(), rootNode, offset, length, change);
 		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
 		for (SyntaxError syntaxError : errors) {
 			logger.debug(model + offset + length + change + ":" + syntaxError.getMessage());
