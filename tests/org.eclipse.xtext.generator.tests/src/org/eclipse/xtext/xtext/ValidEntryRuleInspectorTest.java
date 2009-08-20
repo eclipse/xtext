@@ -122,6 +122,16 @@ public class ValidEntryRuleInspectorTest extends XtextRuleInspectorTest<Pair<Boo
 		Grammar grammar = getGrammar(grammarAsString);
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testAction_04() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : {X} | (ID name=ID)?;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
@@ -235,6 +245,16 @@ public class ValidEntryRuleInspectorTest extends XtextRuleInspectorTest<Pair<Boo
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);
 		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testGroup_09() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : ID? x+=ID*;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
 	}
 	
 	public void testAlternatives_01() throws Exception {

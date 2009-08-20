@@ -94,7 +94,7 @@ public class ValidEntryRuleInspector extends XtextRuleInspector<Pair<Boolean, Bo
 	public Pair<Boolean, Boolean> caseRuleCall(RuleCall object) {
 		boolean instantiated = !GrammarUtil.isOptionalCardinality(object) && 
 			(object.getRule() instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) object.getRule()));
-		return Tuples.create(GrammarUtil.isOptionalCardinality(object) || instantiated, instantiated);
+		return Tuples.create( instantiated, instantiated);
 	}
 
 }
