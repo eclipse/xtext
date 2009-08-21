@@ -112,7 +112,7 @@
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
-    	<menuContribution
+        <menuContribution
             locationURI="popup:#TextEditorContext?after=group.open">
              <command
                  commandId="org.eclipse.xtext.example.Domainmodel.validate"
@@ -120,12 +120,20 @@
                  tooltip="Trigger expensive validation">
             <visibleWhen
                   checkEnabled="false">
-               <reference
-                     definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
-               </reference>
+                <reference
+                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                </reference>
             </visibleWhen>
          </command>  
          </menuContribution>
-	</extension>
+    </extension>
+
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider">
+      </markerResolutionGenerator>
+   </extension>
 
 </plugin>

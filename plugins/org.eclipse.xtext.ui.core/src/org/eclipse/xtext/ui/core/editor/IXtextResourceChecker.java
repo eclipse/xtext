@@ -7,7 +7,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 
 public interface IXtextResourceChecker {
-	
+
+	static final String CODE_KEY = "code";
 	static final String DIAGNOSTIC_KEY = "EmfDiagnostic";
 	
 	List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor);

@@ -28,6 +28,7 @@
 			</fragment>
 			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
 			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.quickfix.QuickfixProviderFragment"/>
 			
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
