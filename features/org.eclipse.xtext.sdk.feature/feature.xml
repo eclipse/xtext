@@ -148,12 +148,4 @@ This Agreement is governed by the laws of the State of New York and the intellec
    <includes
          id="org.eclipse.xtext.docs"
          version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.xtext.bootstrap"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
 </feature>
