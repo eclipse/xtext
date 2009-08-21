@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -206,7 +207,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 
 		@Override
-		protected void beforeReadOnly(XtextResource res, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
+		protected void beforeReadOnly(XtextResource res, IUnitOfWork<?, XtextResource> work) {
 			if (log.isDebugEnabled())
 				log.debug("read - " + Thread.currentThread().getName());
 			updateContentBeforeRead();
@@ -219,14 +220,28 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 
 		@Override
-		protected void afterReadOnly(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
+		protected void afterReadOnly(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 		}
 
 		@Override
-		protected void afterModify(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
+		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 			notifyModelListeners(resource);
+		}
+
+		@Override
+		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+			try {
+				return super.modify(work);
+			} catch (RuntimeException e) {
+				try {
+					getState().reparse(get());
+				}
+				catch (IOException ioe) {
+				}
+				throw e;
+			}
 		}
 
 		public <T> T process(IUnitOfWork<T, XtextResource> transaction) {

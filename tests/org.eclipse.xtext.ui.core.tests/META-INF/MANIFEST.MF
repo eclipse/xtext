@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.8.0",
  org.eclipse.xtext.generator;bundle-version="0.8.0",
  org.eclipse.jdt.core;bundle-version="3.4.0",
  org.eclipse.jdt.launching;bundle-version="3.4.0",
- org.eclipse.xtext
+ org.eclipse.xtext,
+ org.eclipse.xtext.junit;bundle-version="0.8.0"
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.XtextUICoreTestsPlugin
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
