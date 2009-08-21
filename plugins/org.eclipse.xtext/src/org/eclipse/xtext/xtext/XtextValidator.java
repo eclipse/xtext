@@ -565,7 +565,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			}
 			for (RuleCall ruleCall : leftRecursiveRuleCalls) {
 				this.validationMessageAcceptor.acceptError("The following rule call is left-recursive '"
-						+ ruleCall.getRule().getName() + "'", ruleCall, XtextPackage.RULE_CALL__RULE);
+						+ ruleCall.getRule().getName() + "'", ruleCall, XtextPackage.RULE_CALL__RULE, null);
 			}
 			return null;
 		}

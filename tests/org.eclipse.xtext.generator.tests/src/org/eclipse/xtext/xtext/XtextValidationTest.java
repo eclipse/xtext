@@ -596,7 +596,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
-	
+
 	public void testBug_286683() throws Exception {
 		XtextResource resource = getResourceFromString("grammar org.xtext.example.MyDsl with org.xtext.example.MyDsl\n"+
 				"generate myDsl 'http://www.xtext.org/example/MyDsl'\n"+
@@ -610,12 +610,12 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature) {
+	public void acceptError(String message, EObject object, Integer feature, Integer code) {
 		assertNull(lastMessage);
 		lastMessage = message;
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature) {
+	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
 		fail("Unexpected call to acceptWarning(..)");
 	}
 }
