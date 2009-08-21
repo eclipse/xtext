@@ -56,11 +56,11 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 	}
 
 	public void acceptError(String message, EObject object, Integer feature) {
-		acceptor.acceptError(message, object, feature);
+		acceptor.acceptError(message, object, feature, null);
 	}
 
 	public void acceptWarning(String message, EObject object, Integer feature) {
-		acceptor.acceptWarning(message, object, feature);
+		acceptor.acceptWarning(message, object, feature, null);
 	}
 	
 	public boolean addVisited(AbstractRule rule) {

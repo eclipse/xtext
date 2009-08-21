@@ -5,17 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.ui.core.quickfix;
 
-import org.eclipse.emf.ecore.EObject;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Sebastian Zarnekow - initial contribution and API
+ * @author Knut Wannheden - Initial contribution and API
  */
-public interface ValidationMessageAcceptor {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface Fix {
 
-	void acceptError(String message, EObject object, Integer feature, Integer code);
-	
-	void acceptWarning(String message, EObject object, Integer feature, Integer code);
-	
+    int code();
+
+    String label() default "";
+
+    String description() default "";
+
+    String image() default "";
 }

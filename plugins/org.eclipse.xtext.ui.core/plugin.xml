@@ -147,6 +147,9 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.emf.ecore.diagnostic"/>
       <persistent value="true"/>
+      <attribute
+            name="code">
+      </attribute>
    </extension>
   <extension
          id="org.eclipse.xtext.ui.core.check.fast"

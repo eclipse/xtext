@@ -18,6 +18,7 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
+import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -63,6 +64,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		return new ProblemHover(sourceViewer);
 	}
+
+	@Inject(optional = true)
+	private IQuickAssistAssistant quickAssistant;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -113,6 +117,16 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		detectors.add(detector);
 		return detectors.toArray(new IHyperlinkDetector[detectors.size()]);
 	}
+
+    @Override
+    public IQuickAssistAssistant getQuickAssistAssistant(ISourceViewer sourceViewer) {
+        if (sourceViewer.isEditable()) {
+            if (quickAssistant == null)
+                quickAssistant = new XtextQuickAssistAssistant();
+            return quickAssistant;
+        }
+        return null;
+    }
 
 	@Override
 	public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {

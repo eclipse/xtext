@@ -8,14 +8,15 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -64,12 +65,24 @@ public class DefaultDiagnosticConverter implements IDiagnosticConverter {
 			marker.put(IMarker.CHAR_START, locationData.getSecond());
 			marker.put(IMarker.CHAR_END, locationData.getThird());
 		}
+		final EObject causer = getCauser(diagnostic);
+		if (causer != null)
+			marker.put(EValidator.URI_ATTRIBUTE, EcoreUtil.getURI(causer).toString());
+		final Integer code = diagnostic.getCode();
+		if (code != null)
+			marker.put(IXtextResourceChecker.CODE_KEY, code);
 		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		marker.put(IMarker.MESSAGE, diagnostic.getMessage());
 		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		acceptor.accept(marker);
 	}
 	
+	protected EObject getCauser(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+		// causer is the first element see Diagnostician.getData
+		Object causer = diagnostic.getData().get(0);
+		return causer instanceof EObject ? (EObject) causer : null;
+	}
+
 	/**
 	 * @return the location data for the given diagnostic. 
 	 * <ol>
@@ -79,15 +92,13 @@ public class DefaultDiagnosticConverter implements IDiagnosticConverter {
 	 * </ol>
 	 */
 	protected Triple<Integer, Integer, Integer> getLocationData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
-		Iterator<?> data = diagnostic.getData().iterator();
-		// causer is the first element see Diagnostician.getData
-		Object causer = data.next();
-		if (causer instanceof EObject) {
-			EObject ele = (EObject) causer;
+		EObject causer = getCauser(diagnostic);
+		if (causer != null) {
 			// feature is the second element see Diagnostician.getData
-			Object feature = data.hasNext() ? data.next() : null;
-			EStructuralFeature structuralFeature = resolveStructuralFeature(ele, feature);
-			return getLocationData(ele, structuralFeature);
+			List<?> data = diagnostic.getData();
+			Object feature = data.size() > 1 ? data.get(1) : null;
+			EStructuralFeature structuralFeature = resolveStructuralFeature(causer, feature);
+			return getLocationData(causer, structuralFeature);
 		}
 		return null;
 	}

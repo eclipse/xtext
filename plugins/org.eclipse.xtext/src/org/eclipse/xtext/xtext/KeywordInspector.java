@@ -42,7 +42,7 @@ public class KeywordInspector {
 				String value = ((Keyword) element).getValue();
 				if (value.equals(keyword.getValue()))
 				acceptor.acceptError("The keyword '" + value + "' hides the terminal rule " + rule.getName()+ ".", 
-						keyword, XtextPackage.KEYWORD__VALUE);
+						keyword, XtextPackage.KEYWORD__VALUE, null);
 			}
 		}
 	}

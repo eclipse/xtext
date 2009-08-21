@@ -1,0 +1,43 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::quickfix::QuickfixProviderFragment»
+
+«DEFINE generate FOR Grammar»
+«FILE getQuickfixProviderName().asPath()+".java" SRC_UI»
+package «getQuickfixProviderName().toJavaPackage()»;
+
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.xtext.ui.core.quickfix.AbstractDeclarativeMarkerResolutionGenerator;
+
+public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarativeQuickfixProvider {
+
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar-»
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="«executableExtensionFactory()»:«getQuickfixProviderName()»">
+      </markerResolutionGenerator>
+   </extension>
+«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»

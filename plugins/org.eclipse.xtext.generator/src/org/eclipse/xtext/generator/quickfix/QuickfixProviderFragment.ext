@@ -4,18 +4,9 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+import org::eclipse::xtext;
 
-import org.eclipse.emf.ecore.EObject;
-
-/**
- * @author Sebastian Zarnekow - initial contribution and API
- */
-public interface ValidationMessageAcceptor {
-
-	void acceptError(String message, EObject object, Integer feature, Integer code);
-	
-	void acceptWarning(String message, EObject object, Integer feature, Integer code);
-	
-}
+String getQuickfixProviderName(Grammar g) :
+	JAVA org.eclipse.xtext.generator.quickfix.QuickfixProviderFragment.getQuickfixProviderName(org.eclipse.xtext.Grammar);

@@ -300,28 +300,44 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void warning(String string, Integer feature) {
-		warning(string, state.get().currentObject, feature);
+		warning(string, feature, null);
+	}
+
+	protected void warning(String string, Integer feature, Integer code) {
+		warning(string, state.get().currentObject, feature, code);
 	}
 
 	protected void warning(String string, EObject source, Integer feature) {
-		getMessageAcceptor().acceptWarning(string, source, feature);
+		warning(string, source, feature, null);
+	}
+
+	protected void warning(String string, EObject source, Integer feature, Integer code) {
+		getMessageAcceptor().acceptWarning(string, source, feature, code);
 	}
 	
-	public void acceptWarning(String message, EObject object, Integer feature) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature,  state.get().currentCheckType));
+	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature, code, state.get().currentCheckType));
 	}
 
 	protected void error(String string, Integer feature) {
-		error(string, state.get().currentObject, feature);
+		error(string, feature, null);
+	}
+
+	protected void error(String string, Integer feature, Integer code) {
+		error(string, state.get().currentObject, feature, code);
 	}
 
 	protected void error(String string, EObject source, Integer feature) {
-		getMessageAcceptor().acceptError(string, source, feature);
+		error(string, source, feature, null);
+	}
+
+	protected void error(String string, EObject source, Integer feature, Integer code) {
+		getMessageAcceptor().acceptError(string, source, feature, code);
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature) {
+	public void acceptError(String message, EObject object, Integer feature, Integer code) {
 		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, state.get().currentCheckType));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, code, state.get().currentCheckType));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
@@ -443,12 +459,13 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	public static class DiagnosticImpl implements Diagnostic {
 
-		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType) {
+		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, Integer code, CheckType checkType) {
 			super();
 			this.severity = severity;
 			this.message = message;
 			this.source = source;
 			this.feature = feature;
+			this.code = code;
 			this.checkType = checkType;
 		}
 
@@ -457,13 +474,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private final Integer feature;
 		private final int severity;
 		private final CheckType checkType;
+		private final Integer code;
 
 		public List<Diagnostic> getChildren() {
 			return Collections.emptyList();
 		}
 
 		public int getCode() {
-			return 0;
+			return code != null ? code : 0;
 		}
 
 		public List<?> getData() {

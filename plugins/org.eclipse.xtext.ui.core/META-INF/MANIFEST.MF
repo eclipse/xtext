@@ -34,6 +34,7 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor.toggleComments,
  org.eclipse.xtext.ui.core.editor.utils,
  org.eclipse.xtext.ui.core.internal,
+ org.eclipse.xtext.ui.core.quickfix,
  org.eclipse.xtext.ui.core.util,
  org.eclipse.xtext.ui.core.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
