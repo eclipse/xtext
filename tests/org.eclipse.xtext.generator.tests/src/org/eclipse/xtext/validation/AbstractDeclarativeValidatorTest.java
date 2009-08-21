@@ -218,6 +218,24 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
+	public void testErrorWithCode() {
+		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
+			@Check
+			@SuppressWarnings("unused")
+			public void foo(Object x) {
+				error("Error Message", 1, 42);
+			}
+		};
+		BasicDiagnostic chain = new BasicDiagnostic();
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
+		assertEquals(1, chain.getChildren().size());
+
+		Diagnostic diag = chain.getChildren().get(0);
+		assertEquals("Error Message", diag.getMessage());
+		assertEquals(42, diag.getCode());
+		assertEquals(Diagnostic.ERROR, diag.getSeverity());
+	}
+
 	public void testWarning() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
@@ -251,6 +269,24 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		Diagnostic diag = chain.getChildren().get(0);
 		assertEquals("Error Message", diag.getMessage());
 		assertEquals(EcorePackage.eINSTANCE.getEAnnotation().toString(), diag.getSource());
+		assertEquals(Diagnostic.WARNING, diag.getSeverity());
+	}
+
+	public void testWarningWithCode() {
+		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
+			@Check
+			@SuppressWarnings("unused")
+			public void foo(Object x) {
+				warning("Error Message", 1, 42);
+			}
+		};
+		BasicDiagnostic chain = new BasicDiagnostic();
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.emptyMap());
+		assertEquals(1, chain.getChildren().size());
+
+		Diagnostic diag = chain.getChildren().get(0);
+		assertEquals("Error Message", diag.getMessage());
+		assertEquals(42, diag.getCode());
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
 	}
 
