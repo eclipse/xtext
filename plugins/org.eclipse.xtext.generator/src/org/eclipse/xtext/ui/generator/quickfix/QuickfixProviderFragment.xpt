@@ -20,7 +20,7 @@
 package «getQuickfixProviderName().toJavaPackage()»;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.xtext.ui.core.quickfix.AbstractDeclarativeMarkerResolutionGenerator;
+import org.eclipse.xtext.ui.core.quickfix.AbstractDeclarativeQuickfixProvider;
 
 public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarativeQuickfixProvider {
 
