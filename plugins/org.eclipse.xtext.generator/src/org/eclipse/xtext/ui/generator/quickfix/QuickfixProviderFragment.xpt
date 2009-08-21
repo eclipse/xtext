@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
-«EXTENSION org::eclipse::xtext::generator::quickfix::QuickfixProviderFragment»
+«EXTENSION org::eclipse::xtext::ui::generator::quickfix::QuickfixProviderFragment»
 
 «DEFINE generate FOR Grammar»
 «FILE getQuickfixProviderName().asPath()+".java" SRC_UI»

@@ -9,4 +9,4 @@
 import org::eclipse::xtext;
 
 String getQuickfixProviderName(Grammar g) :
-	JAVA org.eclipse.xtext.generator.quickfix.QuickfixProviderFragment.getQuickfixProviderName(org.eclipse.xtext.Grammar);
+	JAVA org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment.getQuickfixProviderName(org.eclipse.xtext.Grammar);
