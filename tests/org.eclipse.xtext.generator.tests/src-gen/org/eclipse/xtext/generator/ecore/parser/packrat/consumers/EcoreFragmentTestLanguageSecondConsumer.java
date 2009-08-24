@@ -39,6 +39,8 @@ public final class EcoreFragmentTestLanguageSecondConsumer extends NonTerminalCo
 
 	private IElementConsumer crossReference$6$Consumer;
 
+	private IElementConsumer ruleCall$8$Consumer;
+
 	private ICharacterClass keyword$4$Delimiter;
 
 	private ISequenceMatcher ruleCall$8$Delimiter;
@@ -111,6 +113,18 @@ public final class EcoreFragmentTestLanguageSecondConsumer extends NonTerminalCo
 		
 		protected CrossReference$6$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "first", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

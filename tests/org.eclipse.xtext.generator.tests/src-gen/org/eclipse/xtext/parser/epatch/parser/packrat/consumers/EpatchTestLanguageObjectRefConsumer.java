@@ -53,6 +53,8 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$8$Consumer;
 
+	private IElementConsumer ruleCall$10$Consumer;
+
 	private IElementConsumer assignment$11$Consumer;
 
 	private IElementConsumer ruleCall$12$Consumer;
@@ -65,6 +67,8 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$16$Consumer;
 
+	private IElementConsumer ruleCall$18$Consumer;
+
 	private IElementConsumer assignment$19$Consumer;
 
 	private IElementConsumer ruleCall$20$Consumer;
@@ -74,6 +78,8 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 	private IElementConsumer assignment$22$Consumer;
 
 	private IElementConsumer crossReference$23$Consumer;
+
+	private IElementConsumer ruleCall$25$Consumer;
 
 	private IElementConsumer assignment$26$Consumer;
 
@@ -240,6 +246,18 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		}
 	}
 
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "leftRes", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
+		}
+	}
+
 	protected class Assignment$11$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$11$Consumer(final Assignment assignment) {
@@ -317,6 +335,18 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		}
 	}
 
+	protected class RuleCall$18$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$18$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "leftRes", false, false, getElement(), getRuleCall$18$Delimiter(), optional);
+		}
+	}
+
 	protected class Assignment$19$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$19$Consumer(final Assignment assignment) {
@@ -369,6 +399,18 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		
 		protected CrossReference$23$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "rightRes", false, false, getElement(), getRuleCall$25$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$25$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$25$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

@@ -549,6 +549,7 @@ ruleProperty returns [EObject current=null]
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

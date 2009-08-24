@@ -41,6 +41,8 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 
 	private IElementConsumer crossReference$7$Consumer;
 
+	private IElementConsumer ruleCall$9$Consumer;
+
 	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
@@ -128,6 +130,18 @@ public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer
 		
 		protected CrossReference$7$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

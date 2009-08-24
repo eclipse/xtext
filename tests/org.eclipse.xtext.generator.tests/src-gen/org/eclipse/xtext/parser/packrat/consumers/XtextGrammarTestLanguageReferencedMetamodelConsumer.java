@@ -37,6 +37,8 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 
 	private IElementConsumer crossReference$4$Consumer;
 
+	private IElementConsumer ruleCall$6$Consumer;
+
 	private IElementConsumer group$7$Consumer;
 
 	private IElementConsumer keyword$8$Consumer;
@@ -95,6 +97,18 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 		
 		protected CrossReference$4$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "ePackage", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

@@ -157,6 +157,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             		createLeafNode(grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
             	
+             lastConsumedDatatypeToken = null; 
 
             }
 

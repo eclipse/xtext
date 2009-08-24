@@ -425,6 +425,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
             		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(), "extends"); 
             	
+             lastConsumedDatatypeToken = null; 
 
             }
 

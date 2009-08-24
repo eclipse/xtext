@@ -157,6 +157,7 @@ ruleDatatypeBug286557 returns [EObject current=null]
 		ruleFQN		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

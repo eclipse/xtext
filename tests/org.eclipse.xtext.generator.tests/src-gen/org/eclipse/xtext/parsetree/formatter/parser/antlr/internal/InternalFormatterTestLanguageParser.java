@@ -1755,6 +1755,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
              
             	        currentNode = currentNode.getParent();
             	    
+             lastConsumedDatatypeToken = null; 
 
             }
 

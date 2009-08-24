@@ -67,6 +67,8 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 
 	private IElementConsumer crossReference$15$Consumer;
 
+	private IElementConsumer ruleCall$17$Consumer;
+
 	private IElementConsumer group$18$Consumer;
 
 	private IElementConsumer keyword$19$Consumer;
@@ -94,6 +96,8 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 	private IElementConsumer assignment$30$Consumer;
 
 	private IElementConsumer crossReference$31$Consumer;
+
+	private IElementConsumer ruleCall$33$Consumer;
 
 	private IElementConsumer assignment$34$Consumer;
 
@@ -316,6 +320,18 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 		}
 	}
 
+	protected class RuleCall$17$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$17$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "refObject", false, false, getElement(), getRuleCall$17$Delimiter(), optional);
+		}
+	}
+
 	protected class Group$18$Consumer extends OptionalGroupConsumer {
 		
 		protected Group$18$Consumer(final Group group) {
@@ -481,6 +497,18 @@ public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerm
 		
 		protected CrossReference$31$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "import", false, false, getElement(), getRuleCall$33$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$33$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$33$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

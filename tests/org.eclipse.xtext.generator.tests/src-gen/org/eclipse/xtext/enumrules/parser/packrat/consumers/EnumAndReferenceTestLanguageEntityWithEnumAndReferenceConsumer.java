@@ -46,6 +46,8 @@ public final class EnumAndReferenceTestLanguageEntityWithEnumAndReferenceConsume
 
 	private IElementConsumer crossReference$8$Consumer;
 
+	private IElementConsumer ruleCall$10$Consumer;
+
 	private ICharacterClass keyword$6$Delimiter;
 
 	private ISequenceMatcher ruleCall$10$Delimiter;
@@ -143,6 +145,18 @@ public final class EnumAndReferenceTestLanguageEntityWithEnumAndReferenceConsume
 		
 		protected CrossReference$8$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

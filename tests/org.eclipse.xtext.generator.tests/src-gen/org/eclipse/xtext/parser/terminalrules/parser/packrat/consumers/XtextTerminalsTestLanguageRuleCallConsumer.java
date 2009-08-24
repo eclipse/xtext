@@ -28,6 +28,8 @@ public final class XtextTerminalsTestLanguageRuleCallConsumer extends NonTermina
 
 	private IElementConsumer crossReference$2$Consumer;
 
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private ISequenceMatcher ruleCall$4$Delimiter;
 
 	protected class Assignment$1$Consumer extends AssignmentConsumer {
@@ -46,6 +48,18 @@ public final class XtextTerminalsTestLanguageRuleCallConsumer extends NonTermina
 		
 		protected CrossReference$2$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

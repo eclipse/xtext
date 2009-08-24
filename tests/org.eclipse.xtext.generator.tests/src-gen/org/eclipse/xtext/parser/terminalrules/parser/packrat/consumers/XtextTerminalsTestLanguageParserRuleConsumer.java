@@ -60,6 +60,8 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 
 	private IElementConsumer crossReference$14$Consumer;
 
+	private IElementConsumer ruleCall$16$Consumer;
+
 	private IElementConsumer group$17$Consumer;
 
 	private IElementConsumer keyword$18$Consumer;
@@ -67,6 +69,8 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 	private IElementConsumer assignment$19$Consumer;
 
 	private IElementConsumer crossReference$20$Consumer;
+
+	private IElementConsumer ruleCall$22$Consumer;
 
 	private IElementConsumer keyword$23$Consumer;
 
@@ -276,6 +280,18 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		}
 	}
 
+	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getRuleCall$16$Delimiter(), optional);
+		}
+	}
+
 	protected class Group$17$Consumer extends LoopGroupConsumer {
 		
 		protected Group$17$Consumer(final Group group) {
@@ -317,6 +333,18 @@ public final class XtextTerminalsTestLanguageParserRuleConsumer extends NonTermi
 		
 		protected CrossReference$20$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getRuleCall$22$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$22$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$22$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

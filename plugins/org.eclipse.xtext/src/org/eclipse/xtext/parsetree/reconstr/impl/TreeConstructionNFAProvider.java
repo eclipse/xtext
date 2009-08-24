@@ -5,6 +5,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 
@@ -29,16 +30,7 @@ public class TreeConstructionNFAProvider extends
 		public boolean filter(AbstractElement ele) {
 			if (ele.eContainer() instanceof AbstractRule)
 				return false;
-			// if (GrammarUtil.containingAssignment(ele) != null)
-			// return true;
-			if (ele.eContainer() instanceof Assignment)
-				return true;
-
-			if (ele.eContainer() instanceof CrossReference)
-				return true;
-
-			if (ele.eContainer() instanceof Alternatives
-					&& ele.eContainer().eContainer() instanceof Assignment)
+			if (EcoreUtil2.getContainerOfType(ele.eContainer(), Assignment.class) != null)
 				return true;
 
 			return false;

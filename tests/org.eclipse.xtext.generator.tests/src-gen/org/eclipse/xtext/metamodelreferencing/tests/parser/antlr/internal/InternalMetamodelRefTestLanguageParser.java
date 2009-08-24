@@ -267,6 +267,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             		createLeafNode(grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0(), "rule"); 
             	
+             lastConsumedDatatypeToken = null; 
 
             }
 

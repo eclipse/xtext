@@ -141,7 +141,11 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$53$Consumer;
 
+	private IElementConsumer ruleCall$55$Consumer;
+
 	private IElementConsumer crossReference$56$Consumer;
+
+	private IElementConsumer ruleCall$58$Consumer;
 
 	private ICharacterClass keyword$12$Delimiter;
 
@@ -835,10 +839,34 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 	}
 
+	protected class RuleCall$55$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$55$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "ref", false, false, getElement(), getRuleCall$55$Delimiter(), optional);
+		}
+	}
+
 	protected class CrossReference$56$Consumer extends ElementConsumer<CrossReference> {
 		
 		protected CrossReference$56$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getRuleCall$58$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$58$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$58$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

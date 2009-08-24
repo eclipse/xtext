@@ -425,6 +425,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(), "extends"); 
             	
+             lastConsumedDatatypeToken = null; 
 
             }
 
