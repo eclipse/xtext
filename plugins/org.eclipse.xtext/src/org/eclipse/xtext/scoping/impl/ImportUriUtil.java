@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.HashMap;
+import java.util.Collections;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 
 /**
@@ -25,14 +26,13 @@ public class ImportUriUtil {
 	public static boolean isValid(EObject context, String uri) {
 		URI newURI = getResolvedImportUri(context.eResource(), uri);
 		try {
-			URIConverter uriConverter = context.eResource().getResourceSet().getURIConverter();
+			ResourceSet resourceSet = context.eResource().getResourceSet();
+			if (resourceSet.getResource(URI.createURI(uri), false) != null)
+				return true;
+			URIConverter uriConverter = resourceSet.getURIConverter();
 			URI normalized = uriConverter.normalize(newURI);
-			for (Resource res: context.eResource().getResourceSet().getResources()) {
-				if (uriConverter.normalize(res.getURI()).equals(normalized))
-					return true;
-			}
 			if (normalized != null)
-				return uriConverter.exists(normalized, new HashMap<Object,Object>(2));
+				return uriConverter.exists(normalized, Collections.emptyMap());
 		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
 		}
