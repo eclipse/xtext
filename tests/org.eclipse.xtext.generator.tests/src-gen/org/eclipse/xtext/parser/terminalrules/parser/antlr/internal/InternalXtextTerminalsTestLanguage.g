@@ -127,6 +127,7 @@ ruleGrammar returns [EObject current=null]
 		ruleGrammarID		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -149,6 +150,7 @@ ruleGrammar returns [EObject current=null]
 		ruleGrammarID		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -190,6 +192,7 @@ ruleGrammar returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleCrossReference_3_2_0_0(), "hiddenTokens"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -210,6 +213,7 @@ ruleGrammar returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleCrossReference_3_2_1_1_0(), "hiddenTokens"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -450,6 +454,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getGeneratedMetamodelAccess().getEPackageEPackageCrossReference_2_0(), "ePackage"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -515,6 +520,7 @@ ruleReferencedMetamodel returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_1_0(), "ePackage"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -646,6 +652,7 @@ ruleParserRule returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleCrossReference_2_2_0_0(), "hiddenTokens"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -666,6 +673,7 @@ ruleParserRule returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleCrossReference_2_2_1_1_0(), "hiddenTokens"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -736,6 +744,7 @@ ruleTypeRef returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getTypeRefAccess().getMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0(), "metamodel"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -756,6 +765,7 @@ ruleTypeRef returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getTypeRefAccess().getClassifierEClassifierCrossReference_1_0(), "classifier"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -1242,6 +1252,7 @@ ruleRuleCall returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2634,6 +2645,7 @@ ruleEnumLiteralDeclaration returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0(), "enumLiteral"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

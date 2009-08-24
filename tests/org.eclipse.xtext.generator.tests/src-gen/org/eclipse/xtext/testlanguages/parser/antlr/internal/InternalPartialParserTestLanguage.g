@@ -550,6 +550,7 @@ ruleFirstConcrete returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getFirstConcreteAccess().getReferencedContainerSomeContainerCrossReference_4_0(), "referencedContainer"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -628,6 +629,7 @@ ruleSecondConcrete returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getSecondConcreteAccess().getReferencedChildrenChildCrossReference_5_0(), "referencedChildren"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

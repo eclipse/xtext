@@ -33,11 +33,15 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 
 	private IElementConsumer crossReference$3$Consumer;
 
+	private IElementConsumer ruleCall$5$Consumer;
+
 	private IElementConsumer keyword$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
 	private IElementConsumer crossReference$8$Consumer;
+
+	private IElementConsumer ruleCall$10$Consumer;
 
 	private ICharacterClass keyword$6$Delimiter;
 
@@ -83,6 +87,18 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 		}
 	}
 
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "event", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+		}
+	}
+
 	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
 		
 		protected Keyword$6$Consumer(final Keyword keyword) {
@@ -111,6 +127,18 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 		
 		protected CrossReference$8$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "state", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

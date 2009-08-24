@@ -35,6 +35,8 @@ public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$4$Consumer;
 
+	private IElementConsumer ruleCall$6$Consumer;
+
 	private ICharacterClass keyword$2$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
@@ -78,6 +80,18 @@ public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsum
 		
 		protected CrossReference$4$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(fqnConsumer, "ref", false, true, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

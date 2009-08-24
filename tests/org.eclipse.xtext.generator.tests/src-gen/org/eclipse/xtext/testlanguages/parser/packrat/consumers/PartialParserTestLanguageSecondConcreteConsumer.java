@@ -48,6 +48,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 
 	private IElementConsumer crossReference$9$Consumer;
 
+	private IElementConsumer ruleCall$11$Consumer;
+
 	private IElementConsumer keyword$12$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -168,6 +170,18 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		
 		protected CrossReference$9$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "referencedChildren", true, false, getElement(), getRuleCall$11$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

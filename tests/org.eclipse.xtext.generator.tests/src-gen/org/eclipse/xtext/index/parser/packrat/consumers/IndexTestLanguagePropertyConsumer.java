@@ -34,6 +34,8 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 
 	private IElementConsumer crossReference$3$Consumer;
 
+	private IElementConsumer ruleCall$5$Consumer;
+
 	private IElementConsumer assignment$6$Consumer;
 
 	private IElementConsumer ruleCall$7$Consumer;
@@ -69,6 +71,18 @@ public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer
 		
 		protected CrossReference$3$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(qualifiedNameConsumer, "type", false, true, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

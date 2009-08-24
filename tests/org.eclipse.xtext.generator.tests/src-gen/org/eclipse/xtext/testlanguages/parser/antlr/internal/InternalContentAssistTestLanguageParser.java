@@ -685,6 +685,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
             		createLeafNode(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
             	
+             lastConsumedDatatypeToken = null; 
 
             }
 

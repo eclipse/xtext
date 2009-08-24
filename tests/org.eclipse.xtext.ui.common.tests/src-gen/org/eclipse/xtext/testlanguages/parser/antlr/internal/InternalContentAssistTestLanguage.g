@@ -334,6 +334,7 @@ ruleAbstractRuleCall returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

@@ -48,11 +48,15 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$8$Consumer;
 
+	private IElementConsumer ruleCall$10$Consumer;
+
 	private IElementConsumer keyword$11$Consumer;
 
 	private IElementConsumer assignment$12$Consumer;
 
 	private IElementConsumer crossReference$13$Consumer;
+
+	private IElementConsumer ruleCall$15$Consumer;
 
 	private IElementConsumer group$16$Consumer;
 
@@ -62,11 +66,15 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$19$Consumer;
 
+	private IElementConsumer ruleCall$21$Consumer;
+
 	private IElementConsumer keyword$22$Consumer;
 
 	private IElementConsumer assignment$23$Consumer;
 
 	private IElementConsumer crossReference$24$Consumer;
+
+	private IElementConsumer ruleCall$26$Consumer;
 
 	private IElementConsumer keyword$27$Consumer;
 
@@ -210,6 +218,18 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		}
 	}
 
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
+		}
+	}
+
 	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
 		
 		protected Keyword$11$Consumer(final Keyword keyword) {
@@ -238,6 +258,18 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		
 		protected CrossReference$13$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "parentId", false, false, getElement(), getRuleCall$15$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
@@ -297,6 +329,18 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		}
 	}
 
+	protected class RuleCall$21$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$21$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "parentId", false, false, getElement(), getRuleCall$21$Delimiter(), optional);
+		}
+	}
+
 	protected class Keyword$22$Consumer extends ElementConsumer<Keyword> {
 		
 		protected Keyword$22$Consumer(final Keyword keyword) {
@@ -325,6 +369,18 @@ public final class LazyLinkingTestLanguageTypeConsumer extends NonTerminalConsum
 		
 		protected CrossReference$24$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getRuleCall$26$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$26$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$26$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

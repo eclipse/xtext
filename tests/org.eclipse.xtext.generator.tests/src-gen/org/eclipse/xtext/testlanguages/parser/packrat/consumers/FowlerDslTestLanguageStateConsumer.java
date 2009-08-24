@@ -48,6 +48,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 
 	private IElementConsumer crossReference$9$Consumer;
 
+	private IElementConsumer ruleCall$11$Consumer;
+
 	private IElementConsumer keyword$12$Consumer;
 
 	private IElementConsumer assignment$13$Consumer;
@@ -177,6 +179,18 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		
 		protected CrossReference$9$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "actions", true, false, getElement(), getRuleCall$11$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

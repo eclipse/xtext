@@ -35,6 +35,8 @@ public final class LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer extend
 
 	private IElementConsumer crossReference$4$Consumer;
 
+	private IElementConsumer ruleCall$6$Consumer;
+
 	private IElementConsumer assignment$7$Consumer;
 
 	private IElementConsumer ruleCall$8$Consumer;
@@ -92,6 +94,18 @@ public final class LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer extend
 		
 		protected CrossReference$4$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "type", true, false, getElement(), getRuleCall$6$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

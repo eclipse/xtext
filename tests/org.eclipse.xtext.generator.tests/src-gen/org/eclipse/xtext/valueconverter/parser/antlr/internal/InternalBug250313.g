@@ -381,11 +381,13 @@ ruleModel returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getModelAccess().getRefChild1CrossReference_8_1_1_0_0(), "ref"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
     |	RULE_ID
 	{
 		createLeafNode(grammarAccess.getModelAccess().getRefChild2CrossReference_8_1_1_0_1(), "ref"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 )
 
 		// TODO assign feature to currentNode

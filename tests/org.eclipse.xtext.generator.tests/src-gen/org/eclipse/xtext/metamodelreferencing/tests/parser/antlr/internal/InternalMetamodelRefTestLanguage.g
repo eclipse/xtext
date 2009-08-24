@@ -158,6 +158,7 @@ ruleNameRef returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0(), "rule"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

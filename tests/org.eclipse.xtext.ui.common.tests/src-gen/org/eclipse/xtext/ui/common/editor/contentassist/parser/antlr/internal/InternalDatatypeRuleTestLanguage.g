@@ -337,6 +337,7 @@ ruleCompositeTypeEntry returns [EObject current=null]
 		ruleTypeId		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
