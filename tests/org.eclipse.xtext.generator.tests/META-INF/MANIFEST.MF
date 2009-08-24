@@ -300,6 +300,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.generator.ecore.second.util,
  org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest,
  org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl,
- org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.util
+ org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.util,
+ org.eclipse.xtext.parser.assignments.bug287184Test,
+ org.eclipse.xtext.parser.assignments.bug287184Test.impl,
+ org.eclipse.xtext.parser.assignments.bug287184Test.util
 Import-Package: org.apache.log4j
-

@@ -87,6 +87,9 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
