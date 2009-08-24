@@ -8,16 +8,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.projectWizard;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xpand2.XpandUtil;
+import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
+import org.eclipse.xtext.generator.Generator;
 
 import com.google.common.collect.Lists;
 
@@ -25,6 +29,7 @@ import com.google.common.collect.Lists;
  * An {@link IGeneratorFragment} to generate a simple project wizard.
  *  
  * @author Sven Efftinge - Initial contribution and API
+ * @author Knut Wannheden
  */
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
@@ -32,6 +37,19 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private String generatorProjectName;
 	private String modelFileExtension;
+
+	@Override
+	public void generate(final Grammar grammar, XpandExecutionContext ctx) {
+		final String templateName = getNewProjectTemplateName(grammar);
+		final Outlet outlet = ctx.getOutput().getOutlet(Generator.SRC_UI);
+		final File templateFile = new File(new File(outlet.getPath()), templateName.replaceAll("::", "/") + '.' + XpandUtil.TEMPLATE_EXTENSION);
+		final boolean templateExisted = templateFile.exists();
+		super.generate(grammar, ctx);
+		if (!templateExisted && templateFile.exists()) {
+			LOG.info("A new template " + templateName + " has been generated into " + outlet.getPath() + ".");
+			LOG.info("  Make sure to enable the Xtend/Xpand nature and JavaBeans metamodel to edit this template.");
+		}
+	}
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
@@ -76,7 +94,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	}
 
 	/**
-	 * Sets the name of the generator project. 
+	 * Sets the name of the generator project.
 	 * 
 	 * @param generatorProjectName
 	 */
@@ -99,4 +117,8 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		this.modelFileExtension = modelFileExtension.trim();
 	}
 
+	public static String getNewProjectTemplateName(Grammar grammar) {
+		return GrammarUtil.getNamespace(grammar).replaceAll("\\.", "::") + "::ui::wizard::"
+				+ GrammarUtil.getName(grammar) + "NewProject";
+	}
 }

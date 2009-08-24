@@ -8,8 +8,8 @@ projectInfoClassName(Grammar this) :
 projectCreatorClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"ProjectCreator";
 	
-newProjectTemplateName(Grammar this) :
-	getNamespace().replaceAll('\\.', '::')+"::ui::wizard::"+getName()+"NewProject";
+String newProjectTemplateName(Grammar this) :
+	JAVA org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment.getNewProjectTemplateName(org.eclipse.xtext.Grammar);
 
 projectWizardClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"NewProjectWizard";
