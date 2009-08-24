@@ -12,12 +12,14 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.Map;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
- * A new project wizard to create Xtext projects.
+ * A project wizard to create Xtext projects.
  * 
  * @author KD - Initial contribution and API
  * @author Sven Efftinge
@@ -31,12 +33,9 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	 */
 	public NewXtextProjectWizard() {
 		setWindowTitle(Messages.NewXtextProjectWizard_WindowTitle);
-		setDefaultPageImageDescriptor(Activator.getImageDescriptor("wizban/xtext.gif")); //$NON-NLS-1$
+		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/xtext.gif")); //$NON-NLS-1$
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.wizard.Wizard#addPages()
-	 */
 	@Override
 	public void addPages() {
 		super.addPages();
@@ -45,9 +44,6 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard#getProjectInfo()
-	 */
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = new XtextProjectInfo();
@@ -63,6 +59,14 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		else
 			projectInfo.setLocation(mainPage.getLocationPath());
 		projectInfo.setWorkbench(getWorkbench());
+		String encoding = null;
+		try {
+			encoding = ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
+		}
+		catch (final CoreException e) {
+			encoding = System.getProperty("file.encoding");
+		}
+		projectInfo.setEncoding(encoding);
 		return projectInfo;
 	}
 
