@@ -11,6 +11,7 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -35,4 +36,14 @@ public class ImportUriUtilTest extends AbstractXtextTests {
 		assertEquals(bar, ImportUriUtil.getResource(foo, "bar.xmi"));
 		assertEquals(true, ImportUriUtil.isValid(ePackage, "bar.xmi"));
 	}
+
+	public void testEPackageURI() throws Exception {
+		ResourceSet rs = new ResourceSetImpl();
+		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		foo.getContents().add(ePackage);
+		
+		assertEquals(true, ImportUriUtil.isValid(ePackage, EcorePackage.eNS_URI));
+	}
+
 }
