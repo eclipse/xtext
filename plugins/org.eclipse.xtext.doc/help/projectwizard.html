@@ -34,7 +34,7 @@
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>the 
-						<code class="code">generatorProjectName</code> attribute is used to specify the generator project containing the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project
+						<code class="code">generatorProjectName</code> attribute is used to specify the generator project containing the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
 					</p>
 </li>
 <li class="listitem">
@@ -53,6 +53,12 @@
 				<code class="code">MyDslGenerator.mwe</code> workflow. As the Xpand template is in the 
 				<code class="code">src</code> source folder you may of course modify it to generate whatever files you want. Just make sure to leave the top-level 
 				<code class="code">main</code> definition in place, as that is the interface for the project wizard.
+			</p>
+<p>
+				
+<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you shoud check that the JavaBeans meta model contributor is enabled under 
+				<span class="emphasis"><em>Preferences &gt; Xtend/Xpand</em></span>. Further you should also configure the UI project with the Xpand/Xtend nature using 
+				<span class="emphasis"><em>Configure &gt; Add Xpand/Xtend Nature</em></span> in the context menu.
 			</p>
 <div class="section" title="Customizing the project wizard">
 <div class="titlepage">

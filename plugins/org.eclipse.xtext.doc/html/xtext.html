@@ -97,6 +97,9 @@
 <span class="section"><a href="#SetupwithinEclipseEquinoxOSGi">Setup within Eclipse-Equinox (OSGi)</a></span>
 </dt>
 <dt>
+<span class="section"><a href="#Logging">Logging</a></span>
+</dt>
+<dt>
 <span class="section"><a href="#validation">Validation</a></span>
 </dt>
 <dt>
@@ -3369,6 +3372,18 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&
 </p>
 </div>
 </div>
+<div class="section" title="Logging">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="Logging"></a>Logging</h2>
+</div>
+</div>
+</div>
+<p>Xtext uses Apache&rsquo;s log4j for logging. It is configured using a so called log4j.properties, which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a log4j.properties in place and make sure that it is not overridden by other log4j.properties in previous class path entries.</p>
+<p>In OSGi you provide configuration by creating a fragment for org.apache.log4j. In this case you need to make sure that there&rsquo;s no second fragment contributing a log4j.properties file.</p>
+</div>
 <div class="section" title="Validation">
 <div class="titlepage">
 <div>
@@ -5846,7 +5861,7 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>the 
-						<code class="code">generatorProjectName</code> attribute is used to specify the generator project containing the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project
+						<code class="code">generatorProjectName</code> attribute is used to specify the generator project containing the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
 					</p>
 </li>
 <li class="listitem">
@@ -5865,6 +5880,12 @@ public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFor
 				<code class="code">MyDslGenerator.mwe</code> workflow. As the Xpand template is in the 
 				<code class="code">src</code> source folder you may of course modify it to generate whatever files you want. Just make sure to leave the top-level 
 				<code class="code">main</code> definition in place, as that is the interface for the project wizard.
+			</p>
+<p>
+				
+<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you shoud check that the JavaBeans meta model contributor is enabled under 
+				<span class="emphasis"><em>Preferences &gt; Xtend/Xpand</em></span>. Further you should also configure the UI project with the Xpand/Xtend nature using 
+				<span class="emphasis"><em>Configure &gt; Add Xpand/Xtend Nature</em></span> in the context menu.
 			</p>
 <div class="section" title="Customizing the project wizard">
 <div class="titlepage">

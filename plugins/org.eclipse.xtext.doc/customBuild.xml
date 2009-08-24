@@ -22,8 +22,9 @@
 	
 	<!--  
 		WikiText Toolchain 
-	-->
 	<property name="wikitext.url" value="http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip"/>
+	-->
+	<property name="wikitext.url" value="http://download.eclipse.org/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip"/>
 	<property name="wikitext.dir" value="${download.dir}${file.separator}wikitext"/>
 
 	<target name="check-wikitext">

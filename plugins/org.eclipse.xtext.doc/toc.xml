@@ -93,6 +93,7 @@
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
 <topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"></topic>
 <topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
+<topic href="help/Logging.html" label="Logging"></topic>
 <topic href="help/validation.html" label="Validation">
 <topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
 <topic href="help/validation.html#linking_validation" label="Crosslink Validation"></topic>
