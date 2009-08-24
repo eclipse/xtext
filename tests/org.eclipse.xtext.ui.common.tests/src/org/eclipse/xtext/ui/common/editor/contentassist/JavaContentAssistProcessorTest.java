@@ -273,4 +273,20 @@ public class JavaContentAssistProcessorTest extends AbstractContentAssistProcess
     				//, "Name"
     		);
     }
+    
+    @Override
+	public void testBug286935_01() throws Exception {
+    	newBuilder(setup.getBug286935TestLanguageSetup())
+    		.append("init cond")
+    		.assertText("cond"); // "\"Label\"" will not be proposed
+    }
+    
+    @Override
+	public void testBug286935_02() throws Exception {
+    	newBuilder(setup.getBug286935TestLanguageSetup())
+    		.append("init cond ")
+    		.assertText("state", 
+    				"stateName", 
+    				"\"Label\""); // "final" will not be proposed
+    }
 }

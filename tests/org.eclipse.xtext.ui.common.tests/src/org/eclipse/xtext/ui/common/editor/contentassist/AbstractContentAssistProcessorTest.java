@@ -801,6 +801,21 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     		.assertText();
     }
     
+    public void testBug286935_01() throws Exception {
+    	newBuilder(setup.getBug286935TestLanguageSetup())
+    		.append("init cond")
+    		.assertText("cond", "\"Label\"");
+    }
+    
+    public void testBug286935_02() throws Exception {
+    	newBuilder(setup.getBug286935TestLanguageSetup())
+    		.append("init cond ")
+    		.assertText("state", 
+    				"stateName", 
+    				"\"Label\"", 
+    				"final");
+    }
+    
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);

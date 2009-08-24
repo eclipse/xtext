@@ -24,7 +24,7 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 		void announceEof(int lookAhead);
 		void announceConsume();
 	}
-
+	
 	private StreamListener listener;
 	
 	public ObservableXtextTokenStream() {
