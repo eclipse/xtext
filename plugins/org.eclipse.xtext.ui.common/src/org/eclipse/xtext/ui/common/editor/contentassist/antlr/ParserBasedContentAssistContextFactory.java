@@ -265,7 +265,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 						return result;
 				}
 				return Boolean.FALSE;
-			};
+			}
 
 			@Override
 			public Boolean caseAssignment(Assignment object) {
@@ -404,7 +404,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				ParserRule rule = EcoreUtil2.getContainerOfType(element.getGrammarElement(), ParserRule.class);
 				if (rule != null && GrammarUtil.isDatatypeRule(rule)) {
 					for (int i = element.getLocalTrace().size() - 1; i >= 0; i--) {
-						AbstractElement grammarElement = (AbstractElement) element.getLocalTrace().get(i);
+						AbstractElement grammarElement = element.getLocalTrace().get(i);
 						if (grammarElement instanceof Assignment) {
 							calculator.doSwitch(grammarElement);
 							return;

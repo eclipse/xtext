@@ -121,6 +121,8 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.util,
  org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest,
  org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.impl,
- org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.util
+ org.eclipse.xtext.ui.common.editor.contentassist.domainModelTest.util,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug286935TestLanguage,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug286935TestLanguage.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug286935TestLanguage.util
 Import-Package: org.apache.log4j
-

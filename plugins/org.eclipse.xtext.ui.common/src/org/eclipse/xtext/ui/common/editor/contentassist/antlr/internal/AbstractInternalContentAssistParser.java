@@ -42,6 +42,11 @@ import com.google.common.collect.Maps;
 public abstract class AbstractInternalContentAssistParser extends Parser implements
 		ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
 
+	public interface RecoveryListener {
+		void beginErrorRecovery();
+		void endErrorRecovery();
+	}
+	
 	private final List<EObject> grammarElements;
 	private final List<EObject> localTrace;
 	private int stackSize;
@@ -49,6 +54,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private ObservableXtextTokenStream.StreamListener delegate;
 	private List<TerminalRule> terminalRules;
 	private boolean mismatch;
+	private RecoveryListener recoveryListener;
 
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
@@ -71,8 +77,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	@Override
 	public void recover(IntStream stream, RecognitionException ex) {
+		if (recoveryListener != null)
+			recoveryListener.beginErrorRecovery();
 		removeUnexpectedElements();
 		super.recover(stream, ex);
+		if (recoveryListener != null)
+			recoveryListener.endErrorRecovery();
 	}
 
 	private void removeUnexpectedElements() {
@@ -236,7 +246,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			return;
 		delegate.announceEof(lookAhead);
 	}
-
+	
 	public void announceConsume() {
 		localTrace.clear();
 	}
@@ -244,7 +254,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public Set<FollowElement> getFollowElements() {
 		return followElements;
 	}
-
+	
 	public Map<Integer, String> getTokenDefMap() {
 		String[] names = getTokenNames();
 		Map<Integer, String> result = Maps.newHashMapWithExpectedSize(names.length - Token.MIN_TOKEN_TYPE);
@@ -264,5 +274,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	public List<EObject> getLocalTrace() {
 		return localTrace;
+	}
+	
+	public RecoveryListener getRecoveryListener() {
+		return recoveryListener;
+	}
+
+	public void setRecoveryListener(RecoveryListener recoveryListener) {
+		this.recoveryListener = recoveryListener;
 	}
 }

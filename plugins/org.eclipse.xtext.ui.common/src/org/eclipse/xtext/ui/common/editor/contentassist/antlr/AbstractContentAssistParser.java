@@ -71,16 +71,27 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		try {
 			final boolean[] wasEof = new boolean[] { false };
 			final boolean[] consumedSomething = new boolean[] { true };
+			final boolean[] errorRecovery = new boolean[] { false };
 			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
 			stream.setListener(new StreamListener() {
 				public void announceEof(int lookAhead) {
-					parser.announceEof(lookAhead);
+					if (!errorRecovery[0])
+						parser.announceEof(lookAhead);
 					wasEof[0] = true;
 				}
 				
 				public void announceConsume() {
 					parser.announceConsume();
 					consumedSomething[0] = true;
+				}
+			});
+			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
+				public void endErrorRecovery() {
+					errorRecovery[0] = false;
+				}
+				
+				public void beginErrorRecovery() {
+					errorRecovery[0] = true;
 				}
 			});
 			int i = startIndex;
