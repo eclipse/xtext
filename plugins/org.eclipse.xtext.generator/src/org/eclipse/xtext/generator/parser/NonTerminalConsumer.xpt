@@ -217,6 +217,14 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «EXPAND defineConsumerField(assignment, this) FOREACH groups-»
 «ENDDEFINE»
 
+«DEFINE defineConsumerField(Assignment assignment) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
 «DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
@@ -228,6 +236,29 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
+«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, CrossReference crossRef) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerField(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerField(Assignment assignment, CrossReference parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
 «EXPAND defineConsumerField(assignment, this) FOREACH groups-»
 «ENDDEFINE»
 
@@ -306,6 +337,29 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
 «ENDDEFINE»
 
+«DEFINE defineConsumerClass(Assignment assignment) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, CrossReference parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, CrossReference parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
 «DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
@@ -318,6 +372,14 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR CrossReference-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOR terminal-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Assignment assignment) FOR Action-»
@@ -525,6 +587,10 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR RuleCall-»
 «EXPAND doConsumeBody(assignment, reference, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR Alternatives-»
+			return «consumerFieldName()».consume();
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR AbstractRule-»

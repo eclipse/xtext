@@ -1,5 +1,5 @@
 <workflow>
-	<property name="standardFragments" value="org/eclipse/xtext/generator/StandardRuntimeFragments.mwe"/>
+	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
 	<property name="projectName" value="org.eclipse.xtext.generator.tests"/>
 	<property name="runtimeProject" value="../${projectName}"/>
 	
@@ -12,6 +12,9 @@
 		<projectNameRt value="${projectName}"/>
 		
 		<language uri="classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
 	</component>
