@@ -17,7 +17,6 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
- * 
  */
 public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 
@@ -46,6 +45,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 		this.message = message;
 	}
 
+	@Override
 	public void checkConfiguration(Issues issues) {
 		if (delegate == null && message != null) {
 			issues.addWarning("---- ATTENTION----\n\t" + "\n\n\t" + message);
@@ -56,6 +56,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 			fallback.checkConfiguration(issues);
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.addToPluginXmlRt(grammar, ctx);
@@ -63,6 +64,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 			fallback.addToPluginXmlRt(grammar, ctx);
 	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.addToPluginXmlUi(grammar, ctx);
@@ -70,6 +72,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 			fallback.addToPluginXmlUi(grammar, ctx);
 	}
 
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.addToStandaloneSetup(grammar, ctx);
@@ -77,6 +80,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 			fallback.addToStandaloneSetup(grammar, ctx);
 	}
 
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (delegate != null)
 			delegate.generate(grammar, ctx);
@@ -84,36 +88,42 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 			fallback.generate(grammar, ctx);
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getExportedPackagesRt(grammar);
 		return fallback.getExportedPackagesRt(grammar);
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getExportedPackagesUi(grammar);
 		return fallback.getExportedPackagesUi(grammar);
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsRt(grammar);
 		return fallback.getGuiceBindingsRt(grammar);
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsUi(grammar);
 		return fallback.getGuiceBindingsUi(grammar);
 	}
 
+	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getRequiredBundlesRt(grammar);
 		return fallback.getRequiredBundlesRt(grammar);
 	}
 
+	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getRequiredBundlesUi(grammar);

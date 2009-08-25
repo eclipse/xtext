@@ -27,6 +27,7 @@ public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private Level level;
 
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (message != null)
 			log.log(level, message);
@@ -48,35 +49,44 @@ public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 		this.level = level;
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 	}
 
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return Strings.EMPTY_ARRAY;
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return Strings.EMPTY_ARRAY;
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return Strings.EMPTY_ARRAY;
 	}
 
+	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return Strings.EMPTY_ARRAY;
 	}
