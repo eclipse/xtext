@@ -22,6 +22,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
  */
 public class TraceToDot extends TreeConstNFAToDot {
 
+	@Override
 	protected Props drawObject(Object obj) {
 		if (obj instanceof TreeConstructionReportImpl)
 			return drawPTC((TreeConstructionReportImpl) obj);
@@ -53,13 +54,13 @@ public class TraceToDot extends TreeConstNFAToDot {
 				}
 				if (t.getNext() != null) {
 					Edge e = new Edge(t.getNext(), t);
-					e.setLabel(String.valueOf(((AbstractToken) t).getNo()));
+					e.setLabel(String.valueOf((t).getNo()));
 					if (!sol)
 						e.setStyle("dashed");
 					d.add(e);
 				}
 				drawn.add(t);
-				t = (AbstractToken) t.getNext();
+				t = t.getNext();
 			}
 			sol = false;
 		}

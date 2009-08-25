@@ -57,18 +57,20 @@ public class TreeConstNFAToDot extends GrammarToDot {
 
 	protected void setStatusStyle(Props p, Status s) {
 		switch (s) {
-		case AMBIGIOUS:
-			p.put("color", "green");
-			break;
-		case DETOUR_OR_LOOP:
-			p.put("color", "blue");
-			break;
-		case ORPHAN:
-			p.put("color", "grey");
-			break;
-		case UNKNOWN:
-			p.put("color", "red");
-			break;
+			case AMBIGIOUS:
+				p.put("color", "green");
+				break;
+			case DETOUR_OR_LOOP:
+				p.put("color", "blue");
+				break;
+			case ORPHAN:
+				p.put("color", "grey");
+				break;
+			case UNKNOWN:
+				p.put("color", "red");
+				break;
+			case ENABLED:
+				break;
 		}
 	}
 }
