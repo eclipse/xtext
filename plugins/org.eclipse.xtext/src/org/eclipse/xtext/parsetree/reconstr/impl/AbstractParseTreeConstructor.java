@@ -154,6 +154,7 @@ public abstract class AbstractParseTreeConstructor implements
 			super(parent, next, no, current);
 		}
 
+		@Override
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
@@ -214,6 +215,7 @@ public abstract class AbstractParseTreeConstructor implements
 			return null;
 		}
 
+		@Override
 		public String serializeThis() {
 			if (type == null)
 				return null;
@@ -264,6 +266,7 @@ public abstract class AbstractParseTreeConstructor implements
 			super(parent, next, no, current);
 		}
 
+		@Override
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
@@ -276,10 +279,12 @@ public abstract class AbstractParseTreeConstructor implements
 			super(parent, next, no, current);
 		}
 
+		@Override
 		public String serializeThis() {
 			return ((Keyword) getGrammarElement()).getValue();
 		}
 
+		@Override
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
@@ -299,16 +304,19 @@ public abstract class AbstractParseTreeConstructor implements
 			return true;
 		}
 
+		@Override
 		public AbstractToken createParentFollower(AbstractToken next,
 				int actIndex, int index, IInstanceDescription i) {
 			return index != 0 || !i.isConsumed() ? null
 					: new RootToken(next, i);
 		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return null;
 		}
 
+		@Override
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
@@ -329,11 +337,13 @@ public abstract class AbstractParseTreeConstructor implements
 			super(parent, next, no, current);
 		}
 
+		@Override
 		public String serializeThis() {
 			return unassTextSerializer.serializeUnassignedRuleCall(
 					(RuleCall) getGrammarElement(), current.getDelegate());
 		}
 
+		@Override
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
