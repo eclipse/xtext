@@ -28,6 +28,8 @@ public final class DatatypeRuleTestLanguageCompositeTypeEntryConsumer extends No
 
 	private IElementConsumer crossReference$2$Consumer;
 
+	private IElementConsumer ruleCall$4$Consumer;
+
 	protected class Assignment$1$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$1$Consumer(final Assignment assignment) {
@@ -44,6 +46,18 @@ public final class DatatypeRuleTestLanguageCompositeTypeEntryConsumer extends No
 		
 		protected CrossReference$2$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeIdConsumer, "dataType", false, true, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

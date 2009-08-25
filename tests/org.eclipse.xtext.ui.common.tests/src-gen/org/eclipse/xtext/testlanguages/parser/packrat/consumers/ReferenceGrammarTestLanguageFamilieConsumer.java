@@ -50,13 +50,19 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 
 	private IElementConsumer crossReference$10$Consumer;
 
+	private IElementConsumer ruleCall$12$Consumer;
+
 	private IElementConsumer assignment$13$Consumer;
 
 	private IElementConsumer crossReference$14$Consumer;
 
+	private IElementConsumer ruleCall$16$Consumer;
+
 	private IElementConsumer assignment$17$Consumer;
 
 	private IElementConsumer crossReference$18$Consumer;
+
+	private IElementConsumer ruleCall$20$Consumer;
 
 	private IElementConsumer group$21$Consumer;
 
@@ -65,6 +71,8 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 	private IElementConsumer assignment$23$Consumer;
 
 	private IElementConsumer crossReference$24$Consumer;
+
+	private IElementConsumer ruleCall$26$Consumer;
 
 	private IElementConsumer keyword$27$Consumer;
 
@@ -219,6 +227,18 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		}
 	}
 
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "mutter", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
+		}
+	}
+
 	protected class Assignment$13$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$13$Consumer(final Assignment assignment) {
@@ -243,6 +263,18 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		}
 	}
 
+	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "vater", false, false, getElement(), getRuleCall$16$Delimiter(), optional);
+		}
+	}
+
 	protected class Assignment$17$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$17$Consumer(final Assignment assignment) {
@@ -259,6 +291,18 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		
 		protected CrossReference$18$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getRuleCall$20$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
@@ -308,6 +352,18 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		
 		protected CrossReference$24$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getRuleCall$26$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$26$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$26$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

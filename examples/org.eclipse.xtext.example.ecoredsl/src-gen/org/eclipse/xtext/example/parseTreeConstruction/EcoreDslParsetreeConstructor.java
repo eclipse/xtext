@@ -5691,21 +5691,21 @@ protected class EGenericTypeDecl_ELowerBoundAssignment_2_1_1_1 extends Assignmen
 /************ begin Rule EOperationDecl ****************
  *
  * EOperationDecl returns ecore::EOperation:
- *   eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
- *   eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
- *   ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
- *   +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
- *   eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
- *   EGenericTypeReferenceDecl)*)? ";";
+ *   eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
+ *   EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
+ *   "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
+ *   eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
+ *   EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+ *   ";";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
-// eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
-// ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
-// +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
-// eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
-// EGenericTypeReferenceDecl)*)? ";"
+// eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
+// EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
+// "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
+// eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
+// EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+// ";"
 protected class EOperationDecl_Group extends GroupToken {
 	
 	public EOperationDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5771,7 +5771,7 @@ protected class EOperationDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 	}	
 }
 
-// (unique?="bag"|ordered?="random")*
+// (unique?=Bag|ordered?=Random)*
 protected class EOperationDecl_Alternatives_1 extends AlternativesToken {
 
 	public EOperationDecl_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5792,7 +5792,7 @@ protected class EOperationDecl_Alternatives_1 extends AlternativesToken {
 		
 }
 
-// unique?="bag"
+// unique?=Bag
 protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 	
 	public EOperationDecl_UniqueAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5814,9 +5814,9 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
-			element = grammarAccess.getEOperationDeclAccess().getUniqueBagKeyword_1_0_0();
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0();
 			return obj;
 		}
 		return null;
@@ -5824,7 +5824,7 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 
 }
 
-// ordered?="random"
+// ordered?=Random
 protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 	
 	public EOperationDecl_OrderedAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5846,9 +5846,9 @@ protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
-			element = grammarAccess.getEOperationDeclAccess().getOrderedRandomKeyword_1_1_0();
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0();
 			return obj;
 		}
 		return null;

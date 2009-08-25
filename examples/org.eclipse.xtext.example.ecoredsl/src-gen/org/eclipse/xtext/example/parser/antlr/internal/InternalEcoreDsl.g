@@ -187,6 +187,7 @@ ruleReferencedMetamodel returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0(), "ePackage"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -1750,6 +1751,7 @@ ruleEReferenceDecl returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceCrossReference_5_1_0(), "eOpposite"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2082,6 +2084,7 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2157,6 +2160,7 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2194,6 +2198,7 @@ ruleEGenericTypeDecl returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2269,6 +2274,7 @@ ruleEGenericTypeDecl returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -2372,11 +2378,10 @@ ruleEOperationDecl returns [EObject current=null]
 	
 )*((	
 	
-	    lv_unique_1='bag' 
-    {
-        createLeafNode(grammarAccess.getEOperationDeclAccess().getUniqueBagKeyword_1_0_0(), "unique"); 
-    }
-
+	    lv_unique_1=	RULE_BAG
+	{
+		createLeafNode(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0(), "unique"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -2385,7 +2390,7 @@ ruleEOperationDecl returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "unique", true, "bag", lastConsumedNode);
+	       		set($current, "unique", true, "Bag", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -2394,11 +2399,10 @@ ruleEOperationDecl returns [EObject current=null]
 )
     |(	
 	
-	    lv_ordered_2='random' 
-    {
-        createLeafNode(grammarAccess.getEOperationDeclAccess().getOrderedRandomKeyword_1_1_0(), "ordered"); 
-    }
-
+	    lv_ordered_2=	RULE_RANDOM
+	{
+		createLeafNode(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0(), "ordered"); 
+	}
  
 	    {
 	        if ($current==null) {
@@ -2407,7 +2411,7 @@ ruleEOperationDecl returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "ordered", true, "random", lastConsumedNode);
+	       		set($current, "ordered", true, "Random", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
