@@ -1328,9 +1328,9 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Assignment cUniqueAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final Keyword cUniqueBagKeyword_1_0_0 = (Keyword)cUniqueAssignment_1_0.eContents().get(0);
+		private final RuleCall cUniqueBagTerminalRuleCall_1_0_0 = (RuleCall)cUniqueAssignment_1_0.eContents().get(0);
 		private final Assignment cOrderedAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final Keyword cOrderedRandomKeyword_1_1_0 = (Keyword)cOrderedAssignment_1_1.eContents().get(0);
+		private final RuleCall cOrderedRandomTerminalRuleCall_1_1_0 = (RuleCall)cOrderedAssignment_1_1.eContents().get(0);
 		private final Keyword cOpKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
 		private final Assignment cEGenericTypeAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
@@ -1367,20 +1367,20 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//EOperationDecl returns ecore::EOperation:
-		//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
-		//  eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
-		//  ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
-		//  +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
-		//  eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
-		//  EGenericTypeReferenceDecl)*)? ";";
+		//  eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
+		//  EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
+		//  "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
+		//  eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
+		//  EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+		//  ";";
 		public ParserRule getRule() { return rule; }
 
-		//eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
-		//eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
-		//ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
-		//+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
-		//eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
-		//EGenericTypeReferenceDecl)*)? ";"
+		//eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
+		//EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
+		//"," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
+		//eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
+		//EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+		//";"
 		public Group getGroup() { return cGroup; }
 
 		//eAnnotations+=EAnnotationDecl*
@@ -1389,20 +1389,20 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//EAnnotationDecl
 		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		//(unique?="bag"|ordered?="random")*
+		//(unique?=Bag|ordered?=Random)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//unique?="bag"
+		//unique?=Bag
 		public Assignment getUniqueAssignment_1_0() { return cUniqueAssignment_1_0; }
 
-		//"bag"
-		public Keyword getUniqueBagKeyword_1_0_0() { return cUniqueBagKeyword_1_0_0; }
+		//Bag
+		public RuleCall getUniqueBagTerminalRuleCall_1_0_0() { return cUniqueBagTerminalRuleCall_1_0_0; }
 
-		//ordered?="random"
+		//ordered?=Random
 		public Assignment getOrderedAssignment_1_1() { return cOrderedAssignment_1_1; }
 
-		//"random"
-		public Keyword getOrderedRandomKeyword_1_1_0() { return cOrderedRandomKeyword_1_1_0; }
+		//Random
+		public RuleCall getOrderedRandomTerminalRuleCall_1_1_0() { return cOrderedRandomTerminalRuleCall_1_1_0; }
 
 		//"op"
 		public Keyword getOpKeyword_2() { return cOpKeyword_2; }
@@ -1885,12 +1885,12 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//EOperationDecl returns ecore::EOperation:
-	//  eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (
-	//  eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
-	//  ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters
-	//  +=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
-	//  eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
-	//  EGenericTypeReferenceDecl)*)? ";";
+	//  eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
+	//  EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
+	//  "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
+	//  eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
+	//  EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+	//  ";";
 	public EOperationDeclElements getEOperationDeclAccess() {
 		return (pEOperationDecl != null) ? pEOperationDecl : (pEOperationDecl = new EOperationDeclElements());
 	}

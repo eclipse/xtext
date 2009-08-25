@@ -536,10 +536,10 @@
         </tokens>
         <tokens xsi:type="xtext:Alternatives" cardinality="*">
           <groups xsi:type="xtext:Assignment" feature="unique" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="bag"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
           </groups>
           <groups xsi:type="xtext:Assignment" feature="ordered" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="random"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
           </groups>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="op"/>

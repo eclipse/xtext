@@ -426,6 +426,7 @@ ruleEntity returns [EObject current=null]
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -695,6 +696,7 @@ ruleReference returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getReferenceAccess().getOppositeReferenceCrossReference_4_1_0(), "opposite"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -943,6 +945,7 @@ ruleTypeRef returns [EObject current=null]
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
 	    }
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

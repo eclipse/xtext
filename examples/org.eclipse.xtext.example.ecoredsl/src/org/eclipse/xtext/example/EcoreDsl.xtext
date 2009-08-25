@@ -75,7 +75,7 @@ EGenericTypeDecl returns ecore::EGenericType:
 
 EOperationDecl returns ecore::EOperation:
    (eAnnotations+=EAnnotationDecl)*  
-   ((unique?="bag")|(ordered?="random"))*
+   ((unique?=Bag)|(ordered?=Random))*
    "op"  ((eGenericType=EGenericTypeReferenceDecl)|"void") name=ID
    ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? 
    "(" (eParameters+=EParameterDecl (","  eParameters+=EParameterDecl)* )? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*  )? ";"  

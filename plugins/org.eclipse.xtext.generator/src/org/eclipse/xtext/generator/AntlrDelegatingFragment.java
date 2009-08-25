@@ -21,7 +21,7 @@ import org.eclipse.xtext.Grammar;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements IGeneratorFragment {
+public class AntlrDelegatingFragment extends DefaultGeneratorFragment {
 
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";
 
@@ -79,42 +79,52 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 		}
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		getInstance().addToPluginXmlRt(grammar, ctx);
 	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		getInstance().addToPluginXmlUi(grammar, ctx);
 	}
 
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		getInstance().addToStandaloneSetup(grammar, ctx);
 	}
 
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		getInstance().generate(grammar, ctx);
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return getInstance().getExportedPackagesRt(grammar);
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return getInstance().getExportedPackagesUi(grammar);
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return getInstance().getGuiceBindingsRt(grammar);
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return getInstance().getGuiceBindingsUi(grammar);
 	}
 
+	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return getInstance().getRequiredBundlesRt(grammar);
 	}
 
+	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return getInstance().getRequiredBundlesUi(grammar);
 	}

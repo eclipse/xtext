@@ -28,42 +28,52 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 		return getClass().getName().replaceAll("\\.", "::");
 	}
 
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters(grammar));
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return null;
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return null;
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return null;
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return null;
 	}
 
+	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return null;
 	}
 
+	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return null;
 	}

@@ -19,7 +19,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.

@@ -371,6 +371,7 @@ ruleState returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getStateAccess().getActionsCommandCrossReference_2_2_0(), "actions"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -437,6 +438,7 @@ ruleTransition returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getTransitionAccess().getEventEventCrossReference_0_0(), "event"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	
@@ -457,6 +459,7 @@ ruleTransition returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getTransitionAccess().getStateStateCrossReference_2_0(), "state"); 
 	}
+		{ lastConsumedDatatypeToken = null; }
 
 		// TODO assign feature to currentNode
 	

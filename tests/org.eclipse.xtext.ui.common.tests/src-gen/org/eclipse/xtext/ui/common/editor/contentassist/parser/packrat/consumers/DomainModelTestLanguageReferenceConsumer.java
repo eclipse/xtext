@@ -41,6 +41,8 @@ public final class DomainModelTestLanguageReferenceConsumer extends NonTerminalC
 
 	private IElementConsumer crossReference$7$Consumer;
 
+	private IElementConsumer ruleCall$9$Consumer;
+
 	private IElementConsumer keyword$10$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
@@ -133,6 +135,18 @@ public final class DomainModelTestLanguageReferenceConsumer extends NonTerminalC
 		
 		protected CrossReference$7$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "type", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
