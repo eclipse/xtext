@@ -63,15 +63,20 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 					return result;
 				}
 				if (visitedRules.add(object)) {
-					if (object.getAlternatives() != null && doSwitch(object.getAlternatives())) {
+					Boolean result = object.getAlternatives() != null && doSwitch(object.getAlternatives());
+					if (result)
 						typeRef.setClassifier(EcorePackage.Literals.ESTRING);
-						return true;
-					}
+					visitedRules.remove(object);
+					return result;
 				} else {
 					return true;
 				}
 			}
-			return !visitedRules.add(object) || (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
+			if (!visitedRules.add(object))
+				return true;
+			Boolean result = (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
+			visitedRules.remove(object);
+			return result; 
 		}
 
 	}
@@ -88,7 +93,11 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 			if (typeRef == null || typeRef.getClassifier() == null) {
 				throw new IllegalStateException("checks are only allowed for linked grammars. Rule: " + object.getName());
 			}
-			return !visitedRules.add(object) || GrammarUtil.isDatatypeRule(object);
+			if (!visitedRules.add(object))
+				return true;
+			Boolean result = GrammarUtil.isDatatypeRule(object);
+			visitedRules.remove(object);
+			return result; 
 		}
 
 	}

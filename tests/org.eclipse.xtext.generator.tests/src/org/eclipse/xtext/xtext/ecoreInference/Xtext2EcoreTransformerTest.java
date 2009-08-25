@@ -1182,4 +1182,16 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		XtextResource resource = getResourceFromString(grammar);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
+	
+	public void testBug_287550_01() throws Exception {
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
+			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
+			"Model: Left | Right;\n" + 
+			"Left: Delegate;\n" + 
+			"Right returns Model: Delegate '=';\n" + 
+			"Delegate returns Left: value=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
+	
 }
