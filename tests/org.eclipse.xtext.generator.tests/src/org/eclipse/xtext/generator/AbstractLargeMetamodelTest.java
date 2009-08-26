@@ -14,7 +14,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class LargeMetamodelTest extends AbstractXtextTests {
+public abstract class AbstractLargeMetamodelTest extends AbstractXtextTests {
 
 //	@Override
 //	protected void setUp() throws Exception {

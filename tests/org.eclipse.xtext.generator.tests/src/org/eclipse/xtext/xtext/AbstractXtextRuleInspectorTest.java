@@ -12,7 +12,7 @@ import org.eclipse.xtext.AbstractRule;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class XtextRuleInspectorTest<Result, Rule extends AbstractRule> extends XtextInspectorTest {
+public abstract class AbstractXtextRuleInspectorTest<Result, Rule extends AbstractRule> extends AbstractXtextInspectorTest {
 
 	public void validateRule(Rule rule) {
 		assertNotNull("rule", rule);
