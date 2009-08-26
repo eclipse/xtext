@@ -12,7 +12,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 
-public class AbstractGenericModuleTest extends TestCase {
+public class GenericModuleTest extends TestCase {
 	
 	public void testSimple() throws Exception {
 		AbstractGenericModule module = new TestModule();
@@ -20,7 +20,7 @@ public class AbstractGenericModuleTest extends TestCase {
 		assertEquals(3,bindings.size());
 		assertTrue(bindings.contains(new AbstractGenericModule.Binding(CharSequence.class, String.class,false,false, false)));
 		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Type.class, Class.class,false,false, false)));
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, AbstractGenericModuleTest.class,false,false, false)));
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(TestCase.class, GenericModuleTest.class,false,false, false)));
 	}
 	
 	public void testOverride() throws Exception {
@@ -130,6 +130,7 @@ public class AbstractGenericModuleTest extends TestCase {
 		Foo.instantiations=0;
 
 		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
 			@SingletonBinding()
 			public Class<Foo> bindFoo() {
 				return Foo.class;
@@ -149,6 +150,7 @@ public class AbstractGenericModuleTest extends TestCase {
 		Foo.instantiations=0;
 		
 		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
 			@SingletonBinding(eager=true)
 			public Class<Foo> bindFoo() {
 				return Foo.class;

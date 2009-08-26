@@ -19,9 +19,11 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.CurrentModelBugTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.JavaContentAssistProcessorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ParserBasedContentAssistProcessorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperAntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DeclarativeSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.LightweightPositionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);

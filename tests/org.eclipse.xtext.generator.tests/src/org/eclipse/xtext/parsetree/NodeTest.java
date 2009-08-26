@@ -13,7 +13,7 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractNodeTest extends AbstractXtextTests {
+public class NodeTest extends AbstractXtextTests {
 
 	private AbstractNode rootNode;
 

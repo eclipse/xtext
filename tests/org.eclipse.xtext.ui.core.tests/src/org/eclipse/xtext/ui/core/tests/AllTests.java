@@ -18,6 +18,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.model.edit.DefaultTextEditComposerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.reconciler.ReplaceRegionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.XtextDamageRepairerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.quickfix.DeclarativeQuickfixProviderTest.class);
       return suite;
    }
 }

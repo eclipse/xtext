@@ -13,7 +13,7 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class InheritanceTest2 extends AbstractGeneratorTest {
+public class AnotherInheritanceTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {

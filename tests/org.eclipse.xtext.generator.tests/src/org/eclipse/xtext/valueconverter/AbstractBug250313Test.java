@@ -23,7 +23,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public abstract class Bug250313 extends AbstractGeneratorTest {
+public abstract class AbstractBug250313Test extends AbstractGeneratorTest {
 
 	private ParserTestHelper helper;
 	private AbstractNode node;
@@ -37,7 +37,7 @@ public abstract class Bug250313 extends AbstractGeneratorTest {
 		with(new Bug250313StandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new MyBug250313RuntimeModule(Bug250313.this));
+				return Guice.createInjector(new MyBug250313RuntimeModule(AbstractBug250313Test.this));
 			}
 		});
 		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY));
@@ -54,16 +54,16 @@ public abstract class Bug250313 extends AbstractGeneratorTest {
 
 	public static class MyBug250313RuntimeModule extends Bug250313RuntimeModule {
 
-		private final Bug250313 test;
+		private final AbstractBug250313Test test;
 
-		public MyBug250313RuntimeModule(Bug250313 test) {
+		public MyBug250313RuntimeModule(AbstractBug250313Test test) {
 			this.test = test;
 		}
 
 		@Override
 		public void configure(Binder binder) {
 			super.configure(binder);
-			binder.bind(Bug250313.class).toInstance(test);
+			binder.bind(AbstractBug250313Test.class).toInstance(test);
 		}
 
 		@Override
@@ -79,7 +79,7 @@ public abstract class Bug250313 extends AbstractGeneratorTest {
 		private Converters delegate;
 
 		@Inject
-		private Bug250313 test;
+		private AbstractBug250313Test test;
 
 		public String toString(Object value, String lexerRule) {
 			return delegate.toString(value, lexerRule);
@@ -395,23 +395,5 @@ public abstract class Bug250313 extends AbstractGeneratorTest {
 		assertWithXtend("bug250313::Child2", "this.children.metaType", model);
 		assertWithXtend("'str'", "this.ref.name", model);
 		assertEquals(lexerRule, 2, convertCallCount);
-	}
-
-	public static class Antlr extends Bug250313 {
-
-		@Override
-		protected IParser getParserUnderTest() {
-			return getAntlrParser();
-		}
-
-	}
-
-	public static class Packrat extends Bug250313 {
-
-		@Override
-		protected IParser getParserUnderTest() {
-			return getPackratParser();
-		}
-
 	}
 }

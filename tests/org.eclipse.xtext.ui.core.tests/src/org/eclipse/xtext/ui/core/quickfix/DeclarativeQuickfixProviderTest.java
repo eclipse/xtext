@@ -19,7 +19,7 @@ import org.eclipse.ui.IMarkerResolution;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class AbstractDeclarativeQuickfixProviderTest extends TestCase {
+public class DeclarativeQuickfixProviderTest extends TestCase {
 
 	private static final int DUMMY_CODE = 42;
 

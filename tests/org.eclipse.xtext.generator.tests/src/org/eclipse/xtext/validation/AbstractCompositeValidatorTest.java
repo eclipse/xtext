@@ -22,15 +22,10 @@ import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFactory;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
-import org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
 
-import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.name.Names;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -194,84 +189,4 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 	}
 	
 	public abstract void testContentsSize();
-	
-	public static class WithEObjectValidator extends AbstractCompositeValidatorTest {
-
-		@Override
-		protected EnumRulesTestLanguageStandaloneSetup createStandaloneSetup() {
-			return new EnumRulesTestLanguageStandaloneSetup() {
-				@Override
-				public Injector createInjector() {
-					return Guice.createInjector(new org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule() {
-						
-						@Override
-						public void configure(Binder binder) {
-							super.configure(binder);
-							binder.bind(boolean.class).annotatedWith(
-									Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(true);
-							binder.bind(EnumRulesTestLanguagePackage.class).toInstance(EnumRulesTestLanguagePackage.eINSTANCE);
-						}
-						
-						@Override
-						public Class<? extends EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
-							return null;
-						}
-						
-					});
-				}
-				
-			};
-		}
-		
-		@Override
-		public void testContentsSize() {
-			EValidator validator = registry.getEValidator(pack);
-			assertNotNull(validator);
-			assertTrue(validator instanceof CompositeEValidator);
-			CompositeEValidator composite = (CompositeEValidator) validator;
-			Collection<EValidatorEqualitySupport> contents = composite.getContents();
-			assertEquals(3, contents.size());
-		}
-		
-	}
-	
-	public static class WithoutEObjectValidator extends AbstractCompositeValidatorTest {
-
-		@Override
-		protected EnumRulesTestLanguageStandaloneSetup createStandaloneSetup() {
-			return new EnumRulesTestLanguageStandaloneSetup() {
-				@Override
-				public Injector createInjector() {
-					return Guice.createInjector(new org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule() {
-						
-						@Override
-						public void configure(Binder binder) {
-							super.configure(binder);
-							binder.bind(boolean.class).annotatedWith(
-									Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
-							binder.bind(EnumRulesTestLanguagePackage.class).toInstance(EnumRulesTestLanguagePackage.eINSTANCE);
-						}
-						
-						@Override
-						public Class<? extends EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
-							return null;
-						}
-						
-					});
-				}
-				
-			};
-		}
-		
-		@Override
-		public void testContentsSize() {
-			EValidator validator = registry.getEValidator(pack);
-			assertNotNull(validator);
-			assertTrue(validator instanceof CompositeEValidator);
-			CompositeEValidator composite = (CompositeEValidator) validator;
-			Collection<EValidatorEqualitySupport> contents = composite.getContents();
-			assertEquals(2, contents.size());
-		}
-		
-	}
 }

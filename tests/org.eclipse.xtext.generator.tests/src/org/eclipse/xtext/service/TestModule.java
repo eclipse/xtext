@@ -22,6 +22,6 @@ public class TestModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends TestCase> bindTestCase() {
-		return AbstractGenericModuleTest.class;
+		return GenericModuleTest.class;
 	}
 }

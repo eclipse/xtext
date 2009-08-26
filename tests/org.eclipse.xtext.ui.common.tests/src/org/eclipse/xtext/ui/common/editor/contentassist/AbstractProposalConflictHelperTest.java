@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AntlrProposalConflictHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -121,14 +120,5 @@ public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTe
 	
 	public void testGrammarID_GrammarID() {
 		assertTrue(helper.existsConflict("foo.bar", "zonk.stuff"));
-	}
-	
-	public static class Antlr extends AbstractProposalConflictHelperTest {
-
-		@Override
-		protected ProposalConflictHelper createProposalConflictHelper() {
-			return get(AntlrProposalConflictHelper.class);
-		}
-		
 	}
 }
