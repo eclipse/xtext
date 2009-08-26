@@ -35,7 +35,7 @@ import com.google.inject.name.Names;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class CompositeValidatorTest extends AbstractXtextTests {
+public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests {
 
 	protected EValidator.Registry registry;
 	protected EnumRulesTestLanguagePackage pack;
@@ -195,7 +195,7 @@ public abstract class CompositeValidatorTest extends AbstractXtextTests {
 	
 	public abstract void testContentsSize();
 	
-	public static class WithEObjectValidator extends CompositeValidatorTest {
+	public static class WithEObjectValidator extends AbstractCompositeValidatorTest {
 
 		@Override
 		protected EnumRulesTestLanguageStandaloneSetup createStandaloneSetup() {
@@ -235,7 +235,7 @@ public abstract class CompositeValidatorTest extends AbstractXtextTests {
 		
 	}
 	
-	public static class WithoutEObjectValidator extends CompositeValidatorTest {
+	public static class WithoutEObjectValidator extends AbstractCompositeValidatorTest {
 
 		@Override
 		protected EnumRulesTestLanguageStandaloneSetup createStandaloneSetup() {

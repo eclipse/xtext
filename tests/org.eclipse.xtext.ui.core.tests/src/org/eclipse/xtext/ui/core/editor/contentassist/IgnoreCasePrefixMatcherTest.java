@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher.IgnoreCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class IgnoreCasePrefixMatcherTest extends PrefixMatcherTest<PrefixMatcher.IgnoreCase> {
+public class IgnoreCasePrefixMatcherTest extends AbstractPrefixMatcherTest<PrefixMatcher.IgnoreCase> {
 
 	@Override
 	protected IgnoreCase createMatcher() {

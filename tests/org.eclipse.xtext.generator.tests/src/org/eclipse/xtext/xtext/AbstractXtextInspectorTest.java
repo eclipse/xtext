@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class XtextInspectorTest extends AbstractXtextTests implements ValidationMessageAcceptor  {
+public abstract class AbstractXtextInspectorTest extends AbstractXtextTests implements ValidationMessageAcceptor  {
 
 	protected List<Triple<String, EObject, Integer>> warnings;
 	protected List<Triple<String, EObject, Integer>> errors;

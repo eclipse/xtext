@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class XtendContentAssistProcessorTest extends AbstractContentAssistProcessorTest {
+public abstract class AbstractXtendContentAssistProcessorTest extends AbstractContentAssistProcessorTest {
 
 	@Override
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup setup) throws Exception {
