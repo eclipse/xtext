@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTran
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class AbstractDeclarativeSemanticModelTransformerTest extends AbstractXtextTests {
+public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests {
 
 	private root theRoot;
 	private XtextResource resource;
