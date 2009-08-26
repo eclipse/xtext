@@ -9,7 +9,6 @@ package org.eclipse.xtext.enumrules;
 
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -49,22 +48,6 @@ public abstract class AbstractEnumAndReferenceTest extends AbstractXtextTests {
 		CompositeNode node = nodeAdapter.getParserNode();
 		assertNotNull(node);
 		assertTrue(node.getChildren().size() == 7); // 3 hidden WS + 4 visible LeafNodes
-	}
-	
-	public static class Antlr extends AbstractEnumAndReferenceTest {
-		
-		@Override
-		protected IParser getParser() {
-			return getAntlrParser();
-		}
-	}
-	
-	public static class Packrat extends AbstractEnumAndReferenceTest {
-		
-		@Override
-		protected IParser getParser() {
-			return getPackratParser();
-		}
 	}
 	
 }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.actions;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -42,20 +41,6 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	protected void tearDown() throws Exception {
 		grammarAccess = null;
 		super.tearDown();
-	}
-
-	public static class Antlr extends AbstractParserTest {
-		@Override
-		protected IParser getParser() {
-			return getAntlrParser();
-		}
-	}
-
-	public static class Packrat extends AbstractParserTest {
-		@Override
-		protected IParser getParser() {
-			return getPackratParser();
-		}
 	}
 
 	/**

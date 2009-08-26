@@ -24,7 +24,7 @@ import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public class AbstractDeclarativeValidatorTest extends TestCase {
+public class DeclarativeValidatorTest extends TestCase {
 
 	private ValidationTestHelper helper;
 
