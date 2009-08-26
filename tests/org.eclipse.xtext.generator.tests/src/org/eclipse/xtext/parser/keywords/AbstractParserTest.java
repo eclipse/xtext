@@ -13,9 +13,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
-import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -106,23 +104,5 @@ public abstract class AbstractParserTest extends AbstractGeneratorTest {
 		XtextResource resource = helper.getResourceFromString("\"d\"");
 		assertTrue(resource.getErrors().isEmpty());
 		checkModel(resource, eighth);
-	}
-	
-	public static class Antlr extends AbstractParserTest {
-
-		@Override
-		protected IAntlrParser getParserUnderTest() {
-			return getAntlrParser();
-		}
-
-	}
-
-	public static class Packrat extends AbstractParserTest {
-
-		@Override
-		protected IPackratParser getParserUnderTest() {
-			return getPackratParser();
-		}
-
 	}
 }

@@ -44,7 +44,7 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage;
 import org.eclipse.xtext.testlanguages.TestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
-import org.eclipse.xtext.valueconverter.Bug250313;
+import org.eclipse.xtext.valueconverter.AbstractBug250313Test;
 import org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTestLanguage;
 
 /**
@@ -78,7 +78,7 @@ public class GenerateAllTestGrammars {
 			OptionalEmptyTestLanguage.class,
 			ReferenceGrammarTestLanguage.class,
 			LookaheadTestLanguage.class,
-			Bug250313.class,
+			AbstractBug250313Test.class,
 			FowlerDslTestLanguage.class,
 			TreeTestLanguage.class,
 			ImportUriTestLanguage.class,

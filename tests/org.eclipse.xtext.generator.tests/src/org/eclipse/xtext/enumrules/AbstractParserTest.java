@@ -12,7 +12,6 @@ import org.eclipse.xtext.enumrules.enumRulesTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
 import org.eclipse.xtext.enumrules.enums.EnumsPackage;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 
 /**
@@ -35,20 +34,6 @@ public abstract class AbstractParserTest extends AbstractEnumRulesTest {
 		super.tearDown();
 	}
 
-	public static class Antlr extends AbstractParserTest {
-		@Override
-		protected IParser getParser() {
-			return getAntlrParser();
-		}
-	}
-
-	public static class Packrat extends AbstractParserTest {
-		@Override
-		protected IParser getParser() {
-			return getPackratParser();
-		}
-	}
-	
 	public void testParseSameName() throws Exception {
 		String modelAsString = "existing SameName";
 		Model model = (Model) helper.getModel(modelAsString);
