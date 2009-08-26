@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.ParsetreeFactory;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsetreeUtilTest2 extends AbstractXtextTests {
+public class ParsetreeUtilTest extends AbstractXtextTests {
 
 	private String modelAsString;
 	private Grammar grammar;

@@ -59,18 +59,4 @@ public abstract class AbstractParsetreeUtilTest extends TestCase {
 	}
 	
 	protected abstract char[] getSeparator();
-	
-	public static class Windows extends AbstractParsetreeUtilTest {
-		@Override
-		protected char[] getSeparator() {
-			return "\r\n".toCharArray();
-		}
-	}
-	
-	public static class LinuxAndMac extends AbstractParsetreeUtilTest {
-		@Override
-		protected char[] getSeparator() {
-			return "\n".toCharArray();
-		}
-	}
 }

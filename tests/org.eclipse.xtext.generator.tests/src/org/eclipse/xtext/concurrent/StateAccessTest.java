@@ -18,7 +18,7 @@ import junit.framework.TestCase;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class AbstractStateAccessTest extends TestCase {
+public class StateAccessTest extends TestCase {
 
 	public static class Foo {
 		public String val = "foo";
