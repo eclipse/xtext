@@ -33,19 +33,16 @@ public class XtextFormatterTest extends AbstractGeneratorTest {
 		// System.out.println(r.getWarnings());
 		// System.out.println(r.getErrors());
 		ByteArrayOutputStream formatted = new ByteArrayOutputStream();
-		ByteArrayOutputStream expected = new ByteArrayOutputStream();
 		Map<String, Object> opt = new HashMap<String, Object>();
 		opt.put(XtextResource.OPTION_FORMAT, Boolean.TRUE);
 		r.save(formatted, opt);
 		// System.out.println(EmfFormatter.listToStr(r.getContents()));
 		// System.out.println(formatted.toString());
 
-		InputStream in = new BufferedInputStream(new FileInputStream("src/"
-				+ path + "/XtextFormatterExpected.xtext"));
-		int i;
-		while ((i = in.read()) >= 0)
-			expected.write(i);
-		assertEquals(expected.toString(), formatted.toString());
+		URI expectedURI = URI.createURI("classpath:/" + path + "/XtextFormatterExpected.xtext");
+		XtextResource expectedResource = (XtextResource) resourceSet.getResource(expectedURI, true);
+		String expected = expectedResource.getParseResult().getRootNode().serialize();
+		assertEquals(expected, formatted.toString());
 	}
 
 }

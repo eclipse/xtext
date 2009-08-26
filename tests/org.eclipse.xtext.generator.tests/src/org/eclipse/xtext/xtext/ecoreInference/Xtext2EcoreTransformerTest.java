@@ -1194,4 +1194,30 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
 	
+	public void testBug_287698_01() throws Exception {
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
+		"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
+		"Model returns Namespace: {Model} elements+=NamespaceElement;\n" + 
+		"NamespaceElement: Type | Namespace ;\n" + 
+		"Type: 'type' name=ID ';';\n" + 
+		"Namespace: 'namespace' name=ID '{' elements+=Type '}';\n";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
+	
+	public void testBug_287698_02() throws Exception {
+		String grammar = "grammar language with org.eclipse.xtext.common.Terminals\n" +
+		"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
+		"Model returns Namespace: {Model} elements+=(Namespace | Something); \n" + 
+		"Root: Type | NamespaceElement;\n" + 
+		"Type: 'type' name=ID ';';\n" + 
+		"NamespaceElement: Namespace | Something;\n" + 
+		"Namespace: 'namespace' name=ID '{' elements+=SubSomething '}';\n" + 
+		"Something: ReturnModel | SubSomething;\n" + 
+		"SubSomething: 'something' name=ID ';';\n" + 
+		"ReturnModel returns Model: name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
+	
 }
