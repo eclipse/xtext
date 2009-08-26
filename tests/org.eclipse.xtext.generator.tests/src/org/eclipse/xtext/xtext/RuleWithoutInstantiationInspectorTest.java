@@ -181,4 +181,15 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
+	public void testBug_287735_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: x=X;\n" +
+				"X : Y | Z;\n";
+		Grammar grammar = getGrammarWithErrors(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
 }
