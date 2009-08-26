@@ -25,7 +25,7 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParserTest extends AbstractXtextTests {
+public abstract class AbstractParserTest extends AbstractXtextTests {
 
 	private ActionTestLanguageGrammarAccess grammarAccess;
 	private ParserTestHelper helper;
@@ -44,14 +44,14 @@ public abstract class ParserTest extends AbstractXtextTests {
 		super.tearDown();
 	}
 
-	public static class Antlr extends ParserTest {
+	public static class Antlr extends AbstractParserTest {
 		@Override
 		protected IParser getParser() {
 			return getAntlrParser();
 		}
 	}
 
-	public static class Packrat extends ParserTest {
+	public static class Packrat extends AbstractParserTest {
 		@Override
 		protected IParser getParser() {
 			return getPackratParser();

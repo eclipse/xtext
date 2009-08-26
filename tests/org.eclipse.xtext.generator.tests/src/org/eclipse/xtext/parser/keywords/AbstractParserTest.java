@@ -22,7 +22,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParserTest extends AbstractGeneratorTest {
+public abstract class AbstractParserTest extends AbstractGeneratorTest {
 
 	private ParserTestHelper helper;
 	private EStructuralFeature first;
@@ -108,7 +108,7 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 		checkModel(resource, eighth);
 	}
 	
-	public static class Antlr extends ParserTest {
+	public static class Antlr extends AbstractParserTest {
 
 		@Override
 		protected IAntlrParser getParserUnderTest() {
@@ -117,7 +117,7 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 
 	}
 
-	public static class Packrat extends ParserTest {
+	public static class Packrat extends AbstractParserTest {
 
 		@Override
 		protected IPackratParser getParserUnderTest() {

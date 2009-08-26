@@ -14,7 +14,7 @@ import org.eclipse.xtext.ParserRule;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RuleWithoutInstantiationInspectorTest extends XtextRuleInspectorTest<Boolean, ParserRule> {
+public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInspectorTest<Boolean, ParserRule> {
 
 	@Override
 	protected XtextRuleInspector<Boolean, ParserRule> createInspector() {
