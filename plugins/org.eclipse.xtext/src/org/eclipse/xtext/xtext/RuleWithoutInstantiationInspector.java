@@ -90,7 +90,7 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 	public Boolean caseRuleCall(RuleCall object) {
 		if (GrammarUtil.isOptionalCardinality(object))
 			return Boolean.FALSE;
-		return (object.getRule() instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) object.getRule()));
+		return object.getRule() == null || (object.getRule() instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) object.getRule()));
 	}
 
 }
