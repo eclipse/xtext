@@ -20,7 +20,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
  * TODO reactivate testcase and move to test plugin, that is not hosted at eclipse
  */
 @SuppressWarnings("unused")
-public abstract class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
+public abstract class AbstractTerminalRuleToLexerBodyTest extends AbstractXtextTests {
 
 	private Grammar grammar;
 	private TerminalRule adaString;

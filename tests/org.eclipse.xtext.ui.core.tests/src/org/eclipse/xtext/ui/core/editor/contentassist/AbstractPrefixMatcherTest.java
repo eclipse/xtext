@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class PrefixMatcherTest<Matcher extends PrefixMatcher> extends TestCase {
+public abstract class AbstractPrefixMatcherTest<Matcher extends PrefixMatcher> extends TestCase {
 
 	protected Matcher matcher;
 

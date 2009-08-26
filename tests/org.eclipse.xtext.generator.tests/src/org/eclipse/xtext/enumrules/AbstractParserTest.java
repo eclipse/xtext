@@ -18,7 +18,7 @@ import org.eclipse.xtext.parser.ParserTestHelper;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParserTest extends AbstractEnumRulesTest {
+public abstract class AbstractParserTest extends AbstractEnumRulesTest {
 
 	private ParserTestHelper helper;
 
@@ -35,14 +35,14 @@ public abstract class ParserTest extends AbstractEnumRulesTest {
 		super.tearDown();
 	}
 
-	public static class Antlr extends ParserTest {
+	public static class Antlr extends AbstractParserTest {
 		@Override
 		protected IParser getParser() {
 			return getAntlrParser();
 		}
 	}
 
-	public static class Packrat extends ParserTest {
+	public static class Packrat extends AbstractParserTest {
 		@Override
 		protected IParser getParser() {
 			return getPackratParser();

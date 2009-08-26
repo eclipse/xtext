@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher.CamelCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CamelCasePrefixMatcherTest extends PrefixMatcherTest<PrefixMatcher.CamelCase>{
+public class CamelCasePrefixMatcherTest extends AbstractPrefixMatcherTest<PrefixMatcher.CamelCase>{
 
 	@Override
 	protected CamelCase createMatcher() {

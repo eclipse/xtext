@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParsetreeUtilTest extends TestCase {
+public abstract class AbstractParsetreeUtilTest extends TestCase {
 
 	private char[] separator;
 
@@ -60,14 +60,14 @@ public abstract class ParsetreeUtilTest extends TestCase {
 	
 	protected abstract char[] getSeparator();
 	
-	public static class Windows extends ParsetreeUtilTest {
+	public static class Windows extends AbstractParsetreeUtilTest {
 		@Override
 		protected char[] getSeparator() {
 			return "\r\n".toCharArray();
 		}
 	}
 	
-	public static class LinuxAndMac extends ParsetreeUtilTest {
+	public static class LinuxAndMac extends AbstractParsetreeUtilTest {
 		@Override
 		protected char[] getSeparator() {
 			return "\n".toCharArray();

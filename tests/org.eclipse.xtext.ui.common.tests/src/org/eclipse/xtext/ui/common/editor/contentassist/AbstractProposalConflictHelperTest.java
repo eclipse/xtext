@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AntlrProposalConfl
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ProposalConflictHelperTest extends AbstractXtextTests {
+public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTests {
 
 	private IContentAssistProcessorTestSetup setup;
 	private ProposalConflictHelper helper;
@@ -123,7 +123,7 @@ public abstract class ProposalConflictHelperTest extends AbstractXtextTests {
 		assertTrue(helper.existsConflict("foo.bar", "zonk.stuff"));
 	}
 	
-	public static class Antlr extends ProposalConflictHelperTest {
+	public static class Antlr extends AbstractProposalConflictHelperTest {
 
 		@Override
 		protected ProposalConflictHelper createProposalConflictHelper() {
