@@ -15,7 +15,7 @@ import org.eclipse.xtext.util.Pair;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ValidEntryRuleInspectorTest extends XtextRuleInspectorTest<Pair<Boolean, Boolean>, ParserRule>{
+public class ValidEntryRuleInspectorTest extends AbstractXtextRuleInspectorTest<Pair<Boolean, Boolean>, ParserRule>{
 
 	@Override
 	protected XtextRuleInspector<Pair<Boolean, Boolean>, ParserRule> createInspector() {

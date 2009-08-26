@@ -14,7 +14,7 @@ import org.eclipse.xtext.ParserRule;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OverriddenValueInspectorTest extends XtextRuleInspectorTest<Void, ParserRule> {
+public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest<Void, ParserRule> {
 
 	@Override
 	protected XtextRuleInspector<Void, ParserRule> createInspector() {

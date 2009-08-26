@@ -15,7 +15,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
-public abstract class EnumAndReferenceTest extends AbstractXtextTests {
+public abstract class AbstractEnumAndReferenceTest extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 
@@ -51,7 +51,7 @@ public abstract class EnumAndReferenceTest extends AbstractXtextTests {
 		assertTrue(node.getChildren().size() == 7); // 3 hidden WS + 4 visible LeafNodes
 	}
 	
-	public static class Antlr extends EnumAndReferenceTest {
+	public static class Antlr extends AbstractEnumAndReferenceTest {
 		
 		@Override
 		protected IParser getParser() {
@@ -59,7 +59,7 @@ public abstract class EnumAndReferenceTest extends AbstractXtextTests {
 		}
 	}
 	
-	public static class Packrat extends EnumAndReferenceTest {
+	public static class Packrat extends AbstractEnumAndReferenceTest {
 		
 		@Override
 		protected IParser getParser() {
