@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
@@ -25,6 +26,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
+
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -177,6 +181,51 @@ public class TypeHierarchyHelper {
 		liftUpFeaturesRecursively(rootInfos, featuresToRemove);
 		for(Map.Entry<EClass, Collection<EStructuralFeature>> entry: featuresToRemove.entrySet()) {
 			entry.getKey().getEStructuralFeatures().removeAll(entry.getValue());
+		}
+		traversedTypes.clear();
+		pushFeaturesUp(infos.getAllEClassInfos());
+	}
+
+	private void pushFeaturesUp(Collection<EClassInfo> infos) {
+		Set<EClass> traversedClasses = Sets.newHashSet();
+		for(EClassInfo info: infos)
+			pushFeaturesUp(info, traversedClasses);
+	}
+
+	private void pushFeaturesUp(EClassInfo info, Collection<EClass> traversedClasses) {
+		EClass eClass = info.getEClass();
+		if (info.isGenerated()) {
+			if (traversedClasses.add(eClass)) {
+				if (eClass.getESuperTypes().isEmpty())
+					return;
+				for(EClass superType: eClass.getESuperTypes()) {
+					EClassInfo superInfo = (EClassInfo) infos.getInfoOrNull(superType);
+					pushFeaturesUp(superInfo, traversedClasses);
+				}
+				Map<String, EStructuralFeature> allFeatures = Maps.newHashMap();
+				Set<String> skippedNames = Sets.newHashSet();
+				for(EStructuralFeature feature: eClass.getEAllStructuralFeatures()) {
+					if (feature.getEContainingClass() != eClass) {
+						if (allFeatures.containsKey(feature.getName())) {
+							allFeatures.remove(feature.getName());
+						} else if (skippedNames.add(feature.getName())) {
+							allFeatures.put(feature.getName(), feature);
+						}
+					}
+				}
+				Iterator<EStructuralFeature> iter = eClass.getEStructuralFeatures().iterator();
+				while(iter.hasNext()) {
+					EStructuralFeature declared = iter.next();
+					EStructuralFeature existing = allFeatures.get(declared.getName());
+					if (existing != null) {
+						EClassifier compatibleType = EcoreUtil2.getCompatibleType(declared.getEType(), existing.getEType());
+						if (compatibleType != null) {
+							iter.remove();
+							existing.setEType(compatibleType);
+						}
+					}
+				}
+			}
 		}
 	}
 
