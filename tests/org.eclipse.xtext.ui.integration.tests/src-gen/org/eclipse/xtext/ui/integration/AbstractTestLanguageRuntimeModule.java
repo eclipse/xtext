@@ -33,26 +33,6 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 		return org.eclipse.xtext.ui.integration.parseTreeConstruction.TestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return AbstractTestLanguageRuntimeModule.class.getClassLoader();
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator> bindTestLanguageCheckValidator() {
-		return org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.ui.integration.parser.antlr.TestLanguageParser.class;
