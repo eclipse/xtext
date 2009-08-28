@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.core.quickfix.Fix;
 
 public class DomainmodelQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
 
-	@Fix(code = DomainmodelJavaValidator.CAPITAL_TYPE_NAME, label = "Capitalize name", description = "Capitalize name of type")
+	@Fix(code = DomainmodelJavaValidator.INVALID_TYPE_NAME, label = "Capitalize name", description = "Capitalize name of type")
 	public void fixName(Type type, IMarker marker) {
 		type.setName(type.getName().toUpperCase());
 	}
