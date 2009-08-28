@@ -56,11 +56,11 @@ public class DomainmodelJavaValidator
   }
 }
 
-h3(#quickfixes). Quckfixes
+h3(#quickfixes). Quickfixes
 
-For validations written using the @AbstractDeclarativeValidator@ it is possible to provide corresponding quickfixes in the editor. To be able to implement a quickfix for a given diagnostic (a warning or error) the underlying _cause_ of the diagnostic must be known. I.e. what problem does the diagnostic represent? As we don't want to deduce this from the diagnostic's error message we associate a problem specific _code_ with the diagnostic.
+For validations written using the @AbstractDeclarativeValidator@ it is possible to provide corresponding quickfixes in the editor. To be able to implement a quickfix for a given diagnostic (a warning or error) the underlying _cause_ of the diagnostic must be known (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn't know what needs to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem specific _code_ with the diagnostic.
 
-In the following example (from ${org.eclipse.xtext.example.domainmodel/src/org.eclipse.xtext.example.validation.DomainmodelJavaValidator}) the diagnostic's _code_ is given by the last argument to the @warning()@ method and it is a reference to the static field @INVALID_TYPE_NAME@ of type @int@ in the validator class.
+In the following example (from ${org.eclipse.xtext.example.domainmodel/src/org.eclipse.xtext.example.validation.DomainmodelJavaValidator}) the diagnostic's _code_ is given by the last argument to the @warning()@ method and it is a reference to the static @int@ field @INVALID_TYPE_NAME@ in the validator class.
 
 bc.. 
       warning("Name should start with a capital", 
@@ -80,7 +80,9 @@ public class DomainmodelQuickfixProvider extends AbstractDeclarativeQuickfixProv
   }
 }
 
-p. By using the correct signature (see below) and annotating the method with the @Fix@ annotation referencing the code (here @INVALID_TYPE_NAME@) we specified in the validator, Xtext knows that this method implements a fix for the problem. This thus also allows us to register multiple fixes for the same problem. The ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.quickfix.Fix} annotation accepts the following arguments:
+p. By using the correct signature (see below) and annotating the method with the @Fix@ annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
+
+The ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.quickfix.Fix} annotation accepts the following arguments:
 
 * *code* - the code of the validation this fix is applicable to
 * *label* - the label text to display for this fix in the editor
@@ -89,7 +91,7 @@ p. By using the correct signature (see below) and annotating the method with the
 
 In addition to the @Fix@ annotation our fix method also needs to have the correct signature: Its first argument needs to be of a type which is compatible with the type of the object the validation was created for (the validation's _source_) and its second argument is of type _IMarker_.
 
-The fix method will be invoked inside a modification transaction and the first argument will be passed as the actual object the validation was created for and the second argument will be passed as the Eclipse marker that corresponds to the validation. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the editor's text will be updated accordingly. If the method fails (throws an exception) the change will not be committed.
+The fix method will be invoked inside a modification transaction and the first argument will be passed as the actual object the validation was created for and the second argument will be passed as the Eclipse marker that corresponds to the validation. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor's content will be updated accordingly. If the method fails (throws an exception) the change will not be committed.
 
 h3(#check_based_validation). Validation with the Check language
 
