@@ -8,5 +8,3 @@ Export-Package: org.apache.log4j;version="1.2.15";uses:="org.apache.log4j.or,org
 Eclipse-BuddyPolicy: registered
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: http://www.apache.org
-Bundle-ClassPath: bin/,
- .
