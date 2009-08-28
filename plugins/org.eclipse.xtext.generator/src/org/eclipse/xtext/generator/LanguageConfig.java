@@ -49,7 +49,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 
 		public String apply(IGeneratorFragment from) {
 			if (from instanceof CompositeGeneratorFragment) {
-				return Strings.toString(((CompositeGeneratorFragment)from).fragments, this, delim);
+				return Strings.toString(((CompositeGeneratorFragment) from).fragments, this, delim);
 			}
 			return from.getClass().getSimpleName();
 		}
@@ -59,20 +59,21 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	private Grammar grammar;
 
 	private List<String> fileExtensions = new ArrayList<String>();
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (LOG.isInfoEnabled()) {
-			LOG.info("generating infrastructure for "+grammar.getName()+" with fragments : "+Strings.toString(this.fragments, new ToStringFunction(", "), ", "));
+			LOG.info("generating infrastructure for " + grammar.getName() + " with fragments : "
+					+ Strings.toString(this.fragments, new ToStringFunction(", "), ", "));
 		}
 		super.generate(grammar, ctx);
 	}
-	
+
 	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
 		if (getGrammar() == null) {
-			issues.addError("property 'uri' is mandatory for element 'language'.",this);
+			issues.addError("property 'uri' is mandatory for element 'language'.", this);
 		}
 	}
 
@@ -117,8 +118,12 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			DiagnosticChain chain = new DiagnosticChain() {
 
 				public void add(Diagnostic diagnostic) {
-					if (diagnostic.getSeverity() == Diagnostic.ERROR)
-						throw new IllegalStateException(diagnostic.getMessage());
+					if (diagnostic.getSeverity() == Diagnostic.ERROR) {
+						if (diagnostic.getException() == null)
+							throw new IllegalStateException(diagnostic.getMessage());
+						else
+							throw new IllegalStateException(diagnostic.getMessage(), diagnostic.getException());
+					}
 				}
 
 				public void addAll(Diagnostic diagnostic) {
