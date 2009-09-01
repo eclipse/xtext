@@ -152,5 +152,14 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		};
 	}
 
+	public ISetup getBug287941TestLanguageSetup() {
+		return new Bug286935TestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new Bug286935TestLanguageUiModule(), 
+						new UIPluginModule(Activator.getDefault()));
+			}
+		};
+	}
 
 }

@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class LookAheadContentAssistTestLanguageParser extends org.eclipse.xtext.
 	@Inject
 	private LookAheadContentAssistTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer lexer = new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer(in);
+		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser parser = new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class LookAheadContentAssistTestLanguageParser extends org.eclipse.xtext.
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class LookAheadContentAssistTestLanguageParser extends org.eclipse.xtext.
 	
 	public void setGrammarAccess(LookAheadContentAssistTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

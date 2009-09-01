@@ -816,6 +816,20 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     				"final");
     }
     
+    public void testBug287941_01() throws Exception {
+    	newBuilder(setup.getBug287941TestLanguageSetup()).append(
+    			"import \"classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug287941TestModel.ecore\"\n" + 
+    			"select t from Test as t \n" + 
+    			"	where t. testAttr like \"\"").assertTextAtCursorPosition("t. testAttr", 3, "testAttr", "testRef");
+    }
+    
+    public void testBug287941_02() throws Exception {
+    	newBuilder(setup.getBug287941TestLanguageSetup()).append(
+    			"import \"classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug287941TestModel.ecore\"\n" + 
+    			"select t from Test as t \n" + 
+    			"	where t.testAttr like \"\"").assertTextAtCursorPosition("t.testAttr", 2, "testAttr", "testRef", ".");
+    }
+    
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);

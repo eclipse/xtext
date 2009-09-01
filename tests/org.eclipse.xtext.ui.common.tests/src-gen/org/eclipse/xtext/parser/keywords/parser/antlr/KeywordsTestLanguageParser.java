@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class KeywordsTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer lexer = new org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer(in);
+		org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageParser parser = new org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class KeywordsTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class KeywordsTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 	
 	public void setGrammarAccess(KeywordsTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

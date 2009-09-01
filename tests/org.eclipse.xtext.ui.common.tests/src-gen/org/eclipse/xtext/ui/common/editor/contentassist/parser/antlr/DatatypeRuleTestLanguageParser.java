@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.services.DatatypeRuleTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class DatatypeRuleTestLanguageParser extends org.eclipse.xtext.parser.ant
 	@Inject
 	private DatatypeRuleTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer lexer = new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer(in);
+		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageParser parser = new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class DatatypeRuleTestLanguageParser extends org.eclipse.xtext.parser.ant
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class DatatypeRuleTestLanguageParser extends org.eclipse.xtext.parser.ant
 	
 	public void setGrammarAccess(DatatypeRuleTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalDatatypeRuleTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

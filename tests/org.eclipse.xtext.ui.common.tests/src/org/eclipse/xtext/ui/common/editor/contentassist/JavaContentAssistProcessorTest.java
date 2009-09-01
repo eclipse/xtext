@@ -289,4 +289,20 @@ public class JavaContentAssistProcessorTest extends AbstractContentAssistProcess
     				"stateName", 
     				"\"Label\""); // "final" will not be proposed
     }
+    
+    @Override
+	public void testBug287941_01() throws Exception {
+    	newBuilder(setup.getBug287941TestLanguageSetup()).append(
+    			"import \"classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug287941TestModel.ecore\"\n" + 
+    			"select t from Test as t \n" + 
+    			"	where t. testAttr like \"\"").assertTextAtCursorPosition("t. testAttr", 3, "testAttr");
+    }
+    
+    @Override
+	public void testBug287941_02() throws Exception {
+    	newBuilder(setup.getBug287941TestLanguageSetup()).append(
+    			"import \"classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug287941TestModel.ecore\"\n" + 
+    			"select t from Test as t \n" + 
+    			"	where t.testAttr like \"\"").assertTextAtCursorPosition("t.testAttr", 2, "testAttr", ".");
+    }
 }

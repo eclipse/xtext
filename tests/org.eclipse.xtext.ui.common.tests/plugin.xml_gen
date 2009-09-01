@@ -359,6 +359,124 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/tmf/tests/2009/bug287941TestLanguage" 
+       class = "org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.Bug287941TestLanguagePackage"
+       genModel = "org/eclipse/xtext/ui/common/editor/contentassist/Bug287941TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="bug287941testlanguage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage"
+            name="Bug287941TestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage"
+            name="Bug287941TestLanguage"
+            category="org.eclipse.xtext.languages">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_Bug287941TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_Bug287941TestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage"
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_Bug287941TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_Bug287941TestLanguage"
+            label="Bug287941TestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="bug287941testlanguage">
+		</parser>
+	</extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest" 
        class = "org.eclipse.xtext.ui.common.editor.contentassist.contentAssistContextTest.ContentAssistContextTestPackage"
        genModel = "org/eclipse/xtext/ui/common/editor/contentassist/ContentAssistContextTestLanguage.genmodel" /> 
