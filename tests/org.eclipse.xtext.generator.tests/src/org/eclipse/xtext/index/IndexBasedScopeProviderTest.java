@@ -303,8 +303,8 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"}" +
 				"bar {" +
 				"  entity Bar{}" +
-				"}" +
-		"}"), URI.createURI("withoutwildcard.indextestlanguage"));
+				"}"
+		), URI.createURI("withoutwildcard.indextestlanguage"));
 		IndexFeederImpl feeder = new IndexFeederImpl(store);
 		indexer.resourceChanged(resource, feeder);
 		feeder.commit();

@@ -56,7 +56,7 @@ public class NodeUtilTest extends AbstractGeneratorTest {
 	
 	
 	public void testGetAllContents() throws Exception {
-		CompositeNode rootNode = getRootNode("foo");
+		CompositeNode rootNode = getRootNodeAndExpect("foo", 1);
 		Iterable<AbstractNode> contents = NodeUtil.getAllContents(rootNode);
 		Iterator<AbstractNode> iterator = contents.iterator();
 		List<AbstractNode> expected = getAllNodes(rootNode, new ArrayList<AbstractNode>());

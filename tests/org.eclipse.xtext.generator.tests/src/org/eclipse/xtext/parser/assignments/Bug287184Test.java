@@ -53,7 +53,7 @@ public class Bug287184Test extends AbstractXtextTests {
 	
 	public void testBug287184_06() throws Exception {
 		String modelAsText = "model ID detail ID;";
-		Resource res = getResourceFromString(modelAsText);
+		Resource res = getResourceFromStringAndExpect(modelAsText, 2);
 		assertEquals(res.getErrors().toString(), 2, res.getErrors().size());
 	}
 	

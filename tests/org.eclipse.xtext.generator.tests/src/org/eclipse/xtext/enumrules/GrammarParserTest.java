@@ -231,7 +231,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/9'\n" +
 			"Model: enumValue=ExistingEnum;\n" +
 			"enum ExistingEnum: SameName | Absent | SameName;";
-		Grammar grammar = (Grammar) getModel(modelAsString);
+		Grammar grammar = (Grammar) getModelAndExpect(modelAsString, 1);
 		assertEquals(grammar.eResource().getErrors().toString(), 1, grammar.eResource().getErrors().size());
 		TransformationDiagnostic diag = (TransformationDiagnostic) grammar.eResource().getErrors().get(0);
 		int offset = diag.getOffset();
@@ -273,7 +273,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/11'\n" +
 			"Model: enumValue=ExistingEnum;\n" +
 			"enum ExistingEnum: SameName;";
-		Grammar grammar = (Grammar) getModel(modelAsString);
+		Grammar grammar = (Grammar) getModelAndExpect(modelAsString, 1);
 		assertEquals(grammar.eResource().getErrors().toString(), 1, grammar.eResource().getErrors().size());
 		TransformationDiagnostic diag = (TransformationDiagnostic) grammar.eResource().getErrors().get(0);
 		int offset = diag.getOffset();

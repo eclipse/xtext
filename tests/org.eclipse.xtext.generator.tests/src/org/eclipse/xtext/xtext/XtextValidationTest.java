@@ -383,10 +383,10 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 	}
 	
 	public void testBug_280413_01() throws Exception {
-		XtextResource resource = getResourceFromString(
+		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
 				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
-				"ParserRule returns xtext::ParserRule: name = ID;");
+				"ParserRule returns xtext::ParserRule: name = ID;", 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -427,11 +427,11 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 	}
 	
 	public void testBug_281660() throws Exception {
-		XtextResource resource = getResourceFromString(
+		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
 				"RuleA : foo += [RuleB] ('->' foo+=RuleB)*;\n" +
-				"RuleB : 'holla' name=ID;");
+				"RuleB : 'holla' name=ID;", 1);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().size()==1);
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 

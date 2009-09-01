@@ -74,7 +74,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 
 	public void testErrors1() throws Exception {
 		String model = "element # ;";
-		CompositeNode node = getRootNode(model);
+		CompositeNode node = getRootNodeAndExpect(model, 1);
 		assertEquals(model, node.serialize());
 		EList<LeafNode> nodes = node.getLeafNodes();
 		assertEquals(5,nodes.size());

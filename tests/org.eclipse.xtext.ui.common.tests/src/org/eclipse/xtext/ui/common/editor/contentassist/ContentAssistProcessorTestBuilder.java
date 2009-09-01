@@ -154,7 +154,7 @@ public class ContentAssistProcessorTestBuilder {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
+		final XtextResource xtextResource = tests.getResourceAndExpect(new StringInputStream(currentModelToParse), AbstractXtextTests.UNKNOWN_EXPECTATION);
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		ITextViewer textViewer = getTextViewer(currentModelToParse, xtextDocument);
 		ContentAssistContext.Factory factory = tests.get(ContentAssistContext.Factory.class);
@@ -207,7 +207,7 @@ public class ContentAssistProcessorTestBuilder {
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
 
-		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
+		final XtextResource xtextResource = tests.getResourceAndExpect(new StringInputStream(currentModelToParse), AbstractXtextTests.UNKNOWN_EXPECTATION);
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 
 		return this.contentAssistProcessor.computeCompletionProposals(getTextViewer(currentModelToParse, xtextDocument), cursorPosition);
