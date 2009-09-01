@@ -186,7 +186,7 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 				"generate metamodel 'foo.sample'\n" +
 				"Model: x=X;\n" +
 				"X : Y | Z;\n";
-		Grammar grammar = getGrammarWithErrors(grammarAsString);
+		Grammar grammar = getGrammarWithErrors(grammarAsString, 2);
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);
 		assertTrue(warnings.toString(), warnings.isEmpty());

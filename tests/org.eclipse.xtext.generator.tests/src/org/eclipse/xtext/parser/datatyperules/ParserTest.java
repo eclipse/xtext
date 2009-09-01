@@ -96,7 +96,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionError() throws Exception {
 		String model = "a.b.c.d: 1/0;";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
 		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
@@ -110,7 +110,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionErrorAndSpaces() throws Exception {
 		String model = "a.b.c.d:  1 / 0 ; ";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
 		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
@@ -124,7 +124,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseWithFractionErrorAndSyntaxError() throws Exception {
 		String model = "a.b.c.d: 1/0 ";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 2);
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
 		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
@@ -213,7 +213,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_01() throws Exception {
 		String model = "a.b.c.d";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
@@ -227,7 +227,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_02() throws Exception {
 		String model = "a.b.c.";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
@@ -241,7 +241,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_03() throws Exception {
 		String model = "a.b.c. ;";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);
@@ -255,7 +255,7 @@ public class ParserTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_04() throws Exception {
 		String model = "a.b.c";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, r.getErrors().size());
 		EObject parsedModel = r.getContents().get(0);
 		assertNotNull(parsedModel);

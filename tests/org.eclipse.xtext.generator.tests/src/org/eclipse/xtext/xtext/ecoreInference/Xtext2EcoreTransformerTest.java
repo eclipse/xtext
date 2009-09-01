@@ -84,20 +84,24 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		super.tearDown();
 	}
 
-	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
-		List<EPackage> metamodels = getEPackagesFromGrammar(xtextGrammar);
+	private EPackage getEPackageFromGrammar(String xtextGrammar, int expectedErrors) throws Exception {
+		List<EPackage> metamodels = getEPackagesFromGrammar(xtextGrammar, expectedErrors);
 		assertEquals(1, metamodels.size());
 
 		EPackage result = metamodels.get(0);
 		assertNotNull(result);
 		return result;
 	}
+	
+	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
+		return getEPackageFromGrammar(xtextGrammar, 0);
+	}
 
 	@Override
-	public XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);
 		XtextLinker linker = new XtextLinker() {
 			@Override
@@ -112,19 +116,12 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		linker.setPackageRemover(new PackageRemover());
 		resource.setLinker(linker);
 		resource.load(in, null);
-
-//		for(Diagnostic d: resource.getErrors())
-//			System.out.println("Resource Error: "+d);
-//
-//		for(Diagnostic d: resource.getWarnings())
-//			System.out.println("Resource Warning: "+d);
-
 		return resource;
 	}
 
-	private List<EPackage> getEPackagesFromGrammar(String xtextGrammar) throws Exception {
+	private List<EPackage> getEPackagesFromGrammar(String xtextGrammar, int expectedErrors) throws Exception {
 		replay(errorAcceptorMock);
-		Grammar grammar = (Grammar) getModel(xtextGrammar);
+		Grammar grammar = (Grammar) getModelAndExpect(xtextGrammar, expectedErrors);
 		verify(errorAcceptorMock);
 //		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
 //		xtext2EcoreTransformer.transform(grammar);
@@ -632,7 +629,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		grammar += " generate t2 'http://t2' as t2";
 		grammar += " RuleA: featureA=ID;";
 		grammar += " RuleB returns t2::TypeB: featureB=ID;";
-		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
+		List<EPackage> ePackages = getEPackagesFromGrammar(grammar, 0);
 		assertEquals(2, ePackages.size());
 
 		EPackage t1 = ePackages.get(0);
@@ -661,7 +658,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
 
-		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
+		List<EPackage> ePackages = getEPackagesFromGrammar(grammar, 5);
 		assertEquals(0, ePackages.size());
 	}
 
@@ -671,7 +668,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"RuleA returns ecore::SomeNewTypeA: feature=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
-		EPackage result = getEPackageFromGrammar(grammar);
+		EPackage result = getEPackageFromGrammar(grammar, 2);
 		assertTrue(result.getEClassifiers().isEmpty());
 	}
 
@@ -680,7 +677,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"generate test 'http://test' " +
 				"import 'http://www.unknownModel' as unknownModel " +
 				"RuleA: feature=ID;";
-		getEPackageFromGrammar(grammar);
+		getEPackageFromGrammar(grammar, 1);
 	}
 
 	public void testMoreThanOneRuleCall() throws Exception {
@@ -688,7 +685,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				" generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
 				(EObject) anyObject());
-		getEPackageFromGrammar(grammar);
+		getEPackageFromGrammar(grammar, 1);
 	}
 
 	public void testRuleCallAndAction() throws Exception {
@@ -702,7 +699,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				" generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
 				(EObject) anyObject());
-		getEPackageFromGrammar(grammar);
+		getEPackageFromGrammar(grammar, 1);
 	}
 
 	public void testAddingFeatureTwice() throws Exception {
@@ -725,7 +722,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoCompatibleFeatureTypeAvailable), (String) anyObject(),
 				(EObject) anyObject());
-		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EPackage ePackage = getEPackageFromGrammar(grammar, 1);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
 		assertNotNull(typeA);
@@ -813,7 +810,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoSuchRuleAvailable), (String) anyObject(),
 				(EObject) anyObject());
-		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EPackage ePackage = getEPackageFromGrammar(grammar, 1);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		assertEquals("RuleA", ePackage.getEClassifiers().get(0).getName());
 	}
@@ -830,7 +827,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				(EObject) anyObject());
 		EasyMock.expectLastCall().times(3);
 
-		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EPackage ePackage = getEPackageFromGrammar(grammar, 3);
 		assertEquals(4, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -887,7 +884,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"NestedModelId : ModelId '.' ModelId;\n" +
 				"Fraction returns EBigDecimal: INT ('/' INT)?;\n" +
 				"Vector : '(' INT I";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 8);
 		for(Diagnostic d: resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
@@ -899,7 +896,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"Model: (children+=Element)*;\n" +
 				"Element returns Type: Item ( { Item.items+=current } items+=Item );\n" +
 				"Item returns Type:	{ T";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		for(Diagnostic d: resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
@@ -1010,7 +1007,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"enum MyEnum:\n" +
 				"	A | B" +
 				";";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		for(Diagnostic d: resource.getErrors()) {
 			assertFalse(d instanceof ExceptionDiagnostic);
@@ -1034,7 +1031,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				" grammar test with org.eclipse.xtext.common.Terminals" +
 				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				" Object returns ecore::EObject: {ecore::EInt}; ";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 
@@ -1099,7 +1096,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			"generate test 'http://test'\n" +
 			"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
 			"ParserRule returns xtext::ParserRule: name=ID;";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		TransformationDiagnostic diagnostic = (TransformationDiagnostic) resource.getErrors().get(0);
 		assertEquals(grammar.indexOf("xtext::ParserRule"), diagnostic.getOffset());
@@ -1121,7 +1118,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"Bar :\n" + 
 				" 	'bar' eSuperTypes+=[ecore::EAttribute];";
 		
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 	
@@ -1169,7 +1166,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		"\n" + 
 		"Child returns actionLang::Child:\n" + 
 		"	Child unknown=ID;";
-		XtextResource resource = getResourceFromString(grammar);
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 	

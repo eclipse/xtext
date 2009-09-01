@@ -19,7 +19,7 @@ public class MetamodelRefTest extends AbstractGeneratorTest {
     }
 
     public void testStuff() throws Exception {
-        Object parse = getModel("foo bar");
+        Object parse = getModelAndExpect("foo bar", 1);
         assertWithXtend("'anotherSimpleTest::Foo'", "metaType.name", parse);
         assertWithXtend("'xtext::RuleCall'", "nameRefs.first().metaType.name", parse);
     }

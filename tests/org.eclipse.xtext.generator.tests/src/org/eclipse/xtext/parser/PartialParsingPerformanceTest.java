@@ -88,7 +88,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		modelBuffer.append(" kind (Herbert " + NUM_ELEMENTS + 1 + "\n");
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
-		CompositeNode rootNode = getRootNode(model);
+		CompositeNode rootNode = getRootNodeAndExpect(model, 1);
 		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
 		assertEquals(1, reparse.getParseErrors().size());
 	}
