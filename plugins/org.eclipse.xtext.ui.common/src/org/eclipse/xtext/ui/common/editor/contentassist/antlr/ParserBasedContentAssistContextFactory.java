@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -52,6 +53,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator.I
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
@@ -140,7 +142,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	private void createContexts(
+	protected void createContexts(
 			ITextViewer viewer, IParseResult parseResult, int completionOffset,
 			CompositeNode rootNode, AbstractNode lastCompleteNode, AbstractNode currentNode,
 			List<ContentAssistContext> result, String prefix,
@@ -154,7 +156,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	private Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
+	protected Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
 			Collection<FollowElement> followElements) {
 		Multimap<EObject, FollowElement> result = Multimaps.newArrayListMultimap();
 		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
@@ -187,9 +189,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		return result;
 	}
 
-	private boolean canBeCalledAfter(AbstractRule rule, final EObject previousGrammarElement, final EObject nextGrammarElement) {
+	protected boolean canBeCalledAfter(AbstractRule rule, final EObject previousGrammarElement, final EObject nextGrammarElement) {
 		return new XtextSwitch<Boolean>() {
 			private Set<AbstractRule> visiting = new HashSet<AbstractRule>();
+			private Map<AbstractRule, Boolean> visited = Maps.newHashMapWithExpectedSize(4);
 			private EObject grammarElement = previousGrammarElement;
 			private Boolean result = Boolean.FALSE;
 			
@@ -199,8 +202,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					return result;
 				if (!visiting.add(object))
 					return false;
+				if (visited.containsKey(object))
+					return visited.get(object);
+				EObject wasGrammarElement = grammarElement;
 				Boolean result = doSwitch(object.getAlternatives());
 				visiting.remove(object);
+				if (wasGrammarElement == grammarElement) // we store the result per grammarElement for performance reasons
+					visited.put(object, result);
 				return result;
 			}
 
@@ -208,6 +216,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				if (object == grammarElement) {
 					if (grammarElement == previousGrammarElement) {
 						grammarElement = nextGrammarElement;
+						visited.clear();
 						return true;
 					}
 					result = Boolean.TRUE;
@@ -322,7 +331,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}.doSwitch(rule);
 	}
 
-	private AbstractRule getRule(EObject currentGrammarElement) {
+	protected AbstractRule getRule(EObject currentGrammarElement) {
 		AbstractRule rule = null;
 		if (currentGrammarElement instanceof RuleCall)
 			rule = ((RuleCall) currentGrammarElement).getRule();
@@ -379,7 +388,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	private void computeFollowElements(Collection<FollowElement> followElements, final ContentAssistContext result) {
+	protected void computeFollowElements(Collection<FollowElement> followElements, final ContentAssistContext result) {
 		FollowElementCalculator calculator = new FollowElementCalculator();
 		calculator.acceptor =
 			new IFollowElementAcceptor(){
@@ -394,7 +403,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 	
-	private void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
+	protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
 		if (element.getLookAhead() <= 1) {
 			Assignment ass = EcoreUtil2.getContainerOfType(element.getGrammarElement(), Assignment.class);
 			if (ass != null)
