@@ -101,7 +101,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		public IScope getScope(EObject context, EReference reference) {
 			return IScope.NULLSCOPE;
 		}
-	};;
+	};
 
 	@Inject(optional = true)
 	public void setGenericFallBack(DefaultScopeProvider defaultScopeProvider) {
