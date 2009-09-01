@@ -35,4 +35,6 @@ public interface IContentAssistProcessorTestSetup {
 	ISetup getLookAheadContentAssistTestLanguageSetup();
 	
 	ISetup getBug286935TestLanguageSetup();
+	
+	ISetup getBug287941TestLanguageSetup();
 }

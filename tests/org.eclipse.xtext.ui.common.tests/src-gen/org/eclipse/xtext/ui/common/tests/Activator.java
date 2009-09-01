@@ -47,6 +47,11 @@ public class Activator extends AbstractUIPlugin {
 			createUIPluginModule()
 		));
 		
+		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage", Guice.createInjector(
+			new org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageUiModule(),
+			createUIPluginModule()
+		));
+		
 		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguage", Guice.createInjector(
 			new org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageUiModule(),
 			createUIPluginModule()

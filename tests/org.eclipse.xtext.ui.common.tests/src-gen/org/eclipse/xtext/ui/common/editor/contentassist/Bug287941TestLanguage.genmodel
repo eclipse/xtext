@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.common.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.common.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.common.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.common.tests" forceOverwrite="true" modelName="Bug287941TestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.common.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.common.tests.editor">
+  <genPackages prefix="Bug287941TestLanguage" basePackage="org.eclipse.xtext.ui.common.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="Bug287941TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug287941TestLanguage.ecore#//NumericOperator">
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/lessThen"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/greaterThen"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/lessEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/greaterEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/equal"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//NumericOperator/notEqual"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug287941TestLanguage.ecore#//StringOperator">
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//StringOperator/equal"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//StringOperator/notEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//StringOperator/like"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//StringOperator/notLike"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug287941TestLanguage.ecore#//BooleanOperator">
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//BooleanOperator/equal"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug287941TestLanguage.ecore#//BooleanOperator/notEqual"/>
+    </genEnums>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//Model/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//Model/query"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//Import/importURI"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//MQLquery">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//MQLquery/selectEntries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//MQLquery/fromEntries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//MQLquery/whereEntries"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//SelectEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//SelectEntry/select"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//SelectEntry/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//FromEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//FromEntry/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//FromEntry/withoutsubtypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//FromEntry/alias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//FromEntry/scopeClause"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//ScopeClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//ScopeClause/notIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//ScopeClause/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//Scope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//Scope/uris"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//ResourceScope"/>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//ElementScope"/>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//WhereEntry"/>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//AttributeWhereEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//AttributeWhereEntry/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//AttributeWhereEntry/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//NumericAttributeWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//NumericAttributeWhereEntry/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//DoubleWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//DoubleWhereEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//LongWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//LongWhereEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//VariableWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//VariableWhereEntry/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//VariableWhereEntry/rightAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//VariableWhereEntry/rightAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//StringAttributeWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//StringAttributeWhereEntry/operator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//StringAttributeWhereEntry/pattern"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//BooleanAttributeWhereEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//BooleanAttributeWhereEntry/operator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//BooleanAttributeWhereEntry/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//NullWhereEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//NullWhereEntry/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//NullWhereEntry/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//NullWhereEntry/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//ReferenceAliasWhereEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//ReferenceAliasWhereEntry/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//ReferenceAliasWhereEntry/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//ReferenceAliasWhereEntry/rightAlias"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//SubselectWhereEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//SubselectWhereEntry/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//SubselectWhereEntry/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287941TestLanguage.ecore#//SubselectWhereEntry/notIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//SubselectWhereEntry/subQuery"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//AliasWhereEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//AliasWhereEntry/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//AliasWhereEntry/rightAlias"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//OrWhereEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//OrWhereEntry/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug287941TestLanguage.ecore#//AndWhereEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug287941TestLanguage.ecore#//AndWhereEntry/entries"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

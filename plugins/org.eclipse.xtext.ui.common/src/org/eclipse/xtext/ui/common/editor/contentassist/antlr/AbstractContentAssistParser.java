@@ -82,7 +82,8 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				
 				public void announceConsume() {
 					parser.announceConsume();
-					consumedSomething[0] = true;
+					if (!errorRecovery[0])
+						consumedSomething[0] = true;
 				}
 			});
 			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
@@ -102,8 +103,11 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				method.setAccessible(true);
 				method.invoke(parser);
 				result = parser.getFollowElements();
-				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse))
-					return result;
+				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse)) {
+					if (consumedSomething[0])
+						return result;
+					return Collections.emptyList();
+				}
 				if (!wasEof[0] && ruleNames.length != 1)
 					i++;
 				if (ruleNames.length > 2)

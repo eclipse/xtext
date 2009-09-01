@@ -241,7 +241,6 @@ public abstract class AbstractXtextTests extends TestCase {
 		}
 		
 		for(Diagnostic d: resource.getErrors()) {
-//			System.out.println("Resource Error: "+d);
 			if (d instanceof ExceptionDiagnostic)
 				fail(d.getMessage());
 		}
