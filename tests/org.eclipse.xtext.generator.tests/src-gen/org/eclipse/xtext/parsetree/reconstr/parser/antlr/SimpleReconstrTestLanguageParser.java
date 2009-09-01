@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 	@Inject
 	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer lexer = new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer(in);
+		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser parser = new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 	
 	public void setGrammarAccess(SimpleReconstrTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Inject
 	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer lexer = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer(in);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser parser = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 	
 	public void setGrammarAccess(OptionalEmptyTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class UnassignedRuleCallTestLanguageParser extends org.eclipse.xtext.pars
 	@Inject
 	private UnassignedRuleCallTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer lexer = new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer(in);
+		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser parser = new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class UnassignedRuleCallTestLanguageParser extends org.eclipse.xtext.pars
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class UnassignedRuleCallTestLanguageParser extends org.eclipse.xtext.pars
 	
 	public void setGrammarAccess(UnassignedRuleCallTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

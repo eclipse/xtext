@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class LazyLinkingTestLanguageParser extends org.eclipse.xtext.parser.antl
 	@Inject
 	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer lexer = new org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer(in);
+		org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser parser = new org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class LazyLinkingTestLanguageParser extends org.eclipse.xtext.parser.antl
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class LazyLinkingTestLanguageParser extends org.eclipse.xtext.parser.antl
 	
 	public void setGrammarAccess(LazyLinkingTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

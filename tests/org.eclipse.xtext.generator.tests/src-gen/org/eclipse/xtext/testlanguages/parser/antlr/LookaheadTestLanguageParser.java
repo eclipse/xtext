@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class LookaheadTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	@Inject
 	private LookaheadTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer lexer = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer(in);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser parser = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class LookaheadTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class LookaheadTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	
 	public void setGrammarAccess(LookaheadTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalLookaheadTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

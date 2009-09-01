@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class GrammarAccessTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Inject
 	private GrammarAccessTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer lexer = new org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer(in);
+		org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageParser parser = new org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class GrammarAccessTestLanguageParser extends org.eclipse.xtext.parser.an
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class GrammarAccessTestLanguageParser extends org.eclipse.xtext.parser.an
 	
 	public void setGrammarAccess(GrammarAccessTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal.InternalGrammarAccessTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

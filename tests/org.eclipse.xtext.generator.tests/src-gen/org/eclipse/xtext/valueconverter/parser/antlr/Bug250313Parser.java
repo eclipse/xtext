@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
@@ -21,13 +22,16 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	@Inject
 	private Bug250313GrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer lexer = new org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer(in);
+		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser parser = new org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	
 	public void setGrammarAccess(Bug250313GrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Lexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

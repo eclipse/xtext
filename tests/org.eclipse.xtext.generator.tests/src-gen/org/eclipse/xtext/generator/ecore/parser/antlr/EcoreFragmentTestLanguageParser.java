@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class EcoreFragmentTestLanguageParser extends org.eclipse.xtext.parser.an
 	@Inject
 	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer lexer = new org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer(in);
+		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser parser = new org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class EcoreFragmentTestLanguageParser extends org.eclipse.xtext.parser.an
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class EcoreFragmentTestLanguageParser extends org.eclipse.xtext.parser.an
 	
 	public void setGrammarAccess(EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

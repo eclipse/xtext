@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr
 	@Inject
 	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer lexer = new org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer(in);
+		org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser parser = new org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr
 	
 	public void setGrammarAccess(MultiGenMMTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

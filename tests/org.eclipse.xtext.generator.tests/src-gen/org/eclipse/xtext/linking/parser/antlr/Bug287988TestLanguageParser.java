@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class Bug287988TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	@Inject
 	private Bug287988TestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer lexer = new org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer(in);
+		org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageParser parser = new org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class Bug287988TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class Bug287988TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	
 	public void setGrammarAccess(Bug287988TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalBug287988TestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

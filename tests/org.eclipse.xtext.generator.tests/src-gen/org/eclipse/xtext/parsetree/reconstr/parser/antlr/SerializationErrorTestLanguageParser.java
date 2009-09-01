@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class SerializationErrorTestLanguageParser extends org.eclipse.xtext.pars
 	@Inject
 	private SerializationErrorTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer lexer = new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer(in);
+		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser parser = new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class SerializationErrorTestLanguageParser extends org.eclipse.xtext.pars
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class SerializationErrorTestLanguageParser extends org.eclipse.xtext.pars
 	
 	public void setGrammarAccess(SerializationErrorTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

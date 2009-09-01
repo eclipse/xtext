@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class ImportUriTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	@Inject
 	private ImportUriTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer lexer = new org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer(in);
+		org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageParser parser = new org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class ImportUriTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class ImportUriTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	
 	public void setGrammarAccess(ImportUriTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalImportUriTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }
