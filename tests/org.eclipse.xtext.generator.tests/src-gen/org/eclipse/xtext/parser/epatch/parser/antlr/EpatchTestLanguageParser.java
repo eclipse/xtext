@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	@Inject
 	private EpatchTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer lexer = new org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer(in);
+		org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser parser = new org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class EpatchTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	
 	public void setGrammarAccess(EpatchTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

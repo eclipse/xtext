@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class ActionTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	@Inject
 	private ActionTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer lexer = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer(in);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser parser = new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class ActionTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class ActionTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 	
 	public void setGrammarAccess(ActionTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

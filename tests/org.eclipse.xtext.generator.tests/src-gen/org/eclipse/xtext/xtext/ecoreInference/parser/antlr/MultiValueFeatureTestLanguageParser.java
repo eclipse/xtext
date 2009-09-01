@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 	@Inject
 	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer lexer = new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer(in);
+		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser parser = new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 	
 	public void setGrammarAccess(MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

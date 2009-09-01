@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 	@Inject
 	private DummyTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer lexer = new org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer(in);
+		org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser parser = new org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class DummyTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abst
 	
 	public void setGrammarAccess(DummyTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

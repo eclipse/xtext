@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class InheritanceTest2LanguageParser extends org.eclipse.xtext.parser.ant
 	@Inject
 	private InheritanceTest2LanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer lexer = new org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer(in);
+		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageParser parser = new org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class InheritanceTest2LanguageParser extends org.eclipse.xtext.parser.ant
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class InheritanceTest2LanguageParser extends org.eclipse.xtext.parser.ant
 	
 	public void setGrammarAccess(InheritanceTest2LanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }
