@@ -20,7 +20,7 @@ public class InvalidTokenTest extends AbstractGeneratorTest {
 
 	public void testInvalidTokenError() throws Exception {
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);
-		CompositeNode rootNode = getRootNode("/*");
+		CompositeNode rootNode = getRootNodeAndExpect("/*", 1);
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		assertFalse(allSyntaxErrors.isEmpty());
 		SyntaxError syntaxError = allSyntaxErrors.get(0);

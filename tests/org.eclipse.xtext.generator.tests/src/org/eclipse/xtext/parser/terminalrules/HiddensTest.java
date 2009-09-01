@@ -194,7 +194,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 
 	public void testDatatypeHiddens_03() throws Exception {
 		String model = "datatype rule /* foo */ ;";
-		Resource res = getResourceFromString(model);
+		Resource res = getResourceFromStringAndExpect(model, 1);
 		assertFalse(res.getErrors().isEmpty());
 		assertEquals(1, res.getErrors().size());
 	}

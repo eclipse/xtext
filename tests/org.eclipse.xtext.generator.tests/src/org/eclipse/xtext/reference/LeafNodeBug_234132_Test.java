@@ -27,7 +27,7 @@ public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
-        CompositeNode rootNode = getRootNode(model);
+        CompositeNode rootNode = getRootNodeAndExpect(model, 1);
         
         EList<LeafNode> leafNodes = rootNode.getLeafNodes();
         logger.debug("Model length=" + model.length());

@@ -51,7 +51,7 @@ public class Bug266082Test extends AbstractXtextTests {
 			model.append("import '" + i + ".importuritestlanguage'\n");
 		}
 		model.append("type Foo extends Bar");
-		Resource res = getResourceFromString(model.toString());
+		Resource res = getResourceFromStringAndExpect(model.toString(), 1);
 		assertEquals(res.getErrors().toString(), 1, res.getErrors().size());
 	}
 

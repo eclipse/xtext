@@ -28,7 +28,7 @@ public class Bug265111Test extends AbstractXtextTests {
 				"generate test 'http://test'\n" +
 				"Root: A | Model;" +
 				"A: 'A' name=ID;";
-		Resource r = getResourceFromString(grammar);
+		Resource r = getResourceFromStringAndExpect(grammar, 1);
 		Grammar g = (Grammar) r.getContents().get(0);
 		assertEquals("test", g.getName());
 		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());

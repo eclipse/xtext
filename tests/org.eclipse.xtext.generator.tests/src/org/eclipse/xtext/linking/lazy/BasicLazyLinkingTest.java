@@ -38,7 +38,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 	}
 	
 	public void testLazyLinking() throws Exception {
-		XtextResource resource = getResource(new StringInputStream("type A extends B.id{} type B { A id}"));
+		XtextResource resource = getResource(new StringInputStream("type A extends B.id{} type B { A id; }"));
 		doTest(resource);
 	}
 	
@@ -54,19 +54,17 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 	}
 
 	public void testRecursion() throws Exception {
-		XtextResource resource = getResource(new StringInputStream("type A extends B.a { B b } type B extends A.b { A a}"));
-		
+		XtextResource resource = getResource(new StringInputStream("type A extends B.a { B b; } type B extends A.b { A a; }"));
 		doTest(resource);
 	}
 	
 	public void testBackwardDependency() throws Exception {
-		XtextResource resource = getResource(new StringInputStream("type A for a in B { B b } type B for b in A { A a}"));
-		
+		XtextResource resource = getResource(new StringInputStream("type A for a in B { B b; } type B for b in A { A a; }"));
 		doTest(resource);
 	}
 	
 	public void testLazyMultiRef() throws Exception {
-		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B a}"));
+		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B a; }"));
 		Model m = (Model) resource.getContents().get(0);
 		Type t2 = m.getTypes().get(1);
 		
@@ -79,7 +77,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 	}
 	
 	public void testLazyMultiRefDuplicates() throws Exception {
-		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B A a}"));
+		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B A a; }"));
 		Model m = (Model) resource.getContents().get(0);
 		Type t1 = m.getTypes().get(0);
 		Type t2 = m.getTypes().get(1);
@@ -149,7 +147,7 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
     // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486
     @SuppressWarnings("unchecked")
     public void testReferenceWithOpposite() throws Exception {
-        XtextResource resource = getResource(new StringInputStream("type foo {} type bar extends foo {}"));
+        XtextResource resource = getResourceAndExpect(new StringInputStream("type foo {} type bar extends foo {}"), 1);
         Model model = (Model) resource.getContents().get(0);
         Type typeFoo = model.getTypes().get(0);
         Type typeBar = model.getTypes().get(1);
@@ -160,10 +158,10 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
     }
 
 	@Override
-	public XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);
 		return resource;

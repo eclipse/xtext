@@ -40,7 +40,7 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 	}
 
 	public void testLinkError() throws Exception {
-		XtextResource resource = getResourceFromString(" type A extends B \n type B extends C");
+		XtextResource resource = getResourceFromStringAndExpect(" type A extends B \n type B extends C", 1);
 		EObject model = getModel(resource);
 		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
 		assertWithXtend("2", "types.size", model);
@@ -75,7 +75,7 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 
 	public void testReparse() throws Exception {
 		String modelText = " type A extends B \n type B extends C";
-		XtextResource resource = getResourceFromString(modelText);
+		XtextResource resource = getResourceFromStringAndExpect(modelText, 1);
 		EObject model = getModel(resource);
 		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
 

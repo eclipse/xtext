@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
+import java.io.InputStream;
+
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -15,6 +18,7 @@ import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.valueconverter.Bug250313RuntimeModule.Converters;
 
@@ -102,10 +106,10 @@ public abstract class AbstractBug250313Test extends AbstractGeneratorTest {
 	}
 
 	@Override
-	public EObject getModel(String model) throws Exception {
-		return helper.getResourceFromString(model).getParseResult().getRootASTElement();
+	public XtextResource doGetResource(InputStream in, URI uri) throws Exception {
+		return helper.getResourceFromStream(in);
 	}
-
+	
 	public void testSTRINGConversion_01() throws Exception {
 		EObject model = getModel("1 'str'");
 		assertWithXtend("'str'", "this.value", model);

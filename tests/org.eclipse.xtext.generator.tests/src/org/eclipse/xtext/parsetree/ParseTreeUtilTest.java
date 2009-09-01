@@ -32,13 +32,13 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetGrammarElementFromNode() throws Exception {
 		String text = "spielplatz 1 \"junit\" {  ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
 		AbstractElement grammarElementFromNode = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNodeByOffset);
 		assertTrue("expect Keyword as last complete grammar element, but was: " + grammarElementFromNode, grammarElementFromNode instanceof Keyword);
 
 		text = "spielplatz 1 \"junit\" { kind (k1 ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
 		grammarElementFromNode = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNodeByOffset);
 		assertTrue("expect Keyword as last complete grammar element, but was: " + grammarElementFromNode, grammarElementFromNode instanceof RuleCall);
@@ -46,7 +46,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetLastCompleteNodeByOffset() throws Exception {
 		String text = "spielplatz 1 \"junit\" {  ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
 		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
 		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
@@ -54,7 +54,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetLastCompleteNodeByOffset2() throws Exception {
 		String text = "spielplatz 1 \"junit\" {";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
 		assertTrue("expect leafnode as last complete element", lastCompleteNodeByOffset instanceof LeafNode);
 		assertEquals("expect leafnode with text '{'", ((LeafNode) lastCompleteNodeByOffset).getText(), "{");
@@ -62,32 +62,32 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetCurrentOrFollowingNodeByOffset() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kin  ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		LeafNode currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, 26);
 		assertEquals("expect leafnode with text 'kin'", currentNodeByOffset.getText(), "kin");
 
 		text = "spielplatz 1 \"junit\" { kind (";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, text.length());
 		assertEquals("expect leafnode with text '('", currentNodeByOffset.getText(), "(");
 
 		text = "spielplatz 1 \"junit\" { kind (  ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, text.length());
 		assertEquals("expect leafnode with WS text '__'", currentNodeByOffset.getText(), "  ");
 
 		text = "spielplatz 1 \"junit\" { kind (";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, text.length() - 1);
 		assertEquals("expect leafnode with '('", currentNodeByOffset.getText(), "(");
 
 		text = "spielplatz 1 \"junit\" { kind (";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, 0);
 		assertEquals("expect leafnode with WS text 'spielplatz'", currentNodeByOffset.getText(), "spielplatz");
 
 		text = "spielplatz 1 \"junit\" { kind(a 1) kind(b 2) }";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 0);
 		AbstractNode currentCompositeNodeByOffset = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, text
 				.indexOf(')') + 1);
 		assertTrue(currentCompositeNodeByOffset instanceof CompositeNode);
@@ -121,42 +121,42 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetCurrentOrPrecedingNodeByOffset_04() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kin  ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 26);
 		assertEquals("expect node with text ''", "kin", currentNodeByOffset.serialize());
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_05() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, text.length());
 		assertEquals("expect leafnode with text '('", "(", currentNodeByOffset.serialize());
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_06() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (  ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, text.length());
 		assertEquals("expect node with text '" + text + "'", currentNodeByOffset.serialize(), text);
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_07() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, text.length() - 1);
 		assertEquals("expect leafnode with text '('", currentNodeByOffset.serialize(), "(");
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_08() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 0);
 		assertEquals("expect leafnode with text 'spielplatz'", currentNodeByOffset.serialize(), "spielplatz");
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_09() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, "spielplatz"
 				.length());
 		assertEquals("expect leafnode with text 'spielplatz'", currentNodeByOffset.serialize(), "spielplatz");
@@ -164,7 +164,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetCurrentOrPrecedingNodeByOffset_10() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, "spielplatz"
 				.length() + 1);
 		assertEquals("expect leafnode with text '1'", "1", currentNodeByOffset.serialize());
@@ -172,35 +172,35 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetCurrentOrPrecedingNodeByOffset_11() throws Exception {
 		String text = "spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 2);
 		assertEquals("expect leafnode with text 'spielplatz'", currentNodeByOffset.serialize(), "spielplatz");
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_12() throws Exception {
 		String text = "  spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 0);
 		assertEquals("expect node with text '" + text + "'", currentNodeByOffset.serialize(), text);
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_13() throws Exception {
 		String text = "  spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 1);
 		assertEquals("expect node with text '" + text + "'", currentNodeByOffset.serialize(), text);
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_14() throws Exception {
 		String text = "  spielplatz 1 \"junit\" { kind (";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 2);
 		assertEquals("expect leafnode with text 'spielplatz'", "spielplatz", currentNodeByOffset.serialize());
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_15() throws Exception {
 		String text = "  spielplatz 1 \"junit\" { kind (a  1) ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, text.indexOf("a  1") + 2);
 		assertEquals("expect leafnode with text ' kind (a  1)'", " kind (a  1)", currentNodeByOffset.serialize());
 	}
@@ -215,44 +215,44 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 	public void testGetElementSetValidFromOffset() throws Exception {
 		String text = "spielplatz ";
-		CompositeNode rootNode = getRootNode(text);
+		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		Set<AbstractElement> elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text
 				.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 
 		// Keyword Assignment [Assignment|Keyword]
 		text = "spielplatz 1 ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
 
 		// Keyword Assignment Assignment [Keyword]
 		text = "spielplatz 1 \"junit\" ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 
 		// Keyword Assignment Assignment Keyword [Alternatives|Keyword]
 		text = "spielplatz 1 \"junit\" { ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
 
 		// Keyword Assignment Assignment Keyword [Keyword]
 		text = "spielplatz 1 \"junit\" { kind ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 
 		// Keyword Assignment Assignment Keyword Keyword [Assignment]
 		text = "spielplatz 1 \"junit\" { kind ( ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 
 		// Keyword Assignment Assignment Keyword
 		text = "spielplatz 1 \"junit\" { kind (kind1 0) kind (kind2 0) erwachsener (e1 1)  erwachsener (e2 2) familie ( asd ";
-		rootNode = getRootNode(text);
+		rootNode = getRootNodeAndExpect(text, 1);
 		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
 		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 	}

@@ -1,0 +1,27 @@
+<workflow>
+	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
+	<property name="projectName" value="org.eclipse.xtext.generator.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen/org/eclipse/xtext/linking"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		
+		<language uri="classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+	</component>
+</workflow>

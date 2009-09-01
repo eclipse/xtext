@@ -57,7 +57,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 	}
 
 	public void testGetSingleValuedLinkText() throws Exception {
-		XtextResource r = getResourceFromString("type TypeA extends ^extends type ^extends extends ^type");
+		XtextResource r = getResourceFromStringAndExpect("type TypeA extends ^extends type ^extends extends ^type", 1);
 		Main model = (Main) r.getContents().get(0);
 		assertEquals(2, model.getTypes().size());
 
@@ -83,7 +83,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		with(LazyLinkingTestLanguageStandaloneSetup.class);
 		linkingService = (DefaultLinkingService) get(ILinkingService.class);
 
-		XtextResource r = getResourceFromString("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }");
+		XtextResource r = getResourceFromStringAndExpect("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }", 1);
 		Model model = (Model) r.getContents().get(0);
 		assertEquals(2, model.getTypes().size());
 		
