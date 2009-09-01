@@ -60,7 +60,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		String model = "spielplatz 1 {kind (k 1}"; // model contains an error
 		// due to missing ) at idx
 		// 23
-		XtextResource resource = getResourceFromString(model);
+		XtextResource resource = getResourceFromStringAndExpect(model, 1);
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(1, resource.getParseResult().getParseErrors().size());
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
@@ -273,7 +273,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				"        name=ID;\n" +
 				"Model : \n" +
 				"        import;";
-		XtextResource resource = getResourceFromString(model);
+		XtextResource resource = getResourceFromStringAndExpect(model, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		model = resource.getParseResult().getRootNode().serialize();
 		resource.update(model.indexOf("import;") + "import".length(), 1, "");

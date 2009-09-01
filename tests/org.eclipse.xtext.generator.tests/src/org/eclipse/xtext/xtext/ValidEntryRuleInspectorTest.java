@@ -331,7 +331,7 @@ public class ValidEntryRuleInspectorTest extends AbstractXtextRuleInspectorTest<
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"X : 'x' Y;\n";
-		Grammar grammar = getGrammarWithErrors(grammarAsString);
+		Grammar grammar = getGrammarWithErrors(grammarAsString, 1);
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);
 		assertTrue(warnings.toString(), warnings.isEmpty());

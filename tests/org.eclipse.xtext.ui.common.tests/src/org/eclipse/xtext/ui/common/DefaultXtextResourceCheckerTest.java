@@ -64,7 +64,7 @@ public class DefaultXtextResourceCheckerTest extends AbstractXtextTests {
 	}
 	
 	public void testManyErrors() throws Exception {
-		XtextResource resource = getResourceFromString("grammar org.foo.bar");
+		XtextResource resource = getResourceFromStringAndExpect("grammar org.foo.bar", 1);
 		int errors = resource.getErrors().size();
 		assertEquals(1, errors);
 		List<Map<String, Object>> markers = resourceChecker.check(resource, Maps.newHashMap(), new NullProgressMonitor());

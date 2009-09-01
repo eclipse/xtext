@@ -130,6 +130,12 @@ public abstract class AbstractXtextTests extends TestCase {
 			injector = Guice.createInjector();
 		return injector.getInstance(key);
 	}
+	
+	public void injectMembers(Object object) {
+		if (injector == null)
+			injector = Guice.createInjector();
+		injector.injectMembers(object);
+	}
 
 	protected IParser getParser() {
 		return injector.getInstance(ISwitchingParser.class);
@@ -180,37 +186,62 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 	// parse methods
 
-	public EObject getModel(String model) throws Exception {
+	public final EObject getModel(String model) throws Exception {
 		return getModel(new org.eclipse.xtext.util.StringInputStream(model));
 	}
-
-	public EObject getModel(InputStream model) throws Exception {
+	
+	public final EObject getModel(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
 		return getModel(resource);
 	}
+	
+	public static final int EXPECT_ERRORS = -2;
+	public static final int UNKNOWN_EXPECTATION = Integer.MIN_VALUE;
 
-	protected EObject getModel(XtextResource resource) {
+	public final EObject getModelAndExpect(String model, int errors) throws Exception {
+		return getModelAndExpect(new org.eclipse.xtext.util.StringInputStream(model), errors);
+	}
+	
+	public final EObject getModelAndExpect(InputStream model, int errors) throws Exception {
+		XtextResource resource = getResourceAndExpect(model, errors);
+		return getModel(resource);
+	}
+
+	protected final EObject getModel(XtextResource resource) {
 		return resource.getParseResult().getRootASTElement();
 	}
 
-	protected XtextResource getResourceFromString(String model) throws Exception {
+	protected final XtextResource getResourceFromString(String model) throws Exception {
 		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
 	}
-
-	public XtextResource getResource(InputStream in) throws Exception {
-		return getResource(in, URI.createURI("mytestmodel.test"));
+	
+	protected final XtextResource getResourceFromStringAndExpect(String model, int errors) throws Exception {
+		return getResourceAndExpect(new org.eclipse.xtext.util.StringInputStream(model), errors);
 	}
 
-	public XtextResource getResource(InputStream in, URI uri) throws Exception {
-		XtextResourceSet rs = get(XtextResourceSet.class);
-		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
-		rs.getResources().add(resource);
-		resource.load(in, null);
-		EcoreUtil.resolveAll(resource);
+	public final XtextResource getResource(InputStream in) throws Exception {
+		return getResource(in, URI.createURI("mytestmodel.test"));
+	}
+	
+	public final XtextResource getResourceAndExpect(InputStream in, int errors) throws Exception {
+		return getResourceAndExpect(in, URI.createURI("mytestmodel.test"), errors);
+	}
 
+	public final XtextResource getResource(InputStream in, URI uri) throws Exception {
+		return getResourceAndExpect(in, uri, 0);
+	}
+	
+	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors) throws Exception {
+		XtextResource resource = doGetResource(in, uri);
+		if (expectedErrors != UNKNOWN_EXPECTATION) {
+			if (expectedErrors == EXPECT_ERRORS)
+				assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+			else
+				assertEquals(resource.getErrors().toString(), expectedErrors, resource.getErrors().size());
+		}
+		
 		for(Diagnostic d: resource.getErrors()) {
-			System.out.println("Resource Error: "+d);
+//			System.out.println("Resource Error: "+d);
 			if (d instanceof ExceptionDiagnostic)
 				fail(d.getMessage());
 		}
@@ -221,17 +252,36 @@ public abstract class AbstractXtextTests extends TestCase {
 		return resource;
 	}
 
-	protected CompositeNode getRootNode(InputStream model) throws Exception {
+	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
+		rs.getResources().add(resource);
+		resource.load(in, null);
+		EcoreUtil.resolveAll(resource);
+		return resource;
+	}
+
+	protected final CompositeNode getRootNode(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
 		return getRootNode(resource);
 	}
+	
+	protected final CompositeNode getRootNodeAndExpect(InputStream model, int errors) throws Exception {
+		XtextResource resource = getResourceAndExpect(model, errors);
+		return getRootNode(resource);
+	}
 
-	protected CompositeNode getRootNode(XtextResource resource) {
+	protected final CompositeNode getRootNode(XtextResource resource) {
 		return resource.getParseResult().getRootNode();
 	}
 
-	protected CompositeNode getRootNode(String model2) throws Exception {
+	protected final CompositeNode getRootNode(String model2) throws Exception {
 		return getRootNode(new StringInputStream(model2));
+	}
+	
+	protected final CompositeNode getRootNodeAndExpect(String model, int errors) throws Exception {
+		return getRootNodeAndExpect(new StringInputStream(model), errors);
 	}
 
 	// Xtend helper methods

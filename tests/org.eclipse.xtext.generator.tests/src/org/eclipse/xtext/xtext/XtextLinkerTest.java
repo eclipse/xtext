@@ -27,7 +27,7 @@ public class XtextLinkerTest extends AbstractGeneratorTest {
 	}
 	
 	public void testPackageRemovedProperly() throws Exception {
-		XtextResource res = getResourceFromString("grammar foo.Bar generate foo 'bar' Model : name=ID;");
+		XtextResource res = getResourceFromStringAndExpect("grammar foo.Bar generate foo 'bar' Model : name=ID;", 1);
 		res.load(null);
 		Grammar g = (Grammar) res.getContents().get(0);
 		GeneratedMetamodel genMM = (GeneratedMetamodel) g.getMetamodelDeclarations().get(0);

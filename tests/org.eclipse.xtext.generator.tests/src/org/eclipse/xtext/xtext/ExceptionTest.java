@@ -32,9 +32,9 @@ public class ExceptionTest extends AbstractGeneratorTest {
 			"Foo : name=ID (nameRefs+=NameRef)*;\n" +
 			"NameRef returns xtext::RuleCall : rle=[ParserRule];\n" +
 			"MyRule returns xtext::ParserRule : name=ID;";
-		Resource r = getResourceFromString(model);
+		Resource r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());
-		r = getResourceFromString(model);
+		r = getResourceFromStringAndExpect(model, 1);
 		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());
 	}
 
@@ -46,7 +46,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 	        "Keyword : \n" +
 	        "   value=STRING \n" +
 	        ";\n";
-		assertNoException(model);
+		assertNoException(model, 3);
 	}
 
 	public void testFirstAssignmentWithoutLeftSide() throws Exception {
@@ -54,7 +54,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
             "generate test \"test\"\n" +
             "Numbers: =INT n2=INT ;";
-		assertNoException(model);
+		assertNoException(model, 1);
 	}
 	
 	public void testBug_270773() throws Exception {
@@ -63,11 +63,11 @@ public class ExceptionTest extends AbstractGeneratorTest {
 			"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +
             "generate test \"test\"\n" +
             "enum Foo returns ecore::EString: Zonk ;";
-		assertNoException(model);
+		assertNoException(model, 2);
 	}
 
-	private void assertNoException(String model) throws Exception {
-		Resource r = getResourceFromString(model);
+	private void assertNoException(String model, int expectedErrors) throws Exception {
+		Resource r = getResourceFromStringAndExpect(model, expectedErrors);
 		Iterable<ExceptionDiagnostic> filtered = Iterables.filter(r.getErrors(), ExceptionDiagnostic.class);
 		assertNotNull(filtered);
 		assertFalse(filtered.iterator().hasNext());

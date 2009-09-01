@@ -12,4 +12,5 @@ public class ParsetreeUtilLinuxAndMacTest extends AbstractParsetreeUtilTest {
 	protected char[] getSeparator() {
 		return "\n".toCharArray();
 	}
+	
 }

@@ -39,6 +39,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.lexer.Bug282355Test.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug266082Test.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.Bug287988Test.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.Bug287988WithEagerLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkerTest.class);

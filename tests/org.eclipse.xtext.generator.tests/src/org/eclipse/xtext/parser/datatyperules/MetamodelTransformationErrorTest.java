@@ -45,7 +45,7 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 				"ValidId2 returns ecore::EString: ID '.' ValidId;\n" +
 				"FailureId returns ecore::EString: name=ID;\n" +
 				"Failure2 returns ecore::EString: name=Start;";
-		resource = getResourceFromString(model);
+		resource = getResourceFromStringAndExpect(model, 2);
 		grammar = (Grammar) resource.getContents().get(0);
 		transformer = new Xtext2EcoreTransformer(grammar);
 		errorAcceptor = EasyMock.createMock(ErrorAcceptor.class);
