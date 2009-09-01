@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -68,6 +70,11 @@ public class LazyLinker extends AbstractCleaningLinker {
 		if (nodeAdapter == null)
 			return;
 		final CompositeNode node = nodeAdapter.getParserNode();
+		installProxies(obj, producer, settingsToLink, node);
+	}
+
+	private void installProxies(EObject obj, IDiagnosticProducer producer,
+			Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink, CompositeNode node) {
 		EList<AbstractNode> children = node.getChildren();
 		for (AbstractNode abstractNode : children) {
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
@@ -84,6 +91,13 @@ public class LazyLinker extends AbstractCleaningLinker {
 				else {
 					createAndSetProxy(obj, abstractNode, eRef);
 				}
+			}
+		}
+		if (node.getGrammarElement() instanceof AbstractElement) {
+			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment == null && node.getParent() != null) {
+				installProxies(obj, producer, settingsToLink, node.getParent());
 			}
 		}
 	}

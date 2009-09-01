@@ -50,7 +50,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 	
 	public void testFallBack() throws Exception {
 		with(new LazyLinkingTestLanguageStandaloneSetup());
-		EObject model = getModel("type Foo");
+		EObject model = getModelAndExpect("type Foo", 1);
 		IScopeProvider provider = getScopeProvider();
 		IScope scope = provider.getScope(model, LazyLinkingPackage.eINSTANCE.getType());
 		assertEquals("Foo",scope.getAllContents().iterator().next().name());
@@ -125,7 +125,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource res = new XMIResourceFactoryImpl().createResource(URI.createURI("test.uri"));
 		resourceSet.getResources().add(res);
-		EReference details = (EReference) EcoreUtil.copy(EcorePackage.eINSTANCE.getEClass_ESuperTypes());
+		EReference details = EcoreUtil.copy(EcorePackage.eINSTANCE.getEClass_ESuperTypes());
 		res.getContents().add(details);
 		assertNotNull(provider.getScope(details, details.eClass()));
 	}

@@ -66,8 +66,13 @@ public class LazyURIEncoder {
 	public void getRelativePath(StringBuilder result, AbstractNode parserNode, AbstractNode node) {
 		if (parserNode == node)
 			return;
-		getRelativePath(result, parserNode, node.getParent());
-		result.append("/").append(node.getParent().getChildren().indexOf(node));
+		if (EcoreUtil.isAncestor(parserNode, node)) {
+			getRelativePath(result, parserNode, node.getParent());
+			result.append("/").append(node.getParent().getChildren().indexOf(node));
+		} else {
+			result.append("/..");
+			getRelativePath(result, parserNode.getParent(), node);
+		}
 	}
 
 	/**
@@ -77,10 +82,17 @@ public class LazyURIEncoder {
 		final String[] split = path.split("/");
 		AbstractNode result = node;
 		for (String string : split) {
-			if (string.trim().length() > 0) {
-				int index = Integer.parseInt(string);
-				if (index >= 0) {
-					result = ((CompositeNode) result).getChildren().get(index);
+			String trimmed = string.trim();
+			if (trimmed.length() > 0) {
+				if ("..".equals(trimmed)) {
+					if (result.getParent() == null)
+						throw new IllegalStateException("node has no parent");
+					result = result.getParent();
+				} else {
+					int index = Integer.parseInt(string);
+					if (index >= 0) {
+						result = ((CompositeNode) result).getChildren().get(index);
+					}
 				}
 			}
 		}

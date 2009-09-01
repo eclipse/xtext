@@ -13,19 +13,19 @@ public class SerializeTest extends AbstractGeneratorTest {
 	
 	public void testUncompleteComment() throws Exception {
 	    String model ="a /* comment *";
-	    checkSerialize(model);
+	    checkSerialize(model, 1);
 	}
 	
 	public void testSimple() throws Exception {
 	    String model = "/* foo */ x + y * ( /* stuff */ a /* end  */\n * b)";
         int x = model.length();
 		while (x>0) {
-			checkSerialize(model.substring(0,x--));
+			checkSerialize(model.substring(0,x--), UNKNOWN_EXPECTATION);
 		}
 	}
 	
-	private void checkSerialize(String model) throws Exception {
-		CompositeNode node = getRootNode(model);
+	private void checkSerialize(String model, int expectedErrors) throws Exception {
+		CompositeNode node = getRootNodeAndExpect(model, expectedErrors);
 		String serialize = node.serialize();
 		assertEquals(model, serialize);
 	}

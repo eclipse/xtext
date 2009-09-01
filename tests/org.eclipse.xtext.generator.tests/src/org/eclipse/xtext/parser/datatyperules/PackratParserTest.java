@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import java.io.InputStream;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguagePackratParser;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
@@ -55,7 +56,7 @@ public class PackratParserTest extends ParserTest {
 	}
 
 	@Override
-	public XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		ParserTestHelper helper = new ParserTestHelper(getResourceFactory(), parser, get(Keys.RESOURCE_SET_KEY));
 		return helper.getResourceFromStream(in);
 	}

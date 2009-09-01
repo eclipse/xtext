@@ -36,9 +36,9 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
 
-	public void testLexError() throws Exception {
+	public void testLexerError_01() throws Exception {
 		String model = "grammar a import 'holla' % as foo";
-		EObject root = getModel(model);
+		EObject root = getModelAndExpect(model, 2);
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals(1,errors.size());
 		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
@@ -50,7 +50,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
 	public void testParseError1() throws Exception {
 		String model = "grammar a import 'holla' foo returns x::y::Z : name=ID;";
-		EObject root = getModel(model);
+		EObject root = getModelAndExpect(model, 5);
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
 		assertEquals(1, errors.get(0).getNode().getTotalLine());
@@ -60,17 +60,17 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 	public void testParseError2() throws Exception {
-		Object object = getModel("grammar a import 'holla' foo returns y::Z : name=foo #;");
+		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #;", 4);
 		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
 	}
 
 	public void testParseError3() throws Exception {
-		Object object = getModel("grammar a import 'holla' foo returns y::Z : name=foo #############");
+		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #############", 4);
 		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
 	}
 
 	public void testParseError4() throws Exception {
-		Object object = getModel("grammar a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'");
+		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'", 5);
 		//logger.debug(errors);
 		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
 		assertWithXtend("null", "rules.first().eAllContents.typeSelect(xtextTest::Keyword).first().name", object);
@@ -78,10 +78,10 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 
-	public void testname() throws Exception {
+	public void testName() throws Exception {
 		String model = "grammar a import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
 		for (int i=model.length();0<i;i--) {
-			getModel(model.substring(0, i));
+			getModelAndExpect(model.substring(0, i), EXPECT_ERRORS);
 		}
 	}
 
@@ -92,15 +92,15 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testBug236425() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 }";
-		EObject object = getModel(model);
+		EObject object = getModelAndExpect(model, 1);
 		CompositeNode node = NodeUtil.getRootNode(object);
 		assertEquals(1,node.allSyntaxErrors().size());
 	}
 
-	public void testLexerError() throws Exception {
+	public void testLexerError_02() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 '}";
-		EObject object = getModel(model);
+		EObject object = getModelAndExpect(model, 1);
 		CompositeNode node = NodeUtil.getRootNode(object);
 		assertEquals(1,node.allSyntaxErrors().size());
 		logger.debug(node.allSyntaxErrors().get(0).getMessage());
@@ -114,7 +114,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 			"};\n" +
 			"};\n" +
 			"\n";
-		Resource res = getResourceFromString(model);
+		Resource res = getResourceFromStringAndExpect(model, 1);
 		assertEquals(res.getErrors().size(), 1, res.getErrors().size());
 		Diagnostic diag = res.getErrors().get(0);
 		assertNotNull(diag);

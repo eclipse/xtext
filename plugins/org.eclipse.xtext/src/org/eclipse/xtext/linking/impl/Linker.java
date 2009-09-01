@@ -19,6 +19,8 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -46,8 +48,15 @@ public class Linker extends AbstractCleaningLinker {
 		if (nodeAdapter == null)
 			return;
 		final CompositeNode node = nodeAdapter.getParserNode();
-		EList<AbstractNode> children = node.getChildren();
 		Set<EReference> handledReferences = new HashSet<EReference>();
+		ensureLinked(obj, producer, node, handledReferences);
+		producer.setNode(node);
+		setDefaultValues(obj, handledReferences, producer);
+	}
+
+	private void ensureLinked(EObject obj, IDiagnosticProducer producer, CompositeNode node,
+			Set<EReference> handledReferences) {
+		EList<AbstractNode> children = node.getChildren();
 		for (AbstractNode abstractNode : children) {
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
@@ -55,8 +64,13 @@ public class Linker extends AbstractCleaningLinker {
 				ensureIsLinked(obj, abstractNode, ref, handledReferences, producer);
 			}
 		}
-		producer.setNode(node);
-		setDefaultValues(obj, handledReferences, producer);
+		if (node.getGrammarElement() instanceof AbstractElement) {
+			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment == null && node.getParent() != null) {
+				ensureLinked(obj, producer, node.getParent(), handledReferences);
+			}
+		}
 	}
 
 	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {

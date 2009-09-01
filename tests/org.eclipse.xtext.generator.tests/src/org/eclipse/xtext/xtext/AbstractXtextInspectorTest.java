@@ -67,8 +67,8 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		return (Grammar) resourceFromString.getContents().get(0);
 	}
 	
-	protected Grammar getGrammarWithErrors(String grammar) throws Exception {
-		XtextResource resourceFromString = getResourceFromString(grammar);
+	protected Grammar getGrammarWithErrors(String grammar, int expectedErrors) throws Exception {
+		XtextResource resourceFromString = getResourceFromStringAndExpect(grammar, expectedErrors);
 		return (Grammar) resourceFromString.getContents().get(0);
 	}
 

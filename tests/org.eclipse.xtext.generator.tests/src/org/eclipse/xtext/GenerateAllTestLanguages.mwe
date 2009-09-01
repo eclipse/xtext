@@ -28,6 +28,9 @@
 		<language uri="classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
