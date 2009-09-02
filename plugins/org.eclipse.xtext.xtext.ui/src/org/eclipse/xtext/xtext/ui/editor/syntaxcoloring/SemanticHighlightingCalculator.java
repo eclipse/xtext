@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractNegatedToken;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -110,8 +111,24 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 				if (object.getAlternatives() != null)
 					doSwitch(object.getAlternatives());
 				if (object.isDefinesHiddenTokens())
-					usedRules.addAll(object.getHiddenTokens());
+					for(AbstractRule rule: object.getHiddenTokens())
+						doSwitch(rule);
 			}
+			return null;
+		}
+		
+		@Override
+		public Void caseTerminalRule(TerminalRule object) {
+			if (usedRules.add(object) && object.getAlternatives() != null) {
+				return doSwitch(object.getAlternatives());
+			}
+			return null;
+		}
+		
+		@Override
+		public Void caseAbstractNegatedToken(AbstractNegatedToken object) {
+			if (object.getTerminal() != null)
+				return doSwitch(object.getTerminal());
 			return null;
 		}
 		
@@ -155,7 +172,8 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 			if (!visitedGrammars.add(object))
 				return null;
 			if (object.isDefinesHiddenTokens())
-				usedRules.addAll(object.getHiddenTokens());
+				for(AbstractRule rule: object.getHiddenTokens())
+					doSwitch(rule);
 			for(Grammar grammar: object.getUsedGrammars()) {
 				caseGrammar(grammar);
 			}
