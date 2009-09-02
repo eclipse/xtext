@@ -22,12 +22,14 @@ public class SemanticHighlightingConfiguration implements ISemanticHighlightingC
 	public static final String TYPE_REFERENCE_ID = "TypeReference";
 	public static final String DATA_TYPE_RULE_ID = "DataTypeIndicator";
 	public static final String UNUSED_VALUE_ID = "UnusedValue";
+	public static final String NEVER_CALLED_RULE_ID = "NeverCalledRule";
 	
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(RULE_DECLARATION_ID, "Rule Declaration", defaultTextStyle());
 		acceptor.acceptDefaultHighlighting(TYPE_REFERENCE_ID, "Type Reference", typeReference());
 		acceptor.acceptDefaultHighlighting(DATA_TYPE_RULE_ID, "Data Type Rule", dataTypeRule());
 		acceptor.acceptDefaultHighlighting(UNUSED_VALUE_ID, "Unused Value", unusedValue());
+		acceptor.acceptDefaultHighlighting(NEVER_CALLED_RULE_ID, "Uncalled Rule", unusedRule());
 	}
 
 	public TextStyle defaultTextStyle() {
@@ -50,6 +52,12 @@ public class SemanticHighlightingConfiguration implements ISemanticHighlightingC
 	}
 	
 	public TextStyle unusedValue() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(128, 128, 128));
+		return textStyle;
+	}
+	
+	public TextStyle unusedRule() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(128, 128, 128));
 		return textStyle;
