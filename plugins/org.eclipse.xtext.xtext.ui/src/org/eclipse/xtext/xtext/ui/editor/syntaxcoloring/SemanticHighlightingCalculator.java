@@ -106,8 +106,12 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 		
 		@Override
 		public Void caseParserRule(ParserRule object) {
-			if (usedRules.add(object) && object.getAlternatives() != null)
-				doSwitch(object.getAlternatives());
+			if (usedRules.add(object)) {
+				if (object.getAlternatives() != null)
+					doSwitch(object.getAlternatives());
+				if (object.isDefinesHiddenTokens())
+					usedRules.addAll(object.getHiddenTokens());
+			}
 			return null;
 		}
 		
