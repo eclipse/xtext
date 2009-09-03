@@ -84,54 +84,60 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    
-	    { 
+((
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), currentNode); 
 	    }
-	    lv_type_0=ruleKindOfKeyword 
-	    {
+		lv_type_0_0=ruleKindOfKeyword		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "type", lv_type_0, "KindOfKeyword", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"type",
+	        		lv_type_0_0, 
+	        		"KindOfKeyword", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
-)(	
-	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-	}
- 
-	    {
+
+)
+)(
+(
+		lv_name_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )'reference' 
     {
         createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null); 
     }
-(	
-	
-		
+(
+(
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier());
@@ -142,10 +148,8 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0(), "ref"); 
 	}
-		{ lastConsumedDatatypeToken = null; }
 
-		// TODO assign feature to currentNode
-	
+)
 ));
 
 

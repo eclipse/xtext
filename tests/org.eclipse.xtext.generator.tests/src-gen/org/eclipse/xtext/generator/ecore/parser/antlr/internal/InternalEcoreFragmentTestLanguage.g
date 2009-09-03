@@ -83,33 +83,36 @@ ruleSecond returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
-	}
- 
-	    {
+((
+(
+		lv_name_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getSecondRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )'first' 
     {
         createLeafNode(grammarAccess.getSecondAccess().getFirstKeyword_1(), null); 
     }
-(	
-	
-		
+(
+(
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getSecondRule().getType().getClassifier());
@@ -120,10 +123,8 @@ ruleSecond returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
 	}
-		{ lastConsumedDatatypeToken = null; }
 
-		// TODO assign feature to currentNode
-	
+)
 ));
 
 

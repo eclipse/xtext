@@ -102,20 +102,20 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:80:1: ruleModel returns [EObject current=null] : (lv_elements_0= ruleClass )* ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleClass ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_elements_0 = null;
+        EObject lv_elements_0_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:85:6: ( (lv_elements_0= ruleClass )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:86:1: (lv_elements_0= ruleClass )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:85:6: ( ( (lv_elements_0_0= ruleClass ) )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:86:1: ( (lv_elements_0_0= ruleClass ) )*
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:86:1: (lv_elements_0= ruleClass )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:86:1: ( (lv_elements_0_0= ruleClass ) )*
             loop1:
             do {
                 int alt1=2;
@@ -128,13 +128,16 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:89:6: lv_elements_0= ruleClass
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:87:1: (lv_elements_0_0= ruleClass )
+            	    {
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:87:1: (lv_elements_0_0= ruleClass )
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:88:3: lv_elements_0_0= ruleClass
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsClassParserRuleCall_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleClass_in_ruleModel141);
-            	    lv_elements_0=ruleClass();
+            	    pushFollow(FOLLOW_ruleClass_in_ruleModel128);
+            	    lv_elements_0_0=ruleClass();
             	    _fsp--;
 
 
@@ -142,14 +145,21 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "elements", lv_elements_0, "Class", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"elements",
+            	    	        		lv_elements_0_0, 
+            	    	        		"Class", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -179,7 +189,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start entryRuleClass
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:114:1: entryRuleClass returns [EObject current=null] : iv_ruleClass= ruleClass EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:117:1: entryRuleClass returns [EObject current=null] : iv_ruleClass= ruleClass EOF ;
     public final EObject entryRuleClass() throws RecognitionException {
         EObject current = null;
 
@@ -187,16 +197,16 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:114:47: (iv_ruleClass= ruleClass EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:115:2: iv_ruleClass= ruleClass EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:117:47: (iv_ruleClass= ruleClass EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:118:2: iv_ruleClass= ruleClass EOF
             {
              currentNode = createCompositeNode(grammarAccess.getClassRule(), currentNode); 
-            pushFollow(FOLLOW_ruleClass_in_entryRuleClass178);
+            pushFollow(FOLLOW_ruleClass_in_entryRuleClass161);
             iv_ruleClass=ruleClass();
             _fsp--;
 
              current =iv_ruleClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleClass188); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleClass171); 
 
             }
 
@@ -214,22 +224,22 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start ruleClass
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:122:1: ruleClass returns [EObject current=null] : ( ( ( RULE_ID ) '<-' )? (lv_name_2= RULE_ID ) '{' '}' ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:125:1: ruleClass returns [EObject current=null] : ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' ) ;
     public final EObject ruleClass() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_2=null;
+        Token lv_name_2_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:127:6: ( ( ( ( RULE_ID ) '<-' )? (lv_name_2= RULE_ID ) '{' '}' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:1: ( ( ( RULE_ID ) '<-' )? (lv_name_2= RULE_ID ) '{' '}' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:130:6: ( ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:1: ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:1: ( ( ( RULE_ID ) '<-' )? (lv_name_2= RULE_ID ) '{' '}' )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:2: ( ( RULE_ID ) '<-' )? (lv_name_2= RULE_ID ) '{' '}'
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:1: ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:2: ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}'
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:2: ( ( RULE_ID ) '<-' )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:2: ( ( ( RULE_ID ) ) '<-' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -242,10 +252,13 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:3: ( RULE_ID ) '<-'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:3: ( ( RULE_ID ) ) '<-'
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:128:3: ( RULE_ID )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:3: RULE_ID
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:3: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:132:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:132:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:133:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -253,15 +266,17 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass236); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass215); 
 
                     		createLeafNode(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0(), "superClass"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    match(input,11,FOLLOW_11_in_ruleClass252); 
+
+                    }
+
+                    match(input,11,FOLLOW_11_in_ruleClass224); 
 
                             createLeafNode(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1(), null); 
                         
@@ -271,22 +286,29 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:149:3: (lv_name_2= RULE_ID )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:151:6: lv_name_2= RULE_ID
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:149:3: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:150:1: (lv_name_2_0= RULE_ID )
             {
-            lv_name_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass276); 
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:150:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:151:3: lv_name_2_0= RULE_ID
+            {
+            lv_name_2_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass243); 
 
-            		createLeafNode(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getClassRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_2, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_2_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -294,11 +316,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleClass293); 
+
+            }
+
+            match(input,12,FOLLOW_12_in_ruleClass257); 
 
                     createLeafNode(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            match(input,13,FOLLOW_13_in_ruleClass302); 
+            match(input,13,FOLLOW_13_in_ruleClass266); 
 
                     createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null); 
                 
@@ -328,13 +353,13 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClass_in_ruleModel141 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleClass_in_entryRuleClass178 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleClass188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleClass236 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleClass252 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleClass276 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleClass293 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleClass302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClass_in_ruleModel128 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleClass_in_entryRuleClass161 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleClass171 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleClass215 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_ruleClass224 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleClass243 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleClass257 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleClass266 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -103,47 +103,54 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleEPatch
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:80:1: ruleEPatch returns [EObject current=null] : ( 'epatch' (lv_name_1= RULE_ID ) '{' (lv_imports_3= ruleImport )* (lv_resources_4= ruleNamedResource )* (lv_objects_5= ruleObjectRef )* '}' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:80:1: ruleEPatch returns [EObject current=null] : ( 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}' ) ;
     public final EObject ruleEPatch() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        EObject lv_imports_3 = null;
+        Token lv_name_1_0=null;
+        EObject lv_imports_3_0 = null;
 
-        EObject lv_resources_4 = null;
+        EObject lv_resources_4_0 = null;
 
-        EObject lv_objects_5 = null;
+        EObject lv_objects_5_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:85:6: ( ( 'epatch' (lv_name_1= RULE_ID ) '{' (lv_imports_3= ruleImport )* (lv_resources_4= ruleNamedResource )* (lv_objects_5= ruleObjectRef )* '}' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:1: ( 'epatch' (lv_name_1= RULE_ID ) '{' (lv_imports_3= ruleImport )* (lv_resources_4= ruleNamedResource )* (lv_objects_5= ruleObjectRef )* '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:85:6: ( ( 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:1: ( 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:1: ( 'epatch' (lv_name_1= RULE_ID ) '{' (lv_imports_3= ruleImport )* (lv_resources_4= ruleNamedResource )* (lv_objects_5= ruleObjectRef )* '}' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:2: 'epatch' (lv_name_1= RULE_ID ) '{' (lv_imports_3= ruleImport )* (lv_resources_4= ruleNamedResource )* (lv_objects_5= ruleObjectRef )* '}'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:1: ( 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:86:2: 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}'
             {
             match(input,12,FOLLOW_12_in_ruleEPatch117); 
 
                     createLeafNode(grammarAccess.getEPatchAccess().getEpatchKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:90:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:92:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:90:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:91:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPatch139); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:91:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:92:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPatch134); 
 
-            		createLeafNode(grammarAccess.getEPatchAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getEPatchAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -151,11 +158,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleEPatch156); 
+
+            }
+
+            match(input,13,FOLLOW_13_in_ruleEPatch148); 
 
                     createLeafNode(grammarAccess.getEPatchAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:114:1: (lv_imports_3= ruleImport )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:118:1: ( (lv_imports_3_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -168,13 +178,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:117:6: lv_imports_3= ruleImport
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:119:1: (lv_imports_3_0= ruleImport )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:119:1: (lv_imports_3_0= ruleImport )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:120:3: lv_imports_3_0= ruleImport
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getImportsImportParserRuleCall_3_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleImport_in_ruleEPatch190);
-            	    lv_imports_3=ruleImport();
+            	    pushFollow(FOLLOW_ruleImport_in_ruleEPatch169);
+            	    lv_imports_3_0=ruleImport();
             	    _fsp--;
 
 
@@ -182,14 +195,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "imports", lv_imports_3, "Import", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"imports",
+            	    	        		lv_imports_3_0, 
+            	    	        		"Import", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -199,7 +219,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:135:3: (lv_resources_4= ruleNamedResource )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:142:3: ( (lv_resources_4_0= ruleNamedResource ) )*
             loop2:
             do {
                 int alt2=2;
@@ -212,13 +232,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:138:6: lv_resources_4= ruleNamedResource
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:143:1: (lv_resources_4_0= ruleNamedResource )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:143:1: (lv_resources_4_0= ruleNamedResource )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:144:3: lv_resources_4_0= ruleNamedResource
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getResourcesNamedResourceParserRuleCall_4_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNamedResource_in_ruleEPatch229);
-            	    lv_resources_4=ruleNamedResource();
+            	    pushFollow(FOLLOW_ruleNamedResource_in_ruleEPatch191);
+            	    lv_resources_4_0=ruleNamedResource();
             	    _fsp--;
 
 
@@ -226,14 +249,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "resources", lv_resources_4, "NamedResource", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"resources",
+            	    	        		lv_resources_4_0, 
+            	    	        		"NamedResource", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -243,7 +273,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:156:3: (lv_objects_5= ruleObjectRef )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:166:3: ( (lv_objects_5_0= ruleObjectRef ) )*
             loop3:
             do {
                 int alt3=2;
@@ -256,13 +286,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:159:6: lv_objects_5= ruleObjectRef
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:167:1: (lv_objects_5_0= ruleObjectRef )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:167:1: (lv_objects_5_0= ruleObjectRef )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:168:3: lv_objects_5_0= ruleObjectRef
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getObjectsObjectRefParserRuleCall_5_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleObjectRef_in_ruleEPatch268);
-            	    lv_objects_5=ruleObjectRef();
+            	    pushFollow(FOLLOW_ruleObjectRef_in_ruleEPatch213);
+            	    lv_objects_5_0=ruleObjectRef();
             	    _fsp--;
 
 
@@ -270,14 +303,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "objects", lv_objects_5, "ObjectRef", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"objects",
+            	    	        		lv_objects_5_0, 
+            	    	        		"ObjectRef", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -287,7 +327,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
             } while (true);
 
-            match(input,14,FOLLOW_14_in_ruleEPatch282); 
+            match(input,14,FOLLOW_14_in_ruleEPatch223); 
 
                     createLeafNode(grammarAccess.getEPatchAccess().getRightCurlyBracketKeyword_6(), null); 
                 
@@ -314,7 +354,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:188:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:201:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -322,16 +362,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:188:48: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:189:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:201:48: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:202:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport315);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport256);
             iv_ruleImport=ruleImport();
             _fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport325); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport266); 
 
             }
 
@@ -349,7 +389,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:196:1: ruleImport returns [EObject current=null] : (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:209:1: ruleImport returns [EObject current=null] : (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -363,15 +403,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:201:6: ( (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:202:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:214:6: ( (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:215:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:202:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:215:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )
             int alt4=3;
             int LA4_0 = input.LA(1);
 
             if ( (LA4_0==15) ) {
                 switch ( input.LA(2) ) {
+                case RULE_ID:
+                    {
+                    alt4=1;
+                    }
+                    break;
                 case 20:
                     {
                     alt4=3;
@@ -382,14 +427,9 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     alt4=2;
                     }
                     break;
-                case RULE_ID:
-                    {
-                    alt4=1;
-                    }
-                    break;
                 default:
                     NoViableAltException nvae =
-                        new NoViableAltException("202:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )", 4, 1, input);
+                        new NoViableAltException("215:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )", 4, 1, input);
 
                     throw nvae;
                 }
@@ -397,18 +437,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("202:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )", 4, 0, input);
+                    new NoViableAltException("215:1: (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport )", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:203:5: this_ModelImport_0= ruleModelImport
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:216:5: this_ModelImport_0= ruleModelImport
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getImportAccess().getModelImportParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleModelImport_in_ruleImport372);
+                    pushFollow(FOLLOW_ruleModelImport_in_ruleImport313);
                     this_ModelImport_0=ruleModelImport();
                     _fsp--;
 
@@ -420,12 +460,12 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:213:5: this_JavaImport_1= ruleJavaImport
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:226:5: this_JavaImport_1= ruleJavaImport
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getImportAccess().getJavaImportParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleJavaImport_in_ruleImport399);
+                    pushFollow(FOLLOW_ruleJavaImport_in_ruleImport340);
                     this_JavaImport_1=ruleJavaImport();
                     _fsp--;
 
@@ -437,12 +477,12 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:223:5: this_ExtensionImport_2= ruleExtensionImport
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:236:5: this_ExtensionImport_2= ruleExtensionImport
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getImportAccess().getExtensionImportParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleExtensionImport_in_ruleImport426);
+                    pushFollow(FOLLOW_ruleExtensionImport_in_ruleImport367);
                     this_ExtensionImport_2=ruleExtensionImport();
                     _fsp--;
 
@@ -476,7 +516,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleModelImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:238:1: entryRuleModelImport returns [EObject current=null] : iv_ruleModelImport= ruleModelImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:251:1: entryRuleModelImport returns [EObject current=null] : iv_ruleModelImport= ruleModelImport EOF ;
     public final EObject entryRuleModelImport() throws RecognitionException {
         EObject current = null;
 
@@ -484,16 +524,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:238:53: (iv_ruleModelImport= ruleModelImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:239:2: iv_ruleModelImport= ruleModelImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:251:53: (iv_ruleModelImport= ruleModelImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:252:2: iv_ruleModelImport= ruleModelImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModelImport_in_entryRuleModelImport458);
+            pushFollow(FOLLOW_ruleModelImport_in_entryRuleModelImport399);
             iv_ruleModelImport=ruleModelImport();
             _fsp--;
 
              current =iv_ruleModelImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModelImport468); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModelImport409); 
 
             }
 
@@ -511,7 +551,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleModelImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:246:1: ruleModelImport returns [EObject current=null] : (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:259:1: ruleModelImport returns [EObject current=null] : (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport ) ;
     public final EObject ruleModelImport() throws RecognitionException {
         EObject current = null;
 
@@ -523,10 +563,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:251:6: ( (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:252:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:264:6: ( (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:265:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:252:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:265:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -544,32 +584,32 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("252:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 2, input);
+                            new NoViableAltException("265:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 2, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("252:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 1, input);
+                        new NoViableAltException("265:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("252:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 0, input);
+                    new NoViableAltException("265:1: (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport )", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:253:5: this_ResourceImport_0= ruleResourceImport
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:266:5: this_ResourceImport_0= ruleResourceImport
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getModelImportAccess().getResourceImportParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleResourceImport_in_ruleModelImport515);
+                    pushFollow(FOLLOW_ruleResourceImport_in_ruleModelImport456);
                     this_ResourceImport_0=ruleResourceImport();
                     _fsp--;
 
@@ -581,12 +621,12 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:263:5: this_EPackageImport_1= ruleEPackageImport
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:276:5: this_EPackageImport_1= ruleEPackageImport
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getModelImportAccess().getEPackageImportParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleEPackageImport_in_ruleModelImport542);
+                    pushFollow(FOLLOW_ruleEPackageImport_in_ruleModelImport483);
                     this_EPackageImport_1=ruleEPackageImport();
                     _fsp--;
 
@@ -620,7 +660,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleResourceImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:278:1: entryRuleResourceImport returns [EObject current=null] : iv_ruleResourceImport= ruleResourceImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:291:1: entryRuleResourceImport returns [EObject current=null] : iv_ruleResourceImport= ruleResourceImport EOF ;
     public final EObject entryRuleResourceImport() throws RecognitionException {
         EObject current = null;
 
@@ -628,16 +668,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:278:56: (iv_ruleResourceImport= ruleResourceImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:279:2: iv_ruleResourceImport= ruleResourceImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:291:56: (iv_ruleResourceImport= ruleResourceImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:292:2: iv_ruleResourceImport= ruleResourceImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getResourceImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleResourceImport_in_entryRuleResourceImport574);
+            pushFollow(FOLLOW_ruleResourceImport_in_entryRuleResourceImport515);
             iv_ruleResourceImport=ruleResourceImport();
             _fsp--;
 
              current =iv_ruleResourceImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleResourceImport584); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleResourceImport525); 
 
             }
 
@@ -655,42 +695,49 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleResourceImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:286:1: ruleResourceImport returns [EObject current=null] : ( 'import' (lv_name_1= RULE_ID ) 'uri' (lv_uri_3= RULE_STRING ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:299:1: ruleResourceImport returns [EObject current=null] : ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) ) ) ;
     public final EObject ruleResourceImport() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        Token lv_uri_3=null;
+        Token lv_name_1_0=null;
+        Token lv_uri_3_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:291:6: ( ( 'import' (lv_name_1= RULE_ID ) 'uri' (lv_uri_3= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:292:1: ( 'import' (lv_name_1= RULE_ID ) 'uri' (lv_uri_3= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:304:6: ( ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:305:1: ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:292:1: ( 'import' (lv_name_1= RULE_ID ) 'uri' (lv_uri_3= RULE_STRING ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:292:2: 'import' (lv_name_1= RULE_ID ) 'uri' (lv_uri_3= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:305:1: ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:305:2: 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) )
             {
-            match(input,15,FOLLOW_15_in_ruleResourceImport618); 
+            match(input,15,FOLLOW_15_in_ruleResourceImport559); 
 
                     createLeafNode(grammarAccess.getResourceImportAccess().getImportKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:296:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:298:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:309:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:310:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleResourceImport640); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:310:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:311:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleResourceImport576); 
 
-            		createLeafNode(grammarAccess.getResourceImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getResourceImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getResourceImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -698,30 +745,43 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleResourceImport657); 
+
+            }
+
+            match(input,16,FOLLOW_16_in_ruleResourceImport590); 
 
                     createLeafNode(grammarAccess.getResourceImportAccess().getUriKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:320:1: (lv_uri_3= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:322:6: lv_uri_3= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:337:1: ( (lv_uri_3_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:338:1: (lv_uri_3_0= RULE_STRING )
             {
-            lv_uri_3=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleResourceImport679); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:338:1: (lv_uri_3_0= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:339:3: lv_uri_3_0= RULE_STRING
+            {
+            lv_uri_3_0=(Token)input.LT(1);
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleResourceImport607); 
 
-            		createLeafNode(grammarAccess.getResourceImportAccess().getUriSTRINGTerminalRuleCall_3_0(), "uri"); 
-            	
+            			createLeafNode(grammarAccess.getResourceImportAccess().getUriSTRINGTerminalRuleCall_3_0(), "uri"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getResourceImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "uri", lv_uri_3, "STRING", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"uri",
+            	        		lv_uri_3_0, 
+            	        		"STRING", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -748,7 +808,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleEPackageImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:347:1: entryRuleEPackageImport returns [EObject current=null] : iv_ruleEPackageImport= ruleEPackageImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:368:1: entryRuleEPackageImport returns [EObject current=null] : iv_ruleEPackageImport= ruleEPackageImport EOF ;
     public final EObject entryRuleEPackageImport() throws RecognitionException {
         EObject current = null;
 
@@ -756,16 +816,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:347:56: (iv_ruleEPackageImport= ruleEPackageImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:348:2: iv_ruleEPackageImport= ruleEPackageImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:368:56: (iv_ruleEPackageImport= ruleEPackageImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:369:2: iv_ruleEPackageImport= ruleEPackageImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEPackageImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport720);
+            pushFollow(FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport645);
             iv_ruleEPackageImport=ruleEPackageImport();
             _fsp--;
 
              current =iv_ruleEPackageImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEPackageImport730); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEPackageImport655); 
 
             }
 
@@ -783,42 +843,49 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleEPackageImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:355:1: ruleEPackageImport returns [EObject current=null] : ( 'import' (lv_name_1= RULE_ID ) 'ns' (lv_nsURI_3= RULE_STRING ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:376:1: ruleEPackageImport returns [EObject current=null] : ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) ) ) ;
     public final EObject ruleEPackageImport() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        Token lv_nsURI_3=null;
+        Token lv_name_1_0=null;
+        Token lv_nsURI_3_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:360:6: ( ( 'import' (lv_name_1= RULE_ID ) 'ns' (lv_nsURI_3= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:361:1: ( 'import' (lv_name_1= RULE_ID ) 'ns' (lv_nsURI_3= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:381:6: ( ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:382:1: ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:361:1: ( 'import' (lv_name_1= RULE_ID ) 'ns' (lv_nsURI_3= RULE_STRING ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:361:2: 'import' (lv_name_1= RULE_ID ) 'ns' (lv_nsURI_3= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:382:1: ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:382:2: 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) )
             {
-            match(input,15,FOLLOW_15_in_ruleEPackageImport764); 
+            match(input,15,FOLLOW_15_in_ruleEPackageImport689); 
 
                     createLeafNode(grammarAccess.getEPackageImportAccess().getImportKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:365:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:367:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:386:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:387:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPackageImport786); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:387:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:388:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPackageImport706); 
 
-            		createLeafNode(grammarAccess.getEPackageImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getEPackageImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getEPackageImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -826,30 +893,43 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleEPackageImport803); 
+
+            }
+
+            match(input,17,FOLLOW_17_in_ruleEPackageImport720); 
 
                     createLeafNode(grammarAccess.getEPackageImportAccess().getNsKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:389:1: (lv_nsURI_3= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:391:6: lv_nsURI_3= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:414:1: ( (lv_nsURI_3_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:415:1: (lv_nsURI_3_0= RULE_STRING )
             {
-            lv_nsURI_3=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageImport825); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:415:1: (lv_nsURI_3_0= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:416:3: lv_nsURI_3_0= RULE_STRING
+            {
+            lv_nsURI_3_0=(Token)input.LT(1);
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageImport737); 
 
-            		createLeafNode(grammarAccess.getEPackageImportAccess().getNsURISTRINGTerminalRuleCall_3_0(), "nsURI"); 
-            	
+            			createLeafNode(grammarAccess.getEPackageImportAccess().getNsURISTRINGTerminalRuleCall_3_0(), "nsURI"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getEPackageImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "nsURI", lv_nsURI_3, "STRING", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"nsURI",
+            	        		lv_nsURI_3_0, 
+            	        		"STRING", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -876,7 +956,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleJavaImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:416:1: entryRuleJavaImport returns [EObject current=null] : iv_ruleJavaImport= ruleJavaImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:445:1: entryRuleJavaImport returns [EObject current=null] : iv_ruleJavaImport= ruleJavaImport EOF ;
     public final EObject entryRuleJavaImport() throws RecognitionException {
         EObject current = null;
 
@@ -884,16 +964,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:416:52: (iv_ruleJavaImport= ruleJavaImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:417:2: iv_ruleJavaImport= ruleJavaImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:445:52: (iv_ruleJavaImport= ruleJavaImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:446:2: iv_ruleJavaImport= ruleJavaImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getJavaImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleJavaImport_in_entryRuleJavaImport866);
+            pushFollow(FOLLOW_ruleJavaImport_in_entryRuleJavaImport775);
             iv_ruleJavaImport=ruleJavaImport();
             _fsp--;
 
              current =iv_ruleJavaImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJavaImport876); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJavaImport785); 
 
             }
 
@@ -911,46 +991,53 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleJavaImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:424:1: ruleJavaImport returns [EObject current=null] : ( 'import' 'java' (lv_path_2= RULE_ID ) ( '.' (lv_path_4= RULE_ID ) )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:453:1: ruleJavaImport returns [EObject current=null] : ( 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )* ) ;
     public final EObject ruleJavaImport() throws RecognitionException {
         EObject current = null;
 
-        Token lv_path_2=null;
-        Token lv_path_4=null;
+        Token lv_path_2_0=null;
+        Token lv_path_4_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:429:6: ( ( 'import' 'java' (lv_path_2= RULE_ID ) ( '.' (lv_path_4= RULE_ID ) )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:430:1: ( 'import' 'java' (lv_path_2= RULE_ID ) ( '.' (lv_path_4= RULE_ID ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:458:6: ( ( 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:459:1: ( 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:430:1: ( 'import' 'java' (lv_path_2= RULE_ID ) ( '.' (lv_path_4= RULE_ID ) )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:430:2: 'import' 'java' (lv_path_2= RULE_ID ) ( '.' (lv_path_4= RULE_ID ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:459:1: ( 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:459:2: 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )*
             {
-            match(input,15,FOLLOW_15_in_ruleJavaImport910); 
+            match(input,15,FOLLOW_15_in_ruleJavaImport819); 
 
                     createLeafNode(grammarAccess.getJavaImportAccess().getImportKeyword_0(), null); 
                 
-            match(input,18,FOLLOW_18_in_ruleJavaImport919); 
+            match(input,18,FOLLOW_18_in_ruleJavaImport828); 
 
                     createLeafNode(grammarAccess.getJavaImportAccess().getJavaKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:438:1: (lv_path_2= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:440:6: lv_path_2= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:467:1: ( (lv_path_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:468:1: (lv_path_2_0= RULE_ID )
             {
-            lv_path_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport941); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:468:1: (lv_path_2_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:469:3: lv_path_2_0= RULE_ID
+            {
+            lv_path_2_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport845); 
 
-            		createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
-            	
+            			createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getJavaImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		add(current, "path", lv_path_2, "ID", lastConsumedNode);
+            	       		add(
+            	       			current, 
+            	       			"path",
+            	        		lv_path_2_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -958,7 +1045,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:458:2: ( '.' (lv_path_4= RULE_ID ) )*
+
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:491:2: ( '.' ( (lv_path_4_0= RULE_ID ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -971,32 +1061,42 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:458:3: '.' (lv_path_4= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:491:3: '.' ( (lv_path_4_0= RULE_ID ) )
             	    {
-            	    match(input,19,FOLLOW_19_in_ruleJavaImport959); 
+            	    match(input,19,FOLLOW_19_in_ruleJavaImport860); 
 
             	            createLeafNode(grammarAccess.getJavaImportAccess().getFullStopKeyword_3_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:462:1: (lv_path_4= RULE_ID )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:464:6: lv_path_4= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:495:1: ( (lv_path_4_0= RULE_ID ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:496:1: (lv_path_4_0= RULE_ID )
             	    {
-            	    lv_path_4=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport981); 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:496:1: (lv_path_4_0= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:497:3: lv_path_4_0= RULE_ID
+            	    {
+            	    lv_path_4_0=(Token)input.LT(1);
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport877); 
 
-            	    		createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
-            	    	
+            	    			createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = factory.create(grammarAccess.getJavaImportRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "path", lv_path_4, "ID", lastConsumedNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"path",
+            	    	        		lv_path_4_0, 
+            	    	        		"ID", 
+            	    	        		lastConsumedNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	    
+
+            	    }
+
 
             	    }
 
@@ -1032,7 +1132,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleExtensionImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:489:1: entryRuleExtensionImport returns [EObject current=null] : iv_ruleExtensionImport= ruleExtensionImport EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:526:1: entryRuleExtensionImport returns [EObject current=null] : iv_ruleExtensionImport= ruleExtensionImport EOF ;
     public final EObject entryRuleExtensionImport() throws RecognitionException {
         EObject current = null;
 
@@ -1040,16 +1140,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:489:57: (iv_ruleExtensionImport= ruleExtensionImport EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:490:2: iv_ruleExtensionImport= ruleExtensionImport EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:526:57: (iv_ruleExtensionImport= ruleExtensionImport EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:527:2: iv_ruleExtensionImport= ruleExtensionImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExtensionImportRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport1024);
+            pushFollow(FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport917);
             iv_ruleExtensionImport=ruleExtensionImport();
             _fsp--;
 
              current =iv_ruleExtensionImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExtensionImport1034); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExtensionImport927); 
 
             }
 
@@ -1067,46 +1167,53 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleExtensionImport
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:497:1: ruleExtensionImport returns [EObject current=null] : ( 'import' 'extension' (lv_path_2= RULE_ID ) ( '::' (lv_path_4= RULE_ID ) )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:534:1: ruleExtensionImport returns [EObject current=null] : ( 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )* ) ;
     public final EObject ruleExtensionImport() throws RecognitionException {
         EObject current = null;
 
-        Token lv_path_2=null;
-        Token lv_path_4=null;
+        Token lv_path_2_0=null;
+        Token lv_path_4_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:502:6: ( ( 'import' 'extension' (lv_path_2= RULE_ID ) ( '::' (lv_path_4= RULE_ID ) )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:503:1: ( 'import' 'extension' (lv_path_2= RULE_ID ) ( '::' (lv_path_4= RULE_ID ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:539:6: ( ( 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:540:1: ( 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:503:1: ( 'import' 'extension' (lv_path_2= RULE_ID ) ( '::' (lv_path_4= RULE_ID ) )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:503:2: 'import' 'extension' (lv_path_2= RULE_ID ) ( '::' (lv_path_4= RULE_ID ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:540:1: ( 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:540:2: 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )*
             {
-            match(input,15,FOLLOW_15_in_ruleExtensionImport1068); 
+            match(input,15,FOLLOW_15_in_ruleExtensionImport961); 
 
                     createLeafNode(grammarAccess.getExtensionImportAccess().getImportKeyword_0(), null); 
                 
-            match(input,20,FOLLOW_20_in_ruleExtensionImport1077); 
+            match(input,20,FOLLOW_20_in_ruleExtensionImport970); 
 
                     createLeafNode(grammarAccess.getExtensionImportAccess().getExtensionKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:511:1: (lv_path_2= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:513:6: lv_path_2= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:548:1: ( (lv_path_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:549:1: (lv_path_2_0= RULE_ID )
             {
-            lv_path_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1099); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:549:1: (lv_path_2_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:550:3: lv_path_2_0= RULE_ID
+            {
+            lv_path_2_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport987); 
 
-            		createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
-            	
+            			createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getExtensionImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		add(current, "path", lv_path_2, "ID", lastConsumedNode);
+            	       		add(
+            	       			current, 
+            	       			"path",
+            	        		lv_path_2_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1114,7 +1221,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:531:2: ( '::' (lv_path_4= RULE_ID ) )*
+
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:572:2: ( '::' ( (lv_path_4_0= RULE_ID ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -1127,32 +1237,42 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:531:3: '::' (lv_path_4= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:572:3: '::' ( (lv_path_4_0= RULE_ID ) )
             	    {
-            	    match(input,21,FOLLOW_21_in_ruleExtensionImport1117); 
+            	    match(input,21,FOLLOW_21_in_ruleExtensionImport1002); 
 
             	            createLeafNode(grammarAccess.getExtensionImportAccess().getColonColonKeyword_3_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:535:1: (lv_path_4= RULE_ID )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:537:6: lv_path_4= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:576:1: ( (lv_path_4_0= RULE_ID ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:577:1: (lv_path_4_0= RULE_ID )
             	    {
-            	    lv_path_4=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1139); 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:577:1: (lv_path_4_0= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:578:3: lv_path_4_0= RULE_ID
+            	    {
+            	    lv_path_4_0=(Token)input.LT(1);
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1019); 
 
-            	    		createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
-            	    	
+            	    			createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = factory.create(grammarAccess.getExtensionImportRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "path", lv_path_4, "ID", lastConsumedNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"path",
+            	    	        		lv_path_4_0, 
+            	    	        		"ID", 
+            	    	        		lastConsumedNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	    
+
+            	    }
+
 
             	    }
 
@@ -1188,7 +1308,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleNamedResource
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:562:1: entryRuleNamedResource returns [EObject current=null] : iv_ruleNamedResource= ruleNamedResource EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:607:1: entryRuleNamedResource returns [EObject current=null] : iv_ruleNamedResource= ruleNamedResource EOF ;
     public final EObject entryRuleNamedResource() throws RecognitionException {
         EObject current = null;
 
@@ -1196,16 +1316,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:562:55: (iv_ruleNamedResource= ruleNamedResource EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:563:2: iv_ruleNamedResource= ruleNamedResource EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:607:55: (iv_ruleNamedResource= ruleNamedResource EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:608:2: iv_ruleNamedResource= ruleNamedResource EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNamedResourceRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNamedResource_in_entryRuleNamedResource1182);
+            pushFollow(FOLLOW_ruleNamedResource_in_entryRuleNamedResource1059);
             iv_ruleNamedResource=ruleNamedResource();
             _fsp--;
 
              current =iv_ruleNamedResource; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNamedResource1192); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNamedResource1069); 
 
             }
 
@@ -1223,47 +1343,54 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleNamedResource
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:570:1: ruleNamedResource returns [EObject current=null] : ( 'resource' (lv_name_1= RULE_ID ) '{' 'left' ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) ) ';' 'right' ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) ) ';' '}' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:615:1: ruleNamedResource returns [EObject current=null] : ( 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}' ) ;
     public final EObject ruleNamedResource() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        Token lv_leftUri_5=null;
-        Token lv_rightUri_10=null;
-        EObject lv_leftRoot_6 = null;
+        Token lv_name_1_0=null;
+        Token lv_leftUri_5_0=null;
+        Token lv_rightUri_10_0=null;
+        EObject lv_leftRoot_6_0 = null;
 
-        EObject lv_rightRoot_11 = null;
+        EObject lv_rightRoot_11_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:575:6: ( ( 'resource' (lv_name_1= RULE_ID ) '{' 'left' ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) ) ';' 'right' ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) ) ';' '}' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:576:1: ( 'resource' (lv_name_1= RULE_ID ) '{' 'left' ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) ) ';' 'right' ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) ) ';' '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:620:6: ( ( 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:621:1: ( 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:576:1: ( 'resource' (lv_name_1= RULE_ID ) '{' 'left' ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) ) ';' 'right' ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) ) ';' '}' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:576:2: 'resource' (lv_name_1= RULE_ID ) '{' 'left' ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) ) ';' 'right' ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) ) ';' '}'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:621:1: ( 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:621:2: 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}'
             {
-            match(input,22,FOLLOW_22_in_ruleNamedResource1226); 
+            match(input,22,FOLLOW_22_in_ruleNamedResource1103); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getResourceKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:580:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:582:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:625:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:626:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNamedResource1248); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:626:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:627:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNamedResource1120); 
 
-            		createLeafNode(grammarAccess.getNamedResourceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getNamedResourceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -1271,15 +1398,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleNamedResource1265); 
+
+            }
+
+            match(input,13,FOLLOW_13_in_ruleNamedResource1134); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            match(input,23,FOLLOW_23_in_ruleNamedResource1274); 
+            match(input,23,FOLLOW_23_in_ruleNamedResource1143); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getLeftKeyword_3(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:608:1: ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:657:1: ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1291,41 +1421,51 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("608:1: ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) )", 8, 0, input);
+                    new NoViableAltException("657:1: ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) )", 8, 0, input);
 
                 throw nvae;
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:608:2: ( 'uri' (lv_leftUri_5= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:657:2: ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:608:2: ( 'uri' (lv_leftUri_5= RULE_STRING ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:608:3: 'uri' (lv_leftUri_5= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:657:2: ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:657:3: 'uri' ( (lv_leftUri_5_0= RULE_STRING ) )
                     {
-                    match(input,16,FOLLOW_16_in_ruleNamedResource1285); 
+                    match(input,16,FOLLOW_16_in_ruleNamedResource1154); 
 
                             createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_4_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:612:1: (lv_leftUri_5= RULE_STRING )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:614:6: lv_leftUri_5= RULE_STRING
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:661:1: ( (lv_leftUri_5_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:1: (lv_leftUri_5_0= RULE_STRING )
                     {
-                    lv_leftUri_5=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1307); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:1: (lv_leftUri_5_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:663:3: lv_leftUri_5_0= RULE_STRING
+                    {
+                    lv_leftUri_5_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1171); 
 
-                    		createLeafNode(grammarAccess.getNamedResourceAccess().getLeftUriSTRINGTerminalRuleCall_4_0_1_0(), "leftUri"); 
-                    	
+                    			createLeafNode(grammarAccess.getNamedResourceAccess().getLeftUriSTRINGTerminalRuleCall_4_0_1_0(), "leftUri"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "leftUri", lv_leftUri_5, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"leftUri",
+                    	        		lv_leftUri_5_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -1336,16 +1476,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:633:6: (lv_leftRoot_6= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:686:6: ( (lv_leftRoot_6_0= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:633:6: (lv_leftRoot_6= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:636:6: lv_leftRoot_6= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:686:6: ( (lv_leftRoot_6_0= ruleCreatedObject ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:687:1: (lv_leftRoot_6_0= ruleCreatedObject )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:687:1: (lv_leftRoot_6_0= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:688:3: lv_leftRoot_6_0= ruleCreatedObject
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getNamedResourceAccess().getLeftRootCreatedObjectParserRuleCall_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1356);
-                    lv_leftRoot_6=ruleCreatedObject();
+                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1204);
+                    lv_leftRoot_6_0=ruleCreatedObject();
                     _fsp--;
 
 
@@ -1353,9 +1496,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "leftRoot", lv_leftRoot_6, "CreatedObject", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"leftRoot",
+                    	        		lv_leftRoot_6_0, 
+                    	        		"CreatedObject", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1366,19 +1513,22 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            match(input,24,FOLLOW_24_in_ruleNamedResource1370); 
+            match(input,24,FOLLOW_24_in_ruleNamedResource1214); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_5(), null); 
                 
-            match(input,25,FOLLOW_25_in_ruleNamedResource1379); 
+            match(input,25,FOLLOW_25_in_ruleNamedResource1223); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getRightKeyword_6(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:1: ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:718:1: ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1390,41 +1540,51 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("662:1: ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) )", 9, 0, input);
+                    new NoViableAltException("718:1: ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:2: ( 'uri' (lv_rightUri_10= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:718:2: ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:2: ( 'uri' (lv_rightUri_10= RULE_STRING ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:662:3: 'uri' (lv_rightUri_10= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:718:2: ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:718:3: 'uri' ( (lv_rightUri_10_0= RULE_STRING ) )
                     {
-                    match(input,16,FOLLOW_16_in_ruleNamedResource1390); 
+                    match(input,16,FOLLOW_16_in_ruleNamedResource1234); 
 
                             createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_7_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:666:1: (lv_rightUri_10= RULE_STRING )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:668:6: lv_rightUri_10= RULE_STRING
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:722:1: ( (lv_rightUri_10_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:723:1: (lv_rightUri_10_0= RULE_STRING )
                     {
-                    lv_rightUri_10=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1412); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:723:1: (lv_rightUri_10_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:724:3: lv_rightUri_10_0= RULE_STRING
+                    {
+                    lv_rightUri_10_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1251); 
 
-                    		createLeafNode(grammarAccess.getNamedResourceAccess().getRightUriSTRINGTerminalRuleCall_7_0_1_0(), "rightUri"); 
-                    	
+                    			createLeafNode(grammarAccess.getNamedResourceAccess().getRightUriSTRINGTerminalRuleCall_7_0_1_0(), "rightUri"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "rightUri", lv_rightUri_10, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"rightUri",
+                    	        		lv_rightUri_10_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -1435,16 +1595,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:687:6: (lv_rightRoot_11= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:747:6: ( (lv_rightRoot_11_0= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:687:6: (lv_rightRoot_11= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:690:6: lv_rightRoot_11= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:747:6: ( (lv_rightRoot_11_0= ruleCreatedObject ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:748:1: (lv_rightRoot_11_0= ruleCreatedObject )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:748:1: (lv_rightRoot_11_0= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:749:3: lv_rightRoot_11_0= ruleCreatedObject
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getNamedResourceAccess().getRightRootCreatedObjectParserRuleCall_7_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1461);
-                    lv_rightRoot_11=ruleCreatedObject();
+                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1284);
+                    lv_rightRoot_11_0=ruleCreatedObject();
                     _fsp--;
 
 
@@ -1452,9 +1615,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "rightRoot", lv_rightRoot_11, "CreatedObject", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"rightRoot",
+                    	        		lv_rightRoot_11_0, 
+                    	        		"CreatedObject", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1465,15 +1632,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            match(input,24,FOLLOW_24_in_ruleNamedResource1475); 
+            match(input,24,FOLLOW_24_in_ruleNamedResource1294); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_8(), null); 
                 
-            match(input,14,FOLLOW_14_in_ruleNamedResource1484); 
+            match(input,14,FOLLOW_14_in_ruleNamedResource1303); 
 
                     createLeafNode(grammarAccess.getNamedResourceAccess().getRightCurlyBracketKeyword_9(), null); 
                 
@@ -1500,7 +1670,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleObjectRef
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:725:1: entryRuleObjectRef returns [EObject current=null] : iv_ruleObjectRef= ruleObjectRef EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:788:1: entryRuleObjectRef returns [EObject current=null] : iv_ruleObjectRef= ruleObjectRef EOF ;
     public final EObject entryRuleObjectRef() throws RecognitionException {
         EObject current = null;
 
@@ -1508,16 +1678,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:725:51: (iv_ruleObjectRef= ruleObjectRef EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:726:2: iv_ruleObjectRef= ruleObjectRef EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:788:51: (iv_ruleObjectRef= ruleObjectRef EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:789:2: iv_ruleObjectRef= ruleObjectRef EOF
             {
              currentNode = createCompositeNode(grammarAccess.getObjectRefRule(), currentNode); 
-            pushFollow(FOLLOW_ruleObjectRef_in_entryRuleObjectRef1519);
+            pushFollow(FOLLOW_ruleObjectRef_in_entryRuleObjectRef1338);
             iv_ruleObjectRef=ruleObjectRef();
             _fsp--;
 
              current =iv_ruleObjectRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectRef1529); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectRef1348); 
 
             }
 
@@ -1535,37 +1705,37 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleObjectRef
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:733:1: ruleObjectRef returns [EObject current=null] : ( 'object' (lv_name_1= RULE_ID )? ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) ) ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:796:1: ruleObjectRef returns [EObject current=null] : ( 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )? ) ;
     public final EObject ruleObjectRef() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        Token lv_leftFrag_3=null;
-        Token lv_leftFrag_6=null;
-        Token lv_rightFrag_9=null;
-        EObject lv_assignments_11 = null;
+        Token lv_name_1_0=null;
+        Token lv_leftFrag_3_0=null;
+        Token lv_leftFrag_6_0=null;
+        Token lv_rightFrag_9_0=null;
+        EObject lv_assignments_11_0 = null;
 
-        EObject lv_assignments_12 = null;
+        EObject lv_assignments_12_0 = null;
 
-        EObject lv_leftMig_14 = null;
+        EObject lv_leftMig_14_0 = null;
 
-        EObject lv_rightMig_16 = null;
+        EObject lv_rightMig_16_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:738:6: ( ( 'object' (lv_name_1= RULE_ID )? ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) ) ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:739:1: ( 'object' (lv_name_1= RULE_ID )? ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) ) ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:801:6: ( ( 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:802:1: ( 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:739:1: ( 'object' (lv_name_1= RULE_ID )? ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) ) ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:739:2: 'object' (lv_name_1= RULE_ID )? ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) ) ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:802:1: ( 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:802:2: 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )?
             {
-            match(input,26,FOLLOW_26_in_ruleObjectRef1563); 
+            match(input,26,FOLLOW_26_in_ruleObjectRef1382); 
 
                     createLeafNode(grammarAccess.getObjectRefAccess().getObjectKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:743:1: (lv_name_1= RULE_ID )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:806:1: ( (lv_name_1_0= RULE_ID ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1578,32 +1748,42 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:745:6: lv_name_1= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:807:1: (lv_name_1_0= RULE_ID )
                     {
-                    lv_name_1=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1585); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:807:1: (lv_name_1_0= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:808:3: lv_name_1_0= RULE_ID
+                    {
+                    lv_name_1_0=(Token)input.LT(1);
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1399); 
 
-                    		createLeafNode(grammarAccess.getObjectRefAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-                    	
+                    			createLeafNode(grammarAccess.getObjectRefAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"name",
+                    	        		lv_name_1_0, 
+                    	        		"ID", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:763:3: ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:830:3: ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1615,19 +1795,22 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("763:3: ( ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) ) | ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) ) )", 11, 0, input);
+                    new NoViableAltException("830:3: ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) )", 11, 0, input);
 
                 throw nvae;
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:763:4: ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:830:4: ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:763:4: ( ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:763:5: ( RULE_ID ) (lv_leftFrag_3= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:830:4: ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:830:5: ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:763:5: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:766:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:830:5: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:831:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:831:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:832:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -1635,34 +1818,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1618); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1425); 
 
                     		createLeafNode(grammarAccess.getObjectRefAccess().getLeftResNamedResourceCrossReference_2_0_0_0(), "leftRes"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:780:2: (lv_leftFrag_3= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:782:6: lv_leftFrag_3= RULE_FRAGMENT
-                    {
-                    lv_leftFrag_3=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1647); 
 
-                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_0_1_0(), "leftFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:844:2: ( (lv_leftFrag_3_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:845:1: (lv_leftFrag_3_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:845:1: (lv_leftFrag_3_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:846:3: lv_leftFrag_3_0= RULE_FRAGMENT
+                    {
+                    lv_leftFrag_3_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1442); 
+
+                    			createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_0_1_0(), "leftFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "leftFrag", lv_leftFrag_3, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"leftFrag",
+                    	        		lv_leftFrag_3_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -1673,17 +1868,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:801:6: ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:869:6: ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:801:6: ( 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:801:7: 'left' ( RULE_ID ) (lv_leftFrag_6= RULE_FRAGMENT ) 'right' ( RULE_ID ) (lv_rightFrag_9= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:869:6: ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:869:7: 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) )
                     {
-                    match(input,23,FOLLOW_23_in_ruleObjectRef1672); 
+                    match(input,23,FOLLOW_23_in_ruleObjectRef1464); 
 
                             createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_2_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:805:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:808:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:873:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:874:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:874:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:875:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -1691,30 +1889,39 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1694); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1482); 
 
                     		createLeafNode(grammarAccess.getObjectRefAccess().getLeftResNamedResourceCrossReference_2_1_1_0(), "leftRes"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:822:2: (lv_leftFrag_6= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:824:6: lv_leftFrag_6= RULE_FRAGMENT
-                    {
-                    lv_leftFrag_6=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1723); 
 
-                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_1_2_0(), "leftFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:887:2: ( (lv_leftFrag_6_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:888:1: (lv_leftFrag_6_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:888:1: (lv_leftFrag_6_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:889:3: lv_leftFrag_6_0= RULE_FRAGMENT
+                    {
+                    lv_leftFrag_6_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1499); 
+
+                    			createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_1_2_0(), "leftFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "leftFrag", lv_leftFrag_6, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"leftFrag",
+                    	        		lv_leftFrag_6_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1722,12 +1929,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     }
 
-                    match(input,25,FOLLOW_25_in_ruleObjectRef1740); 
+
+                    }
+
+                    match(input,25,FOLLOW_25_in_ruleObjectRef1513); 
 
                             createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_2_1_3(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:846:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:849:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:915:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:916:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:916:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:917:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -1735,34 +1948,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1762); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1531); 
 
                     		createLeafNode(grammarAccess.getObjectRefAccess().getRightResNamedResourceCrossReference_2_1_4_0(), "rightRes"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:863:2: (lv_rightFrag_9= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:865:6: lv_rightFrag_9= RULE_FRAGMENT
-                    {
-                    lv_rightFrag_9=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1791); 
 
-                    		createLeafNode(grammarAccess.getObjectRefAccess().getRightFragFRAGMENTTerminalRuleCall_2_1_5_0(), "rightFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:929:2: ( (lv_rightFrag_9_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:930:1: (lv_rightFrag_9_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:930:1: (lv_rightFrag_9_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:931:3: lv_rightFrag_9_0= RULE_FRAGMENT
+                    {
+                    lv_rightFrag_9_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1548); 
+
+                    			createLeafNode(grammarAccess.getObjectRefAccess().getRightFragFRAGMENTTerminalRuleCall_2_1_5_0(), "rightFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "rightFrag", lv_rightFrag_9, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"rightFrag",
+                    	        		lv_rightFrag_9_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -1775,7 +2000,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:883:4: ( '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:953:4: ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1784,13 +2009,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:883:5: '{' ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+ ( 'left' (lv_leftMig_14= ruleMigration ) )? ( 'right' (lv_rightMig_16= ruleMigration ) )? '}'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:953:5: '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}'
                     {
-                    match(input,13,FOLLOW_13_in_ruleObjectRef1811); 
+                    match(input,13,FOLLOW_13_in_ruleObjectRef1565); 
 
                             createLeafNode(grammarAccess.getObjectRefAccess().getLeftCurlyBracketKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:887:1: ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:957:1: ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+
                     int cnt12=0;
                     loop12:
                     do {
@@ -1819,16 +2044,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:887:2: (lv_assignments_11= ruleBiSingleAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:957:2: ( (lv_assignments_11_0= ruleBiSingleAssignment ) )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:887:2: (lv_assignments_11= ruleBiSingleAssignment )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:890:6: lv_assignments_11= ruleBiSingleAssignment
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:957:2: ( (lv_assignments_11_0= ruleBiSingleAssignment ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:958:1: (lv_assignments_11_0= ruleBiSingleAssignment )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:958:1: (lv_assignments_11_0= ruleBiSingleAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:959:3: lv_assignments_11_0= ruleBiSingleAssignment
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getAssignmentsBiSingleAssignmentParserRuleCall_3_1_0_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1846);
-                    	    lv_assignments_11=ruleBiSingleAssignment();
+                    	    pushFollow(FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1587);
+                    	    lv_assignments_11_0=ruleBiSingleAssignment();
                     	    _fsp--;
 
 
@@ -1836,14 +2064,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "assignments", lv_assignments_11, "BiSingleAssignment", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"assignments",
+                    	    	        		lv_assignments_11_0, 
+                    	    	        		"BiSingleAssignment", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -1851,16 +2086,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:909:6: (lv_assignments_12= ruleBiListAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:982:6: ( (lv_assignments_12_0= ruleBiListAssignment ) )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:909:6: (lv_assignments_12= ruleBiListAssignment )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:912:6: lv_assignments_12= ruleBiListAssignment
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:982:6: ( (lv_assignments_12_0= ruleBiListAssignment ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:983:1: (lv_assignments_12_0= ruleBiListAssignment )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:983:1: (lv_assignments_12_0= ruleBiListAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:984:3: lv_assignments_12_0= ruleBiListAssignment
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getAssignmentsBiListAssignmentParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleBiListAssignment_in_ruleObjectRef1890);
-                    	    lv_assignments_12=ruleBiListAssignment();
+                    	    pushFollow(FOLLOW_ruleBiListAssignment_in_ruleObjectRef1614);
+                    	    lv_assignments_12_0=ruleBiListAssignment();
                     	    _fsp--;
 
 
@@ -1868,14 +2106,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "assignments", lv_assignments_12, "BiListAssignment", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"assignments",
+                    	    	        		lv_assignments_12_0, 
+                    	    	        		"BiListAssignment", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -1892,7 +2137,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                         cnt12++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:930:4: ( 'left' (lv_leftMig_14= ruleMigration ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1006:4: ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1901,20 +2146,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:930:5: 'left' (lv_leftMig_14= ruleMigration )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1006:5: 'left' ( (lv_leftMig_14_0= ruleMigration ) )
                             {
-                            match(input,23,FOLLOW_23_in_ruleObjectRef1906); 
+                            match(input,23,FOLLOW_23_in_ruleObjectRef1626); 
 
                                     createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_3_2_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:934:1: (lv_leftMig_14= ruleMigration )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:937:6: lv_leftMig_14= ruleMigration
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1010:1: ( (lv_leftMig_14_0= ruleMigration ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1011:1: (lv_leftMig_14_0= ruleMigration )
+                            {
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1011:1: (lv_leftMig_14_0= ruleMigration )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1012:3: lv_leftMig_14_0= ruleMigration
                             {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getLeftMigMigrationParserRuleCall_3_2_1_0(), currentNode); 
                             	    
-                            pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef1940);
-                            lv_leftMig_14=ruleMigration();
+                            pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef1647);
+                            lv_leftMig_14_0=ruleMigration();
                             _fsp--;
 
 
@@ -1922,9 +2170,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "leftMig", lv_leftMig_14, "Migration", currentNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"leftMig",
+                            	        		lv_leftMig_14_0, 
+                            	        		"Migration", 
+                            	        		currentNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -1935,11 +2187,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             }
+
+
+                            }
                             break;
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:955:4: ( 'right' (lv_rightMig_16= ruleMigration ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1034:4: ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1948,20 +2203,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:955:5: 'right' (lv_rightMig_16= ruleMigration )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1034:5: 'right' ( (lv_rightMig_16_0= ruleMigration ) )
                             {
-                            match(input,25,FOLLOW_25_in_ruleObjectRef1956); 
+                            match(input,25,FOLLOW_25_in_ruleObjectRef1659); 
 
                                     createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_3_3_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:959:1: (lv_rightMig_16= ruleMigration )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:962:6: lv_rightMig_16= ruleMigration
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1038:1: ( (lv_rightMig_16_0= ruleMigration ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1039:1: (lv_rightMig_16_0= ruleMigration )
+                            {
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1039:1: (lv_rightMig_16_0= ruleMigration )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1040:3: lv_rightMig_16_0= ruleMigration
                             {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getRightMigMigrationParserRuleCall_3_3_1_0(), currentNode); 
                             	    
-                            pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef1990);
-                            lv_rightMig_16=ruleMigration();
+                            pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef1680);
+                            lv_rightMig_16_0=ruleMigration();
                             _fsp--;
 
 
@@ -1969,9 +2227,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "rightMig", lv_rightMig_16, "Migration", currentNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"rightMig",
+                            	        		lv_rightMig_16_0, 
+                            	        		"Migration", 
+                            	        		currentNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -1982,11 +2244,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             }
+
+
+                            }
                             break;
 
                     }
 
-                    match(input,14,FOLLOW_14_in_ruleObjectRef2005); 
+                    match(input,14,FOLLOW_14_in_ruleObjectRef1691); 
 
                             createLeafNode(grammarAccess.getObjectRefAccess().getRightCurlyBracketKeyword_3_4(), null); 
                         
@@ -2019,7 +2284,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleBiSingleAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:993:1: entryRuleBiSingleAssignment returns [EObject current=null] : iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1075:1: entryRuleBiSingleAssignment returns [EObject current=null] : iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF ;
     public final EObject entryRuleBiSingleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2027,16 +2292,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:993:60: (iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:994:2: iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1075:60: (iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1076:2: iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF
             {
              currentNode = createCompositeNode(grammarAccess.getBiSingleAssignmentRule(), currentNode); 
-            pushFollow(FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment2042);
+            pushFollow(FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment1728);
             iv_ruleBiSingleAssignment=ruleBiSingleAssignment();
             _fsp--;
 
              current =iv_ruleBiSingleAssignment; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBiSingleAssignment2052); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBiSingleAssignment1738); 
 
             }
 
@@ -2054,41 +2319,48 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleBiSingleAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1001:1: ruleBiSingleAssignment returns [EObject current=null] : ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) '|' (lv_rightValue_4= ruleSingleAssignmentValue ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1083:1: ruleBiSingleAssignment returns [EObject current=null] : ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';' ) ;
     public final EObject ruleBiSingleAssignment() throws RecognitionException {
         EObject current = null;
 
-        Token lv_feature_0=null;
-        EObject lv_leftValue_2 = null;
+        Token lv_feature_0_0=null;
+        EObject lv_leftValue_2_0 = null;
 
-        EObject lv_rightValue_4 = null;
+        EObject lv_rightValue_4_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1006:6: ( ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) '|' (lv_rightValue_4= ruleSingleAssignmentValue ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1007:1: ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) '|' (lv_rightValue_4= ruleSingleAssignmentValue ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1088:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1007:1: ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) '|' (lv_rightValue_4= ruleSingleAssignmentValue ) ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1007:2: (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) '|' (lv_rightValue_4= ruleSingleAssignmentValue ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:2: ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1007:2: (lv_feature_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1009:6: lv_feature_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:2: ( (lv_feature_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1090:1: (lv_feature_0_0= RULE_ID )
             {
-            lv_feature_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiSingleAssignment2099); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1090:1: (lv_feature_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1091:3: lv_feature_0_0= RULE_ID
+            {
+            lv_feature_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiSingleAssignment1780); 
 
-            		createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
-            	
+            			createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "feature", lv_feature_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"feature",
+            	        		lv_feature_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2096,18 +2368,24 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleBiSingleAssignment2116); 
+
+            }
+
+            match(input,27,FOLLOW_27_in_ruleBiSingleAssignment1794); 
 
                     createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1031:1: (lv_leftValue_2= ruleSingleAssignmentValue )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1034:6: lv_leftValue_2= ruleSingleAssignmentValue
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1117:1: ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1118:1: (lv_leftValue_2_0= ruleSingleAssignmentValue )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1118:1: (lv_leftValue_2_0= ruleSingleAssignmentValue )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1119:3: lv_leftValue_2_0= ruleSingleAssignmentValue
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getBiSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2150);
-            lv_leftValue_2=ruleSingleAssignmentValue();
+            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment1815);
+            lv_leftValue_2_0=ruleSingleAssignmentValue();
             _fsp--;
 
 
@@ -2115,9 +2393,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
-            	        
             	        try {
-            	       		set(current, "leftValue", lv_leftValue_2, "SingleAssignmentValue", currentNode);
+            	       		set(
+            	       			current, 
+            	       			"leftValue",
+            	        		lv_leftValue_2_0, 
+            	        		"SingleAssignmentValue", 
+            	        		currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2126,18 +2408,24 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,28,FOLLOW_28_in_ruleBiSingleAssignment2163); 
+
+            }
+
+            match(input,28,FOLLOW_28_in_ruleBiSingleAssignment1824); 
 
                     createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getVerticalLineKeyword_3(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1056:1: (lv_rightValue_4= ruleSingleAssignmentValue )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1059:6: lv_rightValue_4= ruleSingleAssignmentValue
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1145:1: ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1146:1: (lv_rightValue_4_0= ruleSingleAssignmentValue )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1146:1: (lv_rightValue_4_0= ruleSingleAssignmentValue )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1147:3: lv_rightValue_4_0= ruleSingleAssignmentValue
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getBiSingleAssignmentAccess().getRightValueSingleAssignmentValueParserRuleCall_4_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2197);
-            lv_rightValue_4=ruleSingleAssignmentValue();
+            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment1845);
+            lv_rightValue_4_0=ruleSingleAssignmentValue();
             _fsp--;
 
 
@@ -2145,9 +2433,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
-            	        
             	        try {
-            	       		set(current, "rightValue", lv_rightValue_4, "SingleAssignmentValue", currentNode);
+            	       		set(
+            	       			current, 
+            	       			"rightValue",
+            	        		lv_rightValue_4_0, 
+            	        		"SingleAssignmentValue", 
+            	        		currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2156,7 +2448,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,24,FOLLOW_24_in_ruleBiSingleAssignment2210); 
+
+            }
+
+            match(input,24,FOLLOW_24_in_ruleBiSingleAssignment1854); 
 
                     createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getSemicolonKeyword_5(), null); 
                 
@@ -2183,7 +2478,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleBiListAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1088:1: entryRuleBiListAssignment returns [EObject current=null] : iv_ruleBiListAssignment= ruleBiListAssignment EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1180:1: entryRuleBiListAssignment returns [EObject current=null] : iv_ruleBiListAssignment= ruleBiListAssignment EOF ;
     public final EObject entryRuleBiListAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2191,16 +2486,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1088:58: (iv_ruleBiListAssignment= ruleBiListAssignment EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1089:2: iv_ruleBiListAssignment= ruleBiListAssignment EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1180:58: (iv_ruleBiListAssignment= ruleBiListAssignment EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1181:2: iv_ruleBiListAssignment= ruleBiListAssignment EOF
             {
              currentNode = createCompositeNode(grammarAccess.getBiListAssignmentRule(), currentNode); 
-            pushFollow(FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment2243);
+            pushFollow(FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment1887);
             iv_ruleBiListAssignment=ruleBiListAssignment();
             _fsp--;
 
              current =iv_ruleBiListAssignment; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBiListAssignment2253); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBiListAssignment1897); 
 
             }
 
@@ -2218,45 +2513,52 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleBiListAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1096:1: ruleBiListAssignment returns [EObject current=null] : ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )? '|' ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )? ']' ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1188:1: ruleBiListAssignment returns [EObject current=null] : ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';' ) ;
     public final EObject ruleBiListAssignment() throws RecognitionException {
         EObject current = null;
 
-        Token lv_feature_0=null;
-        EObject lv_leftValues_3 = null;
+        Token lv_feature_0_0=null;
+        EObject lv_leftValues_3_0 = null;
 
-        EObject lv_leftValues_5 = null;
+        EObject lv_leftValues_5_0 = null;
 
-        EObject lv_rightValues_7 = null;
+        EObject lv_rightValues_7_0 = null;
 
-        EObject lv_rightValues_9 = null;
+        EObject lv_rightValues_9_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1101:6: ( ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )? '|' ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )? ']' ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1102:1: ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )? '|' ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )? ']' ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1193:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1194:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1102:1: ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )? '|' ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )? ']' ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1102:2: (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )? '|' ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )? ']' ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1194:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1194:2: ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1102:2: (lv_feature_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1104:6: lv_feature_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1194:2: ( (lv_feature_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1195:1: (lv_feature_0_0= RULE_ID )
             {
-            lv_feature_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiListAssignment2300); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1195:1: (lv_feature_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1196:3: lv_feature_0_0= RULE_ID
+            {
+            lv_feature_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiListAssignment1939); 
 
-            		createLeafNode(grammarAccess.getBiListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
-            	
+            			createLeafNode(grammarAccess.getBiListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "feature", lv_feature_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"feature",
+            	        		lv_feature_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2264,15 +2566,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleBiListAssignment2317); 
+
+            }
+
+            match(input,27,FOLLOW_27_in_ruleBiListAssignment1953); 
 
                     createLeafNode(grammarAccess.getBiListAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
-            match(input,29,FOLLOW_29_in_ruleBiListAssignment2326); 
+            match(input,29,FOLLOW_29_in_ruleBiListAssignment1962); 
 
                     createLeafNode(grammarAccess.getBiListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1130:1: ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1226:1: ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -2281,16 +2586,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1130:2: (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1226:2: ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )*
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1130:2: (lv_leftValues_3= ruleListAssignmentValue )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1133:6: lv_leftValues_3= ruleListAssignmentValue
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1226:2: ( (lv_leftValues_3_0= ruleListAssignmentValue ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1227:1: (lv_leftValues_3_0= ruleListAssignmentValue )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1227:1: (lv_leftValues_3_0= ruleListAssignmentValue )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1228:3: lv_leftValues_3_0= ruleListAssignmentValue
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2361);
-                    lv_leftValues_3=ruleListAssignmentValue();
+                    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment1984);
+                    lv_leftValues_3_0=ruleListAssignmentValue();
                     _fsp--;
 
 
@@ -2298,9 +2606,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		add(current, "leftValues", lv_leftValues_3, "ListAssignmentValue", currentNode);
+                    	       		add(
+                    	       			current, 
+                    	       			"leftValues",
+                    	        		lv_leftValues_3_0, 
+                    	        		"ListAssignmentValue", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -2309,7 +2621,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1151:2: ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )*
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1250:2: ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )*
                     loop16:
                     do {
                         int alt16=2;
@@ -2322,20 +2637,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                         switch (alt16) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1151:3: ',' (lv_leftValues_5= ruleListAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1250:3: ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) )
                     	    {
-                    	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2375); 
+                    	    match(input,30,FOLLOW_30_in_ruleBiListAssignment1994); 
 
                     	            createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1155:1: (lv_leftValues_5= ruleListAssignmentValue )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1158:6: lv_leftValues_5= ruleListAssignmentValue
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1254:1: ( (lv_leftValues_5_0= ruleListAssignmentValue ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:1: (lv_leftValues_5_0= ruleListAssignmentValue )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:1: (lv_leftValues_5_0= ruleListAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1256:3: lv_leftValues_5_0= ruleListAssignmentValue
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2409);
-                    	    lv_leftValues_5=ruleListAssignmentValue();
+                    	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2015);
+                    	    lv_leftValues_5_0=ruleListAssignmentValue();
                     	    _fsp--;
 
 
@@ -2343,14 +2661,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "leftValues", lv_leftValues_5, "ListAssignmentValue", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"leftValues",
+                    	    	        		lv_leftValues_5_0, 
+                    	    	        		"ListAssignmentValue", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -2369,11 +2694,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,28,FOLLOW_28_in_ruleBiListAssignment2426); 
+            match(input,28,FOLLOW_28_in_ruleBiListAssignment2028); 
 
                     createLeafNode(grammarAccess.getBiListAssignmentAccess().getVerticalLineKeyword_4(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1180:1: ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1282:1: ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2382,16 +2707,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1180:2: (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1282:2: ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )*
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1180:2: (lv_rightValues_7= ruleListAssignmentValue )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1183:6: lv_rightValues_7= ruleListAssignmentValue
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1282:2: ( (lv_rightValues_7_0= ruleListAssignmentValue ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1283:1: (lv_rightValues_7_0= ruleListAssignmentValue )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1283:1: (lv_rightValues_7_0= ruleListAssignmentValue )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1284:3: lv_rightValues_7_0= ruleListAssignmentValue
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2461);
-                    lv_rightValues_7=ruleListAssignmentValue();
+                    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2050);
+                    lv_rightValues_7_0=ruleListAssignmentValue();
                     _fsp--;
 
 
@@ -2399,9 +2727,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		add(current, "rightValues", lv_rightValues_7, "ListAssignmentValue", currentNode);
+                    	       		add(
+                    	       			current, 
+                    	       			"rightValues",
+                    	        		lv_rightValues_7_0, 
+                    	        		"ListAssignmentValue", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -2410,7 +2742,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1201:2: ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )*
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1306:2: ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )*
                     loop18:
                     do {
                         int alt18=2;
@@ -2423,20 +2758,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                         switch (alt18) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1201:3: ',' (lv_rightValues_9= ruleListAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1306:3: ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) )
                     	    {
-                    	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2475); 
+                    	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2060); 
 
                     	            createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_5_1_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1205:1: (lv_rightValues_9= ruleListAssignmentValue )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1208:6: lv_rightValues_9= ruleListAssignmentValue
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1310:1: ( (lv_rightValues_9_0= ruleListAssignmentValue ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1311:1: (lv_rightValues_9_0= ruleListAssignmentValue )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1311:1: (lv_rightValues_9_0= ruleListAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1312:3: lv_rightValues_9_0= ruleListAssignmentValue
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2509);
-                    	    lv_rightValues_9=ruleListAssignmentValue();
+                    	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2081);
+                    	    lv_rightValues_9_0=ruleListAssignmentValue();
                     	    _fsp--;
 
 
@@ -2444,14 +2782,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "rightValues", lv_rightValues_9, "ListAssignmentValue", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"rightValues",
+                    	    	        		lv_rightValues_9_0, 
+                    	    	        		"ListAssignmentValue", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -2470,11 +2815,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,31,FOLLOW_31_in_ruleBiListAssignment2526); 
+            match(input,31,FOLLOW_31_in_ruleBiListAssignment2094); 
 
                     createLeafNode(grammarAccess.getBiListAssignmentAccess().getRightSquareBracketKeyword_6(), null); 
                 
-            match(input,24,FOLLOW_24_in_ruleBiListAssignment2535); 
+            match(input,24,FOLLOW_24_in_ruleBiListAssignment2103); 
 
                     createLeafNode(grammarAccess.getBiListAssignmentAccess().getSemicolonKeyword_7(), null); 
                 
@@ -2501,7 +2846,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleMonoSingleAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1241:1: entryRuleMonoSingleAssignment returns [EObject current=null] : iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1349:1: entryRuleMonoSingleAssignment returns [EObject current=null] : iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF ;
     public final EObject entryRuleMonoSingleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2509,16 +2854,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1241:62: (iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1242:2: iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1349:62: (iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1350:2: iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMonoSingleAssignmentRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2568);
+            pushFollow(FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2136);
             iv_ruleMonoSingleAssignment=ruleMonoSingleAssignment();
             _fsp--;
 
              current =iv_ruleMonoSingleAssignment; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMonoSingleAssignment2578); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMonoSingleAssignment2146); 
 
             }
 
@@ -2536,39 +2881,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleMonoSingleAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1249:1: ruleMonoSingleAssignment returns [EObject current=null] : ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1357:1: ruleMonoSingleAssignment returns [EObject current=null] : ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';' ) ;
     public final EObject ruleMonoSingleAssignment() throws RecognitionException {
         EObject current = null;
 
-        Token lv_feature_0=null;
-        EObject lv_leftValue_2 = null;
+        Token lv_feature_0_0=null;
+        EObject lv_leftValue_2_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1254:6: ( ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:1: ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1362:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1363:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:1: ( (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:2: (lv_feature_0= RULE_ID ) '=' (lv_leftValue_2= ruleSingleAssignmentValue ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1363:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1363:2: ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:2: (lv_feature_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1257:6: lv_feature_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1363:2: ( (lv_feature_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1364:1: (lv_feature_0_0= RULE_ID )
             {
-            lv_feature_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2625); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1364:1: (lv_feature_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1365:3: lv_feature_0_0= RULE_ID
+            {
+            lv_feature_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2188); 
 
-            		createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
-            	
+            			createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "feature", lv_feature_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"feature",
+            	        		lv_feature_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2576,18 +2928,24 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleMonoSingleAssignment2642); 
+
+            }
+
+            match(input,27,FOLLOW_27_in_ruleMonoSingleAssignment2202); 
 
                     createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1279:1: (lv_leftValue_2= ruleSingleAssignmentValue )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1282:6: lv_leftValue_2= ruleSingleAssignmentValue
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1391:1: ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1392:1: (lv_leftValue_2_0= ruleSingleAssignmentValue )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1392:1: (lv_leftValue_2_0= ruleSingleAssignmentValue )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1393:3: lv_leftValue_2_0= ruleSingleAssignmentValue
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getMonoSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2676);
-            lv_leftValue_2=ruleSingleAssignmentValue();
+            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2223);
+            lv_leftValue_2_0=ruleSingleAssignmentValue();
             _fsp--;
 
 
@@ -2595,9 +2953,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	            current = factory.create(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
-            	        
             	        try {
-            	       		set(current, "leftValue", lv_leftValue_2, "SingleAssignmentValue", currentNode);
+            	       		set(
+            	       			current, 
+            	       			"leftValue",
+            	        		lv_leftValue_2_0, 
+            	        		"SingleAssignmentValue", 
+            	        		currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2606,7 +2968,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,24,FOLLOW_24_in_ruleMonoSingleAssignment2689); 
+
+            }
+
+            match(input,24,FOLLOW_24_in_ruleMonoSingleAssignment2232); 
 
                     createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getSemicolonKeyword_3(), null); 
                 
@@ -2633,7 +2998,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleMonoListAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1311:1: entryRuleMonoListAssignment returns [EObject current=null] : iv_ruleMonoListAssignment= ruleMonoListAssignment EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1426:1: entryRuleMonoListAssignment returns [EObject current=null] : iv_ruleMonoListAssignment= ruleMonoListAssignment EOF ;
     public final EObject entryRuleMonoListAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2641,16 +3006,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1311:60: (iv_ruleMonoListAssignment= ruleMonoListAssignment EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1312:2: iv_ruleMonoListAssignment= ruleMonoListAssignment EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1426:60: (iv_ruleMonoListAssignment= ruleMonoListAssignment EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1427:2: iv_ruleMonoListAssignment= ruleMonoListAssignment EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMonoListAssignmentRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2722);
+            pushFollow(FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2265);
             iv_ruleMonoListAssignment=ruleMonoListAssignment();
             _fsp--;
 
              current =iv_ruleMonoListAssignment; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMonoListAssignment2732); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMonoListAssignment2275); 
 
             }
 
@@ -2668,41 +3033,48 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleMonoListAssignment
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1319:1: ruleMonoListAssignment returns [EObject current=null] : ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )? ']' ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1434:1: ruleMonoListAssignment returns [EObject current=null] : ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';' ) ;
     public final EObject ruleMonoListAssignment() throws RecognitionException {
         EObject current = null;
 
-        Token lv_feature_0=null;
-        EObject lv_leftValues_3 = null;
+        Token lv_feature_0_0=null;
+        EObject lv_leftValues_3_0 = null;
 
-        EObject lv_leftValues_5 = null;
+        EObject lv_leftValues_5_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1324:6: ( ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )? ']' ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1325:1: ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )? ']' ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1439:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1440:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1325:1: ( (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )? ']' ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1325:2: (lv_feature_0= RULE_ID ) '=' '[' ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )? ']' ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1440:1: ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1440:2: ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1325:2: (lv_feature_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1327:6: lv_feature_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1440:2: ( (lv_feature_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1441:1: (lv_feature_0_0= RULE_ID )
             {
-            lv_feature_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoListAssignment2779); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1441:1: (lv_feature_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1442:3: lv_feature_0_0= RULE_ID
+            {
+            lv_feature_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoListAssignment2317); 
 
-            		createLeafNode(grammarAccess.getMonoListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
-            	
+            			createLeafNode(grammarAccess.getMonoListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "feature", lv_feature_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"feature",
+            	        		lv_feature_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -2710,15 +3082,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleMonoListAssignment2796); 
+
+            }
+
+            match(input,27,FOLLOW_27_in_ruleMonoListAssignment2331); 
 
                     createLeafNode(grammarAccess.getMonoListAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
-            match(input,29,FOLLOW_29_in_ruleMonoListAssignment2805); 
+            match(input,29,FOLLOW_29_in_ruleMonoListAssignment2340); 
 
                     createLeafNode(grammarAccess.getMonoListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1353:1: ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1472:1: ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -2727,16 +3102,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt21) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1353:2: (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1472:2: ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )*
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1353:2: (lv_leftValues_3= ruleAssignmentValue )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1356:6: lv_leftValues_3= ruleAssignmentValue
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1472:2: ( (lv_leftValues_3_0= ruleAssignmentValue ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1473:1: (lv_leftValues_3_0= ruleAssignmentValue )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1473:1: (lv_leftValues_3_0= ruleAssignmentValue )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1474:3: lv_leftValues_3_0= ruleAssignmentValue
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2840);
-                    lv_leftValues_3=ruleAssignmentValue();
+                    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2362);
+                    lv_leftValues_3_0=ruleAssignmentValue();
                     _fsp--;
 
 
@@ -2744,9 +3122,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		add(current, "leftValues", lv_leftValues_3, "AssignmentValue", currentNode);
+                    	       		add(
+                    	       			current, 
+                    	       			"leftValues",
+                    	        		lv_leftValues_3_0, 
+                    	        		"AssignmentValue", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -2755,7 +3137,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1374:2: ( ',' (lv_leftValues_5= ruleAssignmentValue ) )*
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1496:2: ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )*
                     loop20:
                     do {
                         int alt20=2;
@@ -2768,20 +3153,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                         switch (alt20) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1374:3: ',' (lv_leftValues_5= ruleAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1496:3: ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) )
                     	    {
-                    	    match(input,30,FOLLOW_30_in_ruleMonoListAssignment2854); 
+                    	    match(input,30,FOLLOW_30_in_ruleMonoListAssignment2372); 
 
                     	            createLeafNode(grammarAccess.getMonoListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1378:1: (lv_leftValues_5= ruleAssignmentValue )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1381:6: lv_leftValues_5= ruleAssignmentValue
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1500:1: ( (lv_leftValues_5_0= ruleAssignmentValue ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1501:1: (lv_leftValues_5_0= ruleAssignmentValue )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1501:1: (lv_leftValues_5_0= ruleAssignmentValue )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1502:3: lv_leftValues_5_0= ruleAssignmentValue
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2888);
-                    	    lv_leftValues_5=ruleAssignmentValue();
+                    	    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2393);
+                    	    lv_leftValues_5_0=ruleAssignmentValue();
                     	    _fsp--;
 
 
@@ -2789,14 +3177,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "leftValues", lv_leftValues_5, "AssignmentValue", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"leftValues",
+                    	    	        		lv_leftValues_5_0, 
+                    	    	        		"AssignmentValue", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -2815,11 +3210,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,31,FOLLOW_31_in_ruleMonoListAssignment2905); 
+            match(input,31,FOLLOW_31_in_ruleMonoListAssignment2406); 
 
                     createLeafNode(grammarAccess.getMonoListAssignmentAccess().getRightSquareBracketKeyword_4(), null); 
                 
-            match(input,24,FOLLOW_24_in_ruleMonoListAssignment2914); 
+            match(input,24,FOLLOW_24_in_ruleMonoListAssignment2415); 
 
                     createLeafNode(grammarAccess.getMonoListAssignmentAccess().getSemicolonKeyword_5(), null); 
                 
@@ -2846,7 +3241,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1414:1: entryRuleAssignmentValue returns [EObject current=null] : iv_ruleAssignmentValue= ruleAssignmentValue EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1539:1: entryRuleAssignmentValue returns [EObject current=null] : iv_ruleAssignmentValue= ruleAssignmentValue EOF ;
     public final EObject entryRuleAssignmentValue() throws RecognitionException {
         EObject current = null;
 
@@ -2854,16 +3249,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1414:57: (iv_ruleAssignmentValue= ruleAssignmentValue EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1415:2: iv_ruleAssignmentValue= ruleAssignmentValue EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1539:57: (iv_ruleAssignmentValue= ruleAssignmentValue EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1540:2: iv_ruleAssignmentValue= ruleAssignmentValue EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAssignmentValueRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue2947);
+            pushFollow(FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue2448);
             iv_ruleAssignmentValue=ruleAssignmentValue();
             _fsp--;
 
              current =iv_ruleAssignmentValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssignmentValue2957); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAssignmentValue2458); 
 
             }
 
@@ -2881,24 +3276,24 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1422:1: ruleAssignmentValue returns [EObject current=null] : ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1547:1: ruleAssignmentValue returns [EObject current=null] : ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) ) ;
     public final EObject ruleAssignmentValue() throws RecognitionException {
         EObject current = null;
 
-        Token lv_value_0=null;
-        Token lv_refFeature_3=null;
-        Token lv_refIndex_5=null;
-        Token lv_impFrag_9=null;
-        EObject lv_newObject_7 = null;
+        Token lv_value_0_0=null;
+        Token lv_refFeature_3_0=null;
+        Token lv_refIndex_5_0=null;
+        Token lv_impFrag_9_0=null;
+        EObject lv_newObject_7_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1427:6: ( ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1428:1: ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1552:6: ( ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1553:1: ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1428:1: ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1553:1: ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) )
             int alt24=4;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -2918,7 +3313,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("1428:1: ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) )", 24, 2, input);
+                        new NoViableAltException("1553:1: ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) )", 24, 2, input);
 
                     throw nvae;
                 }
@@ -2932,31 +3327,38 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1428:1: ( (lv_value_0= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? ) | (lv_newObject_7= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) ) )", 24, 0, input);
+                    new NoViableAltException("1553:1: ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) )", 24, 0, input);
 
                 throw nvae;
             }
 
             switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1428:2: (lv_value_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1553:2: ( (lv_value_0_0= RULE_STRING ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1428:2: (lv_value_0= RULE_STRING )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1430:6: lv_value_0= RULE_STRING
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1553:2: ( (lv_value_0_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1554:1: (lv_value_0_0= RULE_STRING )
                     {
-                    lv_value_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAssignmentValue3004); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1554:1: (lv_value_0_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1555:3: lv_value_0_0= RULE_STRING
+                    {
+                    lv_value_0_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAssignmentValue2500); 
 
-                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getValueSTRINGTerminalRuleCall_0_0(), "value"); 
-                    	
+                    			createLeafNode(grammarAccess.getAssignmentValueAccess().getValueSTRINGTerminalRuleCall_0_0(), "value"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "value", lv_value_0, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"value",
+                    	        		lv_value_0_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -2966,15 +3368,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1449:6: ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1578:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1449:6: ( ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1449:7: ( RULE_ID ) ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1578:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1578:7: ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )?
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1449:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1452:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1578:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1579:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1579:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1580:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -2982,15 +3390,17 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3041); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue2530); 
 
                     		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefObjectNamedObjectCrossReference_1_0_0(), "refObject"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1466:2: ( '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )? )?
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1592:2: ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )?
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -2999,28 +3409,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt23) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1466:3: '.' (lv_refFeature_3= RULE_ID ) ( '[' (lv_refIndex_5= RULE_INT ) ']' )?
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1592:3: '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )?
                             {
-                            match(input,19,FOLLOW_19_in_ruleAssignmentValue3058); 
+                            match(input,19,FOLLOW_19_in_ruleAssignmentValue2540); 
 
                                     createLeafNode(grammarAccess.getAssignmentValueAccess().getFullStopKeyword_1_1_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1470:1: (lv_refFeature_3= RULE_ID )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1472:6: lv_refFeature_3= RULE_ID
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1596:1: ( (lv_refFeature_3_0= RULE_ID ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1597:1: (lv_refFeature_3_0= RULE_ID )
                             {
-                            lv_refFeature_3=(Token)input.LT(1);
-                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3080); 
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1597:1: (lv_refFeature_3_0= RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1598:3: lv_refFeature_3_0= RULE_ID
+                            {
+                            lv_refFeature_3_0=(Token)input.LT(1);
+                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue2557); 
 
-                            		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_1_1_1_0(), "refFeature"); 
-                            	
+                            			createLeafNode(grammarAccess.getAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_1_1_1_0(), "refFeature"); 
+                            		
 
                             	        if (current==null) {
                             	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "refFeature", lv_refFeature_3, "ID", lastConsumedNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"refFeature",
+                            	        		lv_refFeature_3_0, 
+                            	        		"ID", 
+                            	        		lastConsumedNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -3028,7 +3445,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                             }
 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1490:2: ( '[' (lv_refIndex_5= RULE_INT ) ']' )?
+
+                            }
+
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1620:2: ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )?
                             int alt22=2;
                             int LA22_0 = input.LA(1);
 
@@ -3037,28 +3457,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             switch (alt22) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1490:3: '[' (lv_refIndex_5= RULE_INT ) ']'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1620:3: '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']'
                                     {
-                                    match(input,29,FOLLOW_29_in_ruleAssignmentValue3098); 
+                                    match(input,29,FOLLOW_29_in_ruleAssignmentValue2572); 
 
                                             createLeafNode(grammarAccess.getAssignmentValueAccess().getLeftSquareBracketKeyword_1_1_2_0(), null); 
                                         
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1494:1: (lv_refIndex_5= RULE_INT )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1496:6: lv_refIndex_5= RULE_INT
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1624:1: ( (lv_refIndex_5_0= RULE_INT ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1625:1: (lv_refIndex_5_0= RULE_INT )
                                     {
-                                    lv_refIndex_5=(Token)input.LT(1);
-                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAssignmentValue3120); 
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1625:1: (lv_refIndex_5_0= RULE_INT )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1626:3: lv_refIndex_5_0= RULE_INT
+                                    {
+                                    lv_refIndex_5_0=(Token)input.LT(1);
+                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAssignmentValue2589); 
 
-                                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefIndexINTTerminalRuleCall_1_1_2_1_0(), "refIndex"); 
-                                    	
+                                    			createLeafNode(grammarAccess.getAssignmentValueAccess().getRefIndexINTTerminalRuleCall_1_1_2_1_0(), "refIndex"); 
+                                    		
 
                                     	        if (current==null) {
                                     	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
-                                    	        
                                     	        try {
-                                    	       		set(current, "refIndex", lv_refIndex_5, "INT", lastConsumedNode);
+                                    	       		set(
+                                    	       			current, 
+                                    	       			"refIndex",
+                                    	        		lv_refIndex_5_0, 
+                                    	        		"INT", 
+                                    	        		lastConsumedNode);
                                     	        } catch (ValueConverterException vce) {
                                     				handleValueConverterException(vce);
                                     	        }
@@ -3066,7 +3493,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     }
 
-                                    match(input,31,FOLLOW_31_in_ruleAssignmentValue3137); 
+
+                                    }
+
+                                    match(input,31,FOLLOW_31_in_ruleAssignmentValue2603); 
 
                                             createLeafNode(grammarAccess.getAssignmentValueAccess().getRightSquareBracketKeyword_1_1_2_2(), null); 
                                         
@@ -3089,16 +3519,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1519:6: (lv_newObject_7= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1653:6: ( (lv_newObject_7_0= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1519:6: (lv_newObject_7= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1522:6: lv_newObject_7= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1653:6: ( (lv_newObject_7_0= ruleCreatedObject ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1654:1: (lv_newObject_7_0= ruleCreatedObject )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1654:1: (lv_newObject_7_0= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1655:3: lv_newObject_7_0= ruleCreatedObject
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleAssignmentValue3182);
-                    lv_newObject_7=ruleCreatedObject();
+                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleAssignmentValue2635);
+                    lv_newObject_7_0=ruleCreatedObject();
                     _fsp--;
 
 
@@ -3106,9 +3539,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "newObject", lv_newObject_7, "CreatedObject", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"newObject",
+                    	        		lv_newObject_7_0, 
+                    	        		"CreatedObject", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3119,15 +3556,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1541:6: ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1678:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1541:6: ( ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1541:7: ( RULE_ID ) (lv_impFrag_9= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1678:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1678:7: ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1541:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1544:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1678:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1679:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1679:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1680:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -3135,34 +3578,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3215); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue2660); 
 
                     		createLeafNode(grammarAccess.getAssignmentValueAccess().getImportImportCrossReference_3_0_0(), "import"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1558:2: (lv_impFrag_9= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1560:6: lv_impFrag_9= RULE_FRAGMENT
-                    {
-                    lv_impFrag_9=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue3244); 
 
-                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_3_1_0(), "impFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1692:2: ( (lv_impFrag_9_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1693:1: (lv_impFrag_9_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1693:1: (lv_impFrag_9_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1694:3: lv_impFrag_9_0= RULE_FRAGMENT
+                    {
+                    lv_impFrag_9_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue2677); 
+
+                    			createLeafNode(grammarAccess.getAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_3_1_0(), "impFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "impFrag", lv_impFrag_9, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"impFrag",
+                    	        		lv_impFrag_9_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -3195,7 +3650,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleListAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1585:1: entryRuleListAssignmentValue returns [EObject current=null] : iv_ruleListAssignmentValue= ruleListAssignmentValue EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1723:1: entryRuleListAssignmentValue returns [EObject current=null] : iv_ruleListAssignmentValue= ruleListAssignmentValue EOF ;
     public final EObject entryRuleListAssignmentValue() throws RecognitionException {
         EObject current = null;
 
@@ -3203,16 +3658,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1585:61: (iv_ruleListAssignmentValue= ruleListAssignmentValue EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1586:2: iv_ruleListAssignmentValue= ruleListAssignmentValue EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1723:61: (iv_ruleListAssignmentValue= ruleListAssignmentValue EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1724:2: iv_ruleListAssignmentValue= ruleListAssignmentValue EOF
             {
              currentNode = createCompositeNode(grammarAccess.getListAssignmentValueRule(), currentNode); 
-            pushFollow(FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue3286);
+            pushFollow(FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue2716);
             iv_ruleListAssignmentValue=ruleListAssignmentValue();
             _fsp--;
 
              current =iv_ruleListAssignmentValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleListAssignmentValue3296); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleListAssignmentValue2726); 
 
             }
 
@@ -3230,44 +3685,51 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleListAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1593:1: ruleListAssignmentValue returns [EObject current=null] : ( (lv_index_0= RULE_INT ) ':' ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1731:1: ruleListAssignmentValue returns [EObject current=null] : ( ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) ) ) ;
     public final EObject ruleListAssignmentValue() throws RecognitionException {
         EObject current = null;
 
-        Token lv_index_0=null;
-        Token lv_refIndex_3=null;
-        Token lv_value_5=null;
-        Token lv_refFeature_8=null;
-        Token lv_refIndex_10=null;
-        Token lv_impFrag_14=null;
-        EObject lv_newObject_12 = null;
+        Token lv_index_0_0=null;
+        Token lv_refIndex_3_0=null;
+        Token lv_value_5_0=null;
+        Token lv_refFeature_8_0=null;
+        Token lv_refIndex_10_0=null;
+        Token lv_impFrag_14_0=null;
+        EObject lv_newObject_12_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1598:6: ( ( (lv_index_0= RULE_INT ) ':' ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1599:1: ( (lv_index_0= RULE_INT ) ':' ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1736:6: ( ( ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1737:1: ( ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1599:1: ( (lv_index_0= RULE_INT ) ':' ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1599:2: (lv_index_0= RULE_INT ) ':' ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1737:1: ( ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1737:2: ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1599:2: (lv_index_0= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1601:6: lv_index_0= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1737:2: ( (lv_index_0_0= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1738:1: (lv_index_0_0= RULE_INT )
             {
-            lv_index_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3343); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1738:1: (lv_index_0_0= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1739:3: lv_index_0_0= RULE_INT
+            {
+            lv_index_0_0=(Token)input.LT(1);
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue2768); 
 
-            		createLeafNode(grammarAccess.getListAssignmentValueAccess().getIndexINTTerminalRuleCall_0_0(), "index"); 
-            	
+            			createLeafNode(grammarAccess.getListAssignmentValueAccess().getIndexINTTerminalRuleCall_0_0(), "index"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "index", lv_index_0, "INT", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"index",
+            	        		lv_index_0_0, 
+            	        		"INT", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -3275,11 +3737,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,32,FOLLOW_32_in_ruleListAssignmentValue3360); 
+
+            }
+
+            match(input,32,FOLLOW_32_in_ruleListAssignmentValue2782); 
 
                     createLeafNode(grammarAccess.getListAssignmentValueAccess().getColonKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1623:1: ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:1: ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) )
             int alt27=5;
             switch ( input.LA(1) ) {
             case 29:
@@ -3304,7 +3769,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("1623:1: ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) )", 27, 3, input);
+                        new NoViableAltException("1765:1: ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) )", 27, 3, input);
 
                     throw nvae;
                 }
@@ -3318,38 +3783,45 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1623:1: ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) )", 27, 0, input);
+                    new NoViableAltException("1765:1: ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) )", 27, 0, input);
 
                 throw nvae;
             }
 
             switch (alt27) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1623:2: ( '[' (lv_refIndex_3= RULE_INT ) ']' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:2: ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1623:2: ( '[' (lv_refIndex_3= RULE_INT ) ']' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1623:3: '[' (lv_refIndex_3= RULE_INT ) ']'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:2: ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:3: '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']'
                     {
-                    match(input,29,FOLLOW_29_in_ruleListAssignmentValue3371); 
+                    match(input,29,FOLLOW_29_in_ruleListAssignmentValue2793); 
 
                             createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1627:1: (lv_refIndex_3= RULE_INT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1629:6: lv_refIndex_3= RULE_INT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1769:1: ( (lv_refIndex_3_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1770:1: (lv_refIndex_3_0= RULE_INT )
                     {
-                    lv_refIndex_3=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3393); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1770:1: (lv_refIndex_3_0= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1771:3: lv_refIndex_3_0= RULE_INT
+                    {
+                    lv_refIndex_3_0=(Token)input.LT(1);
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue2810); 
 
-                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_0_1_0(), "refIndex"); 
-                    	
+                    			createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_0_1_0(), "refIndex"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "refIndex", lv_refIndex_3, "INT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"refIndex",
+                    	        		lv_refIndex_3_0, 
+                    	        		"INT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3357,7 +3829,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     }
 
-                    match(input,31,FOLLOW_31_in_ruleListAssignmentValue3410); 
+
+                    }
+
+                    match(input,31,FOLLOW_31_in_ruleListAssignmentValue2824); 
 
                             createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_0_2(), null); 
                         
@@ -3368,24 +3843,31 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1652:6: (lv_value_5= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1798:6: ( (lv_value_5_0= RULE_STRING ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1652:6: (lv_value_5= RULE_STRING )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1654:6: lv_value_5= RULE_STRING
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1798:6: ( (lv_value_5_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1799:1: (lv_value_5_0= RULE_STRING )
                     {
-                    lv_value_5=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleListAssignmentValue3439); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1799:1: (lv_value_5_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1800:3: lv_value_5_0= RULE_STRING
+                    {
+                    lv_value_5_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleListAssignmentValue2848); 
 
-                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getValueSTRINGTerminalRuleCall_2_1_0(), "value"); 
-                    	
+                    			createLeafNode(grammarAccess.getListAssignmentValueAccess().getValueSTRINGTerminalRuleCall_2_1_0(), "value"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "value", lv_value_5, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"value",
+                    	        		lv_value_5_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3395,15 +3877,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1673:6: ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1673:6: ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1673:7: ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:7: ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )?
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1673:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1676:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1824:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1824:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1825:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -3411,15 +3899,17 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3476); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue2878); 
 
                     		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefObjectNamedObjectCrossReference_2_2_0_0(), "refObject"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1690:2: ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )?
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1837:2: ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )?
                     int alt26=2;
                     int LA26_0 = input.LA(1);
 
@@ -3428,28 +3918,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt26) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1690:3: '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )?
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1837:3: '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )?
                             {
-                            match(input,19,FOLLOW_19_in_ruleListAssignmentValue3493); 
+                            match(input,19,FOLLOW_19_in_ruleListAssignmentValue2888); 
 
                                     createLeafNode(grammarAccess.getListAssignmentValueAccess().getFullStopKeyword_2_2_1_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1694:1: (lv_refFeature_8= RULE_ID )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1696:6: lv_refFeature_8= RULE_ID
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1841:1: ( (lv_refFeature_8_0= RULE_ID ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1842:1: (lv_refFeature_8_0= RULE_ID )
                             {
-                            lv_refFeature_8=(Token)input.LT(1);
-                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3515); 
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1842:1: (lv_refFeature_8_0= RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1843:3: lv_refFeature_8_0= RULE_ID
+                            {
+                            lv_refFeature_8_0=(Token)input.LT(1);
+                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue2905); 
 
-                            		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_2_1_1_0(), "refFeature"); 
-                            	
+                            			createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_2_1_1_0(), "refFeature"); 
+                            		
 
                             	        if (current==null) {
                             	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "refFeature", lv_refFeature_8, "ID", lastConsumedNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"refFeature",
+                            	        		lv_refFeature_8_0, 
+                            	        		"ID", 
+                            	        		lastConsumedNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -3457,7 +3954,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                             }
 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1714:2: ( '[' (lv_refIndex_10= RULE_INT ) ']' )?
+
+                            }
+
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1865:2: ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )?
                             int alt25=2;
                             int LA25_0 = input.LA(1);
 
@@ -3466,28 +3966,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             switch (alt25) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1714:3: '[' (lv_refIndex_10= RULE_INT ) ']'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1865:3: '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']'
                                     {
-                                    match(input,29,FOLLOW_29_in_ruleListAssignmentValue3533); 
+                                    match(input,29,FOLLOW_29_in_ruleListAssignmentValue2920); 
 
                                             createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_2_1_2_0(), null); 
                                         
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1718:1: (lv_refIndex_10= RULE_INT )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1720:6: lv_refIndex_10= RULE_INT
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1869:1: ( (lv_refIndex_10_0= RULE_INT ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1870:1: (lv_refIndex_10_0= RULE_INT )
                                     {
-                                    lv_refIndex_10=(Token)input.LT(1);
-                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3555); 
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1870:1: (lv_refIndex_10_0= RULE_INT )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1871:3: lv_refIndex_10_0= RULE_INT
+                                    {
+                                    lv_refIndex_10_0=(Token)input.LT(1);
+                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue2937); 
 
-                                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_2_1_2_1_0(), "refIndex"); 
-                                    	
+                                    			createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_2_1_2_1_0(), "refIndex"); 
+                                    		
 
                                     	        if (current==null) {
                                     	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
-                                    	        
                                     	        try {
-                                    	       		set(current, "refIndex", lv_refIndex_10, "INT", lastConsumedNode);
+                                    	       		set(
+                                    	       			current, 
+                                    	       			"refIndex",
+                                    	        		lv_refIndex_10_0, 
+                                    	        		"INT", 
+                                    	        		lastConsumedNode);
                                     	        } catch (ValueConverterException vce) {
                                     				handleValueConverterException(vce);
                                     	        }
@@ -3495,7 +4002,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     }
 
-                                    match(input,31,FOLLOW_31_in_ruleListAssignmentValue3572); 
+
+                                    }
+
+                                    match(input,31,FOLLOW_31_in_ruleListAssignmentValue2951); 
 
                                             createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_2_1_2_2(), null); 
                                         
@@ -3518,16 +4028,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1743:6: (lv_newObject_12= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1898:6: ( (lv_newObject_12_0= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1743:6: (lv_newObject_12= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1746:6: lv_newObject_12= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1898:6: ( (lv_newObject_12_0= ruleCreatedObject ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1899:1: (lv_newObject_12_0= ruleCreatedObject )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1899:1: (lv_newObject_12_0= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1900:3: lv_newObject_12_0= ruleCreatedObject
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getListAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_3_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue3617);
-                    lv_newObject_12=ruleCreatedObject();
+                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue2983);
+                    lv_newObject_12_0=ruleCreatedObject();
                     _fsp--;
 
 
@@ -3535,9 +4048,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "newObject", lv_newObject_12, "CreatedObject", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"newObject",
+                    	        		lv_newObject_12_0, 
+                    	        		"CreatedObject", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3548,15 +4065,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:6: ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1923:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:6: ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:7: ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1923:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1923:7: ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1765:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1768:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1923:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1925:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -3564,34 +4087,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3650); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3008); 
 
                     		createLeafNode(grammarAccess.getListAssignmentValueAccess().getImportImportCrossReference_2_4_0_0(), "import"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1782:2: (lv_impFrag_14= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1784:6: lv_impFrag_14= RULE_FRAGMENT
-                    {
-                    lv_impFrag_14=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3679); 
 
-                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_2_4_1_0(), "impFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1937:2: ( (lv_impFrag_14_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1938:1: (lv_impFrag_14_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1938:1: (lv_impFrag_14_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1939:3: lv_impFrag_14_0= RULE_FRAGMENT
+                    {
+                    lv_impFrag_14_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3025); 
+
+                    			createLeafNode(grammarAccess.getListAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_2_4_1_0(), "impFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "impFrag", lv_impFrag_14, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"impFrag",
+                    	        		lv_impFrag_14_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -3627,7 +4162,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleSingleAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1809:1: entryRuleSingleAssignmentValue returns [EObject current=null] : iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1968:1: entryRuleSingleAssignmentValue returns [EObject current=null] : iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF ;
     public final EObject entryRuleSingleAssignmentValue() throws RecognitionException {
         EObject current = null;
 
@@ -3635,16 +4170,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1809:63: (iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1810:2: iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1968:63: (iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1969:2: iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSingleAssignmentValueRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3722);
+            pushFollow(FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3065);
             iv_ruleSingleAssignmentValue=ruleSingleAssignmentValue();
             _fsp--;
 
              current =iv_ruleSingleAssignmentValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSingleAssignmentValue3732); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSingleAssignmentValue3075); 
 
             }
 
@@ -3662,25 +4197,25 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleSingleAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1817:1: ruleSingleAssignmentValue returns [EObject current=null] : ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1976:1: ruleSingleAssignmentValue returns [EObject current=null] : ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) ) ;
     public final EObject ruleSingleAssignmentValue() throws RecognitionException {
         EObject current = null;
 
-        Token lv_keyword_0=null;
-        Token lv_value_1=null;
-        Token lv_refFeature_4=null;
-        Token lv_refIndex_6=null;
-        Token lv_impFrag_10=null;
-        EObject lv_newObject_8 = null;
+        Token lv_keyword_0_0=null;
+        Token lv_value_1_0=null;
+        Token lv_refFeature_4_0=null;
+        Token lv_refIndex_6_0=null;
+        Token lv_impFrag_10_0=null;
+        EObject lv_newObject_8_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1822:6: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:1: ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1981:6: ( ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1982:1: ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:1: ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1982:1: ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) )
             int alt30=5;
             switch ( input.LA(1) ) {
             case 33:
@@ -3705,7 +4240,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("1823:1: ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )", 30, 3, input);
+                        new NoViableAltException("1982:1: ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) )", 30, 3, input);
 
                     throw nvae;
                 }
@@ -3719,20 +4254,23 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1823:1: ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? ) | (lv_newObject_8= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )", 30, 0, input);
+                    new NoViableAltException("1982:1: ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) )", 30, 0, input);
 
                 throw nvae;
             }
 
             switch (alt30) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:2: (lv_keyword_0= 'null' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1982:2: ( (lv_keyword_0_0= 'null' ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1823:2: (lv_keyword_0= 'null' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1825:6: lv_keyword_0= 'null'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1982:2: ( (lv_keyword_0_0= 'null' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1983:1: (lv_keyword_0_0= 'null' )
                     {
-                    lv_keyword_0=(Token)input.LT(1);
-                    match(input,33,FOLLOW_33_in_ruleSingleAssignmentValue3778); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1983:1: (lv_keyword_0_0= 'null' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1984:3: lv_keyword_0_0= 'null'
+                    {
+                    lv_keyword_0_0=(Token)input.LT(1);
+                    match(input,33,FOLLOW_33_in_ruleSingleAssignmentValue3117); 
 
                             createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getKeywordNullKeyword_0_0(), "keyword"); 
                         
@@ -3743,11 +4281,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	        }
                     	        
                     	        try {
-                    	       		set(current, "keyword", /* lv_keyword_0 */ input.LT(-1), "null", lastConsumedNode);
+                    	       		set(current, "keyword", lv_keyword_0_0, "null", lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -3755,24 +4296,31 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1845:6: (lv_value_1= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2004:6: ( (lv_value_1_0= RULE_STRING ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1845:6: (lv_value_1= RULE_STRING )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1847:6: lv_value_1= RULE_STRING
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2004:6: ( (lv_value_1_0= RULE_STRING ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2005:1: (lv_value_1_0= RULE_STRING )
                     {
-                    lv_value_1=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3819); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2005:1: (lv_value_1_0= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2006:3: lv_value_1_0= RULE_STRING
+                    {
+                    lv_value_1_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3153); 
 
-                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getValueSTRINGTerminalRuleCall_1_0(), "value"); 
-                    	
+                    			createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getValueSTRINGTerminalRuleCall_1_0(), "value"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "value", lv_value_1, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"value",
+                    	        		lv_value_1_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3782,15 +4330,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1866:6: ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2029:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1866:6: ( ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1866:7: ( RULE_ID ) ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2029:6: ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2029:7: ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )?
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1866:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1869:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2029:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2030:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2030:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2031:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -3798,15 +4352,17 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3856); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3183); 
 
                     		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefObjectNamedObjectCrossReference_2_0_0(), "refObject"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1883:2: ( '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )? )?
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2043:2: ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )?
                     int alt29=2;
                     int LA29_0 = input.LA(1);
 
@@ -3815,28 +4371,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt29) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1883:3: '.' (lv_refFeature_4= RULE_ID ) ( '[' (lv_refIndex_6= RULE_INT ) ']' )?
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2043:3: '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )?
                             {
-                            match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue3873); 
+                            match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue3193); 
 
                                     createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getFullStopKeyword_2_1_0(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:1: (lv_refFeature_4= RULE_ID )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1889:6: lv_refFeature_4= RULE_ID
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2047:1: ( (lv_refFeature_4_0= RULE_ID ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2048:1: (lv_refFeature_4_0= RULE_ID )
                             {
-                            lv_refFeature_4=(Token)input.LT(1);
-                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3895); 
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2048:1: (lv_refFeature_4_0= RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2049:3: lv_refFeature_4_0= RULE_ID
+                            {
+                            lv_refFeature_4_0=(Token)input.LT(1);
+                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3210); 
 
-                            		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_1_1_0(), "refFeature"); 
-                            	
+                            			createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_1_1_0(), "refFeature"); 
+                            		
 
                             	        if (current==null) {
                             	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "refFeature", lv_refFeature_4, "ID", lastConsumedNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"refFeature",
+                            	        		lv_refFeature_4_0, 
+                            	        		"ID", 
+                            	        		lastConsumedNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -3844,7 +4407,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                             }
 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1907:2: ( '[' (lv_refIndex_6= RULE_INT ) ']' )?
+
+                            }
+
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2071:2: ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )?
                             int alt28=2;
                             int LA28_0 = input.LA(1);
 
@@ -3853,28 +4419,35 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             switch (alt28) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1907:3: '[' (lv_refIndex_6= RULE_INT ) ']'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2071:3: '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']'
                                     {
-                                    match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue3913); 
+                                    match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue3225); 
 
                                             createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getLeftSquareBracketKeyword_2_1_2_0(), null); 
                                         
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1911:1: (lv_refIndex_6= RULE_INT )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1913:6: lv_refIndex_6= RULE_INT
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2075:1: ( (lv_refIndex_6_0= RULE_INT ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2076:1: (lv_refIndex_6_0= RULE_INT )
                                     {
-                                    lv_refIndex_6=(Token)input.LT(1);
-                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue3935); 
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2076:1: (lv_refIndex_6_0= RULE_INT )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2077:3: lv_refIndex_6_0= RULE_INT
+                                    {
+                                    lv_refIndex_6_0=(Token)input.LT(1);
+                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue3242); 
 
-                                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_1_2_1_0(), "refIndex"); 
-                                    	
+                                    			createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_1_2_1_0(), "refIndex"); 
+                                    		
 
                                     	        if (current==null) {
                                     	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
-                                    	        
                                     	        try {
-                                    	       		set(current, "refIndex", lv_refIndex_6, "INT", lastConsumedNode);
+                                    	       		set(
+                                    	       			current, 
+                                    	       			"refIndex",
+                                    	        		lv_refIndex_6_0, 
+                                    	        		"INT", 
+                                    	        		lastConsumedNode);
                                     	        } catch (ValueConverterException vce) {
                                     				handleValueConverterException(vce);
                                     	        }
@@ -3882,7 +4455,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     }
 
-                                    match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue3952); 
+
+                                    }
+
+                                    match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue3256); 
 
                                             createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRightSquareBracketKeyword_2_1_2_2(), null); 
                                         
@@ -3905,16 +4481,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1936:6: (lv_newObject_8= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2104:6: ( (lv_newObject_8_0= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1936:6: (lv_newObject_8= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1939:6: lv_newObject_8= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2104:6: ( (lv_newObject_8_0= ruleCreatedObject ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2105:1: (lv_newObject_8_0= ruleCreatedObject )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2105:1: (lv_newObject_8_0= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2106:3: lv_newObject_8_0= ruleCreatedObject
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getSingleAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_3_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue3997);
-                    lv_newObject_8=ruleCreatedObject();
+                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue3288);
+                    lv_newObject_8_0=ruleCreatedObject();
                     _fsp--;
 
 
@@ -3922,9 +4501,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "newObject", lv_newObject_8, "CreatedObject", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"newObject",
+                    	        		lv_newObject_8_0, 
+                    	        		"CreatedObject", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -3935,15 +4518,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     }
+
+
+                    }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1958:6: ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2129:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1958:6: ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1958:7: ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2129:6: ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2129:7: ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1958:7: ( RULE_ID )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1961:3: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2129:7: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2130:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2130:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2131:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -3951,34 +4540,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4030); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3313); 
 
                     		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getImportImportCrossReference_4_0_0(), "import"); 
                     	
-                     lastConsumedDatatypeToken = null; 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1975:2: (lv_impFrag_10= RULE_FRAGMENT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1977:6: lv_impFrag_10= RULE_FRAGMENT
-                    {
-                    lv_impFrag_10=(Token)input.LT(1);
-                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4059); 
 
-                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_4_1_0(), "impFrag"); 
-                    	
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2143:2: ( (lv_impFrag_10_0= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2144:1: (lv_impFrag_10_0= RULE_FRAGMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2144:1: (lv_impFrag_10_0= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2145:3: lv_impFrag_10_0= RULE_FRAGMENT
+                    {
+                    lv_impFrag_10_0=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue3330); 
+
+                    			createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_4_1_0(), "impFrag"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "impFrag", lv_impFrag_10, "FRAGMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"impFrag",
+                    	        		lv_impFrag_10_0, 
+                    	        		"FRAGMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -4011,7 +4612,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleCreatedObject
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2002:1: entryRuleCreatedObject returns [EObject current=null] : iv_ruleCreatedObject= ruleCreatedObject EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2174:1: entryRuleCreatedObject returns [EObject current=null] : iv_ruleCreatedObject= ruleCreatedObject EOF ;
     public final EObject entryRuleCreatedObject() throws RecognitionException {
         EObject current = null;
 
@@ -4019,16 +4620,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2002:55: (iv_ruleCreatedObject= ruleCreatedObject EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2003:2: iv_ruleCreatedObject= ruleCreatedObject EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2174:55: (iv_ruleCreatedObject= ruleCreatedObject EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2175:2: iv_ruleCreatedObject= ruleCreatedObject EOF
             {
              currentNode = createCompositeNode(grammarAccess.getCreatedObjectRule(), currentNode); 
-            pushFollow(FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject4101);
+            pushFollow(FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject3369);
             iv_ruleCreatedObject=ruleCreatedObject();
             _fsp--;
 
              current =iv_ruleCreatedObject; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCreatedObject4111); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCreatedObject3379); 
 
             }
 
@@ -4046,32 +4647,32 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleCreatedObject
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2010:1: ruleCreatedObject returns [EObject current=null] : ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) (lv_name_2= RULE_ID )? ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2182:1: ruleCreatedObject returns [EObject current=null] : ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )? ) ;
     public final EObject ruleCreatedObject() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_2=null;
+        Token lv_name_2_0=null;
         EObject this_ObjectNew_0 = null;
 
         EObject this_ObjectCopy_1 = null;
 
-        EObject lv_assignments_4 = null;
+        EObject lv_assignments_4_0 = null;
 
-        EObject lv_assignments_5 = null;
+        EObject lv_assignments_5_0 = null;
 
-        EObject lv_leftMig_6 = null;
+        EObject lv_leftMig_6_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2015:6: ( ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) (lv_name_2= RULE_ID )? ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2016:1: ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) (lv_name_2= RULE_ID )? ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2187:6: ( ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2188:1: ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2016:1: ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) (lv_name_2= RULE_ID )? ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2016:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) (lv_name_2= RULE_ID )? ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2188:1: ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2188:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )?
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2016:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2188:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy )
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -4083,18 +4684,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2016:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy )", 31, 0, input);
+                    new NoViableAltException("2188:2: (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy )", 31, 0, input);
 
                 throw nvae;
             }
             switch (alt31) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2017:5: this_ObjectNew_0= ruleObjectNew
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2189:5: this_ObjectNew_0= ruleObjectNew
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getObjectNewParserRuleCall_0_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleObjectNew_in_ruleCreatedObject4159);
+                    pushFollow(FOLLOW_ruleObjectNew_in_ruleCreatedObject3427);
                     this_ObjectNew_0=ruleObjectNew();
                     _fsp--;
 
@@ -4106,12 +4707,12 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2027:5: this_ObjectCopy_1= ruleObjectCopy
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2199:5: this_ObjectCopy_1= ruleObjectCopy
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getObjectCopyParserRuleCall_0_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleObjectCopy_in_ruleCreatedObject4186);
+                    pushFollow(FOLLOW_ruleObjectCopy_in_ruleCreatedObject3454);
                     this_ObjectCopy_1=ruleObjectCopy();
                     _fsp--;
 
@@ -4125,7 +4726,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2035:2: (lv_name_2= RULE_ID )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2207:2: ( (lv_name_2_0= RULE_ID ) )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -4134,32 +4735,42 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt32) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2037:6: lv_name_2= RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2208:1: (lv_name_2_0= RULE_ID )
                     {
-                    lv_name_2=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCreatedObject4208); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2208:1: (lv_name_2_0= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2209:3: lv_name_2_0= RULE_ID
+                    {
+                    lv_name_2_0=(Token)input.LT(1);
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCreatedObject3471); 
 
-                    		createLeafNode(grammarAccess.getCreatedObjectAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-                    	
+                    			createLeafNode(grammarAccess.getCreatedObjectAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "name", lv_name_2, "ID", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"name",
+                    	        		lv_name_2_0, 
+                    	        		"ID", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2055:3: ( '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2231:3: ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -4168,13 +4779,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt35) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2055:4: '{' ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+ (lv_leftMig_6= ruleMigration )? '}'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2231:4: '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}'
                     {
-                    match(input,13,FOLLOW_13_in_ruleCreatedObject4227); 
+                    match(input,13,FOLLOW_13_in_ruleCreatedObject3487); 
 
                             createLeafNode(grammarAccess.getCreatedObjectAccess().getLeftCurlyBracketKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2059:1: ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2235:1: ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+
                     int cnt33=0;
                     loop33:
                     do {
@@ -4203,16 +4814,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                         switch (alt33) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2059:2: (lv_assignments_4= ruleMonoSingleAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2235:2: ( (lv_assignments_4_0= ruleMonoSingleAssignment ) )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2059:2: (lv_assignments_4= ruleMonoSingleAssignment )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2062:6: lv_assignments_4= ruleMonoSingleAssignment
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2235:2: ( (lv_assignments_4_0= ruleMonoSingleAssignment ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2236:1: (lv_assignments_4_0= ruleMonoSingleAssignment )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2236:1: (lv_assignments_4_0= ruleMonoSingleAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2237:3: lv_assignments_4_0= ruleMonoSingleAssignment
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getAssignmentsMonoSingleAssignmentParserRuleCall_2_1_0_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject4262);
-                    	    lv_assignments_4=ruleMonoSingleAssignment();
+                    	    pushFollow(FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject3509);
+                    	    lv_assignments_4_0=ruleMonoSingleAssignment();
                     	    _fsp--;
 
 
@@ -4220,14 +4834,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "assignments", lv_assignments_4, "MonoSingleAssignment", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"assignments",
+                    	    	        		lv_assignments_4_0, 
+                    	    	        		"MonoSingleAssignment", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -4235,16 +4856,19 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2081:6: (lv_assignments_5= ruleMonoListAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2260:6: ( (lv_assignments_5_0= ruleMonoListAssignment ) )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2081:6: (lv_assignments_5= ruleMonoListAssignment )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2084:6: lv_assignments_5= ruleMonoListAssignment
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2260:6: ( (lv_assignments_5_0= ruleMonoListAssignment ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2261:1: (lv_assignments_5_0= ruleMonoListAssignment )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2261:1: (lv_assignments_5_0= ruleMonoListAssignment )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2262:3: lv_assignments_5_0= ruleMonoListAssignment
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject4306);
-                    	    lv_assignments_5=ruleMonoListAssignment();
+                    	    pushFollow(FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject3536);
+                    	    lv_assignments_5_0=ruleMonoListAssignment();
                     	    _fsp--;
 
 
@@ -4252,14 +4876,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "assignments", lv_assignments_5, "MonoListAssignment", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"assignments",
+                    	    	        		lv_assignments_5_0, 
+                    	    	        		"MonoListAssignment", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -4276,7 +4907,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                         cnt33++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2102:4: (lv_leftMig_6= ruleMigration )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2284:4: ( (lv_leftMig_6_0= ruleMigration ) )?
                     int alt34=2;
                     int LA34_0 = input.LA(1);
 
@@ -4285,13 +4916,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     switch (alt34) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2105:6: lv_leftMig_6= ruleMigration
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2285:1: (lv_leftMig_6_0= ruleMigration )
+                            {
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2285:1: (lv_leftMig_6_0= ruleMigration )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2286:3: lv_leftMig_6_0= ruleMigration
                             {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getLeftMigMigrationParserRuleCall_2_2_0(), currentNode); 
                             	    
-                            pushFollow(FOLLOW_ruleMigration_in_ruleCreatedObject4346);
-                            lv_leftMig_6=ruleMigration();
+                            pushFollow(FOLLOW_ruleMigration_in_ruleCreatedObject3559);
+                            lv_leftMig_6_0=ruleMigration();
                             _fsp--;
 
 
@@ -4299,9 +4933,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
-                            	        
                             	        try {
-                            	       		set(current, "leftMig", lv_leftMig_6, "Migration", currentNode);
+                            	       		set(
+                            	       			current, 
+                            	       			"leftMig",
+                            	        		lv_leftMig_6_0, 
+                            	        		"Migration", 
+                            	        		currentNode);
                             	        } catch (ValueConverterException vce) {
                             				handleValueConverterException(vce);
                             	        }
@@ -4309,11 +4947,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	    
 
                             }
+
+
+                            }
                             break;
 
                     }
 
-                    match(input,14,FOLLOW_14_in_ruleCreatedObject4360); 
+                    match(input,14,FOLLOW_14_in_ruleCreatedObject3569); 
 
                             createLeafNode(grammarAccess.getCreatedObjectAccess().getRightCurlyBracketKeyword_2_3(), null); 
                         
@@ -4346,7 +4987,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleObjectNew
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2134:1: entryRuleObjectNew returns [EObject current=null] : iv_ruleObjectNew= ruleObjectNew EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2319:1: entryRuleObjectNew returns [EObject current=null] : iv_ruleObjectNew= ruleObjectNew EOF ;
     public final EObject entryRuleObjectNew() throws RecognitionException {
         EObject current = null;
 
@@ -4354,16 +4995,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2134:51: (iv_ruleObjectNew= ruleObjectNew EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2135:2: iv_ruleObjectNew= ruleObjectNew EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2319:51: (iv_ruleObjectNew= ruleObjectNew EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2320:2: iv_ruleObjectNew= ruleObjectNew EOF
             {
              currentNode = createCompositeNode(grammarAccess.getObjectNewRule(), currentNode); 
-            pushFollow(FOLLOW_ruleObjectNew_in_entryRuleObjectNew4395);
+            pushFollow(FOLLOW_ruleObjectNew_in_entryRuleObjectNew3604);
             iv_ruleObjectNew=ruleObjectNew();
             _fsp--;
 
              current =iv_ruleObjectNew; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectNew4405); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectNew3614); 
 
             }
 
@@ -4381,27 +5022,30 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleObjectNew
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2142:1: ruleObjectNew returns [EObject current=null] : ( 'new' ( RULE_ID ) (lv_impFrag_2= RULE_FRAGMENT ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2327:1: ruleObjectNew returns [EObject current=null] : ( 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) ) ) ;
     public final EObject ruleObjectNew() throws RecognitionException {
         EObject current = null;
 
-        Token lv_impFrag_2=null;
+        Token lv_impFrag_2_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2147:6: ( ( 'new' ( RULE_ID ) (lv_impFrag_2= RULE_FRAGMENT ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2148:1: ( 'new' ( RULE_ID ) (lv_impFrag_2= RULE_FRAGMENT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2332:6: ( ( 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2333:1: ( 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2148:1: ( 'new' ( RULE_ID ) (lv_impFrag_2= RULE_FRAGMENT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2148:2: 'new' ( RULE_ID ) (lv_impFrag_2= RULE_FRAGMENT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2333:1: ( 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2333:2: 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) )
             {
-            match(input,34,FOLLOW_34_in_ruleObjectNew4439); 
+            match(input,34,FOLLOW_34_in_ruleObjectNew3648); 
 
                     createLeafNode(grammarAccess.getObjectNewAccess().getNewKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2152:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2155:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2337:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2338:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2338:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2339:3: RULE_ID
             {
 
             			if (current==null) {
@@ -4409,34 +5053,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectNew4461); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectNew3666); 
 
             		createLeafNode(grammarAccess.getObjectNewAccess().getImportImportCrossReference_1_0(), "import"); 
             	
-             lastConsumedDatatypeToken = null; 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2169:2: (lv_impFrag_2= RULE_FRAGMENT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2171:6: lv_impFrag_2= RULE_FRAGMENT
-            {
-            lv_impFrag_2=(Token)input.LT(1);
-            match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectNew4490); 
 
-            		createLeafNode(grammarAccess.getObjectNewAccess().getImpFragFRAGMENTTerminalRuleCall_2_0(), "impFrag"); 
-            	
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2351:2: ( (lv_impFrag_2_0= RULE_FRAGMENT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2352:1: (lv_impFrag_2_0= RULE_FRAGMENT )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2352:1: (lv_impFrag_2_0= RULE_FRAGMENT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2353:3: lv_impFrag_2_0= RULE_FRAGMENT
+            {
+            lv_impFrag_2_0=(Token)input.LT(1);
+            match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectNew3683); 
+
+            			createLeafNode(grammarAccess.getObjectNewAccess().getImpFragFRAGMENTTerminalRuleCall_2_0(), "impFrag"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getObjectNewRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "impFrag", lv_impFrag_2, "FRAGMENT", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"impFrag",
+            	        		lv_impFrag_2_0, 
+            	        		"FRAGMENT", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -4463,7 +5119,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleObjectCopy
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2196:1: entryRuleObjectCopy returns [EObject current=null] : iv_ruleObjectCopy= ruleObjectCopy EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2382:1: entryRuleObjectCopy returns [EObject current=null] : iv_ruleObjectCopy= ruleObjectCopy EOF ;
     public final EObject entryRuleObjectCopy() throws RecognitionException {
         EObject current = null;
 
@@ -4471,16 +5127,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2196:52: (iv_ruleObjectCopy= ruleObjectCopy EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2197:2: iv_ruleObjectCopy= ruleObjectCopy EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2382:52: (iv_ruleObjectCopy= ruleObjectCopy EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2383:2: iv_ruleObjectCopy= ruleObjectCopy EOF
             {
              currentNode = createCompositeNode(grammarAccess.getObjectCopyRule(), currentNode); 
-            pushFollow(FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy4531);
+            pushFollow(FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy3721);
             iv_ruleObjectCopy=ruleObjectCopy();
             _fsp--;
 
              current =iv_ruleObjectCopy; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectCopy4541); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleObjectCopy3731); 
 
             }
 
@@ -4498,27 +5154,30 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleObjectCopy
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2204:1: ruleObjectCopy returns [EObject current=null] : ( 'copy' ( RULE_ID ) (lv_fragment_2= RULE_FRAGMENT ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2390:1: ruleObjectCopy returns [EObject current=null] : ( 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) ) ) ;
     public final EObject ruleObjectCopy() throws RecognitionException {
         EObject current = null;
 
-        Token lv_fragment_2=null;
+        Token lv_fragment_2_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2209:6: ( ( 'copy' ( RULE_ID ) (lv_fragment_2= RULE_FRAGMENT ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2210:1: ( 'copy' ( RULE_ID ) (lv_fragment_2= RULE_FRAGMENT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2395:6: ( ( 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2396:1: ( 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2210:1: ( 'copy' ( RULE_ID ) (lv_fragment_2= RULE_FRAGMENT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2210:2: 'copy' ( RULE_ID ) (lv_fragment_2= RULE_FRAGMENT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2396:1: ( 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2396:2: 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) )
             {
-            match(input,35,FOLLOW_35_in_ruleObjectCopy4575); 
+            match(input,35,FOLLOW_35_in_ruleObjectCopy3765); 
 
                     createLeafNode(grammarAccess.getObjectCopyAccess().getCopyKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2214:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2217:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2400:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2401:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2401:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2402:3: RULE_ID
             {
 
             			if (current==null) {
@@ -4526,34 +5185,46 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectCopy4597); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectCopy3783); 
 
             		createLeafNode(grammarAccess.getObjectCopyAccess().getResourceNamedResourceCrossReference_1_0(), "resource"); 
             	
-             lastConsumedDatatypeToken = null; 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2231:2: (lv_fragment_2= RULE_FRAGMENT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2233:6: lv_fragment_2= RULE_FRAGMENT
-            {
-            lv_fragment_2=(Token)input.LT(1);
-            match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy4626); 
 
-            		createLeafNode(grammarAccess.getObjectCopyAccess().getFragmentFRAGMENTTerminalRuleCall_2_0(), "fragment"); 
-            	
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2414:2: ( (lv_fragment_2_0= RULE_FRAGMENT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2415:1: (lv_fragment_2_0= RULE_FRAGMENT )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2415:1: (lv_fragment_2_0= RULE_FRAGMENT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2416:3: lv_fragment_2_0= RULE_FRAGMENT
+            {
+            lv_fragment_2_0=(Token)input.LT(1);
+            match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy3800); 
+
+            			createLeafNode(grammarAccess.getObjectCopyAccess().getFragmentFRAGMENTTerminalRuleCall_2_0(), "fragment"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getObjectCopyRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "fragment", lv_fragment_2, "FRAGMENT", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"fragment",
+            	        		lv_fragment_2_0, 
+            	        		"FRAGMENT", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -4580,7 +5251,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleMigration
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2258:1: entryRuleMigration returns [EObject current=null] : iv_ruleMigration= ruleMigration EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2445:1: entryRuleMigration returns [EObject current=null] : iv_ruleMigration= ruleMigration EOF ;
     public final EObject entryRuleMigration() throws RecognitionException {
         EObject current = null;
 
@@ -4588,16 +5259,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2258:51: (iv_ruleMigration= ruleMigration EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2259:2: iv_ruleMigration= ruleMigration EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2445:51: (iv_ruleMigration= ruleMigration EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2446:2: iv_ruleMigration= ruleMigration EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMigrationRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMigration_in_entryRuleMigration4667);
+            pushFollow(FOLLOW_ruleMigration_in_entryRuleMigration3838);
             iv_ruleMigration=ruleMigration();
             _fsp--;
 
              current =iv_ruleMigration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMigration4677); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMigration3848); 
 
             }
 
@@ -4615,31 +5286,31 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleMigration
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2266:1: ruleMigration returns [EObject current=null] : ( 'migrate' (lv_first_1= ruleExecutable )? ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )? ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2453:1: ruleMigration returns [EObject current=null] : ( 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';' ) ;
     public final EObject ruleMigration() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_first_1 = null;
+        EObject lv_first_1_0 = null;
 
-        EObject lv_asOp_3 = null;
+        EObject lv_asOp_3_0 = null;
 
-        EObject lv_eachOp_5 = null;
+        EObject lv_eachOp_5_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2271:6: ( ( 'migrate' (lv_first_1= ruleExecutable )? ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )? ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2272:1: ( 'migrate' (lv_first_1= ruleExecutable )? ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )? ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2458:6: ( ( 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2459:1: ( 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2272:1: ( 'migrate' (lv_first_1= ruleExecutable )? ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )? ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2272:2: 'migrate' (lv_first_1= ruleExecutable )? ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )? ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2459:1: ( 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2459:2: 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';'
             {
-            match(input,36,FOLLOW_36_in_ruleMigration4711); 
+            match(input,36,FOLLOW_36_in_ruleMigration3882); 
 
                     createLeafNode(grammarAccess.getMigrationAccess().getMigrateKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2276:1: (lv_first_1= ruleExecutable )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2463:1: ( (lv_first_1_0= ruleExecutable ) )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -4648,13 +5319,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2279:6: lv_first_1= ruleExecutable
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2464:1: (lv_first_1_0= ruleExecutable )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2464:1: (lv_first_1_0= ruleExecutable )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2465:3: lv_first_1_0= ruleExecutable
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4745);
-                    lv_first_1=ruleExecutable();
+                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration3903);
+                    lv_first_1_0=ruleExecutable();
                     _fsp--;
 
 
@@ -4662,9 +5336,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "first", lv_first_1, "Executable", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"first",
+                    	        		lv_first_1_0, 
+                    	        		"Executable", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -4672,11 +5350,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2297:3: ( ( 'as' (lv_asOp_3= ruleExecutable ) ) | ( 'each' (lv_eachOp_5= ruleExecutable ) ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2487:3: ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )?
             int alt37=3;
             int LA37_0 = input.LA(1);
 
@@ -4688,23 +5369,26 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2297:4: ( 'as' (lv_asOp_3= ruleExecutable ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2487:4: ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2297:4: ( 'as' (lv_asOp_3= ruleExecutable ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2297:5: 'as' (lv_asOp_3= ruleExecutable )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2487:4: ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2487:5: 'as' ( (lv_asOp_3_0= ruleExecutable ) )
                     {
-                    match(input,37,FOLLOW_37_in_ruleMigration4761); 
+                    match(input,37,FOLLOW_37_in_ruleMigration3915); 
 
                             createLeafNode(grammarAccess.getMigrationAccess().getAsKeyword_2_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2301:1: (lv_asOp_3= ruleExecutable )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2304:6: lv_asOp_3= ruleExecutable
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2491:1: ( (lv_asOp_3_0= ruleExecutable ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2492:1: (lv_asOp_3_0= ruleExecutable )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2492:1: (lv_asOp_3_0= ruleExecutable )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2493:3: lv_asOp_3_0= ruleExecutable
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_2_0_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4795);
-                    lv_asOp_3=ruleExecutable();
+                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration3936);
+                    lv_asOp_3_0=ruleExecutable();
                     _fsp--;
 
 
@@ -4712,14 +5396,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "asOp", lv_asOp_3, "Executable", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"asOp",
+                    	        		lv_asOp_3_0, 
+                    	        		"Executable", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	        currentNode = currentNode.getParent();
                     	    
+
+                    }
+
 
                     }
 
@@ -4730,23 +5421,26 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2323:6: ( 'each' (lv_eachOp_5= ruleExecutable ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2516:6: ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2323:6: ( 'each' (lv_eachOp_5= ruleExecutable ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2323:7: 'each' (lv_eachOp_5= ruleExecutable )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2516:6: ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2516:7: 'each' ( (lv_eachOp_5_0= ruleExecutable ) )
                     {
-                    match(input,38,FOLLOW_38_in_ruleMigration4816); 
+                    match(input,38,FOLLOW_38_in_ruleMigration3953); 
 
                             createLeafNode(grammarAccess.getMigrationAccess().getEachKeyword_2_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2327:1: (lv_eachOp_5= ruleExecutable )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2330:6: lv_eachOp_5= ruleExecutable
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2520:1: ( (lv_eachOp_5_0= ruleExecutable ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2521:1: (lv_eachOp_5_0= ruleExecutable )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2521:1: (lv_eachOp_5_0= ruleExecutable )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2522:3: lv_eachOp_5_0= ruleExecutable
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_2_1_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4850);
-                    lv_eachOp_5=ruleExecutable();
+                    pushFollow(FOLLOW_ruleExecutable_in_ruleMigration3974);
+                    lv_eachOp_5_0=ruleExecutable();
                     _fsp--;
 
 
@@ -4754,14 +5448,21 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "eachOp", lv_eachOp_5, "Executable", currentNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"eachOp",
+                    	        		lv_eachOp_5_0, 
+                    	        		"Executable", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	        currentNode = currentNode.getParent();
                     	    
+
+                    }
+
 
                     }
 
@@ -4774,7 +5475,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,24,FOLLOW_24_in_ruleMigration4866); 
+            match(input,24,FOLLOW_24_in_ruleMigration3986); 
 
                     createLeafNode(grammarAccess.getMigrationAccess().getSemicolonKeyword_3(), null); 
                 
@@ -4801,7 +5502,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2359:1: entryRuleExecutable returns [EObject current=null] : iv_ruleExecutable= ruleExecutable EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2555:1: entryRuleExecutable returns [EObject current=null] : iv_ruleExecutable= ruleExecutable EOF ;
     public final EObject entryRuleExecutable() throws RecognitionException {
         EObject current = null;
 
@@ -4809,16 +5510,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2359:52: (iv_ruleExecutable= ruleExecutable EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2360:2: iv_ruleExecutable= ruleExecutable EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2555:52: (iv_ruleExecutable= ruleExecutable EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2556:2: iv_ruleExecutable= ruleExecutable EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExecutableRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExecutable_in_entryRuleExecutable4899);
+            pushFollow(FOLLOW_ruleExecutable_in_entryRuleExecutable4019);
             iv_ruleExecutable=ruleExecutable();
             _fsp--;
 
              current =iv_ruleExecutable; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExecutable4909); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExecutable4029); 
 
             }
 
@@ -4836,7 +5537,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2367:1: ruleExecutable returns [EObject current=null] : (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2563:1: ruleExecutable returns [EObject current=null] : (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable ) ;
     public final EObject ruleExecutable() throws RecognitionException {
         EObject current = null;
 
@@ -4848,10 +5549,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2372:6: ( (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2373:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2568:6: ( (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2569:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2373:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2569:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -4863,18 +5564,18 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2373:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )", 38, 0, input);
+                    new NoViableAltException("2569:1: (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable )", 38, 0, input);
 
                 throw nvae;
             }
             switch (alt38) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2374:5: this_JavaExecutable_0= ruleJavaExecutable
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2570:5: this_JavaExecutable_0= ruleJavaExecutable
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getExecutableAccess().getJavaExecutableParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleJavaExecutable_in_ruleExecutable4956);
+                    pushFollow(FOLLOW_ruleJavaExecutable_in_ruleExecutable4076);
                     this_JavaExecutable_0=ruleJavaExecutable();
                     _fsp--;
 
@@ -4886,12 +5587,12 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2384:5: this_ExpressionExecutable_1= ruleExpressionExecutable
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2580:5: this_ExpressionExecutable_1= ruleExpressionExecutable
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getExecutableAccess().getExpressionExecutableParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleExpressionExecutable_in_ruleExecutable4983);
+                    pushFollow(FOLLOW_ruleExpressionExecutable_in_ruleExecutable4103);
                     this_ExpressionExecutable_1=ruleExpressionExecutable();
                     _fsp--;
 
@@ -4925,7 +5626,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleJavaExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2399:1: entryRuleJavaExecutable returns [EObject current=null] : iv_ruleJavaExecutable= ruleJavaExecutable EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2595:1: entryRuleJavaExecutable returns [EObject current=null] : iv_ruleJavaExecutable= ruleJavaExecutable EOF ;
     public final EObject entryRuleJavaExecutable() throws RecognitionException {
         EObject current = null;
 
@@ -4933,16 +5634,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2399:56: (iv_ruleJavaExecutable= ruleJavaExecutable EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2400:2: iv_ruleJavaExecutable= ruleJavaExecutable EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2595:56: (iv_ruleJavaExecutable= ruleJavaExecutable EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2596:2: iv_ruleJavaExecutable= ruleJavaExecutable EOF
             {
              currentNode = createCompositeNode(grammarAccess.getJavaExecutableRule(), currentNode); 
-            pushFollow(FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable5015);
+            pushFollow(FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable4135);
             iv_ruleJavaExecutable=ruleJavaExecutable();
             _fsp--;
 
              current =iv_ruleJavaExecutable; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJavaExecutable5025); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJavaExecutable4145); 
 
             }
 
@@ -4960,41 +5661,48 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleJavaExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2407:1: ruleJavaExecutable returns [EObject current=null] : ( 'java' (lv_method_1= RULE_ID ) '(' ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2603:1: ruleJavaExecutable returns [EObject current=null] : ( 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')' ) ;
     public final EObject ruleJavaExecutable() throws RecognitionException {
         EObject current = null;
 
-        Token lv_method_1=null;
+        Token lv_method_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2412:6: ( ( 'java' (lv_method_1= RULE_ID ) '(' ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2413:1: ( 'java' (lv_method_1= RULE_ID ) '(' ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2608:6: ( ( 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2609:1: ( 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2413:1: ( 'java' (lv_method_1= RULE_ID ) '(' ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2413:2: 'java' (lv_method_1= RULE_ID ) '(' ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2609:1: ( 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2609:2: 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')'
             {
-            match(input,18,FOLLOW_18_in_ruleJavaExecutable5059); 
+            match(input,18,FOLLOW_18_in_ruleJavaExecutable4179); 
 
                     createLeafNode(grammarAccess.getJavaExecutableAccess().getJavaKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2417:1: (lv_method_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2419:6: lv_method_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2613:1: ( (lv_method_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2614:1: (lv_method_1_0= RULE_ID )
             {
-            lv_method_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaExecutable5081); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2614:1: (lv_method_1_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2615:3: lv_method_1_0= RULE_ID
+            {
+            lv_method_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaExecutable4196); 
 
-            		createLeafNode(grammarAccess.getJavaExecutableAccess().getMethodIDTerminalRuleCall_1_0(), "method"); 
-            	
+            			createLeafNode(grammarAccess.getJavaExecutableAccess().getMethodIDTerminalRuleCall_1_0(), "method"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getJavaExecutableRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "method", lv_method_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"method",
+            	        		lv_method_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -5002,11 +5710,14 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             }
 
-            match(input,39,FOLLOW_39_in_ruleJavaExecutable5098); 
+
+            }
+
+            match(input,39,FOLLOW_39_in_ruleJavaExecutable4210); 
 
                     createLeafNode(grammarAccess.getJavaExecutableAccess().getLeftParenthesisKeyword_2(), null); 
                 
-            match(input,40,FOLLOW_40_in_ruleJavaExecutable5107); 
+            match(input,40,FOLLOW_40_in_ruleJavaExecutable4219); 
 
                     createLeafNode(grammarAccess.getJavaExecutableAccess().getRightParenthesisKeyword_3(), null); 
                 
@@ -5033,7 +5744,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start entryRuleExpressionExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2452:1: entryRuleExpressionExecutable returns [EObject current=null] : iv_ruleExpressionExecutable= ruleExpressionExecutable EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2652:1: entryRuleExpressionExecutable returns [EObject current=null] : iv_ruleExpressionExecutable= ruleExpressionExecutable EOF ;
     public final EObject entryRuleExpressionExecutable() throws RecognitionException {
         EObject current = null;
 
@@ -5041,16 +5752,16 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2452:62: (iv_ruleExpressionExecutable= ruleExpressionExecutable EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2453:2: iv_ruleExpressionExecutable= ruleExpressionExecutable EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2652:62: (iv_ruleExpressionExecutable= ruleExpressionExecutable EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2653:2: iv_ruleExpressionExecutable= ruleExpressionExecutable EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExpressionExecutableRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable5140);
+            pushFollow(FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable4252);
             iv_ruleExpressionExecutable=ruleExpressionExecutable();
             _fsp--;
 
              current =iv_ruleExpressionExecutable; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionExecutable5150); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionExecutable4262); 
 
             }
 
@@ -5068,38 +5779,48 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleExpressionExecutable
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2460:1: ruleExpressionExecutable returns [EObject current=null] : (lv_exprstr_0= RULE_STRING ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2660:1: ruleExpressionExecutable returns [EObject current=null] : ( (lv_exprstr_0_0= RULE_STRING ) ) ;
     public final EObject ruleExpressionExecutable() throws RecognitionException {
         EObject current = null;
 
-        Token lv_exprstr_0=null;
+        Token lv_exprstr_0_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2465:6: ( (lv_exprstr_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2466:1: (lv_exprstr_0= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2665:6: ( ( (lv_exprstr_0_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2666:1: ( (lv_exprstr_0_0= RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2466:1: (lv_exprstr_0= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2468:6: lv_exprstr_0= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2666:1: ( (lv_exprstr_0_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2667:1: (lv_exprstr_0_0= RULE_STRING )
             {
-            lv_exprstr_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExpressionExecutable5196); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2667:1: (lv_exprstr_0_0= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2668:3: lv_exprstr_0_0= RULE_STRING
+            {
+            lv_exprstr_0_0=(Token)input.LT(1);
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExpressionExecutable4303); 
 
-            		createLeafNode(grammarAccess.getExpressionExecutableAccess().getExprstrSTRINGTerminalRuleCall_0(), "exprstr"); 
-            	
+            			createLeafNode(grammarAccess.getExpressionExecutableAccess().getExprstrSTRINGTerminalRuleCall_0(), "exprstr"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getExpressionExecutableRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "exprstr", lv_exprstr_0, "STRING", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"exprstr",
+            	        		lv_exprstr_0_0, 
+            	        		"STRING", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -5127,204 +5848,204 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
     public static final BitSet FOLLOW_ruleEPatch_in_entryRuleEPatch73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEPatch83 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_ruleEPatch117 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEPatch139 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleEPatch156 = new BitSet(new long[]{0x000000000440C000L});
-    public static final BitSet FOLLOW_ruleImport_in_ruleEPatch190 = new BitSet(new long[]{0x000000000440C000L});
-    public static final BitSet FOLLOW_ruleNamedResource_in_ruleEPatch229 = new BitSet(new long[]{0x0000000004404000L});
-    public static final BitSet FOLLOW_ruleObjectRef_in_ruleEPatch268 = new BitSet(new long[]{0x0000000004004000L});
-    public static final BitSet FOLLOW_14_in_ruleEPatch282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport315 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelImport_in_ruleImport372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJavaImport_in_ruleImport399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExtensionImport_in_ruleImport426 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelImport_in_entryRuleModelImport458 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModelImport468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleResourceImport_in_ruleModelImport515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEPackageImport_in_ruleModelImport542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleResourceImport_in_entryRuleResourceImport574 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleResourceImport584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleResourceImport618 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleResourceImport640 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleResourceImport657 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleResourceImport679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport720 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEPackageImport730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleEPackageImport764 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEPackageImport786 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleEPackageImport803 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleEPackageImport825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJavaImport_in_entryRuleJavaImport866 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJavaImport876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleJavaImport910 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleJavaImport919 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaImport941 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleJavaImport959 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaImport981 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport1024 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExtensionImport1034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleExtensionImport1068 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleExtensionImport1077 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExtensionImport1099 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_21_in_ruleExtensionImport1117 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExtensionImport1139 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_ruleNamedResource_in_entryRuleNamedResource1182 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNamedResource1192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleNamedResource1226 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleNamedResource1248 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleNamedResource1265 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_ruleNamedResource1274 = new BitSet(new long[]{0x0000000C00010000L});
-    public static final BitSet FOLLOW_16_in_ruleNamedResource1285 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleNamedResource1307 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleNamedResource1356 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleNamedResource1370 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleNamedResource1379 = new BitSet(new long[]{0x0000000C00010000L});
-    public static final BitSet FOLLOW_16_in_ruleNamedResource1390 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleNamedResource1412 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleNamedResource1461 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleNamedResource1475 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleNamedResource1484 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleObjectRef_in_entryRuleObjectRef1519 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleObjectRef1529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleObjectRef1563 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1585 = new BitSet(new long[]{0x0000000000800010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1618 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1647 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_23_in_ruleObjectRef1672 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1694 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1723 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleObjectRef1740 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1762 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1791 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13_in_ruleObjectRef1811 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1846 = new BitSet(new long[]{0x0000000002804010L});
-    public static final BitSet FOLLOW_ruleBiListAssignment_in_ruleObjectRef1890 = new BitSet(new long[]{0x0000000002804010L});
-    public static final BitSet FOLLOW_23_in_ruleObjectRef1906 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_ruleMigration_in_ruleObjectRef1940 = new BitSet(new long[]{0x0000000002004000L});
-    public static final BitSet FOLLOW_25_in_ruleObjectRef1956 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_ruleMigration_in_ruleObjectRef1990 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleObjectRef2005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment2042 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBiSingleAssignment2052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBiSingleAssignment2099 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleBiSingleAssignment2116 = new BitSet(new long[]{0x0000000E00000030L});
-    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2150 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_ruleBiSingleAssignment2163 = new BitSet(new long[]{0x0000000E00000030L});
-    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2197 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleBiSingleAssignment2210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment2243 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBiListAssignment2253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBiListAssignment2300 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleBiListAssignment2317 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_ruleBiListAssignment2326 = new BitSet(new long[]{0x0000000010000080L});
-    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2361 = new BitSet(new long[]{0x0000000050000000L});
-    public static final BitSet FOLLOW_30_in_ruleBiListAssignment2375 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2409 = new BitSet(new long[]{0x0000000050000000L});
-    public static final BitSet FOLLOW_28_in_ruleBiListAssignment2426 = new BitSet(new long[]{0x0000000080000080L});
-    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2461 = new BitSet(new long[]{0x00000000C0000000L});
-    public static final BitSet FOLLOW_30_in_ruleBiListAssignment2475 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2509 = new BitSet(new long[]{0x00000000C0000000L});
-    public static final BitSet FOLLOW_31_in_ruleBiListAssignment2526 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleBiListAssignment2535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2568 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMonoSingleAssignment2578 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2625 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleMonoSingleAssignment2642 = new BitSet(new long[]{0x0000000E00000030L});
-    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2676 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleMonoSingleAssignment2689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2722 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMonoListAssignment2732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMonoListAssignment2779 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleMonoListAssignment2796 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_ruleMonoListAssignment2805 = new BitSet(new long[]{0x0000000C80000030L});
-    public static final BitSet FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2840 = new BitSet(new long[]{0x00000000C0000000L});
-    public static final BitSet FOLLOW_30_in_ruleMonoListAssignment2854 = new BitSet(new long[]{0x0000000C00000030L});
-    public static final BitSet FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2888 = new BitSet(new long[]{0x00000000C0000000L});
-    public static final BitSet FOLLOW_31_in_ruleMonoListAssignment2905 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleMonoListAssignment2914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue2947 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentValue2957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleAssignmentValue3004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue3041 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleAssignmentValue3058 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue3080 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_29_in_ruleAssignmentValue3098 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleAssignmentValue3120 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleAssignmentValue3137 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleAssignmentValue3182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue3215 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue3244 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue3286 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleListAssignmentValue3296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue3343 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_ruleListAssignmentValue3360 = new BitSet(new long[]{0x0000000C20000030L});
-    public static final BitSet FOLLOW_29_in_ruleListAssignmentValue3371 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue3393 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleListAssignmentValue3410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleListAssignmentValue3439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue3476 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleListAssignmentValue3493 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue3515 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_29_in_ruleListAssignmentValue3533 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue3555 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleListAssignmentValue3572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue3617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue3650 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3722 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSingleAssignmentValue3732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleSingleAssignmentValue3778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3819 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3856 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleSingleAssignmentValue3873 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3895 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_29_in_ruleSingleAssignmentValue3913 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSingleAssignmentValue3935 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleSingleAssignmentValue3952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue3997 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4030 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4059 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject4101 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCreatedObject4111 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleObjectNew_in_ruleCreatedObject4159 = new BitSet(new long[]{0x0000000000002012L});
-    public static final BitSet FOLLOW_ruleObjectCopy_in_ruleCreatedObject4186 = new BitSet(new long[]{0x0000000000002012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCreatedObject4208 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13_in_ruleCreatedObject4227 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject4262 = new BitSet(new long[]{0x0000001000004010L});
-    public static final BitSet FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject4306 = new BitSet(new long[]{0x0000001000004010L});
-    public static final BitSet FOLLOW_ruleMigration_in_ruleCreatedObject4346 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleCreatedObject4360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleObjectNew_in_entryRuleObjectNew4395 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleObjectNew4405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleObjectNew4439 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectNew4461 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectNew4490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy4531 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleObjectCopy4541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_ruleObjectCopy4575 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectCopy4597 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy4626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMigration_in_entryRuleMigration4667 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMigration4677 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleMigration4711 = new BitSet(new long[]{0x0000006001040020L});
-    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration4745 = new BitSet(new long[]{0x0000006001000000L});
-    public static final BitSet FOLLOW_37_in_ruleMigration4761 = new BitSet(new long[]{0x0000000000040020L});
-    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration4795 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_38_in_ruleMigration4816 = new BitSet(new long[]{0x0000000000040020L});
-    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration4850 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleMigration4866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExecutable_in_entryRuleExecutable4899 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExecutable4909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJavaExecutable_in_ruleExecutable4956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionExecutable_in_ruleExecutable4983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable5015 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJavaExecutable5025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleJavaExecutable5059 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaExecutable5081 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_39_in_ruleJavaExecutable5098 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_ruleJavaExecutable5107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable5140 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionExecutable5150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleExpressionExecutable5196 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEPatch134 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleEPatch148 = new BitSet(new long[]{0x000000000440C000L});
+    public static final BitSet FOLLOW_ruleImport_in_ruleEPatch169 = new BitSet(new long[]{0x000000000440C000L});
+    public static final BitSet FOLLOW_ruleNamedResource_in_ruleEPatch191 = new BitSet(new long[]{0x0000000004404000L});
+    public static final BitSet FOLLOW_ruleObjectRef_in_ruleEPatch213 = new BitSet(new long[]{0x0000000004004000L});
+    public static final BitSet FOLLOW_14_in_ruleEPatch223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport256 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModelImport_in_ruleImport313 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJavaImport_in_ruleImport340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExtensionImport_in_ruleImport367 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModelImport_in_entryRuleModelImport399 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModelImport409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleResourceImport_in_ruleModelImport456 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEPackageImport_in_ruleModelImport483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleResourceImport_in_entryRuleResourceImport515 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleResourceImport525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleResourceImport559 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleResourceImport576 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleResourceImport590 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleResourceImport607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport645 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEPackageImport655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleEPackageImport689 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEPackageImport706 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleEPackageImport720 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEPackageImport737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJavaImport_in_entryRuleJavaImport775 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJavaImport785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleJavaImport819 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleJavaImport828 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaImport845 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleJavaImport860 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaImport877 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport917 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExtensionImport927 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleExtensionImport961 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleExtensionImport970 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExtensionImport987 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_21_in_ruleExtensionImport1002 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExtensionImport1019 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_ruleNamedResource_in_entryRuleNamedResource1059 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNamedResource1069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleNamedResource1103 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleNamedResource1120 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleNamedResource1134 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleNamedResource1143 = new BitSet(new long[]{0x0000000C00010000L});
+    public static final BitSet FOLLOW_16_in_ruleNamedResource1154 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleNamedResource1171 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleNamedResource1204 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleNamedResource1214 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleNamedResource1223 = new BitSet(new long[]{0x0000000C00010000L});
+    public static final BitSet FOLLOW_16_in_ruleNamedResource1234 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleNamedResource1251 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleNamedResource1284 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleNamedResource1294 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleNamedResource1303 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleObjectRef_in_entryRuleObjectRef1338 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleObjectRef1348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleObjectRef1382 = new BitSet(new long[]{0x0000000000800010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1399 = new BitSet(new long[]{0x0000000000800010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1425 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1442 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_23_in_ruleObjectRef1464 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1482 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1499 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleObjectRef1513 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectRef1531 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1548 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_ruleObjectRef1565 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1587 = new BitSet(new long[]{0x0000000002804010L});
+    public static final BitSet FOLLOW_ruleBiListAssignment_in_ruleObjectRef1614 = new BitSet(new long[]{0x0000000002804010L});
+    public static final BitSet FOLLOW_23_in_ruleObjectRef1626 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_ruleMigration_in_ruleObjectRef1647 = new BitSet(new long[]{0x0000000002004000L});
+    public static final BitSet FOLLOW_25_in_ruleObjectRef1659 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_ruleMigration_in_ruleObjectRef1680 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleObjectRef1691 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment1728 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBiSingleAssignment1738 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBiSingleAssignment1780 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleBiSingleAssignment1794 = new BitSet(new long[]{0x0000000E00000030L});
+    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment1815 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_ruleBiSingleAssignment1824 = new BitSet(new long[]{0x0000000E00000030L});
+    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment1845 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleBiSingleAssignment1854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment1887 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBiListAssignment1897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBiListAssignment1939 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleBiListAssignment1953 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_29_in_ruleBiListAssignment1962 = new BitSet(new long[]{0x0000000010000080L});
+    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment1984 = new BitSet(new long[]{0x0000000050000000L});
+    public static final BitSet FOLLOW_30_in_ruleBiListAssignment1994 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2015 = new BitSet(new long[]{0x0000000050000000L});
+    public static final BitSet FOLLOW_28_in_ruleBiListAssignment2028 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2050 = new BitSet(new long[]{0x00000000C0000000L});
+    public static final BitSet FOLLOW_30_in_ruleBiListAssignment2060 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2081 = new BitSet(new long[]{0x00000000C0000000L});
+    public static final BitSet FOLLOW_31_in_ruleBiListAssignment2094 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleBiListAssignment2103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2136 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMonoSingleAssignment2146 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2188 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleMonoSingleAssignment2202 = new BitSet(new long[]{0x0000000E00000030L});
+    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2223 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleMonoSingleAssignment2232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2265 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMonoListAssignment2275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMonoListAssignment2317 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleMonoListAssignment2331 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_29_in_ruleMonoListAssignment2340 = new BitSet(new long[]{0x0000000C80000030L});
+    public static final BitSet FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2362 = new BitSet(new long[]{0x00000000C0000000L});
+    public static final BitSet FOLLOW_30_in_ruleMonoListAssignment2372 = new BitSet(new long[]{0x0000000C00000030L});
+    public static final BitSet FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2393 = new BitSet(new long[]{0x00000000C0000000L});
+    public static final BitSet FOLLOW_31_in_ruleMonoListAssignment2406 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleMonoListAssignment2415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue2448 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentValue2458 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleAssignmentValue2500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue2530 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleAssignmentValue2540 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue2557 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleAssignmentValue2572 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleAssignmentValue2589 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleAssignmentValue2603 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleAssignmentValue2635 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignmentValue2660 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue2677 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue2716 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleListAssignmentValue2726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue2768 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_ruleListAssignmentValue2782 = new BitSet(new long[]{0x0000000C20000030L});
+    public static final BitSet FOLLOW_29_in_ruleListAssignmentValue2793 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue2810 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleListAssignmentValue2824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleListAssignmentValue2848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue2878 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleListAssignmentValue2888 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue2905 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleListAssignmentValue2920 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleListAssignmentValue2937 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleListAssignmentValue2951 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue2983 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleListAssignmentValue3008 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3065 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSingleAssignmentValue3075 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleSingleAssignmentValue3117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3183 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleSingleAssignmentValue3193 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3210 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleSingleAssignmentValue3225 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSingleAssignmentValue3242 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleSingleAssignmentValue3256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue3288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3313 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue3330 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject3369 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCreatedObject3379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleObjectNew_in_ruleCreatedObject3427 = new BitSet(new long[]{0x0000000000002012L});
+    public static final BitSet FOLLOW_ruleObjectCopy_in_ruleCreatedObject3454 = new BitSet(new long[]{0x0000000000002012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCreatedObject3471 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_ruleCreatedObject3487 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject3509 = new BitSet(new long[]{0x0000001000004010L});
+    public static final BitSet FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject3536 = new BitSet(new long[]{0x0000001000004010L});
+    public static final BitSet FOLLOW_ruleMigration_in_ruleCreatedObject3559 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleCreatedObject3569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleObjectNew_in_entryRuleObjectNew3604 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleObjectNew3614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleObjectNew3648 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectNew3666 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectNew3683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy3721 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleObjectCopy3731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_ruleObjectCopy3765 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleObjectCopy3783 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy3800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMigration_in_entryRuleMigration3838 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMigration3848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_ruleMigration3882 = new BitSet(new long[]{0x0000006001040020L});
+    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration3903 = new BitSet(new long[]{0x0000006001000000L});
+    public static final BitSet FOLLOW_37_in_ruleMigration3915 = new BitSet(new long[]{0x0000000000040020L});
+    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration3936 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_38_in_ruleMigration3953 = new BitSet(new long[]{0x0000000000040020L});
+    public static final BitSet FOLLOW_ruleExecutable_in_ruleMigration3974 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleMigration3986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExecutable_in_entryRuleExecutable4019 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExecutable4029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJavaExecutable_in_ruleExecutable4076 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionExecutable_in_ruleExecutable4103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable4135 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJavaExecutable4145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleJavaExecutable4179 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleJavaExecutable4196 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_39_in_ruleJavaExecutable4210 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_ruleJavaExecutable4219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable4252 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionExecutable4262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleExpressionExecutable4303 = new BitSet(new long[]{0x0000000000000002L});
 
 }

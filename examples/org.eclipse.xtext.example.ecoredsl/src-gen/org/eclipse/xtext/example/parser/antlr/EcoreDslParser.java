@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
@@ -21,13 +22,16 @@ public class EcoreDslParser extends org.eclipse.xtext.parser.antlr.AbstractAntlr
 	@Inject
 	private EcoreDslGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer lexer = new org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer(in);
+		org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser parser = new org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class EcoreDslParser extends org.eclipse.xtext.parser.antlr.AbstractAntlr
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class EcoreDslParser extends org.eclipse.xtext.parser.antlr.AbstractAntlr
 	
 	public void setGrammarAccess(EcoreDslGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalEcoreDslLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

@@ -102,31 +102,31 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleStatemachine
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:80:1: ruleStatemachine returns [EObject current=null] : ( 'events' (lv_events_1= ruleEvent )* 'end' 'commands' (lv_commands_4= ruleCommand )* 'end' (lv_states_6= ruleState )* ) ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:80:1: ruleStatemachine returns [EObject current=null] : ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* ) ;
     public final EObject ruleStatemachine() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_events_1 = null;
+        EObject lv_events_1_0 = null;
 
-        EObject lv_commands_4 = null;
+        EObject lv_commands_4_0 = null;
 
-        EObject lv_states_6 = null;
+        EObject lv_states_6_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:85:6: ( ( 'events' (lv_events_1= ruleEvent )* 'end' 'commands' (lv_commands_4= ruleCommand )* 'end' (lv_states_6= ruleState )* ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:1: ( 'events' (lv_events_1= ruleEvent )* 'end' 'commands' (lv_commands_4= ruleCommand )* 'end' (lv_states_6= ruleState )* )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:85:6: ( ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:1: ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:1: ( 'events' (lv_events_1= ruleEvent )* 'end' 'commands' (lv_commands_4= ruleCommand )* 'end' (lv_states_6= ruleState )* )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:2: 'events' (lv_events_1= ruleEvent )* 'end' 'commands' (lv_commands_4= ruleCommand )* 'end' (lv_states_6= ruleState )*
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:1: ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:86:2: 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )*
             {
             match(input,11,FOLLOW_11_in_ruleStatemachine117); 
 
                     createLeafNode(grammarAccess.getStatemachineAccess().getEventsKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:90:1: (lv_events_1= ruleEvent )*
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:90:1: ( (lv_events_1_0= ruleEvent ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,13 +139,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:93:6: lv_events_1= ruleEvent
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:91:1: (lv_events_1_0= ruleEvent )
+            	    {
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:91:1: (lv_events_1_0= ruleEvent )
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:92:3: lv_events_1_0= ruleEvent
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getEventsEventParserRuleCall_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleEvent_in_ruleStatemachine151);
-            	    lv_events_1=ruleEvent();
+            	    pushFollow(FOLLOW_ruleEvent_in_ruleStatemachine138);
+            	    lv_events_1_0=ruleEvent();
             	    _fsp--;
 
 
@@ -153,14 +156,21 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    	            current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "events", lv_events_1, "Event", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"events",
+            	    	        		lv_events_1_0, 
+            	    	        		"Event", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -170,15 +180,15 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,12,FOLLOW_12_in_ruleStatemachine165); 
+            match(input,12,FOLLOW_12_in_ruleStatemachine148); 
 
                     createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_2(), null); 
                 
-            match(input,13,FOLLOW_13_in_ruleStatemachine174); 
+            match(input,13,FOLLOW_13_in_ruleStatemachine157); 
 
                     createLeafNode(grammarAccess.getStatemachineAccess().getCommandsKeyword_3(), null); 
                 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:119:1: (lv_commands_4= ruleCommand )*
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:122:1: ( (lv_commands_4_0= ruleCommand ) )*
             loop2:
             do {
                 int alt2=2;
@@ -191,13 +201,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:122:6: lv_commands_4= ruleCommand
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:123:1: (lv_commands_4_0= ruleCommand )
+            	    {
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:123:1: (lv_commands_4_0= ruleCommand )
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:124:3: lv_commands_4_0= ruleCommand
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getCommandsCommandParserRuleCall_4_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCommand_in_ruleStatemachine208);
-            	    lv_commands_4=ruleCommand();
+            	    pushFollow(FOLLOW_ruleCommand_in_ruleStatemachine178);
+            	    lv_commands_4_0=ruleCommand();
             	    _fsp--;
 
 
@@ -205,14 +218,21 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    	            current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "commands", lv_commands_4, "Command", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"commands",
+            	    	        		lv_commands_4_0, 
+            	    	        		"Command", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -222,11 +242,11 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,12,FOLLOW_12_in_ruleStatemachine222); 
+            match(input,12,FOLLOW_12_in_ruleStatemachine188); 
 
                     createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_5(), null); 
                 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:144:1: (lv_states_6= ruleState )*
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:150:1: ( (lv_states_6_0= ruleState ) )*
             loop3:
             do {
                 int alt3=2;
@@ -239,13 +259,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:147:6: lv_states_6= ruleState
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:151:1: (lv_states_6_0= ruleState )
+            	    {
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:151:1: (lv_states_6_0= ruleState )
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:152:3: lv_states_6_0= ruleState
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getStatesStateParserRuleCall_6_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleState_in_ruleStatemachine256);
-            	    lv_states_6=ruleState();
+            	    pushFollow(FOLLOW_ruleState_in_ruleStatemachine209);
+            	    lv_states_6_0=ruleState();
             	    _fsp--;
 
 
@@ -253,14 +276,21 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    	            current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "states", lv_states_6, "State", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"states",
+            	    	        		lv_states_6_0, 
+            	    	        		"State", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -293,7 +323,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleEvent
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:172:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:181:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
     public final EObject entryRuleEvent() throws RecognitionException {
         EObject current = null;
 
@@ -301,16 +331,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:172:47: (iv_ruleEvent= ruleEvent EOF )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:173:2: iv_ruleEvent= ruleEvent EOF
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:181:47: (iv_ruleEvent= ruleEvent EOF )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:182:2: iv_ruleEvent= ruleEvent EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEventRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent294);
+            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent243);
             iv_ruleEvent=ruleEvent();
             _fsp--;
 
              current =iv_ruleEvent; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent304); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent253); 
 
             }
 
@@ -328,24 +358,24 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleEvent
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:180:1: ruleEvent returns [EObject current=null] : ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) (lv_code_2= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:189:1: ruleEvent returns [EObject current=null] : ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) ;
     public final EObject ruleEvent() throws RecognitionException {
         EObject current = null;
 
-        Token lv_resetting_0=null;
-        Token lv_name_1=null;
-        Token lv_code_2=null;
+        Token lv_resetting_0_0=null;
+        Token lv_name_1_0=null;
+        Token lv_code_2_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:185:6: ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) (lv_code_2= RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:186:1: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) (lv_code_2= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:194:6: ( ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:195:1: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:186:1: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) (lv_code_2= RULE_ID ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:186:2: (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) (lv_code_2= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:195:1: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:195:2: ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:186:2: (lv_resetting_0= 'resetting' )?
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:195:2: ( (lv_resetting_0_0= 'resetting' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -354,10 +384,13 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:188:6: lv_resetting_0= 'resetting'
+                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:196:1: (lv_resetting_0_0= 'resetting' )
                     {
-                    lv_resetting_0=(Token)input.LT(1);
-                    match(input,14,FOLLOW_14_in_ruleEvent350); 
+                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:196:1: (lv_resetting_0_0= 'resetting' )
+                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:197:3: lv_resetting_0_0= 'resetting'
+                    {
+                    lv_resetting_0_0=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_ruleEvent295); 
 
                             createLeafNode(grammarAccess.getEventAccess().getResettingResettingKeyword_0_0(), "resetting"); 
                         
@@ -375,26 +408,36 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:207:3: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:209:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:216:3: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:217:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent386); 
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:217:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:218:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent326); 
 
-            		createLeafNode(grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getEventRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -402,26 +445,39 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:227:2: (lv_code_2= RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:229:6: lv_code_2= RULE_ID
-            {
-            lv_code_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent416); 
 
-            		createLeafNode(grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0(), "code"); 
-            	
+            }
+
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:240:2: ( (lv_code_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:241:1: (lv_code_2_0= RULE_ID )
+            {
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:241:1: (lv_code_2_0= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:242:3: lv_code_2_0= RULE_ID
+            {
+            lv_code_2_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent348); 
+
+            			createLeafNode(grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0(), "code"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getEventRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "code", lv_code_2, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"code",
+            	        		lv_code_2_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -448,7 +504,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleCommand
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:254:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:271:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
     public final EObject entryRuleCommand() throws RecognitionException {
         EObject current = null;
 
@@ -456,16 +512,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:254:49: (iv_ruleCommand= ruleCommand EOF )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:255:2: iv_ruleCommand= ruleCommand EOF
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:271:49: (iv_ruleCommand= ruleCommand EOF )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:272:2: iv_ruleCommand= ruleCommand EOF
             {
              currentNode = createCompositeNode(grammarAccess.getCommandRule(), currentNode); 
-            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand457);
+            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand386);
             iv_ruleCommand=ruleCommand();
             _fsp--;
 
              current =iv_ruleCommand; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand467); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand396); 
 
             }
 
@@ -483,38 +539,45 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleCommand
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:262:1: ruleCommand returns [EObject current=null] : ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:279:1: ruleCommand returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) ;
     public final EObject ruleCommand() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0=null;
-        Token lv_code_1=null;
+        Token lv_name_0_0=null;
+        Token lv_code_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:267:6: ( ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:268:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:284:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:285:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:268:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:268:2: (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:285:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:285:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:268:2: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:270:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:285:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:286:1: (lv_name_0_0= RULE_ID )
             {
-            lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand514); 
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:286:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:287:3: lv_name_0_0= RULE_ID
+            {
+            lv_name_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand438); 
 
-            		createLeafNode(grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getCommandRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -522,26 +585,39 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:288:2: (lv_code_1= RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:290:6: lv_code_1= RULE_ID
-            {
-            lv_code_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand544); 
 
-            		createLeafNode(grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0(), "code"); 
-            	
+            }
+
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:309:2: ( (lv_code_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:310:1: (lv_code_1_0= RULE_ID )
+            {
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:310:1: (lv_code_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:311:3: lv_code_1_0= RULE_ID
+            {
+            lv_code_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand460); 
+
+            			createLeafNode(grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0(), "code"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getCommandRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "code", lv_code_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"code",
+            	        		lv_code_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -568,7 +644,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleState
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:315:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:340:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
     public final EObject entryRuleState() throws RecognitionException {
         EObject current = null;
 
@@ -576,16 +652,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:315:47: (iv_ruleState= ruleState EOF )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:316:2: iv_ruleState= ruleState EOF
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:340:47: (iv_ruleState= ruleState EOF )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:341:2: iv_ruleState= ruleState EOF
             {
              currentNode = createCompositeNode(grammarAccess.getStateRule(), currentNode); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState585);
+            pushFollow(FOLLOW_ruleState_in_entryRuleState498);
             iv_ruleState=ruleState();
             _fsp--;
 
              current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState595); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleState508); 
 
             }
 
@@ -603,43 +679,50 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleState
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:323:1: ruleState returns [EObject current=null] : ( 'state' (lv_name_1= RULE_ID ) ( 'actions' '{' ( RULE_ID )+ '}' )? (lv_transitions_6= ruleTransition )* 'end' ) ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:348:1: ruleState returns [EObject current=null] : ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' ) ;
     public final EObject ruleState() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        EObject lv_transitions_6 = null;
+        Token lv_name_1_0=null;
+        EObject lv_transitions_6_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:328:6: ( ( 'state' (lv_name_1= RULE_ID ) ( 'actions' '{' ( RULE_ID )+ '}' )? (lv_transitions_6= ruleTransition )* 'end' ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:329:1: ( 'state' (lv_name_1= RULE_ID ) ( 'actions' '{' ( RULE_ID )+ '}' )? (lv_transitions_6= ruleTransition )* 'end' )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:353:6: ( ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:354:1: ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:329:1: ( 'state' (lv_name_1= RULE_ID ) ( 'actions' '{' ( RULE_ID )+ '}' )? (lv_transitions_6= ruleTransition )* 'end' )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:329:2: 'state' (lv_name_1= RULE_ID ) ( 'actions' '{' ( RULE_ID )+ '}' )? (lv_transitions_6= ruleTransition )* 'end'
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:354:1: ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:354:2: 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end'
             {
-            match(input,15,FOLLOW_15_in_ruleState629); 
+            match(input,15,FOLLOW_15_in_ruleState542); 
 
                     createLeafNode(grammarAccess.getStateAccess().getStateKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:333:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:335:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:358:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:359:1: (lv_name_1_0= RULE_ID )
             {
-            lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState651); 
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:359:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:360:3: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState559); 
 
-            		createLeafNode(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_1, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
@@ -647,7 +730,10 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:353:2: ( 'actions' '{' ( RULE_ID )+ '}' )?
+
+            }
+
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:382:2: ( 'actions' '{' ( ( RULE_ID ) )+ '}' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -656,17 +742,17 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:353:3: 'actions' '{' ( RULE_ID )+ '}'
+                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:382:3: 'actions' '{' ( ( RULE_ID ) )+ '}'
                     {
-                    match(input,16,FOLLOW_16_in_ruleState669); 
+                    match(input,16,FOLLOW_16_in_ruleState574); 
 
                             createLeafNode(grammarAccess.getStateAccess().getActionsKeyword_2_0(), null); 
                         
-                    match(input,17,FOLLOW_17_in_ruleState678); 
+                    match(input,17,FOLLOW_17_in_ruleState583); 
 
                             createLeafNode(grammarAccess.getStateAccess().getLeftCurlyBracketKeyword_2_1(), null); 
                         
-                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:361:1: ( RULE_ID )+
+                    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:390:1: ( ( RULE_ID ) )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -680,7 +766,10 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:364:3: RULE_ID
+                    	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:391:1: ( RULE_ID )
+                    	    {
+                    	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:391:1: ( RULE_ID )
+                    	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:392:3: RULE_ID
                     	    {
 
                     	    			if (current==null) {
@@ -688,11 +777,13 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                     	    	            associateNodeWithAstElement(currentNode, current);
                     	    	        }
                     	            
-                    	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState700); 
+                    	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState601); 
 
                     	    		createLeafNode(grammarAccess.getStateAccess().getActionsCommandCrossReference_2_2_0(), "actions"); 
                     	    	
-                    	     lastConsumedDatatypeToken = null; 
+
+                    	    }
+
 
                     	    }
                     	    break;
@@ -706,7 +797,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                         cnt5++;
                     } while (true);
 
-                    match(input,18,FOLLOW_18_in_ruleState717); 
+                    match(input,18,FOLLOW_18_in_ruleState611); 
 
                             createLeafNode(grammarAccess.getStateAccess().getRightCurlyBracketKeyword_2_3(), null); 
                         
@@ -716,7 +807,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:382:3: (lv_transitions_6= ruleTransition )*
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:408:3: ( (lv_transitions_6_0= ruleTransition ) )*
             loop7:
             do {
                 int alt7=2;
@@ -729,13 +820,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:385:6: lv_transitions_6= ruleTransition
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:409:1: (lv_transitions_6_0= ruleTransition )
+            	    {
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:409:1: (lv_transitions_6_0= ruleTransition )
+            	    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:410:3: lv_transitions_6_0= ruleTransition
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getTransitionsTransitionParserRuleCall_3_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTransition_in_ruleState753);
-            	    lv_transitions_6=ruleTransition();
+            	    pushFollow(FOLLOW_ruleTransition_in_ruleState634);
+            	    lv_transitions_6_0=ruleTransition();
             	    _fsp--;
 
 
@@ -743,14 +837,21 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	    	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "transitions", lv_transitions_6, "Transition", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"transitions",
+            	    	        		lv_transitions_6_0, 
+            	    	        		"Transition", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -760,7 +861,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,12,FOLLOW_12_in_ruleState767); 
+            match(input,12,FOLLOW_12_in_ruleState644); 
 
                     createLeafNode(grammarAccess.getStateAccess().getEndKeyword_4(), null); 
                 
@@ -787,7 +888,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleTransition
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:414:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:443:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
     public final EObject entryRuleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -795,16 +896,16 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:414:52: (iv_ruleTransition= ruleTransition EOF )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:415:2: iv_ruleTransition= ruleTransition EOF
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:443:52: (iv_ruleTransition= ruleTransition EOF )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:444:2: iv_ruleTransition= ruleTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTransitionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition800);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition677);
             iv_ruleTransition=ruleTransition();
             _fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition810); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition687); 
 
             }
 
@@ -822,21 +923,24 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleTransition
-    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:422:1: ruleTransition returns [EObject current=null] : ( ( RULE_ID ) '=>' ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:451:1: ruleTransition returns [EObject current=null] : ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) ) ;
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:427:6: ( ( ( RULE_ID ) '=>' ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:428:1: ( ( RULE_ID ) '=>' ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:456:6: ( ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:457:1: ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:428:1: ( ( RULE_ID ) '=>' ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:428:2: ( RULE_ID ) '=>' ( RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:457:1: ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:457:2: ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:428:2: ( RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:431:3: RULE_ID
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:457:2: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:458:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:458:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:459:3: RULE_ID
             {
 
             			if (current==null) {
@@ -844,20 +948,25 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition857); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition730); 
 
             		createLeafNode(grammarAccess.getTransitionAccess().getEventEventCrossReference_0_0(), "event"); 
             	
-             lastConsumedDatatypeToken = null; 
 
             }
 
-            match(input,19,FOLLOW_19_in_ruleTransition873); 
+
+            }
+
+            match(input,19,FOLLOW_19_in_ruleTransition739); 
 
                     createLeafNode(grammarAccess.getTransitionAccess().getEqualsSignGreaterThanSignKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:449:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:452:3: RULE_ID
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:475:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:476:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:476:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:477:3: RULE_ID
             {
 
             			if (current==null) {
@@ -865,11 +974,13 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition895); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition757); 
 
             		createLeafNode(grammarAccess.getTransitionAccess().getStateStateCrossReference_2_0(), "state"); 
             	
-             lastConsumedDatatypeToken = null; 
+
+            }
+
 
             }
 
@@ -900,35 +1011,35 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleStatemachine_in_entryRuleStatemachine73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStatemachine83 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleStatemachine117 = new BitSet(new long[]{0x0000000000005010L});
-    public static final BitSet FOLLOW_ruleEvent_in_ruleStatemachine151 = new BitSet(new long[]{0x0000000000005010L});
-    public static final BitSet FOLLOW_12_in_ruleStatemachine165 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleStatemachine174 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleCommand_in_ruleStatemachine208 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_12_in_ruleStatemachine222 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStatemachine256 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent294 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEvent304 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleEvent350 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent386 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent416 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand457 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCommand467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand514 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand544 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState585 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleState629 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState651 = new BitSet(new long[]{0x0000000000011010L});
-    public static final BitSet FOLLOW_16_in_ruleState669 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleState678 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState700 = new BitSet(new long[]{0x0000000000040010L});
-    public static final BitSet FOLLOW_18_in_ruleState717 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleState753 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_12_in_ruleState767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition800 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition857 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleTransition873 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition895 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_ruleStatemachine138 = new BitSet(new long[]{0x0000000000005010L});
+    public static final BitSet FOLLOW_12_in_ruleStatemachine148 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleStatemachine157 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_ruleCommand_in_ruleStatemachine178 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_12_in_ruleStatemachine188 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStatemachine209 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent243 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEvent253 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleEvent295 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent326 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand386 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCommand396 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand438 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_entryRuleState498 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleState508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleState542 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState559 = new BitSet(new long[]{0x0000000000011010L});
+    public static final BitSet FOLLOW_16_in_ruleState574 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleState583 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState601 = new BitSet(new long[]{0x0000000000040010L});
+    public static final BitSet FOLLOW_18_in_ruleState611 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleState634 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_12_in_ruleState644 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition677 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition730 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleTransition739 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition757 = new BitSet(new long[]{0x0000000000000002L});
 
 }

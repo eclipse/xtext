@@ -102,30 +102,38 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( 'model' (lv_name_1= ( RULE_ID | ruleFQN ) ) (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+ ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+ ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_1=null;
-        Token lv_detail_2=null;
+        Token lv_name_1_1=null;
+        AntlrDatatypeRuleToken lv_name_1_2 = null;
+
+        EObject lv_detail_2_1 = null;
+
+        EObject lv_detail_2_2 = null;
+
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:85:6: ( ( 'model' (lv_name_1= ( RULE_ID | ruleFQN ) ) (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+ ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:1: ( 'model' (lv_name_1= ( RULE_ID | ruleFQN ) ) (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:85:6: ( ( 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+ ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:1: ( 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+ )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:1: ( 'model' (lv_name_1= ( RULE_ID | ruleFQN ) ) (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:2: 'model' (lv_name_1= ( RULE_ID | ruleFQN ) ) (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:1: ( 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:86:2: 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+
             {
             match(input,11,FOLLOW_11_in_ruleModel117); 
 
                     createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:90:1: (lv_name_1= ( RULE_ID | ruleFQN ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:92:6: lv_name_1= ( RULE_ID | ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:90:1: ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:91:1: ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:92:16: ( RULE_ID | ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:91:1: ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:92:1: (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:92:1: (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -140,41 +148,72 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("92:16: ( RULE_ID | ruleFQN )", 1, 1, input);
+                        new NoViableAltException("92:1: (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN )", 1, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("92:16: ( RULE_ID | ruleFQN )", 1, 0, input);
+                    new NoViableAltException("92:1: (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:92:18: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:93:3: lv_name_1_1= RULE_ID
                     {
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel140); 
+                    lv_name_1_1=(Token)input.LT(1);
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel136); 
 
-                    		createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0_0(), "name"); 
-                    	
+                    			createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0_0(), "name"); 
+                    		
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        try {
+                    	       		set(
+                    	       			current, 
+                    	       			"name",
+                    	        		lv_name_1_1, 
+                    	        		"ID", 
+                    	        		lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:97:7: ruleFQN
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:114:8: lv_name_1_2= ruleFQN
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0_1(), currentNode); 
-                        
-                    pushFollow(FOLLOW_ruleFQN_in_ruleModel155);
-                    ruleFQN();
+                    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0_1(), currentNode); 
+                    	    
+                    pushFollow(FOLLOW_ruleFQN_in_ruleModel160);
+                    lv_name_1_2=ruleFQN();
                     _fsp--;
 
-                     
-                            currentNode = currentNode.getParent();
-                        
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	        }
+                    	        try {
+                    	       		set(
+                    	       			current, 
+                    	       			"name",
+                    	        		lv_name_1_2, 
+                    	        		"FQN", 
+                    	        		currentNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	        currentNode = currentNode.getParent();
+                    	    
 
                     }
                     break;
@@ -182,21 +221,12 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             }
 
 
-            	        if (current==null) {
-            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
-            	        }
-            	        
-            	        try {
-            	       		set(current, "name", lv_name_1, null, lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	    
+            }
+
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:118:2: (lv_detail_2= ( ruleDetail | ruleAssociatedDetail ) )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:138:2: ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+
             int cnt3=0;
             loop3:
             do {
@@ -210,9 +240,12 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:120:6: lv_detail_2= ( ruleDetail | ruleAssociatedDetail )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:139:1: ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:120:18: ( ruleDetail | ruleAssociatedDetail )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:139:1: ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:140:1: (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:140:1: (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail )
             	    int alt2=2;
             	    int LA2_0 = input.LA(1);
 
@@ -224,40 +257,68 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    else {
             	        NoViableAltException nvae =
-            	            new NoViableAltException("120:18: ( ruleDetail | ruleAssociatedDetail )", 2, 0, input);
+            	            new NoViableAltException("140:1: (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail )", 2, 0, input);
 
             	        throw nvae;
             	    }
             	    switch (alt2) {
             	        case 1 :
-            	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:120:20: ruleDetail
+            	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:141:3: lv_detail_2_1= ruleDetail
             	            {
             	             
-            	                    currentNode=createCompositeNode(grammarAccess.getModelAccess().getDetailDetailParserRuleCall_2_0_0(), currentNode); 
-            	                
-            	            pushFollow(FOLLOW_ruleDetail_in_ruleModel190);
-            	            ruleDetail();
+            	            	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDetailDetailParserRuleCall_2_0_0(), currentNode); 
+            	            	    
+            	            pushFollow(FOLLOW_ruleDetail_in_ruleModel186);
+            	            lv_detail_2_1=ruleDetail();
             	            _fsp--;
 
-            	             
-            	                    currentNode = currentNode.getParent();
-            	                
+
+            	            	        if (current==null) {
+            	            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+            	            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	            	        }
+            	            	        try {
+            	            	       		add(
+            	            	       			current, 
+            	            	       			"detail",
+            	            	        		lv_detail_2_1, 
+            	            	        		"Detail", 
+            	            	        		currentNode);
+            	            	        } catch (ValueConverterException vce) {
+            	            				handleValueConverterException(vce);
+            	            	        }
+            	            	        currentNode = currentNode.getParent();
+            	            	    
 
             	            }
             	            break;
             	        case 2 :
-            	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:127:7: ruleAssociatedDetail
+            	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:162:8: lv_detail_2_2= ruleAssociatedDetail
             	            {
             	             
-            	                    currentNode=createCompositeNode(grammarAccess.getModelAccess().getDetailAssociatedDetailParserRuleCall_2_0_1(), currentNode); 
-            	                
-            	            pushFollow(FOLLOW_ruleAssociatedDetail_in_ruleModel204);
-            	            ruleAssociatedDetail();
+            	            	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDetailAssociatedDetailParserRuleCall_2_0_1(), currentNode); 
+            	            	    
+            	            pushFollow(FOLLOW_ruleAssociatedDetail_in_ruleModel205);
+            	            lv_detail_2_2=ruleAssociatedDetail();
             	            _fsp--;
 
-            	             
-            	                    currentNode = currentNode.getParent();
-            	                
+
+            	            	        if (current==null) {
+            	            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+            	            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	            	        }
+            	            	        try {
+            	            	       		add(
+            	            	       			current, 
+            	            	       			"detail",
+            	            	        		lv_detail_2_2, 
+            	            	        		"AssociatedDetail", 
+            	            	        		currentNode);
+            	            	        } catch (ValueConverterException vce) {
+            	            				handleValueConverterException(vce);
+            	            	        }
+            	            	        currentNode = currentNode.getParent();
+            	            	    
 
             	            }
             	            break;
@@ -265,17 +326,8 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             	    }
 
 
-            	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode, current);
-            	    	        }
-            	    	        
-            	    	        try {
-            	    	       		add(current, "detail", lv_detail_2, null, lastConsumedNode);
-            	    	        } catch (ValueConverterException vce) {
-            	    				handleValueConverterException(vce);
-            	    	        }
-            	    	    
+            	    }
+
 
             	    }
             	    break;
@@ -312,7 +364,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleDetail
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:157:1: entryRuleDetail returns [EObject current=null] : iv_ruleDetail= ruleDetail EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:195:1: entryRuleDetail returns [EObject current=null] : iv_ruleDetail= ruleDetail EOF ;
     public final EObject entryRuleDetail() throws RecognitionException {
         EObject current = null;
 
@@ -320,16 +372,16 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:157:48: (iv_ruleDetail= ruleDetail EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:158:2: iv_ruleDetail= ruleDetail EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:195:48: (iv_ruleDetail= ruleDetail EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:196:2: iv_ruleDetail= ruleDetail EOF
             {
              currentNode = createCompositeNode(grammarAccess.getDetailRule(), currentNode); 
-            pushFollow(FOLLOW_ruleDetail_in_entryRuleDetail249);
+            pushFollow(FOLLOW_ruleDetail_in_entryRuleDetail244);
             iv_ruleDetail=ruleDetail();
             _fsp--;
 
              current =iv_ruleDetail; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDetail259); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDetail254); 
 
             }
 
@@ -347,23 +399,25 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleDetail
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:165:1: ruleDetail returns [EObject current=null] : ( (lv_doc_0= RULE_ML_COMMENT )? 'detail' (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )? ( ruleFQN ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:203:1: ruleDetail returns [EObject current=null] : ( ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) ) ) ;
     public final EObject ruleDetail() throws RecognitionException {
         EObject current = null;
 
-        Token lv_doc_0=null;
-        Token lv_visibility_2=null;
+        Token lv_doc_0_0=null;
+        Token lv_visibility_2_1=null;
+        Token lv_visibility_2_2=null;
+        Token lv_visibility_2_3=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:170:6: ( ( (lv_doc_0= RULE_ML_COMMENT )? 'detail' (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )? ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:171:1: ( (lv_doc_0= RULE_ML_COMMENT )? 'detail' (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )? ( ruleFQN ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:208:6: ( ( ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:209:1: ( ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:171:1: ( (lv_doc_0= RULE_ML_COMMENT )? 'detail' (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )? ( ruleFQN ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:171:2: (lv_doc_0= RULE_ML_COMMENT )? 'detail' (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )? ( ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:209:1: ( ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:209:2: ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:171:2: (lv_doc_0= RULE_ML_COMMENT )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:209:2: ( (lv_doc_0_0= RULE_ML_COMMENT ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -372,36 +426,46 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:173:6: lv_doc_0= RULE_ML_COMMENT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:210:1: (lv_doc_0_0= RULE_ML_COMMENT )
                     {
-                    lv_doc_0=(Token)input.LT(1);
-                    match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleDetail306); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:210:1: (lv_doc_0_0= RULE_ML_COMMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:211:3: lv_doc_0_0= RULE_ML_COMMENT
+                    {
+                    lv_doc_0_0=(Token)input.LT(1);
+                    match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleDetail296); 
 
-                    		createLeafNode(grammarAccess.getDetailAccess().getDocML_COMMENTTerminalRuleCall_0_0(), "doc"); 
-                    	
+                    			createLeafNode(grammarAccess.getDetailAccess().getDocML_COMMENTTerminalRuleCall_0_0(), "doc"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "doc", lv_doc_0, "ML_COMMENT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"doc",
+                    	        		lv_doc_0_0, 
+                    	        		"ML_COMMENT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleDetail324); 
+            match(input,12,FOLLOW_12_in_ruleDetail311); 
 
                     createLeafNode(grammarAccess.getDetailAccess().getDetailKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:195:1: (lv_visibility_2= ( 'private' | 'protected' | 'public' ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:237:1: ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -410,9 +474,12 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:197:6: lv_visibility_2= ( 'private' | 'protected' | 'public' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:238:1: ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:197:22: ( 'private' | 'protected' | 'public' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:238:1: ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:239:1: (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:239:1: (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' )
                     int alt5=3;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -432,39 +499,78 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
                         break;
                     default:
                         NoViableAltException nvae =
-                            new NoViableAltException("197:22: ( 'private' | 'protected' | 'public' )", 5, 0, input);
+                            new NoViableAltException("239:1: (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' )", 5, 0, input);
 
                         throw nvae;
                     }
 
                     switch (alt5) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:197:23: 'private'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:240:3: lv_visibility_2_1= 'private'
                             {
-                            match(input,13,FOLLOW_13_in_ruleDetail346); 
+                            lv_visibility_2_1=(Token)input.LT(1);
+                            match(input,13,FOLLOW_13_in_ruleDetail330); 
 
                                     createLeafNode(grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_2_0_0(), "visibility"); 
                                 
 
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode, current);
+                            	        }
+                            	        
+                            	        try {
+                            	       		set(current, "visibility", lv_visibility_2_1, null, lastConsumedNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	    
+
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:203:6: 'protected'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:258:8: lv_visibility_2_2= 'protected'
                             {
-                            match(input,14,FOLLOW_14_in_ruleDetail362); 
+                            lv_visibility_2_2=(Token)input.LT(1);
+                            match(input,14,FOLLOW_14_in_ruleDetail358); 
 
                                     createLeafNode(grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_2_0_1(), "visibility"); 
                                 
 
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode, current);
+                            	        }
+                            	        
+                            	        try {
+                            	       		set(current, "visibility", lv_visibility_2_2, null, lastConsumedNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	    
+
                             }
                             break;
                         case 3 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:209:6: 'public'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:276:8: lv_visibility_2_3= 'public'
                             {
-                            match(input,15,FOLLOW_15_in_ruleDetail378); 
+                            lv_visibility_2_3=(Token)input.LT(1);
+                            match(input,15,FOLLOW_15_in_ruleDetail386); 
 
                                     createLeafNode(grammarAccess.getDetailAccess().getVisibilityPublicKeyword_2_0_2(), "visibility"); 
                                 
+
+                            	        if (current==null) {
+                            	            current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
+                            	            associateNodeWithAstElement(currentNode, current);
+                            	        }
+                            	        
+                            	        try {
+                            	       		set(current, "visibility", lv_visibility_2_3, null, lastConsumedNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	    
 
                             }
                             break;
@@ -472,25 +578,19 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
                     }
 
 
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getDetailRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
-                    	        }
-                    	        
-                    	        try {
-                    	       		set(current, "visibility", /* lv_visibility_2 */ input.LT(-1), null, lastConsumedNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	    
+                    }
+
 
                     }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:229:3: ( ruleFQN )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:232:3: ruleFQN
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:297:3: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:298:1: ( ruleFQN )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:298:1: ( ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:299:3: ruleFQN
             {
 
             			if (current==null) {
@@ -501,14 +601,16 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
              
             	        currentNode=createCompositeNode(grammarAccess.getDetailAccess().getDetailClassModelCrossReference_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleDetail421);
+            pushFollow(FOLLOW_ruleFQN_in_ruleDetail426);
             ruleFQN();
             _fsp--;
 
              
             	        currentNode = currentNode.getParent();
             	    
-             lastConsumedDatatypeToken = null; 
+
+            }
+
 
             }
 
@@ -535,7 +637,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleAssociatedDetail
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:255:1: entryRuleAssociatedDetail returns [EObject current=null] : iv_ruleAssociatedDetail= ruleAssociatedDetail EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:320:1: entryRuleAssociatedDetail returns [EObject current=null] : iv_ruleAssociatedDetail= ruleAssociatedDetail EOF ;
     public final EObject entryRuleAssociatedDetail() throws RecognitionException {
         EObject current = null;
 
@@ -543,16 +645,16 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:255:58: (iv_ruleAssociatedDetail= ruleAssociatedDetail EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:256:2: iv_ruleAssociatedDetail= ruleAssociatedDetail EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:320:58: (iv_ruleAssociatedDetail= ruleAssociatedDetail EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:321:2: iv_ruleAssociatedDetail= ruleAssociatedDetail EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAssociatedDetailRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAssociatedDetail_in_entryRuleAssociatedDetail461);
+            pushFollow(FOLLOW_ruleAssociatedDetail_in_entryRuleAssociatedDetail459);
             iv_ruleAssociatedDetail=ruleAssociatedDetail();
             _fsp--;
 
              current =iv_ruleAssociatedDetail; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssociatedDetail471); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAssociatedDetail469); 
 
             }
 
@@ -570,25 +672,28 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleAssociatedDetail
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:263:1: ruleAssociatedDetail returns [EObject current=null] : ( 'associated' ( ( RULE_ID | ruleFQN ) ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:328:1: ruleAssociatedDetail returns [EObject current=null] : ( 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';' ) ;
     public final EObject ruleAssociatedDetail() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:268:6: ( ( 'associated' ( ( RULE_ID | ruleFQN ) ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:269:1: ( 'associated' ( ( RULE_ID | ruleFQN ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:333:6: ( ( 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:334:1: ( 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:269:1: ( 'associated' ( ( RULE_ID | ruleFQN ) ) ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:269:2: 'associated' ( ( RULE_ID | ruleFQN ) ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:334:1: ( 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:334:2: 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';'
             {
-            match(input,16,FOLLOW_16_in_ruleAssociatedDetail505); 
+            match(input,16,FOLLOW_16_in_ruleAssociatedDetail503); 
 
                     createLeafNode(grammarAccess.getAssociatedDetailAccess().getAssociatedKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:273:1: ( ( RULE_ID | ruleFQN ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:276:3: ( RULE_ID | ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:338:1: ( ( ( RULE_ID | ruleFQN ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:339:1: ( ( RULE_ID | ruleFQN ) )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:339:1: ( ( RULE_ID | ruleFQN ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:340:3: ( RULE_ID | ruleFQN )
             {
 
             			if (current==null) {
@@ -596,37 +701,37 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:282:3: ( RULE_ID | ruleFQN )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:346:3: ( RULE_ID | ruleFQN )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
             if ( (LA7_0==RULE_ID) ) {
                 int LA7_1 = input.LA(2);
 
-                if ( (LA7_1==18) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_1==17) ) {
+                if ( (LA7_1==17) ) {
                     alt7=1;
+                }
+                else if ( (LA7_1==18) ) {
+                    alt7=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("282:3: ( RULE_ID | ruleFQN )", 7, 1, input);
+                        new NoViableAltException("346:3: ( RULE_ID | ruleFQN )", 7, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("282:3: ( RULE_ID | ruleFQN )", 7, 0, input);
+                    new NoViableAltException("346:3: ( RULE_ID | ruleFQN )", 7, 0, input);
 
                 throw nvae;
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:282:5: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:346:5: RULE_ID
                     {
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssociatedDetail530); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssociatedDetail524); 
 
                     		createLeafNode(grammarAccess.getAssociatedDetailAccess().getDetailClassModelCrossReference_1_0(), "detailClass"); 
                     	
@@ -634,12 +739,12 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:287:8: ruleFQN
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:351:8: ruleFQN
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getAssociatedDetailAccess().getDetailClassModelCrossReference_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleAssociatedDetail547);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleAssociatedDetail541);
                     ruleFQN();
                     _fsp--;
 
@@ -652,11 +757,13 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             lastConsumedDatatypeToken = null; 
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleAssociatedDetail565); 
+
+            }
+
+            match(input,17,FOLLOW_17_in_ruleAssociatedDetail552); 
 
                     createLeafNode(grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2(), null); 
                 
@@ -683,7 +790,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleFQN
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:309:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:371:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -691,16 +798,16 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:309:44: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:310:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:371:44: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:372:2: iv_ruleFQN= ruleFQN EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN599);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN586);
             iv_ruleFQN=ruleFQN();
             _fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN610); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN597); 
 
             }
 
@@ -718,7 +825,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleFQN
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:317:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:379:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -729,21 +836,21 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:323:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:324:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:384:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:385:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:324:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:324:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:385:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:385:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )+
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN650); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN637); 
 
             		current.merge(this_ID_0);
                 
              
                 createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:331:1: (kw= '.' this_ID_2= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:392:1: (kw= '.' this_ID_2= RULE_ID )+
             int cnt8=0;
             loop8:
             do {
@@ -757,16 +864,16 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:332:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:393:2: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)input.LT(1);
-            	    match(input,18,FOLLOW_18_in_ruleFQN669); 
+            	    match(input,18,FOLLOW_18_in_ruleFQN656); 
 
             	            current.merge(kw);
             	            createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
             	        
             	    this_ID_2=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN684); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN671); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -794,7 +901,6 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
 
              resetLookahead(); 
             	    lastConsumedNode = currentNode;
-            	    lastConsumedDatatypeToken = current;
                 
         }
          
@@ -814,28 +920,28 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleModel117 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel140 = new BitSet(new long[]{0x0000000000011020L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleModel155 = new BitSet(new long[]{0x0000000000011020L});
-    public static final BitSet FOLLOW_ruleDetail_in_ruleModel190 = new BitSet(new long[]{0x0000000000011022L});
-    public static final BitSet FOLLOW_ruleAssociatedDetail_in_ruleModel204 = new BitSet(new long[]{0x0000000000011022L});
-    public static final BitSet FOLLOW_ruleDetail_in_entryRuleDetail249 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDetail259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleDetail306 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleDetail324 = new BitSet(new long[]{0x000000000000E010L});
-    public static final BitSet FOLLOW_13_in_ruleDetail346 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_14_in_ruleDetail362 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_15_in_ruleDetail378 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleDetail421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssociatedDetail_in_entryRuleAssociatedDetail461 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssociatedDetail471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleAssociatedDetail505 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAssociatedDetail530 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleAssociatedDetail547 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleAssociatedDetail565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN599 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN650 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleFQN669 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN684 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel136 = new BitSet(new long[]{0x0000000000011020L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleModel160 = new BitSet(new long[]{0x0000000000011020L});
+    public static final BitSet FOLLOW_ruleDetail_in_ruleModel186 = new BitSet(new long[]{0x0000000000011022L});
+    public static final BitSet FOLLOW_ruleAssociatedDetail_in_ruleModel205 = new BitSet(new long[]{0x0000000000011022L});
+    public static final BitSet FOLLOW_ruleDetail_in_entryRuleDetail244 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDetail254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleDetail296 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleDetail311 = new BitSet(new long[]{0x000000000000E010L});
+    public static final BitSet FOLLOW_13_in_ruleDetail330 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_14_in_ruleDetail358 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_15_in_ruleDetail386 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleDetail426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssociatedDetail_in_entryRuleAssociatedDetail459 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAssociatedDetail469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleAssociatedDetail503 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAssociatedDetail524 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleAssociatedDetail541 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleAssociatedDetail552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN586 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN637 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleFQN656 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN671 = new BitSet(new long[]{0x0000000000040002L});
 
 }

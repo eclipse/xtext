@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
@@ -21,13 +22,16 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 	@Inject
 	private DomainmodelGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer lexer = new org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer(in);
+		org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser parser = new org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 	
 	public void setGrammarAccess(DomainmodelGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

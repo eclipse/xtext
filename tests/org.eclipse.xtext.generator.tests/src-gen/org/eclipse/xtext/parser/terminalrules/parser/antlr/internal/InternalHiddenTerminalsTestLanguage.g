@@ -157,57 +157,64 @@ ruleWithoutHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null); 
     }
-(	
-	
-	    lv_spaces_1=	RULE_WS
-	{
-		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
-	}
- 
-	    {
+(
+(
+		lv_spaces_1_0=RULE_WS
+		{
+			createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "spaces", lv_spaces_1, "WS", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"spaces",
+	        		lv_spaces_1_0, 
+	        		"WS", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )'hiddens' 
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null); 
     }
-(	
-	
-	    lv_spaces_3=	RULE_WS
-	{
-		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
-	}
- 
-	    {
+(
+(
+		lv_spaces_3_0=RULE_WS
+		{
+			createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "spaces", lv_spaces_3, "WS", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"spaces",
+	        		lv_spaces_3_0, 
+	        		"WS", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)?(	
-	
-	    lv_valid_4=';' 
+
+)
+)?(
+(
+		lv_valid_4_0=';' 
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -221,7 +228,8 @@ ruleWithoutHiddens returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -253,13 +261,12 @@ ruleWithHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null); 
     }
-(	
-	
-	    lv_valid_2=';' 
+(
+(
+		lv_valid_2_0=';' 
     {
         createLeafNode(grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -273,7 +280,8 @@ ruleWithHiddens returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -309,38 +317,40 @@ ruleOverridingHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0(), currentNode); 
 	    }
-	    lv_called_3=ruleOverridingHiddensCall 
-	    {
+		lv_called_3_0=ruleOverridingHiddensCall		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "called", lv_called_3, "OverridingHiddensCall", currentNode);
+	       		set(
+	       			$current, 
+	       			"called",
+	        		lv_called_3_0, 
+	        		"OverridingHiddensCall", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )')' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
-(	
-	
-	    lv_valid_5=';' 
+(
+(
+		lv_valid_5_0=';' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -354,7 +364,8 @@ ruleOverridingHiddens returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -382,33 +393,36 @@ ruleOverridingHiddensCall returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null); 
     }
-(	
-	
-	    lv_spaces_1=	RULE_WS
-	{
-		createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
-	}
- 
-	    {
+(
+(
+		lv_spaces_1_0=RULE_WS
+		{
+			createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "spaces", lv_spaces_1, "WS", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"spaces",
+	        		lv_spaces_1_0, 
+	        		"WS", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)?(	
-	
-	    lv_valid_2=';' 
+
+)
+)?(
+(
+		lv_valid_2_0=';' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -422,7 +436,8 @@ ruleOverridingHiddensCall returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -458,60 +473,65 @@ ruleInheritingHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
-((	
-	
-	    
-	    { 
+((
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0(), currentNode); 
 	    }
-	    lv_called_3=ruleInheritingHiddensCall 
-	    {
+		lv_called_3_0=ruleInheritingHiddensCall		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "called", lv_called_3, "InheritingHiddensCall", currentNode);
+	       		set(
+	       			$current, 
+	       			"called",
+	        		lv_called_3_0, 
+	        		"InheritingHiddensCall", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
 )
-    |(	
-	
-	    
-	    { 
+)
+    |(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0(), currentNode); 
 	    }
-	    lv_hidingCalled_4=ruleHidingHiddens 
-	    {
+		lv_hidingCalled_4_0=ruleHidingHiddens		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "hidingCalled", lv_hidingCalled_4, "HidingHiddens", currentNode);
+	       		set(
+	       			$current, 
+	       			"hidingCalled",
+	        		lv_hidingCalled_4_0, 
+	        		"HidingHiddens", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))')' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
-(	
-	
-	    lv_valid_6=';' 
+(
+(
+		lv_valid_6_0=';' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -525,7 +545,8 @@ ruleInheritingHiddens returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -551,27 +572,30 @@ ruleDatatypeHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_valid_1=ruleDatatypeRule 
-	    {
+		lv_valid_1_0=ruleDatatypeRule		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getDatatypeHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "valid", true, "DatatypeRule", currentNode);
+	       		set(
+	       			$current, 
+	       			"valid",
+	        		true, 
+	        		"DatatypeRule", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ));
 
 
@@ -593,7 +617,6 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
 		myHiddenTokenState.restore();
     }:
 (
@@ -636,47 +659,54 @@ ruleHidingHiddens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null); 
     }
-(	
-	
-	    lv_space_1=	RULE_WS
-	{
-		createLeafNode(grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
-	}
- 
-	    {
+(
+(
+		lv_space_1_0=RULE_WS
+		{
+			createLeafNode(grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "space", lv_space_1, "WS", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"space",
+	        		lv_space_1_0, 
+	        		"WS", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    
-	    { 
+
+)
+)(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0(), currentNode); 
 	    }
-	    lv_called_2=ruleInheritingHiddensCall 
-	    {
+		lv_called_2_0=ruleInheritingHiddensCall		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "called", lv_called_2, "InheritingHiddensCall", currentNode);
+	       		set(
+	       			$current, 
+	       			"called",
+	        		lv_called_2_0, 
+	        		"InheritingHiddensCall", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ));
 
 
@@ -702,13 +732,12 @@ ruleInheritingHiddensCall returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null); 
     }
-(	
-	
-	    lv_valid_1=';' 
+(
+(
+		lv_valid_1_0=';' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -722,7 +751,8 @@ ruleInheritingHiddensCall returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 

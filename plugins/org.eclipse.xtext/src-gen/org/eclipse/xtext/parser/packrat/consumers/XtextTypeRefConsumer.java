@@ -35,11 +35,15 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$4$Consumer;
 
+	private IElementConsumer ruleCall$6$Consumer;
+
 	private IElementConsumer keyword$7$Consumer;
 
 	private IElementConsumer assignment$8$Consumer;
 
 	private IElementConsumer crossReference$9$Consumer;
+
+	private IElementConsumer ruleCall$11$Consumer;
 
 	private ICharacterClass keyword$7$Delimiter;
 
@@ -97,6 +101,18 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 		}
 	}
 
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "metamodel", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
+		}
+	}
+
 	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
 		protected Keyword$7$Consumer(final Keyword keyword) {
@@ -125,6 +141,18 @@ public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 		
 		protected CrossReference$9$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "classifier", false, false, getElement(), getRuleCall$11$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

@@ -83,27 +83,30 @@ ruleFile returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0(), currentNode); 
 	    }
-	    lv_stuff_0=ruleStuff 
-	    {
+		lv_stuff_0_0=ruleStuff		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFileRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "stuff", lv_stuff_0, "Stuff", currentNode);
+	       		add(
+	       			$current, 
+	       			"stuff",
+	        		lv_stuff_0_0, 
+	        		"Stuff", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 
@@ -129,26 +132,30 @@ ruleStuff returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getStuffAccess().getStuffKeyword_0(), null); 
     }
-(	
-	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-	}
- 
-	    {
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStuffRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 

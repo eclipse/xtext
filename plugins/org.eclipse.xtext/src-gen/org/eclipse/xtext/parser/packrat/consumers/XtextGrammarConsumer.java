@@ -50,6 +50,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$8$Consumer;
 
+	private IElementConsumer ruleCall$10$Consumer;
+
 	private IElementConsumer group$11$Consumer;
 
 	private IElementConsumer keyword$12$Consumer;
@@ -57,6 +59,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 	private IElementConsumer assignment$13$Consumer;
 
 	private IElementConsumer crossReference$14$Consumer;
+
+	private IElementConsumer ruleCall$16$Consumer;
 
 	private IElementConsumer group$17$Consumer;
 
@@ -72,6 +76,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$23$Consumer;
 
+	private IElementConsumer ruleCall$25$Consumer;
+
 	private IElementConsumer group$26$Consumer;
 
 	private IElementConsumer keyword$27$Consumer;
@@ -79,6 +85,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 	private IElementConsumer assignment$28$Consumer;
 
 	private IElementConsumer crossReference$29$Consumer;
+
+	private IElementConsumer ruleCall$31$Consumer;
 
 	private IElementConsumer keyword$32$Consumer;
 
@@ -211,6 +219,18 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 	}
 
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(grammarIdConsumer, "usedGrammars", true, true, false, getElement(), optional);
+		}
+	}
+
 	protected class Group$11$Consumer extends LoopGroupConsumer {
 		
 		protected Group$11$Consumer(final Group group) {
@@ -252,6 +272,18 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		
 		protected CrossReference$14$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(grammarIdConsumer, "usedGrammars", true, true, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
@@ -348,6 +380,18 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 	}
 
+	protected class RuleCall$25$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$25$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getRuleCall$25$Delimiter(), optional);
+		}
+	}
+
 	protected class Group$26$Consumer extends LoopGroupConsumer {
 		
 		protected Group$26$Consumer(final Group group) {
@@ -389,6 +433,18 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		
 		protected CrossReference$29$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getRuleCall$31$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$31$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$31$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override

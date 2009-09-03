@@ -83,27 +83,30 @@ ruleRoot returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0(), currentNode); 
 	    }
-	    lv_elements_0=ruleType 
-	    {
+		lv_elements_0_0=ruleType		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "elements", lv_elements_0, "Type", currentNode);
+	       		add(
+	       			$current, 
+	       			"elements",
+	        		lv_elements_0_0, 
+	        		"Type", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 

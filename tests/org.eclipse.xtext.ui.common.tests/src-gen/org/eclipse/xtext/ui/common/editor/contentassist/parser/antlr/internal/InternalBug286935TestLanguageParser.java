@@ -103,52 +103,48 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleState
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:81:1: ruleState returns [EObject current=null] : ( ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )? ( 'state' )? (lv_stateName_9= RULE_ID )? (lv_label_10= RULE_STRING )? ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:81:1: ruleState returns [EObject current=null] : ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? ) ;
     public final EObject ruleState() throws RecognitionException {
         EObject current = null;
 
-        Token lv_isInitial_0=null;
-        Token lv_isFinal_1=null;
-        Token lv_isInitial_3=null;
-        Token lv_isInitial_5=null;
-        Token lv_isFinal_7=null;
-        Token lv_stateName_9=null;
-        Token lv_label_10=null;
-        Enumerator lv_stateKind_2 = null;
+        Token lv_isInitial_0_0=null;
+        Token lv_isFinal_1_0=null;
+        Token lv_isInitial_3_0=null;
+        Token lv_isInitial_5_0=null;
+        Token lv_isFinal_7_0=null;
+        Token lv_stateName_9_0=null;
+        Token lv_label_10_0=null;
+        Enumerator lv_stateKind_2_0 = null;
 
-        Enumerator lv_stateKind_4 = null;
+        Enumerator lv_stateKind_4_0 = null;
 
-        Enumerator lv_stateKind_6 = null;
+        Enumerator lv_stateKind_6_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:86:6: ( ( ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )? ( 'state' )? (lv_stateName_9= RULE_ID )? (lv_label_10= RULE_STRING )? ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:1: ( ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )? ( 'state' )? (lv_stateName_9= RULE_ID )? (lv_label_10= RULE_STRING )? )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:86:6: ( ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:1: ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:1: ( ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )? ( 'state' )? (lv_stateName_9= RULE_ID )? (lv_label_10= RULE_STRING )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:2: ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )? ( 'state' )? (lv_stateName_9= RULE_ID )? (lv_label_10= RULE_STRING )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:1: ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:2: ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )?
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:2: ( (lv_isInitial_0= 'init' ) | (lv_isFinal_1= 'final' ) | (lv_stateKind_2= ruleStateType ) | ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) ) | ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) ) )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:2: ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )?
             int alt1=6;
             switch ( input.LA(1) ) {
                 case 11:
                     {
                     switch ( input.LA(2) ) {
-                        case 14:
+                        case EOF:
+                        case RULE_ID:
+                        case RULE_STRING:
+                        case 13:
                             {
-                            int LA1_5 = input.LA(3);
-
-                            if ( (LA1_5==EOF||(LA1_5>=RULE_ID && LA1_5<=RULE_STRING)||LA1_5==13) ) {
-                                alt1=4;
-                            }
-                            else if ( (LA1_5==12) ) {
-                                alt1=5;
-                            }
+                            alt1=1;
                             }
                             break;
-                        case 15:
+                        case 14:
                             {
                             int LA1_6 = input.LA(3);
 
@@ -160,19 +156,19 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             }
                             break;
-                        case 16:
+                        case 15:
                             {
                             int LA1_7 = input.LA(3);
 
-                            if ( (LA1_7==12) ) {
-                                alt1=5;
-                            }
-                            else if ( (LA1_7==EOF||(LA1_7>=RULE_ID && LA1_7<=RULE_STRING)||LA1_7==13) ) {
+                            if ( (LA1_7==EOF||(LA1_7>=RULE_ID && LA1_7<=RULE_STRING)||LA1_7==13) ) {
                                 alt1=4;
+                            }
+                            else if ( (LA1_7==12) ) {
+                                alt1=5;
                             }
                             }
                             break;
-                        case 17:
+                        case 16:
                             {
                             int LA1_8 = input.LA(3);
 
@@ -184,12 +180,16 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             }
                             break;
-                        case EOF:
-                        case RULE_ID:
-                        case RULE_STRING:
-                        case 13:
+                        case 17:
                             {
-                            alt1=1;
+                            int LA1_9 = input.LA(3);
+
+                            if ( (LA1_9==12) ) {
+                                alt1=5;
+                            }
+                            else if ( (LA1_9==EOF||(LA1_9>=RULE_ID && LA1_9<=RULE_STRING)||LA1_9==13) ) {
+                                alt1=4;
+                            }
                             }
                             break;
                     }
@@ -213,13 +213,16 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:3: (lv_isInitial_0= 'init' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:3: ( (lv_isInitial_0_0= 'init' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:3: (lv_isInitial_0= 'init' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:89:6: lv_isInitial_0= 'init'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:87:3: ( (lv_isInitial_0_0= 'init' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:88:1: (lv_isInitial_0_0= 'init' )
                     {
-                    lv_isInitial_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState130); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:88:1: (lv_isInitial_0_0= 'init' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:89:3: lv_isInitial_0_0= 'init'
+                    {
+                    lv_isInitial_0_0=(Token)input.LT(1);
+                    match(input,11,FOLLOW_11_in_ruleState126); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0(), "isInitial"); 
                         
@@ -240,15 +243,21 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     }
+
+
+                    }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:109:6: (lv_isFinal_1= 'final' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:109:6: ( (lv_isFinal_1_0= 'final' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:109:6: (lv_isFinal_1= 'final' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:111:6: lv_isFinal_1= 'final'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:109:6: ( (lv_isFinal_1_0= 'final' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:110:1: (lv_isFinal_1_0= 'final' )
                     {
-                    lv_isFinal_1=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleState170); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:110:1: (lv_isFinal_1_0= 'final' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:111:3: lv_isFinal_1_0= 'final'
+                    {
+                    lv_isFinal_1_0=(Token)input.LT(1);
+                    match(input,12,FOLLOW_12_in_ruleState162); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0(), "isFinal"); 
                         
@@ -269,18 +278,24 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     }
+
+
+                    }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:131:6: (lv_stateKind_2= ruleStateType )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:131:6: ( (lv_stateKind_2_0= ruleStateType ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:131:6: (lv_stateKind_2= ruleStateType )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:134:6: lv_stateKind_2= ruleStateType
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:131:6: ( (lv_stateKind_2_0= ruleStateType ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:132:1: (lv_stateKind_2_0= ruleStateType )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:132:1: (lv_stateKind_2_0= ruleStateType )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:133:3: lv_stateKind_2_0= ruleStateType
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState223);
-                    lv_stateKind_2=ruleStateType();
+                    pushFollow(FOLLOW_ruleStateType_in_ruleState202);
+                    lv_stateKind_2_0=ruleStateType();
                     _fsp--;
 
 
@@ -288,9 +303,13 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "stateKind", lv_stateKind_2, "StateType", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"stateKind",
+                    	        		lv_stateKind_2_0, 
+                    	        		"StateType", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -301,18 +320,24 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     }
+
+
+                    }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:153:6: ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:156:6: ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:153:6: ( (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:153:7: (lv_isInitial_3= 'init' ) (lv_stateKind_4= ruleStateType )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:156:6: ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:156:7: ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:153:7: (lv_isInitial_3= 'init' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:155:6: lv_isInitial_3= 'init'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:156:7: ( (lv_isInitial_3_0= 'init' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:157:1: (lv_isInitial_3_0= 'init' )
                     {
-                    lv_isInitial_3=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState255); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:157:1: (lv_isInitial_3_0= 'init' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:158:3: lv_isInitial_3_0= 'init'
+                    {
+                    lv_isInitial_3_0=(Token)input.LT(1);
+                    match(input,11,FOLLOW_11_in_ruleState226); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0(), "isInitial"); 
                         
@@ -331,14 +356,20 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:174:2: (lv_stateKind_4= ruleStateType )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:177:6: lv_stateKind_4= ruleStateType
+
+                    }
+
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:177:2: ( (lv_stateKind_4_0= ruleStateType ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:178:1: (lv_stateKind_4_0= ruleStateType )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:178:1: (lv_stateKind_4_0= ruleStateType )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:179:3: lv_stateKind_4_0= ruleStateType
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState302);
-                    lv_stateKind_4=ruleStateType();
+                    pushFollow(FOLLOW_ruleStateType_in_ruleState260);
+                    lv_stateKind_4_0=ruleStateType();
                     _fsp--;
 
 
@@ -346,9 +377,13 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "stateKind", lv_stateKind_4, "StateType", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"stateKind",
+                    	        		lv_stateKind_4_0, 
+                    	        		"StateType", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -362,18 +397,24 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     }
+
+
+                    }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:196:6: ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:202:6: ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:196:6: ( (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:196:7: (lv_isInitial_5= 'init' ) (lv_stateKind_6= ruleStateType ) (lv_isFinal_7= 'final' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:202:6: ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:202:7: ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:196:7: (lv_isInitial_5= 'init' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:198:6: lv_isInitial_5= 'init'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:202:7: ( (lv_isInitial_5_0= 'init' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:203:1: (lv_isInitial_5_0= 'init' )
                     {
-                    lv_isInitial_5=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState335); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:203:1: (lv_isInitial_5_0= 'init' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:204:3: lv_isInitial_5_0= 'init'
+                    {
+                    lv_isInitial_5_0=(Token)input.LT(1);
+                    match(input,11,FOLLOW_11_in_ruleState285); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0(), "isInitial"); 
                         
@@ -392,14 +433,20 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:217:2: (lv_stateKind_6= ruleStateType )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:220:6: lv_stateKind_6= ruleStateType
+
+                    }
+
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:223:2: ( (lv_stateKind_6_0= ruleStateType ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:224:1: (lv_stateKind_6_0= ruleStateType )
+                    {
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:224:1: (lv_stateKind_6_0= ruleStateType )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:225:3: lv_stateKind_6_0= ruleStateType
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState382);
-                    lv_stateKind_6=ruleStateType();
+                    pushFollow(FOLLOW_ruleStateType_in_ruleState319);
+                    lv_stateKind_6_0=ruleStateType();
                     _fsp--;
 
 
@@ -407,9 +454,13 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "stateKind", lv_stateKind_6, "StateType", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"stateKind",
+                    	        		lv_stateKind_6_0, 
+                    	        		"StateType", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -418,11 +469,17 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:238:2: (lv_isFinal_7= 'final' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:240:6: lv_isFinal_7= 'final'
+
+                    }
+
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:247:2: ( (lv_isFinal_7_0= 'final' ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:248:1: (lv_isFinal_7_0= 'final' )
                     {
-                    lv_isFinal_7=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleState407); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:248:1: (lv_isFinal_7_0= 'final' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:249:3: lv_isFinal_7_0= 'final'
+                    {
+                    lv_isFinal_7_0=(Token)input.LT(1);
+                    match(input,12,FOLLOW_12_in_ruleState336); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0(), "isFinal"); 
                         
@@ -446,11 +503,14 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:259:5: ( 'state' )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:268:5: ( 'state' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -459,9 +519,9 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:259:6: 'state'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:268:6: 'state'
                     {
-                    match(input,13,FOLLOW_13_in_ruleState433); 
+                    match(input,13,FOLLOW_13_in_ruleState362); 
 
                             createLeafNode(grammarAccess.getStateAccess().getStateKeyword_1(), null); 
                         
@@ -471,7 +531,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:263:3: (lv_stateName_9= RULE_ID )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:272:3: ( (lv_stateName_9_0= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -480,32 +540,42 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:265:6: lv_stateName_9= RULE_ID
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:273:1: (lv_stateName_9_0= RULE_ID )
                     {
-                    lv_stateName_9=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState457); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:273:1: (lv_stateName_9_0= RULE_ID )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:274:3: lv_stateName_9_0= RULE_ID
+                    {
+                    lv_stateName_9_0=(Token)input.LT(1);
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState381); 
 
-                    		createLeafNode(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0(), "stateName"); 
-                    	
+                    			createLeafNode(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0(), "stateName"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "stateName", lv_stateName_9, "ID", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"stateName",
+                    	        		lv_stateName_9_0, 
+                    	        		"ID", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
 
                     }
+
+
+                    }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:283:3: (lv_label_10= RULE_STRING )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:296:3: ( (lv_label_10_0= RULE_STRING ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -514,25 +584,35 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:285:6: lv_label_10= RULE_STRING
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:297:1: (lv_label_10_0= RULE_STRING )
                     {
-                    lv_label_10=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleState488); 
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:297:1: (lv_label_10_0= RULE_STRING )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:298:3: lv_label_10_0= RULE_STRING
+                    {
+                    lv_label_10_0=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleState404); 
 
-                    		createLeafNode(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0(), "label"); 
-                    	
+                    			createLeafNode(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0(), "label"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getStateRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "label", lv_label_10, "STRING", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"label",
+                    	        		lv_label_10_0, 
+                    	        		"STRING", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
                     break;
@@ -562,16 +642,16 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleStateType
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:310:1: ruleStateType returns [Enumerator current=null] : ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:327:1: ruleStateType returns [Enumerator current=null] : ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) ) ;
     public final Enumerator ruleStateType() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:314:6: ( ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:315:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:331:6: ( ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:315:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )
             int alt5=4;
             switch ( input.LA(1) ) {
             case 14:
@@ -596,19 +676,19 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("315:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )", 5, 0, input);
+                    new NoViableAltException("332:1: ( ( 'NORMAL' ) | ( 'cond' ) | ( 'reference' ) | ( 'textual' ) )", 5, 0, input);
 
                 throw nvae;
             }
 
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:315:2: ( 'NORMAL' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:2: ( 'NORMAL' )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:315:2: ( 'NORMAL' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:315:4: 'NORMAL'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:2: ( 'NORMAL' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:4: 'NORMAL'
                     {
-                    match(input,14,FOLLOW_14_in_ruleStateType544); 
+                    match(input,14,FOLLOW_14_in_ruleStateType457); 
 
                             current = grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0(), null); 
@@ -620,12 +700,12 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:321:6: ( 'cond' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:338:6: ( 'cond' )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:321:6: ( 'cond' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:321:8: 'cond'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:338:6: ( 'cond' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:338:8: 'cond'
                     {
-                    match(input,15,FOLLOW_15_in_ruleStateType559); 
+                    match(input,15,FOLLOW_15_in_ruleStateType472); 
 
                             current = grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1(), null); 
@@ -637,12 +717,12 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:327:6: ( 'reference' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:344:6: ( 'reference' )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:327:6: ( 'reference' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:327:8: 'reference'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:344:6: ( 'reference' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:344:8: 'reference'
                     {
-                    match(input,16,FOLLOW_16_in_ruleStateType574); 
+                    match(input,16,FOLLOW_16_in_ruleStateType487); 
 
                             current = grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2(), null); 
@@ -654,12 +734,12 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:333:6: ( 'textual' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:350:6: ( 'textual' )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:333:6: ( 'textual' )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:333:8: 'textual'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:350:6: ( 'textual' )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:350:8: 'textual'
                     {
-                    match(input,17,FOLLOW_17_in_ruleStateType589); 
+                    match(input,17,FOLLOW_17_in_ruleStateType502); 
 
                             current = grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3(), null); 
@@ -696,20 +776,20 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
     public static final BitSet FOLLOW_ruleState_in_entryRuleState73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleState83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleState130 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_12_in_ruleState170 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState223 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_11_in_ruleState255 = new BitSet(new long[]{0x000000000003C000L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState302 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_11_in_ruleState335 = new BitSet(new long[]{0x000000000003C000L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState382 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleState407 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_13_in_ruleState433 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState457 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleState488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleStateType544 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleStateType559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleStateType574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleStateType589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleState126 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_12_in_ruleState162 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_ruleStateType_in_ruleState202 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_11_in_ruleState226 = new BitSet(new long[]{0x000000000003C000L});
+    public static final BitSet FOLLOW_ruleStateType_in_ruleState260 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_11_in_ruleState285 = new BitSet(new long[]{0x000000000003C000L});
+    public static final BitSet FOLLOW_ruleStateType_in_ruleState319 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleState336 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_13_in_ruleState362 = new BitSet(new long[]{0x0000000000000032L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState381 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleState404 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleStateType457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleStateType472 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleStateType487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleStateType502 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -62,8 +61,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected int lastConsumedIndex = -1;
 
 	protected AbstractNode lastConsumedNode;
-
-	protected AntlrDatatypeRuleToken lastConsumedDatatypeToken;
 
 	private final Map<String, AbstractRule> allRules;
 
@@ -146,53 +143,13 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException {
-		if (lexerRule == null) {
-			String fixedLexerRule = getFixedRule(node);
-			Object val = lastConsumedDatatypeToken == null ? value : lastConsumedDatatypeToken;
-			if (val == null) {
-				if (node instanceof LeafNode)
-					val = ((LeafNode) node).getText();
-				else
-					val = node.getElement();
-			}
-			factory.set(_this, feature, val, fixedLexerRule, node);
-			lastConsumedDatatypeToken = null;
-			return;
-		}
 		factory.set(_this, feature, value, lexerRule, node);
-		lastConsumedDatatypeToken = null;
 	}
 
 	protected void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException {
-		if (lexerRule == null) {
-			String fixedLexerRule = getFixedRule(node);
-			Object val = lastConsumedDatatypeToken == null ? value : lastConsumedDatatypeToken;
-			if (val == null) {
-				if (node instanceof LeafNode)
-					val = ((LeafNode) node).getText();
-				else
-					val = node.getElement();
-			}
-			factory.add(_this, feature, val, fixedLexerRule, node);
-			lastConsumedDatatypeToken = null;
-			return;
-		}
 		factory.add(_this, feature, value, lexerRule, node);
-		lastConsumedDatatypeToken = null;
 	}
-
-	private String getFixedRule(AbstractNode node) {
-		if (currentNode != null && !currentNode.getChildren().isEmpty()) {
-			EObject grammarElement = node.getGrammarElement();
-			if (grammarElement instanceof AbstractRule) {
-				return ((AbstractRule) grammarElement).getName();
-			} else if (grammarElement instanceof RuleCall) {
-				return ((RuleCall) grammarElement).getRule().getName();
-			}
-		}
-		return null;
-	}
-
+	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 		if (parentNode != null)

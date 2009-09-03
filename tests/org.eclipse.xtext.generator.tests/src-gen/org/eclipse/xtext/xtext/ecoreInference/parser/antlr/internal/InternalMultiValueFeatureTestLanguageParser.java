@@ -102,19 +102,19 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleStart
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:80:1: ruleStart returns [EObject current=null] : (lv_featureA_0= RULE_ID )+ ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:80:1: ruleStart returns [EObject current=null] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
     public final EObject ruleStart() throws RecognitionException {
         EObject current = null;
 
-        Token lv_featureA_0=null;
+        Token lv_featureA_0_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:85:6: ( (lv_featureA_0= RULE_ID )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: (lv_featureA_0= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:85:6: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: ( (lv_featureA_0_0= RULE_ID ) )+
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: (lv_featureA_0= RULE_ID )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:1: ( (lv_featureA_0_0= RULE_ID ) )+
             int cnt1=0;
             loop1:
             do {
@@ -128,25 +128,35 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:88:6: lv_featureA_0= RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:87:1: (lv_featureA_0_0= RULE_ID )
             	    {
-            	    lv_featureA_0=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart129); 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:87:1: (lv_featureA_0_0= RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:88:3: lv_featureA_0_0= RULE_ID
+            	    {
+            	    lv_featureA_0_0=(Token)input.LT(1);
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart124); 
 
-            	    		createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
-            	    	
+            	    			createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "featureA", lv_featureA_0, "ID", lastConsumedNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"featureA",
+            	    	        		lv_featureA_0_0, 
+            	    	        		"ID", 
+            	    	        		lastConsumedNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	    
+
+            	    }
+
 
             	    }
             	    break;
@@ -183,6 +193,6 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
     public static final BitSet FOLLOW_ruleStart_in_entryRuleStart73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStart83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStart129 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStart124 = new BitSet(new long[]{0x0000000000000012L});
 
 }

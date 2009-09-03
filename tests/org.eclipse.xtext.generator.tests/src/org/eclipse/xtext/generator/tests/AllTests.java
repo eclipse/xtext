@@ -57,6 +57,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.LexerProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.AntlrDatatypeRuleTokenTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug288432Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.ParserBug281962Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.GrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTest.class);

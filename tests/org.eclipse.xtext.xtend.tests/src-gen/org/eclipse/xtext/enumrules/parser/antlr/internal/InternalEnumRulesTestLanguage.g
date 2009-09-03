@@ -88,78 +88,87 @@ ruleModel returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelAccess().getExistingKeyword_0_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), currentNode); 
 	    }
-	    lv_existing_1=ruleExistingEnum 
-	    {
+		lv_existing_1_0=ruleExistingEnum		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "existing", lv_existing_1, "ExistingEnum", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"existing",
+	        		lv_existing_1_0, 
+	        		"ExistingEnum", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )('generated' 
     {
         createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), currentNode); 
 	    }
-	    lv_generated_3=ruleGeneratedEnum 
-	    {
+		lv_generated_3_0=ruleGeneratedEnum		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "generated", lv_generated_3, "GeneratedEnum", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"generated",
+	        		lv_generated_3_0, 
+	        		"GeneratedEnum", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))?)
     |('generated' 
     {
         createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), currentNode); 
 	    }
-	    lv_generated_5=ruleGeneratedEnum 
-	    {
+		lv_generated_5_0=ruleGeneratedEnum		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "generated", lv_generated_5, "GeneratedEnum", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"generated",
+	        		lv_generated_5_0, 
+	        		"GeneratedEnum", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )));
 
 

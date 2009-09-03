@@ -36,6 +36,8 @@ public final class XtextEnumLiteralDeclarationConsumer extends NonTerminalConsum
 
 	private IElementConsumer crossReference$3$Consumer;
 
+	private IElementConsumer ruleCall$5$Consumer;
+
 	private IElementConsumer group$6$Consumer;
 
 	private IElementConsumer keyword$7$Consumer;
@@ -77,6 +79,18 @@ public final class XtextEnumLiteralDeclarationConsumer extends NonTerminalConsum
 		
 		protected CrossReference$3$Consumer(final CrossReference crossReference) {
 			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "enumLiteral", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
