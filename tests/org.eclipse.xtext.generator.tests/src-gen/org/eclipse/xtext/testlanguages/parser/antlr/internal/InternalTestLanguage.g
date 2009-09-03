@@ -83,27 +83,30 @@ ruleEntryRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getEntryRuleAccess().getMultiFeatureAbstractRuleParserRuleCall_0(), currentNode); 
 	    }
-	    lv_multiFeature_0=ruleAbstractRule 
-	    {
+		lv_multiFeature_0_0=ruleAbstractRule		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntryRuleRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "multiFeature", lv_multiFeature_0, "AbstractRule", currentNode);
+	       		add(
+	       			$current, 
+	       			"multiFeature",
+	        		lv_multiFeature_0_0, 
+	        		"AbstractRule", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 
@@ -169,13 +172,12 @@ ruleChoiceRule returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0(), null); 
     }
-(	
-	
-	    lv_optionalKeyword_1='optional' 
+(
+(
+		lv_optionalKeyword_1_0='optional' 
     {
         createLeafNode(grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0(), "optionalKeyword"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -189,27 +191,32 @@ ruleChoiceRule returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)?(	
-	
-	    lv_name_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
-	}
- 
-	    {
+
+)
+)?(
+(
+		lv_name_2_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getChoiceRuleRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_2, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -260,27 +267,30 @@ ruleReducibleRule returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(	
-	
-	    
-	    { 
+)(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getReducibleRuleAccess().getActionFeatureTerminalRuleParserRuleCall_2_1_0(), currentNode); 
 	    }
-	    lv_actionFeature_3=ruleTerminalRule 
-	    {
+		lv_actionFeature_3_0=ruleTerminalRule		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getReducibleRuleRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "actionFeature", lv_actionFeature_3, "TerminalRule", currentNode);
+	       		add(
+	       			$current, 
+	       			"actionFeature",
+	        		lv_actionFeature_3_0, 
+	        		"TerminalRule", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))?);
 
 
@@ -302,26 +312,30 @@ ruleTerminalRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    lv_stringFeature_0=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), "stringFeature"); 
-	}
- 
-	    {
+(
+(
+		lv_stringFeature_0_0=RULE_STRING
+		{
+			createLeafNode(grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), "stringFeature"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTerminalRuleRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "stringFeature", lv_stringFeature_0, "STRING", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"stringFeature",
+	        		lv_stringFeature_0_0, 
+	        		"STRING", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 );
 
 

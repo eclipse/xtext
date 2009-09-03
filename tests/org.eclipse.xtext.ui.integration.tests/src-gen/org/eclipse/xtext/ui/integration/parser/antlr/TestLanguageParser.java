@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
@@ -21,13 +22,16 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer lexer = new org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer(in);
+		org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
 		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageParser parser = new org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageParser parser = createParser(stream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +40,10 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +57,13 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 	
 	public void setGrammarAccess(TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setGrammarAccess(Provider<org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }

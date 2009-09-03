@@ -79,72 +79,78 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    
-	    { 
+((
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), currentNode); 
 	    }
-	    lv_enums_0=ruleEnumName
- 
-	    {
+		lv_enums_0_0=ruleEnumName		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "enums", lv_enums_0, "EnumName", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"enums",
+	        		lv_enums_0_0, 
+	        		"EnumName", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
-)*(	
-	
-	    
-	    { 
+
+)
+)*(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_abs_1=ruleAb
- 
-	    {
+		lv_abs_1_0=ruleAb		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "abs", lv_abs_1, "Ab", currentNode);
+	       		add(
+	       			$current, 
+	       			"abs",
+	        		lv_abs_1_0, 
+	        		"Ab", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
-)*(	
-	
-	    
-	    { 
+
+)
+)*(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(), currentNode); 
 	    }
-	    lv_xbs_2=ruleXb
- 
-	    {
+		lv_xbs_2_0=ruleXb		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "xbs", lv_xbs_2, "Xb", currentNode);
+	       		add(
+	       			$current, 
+	       			"xbs",
+	        		lv_xbs_2_0, 
+	        		"Xb", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*);
 
 
@@ -166,48 +172,54 @@ ruleAb returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_x_0=RULE_CHARA
-    { 
-    createLeafNode(grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
-    }
-
- 
-	    {
+((
+(
+		lv_x_0_0=RULE_CHARA
+		{
+			createLeafNode(grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAbRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "x", lv_x_0, "CharA", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"x",
+	        		lv_x_0_0, 
+	        		"CharA", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    lv_y_1=RULE_CHARB
-    { 
-    createLeafNode(grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
-    }
 
- 
-	    {
+)
+)(
+(
+		lv_y_1_0=RULE_CHARB
+		{
+			createLeafNode(grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAbRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "y", lv_y_1, "Charb", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"y",
+	        		lv_y_1_0, 
+	        		"Charb", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -229,48 +241,54 @@ ruleXb returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_x_0=RULE_CHARX
-    { 
-    createLeafNode(grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
-    }
-
- 
-	    {
+((
+(
+		lv_x_0_0=RULE_CHARX
+		{
+			createLeafNode(grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXbRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "x", lv_x_0, "CharX", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"x",
+	        		lv_x_0_0, 
+	        		"CharX", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    lv_y_1=RULE_CHARB
-    { 
-    createLeafNode(grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
-    }
 
- 
-	    {
+)
+)(
+(
+		lv_y_1_0=RULE_CHARB
+		{
+			createLeafNode(grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXbRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "y", lv_y_1, "Charb", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"y",
+	        		lv_y_1_0, 
+	        		"Charb", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 

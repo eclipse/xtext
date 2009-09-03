@@ -83,26 +83,30 @@ ruleStart returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    lv_featureA_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
-	}
- 
-	    {
+(
+(
+		lv_featureA_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "featureA", lv_featureA_0, "ID", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"featureA",
+	        		lv_featureA_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )+;
 
 

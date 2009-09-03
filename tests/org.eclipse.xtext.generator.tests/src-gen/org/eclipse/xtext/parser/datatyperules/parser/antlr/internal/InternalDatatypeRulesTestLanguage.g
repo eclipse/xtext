@@ -83,27 +83,30 @@ ruleCompositeModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getCompositeModelAccess().getModelModelParserRuleCall_0(), currentNode); 
 	    }
-	    lv_model_0=ruleModel 
-	    {
+		lv_model_0_0=ruleModel		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getCompositeModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "model", lv_model_0, "Model", currentNode);
+	       		add(
+	       			$current, 
+	       			"model",
+	        		lv_model_0_0, 
+	        		"Model", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )+;
 
 
@@ -125,102 +128,114 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    
-	    { 
+((
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0(), currentNode); 
 	    }
-	    lv_id_0=ruleNestedModelId 
-	    {
+		lv_id_0_0=ruleNestedModelId		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "id", lv_id_0, "NestedModelId", currentNode);
+	       		set(
+	       			$current, 
+	       			"id",
+	        		lv_id_0_0, 
+	        		"NestedModelId", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )(':' 
     {
         createLeafNode(grammarAccess.getModelAccess().getColonKeyword_1_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0(), currentNode); 
 	    }
-	    lv_value_2=ruleFraction 
-	    {
+		lv_value_2_0=ruleFraction		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "value", lv_value_2, "Fraction", currentNode);
+	       		set(
+	       			$current, 
+	       			"value",
+	        		lv_value_2_0, 
+	        		"Fraction", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))?('#' 
     {
         createLeafNode(grammarAccess.getModelAccess().getNumberSignKeyword_2_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0(), currentNode); 
 	    }
-	    lv_vector_4=ruleVector 
-	    {
+		lv_vector_4_0=ruleVector		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "vector", lv_vector_4, "Vector", currentNode);
+	       		set(
+	       			$current, 
+	       			"vector",
+	        		lv_vector_4_0, 
+	        		"Vector", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))?('+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getPlusSignKeyword_3_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0(), currentNode); 
 	    }
-	    lv_dots_6=ruleDots 
-	    {
+		lv_dots_6_0=ruleDots		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "dots", lv_dots_6, "Dots", currentNode);
+	       		set(
+	       			$current, 
+	       			"dots",
+	        		lv_dots_6_0, 
+	        		"Dots", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ))?';' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_4(), null); 
@@ -245,7 +260,6 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
@@ -288,7 +302,6 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (
     { 
@@ -339,7 +352,6 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
@@ -382,7 +394,6 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (
 	kw='(' 
@@ -431,7 +442,6 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 ((
 	kw='.' 

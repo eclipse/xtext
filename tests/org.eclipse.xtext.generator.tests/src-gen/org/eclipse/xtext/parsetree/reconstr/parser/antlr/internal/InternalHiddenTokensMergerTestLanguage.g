@@ -117,34 +117,36 @@ ruleDatatypeBug286557 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getNumberSignDigitOneKeyword_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getDatatypeBug286557Access().getNameFQNParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_name_1=ruleFQN 
-	    {
+		lv_name_1_0=ruleFQN		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getDatatypeBug286557Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_1, "FQN", currentNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"FQN", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )('ref' 
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getRefKeyword_2_0(), null); 
     }
-(	
-	
-		
+(
+(
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getDatatypeBug286557Rule().getType().getClassifier());
@@ -157,10 +159,8 @@ ruleDatatypeBug286557 returns [EObject current=null]
 		ruleFQN		{ 
 	        currentNode = currentNode.getParent();
 	    }
-		{ lastConsumedDatatypeToken = null; }
 
-		// TODO assign feature to currentNode
-	
+)
 ))?';' 
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getSemicolonKeyword_3(), null); 
@@ -185,7 +185,6 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);

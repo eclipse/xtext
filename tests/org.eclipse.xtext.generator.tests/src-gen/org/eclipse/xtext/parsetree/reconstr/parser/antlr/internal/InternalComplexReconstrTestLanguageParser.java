@@ -226,25 +226,25 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleOp
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:120:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:120:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) ;
     public final EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
         EObject this_Term_0 = null;
 
-        EObject lv_addOperands_3 = null;
+        EObject lv_addOperands_3_0 = null;
 
-        EObject lv_minusOperands_6 = null;
+        EObject lv_minusOperands_6_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:125:6: ( (this_Term_0= ruleTerm ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:126:1: (this_Term_0= ruleTerm ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:125:6: ( (this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:126:1: (this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:126:1: (this_Term_0= ruleTerm ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:127:5: this_Term_0= ruleTerm ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:126:1: (this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:127:5: this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getOpAccess().getTermParserRuleCall_0(), currentNode); 
@@ -257,7 +257,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     current = this_Term_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:1: ( ( () '+' (lv_addOperands_3= ruleTerm ) ) | ( () '-' (lv_minusOperands_6= ruleTerm ) ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:1: ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -273,10 +273,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:2: ( () '+' (lv_addOperands_3= ruleTerm ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:2: ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:2: ( () '+' (lv_addOperands_3= ruleTerm ) )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:3: () '+' (lv_addOperands_3= ruleTerm )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:2: ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:3: () '+' ( (lv_addOperands_3_0= ruleTerm ) )
             	    {
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:135:3: ()
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:136:5: 
@@ -303,14 +303,17 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	            createLeafNode(grammarAccess.getOpAccess().getPlusSignKeyword_1_0_1(), null); 
             	        
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:155:1: (lv_addOperands_3= ruleTerm )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:158:6: lv_addOperands_3= ruleTerm
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:155:1: ( (lv_addOperands_3_0= ruleTerm ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:156:1: (lv_addOperands_3_0= ruleTerm )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:156:1: (lv_addOperands_3_0= ruleTerm )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:157:3: lv_addOperands_3_0= ruleTerm
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getOpAccess().getAddOperandsTermParserRuleCall_1_0_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp299);
-            	    lv_addOperands_3=ruleTerm();
+            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp286);
+            	    lv_addOperands_3_0=ruleTerm();
             	    _fsp--;
 
 
@@ -318,9 +321,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    	            current = factory.create(grammarAccess.getOpRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "addOperands", lv_addOperands_3, "Term", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"addOperands",
+            	    	        		lv_addOperands_3_0, 
+            	    	        		"Term", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
@@ -334,15 +341,18 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
             	    }
+
+
+            	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:177:6: ( () '-' (lv_minusOperands_6= ruleTerm ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:180:6: ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:177:6: ( () '-' (lv_minusOperands_6= ruleTerm ) )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:177:7: () '-' (lv_minusOperands_6= ruleTerm )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:180:6: ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:180:7: () '-' ( (lv_minusOperands_6_0= ruleTerm ) )
             	    {
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:177:7: ()
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:178:5: 
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:180:7: ()
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:181:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier());
@@ -362,18 +372,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	    }
 
-            	    match(input,12,FOLLOW_12_in_ruleOp329); 
+            	    match(input,12,FOLLOW_12_in_ruleOp312); 
 
             	            createLeafNode(grammarAccess.getOpAccess().getHyphenMinusKeyword_1_1_1(), null); 
             	        
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:197:1: (lv_minusOperands_6= ruleTerm )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:200:6: lv_minusOperands_6= ruleTerm
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:200:1: ( (lv_minusOperands_6_0= ruleTerm ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:201:1: (lv_minusOperands_6_0= ruleTerm )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:201:1: (lv_minusOperands_6_0= ruleTerm )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:202:3: lv_minusOperands_6_0= ruleTerm
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getOpAccess().getMinusOperandsTermParserRuleCall_1_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp363);
-            	    lv_minusOperands_6=ruleTerm();
+            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp333);
+            	    lv_minusOperands_6_0=ruleTerm();
             	    _fsp--;
 
 
@@ -381,14 +394,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    	            current = factory.create(grammarAccess.getOpRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
-            	    	        
             	    	        try {
-            	    	       		add(current, "minusOperands", lv_minusOperands_6, "Term", currentNode);
+            	    	       		add(
+            	    	       			current, 
+            	    	       			"minusOperands",
+            	    	        		lv_minusOperands_6_0, 
+            	    	        		"Term", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
             	    	        currentNode = currentNode.getParent();
             	    	    
+
+            	    }
+
 
             	    }
 
@@ -427,7 +447,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleTerm
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:225:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:231:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
     public final EObject entryRuleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -435,16 +455,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:225:46: (iv_ruleTerm= ruleTerm EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:226:2: iv_ruleTerm= ruleTerm EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:231:46: (iv_ruleTerm= ruleTerm EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:232:2: iv_ruleTerm= ruleTerm EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm403);
+            pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm369);
             iv_ruleTerm=ruleTerm();
             _fsp--;
 
              current =iv_ruleTerm; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerm413); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTerm379); 
 
             }
 
@@ -462,7 +482,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleTerm
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:233:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:239:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
     public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -474,10 +494,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:238:6: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:239:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:244:6: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:245:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:239:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:245:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -489,18 +509,18 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("239:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )", 3, 0, input);
+                    new NoViableAltException("245:1: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:240:5: this_Atom_0= ruleAtom
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:246:5: this_Atom_0= ruleAtom
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleAtom_in_ruleTerm460);
+                    pushFollow(FOLLOW_ruleAtom_in_ruleTerm426);
                     this_Atom_0=ruleAtom();
                     _fsp--;
 
@@ -512,12 +532,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:250:5: this_Parens_1= ruleParens
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:256:5: this_Parens_1= ruleParens
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleParens_in_ruleTerm487);
+                    pushFollow(FOLLOW_ruleParens_in_ruleTerm453);
                     this_Parens_1=ruleParens();
                     _fsp--;
 
@@ -551,7 +571,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleAtom
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:265:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:271:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -559,16 +579,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:265:46: (iv_ruleAtom= ruleAtom EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:266:2: iv_ruleAtom= ruleAtom EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:271:46: (iv_ruleAtom= ruleAtom EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:272:2: iv_ruleAtom= ruleAtom EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom519);
+            pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom485);
             iv_ruleAtom=ruleAtom();
             _fsp--;
 
              current =iv_ruleAtom; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAtom529); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAtom495); 
 
             }
 
@@ -586,38 +606,48 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleAtom
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:273:1: ruleAtom returns [EObject current=null] : (lv_name_0= RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:279:1: ruleAtom returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0=null;
+        Token lv_name_0_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:278:6: ( (lv_name_0= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:279:1: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:284:6: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:285:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:279:1: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:281:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:285:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:286:1: (lv_name_0_0= RULE_ID )
             {
-            lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom575); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:286:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:287:3: lv_name_0_0= RULE_ID
+            {
+            lv_name_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom536); 
 
-            		createLeafNode(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getAtomRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		set(current, "name", lv_name_0, "ID", lastConsumedNode);
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -641,7 +671,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleParens
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:306:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:316:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
     public final EObject entryRuleParens() throws RecognitionException {
         EObject current = null;
 
@@ -649,16 +679,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:306:48: (iv_ruleParens= ruleParens EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:307:2: iv_ruleParens= ruleParens EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:316:48: (iv_ruleParens= ruleParens EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:317:2: iv_ruleParens= ruleParens EOF
             {
              currentNode = createCompositeNode(grammarAccess.getParensRule(), currentNode); 
-            pushFollow(FOLLOW_ruleParens_in_entryRuleParens615);
+            pushFollow(FOLLOW_ruleParens_in_entryRuleParens573);
             iv_ruleParens=ruleParens();
             _fsp--;
 
              current =iv_ruleParens; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParens625); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleParens583); 
 
             }
 
@@ -676,31 +706,31 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleParens
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:314:1: ruleParens returns [EObject current=null] : ( '(' this_Op_1= ruleOp ')' (lv_em_3= '!' )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:324:1: ruleParens returns [EObject current=null] : ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? ) ;
     public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
-        Token lv_em_3=null;
+        Token lv_em_3_0=null;
         EObject this_Op_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:319:6: ( ( '(' this_Op_1= ruleOp ')' (lv_em_3= '!' )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:320:1: ( '(' this_Op_1= ruleOp ')' (lv_em_3= '!' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:329:6: ( ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:330:1: ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:320:1: ( '(' this_Op_1= ruleOp ')' (lv_em_3= '!' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:320:2: '(' this_Op_1= ruleOp ')' (lv_em_3= '!' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:330:1: ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:330:2: '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )?
             {
-            match(input,13,FOLLOW_13_in_ruleParens659); 
+            match(input,13,FOLLOW_13_in_ruleParens617); 
 
                     createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
                 
              
                     currentNode=createCompositeNode(grammarAccess.getParensAccess().getOpParserRuleCall_1(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleOp_in_ruleParens681);
+            pushFollow(FOLLOW_ruleOp_in_ruleParens639);
             this_Op_1=ruleOp();
             _fsp--;
 
@@ -708,11 +738,11 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     current = this_Op_1; 
                     currentNode = currentNode.getParent();
                 
-            match(input,14,FOLLOW_14_in_ruleParens689); 
+            match(input,14,FOLLOW_14_in_ruleParens647); 
 
                     createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:337:1: (lv_em_3= '!' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:347:1: ( (lv_em_3_0= '!' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -721,10 +751,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:339:6: lv_em_3= '!'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:348:1: (lv_em_3_0= '!' )
                     {
-                    lv_em_3=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleParens710); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:348:1: (lv_em_3_0= '!' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:349:3: lv_em_3_0= '!'
+                    {
+                    lv_em_3_0=(Token)input.LT(1);
+                    match(input,15,FOLLOW_15_in_ruleParens664); 
 
                             createLeafNode(grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0(), "em"); 
                         
@@ -735,11 +768,14 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	        }
                     	        
                     	        try {
-                    	       		set(current, "em", /* lv_em_3 */ input.LT(-1), "!", lastConsumedNode);
+                    	       		set(current, "em", lv_em_3_0, "!", lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
                     break;
@@ -769,7 +805,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleTrickyA1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:367:1: entryRuleTrickyA1 returns [EObject current=null] : iv_ruleTrickyA1= ruleTrickyA1 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:377:1: entryRuleTrickyA1 returns [EObject current=null] : iv_ruleTrickyA1= ruleTrickyA1 EOF ;
     public final EObject entryRuleTrickyA1() throws RecognitionException {
         EObject current = null;
 
@@ -777,16 +813,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:367:50: (iv_ruleTrickyA1= ruleTrickyA1 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:368:2: iv_ruleTrickyA1= ruleTrickyA1 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:377:50: (iv_ruleTrickyA1= ruleTrickyA1 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:378:2: iv_ruleTrickyA1= ruleTrickyA1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyA1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1759);
+            pushFollow(FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1713);
             iv_ruleTrickyA1=ruleTrickyA1();
             _fsp--;
 
              current =iv_ruleTrickyA1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyA1769); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyA1723); 
 
             }
 
@@ -804,38 +840,48 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleTrickyA1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:375:1: ruleTrickyA1 returns [EObject current=null] : (lv_name_0= RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:385:1: ruleTrickyA1 returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleTrickyA1() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0=null;
+        Token lv_name_0_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:380:6: ( (lv_name_0= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:381:1: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:390:6: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:391:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:381:1: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:383:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:391:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:392:1: (lv_name_0_0= RULE_ID )
             {
-            lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrickyA1815); 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:392:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:393:3: lv_name_0_0= RULE_ID
+            {
+            lv_name_0_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrickyA1764); 
 
-            		createLeafNode(grammarAccess.getTrickyA1Access().getNameIDTerminalRuleCall_0(), "name"); 
-            	
+            			createLeafNode(grammarAccess.getTrickyA1Access().getNameIDTerminalRuleCall_0(), "name"); 
+            		
 
             	        if (current==null) {
             	            current = factory.create(grammarAccess.getTrickyA1Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
-            	        
             	        try {
-            	       		add(current, "name", lv_name_0, "ID", lastConsumedNode);
+            	       		add(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_0_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	    
+
+            }
+
 
             }
 
@@ -859,7 +905,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleTrickyG
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:418:1: entryRuleTrickyG returns [EObject current=null] : iv_ruleTrickyG= ruleTrickyG EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:432:1: entryRuleTrickyG returns [EObject current=null] : iv_ruleTrickyG= ruleTrickyG EOF ;
     public final EObject entryRuleTrickyG() throws RecognitionException {
         EObject current = null;
 
@@ -867,16 +913,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:418:49: (iv_ruleTrickyG= ruleTrickyG EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:419:2: iv_ruleTrickyG= ruleTrickyG EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:432:49: (iv_ruleTrickyG= ruleTrickyG EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:433:2: iv_ruleTrickyG= ruleTrickyG EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyGRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG_in_entryRuleTrickyG865);
+            pushFollow(FOLLOW_ruleTrickyG_in_entryRuleTrickyG811);
             iv_ruleTrickyG=ruleTrickyG();
             _fsp--;
 
              current =iv_ruleTrickyG; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG875); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG821); 
 
             }
 
@@ -894,34 +940,37 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleTrickyG
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:426:1: ruleTrickyG returns [EObject current=null] : ( 'TG' (lv_tree_1= ruleTrickyG1 ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:440:1: ruleTrickyG returns [EObject current=null] : ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) ;
     public final EObject ruleTrickyG() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_tree_1 = null;
+        EObject lv_tree_1_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:431:6: ( ( 'TG' (lv_tree_1= ruleTrickyG1 ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:432:1: ( 'TG' (lv_tree_1= ruleTrickyG1 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:445:6: ( ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:446:1: ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:432:1: ( 'TG' (lv_tree_1= ruleTrickyG1 ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:432:2: 'TG' (lv_tree_1= ruleTrickyG1 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:446:1: ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:446:2: 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
             {
-            match(input,16,FOLLOW_16_in_ruleTrickyG909); 
+            match(input,16,FOLLOW_16_in_ruleTrickyG855); 
 
                     createLeafNode(grammarAccess.getTrickyGAccess().getTGKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:436:1: (lv_tree_1= ruleTrickyG1 )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:439:6: lv_tree_1= ruleTrickyG1
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:450:1: ( (lv_tree_1_0= ruleTrickyG1 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:451:1: (lv_tree_1_0= ruleTrickyG1 )
+            {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:451:1: (lv_tree_1_0= ruleTrickyG1 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:452:3: lv_tree_1_0= ruleTrickyG1
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getTrickyGAccess().getTreeTrickyG1ParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG943);
-            lv_tree_1=ruleTrickyG1();
+            pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG876);
+            lv_tree_1_0=ruleTrickyG1();
             _fsp--;
 
 
@@ -929,14 +978,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	            current = factory.create(grammarAccess.getTrickyGRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
-            	        
             	        try {
-            	       		set(current, "tree", lv_tree_1, "TrickyG1", currentNode);
+            	       		set(
+            	       			current, 
+            	       			"tree",
+            	        		lv_tree_1_0, 
+            	        		"TrickyG1", 
+            	        		currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
             	        }
             	        currentNode = currentNode.getParent();
             	    
+
+            }
+
 
             }
 
@@ -963,7 +1019,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleTrickyG1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:464:1: entryRuleTrickyG1 returns [EObject current=null] : iv_ruleTrickyG1= ruleTrickyG1 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:481:1: entryRuleTrickyG1 returns [EObject current=null] : iv_ruleTrickyG1= ruleTrickyG1 EOF ;
     public final EObject entryRuleTrickyG1() throws RecognitionException {
         EObject current = null;
 
@@ -971,16 +1027,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:464:50: (iv_ruleTrickyG1= ruleTrickyG1 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:465:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:481:50: (iv_ruleTrickyG1= ruleTrickyG1 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:482:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyG1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1980);
+            pushFollow(FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1909);
             iv_ruleTrickyG1=ruleTrickyG1();
             _fsp--;
 
              current =iv_ruleTrickyG1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG1990); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG1919); 
 
             }
 
@@ -998,29 +1054,29 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleTrickyG1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:472:1: ruleTrickyG1 returns [EObject current=null] : ( '[' ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )? ']' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:489:1: ruleTrickyG1 returns [EObject current=null] : ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' ) ;
     public final EObject ruleTrickyG1() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_vals_1 = null;
+        EObject lv_vals_1_0 = null;
 
-        EObject lv_vals_3 = null;
+        EObject lv_vals_3_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:477:6: ( ( '[' ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )? ']' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:478:1: ( '[' ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )? ']' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:494:6: ( ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:495:1: ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:478:1: ( '[' ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )? ']' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:478:2: '[' ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )? ']'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:495:1: ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:495:2: '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']'
             {
-            match(input,17,FOLLOW_17_in_ruleTrickyG11024); 
+            match(input,17,FOLLOW_17_in_ruleTrickyG1953); 
 
                     createLeafNode(grammarAccess.getTrickyG1Access().getLeftSquareBracketKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:482:1: ( (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )* )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:499:1: ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1029,16 +1085,19 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:482:2: (lv_vals_1= ruleTrickyG2 ) ( ',' (lv_vals_3= ruleTrickyG2 ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:499:2: ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:482:2: (lv_vals_1= ruleTrickyG2 )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:485:6: lv_vals_1= ruleTrickyG2
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:499:2: ( (lv_vals_1_0= ruleTrickyG2 ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:500:1: (lv_vals_1_0= ruleTrickyG2 )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:500:1: (lv_vals_1_0= ruleTrickyG2 )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:501:3: lv_vals_1_0= ruleTrickyG2
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG11059);
-                    lv_vals_1=ruleTrickyG2();
+                    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG1975);
+                    lv_vals_1_0=ruleTrickyG2();
                     _fsp--;
 
 
@@ -1046,9 +1105,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	            current = factory.create(grammarAccess.getTrickyG1Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
-                    	        
                     	        try {
-                    	       		add(current, "vals", lv_vals_1, "TrickyG2", currentNode);
+                    	       		add(
+                    	       			current, 
+                    	       			"vals",
+                    	        		lv_vals_1_0, 
+                    	        		"TrickyG2", 
+                    	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
@@ -1057,7 +1120,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:503:2: ( ',' (lv_vals_3= ruleTrickyG2 ) )*
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:523:2: ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1070,20 +1136,23 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:503:3: ',' (lv_vals_3= ruleTrickyG2 )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:523:3: ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
                     	    {
-                    	    match(input,18,FOLLOW_18_in_ruleTrickyG11073); 
+                    	    match(input,18,FOLLOW_18_in_ruleTrickyG1985); 
 
                     	            createLeafNode(grammarAccess.getTrickyG1Access().getCommaKeyword_1_1_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:507:1: (lv_vals_3= ruleTrickyG2 )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:510:6: lv_vals_3= ruleTrickyG2
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:527:1: ( (lv_vals_3_0= ruleTrickyG2 ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:528:1: (lv_vals_3_0= ruleTrickyG2 )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:528:1: (lv_vals_3_0= ruleTrickyG2 )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:529:3: lv_vals_3_0= ruleTrickyG2
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG11107);
-                    	    lv_vals_3=ruleTrickyG2();
+                    	    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG11006);
+                    	    lv_vals_3_0=ruleTrickyG2();
                     	    _fsp--;
 
 
@@ -1091,14 +1160,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	    	            current = factory.create(grammarAccess.getTrickyG1Rule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
-                    	    	        
                     	    	        try {
-                    	    	       		add(current, "vals", lv_vals_3, "TrickyG2", currentNode);
+                    	    	       		add(
+                    	    	       			current, 
+                    	    	       			"vals",
+                    	    	        		lv_vals_3_0, 
+                    	    	        		"TrickyG2", 
+                    	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
                     	    	        }
                     	    	        currentNode = currentNode.getParent();
                     	    	    
+
+                    	    }
+
 
                     	    }
 
@@ -1117,7 +1193,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             }
 
-            match(input,19,FOLLOW_19_in_ruleTrickyG11124); 
+            match(input,19,FOLLOW_19_in_ruleTrickyG11019); 
 
                     createLeafNode(grammarAccess.getTrickyG1Access().getRightSquareBracketKeyword_2(), null); 
                 
@@ -1144,7 +1220,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start entryRuleTrickyG2
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:539:1: entryRuleTrickyG2 returns [EObject current=null] : iv_ruleTrickyG2= ruleTrickyG2 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:562:1: entryRuleTrickyG2 returns [EObject current=null] : iv_ruleTrickyG2= ruleTrickyG2 EOF ;
     public final EObject entryRuleTrickyG2() throws RecognitionException {
         EObject current = null;
 
@@ -1152,16 +1228,16 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:539:50: (iv_ruleTrickyG2= ruleTrickyG2 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:540:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:562:50: (iv_ruleTrickyG2= ruleTrickyG2 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:563:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyG2Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21157);
+            pushFollow(FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21052);
             iv_ruleTrickyG2=ruleTrickyG2();
             _fsp--;
 
              current =iv_ruleTrickyG2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG21167); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG21062); 
 
             }
 
@@ -1179,21 +1255,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start ruleTrickyG2
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:547:1: ruleTrickyG2 returns [EObject current=null] : (this_TrickyG1_0= ruleTrickyG1 | (lv_val_1= RULE_INT ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:570:1: ruleTrickyG2 returns [EObject current=null] : (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final EObject ruleTrickyG2() throws RecognitionException {
         EObject current = null;
 
-        Token lv_val_1=null;
+        Token lv_val_1_0=null;
         EObject this_TrickyG1_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:552:6: ( (this_TrickyG1_0= ruleTrickyG1 | (lv_val_1= RULE_INT ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:553:1: (this_TrickyG1_0= ruleTrickyG1 | (lv_val_1= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:575:6: ( (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:576:1: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:553:1: (this_TrickyG1_0= ruleTrickyG1 | (lv_val_1= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:576:1: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1205,18 +1281,18 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("553:1: (this_TrickyG1_0= ruleTrickyG1 | (lv_val_1= RULE_INT ) )", 7, 0, input);
+                    new NoViableAltException("576:1: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )", 7, 0, input);
 
                 throw nvae;
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:554:5: this_TrickyG1_0= ruleTrickyG1
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:577:5: this_TrickyG1_0= ruleTrickyG1
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTrickyG2Access().getTrickyG1ParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG21214);
+                    pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG21109);
                     this_TrickyG1_0=ruleTrickyG1();
                     _fsp--;
 
@@ -1228,28 +1304,38 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:563:6: (lv_val_1= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:586:6: ( (lv_val_1_0= RULE_INT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:563:6: (lv_val_1= RULE_INT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:565:6: lv_val_1= RULE_INT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:586:6: ( (lv_val_1_0= RULE_INT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:587:1: (lv_val_1_0= RULE_INT )
                     {
-                    lv_val_1=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTrickyG21241); 
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:587:1: (lv_val_1_0= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:588:3: lv_val_1_0= RULE_INT
+                    {
+                    lv_val_1_0=(Token)input.LT(1);
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTrickyG21131); 
 
-                    		createLeafNode(grammarAccess.getTrickyG2Access().getValINTTerminalRuleCall_1_0(), "val"); 
-                    	
+                    			createLeafNode(grammarAccess.getTrickyG2Access().getValINTTerminalRuleCall_1_0(), "val"); 
+                    		
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getTrickyG2Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
-                    	        
                     	        try {
-                    	       		set(current, "val", lv_val_1, "INT", lastConsumedNode);
+                    	       		set(
+                    	       			current, 
+                    	       			"val",
+                    	        		lv_val_1_0, 
+                    	        		"INT", 
+                    	        		lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
                     	    
+
+                    }
+
 
                     }
 
@@ -1288,39 +1374,39 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
     public static final BitSet FOLLOW_EOF_in_entryRuleOp199 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTerm_in_ruleOp246 = new BitSet(new long[]{0x0000000000001802L});
     public static final BitSet FOLLOW_11_in_ruleOp265 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp299 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_12_in_ruleOp329 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp363 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm403 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerm413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_ruleTerm460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParens_in_ruleTerm487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom519 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAtom529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAtom575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParens_in_entryRuleParens615 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParens625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleParens659 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleOp_in_ruleParens681 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleParens689 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_ruleParens710 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1759 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyA1769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTrickyA1815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG_in_entryRuleTrickyG865 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleTrickyG909 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1980 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG1990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleTrickyG11024 = new BitSet(new long[]{0x00000000000A0020L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG11059 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_18_in_ruleTrickyG11073 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG11107 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_19_in_ruleTrickyG11124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21157 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG21167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG21214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTrickyG21241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp286 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_12_in_ruleOp312 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp333 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm369 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTerm379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtom_in_ruleTerm426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParens_in_ruleTerm453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom485 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAtom495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAtom536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParens_in_entryRuleParens573 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleParens583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleParens617 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_ruleOp_in_ruleParens639 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleParens647 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_15_in_ruleParens664 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1713 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyA1723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTrickyA1764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyG_in_entryRuleTrickyG811 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleTrickyG855 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG876 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1909 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG1919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleTrickyG1953 = new BitSet(new long[]{0x00000000000A0020L});
+    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG1975 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_18_in_ruleTrickyG1985 = new BitSet(new long[]{0x0000000000020020L});
+    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG11006 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_19_in_ruleTrickyG11019 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21052 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG21062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG21109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTrickyG21131 = new BitSet(new long[]{0x0000000000000002L});
 
 }

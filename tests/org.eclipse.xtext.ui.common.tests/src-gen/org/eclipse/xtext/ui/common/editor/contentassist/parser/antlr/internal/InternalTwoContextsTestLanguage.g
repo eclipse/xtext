@@ -83,27 +83,30 @@ ruleMainModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0(), currentNode); 
 	    }
-	    lv_elements_0=ruleAnElement 
-	    {
+		lv_elements_0_0=ruleAnElement		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getMainModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "elements", lv_elements_0, "AnElement", currentNode);
+	       		add(
+	       			$current, 
+	       			"elements",
+	        		lv_elements_0_0, 
+	        		"AnElement", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 
@@ -125,33 +128,36 @@ ruleAnElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
-	}
- 
-	    {
+((
+(
+		lv_name_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )('refersTo' 
     {
         createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
     }
-(	
-	
-		
+(
+(
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
@@ -162,10 +168,8 @@ ruleAnElement returns [EObject current=null]
 	{
 		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
 	}
-		{ lastConsumedDatatypeToken = null; }
 
-		// TODO assign feature to currentNode
-	
+)
 ))?';' 
     {
         createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 

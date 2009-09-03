@@ -141,46 +141,54 @@ ruleTestRequired returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null); 
     }
-(	
-	
-	    lv_required1_1=	RULE_INT
-	{
-		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
-	}
- 
-	    {
+(
+(
+		lv_required1_1_0=RULE_INT
+		{
+			createLeafNode(grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "required1", lv_required1_1, "INT", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"required1",
+	        		lv_required1_1_0, 
+	        		"INT", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    lv_required2_2=	RULE_INT
-	{
-		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
-	}
- 
-	    {
+
+)
+)(
+(
+		lv_required2_2_0=RULE_INT
+		{
+			createLeafNode(grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "required2", lv_required2_2, "INT", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"required2",
+	        		lv_required2_2_0, 
+	        		"INT", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -206,50 +214,58 @@ ruleTestOptional returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null); 
     }
-(	
-	
-	    lv_opt1_1=	RULE_INT
-	{
-		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
-	}
- 
-	    {
+(
+(
+		lv_opt1_1_0=RULE_INT
+		{
+			createLeafNode(grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "opt1", lv_opt1_1, "INT", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"opt1",
+	        		lv_opt1_1_0, 
+	        		"INT", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )?(':' 
     {
         createLeafNode(grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null); 
     }
-(	
-	
-	    lv_opt2_3=	RULE_INT
-	{
-		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
-	}
- 
-	    {
+(
+(
+		lv_opt2_3_0=RULE_INT
+		{
+			createLeafNode(grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "opt2", lv_opt2_3, "INT", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"opt2",
+	        		lv_opt2_3_0, 
+	        		"INT", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ))?);
 
 
@@ -275,26 +291,30 @@ ruleTestList returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getTestListAccess().getListKeyword_0(), null); 
     }
-(	
-	
-	    lv_item_1=	RULE_INT
-	{
-		createLeafNode(grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
-	}
- 
-	    {
+(
+(
+		lv_item_1_0=RULE_INT
+		{
+			createLeafNode(grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestListRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "item", lv_item_1, "INT", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"item",
+	        		lv_item_1_0, 
+	        		"INT", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )*);
 
 

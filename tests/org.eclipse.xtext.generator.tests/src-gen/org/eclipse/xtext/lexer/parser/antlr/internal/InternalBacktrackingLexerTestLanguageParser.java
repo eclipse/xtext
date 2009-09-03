@@ -120,28 +120,28 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_enums_0= ruleEnumName )* (lv_abs_1= ruleAb )* (lv_xbs_2= ruleXb )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_abs_1_0= ruleAb ) )* ( (lv_xbs_2_0= ruleXb ) )* ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
         int ruleModel_StartIndex = input.index();
-        Enumerator lv_enums_0 = null;
+        Enumerator lv_enums_0_0 = null;
 
-        EObject lv_abs_1 = null;
+        EObject lv_abs_1_0 = null;
 
-        EObject lv_xbs_2 = null;
+        EObject lv_xbs_2_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 2) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:81:6: ( ( (lv_enums_0= ruleEnumName )* (lv_abs_1= ruleAb )* (lv_xbs_2= ruleXb )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:1: ( (lv_enums_0= ruleEnumName )* (lv_abs_1= ruleAb )* (lv_xbs_2= ruleXb )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:81:6: ( ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_abs_1_0= ruleAb ) )* ( (lv_xbs_2_0= ruleXb ) )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:1: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_abs_1_0= ruleAb ) )* ( (lv_xbs_2_0= ruleXb ) )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:1: ( (lv_enums_0= ruleEnumName )* (lv_abs_1= ruleAb )* (lv_xbs_2= ruleXb )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:2: (lv_enums_0= ruleEnumName )* (lv_abs_1= ruleAb )* (lv_xbs_2= ruleXb )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:1: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_abs_1_0= ruleAb ) )* ( (lv_xbs_2_0= ruleXb ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:2: ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_abs_1_0= ruleAb ) )* ( (lv_xbs_2_0= ruleXb ) )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:2: (lv_enums_0= ruleEnumName )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:82:2: ( (lv_enums_0_0= ruleEnumName ) )*
             loop1:
             do {
                 int alt1=2;
@@ -154,15 +154,18 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:85:6: lv_enums_0= ruleEnumName
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:83:1: (lv_enums_0_0= ruleEnumName )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:83:1: (lv_enums_0_0= ruleEnumName )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:84:3: lv_enums_0_0= ruleEnumName
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleEnumName_in_ruleModel148);
-            	    lv_enums_0=ruleEnumName();
+            	    pushFollow(FOLLOW_ruleEnumName_in_ruleModel135);
+            	    lv_enums_0_0=ruleEnumName();
             	    _fsp--;
             	    if (failed) return current;
             	    if ( backtracking==0 ) {
@@ -171,15 +174,22 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	      	            associateNodeWithAstElement(currentNode.getParent(), current);
             	      	        }
-            	      	        
             	      	        try {
-            	      	       		add(current, "enums", lv_enums_0, "EnumName", lastConsumedNode);
+            	      	       		add(
+            	      	       			current, 
+            	      	       			"enums",
+            	      	        		lv_enums_0_0, 
+            	      	        		"EnumName", 
+            	      	        		currentNode);
             	      	        } catch (ValueConverterException vce) {
             	      				handleValueConverterException(vce);
             	      	        }
             	      	        currentNode = currentNode.getParent();
             	      	    
             	    }
+
+            	    }
+
 
             	    }
             	    break;
@@ -189,7 +199,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:104:3: (lv_abs_1= ruleAb )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:106:3: ( (lv_abs_1_0= ruleAb ) )*
             loop2:
             do {
                 int alt2=2;
@@ -202,15 +212,18 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:107:6: lv_abs_1= ruleAb
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:107:1: (lv_abs_1_0= ruleAb )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:107:1: (lv_abs_1_0= ruleAb )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:108:3: lv_abs_1_0= ruleAb
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleAb_in_ruleModel188);
-            	    lv_abs_1=ruleAb();
+            	    pushFollow(FOLLOW_ruleAb_in_ruleModel157);
+            	    lv_abs_1_0=ruleAb();
             	    _fsp--;
             	    if (failed) return current;
             	    if ( backtracking==0 ) {
@@ -219,15 +232,22 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	      	            associateNodeWithAstElement(currentNode.getParent(), current);
             	      	        }
-            	      	        
             	      	        try {
-            	      	       		add(current, "abs", lv_abs_1, "Ab", currentNode);
+            	      	       		add(
+            	      	       			current, 
+            	      	       			"abs",
+            	      	        		lv_abs_1_0, 
+            	      	        		"Ab", 
+            	      	        		currentNode);
             	      	        } catch (ValueConverterException vce) {
             	      				handleValueConverterException(vce);
             	      	        }
             	      	        currentNode = currentNode.getParent();
             	      	    
             	    }
+
+            	    }
+
 
             	    }
             	    break;
@@ -237,7 +257,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:126:3: (lv_xbs_2= ruleXb )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:130:3: ( (lv_xbs_2_0= ruleXb ) )*
             loop3:
             do {
                 int alt3=2;
@@ -250,15 +270,18 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:129:6: lv_xbs_2= ruleXb
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:131:1: (lv_xbs_2_0= ruleXb )
+            	    {
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:131:1: (lv_xbs_2_0= ruleXb )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:132:3: lv_xbs_2_0= ruleXb
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleXb_in_ruleModel228);
-            	    lv_xbs_2=ruleXb();
+            	    pushFollow(FOLLOW_ruleXb_in_ruleModel179);
+            	    lv_xbs_2_0=ruleXb();
             	    _fsp--;
             	    if (failed) return current;
             	    if ( backtracking==0 ) {
@@ -267,15 +290,22 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	      	            associateNodeWithAstElement(currentNode.getParent(), current);
             	      	        }
-            	      	        
             	      	        try {
-            	      	       		add(current, "xbs", lv_xbs_2, "Xb", currentNode);
+            	      	       		add(
+            	      	       			current, 
+            	      	       			"xbs",
+            	      	        		lv_xbs_2_0, 
+            	      	        		"Xb", 
+            	      	        		currentNode);
             	      	        } catch (ValueConverterException vce) {
             	      				handleValueConverterException(vce);
             	      	        }
             	      	        currentNode = currentNode.getParent();
             	      	    
             	    }
+
+            	    }
+
 
             	    }
             	    break;
@@ -311,7 +341,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start entryRuleAb
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:155:1: entryRuleAb returns [EObject current=null] : iv_ruleAb= ruleAb EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:161:1: entryRuleAb returns [EObject current=null] : iv_ruleAb= ruleAb EOF ;
     public final EObject entryRuleAb() throws RecognitionException {
         EObject current = null;
         int entryRuleAb_StartIndex = input.index();
@@ -320,20 +350,20 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 3) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:155:44: (iv_ruleAb= ruleAb EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:156:2: iv_ruleAb= ruleAb EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:161:44: (iv_ruleAb= ruleAb EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:162:2: iv_ruleAb= ruleAb EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAbRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleAb_in_entryRuleAb267);
+            pushFollow(FOLLOW_ruleAb_in_entryRuleAb213);
             iv_ruleAb=ruleAb();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleAb; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAb277); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAb223); if (failed) return current;
 
             }
 
@@ -352,32 +382,35 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleAb
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:163:1: ruleAb returns [EObject current=null] : ( (lv_x_0= RULE_CHARA ) (lv_y_1= RULE_CHARB ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:169:1: ruleAb returns [EObject current=null] : ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
     public final EObject ruleAb() throws RecognitionException {
         EObject current = null;
         int ruleAb_StartIndex = input.index();
-        Token lv_x_0=null;
-        Token lv_y_1=null;
+        Token lv_x_0_0=null;
+        Token lv_y_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 4) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:168:6: ( ( (lv_x_0= RULE_CHARA ) (lv_y_1= RULE_CHARB ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:169:1: ( (lv_x_0= RULE_CHARA ) (lv_y_1= RULE_CHARB ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:174:6: ( ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:175:1: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:169:1: ( (lv_x_0= RULE_CHARA ) (lv_y_1= RULE_CHARB ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:169:2: (lv_x_0= RULE_CHARA ) (lv_y_1= RULE_CHARB )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:175:1: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:175:2: ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:169:2: (lv_x_0= RULE_CHARA )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:171:6: lv_x_0= RULE_CHARA
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:175:2: ( (lv_x_0_0= RULE_CHARA ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:176:1: (lv_x_0_0= RULE_CHARA )
             {
-            lv_x_0=(Token)input.LT(1);
-            match(input,RULE_CHARA,FOLLOW_RULE_CHARA_in_ruleAb323); if (failed) return current;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:176:1: (lv_x_0_0= RULE_CHARA )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:177:3: lv_x_0_0= RULE_CHARA
+            {
+            lv_x_0_0=(Token)input.LT(1);
+            match(input,RULE_CHARA,FOLLOW_RULE_CHARA_in_ruleAb265); if (failed) return current;
             if ( backtracking==0 ) {
-               
-                  createLeafNode(grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
-                  
+
+              			createLeafNode(grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
+              		
             }
             if ( backtracking==0 ) {
 
@@ -385,9 +418,13 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
               	            current = factory.create(grammarAccess.getAbRule().getType().getClassifier());
               	            associateNodeWithAstElement(currentNode, current);
               	        }
-              	        
               	        try {
-              	       		set(current, "x", lv_x_0, "CharA", lastConsumedNode);
+              	       		set(
+              	       			current, 
+              	       			"x",
+              	        		lv_x_0_0, 
+              	        		"CharA", 
+              	        		lastConsumedNode);
               	        } catch (ValueConverterException vce) {
               				handleValueConverterException(vce);
               	        }
@@ -396,15 +433,21 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:190:2: (lv_y_1= RULE_CHARB )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:192:6: lv_y_1= RULE_CHARB
+
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:199:2: ( (lv_y_1_0= RULE_CHARB ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:200:1: (lv_y_1_0= RULE_CHARB )
             {
-            lv_y_1=(Token)input.LT(1);
-            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleAb356); if (failed) return current;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:200:1: (lv_y_1_0= RULE_CHARB )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:201:3: lv_y_1_0= RULE_CHARB
+            {
+            lv_y_1_0=(Token)input.LT(1);
+            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleAb287); if (failed) return current;
             if ( backtracking==0 ) {
-               
-                  createLeafNode(grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
-                  
+
+              			createLeafNode(grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+              		
             }
             if ( backtracking==0 ) {
 
@@ -412,14 +455,21 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
               	            current = factory.create(grammarAccess.getAbRule().getType().getClassifier());
               	            associateNodeWithAstElement(currentNode, current);
               	        }
-              	        
               	        try {
-              	       		set(current, "y", lv_y_1, "Charb", lastConsumedNode);
+              	       		set(
+              	       			current, 
+              	       			"y",
+              	        		lv_y_1_0, 
+              	        		"Charb", 
+              	        		lastConsumedNode);
               	        } catch (ValueConverterException vce) {
               				handleValueConverterException(vce);
               	        }
               	    
             }
+
+            }
+
 
             }
 
@@ -449,7 +499,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start entryRuleXb
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:218:1: entryRuleXb returns [EObject current=null] : iv_ruleXb= ruleXb EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:230:1: entryRuleXb returns [EObject current=null] : iv_ruleXb= ruleXb EOF ;
     public final EObject entryRuleXb() throws RecognitionException {
         EObject current = null;
         int entryRuleXb_StartIndex = input.index();
@@ -458,20 +508,20 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 5) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:218:44: (iv_ruleXb= ruleXb EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:219:2: iv_ruleXb= ruleXb EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:230:44: (iv_ruleXb= ruleXb EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:231:2: iv_ruleXb= ruleXb EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getXbRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleXb_in_entryRuleXb401);
+            pushFollow(FOLLOW_ruleXb_in_entryRuleXb325);
             iv_ruleXb=ruleXb();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleXb; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXb411); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXb335); if (failed) return current;
 
             }
 
@@ -490,32 +540,35 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleXb
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:226:1: ruleXb returns [EObject current=null] : ( (lv_x_0= RULE_CHARX ) (lv_y_1= RULE_CHARB ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:238:1: ruleXb returns [EObject current=null] : ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
     public final EObject ruleXb() throws RecognitionException {
         EObject current = null;
         int ruleXb_StartIndex = input.index();
-        Token lv_x_0=null;
-        Token lv_y_1=null;
+        Token lv_x_0_0=null;
+        Token lv_y_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 6) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:231:6: ( ( (lv_x_0= RULE_CHARX ) (lv_y_1= RULE_CHARB ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:232:1: ( (lv_x_0= RULE_CHARX ) (lv_y_1= RULE_CHARB ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:243:6: ( ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:244:1: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:232:1: ( (lv_x_0= RULE_CHARX ) (lv_y_1= RULE_CHARB ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:232:2: (lv_x_0= RULE_CHARX ) (lv_y_1= RULE_CHARB )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:244:1: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:244:2: ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:232:2: (lv_x_0= RULE_CHARX )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:234:6: lv_x_0= RULE_CHARX
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:244:2: ( (lv_x_0_0= RULE_CHARX ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:245:1: (lv_x_0_0= RULE_CHARX )
             {
-            lv_x_0=(Token)input.LT(1);
-            match(input,RULE_CHARX,FOLLOW_RULE_CHARX_in_ruleXb457); if (failed) return current;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:245:1: (lv_x_0_0= RULE_CHARX )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:246:3: lv_x_0_0= RULE_CHARX
+            {
+            lv_x_0_0=(Token)input.LT(1);
+            match(input,RULE_CHARX,FOLLOW_RULE_CHARX_in_ruleXb377); if (failed) return current;
             if ( backtracking==0 ) {
-               
-                  createLeafNode(grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
-                  
+
+              			createLeafNode(grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
+              		
             }
             if ( backtracking==0 ) {
 
@@ -523,9 +576,13 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
               	            current = factory.create(grammarAccess.getXbRule().getType().getClassifier());
               	            associateNodeWithAstElement(currentNode, current);
               	        }
-              	        
               	        try {
-              	       		set(current, "x", lv_x_0, "CharX", lastConsumedNode);
+              	       		set(
+              	       			current, 
+              	       			"x",
+              	        		lv_x_0_0, 
+              	        		"CharX", 
+              	        		lastConsumedNode);
               	        } catch (ValueConverterException vce) {
               				handleValueConverterException(vce);
               	        }
@@ -534,15 +591,21 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:253:2: (lv_y_1= RULE_CHARB )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:255:6: lv_y_1= RULE_CHARB
+
+            }
+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:268:2: ( (lv_y_1_0= RULE_CHARB ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:269:1: (lv_y_1_0= RULE_CHARB )
             {
-            lv_y_1=(Token)input.LT(1);
-            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleXb490); if (failed) return current;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:269:1: (lv_y_1_0= RULE_CHARB )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:270:3: lv_y_1_0= RULE_CHARB
+            {
+            lv_y_1_0=(Token)input.LT(1);
+            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleXb399); if (failed) return current;
             if ( backtracking==0 ) {
-               
-                  createLeafNode(grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
-                  
+
+              			createLeafNode(grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+              		
             }
             if ( backtracking==0 ) {
 
@@ -550,14 +613,21 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
               	            current = factory.create(grammarAccess.getXbRule().getType().getClassifier());
               	            associateNodeWithAstElement(currentNode, current);
               	        }
-              	        
               	        try {
-              	       		set(current, "y", lv_y_1, "Charb", lastConsumedNode);
+              	       		set(
+              	       			current, 
+              	       			"y",
+              	        		lv_y_1_0, 
+              	        		"Charb", 
+              	        		lastConsumedNode);
               	        } catch (ValueConverterException vce) {
               				handleValueConverterException(vce);
               	        }
               	    
             }
+
+            }
+
 
             }
 
@@ -587,17 +657,17 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start ruleEnumName
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:281:1: ruleEnumName returns [Enumerator current=null] : ( ( KEYWORD_1 ) | ( KEYWORD_2 ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:299:1: ruleEnumName returns [Enumerator current=null] : ( ( KEYWORD_1 ) | ( KEYWORD_2 ) ) ;
     public final Enumerator ruleEnumName() throws RecognitionException {
         Enumerator current = null;
         int ruleEnumName_StartIndex = input.index();
          setCurrentLookahead(); resetLookahead(); 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 7) ) { return current; }
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:285:6: ( ( ( KEYWORD_1 ) | ( KEYWORD_2 ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:286:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:303:6: ( ( ( KEYWORD_1 ) | ( KEYWORD_2 ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:304:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:286:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:304:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -610,18 +680,18 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("286:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )", 4, 0, input);
+                    new NoViableAltException("304:1: ( ( KEYWORD_1 ) | ( KEYWORD_2 ) )", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:286:2: ( KEYWORD_1 )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:304:2: ( KEYWORD_1 )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:286:2: ( KEYWORD_1 )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:286:7: KEYWORD_1
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:304:2: ( KEYWORD_1 )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:304:7: KEYWORD_1
                     {
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleEnumName552); if (failed) return current;
+                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleEnumName454); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -635,12 +705,12 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:292:6: ( KEYWORD_2 )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:310:6: ( KEYWORD_2 )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:292:6: ( KEYWORD_2 )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:292:11: KEYWORD_2
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:310:6: ( KEYWORD_2 )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:310:11: KEYWORD_2
                     {
-                    match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleEnumName569); if (failed) return current;
+                    match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleEnumName471); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -682,18 +752,18 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel79 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumName_in_ruleModel148 = new BitSet(new long[]{0x0000000000017002L});
-    public static final BitSet FOLLOW_ruleAb_in_ruleModel188 = new BitSet(new long[]{0x0000000000014002L});
-    public static final BitSet FOLLOW_ruleXb_in_ruleModel228 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_ruleAb_in_entryRuleAb267 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAb277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb323 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXb_in_entryRuleXb401 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXb411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb457 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_ruleEnumName552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumName_in_ruleModel135 = new BitSet(new long[]{0x0000000000017002L});
+    public static final BitSet FOLLOW_ruleAb_in_ruleModel157 = new BitSet(new long[]{0x0000000000014002L});
+    public static final BitSet FOLLOW_ruleXb_in_ruleModel179 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleAb_in_entryRuleAb213 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAb223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb265 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXb_in_entryRuleXb325 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXb335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb377 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_1_in_ruleEnumName454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName471 = new BitSet(new long[]{0x0000000000000002L});
 
 }

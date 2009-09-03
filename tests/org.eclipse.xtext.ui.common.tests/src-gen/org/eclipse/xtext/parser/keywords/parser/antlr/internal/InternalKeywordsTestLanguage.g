@@ -83,13 +83,12 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_first_0='foo\\bar' 
+((
+(
+		lv_first_0_0='foo\\bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -103,15 +102,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_second_1='foo\\' 
+)
+    |(
+(
+		lv_second_1_0='foo\\' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -125,15 +124,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_third_2='\\bar' 
+)
+    |(
+(
+		lv_third_2_0='\\bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -147,15 +146,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_forth_3='\\' 
+)
+    |(
+(
+		lv_forth_3_0='\\' 
     {
         createLeafNode(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -169,15 +168,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_fifth_4='"a"' 
+)
+    |(
+(
+		lv_fifth_4_0='"a"' 
     {
         createLeafNode(grammarAccess.getModelAccess().getFifthAKeyword_4_0(), "fifth"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -191,15 +190,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_sixth_5='\'b\'' 
+)
+    |(
+(
+		lv_sixth_5_0='\'b\'' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSixthBKeyword_5_0(), "sixth"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -213,15 +212,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_seventh_6='\'c\'' 
+)
+    |(
+(
+		lv_seventh_6_0='\'c\'' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSeventhCKeyword_6_0(), "seventh"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -235,15 +234,15 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_eighth_7='"d"' 
+)
+    |(
+(
+		lv_eighth_7_0='"d"' 
     {
         createLeafNode(grammarAccess.getModelAccess().getEighthDKeyword_7_0(), "eighth"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -257,7 +256,8 @@ ruleModel returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 

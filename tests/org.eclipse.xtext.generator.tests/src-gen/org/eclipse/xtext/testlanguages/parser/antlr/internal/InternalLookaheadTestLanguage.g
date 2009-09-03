@@ -83,27 +83,30 @@ ruleEntry returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0(), currentNode); 
 	    }
-	    lv_contents_0=ruleAlts 
-	    {
+		lv_contents_0_0=ruleAlts		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntryRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "contents", lv_contents_0, "Alts", currentNode);
+	       		add(
+	       			$current, 
+	       			"contents",
+	        		lv_contents_0_0, 
+	        		"Alts", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 
@@ -179,13 +182,12 @@ ruleLookAhead0 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
     }
-(	
-	
-	    lv_x_1='a' 
+(
+(
+		lv_x_1_0='a' 
     {
         createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -194,12 +196,13 @@ ruleLookAhead0 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_1 */ input.LT(-1), "a", lastConsumedNode);
+	       		set($current, "x", lv_x_1_0, "a", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -225,34 +228,36 @@ ruleLookAhead1 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
     }
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_y_1=ruleLookAhead2 
-	    {
+		lv_y_1_0=ruleLookAhead2		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "y", lv_y_1, "LookAhead2", currentNode);
+	       		set(
+	       			$current, 
+	       			"y",
+	        		lv_y_1_0, 
+	        		"LookAhead2", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
-)(	
-	
-	    lv_x_2='b' 
+
+)
+)(
+(
+		lv_x_2_0='b' 
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -261,19 +266,19 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_2 */ input.LT(-1), "b", lastConsumedNode);
+	       		set($current, "x", lv_x_2_0, "b", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    lv_x_3='d' 
+
+)
+)(
+(
+		lv_x_3_0='d' 
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -282,12 +287,13 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_3 */ input.LT(-1), "d", lastConsumedNode);
+	       		set($current, "x", lv_x_3_0, "d", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 
@@ -309,13 +315,12 @@ ruleLookAhead2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((	
-	
-	    lv_z_0='foo' 
+(((
+(
+		lv_z_0_0='foo' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -324,20 +329,20 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "z", /* lv_z_0 */ input.LT(-1), "foo", lastConsumedNode);
+	       		set($current, "z", lv_z_0_0, "foo", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_z_1='bar' 
+)
+    |(
+(
+		lv_z_1_0='bar' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -346,12 +351,13 @@ ruleLookAhead2 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "z", /* lv_z_1 */ input.LT(-1), "bar", lastConsumedNode);
+	       		set($current, "z", lv_z_1_0, "bar", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ))'c' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
@@ -385,13 +391,12 @@ ruleLookAhead3 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
     }
-(	
-	
-	    lv_x_2='b' 
+(
+(
+		lv_x_2_0='b' 
     {
         createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -400,33 +405,37 @@ ruleLookAhead3 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_2 */ input.LT(-1), "b", lastConsumedNode);
+	       		set($current, "x", lv_x_2_0, "b", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    
-	    { 
+
+)
+)(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(), currentNode); 
 	    }
-	    lv_z_3=ruleLookAhead4 
-	    {
+		lv_z_3_0=ruleLookAhead4		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getLookAhead3Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "z", lv_z_3, "LookAhead4", currentNode);
+	       		set(
+	       			$current, 
+	       			"z",
+	        		lv_z_3_0, 
+	        		"LookAhead4", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ));
 
 
@@ -448,13 +457,12 @@ ruleLookAhead4 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_x_0='c' 
+((
+(
+		lv_x_0_0='c' 
     {
         createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -463,20 +471,20 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_0 */ input.LT(-1), "c", lastConsumedNode);
+	       		set($current, "x", lv_x_0_0, "c", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
 )
-    |(	
-	
-	    lv_x_1='d' 
+)
+    |(
+(
+		lv_x_1_0='d' 
     {
         createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -485,12 +493,13 @@ ruleLookAhead4 returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "x", /* lv_x_1 */ input.LT(-1), "d", lastConsumedNode);
+	       		set($current, "x", lv_x_1_0, "d", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 ));
 
 

@@ -91,27 +91,30 @@ ruleModel returns [EObject current=null]
     { 
     createLeafNode(grammarAccess.getModelAccess().getINTTerminalRuleCall_1(), null); 
     }
-)+(	
-	
-	    
-	    { 
+)+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getModelFeaturesModelFeaturesParserRuleCall_2_0(), currentNode); 
 	    }
-	    lv_modelFeatures_2=ruleModelFeatures 
-	    {
+		lv_modelFeatures_2_0=ruleModelFeatures		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		set($current, "modelFeatures", lv_modelFeatures_2, "ModelFeatures", currentNode);
+	       		set(
+	       			$current, 
+	       			"modelFeatures",
+	        		lv_modelFeatures_2_0, 
+	        		"ModelFeatures", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 ));
 
 
@@ -137,26 +140,30 @@ ruleModelFeatures returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null); 
     }
-(	
-	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
-	}
- 
-	    {
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelFeaturesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )ruleDataTypeRule';' 
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
@@ -181,7 +188,6 @@ ruleDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-	    lastConsumedDatatypeToken = $current;
     }:
 (    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);

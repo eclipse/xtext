@@ -83,27 +83,30 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	
-	
-	    
-	    { 
+(
+(
+		{ 
 	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0(), currentNode); 
 	    }
-	    lv_elements_0=ruleElement 
-	    {
+		lv_elements_0_0=ruleElement		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
-	        
 	        try {
-	       		add($current, "elements", lv_elements_0, "Element", currentNode);
+	       		add(
+	       			$current, 
+	       			"elements",
+	        		lv_elements_0_0, 
+	        		"Element", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
 	    }
-	
+
+)
 )*;
 
 
@@ -125,13 +128,12 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
-	
-	    lv_optional_0='optional' 
+((
+(
+		lv_optional_0_0='optional' 
     {
         createLeafNode(grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0(), "optional"); 
     }
-
  
 	    {
 	        if ($current==null) {
@@ -145,51 +147,60 @@ ruleElement returns [EObject current=null]
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )?'element' 
     {
         createLeafNode(grammarAccess.getElementAccess().getElementKeyword_1(), null); 
     }
-(	
-	
-	    lv_name_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
-	}
- 
-	    {
+(
+(
+		lv_name_2_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		set($current, "name", lv_name_2, "ID", lastConsumedNode);
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
-)(	
-	
-	    lv_descriptions_3=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0(), "descriptions"); 
-	}
- 
-	    {
+
+)
+)(
+(
+		lv_descriptions_3_0=RULE_STRING
+		{
+			createLeafNode(grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0(), "descriptions"); 
+		}
+		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
 	        try {
-	       		add($current, "descriptions", lv_descriptions_3, "STRING", lastConsumedNode);
+	       		add(
+	       			$current, 
+	       			"descriptions",
+	        		lv_descriptions_3_0, 
+	        		"STRING", 
+	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-	
+
+)
 )*';' 
     {
         createLeafNode(grammarAccess.getElementAccess().getSemicolonKeyword_4(), null); 
