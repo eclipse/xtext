@@ -182,6 +182,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/Bug288432Test" 
+       class = "org.eclipse.xtext.parser.assignments.bug288432Test.Bug288432TestPackage"
+       genModel = "org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest" 
        class = "org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.genmodel" /> 
