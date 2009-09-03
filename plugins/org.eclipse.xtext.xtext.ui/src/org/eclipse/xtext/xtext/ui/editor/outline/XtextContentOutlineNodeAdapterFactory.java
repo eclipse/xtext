@@ -19,6 +19,7 @@ public class XtextContentOutlineNodeAdapterFactory extends DefaultContentOutline
 	@SuppressWarnings("unchecked")
 	private static final Class[] types = { ParserRule.class };
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Class[] getAdapterList() {
 		return types;
