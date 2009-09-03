@@ -44,10 +44,10 @@ import com.google.inject.Inject;
 public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
-	private IScopeProvider scopeProvider;
+	protected IScopeProvider scopeProvider;
 
 	@Inject
-	private IValueConverterService valueConverter;
+	protected IValueConverterService valueConverter;
 
 	protected IScope getScope(EObject context, EReference reference) {
 		if (scopeProvider == null)
@@ -151,7 +151,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		return null;
 	}
 
-	private IScopedElement getScopedElement(IScope scope, EObject element) {
+	protected IScopedElement getScopedElement(IScope scope, EObject element) {
 		Iterable<IScopedElement> allContents = scope.getAllContents();
 		URI left = EcoreUtil.getURI(element);
 		for (IScopedElement scopedElement : allContents) {
@@ -198,7 +198,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private String getNodeModelLinkText(EObject object, EReference reference, EObject context) {
+	protected String getNodeModelLinkText(EObject object, EReference reference, EObject context) {
 		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(context, reference);
 		if (!nodes.isEmpty()) {
 			if (reference.isMany()) {
