@@ -22,6 +22,7 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_GeneratorConfiguration;
 	public static String WizardNewXtextProjectCreationPage_LabelExtensions;
 	public static String WizardNewXtextProjectCreationPage_LabelLanguage;
+	public static String WizardNewXtextProjectCreationPage_LabelLayout;
 	public static String WizardNewXtextProjectCreationPage_LabelName;
 	public static String WizardNewXtextProjectCreationPage_WindowTitle;
 	static {
