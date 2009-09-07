@@ -44,10 +44,10 @@ import com.google.inject.Inject;
 public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
-	protected IScopeProvider scopeProvider;
+	private IScopeProvider scopeProvider;
 
 	@Inject
-	protected IValueConverterService valueConverter;
+	private IValueConverterService valueConverter;
 
 	protected IScope getScope(EObject context, EReference reference) {
 		if (scopeProvider == null)
