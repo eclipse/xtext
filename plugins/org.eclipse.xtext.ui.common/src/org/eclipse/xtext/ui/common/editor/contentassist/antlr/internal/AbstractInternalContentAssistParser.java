@@ -55,6 +55,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private List<TerminalRule> terminalRules;
 	private boolean mismatch;
 	private RecoveryListener recoveryListener;
+	private int lookAheadAddOn;
+	private boolean marked = false;
+	private int currentMarker;
+	private int firstMarker;
 
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
@@ -121,13 +125,24 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					wasErrorRecovery = wasErrorRecovery || errorRecovery;
 					if (!wasErrorRecovery && !mismatch) {
 						AbstractElement current = getCurrentGrammarElement();
-						if (current != null)
+						if (current != null) {
+							if (marked)
+								lookAhead+=lookAheadAddOn;
 							followElements.add(createFollowElement(current, lookAhead));
+						}
 					}
 				}
 
 				public void announceConsume() {
 					AbstractInternalContentAssistParser.this.announceConsume();
+				}
+				
+				public void announceMark(int marker) {
+					AbstractInternalContentAssistParser.this.announceMark(marker);
+				}
+				
+				public void announceRewind(int marker) {
+					AbstractInternalContentAssistParser.this.announceRewind(marker);
 				}
 			};
 		} else if (!errorRecovery) {
@@ -136,13 +151,24 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				public void announceEof(int lookAhead) {
 					if (!errorRecovery && !mismatch) {
 						AbstractElement current = getCurrentGrammarElement();
-						if (current != null)
+						if (current != null) {
+							if (marked)
+								lookAhead+=lookAheadAddOn;
 							followElements.add(createFollowElement(current, lookAhead));
+						}
 					}
 				}
 
 				public void announceConsume() {
 					AbstractInternalContentAssistParser.this.announceConsume();
+				}
+				
+				public void announceMark(int marker) {
+					AbstractInternalContentAssistParser.this.announceMark(marker);
+				}
+				
+				public void announceRewind(int marker) {
+					AbstractInternalContentAssistParser.this.announceRewind(marker);
 				}
 
 			};
@@ -157,6 +183,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					if (current != null
 							&& (lastAddedElement == null || 
 								!EcoreUtil.isAncestor(current, lastAddedElement))) {
+						if (marked)
+							lookAhead+=lookAheadAddOn;
 						followElements.add(createFollowElement(current, lookAhead));
 						lastAddedElement = current;
 					}
@@ -164,6 +192,14 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 				public void announceConsume() {
 					AbstractInternalContentAssistParser.this.announceConsume();
+				}
+				
+				public void announceMark(int marker) {
+					AbstractInternalContentAssistParser.this.announceMark(marker);
+				}
+				
+				public void announceRewind(int marker) {
+					AbstractInternalContentAssistParser.this.announceRewind(marker);
 				}
 
 			};
@@ -197,7 +233,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			List<LookAheadTerminal> lookAheadTerminals = Lists
 					.<LookAheadTerminal> newArrayListWithExpectedSize(lookAhead - 1);
 			for (int i = 1; i < lookAhead; i++) {
-				Token token = input.LT(i);
+				int tokenIndex = i;
+				if (marked) {
+					tokenIndex -= lookAheadAddOn;
+					if (tokenIndex <= 0)
+						tokenIndex--;
+				}
+				Token token = input.LT(tokenIndex);
 				if (token == Token.EOF_TOKEN) {
 					result.setLookAhead(i);
 					break;
@@ -248,7 +290,28 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	public void announceConsume() {
-		localTrace.clear();
+		if (!marked)
+			localTrace.clear();
+		else
+			lookAheadAddOn++;
+	}
+	
+	public void announceRewind(int marker) {
+		currentMarker = marker;
+		lookAheadAddOn = currentMarker - firstMarker;
+		if (firstMarker == currentMarker)
+			marked = false;
+	}
+	
+	public void announceMark(int marker) {
+		if (!marked) {
+			marked = true;
+			lookAheadAddOn = 0;
+			currentMarker = marker;
+			firstMarker = marker;
+		} else {
+			currentMarker = marker;
+		}
 	}
 
 	public Set<FollowElement> getFollowElements() {

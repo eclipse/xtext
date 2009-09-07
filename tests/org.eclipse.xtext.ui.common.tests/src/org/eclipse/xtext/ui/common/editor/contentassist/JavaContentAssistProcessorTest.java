@@ -305,4 +305,49 @@ public class JavaContentAssistProcessorTest extends AbstractContentAssistProcess
     			"select t from Test as t \n" + 
     			"	where t.testAttr like \"\"").assertTextAtCursorPosition("t.testAttr", 2, "testAttr", ".");
     }
+    
+    @Override
+	public void testBug288734_03() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("constant ").assertText();
+    }
+    
+    @Override
+	public void testBug288734_09() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc ").assertText();
+    }
+    
+    @Override
+	public void testBug288734_10() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' ").assertText();
+    }
+    
+    @Override
+	public void testBug288734_11() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc").assertText();
+    }
+    
+    @Override
+	public void testBug288734_12() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc ").assertText();
+    }
+    
+    @Override
+	public void testBug288734_13() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' constant").assertText();
+    }
+    
+    @Override
+	public void testBug288734_14() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' constant ").assertText();
+    }
+    
+    @Override
+	public void testBug288734_15() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant").assertText();
+    }
+    
+    @Override
+	public void testBug288734_16() throws Exception {
+    	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant ").assertText();
+    }
 }
