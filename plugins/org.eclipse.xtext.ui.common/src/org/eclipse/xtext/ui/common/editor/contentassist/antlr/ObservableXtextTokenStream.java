@@ -23,6 +23,8 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	public interface StreamListener {
 		void announceEof(int lookAhead);
 		void announceConsume();
+		void announceMark(int marker);
+		void announceRewind(int marker);
 	}
 	
 	private StreamListener listener;
@@ -51,6 +53,21 @@ public class ObservableXtextTokenStream extends XtextTokenStream {
 	@Override
 	protected List<Token> createLookAheadTokenList() {
 		return Collections.<Token>emptyList();
+	}
+	
+	@Override
+	public int mark() {
+		int result = super.mark();
+		if (getListener() != null)
+			getListener().announceMark(result);
+		return result;
+	}
+	
+	@Override
+	public void rewind(int marker) {
+		if (getListener() != null)
+			getListener().announceRewind(marker);
+		super.rewind(marker);
 	}
 	
 	@Override

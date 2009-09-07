@@ -85,6 +85,14 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					if (!errorRecovery[0])
 						consumedSomething[0] = true;
 				}
+
+				public void announceMark(int marker) {
+					parser.announceMark(marker);
+				}
+
+				public void announceRewind(int marker) {
+					parser.announceRewind(marker);
+				}
 			});
 			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
 				public void endErrorRecovery() {
