@@ -177,4 +177,17 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		assertEquals(b, provider.getScope(details, details));
 		assertEquals(c, provider.getScope(details.getEContainingClass(), details));
 	}
+	
+	public void testScopeByReference_() throws Exception {
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
+			@SuppressWarnings("unused")
+			private IScope scope_EClass_eSuperTypes(EClass clazz, EReference ref) {
+				return a;
+			}
+			
+		};
+		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
+		assertEquals(a, provider.getScope(details.getEContainingClass(), details));
+	}
 }
