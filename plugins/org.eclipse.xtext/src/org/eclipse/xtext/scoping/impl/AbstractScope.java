@@ -9,9 +9,12 @@
 package org.eclipse.xtext.scoping.impl;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 
@@ -40,9 +43,25 @@ public abstract class AbstractScope implements IScope {
 		}));
 	}
 
-	@Deprecated
-	public final IScopedElement getScopedElement(EObject element) {
-		throw new UnsupportedOperationException();
+	public IScopedElement getContentByEObject(EObject object) {
+		Iterator<IScopedElement> allContents = getAllContents().iterator();
+		URI uri = EcoreUtil.getURI(object);
+		while (allContents.hasNext()) {
+			IScopedElement element = allContents.next();
+			URI elementsUri = EcoreUtil.getURI(element.element());
+			if (uri.equals(elementsUri))
+				return element;
+		}
+		return null;
 	}
 
+	public IScopedElement getContentByName(String name) {
+		Iterator<IScopedElement> allContents = getAllContents().iterator();
+		while (allContents.hasNext()) {
+			IScopedElement element = allContents.next();
+			if (element.name().equals(name)) 
+				return element;
+		}
+		return null;
+	}
 }
