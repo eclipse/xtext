@@ -20,4 +20,8 @@ public abstract class AbstractScopedElement implements IScopedElement {
 	public String toString() {
 		return name();
 	}
+	
+	public Object additionalInformation() {
+		return null;
+	}
 }

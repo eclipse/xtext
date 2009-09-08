@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * of methods of the following signature
  * <p/>
  * <code>
- * IScope scope_[EReferenceName](MyType context, EReference reference) </br>
+ * IScope scope_[EClassName]_[EReferenceName](MyType context, EReference reference) </br>
  * IScope scope_[EClassName](MyType context, EClass clazz)
  * </code>
  * </p>
@@ -129,18 +129,26 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		return scope;
 	}
 
-	private IScope internalGetScope(EObject context, EReference reference) {
+	protected IScope internalGetScope(EObject context, EReference reference) {
 		final Predicate<Method> predicate = getPredicate(context, reference);
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
-				refErrorHandler);
+				getRefErrorHandler());
 		return scope.invoke(context, reference);
+	}
+
+	protected ErrorHandler<IScope> getRefErrorHandler() {
+		return refErrorHandler;
 	}
 
 	public IScope getScope(EObject context, EClass type) {
 		final Predicate<Method> predicate = getPredicate(context, type);
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
-				typeErrorHandler);
+				getTypeErrorHandler());
 		return scope.invoke(context, type);
+	}
+
+	protected ErrorHandler<IScope> getTypeErrorHandler() {
+		return typeErrorHandler;
 	}
 
 }

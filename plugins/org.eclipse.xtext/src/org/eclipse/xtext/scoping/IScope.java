@@ -9,6 +9,7 @@ package org.eclipse.xtext.scoping;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
@@ -57,5 +58,15 @@ public interface IScope {
      * (see {@link IScope#getOuterScope()}), where the elements from an outer scope follows the one from it's inner scope
      */
     Iterable<IScopedElement> getAllContents();
+    
+    /**
+     * a deep search for the element with the given name
+     */
+    IScopedElement getContentByName(String name);
+    
+    /**
+     * a deep search for the element with the given object
+     */
+    IScopedElement getContentByEObject(EObject object);
     
 }
