@@ -11,7 +11,7 @@ package org.eclipse.xtext.index;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.index.EObjectDescriptor;
+import org.eclipse.emf.emfindex.EObjectDescriptor;
 import org.eclipse.xtext.scoping.impl.AbstractScopedElement;
 
 /**
@@ -20,29 +20,28 @@ import org.eclipse.xtext.scoping.impl.AbstractScopedElement;
  */
 public class IndexBasedScopedElement extends AbstractScopedElement {
 	
-	private EObjectDescriptor descriptor;
+	private String name;
+	private EObject element;
 	
 	IndexBasedScopedElement(EObjectDescriptor descriptor) {
 		super();
-		this.descriptor = descriptor;
+		name = descriptor.getName();
+		element = createProxy(descriptor);
 	}
 
-	/**
-	 * @return the user data map of the EObjectDescriptor.
-	 */
-	public Object additionalInformation() {
-		return descriptor.getUserData();
-	}
-
-	public EObject element() {
-		EClass eclass = descriptor.getEClassDescriptor().getEClass();
+	private EObject createProxy(EObjectDescriptor descriptor) {
+		EClass eclass = descriptor.getEClass();
 		EObject obj = eclass.getEPackage().getEFactoryInstance().create(eclass);
 		((InternalEObject)obj).eSetProxyURI(descriptor.getFragmentURI());
 		return obj;
 	}
+	
+	public EObject element() {
+		return element;
+	}
 
 	public String name() {
-		return descriptor.getName();
+		return name;
 	}
-	
+
 }
