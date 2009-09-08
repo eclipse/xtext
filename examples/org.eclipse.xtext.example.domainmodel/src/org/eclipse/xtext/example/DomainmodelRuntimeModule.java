@@ -3,12 +3,14 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
-import org.eclipse.emf.index.IndexStore;
-import org.eclipse.emf.index.impl.PersistableIndexStore;
+import org.eclipse.emf.emfindex.Index;
+import org.eclipse.emf.emfindex.MemoryIndexImpl;
 import org.eclipse.xtext.index.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.index.DefaultIndexBasedScopeProvider;
 import org.eclipse.xtext.index.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+
+import com.google.inject.Provider;
 
 
 /**
@@ -16,8 +18,12 @@ import org.eclipse.xtext.scoping.IScopeProvider;
  */
 public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	
-	public IndexStore bindIndexStore() {
-		return new PersistableIndexStore();
+	public Provider<Index> provideIndex() {
+		return new Provider<Index>() {
+			public Index get() {
+				return new MemoryIndexImpl();
+			}
+		};
 	}
 	
 	@Override

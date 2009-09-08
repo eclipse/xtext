@@ -3,12 +3,14 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
-import org.eclipse.emf.index.IndexStore;
-import org.eclipse.emf.index.ui.internal.EmfIndexUIPlugin;
+import org.eclipse.emf.emfindex.Index;
+import org.eclipse.emf.emfindex.ui.EmfIndexUIPlugin;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
+
+import com.google.inject.Provider;
 
 
 /**
@@ -16,8 +18,13 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCo
  */
 public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	
-	public IndexStore bindIndexStore() {
-		return EmfIndexUIPlugin.getDefault().getIndexStore();
+	@Override
+	public Provider<Index> provideIndex() {
+		return new Provider<Index>() {
+			public Index get() {
+				return EmfIndexUIPlugin.getDefault().getIndex();
+			}
+		};
 	}
 	
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
