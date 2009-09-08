@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
-import org.eclipse.emf.index.impl.PersistableIndexStore;
-import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
 import org.eclipse.xtext.index.DefaultIndexBasedScopeProvider.DefaultImportNormalizer;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
@@ -30,7 +27,6 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -40,40 +36,28 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
+public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 
-	private PersistableIndexStore store;
-	private DefaultDeclarativeResourceIndexer indexer;
 	private DefaultIndexBasedScopeProvider scopeProvider;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
-		store = new PersistableIndexStore();
-		new EcoreIndexFeederImpl(store).feedEPackagesFromRegistry();
-
-		indexer = new DefaultDeclarativeResourceIndexer();
-		DefaultDeclarativeQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
-		indexer.setNameProvider(nameProvider);
 
 		scopeProvider = new DefaultIndexBasedScopeProvider();
-		scopeProvider.setIndexStore(store);
+		scopeProvider.setIndexStore(index);
 		scopeProvider.setNameProvider(nameProvider);
 	}
 
 	public void indexExample() throws Exception {
-		final String source = "foo.bar { " +
+		String source = "foo.bar { " +
 			"  entity Person {  " +
 			"    String name " +
 			"  } " +
 			"  datatype String " +
 			"}";
-		XtextResource resource = getResource(new StringInputStream(source), URI.createURI("my.indextestlanguage"));
-
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		index(source,"my.indextestlanguage");
 	}
 
 	public void testGlobalScope() throws Exception {
@@ -110,9 +94,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		"  } " +
 		"  entity Person {}" +
 		"}"), URI.createURI("relative.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
@@ -136,9 +118,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"  entity Person {" +
 				"  }" +
 		"}"), URI.createURI("relative.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 		public Iterator<EObject> iterator() {
 			return resource.getAllContents();
@@ -165,9 +145,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"    entity Person {}" +
 				"  }" +
 		"}"), URI.createURI("relative.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
@@ -222,9 +200,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"  entity D {}" +
 				"  datatype Context" +
 				"}"), URI.createURI("testReexports2.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
@@ -274,9 +250,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"E {" +
 				"  datatype Context" +
 				"}"), URI.createURI("foo23.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
@@ -305,9 +279,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 				"  entity Bar{}" +
 				"}"
 		), URI.createURI("withoutwildcard.indextestlanguage"));
-		IndexFeederImpl feeder = new IndexFeederImpl(store);
-		indexer.resourceChanged(resource, feeder);
-		feeder.commit();
+		indexResource(resource);
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();

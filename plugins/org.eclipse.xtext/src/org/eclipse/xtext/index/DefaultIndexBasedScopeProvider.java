@@ -8,22 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.transform;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IndexStore;
-import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.emfindex.EObjectDescriptor;
+import org.eclipse.emf.emfindex.Index;
+import org.eclipse.emf.emfindex.query.EObjectDescriptorQuery;
+import org.eclipse.emf.emfindex.query.QueryCommand;
+import org.eclipse.emf.emfindex.query.QueryExecutor;
+import org.eclipse.emf.emfindex.query.QueryResult;
+import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
+import org.eclipse.emf.emfindex.util.Descriptors;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
@@ -79,7 +86,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 					if (!s1.equals(s2)) {
 						if (!s1.equals(nameProvider.getWildcard())) {
 							break;
-						} else {
+						}
+						else {
 							StringBuffer result = new StringBuffer(s2);
 							while (i2.hasNext()) {
 								result.append(nameProvider.getDelimiter());
@@ -87,7 +95,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 							}
 							return result.toString();
 						}
-					} else if (!i1.hasNext() && !i2.hasNext()) {
+					}
+					else if (!i1.hasNext() && !i2.hasNext()) {
 						return s2;
 					}
 				}
@@ -104,9 +113,9 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	@Inject
-	private IndexStore indexStore;
+	private Index indexStore;
 
-	public void setIndexStore(IndexStore indexStore) {
+	public void setIndexStore(Index indexStore) {
 		this.indexStore = indexStore;
 	}
 
@@ -122,7 +131,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 			// global scope
 			result = getGlobalScope(context, type);
 			result = getResourceScope(result, context, type);
-		} else {
+		}
+		else {
 			// outer scope
 			result = getScope(context.eContainer(), type);
 		}
@@ -212,7 +222,8 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 	protected Set<Function<String, String>> getImportNormalizer(EObject context) {
 		Set<Function<String, String>> namespaceImports = new HashSet<Function<String, String>>();
-		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importedNamespace");
+		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
+				"importedNamespace");
 		for (EObject child : context.eContents()) {
 			String value = importResolver.getValue(child);
 			if (value != null) {
@@ -231,23 +242,24 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 		final Set<Function<String, String>> normalizers = getImportNormalizer(context);
 		if (normalizers.isEmpty())
 			return null;
-		Iterable<IScopedElement> transformed = transform(local.getAllContents(), new Function<IScopedElement, IScopedElement>() {
+		Iterable<IScopedElement> transformed = transform(local.getAllContents(),
+				new Function<IScopedElement, IScopedElement>() {
 
-			public IScopedElement apply(final IScopedElement input) {
-				for (Function<String, String> normalizer : normalizers) {
-					final String newName = normalizer.apply(input.name());
-					if (newName != null) {
-						return new AliasedScopedElement(newName, input);
+					public IScopedElement apply(final IScopedElement input) {
+						for (Function<String, String> normalizer : normalizers) {
+							final String newName = normalizer.apply(input.name());
+							if (newName != null) {
+								return new AliasedScopedElement(newName, input);
+							}
+						}
+						return null;
 					}
-				}
-				return null;
-			}
-		});
+				});
 		return filter(transformed, Predicates.notNull());
 	}
 
 	protected EObject createProxy(EObjectDescriptor from) {
-		EClass eClass = from.getEClassDescriptor().getEClass();
+		EClass eClass = from.getEClass();
 		EObject proxy = eClass.getEPackage().getEFactoryInstance().create(eClass);
 		((InternalEObject) proxy).eSetProxyURI(from.getFragmentURI());
 		return proxy;
@@ -255,24 +267,126 @@ public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
 
 	protected IScope getGlobalScope(final EObject context, final EClass type) {
 		return new SimpleScope(null) {
+
+			@Override
 			public Iterable<IScopedElement> getContents() {
-				Iterable<EObjectDescriptor> result = indexStore.eObjectDAO().createQueryEObjectsByType(type).executeListResult();
-				if (context != null) {
-					Resource eResource = context.eResource();
-					final ResourceDescriptor descriptor = indexStore.resourceDAO().createQueryResource(eResource).executeSingleResult();
-					result = filter(result, new Predicate<EObjectDescriptor>() {
-						public boolean apply(EObjectDescriptor input) {
-							return !input.getResourceDescriptor().equals(descriptor);
-						}
-					});
-				}
-				return transform(result, new Function<EObjectDescriptor, IScopedElement>() {
-					public IScopedElement apply(EObjectDescriptor from) {
-						return new IndexBasedScopedElement(from);
-					}
-				});
+				return indexStore.executeQueryCommand(new ConvertAll(context, type));
+			}
+
+			@Override
+			public IScopedElement getContentByName(String name) {
+				return indexStore.executeQueryCommand(new FindByName(context, type, name));
+			}
+
+			@Override
+			public IScopedElement getContentByEObject(EObject object) {
+				return indexStore.executeQueryCommand(new FindByEObject(context, type, object));
 			}
 		};
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	private static final class FindByEObject extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
+
+		private EObject object;
+
+		public FindByEObject(EObject context, EClass type, EObject object) {
+			super(context, type);
+			this.object = object;
+		}
+
+		public IScopedElement execute(QueryExecutor queryExecutor, Index index) {
+			EObjectDescriptorQuery query = createQuery();
+
+			ResourceDescriptorQuery resourceQuery = new ResourceDescriptorQuery();
+			resourceQuery.setURI(object.eResource().getURI());
+			query.setResourceQuery(resourceQuery);
+			query.setFragment(EcoreUtil.getURI(object).fragment());
+
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query, index);
+			for (EObjectDescriptor desc : result) {
+				EObject proxy = Descriptors.createProxy(desc);
+				return ScopedElement.create(desc.getName(), proxy);
+			}
+			return null;
+		}
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	private final static class FindByName extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
+
+		private String name;
+
+		public FindByName(EObject context, EClass type, String name) {
+			super(context, type);
+			this.name = name;
+		}
+
+		public IScopedElement execute(QueryExecutor queryExecutor, Index index) {
+			EObjectDescriptorQuery query = createQuery();
+			query.setNameEquals(name);
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query, index);
+			for (EObjectDescriptor desc : result) {
+				EObject proxy = Descriptors.createProxy(desc);
+				return ScopedElement.create(desc.getName(), proxy);
+			}
+			return null;
+		}
+
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	private static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IScopedElement>> {
+
+		public ConvertAll(EObject context, EClass type) {
+			super(context, type);
+		}
+
+		public Iterable<IScopedElement> execute(QueryExecutor queryExecutor, Index index) {
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(createQuery(), index);
+			ArrayList<IScopedElement> elements = new ArrayList<IScopedElement>();
+			for (EObjectDescriptor desc : result) {
+				EObject proxy = Descriptors.createProxy(desc);
+				IScopedElement element = ScopedElement.create(desc.getName(), proxy);
+				elements.add(element);
+			}
+			return elements;
+		}
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	abstract static class AbstractIndexQuery {
+
+		private EClass type;
+		private EObject context;
+
+		public AbstractIndexQuery(EObject context, EClass type) {
+			this.context = context;
+			this.type = type;
+		}
+
+		public EObjectDescriptorQuery createQuery() {
+
+			EObjectDescriptorQuery query = new EObjectDescriptorQuery();
+			query.setIsInstanceOf(type);
+
+			if (context != null) {
+				URI resourceURI = context.eResource().getURI();
+				ResourceDescriptorQuery resourceQuery = new ResourceDescriptorQuery();
+				resourceQuery.getURINotIn().add(resourceURI);
+				query.setResourceQuery(resourceQuery);
+			}
+
+			return query;
+		}
 	}
 
 }

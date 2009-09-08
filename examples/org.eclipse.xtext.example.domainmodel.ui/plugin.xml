@@ -14,8 +14,8 @@
 	</extension>
 	
 	<extension
-		point="org.eclipse.emf.index.indexer">
-		<indexer class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.index.DefaultDeclarativeResourceIndexer" fileExtensions="dmodel"/>
+		point="org.eclipse.emf.emfindex.resourceIndexer">
+		<resourceIndexer class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.index.DefaultDeclarativeResourceIndexer" fileExtension="dmodel"/>
 	</extension>
 
 

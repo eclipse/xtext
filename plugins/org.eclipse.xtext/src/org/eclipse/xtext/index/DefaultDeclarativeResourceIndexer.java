@@ -11,7 +11,8 @@ package org.eclipse.xtext.index;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.emfindex.store.ResourceIndexerImpl;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.inject.Inject;
@@ -22,40 +23,28 @@ import com.google.inject.Inject;
  */
 public class DefaultDeclarativeResourceIndexer extends ResourceIndexerImpl {
 
-	private final PolymorphicDispatcher<Boolean> isIndex = new PolymorphicDispatcher<Boolean>("isIndex", 1, 1, Collections
-			.singletonList(this));
-
-	private final PolymorphicDispatcher<String> getDisplayName = new PolymorphicDispatcher<String>("getDisplayName", 1, 1, Collections
-			.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>() {
-
-		public String handle(Object[] params, Throwable throwable) {
-			return getEObjectName((EObject) params[0]);
-		}
-	});
+	@Override
+	protected boolean isIndexElement(EObject eObject, Resource resource) {
+		return isIndex.invoke(eObject);
+	}
 	
-	protected boolean isIndexElement(EObject element) {
-		return isIndex.invoke(element);
-	};
-	
-	protected boolean isIndex(EObject element) {
-		return getEObjectDisplayName(element) != null;
-	};
-
 	@Override
 	protected String getEObjectName(EObject eObject) {
 		return nameProvider.getQualifiedName(eObject);
 	}
 
-	@Override
-	protected String getEObjectDisplayName(EObject eObject) {
-		return getDisplayName.invoke(eObject);
-	}
-	
 	@Inject
 	private IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 	
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
+	}
+	
+	private final PolymorphicDispatcher<Boolean> isIndex = new PolymorphicDispatcher<Boolean>("isIndex", 1, 1, Collections
+			.singletonList(this));
+
+	protected boolean isIndex(EObject obj) {
+		return getEObjectName(obj)!=null;
 	}
 
 }
