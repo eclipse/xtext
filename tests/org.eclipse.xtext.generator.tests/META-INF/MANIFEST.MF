@@ -15,12 +15,12 @@ Require-Bundle: org.eclipse.xtext,
  org.easymock;bundle-version="2.3.0",
  org.eclipse.xtext.junit;bundle-version="0.8.0",
  org.eclipse.emf.mwe.utils;bundle-version="0.8.0",
- org.eclipse.emf.index,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.xtend
+ org.eclipse.xtext.xtend,
+ org.eclipse.emf.emfindex;bundle-version="0.8.0"
 Bundle-ClassPath: lib/simple.jar,.
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.dummy,
