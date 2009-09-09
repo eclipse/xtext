@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.types
+Bundle-Vendor: Eclipse.org
+Bundle-Version: 0.8.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.common.types;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: 
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ com.google.collect;bundle-version="0.8.0",
+ com.google.guice;bundle-version="1.0.1",
+ org.eclipse.xtext;bundle-version="0.8.0"
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.common.types,
+ org.eclipse.xtext.common.types.access,
+ org.eclipse.xtext.common.types.access.impl,
+ org.eclipse.xtext.common.types.impl,
+ org.eclipse.xtext.common.types.util
