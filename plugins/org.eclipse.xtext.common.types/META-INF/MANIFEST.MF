@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.types
+Bundle-Name: org.eclipse.xtext.common.types
 Bundle-Vendor: Eclipse.org
 Bundle-Version: 0.8.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.common.types;singleton:=true

@@ -66,6 +66,11 @@ public class TypeResource extends ResourceImpl {
 	}
 	
 	@Override
+	public void save(Map<?, ?> options) throws IOException {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		if (getURI() != null && mirror != null) {
 			mirror.initialize(this);
