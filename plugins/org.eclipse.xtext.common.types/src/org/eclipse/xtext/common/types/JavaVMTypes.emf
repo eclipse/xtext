@@ -1,0 +1,144 @@
+@namespace(uri="http://www.eclipse.org/xtext/common/JavaVMTypes", prefix="types")
+package types;
+
+abstract class IdentifyableElement {
+  op String getCanonicalName();
+}
+
+abstract class Type extends IdentifyableElement {
+}
+
+class Void extends Type {
+}
+
+abstract class ConstrainedType extends Type {
+  val TypeConstraint[*]#constrainedType constraints;
+}
+
+abstract class ComponentType extends Type {
+  val ArrayType#componentType arrayType;
+}
+
+abstract class ReferenceType extends ComponentType {
+}
+
+class PrimitiveType extends ComponentType {
+  attr String name;
+}
+
+class Wildcard extends ConstrainedType {
+}
+
+class ArrayType extends ReferenceType {
+  op int getDimensions();
+  ref ComponentType#arrayType componentType;
+}
+
+abstract class DeclaredType extends ReferenceType, Member {
+  attr String fullyQualifiedName;
+  op String getSimpleName();
+  op String getPackageName(); 
+  attr String visibility;
+  val TypeReference[*] superTypes;
+  val Member[*]#declaringType members;
+}
+
+class TypeVariable extends ReferenceType, ConstrainedType {
+  attr String name;
+}
+
+abstract class TypeConstraint extends IdentifyableElement {
+  val TypeReference[*] referencedTypes;
+  ref ConstrainedType#constraints constrainedType;
+}
+
+class UpperBound extends TypeConstraint {
+}
+
+class LowerBound extends TypeConstraint {
+}
+
+class AnnotationType extends DeclaredType {
+}
+
+class EnumerationType extends DeclaredType {
+}
+
+class GenericType extends DeclaredType {
+  attr boolean ~abstract;
+  attr boolean ~interface;
+  attr boolean static;
+  attr boolean final;
+  val TypeVariable[*] typeVariables;
+  op TypeReference[*] getExtendedInterfaces();
+  op TypeReference[*] getExtendedClasses();
+  op boolean isInstantiateable();
+}
+
+class ParameterizedType extends ReferenceType {
+  val GenericType#incarnations rawType;
+  val TypeParameter[*]#declarator parameters;
+}
+
+abstract class TypeParameter extends IdentifyableElement {
+  ref TypeVariable variable;
+}
+
+class WildcardTypeParameter extends TypeParameter {
+  val Wildcard wildcard;
+}
+
+class ReferenceTypeParameter extends TypeParameter {
+  val TypeReference reference;
+}
+
+class TypeReference extends IdentifyableElement {
+  ref Type type;
+  op boolean isValidReturnType();
+  op boolean isValidParameterType();
+}
+
+abstract class Member extends AnnotationTarget, IdentifyableElement {
+  ref DeclaredType#members declaringType;
+}
+
+class Field extends Member {
+  attr String visibility;
+  attr boolean static;
+  attr boolean final;
+  val TypeReference type;
+  attr String name;
+}
+
+abstract class Executable extends Member {
+  attr String visibility;
+  attr String name;
+  val FormalParameter[*] parameters;
+  val TypeVariable[*] typeVariables;
+}
+
+class Constructor extends Executable {
+}
+
+class Operation extends Executable {
+  attr boolean static;
+  attr boolean final;
+  attr boolean ~abstract;
+  val TypeReference returnType;
+}
+
+class FormalParameter extends IdentifyableElement {
+  attr String name;
+  val TypeReference parameterType;
+}
+
+abstract class AnnotationTarget {
+  val AnnotationReference[*]#target annotations;
+}
+
+class AnnotationReference {
+  ref AnnotationType annotation;
+  ref AnnotationTarget#annotations target;
+}
+
+
