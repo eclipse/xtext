@@ -52,7 +52,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		with(new LazyLinkingTestLanguageStandaloneSetup());
 		EObject model = getModelAndExpect("type Foo", 1);
 		IScopeProvider provider = getScopeProvider();
-		IScope scope = provider.getScope(model, LazyLinkingPackage.eINSTANCE.getType());
+		IScope scope = provider.getScope(model, LazyLinkingPackage.eINSTANCE.getProperty_Type());
 		assertEquals("Foo",scope.getAllContents().iterator().next().name());
 	}
 
@@ -127,7 +127,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		resourceSet.getResources().add(res);
 		EReference details = (EReference) EcoreUtil.copy(EcorePackage.eINSTANCE.getEClass_ESuperTypes());
 		res.getContents().add(details);
-		assertNotNull(provider.getScope(details, details.eClass()));
+		assertNotNull(provider.getScope(details, EcorePackage.eINSTANCE.getEReference_EOpposite()));
 	}
 	
 	@SuppressWarnings("unused")

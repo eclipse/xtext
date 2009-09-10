@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Stable;
@@ -37,14 +36,4 @@ public interface IScopeProvider {
 	 */
 	public IScope getScope(EObject context, EReference reference);
 
-	/**
-	 * Returns a scope for a given context. The scope contains any visible, type-compatible
-	 * element.
-	 * @param context the element from which an element shall be referenced
-	 * @param type the (super)type of the elements.
-	 * @return {@link IScope} representing the inner most {@link IScope} for the
-	 *         passed context and type. Note for implementors: The result may not be <code>null</code>.
-	 *         Return <code>IScope.NULLSCOPE</code> instead.
-	 */
-	public IScope getScope(EObject context, EClass type);
 }
