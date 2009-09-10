@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.ui.core.editor.quickfix;
 
 import java.util.ArrayList;
 import java.util.Iterator;

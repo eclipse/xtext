@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.quickfix;
+package org.eclipse.xtext.ui.core.editor.quickfix;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -24,11 +24,11 @@ import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.IImageHelper;
-import org.eclipse.xtext.ui.core.editor.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.MarkerUtil;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
+import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
+import org.eclipse.xtext.ui.core.editor.validation.MarkerUtil;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;

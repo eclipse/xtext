@@ -11,8 +11,8 @@ package org.eclipse.xtext.example.quickfix;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.xtext.example.domainmodel.Type;
 import org.eclipse.xtext.example.validation.DomainmodelJavaValidator;
-import org.eclipse.xtext.ui.core.quickfix.AbstractDeclarativeQuickfixProvider;
-import org.eclipse.xtext.ui.core.quickfix.Fix;
+import org.eclipse.xtext.ui.core.editor.quickfix.AbstractDeclarativeQuickfixProvider;
+import org.eclipse.xtext.ui.core.editor.quickfix.Fix;
 
 public class DomainmodelQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
 

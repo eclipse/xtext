@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ui.IMarkerResolution;
+import org.eclipse.xtext.ui.core.editor.quickfix.AbstractDeclarativeQuickfixProvider;
+import org.eclipse.xtext.ui.core.editor.quickfix.Fix;
 
 /**
  * @author Knut Wannheden - Initial contribution and API

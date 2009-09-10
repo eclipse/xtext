@@ -26,6 +26,7 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.core.editor.hover.ProblemHover;
+import org.eclipse.xtext.ui.core.editor.quickfix.XtextQuickAssistAssistant;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ISingleLineCommentHelper;
 
 import com.google.inject.Inject;

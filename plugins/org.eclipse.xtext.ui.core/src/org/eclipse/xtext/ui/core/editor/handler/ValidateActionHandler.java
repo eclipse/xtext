@@ -14,7 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
+import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.inject.Inject;

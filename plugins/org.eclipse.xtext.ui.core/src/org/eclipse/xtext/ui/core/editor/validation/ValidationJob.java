@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.utils;
+package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +21,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.concurrent.IStateAccess;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.MarkerUtil;
 import org.eclipse.xtext.validation.CheckMode;
 
 /**

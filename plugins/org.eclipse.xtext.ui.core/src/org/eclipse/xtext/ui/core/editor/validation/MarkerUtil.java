@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

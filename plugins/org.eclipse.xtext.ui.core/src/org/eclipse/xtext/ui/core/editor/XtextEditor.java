@@ -55,7 +55,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ToggleSLCommentAction;
-import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
+import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.validation.CheckMode;
 
