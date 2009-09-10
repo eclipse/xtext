@@ -51,7 +51,6 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	 * @ordered
 	 */
 	protected EList<TypeReference> referencedTypes;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

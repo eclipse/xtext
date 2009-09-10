@@ -35,12 +35,14 @@ class ArrayType extends ReferenceType {
 }
 
 abstract class DeclaredType extends ReferenceType, Member {
-  attr String fullyQualifiedName;
-  op String getSimpleName();
-  op String getPackageName(); 
+  op String getPackageName();
   attr String visibility;
   val TypeReference[*] superTypes;
   val Member[*]#declaringType members;
+}
+
+abstract class TypeVariableDeclarator extends IdentifyableElement {
+  val TypeVariable[*]#declarator typeVariables;
 }
 
 class TypeVariable extends ReferenceType, ConstrainedType {
@@ -64,20 +66,20 @@ class AnnotationType extends DeclaredType {
 class EnumerationType extends DeclaredType {
 }
 
-class GenericType extends DeclaredType {
+class GenericType extends DeclaredType, TypeVariableDeclarator {
   attr boolean ~abstract;
   attr boolean ~interface;
   attr boolean static;
   attr boolean final;
-  val TypeVariable[*] typeVariables;
   op TypeReference[*] getExtendedInterfaces();
   op TypeReference[*] getExtendedClasses();
-  op boolean isInstantiateable();
+  op boolean isInstantiateable(); 
 }
 
 class ParameterizedType extends ReferenceType {
-  val GenericType#incarnations rawType;
   val TypeParameter[*]#declarator parameters;
+  ref Member#declaredParameterizedTypes declarator;
+  val TypeReference rawType;
 }
 
 abstract class TypeParameter extends IdentifyableElement {
@@ -100,6 +102,9 @@ class TypeReference extends IdentifyableElement {
 
 abstract class Member extends AnnotationTarget, IdentifyableElement {
   ref DeclaredType#members declaringType;
+  attr String fullyQualifiedName;
+  op String getSimpleName();
+  val ParameterizedType[*]#declarator declaredParameterizedTypes;
 }
 
 class Field extends Member {
@@ -107,14 +112,12 @@ class Field extends Member {
   attr boolean static;
   attr boolean final;
   val TypeReference type;
-  attr String name;
 }
 
-abstract class Executable extends Member {
+abstract class Executable extends Member, TypeVariableDeclarator {
   attr String visibility;
-  attr String name;
   val FormalParameter[*] parameters;
-  val TypeVariable[*] typeVariables;
+  val TypeReference[*] exceptions;
 }
 
 class Constructor extends Executable {

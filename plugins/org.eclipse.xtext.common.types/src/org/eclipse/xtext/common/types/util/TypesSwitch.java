@@ -38,6 +38,7 @@ import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
@@ -203,6 +204,13 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.TYPE_VARIABLE_DECLARATOR: {
+				TypeVariableDeclarator typeVariableDeclarator = (TypeVariableDeclarator)theEObject;
+				T result = caseTypeVariableDeclarator(typeVariableDeclarator);
+				if (result == null) result = caseIdentifyableElement(typeVariableDeclarator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TypesPackage.TYPE_VARIABLE: {
 				TypeVariable typeVariable = (TypeVariable)theEObject;
 				T result = caseTypeVariable(typeVariable);
@@ -267,6 +275,7 @@ public class TypesSwitch<T> {
 				GenericType genericType = (GenericType)theEObject;
 				T result = caseGenericType(genericType);
 				if (result == null) result = caseDeclaredType(genericType);
+				if (result == null) result = caseTypeVariableDeclarator(genericType);
 				if (result == null) result = caseReferenceType(genericType);
 				if (result == null) result = caseMember(genericType);
 				if (result == null) result = caseComponentType(genericType);
@@ -337,6 +346,7 @@ public class TypesSwitch<T> {
 				Executable executable = (Executable)theEObject;
 				T result = caseExecutable(executable);
 				if (result == null) result = caseMember(executable);
+				if (result == null) result = caseTypeVariableDeclarator(executable);
 				if (result == null) result = caseAnnotationTarget(executable);
 				if (result == null) result = caseIdentifyableElement(executable);
 				if (result == null) result = defaultCase(theEObject);
@@ -347,6 +357,7 @@ public class TypesSwitch<T> {
 				T result = caseConstructor(constructor);
 				if (result == null) result = caseExecutable(constructor);
 				if (result == null) result = caseMember(constructor);
+				if (result == null) result = caseTypeVariableDeclarator(constructor);
 				if (result == null) result = caseAnnotationTarget(constructor);
 				if (result == null) result = caseIdentifyableElement(constructor);
 				if (result == null) result = defaultCase(theEObject);
@@ -357,6 +368,7 @@ public class TypesSwitch<T> {
 				T result = caseOperation(operation);
 				if (result == null) result = caseExecutable(operation);
 				if (result == null) result = caseMember(operation);
+				if (result == null) result = caseTypeVariableDeclarator(operation);
 				if (result == null) result = caseAnnotationTarget(operation);
 				if (result == null) result = caseIdentifyableElement(operation);
 				if (result == null) result = defaultCase(theEObject);
@@ -532,6 +544,21 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseDeclaredType(DeclaredType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Variable Declarator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Variable Declarator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeVariableDeclarator(TypeVariableDeclarator object) {
 		return null;
 	}
 

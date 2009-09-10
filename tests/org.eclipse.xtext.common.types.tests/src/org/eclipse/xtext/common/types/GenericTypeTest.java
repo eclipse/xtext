@@ -43,7 +43,7 @@ public class GenericTypeTest extends TestCase {
 		typeVariable.setName("T");
 		genericType.setFullyQualifiedName("java.util.List");
 		genericType.getTypeVariables().add(typeVariable);
-		assertEquals("java.util.List<T>", genericType.getCanonicalName());
+		assertEquals("java.util.List", genericType.getCanonicalName());
 	}
 	
 	public void testCanonicalName_05() {
@@ -54,7 +54,7 @@ public class GenericTypeTest extends TestCase {
 		genericType.setFullyQualifiedName("java.util.List");
 		genericType.getTypeVariables().add(typeVariable1);
 		genericType.getTypeVariables().add(typeVariable2);
-		assertEquals("java.util.List<T1, T2>", genericType.getCanonicalName());
+		assertEquals("java.util.List", genericType.getCanonicalName());
 	}
 	
 }

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.DeclaredType#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.DeclaredType#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.DeclaredType#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.DeclaredType#getMembers <em>Members</em>}</li>
@@ -29,44 +28,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface DeclaredType extends ReferenceType, Member {
-	/**
-	 * Returns the value of the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Fully Qualified Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fully Qualified Name</em>' attribute.
-	 * @see #setFullyQualifiedName(String)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getDeclaredType_FullyQualifiedName()
-	 * @model
-	 * @generated
-	 */
-	String getFullyQualifiedName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.DeclaredType#getFullyQualifiedName <em>Fully Qualified Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Fully Qualified Name</em>' attribute.
-	 * @see #getFullyQualifiedName()
-	 * @generated
-	 */
-	void setFullyQualifiedName(String value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Simple Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	String getSimpleName();
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

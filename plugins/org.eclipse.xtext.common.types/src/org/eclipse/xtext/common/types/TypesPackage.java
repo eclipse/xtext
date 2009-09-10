@@ -350,13 +350,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARED_TYPE__FULLY_QUALIFIED_NAME = REFERENCE_TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES = REFERENCE_TYPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__VISIBILITY = REFERENCE_TYPE_FEATURE_COUNT + 3;
+	int DECLARED_TYPE__VISIBILITY = REFERENCE_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -365,7 +374,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__SUPER_TYPES = REFERENCE_TYPE_FEATURE_COUNT + 4;
+	int DECLARED_TYPE__SUPER_TYPES = REFERENCE_TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -374,7 +383,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__MEMBERS = REFERENCE_TYPE_FEATURE_COUNT + 5;
+	int DECLARED_TYPE__MEMBERS = REFERENCE_TYPE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Declared Type</em>' class.
@@ -383,7 +392,35 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 6;
+	int DECLARED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl <em>Type Variable Declarator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariableDeclarator()
+	 * @generated
+	 */
+	int TYPE_VARIABLE_DECLARATOR = 10;
+
+	/**
+	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Variable Declarator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_DECLARATOR_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl <em>Type Variable</em>}' class.
@@ -393,7 +430,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariable()
 	 * @generated
 	 */
-	int TYPE_VARIABLE = 10;
+	int TYPE_VARIABLE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -439,7 +476,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeConstraint()
 	 * @generated
 	 */
-	int TYPE_CONSTRAINT = 11;
+	int TYPE_CONSTRAINT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
@@ -476,7 +513,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getUpperBound()
 	 * @generated
 	 */
-	int UPPER_BOUND = 12;
+	int UPPER_BOUND = 13;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
@@ -513,7 +550,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getLowerBound()
 	 * @generated
 	 */
-	int LOWER_BOUND = 13;
+	int LOWER_BOUND = 14;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
@@ -550,7 +587,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationType()
 	 * @generated
 	 */
-	int ANNOTATION_TYPE = 14;
+	int ANNOTATION_TYPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -587,6 +624,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -632,7 +678,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getEnumerationType()
 	 * @generated
 	 */
-	int ENUMERATION_TYPE = 15;
+	int ENUMERATION_TYPE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -669,6 +715,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -714,7 +769,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericType()
 	 * @generated
 	 */
-	int GENERIC_TYPE = 16;
+	int GENERIC_TYPE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -753,6 +808,15 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
+
+	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,13 +844,22 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_TYPE__MEMBERS = DECLARED_TYPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE__TYPE_VARIABLES = DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__ABSTRACT = DECLARED_TYPE_FEATURE_COUNT + 0;
+	int GENERIC_TYPE__ABSTRACT = DECLARED_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Interface</b></em>' attribute.
@@ -795,7 +868,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__INTERFACE = DECLARED_TYPE_FEATURE_COUNT + 1;
+	int GENERIC_TYPE__INTERFACE = DECLARED_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -804,7 +877,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__STATIC = DECLARED_TYPE_FEATURE_COUNT + 2;
+	int GENERIC_TYPE__STATIC = DECLARED_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -813,16 +886,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__FINAL = DECLARED_TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE__TYPE_VARIABLES = DECLARED_TYPE_FEATURE_COUNT + 4;
+	int GENERIC_TYPE__FINAL = DECLARED_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Generic Type</em>' class.
@@ -841,7 +905,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedType()
 	 * @generated
 	 */
-	int PARAMETERIZED_TYPE = 17;
+	int PARAMETERIZED_TYPE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -853,22 +917,31 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__ARRAY_TYPE = REFERENCE_TYPE__ARRAY_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Raw Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__RAW_TYPE = REFERENCE_TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__PARAMETERS = REFERENCE_TYPE_FEATURE_COUNT + 1;
+	int PARAMETERIZED_TYPE__PARAMETERS = REFERENCE_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Raw Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__RAW_TYPE = REFERENCE_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Parameterized Type</em>' class.
@@ -877,7 +950,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 2;
+	int PARAMETERIZED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -887,7 +960,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameter()
 	 * @generated
 	 */
-	int TYPE_PARAMETER = 18;
+	int TYPE_PARAMETER = 19;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -915,7 +988,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeParameter()
 	 * @generated
 	 */
-	int WILDCARD_TYPE_PARAMETER = 19;
+	int WILDCARD_TYPE_PARAMETER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -952,7 +1025,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeParameter()
 	 * @generated
 	 */
-	int REFERENCE_TYPE_PARAMETER = 20;
+	int REFERENCE_TYPE_PARAMETER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -989,7 +1062,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeReference()
 	 * @generated
 	 */
-	int TYPE_REFERENCE = 21;
+	int TYPE_REFERENCE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1017,7 +1090,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationTarget()
 	 * @generated
 	 */
-	int ANNOTATION_TARGET = 28;
+	int ANNOTATION_TARGET = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1045,7 +1118,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getMember()
 	 * @generated
 	 */
-	int MEMBER = 22;
+	int MEMBER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1066,13 +1139,31 @@ public interface TypesPackage extends EPackage {
 	int MEMBER__DECLARING_TYPE = ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER__FULLY_QUALIFIED_NAME = ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER__DECLARED_PARAMETERIZED_TYPES = ANNOTATION_TARGET_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_FEATURE_COUNT = ANNOTATION_TARGET_FEATURE_COUNT + 1;
+	int MEMBER_FEATURE_COUNT = ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.FieldImpl <em>Field</em>}' class.
@@ -1082,7 +1173,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getField()
 	 * @generated
 	 */
-	int FIELD = 23;
+	int FIELD = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1101,6 +1192,24 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__FULLY_QUALIFIED_NAME = MEMBER__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__DECLARED_PARAMETERIZED_TYPES = MEMBER__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1139,22 +1248,13 @@ public interface TypesPackage extends EPackage {
 	int FIELD__TYPE = MEMBER_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__NAME = MEMBER_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 5;
+	int FIELD_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ExecutableImpl <em>Executable</em>}' class.
@@ -1164,7 +1264,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getExecutable()
 	 * @generated
 	 */
-	int EXECUTABLE = 24;
+	int EXECUTABLE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1185,22 +1285,40 @@ public interface TypesPackage extends EPackage {
 	int EXECUTABLE__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTABLE__FULLY_QUALIFIED_NAME = MEMBER__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTABLE__DECLARED_PARAMETERIZED_TYPES = MEMBER__DECLARED_PARAMETERIZED_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTABLE__TYPE_VARIABLES = MEMBER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__VISIBILITY = MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTABLE__NAME = MEMBER_FEATURE_COUNT + 1;
+	int EXECUTABLE__VISIBILITY = MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1212,13 +1330,13 @@ public interface TypesPackage extends EPackage {
 	int EXECUTABLE__PARAMETERS = MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__TYPE_VARIABLES = MEMBER_FEATURE_COUNT + 3;
+	int EXECUTABLE__EXCEPTIONS = MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Executable</em>' class.
@@ -1237,7 +1355,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstructor()
 	 * @generated
 	 */
-	int CONSTRUCTOR = 25;
+	int CONSTRUCTOR = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1258,6 +1376,33 @@ public interface TypesPackage extends EPackage {
 	int CONSTRUCTOR__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__FULLY_QUALIFIED_NAME = EXECUTABLE__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__DECLARED_PARAMETERIZED_TYPES = EXECUTABLE__DECLARED_PARAMETERIZED_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+
+	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1265,15 +1410,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRUCTOR__VISIBILITY = EXECUTABLE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__NAME = EXECUTABLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1285,13 +1421,13 @@ public interface TypesPackage extends EPackage {
 	int CONSTRUCTOR__PARAMETERS = EXECUTABLE__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+	int CONSTRUCTOR__EXCEPTIONS = EXECUTABLE__EXCEPTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Constructor</em>' class.
@@ -1310,7 +1446,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 26;
+	int OPERATION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1331,6 +1467,33 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__FULLY_QUALIFIED_NAME = EXECUTABLE__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__DECLARED_PARAMETERIZED_TYPES = EXECUTABLE__DECLARED_PARAMETERIZED_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+
+	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1338,15 +1501,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__VISIBILITY = EXECUTABLE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__NAME = EXECUTABLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1358,13 +1512,13 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__PARAMETERS = EXECUTABLE__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+	int OPERATION__EXCEPTIONS = EXECUTABLE__EXCEPTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1419,7 +1573,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getFormalParameter()
 	 * @generated
 	 */
-	int FORMAL_PARAMETER = 27;
+	int FORMAL_PARAMETER = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1457,7 +1611,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationReference()
 	 * @generated
 	 */
-	int ANNOTATION_REFERENCE = 29;
+	int ANNOTATION_REFERENCE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1632,17 +1786,6 @@ public interface TypesPackage extends EPackage {
 	EClass getDeclaredType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.DeclaredType#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
-	 * @see org.eclipse.xtext.common.types.DeclaredType#getFullyQualifiedName()
-	 * @see #getDeclaredType()
-	 * @generated
-	 */
-	EAttribute getDeclaredType_FullyQualifiedName();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.DeclaredType#getVisibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1674,6 +1817,27 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDeclaredType_Members();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator <em>Type Variable Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Variable Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator
+	 * @generated
+	 */
+	EClass getTypeVariableDeclarator();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables <em>Type Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Variables</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables()
+	 * @see #getTypeVariableDeclarator()
+	 * @generated
+	 */
+	EReference getTypeVariableDeclarator_TypeVariables();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeVariable <em>Type Variable</em>}'.
@@ -1823,17 +1987,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getGenericType_Final();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.GenericType#getTypeVariables <em>Type Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Variables</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType#getTypeVariables()
-	 * @see #getGenericType()
-	 * @generated
-	 */
-	EReference getGenericType_TypeVariables();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ParameterizedType <em>Parameterized Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1842,17 +1995,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getParameterizedType();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Raw Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ParameterizedType#getRawType()
-	 * @see #getParameterizedType()
-	 * @generated
-	 */
-	EReference getParameterizedType_RawType();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ParameterizedType#getParameters <em>Parameters</em>}'.
@@ -1864,6 +2006,28 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getParameterizedType_Parameters();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.ParameterizedType#getDeclarator <em>Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.ParameterizedType#getDeclarator()
+	 * @see #getParameterizedType()
+	 * @generated
+	 */
+	EReference getParameterizedType_Declarator();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Raw Type</em>'.
+	 * @see org.eclipse.xtext.common.types.ParameterizedType#getRawType()
+	 * @see #getParameterizedType()
+	 * @generated
+	 */
+	EReference getParameterizedType_RawType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeParameter <em>Type Parameter</em>}'.
@@ -1971,6 +2135,28 @@ public interface TypesPackage extends EPackage {
 	EReference getMember_DeclaringType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Member#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
+	 * @see org.eclipse.xtext.common.types.Member#getFullyQualifiedName()
+	 * @see #getMember()
+	 * @generated
+	 */
+	EAttribute getMember_FullyQualifiedName();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Member#getDeclaredParameterizedTypes <em>Declared Parameterized Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Declared Parameterized Types</em>'.
+	 * @see org.eclipse.xtext.common.types.Member#getDeclaredParameterizedTypes()
+	 * @see #getMember()
+	 * @generated
+	 */
+	EReference getMember_DeclaredParameterizedTypes();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Field <em>Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2025,17 +2211,6 @@ public interface TypesPackage extends EPackage {
 	EReference getField_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Field#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.Field#getName()
-	 * @see #getField()
-	 * @generated
-	 */
-	EAttribute getField_Name();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Executable <em>Executable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2057,17 +2232,6 @@ public interface TypesPackage extends EPackage {
 	EAttribute getExecutable_Visibility();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Executable#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable#getName()
-	 * @see #getExecutable()
-	 * @generated
-	 */
-	EAttribute getExecutable_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2079,15 +2243,15 @@ public interface TypesPackage extends EPackage {
 	EReference getExecutable_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getTypeVariables <em>Type Variables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getExceptions <em>Exceptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Variables</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable#getTypeVariables()
+	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
+	 * @see org.eclipse.xtext.common.types.Executable#getExceptions()
 	 * @see #getExecutable()
 	 * @generated
 	 */
-	EReference getExecutable_TypeVariables();
+	EReference getExecutable_Exceptions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Constructor <em>Constructor</em>}'.
@@ -2393,14 +2557,6 @@ public interface TypesPackage extends EPackage {
 		EClass DECLARED_TYPE = eINSTANCE.getDeclaredType();
 
 		/**
-		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DECLARED_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE.getDeclaredType_FullyQualifiedName();
-
-		/**
 		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2423,6 +2579,24 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DECLARED_TYPE__MEMBERS = eINSTANCE.getDeclaredType_Members();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl <em>Type Variable Declarator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariableDeclarator()
+		 * @generated
+		 */
+		EClass TYPE_VARIABLE_DECLARATOR = eINSTANCE.getTypeVariableDeclarator();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES = eINSTANCE.getTypeVariableDeclarator_TypeVariables();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl <em>Type Variable</em>}' class.
@@ -2551,14 +2725,6 @@ public interface TypesPackage extends EPackage {
 		EAttribute GENERIC_TYPE__FINAL = eINSTANCE.getGenericType_Final();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERIC_TYPE__TYPE_VARIABLES = eINSTANCE.getGenericType_TypeVariables();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2569,20 +2735,28 @@ public interface TypesPackage extends EPackage {
 		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
 
 		/**
-		 * The meta object literal for the '<em><b>Raw Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETERIZED_TYPE__RAW_TYPE = eINSTANCE.getParameterizedType_RawType();
-
-		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PARAMETERIZED_TYPE__PARAMETERS = eINSTANCE.getParameterizedType_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__DECLARATOR = eINSTANCE.getParameterizedType_Declarator();
+
+		/**
+		 * The meta object literal for the '<em><b>Raw Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__RAW_TYPE = eINSTANCE.getParameterizedType_RawType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -2675,6 +2849,22 @@ public interface TypesPackage extends EPackage {
 		EReference MEMBER__DECLARING_TYPE = eINSTANCE.getMember_DeclaringType();
 
 		/**
+		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER__FULLY_QUALIFIED_NAME = eINSTANCE.getMember_FullyQualifiedName();
+
+		/**
+		 * The meta object literal for the '<em><b>Declared Parameterized Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEMBER__DECLARED_PARAMETERIZED_TYPES = eINSTANCE.getMember_DeclaredParameterizedTypes();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.FieldImpl <em>Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2717,14 +2907,6 @@ public interface TypesPackage extends EPackage {
 		EReference FIELD__TYPE = eINSTANCE.getField_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD__NAME = eINSTANCE.getField_Name();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ExecutableImpl <em>Executable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2743,14 +2925,6 @@ public interface TypesPackage extends EPackage {
 		EAttribute EXECUTABLE__VISIBILITY = eINSTANCE.getExecutable_Visibility();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXECUTABLE__NAME = eINSTANCE.getExecutable_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2759,12 +2933,12 @@ public interface TypesPackage extends EPackage {
 		EReference EXECUTABLE__PARAMETERS = eINSTANCE.getExecutable_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Variables</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTABLE__TYPE_VARIABLES = eINSTANCE.getExecutable_TypeVariables();
+		EReference EXECUTABLE__EXCEPTIONS = eINSTANCE.getExecutable_Exceptions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ConstructorImpl <em>Constructor</em>}' class.

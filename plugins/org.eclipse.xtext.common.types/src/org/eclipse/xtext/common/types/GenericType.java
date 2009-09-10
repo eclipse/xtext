@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.common.types.GenericType#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.GenericType#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.GenericType#isFinal <em>Final</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.GenericType#getTypeVariables <em>Type Variables</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface GenericType extends DeclaredType {
+public interface GenericType extends DeclaredType, TypeVariableDeclarator {
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -133,22 +132,6 @@ public interface GenericType extends DeclaredType {
 	 * @generated
 	 */
 	void setFinal(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Type Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeVariable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type Variables</em>' containment reference list.
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getGenericType_TypeVariables()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<TypeVariable> getTypeVariables();
 
 	/**
 	 * <!-- begin-user-doc -->

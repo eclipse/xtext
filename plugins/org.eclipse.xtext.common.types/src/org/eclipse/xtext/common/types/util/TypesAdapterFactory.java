@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
@@ -140,6 +141,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDeclaredType(DeclaredType object) {
 				return createDeclaredTypeAdapter();
+			}
+			@Override
+			public Adapter caseTypeVariableDeclarator(TypeVariableDeclarator object) {
+				return createTypeVariableDeclaratorAdapter();
 			}
 			@Override
 			public Adapter caseTypeVariable(TypeVariable object) {
@@ -378,6 +383,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDeclaredTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator <em>Type Variable Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator
+	 * @generated
+	 */
+	public Adapter createTypeVariableDeclaratorAdapter() {
 		return null;
 	}
 
