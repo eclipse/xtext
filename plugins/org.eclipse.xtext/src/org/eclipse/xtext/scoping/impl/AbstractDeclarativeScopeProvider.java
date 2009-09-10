@@ -11,14 +11,13 @@ package org.eclipse.xtext.scoping.impl;
 import java.lang.reflect.Method;
 import java.util.Collections;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.eclipse.xtext.util.PolymorphicDispatcher.NullErrorHandler;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -47,15 +46,13 @@ import com.google.inject.Inject;
  * {@link #getScope(EObject, EReference)} would be called for the containing
  * Entity. This is done as long as there is an eContainer. <br/>
  * If after walking up the containment hierarchy no suitable scoping declaration
- * has been found, the implementation falls back to invoke getScope(ctx,
- * (EClass) ref.getEType()) i.e. calling {@link #getScope(EObject, EClass)}. For
- * {@link #getScope(EObject, EClass)} this implementation looks for methods with
- * the following signature:</p> <code>
+ * has been found, the implementation falls back to invoke methods with
+ * the following signature (computed by {@link #getPredicate(EObject, EClass)}):</p> <code>
  * IScope scope_[EClassName](MyType context, EClass clazz)</p>
  * </code>
  * 
  * For instance if a scope provider is asked to return all Entities which are
- * visible from a certain Property, it looks for a methode like this:</p> <code>
+ * visible from a certain Property, it looks for a method like this:</p> <code>
  * IScope scope_Entity(Reference ref, EClass clazz)</p>
  * </code>
  * Again the first parameter can also be any super type of the actual type and
@@ -65,38 +62,9 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider {
 
-	private final static Logger log = Logger.getLogger(AbstractDeclarativeScopeProvider.class);
-
-	private final ErrorHandler<IScope> refErrorHandler = new ErrorHandler<IScope>() {
-		public IScope handle(Object[] params, Throwable throwable) {
-			EObject object = (EObject) params[0];
-			EReference reference = (EReference) params[1];
-			// ask the container
-			if (object.eContainer() != null) {
-				return AbstractDeclarativeScopeProvider.this.internalGetScope(object.eContainer(), reference);
-			}
-			return null;
-		}
-	};
-
-	private final ErrorHandler<IScope> typeErrorHandler = new ErrorHandler<IScope>() {
-		public IScope handle(Object[] params, Throwable throwable) {
-			EObject object = (EObject) params[0];
-			EClass type = (EClass) params[1];
-			if (object.eContainer() == null) {
-				if (log.isTraceEnabled())
-					log.trace(throwable.getMessage());
-				return AbstractDeclarativeScopeProvider.this.getGenericFallBack().getScope(object, type);
-			}
-			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), type);
-		}
-	};
+	private static final NullErrorHandler<IScope> ERROR_HANDLER = new PolymorphicDispatcher.NullErrorHandler<IScope>();
 
 	private IScopeProvider genericFallBack = new IScopeProvider() {
-
-		public IScope getScope(EObject context, EClass type) {
-			return IScope.NULLSCOPE;
-		}
 
 		public IScope getScope(EObject context, EReference reference) {
 			return IScope.NULLSCOPE;
@@ -123,32 +91,29 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		IScope scope = internalGetScope(context, reference);
-		if (scope == null)
-			return getScope(context, (EClass) reference.getEType());
-		return scope;
-	}
-
-	protected IScope internalGetScope(EObject context, EReference reference) {
-		final Predicate<Method> predicate = getPredicate(context, reference);
-		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
-				getRefErrorHandler());
-		return scope.invoke(context, reference);
-	}
-
-	protected ErrorHandler<IScope> getRefErrorHandler() {
-		return refErrorHandler;
-	}
-
-	public IScope getScope(EObject context, EClass type) {
-		final Predicate<Method> predicate = getPredicate(context, type);
-		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
-				getTypeErrorHandler());
-		return scope.invoke(context, type);
-	}
-
-	protected ErrorHandler<IScope> getTypeErrorHandler() {
-		return typeErrorHandler;
+		Predicate<Method> predicate = getPredicate(context, reference);
+		PolymorphicDispatcher<IScope> dispatcher = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate,
+				ERROR_HANDLER);
+		EObject current = context;
+		IScope scope = null;
+		while (scope==null && current!=null) {
+			scope = dispatcher.invoke(current,reference);
+			current = current.eContainer();
+		}
+		if (scope!=null)
+			return scope;
+		
+		dispatcher = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), getPredicate(context, reference.getEReferenceType()),
+				ERROR_HANDLER);
+		current = context;
+		while (scope==null && current!=null) {
+			scope = dispatcher.invoke(current,reference.getEReferenceType());
+			current = current.eContainer();
+		}
+		if (scope!=null)
+			return scope;
+		
+		return getGenericFallBack().getScope(context, reference);
 	}
 
 }
