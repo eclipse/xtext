@@ -32,33 +32,8 @@ public class XtendTestsActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.XtextGrammarTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.XtextGrammarTestLanguageUiModule(),
-			createUIPluginModule()
-		));
-		
-		injectors.put("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule(),
-			createUIPluginModule()
-		));
-		
-		injectors.put("org.eclipse.xtext.testlanguages.ContentAssistTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule(),
-			createUIPluginModule()
-		));
-		
-		injectors.put("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule(),
-			createUIPluginModule()
-		));
-		
 		injectors.put("org.eclipse.xtext.testlanguages.TreeTestLanguage", Guice.createInjector(
 			new org.eclipse.xtext.testlanguages.TreeTestLanguageUiModule(),
-			createUIPluginModule()
-		));
-		
-		injectors.put("org.eclipse.xtext.enumrules.EnumRulesTestLanguage", Guice.createInjector(
-			new org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule(),
 			createUIPluginModule()
 		));
 		

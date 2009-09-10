@@ -32,7 +32,8 @@ public class DeclarativeActionBarContributorTest extends TestCase {
 	}
 	
 	class SampleDeclarativeActionBarContributor extends DeclarativeActionBarContributor {
-		protected void addDefaultActions() {};
+		@Override
+		protected void addDefaultActions() {}
 		Action addSomeToolbarAction(XtextContentOutlinePage page) {
 			return new SampleAction(page);
 		}

@@ -5,404 +5,110 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/Test/XtextTest" 
-       class = "org.eclipse.xtext.xtextTest.XtextTestPackage"
-       genModel = "org/eclipse/xtext/XtextGrammarTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="xtextgrammartestlanguage">
-		</parser>
-	</extension>
-
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="xtextgrammartestlanguage"
-			id="org.eclipse.xtext.XtextGrammarTestLanguage"
-			name="XtextGrammarTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.XtextGrammarTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.XtextGrammarTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.XtextGrammarTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.XtextGrammarTestLanguage"
-			name="XtextGrammarTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.ui.keyword_XtextGrammarTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.XtextGrammarTestLanguage"
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.XtextGrammarTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.XtextGrammarTestLanguage"
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.XtextGrammarTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.ui.keyword_XtextGrammarTestLanguage"
-			label="XtextGrammarTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.XtextGrammarTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
-       class = "org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage"
-       genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="keywordstestlanguage">
-		</parser>
-	</extension>
-
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="keywordstestlanguage"
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			name="KeywordsTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			name="KeywordsTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.parser.keywords.ui.keyword_KeywordsTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.parser.keywords.ui.keyword_KeywordsTestLanguage"
-			label="KeywordsTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2008/xtext/tests/ContentAssist" 
-       class = "org.eclipse.xtext.testlanguages.contentAssistTestLanguage.ContentAssistTestLanguagePackage"
-       genModel = "org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="contentassisttestlanguage">
-		</parser>
-	</extension>
-
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="contentassisttestlanguage"
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			name="ContentAssistTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			name="ContentAssistTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.testlanguages.ui.keyword_ContentAssistTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.testlanguages.ui.keyword_ContentAssistTestLanguage"
-			label="ContentAssistTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://eclipse.org/xtext/reference/ReferenceGrammar" 
-       class = "org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage"
-       genModel = "org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="referencegrammartestlanguage">
-		</parser>
-	</extension>
-
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="referencegrammartestlanguage"
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			name="ReferenceGrammarTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			name="ReferenceGrammarTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.testlanguages.ui.keyword_ReferenceGrammarTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.testlanguages.ui.keyword_ReferenceGrammarTestLanguage"
-			label="ReferenceGrammarTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
        class = "org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage"
        genModel = "org/eclipse/xtext/testlanguages/TreeTestLanguage.genmodel" /> 
 	
   </extension>
 
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="treetestlanguage"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            name="TreeTestLanguage Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.testlanguages.TreeTestLanguage" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            name="TreeTestLanguage"
+            category="org.eclipse.xtext.languages">
+            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"
+            label="TreeTestLanguage"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -414,181 +120,5 @@
 		</parser>
 	</extension>
 
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="treetestlanguage"
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			name="TreeTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.testlanguages.TreeTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			name="TreeTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"
-			label="TreeTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest" 
-       class = "org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage"
-       genModel = "org/eclipse/xtext/enumrules/EnumRulesTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-<!-- adding resource factories -->
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
-			type="enumrulestestlanguage">
-		</parser>
-	</extension>
-
-
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="enumrulestestlanguage"
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			name="EnumRulesTestLanguage Editor">
-		</editor>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-      <definition id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.Editor.opened">
-        	<and>
-        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-        			<with variable="activeEditor">
-			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-			            	value="org.eclipse.xtext.enumrules.EnumRulesTestLanguage" 
-      						forcePluginActivation="true"/>
-         			</with>		
-			</and>
-      </definition>
-    </extension>
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			name="EnumRulesTestLanguage"
-			category="org.eclipse.xtext.languages">
-			<keywordReference
-				id="org.eclipse.xtext.enumrules.ui.keyword_EnumRulesTestLanguage">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.coloring"
-			name="Syntax Coloring">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-		<page
-			category="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.templates"
-			name="Templates">
-			<keywordReference 
-				id="org.eclipse.xtext.keyword.editor">
-			</keywordReference>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.enumrules.ui.keyword_EnumRulesTestLanguage"
-			label="EnumRulesTestLanguage">
-		</keyword>
-		<keyword
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.tasktags"
-			label="Task Tags">
-		</keyword>
-	</extension>
-	
 
 </plugin>

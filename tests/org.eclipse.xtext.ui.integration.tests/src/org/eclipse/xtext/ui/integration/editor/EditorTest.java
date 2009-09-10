@@ -36,6 +36,7 @@ public class EditorTest extends AbstractEditorTest {
 
 	private static final Logger logger = Logger.getLogger(EditorTest.class);
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -58,6 +59,7 @@ public class EditorTest extends AbstractEditorTest {
 		IXtextDocument document = openedEditor.getDocument();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				assertTrue(resource.getContents().isEmpty());
@@ -79,6 +81,7 @@ public class EditorTest extends AbstractEditorTest {
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
@@ -91,6 +94,7 @@ public class EditorTest extends AbstractEditorTest {
 		sleep(3000);
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
@@ -117,6 +121,7 @@ public class EditorTest extends AbstractEditorTest {
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
@@ -129,6 +134,7 @@ public class EditorTest extends AbstractEditorTest {
 		sleep(3000);
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
