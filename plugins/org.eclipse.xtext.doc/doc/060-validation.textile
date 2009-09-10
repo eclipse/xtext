@@ -82,7 +82,7 @@ public class DomainmodelQuickfixProvider extends AbstractDeclarativeQuickfixProv
 
 p. By using the correct signature (see below) and annotating the method with the @Fix@ annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
 
-The ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.quickfix.Fix} annotation accepts the following arguments:
+The ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.editor.quickfix.Fix} annotation accepts the following arguments:
 
 * *code* - the code of the validation this fix is applicable to
 * *label* - the label text to display for this fix in the editor
