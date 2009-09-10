@@ -9,14 +9,8 @@
 package org.eclipse.xtext.index;
 
 import java.util.Iterator;
-import java.util.List;
 
-import org.easymock.EasyMock;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfindex.EObjectDescriptor;
 import org.eclipse.emf.emfindex.Index;
 import org.eclipse.emf.emfindex.ResourceDescriptor;
@@ -24,9 +18,7 @@ import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
-import org.eclipse.emf.emfindex.query.ResourceQueryExecutorStrategyImpl;
 import org.eclipse.xtext.index.indexTestLanguage.Namespace;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -79,6 +71,7 @@ public class DefaultDeclarativeResourceIndexerTest extends AbstractIndexBasedTes
 
 	public void testSurpressIndexingForNamespaces() throws Exception {
 		indexer = new DefaultDeclarativeResourceIndexer() {
+			@SuppressWarnings("unused")
 			protected boolean isIndex(Namespace ns) {
 				return false;
 			}
