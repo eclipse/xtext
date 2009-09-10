@@ -11,10 +11,12 @@ import org.eclipse.xtext.formatting.IFormatter;
 public class FormatterTestLanguageRuntimeModule extends
 		AbstractFormatterTestLanguageRuntimeModule {
 
+	@Override
 	public Class<? extends IFormatter> bindIFormatter() {
 		return FormattingTokenSerializerTestImpl.class;
 	}
 
+	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return FormatterTestValueConverters.class;
 	}

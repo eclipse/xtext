@@ -309,5 +309,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.linking.bug287988Test.util,
  org.eclipse.xtext.parser.assignments.bug288432Test,
  org.eclipse.xtext.parser.assignments.bug288432Test.impl,
- org.eclipse.xtext.parser.assignments.bug288432Test.util
+ org.eclipse.xtext.parser.assignments.bug288432Test.util,
+ org.eclipse.xtext.linking.bug289059Test,
+ org.eclipse.xtext.linking.bug289059Test.impl,
+ org.eclipse.xtext.linking.bug289059Test.util
 Import-Package: org.apache.log4j

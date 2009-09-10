@@ -34,10 +34,14 @@ public class EmfAssert {
 
 	public static void assertTokensEqual(String msg, String expected,
 			String actual) {
-		if (expected == null)
+		if (expected == null) {
 			fail("expected is null");
-		if (actual == null)
+			return;
+		}
+		if (actual == null) {
 			fail("actual is null");
+			return;
+		}
 		expected = expected.trim();
 		actual = actual.trim();
 		Matcher expM = SPACE.matcher(expected);
