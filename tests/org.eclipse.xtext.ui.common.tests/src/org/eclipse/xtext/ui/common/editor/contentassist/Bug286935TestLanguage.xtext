@@ -8,7 +8,7 @@
 grammar org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguage
  	with org.eclipse.xtext.common.Terminals
 
-generate bug286935TestLanguage "http://www.eclipse.org/tmf/tests/2009/bug286935TestLanguage"
+generate bug286935TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2009/bug286935TestLanguage"
 
 State:
   (

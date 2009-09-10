@@ -41,7 +41,7 @@ public interface TwoContextsPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/twoContexts";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/twoContexts";
 
   /**
    * The package namespace name.

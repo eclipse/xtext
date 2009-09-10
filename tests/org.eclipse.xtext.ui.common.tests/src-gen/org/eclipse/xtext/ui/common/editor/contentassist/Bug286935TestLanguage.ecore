@@ -2,7 +2,8 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug286935TestLanguage"
-    nsURI="http://www.eclipse.org/tmf/tests/2009/bug286935TestLanguage" nsPrefix="bug286935TestLanguage">
+    nsURI="http://www.eclipse.org/xtext/ui/common/tests/2009/bug286935TestLanguage"
+    nsPrefix="bug286935TestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="State">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInitial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

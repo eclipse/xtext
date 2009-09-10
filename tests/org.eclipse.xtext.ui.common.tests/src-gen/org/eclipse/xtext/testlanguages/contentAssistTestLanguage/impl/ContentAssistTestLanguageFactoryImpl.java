@@ -33,7 +33,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/tests/ContentAssist"); 
+      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/ui/common/tests/ContentAssist"); 
       if (theContentAssistTestLanguageFactory != null)
       {
         return theContentAssistTestLanguageFactory;

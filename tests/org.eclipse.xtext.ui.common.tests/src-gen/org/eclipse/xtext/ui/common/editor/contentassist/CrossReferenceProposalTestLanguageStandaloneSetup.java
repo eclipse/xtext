@@ -29,8 +29,8 @@ public class CrossReferenceProposalTestLanguageStandaloneSetup implements ISetup
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest", org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest", org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

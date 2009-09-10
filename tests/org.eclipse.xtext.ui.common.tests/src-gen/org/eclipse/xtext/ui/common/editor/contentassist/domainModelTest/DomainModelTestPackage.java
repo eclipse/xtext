@@ -41,7 +41,7 @@ public interface DomainModelTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/DomainModelTestLanguage";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/DomainModelTestLanguage";
 
   /**
    * The package namespace name.

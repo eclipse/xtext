@@ -13,7 +13,7 @@
 		<projectNameRt value="${projectName}"/>
 		<activator value="org.eclipse.xtext.xtend.XtendTestsActivator"/>
 		
-		<language uri="classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/xtend/TreeTestLanguage.xtext">
 				<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 				<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 				<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>

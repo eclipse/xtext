@@ -41,7 +41,7 @@ public interface Bug288734TestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage";
 
   /**
    * The package namespace name.

@@ -12,7 +12,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
+import org.eclipse.xtext.xtend.TreeTestLanguageRuntimeModule;
+import org.eclipse.xtext.xtend.TreeTestLanguageStandaloneSetup;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -29,7 +30,7 @@ public class CheckValidatorTest extends AbstractXtextTests {
 		with(new TreeTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule());
+				return Guice.createInjector(new TreeTestLanguageRuntimeModule());
 			}
 		});
 	}

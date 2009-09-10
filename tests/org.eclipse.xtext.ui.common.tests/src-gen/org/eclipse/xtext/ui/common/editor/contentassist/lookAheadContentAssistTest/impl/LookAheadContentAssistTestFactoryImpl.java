@@ -33,7 +33,7 @@ public class LookAheadContentAssistTestFactoryImpl extends EFactoryImpl implemen
   {
     try
     {
-      LookAheadContentAssistTestFactory theLookAheadContentAssistTestFactory = (LookAheadContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/tmf/tests/2009/lookAheadContentAssistTest"); 
+      LookAheadContentAssistTestFactory theLookAheadContentAssistTestFactory = (LookAheadContentAssistTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest"); 
       if (theLookAheadContentAssistTestFactory != null)
       {
         return theLookAheadContentAssistTestFactory;

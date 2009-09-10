@@ -1,7 +1,0 @@
-import org::eclipse::xtext::testlanguages::treeTestLanguage;
-
-context Node#children ERROR "Too many children" : 
-	children.size<4;
-	
-context Node WARNING "Too many children" : 
-	children.size<2 || children.size>=4;

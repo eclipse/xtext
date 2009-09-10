@@ -29,8 +29,8 @@ public class LookAheadContentAssistTestLanguageStandaloneSetup implements ISetup
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/tmf/tests/2009/lookAheadContentAssistTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/tmf/tests/2009/lookAheadContentAssistTest", org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.LookAheadContentAssistTestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest", org.eclipse.xtext.ui.common.editor.contentassist.lookAheadContentAssistTest.LookAheadContentAssistTestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
