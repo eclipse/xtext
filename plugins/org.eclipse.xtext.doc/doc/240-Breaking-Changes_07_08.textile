@@ -1,0 +1,17 @@
+
+h1(#breaking_changes). Breaking API changes between the different versions
+
+
+h2(#breaking_changes_08). Changes in Xtext 0.8.0
+
+*Moved validation classes to dedicated package*
+
+* org.eclipse.xtext.ui.core.editor.IDiagnosticConverter -> org.eclipse.xtext.ui.core.editor.validation.IDiagnosticConverter
+* org.eclipse.xtext.ui.core.editor.DefaultDiagnosticConverter -> org.eclipse.xtext.ui.core.editor.validation.DefaultDiagnosticConverter
+
+* org.eclipse.xtext.ui.core.editor.IXtextResourceChecker -> org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker
+* org.eclipse.xtext.ui.core.editor.DefaultXtextResourceChecker -> org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker
+
+
+
+

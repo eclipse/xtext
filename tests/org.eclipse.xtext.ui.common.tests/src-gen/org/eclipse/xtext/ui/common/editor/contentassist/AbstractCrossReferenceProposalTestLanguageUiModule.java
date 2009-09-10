@@ -113,13 +113,13 @@ public abstract class AbstractCrossReferenceProposalTestLanguageUiModule extends
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.utils.ValidationJob.Factory> bindValidationJob$Factory() {
-		return org.eclipse.xtext.ui.core.editor.utils.DefaultValidationJobFactory.class;
+	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.ValidationJob.Factory> bindValidationJob$Factory() {
+		return org.eclipse.xtext.ui.core.editor.validation.DefaultValidationJobFactory.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextResourceChecker> bindIXtextResourceChecker() {
-		return org.eclipse.xtext.ui.core.editor.DefaultXtextResourceChecker.class;
+	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker> bindIXtextResourceChecker() {
+		return org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

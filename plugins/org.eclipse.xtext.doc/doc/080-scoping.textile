@@ -25,6 +25,7 @@ bc.. public interface IScopeProvider {
    *         the passed context and type.
    */
   public IScope getScope(EObject context, EClass type);
+  
 }
 
 p. A single @IScope@ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope.

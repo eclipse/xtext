@@ -16,8 +16,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.ui.core.editor.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.MarkerUtil;
+import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
+import org.eclipse.xtext.ui.core.editor.validation.MarkerUtil;
 
 /**
  * @author knut - Initial contribution and API
