@@ -96,7 +96,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		if (node.getGrammarElement() instanceof AbstractElement) {
 			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
 			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null) {
+			if (assignment == null && node.getParent() != null && node.getParent().getElement() == null) {
 				installProxies(obj, producer, settingsToLink, node.getParent());
 			}
 		}

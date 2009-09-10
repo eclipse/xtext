@@ -11,6 +11,7 @@ import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 public class UnassignedTextTestLanguageRuntimeModule extends
 		AbstractUnassignedTextTestLanguageRuntimeModule {
 
+	@Override
 	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
 		return UnassignedTextTestSerializer.class;
 	}
