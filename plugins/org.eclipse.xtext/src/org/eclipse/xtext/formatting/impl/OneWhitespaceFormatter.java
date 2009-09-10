@@ -36,6 +36,7 @@ public class OneWhitespaceFormatter extends BaseFormatter {
 			return grammarElement != getWSRule();
 		}
 
+		@Override
 		public void writeHidden(EObject grammarElement, String value)
 				throws IOException {
 			boolean isCmt = isComment(grammarElement, value);
@@ -49,6 +50,7 @@ public class OneWhitespaceFormatter extends BaseFormatter {
 			}
 		}
 
+		@Override
 		public void writeSemantic(EObject grammarElement, String value)
 				throws IOException {
 			writeSpaceIfNecessary();
@@ -66,6 +68,7 @@ public class OneWhitespaceFormatter extends BaseFormatter {
 
 	}
 
+	@Override
 	public ITokenStream createFormatterStream(String initalIndentation,
 			ITokenStream outputStream, boolean preserveWhitespaces) {
 		return new OneWhitespaceFormatterStream(outputStream,

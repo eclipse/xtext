@@ -35,6 +35,7 @@ public class ScopedElement extends AbstractScopedElement {
 	private final EObject element;
 	private final Object additionalInformation;
 
+	@Override
 	public Object additionalInformation() {
 		return additionalInformation;
 	}

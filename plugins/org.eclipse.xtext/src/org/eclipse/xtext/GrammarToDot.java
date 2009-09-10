@@ -100,6 +100,7 @@ public class GrammarToDot extends GraphvizDotBuilder {
 		return d;
 	}
 
+	@Override
 	protected Props drawObject(Object obj) {
 		if (obj == null)
 			throw new NullPointerException("Obj null");

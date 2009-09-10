@@ -49,6 +49,7 @@ public class SettingDelegate implements EStructuralFeature.Setting {
 		delegate.unset();
 	}
 	
+	@Override
 	public int hashCode() {
 		return delegate.getEObject().hashCode() ^ delegate.getEStructuralFeature().hashCode();
 	}
@@ -56,8 +57,6 @@ public class SettingDelegate implements EStructuralFeature.Setting {
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof SettingDelegate))
-			return false;
-		if (obj == null)
 			return false;
 		SettingDelegate other = (SettingDelegate) obj;
 		return delegate == other.delegate || 
