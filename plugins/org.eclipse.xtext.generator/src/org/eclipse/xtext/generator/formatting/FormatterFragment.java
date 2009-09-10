@@ -16,7 +16,6 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.

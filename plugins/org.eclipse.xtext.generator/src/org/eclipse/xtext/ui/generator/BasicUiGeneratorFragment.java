@@ -16,9 +16,10 @@ public class BasicUiGeneratorFragment extends DefaultGeneratorFragment {
 	private String fileExtensions;
 
 	public void setFileExtensions(String text) {
-		this.fileExtensions = text;;
+		this.fileExtensions = text;
 	}
 	
+	@Override
 	public void checkConfiguration(Issues issues) {
 		issues.addWarning("Fragment org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment is deprecated and not needed anymore. Just remove it from the mwe configuration.");
 		if (fileExtensions!=null) 

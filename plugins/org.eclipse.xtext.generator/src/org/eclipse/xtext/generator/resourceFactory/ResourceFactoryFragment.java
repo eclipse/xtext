@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * An {@link IGeneratorFragment} to generate an EMF resource factory and its registration.
