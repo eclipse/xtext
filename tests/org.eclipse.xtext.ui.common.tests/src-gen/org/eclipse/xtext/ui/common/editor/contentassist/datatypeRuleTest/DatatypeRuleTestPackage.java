@@ -41,7 +41,7 @@ public interface DatatypeRuleTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest";
 
   /**
    * The package namespace name.

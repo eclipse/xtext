@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug288734TestLanguage">
-      <ePackage href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#/"/>
+      <ePackage href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="constants" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -14,7 +14,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TConstant">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//TConstant"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//TConstant"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
@@ -24,7 +24,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TStringConstant">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//TStringConstant"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//TStringConstant"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="annotations" operator="+=">
@@ -39,7 +39,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TIntegerConstant">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//TIntegerConstant"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//TIntegerConstant"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="annotations" operator="+=">
@@ -54,7 +54,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TBooleanConstant">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//TBooleanConstant"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//TBooleanConstant"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="annotations" operator="+=">
@@ -69,7 +69,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TAnnotation">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage#//TAnnotation"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage#//TAnnotation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="@desc"/>

@@ -5,9 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
-       class = "org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage"
-       genModel = "org/eclipse/xtext/testlanguages/TreeTestLanguage.genmodel" /> 
+       uri = "http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage" 
+       class = "org.eclipse.xtext.xtend.treeTestLanguage.TreeTestLanguagePackage"
+       genModel = "org/eclipse/xtext/xtend/TreeTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -15,42 +15,42 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="treetestlanguage"
-            id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            id="org.eclipse.xtext.xtend.TreeTestLanguage"
             name="TreeTestLanguage Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.xtend.TreeTestLanguage.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate">
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.xtend.TreeTestLanguage.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.xtend.TreeTestLanguage.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+        <definition id="org.eclipse.xtext.xtend.TreeTestLanguage.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtext.testlanguages.TreeTestLanguage" 
+                        value="org.eclipse.xtext.xtend.TreeTestLanguage" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -59,38 +59,38 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.xtend.TreeTestLanguage"
             name="TreeTestLanguage"
             category="org.eclipse.xtext.languages">
-            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.xtend.ui.keyword_TreeTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.coloring"
+            category="org.eclipse.xtext.xtend.TreeTestLanguage"
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.xtend.TreeTestLanguage.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.xtend.ui.keyword_TreeTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-            class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.templates"
+            category="org.eclipse.xtext.xtend.TreeTestLanguage"
+            class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.xtend.TreeTestLanguage.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.xtend.ui.keyword_TreeTestLanguage"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage"
+            id="org.eclipse.xtext.xtend.ui.keyword_TreeTestLanguage"
             label="TreeTestLanguage"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate"
+            id="org.eclipse.xtext.xtend.TreeTestLanguage.validate"
             name="Validate">
       </command>
     </extension>
@@ -98,12 +98,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.open">
              <command
-                 commandId="org.eclipse.xtext.testlanguages.TreeTestLanguage.validate"
+                 commandId="org.eclipse.xtext.xtend.TreeTestLanguage.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.xtend.TreeTestLanguage.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -115,7 +115,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
 			type="treetestlanguage">
 		</parser>
 	</extension>

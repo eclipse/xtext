@@ -33,7 +33,7 @@ public class ReferenceGrammarFactoryImpl extends EFactoryImpl implements Referen
   {
     try
     {
-      ReferenceGrammarFactory theReferenceGrammarFactory = (ReferenceGrammarFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/reference/ReferenceGrammar"); 
+      ReferenceGrammarFactory theReferenceGrammarFactory = (ReferenceGrammarFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/ReferenceGrammar"); 
       if (theReferenceGrammarFactory != null)
       {
         return theReferenceGrammarFactory;

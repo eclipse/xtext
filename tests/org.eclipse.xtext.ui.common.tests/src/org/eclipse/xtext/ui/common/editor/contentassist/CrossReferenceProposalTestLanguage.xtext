@@ -8,7 +8,7 @@
 grammar org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguage
  	with org.eclipse.xtext.common.Terminals
 
-generate crossReferenceProposalTest "http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest"
+generate crossReferenceProposalTest "http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest"
 
 Model :
         (elements+=Class)*;

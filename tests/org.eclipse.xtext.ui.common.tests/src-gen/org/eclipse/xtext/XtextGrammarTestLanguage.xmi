@@ -2,14 +2,14 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.XtextGrammarTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="xtextTest">
-      <ePackage href="http://www.eclipse.org/2008/Test/XtextTest#/"/>
+      <ePackage href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#/"/>
     </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Grammar">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Grammar"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Grammar"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="grammar"/>
@@ -21,7 +21,7 @@
           <tokens xsi:type="xtext:Assignment" feature="usedGrammars" operator="+=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Grammar"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Grammar"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
             </terminal>
@@ -31,7 +31,7 @@
             <tokens xsi:type="xtext:Assignment" feature="usedGrammars" operator="+=">
               <terminal xsi:type="xtext:CrossReference">
                 <type metamodel="/0/@metamodelDeclarations.0">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Grammar"/>
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Grammar"/>
                 </type>
                 <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
               </terminal>
@@ -47,7 +47,7 @@
             <tokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
               <terminal xsi:type="xtext:CrossReference">
                 <type metamodel="/0/@metamodelDeclarations.0">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
                 </type>
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
               </terminal>
@@ -57,7 +57,7 @@
               <tokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
                 <terminal xsi:type="xtext:CrossReference">
                   <type metamodel="/0/@metamodelDeclarations.0">
-                    <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                    <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
                   </type>
                   <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
                 </terminal>
@@ -88,7 +88,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractRule">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
@@ -98,7 +98,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractMetamodelDeclaration">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractMetamodelDeclaration"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractMetamodelDeclaration"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
@@ -107,7 +107,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="GeneratedMetamodel">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//GeneratedMetamodel"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//GeneratedMetamodel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="generate"/>
@@ -132,7 +132,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ReferencedMetamodel">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//ReferencedMetamodel"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//ReferencedMetamodel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="import"/>
@@ -154,7 +154,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParserRule">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//ParserRule"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//ParserRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -175,7 +175,7 @@
             <tokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
               <terminal xsi:type="xtext:CrossReference">
                 <type metamodel="/0/@metamodelDeclarations.0">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
                 </type>
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
               </terminal>
@@ -185,7 +185,7 @@
               <tokens xsi:type="xtext:Assignment" feature="hiddenTokens" operator="+=">
                 <terminal xsi:type="xtext:CrossReference">
                   <type metamodel="/0/@metamodelDeclarations.0">
-                    <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+                    <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
                   </type>
                   <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
                 </terminal>
@@ -203,14 +203,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TypeRef">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//TypeRef"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//TypeRef"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Assignment" feature="metamodel" operator="=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractMetamodelDeclaration"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractMetamodelDeclaration"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
             </terminal>
@@ -229,14 +229,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Alternatives">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="groups" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Alternatives"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Group" cardinality="+">
@@ -250,14 +250,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Group">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="tokens" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Group"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Group"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Assignment" cardinality="+" feature="tokens" operator="+=">
@@ -268,7 +268,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractToken">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
@@ -277,7 +277,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractTokenWithCardinality">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Alternatives">
@@ -295,7 +295,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Action">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Action"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Action"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="{"/>
@@ -320,7 +320,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractTerminal">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
@@ -330,7 +330,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Keyword">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Keyword"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Keyword"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
@@ -338,12 +338,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="RuleCall">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//RuleCall"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//RuleCall"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="rule" operator="=">
         <terminal xsi:type="xtext:CrossReference">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractRule"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractRule"/>
           </type>
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </terminal>
@@ -351,7 +351,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Assignment">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Assignment"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Assignment"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" feature="feature" operator="=">
@@ -371,7 +371,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AssignableTerminal">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
@@ -382,7 +382,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedAssignableElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="("/>
@@ -392,14 +392,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AssignableAlternatives">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="groups" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Alternatives"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Group" cardinality="+">
@@ -413,7 +413,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CrossReference">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//CrossReference"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//CrossReference"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="["/>
@@ -431,7 +431,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CrossReferenceableTerminal">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
@@ -441,7 +441,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedCrossReferenceableElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="("/>
@@ -451,14 +451,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CrossReferenceableAlternatives">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="groups" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Alternatives"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Group" cardinality="+">
@@ -472,7 +472,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="("/>
@@ -482,7 +482,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TerminalRule">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//TerminalRule"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//TerminalRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="terminal"/>
@@ -504,14 +504,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TerminalAlternatives">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.27"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="groups" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Alternatives"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Group" cardinality="+">
@@ -525,14 +525,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TerminalGroup">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.28"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="tokens" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Group"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Group"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Assignment" cardinality="+" feature="tokens" operator="+=">
@@ -543,7 +543,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TerminalToken">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.29"/>
@@ -558,7 +558,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TerminalTokenElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.35"/>
@@ -570,7 +570,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedTerminalElement">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="("/>
@@ -580,7 +580,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AbstractNegatedToken">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractNegatedToken"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractNegatedToken"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.32"/>
@@ -589,7 +589,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NegatedToken">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//NegatedToken"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//NegatedToken"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="!"/>
@@ -600,7 +600,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UntilToken">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//UntilToken"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//UntilToken"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="->"/>
@@ -611,12 +611,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Wildcard">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Wildcard"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Wildcard"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Wildcard"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Wildcard"/>
           </type>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="."/>
@@ -624,14 +624,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CharacterRange">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="left" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//CharacterRange"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//CharacterRange"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Keyword" value=".."/>
@@ -643,7 +643,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EnumRule">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//EnumRule"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//EnumRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="enum"/>
@@ -665,14 +665,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EnumLiterals">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//AbstractElement"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//AbstractElement"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.38"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="groups" operator="+=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//Alternatives"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//Alternatives"/>
             </type>
           </tokens>
           <tokens xsi:type="xtext:Group" cardinality="+">
@@ -686,7 +686,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="EnumLiteralDeclaration">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/Test/XtextTest#//EnumLiteralDeclaration"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest#//EnumLiteralDeclaration"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" feature="enumLiteral" operator="=">

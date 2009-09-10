@@ -26,11 +26,11 @@ Require-Bundle: org.eclipse.xtext;bundle-version="0.8.0",
  de.itemis.xtext.antlr;bundle-version="0.8.0";resolution:=optional
 Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.testlanguages.treeTestLanguage,
- org.eclipse.xtext.testlanguages.treeTestLanguage.impl,
- org.eclipse.xtext.testlanguages.treeTestLanguage.util,
- org.eclipse.xtext.testlanguages,
- org.eclipse.xtext.testlanguages.services,
- org.eclipse.xtext.testlanguages.parseTreeConstruction,
- org.eclipse.xtext.testlanguages.validation,
- org.eclipse.xtext.testlanguages.parser.antlr
+Export-Package: org.eclipse.xtext.xtend.treeTestLanguage,
+ org.eclipse.xtext.xtend.treeTestLanguage.impl,
+ org.eclipse.xtext.xtend.treeTestLanguage.util,
+ org.eclipse.xtext.xtend,
+ org.eclipse.xtext.xtend.services,
+ org.eclipse.xtext.xtend.parseTreeConstruction,
+ org.eclipse.xtext.xtend.validation,
+ org.eclipse.xtext.xtend.parser.antlr

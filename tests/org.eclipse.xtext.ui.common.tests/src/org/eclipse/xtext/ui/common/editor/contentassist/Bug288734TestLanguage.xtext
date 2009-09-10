@@ -8,7 +8,7 @@
 grammar org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguage
  	with org.eclipse.xtext.common.Terminals
 
-generate bug288734TestLanguage "http://www.eclipse.org/tmf/tests/2009/bug288734TestLanguage"
+generate bug288734TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2009/bug288734TestLanguage"
 
 Model :
     constants+=TConstant

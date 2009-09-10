@@ -33,7 +33,7 @@ public class ContentAssistContextTestFactoryImpl extends EFactoryImpl implements
   {
     try
     {
-      ContentAssistContextTestFactory theContentAssistContextTestFactory = (ContentAssistContextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest"); 
+      ContentAssistContextTestFactory theContentAssistContextTestFactory = (ContentAssistContextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest"); 
       if (theContentAssistContextTestFactory != null)
       {
         return theContentAssistContextTestFactory;

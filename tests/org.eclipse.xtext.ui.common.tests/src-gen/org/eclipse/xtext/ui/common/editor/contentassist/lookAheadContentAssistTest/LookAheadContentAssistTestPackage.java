@@ -41,7 +41,7 @@ public interface LookAheadContentAssistTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/lookAheadContentAssistTest";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest";
 
   /**
    * The package namespace name.

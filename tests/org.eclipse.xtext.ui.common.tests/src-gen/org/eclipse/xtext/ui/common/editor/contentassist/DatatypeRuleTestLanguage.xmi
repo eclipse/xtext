@@ -2,17 +2,17 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="datatypeRuleTest">
-      <ePackage href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#/"/>
+      <ePackage href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//Model"/>
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Types">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//Types"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//Types"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="Types"/>
@@ -23,7 +23,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Type">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//Type"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//Type"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
@@ -32,7 +32,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleType">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//SimpleType"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//SimpleType"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="Type"/>
@@ -44,7 +44,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CompositeType">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//CompositeType"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//CompositeType"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="Composite"/>
@@ -60,12 +60,12 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CompositeTypeEntry">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//CompositeTypeEntry"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//CompositeTypeEntry"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="dataType" operator="=">
         <terminal xsi:type="xtext:CrossReference">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest#//Type"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest#//Type"/>
           </type>
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         </terminal>

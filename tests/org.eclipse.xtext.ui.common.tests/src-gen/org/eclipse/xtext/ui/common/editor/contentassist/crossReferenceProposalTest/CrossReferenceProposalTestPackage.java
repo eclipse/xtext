@@ -41,7 +41,7 @@ public interface CrossReferenceProposalTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest";
+  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest";
 
   /**
    * The package namespace name.

@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="contentAssistContextTest">
-      <ePackage href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#/"/>
+      <ePackage href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="FirstLevel">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//FirstLevel"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//FirstLevel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="secondLevelA" operator="+=">
@@ -19,7 +19,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SecondLevelA">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//SecondLevelA"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//SecondLevelA"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="+" feature="thirdLevelA1" operator="+=">
@@ -32,7 +32,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SecondLevelB">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//SecondLevelB"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//SecondLevelB"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" cardinality="+" feature="thirdLevelB1" operator="+=">
@@ -45,13 +45,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThirdLevelA1">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelA1"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelA1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="A1"/>
         <tokens xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelA1"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelA1"/>
           </type>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
@@ -61,13 +61,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThirdLevelA2">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelA2"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelA2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="A2"/>
         <tokens xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelA2"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelA2"/>
           </type>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
@@ -77,13 +77,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThirdLevelB1">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelB1"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelB1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="B1"/>
         <tokens xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelB1"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelB1"/>
           </type>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
@@ -93,13 +93,13 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ThirdLevelB2">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelB2"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelB2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="B2"/>
         <tokens xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/contentAssistContextTest#//ThirdLevelB2"/>
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/contentAssistContextTest#//ThirdLevelB2"/>
           </type>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">

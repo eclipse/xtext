@@ -41,7 +41,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
   {
     try
     {
-      DomainModelTestFactory theDomainModelTestFactory = (DomainModelTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/tmf/tests/2009/DomainModelTestLanguage"); 
+      DomainModelTestFactory theDomainModelTestFactory = (DomainModelTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/DomainModelTestLanguage"); 
       if (theDomainModelTestFactory != null)
       {
         return theDomainModelTestFactory;

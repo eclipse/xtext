@@ -33,7 +33,7 @@ public class TwoContextsFactoryImpl extends EFactoryImpl implements TwoContextsF
   {
     try
     {
-      TwoContextsFactory theTwoContextsFactory = (TwoContextsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/tmf/tests/2009/twoContexts"); 
+      TwoContextsFactory theTwoContextsFactory = (TwoContextsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/twoContexts"); 
       if (theTwoContextsFactory != null)
       {
         return theTwoContextsFactory;

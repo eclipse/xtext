@@ -41,7 +41,7 @@ public interface ContentAssistTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2008/xtext/tests/ContentAssist";
+  String eNS_URI = "http://www.eclipse.org/2008/xtext/ui/common/tests/ContentAssist";
 
   /**
    * The package namespace name.

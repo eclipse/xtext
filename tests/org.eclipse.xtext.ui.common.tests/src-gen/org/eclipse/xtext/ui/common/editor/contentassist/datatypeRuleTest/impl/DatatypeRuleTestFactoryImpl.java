@@ -33,7 +33,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
   {
     try
     {
-      DatatypeRuleTestFactory theDatatypeRuleTestFactory = (DatatypeRuleTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/tmf/tests/2009/datatypeRuleTest"); 
+      DatatypeRuleTestFactory theDatatypeRuleTestFactory = (DatatypeRuleTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/datatypeRuleTest"); 
       if (theDatatypeRuleTestFactory != null)
       {
         return theDatatypeRuleTestFactory;

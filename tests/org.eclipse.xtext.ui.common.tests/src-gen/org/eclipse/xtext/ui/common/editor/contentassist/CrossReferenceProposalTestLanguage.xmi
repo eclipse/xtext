@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="crossReferenceProposalTest">
-      <ePackage href="http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest#/"/>
+      <ePackage href="http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -14,14 +14,14 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Class">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest#//Class"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest#//Class"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Assignment" feature="superClass" operator="=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/tmf/tests/2009/crossReferenceProposalTest#//Class"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest#//Class"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
             </terminal>

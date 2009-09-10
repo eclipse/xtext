@@ -8,7 +8,7 @@
 grammar org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage
  	hidden(WS, ML_COMMENT, SL_COMMENT)
 
-generate bug287941TestLanguage "http://www.eclipse.org/tmf/tests/2009/bug287941TestLanguage"
+generate bug287941TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2009/bug287941TestLanguage"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 
