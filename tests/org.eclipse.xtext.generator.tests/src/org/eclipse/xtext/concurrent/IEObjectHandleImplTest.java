@@ -40,6 +40,7 @@ public class IEObjectHandleImplTest extends AbstractXtextTests {
 		DefaultImpl<EObject> impl = new IEObjectHandle.DefaultImpl<EObject>(eObject,access);
 		
 		impl.readOnly(new IUnitOfWork.Void<EObject>(){
+			@Override
 			public void process(EObject state) throws Exception {
 				assertNotNull(state);
 				assertSame(eObject, state);
@@ -49,6 +50,7 @@ public class IEObjectHandleImplTest extends AbstractXtextTests {
 		resource.getContents().clear();
 		resource.getContents().addAll(getResourceFromString("element foo; optional element bar;").getContents());
 		impl.readOnly(new IUnitOfWork.Void<EObject>(){
+			@Override
 			public void process(EObject state) throws Exception {
 				assertNotNull(state);
 				assertNotSame(eObject, state);
@@ -57,6 +59,7 @@ public class IEObjectHandleImplTest extends AbstractXtextTests {
 		
 		resource.getContents().clear();
 		impl.readOnly(new IUnitOfWork.Void<EObject>(){
+			@Override
 			public void process(EObject state) throws Exception {
 				assertNull(state);
 			}

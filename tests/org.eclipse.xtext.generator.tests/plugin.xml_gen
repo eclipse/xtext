@@ -41,6 +41,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/Bug289059TestLanguage" 
+       class = "org.eclipse.xtext.linking.bug289059Test.Bug289059TestPackage"
+       genModel = "org/eclipse/xtext/linking/Bug289059TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/importUriTestLanguage" 
        class = "org.eclipse.xtext.linking.importedURI.ImportedURIPackage"
        genModel = "org/eclipse/xtext/linking/ImportUriTestLanguage.genmodel" /> 
