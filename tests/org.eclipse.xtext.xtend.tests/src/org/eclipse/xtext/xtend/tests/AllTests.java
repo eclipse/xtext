@@ -11,7 +11,6 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.xtend.tests");
-      suite.addTestSuite(org.eclipse.xtext.xtend.scoping.XtendScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtend.validation.CheckValidatorTest.class);
       return suite;
    }

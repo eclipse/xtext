@@ -78,9 +78,4 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.XtendScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
-		return org.eclipse.xtext.testlanguages.TreeTestLanguageScopeProvider.class;
-	}
-
 }

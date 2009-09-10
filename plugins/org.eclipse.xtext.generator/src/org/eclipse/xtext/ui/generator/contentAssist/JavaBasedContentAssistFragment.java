@@ -9,7 +9,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * A {@link IGeneratorFragment} to generate a java-based content assist for an Xtext language.

@@ -14,8 +14,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
-import org.eclipse.xtext.ui.core.SimpleLabelProvider;
 
 /**
  * An {@link IGeneratorFragment} to generate the binding of a {@link SimpleLabelProvider} for an Xtext language.

@@ -118,6 +118,11 @@ public abstract class AbstractTreeTestLanguageUiModule extends TreeTestLanguageR
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
+		return org.eclipse.xtext.common.contentassist.TerminalsProposalProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
 		return org.eclipse.xtext.ui.core.editor.formatting.ContentFormatterFactory.class;
 	}
@@ -145,11 +150,6 @@ public abstract class AbstractTreeTestLanguageUiModule extends TreeTestLanguageR
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.IDamagerRepairer> bindIDamagerRepairer() {
 		return org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.XtendBasedContentAssistFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.testlanguages.contentassist.TreeTestLanguageProposalProvider.class;
 	}
 
 
