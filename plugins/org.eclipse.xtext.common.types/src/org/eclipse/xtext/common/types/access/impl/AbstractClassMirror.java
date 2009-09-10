@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.IdentifyableElement;
+import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.TypeVariable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,6 +18,10 @@ import org.eclipse.xtext.common.types.IdentifyableElement;
 public abstract class AbstractClassMirror implements IClassMirror {
 
 	public String getFragment(EObject obj) {
+		if (obj instanceof TypeVariable)
+			return getFragment(obj.eContainer()) + "/" + ((TypeVariable) obj).getName();
+		if (obj instanceof TypeReference)
+			return null;
 		if (obj instanceof IdentifyableElement)
 			return ((IdentifyableElement) obj).getCanonicalName();
 		return null;

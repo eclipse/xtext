@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
  */
 public class ClasspathTypeProvider extends AbstractTypeProvider {
 
-	private final ClassLoader classLoader;
+	private final ClassFinder classFinder;
 	
 	private final PrimitiveTypeProvider primitiveTypeProvider;
 	
@@ -30,7 +30,7 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 	
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
 		super(resourceSet);
-		this.classLoader = classLoader;
+		this.classFinder = new ClassFinder(classLoader);
 		primitiveTypeProvider = new PrimitiveTypeProvider();
 		uriHelper = new ClassURIHelper();
 		declaredTypeProvider = new DeclaredTypeProvider(uriHelper);
@@ -39,61 +39,14 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 	@Override
 	public Type findTypeByName(String name) {
 		try {
-			Class<?> clazz = findClassByName(name);
+			Class<?> clazz = classFinder.forName(name);
 			URI resourceURI = uriHelper.createResourceURI(clazz);
 			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
 			return findTypeByClass(clazz, result);
 		}
-		catch (Exception e) {
+		catch (ClassNotFoundException e) {
 			throw new TypeNotFoundException("Type: '" + name + "' is not available." , e);
 		}
-	}
-
-	public Class<?> findClassByName(String name) throws ClassNotFoundException {
-		try {
-			return Class.forName(normalizeClassName(name), false, classLoader);
-		} catch(ClassNotFoundException e) {
-			Class<?> result = Primitives.forName(name);
-			if (result == null)
-				throw e;
-			return result;
-		}
-	}
-	
-	public String normalizeClassName(String className) {
-		if (className.charAt(0) == '[' || className.charAt(className.length() - 1)!=']') 
-			// assume a valid name if we have the default array notation
-			return className;
-		String tempClassName = className;
-		int idx = tempClassName.length() - 1;
-		StringBuilder result = new StringBuilder(className.length());
-		while(tempClassName.charAt(idx) == ']') {
-			result.append('[');
-			idx-=2;
-		}
-		tempClassName = tempClassName.substring(0, idx + 1);
-		if (Boolean.TYPE.getName().equals(tempClassName)) {
-			result.append('Z');
-		} else if (Byte.TYPE.getName().equals(tempClassName)) {
-			result.append('B');
-		} else if (Character.TYPE.getName().equals(tempClassName)) {
-			result.append('C');
-		} else if (Double.TYPE.getName().equals(tempClassName)) {
-			result.append('D');
-		} else if (Float.TYPE.getName().equals(tempClassName)) {
-			result.append('F');
-		} else if (Integer.TYPE.getName().equals(tempClassName)) {
-			result.append('I');
-		} else if (Long.TYPE.getName().equals(tempClassName)) {
-			result.append('J');
-		} else if (Short.TYPE.getName().equals(tempClassName)) {
-			result.append('S');
-		} else {
-			result.append('L');
-			result.append(tempClassName);
-			result.append(';');
-		}
-		return result.toString();
 	}
 	
 	public ClassMirror createMirror(Class<?> clazz) {
@@ -111,7 +64,7 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 			if (!name.startsWith(ClassURIHelper.OBJECTS))
 				throw new IllegalArgumentException("Invalid resource uri '" + resourceURI.toString() + "'");
 			name = name.substring(ClassURIHelper.OBJECTS.length());
-			Class<?> clazz = findClassByName(name);
+			Class<?> clazz = classFinder.forName(name);
 			return createMirror(clazz);
 		}
 		catch (ClassNotFoundException e) {
@@ -120,43 +73,13 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 	}
 	
 	public Type findTypeByClass(Class<?> clazz, Resource resource) {
-		// TODO: Maybe iterate the resource without the computing a fragment
+		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = uriHelper.getFragment(clazz);
 		Type result = (Type) resource.getEObject(fragment);
 		if (result == null) {
 			throw new IllegalStateException("Resource has not been loaded");
-//			result = createType(clazz);
-//			resource.getContents().add(result);
 		} 
 		return result;
-//		if (clazz.isPrimitive()) {
-//			
-//			for(EObject object: resource.getContents()) {
-//				if (object instanceof PrimitiveType) {
-//					PrimitiveType primitive = (PrimitiveType) object;
-//					if (primitive.getName().equals(clazz.getName())) {
-//						return primitive;
-//					}
-//				} else {
-//					org.eclipse.xtext.common.types.Void _void = (org.eclipse.xtext.common.types.Void) object;
-//					if (_void.getCanonicalName().equals(clazz.getName())) {
-//						return _void;
-//					}
-//				}
-//			}
-//			Type result = createType(clazz);
-//			resource.getContents().add(result);
-//			return result;
-//		}
-//		if (clazz.isArray()) {
-//			Class<?> componentClass = clazz.getComponentType();
-//			ComponentType componentType = (ComponentType) findOrCreateType(componentClass, resource);
-//			if (componentType.getArrayType() == null) {
-//				ArrayType result = TypesFactory.eINSTANCE.createArrayType();
-//				componentType.setArrayType(result);
-//			}
-//			return componentType.getArrayType();
-//		}
 	}
 
 }

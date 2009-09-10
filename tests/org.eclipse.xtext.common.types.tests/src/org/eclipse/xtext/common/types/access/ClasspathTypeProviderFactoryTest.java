@@ -55,4 +55,15 @@ public class ClasspathTypeProviderFactoryTest extends TestCase {
 		assertEquals(typeProvider, map.get(ClassURIHelper.PROTOCOL));
 	}
 	
+	public void testFindTypeProvider_01() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		assertNull(factory.findTypeProvider(resourceSet));
+	}
+	
+	public void testFindTypeProvider_02() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		ClasspathTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
+		assertSame(typeProvider, factory.findTypeProvider(resourceSet));
+	}
+	
 }

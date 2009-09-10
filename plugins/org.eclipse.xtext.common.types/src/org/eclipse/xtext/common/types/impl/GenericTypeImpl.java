@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -34,17 +35,27 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#getTypeVariables <em>Type Variables</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isFinal <em>Final</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#getTypeVariables <em>Type Variables</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
+	/**
+	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeVariable> typeVariables;
+
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,16 +135,6 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * @ordered
 	 */
 	protected boolean final_ = FINAL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeVariable> typeVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,6 +306,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
+				return getTypeVariables();
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.GENERIC_TYPE__INTERFACE:
@@ -313,8 +316,6 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 				return isStatic();
 			case TypesPackage.GENERIC_TYPE__FINAL:
 				return isFinal();
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return getTypeVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,6 +329,10 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
+				getTypeVariables().clear();
+				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
+				return;
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
@@ -339,10 +344,6 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 				return;
 			case TypesPackage.GENERIC_TYPE__FINAL:
 				setFinal((Boolean)newValue);
-				return;
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				getTypeVariables().clear();
-				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -356,6 +357,9 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
+				getTypeVariables().clear();
+				return;
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -367,9 +371,6 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 				return;
 			case TypesPackage.GENERIC_TYPE__FINAL:
 				setFinal(FINAL_EDEFAULT);
-				return;
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				getTypeVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -383,6 +384,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
+				return typeVariables != null && !typeVariables.isEmpty();
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.GENERIC_TYPE__INTERFACE:
@@ -391,10 +394,40 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.GENERIC_TYPE__FINAL:
 				return final_ != FINAL_EDEFAULT;
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return typeVariables != null && !typeVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeVariableDeclarator.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES: return TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeVariableDeclarator.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES: return TypesPackage.GENERIC_TYPE__TYPE_VARIABLES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -421,21 +454,7 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	
 	@Override
 	public String getCanonicalName() {
-		if (fullyQualifiedName == null)
-			return null;
-		StringBuilder result = new StringBuilder(fullyQualifiedName);
-		if (typeVariables != null && !typeVariables.isEmpty()) {
-			boolean first = true;
-			result.append("<");
-			for(TypeVariable variable: typeVariables) {
-				if (!first)
-					result.append(", ");
-				result.append(variable.getCanonicalName());
-				first = false;
-			}
-			result.append(">");
-		}
-		return result.toString();
+		return fullyQualifiedName;
 	}
 	
 } //GenericTypeImpl

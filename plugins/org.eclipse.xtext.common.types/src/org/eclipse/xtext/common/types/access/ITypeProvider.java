@@ -23,6 +23,8 @@ public interface ITypeProvider {
 		
 		ITypeProvider createTypeProvider(ResourceSet resourceSet);
 		
+		ITypeProvider findTypeProvider(ResourceSet resourceSet);
+		
 		ITypeProvider createTypeProvider();
 		
 	}

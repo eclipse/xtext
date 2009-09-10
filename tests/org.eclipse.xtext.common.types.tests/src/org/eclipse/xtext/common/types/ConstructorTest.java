@@ -27,28 +27,8 @@ public class ConstructorTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		constructor.setName("String");
-		assertEquals("String()", constructor.getCanonicalName());
+		constructor.setFullyQualifiedName("java.lang.String()");
+		assertEquals("java.lang.String()", constructor.getCanonicalName());
 	}
 	
-	public void testCanonicalName_03() {
-		constructor.setName("String");
-		FormalParameter parameter = TypesFactory.eINSTANCE.createFormalParameter();
-		parameter.setName("param");
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(genericType);
-		parameter.setParameterType(typeReference);
-		constructor.getParameters().add(parameter);
-		assertEquals("String(java.lang.String)", constructor.getCanonicalName());
-	}
-	
-	public void testCanonicalName_04() {
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		constructor.setDeclaringType(genericType);
-		constructor.setName("String");
-		assertEquals("java.lang.String.String()", constructor.getCanonicalName());
-	}
 }

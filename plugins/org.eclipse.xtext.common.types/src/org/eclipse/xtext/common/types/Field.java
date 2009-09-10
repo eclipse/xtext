@@ -20,7 +20,6 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.Field#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Field#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Field#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.Field#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -132,31 +131,5 @@ public interface Field extends Member {
 	 * @generated
 	 */
 	void setType(TypeReference value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getField_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Field#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 } // Field

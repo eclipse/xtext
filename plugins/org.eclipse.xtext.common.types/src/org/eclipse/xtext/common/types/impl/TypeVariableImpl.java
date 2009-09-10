@@ -273,8 +273,6 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 
 	@Override
 	public String getCanonicalName() {
-		if (constraints != null && !constraints.isEmpty())
-			return name + " " + ConstrainedTypeImpl.getConstraintsCanonicalName(constraints);
 		return name;
 	}
 	

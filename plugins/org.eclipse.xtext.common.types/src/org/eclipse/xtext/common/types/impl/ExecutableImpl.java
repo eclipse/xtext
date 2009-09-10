@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -34,16 +36,26 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getTypeVariables <em>Type Variables</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class ExecutableImpl extends MemberImpl implements Executable {
+	/**
+	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeVariable> typeVariables;
+
 	/**
 	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,26 +77,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	protected String visibility = VISIBILITY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,14 +87,14 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	protected EList<FormalParameter> parameters;
 
 	/**
-	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypeVariables()
+	 * @see #getExceptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeVariable> typeVariables;
+	protected EList<TypeReference> exceptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,32 +141,23 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.EXECUTABLE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<FormalParameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<FormalParameter>(FormalParameter.class, this, TypesPackage.EXECUTABLE__PARAMETERS);
 		}
 		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeReference> getExceptions() {
+		if (exceptions == null) {
+			exceptions = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, TypesPackage.EXECUTABLE__EXCEPTIONS);
+		}
+		return exceptions;
 	}
 
 	/**
@@ -197,10 +180,12 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.EXECUTABLE__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
 				return ((InternalEList<?>)getTypeVariables()).basicRemove(otherEnd, msgs);
+			case TypesPackage.EXECUTABLE__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -213,14 +198,14 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				return getVisibility();
-			case TypesPackage.EXECUTABLE__NAME:
-				return getName();
-			case TypesPackage.EXECUTABLE__PARAMETERS:
-				return getParameters();
 			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
 				return getTypeVariables();
+			case TypesPackage.EXECUTABLE__VISIBILITY:
+				return getVisibility();
+			case TypesPackage.EXECUTABLE__PARAMETERS:
+				return getParameters();
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				return getExceptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,19 +219,20 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
+				getTypeVariables().clear();
+				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
+				return;
 			case TypesPackage.EXECUTABLE__VISIBILITY:
 				setVisibility((String)newValue);
-				return;
-			case TypesPackage.EXECUTABLE__NAME:
-				setName((String)newValue);
 				return;
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends FormalParameter>)newValue);
 				return;
-			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
-				getTypeVariables().clear();
-				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				getExceptions().clear();
+				getExceptions().addAll((Collection<? extends TypeReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,17 +246,17 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
+				getTypeVariables().clear();
+				return;
 			case TypesPackage.EXECUTABLE__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
-				return;
-			case TypesPackage.EXECUTABLE__NAME:
-				setName(NAME_EDEFAULT);
 				return;
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				getParameters().clear();
 				return;
-			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
-				getTypeVariables().clear();
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				getExceptions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -284,16 +270,48 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
-			case TypesPackage.EXECUTABLE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.EXECUTABLE__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
 			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
 				return typeVariables != null && !typeVariables.isEmpty();
+			case TypesPackage.EXECUTABLE__VISIBILITY:
+				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
+			case TypesPackage.EXECUTABLE__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				return exceptions != null && !exceptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeVariableDeclarator.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.EXECUTABLE__TYPE_VARIABLES: return TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == TypeVariableDeclarator.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES: return TypesPackage.EXECUTABLE__TYPE_VARIABLES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -308,28 +326,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (visibility: ");
 		result.append(visibility);
-		result.append(", name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
-	
-	@Override
-	protected String getCanonicalNameImpl() {
-		if (name == null)
-			return null;
-		StringBuilder result = new StringBuilder(64);
-		result.append(name);
-		result.append('(');
-		if (parameters != null && !parameters.isEmpty()) {
-			boolean first = true;
-			for(FormalParameter parameter: parameters) {
-				if (!first)
-					result.append(", ");
-				result.append(parameter.getCanonicalName());
-				first = false;
-			}
-		}
 		result.append(')');
 		return result.toString();
 	}

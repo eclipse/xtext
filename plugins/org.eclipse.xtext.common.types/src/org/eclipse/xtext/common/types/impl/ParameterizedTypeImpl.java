@@ -20,11 +20,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.GenericType;
+import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -34,24 +36,15 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getRawType <em>Raw Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getDeclarator <em>Declarator</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getRawType <em>Raw Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class ParameterizedTypeImpl extends ReferenceTypeImpl implements ParameterizedType {
-	/**
-	 * The cached value of the '{@link #getRawType() <em>Raw Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRawType()
-	 * @generated
-	 * @ordered
-	 */
-	protected GenericType rawType;
-
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -61,6 +54,16 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * @ordered
 	 */
 	protected EList<TypeParameter> parameters;
+
+	/**
+	 * The cached value of the '{@link #getRawType() <em>Raw Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRawType()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeReference rawType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,7 +89,60 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericType getRawType() {
+	public EList<TypeParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.PARAMETERIZED_TYPE__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Member getDeclarator() {
+		if (eContainerFeatureID() != TypesPackage.PARAMETERIZED_TYPE__DECLARATOR) return null;
+		return (Member)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclarator(Member newDeclarator, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDeclarator, TypesPackage.PARAMETERIZED_TYPE__DECLARATOR, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclarator(Member newDeclarator) {
+		if (newDeclarator != eInternalContainer() || (eContainerFeatureID() != TypesPackage.PARAMETERIZED_TYPE__DECLARATOR && newDeclarator != null)) {
+			if (EcoreUtil.isAncestor(this, newDeclarator))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDeclarator != null)
+				msgs = ((InternalEObject)newDeclarator).eInverseAdd(this, TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES, Member.class, msgs);
+			msgs = basicSetDeclarator(newDeclarator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__DECLARATOR, newDeclarator, newDeclarator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference getRawType() {
 		return rawType;
 	}
 
@@ -95,8 +151,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRawType(GenericType newRawType, NotificationChain msgs) {
-		GenericType oldRawType = rawType;
+	public NotificationChain basicSetRawType(TypeReference newRawType, NotificationChain msgs) {
+		TypeReference oldRawType = rawType;
 		rawType = newRawType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, oldRawType, newRawType);
@@ -110,7 +166,7 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRawType(GenericType newRawType) {
+	public void setRawType(TypeReference newRawType) {
 		if (newRawType != rawType) {
 			NotificationChain msgs = null;
 			if (rawType != null)
@@ -129,11 +185,15 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeParameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.PARAMETERIZED_TYPE__PARAMETERS);
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDeclarator((Member)otherEnd, msgs);
 		}
-		return parameters;
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -144,10 +204,12 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				return basicSetRawType(null, msgs);
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				return basicSetDeclarator(null, msgs);
+			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
+				return basicSetRawType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -158,12 +220,28 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES, Member.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				return getRawType();
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				return getParameters();
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				return getDeclarator();
+			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
+				return getRawType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -177,12 +255,15 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				setRawType((GenericType)newValue);
-				return;
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends TypeParameter>)newValue);
+				return;
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				setDeclarator((Member)newValue);
+				return;
+			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
+				setRawType((TypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,11 +277,14 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				setRawType((GenericType)null);
-				return;
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				getParameters().clear();
+				return;
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				setDeclarator((Member)null);
+				return;
+			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
+				setRawType((TypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -214,21 +298,23 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				return rawType != null;
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
+				return getDeclarator() != null;
+			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
+				return rawType != null;
 		}
 		return super.eIsSet(featureID);
 	}
 	
 	@Override
 	public String getCanonicalName() {
-		if (rawType == null)
+		if (getRawType() == null)
 			return null;
 		if (parameters != null && !parameters.isEmpty()) {
 			StringBuilder result = new StringBuilder(64);
-			result.append(rawType.getFullyQualifiedName());
+			result.append(getRawType().getCanonicalName());
 			result.append('<');
 			boolean first = true;
 			for(TypeParameter parameter: parameters) {
@@ -240,7 +326,7 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 			result.append('>');
 			return result.toString();
 		}
-		return rawType.getFullyQualifiedName();
+		return getRawType().getCanonicalName();
 	}
 
 } //ParameterizedTypeImpl

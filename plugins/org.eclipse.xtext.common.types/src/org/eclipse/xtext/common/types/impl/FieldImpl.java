@@ -30,7 +30,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,26 +105,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	 * @ordered
 	 */
 	protected TypeReference type;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -257,27 +236,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FIELD__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -303,8 +261,6 @@ public class FieldImpl extends MemberImpl implements Field {
 				return isFinal();
 			case TypesPackage.FIELD__TYPE:
 				return getType();
-			case TypesPackage.FIELD__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,9 +284,6 @@ public class FieldImpl extends MemberImpl implements Field {
 				return;
 			case TypesPackage.FIELD__TYPE:
 				setType((TypeReference)newValue);
-				return;
-			case TypesPackage.FIELD__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -356,9 +309,6 @@ public class FieldImpl extends MemberImpl implements Field {
 			case TypesPackage.FIELD__TYPE:
 				setType((TypeReference)null);
 				return;
-			case TypesPackage.FIELD__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,8 +329,6 @@ public class FieldImpl extends MemberImpl implements Field {
 				return final_ != FINAL_EDEFAULT;
 			case TypesPackage.FIELD__TYPE:
 				return type != null;
-			case TypesPackage.FIELD__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -401,15 +349,8 @@ public class FieldImpl extends MemberImpl implements Field {
 		result.append(static_);
 		result.append(", final: ");
 		result.append(final_);
-		result.append(", name: ");
-		result.append(name);
 		result.append(')');
 		return result.toString();
 	}
 	
-	@Override
-	protected String getCanonicalNameImpl() {
-		return name;
-	}
-
 } //FieldImpl

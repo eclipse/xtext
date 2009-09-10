@@ -248,7 +248,7 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 	@Override
 	public String getCanonicalName() {
 		if (parameterType != null)
-			return parameterType.getCanonicalName();
+			return getParameterType().getCanonicalName();
 		return null;
 	}
 	

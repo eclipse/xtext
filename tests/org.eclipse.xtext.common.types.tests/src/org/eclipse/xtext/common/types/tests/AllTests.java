@@ -12,6 +12,7 @@ public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.common.types.tests");
       suite.addTestSuite(org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactoryTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassMirrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClasspathTypeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassURIHelperTest.class);
