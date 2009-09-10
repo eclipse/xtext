@@ -51,6 +51,7 @@ public abstract class GraphvizDotBuilder {
 				throw new RuntimeException("Unknown child type");
 		}
 
+		@Override
 		public void draw(PrintStream out) {
 			out.println("digraph G {");
 			for (Node n : nodes)
@@ -72,6 +73,7 @@ public abstract class GraphvizDotBuilder {
 			this.dst = dst;
 		}
 
+		@Override
 		public void draw(PrintStream out) {
 			out.println(id(src) + "->" + id(dst) + " [" + this + "];");
 		}
@@ -99,6 +101,7 @@ public abstract class GraphvizDotBuilder {
 			setShape(shape);
 		}
 
+		@Override
 		public void draw(PrintStream out) {
 			out.println(id(obj) + " [" + this + "];");
 		}
@@ -134,6 +137,7 @@ public abstract class GraphvizDotBuilder {
 			put("style", style);
 		}
 
+		@Override
 		public String toString() {
 			if (size() == 0)
 				return "";
