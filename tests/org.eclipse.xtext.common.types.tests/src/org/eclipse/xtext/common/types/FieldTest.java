@@ -27,25 +27,16 @@ public class FieldTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		field.setName("name");
-		assertEquals("name", field.getCanonicalName());
-	}
-	
-	public void testCanonicalName_03() {
-		field.setName("name");
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(genericType);
-		field.setType(typeReference);
-		assertEquals("name", field.getCanonicalName());
-	}
-	
-	public void testCanonicalName_04() {
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		field.setDeclaringType(genericType);
-		field.setName("name");
+		field.setFullyQualifiedName("java.lang.String.name");
 		assertEquals("java.lang.String.name", field.getCanonicalName());
+	}
+	
+	public void testGetSimpleName_01() {
+		assertNull(field.getSimpleName());
+	}
+	
+	public void testGetSimpleName_02() {
+		field.setFullyQualifiedName("java.lang.String.name");
+		assertEquals("name", field.getSimpleName());
 	}
 }

@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.Type;
-
 import junit.framework.TestCase;
+
+import org.eclipse.xtext.common.types.Type;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +21,6 @@ public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider 
 		assertNotNull(mirror);
 	}
 	
-	
 	public void testCreateClassMirror_02() {
 		try {
 			ClassMirror.createClassMirror(int.class, this);
@@ -30,7 +29,6 @@ public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider 
 			// OK
 		}
 	}
-	
 	
 	public void testCreateClassMirror_03() {
 		try {
@@ -41,7 +39,6 @@ public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider 
 		}
 	}
 	
-	
 	public void testCreateClassMirror_04() {
 		try {
 			ClassMirror.createClassMirror(java.util.Map.Entry.class, this);
@@ -51,10 +48,8 @@ public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider 
 		}
 	}
 
-
 	public <T> Type createType(Class<T> clazz) {
 		fail("Unexpected call");
 		return null;
 	}
-	
 }

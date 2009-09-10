@@ -27,29 +27,16 @@ public class OperationTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		operation.setName("getName");
-		assertEquals("getName()", operation.getCanonicalName());
+		operation.setFullyQualifiedName("java.lang.String.charAt(int)");
+		assertEquals("java.lang.String.charAt(int)", operation.getCanonicalName());
 	}
 	
-	public void testCanonicalName_03() {
-		operation.setName("getName");
-		FormalParameter parameter = TypesFactory.eINSTANCE.createFormalParameter();
-		parameter.setName("param");
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(genericType);
-		parameter.setParameterType(typeReference);
-		operation.getParameters().add(parameter);
-		assertEquals("getName(java.lang.String)", operation.getCanonicalName());
+	public void testGetSimpleName_01() {
+		assertNull(operation.getSimpleName());
 	}
 	
-	public void testCanonicalName_04() {
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.lang.String");
-		operation.setDeclaringType(genericType);
-		operation.setName("getName");
-		assertEquals("java.lang.String.getName()", operation.getCanonicalName());
+	public void testGetSimpleName_02() {
+		operation.setFullyQualifiedName("java.lang.String.charAt(int)");
+		assertEquals("charAt", operation.getSimpleName());
 	}
-	
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,7 +23,10 @@ import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -149,56 +153,6 @@ public class ClasspathTypeProviderTest extends TestCase {
 		}
 	}
 	
-	public void testNormalizeClassName_01() {
-		String name = String.class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(name));
-	}
-	
-	public void testNormalizeClassName_02() {
-		String name = String[].class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(name));
-	}
-	
-	public void testNormalizeClassName_03() {
-		String name = int.class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(name));
-	}
-	
-	public void testNormalizeClassName_04() {
-		String name = int[].class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(name));
-	}
-	
-	public void testNormalizeClassName_05() {
-		String name = String[].class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(String.class.getName() + "[]"));
-	}
-	
-	public void testNormalizeClassName_06() {
-		String name = int[].class.getName();
-		assertEquals(name, typeProvider.normalizeClassName(int.class.getName() + "[]"));
-	}
-	
-	public void testNormalizeClassName_07() {
-		Class<?>[] allArrayTypes = {
-				boolean[].class,
-				int[].class,
-				float[].class,
-				byte[].class,
-				char[].class,
-				double[].class,
-				short[].class,
-				long[].class,
-				String[].class
-		};
-		for(Class<?> arrayType: allArrayTypes) {
-			Class<?> componentType = arrayType.getComponentType();
-			String name = componentType.getName() + "[]";
-			String expectedName = arrayType.getName();
-			assertEquals(expectedName, typeProvider.normalizeClassName(name));
-		}
-	}
-	
 	public void testFindTypeByName_int() {
 		String typeName = "int";
 		Type type = typeProvider.findTypeByName(typeName);
@@ -262,7 +216,7 @@ public class ClasspathTypeProviderTest extends TestCase {
 		for(org.eclipse.xtext.common.types.Member member: type.getMembers()) {
 			assertTrue(member.getCanonicalName(), member instanceof Operation);
 			Operation op = (Operation) member;
-			assertTrue(op.getName(), allNames.remove(op.getName()));
+			assertTrue(op.getSimpleName(), allNames.remove(op.getSimpleName()));
 		}
 	}
 	
@@ -315,4 +269,59 @@ public class ClasspathTypeProviderTest extends TestCase {
 		assertSame(type, number.getArrayType().getArrayType());
 		assertNull(type.getArrayType());
 	}
+	
+	public void testFindTypeByName_javaUtilList_01() {
+		String typeName = List.class.getName();
+		GenericType type = (GenericType) typeProvider.findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getCanonicalName());
+		assertEquals(1, type.getTypeVariables().size());
+		TypeVariable typeVariable = type.getTypeVariables().get(0);
+		assertEquals("E", typeVariable.getName());
+		assertEquals(1, typeVariable.getConstraints().size());
+		TypeConstraint typeConstraint = typeVariable.getConstraints().get(0);
+		assertTrue(typeConstraint instanceof UpperBound);
+		UpperBound upperBound = (UpperBound) typeConstraint;
+		assertSame(typeVariable, upperBound.getConstrainedType());
+		assertEquals(1, upperBound.getReferencedTypes().size());
+		TypeReference typeReference = upperBound.getReferencedTypes().get(0);
+		assertFalse(typeReference.getType().eIsProxy());
+		assertEquals(Object.class.getName(), typeReference.getType().getCanonicalName());
+	}
+	
+	public void testFindTypeByName_javaUtilList_02() {
+		String typeName = List.class.getName();
+		GenericType type = (GenericType) typeProvider.findTypeByName(typeName);
+		Operation toArray = (Operation) type.eResource().getEObject("java.util.List.toArray()");
+		assertNotNull(toArray);
+		assertEquals("java.lang.Object[]", toArray.getReturnType().getCanonicalName());
+	}
+	
+	public void testFindTypeByName_javaUtilList_03() {
+		String typeName = List.class.getName();
+		GenericType type = (GenericType) typeProvider.findTypeByName(typeName);
+		Operation toArray = (Operation) type.eResource().getEObject("java.util.List.toArray(T[])");
+		assertNotNull(toArray);
+		assertEquals("T[]", toArray.getReturnType().getCanonicalName());
+	}
+	
+	public void testFindTypeByName_javaUtilList_04() {
+		String typeName = List.class.getName();
+		GenericType type = (GenericType) typeProvider.findTypeByName(typeName);
+		Operation addAll = (Operation) type.eResource().getEObject("java.util.List.addAll(java.util.Collection)");
+		assertNotNull(addAll);
+		assertEquals("boolean", addAll.getReturnType().getCanonicalName());
+	}
+	
+	public void testFindTypeByName_javaUtilList_05() {
+		String typeName = List.class.getName();
+		GenericType type = (GenericType) typeProvider.findTypeByName(typeName);
+		Operation addAll = (Operation) type.eResource().getEObject("java.util.List.addAll(java.util.Collection)");
+		assertEquals(1, addAll.getParameters().size());
+		assertEquals("p0", addAll.getParameters().get(0).getName());
+		TypeReference parameterType = addAll.getParameters().get(0).getParameterType();
+		assertFalse(parameterType.getType().toString(), parameterType.getType().eIsProxy());
+	}
+	
+	
 }
