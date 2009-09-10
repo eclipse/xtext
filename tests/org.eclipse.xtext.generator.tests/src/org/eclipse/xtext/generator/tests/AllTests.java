@@ -123,6 +123,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.ImportUriUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopesTest.class);
+      suite.addTestSuite(org.eclipse.xtext.scoping.ScopeTest.class);
       suite.addTestSuite(org.eclipse.xtext.service.GenericModuleTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.ChainedIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
