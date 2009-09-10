@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.impl.ScopedElement;

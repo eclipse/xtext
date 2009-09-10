@@ -19,10 +19,12 @@ public class DefaultBackwardNFAProvider extends
 	public static class DefaultBackwardsNFABuilder extends
 			AbstractCachingNFABuilder<DefaultNFAState, DefaultNFATransition> {
 
+		@Override
 		public DefaultNFAState createState(AbstractElement ele) {
 			return new DefaultNFAState(ele, this);
 		}
 
+		@Override
 		protected DefaultNFATransition createTransition(DefaultNFAState source,
 				DefaultNFAState target, boolean isRuleCall) {
 			return new DefaultNFATransition(source, target, isRuleCall);

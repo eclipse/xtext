@@ -297,6 +297,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected Line line = null;
 
+	@Override
 	public void writeHidden(EObject grammarElement, String value)
 			throws IOException {
 		if (cfg.getWhitespaceRule() == grammarElement) {
@@ -325,11 +326,13 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			line = newLine;
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (line != null)
 			line.flush();
 	}
 
+	@Override
 	public void writeSemantic(EObject grammarElement, String value)
 			throws IOException {
 		addLineEntry(grammarElement, value, false);

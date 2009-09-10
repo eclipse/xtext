@@ -26,6 +26,7 @@ public class AliasedScopedElement extends AbstractScopedElement {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public Object additionalInformation() {
 		return delegate.additionalInformation();
 	}
