@@ -120,8 +120,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.DeclarativeScopeProviderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.scoping.impl.DeclarativeScopeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.scoping.impl.DefaultScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.ImportUriUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopesTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopeTest.class);
