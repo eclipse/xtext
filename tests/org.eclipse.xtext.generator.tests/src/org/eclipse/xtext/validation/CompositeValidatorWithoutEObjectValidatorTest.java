@@ -12,7 +12,6 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
-import org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator;
 import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
 
 import com.google.inject.Binder;
@@ -35,11 +34,6 @@ public class CompositeValidatorWithoutEObjectValidatorTest extends AbstractCompo
 						binder.bind(boolean.class).annotatedWith(
 								Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
 						binder.bind(EnumRulesTestLanguagePackage.class).toInstance(EnumRulesTestLanguagePackage.eINSTANCE);
-					}
-					
-					@Override
-					public Class<? extends EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
-						return null;
 					}
 					
 				});

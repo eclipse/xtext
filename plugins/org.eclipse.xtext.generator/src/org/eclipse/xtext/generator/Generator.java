@@ -17,8 +17,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -34,6 +36,8 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.expression.Variable;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -63,8 +67,19 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
+		Map<String,Grammar> uris = new HashMap<String,Grammar>();
 		for (LanguageConfig config : languageConfigs) {
 			config.checkConfiguration(issues);
+			Grammar grammar = config.getGrammar();
+			List<GeneratedMetamodel> select = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
+			for (GeneratedMetamodel generatedMetamodel : select) {
+				String nsURI = generatedMetamodel.getEPackage().getNsURI();
+				if (uris.containsKey(nsURI)) {
+					issues.addError("Duplicate generated grammar with nsURI '"+nsURI+"' in "+uris.get(nsURI).getName()+" and "+grammar.getName());
+				} else {
+					uris.put(nsURI, grammar);
+				}
+			}
 		}
 		if (getProjectNameRt() == null)
 			issues.addError("The property 'projectNameRt' is mandatory");
