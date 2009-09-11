@@ -6,7 +6,7 @@ package org.eclipse.xtext.example;
 import org.eclipse.emf.emfindex.Index;
 import org.eclipse.emf.emfindex.MemoryIndexImpl;
 import org.eclipse.xtext.index.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.index.DefaultIndexBasedScopeProvider;
+import org.eclipse.xtext.index.IndexBasedScopeProvider;
 import org.eclipse.xtext.index.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -28,7 +28,7 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return DefaultIndexBasedScopeProvider.class;
+		return IndexBasedScopeProvider.class;
 	}
 	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
