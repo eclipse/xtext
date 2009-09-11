@@ -11,6 +11,7 @@ package org.eclipse.xtext.scoping.impl;
 import java.lang.reflect.Method;
 import java.util.Collections;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -27,7 +28,7 @@ import com.google.inject.Inject;
  * 
  * At first it looks for methods of the following signature:
  * <code>
- * IScope scope_[EClassName]_[EReferenceName](MyType context, EClass clazz)</p>
+ * IScope scope_[EClassName]_[EReferenceName](MyType context, EReference ref)</p>
  * </code>
  * 
  * That is if {@link #getScope(EObject, EReference)} is called where EReference is e.g. Property.type and
@@ -42,12 +43,12 @@ import com.google.inject.Inject;
  * If after walking up the containment hierarchy no suitable scoping declaration has been found, the implementation
  * falls back to invoke methods with the following signature (computed by {@link #getPredicate(EObject, EClass)}):</p>
  * <code>
- * IScope scope_[EClassName](MyType context, EClass clazz)</p>
+ * IScope scope_[EClassName](MyType context, EReference ref)</p>
  * </code>
  * 
  * For instance if a scope provider is asked to return all Entities which are visible from a certain Property, it looks
  * for a method like this:</p> <code>
- * IScope scope_Entity(Reference ref, EClass clazz)</p>
+ * IScope scope_Entity(Reference ref, EReference ref)</p>
  * </code> Again the first parameter can also be any super type of the actual type and the
  * implementation walks up the containment hierarchy again.</p>
  * 
@@ -56,6 +57,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DeclarativeScopeProvider extends AbstractScopeProvider {
+	
+	private final Logger log = Logger.getLogger(getClass());
 
 	private static final NullErrorHandler<IScope> ERROR_HANDLER = new PolymorphicDispatcher.NullErrorHandler<IScope>();
 
@@ -101,7 +104,14 @@ public class DeclarativeScopeProvider extends AbstractScopeProvider {
 				ERROR_HANDLER);
 		EObject current = context;
 		while (scope == null && current != null) {
+			scope = dispatcher.invoke(current, reference);
+			current = current.eContainer();
+		}
+		current = context;
+		while (scope == null && current != null) {
 			scope = dispatcher.invoke(current, reference.getEReferenceType());
+			if (scope!=null)
+				log.warn("scope_<EClass>(EObject,EClass) is deprecated. Use scope_<EClass>(EObject,EReference) instead.");
 			current = current.eContainer();
 		}
 		return scope;

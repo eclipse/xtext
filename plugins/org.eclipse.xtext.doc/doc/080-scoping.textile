@@ -1,7 +1,7 @@
 
 h2(#scoping). Scoping
 
-An @IScopeProvider@ is responsible for providing an @IScope@ for a given context @EObject@ and @EReference@ (declared or inherited by the object's @EClass@). The returned @IScope@ should contain all target candidates for the given object and cross reference.
+An @IScopeProvider@ is responsible for providing an @IScope@ for a given context @EObject@ and @EReference@. The returned @IScope@ should contain all target candidates for the given object and cross reference.
 
 bc.. public interface IScopeProvider {
 
@@ -9,22 +9,12 @@ bc.. public interface IScopeProvider {
    * Returns a scope for the given context. The scope provides access to 
    * the compatible visible EObjects for a given reference.
    *
-   * @param context the element from which an element shall be referenced
+   * @param context the element from which a scope shall be computed
    * @param reference the reference to be used to filter the elements.
    * @return {@link IScope} representing the inner most {@link IScope} for 
    *         the passed context and reference.
    */
   public IScope getScope(EObject context, EReference reference);
-
-  /**
-   * Returns a scope for a given context. The scope contains any visible, 
-   * type-compatible element.
-   * @param context the element from which an element shall be referenced
-   * @param type the (super)type of the elements.
-   * @return {@link IScope} representing the inner most {@link IScope} for
-   *         the passed context and type.
-   */
-  public IScope getScope(EObject context, EClass type);
   
 }
 
@@ -93,11 +83,11 @@ p. When enumerating the scope's content, the first, most specialized scope would
 
 h3. Declarative Scope Provider
 
-As always there is an implementation that allows to specify scoping in a declarative way (extend ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider} for this purpose). It looks up methods which have either of the following two signatures:
+As always there is an implementation that allows to specify scoping in a declarative way. It looks up methods which have either of the following two signatures:
 
-bc. IScope scope_<ContextReference>(<ContextType> ctx, EReference ref)
+bc. IScope scope_<RefDeclaringEClass>_<Reference>(<ContextType> ctx, EReference ref)
 
-bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EClass type)
+bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EReference ref)
 
 The former is used when evaluating the scope for a specific cross reference and here @<ContextReference>@ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The @ref@ parameter represents this cross reference.
 
@@ -111,10 +101,23 @@ If such a method does not exist, the implementation will try to find one for the
 
 If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the _EClass_ parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
 
-bc. IScope scope_State(Transition this, EClass type)
+bc. IScope scope_State(Transition this, EReference ref)
 
 If no such method exists, the implementation will again try to find a method matching the context object's container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:
 
-bc. IScope scope_State(StateMachine this, EClass type)
+bc. IScope scope_State(StateMachine this, EReference ref)
 
 This scope can now be used for any cross references of type _State_ for context objects owned by the state machine.
+
+There are currently two different scope provider implmentations available which support these semantics:
+
+#  ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider} 
+#  ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.AbstractDeclarativeIndexBasedScopeProvider}
+
+h3. IndexBased Scoping
+
+The index based scoping is based on qualified names and namespaces. As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
+The ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.IndexBasedScopeProvider} supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.AbstractDeclarativeIndexBasedScopeProvider}.
+
+See the JavaDocs and "this blog post":http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html for details.
+
