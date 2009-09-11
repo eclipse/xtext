@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.quickfix;
+package org.eclipse.xtext.ui.core.editor.quickfix;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.validation.MarkerUtil;
 
 /**
- * @author knut - Initial contribution and API
+ * @author Knut Wannheden - Initial contribution and API
  */
 final class MockMarker implements IMarker {
 
