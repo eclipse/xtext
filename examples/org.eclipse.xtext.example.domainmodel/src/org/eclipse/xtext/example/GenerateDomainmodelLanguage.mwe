@@ -31,6 +31,9 @@
 			
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+				<options backtrack="true"/>
+			</fragment>
 			<fragment class="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment"/>
 		</language>
 	</component>

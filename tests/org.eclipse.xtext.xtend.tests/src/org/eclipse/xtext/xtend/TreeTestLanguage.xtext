@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.xtend.TreeTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate treeTestLanguage "http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage" 
+generate treeXtendTestLanguage "http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage" 
  
 Model:
   (children+=Node)*;

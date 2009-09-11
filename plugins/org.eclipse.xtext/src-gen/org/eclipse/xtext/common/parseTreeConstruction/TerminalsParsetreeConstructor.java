@@ -16,11 +16,13 @@ public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor 
 		
 	@Inject
 	private TerminalsGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public TerminalsGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return null;

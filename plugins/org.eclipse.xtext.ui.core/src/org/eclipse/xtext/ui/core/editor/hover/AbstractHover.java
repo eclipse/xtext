@@ -46,6 +46,7 @@ public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITe
 		return getHoverInfoInternal(lineNumber, -1);
 	}
 
+	@Deprecated
 	public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
 		return getHoverInfo2(textViewer, hoverRegion);
 	}

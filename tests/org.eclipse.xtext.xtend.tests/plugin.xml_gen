@@ -6,7 +6,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage" 
-       class = "org.eclipse.xtext.xtend.treeTestLanguage.TreeTestLanguagePackage"
+       class = "org.eclipse.xtext.xtend.treeXtendTestLanguage.TreeXtendTestLanguagePackage"
        genModel = "org/eclipse/xtext/xtend/TreeTestLanguage.genmodel" /> 
 	
   </extension>

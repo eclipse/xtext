@@ -30,7 +30,7 @@ public class TreeTestLanguageStandaloneSetup implements ISetup {
 	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage", org.eclipse.xtext.xtend.treeTestLanguage.TreeTestLanguagePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/xtendtests/TreeTestLanguage", org.eclipse.xtext.xtend.treeXtendTestLanguage.TreeXtendTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

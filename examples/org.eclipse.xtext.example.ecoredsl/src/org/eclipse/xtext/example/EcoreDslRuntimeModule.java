@@ -46,6 +46,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		return EcoreDslTransientValueService.class;
 	}
 	
+	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return EcoreDslScopeProvider.class;
 	}

@@ -1,4 +1,4 @@
-import org::eclipse::xtext::xtend::treeTestLanguage;
+import org::eclipse::xtext::xtend::treeXtendTestLanguage;
 
 context Node#children ERROR "Too many children" : 
 	children.size<4;

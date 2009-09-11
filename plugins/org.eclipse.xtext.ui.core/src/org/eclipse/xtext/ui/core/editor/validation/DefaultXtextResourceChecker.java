@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.ui.core.editor.validation.IDiagnosticConverter.Acceptor;
 import org.eclipse.xtext.validation.CancelIndicator;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
