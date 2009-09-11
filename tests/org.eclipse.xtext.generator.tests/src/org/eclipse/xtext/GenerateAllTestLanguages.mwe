@@ -45,7 +45,6 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
 			<fragment file="${standardFragments}" genModels="${enums.genmodel}"/>
-			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>

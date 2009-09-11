@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate hiddentokenmergertest "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"
+generate hiddentokenmergertest "http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger"
 
 Model:
 	DatatypeBug286557;
