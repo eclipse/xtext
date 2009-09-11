@@ -34,6 +34,7 @@ import org.eclipse.emf.emfindex.util.Descriptors;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.AliasedScopedElement;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.util.Strings;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -111,6 +113,10 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
+	
+	public IQualifiedNameProvider getNameProvider() {
+		return nameProvider;
+	}
 
 	@Inject
 	private Index indexStore;
@@ -118,21 +124,25 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	public void setIndexStore(Index indexStore) {
 		this.indexStore = indexStore;
 	}
+	
+	public Index getIndexStore() {
+		return indexStore;
+	}
 
 	public IScope getScope(EObject context, EReference reference) {
 		return getScope(context, reference.getEReferenceType());
 	}
 
 	public IScope getScope(final EObject context, final EClass type) {
-		IScope result = null;
 		if (context == null)
 			return getGlobalScope(null, type);
+		IScope result = null;
 		if (context.eContainer() == null) {
 			// global scope
 			result = getGlobalScope(context, type);
+			result = getResourceSetScope(result,context, type);
 			result = getResourceScope(result, context, type);
-		}
-		else {
+		} else {
 			// outer scope
 			result = getScope(context.eContainer(), type);
 		}
@@ -140,8 +150,7 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		IScope importScopeConfiguration = result;
 		// local scope used by the import scope
 		if (nameProvider.getQualifiedName(context) != null) {
-			Iterable<IScopedElement> localElements = getLocalElements(context, type);
-			importScopeConfiguration = new SimpleScope(result, localElements);
+			importScopeConfiguration = getLocalElements(result, context, type);
 		}
 		// imports
 		Iterable<IScopedElement> importedElements = getImportedElements(importScopeConfiguration, context, type);
@@ -150,30 +159,62 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		}
 		// local scope
 		if (nameProvider.getQualifiedName(context) != null) {
-			Iterable<IScopedElement> localElements = getLocalElements(context, type);
-			result = new SimpleScope(result, localElements);
+			result = getLocalElements(result, context, type);
 		}
 		return result;
 	}
 
-	/**
-	 * @param result
-	 * @param context
-	 * @param type
-	 * @return
-	 */
-	private IScope getResourceScope(IScope parent, final EObject context, final EClass type) {
-		Iterable<EObject> eObjects = new Iterable<EObject>() {
+	protected IScope getResourceSetScope(final IScope parent, final EObject context, final EClass type) {
+		if (context.eResource()==null || context.eResource().getResourceSet()==null)
+			return parent;
+		Iterable<EObject> contents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return EcoreUtil.getAllProperContents(context.eResource().getResourceSet(), true);
+			}
+		};
+		Iterable<EObject> filtered = Iterables.filter(contents, EObject.class);
+		return createScopeWithQualifiedNames(parent, type, filtered);
+	}
+	
+	protected IScope getResourceScope(IScope parent, final EObject context, final EClass type) {
+		if (context.eResource()==null)
+			return parent;
+		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return EcoreUtil.getAllProperContents(context.eResource(), true);
 			}
 		};
-		eObjects = filter(eObjects, new Predicate<EObject>() {
-
-			public boolean apply(EObject input) {
-				return type.isInstance(input);
+		return createScopeWithQualifiedNames(parent, type, contents);
+	}
+	
+	protected IScope getLocalElements(IScope parent, final EObject context, final EClass type) {
+		final String commonPrefix = nameProvider.getQualifiedName(context) + nameProvider.getDelimiter();
+		
+		Iterable<EObject> contents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return EcoreUtil.getAllProperContents(context, true);
+			}
+		};
+		// filter by type
+		contents = filter(contents, typeFilter(type));
+		// transform to IScopedElements
+		Iterable<IScopedElement> scopedElements = Scopes.scopedElementsFor(contents,new Function<EObject, String>() {
+			public String apply(EObject from) {
+				String name = nameProvider.getQualifiedName(from);
+				if (name != null && name.startsWith(commonPrefix))
+					return name.substring(commonPrefix.length());
+				return null;
 			}
 		});
+		// filter null values;
+		return new SimpleScope(parent,filter(scopedElements, Predicates.notNull()));
+	}
+
+
+	protected IScope createScopeWithQualifiedNames(final IScope parent, final EClass type,
+			Iterable<EObject> eObjects) {
+		
+		eObjects = filter(eObjects, typeFilter(type));
 
 		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
 
@@ -188,36 +229,13 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		return new SimpleScope(parent, filter(result, Predicates.notNull()));
 	}
 
-	@SuppressWarnings("unchecked")
-	private Iterable<IScopedElement> getLocalElements(final EObject context, final EClass type) {
-		final String commonPrefix = nameProvider.getQualifiedName(context) + nameProvider.getDelimiter();
-		Iterable<? extends EObject> contents = new Iterable<? extends EObject>() {
-
-			public Iterator<? extends EObject> iterator() {
-				return (Iterator<? extends EObject>) EcoreUtil.getAllProperContents(context, true);
-			}
-
-		};
-		// filter by type
-		contents = filter(contents, new Predicate<EObject>() {
+	protected Predicate<EObject> typeFilter(final EClass type) {
+		return new Predicate<EObject>() {
 
 			public boolean apply(EObject input) {
 				return type.isInstance(input);
 			}
-		});
-		// transform to IScopedElements
-		Iterable<IScopedElement> scopedElements = transform(contents, new Function<EObject, IScopedElement>() {
-
-			public IScopedElement apply(EObject from) {
-				String name = nameProvider.getQualifiedName(from);
-				if (name != null && name.startsWith(commonPrefix))
-					return ScopedElement.create(name.substring(commonPrefix.length()), from);
-				return null;
-			}
-
-		});
-		// filter null values;
-		return filter(scopedElements, Predicates.notNull());
+		};
 	}
 
 	protected Set<Function<String, String>> getImportNormalizer(EObject context) {
