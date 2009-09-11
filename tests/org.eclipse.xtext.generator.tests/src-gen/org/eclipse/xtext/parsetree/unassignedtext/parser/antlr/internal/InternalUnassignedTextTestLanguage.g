@@ -78,7 +78,7 @@ entryRuleModel returns [EObject current=null] :
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -148,7 +148,7 @@ entryRuleCaseInsensitiveKeywordRule returns [EObject current=null] :
 
 // Rule CaseInsensitiveKeywordRule
 ruleCaseInsensitiveKeywordRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -197,7 +197,7 @@ entryRulePluralRule returns [EObject current=null] :
 
 // Rule PluralRule
 rulePluralRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -250,7 +250,7 @@ entryRuleMultiRule returns [EObject current=null] :
 
 // Rule MultiRule
 ruleMultiRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -311,7 +311,7 @@ entryRuleDatatypeRule returns [EObject current=null] :
 
 // Rule DatatypeRule
 ruleDatatypeRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -437,7 +437,7 @@ entryRuleCommonTerminalsRule returns [EObject current=null] :
 
 // Rule CommonTerminalsRule
 ruleCommonTerminalsRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

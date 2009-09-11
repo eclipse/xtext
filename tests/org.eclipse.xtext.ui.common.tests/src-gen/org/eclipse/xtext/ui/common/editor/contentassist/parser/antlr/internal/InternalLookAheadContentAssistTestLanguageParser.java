@@ -123,7 +123,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
         EObject lv_attribute_14_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:85:6: ( ( ( '(' ( (lv_attribute_1_0= ruleAttribute ) )* ( (lv_attribute_2_0= rulePair ) )* ')' ) | ( '[' ( (lv_attribute_5_0= ruleAttribute ) )+ ( (lv_attribute_6_0= rulePair ) )* ']' ) | ( '<' ( (lv_attribute_9_0= ruleAttribute ) )* ( (lv_attribute_10_0= rulePair ) )+ '>' ) | ( '{' ( (lv_attribute_13_0= ruleAttribute ) )+ ( (lv_attribute_14_0= rulePair ) )+ '}' ) ) )
@@ -780,7 +780,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
         Token lv_value_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:333:6: ( ( (lv_value_0_0= RULE_ID ) ) )
@@ -881,7 +881,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
         Token lv_name_0_0=null;
         Token lv_value_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:378:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_value_2_0= RULE_ID ) ) ) )

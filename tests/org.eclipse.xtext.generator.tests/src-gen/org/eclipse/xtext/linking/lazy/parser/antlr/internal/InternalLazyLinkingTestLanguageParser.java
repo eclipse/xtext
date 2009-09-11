@@ -109,7 +109,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
         EObject lv_types_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:85:6: ( ( (lv_types_0_0= ruleType ) )* )
@@ -234,7 +234,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
         EObject lv_unresolvedProxyProperty_12_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:130:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) '.' ( ( RULE_ID ) ) )? ( 'for' ( ( RULE_ID ) ) 'in' ( ( RULE_ID ) ) )? '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* '}' ) )
@@ -598,7 +598,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:307:6: ( ( ( ( RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) ';' ) )
@@ -759,7 +759,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:370:6: ( ( 'unresolved' ( ( RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) ';' ) )

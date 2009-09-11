@@ -41,7 +41,7 @@ public interface XtextTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest";
+  String eNS_URI = "http://www.eclipse.org/2008/Test/XtextTest";
 
   /**
    * The package namespace name.

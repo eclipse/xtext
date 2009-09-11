@@ -29,8 +29,8 @@ public class KeywordsTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage", org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage", org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

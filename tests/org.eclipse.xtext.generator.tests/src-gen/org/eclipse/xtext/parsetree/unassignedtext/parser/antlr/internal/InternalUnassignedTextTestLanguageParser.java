@@ -121,7 +121,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         EObject this_CommonTerminalsRule_4 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:85:6: ( (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) )
@@ -312,7 +312,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
         Token lv_val_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:155:6: ( ( RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
@@ -422,7 +422,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
         Token lv_count_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:204:6: ( ( 'contents:' ( (lv_count_1_0= RULE_INT ) ) RULE_PLURAL ) )
@@ -536,7 +536,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
         Token lv_val_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:257:6: ( ( 'multi' ( (lv_val_1_0= RULE_INT ) ) RULE_MULTI RULE_MULTI RULE_MULTI ) )
@@ -658,7 +658,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
         Token lv_val_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:318:6: ( ( 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
@@ -991,7 +991,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
         Token lv_val_4_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.g:444:6: ( ( 'terminals' RULE_ID RULE_INT RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )

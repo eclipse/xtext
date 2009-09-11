@@ -111,7 +111,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_types_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalImportUriTestLanguage.g:85:6: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) )
@@ -292,7 +292,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_importURI_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalImportUriTestLanguage.g:154:6: ( ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
@@ -402,7 +402,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalImportUriTestLanguage.g:203:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) 'extends' ( ( RULE_ID ) ) ) )

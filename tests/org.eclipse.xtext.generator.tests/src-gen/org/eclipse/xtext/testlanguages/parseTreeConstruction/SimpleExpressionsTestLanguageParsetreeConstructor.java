@@ -16,11 +16,13 @@ public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractP
 		
 	@Inject
 	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public SimpleExpressionsTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group(this, this, 0, inst);
@@ -58,10 +61,12 @@ protected class Sequence_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSequenceAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group_1(parent, this, 0, inst);
@@ -70,6 +75,7 @@ protected class Sequence_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSequenceRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -83,10 +89,12 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getSequenceAccess().getAdditionParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
@@ -94,12 +102,14 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -114,10 +124,12 @@ protected class Sequence_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSequenceAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_ExpressionsAssignment_1_1(parent, this, 0, inst);
@@ -134,10 +146,12 @@ protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Sequence_Group_1(parent, this, 0, inst);
@@ -147,6 +161,7 @@ protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expressions", false);
@@ -163,10 +178,12 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSequenceAccess().getExpressionsAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
@@ -174,6 +191,7 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("expressions");
@@ -189,6 +207,7 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -217,10 +236,12 @@ protected class Addition_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group_1(parent, this, 0, inst);
@@ -229,6 +250,7 @@ protected class Addition_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -242,10 +264,12 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
@@ -253,12 +277,14 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Multiplication_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -273,10 +299,12 @@ protected class Addition_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_ValuesAssignment_1_2(parent, this, 0, inst);
@@ -293,10 +321,12 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getOpValuesAction_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group_1(parent, this, 0, inst);
@@ -306,6 +336,7 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
@@ -322,10 +353,12 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getOperatorAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_OpValuesAction_1_0(parent, this, 0, inst);
@@ -333,6 +366,7 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -358,10 +392,12 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAdditionAccess().getValuesAssignment_1_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
@@ -369,6 +405,7 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
@@ -384,6 +421,7 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -412,10 +450,12 @@ protected class Multiplication_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group_1(parent, this, 0, inst);
@@ -424,6 +464,7 @@ protected class Multiplication_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -437,10 +478,12 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getTermParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
@@ -448,12 +491,14 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -468,10 +513,12 @@ protected class Multiplication_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_ValuesAssignment_1_2(parent, this, 0, inst);
@@ -488,10 +535,12 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_Group_1(parent, this, 0, inst);
@@ -501,6 +550,7 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
@@ -517,10 +567,12 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getOperatorAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Multiplication_OpValuesAction_1_0(parent, this, 0, inst);
@@ -528,6 +580,7 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -553,10 +606,12 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMultiplicationAccess().getValuesAssignment_1_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
@@ -564,6 +619,7 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
@@ -579,6 +635,7 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -607,10 +664,12 @@ protected class Term_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTermAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_AtomParserRuleCall_0(parent, this, 0, inst);
@@ -619,6 +678,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -632,10 +692,12 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTermAccess().getAtomParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Atom_NameAssignment(this, this, 0, inst);
@@ -643,12 +705,14 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Atom_NameAssignment.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -663,10 +727,12 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTermAccess().getParensParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_Group(this, this, 0, inst);
@@ -674,12 +740,14 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -705,20 +773,24 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAtomAccess().getNameAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -749,10 +821,12 @@ protected class Parens_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getParensAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_RightParenthesisKeyword_2(parent, this, 0, inst);
@@ -760,6 +834,7 @@ protected class Parens_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -773,10 +848,12 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParensAccess().getLeftParenthesisKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -792,10 +869,12 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getParensAccess().getAdditionParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Addition_Group(this, this, 0, inst);
@@ -803,12 +882,14 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
@@ -824,10 +905,12 @@ protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParensAccess().getRightParenthesisKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_AdditionParserRuleCall_1(parent, this, 0, inst);

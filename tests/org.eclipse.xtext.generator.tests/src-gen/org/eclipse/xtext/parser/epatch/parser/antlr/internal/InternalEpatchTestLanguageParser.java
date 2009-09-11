@@ -115,7 +115,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_objects_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:85:6: ( ( 'epatch' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_resources_4_0= ruleNamedResource ) )* ( (lv_objects_5_0= ruleObjectRef ) )* '}' ) )
@@ -400,7 +400,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject this_ExtensionImport_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:214:6: ( (this_ModelImport_0= ruleModelImport | this_JavaImport_1= ruleJavaImport | this_ExtensionImport_2= ruleExtensionImport ) )
@@ -560,7 +560,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject this_EPackageImport_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:264:6: ( (this_ResourceImport_0= ruleResourceImport | this_EPackageImport_1= ruleEPackageImport ) )
@@ -702,7 +702,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         Token lv_name_1_0=null;
         Token lv_uri_3_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:304:6: ( ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'uri' ( (lv_uri_3_0= RULE_STRING ) ) ) )
@@ -850,7 +850,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         Token lv_name_1_0=null;
         Token lv_nsURI_3_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:381:6: ( ( 'import' ( (lv_name_1_0= RULE_ID ) ) 'ns' ( (lv_nsURI_3_0= RULE_STRING ) ) ) )
@@ -998,7 +998,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         Token lv_path_2_0=null;
         Token lv_path_4_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:458:6: ( ( 'import' 'java' ( (lv_path_2_0= RULE_ID ) ) ( '.' ( (lv_path_4_0= RULE_ID ) ) )* ) )
@@ -1174,7 +1174,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         Token lv_path_2_0=null;
         Token lv_path_4_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:539:6: ( ( 'import' 'extension' ( (lv_path_2_0= RULE_ID ) ) ( '::' ( (lv_path_4_0= RULE_ID ) ) )* ) )
@@ -1355,7 +1355,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_rightRoot_11_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:620:6: ( ( 'resource' ( (lv_name_1_0= RULE_ID ) ) '{' 'left' ( ( 'uri' ( (lv_leftUri_5_0= RULE_STRING ) ) ) | ( (lv_leftRoot_6_0= ruleCreatedObject ) ) ) ';' 'right' ( ( 'uri' ( (lv_rightUri_10_0= RULE_STRING ) ) ) | ( (lv_rightRoot_11_0= ruleCreatedObject ) ) ) ';' '}' ) )
@@ -1722,7 +1722,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_rightMig_16_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:801:6: ( ( 'object' ( (lv_name_1_0= RULE_ID ) )? ( ( ( ( RULE_ID ) ) ( (lv_leftFrag_3_0= RULE_FRAGMENT ) ) ) | ( 'left' ( ( RULE_ID ) ) ( (lv_leftFrag_6_0= RULE_FRAGMENT ) ) 'right' ( ( RULE_ID ) ) ( (lv_rightFrag_9_0= RULE_FRAGMENT ) ) ) ) ( '{' ( ( (lv_assignments_11_0= ruleBiSingleAssignment ) ) | ( (lv_assignments_12_0= ruleBiListAssignment ) ) )+ ( 'left' ( (lv_leftMig_14_0= ruleMigration ) ) )? ( 'right' ( (lv_rightMig_16_0= ruleMigration ) ) )? '}' )? ) )
@@ -2329,7 +2329,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_rightValue_4_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1088:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) '|' ( (lv_rightValue_4_0= ruleSingleAssignmentValue ) ) ';' ) )
@@ -2527,7 +2527,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_rightValues_9_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1193:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleListAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleListAssignmentValue ) ) )* )? '|' ( ( (lv_rightValues_7_0= ruleListAssignmentValue ) ) ( ',' ( (lv_rightValues_9_0= ruleListAssignmentValue ) ) )* )? ']' ';' ) )
@@ -2889,7 +2889,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_leftValue_2_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1362:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' ( (lv_leftValue_2_0= ruleSingleAssignmentValue ) ) ';' ) )
@@ -3043,7 +3043,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_leftValues_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1439:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) '=' '[' ( ( (lv_leftValues_3_0= ruleAssignmentValue ) ) ( ',' ( (lv_leftValues_5_0= ruleAssignmentValue ) ) )* )? ']' ';' ) )
@@ -3287,7 +3287,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_newObject_7_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1552:6: ( ( ( (lv_value_0_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_3_0= RULE_ID ) ) ( '[' ( (lv_refIndex_5_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_7_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_9_0= RULE_FRAGMENT ) ) ) ) )
@@ -3698,7 +3698,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_newObject_12_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1736:6: ( ( ( (lv_index_0_0= RULE_INT ) ) ':' ( ( '[' ( (lv_refIndex_3_0= RULE_INT ) ) ']' ) | ( (lv_value_5_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_8_0= RULE_ID ) ) ( '[' ( (lv_refIndex_10_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_12_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_14_0= RULE_FRAGMENT ) ) ) ) ) )
@@ -4209,7 +4209,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_newObject_8_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1981:6: ( ( ( (lv_keyword_0_0= 'null' ) ) | ( (lv_value_1_0= RULE_STRING ) ) | ( ( ( RULE_ID ) ) ( '.' ( (lv_refFeature_4_0= RULE_ID ) ) ( '[' ( (lv_refIndex_6_0= RULE_INT ) ) ']' )? )? ) | ( (lv_newObject_8_0= ruleCreatedObject ) ) | ( ( ( RULE_ID ) ) ( (lv_impFrag_10_0= RULE_FRAGMENT ) ) ) ) )
@@ -4663,7 +4663,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_leftMig_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2187:6: ( ( (this_ObjectNew_0= ruleObjectNew | this_ObjectCopy_1= ruleObjectCopy ) ( (lv_name_2_0= RULE_ID ) )? ( '{' ( ( (lv_assignments_4_0= ruleMonoSingleAssignment ) ) | ( (lv_assignments_5_0= ruleMonoListAssignment ) ) )+ ( (lv_leftMig_6_0= ruleMigration ) )? '}' )? ) )
@@ -5028,7 +5028,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
         Token lv_impFrag_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2332:6: ( ( 'new' ( ( RULE_ID ) ) ( (lv_impFrag_2_0= RULE_FRAGMENT ) ) ) )
@@ -5160,7 +5160,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
         Token lv_fragment_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2395:6: ( ( 'copy' ( ( RULE_ID ) ) ( (lv_fragment_2_0= RULE_FRAGMENT ) ) ) )
@@ -5297,7 +5297,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject lv_eachOp_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2458:6: ( ( 'migrate' ( (lv_first_1_0= ruleExecutable ) )? ( ( 'as' ( (lv_asOp_3_0= ruleExecutable ) ) ) | ( 'each' ( (lv_eachOp_5_0= ruleExecutable ) ) ) )? ';' ) )
@@ -5546,7 +5546,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
         EObject this_ExpressionExecutable_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2568:6: ( (this_JavaExecutable_0= ruleJavaExecutable | this_ExpressionExecutable_1= ruleExpressionExecutable ) )
@@ -5667,7 +5667,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
         Token lv_method_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2608:6: ( ( 'java' ( (lv_method_1_0= RULE_ID ) ) '(' ')' ) )
@@ -5785,7 +5785,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
         Token lv_exprstr_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2665:6: ( ( (lv_exprstr_0_0= RULE_STRING ) ) )

@@ -110,7 +110,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
         Token lv_bar_3_0=null;
         Token lv_bar_5_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.g:85:6: ( ( ( 'foo' ( (lv_foo_1_0= RULE_ID ) ) ( 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | ( 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) )

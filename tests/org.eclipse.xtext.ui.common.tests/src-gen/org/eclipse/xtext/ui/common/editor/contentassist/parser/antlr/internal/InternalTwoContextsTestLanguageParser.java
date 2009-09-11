@@ -109,7 +109,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
         EObject lv_elements_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:85:6: ( ( (lv_elements_0_0= ruleAnElement ) )* )
@@ -230,7 +230,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:130:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( 'refersTo' ( ( RULE_ID ) ) )? ';' ) )

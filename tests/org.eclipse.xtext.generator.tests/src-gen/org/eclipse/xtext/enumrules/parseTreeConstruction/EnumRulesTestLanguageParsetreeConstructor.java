@@ -16,11 +16,13 @@ public class EnumRulesTestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private EnumRulesTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public EnumRulesTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
@@ -55,10 +58,12 @@ protected class Model_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group_0(parent, this, 0, inst);
@@ -67,6 +72,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -80,10 +86,12 @@ protected class Model_Group_0 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group_0_2(parent, this, 0, inst);
@@ -101,10 +109,12 @@ protected class Model_ExistingKeyword_0_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getModelAccess().getExistingKeyword_0_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -120,10 +130,12 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getExistingAssignment_0_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ExistingKeyword_0_0(parent, this, 0, inst);
@@ -131,6 +143,7 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("existing",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("existing");
@@ -151,10 +164,12 @@ protected class Model_Group_0_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup_0_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_GeneratedAssignment_0_2_1(parent, this, 0, inst);
@@ -171,10 +186,12 @@ protected class Model_GeneratedKeyword_0_2_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ExistingAssignment_0_1(parent, this, 0, inst);
@@ -191,10 +208,12 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getGeneratedAssignment_0_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_GeneratedKeyword_0_2_0(parent, this, 0, inst);
@@ -202,6 +221,7 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("generated",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");
@@ -224,10 +244,12 @@ protected class Model_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_GeneratedAssignment_1_1(parent, this, 0, inst);
@@ -244,10 +266,12 @@ protected class Model_GeneratedKeyword_1_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getModelAccess().getGeneratedKeyword_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -263,10 +287,12 @@ protected class Model_GeneratedAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getGeneratedAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_GeneratedKeyword_1_0(parent, this, 0, inst);
@@ -274,6 +300,7 @@ protected class Model_GeneratedAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("generated",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");

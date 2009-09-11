@@ -109,7 +109,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         EObject lv_elements_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:85:6: ( ( (lv_elements_0_0= ruleElement ) )* )
@@ -232,7 +232,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         Token lv_name_2_0=null;
         Token lv_descriptions_3_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:130:6: ( ( ( (lv_optional_0_0= 'optional' ) )? 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* ';' ) )

@@ -108,7 +108,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
         Token lv_featureA_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:85:6: ( ( (lv_featureA_0_0= RULE_ID ) )+ )

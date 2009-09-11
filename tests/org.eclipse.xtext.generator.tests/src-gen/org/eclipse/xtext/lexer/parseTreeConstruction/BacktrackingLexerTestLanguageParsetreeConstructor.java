@@ -16,11 +16,13 @@ public class BacktrackingLexerTestLanguageParsetreeConstructor extends AbstractP
 		
 	@Inject
 	private BacktrackingLexerTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public BacktrackingLexerTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
@@ -55,10 +58,12 @@ protected class Model_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_XbsAssignment_2(parent, this, 0, inst);
@@ -68,6 +73,7 @@ protected class Model_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -81,10 +87,12 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getEnumsAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_EnumsAssignment_0(parent, this, 0, inst);
@@ -92,6 +100,7 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("enums",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("enums");
@@ -112,10 +121,12 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getAbsAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Ab_Group(this, this, 0, inst);
@@ -123,6 +134,7 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("abs",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abs");
@@ -138,6 +150,7 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -155,10 +168,12 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getXbsAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Xb_Group(this, this, 0, inst);
@@ -166,6 +181,7 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("xbs",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("xbs");
@@ -181,6 +197,7 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -210,10 +227,12 @@ protected class Ab_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAbAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Ab_YAssignment_1(parent, this, 0, inst);
@@ -221,6 +240,7 @@ protected class Ab_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -234,16 +254,19 @@ protected class Ab_XAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAbAccess().getXAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -264,10 +287,12 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAbAccess().getYAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Ab_XAssignment_0(parent, this, 0, inst);
@@ -275,6 +300,7 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
@@ -306,10 +332,12 @@ protected class Xb_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getXbAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Xb_YAssignment_1(parent, this, 0, inst);
@@ -317,6 +345,7 @@ protected class Xb_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getXbRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -330,16 +359,19 @@ protected class Xb_XAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getXbAccess().getXAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
@@ -360,10 +392,12 @@ protected class Xb_YAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getXbAccess().getYAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Xb_XAssignment_0(parent, this, 0, inst);
@@ -371,6 +405,7 @@ protected class Xb_YAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");

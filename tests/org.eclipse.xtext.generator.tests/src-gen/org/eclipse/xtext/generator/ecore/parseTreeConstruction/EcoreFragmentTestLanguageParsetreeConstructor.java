@@ -16,11 +16,13 @@ public class EcoreFragmentTestLanguageParsetreeConstructor extends AbstractParse
 		
 	@Inject
 	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public EcoreFragmentTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Second_Group(this, this, 0, inst);
@@ -53,10 +56,12 @@ protected class Second_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSecondAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Second_FirstAssignment_2(parent, this, 0, inst);
@@ -64,6 +69,7 @@ protected class Second_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSecondRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -77,16 +83,19 @@ protected class Second_NameAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondAccess().getNameAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -107,10 +116,12 @@ protected class Second_FirstKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSecondAccess().getFirstKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Second_NameAssignment_0(parent, this, 0, inst);
@@ -127,10 +138,12 @@ protected class Second_FirstAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondAccess().getFirstAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Second_FirstKeyword_1(parent, this, 0, inst);
@@ -138,6 +151,7 @@ protected class Second_FirstAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("first");

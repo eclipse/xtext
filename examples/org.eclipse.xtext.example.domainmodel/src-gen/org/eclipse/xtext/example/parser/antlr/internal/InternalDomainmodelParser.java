@@ -116,7 +116,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_elements_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:87:6: ( ( (lv_elements_0_0= ruleAbstractElement ) )* )
@@ -252,7 +252,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject this_Import_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:132:6: ( (this_PackageDeclaration_0= rulePackageDeclaration | this_Type_1= ruleType | this_Import_2= ruleImport ) )
@@ -420,7 +420,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_importedNamespace_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:182:6: ( ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard ) ) ) )
@@ -548,7 +548,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:231:6: ( ( 'package' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleAbstractElement ) )* '}' ) )
@@ -746,7 +746,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject this_DataType_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:312:6: ( (this_Entity_0= ruleEntity | this_DataType_1= ruleDataType ) )
@@ -882,7 +882,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:352:6: ( ( 'datatype' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -1006,7 +1006,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_features_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:401:6: ( ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( ruleQualifiedName ) ) )? '{' ( (lv_features_5_0= ruleFeature ) )* '}' ) )
@@ -1258,7 +1258,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject this_Operation_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:502:6: ( (this_StructuralFeature_0= ruleStructuralFeature | this_Operation_1= ruleOperation ) )
@@ -1397,7 +1397,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject this_Reference_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:542:6: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
@@ -1535,7 +1535,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_type_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:582:6: ( ( 'attr' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_type_3_0= ruleTypeRef ) ) ) )
@@ -1705,7 +1705,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_type_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:659:6: ( ( 'ref' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_type_3_0= ruleTypeRef ) ) ( 'opposite' ( ( RULE_ID ) ) )? ) )
@@ -1930,7 +1930,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_type_9_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:754:6: ( ( ( (lv_visibility_0_0= ruleVisibility ) )? 'op' ( (lv_name_2_0= RULE_ID ) ) '(' ( ( (lv_params_4_0= ruleParameter ) ) ( ',' ( (lv_params_6_0= ruleParameter ) ) )* )? ')' ':' ( (lv_type_9_0= ruleTypeRef ) ) ) )
@@ -2290,7 +2290,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         EObject lv_type_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:915:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleTypeRef ) ) ) )
@@ -2444,7 +2444,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:986:6: ( ( ( ruleQualifiedName ) ) )

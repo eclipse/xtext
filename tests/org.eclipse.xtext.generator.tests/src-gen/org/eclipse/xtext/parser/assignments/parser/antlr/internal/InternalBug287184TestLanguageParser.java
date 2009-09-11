@@ -114,7 +114,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_detail_2_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:85:6: ( ( 'model' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= ruleFQN ) ) ) ( ( (lv_detail_2_1= ruleDetail | lv_detail_2_2= ruleAssociatedDetail ) ) )+ ) )
@@ -408,7 +408,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_visibility_2_2=null;
         Token lv_visibility_2_3=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:208:6: ( ( ( (lv_doc_0_0= RULE_ML_COMMENT ) )? 'detail' ( ( (lv_visibility_2_1= 'private' | lv_visibility_2_2= 'protected' | lv_visibility_2_3= 'public' ) ) )? ( ( ruleFQN ) ) ) )
@@ -676,7 +676,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
     public final EObject ruleAssociatedDetail() throws RecognitionException {
         EObject current = null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.g:333:6: ( ( 'associated' ( ( ( RULE_ID | ruleFQN ) ) ) ';' ) )

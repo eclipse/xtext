@@ -78,7 +78,7 @@ entryRuleEntry returns [EObject current=null] :
 
 // Rule Entry
 ruleEntry returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -123,7 +123,7 @@ entryRuleAlts returns [EObject current=null] :
 
 // Rule Alts
 ruleAlts returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -173,7 +173,7 @@ entryRuleLookAhead0 returns [EObject current=null] :
 
 // Rule LookAhead0
 ruleLookAhead0 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -219,7 +219,7 @@ entryRuleLookAhead1 returns [EObject current=null] :
 
 // Rule LookAhead1
 ruleLookAhead1 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -310,7 +310,7 @@ entryRuleLookAhead2 returns [EObject current=null] :
 
 // Rule LookAhead2
 ruleLookAhead2 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -378,7 +378,7 @@ entryRuleLookAhead3 returns [EObject current=null] :
 
 // Rule LookAhead3
 ruleLookAhead3 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -452,7 +452,7 @@ entryRuleLookAhead4 returns [EObject current=null] :
 
 // Rule LookAhead4
 ruleLookAhead4 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

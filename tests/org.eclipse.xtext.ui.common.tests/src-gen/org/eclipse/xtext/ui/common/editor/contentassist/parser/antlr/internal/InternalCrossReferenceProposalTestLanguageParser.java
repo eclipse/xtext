@@ -109,7 +109,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
         EObject lv_elements_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:85:6: ( ( (lv_elements_0_0= ruleClass ) )* )
@@ -230,7 +230,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
         Token lv_name_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:130:6: ( ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' ) )

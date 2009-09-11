@@ -16,11 +16,13 @@ public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParse
 		
 	@Inject
 	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public OptionalEmptyTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ChildAssignment(this, this, 0, inst);
@@ -54,10 +57,12 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getChildAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_Group(this, this, 0, inst);
@@ -65,10 +70,12 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("child",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("child");
@@ -84,6 +91,7 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -109,10 +117,12 @@ protected class Greeting_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getGreetingAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_NameAssignment_1(parent, this, 0, inst);
@@ -120,6 +130,7 @@ protected class Greeting_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -133,10 +144,12 @@ protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getGreetingAccess().getHalloKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -152,10 +165,12 @@ protected class Greeting_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getGreetingAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Greeting_HalloKeyword_0(parent, this, 0, inst);
@@ -163,6 +178,7 @@ protected class Greeting_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

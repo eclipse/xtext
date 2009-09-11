@@ -109,7 +109,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
         EObject lv_modelFeatures_2_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:85:6: ( ( 'model' ( RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) )
@@ -255,7 +255,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:138:6: ( ( 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule ';' ) )

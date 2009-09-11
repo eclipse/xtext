@@ -16,11 +16,13 @@ public class FowlerDslTestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private FowlerDslTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public FowlerDslTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statemachine_Group(this, this, 0, inst);
@@ -57,10 +60,12 @@ protected class Statemachine_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statemachine_StatesAssignment_6(parent, this, 0, inst);
@@ -69,6 +74,7 @@ protected class Statemachine_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStatemachineRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -82,10 +88,12 @@ protected class Statemachine_EventsKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEventsKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -101,10 +109,12 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEventsAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Event_Group(this, this, 0, inst);
@@ -112,6 +122,7 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("events",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("events");
@@ -127,6 +138,7 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -144,10 +156,12 @@ protected class Statemachine_EndKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEndKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statemachine_EventsAssignment_1(parent, this, 0, inst);
@@ -165,10 +179,12 @@ protected class Statemachine_CommandsKeyword_3 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getCommandsKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statemachine_EndKeyword_2(parent, this, 0, inst);
@@ -185,10 +201,12 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getCommandsAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Command_Group(this, this, 0, inst);
@@ -196,6 +214,7 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("commands",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("commands");
@@ -211,6 +230,7 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -228,10 +248,12 @@ protected class Statemachine_EndKeyword_5 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEndKeyword_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statemachine_CommandsAssignment_4(parent, this, 0, inst);
@@ -249,10 +271,12 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getStatesAssignment_6();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_Group(this, this, 0, inst);
@@ -260,6 +284,7 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("states",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("states");
@@ -275,6 +300,7 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -303,10 +329,12 @@ protected class Event_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getEventAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Event_CodeAssignment_2(parent, this, 0, inst);
@@ -314,6 +342,7 @@ protected class Event_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -327,16 +356,19 @@ protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getResettingAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resetting",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
@@ -357,10 +389,12 @@ protected class Event_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Event_ResettingAssignment_0(parent, this, 0, inst);
@@ -368,6 +402,7 @@ protected class Event_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -388,10 +423,12 @@ protected class Event_CodeAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getCodeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Event_NameAssignment_1(parent, this, 0, inst);
@@ -399,6 +436,7 @@ protected class Event_CodeAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
@@ -430,10 +468,12 @@ protected class Command_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getCommandAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Command_CodeAssignment_1(parent, this, 0, inst);
@@ -441,6 +481,7 @@ protected class Command_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -454,16 +495,19 @@ protected class Command_NameAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getCommandAccess().getNameAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -484,10 +528,12 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getCommandAccess().getCodeAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Command_NameAssignment_0(parent, this, 0, inst);
@@ -495,6 +541,7 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
@@ -527,10 +574,12 @@ protected class State_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_EndKeyword_4(parent, this, 0, inst);
@@ -538,6 +587,7 @@ protected class State_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -551,10 +601,12 @@ protected class State_StateKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -570,10 +622,12 @@ protected class State_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateKeyword_0(parent, this, 0, inst);
@@ -581,6 +635,7 @@ protected class State_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -601,10 +656,12 @@ protected class State_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_RightCurlyBracketKeyword_2_3(parent, this, 0, inst);
@@ -621,10 +678,12 @@ protected class State_ActionsKeyword_2_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getActionsKeyword_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_NameAssignment_1(parent, this, 0, inst);
@@ -641,10 +700,12 @@ protected class State_LeftCurlyBracketKeyword_2_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getLeftCurlyBracketKeyword_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_ActionsKeyword_2_0(parent, this, 0, inst);
@@ -661,10 +722,12 @@ protected class State_ActionsAssignment_2_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getActionsAssignment_2_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_ActionsAssignment_2_2(parent, this, 0, inst);
@@ -673,6 +736,7 @@ protected class State_ActionsAssignment_2_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("actions",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actions");
@@ -696,10 +760,12 @@ protected class State_RightCurlyBracketKeyword_2_3 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getRightCurlyBracketKeyword_2_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_ActionsAssignment_2_2(parent, this, 0, inst);
@@ -717,10 +783,12 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getTransitionsAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Transition_Group(this, this, 0, inst);
@@ -728,6 +796,7 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transitions",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transitions");
@@ -743,6 +812,7 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -761,10 +831,12 @@ protected class State_EndKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getEndKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_TransitionsAssignment_3(parent, this, 0, inst);
@@ -794,10 +866,12 @@ protected class Transition_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Transition_StateAssignment_2(parent, this, 0, inst);
@@ -805,6 +879,7 @@ protected class Transition_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -818,16 +893,19 @@ protected class Transition_EventAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getEventAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("event",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");
@@ -851,10 +929,12 @@ protected class Transition_EqualsSignGreaterThanSignKeyword_1 extends KeywordTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getEqualsSignGreaterThanSignKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Transition_EventAssignment_0(parent, this, 0, inst);
@@ -871,10 +951,12 @@ protected class Transition_StateAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getStateAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Transition_EqualsSignGreaterThanSignKeyword_1(parent, this, 0, inst);
@@ -882,6 +964,7 @@ protected class Transition_StateAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("state",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("state");

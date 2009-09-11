@@ -121,7 +121,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_stateKind_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:86:6: ( ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? ) )

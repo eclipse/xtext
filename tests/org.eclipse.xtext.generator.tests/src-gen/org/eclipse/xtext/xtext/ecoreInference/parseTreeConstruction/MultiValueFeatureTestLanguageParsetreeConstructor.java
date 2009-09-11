@@ -16,11 +16,13 @@ public class MultiValueFeatureTestLanguageParsetreeConstructor extends AbstractP
 		
 	@Inject
 	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_FeatureAAssignment(this, this, 0, inst);
@@ -53,10 +56,12 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStartAccess().getFeatureAAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_FeatureAAssignment(parent, this, 0, inst);
@@ -64,10 +69,12 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("featureA",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");

@@ -16,11 +16,13 @@ public class HiddenTokensMergerTestLanguageParsetreeConstructor extends Abstract
 		
 	@Inject
 	private HiddenTokensMergerTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public HiddenTokensMergerTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_DatatypeBug286557ParserRuleCall(this, this, 0, inst);
@@ -54,10 +57,12 @@ protected class Model_DatatypeBug286557ParserRuleCall extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getModelAccess().getDatatypeBug286557ParserRuleCall();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_Group(this, this, 0, inst);
@@ -65,16 +70,19 @@ protected class Model_DatatypeBug286557ParserRuleCall extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(DatatypeBug286557_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getDatatypeBug286557Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -99,10 +107,12 @@ protected class DatatypeBug286557_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_SemicolonKeyword_3(parent, this, 0, inst);
@@ -110,6 +120,7 @@ protected class DatatypeBug286557_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDatatypeBug286557Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -123,10 +134,12 @@ protected class DatatypeBug286557_NumberSignDigitOneKeyword_0 extends KeywordTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getNumberSignDigitOneKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -142,10 +155,12 @@ protected class DatatypeBug286557_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_NumberSignDigitOneKeyword_0(parent, this, 0, inst);
@@ -153,6 +168,7 @@ protected class DatatypeBug286557_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -173,10 +189,12 @@ protected class DatatypeBug286557_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_RefAssignment_2_1(parent, this, 0, inst);
@@ -193,10 +211,12 @@ protected class DatatypeBug286557_RefKeyword_2_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getRefKeyword_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_NameAssignment_1(parent, this, 0, inst);
@@ -213,10 +233,12 @@ protected class DatatypeBug286557_RefAssignment_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getRefAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_RefKeyword_2_0(parent, this, 0, inst);
@@ -224,6 +246,7 @@ protected class DatatypeBug286557_RefAssignment_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ref",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref");
@@ -248,10 +271,12 @@ protected class DatatypeBug286557_SemicolonKeyword_3 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getDatatypeBug286557Access().getSemicolonKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DatatypeBug286557_Group_2(parent, this, 0, inst);

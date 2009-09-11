@@ -111,7 +111,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject lv_elements_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:85:6: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* ) )
@@ -292,7 +292,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_importURI_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:154:6: ( ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
@@ -405,7 +405,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject this_Class_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:203:6: ( (this_DataType_0= ruleDataType | this_Class_1= ruleClass ) )
@@ -526,7 +526,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:243:6: ( ( 'datatype' ( (lv_name_1_0= RULE_ID ) ) ( ';' )? ) )
@@ -661,7 +661,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject lv_subClasses_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:296:6: ( ( 'class' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* '}' ) )
@@ -933,7 +933,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject this_Reference_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:419:6: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
@@ -1054,7 +1054,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:459:6: ( ( 'attr' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( ';' )? ) )
@@ -1211,7 +1211,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalDomainModelTestLanguage.g:530:6: ( ( 'ref' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( ';' )? ) )

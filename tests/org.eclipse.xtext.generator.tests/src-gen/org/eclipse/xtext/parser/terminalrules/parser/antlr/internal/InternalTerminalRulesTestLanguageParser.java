@@ -114,7 +114,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         Token lv_wsValue_5_0=null;
         Token lv_anyValue_6_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:85:6: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_mlCommentValue_3_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_4_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_5_0= RULE_WS ) ) | ( (lv_anyValue_6_0= RULE_ANY_OTHER ) ) ) )

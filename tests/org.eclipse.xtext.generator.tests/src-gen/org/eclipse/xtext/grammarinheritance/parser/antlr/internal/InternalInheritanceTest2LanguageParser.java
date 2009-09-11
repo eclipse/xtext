@@ -112,7 +112,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
         AntlrDatatypeRuleToken lv_ids_4_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalInheritanceTest2Language.g:85:6: ( ( 'model' ( (lv_name_1_0= RULE_ID ) ) '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) '}' ) )
@@ -320,7 +320,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalInheritanceTest2Language.g:190:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ) )

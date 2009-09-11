@@ -109,7 +109,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         EObject lv_elements_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:85:6: ( ( (lv_elements_0_0= ruleType ) )* )
@@ -233,7 +233,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         EObject this_AnotherType_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:130:6: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
@@ -352,7 +352,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
     public final EObject ruleAType() throws RecognitionException {
         EObject current = null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:170:6: ( ( 'foo' () ) )
@@ -443,7 +443,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
     public final EObject ruleAnotherType() throws RecognitionException {
         EObject current = null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.g:206:6: ( ( 'bar' () ) )

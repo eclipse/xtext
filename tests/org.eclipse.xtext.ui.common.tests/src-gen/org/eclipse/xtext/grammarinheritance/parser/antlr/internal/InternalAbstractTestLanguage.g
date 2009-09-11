@@ -78,7 +78,7 @@ entryRuleInheritedParserRule returns [EObject current=null] :
 
 // Rule InheritedParserRule
 ruleInheritedParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -129,7 +129,7 @@ entryRuleOverridableParserRule returns [EObject current=null] :
 
 // Rule OverridableParserRule
 ruleOverridableParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -182,7 +182,7 @@ entryRuleExtendableParserRule returns [EObject current=null] :
 
 // Rule ExtendableParserRule
 ruleExtendableParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

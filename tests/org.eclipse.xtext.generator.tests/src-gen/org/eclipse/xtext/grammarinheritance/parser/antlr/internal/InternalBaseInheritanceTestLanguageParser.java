@@ -108,7 +108,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:85:6: ( ( 'model' ( (lv_name_1_0= RULE_ID ) ) ) )

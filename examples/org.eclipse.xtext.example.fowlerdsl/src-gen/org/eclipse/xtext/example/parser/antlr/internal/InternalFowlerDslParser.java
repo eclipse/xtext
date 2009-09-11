@@ -113,7 +113,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
         EObject lv_states_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:85:6: ( ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* ) )
@@ -366,7 +366,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
         Token lv_name_1_0=null;
         Token lv_code_2_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:194:6: ( ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) )
@@ -546,7 +546,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
         Token lv_name_0_0=null;
         Token lv_code_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:284:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) )
@@ -687,7 +687,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
         EObject lv_transitions_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:353:6: ( ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' ) )
@@ -927,7 +927,7 @@ public class InternalFowlerDslParser extends AbstractInternalAntlrParser {
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalFowlerDsl.g:456:6: ( ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) ) )

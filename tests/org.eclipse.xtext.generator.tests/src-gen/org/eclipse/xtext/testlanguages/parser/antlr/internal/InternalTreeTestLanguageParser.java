@@ -109,7 +109,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
         EObject lv_children_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:85:6: ( ( (lv_children_0_0= ruleNode ) )* )
@@ -233,7 +233,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
         EObject lv_children_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:130:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '(' ( (lv_attrib_2_0= RULE_STRING ) ) ')' '{' ( (lv_children_5_0= ruleNode ) )* '};' ) )
