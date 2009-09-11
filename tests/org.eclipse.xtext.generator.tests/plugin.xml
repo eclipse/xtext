@@ -335,15 +335,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/xtext/tests/ContentAssist" 
-       class = "org.eclipse.xtext.testlanguages.contentAssistTestLanguage.ContentAssistTestLanguagePackage"
-       genModel = "org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://example.xtext.org/FowlerDslTestLanguage" 
        class = "org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage"
        genModel = "org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.genmodel" /> 
