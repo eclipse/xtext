@@ -16,11 +16,13 @@ public class Bug287184TestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private Bug287184TestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public Bug287184TestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
@@ -56,10 +59,12 @@ protected class Model_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_DetailAssignment_2(parent, this, 0, inst);
@@ -67,6 +72,7 @@ protected class Model_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -80,10 +86,12 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getModelAccess().getModelKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -99,10 +107,12 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ModelKeyword_0(parent, this, 0, inst);
@@ -110,6 +120,7 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -135,10 +146,12 @@ protected class Model_DetailAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getDetailAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_Group(this, this, 0, inst);
@@ -147,6 +160,7 @@ protected class Model_DetailAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detail",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("detail");
@@ -171,6 +185,7 @@ protected class Model_DetailAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -199,10 +214,12 @@ protected class AbstractDetail_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getAbstractDetailAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractDetail_DetailParserRuleCall_0(parent, this, 0, inst);
@@ -211,6 +228,7 @@ protected class AbstractDetail_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractDetailRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -224,10 +242,12 @@ protected class AbstractDetail_DetailParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractDetailAccess().getDetailParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_Group(this, this, 0, inst);
@@ -235,12 +255,14 @@ protected class AbstractDetail_DetailParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Detail_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getDetailRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -255,10 +277,12 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractDetailAccess().getAssociatedDetailParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AssociatedDetail_Group(this, this, 0, inst);
@@ -266,12 +290,14 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AssociatedDetail_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAssociatedDetailRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -299,10 +325,12 @@ protected class Detail_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getDetailAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_DetailClassAssignment_3(parent, this, 0, inst);
@@ -310,6 +338,7 @@ protected class Detail_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDetailRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -323,16 +352,19 @@ protected class Detail_DocAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDetailAccess().getDocAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("doc",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("doc");
@@ -353,10 +385,12 @@ protected class Detail_DetailKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getDetailAccess().getDetailKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_DocAssignment_0(parent, this, 0, inst);
@@ -373,10 +407,12 @@ protected class Detail_VisibilityAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDetailAccess().getVisibilityAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_DetailKeyword_1(parent, this, 0, inst);
@@ -384,6 +420,7 @@ protected class Detail_VisibilityAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("visibility");
@@ -414,10 +451,12 @@ protected class Detail_DetailClassAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDetailAccess().getDetailClassAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Detail_VisibilityAssignment_2(parent, this, 0, inst);
@@ -426,6 +465,7 @@ protected class Detail_DetailClassAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detailClass",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("detailClass");
@@ -460,10 +500,12 @@ protected class AssociatedDetail_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAssociatedDetailAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AssociatedDetail_SemicolonKeyword_2(parent, this, 0, inst);
@@ -471,6 +513,7 @@ protected class AssociatedDetail_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAssociatedDetailRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -484,10 +527,12 @@ protected class AssociatedDetail_AssociatedKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAssociatedDetailAccess().getAssociatedKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -503,10 +548,12 @@ protected class AssociatedDetail_DetailClassAssignment_1 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAssociatedDetailAccess().getDetailClassAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AssociatedDetail_AssociatedKeyword_0(parent, this, 0, inst);
@@ -514,6 +561,7 @@ protected class AssociatedDetail_DetailClassAssignment_1 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detailClass",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("detailClass");
@@ -537,10 +585,12 @@ protected class AssociatedDetail_SemicolonKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AssociatedDetail_DetailClassAssignment_1(parent, this, 0, inst);

@@ -108,7 +108,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:85:6: ( ( ( (lv_name_0_0= RULE_ID ) ) 'first' ( ( RULE_ID ) ) ) )

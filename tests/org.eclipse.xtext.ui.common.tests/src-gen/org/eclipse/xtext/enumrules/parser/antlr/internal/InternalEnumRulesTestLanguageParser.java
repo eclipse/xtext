@@ -114,7 +114,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_generated_5_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesTestLanguage.g:86:6: ( ( ( 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) ( 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | ( 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )

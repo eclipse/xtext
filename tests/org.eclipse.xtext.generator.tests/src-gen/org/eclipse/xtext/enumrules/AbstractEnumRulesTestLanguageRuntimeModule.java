@@ -63,24 +63,4 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
-		return AbstractEnumRulesTestLanguageRuntimeModule.class.getClassLoader();
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator.class;
-	}
-
 }

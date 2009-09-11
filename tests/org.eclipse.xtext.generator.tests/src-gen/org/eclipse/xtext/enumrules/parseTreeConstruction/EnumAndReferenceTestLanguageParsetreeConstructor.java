@@ -16,11 +16,13 @@ public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractPa
 		
 	@Inject
 	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public EnumAndReferenceTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_Group(this, this, 0, inst);
@@ -53,10 +56,12 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_RefAssignment_3(parent, this, 0, inst);
@@ -64,6 +69,7 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -77,16 +83,19 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -107,10 +116,12 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_TypeAssignment_0(parent, this, 0, inst);
@@ -118,6 +129,7 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -138,10 +150,12 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_NameAssignment_1(parent, this, 0, inst);
@@ -158,10 +172,12 @@ protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEntityWithEnumAndReferenceAccess().getRefAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_ReferenceKeyword_2(parent, this, 0, inst);
@@ -169,6 +185,7 @@ protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentTok
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ref",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref");

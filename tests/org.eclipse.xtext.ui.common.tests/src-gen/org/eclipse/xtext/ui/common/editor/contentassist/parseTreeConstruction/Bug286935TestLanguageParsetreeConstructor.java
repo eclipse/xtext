@@ -16,11 +16,13 @@ public class Bug286935TestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private Bug286935TestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public Bug286935TestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_Group(this, this, 0, inst);
@@ -57,10 +60,12 @@ protected class State_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_LabelAssignment_3(parent, this, 0, inst);
@@ -71,6 +76,7 @@ protected class State_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -85,10 +91,12 @@ protected class State_Alternatives_0 extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getStateAccess().getAlternatives_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_IsInitialAssignment_0_0(parent, this, 0, inst);
@@ -109,16 +117,19 @@ protected class State_IsInitialAssignment_0_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getIsInitialAssignment_0_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isInitial");
@@ -139,16 +150,19 @@ protected class State_IsFinalAssignment_0_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getIsFinalAssignment_0_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isFinal",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isFinal");
@@ -169,16 +183,19 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKindAssignment_0_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
@@ -199,10 +216,12 @@ protected class State_Group_0_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup_0_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateKindAssignment_0_3_1(parent, this, 0, inst);
@@ -219,16 +238,19 @@ protected class State_IsInitialAssignment_0_3_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getIsInitialAssignment_0_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isInitial");
@@ -249,10 +271,12 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKindAssignment_0_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_IsInitialAssignment_0_3_0(parent, this, 0, inst);
@@ -260,6 +284,7 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
@@ -281,10 +306,12 @@ protected class State_Group_0_4 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup_0_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_IsFinalAssignment_0_4_2(parent, this, 0, inst);
@@ -301,16 +328,19 @@ protected class State_IsInitialAssignment_0_4_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getIsInitialAssignment_0_4_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isInitial");
@@ -331,10 +361,12 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKindAssignment_0_4_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_IsInitialAssignment_0_4_0(parent, this, 0, inst);
@@ -342,6 +374,7 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
@@ -362,10 +395,12 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getIsFinalAssignment_0_4_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateKindAssignment_0_4_1(parent, this, 0, inst);
@@ -373,6 +408,7 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isFinal",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isFinal");
@@ -395,10 +431,12 @@ protected class State_StateKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -414,10 +452,12 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateKeyword_1(parent, this, 0, inst);
@@ -426,6 +466,7 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateName",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateName");
@@ -446,10 +487,12 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getLabelAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateNameAssignment_2(parent, this, 0, inst);
@@ -459,6 +502,7 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("label",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("label");

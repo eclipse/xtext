@@ -41,7 +41,7 @@ public interface ReferenceGrammarPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/xtext/ui/common/tests/ReferenceGrammar";
+  String eNS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
 
   /**
    * The package namespace name.

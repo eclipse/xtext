@@ -109,7 +109,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         EObject lv_model_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:85:6: ( ( (lv_model_0_0= ruleModel ) )+ )
@@ -242,7 +242,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         AntlrDatatypeRuleToken lv_dots_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:130:6: ( ( ( (lv_id_0_0= ruleNestedModelId ) ) ( ':' ( (lv_value_2_0= ruleFraction ) ) )? ( '#' ( (lv_vector_4_0= ruleVector ) ) )? ( '+' ( (lv_dots_6_0= ruleDots ) ) )? ';' ) )

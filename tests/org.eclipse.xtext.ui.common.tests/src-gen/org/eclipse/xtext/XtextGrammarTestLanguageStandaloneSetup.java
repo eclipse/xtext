@@ -29,8 +29,8 @@ public class XtextGrammarTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest", org.eclipse.xtext.xtextTest.XtextTestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/Test/XtextTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/Test/XtextTest", org.eclipse.xtext.xtextTest.XtextTestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

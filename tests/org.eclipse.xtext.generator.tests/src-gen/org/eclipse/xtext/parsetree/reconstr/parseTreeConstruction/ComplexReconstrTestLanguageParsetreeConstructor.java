@@ -16,11 +16,13 @@ public class ComplexReconstrTestLanguageParsetreeConstructor extends AbstractPar
 		
 	@Inject
 	private ComplexReconstrTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public ComplexReconstrTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Alternatives(this, this, 0, inst);
@@ -67,10 +70,12 @@ protected class Root_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getRootAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_OpParserRuleCall_0(parent, this, 0, inst);
@@ -79,6 +84,7 @@ protected class Root_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -92,10 +98,12 @@ protected class Root_OpParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getOpParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Group(this, this, 0, inst);
@@ -103,12 +111,14 @@ protected class Root_OpParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getOpRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -123,10 +133,12 @@ protected class Root_TrickyGParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTrickyGParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG_Group(this, this, 0, inst);
@@ -134,12 +146,14 @@ protected class Root_TrickyGParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TrickyG_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTrickyGRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -167,10 +181,12 @@ protected class Op_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getOpAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Alternatives_1(parent, this, 0, inst);
@@ -179,6 +195,7 @@ protected class Op_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getOpRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -192,10 +209,12 @@ protected class Op_TermParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getOpAccess().getTermParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
@@ -203,12 +222,14 @@ protected class Op_TermParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -224,10 +245,12 @@ protected class Op_Alternatives_1 extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getOpAccess().getAlternatives_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Group_1_0(parent, this, 0, inst);
@@ -245,10 +268,12 @@ protected class Op_Group_1_0 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getOpAccess().getGroup_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_AddOperandsAssignment_1_0_2(parent, this, 0, inst);
@@ -265,10 +290,12 @@ protected class Op_AddAddOperandsAction_1_0_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Alternatives_1(parent, this, 0, inst);
@@ -278,6 +305,7 @@ protected class Op_AddAddOperandsAction_1_0_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("addOperands", false);
@@ -294,10 +322,12 @@ protected class Op_PlusSignKeyword_1_0_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getOpAccess().getPlusSignKeyword_1_0_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_AddAddOperandsAction_1_0_0(parent, this, 0, inst);
@@ -314,10 +344,12 @@ protected class Op_AddOperandsAssignment_1_0_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getOpAccess().getAddOperandsAssignment_1_0_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
@@ -325,6 +357,7 @@ protected class Op_AddOperandsAssignment_1_0_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("addOperands",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("addOperands");
@@ -340,6 +373,7 @@ protected class Op_AddOperandsAssignment_1_0_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -357,10 +391,12 @@ protected class Op_Group_1_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getOpAccess().getGroup_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_MinusOperandsAssignment_1_1_2(parent, this, 0, inst);
@@ -377,10 +413,12 @@ protected class Op_MinusMinusOperandsAction_1_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Alternatives_1(parent, this, 0, inst);
@@ -390,6 +428,7 @@ protected class Op_MinusMinusOperandsAction_1_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("minusOperands", false);
@@ -406,10 +445,12 @@ protected class Op_HyphenMinusKeyword_1_1_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getOpAccess().getHyphenMinusKeyword_1_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_MinusMinusOperandsAction_1_1_0(parent, this, 0, inst);
@@ -426,10 +467,12 @@ protected class Op_MinusOperandsAssignment_1_1_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getOpAccess().getMinusOperandsAssignment_1_1_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
@@ -437,6 +480,7 @@ protected class Op_MinusOperandsAssignment_1_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("minusOperands",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("minusOperands");
@@ -452,6 +496,7 @@ protected class Op_MinusOperandsAssignment_1_1_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -481,10 +526,12 @@ protected class Term_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTermAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Term_AtomParserRuleCall_0(parent, this, 0, inst);
@@ -493,6 +540,7 @@ protected class Term_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -506,10 +554,12 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTermAccess().getAtomParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Atom_NameAssignment(this, this, 0, inst);
@@ -517,12 +567,14 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Atom_NameAssignment.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -537,10 +589,12 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTermAccess().getParensParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_Group(this, this, 0, inst);
@@ -548,12 +602,14 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -579,20 +635,24 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAtomAccess().getNameAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -631,10 +691,12 @@ protected class Parens_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getParensAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_EmAssignment_3(parent, this, 0, inst);
@@ -643,6 +705,7 @@ protected class Parens_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -656,10 +719,12 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParensAccess().getLeftParenthesisKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -675,10 +740,12 @@ protected class Parens_OpParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getParensAccess().getOpParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Op_Group(this, this, 0, inst);
@@ -686,12 +753,14 @@ protected class Parens_OpParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getOpRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
@@ -707,10 +776,12 @@ protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParensAccess().getRightParenthesisKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_OpParserRuleCall_1(parent, this, 0, inst);
@@ -727,10 +798,12 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getParensAccess().getEmAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parens_RightParenthesisKeyword_2(parent, this, 0, inst);
@@ -738,6 +811,7 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("em",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
@@ -774,10 +848,12 @@ protected class TrickyA_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_NameAssignment_4(parent, this, 0, inst);
@@ -785,6 +861,7 @@ protected class TrickyA_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyARule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -798,10 +875,12 @@ protected class TrickyA_TAKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getTAKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -817,10 +896,12 @@ protected class TrickyA_TrickyA1ParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getTrickyA1ParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA1_NameAssignment(this, this, 0, inst);
@@ -828,12 +909,14 @@ protected class TrickyA_TrickyA1ParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TrickyA1_NameAssignment.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTrickyA1Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_TAKeyword_0(parent, next, actIndex, inst);
@@ -849,10 +932,12 @@ protected class TrickyA_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_NameAssignment_2(parent, this, 0, inst);
@@ -861,6 +946,7 @@ protected class TrickyA_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -881,10 +967,12 @@ protected class TrickyA_Alternatives_3 extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getAlternatives_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_Group_3_0(parent, this, 0, inst);
@@ -902,10 +990,12 @@ protected class TrickyA_Group_3_0 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getGroup_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_XKeyword_3_0_1(parent, this, 0, inst);
@@ -922,10 +1012,12 @@ protected class TrickyA_TypeBXAction_3_0_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_NameAssignment_2(parent, this, 0, inst);
@@ -935,6 +1027,7 @@ protected class TrickyA_TypeBXAction_3_0_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
@@ -951,10 +1044,12 @@ protected class TrickyA_XKeyword_3_0_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getXKeyword_3_0_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_TypeBXAction_3_0_0(parent, this, 0, inst);
@@ -972,10 +1067,12 @@ protected class TrickyA_Group_3_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getGroup_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_YKeyword_3_1_1(parent, this, 0, inst);
@@ -992,10 +1089,12 @@ protected class TrickyA_TypeCXAction_3_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_NameAssignment_2(parent, this, 0, inst);
@@ -1005,6 +1104,7 @@ protected class TrickyA_TypeCXAction_3_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
@@ -1021,10 +1121,12 @@ protected class TrickyA_YKeyword_3_1_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getYKeyword_3_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_TypeCXAction_3_1_0(parent, this, 0, inst);
@@ -1043,10 +1145,12 @@ protected class TrickyA_NameAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyAAccess().getNameAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyA_Alternatives_3(parent, this, 0, inst);
@@ -1056,6 +1160,7 @@ protected class TrickyA_NameAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1087,20 +1192,24 @@ protected class TrickyA1_NameAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyA1Access().getNameAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyA1Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1131,10 +1240,12 @@ protected class TrickyB_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyB_TypeAssignment_2(parent, this, 0, inst);
@@ -1144,6 +1255,7 @@ protected class TrickyB_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyBRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1157,10 +1269,12 @@ protected class TrickyB_TBKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getTBKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1176,10 +1290,12 @@ protected class TrickyB_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyB_TypeAssignment_1_1(parent, this, 0, inst);
@@ -1196,10 +1312,12 @@ protected class TrickyB_NameAssignment_1_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getNameAssignment_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyB_TBKeyword_0(parent, this, 0, inst);
@@ -1207,6 +1325,7 @@ protected class TrickyB_NameAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1227,10 +1346,12 @@ protected class TrickyB_TypeAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getTypeAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyB_NameAssignment_1_0(parent, this, 0, inst);
@@ -1238,6 +1359,7 @@ protected class TrickyB_TypeAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1259,10 +1381,12 @@ protected class TrickyB_TypeAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyBAccess().getTypeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyB_TypeAssignment_2(parent, this, 0, inst);
@@ -1272,6 +1396,7 @@ protected class TrickyB_TypeAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1303,10 +1428,12 @@ protected class TrickyC_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_Group_4(parent, this, 0, inst);
@@ -1317,6 +1444,7 @@ protected class TrickyC_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyCRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1330,10 +1458,12 @@ protected class TrickyC_TCKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getTCKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1349,10 +1479,12 @@ protected class TrickyC_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_TCKeyword_0(parent, this, 0, inst);
@@ -1360,6 +1492,7 @@ protected class TrickyC_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1380,10 +1513,12 @@ protected class TrickyC_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_XKeyword_2_1(parent, this, 0, inst);
@@ -1400,10 +1535,12 @@ protected class TrickyC_C1XAction_2_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getC1XAction_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_NameAssignment_1(parent, this, 0, inst);
@@ -1412,6 +1549,7 @@ protected class TrickyC_C1XAction_2_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC1XAction_2_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
@@ -1428,10 +1566,12 @@ protected class TrickyC_XKeyword_2_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getXKeyword_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_C1XAction_2_0(parent, this, 0, inst);
@@ -1449,10 +1589,12 @@ protected class TrickyC_Group_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getGroup_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_YKeyword_3_1(parent, this, 0, inst);
@@ -1469,10 +1611,12 @@ protected class TrickyC_C2YAction_3_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getC2YAction_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_Group_2(parent, this, 0, inst);
@@ -1482,6 +1626,7 @@ protected class TrickyC_C2YAction_3_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC2YAction_3_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("y", false);
@@ -1498,10 +1643,12 @@ protected class TrickyC_YKeyword_3_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getYKeyword_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_C2YAction_3_0(parent, this, 0, inst);
@@ -1519,10 +1666,12 @@ protected class TrickyC_Group_4 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getGroup_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_ZKeyword_4_1(parent, this, 0, inst);
@@ -1539,10 +1688,12 @@ protected class TrickyC_C3ZAction_4_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getC3ZAction_4_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_Group_3(parent, this, 0, inst);
@@ -1553,6 +1704,7 @@ protected class TrickyC_C3ZAction_4_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC3ZAction_4_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("z", false);
@@ -1569,10 +1721,12 @@ protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyCAccess().getZKeyword_4_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyC_C3ZAction_4_0(parent, this, 0, inst);
@@ -1605,10 +1759,12 @@ protected class TrickyD_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_TypeAssignment_3(parent, this, 0, inst);
@@ -1619,6 +1775,7 @@ protected class TrickyD_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyDRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1632,10 +1789,12 @@ protected class TrickyD_TDKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getTDKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1651,10 +1810,12 @@ protected class TrickyD_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_TypeAssignment_1_2(parent, this, 0, inst);
@@ -1671,10 +1832,12 @@ protected class TrickyD_NameAssignment_1_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getNameAssignment_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_TDKeyword_0(parent, this, 0, inst);
@@ -1682,6 +1845,7 @@ protected class TrickyD_NameAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1702,10 +1866,12 @@ protected class TrickyD_FooAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getFooAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_NameAssignment_1_0(parent, this, 0, inst);
@@ -1713,6 +1879,7 @@ protected class TrickyD_FooAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("foo",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
@@ -1733,10 +1900,12 @@ protected class TrickyD_TypeAssignment_1_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getTypeAssignment_1_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_FooAssignment_1_1(parent, this, 0, inst);
@@ -1744,6 +1913,7 @@ protected class TrickyD_TypeAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1765,10 +1935,12 @@ protected class TrickyD_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_TypeAssignment_2_1(parent, this, 0, inst);
@@ -1785,10 +1957,12 @@ protected class TrickyD_NameAssignment_2_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getNameAssignment_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_Group_1(parent, this, 0, inst);
@@ -1797,6 +1971,7 @@ protected class TrickyD_NameAssignment_2_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1817,10 +1992,12 @@ protected class TrickyD_TypeAssignment_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getTypeAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_NameAssignment_2_0(parent, this, 0, inst);
@@ -1828,6 +2005,7 @@ protected class TrickyD_TypeAssignment_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1849,10 +2027,12 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyDAccess().getTypeAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyD_TypeAssignment_3(parent, this, 0, inst);
@@ -1863,6 +2043,7 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -1899,10 +2080,12 @@ protected class TrickyE_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_Group_3(parent, this, 0, inst);
@@ -1911,6 +2094,7 @@ protected class TrickyE_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyERule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1924,10 +2108,12 @@ protected class TrickyE_TEKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getTEKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1943,10 +2129,12 @@ protected class TrickyE_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_TypeAssignment_1_2(parent, this, 0, inst);
@@ -1963,10 +2151,12 @@ protected class TrickyE_NameAssignment_1_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getNameAssignment_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_Group_1(parent, this, 0, inst);
@@ -1975,6 +2165,7 @@ protected class TrickyE_NameAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -1995,10 +2186,12 @@ protected class TrickyE_FooAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getFooAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_NameAssignment_1_0(parent, this, 0, inst);
@@ -2006,6 +2199,7 @@ protected class TrickyE_FooAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("foo",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
@@ -2026,10 +2220,12 @@ protected class TrickyE_TypeAssignment_1_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getTypeAssignment_1_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_FooAssignment_1_1(parent, this, 0, inst);
@@ -2037,6 +2233,7 @@ protected class TrickyE_TypeAssignment_1_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2058,10 +2255,12 @@ protected class TrickyE_XKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getXKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_Group_1(parent, this, 0, inst);
@@ -2079,10 +2278,12 @@ protected class TrickyE_Group_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getGroup_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_TypeAssignment_3_1(parent, this, 0, inst);
@@ -2099,10 +2300,12 @@ protected class TrickyE_NameAssignment_3_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getNameAssignment_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_Group_3(parent, this, 0, inst);
@@ -2111,6 +2314,7 @@ protected class TrickyE_NameAssignment_3_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2131,10 +2335,12 @@ protected class TrickyE_TypeAssignment_3_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyEAccess().getTypeAssignment_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyE_NameAssignment_3_0(parent, this, 0, inst);
@@ -2142,6 +2348,7 @@ protected class TrickyE_TypeAssignment_3_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2176,10 +2383,12 @@ protected class TrickyF_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_Alternatives_2(parent, this, 0, inst);
@@ -2187,6 +2396,7 @@ protected class TrickyF_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyFRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2200,10 +2410,12 @@ protected class TrickyF_TFKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getTFKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -2219,10 +2431,12 @@ protected class TrickyF_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_TypeAssignment_1_1(parent, this, 0, inst);
@@ -2239,10 +2453,12 @@ protected class TrickyF_NameAssignment_1_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getNameAssignment_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_Group_1(parent, this, 0, inst);
@@ -2251,6 +2467,7 @@ protected class TrickyF_NameAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2271,10 +2488,12 @@ protected class TrickyF_TypeAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getTypeAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_NameAssignment_1_0(parent, this, 0, inst);
@@ -2282,6 +2501,7 @@ protected class TrickyF_TypeAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2303,10 +2523,12 @@ protected class TrickyF_Alternatives_2 extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getAlternatives_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_NameAssignment_2_0(parent, this, 0, inst);
@@ -2324,10 +2546,12 @@ protected class TrickyF_NameAssignment_2_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getNameAssignment_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_Group_1(parent, this, 0, inst);
@@ -2336,6 +2560,7 @@ protected class TrickyF_NameAssignment_2_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -2356,10 +2581,12 @@ protected class TrickyF_TypeAssignment_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyFAccess().getTypeAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyF_Group_1(parent, this, 0, inst);
@@ -2368,6 +2595,7 @@ protected class TrickyF_TypeAssignment_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -2400,10 +2628,12 @@ protected class TrickyG_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyGAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG_TreeAssignment_1(parent, this, 0, inst);
@@ -2411,6 +2641,7 @@ protected class TrickyG_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyGRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2424,10 +2655,12 @@ protected class TrickyG_TGKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyGAccess().getTGKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -2443,10 +2676,12 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyGAccess().getTreeAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_Group(this, this, 0, inst);
@@ -2454,6 +2689,7 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("tree",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("tree");
@@ -2469,6 +2705,7 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -2496,10 +2733,12 @@ protected class TrickyG1_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_RightSquareBracketKeyword_2(parent, this, 0, inst);
@@ -2507,6 +2746,7 @@ protected class TrickyG1_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyG1Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2520,10 +2760,12 @@ protected class TrickyG1_LeftSquareBracketKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getLeftSquareBracketKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -2539,10 +2781,12 @@ protected class TrickyG1_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_Group_1_1(parent, this, 0, inst);
@@ -2560,10 +2804,12 @@ protected class TrickyG1_ValsAssignment_1_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getValsAssignment_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG2_Alternatives(this, this, 0, inst);
@@ -2571,6 +2817,7 @@ protected class TrickyG1_ValsAssignment_1_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("vals",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
@@ -2586,6 +2833,7 @@ protected class TrickyG1_ValsAssignment_1_0 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -2602,10 +2850,12 @@ protected class TrickyG1_Group_1_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getGroup_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_ValsAssignment_1_1_1(parent, this, 0, inst);
@@ -2622,10 +2872,12 @@ protected class TrickyG1_CommaKeyword_1_1_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getCommaKeyword_1_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_Group_1_1(parent, this, 0, inst);
@@ -2643,10 +2895,12 @@ protected class TrickyG1_ValsAssignment_1_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getValsAssignment_1_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG2_Alternatives(this, this, 0, inst);
@@ -2654,6 +2908,7 @@ protected class TrickyG1_ValsAssignment_1_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("vals",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
@@ -2669,6 +2924,7 @@ protected class TrickyG1_ValsAssignment_1_1_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -2687,10 +2943,12 @@ protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTrickyG1Access().getRightSquareBracketKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_Group_1(parent, this, 0, inst);
@@ -2739,10 +2997,12 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTrickyG2Access().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG2_TrickyG1ParserRuleCall_0(parent, this, 0, inst);
@@ -2751,6 +3011,7 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTrickyG2Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2764,10 +3025,12 @@ protected class TrickyG2_TrickyG1ParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTrickyG2Access().getTrickyG1ParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TrickyG1_Group(this, this, 0, inst);
@@ -2775,12 +3038,14 @@ protected class TrickyG2_TrickyG1ParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TrickyG1_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTrickyG1Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2795,16 +3060,19 @@ protected class TrickyG2_ValAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTrickyG2Access().getValAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("val");

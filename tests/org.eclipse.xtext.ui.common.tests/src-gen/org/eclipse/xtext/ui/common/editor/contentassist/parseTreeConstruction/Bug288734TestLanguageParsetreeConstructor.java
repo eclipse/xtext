@@ -16,11 +16,13 @@ public class Bug288734TestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private Bug288734TestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public Bug288734TestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_ConstantsAssignment(this, this, 0, inst);
@@ -58,10 +61,12 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getConstantsAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TConstant_Alternatives(this, this, 0, inst);
@@ -69,10 +74,12 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("constants",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("constants");
@@ -88,6 +95,7 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -113,10 +121,12 @@ protected class TConstant_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTConstantAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TConstant_TStringConstantParserRuleCall_0(parent, this, 0, inst);
@@ -126,6 +136,7 @@ protected class TConstant_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTConstantRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -139,10 +150,12 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TStringConstant_Group(this, this, 0, inst);
@@ -150,12 +163,14 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TStringConstant_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTStringConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -170,10 +185,12 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_Group(this, this, 0, inst);
@@ -181,12 +198,14 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TIntegerConstant_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTIntegerConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -201,10 +220,12 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_Group(this, this, 0, inst);
@@ -212,12 +233,14 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TBooleanConstant_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTBooleanConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -243,10 +266,12 @@ protected class TStringConstant_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTStringConstantAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TStringConstant_NameAssignment_3(parent, this, 0, inst);
@@ -254,6 +279,7 @@ protected class TStringConstant_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTStringConstantRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -267,10 +293,12 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTStringConstantAccess().getAnnotationsAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
@@ -278,6 +306,7 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("annotations");
@@ -293,6 +322,7 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -309,10 +339,12 @@ protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTStringConstantAccess().getConstantKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TStringConstant_AnnotationsAssignment_0(parent, this, 0, inst);
@@ -329,10 +361,12 @@ protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTStringConstantAccess().getStringKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TStringConstant_ConstantKeyword_1(parent, this, 0, inst);
@@ -349,10 +383,12 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTStringConstantAccess().getNameAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TStringConstant_StringKeyword_2(parent, this, 0, inst);
@@ -360,6 +396,7 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -391,10 +428,12 @@ protected class TIntegerConstant_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTIntegerConstantAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_NameAssignment_3(parent, this, 0, inst);
@@ -402,6 +441,7 @@ protected class TIntegerConstant_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTIntegerConstantRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -415,10 +455,12 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTIntegerConstantAccess().getAnnotationsAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
@@ -426,6 +468,7 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("annotations");
@@ -441,6 +484,7 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -457,10 +501,12 @@ protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_AnnotationsAssignment_0(parent, this, 0, inst);
@@ -477,10 +523,12 @@ protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_ConstantKeyword_1(parent, this, 0, inst);
@@ -497,10 +545,12 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTIntegerConstantAccess().getNameAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_IntegerKeyword_2(parent, this, 0, inst);
@@ -508,6 +558,7 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -539,10 +590,12 @@ protected class TBooleanConstant_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTBooleanConstantAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_NameAssignment_3(parent, this, 0, inst);
@@ -550,6 +603,7 @@ protected class TBooleanConstant_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTBooleanConstantRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -563,10 +617,12 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTBooleanConstantAccess().getAnnotationsAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
@@ -574,6 +630,7 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("annotations");
@@ -589,6 +646,7 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -605,10 +663,12 @@ protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_AnnotationsAssignment_0(parent, this, 0, inst);
@@ -625,10 +685,12 @@ protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_ConstantKeyword_1(parent, this, 0, inst);
@@ -645,10 +707,12 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTBooleanConstantAccess().getNameAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_BooleanKeyword_2(parent, this, 0, inst);
@@ -656,6 +720,7 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -687,10 +752,12 @@ protected class TAnnotation_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTAnnotationAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TAnnotation_DescriptionAssignment_1(parent, this, 0, inst);
@@ -698,6 +765,7 @@ protected class TAnnotation_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTAnnotationRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -711,10 +779,12 @@ protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTAnnotationAccess().getDescKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -730,10 +800,12 @@ protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTAnnotationAccess().getDescriptionAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TAnnotation_DescKeyword_0(parent, this, 0, inst);
@@ -741,6 +813,7 @@ protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("description",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("description");

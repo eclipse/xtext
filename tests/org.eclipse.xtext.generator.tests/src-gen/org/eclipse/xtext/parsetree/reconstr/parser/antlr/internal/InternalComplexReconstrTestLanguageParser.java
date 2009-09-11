@@ -111,7 +111,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject this_TrickyG_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:85:6: ( (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) )
@@ -237,7 +237,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject lv_minusOperands_6_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:125:6: ( (this_Term_0= ruleTerm ( ( () '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
@@ -491,7 +491,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject this_Parens_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:244:6: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
@@ -612,7 +612,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:284:6: ( ( (lv_name_0_0= RULE_ID ) ) )
@@ -714,7 +714,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject this_Op_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:329:6: ( ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? ) )
@@ -846,7 +846,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:390:6: ( ( (lv_name_0_0= RULE_ID ) ) )
@@ -947,7 +947,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject lv_tree_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:445:6: ( ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
@@ -1063,7 +1063,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject lv_vals_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:494:6: ( ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' ) )
@@ -1263,7 +1263,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         EObject this_TrickyG1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:575:6: ( (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )

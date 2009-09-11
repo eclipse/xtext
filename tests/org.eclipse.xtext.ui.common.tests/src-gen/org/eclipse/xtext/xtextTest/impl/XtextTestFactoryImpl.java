@@ -33,7 +33,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
   {
     try
     {
-      XtextTestFactory theXtextTestFactory = (XtextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest"); 
+      XtextTestFactory theXtextTestFactory = (XtextTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Test/XtextTest"); 
       if (theXtextTestFactory != null)
       {
         return theXtextTestFactory;

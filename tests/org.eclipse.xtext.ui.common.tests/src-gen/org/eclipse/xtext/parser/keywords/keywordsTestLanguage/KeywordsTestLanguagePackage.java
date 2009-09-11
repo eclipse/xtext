@@ -40,7 +40,7 @@ public interface KeywordsTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage";
+  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage";
 
   /**
    * The package namespace name.

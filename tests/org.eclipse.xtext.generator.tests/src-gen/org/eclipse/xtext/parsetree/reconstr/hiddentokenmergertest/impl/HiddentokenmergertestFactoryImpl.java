@@ -33,7 +33,7 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     try
     {
-      HiddentokenmergertestFactory theHiddentokenmergertestFactory = (HiddentokenmergertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"); 
+      HiddentokenmergertestFactory theHiddentokenmergertestFactory = (HiddentokenmergertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger"); 
       if (theHiddentokenmergertestFactory != null)
       {
         return theHiddentokenmergertestFactory;

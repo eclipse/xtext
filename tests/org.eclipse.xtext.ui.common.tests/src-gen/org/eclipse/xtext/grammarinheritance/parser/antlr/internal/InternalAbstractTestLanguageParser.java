@@ -109,7 +109,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:85:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -219,7 +219,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:136:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -329,7 +329,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:189:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ) )

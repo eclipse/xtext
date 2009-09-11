@@ -109,7 +109,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
         EObject lv_child_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:85:6: ( ( (lv_child_0_0= ruleGreeting ) )? )
@@ -223,7 +223,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
         Token lv_name_1_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:130:6: ( ( 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )

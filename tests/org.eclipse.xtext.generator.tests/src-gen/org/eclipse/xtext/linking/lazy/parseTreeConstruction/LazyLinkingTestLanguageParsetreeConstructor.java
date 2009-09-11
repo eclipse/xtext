@@ -16,11 +16,13 @@ public class LazyLinkingTestLanguageParsetreeConstructor extends AbstractParseTr
 		
 	@Inject
 	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public LazyLinkingTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_TypesAssignment(this, this, 0, inst);
@@ -56,10 +59,12 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getTypesAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_Group(this, this, 0, inst);
@@ -67,10 +72,12 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("types",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
@@ -86,6 +93,7 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -116,10 +124,12 @@ protected class Type_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTypeAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_RightCurlyBracketKeyword_7(parent, this, 0, inst);
@@ -127,6 +137,7 @@ protected class Type_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -140,10 +151,12 @@ protected class Type_TypeKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getTypeKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -159,10 +172,12 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_TypeKeyword_0(parent, this, 0, inst);
@@ -170,6 +185,7 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -190,10 +206,12 @@ protected class Type_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTypeAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ParentIdAssignment_2_3(parent, this, 0, inst);
@@ -210,10 +228,12 @@ protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getExtendsKeyword_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_NameAssignment_1(parent, this, 0, inst);
@@ -230,10 +250,12 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getExtendsAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ExtendsKeyword_2_0(parent, this, 0, inst);
@@ -241,6 +263,7 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("extends",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
@@ -264,10 +287,12 @@ protected class Type_FullStopKeyword_2_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getFullStopKeyword_2_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ExtendsAssignment_2_1(parent, this, 0, inst);
@@ -284,10 +309,12 @@ protected class Type_ParentIdAssignment_2_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getParentIdAssignment_2_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_FullStopKeyword_2_2(parent, this, 0, inst);
@@ -295,6 +322,7 @@ protected class Type_ParentIdAssignment_2_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parentId",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("parentId");
@@ -319,10 +347,12 @@ protected class Type_Group_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTypeAccess().getGroup_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ExtendsAssignment_3_3(parent, this, 0, inst);
@@ -339,10 +369,12 @@ protected class Type_ForKeyword_3_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getForKeyword_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_Group_2(parent, this, 0, inst);
@@ -360,10 +392,12 @@ protected class Type_ParentIdAssignment_3_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getParentIdAssignment_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ForKeyword_3_0(parent, this, 0, inst);
@@ -371,6 +405,7 @@ protected class Type_ParentIdAssignment_3_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parentId",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("parentId");
@@ -394,10 +429,12 @@ protected class Type_InKeyword_3_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getInKeyword_3_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_ParentIdAssignment_3_1(parent, this, 0, inst);
@@ -414,10 +451,12 @@ protected class Type_ExtendsAssignment_3_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getExtendsAssignment_3_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_InKeyword_3_2(parent, this, 0, inst);
@@ -425,6 +464,7 @@ protected class Type_ExtendsAssignment_3_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("extends",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
@@ -449,10 +489,12 @@ protected class Type_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getLeftCurlyBracketKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_Group_3(parent, this, 0, inst);
@@ -471,10 +513,12 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getPropertiesAssignment_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_Group(this, this, 0, inst);
@@ -482,6 +526,7 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("properties",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("properties");
@@ -497,6 +542,7 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -514,10 +560,12 @@ protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTypeAccess().getUnresolvedProxyPropertyAssignment_6();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new UnresolvedProxyProperty_Group(this, this, 0, inst);
@@ -525,6 +573,7 @@ protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unresolvedProxyProperty",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unresolvedProxyProperty");
@@ -540,6 +589,7 @@ protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -558,10 +608,12 @@ protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Type_UnresolvedProxyPropertyAssignment_6(parent, this, 0, inst);
@@ -591,10 +643,12 @@ protected class Property_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getPropertyAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_SemicolonKeyword_2(parent, this, 0, inst);
@@ -602,6 +656,7 @@ protected class Property_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -615,10 +670,12 @@ protected class Property_TypeAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getPropertyAccess().getTypeAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_TypeAssignment_0(parent, this, 0, inst);
@@ -626,6 +683,7 @@ protected class Property_TypeAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -649,10 +707,12 @@ protected class Property_NameAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getPropertyAccess().getNameAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_TypeAssignment_0(parent, this, 0, inst);
@@ -660,6 +720,7 @@ protected class Property_NameAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -680,10 +741,12 @@ protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getPropertyAccess().getSemicolonKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_NameAssignment_1(parent, this, 0, inst);
@@ -711,10 +774,12 @@ protected class UnresolvedProxyProperty_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getUnresolvedProxyPropertyAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new UnresolvedProxyProperty_SemicolonKeyword_3(parent, this, 0, inst);
@@ -722,6 +787,7 @@ protected class UnresolvedProxyProperty_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -735,10 +801,12 @@ protected class UnresolvedProxyProperty_UnresolvedKeyword_0 extends KeywordToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getUnresolvedProxyPropertyAccess().getUnresolvedKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -754,10 +822,12 @@ protected class UnresolvedProxyProperty_TypeAssignment_1 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getUnresolvedProxyPropertyAccess().getTypeAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new UnresolvedProxyProperty_TypeAssignment_1(parent, this, 0, inst);
@@ -766,6 +836,7 @@ protected class UnresolvedProxyProperty_TypeAssignment_1 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -789,10 +860,12 @@ protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getUnresolvedProxyPropertyAccess().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new UnresolvedProxyProperty_TypeAssignment_1(parent, this, 0, inst);
@@ -800,6 +873,7 @@ protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -820,10 +894,12 @@ protected class UnresolvedProxyProperty_SemicolonKeyword_3 extends KeywordToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new UnresolvedProxyProperty_NameAssignment_2(parent, this, 0, inst);

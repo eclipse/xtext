@@ -16,11 +16,13 @@ public class ContentAssistTestLanguageParsetreeConstructor extends AbstractParse
 		
 	@Inject
 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public ContentAssistTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_Group(this, this, 0, inst);
@@ -57,10 +60,12 @@ protected class Start_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStartAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_EndKeyword_2(parent, this, 0, inst);
@@ -68,6 +73,7 @@ protected class Start_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -81,10 +87,12 @@ protected class Start_AbstractRulesKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStartAccess().getAbstractRulesKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -100,10 +108,12 @@ protected class Start_RulesAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStartAccess().getRulesAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
@@ -111,6 +121,7 @@ protected class Start_RulesAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rules",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
@@ -126,6 +137,7 @@ protected class Start_RulesAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -143,10 +155,12 @@ protected class Start_EndKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStartAccess().getEndKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_RulesAssignment_1(parent, this, 0, inst);
@@ -174,10 +188,12 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_FirstAbstractRuleChildParserRuleCall_0(parent, this, 0, inst);
@@ -186,6 +202,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -199,10 +216,12 @@ protected class AbstractRule_FirstAbstractRuleChildParserRuleCall_0 extends Rule
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getFirstAbstractRuleChildParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstAbstractRuleChild_Group(this, this, 0, inst);
@@ -210,12 +229,14 @@ protected class AbstractRule_FirstAbstractRuleChildParserRuleCall_0 extends Rule
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(FirstAbstractRuleChild_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -230,10 +251,12 @@ protected class AbstractRule_SecondAbstractRuleChildParserRuleCall_1 extends Rul
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondAbstractRuleChild_Group(this, this, 0, inst);
@@ -241,12 +264,14 @@ protected class AbstractRule_SecondAbstractRuleChildParserRuleCall_1 extends Rul
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(SecondAbstractRuleChild_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -272,10 +297,12 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstAbstractRuleChild_SemicolonKeyword_4(parent, this, 0, inst);
@@ -283,6 +310,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -296,16 +324,19 @@ protected class FirstAbstractRuleChild_NameAssignment_0 extends AssignmentToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getNameAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -326,10 +357,12 @@ protected class FirstAbstractRuleChild_LeftParenthesisKeyword_1 extends KeywordT
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstAbstractRuleChild_NameAssignment_0(parent, this, 0, inst);
@@ -346,10 +379,12 @@ protected class FirstAbstractRuleChild_ElementsAssignment_2 extends AssignmentTo
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getElementsAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
@@ -357,6 +392,7 @@ protected class FirstAbstractRuleChild_ElementsAssignment_2 extends AssignmentTo
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
@@ -372,6 +408,7 @@ protected class FirstAbstractRuleChild_ElementsAssignment_2 extends AssignmentTo
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -389,10 +426,12 @@ protected class FirstAbstractRuleChild_RightParenthesisKeyword_3 extends Keyword
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstAbstractRuleChild_ElementsAssignment_2(parent, this, 0, inst);
@@ -409,10 +448,12 @@ protected class FirstAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken  
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstAbstractRuleChild_RightParenthesisKeyword_3(parent, this, 0, inst);
@@ -440,10 +481,12 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondAbstractRuleChild_SemicolonKeyword_4(parent, this, 0, inst);
@@ -451,6 +494,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -464,16 +508,19 @@ protected class SecondAbstractRuleChild_NameAssignment_0 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getNameAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -494,10 +541,12 @@ protected class SecondAbstractRuleChild_RuleKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondAbstractRuleChild_NameAssignment_0(parent, this, 0, inst);
@@ -514,10 +563,12 @@ protected class SecondAbstractRuleChild_ColonKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondAbstractRuleChild_RuleKeyword_1(parent, this, 0, inst);
@@ -534,10 +585,12 @@ protected class SecondAbstractRuleChild_RuleAssignment_3 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getRuleAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRuleCall_RuleAssignment(this, this, 0, inst);
@@ -545,6 +598,7 @@ protected class SecondAbstractRuleChild_RuleAssignment_3 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rule",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
@@ -560,6 +614,7 @@ protected class SecondAbstractRuleChild_RuleAssignment_3 extends AssignmentToken
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -576,10 +631,12 @@ protected class SecondAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondAbstractRuleChild_RuleAssignment_3(parent, this, 0, inst);
@@ -607,20 +664,24 @@ protected class AbstractRuleCall_RuleAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAbstractRuleCallAccess().getRuleAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleCallRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rule",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");

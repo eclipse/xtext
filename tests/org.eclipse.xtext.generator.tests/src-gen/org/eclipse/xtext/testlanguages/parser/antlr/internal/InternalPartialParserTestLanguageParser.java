@@ -112,7 +112,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_content_4_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:85:6: ( ( 'container' ( (lv_name_1_0= RULE_ID ) ) '{' ( ( (lv_nested_3_0= ruleNested ) ) | ( (lv_content_4_0= ruleContent ) ) )* '}' ) )
@@ -336,7 +336,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_nested_2_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:191:6: ( ( 'nested' '{' ( (lv_nested_2_0= ruleSomeContainer ) )+ '}' ) )
@@ -483,7 +483,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject this_AbstractChildren_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:248:6: ( (this_Children_0= ruleChildren | this_AbstractChildren_1= ruleAbstractChildren ) )
@@ -607,7 +607,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_children_4_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:288:6: ( ( 'children' '{' ( (lv_children_2_0= ruleChild ) ) ( ',' ( (lv_children_4_0= ruleChild ) ) )* '}' ) )
@@ -793,7 +793,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_value_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:373:6: ( ( '->' 'C' '(' ( (lv_value_3_0= ruleNamed ) ) ')' ) )
@@ -919,7 +919,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_abstractChildren_2_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:434:6: ( ( 'abstract children' '{' ( (lv_abstractChildren_2_0= ruleAbstractChild ) )+ '}' ) )
@@ -1066,7 +1066,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject this_SecondConcrete_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:491:6: ( (this_FirstConcrete_0= ruleFirstConcrete | this_SecondConcrete_1= ruleSecondConcrete ) )
@@ -1208,7 +1208,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_value_3_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:531:6: ( ( '->' 'F' '(' ( (lv_value_3_0= ruleNamed ) ) ( ( RULE_ID ) )? ')' ) )
@@ -1367,7 +1367,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
         EObject lv_value_4_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:606:6: ( ( '->' 'F' 'S' '(' ( (lv_value_4_0= ruleNamed ) ) ( ( RULE_ID ) )? ')' ) )
@@ -1529,7 +1529,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
         Token lv_name_0_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalPartialParserTestLanguage.g:685:6: ( ( (lv_name_0_0= RULE_ID ) ) )

@@ -41,7 +41,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest";
+  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger";
 
   /**
    * The package namespace name.

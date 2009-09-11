@@ -39,11 +39,13 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 		
 	@Inject
 	private «gaSimpleName()» grammarAccess;
-		
+	
+	@Override	
 	public «gaSimpleName()» getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -53,6 +55,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 «FOREACH calcRootFollowers() AS e ITERATOR i-»
@@ -86,6 +89,7 @@ protected class ThisRootNode extends RootToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public «getJavaTypeName().toSimpleName()» getGrammarElement() {
 		return grammarAccess.«gaRuleElementAccessor()»;
 	}
@@ -93,6 +97,7 @@ protected class ThisRootNode extends RootToken {
 «EXPAND createFollowerMethod FOR getTreeConstState()-»
 		
 «IF getTreeConstState().startState-»
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -103,6 +108,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createFollowerMethod FOR TreeConstState-»
 «IF enabledFollowers.size > 0 || endState-»
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 «FOREACH enabledFollowers AS e-»
@@ -121,6 +127,7 @@ protected class ThisRootNode extends RootToken {
 
 «DEFINE createParentFollowerMethod(boolean isAss) FOR TreeConstState-»
 «IF enabledFollowers.exists(e|e.ruleCall)-»
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 «IF isAss-»
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
@@ -183,6 +190,7 @@ protected class «elementMethodName()» extends AlternativesToken {
 protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
@@ -272,7 +280,8 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends AssignmentToken  {
 	
-«EXPAND constructor-»	
+«EXPAND constructor-»
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("«feature»");
@@ -295,12 +304,14 @@ protected class «elementMethodName()» extends ActionToken  {
 «EXPAND constructor-»
 	
 «IF feature == null || feature == ""-»
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
 «ELSE-»
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		Object val = current.getConsumable("«feature»", false);

@@ -34,7 +34,7 @@ public class EnumRulesTestLanguageFactoryImpl extends EFactoryImpl implements En
   {
     try
     {
-      EnumRulesTestLanguageFactory theEnumRulesTestLanguageFactory = (EnumRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/xtext/ui/common/tests/EnumRulesTest"); 
+      EnumRulesTestLanguageFactory theEnumRulesTestLanguageFactory = (EnumRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest"); 
       if (theEnumRulesTestLanguageFactory != null)
       {
         return theEnumRulesTestLanguageFactory;

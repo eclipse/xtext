@@ -16,11 +16,13 @@ public class Bug287941TestLanguageParsetreeConstructor extends AbstractParseTree
 		
 	@Inject
 	private Bug287941TestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public Bug287941TestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
@@ -76,10 +79,12 @@ protected class Model_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_QueryAssignment_1(parent, this, 0, inst);
@@ -87,6 +92,7 @@ protected class Model_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -100,10 +106,12 @@ protected class Model_ImportsAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getImportsAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Import_Group(this, this, 0, inst);
@@ -111,6 +119,7 @@ protected class Model_ImportsAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("imports",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
@@ -126,6 +135,7 @@ protected class Model_ImportsAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -142,10 +152,12 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getQueryAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group(this, this, 0, inst);
@@ -153,6 +165,7 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("query",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("query");
@@ -168,6 +181,7 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -195,10 +209,12 @@ protected class Import_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getImportAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Import_ImportURIAssignment_1(parent, this, 0, inst);
@@ -206,6 +222,7 @@ protected class Import_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -219,10 +236,12 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getImportAccess().getImportKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -238,10 +257,12 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getImportAccess().getImportURIAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Import_ImportKeyword_0(parent, this, 0, inst);
@@ -249,6 +270,7 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
@@ -284,10 +306,12 @@ protected class MQLquery_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group_6(parent, this, 0, inst);
@@ -297,6 +321,7 @@ protected class MQLquery_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMQLqueryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -310,10 +335,12 @@ protected class MQLquery_SelectKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getSelectKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -329,10 +356,12 @@ protected class MQLquery_SelectEntriesAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getSelectEntriesAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_Group(this, this, 0, inst);
@@ -340,6 +369,7 @@ protected class MQLquery_SelectEntriesAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("selectEntries",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("selectEntries");
@@ -355,6 +385,7 @@ protected class MQLquery_SelectEntriesAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -371,10 +402,12 @@ protected class MQLquery_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_SelectEntriesAssignment_2_1(parent, this, 0, inst);
@@ -391,10 +424,12 @@ protected class MQLquery_CommaKeyword_2_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getCommaKeyword_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group_2(parent, this, 0, inst);
@@ -412,10 +447,12 @@ protected class MQLquery_SelectEntriesAssignment_2_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getSelectEntriesAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_Group(this, this, 0, inst);
@@ -423,6 +460,7 @@ protected class MQLquery_SelectEntriesAssignment_2_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("selectEntries",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("selectEntries");
@@ -438,6 +476,7 @@ protected class MQLquery_SelectEntriesAssignment_2_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -455,10 +494,12 @@ protected class MQLquery_FromKeyword_3 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getFromKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group_2(parent, this, 0, inst);
@@ -476,10 +517,12 @@ protected class MQLquery_FromEntriesAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getFromEntriesAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_Group(this, this, 0, inst);
@@ -487,6 +530,7 @@ protected class MQLquery_FromEntriesAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fromEntries",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("fromEntries");
@@ -502,6 +546,7 @@ protected class MQLquery_FromEntriesAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -518,10 +563,12 @@ protected class MQLquery_Group_5 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getGroup_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_FromEntriesAssignment_5_1(parent, this, 0, inst);
@@ -538,10 +585,12 @@ protected class MQLquery_CommaKeyword_5_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getCommaKeyword_5_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group_5(parent, this, 0, inst);
@@ -559,10 +608,12 @@ protected class MQLquery_FromEntriesAssignment_5_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getFromEntriesAssignment_5_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_Group(this, this, 0, inst);
@@ -570,6 +621,7 @@ protected class MQLquery_FromEntriesAssignment_5_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fromEntries",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("fromEntries");
@@ -585,6 +637,7 @@ protected class MQLquery_FromEntriesAssignment_5_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -602,10 +655,12 @@ protected class MQLquery_Group_6 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getGroup_6();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_WhereEntriesAssignment_6_1(parent, this, 0, inst);
@@ -622,10 +677,12 @@ protected class MQLquery_WhereKeyword_6_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getWhereKeyword_6_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group_5(parent, this, 0, inst);
@@ -643,10 +700,12 @@ protected class MQLquery_WhereEntriesAssignment_6_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMQLqueryAccess().getWhereEntriesAssignment_6_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_Group(this, this, 0, inst);
@@ -654,6 +713,7 @@ protected class MQLquery_WhereEntriesAssignment_6_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("whereEntries",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("whereEntries");
@@ -669,6 +729,7 @@ protected class MQLquery_WhereEntriesAssignment_6_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -698,10 +759,12 @@ protected class SelectEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSelectEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_Group_1(parent, this, 0, inst);
@@ -710,6 +773,7 @@ protected class SelectEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSelectEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -723,16 +787,19 @@ protected class SelectEntry_SelectAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSelectEntryAccess().getSelectAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("select",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("select");
@@ -756,10 +823,12 @@ protected class SelectEntry_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSelectEntryAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_AttributeAssignment_1_1(parent, this, 0, inst);
@@ -776,10 +845,12 @@ protected class SelectEntry_FullStopKeyword_1_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSelectEntryAccess().getFullStopKeyword_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_SelectAssignment_0(parent, this, 0, inst);
@@ -796,10 +867,12 @@ protected class SelectEntry_AttributeAssignment_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSelectEntryAccess().getAttributeAssignment_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SelectEntry_FullStopKeyword_1_0(parent, this, 0, inst);
@@ -807,6 +880,7 @@ protected class SelectEntry_AttributeAssignment_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -844,10 +918,12 @@ protected class FromEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_ScopeClauseAssignment_4(parent, this, 0, inst);
@@ -856,6 +932,7 @@ protected class FromEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFromEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -869,16 +946,19 @@ protected class FromEntry_TypeAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getTypeAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
@@ -902,10 +982,12 @@ protected class FromEntry_WithoutsubtypesAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getWithoutsubtypesAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_TypeAssignment_0(parent, this, 0, inst);
@@ -913,6 +995,7 @@ protected class FromEntry_WithoutsubtypesAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("withoutsubtypes",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("withoutsubtypes");
@@ -933,10 +1016,12 @@ protected class FromEntry_AsKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getAsKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_WithoutsubtypesAssignment_1(parent, this, 0, inst);
@@ -954,10 +1039,12 @@ protected class FromEntry_AliasAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getAliasAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FromEntry_AsKeyword_2(parent, this, 0, inst);
@@ -965,6 +1052,7 @@ protected class FromEntry_AliasAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -985,10 +1073,12 @@ protected class FromEntry_ScopeClauseAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFromEntryAccess().getScopeClauseAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ScopeClause_Group(this, this, 0, inst);
@@ -996,6 +1086,7 @@ protected class FromEntry_ScopeClauseAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("scopeClause",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("scopeClause");
@@ -1011,6 +1102,7 @@ protected class FromEntry_ScopeClauseAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -1038,10 +1130,12 @@ protected class ScopeClause_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getScopeClauseAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ScopeClause_ScopeAssignment_2(parent, this, 0, inst);
@@ -1049,6 +1143,7 @@ protected class ScopeClause_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getScopeClauseRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1062,16 +1157,19 @@ protected class ScopeClause_NotInAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getScopeClauseAccess().getNotInAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("notIn",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("notIn");
@@ -1092,10 +1190,12 @@ protected class ScopeClause_InKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getScopeClauseAccess().getInKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ScopeClause_NotInAssignment_0(parent, this, 0, inst);
@@ -1112,10 +1212,12 @@ protected class ScopeClause_ScopeAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getScopeClauseAccess().getScopeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Scope_Alternatives(this, this, 0, inst);
@@ -1123,6 +1225,7 @@ protected class ScopeClause_ScopeAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("scope",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("scope");
@@ -1138,6 +1241,7 @@ protected class ScopeClause_ScopeAssignment_2 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -1165,10 +1269,12 @@ protected class Scope_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getScopeAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Scope_ResourceScopeParserRuleCall_0(parent, this, 0, inst);
@@ -1177,6 +1283,7 @@ protected class Scope_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getScopeRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1190,10 +1297,12 @@ protected class Scope_ResourceScopeParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getScopeAccess().getResourceScopeParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_Group(this, this, 0, inst);
@@ -1201,12 +1310,14 @@ protected class Scope_ResourceScopeParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ResourceScope_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getResourceScopeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -1221,10 +1332,12 @@ protected class Scope_ElementScopeParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getScopeAccess().getElementScopeParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_Group(this, this, 0, inst);
@@ -1232,12 +1345,14 @@ protected class Scope_ElementScopeParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ElementScope_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getElementScopeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -1263,10 +1378,12 @@ protected class ResourceScope_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_RightCurlyBracketKeyword_4(parent, this, 0, inst);
@@ -1274,6 +1391,7 @@ protected class ResourceScope_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getResourceScopeRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1287,10 +1405,12 @@ protected class ResourceScope_ResourcesKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getResourcesKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1306,10 +1426,12 @@ protected class ResourceScope_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getLeftCurlyBracketKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_ResourcesKeyword_0(parent, this, 0, inst);
@@ -1326,10 +1448,12 @@ protected class ResourceScope_UrisAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getUrisAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_LeftCurlyBracketKeyword_1(parent, this, 0, inst);
@@ -1337,6 +1461,7 @@ protected class ResourceScope_UrisAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
@@ -1357,10 +1482,12 @@ protected class ResourceScope_Group_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getGroup_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_UrisAssignment_3_1(parent, this, 0, inst);
@@ -1377,10 +1504,12 @@ protected class ResourceScope_CommaKeyword_3_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getCommaKeyword_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_Group_3(parent, this, 0, inst);
@@ -1398,10 +1527,12 @@ protected class ResourceScope_UrisAssignment_3_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getUrisAssignment_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_CommaKeyword_3_0(parent, this, 0, inst);
@@ -1409,6 +1540,7 @@ protected class ResourceScope_UrisAssignment_3_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
@@ -1430,10 +1562,12 @@ protected class ResourceScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getResourceScopeAccess().getRightCurlyBracketKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ResourceScope_Group_3(parent, this, 0, inst);
@@ -1462,10 +1596,12 @@ protected class ElementScope_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_RightCurlyBracketKeyword_4(parent, this, 0, inst);
@@ -1473,6 +1609,7 @@ protected class ElementScope_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getElementScopeRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1486,10 +1623,12 @@ protected class ElementScope_ElementsKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getElementsKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -1505,10 +1644,12 @@ protected class ElementScope_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getLeftCurlyBracketKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_ElementsKeyword_0(parent, this, 0, inst);
@@ -1525,10 +1666,12 @@ protected class ElementScope_UrisAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getUrisAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_LeftCurlyBracketKeyword_1(parent, this, 0, inst);
@@ -1536,6 +1679,7 @@ protected class ElementScope_UrisAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
@@ -1556,10 +1700,12 @@ protected class ElementScope_Group_3 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getGroup_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_UrisAssignment_3_1(parent, this, 0, inst);
@@ -1576,10 +1722,12 @@ protected class ElementScope_CommaKeyword_3_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getCommaKeyword_3_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_Group_3(parent, this, 0, inst);
@@ -1597,10 +1745,12 @@ protected class ElementScope_UrisAssignment_3_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getUrisAssignment_3_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_CommaKeyword_3_0(parent, this, 0, inst);
@@ -1608,6 +1758,7 @@ protected class ElementScope_UrisAssignment_3_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
@@ -1629,10 +1780,12 @@ protected class ElementScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getElementScopeAccess().getRightCurlyBracketKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ElementScope_Group_3(parent, this, 0, inst);
@@ -1661,10 +1814,12 @@ protected class WhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_Group_1(parent, this, 0, inst);
@@ -1673,6 +1828,7 @@ protected class WhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1686,10 +1842,12 @@ protected class WhereEntry_AndWhereEntryParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getAndWhereEntryParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_Group(this, this, 0, inst);
@@ -1697,12 +1855,14 @@ protected class WhereEntry_AndWhereEntryParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AndWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -1717,10 +1877,12 @@ protected class WhereEntry_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_Group_1_1(parent, this, 0, inst);
@@ -1737,10 +1899,12 @@ protected class WhereEntry_OrWhereEntryEntriesAction_1_0 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_AndWhereEntryParserRuleCall_0(parent, this, 0, inst);
@@ -1749,6 +1913,7 @@ protected class WhereEntry_OrWhereEntryEntriesAction_1_0 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("entries", false);
@@ -1765,10 +1930,12 @@ protected class WhereEntry_Group_1_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getGroup_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_EntriesAssignment_1_1_1(parent, this, 0, inst);
@@ -1785,10 +1952,12 @@ protected class WhereEntry_OrKeyword_1_1_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getOrKeyword_1_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_Group_1_1(parent, this, 0, inst);
@@ -1806,10 +1975,12 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getWhereEntryAccess().getEntriesAssignment_1_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_Group(this, this, 0, inst);
@@ -1817,6 +1988,7 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("entries",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("entries");
@@ -1832,6 +2004,7 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -1863,10 +2036,12 @@ protected class AndWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_Group_1(parent, this, 0, inst);
@@ -1875,6 +2050,7 @@ protected class AndWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -1888,10 +2064,12 @@ protected class AndWhereEntry_ConcreteWhereEntryParserRuleCall_0 extends RuleCal
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getConcreteWhereEntryParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ConcreteWhereEntry_Alternatives(this, this, 0, inst);
@@ -1899,12 +2077,14 @@ protected class AndWhereEntry_ConcreteWhereEntryParserRuleCall_0 extends RuleCal
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ConcreteWhereEntry_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getConcreteWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -1919,10 +2099,12 @@ protected class AndWhereEntry_Group_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getGroup_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_Group_1_1(parent, this, 0, inst);
@@ -1939,10 +2121,12 @@ protected class AndWhereEntry_AndWhereEntryEntriesAction_1_0 extends ActionToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_ConcreteWhereEntryParserRuleCall_0(parent, this, 0, inst);
@@ -1951,6 +2135,7 @@ protected class AndWhereEntry_AndWhereEntryEntriesAction_1_0 extends ActionToken
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("entries", false);
@@ -1967,10 +2152,12 @@ protected class AndWhereEntry_Group_1_1 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getGroup_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_EntriesAssignment_1_1_1(parent, this, 0, inst);
@@ -1987,10 +2174,12 @@ protected class AndWhereEntry_AndKeyword_1_1_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getAndKeyword_1_1_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AndWhereEntry_Group_1_1(parent, this, 0, inst);
@@ -2008,10 +2197,12 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAndWhereEntryAccess().getEntriesAssignment_1_1_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ConcreteWhereEntry_Alternatives(this, this, 0, inst);
@@ -2019,6 +2210,7 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("entries",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("entries");
@@ -2034,6 +2226,7 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -2065,10 +2258,12 @@ protected class ConcreteWhereEntry_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ConcreteWhereEntry_ParWhereEntryParserRuleCall_0(parent, this, 0, inst);
@@ -2081,6 +2276,7 @@ protected class ConcreteWhereEntry_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getConcreteWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2094,10 +2290,12 @@ protected class ConcreteWhereEntry_ParWhereEntryParserRuleCall_0 extends RuleCal
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getParWhereEntryParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ParWhereEntry_Group(this, this, 0, inst);
@@ -2105,12 +2303,14 @@ protected class ConcreteWhereEntry_ParWhereEntryParserRuleCall_0 extends RuleCal
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getParWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2125,10 +2325,12 @@ protected class ConcreteWhereEntry_AttributeWhereEntryParserRuleCall_1 extends R
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getAttributeWhereEntryParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AttributeWhereEntry_Alternatives(this, this, 0, inst);
@@ -2136,12 +2338,14 @@ protected class ConcreteWhereEntry_AttributeWhereEntryParserRuleCall_1 extends R
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AttributeWhereEntry_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2156,10 +2360,12 @@ protected class ConcreteWhereEntry_NullWhereEntryParserRuleCall_2 extends RuleCa
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getNullWhereEntryParserRuleCall_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_Group(this, this, 0, inst);
@@ -2167,12 +2373,14 @@ protected class ConcreteWhereEntry_NullWhereEntryParserRuleCall_2 extends RuleCa
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(NullWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getNullWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2187,10 +2395,12 @@ protected class ConcreteWhereEntry_ReferenceAliasWhereEntryParserRuleCall_3 exte
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getReferenceAliasWhereEntryParserRuleCall_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_Group(this, this, 0, inst);
@@ -2198,12 +2408,14 @@ protected class ConcreteWhereEntry_ReferenceAliasWhereEntryParserRuleCall_3 exte
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ReferenceAliasWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2218,10 +2430,12 @@ protected class ConcreteWhereEntry_AliasWhereEntryParserRuleCall_4 extends RuleC
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getAliasWhereEntryParserRuleCall_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AliasWhereEntry_Group(this, this, 0, inst);
@@ -2229,12 +2443,14 @@ protected class ConcreteWhereEntry_AliasWhereEntryParserRuleCall_4 extends RuleC
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AliasWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAliasWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2249,10 +2465,12 @@ protected class ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5 extends R
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getConcreteWhereEntryAccess().getSubselectWhereEntryParserRuleCall_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_Group(this, this, 0, inst);
@@ -2260,12 +2478,14 @@ protected class ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5 extends R
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(SubselectWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2291,10 +2511,12 @@ protected class ParWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getParWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ParWhereEntry_RightParenthesisKeyword_2(parent, this, 0, inst);
@@ -2302,6 +2524,7 @@ protected class ParWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getParWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2315,10 +2538,12 @@ protected class ParWhereEntry_LeftParenthesisKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParWhereEntryAccess().getLeftParenthesisKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -2334,10 +2559,12 @@ protected class ParWhereEntry_WhereEntryParserRuleCall_1 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getParWhereEntryAccess().getWhereEntryParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new WhereEntry_Group(this, this, 0, inst);
@@ -2345,12 +2572,14 @@ protected class ParWhereEntry_WhereEntryParserRuleCall_1 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(WhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ParWhereEntry_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
@@ -2366,10 +2595,12 @@ protected class ParWhereEntry_RightParenthesisKeyword_2 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getParWhereEntryAccess().getRightParenthesisKeyword_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ParWhereEntry_WhereEntryParserRuleCall_1(parent, this, 0, inst);
@@ -2399,10 +2630,12 @@ protected class AttributeWhereEntry_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getAttributeWhereEntryAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AttributeWhereEntry_NumericAttributeWhereEntryParserRuleCall_0(parent, this, 0, inst);
@@ -2413,6 +2646,7 @@ protected class AttributeWhereEntry_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2426,10 +2660,12 @@ protected class AttributeWhereEntry_NumericAttributeWhereEntryParserRuleCall_0 e
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAttributeWhereEntryAccess().getNumericAttributeWhereEntryParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NumericAttributeWhereEntry_Alternatives(this, this, 0, inst);
@@ -2437,12 +2673,14 @@ protected class AttributeWhereEntry_NumericAttributeWhereEntryParserRuleCall_0 e
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(NumericAttributeWhereEntry_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getNumericAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2457,10 +2695,12 @@ protected class AttributeWhereEntry_StringAttributeWhereEntryParserRuleCall_1 ex
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAttributeWhereEntryAccess().getStringAttributeWhereEntryParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_Group(this, this, 0, inst);
@@ -2468,12 +2708,14 @@ protected class AttributeWhereEntry_StringAttributeWhereEntryParserRuleCall_1 ex
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(StringAttributeWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2488,10 +2730,12 @@ protected class AttributeWhereEntry_BooleanAttributeWhereEntryParserRuleCall_2 e
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAttributeWhereEntryAccess().getBooleanAttributeWhereEntryParserRuleCall_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_Group(this, this, 0, inst);
@@ -2499,12 +2743,14 @@ protected class AttributeWhereEntry_BooleanAttributeWhereEntryParserRuleCall_2 e
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(BooleanAttributeWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2519,10 +2765,12 @@ protected class AttributeWhereEntry_VariableWhereEntryParserRuleCall_3 extends R
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAttributeWhereEntryAccess().getVariableWhereEntryParserRuleCall_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_Group(this, this, 0, inst);
@@ -2530,12 +2778,14 @@ protected class AttributeWhereEntry_VariableWhereEntryParserRuleCall_3 extends R
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(VariableWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getVariableWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2561,10 +2811,12 @@ protected class NumericAttributeWhereEntry_Alternatives extends AlternativesToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getNumericAttributeWhereEntryAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NumericAttributeWhereEntry_DoubleWhereEntryParserRuleCall_0(parent, this, 0, inst);
@@ -2573,6 +2825,7 @@ protected class NumericAttributeWhereEntry_Alternatives extends AlternativesToke
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNumericAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2586,10 +2839,12 @@ protected class NumericAttributeWhereEntry_DoubleWhereEntryParserRuleCall_0 exte
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getNumericAttributeWhereEntryAccess().getDoubleWhereEntryParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_Group(this, this, 0, inst);
@@ -2597,12 +2852,14 @@ protected class NumericAttributeWhereEntry_DoubleWhereEntryParserRuleCall_0 exte
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(DoubleWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2617,10 +2874,12 @@ protected class NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1 extend
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getNumericAttributeWhereEntryAccess().getLongWhereEntryParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_Group(this, this, 0, inst);
@@ -2628,12 +2887,14 @@ protected class NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1 extend
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LongWhereEntry_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getLongWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -2661,10 +2922,12 @@ protected class DoubleWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_ValueAssignment_4(parent, this, 0, inst);
@@ -2672,6 +2935,7 @@ protected class DoubleWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2685,16 +2949,19 @@ protected class DoubleWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -2718,10 +2985,12 @@ protected class DoubleWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -2738,10 +3007,12 @@ protected class DoubleWhereEntry_AttributeAssignment_2 extends AssignmentToken  
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getAttributeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -2749,6 +3020,7 @@ protected class DoubleWhereEntry_AttributeAssignment_2 extends AssignmentToken  
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -2772,10 +3044,12 @@ protected class DoubleWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
@@ -2783,6 +3057,7 @@ protected class DoubleWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -2803,10 +3078,12 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getDoubleWhereEntryAccess().getValueAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new DoubleWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -2814,6 +3091,7 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -2847,10 +3125,12 @@ protected class LongWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_ValueAssignment_4(parent, this, 0, inst);
@@ -2858,6 +3138,7 @@ protected class LongWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLongWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -2871,16 +3152,19 @@ protected class LongWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -2904,10 +3188,12 @@ protected class LongWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -2924,10 +3210,12 @@ protected class LongWhereEntry_AttributeAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getAttributeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -2935,6 +3223,7 @@ protected class LongWhereEntry_AttributeAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -2958,10 +3247,12 @@ protected class LongWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
@@ -2969,6 +3260,7 @@ protected class LongWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -2989,10 +3281,12 @@ protected class LongWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLongWhereEntryAccess().getValueAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new LongWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3000,6 +3294,7 @@ protected class LongWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
@@ -3033,10 +3328,12 @@ protected class VariableWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_RightAttributeAssignment_6(parent, this, 0, inst);
@@ -3044,6 +3341,7 @@ protected class VariableWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getVariableWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -3057,16 +3355,19 @@ protected class VariableWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -3090,10 +3391,12 @@ protected class VariableWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -3110,10 +3413,12 @@ protected class VariableWhereEntry_AttributeAssignment_2 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getAttributeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -3121,6 +3426,7 @@ protected class VariableWhereEntry_AttributeAssignment_2 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -3144,10 +3450,12 @@ protected class VariableWhereEntry_OperatorAssignment_3 extends AssignmentToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
@@ -3155,6 +3463,7 @@ protected class VariableWhereEntry_OperatorAssignment_3 extends AssignmentToken 
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -3175,10 +3484,12 @@ protected class VariableWhereEntry_RightAliasAssignment_4 extends AssignmentToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getRightAliasAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3186,6 +3497,7 @@ protected class VariableWhereEntry_RightAliasAssignment_4 extends AssignmentToke
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightAlias");
@@ -3209,10 +3521,12 @@ protected class VariableWhereEntry_FullStopKeyword_5 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getFullStopKeyword_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_RightAliasAssignment_4(parent, this, 0, inst);
@@ -3229,10 +3543,12 @@ protected class VariableWhereEntry_RightAttributeAssignment_6 extends Assignment
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getVariableWhereEntryAccess().getRightAttributeAssignment_6();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VariableWhereEntry_FullStopKeyword_5(parent, this, 0, inst);
@@ -3240,6 +3556,7 @@ protected class VariableWhereEntry_RightAttributeAssignment_6 extends Assignment
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAttribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightAttribute");
@@ -3276,10 +3593,12 @@ protected class StringAttributeWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_PatternAssignment_4(parent, this, 0, inst);
@@ -3287,6 +3606,7 @@ protected class StringAttributeWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -3300,16 +3620,19 @@ protected class StringAttributeWhereEntry_AliasAssignment_0 extends AssignmentTo
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -3333,10 +3656,12 @@ protected class StringAttributeWhereEntry_FullStopKeyword_1 extends KeywordToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -3353,10 +3678,12 @@ protected class StringAttributeWhereEntry_AttributeAssignment_2 extends Assignme
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getAttributeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -3364,6 +3691,7 @@ protected class StringAttributeWhereEntry_AttributeAssignment_2 extends Assignme
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -3387,10 +3715,12 @@ protected class StringAttributeWhereEntry_OperatorAssignment_3 extends Assignmen
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
@@ -3398,6 +3728,7 @@ protected class StringAttributeWhereEntry_OperatorAssignment_3 extends Assignmen
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -3418,10 +3749,12 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStringAttributeWhereEntryAccess().getPatternAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new StringAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3429,6 +3762,7 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("pattern",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("pattern");
@@ -3462,10 +3796,12 @@ protected class BooleanAttributeWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_Alternatives_4(parent, this, 0, inst);
@@ -3473,6 +3809,7 @@ protected class BooleanAttributeWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -3486,16 +3823,19 @@ protected class BooleanAttributeWhereEntry_AliasAssignment_0 extends AssignmentT
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -3519,10 +3859,12 @@ protected class BooleanAttributeWhereEntry_FullStopKeyword_1 extends KeywordToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -3539,10 +3881,12 @@ protected class BooleanAttributeWhereEntry_AttributeAssignment_2 extends Assignm
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getAttributeAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -3550,6 +3894,7 @@ protected class BooleanAttributeWhereEntry_AttributeAssignment_2 extends Assignm
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attribute");
@@ -3573,10 +3918,12 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
@@ -3584,6 +3931,7 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -3604,10 +3952,12 @@ protected class BooleanAttributeWhereEntry_Alternatives_4 extends AlternativesTo
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getAlternatives_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_IsTrueAssignment_4_0(parent, this, 0, inst);
@@ -3625,10 +3975,12 @@ protected class BooleanAttributeWhereEntry_IsTrueAssignment_4_0 extends Assignme
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getIsTrueAssignment_4_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3636,6 +3988,7 @@ protected class BooleanAttributeWhereEntry_IsTrueAssignment_4_0 extends Assignme
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isTrue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("isTrue");
@@ -3656,10 +4009,12 @@ protected class BooleanAttributeWhereEntry_FalseKeyword_4_1 extends KeywordToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getBooleanAttributeWhereEntryAccess().getFalseKeyword_4_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new BooleanAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3690,10 +4045,12 @@ protected class NullWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_NullKeyword_4(parent, this, 0, inst);
@@ -3701,6 +4058,7 @@ protected class NullWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNullWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -3714,16 +4072,19 @@ protected class NullWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -3747,10 +4108,12 @@ protected class NullWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -3767,10 +4130,12 @@ protected class NullWhereEntry_FeatureAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getFeatureAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -3778,6 +4143,7 @@ protected class NullWhereEntry_FeatureAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
@@ -3801,10 +4167,12 @@ protected class NullWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getOperatorAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_FeatureAssignment_2(parent, this, 0, inst);
@@ -3812,6 +4180,7 @@ protected class NullWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
@@ -3832,10 +4201,12 @@ protected class NullWhereEntry_NullKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getNullWhereEntryAccess().getNullKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new NullWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
@@ -3863,10 +4234,12 @@ protected class ReferenceAliasWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_RightAliasAssignment_4(parent, this, 0, inst);
@@ -3874,6 +4247,7 @@ protected class ReferenceAliasWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -3887,16 +4261,19 @@ protected class ReferenceAliasWhereEntry_AliasAssignment_0 extends AssignmentTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -3920,10 +4297,12 @@ protected class ReferenceAliasWhereEntry_FullStopKeyword_1 extends KeywordToken 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -3940,10 +4319,12 @@ protected class ReferenceAliasWhereEntry_ReferenceAssignment_2 extends Assignmen
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getReferenceAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -3951,6 +4332,7 @@ protected class ReferenceAliasWhereEntry_ReferenceAssignment_2 extends Assignmen
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("reference",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("reference");
@@ -3974,10 +4356,12 @@ protected class ReferenceAliasWhereEntry_EqualsSignKeyword_3 extends KeywordToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getEqualsSignKeyword_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_ReferenceAssignment_2(parent, this, 0, inst);
@@ -3994,10 +4378,12 @@ protected class ReferenceAliasWhereEntry_RightAliasAssignment_4 extends Assignme
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getReferenceAliasWhereEntryAccess().getRightAliasAssignment_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReferenceAliasWhereEntry_EqualsSignKeyword_3(parent, this, 0, inst);
@@ -4005,6 +4391,7 @@ protected class ReferenceAliasWhereEntry_RightAliasAssignment_4 extends Assignme
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightAlias");
@@ -4041,10 +4428,12 @@ protected class SubselectWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_RightParenthesisKeyword_7(parent, this, 0, inst);
@@ -4052,6 +4441,7 @@ protected class SubselectWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -4065,16 +4455,19 @@ protected class SubselectWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -4098,10 +4491,12 @@ protected class SubselectWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getFullStopKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -4118,10 +4513,12 @@ protected class SubselectWhereEntry_ReferenceAssignment_2 extends AssignmentToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getReferenceAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
@@ -4129,6 +4526,7 @@ protected class SubselectWhereEntry_ReferenceAssignment_2 extends AssignmentToke
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("reference",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("reference");
@@ -4152,10 +4550,12 @@ protected class SubselectWhereEntry_NotInAssignment_3 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getNotInAssignment_3();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_ReferenceAssignment_2(parent, this, 0, inst);
@@ -4163,6 +4563,7 @@ protected class SubselectWhereEntry_NotInAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("notIn",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("notIn");
@@ -4183,10 +4584,12 @@ protected class SubselectWhereEntry_InKeyword_4 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getInKeyword_4();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_NotInAssignment_3(parent, this, 0, inst);
@@ -4204,10 +4607,12 @@ protected class SubselectWhereEntry_LeftParenthesisKeyword_5 extends KeywordToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getLeftParenthesisKeyword_5();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_InKeyword_4(parent, this, 0, inst);
@@ -4224,10 +4629,12 @@ protected class SubselectWhereEntry_SubQueryAssignment_6 extends AssignmentToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getSubQueryAssignment_6();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new MQLquery_Group(this, this, 0, inst);
@@ -4235,6 +4642,7 @@ protected class SubselectWhereEntry_SubQueryAssignment_6 extends AssignmentToken
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("subQuery",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("subQuery");
@@ -4250,6 +4658,7 @@ protected class SubselectWhereEntry_SubQueryAssignment_6 extends AssignmentToken
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -4266,10 +4675,12 @@ protected class SubselectWhereEntry_RightParenthesisKeyword_7 extends KeywordTok
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSubselectWhereEntryAccess().getRightParenthesisKeyword_7();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubselectWhereEntry_SubQueryAssignment_6(parent, this, 0, inst);
@@ -4297,10 +4708,12 @@ protected class AliasWhereEntry_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAliasWhereEntryAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AliasWhereEntry_RightAliasAssignment_2(parent, this, 0, inst);
@@ -4308,6 +4721,7 @@ protected class AliasWhereEntry_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAliasWhereEntryRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -4321,16 +4735,19 @@ protected class AliasWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAliasWhereEntryAccess().getAliasAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
@@ -4354,10 +4771,12 @@ protected class AliasWhereEntry_EqualsSignKeyword_1 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAliasWhereEntryAccess().getEqualsSignKeyword_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AliasWhereEntry_AliasAssignment_0(parent, this, 0, inst);
@@ -4374,10 +4793,12 @@ protected class AliasWhereEntry_RightAliasAssignment_2 extends AssignmentToken  
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAliasWhereEntryAccess().getRightAliasAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AliasWhereEntry_EqualsSignKeyword_1(parent, this, 0, inst);
@@ -4385,6 +4806,7 @@ protected class AliasWhereEntry_RightAliasAssignment_2 extends AssignmentToken  
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightAlias");

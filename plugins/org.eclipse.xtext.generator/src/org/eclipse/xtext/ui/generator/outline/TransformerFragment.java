@@ -16,7 +16,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * An {@link IGeneratorFragment} to generate the configuration for a transformer for the outline view of an Xtext

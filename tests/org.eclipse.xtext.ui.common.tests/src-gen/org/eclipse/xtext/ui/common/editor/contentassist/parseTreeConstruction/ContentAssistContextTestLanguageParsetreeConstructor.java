@@ -16,11 +16,13 @@ public class ContentAssistContextTestLanguageParsetreeConstructor extends Abstra
 		
 	@Inject
 	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public ContentAssistContextTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstLevel_Group(this, this, 0, inst);
@@ -59,10 +62,12 @@ protected class FirstLevel_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFirstLevelAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, this, 0, inst);
@@ -71,6 +76,7 @@ protected class FirstLevel_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFirstLevelRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -84,10 +90,12 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelA_Group(this, this, 0, inst);
@@ -95,6 +103,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondLevelA",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("secondLevelA");
@@ -110,6 +119,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -126,10 +136,12 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFirstLevelAccess().getSecondLevelBAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelB_Group(this, this, 0, inst);
@@ -137,6 +149,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondLevelB",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("secondLevelB");
@@ -152,6 +165,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -180,10 +194,12 @@ protected class SecondLevelA_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSecondLevelAAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, this, 0, inst);
@@ -191,6 +207,7 @@ protected class SecondLevelA_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSecondLevelARule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -204,10 +221,12 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_Group(this, this, 0, inst);
@@ -215,6 +234,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelA1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("thirdLevelA1");
@@ -230,6 +250,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -246,10 +267,12 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondLevelAAccess().getThirdLevelA2Assignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_Group(this, this, 0, inst);
@@ -257,6 +280,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelA2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("thirdLevelA2");
@@ -272,6 +296,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -300,10 +325,12 @@ protected class SecondLevelB_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSecondLevelBAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, this, 0, inst);
@@ -311,6 +338,7 @@ protected class SecondLevelB_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSecondLevelBRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -324,10 +352,12 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_Group(this, this, 0, inst);
@@ -335,6 +365,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelB1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("thirdLevelB1");
@@ -350,6 +381,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -366,10 +398,12 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSecondLevelBAccess().getThirdLevelB2Assignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_Group(this, this, 0, inst);
@@ -377,6 +411,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelB2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("thirdLevelB2");
@@ -392,6 +427,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -420,10 +456,12 @@ protected class ThirdLevelA1_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getThirdLevelA1Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_NameAssignment_2(parent, this, 0, inst);
@@ -432,6 +470,7 @@ protected class ThirdLevelA1_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelA1Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -445,10 +484,12 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getThirdLevelA1Access().getA1Keyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -464,10 +505,12 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_A1Keyword_0(parent, this, 0, inst);
@@ -476,6 +519,7 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
@@ -490,10 +534,12 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getThirdLevelA1Access().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 0, inst);
@@ -501,6 +547,7 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -532,10 +579,12 @@ protected class ThirdLevelA2_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getThirdLevelA2Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_NameAssignment_2(parent, this, 0, inst);
@@ -544,6 +593,7 @@ protected class ThirdLevelA2_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelA2Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -557,10 +607,12 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getThirdLevelA2Access().getA2Keyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -576,10 +628,12 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_A2Keyword_0(parent, this, 0, inst);
@@ -588,6 +642,7 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
@@ -602,10 +657,12 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getThirdLevelA2Access().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 0, inst);
@@ -613,6 +670,7 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -644,10 +702,12 @@ protected class ThirdLevelB1_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getThirdLevelB1Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_NameAssignment_2(parent, this, 0, inst);
@@ -656,6 +716,7 @@ protected class ThirdLevelB1_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelB1Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -669,10 +730,12 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getThirdLevelB1Access().getB1Keyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -688,10 +751,12 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_B1Keyword_0(parent, this, 0, inst);
@@ -700,6 +765,7 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
@@ -714,10 +780,12 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getThirdLevelB1Access().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 0, inst);
@@ -725,6 +793,7 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -756,10 +825,12 @@ protected class ThirdLevelB2_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getThirdLevelB2Access().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_NameAssignment_2(parent, this, 0, inst);
@@ -768,6 +839,7 @@ protected class ThirdLevelB2_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelB2Rule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -781,10 +853,12 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getThirdLevelB2Access().getB2Keyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -800,10 +874,12 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_B2Keyword_0(parent, this, 0, inst);
@@ -812,6 +888,7 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
@@ -826,10 +903,12 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getThirdLevelB2Access().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 0, inst);
@@ -837,6 +916,7 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");

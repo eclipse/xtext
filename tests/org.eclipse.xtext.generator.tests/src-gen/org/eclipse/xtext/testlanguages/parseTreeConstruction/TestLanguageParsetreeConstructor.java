@@ -16,11 +16,13 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 		
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
-		
+	
+	@Override	
 	public TestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 
+	@Override
 	protected AbstractToken getRootToken(IInstanceDescription inst) {
 		return new ThisRootNode(inst);	
 	}
@@ -30,6 +32,7 @@ protected class ThisRootNode extends RootToken {
 		super(inst);
 	}
 	
+	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EntryRule_MultiFeatureAssignment(this, this, 0, inst);
@@ -57,10 +60,12 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEntryRuleAccess().getMultiFeatureAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
@@ -68,10 +73,12 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiFeature",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
@@ -87,6 +94,7 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -113,10 +121,12 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getAlternatives();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AbstractRule_ChoiceRuleParserRuleCall_0(parent, this, 0, inst);
@@ -125,6 +135,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -138,10 +149,12 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getChoiceRuleParserRuleCall_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_Group(this, this, 0, inst);
@@ -149,12 +162,14 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -169,10 +184,12 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_Group(this, this, 0, inst);
@@ -180,12 +197,14 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(next, actIndex , index, inst);
@@ -211,10 +230,12 @@ protected class ChoiceRule_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getChoiceRuleAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_NameAssignment_2(parent, this, 0, inst);
@@ -222,6 +243,7 @@ protected class ChoiceRule_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -235,10 +257,12 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -254,10 +278,12 @@ protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getChoiceRuleAccess().getOptionalKeywordAssignment_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_ChoiceKeyword_0(parent, this, 0, inst);
@@ -265,6 +291,7 @@ protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("optionalKeyword",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
@@ -285,10 +312,12 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getChoiceRuleAccess().getNameAssignment_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ChoiceRule_OptionalKeywordAssignment_1(parent, this, 0, inst);
@@ -297,6 +326,7 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
@@ -330,10 +360,12 @@ protected class ReducibleRule_Group extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getGroup();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_Group_2(parent, this, 0, inst);
@@ -342,6 +374,7 @@ protected class ReducibleRule_Group extends GroupToken {
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
@@ -355,10 +388,12 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
@@ -374,10 +409,12 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getTerminalRuleParserRuleCall_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
@@ -385,12 +422,14 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 		}	
 	}	
 		
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalRule_StringFeatureAssignment.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_ReducibleKeyword_0(parent, next, actIndex, inst);
@@ -406,10 +445,12 @@ protected class ReducibleRule_Group_2 extends GroupToken {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getGroup_2();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_ActionFeatureAssignment_2_1(parent, this, 0, inst);
@@ -426,10 +467,12 @@ protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends 
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Action getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ReducibleRule_TerminalRuleParserRuleCall_1(parent, this, 0, inst);
@@ -438,6 +481,7 @@ protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends 
 	}	
 		
 	
+    @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("actionFeature", false);
@@ -454,10 +498,12 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getReducibleRuleAccess().getActionFeatureAssignment_2_1();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
@@ -465,6 +511,7 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		}	
 	}	
 		
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("actionFeature",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
@@ -480,6 +527,7 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 		return null;
 	}
 
+    @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
@@ -508,20 +556,24 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 		super(parent, next, no, current);
 	}
 	
+	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTerminalRuleAccess().getStringFeatureAssignment();
 	}
 
+    @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
+    @Override
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
+    @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringFeature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
