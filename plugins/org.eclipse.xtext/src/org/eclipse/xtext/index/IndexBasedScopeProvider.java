@@ -49,7 +49,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class DefaultIndexBasedScopeProvider extends AbstractScopeProvider {
+public class IndexBasedScopeProvider extends AbstractScopeProvider {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
