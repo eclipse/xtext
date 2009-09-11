@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.index.DefaultIndexBasedScopeProvider.DefaultImportNormalizer;
+import org.eclipse.xtext.index.IndexBasedScopeProvider.DefaultImportNormalizer;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
@@ -38,14 +38,14 @@ import com.google.common.collect.Lists;
  */
 public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 
-	private DefaultIndexBasedScopeProvider scopeProvider;
+	private IndexBasedScopeProvider scopeProvider;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
 
-		scopeProvider = new DefaultIndexBasedScopeProvider();
+		scopeProvider = new IndexBasedScopeProvider();
 		scopeProvider.setIndexStore(index);
 		scopeProvider.setNameProvider(nameProvider);
 	}
