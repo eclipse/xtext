@@ -20,6 +20,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.index.IndexBasedScopeProvider.DefaultImportNormalizer;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
@@ -283,6 +286,40 @@ public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
+			}
+		};
+		Iterator<Entity> iterator = Iterables.filter(allContents, Entity.class).iterator();
+		Entity foo = iterator.next();
+		assertEquals("Foo", foo.getName());
+		
+		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getEntity());
+		for (IScopedElement ele : scope.getAllContents()) {
+			if (ele.name().equals("Bar"))
+				return;
+		}
+		fail("No entity 'Bar' found");
+	}
+	
+	public void testMultipleFiles() throws Exception {
+		ResourceSetImpl rs = new ResourceSetImpl();
+		final Resource res1 = rs.createResource(URI.createURI("file1.indextestlanguage"));
+		Resource res2 = rs.createResource(URI.createURI("file2.indextestlanguage"));
+		res1.load(new StringInputStream(
+				"foo { " +
+				"  import bar.Bar" +
+				"  entity Foo {" +
+				"  }" +
+				"}"
+		), null);
+		res2.load(new StringInputStream(
+				"bar {" +
+				"  entity Bar{}" +
+				"}"
+		), null);
+		
+		Iterable<EObject> allContents = new Iterable<EObject>() {
+			public Iterator<EObject> iterator() {
+				return res1.getAllContents();
 			}
 		};
 		Iterator<Entity> iterator = Iterables.filter(allContents, Entity.class).iterator();
