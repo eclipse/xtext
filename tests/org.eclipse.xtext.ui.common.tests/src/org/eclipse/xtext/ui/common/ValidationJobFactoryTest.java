@@ -14,8 +14,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EValidator.Registry;
-import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.concurrent.IStateAccess;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -44,10 +44,10 @@ public class ValidationJobFactoryTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new XtextGrammarTestLanguageStandaloneSetup() {
+		with(new XtextGrammarUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageUiModule() {
+				return Guice.createInjector(new XtextGrammarUiTestLanguageUiModule() {
 				}, new UIPluginModule(Activator.getInstance()));
 			}
 		});

@@ -7,8 +7,8 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtend.tests.edit"
     editorPluginID="org.eclipse.xtext.xtend.tests.editor">
-  <genPackages prefix="TreeTestLanguage" basePackage="org.eclipse.xtext.xtend" disposableProviderFactory="true"
-      ecorePackage="TreeTestLanguage.ecore#/">
+  <genPackages prefix="TreeXtendTestLanguage" basePackage="org.eclipse.xtext.xtend"
+      disposableProviderFactory="true" ecorePackage="TreeTestLanguage.ecore#/">
     <genClasses ecoreClass="TreeTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TreeTestLanguage.ecore#//Model/children"/>
     </genClasses>

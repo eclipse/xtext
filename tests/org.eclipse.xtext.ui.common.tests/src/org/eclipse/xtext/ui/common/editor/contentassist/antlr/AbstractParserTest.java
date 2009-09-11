@@ -12,9 +12,9 @@ import java.util.Set;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
+import org.eclipse.xtext.services.XtextGrammarUiTestLanguageGrammarAccess;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -27,13 +27,13 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 
 	protected abstract Collection<FollowElement> getFollowSet(String input) throws RecognitionException;
 
-	protected XtextGrammarTestLanguageGrammarAccess grammarAccess;
+	protected XtextGrammarUiTestLanguageGrammarAccess grammarAccess;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextGrammarTestLanguageStandaloneSetup.class);
-		grammarAccess = get(XtextGrammarTestLanguageGrammarAccess.class);
+		with(XtextGrammarUiTestLanguageStandaloneSetup.class);
+		grammarAccess = get(XtextGrammarUiTestLanguageGrammarAccess.class);
 	}
 
 	@Override

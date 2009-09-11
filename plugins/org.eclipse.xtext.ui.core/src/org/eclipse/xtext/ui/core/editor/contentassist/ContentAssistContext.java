@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 
+import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 
 /**
@@ -30,8 +31,19 @@ import com.google.inject.Inject;
  */
 public class ContentAssistContext implements IFollowElementAcceptor {
 
+	private static final ContentAssistContext[] EMPTY_ARRAY = new ContentAssistContext[0];
+	
+	@ImplementedBy(ContentAssistContext.Factory.Null.class)
 	public interface Factory {
 		ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource);
+		
+		public static class Null implements Factory {
+
+			public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
+				return EMPTY_ARRAY;
+			}
+			
+		}
 	}
 	
 	private String prefix;

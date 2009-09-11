@@ -88,11 +88,6 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory> bindContentAssistContext$Factory() {
-		return org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistContextFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalPostProcessor> bindICompletionProposalPostProcessor() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.DefaultCompletionProposalPostProcessor.class;
 	}
@@ -150,6 +145,16 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.contentassist.DomainmodelProposalProvider.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory> bindContentAssistContext$Factory() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
+		return org.eclipse.xtext.example.contentassist.antlr.DomainmodelParser.class;
 	}
 
 

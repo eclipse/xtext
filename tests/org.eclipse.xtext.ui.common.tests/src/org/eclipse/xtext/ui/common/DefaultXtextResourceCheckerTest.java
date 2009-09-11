@@ -13,8 +13,8 @@ import java.util.Map;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EValidator.Registry;
-import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
@@ -40,10 +40,10 @@ public class DefaultXtextResourceCheckerTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new XtextGrammarTestLanguageStandaloneSetup() {
+		with(new XtextGrammarUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageUiModule() {
+				return Guice.createInjector(new XtextGrammarUiTestLanguageUiModule() {
 				}, new UIPluginModule(Activator.getInstance()));
 			}
 		});

@@ -143,9 +143,6 @@
 		<language uri="classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xtext">
-			<fragment file="${standardFragments}"/>
-		</language>
 		<language uri="classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>

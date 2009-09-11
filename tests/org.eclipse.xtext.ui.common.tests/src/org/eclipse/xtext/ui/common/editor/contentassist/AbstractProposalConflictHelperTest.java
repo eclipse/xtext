@@ -7,29 +7,43 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.common.tests.Activator;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTests {
 
-	private IContentAssistProcessorTestSetup setup;
 	private ProposalConflictHelper helper;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		setup = new JavaContentAssistProcessorTestSetup();
-		with(setup.getXtextGrammarTestSetup());
+		with(getXtextGrammarTestSetup());
 		helper = createProposalConflictHelper();
+	}
+	
+	public ISetup getXtextGrammarTestSetup() {
+		return new XtextGrammarUiTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new XtextGrammarUiTestLanguageUiModule(), new UIPluginModule(Activator.getInstance()));
+			}
+		};
 	}
 	
 	protected abstract ProposalConflictHelper createProposalConflictHelper();
 
 	@Override
 	protected void tearDown() throws Exception {
-		setup = null;
 		helper = null;
 		super.tearDown();
 	}
