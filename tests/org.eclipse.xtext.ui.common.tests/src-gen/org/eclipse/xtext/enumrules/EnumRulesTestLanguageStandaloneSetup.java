@@ -29,8 +29,8 @@ public class EnumRulesTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest", org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/xtext/ui/common/tests/EnumRulesTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/xtext/ui/common/tests/EnumRulesTest", org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

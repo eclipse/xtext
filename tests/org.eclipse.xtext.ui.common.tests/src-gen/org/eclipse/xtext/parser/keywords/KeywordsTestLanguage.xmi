@@ -2,11 +2,11 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="keywordsTestLanguage">
-      <ePackage href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#/"/>
+      <ePackage href="http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Model">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Assignment" feature="first" operator="?=">

@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="referenceGrammar"
-    nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar" nsPrefix="referenceGrammar">
+    nsURI="http://www.eclipse.org/xtext/ui/common/tests/ReferenceGrammar" nsPrefix="referenceGrammar">
   <eClassifiers xsi:type="ecore:EClass" name="Spielplatz">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="groesse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

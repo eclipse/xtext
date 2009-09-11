@@ -39,4 +39,6 @@ public interface IContentAssistProcessorTestSetup {
 	ISetup getBug287941TestLanguageSetup();
 	
 	ISetup getBug288734TestLanguageSetup();
+	
+	ISetup getBug289187TestLanguageSetup();
 }

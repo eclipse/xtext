@@ -350,4 +350,11 @@ public class JavaContentAssistProcessorTest extends AbstractContentAssistProcess
 	public void testBug288734_16() throws Exception {
     	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant ").assertText();
     }
+    
+    @Override
+	public void testBug289187_01() throws Exception {
+    	newBuilder(setup.getBug289187TestLanguageSetup()).append(
+    			"class Foo {\n" + 
+    			"   PRIVATE ").assertText("operation");
+    }
 }

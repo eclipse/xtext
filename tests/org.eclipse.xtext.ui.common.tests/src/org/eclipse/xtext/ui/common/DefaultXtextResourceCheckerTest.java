@@ -22,8 +22,8 @@ import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.xtextTest.Grammar;
-import org.eclipse.xtext.xtextTest.XtextTestPackage;
+import org.eclipse.xtext.xtextUiTest.Grammar;
+import org.eclipse.xtext.xtextUiTest.XtextUiTestPackage;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
@@ -48,7 +48,7 @@ public class DefaultXtextResourceCheckerTest extends AbstractXtextTests {
 			}
 		});
 		validatorRegistry = get(EValidator.Registry.class);
-		validatorRegistry.put(XtextTestPackage.eINSTANCE, new TestValidator());
+		validatorRegistry.put(XtextUiTestPackage.eINSTANCE, new TestValidator());
 		resourceChecker = get(IXtextResourceChecker.class);
 	}
 	

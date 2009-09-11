@@ -150,7 +150,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			int idx = tokens.indexOf(elementToParse) + 1;
 			if (idx != tokens.size()) {
 				String secondRule = getRuleName((AbstractElement) elementToParse.eContainer());
-				secondRule = secondRule.substring(0, secondRule.length() - Integer.toString(idx - 1).length()) + idx;
+  				secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
 				if (GrammarUtil.isMultipleCardinality(elementToParse))
 					return new String[][] {{ ruleName }, {ruleName, secondRule}};
 				return new String[][] { {ruleName, secondRule} };

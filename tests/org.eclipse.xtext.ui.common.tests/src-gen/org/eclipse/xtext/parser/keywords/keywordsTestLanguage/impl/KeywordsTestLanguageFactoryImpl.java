@@ -33,7 +33,7 @@ public class KeywordsTestLanguageFactoryImpl extends EFactoryImpl implements Key
   {
     try
     {
-      KeywordsTestLanguageFactory theKeywordsTestLanguageFactory = (KeywordsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage"); 
+      KeywordsTestLanguageFactory theKeywordsTestLanguageFactory = (KeywordsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/xtext/ui/common/tests/KeywordsTestLanguage"); 
       if (theKeywordsTestLanguageFactory != null)
       {
         return theKeywordsTestLanguageFactory;
