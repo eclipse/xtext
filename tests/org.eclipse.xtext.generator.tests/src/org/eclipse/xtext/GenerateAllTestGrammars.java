@@ -1,10 +1,4 @@
 /*******************************************************************************
- * __  ___            _   
- * \ \/ / |_ _____  __ |_
- *  \  /| __/ _ \ \/ / __|
- *  /  \| |_  __/>  <| |_
- * /_/\_\\__\___/_/\_\\__|
- * 
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -34,7 +28,6 @@ import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
 import org.eclipse.xtext.testlanguages.LexerTestLanguage;
 import org.eclipse.xtext.testlanguages.LookaheadTestLanguage;
@@ -83,7 +76,6 @@ public class GenerateAllTestGrammars {
 			TreeTestLanguage.class,
 			ImportUriTestLanguage.class,
 			PartialParserTestLanguage.class,
-			ContentAssistTestLanguage.class,
 			TransientValuesTest.class,
 			FormatterTestLanguage.class,
 			DatatypeRulesTestLanguage.class,

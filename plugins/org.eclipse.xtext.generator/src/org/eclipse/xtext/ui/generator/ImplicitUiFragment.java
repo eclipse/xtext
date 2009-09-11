@@ -59,7 +59,6 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		// content assist
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory", "org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistantFactory")
 		.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", "org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor")
-		.addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory", "org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistContextFactory")
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalPostProcessor", "org.eclipse.xtext.ui.common.editor.contentassist.DefaultCompletionProposalPostProcessor")
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator", "org.eclipse.xtext.ui.common.editor.contentassist.DefaultFollowElementCalculator")
 
