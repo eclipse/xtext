@@ -6,7 +6,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/ui/common/tests/XtextTest" 
-       class = "org.eclipse.xtext.xtextTest.XtextTestPackage"
+       class = "org.eclipse.xtext.xtextUiTest.XtextUiTestPackage"
        genModel = "org/eclipse/xtext/XtextGrammarTestLanguage.genmodel" /> 
 	
   </extension>

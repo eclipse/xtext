@@ -31,9 +31,9 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.xtextTest,
- org.eclipse.xtext.xtextTest.impl,
- org.eclipse.xtext.xtextTest.util,
+Export-Package: org.eclipse.xtext.xtextUiTest,
+ org.eclipse.xtext.xtextUiTest.impl,
+ org.eclipse.xtext.xtextUiTest.util,
  org.eclipse.xtext,
  org.eclipse.xtext.services,
  org.eclipse.xtext.parser.packrat,
@@ -123,5 +123,7 @@ Export-Package: org.eclipse.xtext.xtextTest,
  org.eclipse.xtext.enumrules.parseTreeConstruction,
  org.eclipse.xtext.enumrules.parser.antlr,
  org.eclipse.xtext.enumrules.contentassist,
- org.eclipse.xtext.enumrules.contentassist.antlr
-
+ org.eclipse.xtext.enumrules.contentassist.antlr,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug289187TestLanguage,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug289187TestLanguage.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug289187TestLanguage.util

@@ -7,7 +7,7 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.common.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.common.tests.editor">
-  <genPackages prefix="XtextTest" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
+  <genPackages prefix="XtextUiTest" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
       ecorePackage="XtextGrammarTestLanguage.ecore#/">
     <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Grammar">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Grammar/name"/>

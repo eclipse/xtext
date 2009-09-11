@@ -41,7 +41,7 @@ public interface TreeTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage";
+  String eNS_URI = "http://www.eclipse.org/2008/xtext/ui/common/tests/TreeTestLanguage";
 
   /**
    * The package namespace name.

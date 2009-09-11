@@ -149,40 +149,6 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
 	}
 
-	/**
-	 *
-	 * <p>
-	 * Tests proposals sample domain language.
-	 * </p>
-	 *
-	 * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=260688">Bug 260688 </a>
-	 *
-//	 */
-//	public void testDomainLanguage() throws Exception {
-//		newBuilder(DomainModel)
-//		.assertCount(4)
-//		.append("d").assertCount(1)
-//		.append("a").assertCount(1)
-//		.append("t").assertCount(1)
-//		.append("a").assertCount(1)
-//		.reset().assertCount(4)
-//		.append("e").assertCount(1)
-//		.append("n").assertCount(1)
-//		.append("t").assertCount(1)
-//		.append("i").assertCount(1)
-//		.reset().assertCount(4)
-//		.append("i").assertCount(1)
-//		.append("m").assertCount(1)
-//		.append("p").assertCount(1)
-//		.append("o").assertCount(1)
-//		.reset().assertCount(4)
-//		.append("p").assertCount(1)
-//		.append("a").assertCount(1)
-//		.append("c").assertCount(1)
-//		.append("k").assertCount(1);
-//	}
-
-
 	public void testCompleteRuleCall() throws Exception {
 		newBuilder(setup.getXtextGrammarTestSetup())
 			.appendNl("grammar foo")
@@ -892,6 +858,12 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     
     public void testBug288734_16() throws Exception {
     	newBuilder(setup.getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant ").assertText("string", "integer", "boolean");
+    }
+    
+    public void testBug289187_01() throws Exception {
+    	newBuilder(setup.getBug289187TestLanguageSetup()).append(
+    			"class Foo {\n" + 
+    			"   PRIVATE ").assertText("attribute", "operation");
     }
     
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {

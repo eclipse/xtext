@@ -41,7 +41,7 @@ public interface EnumRulesTestLanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest";
+  String eNS_URI = "http://www.eclipse.org/2009/xtext/ui/common/tests/EnumRulesTest";
 
   /**
    * The package namespace name.

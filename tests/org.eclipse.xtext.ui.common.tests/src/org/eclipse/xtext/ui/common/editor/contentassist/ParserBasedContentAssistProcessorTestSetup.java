@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserBasedContent
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.Bug286935TestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.Bug287941TestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.Bug288734TestLanguageParser;
+import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.Bug289187TestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.ContentAssistContextTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.CrossReferenceProposalTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.DatatypeRuleTestLanguageParser;
@@ -297,5 +298,22 @@ public class ParserBasedContentAssistProcessorTestSetup implements IContentAssis
 		};
 	}
 
+	public ISetup getBug289187TestLanguageSetup() {
+		return new Bug289187TestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new Bug289187TestLanguageUiModule() {
+					@Override
+					public Class<? extends Factory> bindContentAssistContext$Factory() {
+						return ParserBasedContentAssistContextFactory.class;
+					}
+					@Override
+					public Class<? extends IContentAssistParser> bindIContentAssistParser() {
+						return Bug289187TestLanguageParser.class;
+					}
+				}, new UIPluginModule(Activator.getInstance()));
+			}
+		};
+	}
 	
 }

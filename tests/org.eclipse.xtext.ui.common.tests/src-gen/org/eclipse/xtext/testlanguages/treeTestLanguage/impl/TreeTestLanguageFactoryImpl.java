@@ -33,7 +33,7 @@ public class TreeTestLanguageFactoryImpl extends EFactoryImpl implements TreeTes
   {
     try
     {
-      TreeTestLanguageFactory theTreeTestLanguageFactory = (TreeTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage"); 
+      TreeTestLanguageFactory theTreeTestLanguageFactory = (TreeTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/ui/common/tests/TreeTestLanguage"); 
       if (theTreeTestLanguageFactory != null)
       {
         return theTreeTestLanguageFactory;

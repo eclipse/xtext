@@ -27,8 +27,8 @@ import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.xtextTest.Grammar;
-import org.eclipse.xtext.xtextTest.XtextTestPackage;
+import org.eclipse.xtext.xtextUiTest.Grammar;
+import org.eclipse.xtext.xtextUiTest.XtextUiTestPackage;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
@@ -68,7 +68,7 @@ public class ValidationJobFactoryTest extends AbstractXtextTests {
 				return resource;
 			}
 		};
-		validatorRegistry.put(XtextTestPackage.eINSTANCE, new Bug286114Validator());
+		validatorRegistry.put(XtextUiTestPackage.eINSTANCE, new Bug286114Validator());
 		ValidationJob job = get(Bug286114ValidationJobFactory.class).create(resourceAccess, null, CheckMode.ALL, true);
 		List<Map<String,Object>> issues = job.createIssues(new NullProgressMonitor());
 		assertTrue(issues.toString(), issues.isEmpty());
