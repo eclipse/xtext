@@ -3,17 +3,18 @@
  */
 package org.eclipse.xtext.example.scoping;
 
-import static org.eclipse.xtext.EcoreUtil2.*;
-import static org.eclipse.xtext.scoping.Scopes.*;
+import static org.eclipse.xtext.scoping.Scopes.scopeFor;
 
-import java.util.List;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.example.domainmodel.Entity;
+import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Reference;
+import org.eclipse.xtext.index.AbstractDeclarativeIndexBasedScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * This class contains custom scoping description.
@@ -22,10 +23,16 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  * use it
  * 
  */
-public class DomainmodelScopeProvider extends AbstractDeclarativeScopeProvider {
-	public IScope scope_Reference_opposite(Reference ref, EReference eRef) {
-		List<Reference> typeSelect = typeSelect(((Entity) ref.getType().getReferenced()).getFeatures(), Reference.class);
-		return new SimpleScope(scopedElementsFor(typeSelect));
+public class DomainmodelScopeProvider extends AbstractDeclarativeIndexBasedScopeProvider {
+	
+	public IScope scope_Reference_opposite(final Reference ref, EReference eRef) {
+		EList<Feature> features = ((Entity) ref.getType().getReferenced()).getFeatures();
+		Iterable<Reference> references = Iterables.filter(features, Reference.class);
+		references = Iterables.filter(references, new Predicate<Reference>(){
+			public boolean apply(Reference input) {
+				return ref.eContainer().equals(input.getType().getReferenced());
+			}});
+		return scopeFor(references);
 	}
 
 }
