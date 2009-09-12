@@ -11,6 +11,7 @@ package org.eclipse.xtext.scoping;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -21,6 +22,22 @@ import com.google.common.collect.Iterables;
  *
  */
 public class Scopes {
+	
+	public static IScope scopeFor(Iterable<? extends EObject> elements) {
+		return scopeFor(elements, IScope.NULLSCOPE);
+	}
+	
+	public static IScope scopeFor(Iterable<? extends EObject> elements, IScope outer) {
+		return scopeFor(elements, SimpleAttributeResolver.NAME_RESOLVER, outer);
+	}
+	
+	public static IScope scopeFor(Iterable<? extends EObject> elements, final Function<EObject, String> nameComputation) {
+		return scopeFor(elements, nameComputation, IScope.NULLSCOPE);
+	}
+	
+	public static IScope scopeFor(Iterable<? extends EObject> elements, final Function<EObject, String> nameComputation, IScope outer) {
+		return new SimpleScope(outer, scopedElementsFor(elements, nameComputation));
+	}
 	
 	/**
 	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s 
