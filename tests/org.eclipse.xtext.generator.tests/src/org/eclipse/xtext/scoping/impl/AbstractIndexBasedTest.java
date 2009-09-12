@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.index;
+package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,7 +20,9 @@ import org.eclipse.emf.emfindex.query.ResourceQueryExecutorStrategyImpl;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
 import org.eclipse.emf.emfindex.store.IndexUpdaterImpl;
 import org.eclipse.emf.emfindex.store.UpdateCommand;
+import org.eclipse.xtext.index.DefaultDeclarativeResourceIndexer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 

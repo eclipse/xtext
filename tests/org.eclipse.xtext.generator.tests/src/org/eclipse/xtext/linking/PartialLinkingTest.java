@@ -18,7 +18,7 @@ import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -46,8 +46,8 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		scopeProvider = new DefaultScopeProvider();
-		((DefaultScopeProvider) scopeProvider).setImportUriResolver(get(ImportUriResolver.class));
+		scopeProvider = new SimpleNameScopeProvider();
+		((SimpleNameScopeProvider) scopeProvider).setImportUriResolver(get(ImportUriResolver.class));
 		modelAsText =
 			"spielplatz 1 {\n" +
 			"  kind( Bommel1 1)\n" +

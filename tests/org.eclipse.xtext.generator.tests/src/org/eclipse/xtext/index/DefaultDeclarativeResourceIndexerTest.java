@@ -19,6 +19,7 @@ import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.xtext.index.indexTestLanguage.Namespace;
+import org.eclipse.xtext.scoping.impl.AbstractIndexBasedTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
