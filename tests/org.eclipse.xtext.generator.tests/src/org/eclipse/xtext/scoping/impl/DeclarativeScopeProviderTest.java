@@ -27,7 +27,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 	public void testSimple() throws Exception {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
 		};
@@ -42,11 +42,11 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 
 		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
 
-			private IScope scope_EClass(EReference ctx, EClass ref) {
+			private IScope scope_EClass(EReference ctx, EReference ref) {
 				return b;
 			}
 		};
@@ -63,15 +63,15 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 
 		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
-			private IScope scope_EClass(EClassifier clazz, EClass ref) {
+			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
 			}
 
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return c;
 			}
 
-			private IScope scope_EClass(EReference ctx, EClass ref) {
+			private IScope scope_EClass(EReference ctx, EReference ref) {
 				return b;
 			}
 		};
@@ -88,15 +88,15 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
 
-			private IScope scope_EClass(EClassifier clazz, EClass ref) {
+			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
 			}
 
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return b;
 			}
 
-			private IScope scope_EClass(EReference ctx, EClass ref) {
+			private IScope scope_EClass(EReference ctx, EReference ref) {
 				return c;
 			}
 		};
@@ -116,11 +116,11 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 				return a;
 			}
 
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return c;
 			}
 
-			private IScope scope_EClass(EReference ctx, EClass ref) {
+			private IScope scope_EClass(EReference ctx, EReference ref) {
 				return b;
 			}
 		};
@@ -140,11 +140,11 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 				return a;
 			}
 
-			private IScope scope_EClass(EClass clazz, EClass ref) {
+			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return c;
 			}
 
-			private IScope scope_EClass(EReference ctx, EClass ref) {
+			private IScope scope_EClass(EReference ctx, EReference ref) {
 				return b;
 			}
 		};
