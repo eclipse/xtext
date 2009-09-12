@@ -110,7 +110,10 @@
 </topic>
 <topic href="help/scoping.html" label="Scoping">
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider" label="DeclarativeScopeProvider"></topic>
-<topic href="help/scoping.html#IndexBasedScoping" label="IndexBased Scoping"></topic>
+<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.QualifiedNameScopeProvider" label="QualifiedNameScopeProvider">
+<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
+<topic href="help/scoping.html#Importingnamespaces" label="Importing name spaces"></topic>
+</topic>
 </topic>
 <topic href="help/valueconverter.html" label="Value Converter">
 <topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"></topic>

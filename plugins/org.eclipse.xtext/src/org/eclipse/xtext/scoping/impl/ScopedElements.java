@@ -27,7 +27,9 @@ import com.google.common.collect.Multimaps;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
+ * @deprecated Use functionality in {@link org.eclipse.xtext.scoping.Scopes} instead
  */
+@Deprecated
 public abstract class ScopedElements {
 	private ScopedElements() {
 	}

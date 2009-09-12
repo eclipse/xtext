@@ -10,8 +10,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.index.AbstractDeclarativeIndexBasedScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeQualifiedNameScopeProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -23,7 +23,7 @@ import com.google.common.collect.Iterables;
  * use it
  * 
  */
-public class DomainmodelScopeProvider extends AbstractDeclarativeIndexBasedScopeProvider {
+public class DomainmodelScopeProvider extends AbstractDeclarativeQualifiedNameScopeProvider {
 	
 	public IScope scope_Reference_opposite(final Reference ref, EReference eRef) {
 		EList<Feature> features = ((Entity) ref.getType().getReferenced()).getFeatures();

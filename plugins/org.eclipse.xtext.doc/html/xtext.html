@@ -4183,30 +4183,125 @@ entity&nbsp;Foo;<br>
 <li class="listitem">
 <p> 
 							
-<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeQualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeQualifiedNameScopeProvider</a>
 						
 </p>
 </li>
 </ol>
 </div>
 </div>
-<div class="section" title="IndexBased Scoping">
+<div class="section" title="QualifiedNameScopeProvider">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="IndexBasedScoping"></a>IndexBased Scoping</h3>
+<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.QualifiedNameScopeProvider"></a>
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/QualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">QualifiedNameScopeProvider</a>
+				
+</h3>
 </div>
 </div>
 </div>
-<p>The index based scoping is based on qualified names and namespaces. As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
-					The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/IndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">IndexBasedScopeProvider</a> supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>.
+<p>The qualified name scoping is based on qualified names and name spaces. It adds name space support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both allow to have multiple nested packages within one file and you can put imports per namespace, so that imported names are only visible within that namespace. See the domain model example its scope provider extends  
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeQualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeQualifiedNameScopeProvider</a>.
 				</p>
+<div class="section" title="IQualifiedNameProvider">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider"></a>
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a>
+					
+</h4>
+</div>
+</div>
+</div>
+<p>The 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/QualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">QualifiedNameScopeProvider</a> makes use of the so called 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a> service. It computes qualified names for EObjects. The default implementation (
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses a simple name look up and concats the result to the qualified name of its parent object. See its JavaDoc and the code for more details.
+					</p>
+</div>
+<div class="section" title="Importing name spaces">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="Importingnamespaces"></a>Importing name spaces</h4>
+</div>
+</div>
+</div>
+<p>The QualifiedNameScopeProvider looks up EAttributes with name &lsquo;importNamespace&rsquo; and interprets such as import statements.
+						By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;java.util.Set;<br>
+
+</code>
+</p>
+</div>
+<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+						Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+package&nbsp;foo&nbsp;{<br>
+&nbsp;&nbsp;import&nbsp;bar.Foo<br>
+&nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;Foo&nbsp;{<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+package&nbsp;bar&nbsp;{<br>
+&nbsp;&nbsp;entity&nbsp;Foo&nbsp;{}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Of course the declared elements within a package are as well referable by their simple name:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+package&nbsp;bar&nbsp;{<br>
+&nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;Foo&nbsp;{}<br>
+&nbsp;&nbsp;entity&nbsp;Foo&nbsp;{}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Of course the following would as well be ok:</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+package&nbsp;bar&nbsp;{<br>
+&nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;bar.Foo&nbsp;{}<br>
+&nbsp;&nbsp;entity&nbsp;Foo&nbsp;{}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
+						The 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/IndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">IndexBasedScopeProvider</a> supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>.
+					</p>
 <p>See the JavaDocs and 
-					<a class="ulink" href="http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html" target="_new">this blog post</a> for details.
-				</p>
+						<a class="ulink" href="http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html" target="_new">this blog post</a> for details.
+					</p>
+</div>
 </div>
 </div>
 <div class="section" title="Value Converter">

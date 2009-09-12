@@ -20,13 +20,13 @@ import com.google.inject.Inject;
  * </p>
  * <p>
  * If no polymorphic signature can be found for the given EObject and EReference this implementation calls
- * {@link DefaultScopeProvider#getScope(EObject, EReference)}
+ * {@link SimpleNameScopeProvider#getScope(EObject, EReference)}
  * 
  * </p>
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractDeclarativeScopeProvider extends DefaultScopeProvider {
+public abstract class AbstractDeclarativeScopeProvider extends SimpleNameScopeProvider {
 
 	@Inject
 	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);
@@ -39,3 +39,4 @@ public abstract class AbstractDeclarativeScopeProvider extends DefaultScopeProvi
 		return super.getScope(context, reference);
 	}
 }
+

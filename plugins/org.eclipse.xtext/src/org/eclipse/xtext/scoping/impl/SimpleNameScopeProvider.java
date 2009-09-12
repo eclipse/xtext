@@ -27,9 +27,9 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultScopeProvider extends AbstractScopeProvider {
+public class SimpleNameScopeProvider extends AbstractScopeProvider {
 
-	private static final Logger logger = Logger.getLogger(DefaultScopeProvider.class);
+	private static final Logger logger = Logger.getLogger(SimpleNameScopeProvider.class);
 
 	private final EContentAdapter adapter = new EContentAdapter() {
 		@Override

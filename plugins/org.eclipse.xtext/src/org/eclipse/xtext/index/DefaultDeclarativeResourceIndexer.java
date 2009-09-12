@@ -13,6 +13,8 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfindex.store.ResourceIndexerImpl;
+import org.eclipse.xtext.scoping.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.inject.Inject;

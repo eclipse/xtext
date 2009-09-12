@@ -14,6 +14,8 @@ h2(#breaking_changes_08). Changes in Xtext 0.8.0
 
 *Removed IScopeProvider.getScope(EObject,EClass)*
 
+*Renamed DefaultScopeProvider to SimpleNameScopeProvider*
+
 
 
 
