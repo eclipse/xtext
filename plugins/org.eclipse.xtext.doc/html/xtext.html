@@ -3527,6 +3527,108 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 </p>
 </div>
 </div>
+<div class="section" title="Quickfixes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="quickfixes"></a>Quickfixes</h3>
+</div>
+</div>
+</div>
+<p>For validations written using the 
+					<code class="code">AbstractDeclarativeValidator</code> it is possible to provide corresponding quickfixes in the editor. To be able to implement a quickfix for a given diagnostic (a warning or error) the underlying 
+					<span class="emphasis"><em>cause</em></span> of the diagnostic must be known (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn&rsquo;t know what needs to be done. As we don&rsquo;t want to deduce this from the diagnostic&rsquo;s error message we associate a problem specific 
+					<span class="emphasis"><em>code</em></span> with the diagnostic.
+				</p>
+<p>In the following example (from 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/validation/DomainmodelJavaValidator.java?root=Modeling_Project&view=co" target="_new">DomainmodelJavaValidator</a>) the diagnostic&rsquo;s 
+					<span class="emphasis"><em>code</em></span> is given by the last argument to the 
+					<code class="code">warning()</code> method and it is a reference to the static 
+					<code class="code">int</code> field 
+					<code class="code">INVALID_TYPE_NAME</code> in the validator class.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME);<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Now that the validation has a unique code identifying the problem we can register quickfixes against it. We start by adding the 
+					<code class="code">org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</code> to our workflow and after regenerating the code we should find an empty class 
+					<code class="code">MyDslQuickfixProvider</code> in our DSL&rsquo;s UI project.
+				</p>
+<p>Continuing with the 
+					<code class="code">INVALID_TYPE_NAME</code> problem from the Domainmodel example we add a method with which the problem can be fixed (see also 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel.ui/src/org/eclipse/xtext/example/quickfix/DomainmodelQuickfixProvider.java?root=Modeling_Project&view=co" target="_new">DomainmodelQuickfixProvider</a>):
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">
+<br>
+public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDeclarativeQuickfixProvider&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;@Fix(code&nbsp;=&nbsp;DomainmodelJavaValidator.INVALID_TYPE_NAME,&nbsp;label&nbsp;=&nbsp;"Capitalize&nbsp;name",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;=&nbsp;"Capitalize&nbsp;name&nbsp;of&nbsp;type")<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;fixName(Type&nbsp;type,&nbsp;IMarker&nbsp;marker)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;type.setName(type.getName().toUpperCase());<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>By using the correct signature (see below) and annotating the method with the 
+					<code class="code">Fix</code> annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
+				</p>
+<p>The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/quickfix/Fix.java?root=Modeling_Project&view=co" target="_new">Fix</a> annotation accepts the following arguments:
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>code</strong></span> - the code of the validation this fix is applicable to
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>label</strong></span> - the label text to display for this fix in the editor
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>description</strong></span> - the description to display for this fix
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<span class="bold"><strong>icon</strong></span> - the name of the icon file (in the UI plug-in&rsquo;s 
+							<code class="code">icons</code> directory) to display for this fix
+						</p>
+</li>
+</ul>
+</div>
+<p>In addition to the 
+					<code class="code">Fix</code> annotation our fix method also needs to have the correct signature: Its first argument needs to be of a type which is compatible with the type of the object the validation was created for (the validation&rsquo;s 
+					<span class="emphasis"><em>source</em></span>) and its second argument is of type 
+					<span class="emphasis"><em>IMarker</em></span>.
+				</p>
+<p>The fix method will be invoked inside a modification transaction and the first argument will be passed as the actual object the validation was created for and the second argument will be passed as the Eclipse marker that corresponds to the validation. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&rsquo;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed.</p>
+</div>
 <div class="section" title="Validation with the Check language">
 <div class="titlepage">
 <div>
@@ -3856,8 +3958,7 @@ entity&nbsp;Foo;<br>
 				<code class="code">IScopeProvider</code> is responsible for providing an 
 				<code class="code">IScope</code> for a given context 
 				<code class="code">EObject</code> and 
-				<code class="code">EReference</code> (declared or inherited by the object&rsquo;s 
-				<code class="code">EClass</code>). The returned 
+				<code class="code">EReference</code>. The returned 
 				<code class="code">IScope</code> should contain all target candidates for the given object and cross reference.
 			</p>
 <div class="literallayout">
@@ -3869,23 +3970,13 @@ entity&nbsp;Foo;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;provides&nbsp;access&nbsp;to&nbsp;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br>
 &nbsp;&nbsp;&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;a&nbsp;scope&nbsp;shall&nbsp;be&nbsp;computed<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;elements.<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.<br>
 &nbsp;&nbsp;&nbsp;*/<br>
 &nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br>
-
-<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;a&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;contains&nbsp;any&nbsp;visible,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;type-compatible&nbsp;element.<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;type&nbsp;the&nbsp;(super)type&nbsp;of&nbsp;the&nbsp;elements.<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;type.<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EClass&nbsp;type);<br>
+&nbsp;&nbsp;<br>
 }<br>
 
 <br>
@@ -4005,28 +4096,29 @@ entity&nbsp;Foo;<br>
 				<code class="code">Foo</code>. The linker will iterate the scope in that order and abort when it finds a matching 
 				<code class="code">ScopedElement</code>. 
 			</p>
-<div class="section" title="Declarative Scope Provider">
+<div class="section" title="DeclarativeScopeProvider">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="DeclarativeScopeProvider"></a>Declarative Scope Provider</h3>
+<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider"></a>
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">DeclarativeScopeProvider</a>
+				
+</h3>
 </div>
 </div>
 </div>
-<p>As always there is an implementation that allows to specify scoping in a declarative way (extend 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> for this purpose). It looks up methods which have either of the following two signatures:
-				</p>
+<p>As always there is an implementation that allows to specify scoping in a declarative way. It looks up methods which have either of the following two signatures:</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_&lt;ContextReference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+<code class="code">IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
@@ -4062,7 +4154,7 @@ entity&nbsp;Foo;<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
@@ -4070,13 +4162,50 @@ entity&nbsp;Foo;<br>
 <p>If no such method exists, the implementation will again try to find a method matching the context object&rsquo;s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
 </div>
 <p>This scope can now be used for any cross references of type 
 					<span class="emphasis"><em>State</em></span> for context objects owned by the state machine.
+				</p>
+<p>There are currently two different scope provider implmentations available which support these semantics:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p> 
+							
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> 
+						
+</p>
+</li>
+<li class="listitem">
+<p> 
+							
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>
+						
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" title="IndexBased Scoping">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="IndexBasedScoping"></a>IndexBased Scoping</h3>
+</div>
+</div>
+</div>
+<p>The index based scoping is based on qualified names and namespaces. As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
+					The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/IndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">IndexBasedScopeProvider</a> supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>.
+				</p>
+<p>See the JavaDocs and 
+					<a class="ulink" href="http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html" target="_new">this blog post</a> for details.
 				</p>
 </div>
 </div>

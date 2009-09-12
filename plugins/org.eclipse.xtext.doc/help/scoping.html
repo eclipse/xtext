@@ -15,8 +15,7 @@
 				<code class="code">IScopeProvider</code> is responsible for providing an 
 				<code class="code">IScope</code> for a given context 
 				<code class="code">EObject</code> and 
-				<code class="code">EReference</code> (declared or inherited by the object&rsquo;s 
-				<code class="code">EClass</code>). The returned 
+				<code class="code">EReference</code>. The returned 
 				<code class="code">IScope</code> should contain all target candidates for the given object and cross reference.
 			</p>
 <div class="literallayout">
@@ -28,23 +27,13 @@
 &nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;provides&nbsp;access&nbsp;to&nbsp;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br>
 &nbsp;&nbsp;&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;a&nbsp;scope&nbsp;shall&nbsp;be&nbsp;computed<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;elements.<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.<br>
 &nbsp;&nbsp;&nbsp;*/<br>
 &nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br>
-
-<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;a&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;contains&nbsp;any&nbsp;visible,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;type-compatible&nbsp;element.<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;type&nbsp;the&nbsp;(super)type&nbsp;of&nbsp;the&nbsp;elements.<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;type.<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;public&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EClass&nbsp;type);<br>
+&nbsp;&nbsp;<br>
 }<br>
 
 <br>
@@ -164,28 +153,29 @@ entity&nbsp;Foo;<br>
 				<code class="code">Foo</code>. The linker will iterate the scope in that order and abort when it finds a matching 
 				<code class="code">ScopedElement</code>. 
 			</p>
-<div class="section" title="Declarative Scope Provider">
+<div class="section" title="DeclarativeScopeProvider">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="DeclarativeScopeProvider"></a>Declarative Scope Provider</h3>
+<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider"></a>
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">DeclarativeScopeProvider</a>
+				
+</h3>
 </div>
 </div>
 </div>
-<p>As always there is an implementation that allows to specify scoping in a declarative way (extend 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> for this purpose). It looks up methods which have either of the following two signatures:
-				</p>
+<p>As always there is an implementation that allows to specify scoping in a declarative way. It looks up methods which have either of the following two signatures:</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_&lt;ContextReference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+<code class="code">IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
 </div>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
@@ -221,7 +211,7 @@ entity&nbsp;Foo;<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
@@ -229,13 +219,50 @@ entity&nbsp;Foo;<br>
 <p>If no such method exists, the implementation will again try to find a method matching the context object&rsquo;s container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EClass&nbsp;type)<br>
+<code class="code">IScope&nbsp;scope_State(StateMachine&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
 
 </code>
 </p>
 </div>
 <p>This scope can now be used for any cross references of type 
 					<span class="emphasis"><em>State</em></span> for context objects owned by the state machine.
+				</p>
+<p>There are currently two different scope provider implmentations available which support these semantics:</p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p> 
+							
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> 
+						
+</p>
+</li>
+<li class="listitem">
+<p> 
+							
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>
+						
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" title="IndexBased Scoping">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="IndexBasedScoping"></a>IndexBased Scoping</h3>
+</div>
+</div>
+</div>
+<p>The index based scoping is based on qualified names and namespaces. As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
+					The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/IndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">IndexBasedScopeProvider</a> supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>.
+				</p>
+<p>See the JavaDocs and 
+					<a class="ulink" href="http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html" target="_new">this blog post</a> for details.
 				</p>
 </div>
 </body>

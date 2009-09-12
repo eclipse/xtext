@@ -98,6 +98,7 @@
 <topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
 <topic href="help/validation.html#linking_validation" label="Crosslink Validation"></topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
+<topic href="help/validation.html#quickfixes" label="Quickfixes"></topic>
 <topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
@@ -108,7 +109,8 @@
 </topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
-<topic href="help/scoping.html#DeclarativeScopeProvider" label="Declarative Scope Provider"></topic>
+<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider" label="DeclarativeScopeProvider"></topic>
+<topic href="help/scoping.html#IndexBasedScoping" label="IndexBased Scoping"></topic>
 </topic>
 <topic href="help/valueconverter.html" label="Value Converter">
 <topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"></topic>

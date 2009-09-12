@@ -81,7 +81,7 @@ bc.. Scope (model.dsl) {
 
 p. When enumerating the scope's content, the first, most specialized scope would return @Bar@, its parent would provide @Stuff@ and the outermost scope adds @Foo@. The linker will iterate the scope in that order and abort when it finds a matching @ScopedElement@. 
 
-h3. Declarative Scope Provider
+h3. ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DeclarativeScopeProvider}
 
 As always there is an implementation that allows to specify scoping in a declarative way. It looks up methods which have either of the following two signatures:
 
@@ -112,12 +112,12 @@ This scope can now be used for any cross references of type _State_ for context 
 There are currently two different scope provider implmentations available which support these semantics:
 
 #  ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider} 
-#  ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.AbstractDeclarativeIndexBasedScopeProvider}
+#  ${org.eclipse.xtext/src/org.eclipse.xtext.index.AbstractDeclarativeIndexBasedScopeProvider}
 
 h3. IndexBased Scoping
 
 The index based scoping is based on qualified names and namespaces. As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
-The ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.IndexBasedScopeProvider} supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass ${org.eclipse.xtext/src/org.eclipse.xtext.index.impl.AbstractDeclarativeIndexBasedScopeProvider}.
+The ${org.eclipse.xtext/src/org.eclipse.xtext.index.IndexBasedScopeProvider} supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass ${org.eclipse.xtext/src/org.eclipse.xtext.index.AbstractDeclarativeIndexBasedScopeProvider}.
 
 See the JavaDocs and "this blog post":http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html for details.
 

@@ -12,6 +12,8 @@ h2(#breaking_changes_08). Changes in Xtext 0.8.0
 * org.eclipse.xtext.ui.core.editor.IXtextResourceChecker -> org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker
 * org.eclipse.xtext.ui.core.editor.DefaultXtextResourceChecker -> org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker
 
+*Removed IScopeProvider.getScope(EObject,EClass)*
+
 
 
 
