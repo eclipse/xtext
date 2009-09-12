@@ -40,7 +40,7 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
 import com.google.inject.Binder;
@@ -110,7 +110,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return DefaultScopeProvider.class;
+		return SimpleNameScopeProvider.class;
 	}
 
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {

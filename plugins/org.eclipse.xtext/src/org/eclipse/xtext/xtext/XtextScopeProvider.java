@@ -30,9 +30,9 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
-import org.eclipse.xtext.scoping.impl.ScopedElements;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -42,7 +42,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextScopeProvider extends DefaultScopeProvider {
+public class XtextScopeProvider extends SimpleNameScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -131,7 +131,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	protected IScope createScope(final Grammar grammar, EClass type, IScope parent) {
-		return new SimpleScope(parent, ScopedElements.allInResource(grammar.eResource(), type, SimpleAttributeResolver.NAME_RESOLVER));
+		return new SimpleScope(parent, Scopes.allInResource(grammar.eResource(), type, SimpleAttributeResolver.NAME_RESOLVER));
 	}
 
 	private List<Grammar> getAllGrammars(Grammar grammar) {

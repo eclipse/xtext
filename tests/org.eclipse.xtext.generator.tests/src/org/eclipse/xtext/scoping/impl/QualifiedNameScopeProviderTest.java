@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.index;
+package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.filter;
 
@@ -17,19 +17,18 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.index.IndexBasedScopeProvider.DefaultImportNormalizer;
+import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.impl.QualifiedNameBasedScopeProvider.DefaultImportNormalizer;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -39,16 +38,16 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
+public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 
-	private IndexBasedScopeProvider scopeProvider;
+	private QualifiedNameBasedScopeProvider scopeProvider;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
 
-		scopeProvider = new IndexBasedScopeProvider();
+		scopeProvider = new QualifiedNameBasedScopeProvider();
 		scopeProvider.setIndexStore(index);
 		scopeProvider.setNameProvider(nameProvider);
 	}
@@ -244,6 +243,8 @@ public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 	}
 	
 	public void testLocalElementsNotFromIndex2() throws Exception {
+		// no index
+		scopeProvider.setIndexStore(null);
 		final XtextResource resource = getResource(new StringInputStream(
 				"A { " +
 				"  B { " +
@@ -253,7 +254,7 @@ public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 				"E {" +
 				"  datatype Context" +
 				"}"), URI.createURI("foo23.indextestlanguage"));
-		indexResource(resource);
+
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
@@ -264,11 +265,12 @@ public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 		do {
 			for (IScopedElement ele : scope.getContents()) {
 				if (ele.name().equals("A.B.D")) {
-					assertFalse(ele instanceof IndexBasedScopedElement);
+					return;
 				}
 			}
 			scope = scope.getOuterScope();
 		} while (scope!=IScope.NULLSCOPE);
+		fail("'A.B.D' expected.");
 	}
 	
 	public void testImportsWithoutWildcard() throws Exception {
@@ -351,18 +353,6 @@ public class IndexBasedScopeProviderTest extends AbstractIndexBasedTest {
 		}
 		result+=toString(scope.getOuterScope(),indent+" ")+"\n";
 		return result+indent+"}\n";
-	}
-
-	public void testLazyGlobalIndexAccess() throws Exception {
-		scopeProvider.setIndexStore(null);
-		IScope scope = scopeProvider.getScope(EcoreFactory.eINSTANCE.createEObject(), EcorePackage.Literals.EOBJECT);
-		assertNotNull(scope);
-		try {
-			scope.getAllContents();
-			fail("NullPointerException expected");
-		}
-		catch (NullPointerException e) {
-		}
 	}
 
 	private List<String> toListOfNames(Iterable<IScopedElement> elements) {

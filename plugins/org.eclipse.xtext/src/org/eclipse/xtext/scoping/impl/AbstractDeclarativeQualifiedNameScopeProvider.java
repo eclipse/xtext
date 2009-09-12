@@ -5,12 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.index;
+package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.DeclarativeScopeProvider;
 
 import com.google.inject.Inject;
 
@@ -20,13 +19,13 @@ import com.google.inject.Inject;
  * </p>
  * <p>
  * If no polymorphic signature can be found for the given EObject and EReference this implementation calls
- * {@link IndexBasedScopeProvider#getScope(EObject, EReference)}
+ * {@link QualifiedNameBasedScopeProvider#getScope(EObject, EReference)}
  * 
  * </p>
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractDeclarativeIndexBasedScopeProvider extends IndexBasedScopeProvider {
+public abstract class AbstractDeclarativeQualifiedNameScopeProvider extends QualifiedNameBasedScopeProvider {
 	
 	@Inject
 	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);

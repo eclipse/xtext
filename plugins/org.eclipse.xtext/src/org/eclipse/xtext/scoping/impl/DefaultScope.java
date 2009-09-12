@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
 
@@ -31,7 +32,7 @@ public class DefaultScope extends SimpleScope {
 	}
 	
 	public DefaultScope(Resource resource, EClass type, Function<EObject, String> importResolver, Function<EObject, String> nameResolver) {
-		super(createParent(resource.getAllContents(), type, resource, importResolver, nameResolver), ScopedElements.allInResource(resource,type,nameResolver));
+		super(createParent(resource.getAllContents(), type, resource, importResolver, nameResolver), Scopes.allInResource(resource,type,nameResolver));
 	}
 
 
@@ -55,7 +56,7 @@ public class DefaultScope extends SimpleScope {
 	static class LazyReferencedResourceScope extends SimpleScope {
 
 		public LazyReferencedResourceScope(IScope parent, EClass type, Resource context, String uri, Function<EObject, String> nameFunc) {
-			super(parent, ScopedElements.allInResource(ImportUriUtil.getResource(context, uri), type, nameFunc));
+			super(parent, Scopes.allInResource(ImportUriUtil.getResource(context, uri), type, nameFunc));
 		}
 
 	}

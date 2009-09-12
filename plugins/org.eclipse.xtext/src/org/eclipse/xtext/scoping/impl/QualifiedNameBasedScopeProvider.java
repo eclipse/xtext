@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.index;
+package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.transform;
@@ -32,13 +32,10 @@ import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.emf.emfindex.util.Descriptors;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.AliasedScopedElement;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
@@ -51,7 +48,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class IndexBasedScopeProvider extends AbstractScopeProvider {
+public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -118,9 +115,9 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		return nameProvider;
 	}
 
-	@Inject
 	private Index indexStore;
 
+	@Inject(optional=true)
 	public void setIndexStore(Index indexStore) {
 		this.indexStore = indexStore;
 	}
@@ -284,21 +281,23 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope getGlobalScope(final EObject context, final EClass type) {
+		if (getIndexStore()==null)
+			return IScope.NULLSCOPE;
 		return new SimpleScope(null) {
 
 			@Override
 			public Iterable<IScopedElement> getContents() {
-				return indexStore.executeQueryCommand(new ConvertAll(context, type));
+				return getIndexStore().executeQueryCommand(new ConvertAll(context, type));
 			}
 
 			@Override
 			public IScopedElement getContentByName(String name) {
-				return indexStore.executeQueryCommand(new FindByName(context, type, name));
+				return getIndexStore().executeQueryCommand(new FindByName(context, type, name));
 			}
 
 			@Override
 			public IScopedElement getContentByEObject(EObject object) {
-				return indexStore.executeQueryCommand(new FindByEObject(context, type, object));
+				return getIndexStore().executeQueryCommand(new FindByEObject(context, type, object));
 			}
 		};
 	}
