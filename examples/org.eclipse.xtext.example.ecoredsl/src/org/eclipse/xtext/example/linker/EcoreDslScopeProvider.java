@@ -23,7 +23,7 @@ import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class EcoreDslScopeProvider extends DefaultScopeProvider {
+public class EcoreDslScopeProvider extends SimpleNameScopeProvider {
 
 	@Inject
 	private IValueConverterService valueConverterService;

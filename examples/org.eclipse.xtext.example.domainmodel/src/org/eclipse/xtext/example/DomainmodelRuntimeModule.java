@@ -6,9 +6,9 @@ package org.eclipse.xtext.example;
 import org.eclipse.emf.emfindex.Index;
 import org.eclipse.emf.emfindex.MemoryIndexImpl;
 import org.eclipse.xtext.example.scoping.DomainmodelScopeProvider;
-import org.eclipse.xtext.index.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.index.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider;
 
 import com.google.inject.Provider;
 
