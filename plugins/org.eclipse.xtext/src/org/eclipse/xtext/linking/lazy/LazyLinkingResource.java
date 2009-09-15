@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,6 +31,8 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class LazyLinkingResource extends XtextResource {
+	
+	private final Logger log = Logger.getLogger(getClass());
 	
 	@Inject
 	private ILinkingService linkingService;
@@ -84,6 +87,9 @@ public class LazyLinkingResource extends XtextResource {
 			}
 		} catch (RuntimeException e) { 
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
+			// logged because EcoreUtil.resolve will ignore any exceptions.
+			if (log.isInfoEnabled())
+				log.info("resolution of uriFragment '"+uriFragment+"' failed.", e);
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);

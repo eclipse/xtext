@@ -8,7 +8,6 @@
 package org.eclipse.xtext.linking.impl;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -56,22 +55,21 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 
 	/**
-	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed {@link LeafNode}
+	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed
+	 *         {@link LeafNode}
 	 */
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node)
+			throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
 		final IScope scope = getScope(context, ref);
-		final Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
 		final String s = getCrossRefNodeAsString(node);
 		if (s != null) {
-			while (iterator.hasNext()) {
-				final IScopedElement element = iterator.next();
-				if (s.equals(element.name()))
-					return Collections.singletonList(element.element());
-			}
+			IScopedElement scopedElement = scope.getContentByName(s);
+			if (scopedElement != null)
+				return Collections.singletonList(scopedElement.element());
 		}
 		return Collections.emptyList();
 	}
@@ -87,13 +85,14 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		else {
 			StringBuilder builder = new StringBuilder(node.getLength());
 			boolean hiddenSeen = false;
-			for(LeafNode leaf: node.getLeafNodes()) {
+			for (LeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
 					if (hiddenSeen && builder.length() > 0)
 						builder.append(' ');
 					builder.append(leaf.getText());
 					hiddenSeen = false;
-				} else {
+				}
+				else {
 					hiddenSeen = true;
 				}
 			}
@@ -109,13 +108,15 @@ public class DefaultLinkingService extends AbstractLinkingService {
 				return convertMe;
 			Object result = valueConverter.toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
-		} catch(ValueConverterException ex) {
+		}
+		catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);
 		}
 	}
 
 	/**
-	 * @param grammarElement may be any crossreferencable element, i.e. a keyword or a rulecall
+	 * @param grammarElement
+	 *            may be any crossreferencable element, i.e. a keyword or a rulecall
 	 */
 	protected String getRuleNameFrom(EObject grammarElement) {
 		if (!(grammarElement instanceof Keyword || grammarElement instanceof RuleCall || grammarElement instanceof CrossReference))
@@ -130,8 +131,8 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 
 	/**
-	 * @return the name of the first {@link IScopedElement} returned from the
-	 * injected {@link IScopeProvider} for the passed object {@link EObject}
+	 * @return the name of the first {@link IScopedElement} returned from the injected {@link IScopeProvider} for the
+	 *         passed object {@link EObject}
 	 */
 	public String getLinkText(EObject object, EReference reference, EObject context) {
 		String unconverted = getUnconvertedLinkText(object, reference, context);
@@ -144,7 +145,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
-		IScopedElement scopedElement = getScopedElement(scope,object);
+		IScopedElement scopedElement = getScopedElement(scope, object);
 		if (scopedElement != null) {
 			return scopedElement.name();
 		}
@@ -183,8 +184,8 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			rule = ((RuleCall) contextGrammarElement).getRule();
 		if (rule != null) {
 			List<CrossReference> xreferences = EcoreUtil2.getAllContentsOfType(rule, CrossReference.class);
-			for(CrossReference xref: xreferences) {
-				if (((EClass)xref.getType().getClassifier()).isSuperTypeOf(object.eClass())) {
+			for (CrossReference xref : xreferences) {
+				if (((EClass) xref.getType().getClassifier()).isSuperTypeOf(object.eClass())) {
 					Assignment assignment = GrammarUtil.containingAssignment(xref);
 					if (assignment != null && assignment.getFeature().equals(reference.getName())) {
 						AbstractElement xrefTerminal = xref.getTerminal();
@@ -205,7 +206,8 @@ public class DefaultLinkingService extends AbstractLinkingService {
 				int index = ((List<? extends EObject>) context.eGet(reference, false)).indexOf(object);
 				if (index >= 0 && index < nodes.size())
 					return getCrossRefNodeAsString(nodes.get(index), false);
-			} else {
+			}
+			else {
 				return getCrossRefNodeAsString(nodes.get(0), false);
 			}
 		}
