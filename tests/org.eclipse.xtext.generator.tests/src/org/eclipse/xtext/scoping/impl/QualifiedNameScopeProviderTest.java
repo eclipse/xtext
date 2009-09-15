@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
@@ -28,7 +27,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.scoping.impl.QualifiedNameBasedScopeProvider.DefaultImportNormalizer;
+import org.eclipse.xtext.scoping.impl.QualifiedNameBasedScopeProvider.ImportNormalizer;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -104,10 +103,8 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 		
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getDatatype());
-		List<String> names = toListOfNames(scope.getAllContents());
-		assertEquals(names.toString(), 2, names.size());
-		assertTrue(names.contains("baz.String"));
-		assertTrue(names.contains("stuff.baz.String"));
+		assertNotNull(scope.getContentByName("baz.String"));
+		assertNotNull(scope.getContentByName("stuff.baz.String"));
 	}
 	
 	public void testRelativePath() throws Exception {
@@ -128,11 +125,9 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 		
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getDatatype());
-		List<String> names = toListOfNames(scope.getAllContents());
-		assertEquals(names.toString(), 3, names.size());
-		assertTrue(names.contains("String"));
-		assertTrue(names.contains("baz.String"));
-		assertTrue(names.contains("stuff.baz.String"));
+		assertNotNull(scope.getContentByName("String"));
+		assertNotNull(scope.getContentByName("baz.String"));
+		assertNotNull(scope.getContentByName("stuff.baz.String"));
 	}
 	
 	public void testReexports() throws Exception {
@@ -211,11 +206,9 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		List<String> names = toListOfNames(scope.getAllContents());
-		assertEquals(toString(scope, ""), 3, names.size());
-		assertTrue(names.toString(),names.contains("D"));
-		assertTrue(names.toString(),names.contains("E.D"));
-		assertTrue(names.toString(),names.contains("A.B.D"));
+		assertNotNull(scope.getContentByName("D"));
+		assertNotNull(scope.getContentByName("E.D"));
+		assertNotNull(scope.getContentByName("A.B.D"));
 	}
 	
 	public void testLocalElementsNotFromIndex() throws Exception {
@@ -235,11 +228,7 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		for (IScopedElement ele : scope.getAllContents()) {
-			if (ele.name().equals("A.B.D"))
-				return;
-		}
-		fail("No entity 'A.B.D' found");
+		assertNotNull(scope.getContentByName("A.B.D"));
 	}
 	
 	public void testLocalElementsNotFromIndex2() throws Exception {
@@ -262,15 +251,7 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		do {
-			for (IScopedElement ele : scope.getContents()) {
-				if (ele.name().equals("A.B.D")) {
-					return;
-				}
-			}
-			scope = scope.getOuterScope();
-		} while (scope!=IScope.NULLSCOPE);
-		fail("'A.B.D' expected.");
+		assertNotNull(scope.getContentByName("A.B.D"));
 	}
 	
 	public void testImportsWithoutWildcard() throws Exception {
@@ -295,11 +276,7 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		assertEquals("Foo", foo.getName());
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		for (IScopedElement ele : scope.getAllContents()) {
-			if (ele.name().equals("Bar"))
-				return;
-		}
-		fail("No entity 'Bar' found");
+		assertNotNull(scope.getContentByName("Bar"));
 	}
 	
 	public void testMultipleFiles() throws Exception {
@@ -329,32 +306,28 @@ public class QualifiedNameScopeProviderTest extends AbstractIndexBasedTest {
 		assertEquals("Foo", foo.getName());
 		
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getEntity());
-		for (IScopedElement ele : scope.getAllContents()) {
-			if (ele.name().equals("Bar"))
-				return;
-		}
-		fail("No entity 'Bar' found");
+		assertNotNull(scope.getContentByName("Bar"));
 	}
 	
-	public void testDefaultImportNormalizer() throws Exception {
-		DefaultImportNormalizer normalizer = new DefaultImportNormalizer(Lists.newArrayList("foo","Bar"),new DefaultDeclarativeQualifiedNameProvider());
-		assertEquals("foo.Bar",normalizer.apply("Bar"));
+	public void testImportNormalizer() throws Exception {
+		ImportNormalizer normalizer = new ImportNormalizer(Lists.newArrayList("foo","Bar"),new DefaultDeclarativeQualifiedNameProvider());
+		assertEquals("foo.Bar",normalizer.shortToLongName("Bar"));
+		assertEquals("Bar",normalizer.longToShortName("foo.Bar"));
+		assertNull(normalizer.longToShortName("foo.Baz"));
+		assertNull(normalizer.shortToLongName("Baz"));
+	}
+	
+	public void testImportNormalizerWithWildCard() throws Exception {
+		ImportNormalizer normalizer = new ImportNormalizer(Lists.newArrayList("foo","bar","*"),new DefaultDeclarativeQualifiedNameProvider());
+		assertEquals("Bar",normalizer.longToShortName("foo.bar.Bar"));
+		assertEquals("foo.bar.Bar",normalizer.shortToLongName("Bar"));
+		assertNull(normalizer.longToShortName("foo.Baz"));
+		assertEquals("foo.bar.bar.Baz",normalizer.shortToLongName("bar.Baz"));
 	}
 	
 	
 	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 	
-	private String toString(IScope scope, String indent) {
-		if (scope==IScope.NULLSCOPE)
-			return indent+"{NULLSCOPE}";
-		String result = indent+"{\n";
-		for (IScopedElement e : scope.getContents()) {
-			result+= indent+e.name()+" ("+(((InternalEObject)e.element()).eIsProxy()?((InternalEObject)e.element()).eProxyURI(): nameProvider.getQualifiedName(e.element()))+")\n";
-		}
-		result+=toString(scope.getOuterScope(),indent+" ")+"\n";
-		return result+indent+"}\n";
-	}
-
 	private List<String> toListOfNames(Iterable<IScopedElement> elements) {
 		List<String> result = new ArrayList<String>();
 		for (IScopedElement e : elements) {
