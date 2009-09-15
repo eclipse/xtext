@@ -56,10 +56,12 @@ public abstract class AbstractScope implements IScope {
 	}
 
 	public IScopedElement getContentByName(String name) {
+		if (name==null)
+			throw new NullPointerException("name");
 		Iterator<IScopedElement> allContents = getAllContents().iterator();
 		while (allContents.hasNext()) {
 			IScopedElement element = allContents.next();
-			if (element.name().equals(name)) 
+			if (name.equals(element.name())) 
 				return element;
 		}
 		return null;

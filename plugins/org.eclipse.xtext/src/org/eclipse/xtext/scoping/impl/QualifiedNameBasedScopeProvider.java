@@ -54,12 +54,12 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	public static class DefaultImportNormalizer implements Function<String, String> {
+	public static class ImportNormalizer {
 		private final List<String> elements;
 		private IQualifiedNameProvider nameProvider;
 		private boolean isWildCard;
 
-		public DefaultImportNormalizer(List<String> importedNamespace, IQualifiedNameProvider nameProvider) {
+		public ImportNormalizer(List<String> importedNamespace, IQualifiedNameProvider nameProvider) {
 			this.elements = importedNamespace;
 			this.isWildCard = nameProvider.getWildcard().equals(lastElement(importedNamespace));
 			this.nameProvider = nameProvider;
@@ -69,7 +69,21 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			return importedNamespace.get(importedNamespace.size() - 1);
 		}
 
-		public String apply(String from) {
+		public String shortToLongName(String shortName) {
+			if (!isWildCard) {
+				if (elements.get(elements.size() - 1).equals(shortName)) {
+					return Strings.concat(nameProvider.getDelimiter(), elements);
+				}
+			} else {
+				List<String> withoutWildCard = elements.subList(0, elements.size()-1);
+				ArrayList<String> concatenated = new ArrayList<String>(withoutWildCard);
+				concatenated.add(shortName);
+				return Strings.concat(nameProvider.getDelimiter(), concatenated);
+			}
+			return null;
+		}
+
+		public String longToShortName(String from) {
 			if (!isWildCard) {
 				if (lastElement(elements).equals(from)) {
 					return Strings.concat(nameProvider.getDelimiter(), elements);
@@ -110,18 +124,18 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
-	
+
 	public IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
 	}
 
 	private Index indexStore;
 
-	@Inject(optional=true)
+	@Inject(optional = true)
 	public void setIndexStore(Index indexStore) {
 		this.indexStore = indexStore;
 	}
-	
+
 	public Index getIndexStore() {
 		return indexStore;
 	}
@@ -137,22 +151,19 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		if (context.eContainer() == null) {
 			// global scope
 			result = getGlobalScope(context, type);
-			result = getResourceSetScope(result,context, type);
+			result = getResourceSetScope(result, context, type);
 			result = getResourceScope(result, context, type);
-		} else {
+		}
+		else {
 			// outer scope
 			result = getScope(context.eContainer(), type);
 		}
 
-		IScope importScopeConfiguration = result;
 		// local scope used by the import scope
-		if (nameProvider.getQualifiedName(context) != null) {
-			importScopeConfiguration = getLocalElements(result, context, type);
-		}
-		// imports
-		Iterable<IScopedElement> importedElements = getImportedElements(importScopeConfiguration, context, type);
-		if (importedElements != null) {
-			result = new SimpleScope(result, importedElements);
+		if (hasImports(context)) {
+			IScope localElements = getLocalElements(result, context, type);
+			// imports
+			result = getImportedElements(result, localElements, context, type);
 		}
 		// local scope
 		if (nameProvider.getQualifiedName(context) != null) {
@@ -161,8 +172,12 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		return result;
 	}
 
+	protected boolean hasImports(final EObject context) {
+		return !getImportNormalizer(context).isEmpty();
+	}
+
 	protected IScope getResourceSetScope(final IScope parent, final EObject context, final EClass type) {
-		if (context.eResource()==null || context.eResource().getResourceSet()==null)
+		if (context.eResource() == null || context.eResource().getResourceSet() == null)
 			return parent;
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -172,9 +187,9 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		Iterable<EObject> filtered = Iterables.filter(contents, EObject.class);
 		return createScopeWithQualifiedNames(parent, type, filtered);
 	}
-	
+
 	protected IScope getResourceScope(IScope parent, final EObject context, final EClass type) {
-		if (context.eResource()==null)
+		if (context.eResource() == null)
 			return parent;
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -183,10 +198,10 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		};
 		return createScopeWithQualifiedNames(parent, type, contents);
 	}
-	
+
 	protected IScope getLocalElements(IScope parent, final EObject context, final EClass type) {
 		final String commonPrefix = nameProvider.getQualifiedName(context) + nameProvider.getDelimiter();
-		
+
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return EcoreUtil.getAllProperContents(context, true);
@@ -195,7 +210,7 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		// filter by type
 		contents = filter(contents, typeFilter(type));
 		// transform to IScopedElements
-		Iterable<IScopedElement> scopedElements = Scopes.scopedElementsFor(contents,new Function<EObject, String>() {
+		Iterable<IScopedElement> scopedElements = Scopes.scopedElementsFor(contents, new Function<EObject, String>() {
 			public String apply(EObject from) {
 				String name = nameProvider.getQualifiedName(from);
 				if (name != null && name.startsWith(commonPrefix))
@@ -204,13 +219,11 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			}
 		});
 		// filter null values;
-		return new SimpleScope(parent,filter(scopedElements, Predicates.notNull()));
+		return new SimpleScope(parent, filter(scopedElements, Predicates.notNull()));
 	}
 
+	protected IScope createScopeWithQualifiedNames(final IScope parent, final EClass type, Iterable<EObject> eObjects) {
 
-	protected IScope createScopeWithQualifiedNames(final IScope parent, final EClass type,
-			Iterable<EObject> eObjects) {
-		
 		eObjects = filter(eObjects, typeFilter(type));
 
 		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
@@ -235,8 +248,8 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		};
 	}
 
-	protected Set<Function<String, String>> getImportNormalizer(EObject context) {
-		Set<Function<String, String>> namespaceImports = new HashSet<Function<String, String>>();
+	protected Set<ImportNormalizer> getImportNormalizer(EObject context) {
+		Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
 				"importedNamespace");
 		for (EObject child : context.eContents()) {
@@ -249,20 +262,19 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		return namespaceImports;
 	}
 
-	protected DefaultImportNormalizer createImportNormalizer(final List<String> elements) {
-		return new DefaultImportNormalizer(elements, nameProvider);
+	protected ImportNormalizer createImportNormalizer(final List<String> elements) {
+		return new ImportNormalizer(elements, nameProvider);
 	}
 
-	protected Iterable<IScopedElement> getImportedElements(IScope local, final EObject context, final EClass type) {
-		final Set<Function<String, String>> normalizers = getImportNormalizer(context);
-		if (normalizers.isEmpty())
-			return null;
-		Iterable<IScopedElement> transformed = transform(local.getAllContents(),
+	protected IScope getImportedElements(IScope parent, final IScope localElements, final EObject context, final EClass type) {
+		final Set<ImportNormalizer> normalizers = getImportNormalizer(context);
+
+		Iterable<IScopedElement> transformed = transform(localElements.getAllContents(),
 				new Function<IScopedElement, IScopedElement>() {
 
 					public IScopedElement apply(final IScopedElement input) {
-						for (Function<String, String> normalizer : normalizers) {
-							final String newName = normalizer.apply(input.name());
+						for (ImportNormalizer normalizer : normalizers) {
+							final String newName = normalizer.longToShortName(input.name());
 							if (newName != null) {
 								return new AliasedScopedElement(newName, input);
 							}
@@ -270,7 +282,18 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 						return null;
 					}
 				});
-		return filter(transformed, Predicates.notNull());
+		return new SimpleScope(parent, filter(transformed, Predicates.notNull())) {
+
+			@Override
+			public IScopedElement getContentByName(String name) {
+				for (ImportNormalizer normalizer : normalizers) {
+					IScopedElement element = localElements.getContentByName(normalizer.shortToLongName(name));
+					if (element!=null)
+						return element;
+				}
+				return null; 
+			}
+		};
 	}
 
 	protected EObject createProxy(EObjectDescriptor from) {
@@ -281,7 +304,7 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope getGlobalScope(final EObject context, final EClass type) {
-		if (getIndexStore()==null)
+		if (getIndexStore() == null)
 			return IScope.NULLSCOPE;
 		return new SimpleScope(null) {
 
