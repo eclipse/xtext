@@ -131,3 +131,7 @@ h3. Running the generator
 In order to invoke the generator, select @EntitiesGenerator.mwe@ (in @org.xtext.example.start.generator/src/workflow/@) and choose _Run As -> MWE Workflow_ from the context menu. You'll see a bunch of log messages in the console view, and after a few seconds, you'll find a number of just generated files in @org.xtext.example.entity.generator/src-gen@.
 
 Please note that you'll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.
+
+h2. Where next?
+
+This is the end of the "Getting Started" chapter of this documentation. The next part of this document is more detailed and compact at he same time. It discusses technical topics not always in an introductory way but acts as a comprehensive reference. You will find more material that introduces Xtext at the "Xtext website":http://www.xtext.org .
