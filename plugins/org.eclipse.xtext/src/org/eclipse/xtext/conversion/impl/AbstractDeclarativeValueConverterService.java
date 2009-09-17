@@ -61,9 +61,6 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 			if(isConfigurationMethod(method)) {
 				try {
 					String lexerRule = method.getAnnotation(ValueConverter.class).rule();
-					if (converters.containsKey(lexerRule)) {
-						log.info("value converter for lexer rule "+lexerRule+ " in class "+clazz.getSimpleName()+" has been overwritten.");
-					}
 					converters.put(lexerRule, (IValueConverter<Object>) method.invoke(this));
 					
 				} catch (Exception e) {
