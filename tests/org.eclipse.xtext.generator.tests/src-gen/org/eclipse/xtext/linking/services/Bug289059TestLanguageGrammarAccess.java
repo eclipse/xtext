@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class Bug289059TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -57,7 +57,7 @@ public class Bug289059TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getReferenceModelIDTerminalRuleCall_2_0_1() { return cReferenceModelIDTerminalRuleCall_2_0_1; }
 	}
 
-	public class UnassignedActionElements implements IParserRuleAccess {
+	public class UnassignedActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedAction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnassignedActionAction_0 = (Action)cGroup.eContents().get(0);

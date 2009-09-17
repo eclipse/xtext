@@ -100,7 +100,7 @@
           <groups xsi:type="xtext:Keyword" value="ROT"/>
           <groups xsi:type="xtext:Keyword" value="BLAU"/>
           <groups xsi:type="xtext:Keyword" value="GELB"/>
-          <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
+          <groups xsi:type="xtext:Keyword" value="GR&#x2039;N"/>
         </terminal>
       </alternatives>
     </rules>

@@ -34,15 +34,15 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 «FOREACH allUsedGrammars().reject(g|g.rules.typeSelect(ParserRule).isEmpty && !usedGrammars.contains(g)) AS usedGrammar-»
 import «usedGrammar.gaFQName()»;
 «ENDFOREACH-»
 
 @Singleton
-public class «gaSimpleName()» implements IGrammarAccess {
+public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 	
 	«EXPAND parseRuleClasses FOREACH rules.typeSelect(ParserRule)-»
 	
@@ -84,7 +84,7 @@ public class «gaSimpleName()» implements IGrammarAccess {
 
 
 «DEFINE parseRuleClasses FOR ParserRule»
-	public class «gaRuleAccesorClassName()» implements IParserRuleAccess {
+	public class «gaRuleAccesorClassName()» extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
@@ -100,7 +100,7 @@ public class «gaSimpleName()» implements IGrammarAccess {
 «ENDDEFINE»
 
 «DEFINE parseRuleClasses FOR EnumRule»
-	public class «gaRuleAccesorClassName()» implements IEnumRuleAccess {
+	public class «gaRuleAccesorClassName()» extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;

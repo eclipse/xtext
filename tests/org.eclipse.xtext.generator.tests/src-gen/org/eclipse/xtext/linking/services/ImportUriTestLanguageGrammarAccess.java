@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
+public class ImportUriTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class MainElements implements IParserRuleAccess {
+	public class MainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Main");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypesTypeParserRuleCall_1_0() { return cTypesTypeParserRuleCall_1_0; }
 	}
 
-	public class ImportElements implements IParserRuleAccess {
+	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -69,7 +69,7 @@ public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);

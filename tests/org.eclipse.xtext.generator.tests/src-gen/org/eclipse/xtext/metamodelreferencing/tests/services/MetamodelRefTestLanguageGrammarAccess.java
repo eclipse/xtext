@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
+public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class FooElements implements IParserRuleAccess {
+	public class FooElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameRefsNameRefParserRuleCall_1_0() { return cNameRefsNameRefParserRuleCall_1_0; }
 	}
 
-	public class NameRefElements implements IParserRuleAccess {
+	public class NameRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameRef");
 		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cRuleParserRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
@@ -65,7 +65,7 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getRuleParserRuleIDTerminalRuleCall_0_1() { return cRuleParserRuleIDTerminalRuleCall_0_1; }
 	}
 
-	public class MyRuleElements implements IParserRuleAccess {
+	public class MyRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyRule");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);

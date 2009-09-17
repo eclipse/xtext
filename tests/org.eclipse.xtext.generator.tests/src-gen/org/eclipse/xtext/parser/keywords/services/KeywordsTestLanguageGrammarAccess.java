@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
+public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cFirstAssignment_0 = (Assignment)cAlternatives.eContents().get(0);

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class GrammarAccessTestLanguageGrammarAccess implements IGrammarAccess {
+public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootElements implements IParserRuleAccess {
+	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsTypeParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class GrammarAccessTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getElementsTypeParserRuleCall_0() { return cElementsTypeParserRuleCall_0; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cATypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -53,7 +53,7 @@ public class GrammarAccessTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAnotherTypeParserRuleCall_1() { return cAnotherTypeParserRuleCall_1; }
 	}
 
-	public class ATypeElements implements IParserRuleAccess {
+	public class ATypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFooKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -73,7 +73,7 @@ public class GrammarAccessTestLanguageGrammarAccess implements IGrammarAccess {
 		public Action getATypeAction_1() { return cATypeAction_1; }
 	}
 
-	public class AnotherTypeElements implements IParserRuleAccess {
+	public class AnotherTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnotherType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cBarKeyword_0 = (Keyword)cGroup.eContents().get(0);

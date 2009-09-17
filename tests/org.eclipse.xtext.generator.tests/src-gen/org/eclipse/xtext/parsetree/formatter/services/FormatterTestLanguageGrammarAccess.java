@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
+public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootElements implements IParserRuleAccess {
+	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTestIndentationParserRuleCall_1_1() { return cTestIndentationParserRuleCall_1_1; }
 	}
 
-	public class LineElements implements IParserRuleAccess {
+	public class LineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Line");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -85,7 +85,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
-	public class DeclElements implements IParserRuleAccess {
+	public class DeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Decl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -113,7 +113,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
-	public class AssignElements implements IParserRuleAccess {
+	public class AssignElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assign");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVarAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -185,7 +185,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
 
-	public class MethElements implements IParserRuleAccess {
+	public class MethElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Meth");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVoidKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -245,7 +245,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
-	public class ParamElements implements IParserRuleAccess {
+	public class ParamElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Param");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -277,7 +277,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypeIDTerminalRuleCall_2_0() { return cTypeIDTerminalRuleCall_2_0; }
 	}
 
-	public class TestLinewrapElements implements IParserRuleAccess {
+	public class TestLinewrapElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrap");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLinewrapKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -301,7 +301,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getItemsLineParserRuleCall_1_0() { return cItemsLineParserRuleCall_1_0; }
 	}
 
-	public class TestIndentationElements implements IParserRuleAccess {
+	public class TestIndentationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestIndentation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cIndentationKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -353,7 +353,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
 
-	public class FqnObjElements implements IParserRuleAccess {
+	public class FqnObjElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnObj");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFqnKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -377,7 +377,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 	}
 
-	public class FQNElements implements IParserRuleAccess {
+	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -405,7 +405,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 
-	public class FqnRefElements implements IParserRuleAccess {
+	public class FqnRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFqnrefKeyword_0 = (Keyword)cGroup.eContents().get(0);

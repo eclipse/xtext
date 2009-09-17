@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
+public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Assignment cTypesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypesTypeParserRuleCall_0() { return cTypesTypeParserRuleCall_0; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -157,7 +157,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
-	public class PropertyElements implements IParserRuleAccess {
+	public class PropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Property");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -193,7 +193,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class UnresolvedProxyPropertyElements implements IParserRuleAccess {
+	public class UnresolvedProxyPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnresolvedProxyProperty");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cUnresolvedKeyword_0 = (Keyword)cGroup.eContents().get(0);

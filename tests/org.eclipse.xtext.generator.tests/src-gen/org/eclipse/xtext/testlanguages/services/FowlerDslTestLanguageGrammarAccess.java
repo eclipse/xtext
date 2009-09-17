@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
+public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class StatemachineElements implements IParserRuleAccess {
+	public class StatemachineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statemachine");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEventsKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -69,7 +69,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getStatesStateParserRuleCall_6_0() { return cStatesStateParserRuleCall_6_0; }
 	}
 
-	public class EventElements implements IParserRuleAccess {
+	public class EventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Event");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cResettingAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -105,7 +105,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCodeIDTerminalRuleCall_2_0() { return cCodeIDTerminalRuleCall_2_0; }
 	}
 
-	public class CommandElements implements IParserRuleAccess {
+	public class CommandElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Command");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -133,7 +133,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCodeIDTerminalRuleCall_1_0() { return cCodeIDTerminalRuleCall_1_0; }
 	}
 
-	public class StateElements implements IParserRuleAccess {
+	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -198,7 +198,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getEndKeyword_4() { return cEndKeyword_4; }
 	}
 
-	public class TransitionElements implements IParserRuleAccess {
+	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEventAssignment_0 = (Assignment)cGroup.eContents().get(0);

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class UnassignedRuleCallTestLanguageGrammarAccess implements IGrammarAccess {
+public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getModelFeaturesModelFeaturesParserRuleCall_2_0() { return cModelFeaturesModelFeaturesParserRuleCall_2_0; }
 	}
 
-	public class ModelFeaturesElements implements IParserRuleAccess {
+	public class ModelFeaturesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelFeatures");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFeatureKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -77,7 +77,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess implements IGrammarAcce
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class DataTypeRuleElements implements IParserRuleAccess {
+	public class DataTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class TestLanguageGrammarAccess implements IGrammarAccess {
+public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class EntryRuleElements implements IParserRuleAccess {
+	public class EntryRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryRule");
 		private final Assignment cMultiFeatureAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cMultiFeatureAbstractRuleParserRuleCall_0 = (RuleCall)cMultiFeatureAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getMultiFeatureAbstractRuleParserRuleCall_0() { return cMultiFeatureAbstractRuleParserRuleCall_0; }
 	}
 
-	public class AbstractRuleElements implements IParserRuleAccess {
+	public class AbstractRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cChoiceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -53,7 +53,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getReducibleRuleParserRuleCall_1() { return cReducibleRuleParserRuleCall_1; }
 	}
 
-	public class ChoiceRuleElements implements IParserRuleAccess {
+	public class ChoiceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChoiceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChoiceKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -85,7 +85,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class ReducibleRuleElements implements IParserRuleAccess {
+	public class ReducibleRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReducibleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cReducibleKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -123,7 +123,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getActionFeatureTerminalRuleParserRuleCall_2_1_0() { return cActionFeatureTerminalRuleParserRuleCall_2_1_0; }
 	}
 
-	public class TerminalRuleElements implements IParserRuleAccess {
+	public class TerminalRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TerminalRule");
 		private final Assignment cStringFeatureAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cStringFeatureSTRINGTerminalRuleCall_0 = (RuleCall)cStringFeatureAssignment.eContents().get(0);

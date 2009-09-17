@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess {
+public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class SpielplatzElements implements IParserRuleAccess {
+	public class SpielplatzElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Spielplatz");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSpielplatzKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -95,7 +95,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
-	public class PersonElements implements IParserRuleAccess {
+	public class PersonElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Person");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cKindParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -115,7 +115,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		public RuleCall getErwachsenerParserRuleCall_1() { return cErwachsenerParserRuleCall_1; }
 	}
 
-	public class KindElements implements IParserRuleAccess {
+	public class KindElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Kind");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKindKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -155,7 +155,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
-	public class ErwachsenerElements implements IParserRuleAccess {
+	public class ErwachsenerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Erwachsener");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cErwachsenerKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -195,7 +195,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
-	public class SpielzeugElements implements IParserRuleAccess {
+	public class SpielzeugElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Spielzeug");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSpielzeugKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -235,23 +235,23 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
-	public class FarbeElements implements IParserRuleAccess {
+	public class FarbeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Farbe");
 		private final Assignment cWertAssignment = (Assignment)rule.eContents().get(1);
 		private final Alternatives cWertAlternatives_0 = (Alternatives)cWertAssignment.eContents().get(0);
 		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
 		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
-		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
+		private final Keyword cWertGRNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
-		//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
+		//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
 		public ParserRule getRule() { return rule; }
 
-		//wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
+		//wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" )
 		public Assignment getWertAssignment() { return cWertAssignment; }
 
-		//"ROT"|"BLAU"|"GELB"|"GR\u00DCN"
+		//"ROT"|"BLAU"|"GELB"|"GR\u2039N"
 		public Alternatives getWertAlternatives_0() { return cWertAlternatives_0; }
 
 		//"ROT"
@@ -263,11 +263,11 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		//"GELB"
 		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
 
-		//"GR\u00DCN"
-		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
+		//"GR\u2039N"
+		public Keyword getWertGRNKeyword_0_3() { return cWertGRNKeyword_0_3; }
 	}
 
-	public class FamilieElements implements IParserRuleAccess {
+	public class FamilieElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Familie");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFamilieKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -451,7 +451,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 	}
 
 	//Farbe:
-	//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
+	//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
 	public FarbeElements getFarbeAccess() {
 		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
 	}

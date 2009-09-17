@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
+public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class OpElements implements IParserRuleAccess {
+	public class OpElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Op");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -49,7 +49,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValuesTermParserRuleCall_1_1_0() { return cValuesTermParserRuleCall_1_1_0; }
 	}
 
-	public class TermElements implements IParserRuleAccess {
+	public class TermElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -141,7 +141,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getMultiInheritanceBug280439ParserRuleCall_18() { return cMultiInheritanceBug280439ParserRuleCall_18; }
 	}
 
-	public class AtomElements implements IParserRuleAccess {
+	public class AtomElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
@@ -157,7 +157,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class ParensElements implements IParserRuleAccess {
+	public class ParensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -189,7 +189,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getEmExclamationMarkKeyword_3_0() { return cEmExclamationMarkKeyword_3_0; }
 	}
 
-	public class TwoNumbersElements implements IParserRuleAccess {
+	public class TwoNumbersElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoNumbers");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNum1Assignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -233,7 +233,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNum3INTTerminalRuleCall_2_1_0() { return cNum3INTTerminalRuleCall_2_1_0; }
 	}
 
-	public class ManyStringsElements implements IParserRuleAccess {
+	public class ManyStringsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ManyStrings");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -265,7 +265,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getStr2STRINGTerminalRuleCall_2_0() { return cStr2STRINGTerminalRuleCall_2_0; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -305,7 +305,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getExtendsTypeIDTerminalRuleCall_3_0_1() { return cExtendsTypeIDTerminalRuleCall_3_0_1; }
 	}
 
-	public class Ref2Elements implements IParserRuleAccess {
+	public class Ref2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Ref2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -341,7 +341,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRef2Mykeyword2Keyword_1_0_2() { return cRef2Mykeyword2Keyword_1_0_2; }
 	}
 
-	public class SpareElements implements IParserRuleAccess {
+	public class SpareElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Spare");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -381,7 +381,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getIdIDTerminalRuleCall_2_1_0() { return cIdIDTerminalRuleCall_2_1_0; }
 	}
 
-	public class BooleanElements implements IParserRuleAccess {
+	public class BooleanElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Boolean");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -417,7 +417,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueIDTerminalRuleCall_3_0() { return cValueIDTerminalRuleCall_3_0; }
 	}
 
-	public class Transient1Elements implements IParserRuleAccess {
+	public class Transient1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transient1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -481,7 +481,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getScaleINTTerminalRuleCall_2_1_1_0() { return cScaleINTTerminalRuleCall_2_1_1_0; }
 	}
 
-	public class Consumed1Elements implements IParserRuleAccess {
+	public class Consumed1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -549,7 +549,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getV1INTTerminalRuleCall_1_1_2_0() { return cV1INTTerminalRuleCall_1_1_2_0; }
 	}
 
-	public class Consumed2Elements implements IParserRuleAccess {
+	public class Consumed2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -573,7 +573,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getChildConsumed1ParserRuleCall_1_0() { return cChildConsumed1ParserRuleCall_1_0; }
 	}
 
-	public class Loop1Elements implements IParserRuleAccess {
+	public class Loop1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw0Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -625,7 +625,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getKw30Keyword_5_1() { return cKw30Keyword_5_1; }
 	}
 
-	public class Loop2Elements implements IParserRuleAccess {
+	public class Loop2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -709,7 +709,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getKw6Keyword_4_1() { return cKw6Keyword_4_1; }
 	}
 
-	public class Loop3Elements implements IParserRuleAccess {
+	public class Loop3Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -769,7 +769,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getKw5Keyword_3_2() { return cKw5Keyword_3_2; }
 	}
 
-	public class Loop4Elements implements IParserRuleAccess {
+	public class Loop4Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -837,7 +837,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getKw7Keyword_3_1_1() { return cKw7Keyword_3_1_1; }
 	}
 
-	public class LoopBug285452Elements implements IParserRuleAccess {
+	public class LoopBug285452Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LoopBug285452");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -877,7 +877,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class DuplicateBug284491Elements implements IParserRuleAccess {
+	public class DuplicateBug284491Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DuplicateBug284491");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -921,7 +921,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getTransientTransientKeyword_1_2_0() { return cTransientTransientKeyword_1_2_0; }
 	}
 
-	public class EmptyObjectBug284850Elements implements IParserRuleAccess {
+	public class EmptyObjectBug284850Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectBug284850");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -945,7 +945,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getItemsEmptyObjectItemsParserRuleCall_1_0() { return cItemsEmptyObjectItemsParserRuleCall_1_0; }
 	}
 
-	public class EmptyObjectItemsElements implements IParserRuleAccess {
+	public class EmptyObjectItemsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItems");
 		private final Assignment cListAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cListEmptyObjectItemParserRuleCall_0 = (RuleCall)cListAssignment.eContents().get(0);
@@ -961,7 +961,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getListEmptyObjectItemParserRuleCall_0() { return cListEmptyObjectItemParserRuleCall_0; }
 	}
 
-	public class EmptyObjectItemElements implements IParserRuleAccess {
+	public class EmptyObjectItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItem");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cItemKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -985,7 +985,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
-	public class MultiInheritanceBug280439Elements implements IParserRuleAccess {
+	public class MultiInheritanceBug280439Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiInheritanceBug280439");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -1009,7 +1009,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValConcreteMultiParserRuleCall_1_0() { return cValConcreteMultiParserRuleCall_1_0; }
 	}
 
-	public class AbstractMulti1Elements implements IParserRuleAccess {
+	public class AbstractMulti1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti1");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -1033,7 +1033,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getM1IDTerminalRuleCall_1_0() { return cM1IDTerminalRuleCall_1_0; }
 	}
 
-	public class AbstractMulti2Elements implements IParserRuleAccess {
+	public class AbstractMulti2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti2");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -1057,7 +1057,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getM2IDTerminalRuleCall_1_0() { return cM2IDTerminalRuleCall_1_0; }
 	}
 
-	public class ConcreteMultiElements implements IParserRuleAccess {
+	public class ConcreteMultiElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteMulti");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cM1Assignment_0 = (Assignment)cGroup.eContents().get(0);

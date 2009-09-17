@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
+public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class EPatchElements implements IParserRuleAccess {
+	public class EPatchElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPatch");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEpatchKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -75,7 +75,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
-	public class ImportElements implements IParserRuleAccess {
+	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cModelImportParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -99,7 +99,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getExtensionImportParserRuleCall_2() { return cExtensionImportParserRuleCall_2; }
 	}
 
-	public class ModelImportElements implements IParserRuleAccess {
+	public class ModelImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelImport");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cResourceImportParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -119,7 +119,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getEPackageImportParserRuleCall_1() { return cEPackageImportParserRuleCall_1; }
 	}
 
-	public class ResourceImportElements implements IParserRuleAccess {
+	public class ResourceImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ResourceImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -155,7 +155,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getUriSTRINGTerminalRuleCall_3_0() { return cUriSTRINGTerminalRuleCall_3_0; }
 	}
 
-	public class EPackageImportElements implements IParserRuleAccess {
+	public class EPackageImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPackageImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -191,7 +191,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNsURISTRINGTerminalRuleCall_3_0() { return cNsURISTRINGTerminalRuleCall_3_0; }
 	}
 
-	public class JavaImportElements implements IParserRuleAccess {
+	public class JavaImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JavaImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -235,7 +235,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getPathIDTerminalRuleCall_3_1_0() { return cPathIDTerminalRuleCall_3_1_0; }
 	}
 
-	public class ExtensionImportElements implements IParserRuleAccess {
+	public class ExtensionImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtensionImport");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -279,7 +279,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getPathIDTerminalRuleCall_3_1_0() { return cPathIDTerminalRuleCall_3_1_0; }
 	}
 
-	public class NamedResourceElements implements IParserRuleAccess {
+	public class NamedResourceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedResource");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cResourceKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -385,7 +385,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 
-	public class NamedObjectElements implements IParserRuleAccess {
+	public class NamedObjectElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedObject");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cObjectRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -405,7 +405,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCreatedObjectParserRuleCall_1() { return cCreatedObjectParserRuleCall_1; }
 	}
 
-	public class ObjectRefElements implements IParserRuleAccess {
+	public class ObjectRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cObjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -582,7 +582,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_3_4() { return cRightCurlyBracketKeyword_3_4; }
 	}
 
-	public class AssignmentElements implements IParserRuleAccess {
+	public class AssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBiSingleAssignmentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -610,7 +610,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getMonoListAssignmentParserRuleCall_3() { return cMonoListAssignmentParserRuleCall_3; }
 	}
 
-	public class BiSingleAssignmentElements implements IParserRuleAccess {
+	public class BiSingleAssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BiSingleAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -660,7 +660,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
-	public class BiListAssignmentElements implements IParserRuleAccess {
+	public class BiListAssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BiListAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -760,7 +760,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
-	public class MonoSingleAssignmentElements implements IParserRuleAccess {
+	public class MonoSingleAssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MonoSingleAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -796,7 +796,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class MonoListAssignmentElements implements IParserRuleAccess {
+	public class MonoListAssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MonoListAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -862,7 +862,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
-	public class AssignmentValueElements implements IParserRuleAccess {
+	public class AssignmentValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
@@ -968,7 +968,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImpFragFRAGMENTTerminalRuleCall_3_1_0() { return cImpFragFRAGMENTTerminalRuleCall_3_1_0; }
 	}
 
-	public class ListAssignmentValueElements implements IParserRuleAccess {
+	public class ListAssignmentValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ListAssignmentValue");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cIndexAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1113,7 +1113,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImpFragFRAGMENTTerminalRuleCall_2_4_1_0() { return cImpFragFRAGMENTTerminalRuleCall_2_4_1_0; }
 	}
 
-	public class SingleAssignmentValueElements implements IParserRuleAccess {
+	public class SingleAssignmentValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleAssignmentValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cKeywordAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
@@ -1227,7 +1227,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImpFragFRAGMENTTerminalRuleCall_4_1_0() { return cImpFragFRAGMENTTerminalRuleCall_4_1_0; }
 	}
 
-	public class CreatedObjectElements implements IParserRuleAccess {
+	public class CreatedObjectElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CreatedObject");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -1302,7 +1302,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
 	}
 
-	public class ObjectNewElements implements IParserRuleAccess {
+	public class ObjectNewElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectNew");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNewKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -1338,7 +1338,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImpFragFRAGMENTTerminalRuleCall_2_0() { return cImpFragFRAGMENTTerminalRuleCall_2_0; }
 	}
 
-	public class ObjectCopyElements implements IParserRuleAccess {
+	public class ObjectCopyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ObjectCopy");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCopyKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -1374,7 +1374,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getFragmentFRAGMENTTerminalRuleCall_2_0() { return cFragmentFRAGMENTTerminalRuleCall_2_0; }
 	}
 
-	public class MigrationElements implements IParserRuleAccess {
+	public class MigrationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Migration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMigrateKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -1440,7 +1440,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class ExecutableElements implements IParserRuleAccess {
+	public class ExecutableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Executable");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cJavaExecutableParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -1460,7 +1460,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getExpressionExecutableParserRuleCall_1() { return cExpressionExecutableParserRuleCall_1; }
 	}
 
-	public class JavaExecutableElements implements IParserRuleAccess {
+	public class JavaExecutableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JavaExecutable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cJavaKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -1492,7 +1492,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
-	public class ExpressionExecutableElements implements IParserRuleAccess {
+	public class ExpressionExecutableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionExecutable");
 		private final Assignment cExprstrAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cExprstrSTRINGTerminalRuleCall_0 = (RuleCall)cExprstrAssignment.eContents().get(0);

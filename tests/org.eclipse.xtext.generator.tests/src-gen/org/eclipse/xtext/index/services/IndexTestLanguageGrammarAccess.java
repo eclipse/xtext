@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
+public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class FileElements implements IParserRuleAccess {
+	public class FileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
 
-	public class ImportElements implements IParserRuleAccess {
+	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -57,7 +57,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
 	}
 
-	public class QualifiedNameWithWildCardElements implements IParserRuleAccess {
+	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildCard");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -77,7 +77,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
 	}
 
-	public class QualifiedNameElements implements IParserRuleAccess {
+	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -105,7 +105,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 
-	public class NamespaceElements implements IParserRuleAccess {
+	public class NamespaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Namespace");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -141,7 +141,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
-	public class ElementElements implements IParserRuleAccess {
+	public class ElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNamespaceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -165,7 +165,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEntityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -185,7 +185,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getDatatypeParserRuleCall_1() { return cDatatypeParserRuleCall_1; }
 	}
 
-	public class EntityElements implements IParserRuleAccess {
+	public class EntityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entity");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEntityKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -225,7 +225,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class DatatypeElements implements IParserRuleAccess {
+	public class DatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -249,7 +249,7 @@ public class IndexTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
-	public class PropertyElements implements IParserRuleAccess {
+	public class PropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Property");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);

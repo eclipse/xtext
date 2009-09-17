@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -131,7 +131,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAttributesActionAttributeParserRuleCall_5_1_0() { return cAttributesActionAttributeParserRuleCall_5_1_0; }
 	}
 
-	public class BaseAttributeElements implements IParserRuleAccess {
+	public class BaseAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BaseAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -199,7 +199,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class AttributeElements implements IParserRuleAccess {
+	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cAttributeAction_0 = (Action)cGroup.eContents().get(0);
@@ -219,7 +219,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getAttributeKeyword_1() { return cAttributeKeyword_1; }
 	}
 
-	public class MasterElements implements IParserRuleAccess {
+	public class MasterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Master");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMasterAction_0 = (Action)cGroup.eContents().get(0);
@@ -239,7 +239,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getMasterKeyword_1() { return cMasterKeyword_1; }
 	}
 
-	public class ActionAttributeElements implements IParserRuleAccess {
+	public class ActionAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActionAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -325,7 +325,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class SimpleAttributeElements implements IParserRuleAccess {
+	public class SimpleAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
@@ -381,7 +381,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class RuleCallAttributeElements implements IParserRuleAccess {
+	public class RuleCallAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCallMeParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -409,7 +409,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class CallMeElements implements IParserRuleAccess {
+	public class CallMeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallMe");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -449,7 +449,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypeIDTerminalRuleCall_1_0() { return cTypeIDTerminalRuleCall_1_0; }
 	}
 
-	public class RuleCallAttribute2Elements implements IParserRuleAccess {
+	public class RuleCallAttribute2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallAttribute2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCallMe2ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -501,7 +501,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class CallMe2Elements implements IParserRuleAccess {
+	public class CallMe2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallMe2");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
@@ -517,7 +517,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class RuleCallAttribute3Elements implements IParserRuleAccess {
+	public class RuleCallAttribute3Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallAttribute3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCallMe3ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -569,7 +569,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class CallMe3Elements implements IParserRuleAccess {
+	public class CallMe3Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallMe3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCallKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -593,7 +593,7 @@ public class Bug287988TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCallMe4ParserRuleCall_2() { return cCallMe4ParserRuleCall_2; }
 	}
 
-	public class CallMe4Elements implements IParserRuleAccess {
+	public class CallMe4Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallMe4");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);

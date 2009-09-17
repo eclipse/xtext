@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
+public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -110,7 +110,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getObjectMultiDatatypeParserRuleCall_1_1_0_3() { return cObjectMultiDatatypeParserRuleCall_1_1_0_3; }
 	}
 
-	public class SingleValueElements implements IParserRuleAccess {
+	public class SingleValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -178,7 +178,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueSTRINGTerminalRuleCall_2_1_0() { return cValueSTRINGTerminalRuleCall_2_1_0; }
 	}
 
-	public class MultiValueElements implements IParserRuleAccess {
+	public class MultiValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -246,7 +246,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueSTRINGTerminalRuleCall_2_1_0() { return cValueSTRINGTerminalRuleCall_2_1_0; }
 	}
 
-	public class SingleDatatypeElements implements IParserRuleAccess {
+	public class SingleDatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleDatatype");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -316,7 +316,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueStringDatatypeParserRuleCall_2_1_0() { return cValueStringDatatypeParserRuleCall_2_1_0; }
 	}
 
-	public class MultiDatatypeElements implements IParserRuleAccess {
+	public class MultiDatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiDatatype");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -386,7 +386,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueStringDatatypeParserRuleCall_2_1_0() { return cValueStringDatatypeParserRuleCall_2_1_0; }
 	}
 
-	public class IdDatatypeElements implements IParserRuleAccess {
+	public class IdDatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IdDatatype");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
@@ -398,7 +398,7 @@ public class AssignmentsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
 	}
 
-	public class StringDatatypeElements implements IParserRuleAccess {
+	public class StringDatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringDatatype");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		

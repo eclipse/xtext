@@ -8,15 +8,15 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 
 @Singleton
-public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
+public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cWithoutHiddensParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -48,7 +48,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getDatatypeHiddensParserRuleCall_4() { return cDatatypeHiddensParserRuleCall_4; }
 	}
 
-	public class WithoutHiddensElements implements IParserRuleAccess {
+	public class WithoutHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithoutHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWithoutKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -92,7 +92,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_4_0() { return cValidSemicolonKeyword_4_0; }
 	}
 
-	public class WithHiddensElements implements IParserRuleAccess {
+	public class WithHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -120,7 +120,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
 
-	public class OverridingHiddensElements implements IParserRuleAccess {
+	public class OverridingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOverridingKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -164,7 +164,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
 
-	public class OverridingHiddensCallElements implements IParserRuleAccess {
+	public class OverridingHiddensCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCallKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -196,7 +196,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
 
-	public class InheritingHiddensElements implements IParserRuleAccess {
+	public class InheritingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInheritingKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -254,7 +254,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
 
-	public class DatatypeHiddensElements implements IParserRuleAccess {
+	public class DatatypeHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -278,7 +278,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getValidDatatypeRuleParserRuleCall_1_0() { return cValidDatatypeRuleParserRuleCall_1_0; }
 	}
 
-	public class DatatypeRuleElements implements IParserRuleAccess {
+	public class DatatypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -298,7 +298,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
-	public class HidingHiddensElements implements IParserRuleAccess {
+	public class HidingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HidingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHidingKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -330,7 +330,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getCalledInheritingHiddensCallParserRuleCall_2_0() { return cCalledInheritingHiddensCallParserRuleCall_2_0; }
 	}
 
-	public class InheritingHiddensCallElements implements IParserRuleAccess {
+	public class InheritingHiddensCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCallKeyword_0 = (Keyword)cGroup.eContents().get(0);
