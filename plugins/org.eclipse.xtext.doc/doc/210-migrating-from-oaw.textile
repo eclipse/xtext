@@ -224,7 +224,7 @@ This section provides an overview of new possibilities with TMF Xtext compared t
 
 h3. Dependency Injection with Google Guice
 
-Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of TMF Xtext are wired using "Google Guice":http://code.google.com/p/google-guice  and can easily replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
+Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of TMF Xtext are wired using "Google Guice":http://code.google.com/p/google-guice  and can easily be replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
 
 h3. Improvements on Grammar Level
 
@@ -232,7 +232,7 @@ The Xtext grammar language introduces some new features, too. Read the chapter "
 
 "Grammar mixins":#grammarMixins allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the Ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
  
-In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_COMMENT and WS (whitespace) were hard coded into the grammar language and couldn't be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar @org.eclipse.xtext.common.Terminals@ per default. This means that they are still there but reside in a libraries now. You don't have to use them and you can come up with your own set of reusable rules. 
+In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_COMMENT and WS (whitespace) were hard coded into the grammar language and couldn't be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar @org.eclipse.xtext.common.Terminals@ per default. This means that they are still there but reside in a library now. You don't have to use them and you can come up with your own set of reusable rules. 
 
 "Reusing existing Ecore models":#grammarImport in oAW Xtext didn't work well and we communicated this by flagging this feature as 'experimental'. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
 

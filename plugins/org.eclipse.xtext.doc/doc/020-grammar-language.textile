@@ -279,7 +279,7 @@ This is the rule for Java-style comments that begin with '/*' and end with '*/'.
 
 h5. Negated Token
 
-All the tokens explained above can be inverted using a preceding explanation mark:
+All the tokens explained above can be inverted using a preceding exclamation mark:
 
 bc. terminal ML_COMMENT	: '/*' (!'*/')+;
 
@@ -457,7 +457,7 @@ For instance, the following is not allowed in LL based grammars, because "Expres
 
 bc.. Expression :
   Expression '+' Expression |
-  '(' Expression ')'
+  '(' Expression ')' |
   INT
 ;
 

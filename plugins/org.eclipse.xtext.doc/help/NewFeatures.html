@@ -22,7 +22,7 @@
 </div>
 </div>
 <p>Beyond the mentioned architectural overhaul that carve out separate concerns in a meaningful way these different classes of TMF Xtext are wired using 
-					<a class="ulink" href="http://code.google.com/p/google-guice" target="_new">Google Guice</a>  and can easily replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
+					<a class="ulink" href="http://code.google.com/p/google-guice" target="_new">Google Guice</a>  and can easily be replaced by or combined with your own implementation. We could have foreseen some common needs for adaption but with this mechanism you can virtually change every aspect of Xtext without duplicating an unmanageable amount of code.
 				</p>
 </div>
 <div class="section" title="Improvements on Grammar Level">
@@ -42,7 +42,7 @@
 <a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar mixins</a> allow you to extend existing languages and change their concrete and abstract syntax. However the abstract syntax (i.e. the Ecore model) can only be extended. This allows you to reuse existing validations, code generators, interpreters or other code which has been written against those types.
 				</p>
 <p>In oAW Xtext common terminals like ID, INT, STRING, ML_COMMENT, SL_COMMENT and WS (whitespace) were hard coded into the grammar language and couldn&rsquo;t be removed and hardly overridden. In TMF Xtext these terminals are imported through the newly introduced grammar mixin mechanism from the shipped grammar 
-					<code class="code">org.eclipse.xtext.common.Terminals</code> per default. This means that they are still there but reside in a libraries now. You don&rsquo;t have to use them and you can come up with your own set of reusable rules. 
+					<code class="code">org.eclipse.xtext.common.Terminals</code> per default. This means that they are still there but reside in a library now. You don&rsquo;t have to use them and you can come up with your own set of reusable rules. 
 				</p>
 <p>
 					
