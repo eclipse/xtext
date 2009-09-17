@@ -35,7 +35,7 @@ public class ParseTreeConstructorUtil {
 
 	public static List<AbstractElement> calcRootFollowers(Grammar g) {
 		List<AbstractElement> callees = new ArrayList<AbstractElement>();
-		for (AbstractRule r : g.getRules())
+		for (AbstractRule r : GrammarUtil.allRules(g))
 			if (r instanceof ParserRule) {
 				ParserRule pr = (ParserRule) r;
 				if (!GrammarUtil.isDatatypeRule(pr))
