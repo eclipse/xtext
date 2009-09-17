@@ -45,6 +45,9 @@ protected class ThisRootNode extends RootToken {
 			case 7: return new Subrule2_Group(this, this, 7, inst);
 			case 8: return new Subrule3_Group(this, this, 8, inst);
 			case 9: return new CallExtendedParserRule_CallAssignment(this, this, 9, inst);
+			case 10: return new InheritedParserRule_Group(this, this, 10, inst);
+			case 11: return new AbstractCallOverridenParserRule_Group(this, this, 11, inst);
+			case 12: return new AbstractCallExtendedParserRule_Group(this, this, 12, inst);
 			default: return null;
 		}	
 	}	
