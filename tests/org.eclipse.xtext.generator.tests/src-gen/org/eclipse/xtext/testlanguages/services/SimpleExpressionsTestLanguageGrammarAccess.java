@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAccess {
+public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class SequenceElements implements IParserRuleAccess {
+	public class SequenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Sequence");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -49,7 +49,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getExpressionsAdditionParserRuleCall_1_1_0() { return cExpressionsAdditionParserRuleCall_1_1_0; }
 	}
 
-	public class AdditionElements implements IParserRuleAccess {
+	public class AdditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -97,7 +97,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getValuesMultiplicationParserRuleCall_1_2_0() { return cValuesMultiplicationParserRuleCall_1_2_0; }
 	}
 
-	public class MultiplicationElements implements IParserRuleAccess {
+	public class MultiplicationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -145,7 +145,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getValuesTermParserRuleCall_1_2_0() { return cValuesTermParserRuleCall_1_2_0; }
 	}
 
-	public class TermElements implements IParserRuleAccess {
+	public class TermElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -165,7 +165,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getParensParserRuleCall_1() { return cParensParserRuleCall_1; }
 	}
 
-	public class AtomElements implements IParserRuleAccess {
+	public class AtomElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
@@ -181,7 +181,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class ParensElements implements IParserRuleAccess {
+	public class ParensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);

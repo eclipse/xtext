@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
+public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cCaseInsensitiveKeywordRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -50,7 +50,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCommonTerminalsRuleParserRuleCall_4() { return cCommonTerminalsRuleParserRuleCall_4; }
 	}
 
-	public class CaseInsensitiveKeywordRuleElements implements IParserRuleAccess {
+	public class CaseInsensitiveKeywordRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeywordRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCaseInsensitiveKeywordTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -74,7 +74,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValINTTerminalRuleCall_1_0() { return cValINTTerminalRuleCall_1_0; }
 	}
 
-	public class PluralRuleElements implements IParserRuleAccess {
+	public class PluralRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PluralRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContentsKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -102,7 +102,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getPluralTerminalRuleCall_2() { return cPluralTerminalRuleCall_2; }
 	}
 
-	public class MultiRuleElements implements IParserRuleAccess {
+	public class MultiRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMultiKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -138,7 +138,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getMultiTerminalRuleCall_4() { return cMultiTerminalRuleCall_4; }
 	}
 
-	public class DatatypeRuleElements implements IParserRuleAccess {
+	public class DatatypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -166,7 +166,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getDatatypeParserRuleCall_2() { return cDatatypeParserRuleCall_2; }
 	}
 
-	public class DatatypeElements implements IParserRuleAccess {
+	public class DatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cStrKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
@@ -190,7 +190,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getDatatype2ParserRuleCall_2() { return cDatatype2ParserRuleCall_2; }
 	}
 
-	public class Datatype2Elements implements IParserRuleAccess {
+	public class Datatype2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype2");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
@@ -202,7 +202,7 @@ public class UnassignedTextTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
 	}
 
-	public class CommonTerminalsRuleElements implements IParserRuleAccess {
+	public class CommonTerminalsRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CommonTerminalsRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTerminalsKeyword_0 = (Keyword)cGroup.eContents().get(0);

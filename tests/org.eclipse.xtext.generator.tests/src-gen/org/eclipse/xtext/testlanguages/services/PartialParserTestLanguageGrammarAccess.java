@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
+public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class SomeContainerElements implements IParserRuleAccess {
+	public class SomeContainerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SomeContainer");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContainerKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -69,7 +69,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class NestedElements implements IParserRuleAccess {
+	public class NestedElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Nested");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNestedKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -101,7 +101,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
-	public class ContentElements implements IParserRuleAccess {
+	public class ContentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Content");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cChildrenParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -121,7 +121,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAbstractChildrenParserRuleCall_1() { return cAbstractChildrenParserRuleCall_1; }
 	}
 
-	public class ChildrenElements implements IParserRuleAccess {
+	public class ChildrenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Children");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChildrenKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -169,7 +169,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class ChildElements implements IParserRuleAccess {
+	public class ChildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -205,7 +205,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
-	public class AbstractChildrenElements implements IParserRuleAccess {
+	public class AbstractChildrenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChildren");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAbstractChildrenKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -237,7 +237,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
-	public class AbstractChildElements implements IParserRuleAccess {
+	public class AbstractChildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChild");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFirstConcreteParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -257,7 +257,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSecondConcreteParserRuleCall_1() { return cSecondConcreteParserRuleCall_1; }
 	}
 
-	public class FirstConcreteElements implements IParserRuleAccess {
+	public class FirstConcreteElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -305,7 +305,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
-	public class SecondConcreteElements implements IParserRuleAccess {
+	public class SecondConcreteElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -357,7 +357,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 	}
 
-	public class NamedElements implements IParserRuleAccess {
+	public class NamedElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Named");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class Bug287184TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -65,7 +65,7 @@ public class Bug287184TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getDetailAssociatedDetailParserRuleCall_2_0_1() { return cDetailAssociatedDetailParserRuleCall_2_0_1; }
 	}
 
-	public class AbstractDetailElements implements IParserRuleAccess {
+	public class AbstractDetailElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractDetail");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDetailParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -85,7 +85,7 @@ public class Bug287184TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAssociatedDetailParserRuleCall_1() { return cAssociatedDetailParserRuleCall_1; }
 	}
 
-	public class DetailElements implements IParserRuleAccess {
+	public class DetailElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Detail");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cDocAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -143,7 +143,7 @@ public class Bug287184TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getDetailClassModelFQNParserRuleCall_3_0_1() { return cDetailClassModelFQNParserRuleCall_3_0_1; }
 	}
 
-	public class AssociatedDetailElements implements IParserRuleAccess {
+	public class AssociatedDetailElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssociatedDetail");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAssociatedKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -183,7 +183,7 @@ public class Bug287184TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class FQNElements implements IParserRuleAccess {
+	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);

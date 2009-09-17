@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAccess {
+public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cTestAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
@@ -45,7 +45,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getTestParenthesisParserRuleCall_1_0() { return cTestParenthesisParserRuleCall_1_0; }
 	}
 
-	public class ParenthesisElements implements IParserRuleAccess {
+	public class ParenthesisElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parenthesis");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -69,7 +69,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 
-	public class TestElements implements IParserRuleAccess {
+	public class TestElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Test");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTwoRequiredParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -93,7 +93,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getIndentParserRuleCall_2() { return cIndentParserRuleCall_2; }
 	}
 
-	public class TwoRequiredElements implements IParserRuleAccess {
+	public class TwoRequiredElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTworequiredKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -125,7 +125,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getTwoIDTerminalRuleCall_2_0() { return cTwoIDTerminalRuleCall_2_0; }
 	}
 
-	public class TwoOptionsElements implements IParserRuleAccess {
+	public class TwoOptionsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoOptions");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTwooptionsKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -177,7 +177,7 @@ public class SerializationErrorTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getTwoIDTerminalRuleCall_1_1_1_0() { return cTwoIDTerminalRuleCall_1_1_1_0; }
 	}
 
-	public class IndentElements implements IParserRuleAccess {
+	public class IndentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Indent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);

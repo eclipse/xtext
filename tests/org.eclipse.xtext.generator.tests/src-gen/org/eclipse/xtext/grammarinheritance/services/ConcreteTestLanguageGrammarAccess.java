@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 
 @Singleton
-public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
+public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootRuleElements implements IParserRuleAccess {
+	public class RootRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RootRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConcreteParserRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -57,7 +57,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getOverridableParserRule2ParserRuleCall_3() { return cOverridableParserRule2ParserRuleCall_3; }
 	}
 
-	public class ConcreteParserRuleElements implements IParserRuleAccess {
+	public class ConcreteParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -99,7 +99,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getElementsInheritedParserRuleParserRuleCall_3_0() { return cElementsInheritedParserRuleParserRuleCall_3_0; }
 	}
 
-	public class OverridableParserRuleElements implements IParserRuleAccess {
+	public class OverridableParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridableParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOverriddenelementKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -125,7 +125,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
-	public class CallOverridenParserRuleElements implements IParserRuleAccess {
+	public class CallOverridenParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallOverridenParserRule");
 		private final Assignment cCallAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cCallAbstractCallOverridenParserRuleParserRuleCall_0 = (RuleCall)cCallAssignment.eContents().get(0);
@@ -146,7 +146,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCallAbstractCallOverridenParserRuleParserRuleCall_0() { return cCallAbstractCallOverridenParserRuleParserRuleCall_0; }
 	}
 
-	public class OverridableParserRule2Elements implements IParserRuleAccess {
+	public class OverridableParserRule2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridableParserRule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOverriddenOtherElementKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -188,7 +188,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAgeINTTerminalRuleCall_3_0() { return cAgeINTTerminalRuleCall_3_0; }
 	}
 
-	public class ExtendableParserRuleElements implements IParserRuleAccess {
+	public class ExtendableParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtendableParserRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSubrule1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -216,7 +216,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSubrule3ParserRuleCall_2() { return cSubrule3ParserRuleCall_2; }
 	}
 
-	public class Subrule1Elements implements IParserRuleAccess {
+	public class Subrule1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSubrule1Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -248,7 +248,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSub1IDTerminalRuleCall_2_0() { return cSub1IDTerminalRuleCall_2_0; }
 	}
 
-	public class Subrule2Elements implements IParserRuleAccess {
+	public class Subrule2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSubrule3Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -280,7 +280,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSub2STRINGTerminalRuleCall_2_0() { return cSub2STRINGTerminalRuleCall_2_0; }
 	}
 
-	public class Subrule3Elements implements IParserRuleAccess {
+	public class Subrule3Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSubrule3Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -312,7 +312,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSub1INTTerminalRuleCall_2_0() { return cSub1INTTerminalRuleCall_2_0; }
 	}
 
-	public class CallExtendedParserRuleElements implements IParserRuleAccess {
+	public class CallExtendedParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallExtendedParserRule");
 		private final Assignment cCallAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cCallAbstractCallExtendedParserRuleParserRuleCall_0 = (RuleCall)cCallAssignment.eContents().get(0);
@@ -525,7 +525,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "\u00F6" | "\u00E4" | "\u00FC" | "_") ("a".."z" | "A".."Z" | "_" | "0"
+	//  "^"? ("a".."z" | "A".."Z" | "\u02C6" | "\u2030" | "\u00B8" | "_") ("a".."z" | "A".."Z" | "_" | "0"
 	//  .."9")*;
 	public TerminalRule getIDRule() {
 		return gaAbstractTestLanguage.getIDRule();

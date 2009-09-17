@@ -8,15 +8,15 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 
 @Singleton
-public class BacktrackingLexerTestLanguageGrammarAccess implements IGrammarAccess {
+public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEnumsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -52,7 +52,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getXbsXbParserRuleCall_2_0() { return cXbsXbParserRuleCall_2_0; }
 	}
 
-	public class AbElements implements IParserRuleAccess {
+	public class AbElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Ab");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cXAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -80,7 +80,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getYCharbTerminalRuleCall_1_0() { return cYCharbTerminalRuleCall_1_0; }
 	}
 
-	public class XbElements implements IParserRuleAccess {
+	public class XbElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Xb");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cXAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -109,7 +109,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess implements IGrammarAcces
 	}
 	
 	
-	public class EnumNameElements implements IEnumRuleAccess {
+	public class EnumNameElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cAbcEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);

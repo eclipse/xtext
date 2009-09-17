@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class BodyElements implements IParserRuleAccess {
+	public class BodyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Body");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
@@ -99,7 +99,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getEndBodyKeyword_4() { return cEndBodyKeyword_4; }
 	}
 
-	public class FooElements implements IParserRuleAccess {
+	public class FooElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
 		private final Assignment cFooValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cFooValueSTRINGTerminalRuleCall_0 = (RuleCall)cFooValueAssignment.eContents().get(0);
@@ -115,7 +115,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getFooValueSTRINGTerminalRuleCall_0() { return cFooValueSTRINGTerminalRuleCall_0; }
 	}
 
-	public class ContentElements implements IParserRuleAccess {
+	public class ContentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Content");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContentKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -139,7 +139,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getEndContentKeyword_2() { return cEndContentKeyword_2; }
 	}
 
-	public class MyElementElements implements IParserRuleAccess {
+	public class MyElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cElementKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -171,7 +171,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getBarParameterRefParserRuleCall_1_0_1() { return cBarParameterRefParserRuleCall_1_0_1; }
 	}
 
-	public class ParameterObjectElements implements IParserRuleAccess {
+	public class ParameterObjectElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterObject");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cMyIntParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -195,7 +195,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getParameterRefParserRuleCall_2() { return cParameterRefParserRuleCall_2; }
 	}
 
-	public class ParameterElements implements IParserRuleAccess {
+	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -227,7 +227,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueParameterObjectIDTerminalRuleCall_1_0_1() { return cValueParameterObjectIDTerminalRuleCall_1_0_1; }
 	}
 
-	public class ParameterRefElements implements IParserRuleAccess {
+	public class ParameterRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterRef");
 		private final Assignment cParameterAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cParameterParameterCrossReference_0 = (CrossReference)cParameterAssignment.eContents().get(0);
@@ -247,7 +247,7 @@ public class Bug288432TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getParameterParameterIDTerminalRuleCall_0_1() { return cParameterParameterIDTerminalRuleCall_0_1; }
 	}
 
-	public class MyIntElements implements IParserRuleAccess {
+	public class MyIntElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyInt");
 		private final Assignment cIntAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cIntINTTerminalRuleCall_0 = (RuleCall)cIntAssignment.eContents().get(0);

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess {
+public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class EntityWithEnumAndReferenceElements implements IParserRuleAccess {
+	public class EntityWithEnumAndReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntityWithEnumAndReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -62,7 +62,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 	}
 	
 	
-	public class KindOfKeywordElements implements IEnumRuleAccess {
+	public class KindOfKeywordElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "KindOfKeyword");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cKindOfKeywordEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);

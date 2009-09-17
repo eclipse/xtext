@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class TransientValuesTestGrammarAccess implements IGrammarAccess {
+public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootElements implements IParserRuleAccess {
+	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -49,7 +49,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public RuleCall getTestListParserRuleCall_1_2() { return cTestListParserRuleCall_1_2; }
 	}
 
-	public class TestRequiredElements implements IParserRuleAccess {
+	public class TestRequiredElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRequiredKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -81,7 +81,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public RuleCall getRequired2INTTerminalRuleCall_2_0() { return cRequired2INTTerminalRuleCall_2_0; }
 	}
 
-	public class TestOptionalElements implements IParserRuleAccess {
+	public class TestOptionalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOptionalKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -121,7 +121,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public RuleCall getOpt2INTTerminalRuleCall_2_1_0() { return cOpt2INTTerminalRuleCall_2_1_0; }
 	}
 
-	public class TestListElements implements IParserRuleAccess {
+	public class TestListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cListKeyword_0 = (Keyword)cGroup.eContents().get(0);

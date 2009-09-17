@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess {
+public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class RootElements implements IParserRuleAccess {
+	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cOpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -37,7 +37,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTrickyGParserRuleCall_1() { return cTrickyGParserRuleCall_1; }
 	}
 
-	public class OpElements implements IParserRuleAccess {
+	public class OpElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Op");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -100,7 +100,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getMinusOperandsTermParserRuleCall_1_1_2_0() { return cMinusOperandsTermParserRuleCall_1_1_2_0; }
 	}
 
-	public class TermElements implements IParserRuleAccess {
+	public class TermElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -120,7 +120,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getParensParserRuleCall_1() { return cParensParserRuleCall_1; }
 	}
 
-	public class AtomElements implements IParserRuleAccess {
+	public class AtomElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
@@ -136,7 +136,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class ParensElements implements IParserRuleAccess {
+	public class ParensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -176,7 +176,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getEmExclamationMarkKeyword_3_0() { return cEmExclamationMarkKeyword_3_0; }
 	}
 
-	public class TrickyAElements implements IParserRuleAccess {
+	public class TrickyAElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyA");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTAKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -245,7 +245,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getNameSTRINGTerminalRuleCall_4_0() { return cNameSTRINGTerminalRuleCall_4_0; }
 	}
 
-	public class TrickyA1Elements implements IParserRuleAccess {
+	public class TrickyA1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyA1");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
@@ -261,7 +261,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class TrickyBElements implements IParserRuleAccess {
+	public class TrickyBElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTBKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -305,7 +305,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTypeINTTerminalRuleCall_2_0() { return cTypeINTTerminalRuleCall_2_0; }
 	}
 
-	public class TrickyCElements implements IParserRuleAccess {
+	public class TrickyCElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyC");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTCKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -365,7 +365,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getZKeyword_4_1() { return cZKeyword_4_1; }
 	}
 
-	public class TrickyDElements implements IParserRuleAccess {
+	public class TrickyDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyD");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTDKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -441,7 +441,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTypeIDTerminalRuleCall_3_0() { return cTypeIDTerminalRuleCall_3_0; }
 	}
 
-	public class TrickyEElements implements IParserRuleAccess {
+	public class TrickyEElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyE");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTEKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -514,7 +514,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTypeIDTerminalRuleCall_3_1_0() { return cTypeIDTerminalRuleCall_3_1_0; }
 	}
 
-	public class TrickyFElements implements IParserRuleAccess {
+	public class TrickyFElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyF");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTFKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -572,7 +572,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTypeINTTerminalRuleCall_2_1_0() { return cTypeINTTerminalRuleCall_2_1_0; }
 	}
 
-	public class TrickyGElements implements IParserRuleAccess {
+	public class TrickyGElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTGKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -596,7 +596,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public RuleCall getTreeTrickyG1ParserRuleCall_1_0() { return cTreeTrickyG1ParserRuleCall_1_0; }
 	}
 
-	public class TrickyG1Elements implements IParserRuleAccess {
+	public class TrickyG1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -644,7 +644,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
 	}
 
-	public class TrickyG2Elements implements IParserRuleAccess {
+	public class TrickyG2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG2");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTrickyG1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);

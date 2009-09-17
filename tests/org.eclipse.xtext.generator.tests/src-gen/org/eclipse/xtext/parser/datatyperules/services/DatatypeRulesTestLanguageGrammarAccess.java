@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
+public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class CompositeModelElements implements IParserRuleAccess {
+	public class CompositeModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeModel");
 		private final Assignment cModelAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cModelModelParserRuleCall_0 = (RuleCall)cModelAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getModelModelParserRuleCall_0() { return cModelModelParserRuleCall_0; }
 	}
 
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cIdAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -105,7 +105,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class ModelIdElements implements IParserRuleAccess {
+	public class ModelIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -129,7 +129,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 	}
 
-	public class NestedModelIdElements implements IParserRuleAccess {
+	public class NestedModelIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cModelIdParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -153,7 +153,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getModelIdParserRuleCall_2() { return cModelIdParserRuleCall_2; }
 	}
 
-	public class FractionElements implements IParserRuleAccess {
+	public class FractionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Fraction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -181,7 +181,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 	}
 
-	public class VectorElements implements IParserRuleAccess {
+	public class VectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Vector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -209,7 +209,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
-	public class DotsElements implements IParserRuleAccess {
+	public class DotsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Dots");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);

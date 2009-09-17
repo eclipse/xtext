@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class OptionalEmptyTestLanguageGrammarAccess implements IGrammarAccess {
+public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Assignment cChildAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cChildGreetingParserRuleCall_0 = (RuleCall)cChildAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class OptionalEmptyTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getChildGreetingParserRuleCall_0() { return cChildGreetingParserRuleCall_0; }
 	}
 
-	public class GreetingElements implements IParserRuleAccess {
+	public class GreetingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Greeting");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHalloKeyword_0 = (Keyword)cGroup.eContents().get(0);

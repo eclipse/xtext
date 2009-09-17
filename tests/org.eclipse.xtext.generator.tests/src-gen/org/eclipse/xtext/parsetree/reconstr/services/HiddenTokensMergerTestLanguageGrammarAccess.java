@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class HiddenTokensMergerTestLanguageGrammarAccess implements IGrammarAccess {
+public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final RuleCall cDatatypeBug286557ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
@@ -29,7 +29,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess implements IGrammarAcce
 		public RuleCall getDatatypeBug286557ParserRuleCall() { return cDatatypeBug286557ParserRuleCall; }
 	}
 
-	public class DatatypeBug286557Elements implements IParserRuleAccess {
+	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeBug286557");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -77,7 +77,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess implements IGrammarAcce
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class FQNElements implements IParserRuleAccess {
+	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
