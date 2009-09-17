@@ -36,6 +36,7 @@ protected class ThisRootNode extends RootToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
+			case 1: return new Element_Group(this, this, 1, inst);
 			default: return null;
 		}	
 	}	
