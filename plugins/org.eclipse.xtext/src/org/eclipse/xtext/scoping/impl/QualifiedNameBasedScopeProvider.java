@@ -337,7 +337,7 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			this.object = object;
 		}
 
-		public IScopedElement execute(QueryExecutor queryExecutor, Index index) {
+		public IScopedElement execute(QueryExecutor queryExecutor) {
 			EObjectDescriptorQuery query = createQuery();
 
 			ResourceDescriptorQuery resourceQuery = new ResourceDescriptorQuery();
@@ -345,7 +345,7 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			query.setResourceQuery(resourceQuery);
 			query.setFragment(EcoreUtil.getURI(object).fragment());
 
-			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query, index);
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = Descriptors.createProxy(desc);
 				return ScopedElement.create(desc.getName(), proxy);
@@ -366,10 +366,10 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			this.name = name;
 		}
 
-		public IScopedElement execute(QueryExecutor queryExecutor, Index index) {
+		public IScopedElement execute(QueryExecutor queryExecutor) {
 			EObjectDescriptorQuery query = createQuery();
 			query.setNameEquals(name);
-			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query, index);
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = Descriptors.createProxy(desc);
 				return ScopedElement.create(desc.getName(), proxy);
@@ -388,8 +388,8 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			super(context, type);
 		}
 
-		public Iterable<IScopedElement> execute(QueryExecutor queryExecutor, Index index) {
-			QueryResult<EObjectDescriptor> result = queryExecutor.execute(createQuery(), index);
+		public Iterable<IScopedElement> execute(QueryExecutor queryExecutor) {
+			QueryResult<EObjectDescriptor> result = queryExecutor.execute(createQuery());
 			ArrayList<IScopedElement> elements = new ArrayList<IScopedElement>();
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = Descriptors.createProxy(desc);
