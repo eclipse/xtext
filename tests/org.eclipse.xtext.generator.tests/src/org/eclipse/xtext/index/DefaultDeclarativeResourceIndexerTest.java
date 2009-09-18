@@ -12,7 +12,6 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfindex.EObjectDescriptor;
-import org.eclipse.emf.emfindex.Index;
 import org.eclipse.emf.emfindex.ResourceDescriptor;
 import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
@@ -47,10 +46,10 @@ public class DefaultDeclarativeResourceIndexerTest extends AbstractIndexBasedTes
 
 		index.executeQueryCommand(new QueryCommand<Object>() {
 
-			public Object execute(QueryExecutor queryExecutor, Index index) {
+			public Object execute(QueryExecutor queryExecutor) {
 				ResourceDescriptorQuery query = new ResourceDescriptorQuery();
 				query.setURI(normalizedURI(r));
-				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query, index);
+				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
 				ResourceDescriptor resourceDescriptor = result.iterator().next();
 				Iterator<EObjectDescriptor> descriptors = resourceDescriptor.getEObjectDescriptors().iterator();
 
@@ -90,10 +89,10 @@ public class DefaultDeclarativeResourceIndexerTest extends AbstractIndexBasedTes
 
 		index.executeQueryCommand(new QueryCommand<Object>() {
 
-			public Object execute(QueryExecutor queryExecutor, Index index) {
+			public Object execute(QueryExecutor queryExecutor) {
 				ResourceDescriptorQuery query = new ResourceDescriptorQuery();
 				query.setURI(normalizedURI(r));
-				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query, index);
+				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
 				ResourceDescriptor resourceDescriptor = result.iterator().next();
 				Iterator<EObjectDescriptor> descriptors = resourceDescriptor.getEObjectDescriptors().iterator();
 

@@ -3,8 +3,8 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
+import org.eclipse.emf.emfindex.EmfIndexPlugin;
 import org.eclipse.emf.emfindex.Index;
-import org.eclipse.emf.emfindex.ui.EmfIndexUIPlugin;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -22,7 +22,7 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	public Provider<Index> provideIndex() {
 		return new Provider<Index>() {
 			public Index get() {
-				return EmfIndexUIPlugin.getDefault().getIndex();
+				return EmfIndexPlugin.getDefault().getIndex();
 			}
 		};
 	}
