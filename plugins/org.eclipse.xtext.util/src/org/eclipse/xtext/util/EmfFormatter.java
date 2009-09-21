@@ -194,4 +194,32 @@ public class EmfFormatter {
 		}
 		return buff.toString();
 	}
+	
+	public static String objPath( EObject obj) {
+		StringBuffer b = new StringBuffer();
+		objPath(b, obj);
+		return b.toString();
+	}
+
+	private static void objPath(StringBuffer b, EObject obj) {
+		if (obj.eContainer() != null) {
+			objPath(b, obj.eContainer());
+			b.append(".");
+			b.append(obj.eContainingFeature().getName());
+			if (obj.eContainingFeature().isMany()) {
+				b.append("[");
+				b.append(((List<?>) obj.eContainer().eGet(obj.eContainingFeature())).indexOf(obj));
+				b.append("]");
+			}
+			b.append("->");
+		}
+		b.append(obj.eClass().getName());
+		EStructuralFeature nameF = obj.eClass().getEStructuralFeature("name");
+		Object name = nameF != null ? obj.eGet(nameF) : null;
+		if (name != null) {
+			b.append("'");
+			b.append(name);
+			b.append("'");
+		}
+	}
 }

@@ -22,10 +22,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
@@ -505,54 +508,70 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 
 		public String getSource() {
-			return source.toString();
+			return source == null ? "" : source.toString();
+		}
+		
+		public int getFeature() {
+			return feature;
 		}
 		
 		public CheckType getCheckType() {
 			return checkType;
 		}
+		
+		public static String severityToStr(int severity) {
+			switch (severity) {
+				case OK:
+					return "OK";
+				case INFO:
+					return "INFO";
+				case WARNING:
+					return "WARNING";
+				case ERROR:
+					return "ERROR";
+				case CANCEL:
+					return "CANCEL";
+				default:
+					return Integer.toHexString(severity);
+			}
+		}
 
-		// partially copied from BasicDiagnostic#toString()
 		@Override
 		public String toString() {
 			StringBuilder result = new StringBuilder();
 			result.append("Diagnostic ");
-			switch (severity) {
-				case OK: {
-					result.append("OK");
-					break;
-				}
-				case INFO: {
-					result.append("INFO");
-					break;
-				}
-				case WARNING: {
-					result.append("WARNING");
-					break;
-				}
-				case ERROR: {
-					result.append("ERROR");
-					break;
-				}
-				case CANCEL: {
-					result.append("CANCEL");
-					break;
-				}
-				default: {
-					result.append(Integer.toHexString(severity));
-					break;
+			result.append(severityToStr(severity));
+			if (code != null) {
+				result.append(" code=");
+				result.append(code);
+			}
+			result.append(" \"");
+			result.append(message);
+			result.append("\"");
+			if (source != null) {
+				result.append(" at ");
+				result.append(EmfFormatter.objPath(source));
+				if (feature != null && feature >= 0) {
+					EStructuralFeature feat = source.eClass().getEStructuralFeature(feature);
+					if (feat != null) {
+						result.append(".");
+						result.append(feat.getName());
+						if (!feat.isMany()) { // we don't have the item's index it its a list :/
+							if (feat instanceof EAttribute) {
+								result.append("==\"");
+								result.append(source.eGet(feat));
+								result.append("\"");
+							}
+							else {
+								result.append("==(");
+								result.append(((EObject) source.eGet(feat)).eClass().getName());
+								result.append(")");
+
+							}
+						}
+					}
 				}
 			}
-
-			result.append(" source=");
-			result.append(source);
-
-			result.append(' ');
-			result.append(message);
-
-			result.append(" feature=");
-			result.append(feature);
-
 			return result.toString();
 		}
 
