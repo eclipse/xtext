@@ -52,7 +52,7 @@ public class DomainmodelJavaValidator
   public void checkTypeNameStartsWithCapital(Type type) {
     if (!Character.isUpperCase(type.getName().charAt(0)))
       warning("Name should start with a capital", 
-      	DomainmodelPackage.TYPE__NAME);
+        DomainmodelPackage.TYPE__NAME);
   }
 }
 
@@ -113,7 +113,7 @@ p. Each check works in a specific context (here: @Type@) and can further denote 
  
 h3(#test_validators). Test Validators
  
-If you have implemented your validators by extending ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator}, there are helper classes which may assist you when testing your validators.
+If you have implemented your validators by extending ${org.eclipse.xtext/src/org.eclipse.xtext.validation.AbstractDeclarativeValidator}, there are helper classes which may assist you when testing your validators.
 
 Testing validators typicallally works as follows: 
 # The test creates some models which intentionally violate some constraints.
@@ -122,45 +122,45 @@ Testing validators typicallally works as follows:
 
 To create models, you can either use EMF's @ResourceSet@ to load models from your hard disk or you can utilize the @<MyLanguage>Factory@ (which EMF generates for each @EPackage@) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
 
-To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org/eclipse/xtext/validation/ValidatorTester} as shown by the following example:
+To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org.eclipse.xtext.validation.ValidatorTester} as shown by the following example:
 
 p. Validator:
 
 bc.. public class MyLanguageValidator extends AbstractDeclarativeValidator {
-	@Check
-	public void checkFooElement(FooElement element) {
-		if(element.getBarAttribute().contains("foo"))
-			error("Only Foos allowed", element, MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE, 101);
-	}
+  @Check
+  public void checkFooElement(FooElement element) {
+    if(element.getBarAttribute().contains("foo"))
+      error("Only Foos allowed", element, MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE, 101);
+  }
 }
 
 p. JUnit-Test:
 
 bc.. public class MyLanguageValidatorTest extends TestCase {
 
-	private ValidatorTester<MyLanguageValidator> tester;
+  private ValidatorTester<MyLanguageValidator> tester;
 
-	@Override
-	public void setUp() {
-		MyLanguageValidator val = new MyLanguageValidator();
-		new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);
-		tester = new ValidatorTester<TestingValidator>(val);
-	}
+  @Override
+  public void setUp() {
+    MyLanguageValidator val = new MyLanguageValidator();
+    new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);
+    tester = new ValidatorTester<TestingValidator>(val);
+  }
 
-	public void testError() {
-		FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
-		model.setBarAttribute("barbarbarbarfoo");
-		
-		tester.validator().checkFooElement(model);
-		tester.diagnose().assertError(101);
-	}
-	
-	public void testError2() {
-		FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
-		model.setBarAttribute("barbarbarbarfoo");
-		
-		tester.validate(model).assertError(101);
-	}
+  public void testError() {
+    FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+    model.setBarAttribute("barbarbarbarfoo");
+    
+    tester.validator().checkFooElement(model);
+    tester.diagnose().assertError(101);
+  }
+  
+  public void testError2() {
+    FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+    model.setBarAttribute("barbarbarbarfoo");
+    
+    tester.validate(model).assertError(101);
+  }
 }
 
 p. This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the @setUp()@-method before each testcase and thereby helps to create some common state. In this example, the validator (@MyLanguageValidator@) is instantiated manually and initialized via Google Guice's dependency injection. Then the @ValidatorTester@ is created. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (@tester.validator()@) as well as to the utility classes which assert diagnostics created by the validator (@tester.diagnose()@). Please be aware that you have to call @validator()@ before you can call @diagnose()@. However, you can call @validator()@ multiple times in a row.

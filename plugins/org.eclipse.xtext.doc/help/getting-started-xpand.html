@@ -61,7 +61,7 @@
 <p>
 <code class="code">
 <br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+&acute;IMPORT&nbsp;entities&ordf;<br>
 
 </code>
 </p>
@@ -74,10 +74,10 @@
 <p>
 <code class="code">
 <br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&acute;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&ordf;<br>
+&nbsp;&nbsp;&acute;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
+&nbsp;&nbsp;&acute;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
 
@@ -96,11 +96,11 @@
 <p>
 <code class="code">
 <br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&acute;IMPORT&nbsp;entities&ordf;<br>
+&acute;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&ordf;<br>
+&nbsp;&nbsp;&acute;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
+&nbsp;&nbsp;&acute;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
 
@@ -132,31 +132,31 @@
 <p>
 <code class="code">
 <br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+&acute;IMPORT&nbsp;entities&ordf;<br>
 
 <br>
-&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
+&acute;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&ordf;<br>
+&nbsp;&nbsp;&acute;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&ordf;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&acute;this.name&ordf;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&acute;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&ordf;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&nbsp;&nbsp;&acute;ENDFILE&ordf;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
-&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
+&acute;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&ordf;<br>
+&nbsp;&nbsp;private&nbsp;&acute;this.type.name&ordf;&nbsp;&acute;this.name&ordf;;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&acute;this.name.toFirstUpper()&ordf;(&acute;this.type.name&ordf;&nbsp;&acute;this.name&ordf;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&acute;this.name&ordf;&nbsp;=&nbsp;&acute;this.name&ordf;;<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;&acute;this.type.name&ordf;&nbsp;get&acute;this.name.toFirstUpper()&ordf;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&acute;this.name&ordf;;<br>
 &nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
 
@@ -181,47 +181,47 @@
 <p>
 <code class="code">
 <br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+&acute;IMPORT&nbsp;entities&ordf;<br>
 
 <br>
-&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
+&acute;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&ordf;<br>
+&nbsp;&nbsp;&acute;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&ordf;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&acute;this.name&ordf;DAO<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&acute;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&ordf;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&nbsp;&nbsp;&acute;ENDFILE&ordf;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
-&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
+&acute;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&ordf;<br>
+&nbsp;&nbsp;public&nbsp;&acute;this.name&ordf;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&acute;this.name&ordf;)getHibernateTemplate().get(&acute;this.name&ordf;.class,&nbsp;id);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
 &nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
-&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
+&nbsp;&nbsp;public&nbsp;Collection&lt;&acute;this.name&ordf;&gt;&nbsp;loadAll()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&acute;this.name&ordf;.class);<br>
 &nbsp;&nbsp;}&nbsp;&nbsp;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
+&nbsp;&nbsp;public&nbsp;&acute;this.name&ordf;&nbsp;create(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&acute;this.name&ordf;)&nbsp;getHibernateTemplate().save(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;update(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
 &nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
+&acute;ENDDEFINE&ordf;<br>
 
 <br>
 

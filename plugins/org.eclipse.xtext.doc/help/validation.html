@@ -135,7 +135,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 &nbsp;&nbsp;public&nbsp;void&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	DomainmodelPackage.TYPE__NAME);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br>
 &nbsp;&nbsp;}<br>
 }<br>
 
@@ -292,5 +292,172 @@ public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDec
 					<code class="code">ERROR</code> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
 				</p>Please read more about the Check language as well as the underlying expression language in Xpand&rsquo;s reference documentation which is shipped as Eclipse help. 
 			</div>
+<div class="section" title="Test Validators">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="test_validators"></a>Test Validators</h3>
+</div>
+</div>
+</div>
+<p>If you have implemented your validators by extending 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValidator</a>, there are helper classes which may assist you when testing your validators.
+				</p>
+<p>Testing validators typicallally works as follows: </p>
+<div class="orderedlist">
+<ol class="orderedlist" type="1">
+<li class="listitem">
+<p>The test creates some models which intentionally violate some constraints.</p>
+</li>
+<li class="listitem">
+<p>The test runs some choosen @Check-methods from the validator.</p>
+</li>
+<li class="listitem">
+<p>The test asserts whether the @Check-methods have raised the expected warnings and errors.</p>
+</li>
+</ol>
+</div>
+<p>To create models, you can either use EMF&rsquo;s 
+					<code class="code">ResourceSet</code> to load models from your hard disk or you can utilize the 
+					<code class="code">&lt;MyLanguage&gt;Factory</code> (which EMF generates for each 
+					<code class="code">EPackage</code>) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
+				</p>
+<p>To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/ValidatorTester.java?root=Modeling_Project&view=co" target="_new">ValidatorTester</a> as shown by the following example:
+				</p>
+<p>Validator:</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;MyLanguageValidator&nbsp;extends&nbsp;AbstractDeclarativeValidator&nbsp;{<br>
+&nbsp;&nbsp;@Check<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;checkFooElement(FooElement&nbsp;element)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(element.getBarAttribute().contains("foo"))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error("Only&nbsp;Foos&nbsp;allowed",&nbsp;element,&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>JUnit-Test:</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;MyLanguageValidatorTest&nbsp;extends&nbsp;TestCase&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;private&nbsp;ValidatorTester&lt;MyLanguageValidator&gt;&nbsp;tester;<br>
+
+<br>
+&nbsp;&nbsp;@Override<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setUp()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MyLanguageValidator&nbsp;val&nbsp;=&nbsp;new&nbsp;MyLanguageValidator();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tester&nbsp;=&nbsp;new&nbsp;ValidatorTester&lt;TestingValidator&gt;(val);<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;testError()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute("barbarbarbarfoo");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.validator().checkFooElement(model);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.diagnose().assertError(101);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;testError2()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute("barbarbarbarfoo");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the 
+					<code class="code">setUp()</code>-method before each testcase and thereby helps to create some common state. In this example, the validator (
+					<code class="code">MyLanguageValidator</code>) is instantiated manually and initialized via Google Guice&rsquo;s dependency injection. Then the 
+					<code class="code">ValidatorTester</code> is created. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (
+					<code class="code">tester.validator()</code>) as well as to the utility classes which assert diagnostics created by the validator (
+					<code class="code">tester.diagnose()</code>). Please be aware that you have to call 
+					<code class="code">validator()</code> before you can call 
+					<code class="code">diagnose()</code>. However, you can call 
+					<code class="code">validator()</code> multiple times in a row.
+				</p>
+<p>While 
+					<code class="code">validator()</code> allows to call the validator&rsquo;s @Check-methods directly, 
+					<code class="code">validate(model)</code> leaves it to the framework to call the applicable @Check-methods. However, to avoid side-effects between tests, it is recommended to call the @Check-methods directly.
+				</p>
+<p>
+					
+<code class="code">diagnose()</code> and 
+					<code class="code">validate(model)</code> return an object of type @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} which provides several 
+					<code class="code">assert</code>-methods to verify whether the expected diagnostics are present:
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+							
+<code class="code">assertError(int code)</code>: There must be one diagnostic with severity ERROR and the supplied error code.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertErrorContains(String messageFragment)</code>:  There must be one diagnostic with severity ERROR and its message must contain 
+							<code class="code">messageFragment</code>.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertError(int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertWarning(...)</code>: This method is available for the same combination of parameters as 
+							<code class="code">assertError()</code>.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertOK()</code>: Expects that no diagnostics (errors, warnings etc.) have been raised.   
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertDiagnostics(int severity, int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertAll(DiagnosticPredicate... predicates)</code>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static 
+							<code class="code">error()</code> and 
+							<code class="code">warning()</code>-methods which help to create the needed 
+							<code class="code">DiagnosticPredicate</code>. Example: 
+							<code class="code">assertAll(error(123), warning("some part of the message"))</code>. 
+						</p>
+</li>
+<li class="listitem">
+<p>
+							
+<code class="code">assertAny(DiagnosticPredicate predicate)</code>: Asserts that a diagnostic exists which matches the predicate. 
+						</p>
+</li>
+</ul>
+</div>
+</div>
 </body>
 </html>

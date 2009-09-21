@@ -101,6 +101,7 @@
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
 <topic href="help/validation.html#quickfixes" label="Quickfixes"></topic>
 <topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
+<topic href="help/validation.html#test_validators" label="Test Validators"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of crosslinks"></topic>
