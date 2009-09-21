@@ -110,3 +110,71 @@ bc.. context Type#name WARNING "Name should start with a capital":
 p. Each check works in a specific context (here: @Type@) and can further denote a feature to which a warning or error should be attached to (here: @name@). Each check could either be a @WARNING@ or an @ERROR@ with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
 
  Please read more about the Check language as well as the underlying expression language in Xpand's reference documentation which is shipped as Eclipse help. 
+ 
+h3(#test_validators). Test Validators
+ 
+If you have implemented your validators by extending ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator}, there are helper classes which may assist you when testing your validators.
+
+Testing validators typicallally works as follows: 
+# The test creates some models which intentionally violate some constraints.
+# The test runs some choosen @Check-methods from the validator.
+# The test asserts whether the @Check-methods have raised the expected warnings and errors.
+
+To create models, you can either use EMF's @ResourceSet@ to load models from your hard disk or you can utilize the @<MyLanguage>Factory@ (which EMF generates for each @EPackage@) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
+
+To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org/eclipse/xtext/validation/ValidatorTester} as shown by the following example:
+
+p. Validator:
+
+bc.. public class MyLanguageValidator extends AbstractDeclarativeValidator {
+	@Check
+	public void checkFooElement(FooElement element) {
+		if(element.getBarAttribute().contains("foo"))
+			error("Only Foos allowed", element, MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE, 101);
+	}
+}
+
+p. JUnit-Test:
+
+bc.. public class MyLanguageValidatorTest extends TestCase {
+
+	private ValidatorTester<MyLanguageValidator> tester;
+
+	@Override
+	public void setUp() {
+		MyLanguageValidator val = new MyLanguageValidator();
+		new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(val);
+		tester = new ValidatorTester<TestingValidator>(val);
+	}
+
+	public void testError() {
+		FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+		model.setBarAttribute("barbarbarbarfoo");
+		
+		tester.validator().checkFooElement(model);
+		tester.diagnose().assertError(101);
+	}
+	
+	public void testError2() {
+		FooElement model = MyLanguageFactory.eINSTANCE.createFooElement()
+		model.setBarAttribute("barbarbarbarfoo");
+		
+		tester.validate(model).assertError(101);
+	}
+}
+
+p. This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the @setUp()@-method before each testcase and thereby helps to create some common state. In this example, the validator (@MyLanguageValidator@) is instantiated manually and initialized via Google Guice's dependency injection. Then the @ValidatorTester@ is created. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (@tester.validator()@) as well as to the utility classes which assert diagnostics created by the validator (@tester.diagnose()@). Please be aware that you have to call @validator()@ before you can call @diagnose()@. However, you can call @validator()@ multiple times in a row.
+
+While @validator()@ allows to call the validator's @Check-methods directly, @validate(model)@ leaves it to the framework to call the applicable @Check-methods. However, to avoid side-effects between tests, it is recommended to call the @Check-methods directly.
+
+@diagnose()@ and @validate(model)@ return an object of type @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} which provides several @assert@-methods to verify whether the expected diagnostics are present:
+
+* @assertError(int code)@: There must be one diagnostic with severity ERROR and the supplied error code.
+* @assertErrorContains(String messageFragment)@:  There must be one diagnostic with severity ERROR and its message must contain @messageFragment@.
+* @assertError(int code, String messageFragment)@: Verifies severity, error code and messageFragment.
+* @assertWarning(...)@: This method is available for the same combination of parameters as @assertError()@.
+* @assertOK()@: Expects that no diagnostics (errors, warnings etc.) have been raised.   
+* @assertDiagnostics(int severity, int code, String messageFragment)@: Verifies severity, error code and messageFragment.
+* @assertAll(DiagnosticPredicate... predicates)@: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static @error()@ and @warning()@-methods which help to create the needed @DiagnosticPredicate@. Example: @assertAll(error(123), warning("some part of the message"))@. 
+* @assertAny(DiagnosticPredicate predicate)@: Asserts that a diagnostic exists which matches the predicate. 
+
