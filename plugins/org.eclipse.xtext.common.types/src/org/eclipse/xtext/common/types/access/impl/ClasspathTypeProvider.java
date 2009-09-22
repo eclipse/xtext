@@ -20,20 +20,17 @@ import org.eclipse.xtext.common.types.access.TypeResource;
  */
 public class ClasspathTypeProvider extends AbstractTypeProvider {
 
-	private final ClassFinder classFinder;
+	final ClassFinder classFinder;
 	
-	private final PrimitiveTypeProvider primitiveTypeProvider;
-	
-	private final DeclaredTypeProvider declaredTypeProvider;
+	private final DeclaredTypeFactory declaredTypeFactory;
 	
 	private final ClassURIHelper uriHelper;
 	
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
 		super(resourceSet);
-		this.classFinder = new ClassFinder(classLoader);
-		primitiveTypeProvider = new PrimitiveTypeProvider();
+		classFinder = new ClassFinder(classLoader);
 		uriHelper = new ClassURIHelper();
-		declaredTypeProvider = new DeclaredTypeProvider(uriHelper);
+		declaredTypeFactory = new DeclaredTypeFactory(uriHelper);
 	}
 	
 	@Override
@@ -49,27 +46,18 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 		}
 	}
 	
-	public ClassMirror createMirror(Class<?> clazz) {
-		return ClassMirror.createClassMirror(clazz, declaredTypeProvider);
-	}
-	
 	@Override
-	public IMirror createMirror(URI resourceURI) {
-		if (resourceURI.hasFragment())
-			throw new IllegalArgumentException("Cannot create mirror for uri '" + resourceURI.toString() + "'");
-		String name = resourceURI.path();
+	protected IMirror createMirrorForFQN(String name) throws TypeNotFoundException {
 		try {
-			if (ClassURIHelper.PRIMITIVES.equals(name))
-				return new PrimitiveMirror(primitiveTypeProvider);
-			if (!name.startsWith(ClassURIHelper.OBJECTS))
-				throw new IllegalArgumentException("Invalid resource uri '" + resourceURI.toString() + "'");
-			name = name.substring(ClassURIHelper.OBJECTS.length());
 			Class<?> clazz = classFinder.forName(name);
 			return createMirror(clazz);
+		} catch (ClassNotFoundException e) {
+			throw new TypeNotFoundException(name, e);
 		}
-		catch (ClassNotFoundException e) {
-			throw new TypeNotFoundException("uri: " + resourceURI.toString() + ", opaquePart: " + name, e);
-		}
+	}
+	
+	public ClassMirror createMirror(Class<?> clazz) {
+		return ClassMirror.createClassMirror(clazz, declaredTypeFactory);
 	}
 	
 	public Type findTypeByClass(Class<?> clazz, Resource resource) {

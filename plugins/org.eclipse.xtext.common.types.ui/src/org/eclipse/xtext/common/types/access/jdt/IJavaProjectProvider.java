@@ -5,28 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access;
+package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.jdt.core.IJavaProject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ITypeProvider {
+public interface IJavaProjectProvider {
 
-	Type findTypeByName(String name) throws TypeNotFoundException;
-	
-	ResourceSet getResourceSet();
-	
-	interface Factory {
-		
-		ITypeProvider createTypeProvider(ResourceSet resourceSet);
-		
-		ITypeProvider findTypeProvider(ResourceSet resourceSet);
-		
-		ITypeProvider createTypeProvider() throws UnsupportedOperationException;
-		
-	}
+	IJavaProject getJavaProject(ResourceSet resourceSet);
 	
 }

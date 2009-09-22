@@ -7,21 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveTypeProvider implements IClasspathTypeProvider {
+public interface ITypeFactory<Arg> {
 
-	public <T> Type createType(Class<T> clazz) {
-		if (Void.TYPE.equals(clazz))
-			return TypesFactory.eINSTANCE.createVoid();
-		PrimitiveType result = TypesFactory.eINSTANCE.createPrimitiveType();
-		result.setName(clazz.getName());
-		return result;
-	}
-
+	Type createType(Arg arg);
+	
 }

@@ -39,15 +39,15 @@ import org.eclipse.xtext.common.types.WildcardTypeParameter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DeclaredTypeProvider implements IClasspathTypeProvider {
+public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	private final ClassURIHelper uriHelper;
 
-	public DeclaredTypeProvider(ClassURIHelper uriHelper) {
+	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
 		this.uriHelper = uriHelper;
 	}
 	
-	public <T> DeclaredType createType(Class<T> clazz) {
+	public DeclaredType createType(Class<?> clazz) {
 		if (clazz.isAnonymousClass())
 			throw new IllegalStateException("Cannot create type for anonymous class");
 		if (clazz.isAnnotation())
@@ -75,7 +75,7 @@ public class DeclaredTypeProvider implements IClasspathTypeProvider {
 		for(Method method: clazz.getDeclaredMethods()) {
 			result.getMembers().add(createOperation(method));
 		}
-		for(Constructor<T> constructor: clazz.getDeclaredConstructors()) {
+		for(Constructor<?> constructor: clazz.getDeclaredConstructors()) {
 			result.getMembers().add(createConstructor(constructor));
 		}
 		for(Field field: clazz.getDeclaredFields()) {

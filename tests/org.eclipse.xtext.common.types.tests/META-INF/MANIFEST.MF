@@ -10,4 +10,9 @@ Require-Bundle: org.eclipse.xtext.junit;bundle-version="0.8.0",
  org.eclipse.xtext.common.types;bundle-version="0.8.0",
  org.junit,
  org.eclipse.emf.ecore;bundle-version="2.5.0",
- org.eclipse.xtext;bundle-version="0.8.0"
+ org.eclipse.xtext;bundle-version="0.8.0",
+ org.eclipse.core.resources;bundle-version="3.5.0",
+ org.eclipse.jdt.core;bundle-version="3.5.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.eclipse.jdt.launching;bundle-version="3.5.0",
+ org.eclipse.xtext.common.types.ui;bundle-version="0.8.0"

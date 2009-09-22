@@ -8,8 +8,6 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 
 import com.google.inject.Inject;
@@ -17,7 +15,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProviderFactory implements ITypeProvider.Factory {
+public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;
 
@@ -33,14 +31,14 @@ public class ClasspathTypeProviderFactory implements ITypeProvider.Factory {
 		return result;
 	}
 	
-	public ClasspathTypeProvider findTypeProvider(ResourceSet resourceSet) {
-		if (resourceSet == null)
-			throw new IllegalArgumentException("resourceSet may not be null.");
-		return (ClasspathTypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(ClassURIHelper.PROTOCOL);
-	}
-
+	@Override
 	public ClasspathTypeProvider createTypeProvider() {
-		return createTypeProvider(new ResourceSetImpl());
+		return (ClasspathTypeProvider) super.createTypeProvider();
+	}
+	
+	@Override
+	public ClasspathTypeProvider findTypeProvider(ResourceSet resourceSet) {
+		return (ClasspathTypeProvider) super.findTypeProvider(resourceSet);
 	}
 	
 }
