@@ -15,10 +15,10 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveMirrorTest extends TestCase implements IClasspathTypeProvider {
+public class PrimitiveMirrorTest extends TestCase implements ITypeFactory<Class<?>> {
 
 	private PrimitiveMirror mirror;
-	private PrimitiveTypeProvider helper;
+	private PrimitiveTypeFactory helper;
 	private int callCount;
 	private TypeResource resource;
 
@@ -26,7 +26,7 @@ public class PrimitiveMirrorTest extends TestCase implements IClasspathTypeProvi
 	protected void setUp() throws Exception {
 		super.setUp();
 		callCount = 0;
-		helper = new PrimitiveTypeProvider();
+		helper = new PrimitiveTypeFactory();
 		mirror = new PrimitiveMirror(this);
 		resource = new TypeResource();
 		resource.setMirror(mirror);
@@ -50,7 +50,7 @@ public class PrimitiveMirrorTest extends TestCase implements IClasspathTypeProvi
 		assertEquals(callCount, resource.getContents().size());
 	}
 
-	public <T> Type createType(Class<T> clazz) {
+	public Type createType(Class<?> clazz) {
 		callCount++;
 		return helper.createType(clazz);
 	}

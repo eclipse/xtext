@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.Type;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider {
+public class ClassMirrorTest extends TestCase implements ITypeFactory<Class<?>> {
 
 	public void testCreateClassMirror_01() {
 		ClassMirror mirror = ClassMirror.createClassMirror(String.class, this);
@@ -48,7 +48,7 @@ public class ClassMirrorTest extends TestCase implements IClasspathTypeProvider 
 		}
 	}
 
-	public <T> Type createType(Class<T> clazz) {
+	public Type createType(Class<?> clazz) {
 		fail("Unexpected call");
 		return null;
 	}

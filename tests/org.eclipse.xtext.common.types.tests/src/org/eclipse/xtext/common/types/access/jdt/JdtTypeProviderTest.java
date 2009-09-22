@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.impl;
+package org.eclipse.xtext.common.types.access.jdt;
 
 import java.util.Map;
 
@@ -13,39 +13,52 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
+public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 
 	private ResourceSet resourceSet;
-	private ClasspathTypeProvider typeProvider;
+	private JdtTypeProvider typeProvider;
+	private MockJavaProjectProvider projectProvider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
+		projectProvider = new MockJavaProjectProvider();
+		projectProvider.setUp();
+		typeProvider = new JdtTypeProvider(projectProvider.getJavaProject(resourceSet), resourceSet);
 	}
 	
 	@Override
 	protected void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
+		projectProvider.tearDown();
 		super.tearDown();
+	}
+	
+	@Override
+	protected ITypeProvider getTypeProvider() {
+		return typeProvider;
 	}
 	
 	public void testSetup_01() {
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
-		assertSame(getTypeProvider(), map.get(ClassURIHelper.PROTOCOL));
+		assertSame(typeProvider, map.get(ClassURIHelper.PROTOCOL));
 	}
 	
 	public void testCreateResource_01() {
 		URI primitivesURI = URI.createURI("java:/Primitives"); 
-		TypeResource resource = getTypeProvider().createResource(primitivesURI);
+		TypeResource resource = typeProvider.createResource(primitivesURI);
 		assertNotNull(resource);
 		assertFalse(resource.isLoaded());
 		assertTrue(resource.getContents().isEmpty());
@@ -93,15 +106,15 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	
 	public void testCreateMirror_01() {
 		URI uri = URI.createURI("java:/Objects/java.util.Map");
-		IMirror mirror = getTypeProvider().createMirror(uri);
+		IMirror mirror = typeProvider.createMirror(uri);
 		assertNotNull(mirror);
-		assertTrue(mirror instanceof ClassMirror);
-		assertEquals("java.util.Map", ((ClassMirror) mirror).getMirroredClass().getName());
+		assertTrue(mirror instanceof JdtTypeMirror);
+		assertEquals("java.util.Map", ((JdtTypeMirror) mirror).getMirroredType().getFullyQualifiedName());
 	}
 	
 	public void testCreateMirror_02() {
 		URI uri = URI.createURI("java:/Primitives");
-		IMirror mirror = getTypeProvider().createMirror(uri);
+		IMirror mirror = typeProvider.createMirror(uri);
 		assertNotNull(mirror);
 		assertTrue(mirror instanceof PrimitiveMirror);
 	}
@@ -109,7 +122,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	public void testCreateMirror_03() {
 		URI uri = URI.createURI("java:/Something");
 		try {
-			getTypeProvider().createMirror(uri);
+			typeProvider.createMirror(uri);
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException ex) {
 			// ok
@@ -119,7 +132,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	public void testCreateMirror_04() {
 		URI uri = URI.createURI("java:/Primitives").appendFragment("int");
 		try {
-			getTypeProvider().createMirror(uri);
+			typeProvider.createMirror(uri);
 			fail("Expected IllegalArgumentException");
 		} catch (IllegalArgumentException ex) {
 			// ok
@@ -129,21 +142,16 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	public void testCreateMirror_05() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
 		try {
-			getTypeProvider().createMirror(uri);
+			typeProvider.createMirror(uri);
 			fail("Expected TypeNotFoundException");
 		} catch (TypeNotFoundException ex) {
 			// OK
 		}
 	}
-
-	@Override
-	public ClasspathTypeProvider getTypeProvider() {
-		return typeProvider;
-	}
 	
 	@Override
 	protected String getCollectionParamName() {
-		return "p0";
+		return "c";
 	}
 	
 }

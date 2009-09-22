@@ -14,11 +14,15 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassMirrorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassNameUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClasspathTypeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.ClassURIHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.PrimitiveMirrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.PrimitivesTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.PrimitiveTypeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.PrimitiveTypeFactoryTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactoryTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.TypeURIHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.TypeResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.AnnotationTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.ArrayTypeTest.class);
