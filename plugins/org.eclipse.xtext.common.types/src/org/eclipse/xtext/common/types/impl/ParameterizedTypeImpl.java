@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getDeclarator <em>Declarator</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getRawType <em>Raw Type</em>}</li>
@@ -45,6 +46,26 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public class ParameterizedTypeImpl extends ReferenceTypeImpl implements ParameterizedType {
+	/**
+	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullyQualifiedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FULLY_QUALIFIED_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFullyQualifiedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -82,6 +103,27 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.PARAMETERIZED_TYPE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFullyQualifiedName() {
+		return fullyQualifiedName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFullyQualifiedName(String newFullyQualifiedName) {
+		String oldFullyQualifiedName = fullyQualifiedName;
+		fullyQualifiedName = newFullyQualifiedName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME, oldFullyQualifiedName, fullyQualifiedName));
 	}
 
 	/**
@@ -236,6 +278,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
+				return getFullyQualifiedName();
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				return getParameters();
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
@@ -255,6 +299,9 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
+				setFullyQualifiedName((String)newValue);
+				return;
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends TypeParameter>)newValue);
@@ -277,6 +324,9 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
+				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
+				return;
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -298,6 +348,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
+				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
 			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
@@ -308,25 +360,25 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 		return super.eIsSet(featureID);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (fullyQualifiedName: ");
+		result.append(fullyQualifiedName);
+		result.append(')');
+		return result.toString();
+	}
+
 	@Override
 	public String getCanonicalName() {
-		if (getRawType() == null)
-			return null;
-		if (parameters != null && !parameters.isEmpty()) {
-			StringBuilder result = new StringBuilder(64);
-			result.append(getRawType().getCanonicalName());
-			result.append('<');
-			boolean first = true;
-			for(TypeParameter parameter: parameters) {
-				if (!first)
-					result.append(",");
-				result.append(parameter.getCanonicalName());
-				first = false;
-			}
-			result.append('>');
-			return result.toString();
-		}
-		return getRawType().getCanonicalName();
+		return fullyQualifiedName;
 	}
 
 } //ParameterizedTypeImpl

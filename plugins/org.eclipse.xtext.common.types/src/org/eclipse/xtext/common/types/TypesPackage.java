@@ -460,13 +460,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE_VARIABLE__NAME = REFERENCE_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Type Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 2;
+	int TYPE_VARIABLE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
@@ -917,13 +926,22 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__ARRAY_TYPE = REFERENCE_TYPE__ARRAY_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME = REFERENCE_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__PARAMETERS = REFERENCE_TYPE_FEATURE_COUNT + 0;
+	int PARAMETERIZED_TYPE__PARAMETERS = REFERENCE_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -932,7 +950,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 1;
+	int PARAMETERIZED_TYPE__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Raw Type</b></em>' containment reference.
@@ -941,7 +959,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__RAW_TYPE = REFERENCE_TYPE_FEATURE_COUNT + 2;
+	int PARAMETERIZED_TYPE__RAW_TYPE = REFERENCE_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Parameterized Type</em>' class.
@@ -950,7 +968,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 3;
+	int PARAMETERIZED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -1861,6 +1879,17 @@ public interface TypesPackage extends EPackage {
 	EAttribute getTypeVariable_Name();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeVariable#getDeclarator <em>Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeVariable#getDeclarator()
+	 * @see #getTypeVariable()
+	 * @generated
+	 */
+	EReference getTypeVariable_Declarator();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeConstraint <em>Type Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1995,6 +2024,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getParameterizedType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.ParameterizedType#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
+	 * @see org.eclipse.xtext.common.types.ParameterizedType#getFullyQualifiedName()
+	 * @see #getParameterizedType()
+	 * @generated
+	 */
+	EAttribute getParameterizedType_FullyQualifiedName();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ParameterizedType#getParameters <em>Parameters</em>}'.
@@ -2617,6 +2657,14 @@ public interface TypesPackage extends EPackage {
 		EAttribute TYPE_VARIABLE__NAME = eINSTANCE.getTypeVariable_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_VARIABLE__DECLARATOR = eINSTANCE.getTypeVariable_Declarator();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2733,6 +2781,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
+
+		/**
+		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE.getParameterizedType_FullyQualifiedName();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.

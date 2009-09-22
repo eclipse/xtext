@@ -27,14 +27,7 @@ public class JdtTypeProviderFactoryTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		projectProvider = new MockJavaProjectProvider();
-		projectProvider.setUp();
 		factory = new JdtTypeProviderFactory(projectProvider);
-	}
-	
-	@Override
-	protected void tearDown() throws Exception {
-		projectProvider.tearDown();
-		super.tearDown();
 	}
 	
 	public void testCreateTypeProvider_01() {

@@ -29,6 +29,7 @@ public interface TypeVariableDeclarator extends IdentifyableElement {
 	/**
 	 * Returns the value of the '<em><b>Type Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeVariable}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.TypeVariable#getDeclarator <em>Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type Variables</em>' containment reference list isn't clear,
@@ -37,7 +38,8 @@ public interface TypeVariableDeclarator extends IdentifyableElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Variables</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeVariableDeclarator_TypeVariables()
-	 * @model containment="true"
+	 * @see org.eclipse.xtext.common.types.TypeVariable#getDeclarator
+	 * @model opposite="declarator" containment="true"
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeVariables();

@@ -47,6 +47,7 @@ abstract class TypeVariableDeclarator extends IdentifyableElement {
 
 class TypeVariable extends ReferenceType, ConstrainedType {
   attr String name;
+  ref TypeVariableDeclarator#typeVariables declarator;
 }
 
 abstract class TypeConstraint extends IdentifyableElement {
@@ -77,6 +78,7 @@ class GenericType extends DeclaredType, TypeVariableDeclarator {
 }
 
 class ParameterizedType extends ReferenceType {
+  attr String fullyQualifiedName;
   val TypeParameter[*]#declarator parameters;
   ref Member#declaredParameterizedTypes declarator;
   val TypeReference rawType;
