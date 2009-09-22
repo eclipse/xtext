@@ -23,6 +23,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.enumrules.PackratEnumAndReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.SerializationTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ElementFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
@@ -35,7 +36,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.index.DefaultDeclarativeResourceIndexerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.impl.QualifiedNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.Bug282355Test.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug266082Test.class);
@@ -121,8 +121,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.DeclarativeScopeProviderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.impl.SimpleNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.ImportUriUtilTest.class);
+      suite.addTestSuite(org.eclipse.xtext.scoping.impl.QualifiedNameScopeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.scoping.impl.SimpleNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopesTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopeTest.class);
       suite.addTestSuite(org.eclipse.xtext.service.GenericModuleTest.class);
