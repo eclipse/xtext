@@ -319,7 +319,7 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 			boolean first = true;
 			for(TypeParameter parameter: parameters) {
 				if (!first)
-					result.append(", ");
+					result.append(",");
 				result.append(parameter.getCanonicalName());
 				first = false;
 			}

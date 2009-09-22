@@ -19,12 +19,13 @@ import org.eclipse.xtext.common.types.access.TypeResource;
  */
 public class PrimitiveMirror extends AbstractClassMirror {
 	
-	private final IClasspathTypeProvider typeProvider;
+	private final ITypeFactory<Class<?>> typeFactory;
 
-	public PrimitiveMirror(IClasspathTypeProvider typeProvider) {
-		this.typeProvider = typeProvider;
+	public PrimitiveMirror(ITypeFactory<Class<?>> typeProvider) {
+		this.typeFactory = typeProvider;
 	}
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment) {
 		if (fragment.endsWith("[]")) {
 			ComponentType component = (ComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
@@ -42,10 +43,15 @@ public class PrimitiveMirror extends AbstractClassMirror {
 		}
 		return null;
 	}
+	
+	@Override
+	protected String getTypeName() {
+		throw new UnsupportedOperationException();
+	}
 
 	public void initialize(TypeResource typeResource) {
 		for(Class<?> primitiveClass: Primitives.ALL_PRIMITIVE_TYPES) {
-			Type type = typeProvider.createType(primitiveClass);
+			Type type = typeFactory.createType(primitiveClass);
 			typeResource.getContents().add(type);
 		}
 	}

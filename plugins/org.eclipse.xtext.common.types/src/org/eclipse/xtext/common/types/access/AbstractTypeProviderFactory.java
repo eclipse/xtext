@@ -8,25 +8,22 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ITypeProvider {
+public abstract class AbstractTypeProviderFactory implements ITypeProvider.Factory {
 
-	Type findTypeByName(String name) throws TypeNotFoundException;
-	
-	ResourceSet getResourceSet();
-	
-	interface Factory {
-		
-		ITypeProvider createTypeProvider(ResourceSet resourceSet);
-		
-		ITypeProvider findTypeProvider(ResourceSet resourceSet);
-		
-		ITypeProvider createTypeProvider() throws UnsupportedOperationException;
-		
+	public ITypeProvider findTypeProvider(ResourceSet resourceSet) {
+		if (resourceSet == null)
+			throw new IllegalArgumentException("resourceSet may not be null.");
+		return (ITypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(ClassURIHelper.PROTOCOL);
 	}
-	
+
+	public ITypeProvider createTypeProvider() {
+		return createTypeProvider(new ResourceSetImpl());
+	}
+
 }

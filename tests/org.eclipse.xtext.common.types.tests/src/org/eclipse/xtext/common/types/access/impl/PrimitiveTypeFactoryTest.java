@@ -15,14 +15,14 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveTypeProviderTest extends TestCase implements IClasspathTypeProvider {
+public class PrimitiveTypeFactoryTest extends TestCase implements ITypeFactory<Class<?>> {
 
-	private PrimitiveTypeProvider provider;
+	private PrimitiveTypeFactory provider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		provider = new PrimitiveTypeProvider();
+		provider = new PrimitiveTypeFactory();
 	}
 	
 	public void testByte() {
@@ -61,7 +61,7 @@ public class PrimitiveTypeProviderTest extends TestCase implements IClasspathTyp
 		assertTrue(provider.createType(Void.TYPE) instanceof org.eclipse.xtext.common.types.Void);
 	}
 
-	public <T> Type createType(Class<T> clazz) {
+	public Type createType(Class<?> clazz) {
 		Type result = provider.createType(clazz);
 		assertTrue(result instanceof PrimitiveType);
 		return result;

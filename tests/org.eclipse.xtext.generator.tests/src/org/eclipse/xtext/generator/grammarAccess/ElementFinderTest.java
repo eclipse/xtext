@@ -23,16 +23,18 @@ import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFin
  * @author meysholdt - Initial contribution and API
  */
 public class ElementFinderTest extends AbstractXtextTests {
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		XtextPackage.eINSTANCE.getEFactoryInstance();
 		with(XtextStandaloneSetup.class);
 	}
 
 	private AbstractGrammarElementFinder grammarFinder() {
 		final String file = "classpath:/org/eclipse/xtext/generator/grammarAccess/ElementFinderTestLanguage.xtext";
-		final Resource r = new XtextResourceSet().getResource(URI.createURI(file), true);
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
+		final Resource r = rs.getResource(URI.createURI(file), true);
 		return new AbstractGrammarElementFinder() {
 			public Grammar getGrammar() {
 				return (Grammar) r.getContents().get(0);
