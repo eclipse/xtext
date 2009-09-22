@@ -34,7 +34,6 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
 		projectProvider = new MockJavaProjectProvider();
-		projectProvider.setUp();
 		typeProvider = new JdtTypeProvider(projectProvider.getJavaProject(resourceSet), resourceSet);
 	}
 	
@@ -42,7 +41,6 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	protected void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
-		projectProvider.tearDown();
 		super.tearDown();
 	}
 	
@@ -146,6 +144,21 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			fail("Expected TypeNotFoundException");
 		} catch (TypeNotFoundException ex) {
 			// OK
+		}
+	}
+	
+	public void testCreateMirror_06() {
+		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
+		try {
+			typeProvider.createMirror(uri);
+			fail("Expected TypeNotFoundException");
+		} catch (TypeNotFoundException ex) {
+			try {
+				typeProvider.createMirror(uri);
+				fail("Expected TypeNotFoundException");
+			} catch (TypeNotFoundException e) {
+				// OK
+			}
 		}
 	}
 	

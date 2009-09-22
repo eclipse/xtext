@@ -20,11 +20,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.ConstrainedType;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -36,6 +38,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl#getDeclarator <em>Declarator</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,12 +132,57 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TypeVariableDeclarator getDeclarator() {
+		if (eContainerFeatureID() != TypesPackage.TYPE_VARIABLE__DECLARATOR) return null;
+		return (TypeVariableDeclarator)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclarator(TypeVariableDeclarator newDeclarator, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDeclarator, TypesPackage.TYPE_VARIABLE__DECLARATOR, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclarator(TypeVariableDeclarator newDeclarator) {
+		if (newDeclarator != eInternalContainer() || (eContainerFeatureID() != TypesPackage.TYPE_VARIABLE__DECLARATOR && newDeclarator != null)) {
+			if (EcoreUtil.isAncestor(this, newDeclarator))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDeclarator != null)
+				msgs = ((InternalEObject)newDeclarator).eInverseAdd(this, TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES, TypeVariableDeclarator.class, msgs);
+			msgs = basicSetDeclarator(newDeclarator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_VARIABLE__DECLARATOR, newDeclarator, newDeclarator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TypesPackage.TYPE_VARIABLE__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDeclarator((TypeVariableDeclarator)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -149,8 +197,24 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 		switch (featureID) {
 			case TypesPackage.TYPE_VARIABLE__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				return basicSetDeclarator(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES, TypeVariableDeclarator.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -165,6 +229,8 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 				return getConstraints();
 			case TypesPackage.TYPE_VARIABLE__NAME:
 				return getName();
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				return getDeclarator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -185,6 +251,9 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 			case TypesPackage.TYPE_VARIABLE__NAME:
 				setName((String)newValue);
 				return;
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				setDeclarator((TypeVariableDeclarator)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -203,6 +272,9 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 			case TypesPackage.TYPE_VARIABLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				setDeclarator((TypeVariableDeclarator)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -219,6 +291,8 @@ public class TypeVariableImpl extends ReferenceTypeImpl implements TypeVariable 
 				return constraints != null && !constraints.isEmpty();
 			case TypesPackage.TYPE_VARIABLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.TYPE_VARIABLE__DECLARATOR:
+				return getDeclarator() != null;
 		}
 		return super.eIsSet(featureID);
 	}

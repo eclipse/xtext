@@ -526,6 +526,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTypeVariable_Declarator() {
+		return (EReference)typeVariableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTypeConstraint() {
 		return typeConstraintEClass;
 	}
@@ -643,8 +652,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_Parameters() {
-		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getParameterizedType_FullyQualifiedName() {
+		return (EAttribute)parameterizedTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -652,7 +661,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_Declarator() {
+	public EReference getParameterizedType_Parameters() {
 		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -661,8 +670,17 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_RawType() {
+	public EReference getParameterizedType_Declarator() {
 		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedType_RawType() {
+		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1040,6 +1058,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typeVariableEClass = createEClass(TYPE_VARIABLE);
 		createEAttribute(typeVariableEClass, TYPE_VARIABLE__NAME);
+		createEReference(typeVariableEClass, TYPE_VARIABLE__DECLARATOR);
 
 		typeConstraintEClass = createEClass(TYPE_CONSTRAINT);
 		createEReference(typeConstraintEClass, TYPE_CONSTRAINT__REFERENCED_TYPES);
@@ -1060,6 +1079,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(genericTypeEClass, GENERIC_TYPE__FINAL);
 
 		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
+		createEAttribute(parameterizedTypeEClass, PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETERS);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__DECLARATOR);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__RAW_TYPE);
@@ -1209,10 +1229,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(declaredTypeEClass, ecorePackage.getEString(), "getPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typeVariableDeclaratorEClass, TypeVariableDeclarator.class, "TypeVariableDeclarator", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeVariableDeclarator_TypeVariables(), this.getTypeVariable(), null, "typeVariables", null, 0, -1, TypeVariableDeclarator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeVariableDeclarator_TypeVariables(), this.getTypeVariable(), this.getTypeVariable_Declarator(), "typeVariables", null, 0, -1, TypeVariableDeclarator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeVariableEClass, TypeVariable.class, "TypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeVariable_Declarator(), this.getTypeVariableDeclarator(), this.getTypeVariableDeclarator_TypeVariables(), "declarator", null, 0, 1, TypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeConstraintEClass, TypeConstraint.class, "TypeConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeConstraint_ReferencedTypes(), this.getTypeReference(), null, "referencedTypes", null, 0, -1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1239,6 +1260,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(genericTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameterizedType_FullyQualifiedName(), ecorePackage.getEString(), "fullyQualifiedName", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_Parameters(), this.getTypeParameter(), null, "parameters", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_Declarator(), this.getMember(), this.getMember_DeclaredParameterizedTypes(), "declarator", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_RawType(), this.getTypeReference(), null, "rawType", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

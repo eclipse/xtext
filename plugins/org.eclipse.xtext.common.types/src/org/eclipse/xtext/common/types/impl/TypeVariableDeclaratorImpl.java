@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.TypeVariable;
@@ -73,9 +73,24 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	 */
 	public EList<TypeVariable> getTypeVariables() {
 		if (typeVariables == null) {
-			typeVariables = new EObjectContainmentEList<TypeVariable>(TypeVariable.class, this, TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES);
+			typeVariables = new EObjectContainmentWithInverseEList<TypeVariable>(TypeVariable.class, this, TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES, TypesPackage.TYPE_VARIABLE__DECLARATOR);
 		}
 		return typeVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeVariables()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

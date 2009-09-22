@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 
 import org.eclipse.emf.common.util.URI;
 
@@ -24,19 +25,19 @@ public class ClassURIHelper {
 	public static final String PRIMITIVES = "/Primitives";
 	public static final String OBJECTS = "/Objects/";
 	public static final String PROTOCOL = "java";
-	
+
 	public URI createResourceURI(Type type) {
 		StringBuilder uriBuilder = createURIBuilder();
 		createResourceURI(type, uriBuilder);
 		return createURI(uriBuilder);
 	}
-	
+
 	public URI createResourceURI(String withoutProtocol) {
 		StringBuilder uriBuilder = new StringBuilder(ClassURIHelper.PROTOCOL.length() + 1 + withoutProtocol.length());
 		uriBuilder.append(ClassURIHelper.PROTOCOL).append(":").append(withoutProtocol);
 		return createURI(uriBuilder);
 	}
-	
+
 	private StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);
 		builder.append(ClassURIHelper.PROTOCOL);
@@ -55,24 +56,27 @@ public class ClassURIHelper {
 		createFragment(type, uriBuilder);
 		return createURI(uriBuilder);
 	}
-	
+
 	public String getFragment(Type type) {
 		StringBuilder uriBuilder = new StringBuilder(32);
 		createFragment(type, uriBuilder);
 		return uriBuilder.toString();
 	}
-	
+
 	private void createFragment(Type type, StringBuilder uriBuilder) {
 		if (type instanceof Class<?>) {
 			Class<?> clazz = (Class<?>) type;
 			createFragmentForClass(clazz, uriBuilder);
-		} else if (type instanceof TypeVariable<?>) {
+		}
+		else if (type instanceof TypeVariable<?>) {
 			TypeVariable<?> variable = (TypeVariable<?>) type;
 			createFragmentForTypeVariable(variable, uriBuilder);
-		} else if (type instanceof GenericArrayType) {
+		}
+		else if (type instanceof GenericArrayType) {
 			createFragment(((GenericArrayType) type).getGenericComponentType(), uriBuilder);
 			uriBuilder.append("[]");
-		} else {
+		}
+		else {
 			throw new IllegalStateException("Unexpected type: " + type);
 		}
 	}
@@ -82,10 +86,12 @@ public class ClassURIHelper {
 		if (declaration instanceof Type) {
 			Type declaringType = (Type) declaration;
 			createFragment(declaringType, uriBuilder);
-		} else if (declaration instanceof Member) {
+		}
+		else if (declaration instanceof Member) {
 			Member member = (Member) declaration;
 			createFragmentForMember(member, uriBuilder);
-		} else {
+		}
+		else {
 			throw new IllegalArgumentException(variable + " / " + declaration);
 		}
 		uriBuilder.append('/');
@@ -101,45 +107,97 @@ public class ClassURIHelper {
 		Type[] parameterTypes = null;
 		if (member instanceof java.lang.reflect.Constructor<?>) {
 			parameterTypes = ((java.lang.reflect.Constructor<?>) member).getGenericParameterTypes();
-		} else if (member instanceof Method) {
+		}
+		else if (member instanceof Method) {
 			parameterTypes = ((Method) member).getGenericParameterTypes();
-		} else {
+		}
+		else {
 			throw new IllegalStateException("unknown member type: " + member);
 		}
-		for(int i = 0; i < parameterTypes.length; i++) {
-			if ( i!=0 ) {
+		for (int i = 0; i < parameterTypes.length; i++) {
+			if (i != 0) {
 				uriBuilder.append(',');
 			}
 			computeTypeName(parameterTypes[i], uriBuilder);
 		}
 		uriBuilder.append(')');
 	}
-	
+
 	public String computeTypeName(Type type) {
 		StringBuilder result = new StringBuilder(64);
 		computeTypeName(type, result);
 		return result.toString();
 	}
-	
+
 	public void computeTypeName(Type type, StringBuilder uriBuilder) {
 		if (type instanceof Class<?>) {
 			Class<?> clazz = (Class<?>) type;
 			if (clazz.isArray()) {
 				computeTypeName(clazz.getComponentType(), uriBuilder);
-				uriBuilder.append("[]");				
-			} else {
-				uriBuilder.append(clazz.getName());	
+				uriBuilder.append("[]");
 			}
-		} else if (type instanceof GenericArrayType) {
+			else {
+				uriBuilder.append(clazz.getName());
+			}
+		}
+		else if (type instanceof GenericArrayType) {
 			computeTypeName(((GenericArrayType) type).getGenericComponentType(), uriBuilder);
 			uriBuilder.append("[]");
-		} else if (type instanceof TypeVariable<?>) {
+		}
+		else if (type instanceof TypeVariable<?>) {
 			uriBuilder.append(((TypeVariable<?>) type).getName());
-		} else if (type instanceof ParameterizedType) {
+		}
+		else if (type instanceof ParameterizedType) {
 			Type rawType = ((ParameterizedType) type).getRawType();
 			computeTypeName(rawType, uriBuilder);
-		} else {
+		}
+		else {
 			throw new IllegalStateException("unknown type: " + type);
+		}
+	}
+
+	public String computeParameterizedTypeName(Type type) {
+		StringBuilder result = new StringBuilder(64);
+		computeParameterizedTypeName(type, result);
+		return result.toString();
+	}
+
+	public void computeParameterizedTypeName(Type type, StringBuilder uriBuilder) {
+		computeTypeName(type, uriBuilder);
+		if (type instanceof ParameterizedType) {
+			uriBuilder.append('<');
+			ParameterizedType parameterized = (ParameterizedType) type;
+			for (Type arg : parameterized.getActualTypeArguments()) {
+				computeParameter(arg, uriBuilder);
+			}
+			uriBuilder.append('>');
+		}
+	}
+
+	public void computeParameter(Type type, StringBuilder uriBuilder) {
+		if (type instanceof WildcardType) {
+			WildcardType wildcard = (WildcardType) type;
+			if (wildcard.getUpperBounds().length != 0) {
+				uriBuilder.append("? extends ");
+				for (int i = 0; i < wildcard.getUpperBounds().length; i++) {
+					if (i != 0)
+						uriBuilder.append('&');
+					Type upperBound = wildcard.getUpperBounds()[i];
+					computeParameterizedTypeName(upperBound, uriBuilder);
+				}
+			}
+			if (wildcard.getLowerBounds().length != 0) {
+				uriBuilder.append("? super ");
+				for (int i = 0; i < wildcard.getLowerBounds().length; i++) {
+					if (i != 0)
+						uriBuilder.append('&');
+					Type lowerBound = wildcard.getLowerBounds()[i];
+					computeParameterizedTypeName(lowerBound, uriBuilder);
+				}
+			}
+		}
+		else {
+			computeParameterizedTypeName(type, uriBuilder);
 		}
 	}
 
@@ -147,9 +205,11 @@ public class ClassURIHelper {
 		if (clazz.isArray()) {
 			createFragmentForClass(clazz.getComponentType(), uriBuilder);
 			uriBuilder.append("[]");
-		} else if (clazz.isMemberClass()){
+		}
+		else if (clazz.isMemberClass()) {
 			uriBuilder.append(clazz.getName());
-		} else {
+		}
+		else {
 			uriBuilder.append(clazz.getName());
 		}
 	}
@@ -158,12 +218,15 @@ public class ClassURIHelper {
 		if (type instanceof Class<?>) {
 			Class<?> clazz = (Class<?>) type;
 			createResourceURIForClass(clazz, uriBuilder);
-		} else if (type instanceof TypeVariable<?>) {
+		}
+		else if (type instanceof TypeVariable<?>) {
 			TypeVariable<?> variable = (TypeVariable<?>) type;
 			createResourceURIForTypeVariable(variable, uriBuilder);
-		} else if (type instanceof GenericArrayType) {
+		}
+		else if (type instanceof GenericArrayType) {
 			createResourceURI(((GenericArrayType) type).getGenericComponentType(), uriBuilder);
-		} else {
+		}
+		else {
 			throw new IllegalStateException("unexpected type: " + type);
 		}
 	}
@@ -173,11 +236,13 @@ public class ClassURIHelper {
 		if (declaration instanceof Class<?>) {
 			Class<?> declaringClass = (Class<?>) declaration;
 			createResourceURIForClass(declaringClass, uriBuilder);
-		} else if (declaration instanceof Member) {
+		}
+		else if (declaration instanceof Member) {
 			Member member = (Member) declaration;
 			Class<?> declaringClass = member.getDeclaringClass();
 			createResourceURIForClass(declaringClass, uriBuilder);
-		} else {
+		}
+		else {
 			throw new IllegalArgumentException(variable + " / " + declaration);
 		}
 	}
@@ -185,11 +250,14 @@ public class ClassURIHelper {
 	private void createResourceURIForClass(Class<?> clazz, StringBuilder uriBuilder) {
 		if (clazz.isArray()) {
 			createResourceURIForClass(clazz.getComponentType(), uriBuilder);
-		} else if (clazz.isMemberClass()) {
+		}
+		else if (clazz.isMemberClass()) {
 			createResourceURIForClass(clazz.getDeclaringClass(), uriBuilder);
-		} else if (clazz.isPrimitive()) {
-			uriBuilder.append(ClassURIHelper.PRIMITIVES); 
-		} else {
+		}
+		else if (clazz.isPrimitive()) {
+			uriBuilder.append(ClassURIHelper.PRIMITIVES);
+		}
+		else {
 			uriBuilder.append(ClassURIHelper.OBJECTS).append(clazz.getName());
 		}
 	}

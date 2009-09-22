@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getDeclarator <em>Declarator</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}</li>
@@ -28,6 +29,32 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ParameterizedType extends ReferenceType {
+	/**
+	 * Returns the value of the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Fully Qualified Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Fully Qualified Name</em>' attribute.
+	 * @see #setFullyQualifiedName(String)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getParameterizedType_FullyQualifiedName()
+	 * @model
+	 * @generated
+	 */
+	String getFullyQualifiedName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ParameterizedType#getFullyQualifiedName <em>Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Fully Qualified Name</em>' attribute.
+	 * @see #getFullyQualifiedName()
+	 * @generated
+	 */
+	void setFullyQualifiedName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeParameter}.

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.Executable;
@@ -165,9 +166,24 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.EXECUTABLE__TYPE_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeVariables()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<TypeVariable> getTypeVariables() {
 		if (typeVariables == null) {
-			typeVariables = new EObjectContainmentEList<TypeVariable>(TypeVariable.class, this, TypesPackage.EXECUTABLE__TYPE_VARIABLES);
+			typeVariables = new EObjectContainmentWithInverseEList<TypeVariable>(TypeVariable.class, this, TypesPackage.EXECUTABLE__TYPE_VARIABLES, TypesPackage.TYPE_VARIABLE__DECLARATOR);
 		}
 		return typeVariables;
 	}

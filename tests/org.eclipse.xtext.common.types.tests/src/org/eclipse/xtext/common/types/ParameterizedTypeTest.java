@@ -27,24 +27,8 @@ public class ParameterizedTypeTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.util.List");
-		TypeReference rawTypeReference = TypesFactory.eINSTANCE.createTypeReference();
-		rawTypeReference.setType(genericType);
-		parameterizedType.setRawType(rawTypeReference);
-		assertEquals("java.util.List", parameterizedType.getCanonicalName());
-	}
-	
-	public void testCanonicalName_03() {
-		GenericType genericType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.setFullyQualifiedName("java.util.List");
-		TypeReference rawTypeReference = TypesFactory.eINSTANCE.createTypeReference();
-		rawTypeReference.setType(genericType);
-		parameterizedType.setRawType(rawTypeReference);
-		WildcardTypeParameter parameter = TypesFactory.eINSTANCE.createWildcardTypeParameter();
-		parameter.setWildcard(TypesFactory.eINSTANCE.createWildcard());
-		parameterizedType.getParameters().add(parameter);
-		assertEquals("java.util.List<?>", parameterizedType.getCanonicalName());
+		parameterizedType.setFullyQualifiedName("java.util.List<T>");
+		assertEquals("java.util.List<T>", parameterizedType.getCanonicalName());
 	}
 	
 }

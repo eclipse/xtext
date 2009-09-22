@@ -17,6 +17,7 @@ package org.eclipse.xtext.common.types;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.TypeVariable#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.TypeVariable#getDeclarator <em>Declarator</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,33 @@ public interface TypeVariable extends ReferenceType, ConstrainedType {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Declarator</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables <em>Type Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Declarator</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Declarator</em>' container reference.
+	 * @see #setDeclarator(TypeVariableDeclarator)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeVariable_Declarator()
+	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables
+	 * @model opposite="typeVariables" transient="false"
+	 * @generated
+	 */
+	TypeVariableDeclarator getDeclarator();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeVariable#getDeclarator <em>Declarator</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Declarator</em>' container reference.
+	 * @see #getDeclarator()
+	 * @generated
+	 */
+	void setDeclarator(TypeVariableDeclarator value);
 
 } // TypeVariable

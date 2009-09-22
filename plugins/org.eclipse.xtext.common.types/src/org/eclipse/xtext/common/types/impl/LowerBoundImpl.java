@@ -40,5 +40,12 @@ public class LowerBoundImpl extends TypeConstraintImpl implements LowerBound {
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.LOWER_BOUND;
 	}
+	
+	@Override
+	public String getCanonicalName() {
+		if (referencedTypes != null && !referencedTypes.isEmpty())
+			return "super " + super.getCanonicalName();
+		return null;
+	}
 
 } //LowerBoundImpl

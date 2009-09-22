@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.GenericType;
@@ -246,7 +246,7 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 */
 	public EList<TypeVariable> getTypeVariables() {
 		if (typeVariables == null) {
-			typeVariables = new EObjectContainmentEList<TypeVariable>(TypeVariable.class, this, TypesPackage.GENERIC_TYPE__TYPE_VARIABLES);
+			typeVariables = new EObjectContainmentWithInverseEList<TypeVariable>(TypeVariable.class, this, TypesPackage.GENERIC_TYPE__TYPE_VARIABLES, TypesPackage.TYPE_VARIABLE__DECLARATOR);
 		}
 		return typeVariables;
 	}
@@ -282,6 +282,21 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeVariables()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
