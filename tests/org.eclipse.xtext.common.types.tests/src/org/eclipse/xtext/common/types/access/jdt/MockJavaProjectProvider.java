@@ -51,7 +51,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	public static void setUp() throws Exception {
 		javaProject = createJavaProject("myProject",
 				new String[] {
-					"org.eclipse.xtext.common.types.tests"
+					"org.eclipse.xtext.common.types"
 				},
 				new String[] {
 						JavaCore.NATURE_ID,
