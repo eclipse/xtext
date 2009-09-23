@@ -20,12 +20,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -38,19 +40,9 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	private static IJavaProject javaProject;
 	
-	private static transient boolean isDone = false;
-	
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		if (javaProject == null)
 			throw new IllegalStateException("javaProject is null");
-		while (!isDone) {
-			try {
-				Thread.sleep(50);
-			}
-			catch (InterruptedException e) {
-				// ignore
-			}
-		}
 		return javaProject;
 	}
 
@@ -113,38 +105,32 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, requiredBundles, project);
-			project.build(IncrementalProjectBuilder.FULL_BUILD, new IProgressMonitor() {
-				public void worked(int work) {
-				}
-				
-				public void subTask(String name) {
-				}
-				
-				public void setTaskName(String name) {
-				}
-				
-				public void setCanceled(boolean value) {
-				}
-				
-				public boolean isCanceled() {
-					return false;
-				}
-				
-				public void internalWorked(double work) {
-				}
-				
-				public void done() {
-					isDone = true;
-				}
-				
-				public void beginTask(String name, int totalWork) {
-				}
-			});
+			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+			refresh(javaProject);
 		}
 		catch (final Exception exception) {
 			throw new RuntimeException(exception);
 		}
 		return javaProject ;
+	}
+	
+	public static void refresh(final IJavaProject javaProject) throws CoreException {
+		javaProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+		waitForManualRefresh();
+	}
+	
+	public static void waitForManualRefresh() {
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_REFRESH, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
 	}
 	
 	private static void createManifest(final String projectName, final String[] requiredBundles,
