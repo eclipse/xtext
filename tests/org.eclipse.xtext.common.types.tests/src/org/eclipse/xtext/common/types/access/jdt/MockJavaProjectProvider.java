@@ -22,7 +22,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -30,8 +29,11 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -105,13 +107,43 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, requiredBundles, project);
-			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+//			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+			refreshExternalArchives(javaProject);
 			refresh(javaProject);
 		}
 		catch (final Exception exception) {
 			throw new RuntimeException(exception);
 		}
 		return javaProject ;
+	}
+	
+	protected static void refreshExternalArchives(IJavaProject p) throws JavaModelException {
+		waitForAutoBuild(); // ensure that the auto-build job doesn't interfere with external jar refreshing
+		getJavaModel().refreshExternalArchives(new IJavaElement[] {p}, null);
+	}
+	
+	/**
+	 * Wait for autobuild notification to occur
+	 */
+	public static void waitForAutoBuild() {
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+	
+	/**
+	 * Returns the Java Model this test suite is running on.
+	 */
+	public static IJavaModel getJavaModel() {
+		return JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
 	}
 	
 	public static void refresh(final IJavaProject javaProject) throws CoreException {
