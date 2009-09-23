@@ -22,6 +22,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.access.impl.PrimitiveTypeFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.TypeURIHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.TypeResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.AnnotationTypeTest.class);

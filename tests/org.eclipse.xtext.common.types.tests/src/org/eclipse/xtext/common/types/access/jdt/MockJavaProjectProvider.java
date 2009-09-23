@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -37,9 +38,19 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	private static IJavaProject javaProject;
 	
+	private static transient boolean isDone = false;
+	
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		if (javaProject == null)
 			throw new IllegalStateException("javaProject is null");
+		while (!isDone) {
+			try {
+				Thread.sleep(50);
+			}
+			catch (InterruptedException e) {
+				// ignore
+			}
+		}
 		return javaProject;
 	}
 
@@ -102,7 +113,33 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, requiredBundles, project);
-			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+			project.build(IncrementalProjectBuilder.FULL_BUILD, new IProgressMonitor() {
+				public void worked(int work) {
+				}
+				
+				public void subTask(String name) {
+				}
+				
+				public void setTaskName(String name) {
+				}
+				
+				public void setCanceled(boolean value) {
+				}
+				
+				public boolean isCanceled() {
+					return false;
+				}
+				
+				public void internalWorked(double work) {
+				}
+				
+				public void done() {
+					isDone = true;
+				}
+				
+				public void beginTask(String name, int totalWork) {
+				}
+			});
 		}
 		catch (final Exception exception) {
 			throw new RuntimeException(exception);
