@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.junit.validation;
 
 import static org.eclipse.emf.common.util.Diagnostic.ERROR;
 import static org.eclipse.emf.common.util.Diagnostic.WARNING;

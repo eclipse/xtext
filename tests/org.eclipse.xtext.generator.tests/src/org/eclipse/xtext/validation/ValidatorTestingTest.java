@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.validation.AssertableDiagnostics.error;
-import static org.eclipse.xtext.validation.AssertableDiagnostics.warning;
+import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.error;
+import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.warning;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.validation.ValidatorTester;
 
 /**
  * @author meysholdt - Initial contribution and API

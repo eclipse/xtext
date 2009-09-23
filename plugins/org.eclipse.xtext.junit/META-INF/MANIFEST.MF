@@ -9,4 +9,6 @@ Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0",
  org.eclipse.xtext,
  org.junit;bundle-version="3.8.2";resolution:=optional,
  org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0"
-Export-Package: org.eclipse.xtext.junit
+Export-Package: org.eclipse.xtext.junit,
+ org.eclipse.xtext.junit.validation
+Import-Package: org.apache.log4j
