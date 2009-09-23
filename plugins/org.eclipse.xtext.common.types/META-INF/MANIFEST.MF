@@ -18,4 +18,5 @@ Export-Package: org.eclipse.xtext.common.types,
  org.eclipse.xtext.common.types.access,
  org.eclipse.xtext.common.types.access.impl,
  org.eclipse.xtext.common.types.impl,
+ org.eclipse.xtext.common.types.testSetups,
  org.eclipse.xtext.common.types.util

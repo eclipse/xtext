@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeParameter;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
-import org.eclipse.xtext.common.types.access.scenarios.ParameterizedTypes;
+import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
 
 import com.google.common.collect.Sets;
 

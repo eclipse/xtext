@@ -20,7 +20,6 @@ Export-Package: org.eclipse.xtext.common.types,
  org.eclipse.xtext.common.types.access,
  org.eclipse.xtext.common.types.access.impl,
  org.eclipse.xtext.common.types.access.jdt,
- org.eclipse.xtext.common.types.access.scenarios,
  org.eclipse.xtext.common.types.tests
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.common.types.tests.Activator
