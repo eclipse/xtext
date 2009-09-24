@@ -10,21 +10,21 @@ package org.eclipse.xtext.common.types;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Reference Type Parameter</b></em>'.
+ * A representation of the model object '<em><b>Reference Type Argument</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeParameter#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference <em>Reference</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeParameter()
+ * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument()
  * @model
  * @generated
  */
-public interface ReferenceTypeParameter extends TypeParameter {
+public interface ReferenceTypeArgument extends TypeArgument {
 	/**
 	 * Returns the value of the '<em><b>Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -35,14 +35,14 @@ public interface ReferenceTypeParameter extends TypeParameter {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference</em>' containment reference.
 	 * @see #setReference(TypeReference)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeParameter_Reference()
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument_Reference()
 	 * @model containment="true"
 	 * @generated
 	 */
 	TypeReference getReference();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeParameter#getReference <em>Reference</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference <em>Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reference</em>' containment reference.
@@ -51,4 +51,4 @@ public interface ReferenceTypeParameter extends TypeParameter {
 	 */
 	void setReference(TypeReference value);
 
-} // ReferenceTypeParameter
+} // ReferenceTypeArgument

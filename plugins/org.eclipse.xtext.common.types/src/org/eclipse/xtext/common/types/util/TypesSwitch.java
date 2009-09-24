@@ -32,17 +32,17 @@ import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceType;
-import org.eclipse.xtext.common.types.ReferenceTypeParameter;
+import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.TypeVariable;
-import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
-import org.eclipse.xtext.common.types.WildcardTypeParameter;
+import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -204,21 +204,21 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR: {
-				TypeVariableDeclarator typeVariableDeclarator = (TypeVariableDeclarator)theEObject;
-				T result = caseTypeVariableDeclarator(typeVariableDeclarator);
-				if (result == null) result = caseIdentifyableElement(typeVariableDeclarator);
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR: {
+				TypeParameterDeclarator typeParameterDeclarator = (TypeParameterDeclarator)theEObject;
+				T result = caseTypeParameterDeclarator(typeParameterDeclarator);
+				if (result == null) result = caseIdentifyableElement(typeParameterDeclarator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_VARIABLE: {
-				TypeVariable typeVariable = (TypeVariable)theEObject;
-				T result = caseTypeVariable(typeVariable);
-				if (result == null) result = caseReferenceType(typeVariable);
-				if (result == null) result = caseConstrainedType(typeVariable);
-				if (result == null) result = caseComponentType(typeVariable);
-				if (result == null) result = caseType(typeVariable);
-				if (result == null) result = caseIdentifyableElement(typeVariable);
+			case TypesPackage.TYPE_PARAMETER: {
+				TypeParameter typeParameter = (TypeParameter)theEObject;
+				T result = caseTypeParameter(typeParameter);
+				if (result == null) result = caseReferenceType(typeParameter);
+				if (result == null) result = caseConstrainedType(typeParameter);
+				if (result == null) result = caseComponentType(typeParameter);
+				if (result == null) result = caseType(typeParameter);
+				if (result == null) result = caseIdentifyableElement(typeParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -275,7 +275,7 @@ public class TypesSwitch<T> {
 				GenericType genericType = (GenericType)theEObject;
 				T result = caseGenericType(genericType);
 				if (result == null) result = caseDeclaredType(genericType);
-				if (result == null) result = caseTypeVariableDeclarator(genericType);
+				if (result == null) result = caseTypeParameterDeclarator(genericType);
 				if (result == null) result = caseReferenceType(genericType);
 				if (result == null) result = caseMember(genericType);
 				if (result == null) result = caseComponentType(genericType);
@@ -295,26 +295,26 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_PARAMETER: {
-				TypeParameter typeParameter = (TypeParameter)theEObject;
-				T result = caseTypeParameter(typeParameter);
-				if (result == null) result = caseIdentifyableElement(typeParameter);
+			case TypesPackage.TYPE_ARGUMENT: {
+				TypeArgument typeArgument = (TypeArgument)theEObject;
+				T result = caseTypeArgument(typeArgument);
+				if (result == null) result = caseIdentifyableElement(typeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.WILDCARD_TYPE_PARAMETER: {
-				WildcardTypeParameter wildcardTypeParameter = (WildcardTypeParameter)theEObject;
-				T result = caseWildcardTypeParameter(wildcardTypeParameter);
-				if (result == null) result = caseTypeParameter(wildcardTypeParameter);
-				if (result == null) result = caseIdentifyableElement(wildcardTypeParameter);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT: {
+				WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument)theEObject;
+				T result = caseWildcardTypeArgument(wildcardTypeArgument);
+				if (result == null) result = caseTypeArgument(wildcardTypeArgument);
+				if (result == null) result = caseIdentifyableElement(wildcardTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.REFERENCE_TYPE_PARAMETER: {
-				ReferenceTypeParameter referenceTypeParameter = (ReferenceTypeParameter)theEObject;
-				T result = caseReferenceTypeParameter(referenceTypeParameter);
-				if (result == null) result = caseTypeParameter(referenceTypeParameter);
-				if (result == null) result = caseIdentifyableElement(referenceTypeParameter);
+			case TypesPackage.REFERENCE_TYPE_ARGUMENT: {
+				ReferenceTypeArgument referenceTypeArgument = (ReferenceTypeArgument)theEObject;
+				T result = caseReferenceTypeArgument(referenceTypeArgument);
+				if (result == null) result = caseTypeArgument(referenceTypeArgument);
+				if (result == null) result = caseIdentifyableElement(referenceTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -346,7 +346,7 @@ public class TypesSwitch<T> {
 				Executable executable = (Executable)theEObject;
 				T result = caseExecutable(executable);
 				if (result == null) result = caseMember(executable);
-				if (result == null) result = caseTypeVariableDeclarator(executable);
+				if (result == null) result = caseTypeParameterDeclarator(executable);
 				if (result == null) result = caseAnnotationTarget(executable);
 				if (result == null) result = caseIdentifyableElement(executable);
 				if (result == null) result = defaultCase(theEObject);
@@ -357,7 +357,7 @@ public class TypesSwitch<T> {
 				T result = caseConstructor(constructor);
 				if (result == null) result = caseExecutable(constructor);
 				if (result == null) result = caseMember(constructor);
-				if (result == null) result = caseTypeVariableDeclarator(constructor);
+				if (result == null) result = caseTypeParameterDeclarator(constructor);
 				if (result == null) result = caseAnnotationTarget(constructor);
 				if (result == null) result = caseIdentifyableElement(constructor);
 				if (result == null) result = defaultCase(theEObject);
@@ -368,7 +368,7 @@ public class TypesSwitch<T> {
 				T result = caseOperation(operation);
 				if (result == null) result = caseExecutable(operation);
 				if (result == null) result = caseMember(operation);
-				if (result == null) result = caseTypeVariableDeclarator(operation);
+				if (result == null) result = caseTypeParameterDeclarator(operation);
 				if (result == null) result = caseAnnotationTarget(operation);
 				if (result == null) result = caseIdentifyableElement(operation);
 				if (result == null) result = defaultCase(theEObject);
@@ -548,32 +548,32 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Variable Declarator</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter Declarator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Variable Declarator</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Parameter Declarator</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeVariableDeclarator(TypeVariableDeclarator object) {
+	public T caseTypeParameterDeclarator(TypeParameterDeclarator object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeVariable(TypeVariable object) {
+	public T caseTypeParameter(TypeParameter object) {
 		return null;
 	}
 
@@ -683,47 +683,47 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeParameter(TypeParameter object) {
+	public T caseTypeArgument(TypeArgument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wildcard Type Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wildcard Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wildcard Type Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wildcard Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWildcardTypeParameter(WildcardTypeParameter object) {
+	public T caseWildcardTypeArgument(WildcardTypeArgument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Type Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Reference Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Type Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Reference Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReferenceTypeParameter(ReferenceTypeParameter object) {
+	public T caseReferenceTypeArgument(ReferenceTypeArgument object) {
 		return null;
 	}
 

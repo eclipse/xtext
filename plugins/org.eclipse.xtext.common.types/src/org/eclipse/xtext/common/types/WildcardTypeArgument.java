@@ -10,21 +10,21 @@ package org.eclipse.xtext.common.types;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Wildcard Type Parameter</b></em>'.
+ * A representation of the model object '<em><b>Wildcard Type Argument</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.WildcardTypeParameter#getWildcard <em>Wildcard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.WildcardTypeArgument#getWildcard <em>Wildcard</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.common.types.TypesPackage#getWildcardTypeParameter()
+ * @see org.eclipse.xtext.common.types.TypesPackage#getWildcardTypeArgument()
  * @model
  * @generated
  */
-public interface WildcardTypeParameter extends TypeParameter {
+public interface WildcardTypeArgument extends TypeArgument {
 	/**
 	 * Returns the value of the '<em><b>Wildcard</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -35,14 +35,14 @@ public interface WildcardTypeParameter extends TypeParameter {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wildcard</em>' containment reference.
 	 * @see #setWildcard(Wildcard)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getWildcardTypeParameter_Wildcard()
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getWildcardTypeArgument_Wildcard()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Wildcard getWildcard();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.WildcardTypeParameter#getWildcard <em>Wildcard</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.WildcardTypeArgument#getWildcard <em>Wildcard</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Wildcard</em>' containment reference.
@@ -51,4 +51,4 @@ public interface WildcardTypeParameter extends TypeParameter {
 	 */
 	void setWildcard(Wildcard value);
 
-} // WildcardTypeParameter
+} // WildcardTypeArgument

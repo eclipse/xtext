@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Constraint</b></em>'.
@@ -17,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedTypes <em>Referenced Types</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedType <em>Referenced Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getConstrainedType <em>Constrained Type</em>}</li>
  * </ul>
  * </p>
@@ -28,20 +26,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface TypeConstraint extends IdentifyableElement {
 	/**
-	 * Returns the value of the '<em><b>Referenced Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeReference}.
+	 * Returns the value of the '<em><b>Referenced Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Types</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Referenced Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referenced Types</em>' containment reference list.
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_ReferencedTypes()
+	 * @return the value of the '<em>Referenced Type</em>' containment reference.
+	 * @see #setReferencedType(TypeReference)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_ReferencedType()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TypeReference> getReferencedTypes();
+	TypeReference getReferencedType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedType <em>Referenced Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referenced Type</em>' containment reference.
+	 * @see #getReferencedType()
+	 * @generated
+	 */
+	void setReferencedType(TypeReference value);
 
 	/**
 	 * Returns the value of the '<em><b>Constrained Type</b></em>' container reference.

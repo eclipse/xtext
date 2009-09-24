@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getDeclarator <em>Declarator</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}</li>
  * </ul>
@@ -56,20 +56,22 @@ public interface ParameterizedType extends ReferenceType {
 	void setFullyQualifiedName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeParameter}.
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeArgument}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.TypeArgument#getDeclarator <em>Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getParameterizedType_Parameters()
-	 * @model containment="true"
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getParameterizedType_Arguments()
+	 * @see org.eclipse.xtext.common.types.TypeArgument#getDeclarator
+	 * @model opposite="declarator" containment="true"
 	 * @generated
 	 */
-	EList<TypeParameter> getParameters();
+	EList<TypeArgument> getArguments();
 
 	/**
 	 * Returns the value of the '<em><b>Declarator</b></em>' container reference.

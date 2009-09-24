@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface GenericType extends DeclaredType, TypeVariableDeclarator {
+public interface GenericType extends DeclaredType, TypeParameterDeclarator {
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->

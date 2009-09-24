@@ -19,40 +19,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.TypeVariable;
-import org.eclipse.xtext.common.types.TypeVariableDeclarator;
+import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type Variable Declarator</b></em>'.
+ * An implementation of the model object '<em><b>Type Parameter Declarator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl#getTypeVariables <em>Type Variables</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl implements TypeVariableDeclarator {
+public abstract class TypeParameterDeclaratorImpl extends IdentifyableElementImpl implements TypeParameterDeclarator {
 	/**
-	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypeVariables()
+	 * @see #getTypeParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeVariable> typeVariables;
+	protected EList<TypeParameter> typeParameters;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeVariableDeclaratorImpl() {
+	protected TypeParameterDeclaratorImpl() {
 		super();
 	}
 
@@ -63,7 +63,7 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.TYPE_VARIABLE_DECLARATOR;
+		return TypesPackage.Literals.TYPE_PARAMETER_DECLARATOR;
 	}
 
 	/**
@@ -71,11 +71,11 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeVariable> getTypeVariables() {
-		if (typeVariables == null) {
-			typeVariables = new EObjectContainmentWithInverseEList<TypeVariable>(TypeVariable.class, this, TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES, TypesPackage.TYPE_VARIABLE__DECLARATOR);
+	public EList<TypeParameter> getTypeParameters() {
+		if (typeParameters == null) {
+			typeParameters = new EObjectContainmentWithInverseEList<TypeParameter>(TypeParameter.class, this, TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS, TypesPackage.TYPE_PARAMETER__DECLARATOR);
 		}
-		return typeVariables;
+		return typeParameters;
 	}
 
 	/**
@@ -87,8 +87,8 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeVariables()).basicAdd(otherEnd, msgs);
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeParameters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -101,8 +101,8 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				return ((InternalEList<?>)getTypeVariables()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,8 +115,8 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				return getTypeVariables();
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				return getTypeParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,9 +130,9 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				getTypeVariables().clear();
-				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +146,8 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				getTypeVariables().clear();
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				getTypeParameters().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,10 +161,10 @@ public abstract class TypeVariableDeclaratorImpl extends IdentifyableElementImpl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES:
-				return typeVariables != null && !typeVariables.isEmpty();
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //TypeVariableDeclaratorImpl
+} //TypeParameterDeclaratorImpl

@@ -12,14 +12,14 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class WildcardTypeParameterTest extends TestCase {
+public class TypeParameterTest extends TestCase {
 
-	private WildcardTypeParameter typeParameter;
+	private TypeParameter typeParameter;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		typeParameter = TypesFactory.eINSTANCE.createWildcardTypeParameter();
+		typeParameter = TypesFactory.eINSTANCE.createTypeParameter();
 	}
 	
 	public void testCanonicalName_01() {
@@ -27,8 +27,8 @@ public class WildcardTypeParameterTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		typeParameter.setWildcard(TypesFactory.eINSTANCE.createWildcard());
-		assertEquals("?", typeParameter.getCanonicalName());
+		String name = "T";
+		typeParameter.setName(name);
+		assertEquals("T", typeParameter.getCanonicalName());
 	}
-	
 }

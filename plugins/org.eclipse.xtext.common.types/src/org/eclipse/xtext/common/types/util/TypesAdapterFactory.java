@@ -34,17 +34,17 @@ import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceType;
-import org.eclipse.xtext.common.types.ReferenceTypeParameter;
+import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.TypeVariable;
-import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
-import org.eclipse.xtext.common.types.WildcardTypeParameter;
+import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,12 +143,12 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createDeclaredTypeAdapter();
 			}
 			@Override
-			public Adapter caseTypeVariableDeclarator(TypeVariableDeclarator object) {
-				return createTypeVariableDeclaratorAdapter();
+			public Adapter caseTypeParameterDeclarator(TypeParameterDeclarator object) {
+				return createTypeParameterDeclaratorAdapter();
 			}
 			@Override
-			public Adapter caseTypeVariable(TypeVariable object) {
-				return createTypeVariableAdapter();
+			public Adapter caseTypeParameter(TypeParameter object) {
+				return createTypeParameterAdapter();
 			}
 			@Override
 			public Adapter caseTypeConstraint(TypeConstraint object) {
@@ -179,16 +179,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createParameterizedTypeAdapter();
 			}
 			@Override
-			public Adapter caseTypeParameter(TypeParameter object) {
-				return createTypeParameterAdapter();
+			public Adapter caseTypeArgument(TypeArgument object) {
+				return createTypeArgumentAdapter();
 			}
 			@Override
-			public Adapter caseWildcardTypeParameter(WildcardTypeParameter object) {
-				return createWildcardTypeParameterAdapter();
+			public Adapter caseWildcardTypeArgument(WildcardTypeArgument object) {
+				return createWildcardTypeArgumentAdapter();
 			}
 			@Override
-			public Adapter caseReferenceTypeParameter(ReferenceTypeParameter object) {
-				return createReferenceTypeParameterAdapter();
+			public Adapter caseReferenceTypeArgument(ReferenceTypeArgument object) {
+				return createReferenceTypeArgumentAdapter();
 			}
 			@Override
 			public Adapter caseTypeReference(TypeReference object) {
@@ -387,30 +387,30 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator <em>Type Variable Declarator</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeParameterDeclarator <em>Type Parameter Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator
+	 * @see org.eclipse.xtext.common.types.TypeParameterDeclarator
 	 * @generated
 	 */
-	public Adapter createTypeVariableDeclaratorAdapter() {
+	public Adapter createTypeParameterDeclaratorAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeVariable <em>Type Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeParameter <em>Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.TypeVariable
+	 * @see org.eclipse.xtext.common.types.TypeParameter
 	 * @generated
 	 */
-	public Adapter createTypeVariableAdapter() {
+	public Adapter createTypeParameterAdapter() {
 		return null;
 	}
 
@@ -513,44 +513,44 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeParameter <em>Type Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeArgument <em>Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.TypeParameter
+	 * @see org.eclipse.xtext.common.types.TypeArgument
 	 * @generated
 	 */
-	public Adapter createTypeParameterAdapter() {
+	public Adapter createTypeArgumentAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.WildcardTypeParameter <em>Wildcard Type Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.WildcardTypeArgument <em>Wildcard Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.WildcardTypeParameter
+	 * @see org.eclipse.xtext.common.types.WildcardTypeArgument
 	 * @generated
 	 */
-	public Adapter createWildcardTypeParameterAdapter() {
+	public Adapter createWildcardTypeArgumentAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ReferenceTypeParameter <em>Reference Type Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument <em>Reference Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.ReferenceTypeParameter
+	 * @see org.eclipse.xtext.common.types.ReferenceTypeArgument
 	 * @generated
 	 */
-	public Adapter createReferenceTypeParameterAdapter() {
+	public Adapter createReferenceTypeArgumentAdapter() {
 		return null;
 	}
 

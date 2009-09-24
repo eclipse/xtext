@@ -19,13 +19,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
-import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -37,7 +37,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getDeclarator <em>Declarator</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl#getRawType <em>Raw Type</em>}</li>
  * </ul>
@@ -67,14 +67,14 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameters()
+	 * @see #getArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeParameter> parameters;
+	protected EList<TypeArgument> arguments;
 
 	/**
 	 * The cached value of the '{@link #getRawType() <em>Raw Type</em>}' containment reference.
@@ -131,11 +131,11 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeParameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<TypeParameter>(TypeParameter.class, this, TypesPackage.PARAMETERIZED_TYPE__PARAMETERS);
+	public EList<TypeArgument> getArguments() {
+		if (arguments == null) {
+			arguments = new EObjectContainmentWithInverseEList<TypeArgument>(TypeArgument.class, this, TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS, TypesPackage.TYPE_ARGUMENT__DECLARATOR);
 		}
-		return parameters;
+		return arguments;
 	}
 
 	/**
@@ -227,9 +227,12 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getArguments()).basicAdd(otherEnd, msgs);
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -246,8 +249,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				return basicSetDeclarator(null, msgs);
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
@@ -280,8 +283,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 		switch (featureID) {
 			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
 				return getFullyQualifiedName();
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
-				return getParameters();
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				return getArguments();
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				return getDeclarator();
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
@@ -302,9 +305,9 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName((String)newValue);
 				return;
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends TypeParameter>)newValue);
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				getArguments().clear();
+				getArguments().addAll((Collection<? extends TypeArgument>)newValue);
 				return;
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				setDeclarator((Member)newValue);
@@ -327,8 +330,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
-				getParameters().clear();
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				getArguments().clear();
 				return;
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				setDeclarator((Member)null);
@@ -350,8 +353,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 		switch (featureID) {
 			case TypesPackage.PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME:
 				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
+			case TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS:
+				return arguments != null && !arguments.isEmpty();
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				return getDeclarator() != null;
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:

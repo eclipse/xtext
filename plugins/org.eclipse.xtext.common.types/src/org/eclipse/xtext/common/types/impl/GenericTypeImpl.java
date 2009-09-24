@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.GenericType;
+import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.TypeVariable;
-import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -35,7 +35,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#getTypeVariables <em>Type Variables</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl#isStatic <em>Static</em>}</li>
@@ -47,14 +47,14 @@ import org.eclipse.xtext.common.types.TypesPackage;
  */
 public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	/**
-	 * The cached value of the '{@link #getTypeVariables() <em>Type Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypeVariables()
+	 * @see #getTypeParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeVariable> typeVariables;
+	protected EList<TypeParameter> typeParameters;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -160,6 +160,18 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeParameter> getTypeParameters() {
+		if (typeParameters == null) {
+			typeParameters = new EObjectContainmentWithInverseEList<TypeParameter>(TypeParameter.class, this, TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS, TypesPackage.TYPE_PARAMETER__DECLARATOR);
+		}
+		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -244,18 +256,6 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeVariable> getTypeVariables() {
-		if (typeVariables == null) {
-			typeVariables = new EObjectContainmentWithInverseEList<TypeVariable>(TypeVariable.class, this, TypesPackage.GENERIC_TYPE__TYPE_VARIABLES, TypesPackage.TYPE_VARIABLE__DECLARATOR);
-		}
-		return typeVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<TypeReference> getExtendedInterfaces() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -293,8 +293,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeVariables()).basicAdd(otherEnd, msgs);
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeParameters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -307,8 +307,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return ((InternalEList<?>)getTypeVariables()).basicRemove(otherEnd, msgs);
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -321,8 +321,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return getTypeVariables();
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				return getTypeParameters();
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.GENERIC_TYPE__INTERFACE:
@@ -344,9 +344,9 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				getTypeVariables().clear();
-				getTypeVariables().addAll((Collection<? extends TypeVariable>)newValue);
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
+				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
 				return;
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -372,8 +372,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				getTypeVariables().clear();
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				getTypeParameters().clear();
 				return;
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
@@ -399,8 +399,8 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES:
-				return typeVariables != null && !typeVariables.isEmpty();
+			case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS:
+				return typeParameters != null && !typeParameters.isEmpty();
 			case TypesPackage.GENERIC_TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.GENERIC_TYPE__INTERFACE:
@@ -420,9 +420,9 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeVariableDeclarator.class) {
+		if (baseClass == TypeParameterDeclarator.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.GENERIC_TYPE__TYPE_VARIABLES: return TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES;
+				case TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS: return TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS;
 				default: return -1;
 			}
 		}
@@ -436,9 +436,9 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeVariableDeclarator.class) {
+		if (baseClass == TypeParameterDeclarator.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES: return TypesPackage.GENERIC_TYPE__TYPE_VARIABLES;
+				case TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS: return TypesPackage.GENERIC_TYPE__TYPE_PARAMETERS;
 				default: return -1;
 			}
 		}

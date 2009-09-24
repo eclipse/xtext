@@ -12,6 +12,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 
 /**
@@ -33,32 +34,32 @@ public class TypeURIHelperTest extends TestCase {
 		super.tearDown();
 	}
 	
-	public void testCreateResourceURI_01() {
+	public void testCreateResourceURI_01() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("int", true));
 		assertEquals("java:/Primitives", uri.toString());
 	}
 	
-	public void testCreateResourceURI_02() {
+	public void testCreateResourceURI_02() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("java.lang.String", true));
 		assertEquals("java:/Objects/java.lang.String", uri.toString());
 	}
 	
-	public void testCreateResourceURI_03() {
+	public void testCreateResourceURI_03() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("java.lang.String[]", true));
 		assertEquals("java:/Objects/java.lang.String", uri.toString());
 	}
 	
-	public void testCreateResourceURI_04() {
+	public void testCreateResourceURI_04() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("int[]", true));
 		assertEquals("java:/Primitives", uri.toString());
 	}
 	
-	public void testCreateResourceURI_05() {
+	public void testCreateResourceURI_05() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("java.util.Map$Entry", true));
 		assertEquals("java:/Objects/java.util.Map", uri.toString());
 	}
 	
-	public void testCreateResourceURI_06() {
+	public void testCreateResourceURI_06() throws JavaModelException {
 		URI uri = uriHelper.createResourceURI(Signature.createTypeSignature("java.util.Map$Entry[]", true));
 		assertEquals("java:/Objects/java.util.Map", uri.toString());
 	}
@@ -68,32 +69,32 @@ public class TypeURIHelperTest extends TestCase {
 		assertEquals("java:Something", uri.toString());
 	}
 	
-	public void testFragmentURI_01() {
+	public void testFragmentURI_01() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("int", true));
 		assertEquals(int.class.getName(), fragment);
 	}
 	
-	public void testFragmentURI_02() {
+	public void testFragmentURI_02() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("java.lang.String", true));
 		assertEquals(String.class.getName(), fragment);
 	}
 	
-	public void testFragmentURI_03() {
+	public void testFragmentURI_03() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("int[]", true));
 		assertEquals("int[]", fragment);
 	}
 	
-	public void testFragmentURI_04() {
+	public void testFragmentURI_04() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("java.lang.String[]", true));
 		assertEquals(String.class.getName() + "[]", fragment);
 	}
 
-	public void testFragmentURI_05() {
+	public void testFragmentURI_05() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("java.util.Map$Entry", true));
 		assertEquals(Map.Entry.class.getName(), fragment);
 	}
 	
-	public void testFragmentURI_06() {
+	public void testFragmentURI_06() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("java.util.Map$Entry[]", true));
 		assertEquals(Map.Entry.class.getName() + "[]", fragment);
 	}
