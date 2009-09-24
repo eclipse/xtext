@@ -12,20 +12,15 @@ import java.util.List;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParameterizedTypes {
-
+public abstract class ParameterizedMethods extends TestScenario {
+	
 	abstract <T> void twoListParamsNoResult(List<T> first, List<T> second);
 	
-	void twoListWildcardsNoResult(List<?> first, List<?> second) {
-		first = second;
-	}
+	abstract void twoListWildcardsNoResult(List<?> first, List<?> second);
 	
 	abstract <T> List<T> twoListParamsListResult(List<T> first, List<T> second);
 	
-	List<?> twoListWildcardsListResult(List<?> first, List<?> second) {
-		first = second;
-		return second;
-	}
+	abstract List<?> twoListWildcardsListResult(List<?> first, List<?> second);
 	
 	abstract void arrayWildcard(List<?>[] array);
 	

@@ -78,7 +78,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				}
 			}
 			for (IMethod method : jdtType.getMethods()) {
-				if (!Flags.isSynthetic(method.getFlags())) {
+				if (!Flags.isSynthetic(method.getFlags()) && !"<clinit>".equals(method.getElementName())) {
 					if (method.isConstructor()) {
 						result.getMembers().add(createConstructor(method));
 					}
