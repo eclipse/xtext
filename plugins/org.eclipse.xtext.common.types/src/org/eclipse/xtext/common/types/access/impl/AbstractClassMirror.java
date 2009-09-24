@@ -64,7 +64,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			int paren = fragment.indexOf('(');
 			if (paren == -1)
 				paren = fragment.length();
-			String subFragment = fragment.substring(0, fragment.lastIndexOf('.', paren));
+			int dollar = fragment.lastIndexOf('$', paren);
+			int dot = fragment.lastIndexOf('.', paren);
+			String subFragment = fragment.substring(0, Math.max(dollar, dot));
 			EObject container = getEObject(resource, subFragment);
 			if (container instanceof DeclaredType) {
 				EList<Member> members = ((DeclaredType) container).getMembers();

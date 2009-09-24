@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.FormalParameter;
@@ -28,7 +29,11 @@ import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeParameter;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
-import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
+import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
+import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
+import org.eclipse.xtext.common.types.testSetups.NestedTypes;
+import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
+import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 
 import com.google.common.collect.Sets;
 
@@ -245,22 +250,124 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(parameterType, type.getTypeVariables().get(0));
 	}
 
-	private Operation getMethodFromParameterizedTypes(String method) {
-		String typeName = ParameterizedTypes.class.getName();
+	private Operation getMethodFromParameterizedMethods(String method) {
+		String typeName = ParameterizedMethods.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
-		Operation result = (Operation) type.eResource().getEObject(ParameterizedTypes.class.getName() + "."+ method);
+		Operation result = (Operation) type.eResource().getEObject(ParameterizedMethods.class.getName() + "."+ method);
 		assertNotNull(result);
 		return result;
 	}
 	
+	public void testMemberCount_01() {
+		String typeName = ParameterizedMethods.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = ParameterizedMethods.class.getDeclaredMethods().length;
+		assertEquals(10, methodCount);
+		int constructorCount = ParameterizedMethods.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount);
+		assertEquals(methodCount + constructorCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_02() {
+		String typeName = InitializerWithConstructor.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = InitializerWithConstructor.class.getDeclaredMethods().length;
+		assertEquals(0, methodCount);
+		int constructorCount = InitializerWithConstructor.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount);
+		assertEquals(methodCount + constructorCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_03() {
+		String typeName = InitializerWithoutConstructor.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = InitializerWithoutConstructor.class.getDeclaredMethods().length;
+		assertEquals(0, methodCount);
+		int constructorCount = InitializerWithoutConstructor.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		assertEquals(methodCount + constructorCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_04() {
+		String typeName = NestedTypes.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = NestedTypes.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = NestedTypes.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int nestedTypesCount = NestedTypes.class.getClasses().length;
+		assertEquals(1, nestedTypesCount);
+		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_05() {
+		String typeName = NestedTypes.Outer.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = NestedTypes.Outer.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = NestedTypes.Outer.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int nestedTypesCount = NestedTypes.Outer.class.getClasses().length;
+		assertEquals(1, nestedTypesCount);
+		int fieldCount = NestedTypes.Outer.class.getDeclaredFields().length;
+		assertEquals(1, fieldCount); // implicit reference to enclosing type
+		assertEquals(methodCount + constructorCount + nestedTypesCount + fieldCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_06() {
+		String typeName = NestedTypes.Outer.Inner.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = NestedTypes.Outer.Inner.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = NestedTypes.Outer.Inner.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int fieldCount = NestedTypes.Outer.Inner.class.getDeclaredFields().length;
+		assertEquals(1, fieldCount); // implicit reference to enclosing type
+		assertEquals(methodCount + constructorCount + fieldCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_07() {
+		String typeName = StaticNestedTypes.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = StaticNestedTypes.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = StaticNestedTypes.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int nestedTypesCount = StaticNestedTypes.class.getClasses().length;
+		assertEquals(1, nestedTypesCount);
+		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_08() {
+		String typeName = StaticNestedTypes.Outer.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = StaticNestedTypes.Outer.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = StaticNestedTypes.Outer.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int nestedTypesCount = StaticNestedTypes.Outer.class.getClasses().length;
+		assertEquals(1, nestedTypesCount);
+		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_09() {
+		String typeName = StaticNestedTypes.Outer.Inner.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = StaticNestedTypes.Outer.Inner.class.getDeclaredMethods().length;
+		assertEquals(1, methodCount);
+		int constructorCount = StaticNestedTypes.Outer.Inner.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		assertEquals(methodCount + constructorCount, type.getMembers().size());
+	}
+	
 	public void test_twoListParamsNoResult_01() {
-		Operation twoListParamsNoResult = getMethodFromParameterizedTypes("twoListParamsNoResult(java.util.List,java.util.List)");
+		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		assertEquals(1, twoListParamsNoResult.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_twoListParamsNoResult_02() {
-		Operation twoListParamsNoResult = getMethodFromParameterizedTypes("twoListParamsNoResult(java.util.List,java.util.List)");
+		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
 		TypeReference paramTypeRef = firstParam.getParameterType();
 		Type paramType = paramTypeRef.getType();
@@ -275,7 +382,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListParamsNoResult_03() {
-		Operation twoListParamsNoResult = getMethodFromParameterizedTypes("twoListParamsNoResult(java.util.List,java.util.List)");
+		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
 		TypeReference paramTypeRef = firstParam.getParameterType();
 		Type paramType = paramTypeRef.getType();
@@ -293,12 +400,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 
 	public void test_twoListParamsListResult_01() {
-		Operation twoListParamsListResult = getMethodFromParameterizedTypes("twoListParamsListResult(java.util.List,java.util.List)");
+		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		assertEquals(1, twoListParamsListResult.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_twoListParamsListResult_02() {
-		Operation twoListParamsListResult = getMethodFromParameterizedTypes("twoListParamsListResult(java.util.List,java.util.List)");
+		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		TypeReference returnTypeRef = twoListParamsListResult.getReturnType();
 		Type returnType = returnTypeRef.getType();
 		assertNotNull(returnType);
@@ -312,7 +419,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListParamsListResult_03() {
-		Operation twoListParamsListResult = getMethodFromParameterizedTypes("twoListParamsListResult(java.util.List,java.util.List)");
+		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
 		TypeReference returnTypeRef = twoListParamsListResult.getReturnType();
 		Type returnType = returnTypeRef.getType();
 		ParameterizedType parameterized = (ParameterizedType) returnType;
@@ -329,12 +436,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListWildcardsNoResult_01() {
-		Operation twoListWildcardsNoResult = getMethodFromParameterizedTypes("twoListWildcardsNoResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		assertEquals(1, twoListWildcardsNoResult.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_twoListWildcardsNoResult_02() {
-		Operation twoListWildcardsNoResult = getMethodFromParameterizedTypes("twoListWildcardsNoResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
 		TypeReference paramTypeRef = firstParam.getParameterType();
 		Type paramType = paramTypeRef.getType();
@@ -349,7 +456,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListWildcardsNoResult_03() {
-		Operation twoListWildcardsNoResult = getMethodFromParameterizedTypes("twoListWildcardsNoResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
 		TypeReference paramTypeRef = firstParam.getParameterType();
 		Type paramType = paramTypeRef.getType();
@@ -369,12 +476,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListWildcardsListResult_01() {
-		Operation twoListWildcardsListResult = getMethodFromParameterizedTypes("twoListWildcardsListResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		assertEquals(1, twoListWildcardsListResult.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_twoListWildcardsListResult_02() {
-		Operation twoListWildcardsListResult = getMethodFromParameterizedTypes("twoListWildcardsListResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		TypeReference returnTypeRef = twoListWildcardsListResult.getReturnType();
 		Type returnType = returnTypeRef.getType();
 		assertNotNull(returnType);
@@ -388,7 +495,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_twoListWildcardsListResult_03() {
-		Operation twoListWildcardsListResult = getMethodFromParameterizedTypes("twoListWildcardsListResult(java.util.List,java.util.List)");
+		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
 		TypeReference returnTypeRef = twoListWildcardsListResult.getReturnType();
 		Type returnType = returnTypeRef.getType();
 		ParameterizedType parameterized = (ParameterizedType) returnType;
@@ -407,12 +514,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_arrayWildcard_01() {
-		Operation arrayWildcard = getMethodFromParameterizedTypes("arrayWildcard(java.util.List[])");
+		Operation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
 		assertEquals(1, arrayWildcard.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_arrayWildcard_02() {
-		Operation arrayWildcard = getMethodFromParameterizedTypes("arrayWildcard(java.util.List[])");
+		Operation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
 		Type paramType = arrayWildcard.getParameters().get(0).getParameterType().getType();
 		assertEquals("java.util.List<? extends java.lang.Object>[]", paramType.getCanonicalName());
 		assertTrue(paramType instanceof ArrayType);
@@ -421,12 +528,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_nestedArrayWildcard_01() {
-		Operation nestedArrayWildcard = getMethodFromParameterizedTypes("nestedArrayWildcard(java.util.List[][])");
+		Operation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
 		assertEquals(1, nestedArrayWildcard.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_nestedArrayWildcard_02() {
-		Operation nestedArrayWildcard = getMethodFromParameterizedTypes("nestedArrayWildcard(java.util.List[][])");
+		Operation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
 		Type paramType = nestedArrayWildcard.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof ArrayType);
 		ArrayType arrayType = (ArrayType) paramType;
@@ -436,12 +543,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_arrayParameterized_01() {
-		Operation arrayParameterized = getMethodFromParameterizedTypes("arrayParameterized(java.util.List[])");
+		Operation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
 		assertEquals(1, arrayParameterized.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_arrayParameterized_02() {
-		Operation arrayParameterized = getMethodFromParameterizedTypes("arrayParameterized(java.util.List[])");
+		Operation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
 		Type paramType = arrayParameterized.getParameters().get(0).getParameterType().getType();
 		assertEquals("java.util.List<T>[]", paramType.getCanonicalName());
 		assertTrue(paramType instanceof ArrayType);
@@ -450,12 +557,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_nestedArrayParameterized_01() {
-		Operation nestedArrayParameterized = getMethodFromParameterizedTypes("nestedArrayParameterized(java.util.List[][])");
+		Operation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
 		assertEquals(1, nestedArrayParameterized.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_nestedArrayParameterized_02() {
-		Operation nestedArrayParameterized = getMethodFromParameterizedTypes("nestedArrayParameterized(java.util.List[][])");
+		Operation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
 		Type paramType = nestedArrayParameterized.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof ArrayType);
 		ArrayType arrayType = (ArrayType) paramType;
@@ -465,12 +572,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_arrayVariable_01() {
-		Operation arrayVariable = getMethodFromParameterizedTypes("arrayVariable(T[])");
+		Operation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
 		assertEquals(1, arrayVariable.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_arrayVariable_02() {
-		Operation arrayVariable = getMethodFromParameterizedTypes("arrayVariable(T[])");
+		Operation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
 		Type paramType = arrayVariable.getParameters().get(0).getParameterType().getType();
 		assertEquals("T[]", paramType.getCanonicalName());
 		assertTrue(paramType instanceof ArrayType);
@@ -479,18 +586,95 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	public void test_nestedArrayVariable_01() {
-		Operation nestedArrayVariable = getMethodFromParameterizedTypes("nestedArrayVariable(T[][])");
+		Operation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
 		assertEquals(1, nestedArrayVariable.getDeclaredParameterizedTypes().size());
 	}
 	
 	public void test_nestedArrayVariable_02() {
-		Operation nestedArrayVariable = getMethodFromParameterizedTypes("nestedArrayVariable(T[][])");
+		Operation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
 		Type paramType = nestedArrayVariable.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof ArrayType);
 		ArrayType arrayType = (ArrayType) paramType;
 		assertTrue(arrayType.getComponentType() instanceof ArrayType);
 		arrayType = (ArrayType) arrayType.getComponentType();
 		assertTrue(arrayType.getComponentType() instanceof TypeVariable);
+	}
+	
+	public void test_nestedTypes_Outer() {
+		String typeName = NestedTypes.Outer.class.getName();
+		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName();
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getCanonicalName());
+		Type outerType = (Type) type.eContainer();
+		assertEquals(NestedTypes.class.getName(), outerType.getCanonicalName());
+	}
+	
+	public void test_nestedTypes_Outer_Inner() {
+		String typeName = NestedTypes.Outer.Inner.class.getName();
+		String expectedSuffix = NestedTypes.class.getSimpleName() + 
+			"$" + NestedTypes.Outer.class.getSimpleName() +
+			"$" + NestedTypes.Outer.Inner.class.getSimpleName();
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getCanonicalName());
+		Type outerType = (Type) type.eContainer();
+		assertEquals(NestedTypes.Outer.class.getName(), outerType.getCanonicalName());
+	}
+	
+	public void test_staticNestedTypes_method() {
+		String typeName = StaticNestedTypes.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Operation operation = getMethodFromType(type, StaticNestedTypes.class, "method()");
+		assertEquals("boolean", operation.getReturnType().getCanonicalName());
+	}
+	
+	public void test_staticNestedTypes_Outer() {
+		String typeName = StaticNestedTypes.Outer.class.getName();
+		String expectedSuffix = StaticNestedTypes.class.getSimpleName() + "$" + StaticNestedTypes.Outer.class.getSimpleName();
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getCanonicalName());
+		Type outerType = (Type) type.eContainer();
+		assertEquals(StaticNestedTypes.class.getName(), outerType.getCanonicalName());
+	}
+	
+	public void test_staticNestedTypes_Outer_method() {
+		String typeName = StaticNestedTypes.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Operation operation = getMethodFromType(type, StaticNestedTypes.Outer.class, "method()");
+		assertEquals("int", operation.getReturnType().getCanonicalName());
+	}
+	
+	public void test_staticNestedTypes_Outer_Inner() {
+		String typeName = StaticNestedTypes.Outer.Inner.class.getName();
+		String expectedSuffix = StaticNestedTypes.class.getSimpleName() + 
+			"$" + StaticNestedTypes.Outer.class.getSimpleName() +
+			"$" + StaticNestedTypes.Outer.Inner.class.getSimpleName();
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getCanonicalName());
+		Type outerType = (Type) type.eContainer();
+		assertEquals(StaticNestedTypes.Outer.class.getName(), outerType.getCanonicalName());
+	}
+	
+	public void test_staticNestedTypes_Outer_Inner_method() {
+		String typeName = StaticNestedTypes.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Operation operation = getMethodFromType(type, StaticNestedTypes.Outer.Inner.class, "method()");
+		assertEquals("void", operation.getReturnType().getCanonicalName());
+	}
+	
+	private Operation getMethodFromType(EObject context, Class<?> type, String method) {
+		String methodName = type.getName() + "." + method;
+		assertNotNull(context);
+		Operation result = (Operation) context.eResource().getEObject(methodName);
+		assertNotNull(methodName, result);
+		return result;
 	}
 
 	protected abstract String getCollectionParamName();
