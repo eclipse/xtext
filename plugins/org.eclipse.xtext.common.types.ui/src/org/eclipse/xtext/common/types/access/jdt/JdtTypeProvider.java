@@ -39,22 +39,30 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	}
 	
 	@Override
-	public Type findTypeByName(String name) {
-		String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
-		URI resourceURI = typeUriHelper.createResourceURI(signature);
-		TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
-		Type result = findTypeBySignature(signature, resource);
-		return result;
+	public Type findTypeByName(String name) throws TypeNotFoundException {
+		try {
+			String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
+			URI resourceURI = typeUriHelper.createResourceURI(signature);
+			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+			Type result = findTypeBySignature(signature, resource);
+			return result;
+		} catch(JavaModelException ex) {
+			 throw new TypeNotFoundException("Type: '" + name + "' is not available.", ex);
+		}
 	}
 
-	public Type findTypeBySignature(String signature, TypeResource resource) {
+	public Type findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
 		// TODO: Maybe iterate the resource without computing a fragment
-		String fragment = typeUriHelper.getFragment(signature);
-		Type result = (Type) resource.getEObject(fragment);
-		if (result == null) {
-			throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
-		} 
-		return result;
+		try {
+			String fragment = typeUriHelper.getFragment(signature);
+			Type result = (Type) resource.getEObject(fragment);
+			if (result == null) {
+				throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
+			}
+			return result;
+		} catch(JavaModelException ex) {
+			throw new TypeNotFoundException("Type: '" + signature + "' is not available.", ex);
+		}
 	}
 
 	@Override

@@ -12,24 +12,29 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeVariableTest extends TestCase {
+public class ReferenceTypeArgumentTest extends TestCase {
 
-	
-	private TypeVariable typeVariable;
+	private ReferenceTypeArgument typeArgument;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		typeVariable = TypesFactory.eINSTANCE.createTypeVariable();
+		typeArgument = TypesFactory.eINSTANCE.createReferenceTypeArgument();
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(typeVariable.getCanonicalName());
+		assertNull(typeArgument.getCanonicalName());
 	}
 	
 	public void testCanonicalName_02() {
-		String name = "T";
-		typeVariable.setName(name);
-		assertEquals("T", typeVariable.getCanonicalName());
+		typeArgument.setReference(TypesFactory.eINSTANCE.createTypeReference());
+		assertNull(typeArgument.getCanonicalName());
+	}
+	
+	public void testCanonicalName_03() {
+		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
+		typeReference.setType(TypesFactory.eINSTANCE.createVoid());
+		typeArgument.setReference(typeReference);
+		assertEquals("void", typeArgument.getCanonicalName());
 	}
 }

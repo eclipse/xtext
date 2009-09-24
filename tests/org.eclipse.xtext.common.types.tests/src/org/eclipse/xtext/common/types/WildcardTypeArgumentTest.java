@@ -12,29 +12,23 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReferenceTypeParameterTest extends TestCase {
+public class WildcardTypeArgumentTest extends TestCase {
 
-	private ReferenceTypeParameter typeParameter;
+	private WildcardTypeArgument typeArgument;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		typeParameter = TypesFactory.eINSTANCE.createReferenceTypeParameter();
+		typeArgument = TypesFactory.eINSTANCE.createWildcardTypeArgument();
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(typeParameter.getCanonicalName());
+		assertNull(typeArgument.getCanonicalName());
 	}
 	
 	public void testCanonicalName_02() {
-		typeParameter.setReference(TypesFactory.eINSTANCE.createTypeReference());
-		assertNull(typeParameter.getCanonicalName());
+		typeArgument.setWildcard(TypesFactory.eINSTANCE.createWildcard());
+		assertEquals("?", typeArgument.getCanonicalName());
 	}
 	
-	public void testCanonicalName_03() {
-		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(TypesFactory.eINSTANCE.createVoid());
-		typeParameter.setReference(typeReference);
-		assertEquals("void", typeParameter.getCanonicalName());
-	}
 }
