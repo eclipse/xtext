@@ -15,40 +15,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.ReferenceTypeParameter;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.Wildcard;
+import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reference Type Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Wildcard Type Argument</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ReferenceTypeParameterImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl#getWildcard <em>Wildcard</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ReferenceTypeParameterImpl extends TypeParameterImpl implements ReferenceTypeParameter {
+public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements WildcardTypeArgument {
 	/**
-	 * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
+	 * The cached value of the '{@link #getWildcard() <em>Wildcard</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReference()
+	 * @see #getWildcard()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference reference;
+	protected Wildcard wildcard;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ReferenceTypeParameterImpl() {
+	protected WildcardTypeArgumentImpl() {
 		super();
 	}
 
@@ -59,7 +59,7 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.REFERENCE_TYPE_PARAMETER;
+		return TypesPackage.Literals.WILDCARD_TYPE_ARGUMENT;
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeReference getReference() {
-		return reference;
+	public Wildcard getWildcard() {
+		return wildcard;
 	}
 
 	/**
@@ -76,11 +76,11 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReference(TypeReference newReference, NotificationChain msgs) {
-		TypeReference oldReference = reference;
-		reference = newReference;
+	public NotificationChain basicSetWildcard(Wildcard newWildcard, NotificationChain msgs) {
+		Wildcard oldWildcard = wildcard;
+		wildcard = newWildcard;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE, oldReference, newReference);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, oldWildcard, newWildcard);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -91,18 +91,18 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReference(TypeReference newReference) {
-		if (newReference != reference) {
+	public void setWildcard(Wildcard newWildcard) {
+		if (newWildcard != wildcard) {
 			NotificationChain msgs = null;
-			if (reference != null)
-				msgs = ((InternalEObject)reference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE, null, msgs);
-			if (newReference != null)
-				msgs = ((InternalEObject)newReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE, null, msgs);
-			msgs = basicSetReference(newReference, msgs);
+			if (wildcard != null)
+				msgs = ((InternalEObject)wildcard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, null, msgs);
+			if (newWildcard != null)
+				msgs = ((InternalEObject)newWildcard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, null, msgs);
+			msgs = basicSetWildcard(newWildcard, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE, newReference, newReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, newWildcard, newWildcard));
 	}
 
 	/**
@@ -113,8 +113,8 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE:
-				return basicSetReference(null, msgs);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+				return basicSetWildcard(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -127,8 +127,8 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE:
-				return getReference();
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+				return getWildcard();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,8 +141,8 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE:
-				setReference((TypeReference)newValue);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+				setWildcard((Wildcard)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,8 +156,8 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE:
-				setReference((TypeReference)null);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+				setWildcard((Wildcard)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -171,17 +171,17 @@ public class ReferenceTypeParameterImpl extends TypeParameterImpl implements Ref
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.REFERENCE_TYPE_PARAMETER__REFERENCE:
-				return reference != null;
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+				return wildcard != null;
 		}
 		return super.eIsSet(featureID);
 	}
 	
 	@Override
 	public String getCanonicalName() {
-		if (reference != null)
-			return reference.getCanonicalName();
+		if (wildcard != null)
+			return wildcard.getCanonicalName();
 		return null;
 	}
 
-} //ReferenceTypeParameterImpl
+} //WildcardTypeArgumentImpl

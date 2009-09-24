@@ -7,20 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.ConstrainedType;
 import org.eclipse.xtext.common.types.TypeConstraint;
@@ -34,7 +28,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getReferencedTypes <em>Referenced Types</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getReferencedType <em>Referenced Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getConstrainedType <em>Constrained Type</em>}</li>
  * </ul>
  * </p>
@@ -43,14 +37,14 @@ import org.eclipse.xtext.common.types.TypesPackage;
  */
 public abstract class TypeConstraintImpl extends IdentifyableElementImpl implements TypeConstraint {
 	/**
-	 * The cached value of the '{@link #getReferencedTypes() <em>Referenced Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getReferencedType() <em>Referenced Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferencedTypes()
+	 * @see #getReferencedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeReference> referencedTypes;
+	protected TypeReference referencedType;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +69,42 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeReference> getReferencedTypes() {
-		if (referencedTypes == null) {
-			referencedTypes = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES);
+	public TypeReference getReferencedType() {
+		return referencedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReferencedType(TypeReference newReferencedType, NotificationChain msgs) {
+		TypeReference oldReferencedType = referencedType;
+		referencedType = newReferencedType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, oldReferencedType, newReferencedType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return referencedTypes;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferencedType(TypeReference newReferencedType) {
+		if (newReferencedType != referencedType) {
+			NotificationChain msgs = null;
+			if (referencedType != null)
+				msgs = ((InternalEObject)referencedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, null, msgs);
+			if (newReferencedType != null)
+				msgs = ((InternalEObject)newReferencedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, null, msgs);
+			msgs = basicSetReferencedType(newReferencedType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, newReferencedType, newReferencedType));
 	}
 
 	/**
@@ -147,8 +172,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES:
-				return ((InternalEList<?>)getReferencedTypes()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
+				return basicSetReferencedType(null, msgs);
 			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
 				return basicSetConstrainedType(null, msgs);
 		}
@@ -177,8 +202,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES:
-				return getReferencedTypes();
+			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
+				return getReferencedType();
 			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
 				return getConstrainedType();
 		}
@@ -190,13 +215,11 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES:
-				getReferencedTypes().clear();
-				getReferencedTypes().addAll((Collection<? extends TypeReference>)newValue);
+			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
+				setReferencedType((TypeReference)newValue);
 				return;
 			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
 				setConstrainedType((ConstrainedType)newValue);
@@ -213,8 +236,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES:
-				getReferencedTypes().clear();
+			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
+				setReferencedType((TypeReference)null);
 				return;
 			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
 				setConstrainedType((ConstrainedType)null);
@@ -231,8 +254,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPES:
-				return referencedTypes != null && !referencedTypes.isEmpty();
+			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
+				return referencedType != null;
 			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
 				return getConstrainedType() != null;
 		}
@@ -241,14 +264,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	
 	@Override
 	public String getCanonicalName() {
-		if (referencedTypes != null && !referencedTypes.isEmpty()) {
-			StringBuilder result = new StringBuilder(64);
-			for(TypeReference referencedType: referencedTypes) {
-				if (result.length() != 0)
-					result.append(" & ");
-				result.append(referencedType.getCanonicalName());
-			}
-			return result.toString();
+		if (referencedType != null) {
+			return getReferencedType().getCanonicalName();
 		}
 		return null;
 	}

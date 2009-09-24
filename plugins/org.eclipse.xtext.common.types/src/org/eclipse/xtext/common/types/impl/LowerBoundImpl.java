@@ -43,7 +43,7 @@ public class LowerBoundImpl extends TypeConstraintImpl implements LowerBound {
 	
 	@Override
 	public String getCanonicalName() {
-		if (referencedTypes != null && !referencedTypes.isEmpty())
+		if (referencedType != null)
 			return "super " + super.getCanonicalName();
 		return null;
 	}

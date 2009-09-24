@@ -14,9 +14,9 @@ import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Member;
+import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.TypeVariable;
-import org.eclipse.xtext.common.types.TypeVariableDeclarator;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
@@ -25,8 +25,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 public abstract class AbstractClassMirror implements IClassMirror {
 
 	public String getFragment(EObject obj) {
-		if (obj instanceof TypeVariable)
-			return getFragment(obj.eContainer()) + "/" + ((TypeVariable) obj).getName();
+		if (obj instanceof TypeParameter)
+			return getFragment(obj.eContainer()) + "/" + ((TypeParameter) obj).getName();
 		if (obj instanceof TypeReference)
 			return null;
 		if (obj instanceof IdentifyableElement)
@@ -49,12 +49,12 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			String containerFragment = fragment.substring(0, slash);
 			EObject container = getEObject(resource, containerFragment);
 			if (container != null) {
-				String varName = fragment.substring(slash + 1);
-				if (container instanceof TypeVariableDeclarator) {
-					TypeVariableDeclarator executable = (TypeVariableDeclarator) container;
-					for(TypeVariable variable: executable.getTypeVariables()) {
-						if (variable.getName().equals(varName))
-							return variable;
+				String parameterName = fragment.substring(slash + 1);
+				if (container instanceof TypeParameterDeclarator) {
+					TypeParameterDeclarator executable = (TypeParameterDeclarator) container;
+					for(TypeParameter parameter: executable.getTypeParameters()) {
+						if (parameter.getName().equals(parameterName))
+							return parameter;
 					}
 				} 
 			}

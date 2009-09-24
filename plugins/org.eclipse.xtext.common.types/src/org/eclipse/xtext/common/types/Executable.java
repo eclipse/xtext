@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface Executable extends Member, TypeVariableDeclarator {
+public interface Executable extends Member, TypeParameterDeclarator {
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->

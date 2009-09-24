@@ -39,21 +39,21 @@ public class GenericTypeTest extends TestCase {
 	}
 	
 	public void testCanonicalName_04() {
-		TypeVariable typeVariable = TypesFactory.eINSTANCE.createTypeVariable();
-		typeVariable.setName("T");
+		TypeParameter typeParameter = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParameter.setName("T");
 		genericType.setFullyQualifiedName("java.util.List");
-		genericType.getTypeVariables().add(typeVariable);
+		genericType.getTypeParameters().add(typeParameter);
 		assertEquals("java.util.List", genericType.getCanonicalName());
 	}
 	
 	public void testCanonicalName_05() {
-		TypeVariable typeVariable1 = TypesFactory.eINSTANCE.createTypeVariable();
-		typeVariable1.setName("T1");
-		TypeVariable typeVariable2 = TypesFactory.eINSTANCE.createTypeVariable();
-		typeVariable2.setName("T2");
+		TypeParameter typeParameter1 = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParameter1.setName("T1");
+		TypeParameter typeParameter2 = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParameter2.setName("T2");
 		genericType.setFullyQualifiedName("java.util.List");
-		genericType.getTypeVariables().add(typeVariable1);
-		genericType.getTypeVariables().add(typeVariable2);
+		genericType.getTypeParameters().add(typeParameter1);
+		genericType.getTypeParameters().add(typeParameter2);
 		assertEquals("java.util.List", genericType.getCanonicalName());
 	}
 	

@@ -27,14 +27,14 @@ import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.ReferenceTypeParameter;
+import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.TypeVariable;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
-import org.eclipse.xtext.common.types.WildcardTypeParameter;
+import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,15 +84,15 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
 			case TypesPackage.WILDCARD: return createWildcard();
 			case TypesPackage.ARRAY_TYPE: return createArrayType();
-			case TypesPackage.TYPE_VARIABLE: return createTypeVariable();
+			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.UPPER_BOUND: return createUpperBound();
 			case TypesPackage.LOWER_BOUND: return createLowerBound();
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
 			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
 			case TypesPackage.GENERIC_TYPE: return createGenericType();
 			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
-			case TypesPackage.WILDCARD_TYPE_PARAMETER: return createWildcardTypeParameter();
-			case TypesPackage.REFERENCE_TYPE_PARAMETER: return createReferenceTypeParameter();
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT: return createWildcardTypeArgument();
+			case TypesPackage.REFERENCE_TYPE_ARGUMENT: return createReferenceTypeArgument();
 			case TypesPackage.TYPE_REFERENCE: return createTypeReference();
 			case TypesPackage.FIELD: return createField();
 			case TypesPackage.CONSTRUCTOR: return createConstructor();
@@ -149,9 +149,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeVariable createTypeVariable() {
-		TypeVariableImpl typeVariable = new TypeVariableImpl();
-		return typeVariable;
+	public TypeParameter createTypeParameter() {
+		TypeParameterImpl typeParameter = new TypeParameterImpl();
+		return typeParameter;
 	}
 
 	/**
@@ -219,9 +219,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WildcardTypeParameter createWildcardTypeParameter() {
-		WildcardTypeParameterImpl wildcardTypeParameter = new WildcardTypeParameterImpl();
-		return wildcardTypeParameter;
+	public WildcardTypeArgument createWildcardTypeArgument() {
+		WildcardTypeArgumentImpl wildcardTypeArgument = new WildcardTypeArgumentImpl();
+		return wildcardTypeArgument;
 	}
 
 	/**
@@ -229,9 +229,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceTypeParameter createReferenceTypeParameter() {
-		ReferenceTypeParameterImpl referenceTypeParameter = new ReferenceTypeParameterImpl();
-		return referenceTypeParameter;
+	public ReferenceTypeArgument createReferenceTypeArgument() {
+		ReferenceTypeArgumentImpl referenceTypeArgument = new ReferenceTypeArgumentImpl();
+		return referenceTypeArgument;
 	}
 
 	/**

@@ -7,15 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
-import org.eclipse.xtext.common.types.TypeVariable;
+import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -25,23 +33,42 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl#getDeclarator <em>Declarator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TypeParameterImpl extends IdentifyableElementImpl implements TypeParameter {
+public class TypeParameterImpl extends ReferenceTypeImpl implements TypeParameter {
 	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getConstraints()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeVariable variable;
-
+	protected EList<TypeConstraint> constraints;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,16 +93,11 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeVariable getVariable() {
-		if (variable != null && variable.eIsProxy()) {
-			InternalEObject oldVariable = (InternalEObject)variable;
-			variable = (TypeVariable)eResolveProxy(oldVariable);
-			if (variable != oldVariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_PARAMETER__VARIABLE, oldVariable, variable));
-			}
+	public EList<TypeConstraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE_PARAMETER__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE);
 		}
-		return variable;
+		return constraints;
 	}
 
 	/**
@@ -83,8 +105,8 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeVariable basicGetVariable() {
-		return variable;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -92,11 +114,101 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVariable(TypeVariable newVariable) {
-		TypeVariable oldVariable = variable;
-		variable = newVariable;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_PARAMETER__VARIABLE, oldVariable, variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_PARAMETER__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeParameterDeclarator getDeclarator() {
+		if (eContainerFeatureID() != TypesPackage.TYPE_PARAMETER__DECLARATOR) return null;
+		return (TypeParameterDeclarator)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclarator(TypeParameterDeclarator newDeclarator, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDeclarator, TypesPackage.TYPE_PARAMETER__DECLARATOR, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclarator(TypeParameterDeclarator newDeclarator) {
+		if (newDeclarator != eInternalContainer() || (eContainerFeatureID() != TypesPackage.TYPE_PARAMETER__DECLARATOR && newDeclarator != null)) {
+			if (EcoreUtil.isAncestor(this, newDeclarator))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDeclarator != null)
+				msgs = ((InternalEObject)newDeclarator).eInverseAdd(this, TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS, TypeParameterDeclarator.class, msgs);
+			msgs = basicSetDeclarator(newDeclarator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_PARAMETER__DECLARATOR, newDeclarator, newDeclarator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDeclarator((TypeParameterDeclarator)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				return basicSetDeclarator(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS, TypeParameterDeclarator.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -107,9 +219,12 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_PARAMETER__VARIABLE:
-				if (resolve) return getVariable();
-				return basicGetVariable();
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				return getConstraints();
+			case TypesPackage.TYPE_PARAMETER__NAME:
+				return getName();
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				return getDeclarator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,11 +234,19 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_PARAMETER__VARIABLE:
-				setVariable((TypeVariable)newValue);
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends TypeConstraint>)newValue);
+				return;
+			case TypesPackage.TYPE_PARAMETER__NAME:
+				setName((String)newValue);
+				return;
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				setDeclarator((TypeParameterDeclarator)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,8 +260,14 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_PARAMETER__VARIABLE:
-				setVariable((TypeVariable)null);
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				getConstraints().clear();
+				return;
+			case TypesPackage.TYPE_PARAMETER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				setDeclarator((TypeParameterDeclarator)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -152,10 +281,67 @@ public abstract class TypeParameterImpl extends IdentifyableElementImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_PARAMETER__VARIABLE:
-				return variable != null;
+			case TypesPackage.TYPE_PARAMETER__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
+			case TypesPackage.TYPE_PARAMETER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.TYPE_PARAMETER__DECLARATOR:
+				return getDeclarator() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ConstrainedType.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.TYPE_PARAMETER__CONSTRAINTS: return TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ConstrainedType.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS: return TypesPackage.TYPE_PARAMETER__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+	
+	@Override
+	public String getCanonicalName() {
+		return name;
 	}
 
 } //TypeParameterImpl

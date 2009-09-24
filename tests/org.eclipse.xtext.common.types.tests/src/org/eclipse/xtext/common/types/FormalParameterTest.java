@@ -32,11 +32,11 @@ public class FormalParameterTest extends TestCase {
 	}
 	
 	public void testCanonicalName_03() {
-		TypeVariable typeVariable = TypesFactory.eINSTANCE.createTypeVariable();
-		typeVariable.setName("T");
+		TypeParameter typeParameter = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParameter.setName("T");
 		formalParameter.setName("param");
 		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(typeVariable);
+		typeReference.setType(typeParameter);
 		formalParameter.setParameterType(typeReference);
 		assertEquals("T", formalParameter.getCanonicalName());
 	}

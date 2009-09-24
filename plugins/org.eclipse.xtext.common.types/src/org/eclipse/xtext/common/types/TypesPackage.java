@@ -395,87 +395,32 @@ public interface TypesPackage extends EPackage {
 	int DECLARED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl <em>Type Variable Declarator</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl <em>Type Parameter Declarator</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariableDeclarator()
+	 * @see org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameterDeclarator()
 	 * @generated
 	 */
-	int TYPE_VARIABLE_DECLARATOR = 10;
+	int TYPE_PARAMETER_DECLARATOR = 10;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Variable Declarator</em>' class.
+	 * The number of structural features of the '<em>Type Parameter Declarator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_DECLARATOR_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl <em>Type Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeVariableImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariable()
-	 * @generated
-	 */
-	int TYPE_VARIABLE = 11;
-
-	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__ARRAY_TYPE = REFERENCE_TYPE__ARRAY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__CONSTRAINTS = REFERENCE_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__NAME = REFERENCE_TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Type Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 3;
+	int TYPE_PARAMETER_DECLARATOR_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
@@ -488,13 +433,158 @@ public interface TypesPackage extends EPackage {
 	int TYPE_CONSTRAINT = 12;
 
 	/**
-	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.UpperBoundImpl <em>Upper Bound</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.UpperBoundImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getUpperBound()
+	 * @generated
+	 */
+	int UPPER_BOUND = 13;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.LowerBoundImpl <em>Lower Bound</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.LowerBoundImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getLowerBound()
+	 * @generated
+	 */
+	int LOWER_BOUND = 14;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.AnnotationTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationType()
+	 * @generated
+	 */
+	int ANNOTATION_TYPE = 15;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.EnumerationTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getEnumerationType()
+	 * @generated
+	 */
+	int ENUMERATION_TYPE = 16;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl <em>Generic Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.GenericTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericType()
+	 * @generated
+	 */
+	int GENERIC_TYPE = 17;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedType()
+	 * @generated
+	 */
+	int PARAMETERIZED_TYPE = 18;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.TypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeArgument()
+	 * @generated
+	 */
+	int TYPE_ARGUMENT = 19;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl <em>Wildcard Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeArgument()
+	 * @generated
+	 */
+	int WILDCARD_TYPE_ARGUMENT = 20;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl <em>Reference Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeArgument()
+	 * @generated
+	 */
+	int REFERENCE_TYPE_ARGUMENT = 21;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.TypeParameterImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameter()
+	 * @generated
+	 */
+	int TYPE_PARAMETER = 11;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONSTRAINT__REFERENCED_TYPES = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_PARAMETER__ARRAY_TYPE = REFERENCE_TYPE__ARRAY_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__CONSTRAINTS = REFERENCE_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__NAME = REFERENCE_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__DECLARATOR = REFERENCE_TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Type Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CONSTRAINT__REFERENCED_TYPE = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Constrained Type</b></em>' container reference.
@@ -515,23 +605,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE_CONSTRAINT_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.UpperBoundImpl <em>Upper Bound</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.UpperBoundImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getUpperBound()
-	 * @generated
-	 */
-	int UPPER_BOUND = 13;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Referenced Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UPPER_BOUND__REFERENCED_TYPES = TYPE_CONSTRAINT__REFERENCED_TYPES;
+	int UPPER_BOUND__REFERENCED_TYPE = TYPE_CONSTRAINT__REFERENCED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Constrained Type</b></em>' container reference.
@@ -552,23 +632,13 @@ public interface TypesPackage extends EPackage {
 	int UPPER_BOUND_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.LowerBoundImpl <em>Lower Bound</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.LowerBoundImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getLowerBound()
-	 * @generated
-	 */
-	int LOWER_BOUND = 14;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Referenced Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOWER_BOUND__REFERENCED_TYPES = TYPE_CONSTRAINT__REFERENCED_TYPES;
+	int LOWER_BOUND__REFERENCED_TYPE = TYPE_CONSTRAINT__REFERENCED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Constrained Type</b></em>' container reference.
@@ -587,16 +657,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOWER_BOUND_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.AnnotationTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationType()
-	 * @generated
-	 */
-	int ANNOTATION_TYPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -680,16 +740,6 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.EnumerationTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getEnumerationType()
-	 * @generated
-	 */
-	int ENUMERATION_TYPE = 16;
-
-	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -771,16 +821,6 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl <em>Generic Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.GenericTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericType()
-	 * @generated
-	 */
-	int GENERIC_TYPE = 17;
-
-	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -853,13 +893,13 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_TYPE__MEMBERS = DECLARED_TYPE__MEMBERS;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__TYPE_VARIABLES = DECLARED_TYPE_FEATURE_COUNT + 0;
+	int GENERIC_TYPE__TYPE_PARAMETERS = DECLARED_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -907,16 +947,6 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ParameterizedTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedType()
-	 * @generated
-	 */
-	int PARAMETERIZED_TYPE = 18;
-
-	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -935,13 +965,13 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME = REFERENCE_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__PARAMETERS = REFERENCE_TYPE_FEATURE_COUNT + 1;
+	int PARAMETERIZED_TYPE__ARGUMENTS = REFERENCE_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -971,51 +1001,31 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE_FEATURE_COUNT = REFERENCE_TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeParameterImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameter()
-	 * @generated
-	 */
-	int TYPE_PARAMETER = 19;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER__VARIABLE = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_ARGUMENT__DECLARATOR = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Parameter</em>' class.
+	 * The number of structural features of the '<em>Type Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_ARGUMENT_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeParameterImpl <em>Wildcard Type Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.WildcardTypeParameterImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeParameter()
-	 * @generated
-	 */
-	int WILDCARD_TYPE_PARAMETER = 20;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_PARAMETER__VARIABLE = TYPE_PARAMETER__VARIABLE;
+	int WILDCARD_TYPE_ARGUMENT__DECLARATOR = TYPE_ARGUMENT__DECLARATOR;
 
 	/**
 	 * The feature id for the '<em><b>Wildcard</b></em>' containment reference.
@@ -1024,35 +1034,25 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_PARAMETER__WILDCARD = TYPE_PARAMETER_FEATURE_COUNT + 0;
+	int WILDCARD_TYPE_ARGUMENT__WILDCARD = TYPE_ARGUMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Wildcard Type Parameter</em>' class.
+	 * The number of structural features of the '<em>Wildcard Type Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_PARAMETER_FEATURE_COUNT = TYPE_PARAMETER_FEATURE_COUNT + 1;
+	int WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = TYPE_ARGUMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeParameterImpl <em>Reference Type Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeParameterImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeParameter()
-	 * @generated
-	 */
-	int REFERENCE_TYPE_PARAMETER = 21;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_PARAMETER__VARIABLE = TYPE_PARAMETER__VARIABLE;
+	int REFERENCE_TYPE_ARGUMENT__DECLARATOR = TYPE_ARGUMENT__DECLARATOR;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' containment reference.
@@ -1061,16 +1061,16 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_PARAMETER__REFERENCE = TYPE_PARAMETER_FEATURE_COUNT + 0;
+	int REFERENCE_TYPE_ARGUMENT__REFERENCE = TYPE_ARGUMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Reference Type Parameter</em>' class.
+	 * The number of structural features of the '<em>Reference Type Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_PARAMETER_FEATURE_COUNT = TYPE_PARAMETER_FEATURE_COUNT + 1;
+	int REFERENCE_TYPE_ARGUMENT_FEATURE_COUNT = TYPE_ARGUMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
@@ -1321,13 +1321,13 @@ public interface TypesPackage extends EPackage {
 	int EXECUTABLE__DECLARED_PARAMETERIZED_TYPES = MEMBER__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__TYPE_VARIABLES = MEMBER_FEATURE_COUNT + 0;
+	int EXECUTABLE__TYPE_PARAMETERS = MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1412,13 +1412,13 @@ public interface TypesPackage extends EPackage {
 	int CONSTRUCTOR__DECLARED_PARAMETERIZED_TYPES = EXECUTABLE__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+	int CONSTRUCTOR__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1503,13 +1503,13 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__DECLARED_PARAMETERIZED_TYPES = EXECUTABLE__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
-	 * The feature id for the '<em><b>Type Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_VARIABLES = EXECUTABLE__TYPE_VARIABLES;
+	int OPERATION__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1837,57 +1837,25 @@ public interface TypesPackage extends EPackage {
 	EReference getDeclaredType_Members();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator <em>Type Variable Declarator</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeParameterDeclarator <em>Type Parameter Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Variable Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator
+	 * @return the meta object for class '<em>Type Parameter Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeParameterDeclarator
 	 * @generated
 	 */
-	EClass getTypeVariableDeclarator();
+	EClass getTypeParameterDeclarator();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables <em>Type Variables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.TypeParameterDeclarator#getTypeParameters <em>Type Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Variables</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeVariableDeclarator#getTypeVariables()
-	 * @see #getTypeVariableDeclarator()
+	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeParameterDeclarator#getTypeParameters()
+	 * @see #getTypeParameterDeclarator()
 	 * @generated
 	 */
-	EReference getTypeVariableDeclarator_TypeVariables();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeVariable <em>Type Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Variable</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeVariable
-	 * @generated
-	 */
-	EClass getTypeVariable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.TypeVariable#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeVariable#getName()
-	 * @see #getTypeVariable()
-	 * @generated
-	 */
-	EAttribute getTypeVariable_Name();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeVariable#getDeclarator <em>Declarator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeVariable#getDeclarator()
-	 * @see #getTypeVariable()
-	 * @generated
-	 */
-	EReference getTypeVariable_Declarator();
+	EReference getTypeParameterDeclarator_TypeParameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeConstraint <em>Type Constraint</em>}'.
@@ -1900,15 +1868,15 @@ public interface TypesPackage extends EPackage {
 	EClass getTypeConstraint();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedTypes <em>Referenced Types</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedType <em>Referenced Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Referenced Types</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeConstraint#getReferencedTypes()
+	 * @return the meta object for the containment reference '<em>Referenced Type</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeConstraint#getReferencedType()
 	 * @see #getTypeConstraint()
 	 * @generated
 	 */
-	EReference getTypeConstraint_ReferencedTypes();
+	EReference getTypeConstraint_ReferencedType();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeConstraint#getConstrainedType <em>Constrained Type</em>}'.
@@ -2037,15 +2005,15 @@ public interface TypesPackage extends EPackage {
 	EAttribute getParameterizedType_FullyQualifiedName();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ParameterizedType#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ParameterizedType#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see org.eclipse.xtext.common.types.ParameterizedType#getParameters()
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see org.eclipse.xtext.common.types.ParameterizedType#getArguments()
 	 * @see #getParameterizedType()
 	 * @generated
 	 */
-	EReference getParameterizedType_Parameters();
+	EReference getParameterizedType_Arguments();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.ParameterizedType#getDeclarator <em>Declarator</em>}'.
@@ -2070,6 +2038,69 @@ public interface TypesPackage extends EPackage {
 	EReference getParameterizedType_RawType();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeArgument <em>Type Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeArgument
+	 * @generated
+	 */
+	EClass getTypeArgument();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeArgument#getDeclarator <em>Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeArgument#getDeclarator()
+	 * @see #getTypeArgument()
+	 * @generated
+	 */
+	EReference getTypeArgument_Declarator();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.WildcardTypeArgument <em>Wildcard Type Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wildcard Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.WildcardTypeArgument
+	 * @generated
+	 */
+	EClass getWildcardTypeArgument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.WildcardTypeArgument#getWildcard <em>Wildcard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Wildcard</em>'.
+	 * @see org.eclipse.xtext.common.types.WildcardTypeArgument#getWildcard()
+	 * @see #getWildcardTypeArgument()
+	 * @generated
+	 */
+	EReference getWildcardTypeArgument_Wildcard();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument <em>Reference Type Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reference Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.ReferenceTypeArgument
+	 * @generated
+	 */
+	EClass getReferenceTypeArgument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference()
+	 * @see #getReferenceTypeArgument()
+	 * @generated
+	 */
+	EReference getReferenceTypeArgument_Reference();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeParameter <em>Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2080,57 +2111,26 @@ public interface TypesPackage extends EPackage {
 	EClass getTypeParameter();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.TypeParameter#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.TypeParameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Variable</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameter#getVariable()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeParameter#getName()
 	 * @see #getTypeParameter()
 	 * @generated
 	 */
-	EReference getTypeParameter_Variable();
+	EAttribute getTypeParameter_Name();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.WildcardTypeParameter <em>Wildcard Type Parameter</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeParameter#getDeclarator <em>Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Wildcard Type Parameter</em>'.
-	 * @see org.eclipse.xtext.common.types.WildcardTypeParameter
+	 * @return the meta object for the container reference '<em>Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.TypeParameter#getDeclarator()
+	 * @see #getTypeParameter()
 	 * @generated
 	 */
-	EClass getWildcardTypeParameter();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.WildcardTypeParameter#getWildcard <em>Wildcard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Wildcard</em>'.
-	 * @see org.eclipse.xtext.common.types.WildcardTypeParameter#getWildcard()
-	 * @see #getWildcardTypeParameter()
-	 * @generated
-	 */
-	EReference getWildcardTypeParameter_Wildcard();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ReferenceTypeParameter <em>Reference Type Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reference Type Parameter</em>'.
-	 * @see org.eclipse.xtext.common.types.ReferenceTypeParameter
-	 * @generated
-	 */
-	EClass getReferenceTypeParameter();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ReferenceTypeParameter#getReference <em>Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.ReferenceTypeParameter#getReference()
-	 * @see #getReferenceTypeParameter()
-	 * @generated
-	 */
-	EReference getReferenceTypeParameter_Reference();
+	EReference getTypeParameter_Declarator();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeReference <em>Type Reference</em>}'.
@@ -2621,48 +2621,22 @@ public interface TypesPackage extends EPackage {
 		EReference DECLARED_TYPE__MEMBERS = eINSTANCE.getDeclaredType_Members();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl <em>Type Variable Declarator</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl <em>Type Parameter Declarator</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeVariableDeclaratorImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariableDeclarator()
+		 * @see org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameterDeclarator()
 		 * @generated
 		 */
-		EClass TYPE_VARIABLE_DECLARATOR = eINSTANCE.getTypeVariableDeclarator();
+		EClass TYPE_PARAMETER_DECLARATOR = eINSTANCE.getTypeParameterDeclarator();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Variables</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_VARIABLE_DECLARATOR__TYPE_VARIABLES = eINSTANCE.getTypeVariableDeclarator_TypeVariables();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeVariableImpl <em>Type Variable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeVariableImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeVariable()
-		 * @generated
-		 */
-		EClass TYPE_VARIABLE = eINSTANCE.getTypeVariable();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_VARIABLE__NAME = eINSTANCE.getTypeVariable_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_VARIABLE__DECLARATOR = eINSTANCE.getTypeVariable_Declarator();
+		EReference TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = eINSTANCE.getTypeParameterDeclarator_TypeParameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
@@ -2675,12 +2649,12 @@ public interface TypesPackage extends EPackage {
 		EClass TYPE_CONSTRAINT = eINSTANCE.getTypeConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Referenced Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Referenced Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_CONSTRAINT__REFERENCED_TYPES = eINSTANCE.getTypeConstraint_ReferencedTypes();
+		EReference TYPE_CONSTRAINT__REFERENCED_TYPE = eINSTANCE.getTypeConstraint_ReferencedType();
 
 		/**
 		 * The meta object literal for the '<em><b>Constrained Type</b></em>' container reference feature.
@@ -2791,12 +2765,12 @@ public interface TypesPackage extends EPackage {
 		EAttribute PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME = eINSTANCE.getParameterizedType_FullyQualifiedName();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETERIZED_TYPE__PARAMETERS = eINSTANCE.getParameterizedType_Parameters();
+		EReference PARAMETERIZED_TYPE__ARGUMENTS = eINSTANCE.getParameterizedType_Arguments();
 
 		/**
 		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
@@ -2815,6 +2789,60 @@ public interface TypesPackage extends EPackage {
 		EReference PARAMETERIZED_TYPE__RAW_TYPE = eINSTANCE.getParameterizedType_RawType();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.TypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeArgument()
+		 * @generated
+		 */
+		EClass TYPE_ARGUMENT = eINSTANCE.getTypeArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_ARGUMENT__DECLARATOR = eINSTANCE.getTypeArgument_Declarator();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl <em>Wildcard Type Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeArgument()
+		 * @generated
+		 */
+		EClass WILDCARD_TYPE_ARGUMENT = eINSTANCE.getWildcardTypeArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Wildcard</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WILDCARD_TYPE_ARGUMENT__WILDCARD = eINSTANCE.getWildcardTypeArgument_Wildcard();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl <em>Reference Type Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeArgument()
+		 * @generated
+		 */
+		EClass REFERENCE_TYPE_ARGUMENT = eINSTANCE.getReferenceTypeArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE_TYPE_ARGUMENT__REFERENCE = eINSTANCE.getReferenceTypeArgument_Reference();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2825,48 +2853,20 @@ public interface TypesPackage extends EPackage {
 		EClass TYPE_PARAMETER = eINSTANCE.getTypeParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_PARAMETER__VARIABLE = eINSTANCE.getTypeParameter_Variable();
+		EAttribute TYPE_PARAMETER__NAME = eINSTANCE.getTypeParameter_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeParameterImpl <em>Wildcard Type Parameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.WildcardTypeParameterImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeParameter()
-		 * @generated
-		 */
-		EClass WILDCARD_TYPE_PARAMETER = eINSTANCE.getWildcardTypeParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Wildcard</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WILDCARD_TYPE_PARAMETER__WILDCARD = eINSTANCE.getWildcardTypeParameter_Wildcard();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeParameterImpl <em>Reference Type Parameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeParameterImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeParameter()
-		 * @generated
-		 */
-		EClass REFERENCE_TYPE_PARAMETER = eINSTANCE.getReferenceTypeParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Reference</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REFERENCE_TYPE_PARAMETER__REFERENCE = eINSTANCE.getReferenceTypeParameter_Reference();
+		EReference TYPE_PARAMETER__DECLARATOR = eINSTANCE.getTypeParameter_Declarator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeReferenceImpl <em>Type Reference</em>}' class.

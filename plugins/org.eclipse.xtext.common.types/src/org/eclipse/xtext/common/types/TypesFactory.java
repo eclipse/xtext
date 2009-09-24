@@ -63,13 +63,13 @@ public interface TypesFactory extends EFactory {
 	ArrayType createArrayType();
 
 	/**
-	 * Returns a new object of class '<em>Type Variable</em>'.
+	 * Returns a new object of class '<em>Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Variable</em>'.
+	 * @return a new object of class '<em>Type Parameter</em>'.
 	 * @generated
 	 */
-	TypeVariable createTypeVariable();
+	TypeParameter createTypeParameter();
 
 	/**
 	 * Returns a new object of class '<em>Upper Bound</em>'.
@@ -126,22 +126,22 @@ public interface TypesFactory extends EFactory {
 	ParameterizedType createParameterizedType();
 
 	/**
-	 * Returns a new object of class '<em>Wildcard Type Parameter</em>'.
+	 * Returns a new object of class '<em>Wildcard Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Wildcard Type Parameter</em>'.
+	 * @return a new object of class '<em>Wildcard Type Argument</em>'.
 	 * @generated
 	 */
-	WildcardTypeParameter createWildcardTypeParameter();
+	WildcardTypeArgument createWildcardTypeArgument();
 
 	/**
-	 * Returns a new object of class '<em>Reference Type Parameter</em>'.
+	 * Returns a new object of class '<em>Reference Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reference Type Parameter</em>'.
+	 * @return a new object of class '<em>Reference Type Argument</em>'.
 	 * @generated
 	 */
-	ReferenceTypeParameter createReferenceTypeParameter();
+	ReferenceTypeArgument createReferenceTypeArgument();
 
 	/**
 	 * Returns a new object of class '<em>Type Reference</em>'.

@@ -41,17 +41,17 @@ abstract class DeclaredType extends ReferenceType, Member {
   val Member[*]#declaringType members;
 }
 
-abstract class TypeVariableDeclarator extends IdentifyableElement {
-  val TypeVariable[*]#declarator typeVariables;
+abstract class TypeParameterDeclarator extends IdentifyableElement {
+  val TypeParameter[*]#declarator typeParameters;
 }
 
-class TypeVariable extends ReferenceType, ConstrainedType {
+class TypeParameter extends ReferenceType, ConstrainedType {
   attr String name;
-  ref TypeVariableDeclarator#typeVariables declarator;
+  ref TypeParameterDeclarator#typeParameters declarator;
 }
 
 abstract class TypeConstraint extends IdentifyableElement {
-  val TypeReference[*] referencedTypes;
+  val TypeReference referencedType;
   ref ConstrainedType#constraints constrainedType;
 }
 
@@ -67,7 +67,7 @@ class AnnotationType extends DeclaredType {
 class EnumerationType extends DeclaredType {
 }
 
-class GenericType extends DeclaredType, TypeVariableDeclarator {
+class GenericType extends DeclaredType, TypeParameterDeclarator {
   attr boolean ~abstract;
   attr boolean ~interface;
   attr boolean static;
@@ -79,20 +79,20 @@ class GenericType extends DeclaredType, TypeVariableDeclarator {
 
 class ParameterizedType extends ReferenceType {
   attr String fullyQualifiedName;
-  val TypeParameter[*]#declarator parameters;
+  val TypeArgument[*]#declarator arguments;
   ref Member#declaredParameterizedTypes declarator;
   val TypeReference rawType;
 }
 
-abstract class TypeParameter extends IdentifyableElement {
-  ref TypeVariable variable;
+abstract class TypeArgument extends IdentifyableElement {
+  ref ParameterizedType#arguments declarator;
 }
 
-class WildcardTypeParameter extends TypeParameter {
+class WildcardTypeArgument extends TypeArgument {
   val Wildcard wildcard;
 }
 
-class ReferenceTypeParameter extends TypeParameter {
+class ReferenceTypeArgument extends TypeArgument {
   val TypeReference reference;
 }
 
@@ -116,7 +116,7 @@ class Field extends Member {
   val TypeReference type;
 }
 
-abstract class Executable extends Member, TypeVariableDeclarator {
+abstract class Executable extends Member, TypeParameterDeclarator {
   attr String visibility;
   val FormalParameter[*] parameters;
   val TypeReference[*] exceptions;
