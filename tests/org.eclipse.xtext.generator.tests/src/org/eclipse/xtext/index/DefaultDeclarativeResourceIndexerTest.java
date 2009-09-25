@@ -56,11 +56,11 @@ public class DefaultDeclarativeResourceIndexerTest extends AbstractIndexBasedTes
 				EObjectDescriptor namespace = descriptors.next();
 				assertEquals("foo.bar", namespace.getName());
 
-				descriptors = namespace.getEObjectDescriptors().iterator();
+//				descriptors = namespace.getEObjectDescriptors().iterator();
 
 				EObjectDescriptor person = descriptors.next();
 				assertEquals("foo.bar.Person", person.getName());
-				assertEquals("foo.bar.Person.name", person.getEObjectDescriptors().get(0).getName());
+				assertEquals("foo.bar.Person.name", descriptors.next().getName());
 				assertEquals("foo.bar.String", descriptors.next().getName());
 
 				return null;
@@ -104,7 +104,7 @@ public class DefaultDeclarativeResourceIndexerTest extends AbstractIndexBasedTes
 
 				EObjectDescriptor person = descriptors.next();
 				assertEquals("foo.bar.Person", person.getName());
-				assertEquals("foo.bar.Person.name", person.getEObjectDescriptors().get(0).getName());
+				assertEquals("foo.bar.Person.name", descriptors.next().getName());
 				assertEquals("foo.bar.String", descriptors.next().getName());
 
 				return null;
