@@ -15,11 +15,11 @@
 «EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE generate(String generatorProjectName, String modelFileExtension) FOR Grammar»
+«DEFINE generate(String generatorProjectName, String modelFileExtension, String templateEncoding) FOR Grammar»
 	«EXPAND ProjectInfo::root»
 	«EXPAND NewProjectWizard::root»
 	«EXPAND NewProjectTemplate::root(modelFileExtension)»
-	«EXPAND ProjectCreator::root(generatorProjectName, modelFileExtension)»	
+	«EXPAND ProjectCreator::root(generatorProjectName, modelFileExtension, templateEncoding)»	
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlUi(String generatorProjectName, String modelFileExtension) FOR Grammar»

@@ -19,7 +19,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -161,10 +160,6 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		monitor.worked(1);
 
 		return dslProject;
-	}
-
-	private String getEncoding() throws CoreException {
-		return ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
 	}
 
 	private String pathToTemplates() {

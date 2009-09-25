@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.XpandUtil;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtext.Grammar;
@@ -44,7 +45,9 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		final Outlet outlet = ctx.getOutput().getOutlet(Generator.SRC_UI);
 		final File templateFile = new File(new File(outlet.getPath()), templateName.replaceAll("::", "/") + '.' + XpandUtil.TEMPLATE_EXTENSION);
 		final boolean templateExisted = templateFile.exists();
-		super.generate(grammar, ctx);
+		List<Object> parameters = getParameters(grammar);
+		parameters.add(ctx.getOutput().getOutlet("SRC_GEN_UI").getFileEncoding());
+		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, parameters);
 		if (!templateExisted && templateFile.exists()) {
 			LOG.info("A new template " + templateName + " has been generated into " + outlet.getPath() + ".");
 			LOG.info("  Make sure to enable the Xtend/Xpand nature and JavaBeans metamodel to edit this template.");
