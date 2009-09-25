@@ -82,20 +82,41 @@ public class TypeURIHelper {
 	}
 
 	private void createFragmentForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		if (declarator instanceof IType) {
-			IType declaringType = (IType) declarator;
-			String typeSignature = Signature.createTypeSignature(declaringType.getFullyQualifiedName(), true);
-			createFragment(typeSignature, declarator, uriBuilder);
-		}
-		else if (declarator instanceof IMethod) {
-			IMethod member = (IMethod) declarator;
-			createFragmentForMethod(member, uriBuilder);
-		}
-		else {
-			throw new IllegalArgumentException(signature + " / " + declarator.getElementName());
+		String readable = Signature.toString(signature);
+		IMember localDeclarator = declarator;
+		while(localDeclarator != null) {
+			if (localDeclarator instanceof IType) {
+				IType declaringType = (IType) localDeclarator;
+				ITypeParameter typeParameter = findTypeParameterByName(readable, declaringType.getTypeParameters());
+				if (typeParameter != null) {
+					String typeSignature = Signature.createTypeSignature(declaringType.getFullyQualifiedName(), true);
+					createFragment(typeSignature, declarator, uriBuilder);
+					break;
+				}
+			}
+			else if (localDeclarator instanceof IMethod) {
+				IMethod method = (IMethod) localDeclarator;
+				ITypeParameter typeParameter = findTypeParameterByName(readable, method.getTypeParameters());
+				if (typeParameter != null) {
+					createFragmentForMethod(method, uriBuilder);
+					break;
+				}
+			}
+			localDeclarator = localDeclarator.getDeclaringType();
 		}
 		uriBuilder.append('/');
-		uriBuilder.append(Signature.toString(signature));
+		uriBuilder.append(readable);
+	}
+
+	private ITypeParameter findTypeParameterByName(String readable, ITypeParameter[] typeParameters) {
+		if (typeParameters != null) {
+			for(ITypeParameter parameter: typeParameters) {
+				if (readable.equals(parameter.getElementName())) {
+					return parameter;
+				}
+			}
+		}
+		return null;
 	}
 
 	private void createFragmentForMethod(IMethod method, StringBuilder uriBuilder) throws JavaModelException {
@@ -171,7 +192,7 @@ public class TypeURIHelper {
 				}
 					break;
 				case '-': {
-					uriBuilder.append("? super ");
+					uriBuilder.append("? extends java.lang.Object & super ");
 					String lowerBoundSignature = signature.substring(1);
 					computeParameterizedTypeName(lowerBoundSignature, uriBuilder);
 				}
