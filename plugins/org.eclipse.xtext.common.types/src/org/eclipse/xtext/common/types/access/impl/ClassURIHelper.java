@@ -167,8 +167,12 @@ public class ClassURIHelper {
 		if (type instanceof ParameterizedType) {
 			uriBuilder.append('<');
 			ParameterizedType parameterized = (ParameterizedType) type;
-			for (Type arg : parameterized.getActualTypeArguments()) {
-				computeParameter(arg, uriBuilder);
+			Type[] actualTypeArguments = parameterized.getActualTypeArguments();
+			for (int i = 0; i < actualTypeArguments.length; i++) {
+				if (i!=0) {
+					uriBuilder.append(',');
+				}
+				computeParameter(actualTypeArguments[i], uriBuilder);
 			}
 			uriBuilder.append('>');
 		}
@@ -177,20 +181,23 @@ public class ClassURIHelper {
 	public void computeParameter(Type type, StringBuilder uriBuilder) {
 		if (type instanceof WildcardType) {
 			WildcardType wildcard = (WildcardType) type;
+			boolean wrote = false;
 			if (wildcard.getUpperBounds().length != 0) {
 				uriBuilder.append("? extends ");
+				wrote = true;
 				for (int i = 0; i < wildcard.getUpperBounds().length; i++) {
 					if (i != 0)
-						uriBuilder.append('&');
+						uriBuilder.append(" & extends ");
 					Type upperBound = wildcard.getUpperBounds()[i];
 					computeParameterizedTypeName(upperBound, uriBuilder);
 				}
 			}
 			if (wildcard.getLowerBounds().length != 0) {
-				uriBuilder.append("? super ");
+				if (!wrote)
+					uriBuilder.append("? super ");
 				for (int i = 0; i < wildcard.getLowerBounds().length; i++) {
-					if (i != 0)
-						uriBuilder.append('&');
+					if (i != 0 || wrote)
+						uriBuilder.append(" & super ");
 					Type lowerBound = wildcard.getLowerBounds()[i];
 					computeParameterizedTypeName(lowerBound, uriBuilder);
 				}

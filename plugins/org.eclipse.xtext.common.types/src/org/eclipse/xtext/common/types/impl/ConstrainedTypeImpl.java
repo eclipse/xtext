@@ -179,7 +179,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 		StringBuilder result = new StringBuilder(64);
 		for(TypeConstraint constraint: constraints) {
 			if (result.length() != 0)
-				result.append(",");
+				result.append(" & ");
 			result.append(constraint.getCanonicalName());
 		}
 		return result.toString();

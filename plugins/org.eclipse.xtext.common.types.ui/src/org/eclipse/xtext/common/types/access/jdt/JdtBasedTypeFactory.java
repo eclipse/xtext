@@ -234,6 +234,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				}
 					break;
 				case '-': {
+					UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+					TypeReference objectReference = createTypeReference(Signature.createTypeSignature(Object.class.getName(),
+							true), declarator, container);
+					upperBound.setReferencedType(objectReference);
+					wildcard.getConstraints().add(upperBound);
 					String lowerBoundSignature = actualTypeSignature.substring(1);
 					LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
 					TypeReference reference = createTypeReference(lowerBoundSignature, declarator, container);
