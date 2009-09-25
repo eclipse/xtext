@@ -46,7 +46,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		final File templateFile = new File(new File(outlet.getPath()), templateName.replaceAll("::", "/") + '.' + XpandUtil.TEMPLATE_EXTENSION);
 		final boolean templateExisted = templateFile.exists();
 		List<Object> parameters = getParameters(grammar);
-		parameters.add(ctx.getOutput().getOutlet("SRC_GEN_UI").getFileEncoding());
+		parameters.add(outlet.getFileEncoding());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, parameters);
 		if (!templateExisted && templateFile.exists()) {
 			LOG.info("A new template " + templateName + " has been generated into " + outlet.getPath() + ".");
