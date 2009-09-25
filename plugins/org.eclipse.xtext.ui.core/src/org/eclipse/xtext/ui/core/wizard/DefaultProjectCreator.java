@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.core.wizard;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -43,6 +44,10 @@ public class DefaultProjectCreator extends WorkspaceModifyOperation implements I
 	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 			InterruptedException {
 
+	}
+
+	protected String getEncoding() throws CoreException {
+		return ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
 	}
 
 }

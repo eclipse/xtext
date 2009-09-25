@@ -29,8 +29,6 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 
 	private static Logger logger = Logger.getLogger(XtextNewProjectWizard.class);
 
-//	private WizardNewProjectCreationPage mainPage;
-
 	protected IStructuredSelection selection;
 
 	public XtextNewProjectWizard() {
@@ -38,13 +36,6 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 		setNeedsProgressMonitor(true);
 	}
 
-//	public void addPages() {
-//		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
-//		mainPage.setTitle("Project");
-//		mainPage.setDescription("Create a new project resource.");
-//		addPage(mainPage);
-//	}
-	
 	protected abstract IProjectInfo getProjectInfo();
 
 	@Override
