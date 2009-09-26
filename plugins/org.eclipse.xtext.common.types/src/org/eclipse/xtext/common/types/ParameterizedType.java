@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ParameterizedType extends ReferenceType {
+public interface ParameterizedType extends ComponentType {
 	/**
 	 * Returns the value of the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -102,29 +102,29 @@ public interface ParameterizedType extends ReferenceType {
 	void setDeclarator(Member value);
 
 	/**
-	 * Returns the value of the '<em><b>Raw Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Raw Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Raw Type</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Raw Type</em>' containment reference.
-	 * @see #setRawType(TypeReference)
+	 * @return the value of the '<em>Raw Type</em>' reference.
+	 * @see #setRawType(Type)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getParameterizedType_RawType()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	TypeReference getRawType();
+	Type getRawType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ParameterizedType#getRawType <em>Raw Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Raw Type</em>' containment reference.
+	 * @param value the new value of the '<em>Raw Type</em>' reference.
 	 * @see #getRawType()
 	 * @generated
 	 */
-	void setRawType(TypeReference value);
+	void setRawType(Type value);
 
 } // ParameterizedType

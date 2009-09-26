@@ -37,7 +37,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.ParameterizedTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.PrimitiveTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.ReferenceTypeArgumentTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.TypeReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.TypeParameterTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.UpperBoundTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.VoidTest.class);

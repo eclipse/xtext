@@ -27,14 +27,7 @@ public class ReferenceTypeArgumentTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		typeArgument.setReference(TypesFactory.eINSTANCE.createTypeReference());
-		assertNull(typeArgument.getCanonicalName());
-	}
-	
-	public void testCanonicalName_03() {
-		TypeReference typeReference = TypesFactory.eINSTANCE.createTypeReference();
-		typeReference.setType(TypesFactory.eINSTANCE.createVoid());
-		typeArgument.setReference(typeReference);
+		typeArgument.setType(TypesFactory.eINSTANCE.createVoid());
 		assertEquals("void", typeArgument.getCanonicalName());
 	}
 }

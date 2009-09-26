@@ -41,7 +41,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class TypeParameterImpl extends ReferenceTypeImpl implements TypeParameter {
+public class TypeParameterImpl extends ComponentTypeImpl implements TypeParameter {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

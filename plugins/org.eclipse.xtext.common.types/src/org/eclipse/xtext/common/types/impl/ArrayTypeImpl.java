@@ -31,7 +31,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class ArrayTypeImpl extends ReferenceTypeImpl implements ArrayType {
+public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

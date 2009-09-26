@@ -31,14 +31,12 @@ import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.ReferenceType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
@@ -155,15 +153,6 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.REFERENCE_TYPE: {
-				ReferenceType referenceType = (ReferenceType)theEObject;
-				T result = caseReferenceType(referenceType);
-				if (result == null) result = caseComponentType(referenceType);
-				if (result == null) result = caseType(referenceType);
-				if (result == null) result = caseIdentifyableElement(referenceType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.PRIMITIVE_TYPE: {
 				PrimitiveType primitiveType = (PrimitiveType)theEObject;
 				T result = casePrimitiveType(primitiveType);
@@ -185,7 +174,6 @@ public class TypesSwitch<T> {
 			case TypesPackage.ARRAY_TYPE: {
 				ArrayType arrayType = (ArrayType)theEObject;
 				T result = caseArrayType(arrayType);
-				if (result == null) result = caseReferenceType(arrayType);
 				if (result == null) result = caseComponentType(arrayType);
 				if (result == null) result = caseType(arrayType);
 				if (result == null) result = caseIdentifyableElement(arrayType);
@@ -195,11 +183,10 @@ public class TypesSwitch<T> {
 			case TypesPackage.DECLARED_TYPE: {
 				DeclaredType declaredType = (DeclaredType)theEObject;
 				T result = caseDeclaredType(declaredType);
-				if (result == null) result = caseReferenceType(declaredType);
-				if (result == null) result = caseMember(declaredType);
 				if (result == null) result = caseComponentType(declaredType);
-				if (result == null) result = caseAnnotationTarget(declaredType);
+				if (result == null) result = caseMember(declaredType);
 				if (result == null) result = caseType(declaredType);
+				if (result == null) result = caseAnnotationTarget(declaredType);
 				if (result == null) result = caseIdentifyableElement(declaredType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -214,9 +201,8 @@ public class TypesSwitch<T> {
 			case TypesPackage.TYPE_PARAMETER: {
 				TypeParameter typeParameter = (TypeParameter)theEObject;
 				T result = caseTypeParameter(typeParameter);
-				if (result == null) result = caseReferenceType(typeParameter);
-				if (result == null) result = caseConstrainedType(typeParameter);
 				if (result == null) result = caseComponentType(typeParameter);
+				if (result == null) result = caseConstrainedType(typeParameter);
 				if (result == null) result = caseType(typeParameter);
 				if (result == null) result = caseIdentifyableElement(typeParameter);
 				if (result == null) result = defaultCase(theEObject);
@@ -249,11 +235,10 @@ public class TypesSwitch<T> {
 				AnnotationType annotationType = (AnnotationType)theEObject;
 				T result = caseAnnotationType(annotationType);
 				if (result == null) result = caseDeclaredType(annotationType);
-				if (result == null) result = caseReferenceType(annotationType);
-				if (result == null) result = caseMember(annotationType);
 				if (result == null) result = caseComponentType(annotationType);
-				if (result == null) result = caseAnnotationTarget(annotationType);
+				if (result == null) result = caseMember(annotationType);
 				if (result == null) result = caseType(annotationType);
+				if (result == null) result = caseAnnotationTarget(annotationType);
 				if (result == null) result = caseIdentifyableElement(annotationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -262,11 +247,10 @@ public class TypesSwitch<T> {
 				EnumerationType enumerationType = (EnumerationType)theEObject;
 				T result = caseEnumerationType(enumerationType);
 				if (result == null) result = caseDeclaredType(enumerationType);
-				if (result == null) result = caseReferenceType(enumerationType);
-				if (result == null) result = caseMember(enumerationType);
 				if (result == null) result = caseComponentType(enumerationType);
-				if (result == null) result = caseAnnotationTarget(enumerationType);
+				if (result == null) result = caseMember(enumerationType);
 				if (result == null) result = caseType(enumerationType);
+				if (result == null) result = caseAnnotationTarget(enumerationType);
 				if (result == null) result = caseIdentifyableElement(enumerationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -276,11 +260,10 @@ public class TypesSwitch<T> {
 				T result = caseGenericType(genericType);
 				if (result == null) result = caseDeclaredType(genericType);
 				if (result == null) result = caseTypeParameterDeclarator(genericType);
-				if (result == null) result = caseReferenceType(genericType);
-				if (result == null) result = caseMember(genericType);
 				if (result == null) result = caseComponentType(genericType);
-				if (result == null) result = caseAnnotationTarget(genericType);
+				if (result == null) result = caseMember(genericType);
 				if (result == null) result = caseType(genericType);
+				if (result == null) result = caseAnnotationTarget(genericType);
 				if (result == null) result = caseIdentifyableElement(genericType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -288,7 +271,6 @@ public class TypesSwitch<T> {
 			case TypesPackage.PARAMETERIZED_TYPE: {
 				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
 				T result = caseParameterizedType(parameterizedType);
-				if (result == null) result = caseReferenceType(parameterizedType);
 				if (result == null) result = caseComponentType(parameterizedType);
 				if (result == null) result = caseType(parameterizedType);
 				if (result == null) result = caseIdentifyableElement(parameterizedType);
@@ -315,13 +297,6 @@ public class TypesSwitch<T> {
 				T result = caseReferenceTypeArgument(referenceTypeArgument);
 				if (result == null) result = caseTypeArgument(referenceTypeArgument);
 				if (result == null) result = caseIdentifyableElement(referenceTypeArgument);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.TYPE_REFERENCE: {
-				TypeReference typeReference = (TypeReference)theEObject;
-				T result = caseTypeReference(typeReference);
-				if (result == null) result = caseIdentifyableElement(typeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -469,21 +444,6 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseComponentType(ComponentType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseReferenceType(ReferenceType object) {
 		return null;
 	}
 
@@ -724,21 +684,6 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseReferenceTypeArgument(ReferenceTypeArgument object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeReference(TypeReference object) {
 		return null;
 	}
 

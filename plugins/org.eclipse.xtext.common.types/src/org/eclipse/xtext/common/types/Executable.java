@@ -71,19 +71,19 @@ public interface Executable extends Member, TypeParameterDeclarator {
 	EList<FormalParameter> getParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Exceptions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeReference}.
+	 * Returns the value of the '<em><b>Exceptions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Exceptions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exceptions</em>' containment reference list.
+	 * @return the value of the '<em>Exceptions</em>' reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getExecutable_Exceptions()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	EList<TypeReference> getExceptions();
+	EList<Type> getExceptions();
 
 } // Executable

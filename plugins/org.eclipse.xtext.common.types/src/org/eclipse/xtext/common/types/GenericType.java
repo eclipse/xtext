@@ -139,7 +139,7 @@ public interface GenericType extends DeclaredType, TypeParameterDeclarator {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<TypeReference> getExtendedInterfaces();
+	EList<Type> getExtendedInterfaces();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,7 +151,7 @@ public interface GenericType extends DeclaredType, TypeParameterDeclarator {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<TypeReference> getExtendedClasses();
+	EList<Type> getExtendedClasses();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -29,7 +29,7 @@ import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -51,7 +51,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public abstract class DeclaredTypeImpl extends ReferenceTypeImpl implements DeclaredType {
+public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements DeclaredType {
 	/**
 	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -113,14 +113,14 @@ public abstract class DeclaredTypeImpl extends ReferenceTypeImpl implements Decl
 	protected String visibility = VISIBILITY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuperTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeReference> superTypes;
+	protected EList<Type> superTypes;
 
 	/**
 	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
@@ -285,9 +285,9 @@ public abstract class DeclaredTypeImpl extends ReferenceTypeImpl implements Decl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeReference> getSuperTypes() {
+	public EList<Type> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, TypesPackage.DECLARED_TYPE__SUPER_TYPES);
+			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.DECLARED_TYPE__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -341,8 +341,6 @@ public abstract class DeclaredTypeImpl extends ReferenceTypeImpl implements Decl
 				return basicSetDeclaringType(null, msgs);
 			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 				return ((InternalEList<?>)getDeclaredParameterizedTypes()).basicRemove(otherEnd, msgs);
-			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
-				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
@@ -417,7 +415,7 @@ public abstract class DeclaredTypeImpl extends ReferenceTypeImpl implements Decl
 				return;
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends TypeReference>)newValue);
+				getSuperTypes().addAll((Collection<? extends Type>)newValue);
 				return;
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				getMembers().clear();

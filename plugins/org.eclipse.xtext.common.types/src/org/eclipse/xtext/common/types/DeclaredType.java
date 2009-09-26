@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface DeclaredType extends ReferenceType, Member {
+public interface DeclaredType extends ComponentType, Member {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,20 +63,20 @@ public interface DeclaredType extends ReferenceType, Member {
 	void setVisibility(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Super Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeReference}.
+	 * Returns the value of the '<em><b>Super Types</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Super Types</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super Types</em>' containment reference list.
+	 * @return the value of the '<em>Super Types</em>' reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getDeclaredType_SuperTypes()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	EList<TypeReference> getSuperTypes();
+	EList<Type> getSuperTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.

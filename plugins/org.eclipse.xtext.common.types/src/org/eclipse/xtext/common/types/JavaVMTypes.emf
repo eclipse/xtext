@@ -6,6 +6,9 @@ abstract class IdentifyableElement {
 }
 
 abstract class Type extends IdentifyableElement {
+  op boolean isValidReturnType();
+  op boolean isValidParameterType();
+  op boolean isValidTypeArgument();
 }
 
 class Void extends Type {
@@ -19,9 +22,6 @@ abstract class ComponentType extends Type {
   val ArrayType#componentType arrayType;
 }
 
-abstract class ReferenceType extends ComponentType {
-}
-
 class PrimitiveType extends ComponentType {
   attr String name;
 }
@@ -29,15 +29,15 @@ class PrimitiveType extends ComponentType {
 class Wildcard extends ConstrainedType {
 }
 
-class ArrayType extends ReferenceType {
+class ArrayType extends ComponentType {
   op int getDimensions();
   ref ComponentType#arrayType componentType;
 }
 
-abstract class DeclaredType extends ReferenceType, Member {
+abstract class DeclaredType extends ComponentType, Member {
   op String getPackageName();
   attr String visibility;
-  val TypeReference[*] superTypes;
+  ref Type[*] superTypes;
   val Member[*]#declaringType members;
 }
 
@@ -45,13 +45,13 @@ abstract class TypeParameterDeclarator extends IdentifyableElement {
   val TypeParameter[*]#declarator typeParameters;
 }
 
-class TypeParameter extends ReferenceType, ConstrainedType {
+class TypeParameter extends ComponentType, ConstrainedType {
   attr String name;
   ref TypeParameterDeclarator#typeParameters declarator;
 }
 
 abstract class TypeConstraint extends IdentifyableElement {
-  val TypeReference referencedType;
+  ref Type referencedType;
   ref ConstrainedType#constraints constrainedType;
 }
 
@@ -72,16 +72,16 @@ class GenericType extends DeclaredType, TypeParameterDeclarator {
   attr boolean ~interface;
   attr boolean static;
   attr boolean final;
-  op TypeReference[*] getExtendedInterfaces();
-  op TypeReference[*] getExtendedClasses();
+  op Type[*] getExtendedInterfaces();
+  op Type[*] getExtendedClasses();
   op boolean isInstantiateable(); 
 }
 
-class ParameterizedType extends ReferenceType {
+class ParameterizedType extends ComponentType {
   attr String fullyQualifiedName;
   val TypeArgument[*]#declarator arguments;
   ref Member#declaredParameterizedTypes declarator;
-  val TypeReference rawType;
+  ref Type rawType;
 }
 
 abstract class TypeArgument extends IdentifyableElement {
@@ -93,13 +93,7 @@ class WildcardTypeArgument extends TypeArgument {
 }
 
 class ReferenceTypeArgument extends TypeArgument {
-  val TypeReference reference;
-}
-
-class TypeReference extends IdentifyableElement {
   ref Type type;
-  op boolean isValidReturnType();
-  op boolean isValidParameterType();
 }
 
 abstract class Member extends AnnotationTarget, IdentifyableElement {
@@ -113,13 +107,13 @@ class Field extends Member {
   attr String visibility;
   attr boolean static;
   attr boolean final;
-  val TypeReference type;
+  ref Type type;
 }
 
 abstract class Executable extends Member, TypeParameterDeclarator {
   attr String visibility;
   val FormalParameter[*] parameters;
-  val TypeReference[*] exceptions;
+  ref Type[*] exceptions;
 }
 
 class Constructor extends Executable {
@@ -129,12 +123,12 @@ class Operation extends Executable {
   attr boolean static;
   attr boolean final;
   attr boolean ~abstract;
-  val TypeReference returnType;
+  ref Type returnType;
 }
 
 class FormalParameter extends IdentifyableElement {
   attr String name;
-  val TypeReference parameterType;
+  ref Type parameterType;
 }
 
 abstract class AnnotationTarget {

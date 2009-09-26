@@ -144,15 +144,6 @@ public interface TypesFactory extends EFactory {
 	ReferenceTypeArgument createReferenceTypeArgument();
 
 	/**
-	 * Returns a new object of class '<em>Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Reference</em>'.
-	 * @generated
-	 */
-	TypeReference createTypeReference();
-
-	/**
 	 * Returns a new object of class '<em>Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
