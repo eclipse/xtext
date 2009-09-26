@@ -8,7 +8,6 @@
 package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,7 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -55,14 +54,14 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getParameterType() <em>Parameter Type</em>}' containment reference.
+	 * The cached value of the '{@link #getParameterType() <em>Parameter Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParameterType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference parameterType;
+	protected Type parameterType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,7 +108,15 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeReference getParameterType() {
+	public Type getParameterType() {
+		if (parameterType != null && parameterType.eIsProxy()) {
+			InternalEObject oldParameterType = (InternalEObject)parameterType;
+			parameterType = (Type)eResolveProxy(oldParameterType);
+			if (parameterType != oldParameterType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, oldParameterType, parameterType));
+			}
+		}
 		return parameterType;
 	}
 
@@ -118,47 +125,20 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParameterType(TypeReference newParameterType, NotificationChain msgs) {
-		TypeReference oldParameterType = parameterType;
+	public Type basicGetParameterType() {
+		return parameterType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParameterType(Type newParameterType) {
+		Type oldParameterType = parameterType;
 		parameterType = newParameterType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, oldParameterType, newParameterType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParameterType(TypeReference newParameterType) {
-		if (newParameterType != parameterType) {
-			NotificationChain msgs = null;
-			if (parameterType != null)
-				msgs = ((InternalEObject)parameterType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, null, msgs);
-			if (newParameterType != null)
-				msgs = ((InternalEObject)newParameterType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, null, msgs);
-			msgs = basicSetParameterType(newParameterType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, newParameterType, newParameterType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE:
-				return basicSetParameterType(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE, oldParameterType, parameterType));
 	}
 
 	/**
@@ -172,7 +152,8 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 			case TypesPackage.FORMAL_PARAMETER__NAME:
 				return getName();
 			case TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE:
-				return getParameterType();
+				if (resolve) return getParameterType();
+				return basicGetParameterType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,7 +170,7 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 				setName((String)newValue);
 				return;
 			case TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE:
-				setParameterType((TypeReference)newValue);
+				setParameterType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -207,7 +188,7 @@ public class FormalParameterImpl extends IdentifyableElementImpl implements Form
 				setName(NAME_EDEFAULT);
 				return;
 			case TypesPackage.FORMAL_PARAMETER__PARAMETER_TYPE:
-				setParameterType((TypeReference)null);
+				setParameterType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);

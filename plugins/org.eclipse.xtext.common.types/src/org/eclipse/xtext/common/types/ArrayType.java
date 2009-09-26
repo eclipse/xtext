@@ -24,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface ArrayType extends ReferenceType {
+public interface ArrayType extends ComponentType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <p>

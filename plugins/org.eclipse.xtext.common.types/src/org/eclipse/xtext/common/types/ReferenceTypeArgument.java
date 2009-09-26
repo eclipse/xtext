@@ -16,7 +16,7 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ package org.eclipse.xtext.common.types;
  */
 public interface ReferenceTypeArgument extends TypeArgument {
 	/**
-	 * Returns the value of the '<em><b>Reference</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Reference</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reference</em>' containment reference.
-	 * @see #setReference(TypeReference)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument_Reference()
-	 * @model containment="true"
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(Type)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument_Type()
+	 * @model
 	 * @generated
 	 */
-	TypeReference getReference();
+	Type getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getReference <em>Reference</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reference</em>' containment reference.
-	 * @see #getReference()
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
 	 * @generated
 	 */
-	void setReference(TypeReference value);
+	void setType(Type value);
 
 } // ReferenceTypeArgument

@@ -29,7 +29,6 @@ import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.TypeParameter;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
@@ -93,7 +92,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
 			case TypesPackage.WILDCARD_TYPE_ARGUMENT: return createWildcardTypeArgument();
 			case TypesPackage.REFERENCE_TYPE_ARGUMENT: return createReferenceTypeArgument();
-			case TypesPackage.TYPE_REFERENCE: return createTypeReference();
 			case TypesPackage.FIELD: return createField();
 			case TypesPackage.CONSTRUCTOR: return createConstructor();
 			case TypesPackage.OPERATION: return createOperation();
@@ -232,16 +230,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public ReferenceTypeArgument createReferenceTypeArgument() {
 		ReferenceTypeArgumentImpl referenceTypeArgument = new ReferenceTypeArgumentImpl();
 		return referenceTypeArgument;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeReference createTypeReference() {
-		TypeReferenceImpl typeReference = new TypeReferenceImpl();
-		return typeReference;
 	}
 
 	/**

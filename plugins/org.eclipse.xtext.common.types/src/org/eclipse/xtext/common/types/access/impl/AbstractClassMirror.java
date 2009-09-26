@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
@@ -27,8 +26,6 @@ public abstract class AbstractClassMirror implements IClassMirror {
 	public String getFragment(EObject obj) {
 		if (obj instanceof TypeParameter)
 			return getFragment(obj.eContainer()) + "/" + ((TypeParameter) obj).getName();
-		if (obj instanceof TypeReference)
-			return null;
 		if (obj instanceof IdentifyableElement)
 			return ((IdentifyableElement) obj).getCanonicalName();
 		return null;

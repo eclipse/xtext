@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.GenericType;
+import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -256,7 +256,7 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeReference> getExtendedInterfaces() {
+	public EList<Type> getExtendedInterfaces() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -267,7 +267,7 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeReference> getExtendedClasses() {
+	public EList<Type> getExtendedClasses() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

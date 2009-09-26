@@ -32,7 +32,6 @@ import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
@@ -84,9 +83,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.getMembers().add(createField(field));
 		}
 		if (clazz.getGenericSuperclass() != null)
-			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass(), result));
+			result.getSuperTypes().add(createReferencedType(clazz.getGenericSuperclass(), result));
 		for (Type type : clazz.getGenericInterfaces()) {
-			result.getSuperTypes().add(createTypeReference(type, result));
+			result.getSuperTypes().add(createReferencedType(type, result));
 		}
 		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
@@ -101,16 +100,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (variable.getBounds().length != 0) {
 			for (Type bound : variable.getBounds()) {
 				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
-				upperBound.setReferencedType(createTypeReference(bound, container));
+				upperBound.setReferencedType(createReferencedType(bound, container));
 				result.getConstraints().add(upperBound);
 			}
 		}
-		return result;
-	}
-
-	public TypeReference createTypeReference(Type type, org.eclipse.xtext.common.types.Member container) {
-		TypeReference result = TypesFactory.eINSTANCE.createTypeReference();
-		result.setType(createReferencedType(type, container));
 		return result;
 	}
 
@@ -152,7 +145,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			org.eclipse.xtext.common.types.ParameterizedType newParameterizedType = TypesFactory.eINSTANCE
 					.createParameterizedType();
 			newParameterizedType.setFullyQualifiedName(name);
-			newParameterizedType.setRawType(createTypeReference(parameterizedType.getRawType(), container));
+			newParameterizedType.setRawType(createReferencedType(parameterizedType.getRawType(), container));
 			for (int i = 0; i < parameterizedType.getActualTypeArguments().length; i++) {
 				TypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i], container,
 						parameterizedType.getRawType(), i);
@@ -175,16 +168,16 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (wildcardType.getUpperBounds().length != 0) {
 				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
 				for (Type boundType : wildcardType.getUpperBounds()) {
-					TypeReference reference = createTypeReference(boundType, container);
-					upperBound.setReferencedType(reference);
+					org.eclipse.xtext.common.types.Type upperBoundType = createReferencedType(boundType, container);
+					upperBound.setReferencedType(upperBoundType);
 				}
 				wildcard.getConstraints().add(upperBound);
 			}
 			if (wildcardType.getLowerBounds().length != 0) {
 				LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
 				for (Type boundType : wildcardType.getLowerBounds()) {
-					TypeReference reference = createTypeReference(boundType, container);
-					lowerBound.setReferencedType(reference);
+					org.eclipse.xtext.common.types.Type lowerBoundType = createReferencedType(boundType, container);
+					lowerBound.setReferencedType(lowerBoundType);
 				}
 				wildcard.getConstraints().add(lowerBound);
 			}
@@ -193,8 +186,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		else {
 			ReferenceTypeArgument result = TypesFactory.eINSTANCE.createReferenceTypeArgument();
-			TypeReference typeReference = createTypeReference(actualTypeArgument, container);
-			result.setReference(typeReference);
+			org.eclipse.xtext.common.types.Type typeReference = createReferencedType(actualTypeArgument, container);
+			result.setType(typeReference);
 			return result;
 		}
 	}
@@ -225,7 +218,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility("protected");
 		else if (Modifier.isPublic(field.getModifiers()))
 			result.setVisibility("public");
-		result.setType(createTypeReference(field.getGenericType(), result));
+		result.setType(createReferencedType(field.getGenericType(), result));
 		return result;
 	}
 
@@ -234,7 +227,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		enhanceExecutable(result, constructor, constructor.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType, result));
+			result.getExceptions().add(createReferencedType(parameterType, result));
 		}
 		return result;
 	}
@@ -277,9 +270,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
-		result.setReturnType(createTypeReference(method.getGenericReturnType(), result));
+		result.setReturnType(createReferencedType(method.getGenericReturnType(), result));
 		for (Type parameterType : method.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType, result));
+			result.getExceptions().add(createReferencedType(parameterType, result));
 		}
 		return result;
 	}
@@ -288,7 +281,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			org.eclipse.xtext.common.types.Member container) {
 		FormalParameter result = TypesFactory.eINSTANCE.createFormalParameter();
 		result.setName(paramName);
-		result.setParameterType(createTypeReference(parameterType, container));
+		result.setParameterType(createReferencedType(parameterType, container));
 		return result;
 	}
 

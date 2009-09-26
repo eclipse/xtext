@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -45,7 +45,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class ParameterizedTypeImpl extends ReferenceTypeImpl implements ParameterizedType {
+public class ParameterizedTypeImpl extends ComponentTypeImpl implements ParameterizedType {
 	/**
 	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -77,14 +77,14 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	protected EList<TypeArgument> arguments;
 
 	/**
-	 * The cached value of the '{@link #getRawType() <em>Raw Type</em>}' containment reference.
+	 * The cached value of the '{@link #getRawType() <em>Raw Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRawType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference rawType;
+	protected Type rawType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,7 +184,15 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeReference getRawType() {
+	public Type getRawType() {
+		if (rawType != null && rawType.eIsProxy()) {
+			InternalEObject oldRawType = (InternalEObject)rawType;
+			rawType = (Type)eResolveProxy(oldRawType);
+			if (rawType != oldRawType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, oldRawType, rawType));
+			}
+		}
 		return rawType;
 	}
 
@@ -193,14 +201,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRawType(TypeReference newRawType, NotificationChain msgs) {
-		TypeReference oldRawType = rawType;
-		rawType = newRawType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, oldRawType, newRawType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Type basicGetRawType() {
+		return rawType;
 	}
 
 	/**
@@ -208,18 +210,11 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRawType(TypeReference newRawType) {
-		if (newRawType != rawType) {
-			NotificationChain msgs = null;
-			if (rawType != null)
-				msgs = ((InternalEObject)rawType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, null, msgs);
-			if (newRawType != null)
-				msgs = ((InternalEObject)newRawType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, null, msgs);
-			msgs = basicSetRawType(newRawType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, newRawType, newRawType));
+	public void setRawType(Type newRawType) {
+		Type oldRawType = rawType;
+		rawType = newRawType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE, oldRawType, rawType));
 	}
 
 	/**
@@ -253,8 +248,6 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				return basicSetDeclarator(null, msgs);
-			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				return basicSetRawType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -288,7 +281,8 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 			case TypesPackage.PARAMETERIZED_TYPE__DECLARATOR:
 				return getDeclarator();
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				return getRawType();
+				if (resolve) return getRawType();
+				return basicGetRawType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,7 +307,7 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 				setDeclarator((Member)newValue);
 				return;
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				setRawType((TypeReference)newValue);
+				setRawType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -337,7 +331,7 @@ public class ParameterizedTypeImpl extends ReferenceTypeImpl implements Paramete
 				setDeclarator((Member)null);
 				return;
 			case TypesPackage.PARAMETERIZED_TYPE__RAW_TYPE:
-				setRawType((TypeReference)null);
+				setRawType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
