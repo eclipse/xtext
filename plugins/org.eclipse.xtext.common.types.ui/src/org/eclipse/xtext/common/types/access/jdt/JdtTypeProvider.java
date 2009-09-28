@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
@@ -33,6 +32,8 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
 		super(resourceSet);
+		if (javaProject == null)
+			throw new IllegalArgumentException("javaProject may not be null");
 		this.javaProject = javaProject;
 		this.typeUriHelper = new TypeURIHelper();
 		this.typeFactory = new JdtBasedTypeFactory(typeUriHelper);
@@ -68,7 +69,7 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	@Override
 	protected IMirror createMirrorForFQN(String name) throws TypeNotFoundException {
 		try {
-			IType type = javaProject.findType(name, new NullProgressMonitor());
+			IType type = javaProject.findType(name);
 			if (type == null)
 				throw new TypeNotFoundException("No such type available '" + name + "'");
 			return new JdtTypeMirror(type, typeFactory);
@@ -76,6 +77,14 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 		catch (JavaModelException e) {
 			throw new TypeNotFoundException(name, e);
 		}
+	}
+	
+	public IJavaProject getJavaProject() {
+		return javaProject;
+	}
+	
+	public TypeURIHelper getTypeUriHelper() {
+		return typeUriHelper;
 	}
 
 }

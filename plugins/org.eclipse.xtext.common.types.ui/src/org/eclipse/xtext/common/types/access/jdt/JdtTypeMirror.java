@@ -7,7 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.util.List;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.ElementChangedEvent;
+import org.eclipse.jdt.core.IElementChangedListener;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -15,10 +25,11 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeMirror extends AbstractClassMirror {
+public class JdtTypeMirror extends AbstractClassMirror implements IElementChangedListener, Adapter {
 
 	private final IType mirroredType;
 	private final ITypeFactory<IType> typeFactory;
+	private TypeResource typeResource;
 
 	public JdtTypeMirror(IType type, ITypeFactory<IType> typeFactory) {
 		this.mirroredType = type;
@@ -27,6 +38,9 @@ public class JdtTypeMirror extends AbstractClassMirror {
 
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(mirroredType));
+		this.typeResource = typeResource;
+		JavaCore.addElementChangedListener(this);
+		typeResource.getResourceSet().eAdapters().add(this);
 	}
 
 	@Override
@@ -36,6 +50,68 @@ public class JdtTypeMirror extends AbstractClassMirror {
 
 	public IType getMirroredType() {
 		return mirroredType;
+	}
+
+	public void elementChanged(ElementChangedEvent event) {
+		IJavaElement changedElement = event.getDelta().getElement();
+		while(changedElement != null) {
+			if (changedElement.equals(mirroredType)) {
+				unloadResource();
+				return;
+			}
+			changedElement = changedElement.getParent();
+		}
+		IJavaElement type = mirroredType;
+		changedElement = event.getDelta().getElement();
+		while(type != null) {
+			if (type.equals(changedElement)) {
+				unloadResource();
+				return;
+			}
+			type = type.getParent();
+		}
+	}
+
+	private void unloadResource() {
+		if (typeResource.getResourceSet() != null)
+			typeResource.getResourceSet().eAdapters().remove(this);
+		JavaCore.removeElementChangedListener(this);
+		typeResource.unload();
+		if (typeResource.getResourceSet() != null)
+			typeResource.getResourceSet().getResources().remove(typeResource);
+	}
+
+	public Notifier getTarget() {
+		return null;
+	}
+
+	public boolean isAdapterForType(Object object) {
+		return false;
+	}
+
+	public void notifyChanged(Notification notification) {
+		if (notification.isTouch())
+			return;
+		switch(notification.getEventType()) {
+			case Notification.REMOVE:
+				if (notification.getOldValue() == typeResource) {
+					unloadResource();
+					ResourceSet resourceSet = (ResourceSet) notification.getNotifier();
+					resourceSet.eAdapters().remove(this);
+				}
+				break;
+			case Notification.REMOVE_MANY:
+				if (((List<?>) notification.getOldValue()).contains(typeResource)) {
+					unloadResource();
+					ResourceSet resourceSet = (ResourceSet) notification.getNotifier();
+					resourceSet.eAdapters().remove(this);
+				}
+				break;
+		}
+	}
+
+	public void setTarget(Notifier notifier) {
+		// ignore
 	}
 
 }
