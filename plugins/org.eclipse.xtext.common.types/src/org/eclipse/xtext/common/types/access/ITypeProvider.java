@@ -15,8 +15,16 @@ import org.eclipse.xtext.common.types.Type;
  */
 public interface ITypeProvider {
 
+	/**
+	 * Find a type by its fully qualified name, e.g. java.util.Map$Entry, int[], void or 
+	 * java.lang.String[][][].
+	 */
 	Type findTypeByName(String name) throws TypeNotFoundException;
 	
+	/**
+	 * Returns the resource set that will contain dynamically created resources.
+	 * @return the resource set.
+	 */
 	ResourceSet getResourceSet();
 	
 	interface Factory {
