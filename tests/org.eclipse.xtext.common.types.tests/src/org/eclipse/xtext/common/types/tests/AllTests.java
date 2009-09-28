@@ -25,6 +25,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.TypeURIHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.TypeResourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.JdtBasedSimpleTypeScopeProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.JdtBasedSimpleTypeScopeTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.XtextResourceSetBasedProjectProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.AnnotationTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.ArrayTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.ConstructorTest.class);

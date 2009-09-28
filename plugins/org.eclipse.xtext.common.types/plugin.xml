@@ -5,9 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/xtext/common/Types" 
+       uri = "http://www.eclipse.org/xtext/common/JavaVMTypes" 
        class = "org.eclipse.xtext.common.types.TypesPackage"
-       genModel = "org/eclipse/xtext/common/JavaVMTypes.genmodel" /> 
+       genModel = "org/eclipse/xtext/common/types/JavaVMTypes.genmodel" /> 
 	
   </extension>
 

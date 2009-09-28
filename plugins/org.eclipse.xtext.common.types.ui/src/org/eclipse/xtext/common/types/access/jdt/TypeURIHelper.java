@@ -42,7 +42,7 @@ public class TypeURIHelper {
 		return createURI(uriBuilder);
 	}
 
-	private StringBuilder createURIBuilder() {
+	public StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);
 		builder.append(TypeURIHelper.PROTOCOL);
 		builder.append(':');
