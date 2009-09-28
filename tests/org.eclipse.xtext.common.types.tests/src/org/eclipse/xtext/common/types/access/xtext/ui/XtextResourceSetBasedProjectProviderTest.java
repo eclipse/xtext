@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.xtext;
+package org.eclipse.xtext.common.types.access.xtext.ui;
 
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
+import org.eclipse.xtext.common.types.access.xtext.ui.XtextResourceSetBasedProjectProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import junit.framework.TestCase;
