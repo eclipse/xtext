@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -32,7 +30,7 @@ public class EmfStructureComparator {
 	public void assertSameStructure(EObject left, EObject right) {
 		if(!isSameStructure(left, right)) {
 			log.error(getErrorMessage());
-			Assert.fail(getErrorMessage());
+			throw new AssertionError(getErrorMessage());
 		}
 		//logger.debug("" + counter + " elements compared");
 	}
