@@ -13,21 +13,15 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
-
-import com.google.inject.Inject;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtBasedSimpleTypeScopeProvider implements IScopeProvider {
+public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 
-	@Inject
-	private JdtTypeProviderFactory typeProviderFactory;
-	
 	public IScope getScope(EObject context, EReference reference) {
 		if (context.eResource() == null)
 			throw new IllegalStateException("context must be contained in a resource");
@@ -36,21 +30,17 @@ public class JdtBasedSimpleTypeScopeProvider implements IScopeProvider {
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.TYPE, referenceType)) {
-			JdtTypeProvider typeProvider = typeProviderFactory.findTypeProvider(resourceSet);
+			ITypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
 			if (typeProvider == null)
-				typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
-			return new JdtBasedSimpleTypeScope(typeProvider);
+				typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
+			return createTypeScope(typeProvider);
 		} else {
 			return IScope.NULLSCOPE;
 		}
 	}
 
-	public void setTypeProviderFactory(JdtTypeProviderFactory typeProviderFactory) {
-		this.typeProviderFactory = typeProviderFactory;
-	}
+	public abstract AbstractTypeScope createTypeScope(ITypeProvider typeProvider);
 
-	public JdtTypeProviderFactory getTypeProviderFactory() {
-		return typeProviderFactory;
-	}
-	
+	public abstract ITypeProvider.Factory getTypeProviderFactory();
+
 }

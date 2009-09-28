@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Factory {
 
 	private final ResourceSet resourceSet;
+	
 	private final PrimitiveTypeFactory primitiveTypeFactory;
 	
 	protected AbstractTypeProvider(ResourceSet resourceSet) {
