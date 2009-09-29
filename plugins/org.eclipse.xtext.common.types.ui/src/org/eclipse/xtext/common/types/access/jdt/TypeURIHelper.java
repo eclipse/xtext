@@ -332,14 +332,10 @@ public class TypeURIHelper {
 			createResourceURIForClass(Signature.createTypeSignature(declaringClass.getFullyQualifiedName(), true),
 					declarator, uriBuilder);
 		}
-		else if (declarator instanceof IMethod) {
-			IMethod member = (IMethod) declarator;
-			IType declaringClass = member.getDeclaringType();
+		else {
+			IType declaringClass = declarator.getDeclaringType();
 			createResourceURIForClass(Signature.createTypeSignature(declaringClass.getFullyQualifiedName(), true),
 					declarator, uriBuilder);
-		}
-		else {
-			throw new IllegalArgumentException(signature + " / " + declarator.getElementName());
 		}
 	}
 

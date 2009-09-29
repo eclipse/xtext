@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.DeclaredType;
+import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.LowerBound;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
 import org.eclipse.xtext.common.types.testSetups.NestedTypes;
@@ -380,6 +382,28 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int fieldCount = ParameterizedTypes.Inner.class.getDeclaredFields().length;
 		assertEquals(1, fieldCount);
 		assertEquals(methodCount + constructorCount + fieldCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_12() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int constructorCount = Fields.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int fieldCount = Fields.class.getDeclaredFields().length;
+		assertEquals(4, fieldCount);
+		int nestedCount = Fields.class.getDeclaredClasses().length;
+		assertEquals(1, nestedCount);
+		assertEquals(nestedCount + constructorCount + fieldCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_13() {
+		String typeName = Fields.Inner.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		int constructorCount = Fields.Inner.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount); // default constructor
+		int fieldCount = Fields.Inner.class.getDeclaredFields().length;
+		assertEquals(1, fieldCount);
+		assertEquals(constructorCount + fieldCount, type.getMembers().size());
 	}
 	
 	public void test_twoListParamsNoResult_01() {
@@ -1105,6 +1129,80 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeParameter w = ((TypeParameterDeclarator) type.getDeclaringType()).getTypeParameters().get(4);
 		assertSame(w, refTypeArgument.getType());
 	}
-
+	
+	public void testFields_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+	}
+	
+	private Field getFieldFromType(EObject context, Class<?> type, String field) {
+		String fieldName = type.getName() + "." + field;
+		assertNotNull(context);
+		Field result = (Field) context.eResource().getEObject(fieldName);
+		assertNotNull(fieldName, result);
+		return result;
+	}
+	
+	public void testFields_privateT_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.class, "privateT");
+		assertSame(type, field.getDeclaringType());
+		assertEquals("private", field.getVisibility());
+		Type fieldType = field.getType();
+		assertSame(type.getTypeParameters().get(0), fieldType);
+	}
+	
+	public void testFields_defaultListT_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.class, "defaultListT");
+		assertSame(type, field.getDeclaringType());
+		assertEquals(null, field.getVisibility());
+		Type fieldType = field.getType();
+		assertEquals("java.util.List<T>", fieldType.getCanonicalName());
+		assertTrue(fieldType instanceof ParameterizedType);
+		ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
+		ReferenceTypeArgument refTypeArg = (ReferenceTypeArgument) parameterizedFieldType.getArguments().get(0);
+		assertSame(type.getTypeParameters().get(0), refTypeArg.getType());
+	}
+	
+	public void testFields_protectedString_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.class, "protectedString");
+		assertSame(type, field.getDeclaringType());
+		assertEquals("protected", field.getVisibility());
+		Type fieldType = field.getType();
+		assertEquals("java.lang.String", fieldType.getCanonicalName());
+	}
+	
+	public void testFields_publicInt_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.class, "publicInt");
+		assertSame(type, field.getDeclaringType());
+		assertEquals("public", field.getVisibility());
+		Type fieldType = field.getType();
+		assertEquals("int", fieldType.getCanonicalName());
+		assertTrue(field.getType() instanceof PrimitiveType);
+	}
+	
+	public void testFields_innerFields_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.Inner.class, "innerFields");
+		GenericType innerType = (GenericType) getTypeProvider().findTypeByName(Fields.Inner.class.getName());
+		assertSame(innerType, field.getDeclaringType());
+		assertSame(type, innerType.getDeclaringType());
+		assertEquals("public", field.getVisibility());
+		Type fieldType = field.getType();
+		assertEquals(typeName + "<java.lang.String>", fieldType.getCanonicalName());
+		assertTrue(field.getType() instanceof ParameterizedType);
+		ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
+		assertSame(type, parameterizedFieldType.getRawType());
+	}
+	
 	protected abstract String getCollectionParamName();
 }
