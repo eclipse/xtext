@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.UpperBound;
+import org.eclipse.xtext.common.types.Visibility;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
@@ -1149,7 +1150,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Field field = getFieldFromType(type, Fields.class, "privateT");
 		assertSame(type, field.getDeclaringType());
-		assertEquals("private", field.getVisibility());
+		assertEquals(Visibility.PRIVATE, field.getVisibility());
 		Type fieldType = field.getType();
 		assertSame(type.getTypeParameters().get(0), fieldType);
 	}
@@ -1159,7 +1160,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Field field = getFieldFromType(type, Fields.class, "defaultListT");
 		assertSame(type, field.getDeclaringType());
-		assertEquals(null, field.getVisibility());
+		assertEquals(Visibility.DEFAULT, field.getVisibility());
 		Type fieldType = field.getType();
 		assertEquals("java.util.List<T>", fieldType.getCanonicalName());
 		assertTrue(fieldType instanceof ParameterizedType);
@@ -1173,7 +1174,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Field field = getFieldFromType(type, Fields.class, "protectedString");
 		assertSame(type, field.getDeclaringType());
-		assertEquals("protected", field.getVisibility());
+		assertEquals(Visibility.PROTECTED, field.getVisibility());
 		Type fieldType = field.getType();
 		assertEquals("java.lang.String", fieldType.getCanonicalName());
 	}
@@ -1183,7 +1184,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Field field = getFieldFromType(type, Fields.class, "publicInt");
 		assertSame(type, field.getDeclaringType());
-		assertEquals("public", field.getVisibility());
+		assertEquals(Visibility.PUBLIC, field.getVisibility());
 		Type fieldType = field.getType();
 		assertEquals("int", fieldType.getCanonicalName());
 		assertTrue(field.getType() instanceof PrimitiveType);
@@ -1196,7 +1197,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType innerType = (GenericType) getTypeProvider().findTypeByName(Fields.Inner.class.getName());
 		assertSame(innerType, field.getDeclaringType());
 		assertSame(type, innerType.getDeclaringType());
-		assertEquals("public", field.getVisibility());
+		assertEquals(Visibility.PUBLIC, field.getVisibility());
 		Type fieldType = field.getType();
 		assertEquals(typeName + "<java.lang.String>", fieldType.getCanonicalName());
 		assertTrue(field.getType() instanceof ParameterizedType);

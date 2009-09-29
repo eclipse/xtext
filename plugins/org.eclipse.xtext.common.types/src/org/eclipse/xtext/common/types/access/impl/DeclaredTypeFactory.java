@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.UpperBound;
+import org.eclipse.xtext.common.types.Visibility;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
@@ -62,11 +63,11 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setInterface(clazz.isInterface());
 		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
 		if (Modifier.isPrivate(clazz.getModifiers()))
-			result.setVisibility("private");
+			result.setVisibility(Visibility.PRIVATE);
 		else if (Modifier.isProtected(clazz.getModifiers()))
-			result.setVisibility("protected");
+			result.setVisibility(Visibility.PROTECTED);
 		else if (Modifier.isPublic(clazz.getModifiers()))
-			result.setVisibility("public");
+			result.setVisibility(Visibility.PUBLIC);
 		result.setFullyQualifiedName(clazz.getName());
 		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
 			if (!declaredClass.isAnonymousClass()) {
@@ -212,12 +213,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFullyQualifiedName(field.getDeclaringClass().getName() + "." + field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
-		if (Modifier.isPrivate(field.getModifiers()))
-			result.setVisibility("private");
-		else if (Modifier.isProtected(field.getModifiers()))
-			result.setVisibility("protected");
-		else if (Modifier.isPublic(field.getModifiers()))
-			result.setVisibility("public");
+		setVisibility(result, field.getModifiers());
 		result.setType(createReferencedType(field.getGenericType(), result));
 		return result;
 	}
@@ -230,6 +226,17 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.getExceptions().add(createReferencedType(parameterType, result));
 		}
 		return result;
+	}
+	
+	public void setVisibility(org.eclipse.xtext.common.types.Member result, int modifiers) {
+		if (Modifier.isPrivate(modifiers))
+			result.setVisibility(Visibility.PRIVATE);
+		else if (Modifier.isProtected(modifiers))
+			result.setVisibility(Visibility.PROTECTED);
+		else if (Modifier.isPublic(modifiers))
+			result.setVisibility(Visibility.PUBLIC);
+		else
+			result.setVisibility(Visibility.DEFAULT);
 	}
 
 	public void enhanceExecutable(Executable result, Member member, Type[] parameterTypes) {
@@ -245,12 +252,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		fqName.append(')');
 		result.setFullyQualifiedName(fqName.toString());
-		if (Modifier.isPrivate(member.getModifiers()))
-			result.setVisibility("private");
-		else if (Modifier.isProtected(member.getModifiers()))
-			result.setVisibility("protected");
-		else if (Modifier.isPublic(member.getModifiers()))
-			result.setVisibility("public");
+		setVisibility(result, member.getModifiers());
 		int i = 0;
 		for (Type parameterType : parameterTypes) {
 			result.getParameters().add(createFormalParameter(parameterType, "p" + i, result));

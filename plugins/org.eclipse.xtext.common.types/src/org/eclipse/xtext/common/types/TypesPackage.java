@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -313,13 +314,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARED_TYPE__DECLARING_TYPE = COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_TYPE__VISIBILITY = COMPONENT_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__FULLY_QUALIFIED_NAME = COMPONENT_TYPE_FEATURE_COUNT + 2;
+	int DECLARED_TYPE__FULLY_QUALIFIED_NAME = COMPONENT_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
@@ -328,16 +338,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES = COMPONENT_TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARED_TYPE__VISIBILITY = COMPONENT_TYPE_FEATURE_COUNT + 4;
+	int DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES = COMPONENT_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -658,6 +659,15 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATION_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -674,15 +684,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -739,6 +740,15 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -755,15 +765,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -820,6 +821,15 @@ public interface TypesPackage extends EPackage {
 	int GENERIC_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -836,15 +846,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_TYPE__DECLARED_PARAMETERIZED_TYPES = DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -1101,13 +1102,22 @@ public interface TypesPackage extends EPackage {
 	int MEMBER__DECLARING_TYPE = ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER__VISIBILITY = ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__FULLY_QUALIFIED_NAME = ANNOTATION_TARGET_FEATURE_COUNT + 1;
+	int MEMBER__FULLY_QUALIFIED_NAME = ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Declared Parameterized Types</b></em>' containment reference list.
@@ -1116,7 +1126,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__DECLARED_PARAMETERIZED_TYPES = ANNOTATION_TARGET_FEATURE_COUNT + 2;
+	int MEMBER__DECLARED_PARAMETERIZED_TYPES = ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Member</em>' class.
@@ -1125,7 +1135,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_FEATURE_COUNT = ANNOTATION_TARGET_FEATURE_COUNT + 3;
+	int MEMBER_FEATURE_COUNT = ANNOTATION_TARGET_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.FieldImpl <em>Field</em>}' class.
@@ -1156,6 +1166,15 @@ public interface TypesPackage extends EPackage {
 	int FIELD__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__VISIBILITY = MEMBER__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1174,22 +1193,13 @@ public interface TypesPackage extends EPackage {
 	int FIELD__DECLARED_PARAMETERIZED_TYPES = MEMBER__DECLARED_PARAMETERIZED_TYPES;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FIELD__VISIBILITY = MEMBER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__STATIC = MEMBER_FEATURE_COUNT + 1;
+	int FIELD__STATIC = MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -1198,7 +1208,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__FINAL = MEMBER_FEATURE_COUNT + 2;
+	int FIELD__FINAL = MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1207,7 +1217,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__TYPE = MEMBER_FEATURE_COUNT + 3;
+	int FIELD__TYPE = MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -1216,7 +1226,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 4;
+	int FIELD_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ExecutableImpl <em>Executable</em>}' class.
@@ -1247,6 +1257,15 @@ public interface TypesPackage extends EPackage {
 	int EXECUTABLE__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTABLE__VISIBILITY = MEMBER__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1274,22 +1293,13 @@ public interface TypesPackage extends EPackage {
 	int EXECUTABLE__TYPE_PARAMETERS = MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTABLE__VISIBILITY = MEMBER_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__PARAMETERS = MEMBER_FEATURE_COUNT + 2;
+	int EXECUTABLE__PARAMETERS = MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' reference list.
@@ -1298,7 +1308,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__EXCEPTIONS = MEMBER_FEATURE_COUNT + 3;
+	int EXECUTABLE__EXCEPTIONS = MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Executable</em>' class.
@@ -1307,7 +1317,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 4;
+	int EXECUTABLE_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ConstructorImpl <em>Constructor</em>}' class.
@@ -1338,6 +1348,15 @@ public interface TypesPackage extends EPackage {
 	int CONSTRUCTOR__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__VISIBILITY = EXECUTABLE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1363,15 +1382,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRUCTOR__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__VISIBILITY = EXECUTABLE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1429,6 +1439,15 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__VISIBILITY = EXECUTABLE__VISIBILITY;
+
+	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1454,15 +1473,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__VISIBILITY = EXECUTABLE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1604,6 +1614,17 @@ public interface TypesPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.Visibility
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVisibility()
+	 * @generated
+	 */
+	int VISIBILITY = 29;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.IdentifyableElement <em>Identifyable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1736,17 +1757,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDeclaredType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.DeclaredType#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtext.common.types.DeclaredType#getVisibility()
-	 * @see #getDeclaredType()
-	 * @generated
-	 */
-	EAttribute getDeclaredType_Visibility();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.DeclaredType#getSuperTypes <em>Super Types</em>}'.
@@ -2088,6 +2098,17 @@ public interface TypesPackage extends EPackage {
 	EReference getMember_DeclaringType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Member#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see org.eclipse.xtext.common.types.Member#getVisibility()
+	 * @see #getMember()
+	 * @generated
+	 */
+	EAttribute getMember_Visibility();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Member#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2118,17 +2139,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getField();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Field#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtext.common.types.Field#getVisibility()
-	 * @see #getField()
-	 * @generated
-	 */
-	EAttribute getField_Visibility();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Field#isStatic <em>Static</em>}'.
@@ -2172,17 +2182,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExecutable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Executable#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable#getVisibility()
-	 * @see #getExecutable()
-	 * @generated
-	 */
-	EAttribute getExecutable_Visibility();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getParameters <em>Parameters</em>}'.
@@ -2356,6 +2355,16 @@ public interface TypesPackage extends EPackage {
 	EReference getAnnotationReference_Target();
 
 	/**
+	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Visibility</em>'.
+	 * @see org.eclipse.xtext.common.types.Visibility
+	 * @generated
+	 */
+	EEnum getVisibility();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2498,14 +2507,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DECLARED_TYPE = eINSTANCE.getDeclaredType();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DECLARED_TYPE__VISIBILITY = eINSTANCE.getDeclaredType_Visibility();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
@@ -2790,6 +2791,14 @@ public interface TypesPackage extends EPackage {
 		EReference MEMBER__DECLARING_TYPE = eINSTANCE.getMember_DeclaringType();
 
 		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER__VISIBILITY = eINSTANCE.getMember_Visibility();
+
+		/**
 		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2814,14 +2823,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FIELD = eINSTANCE.getField();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FIELD__VISIBILITY = eINSTANCE.getField_Visibility();
 
 		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -2856,14 +2857,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTABLE = eINSTANCE.getExecutable();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXECUTABLE__VISIBILITY = eINSTANCE.getExecutable_Visibility();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -3002,6 +2995,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATION_REFERENCE__TARGET = eINSTANCE.getAnnotationReference_Target();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.Visibility
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVisibility()
+		 * @generated
+		 */
+		EEnum VISIBILITY = eINSTANCE.getVisibility();
 
 	}
 

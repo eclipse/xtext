@@ -25,7 +25,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.FieldImpl#getType <em>Type</em>}</li>
@@ -35,26 +34,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public class FieldImpl extends MemberImpl implements Field {
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VISIBILITY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected String visibility = VISIBILITY_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -122,27 +101,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.FIELD;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVisibility() {
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(String newVisibility) {
-		String oldVisibility = visibility;
-		visibility = newVisibility;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FIELD__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -233,8 +191,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.FIELD__VISIBILITY:
-				return getVisibility();
 			case TypesPackage.FIELD__STATIC:
 				return isStatic();
 			case TypesPackage.FIELD__FINAL:
@@ -254,9 +210,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.FIELD__VISIBILITY:
-				setVisibility((String)newValue);
-				return;
 			case TypesPackage.FIELD__STATIC:
 				setStatic((Boolean)newValue);
 				return;
@@ -278,9 +231,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.FIELD__VISIBILITY:
-				setVisibility(VISIBILITY_EDEFAULT);
-				return;
 			case TypesPackage.FIELD__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
@@ -302,8 +252,6 @@ public class FieldImpl extends MemberImpl implements Field {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.FIELD__VISIBILITY:
-				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
 			case TypesPackage.FIELD__STATIC:
 				return static_ != STATIC_EDEFAULT;
 			case TypesPackage.FIELD__FINAL:
@@ -324,9 +272,7 @@ public class FieldImpl extends MemberImpl implements Field {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (visibility: ");
-		result.append(visibility);
-		result.append(", static: ");
+		result.append(" (static: ");
 		result.append(static_);
 		result.append(", final: ");
 		result.append(final_);

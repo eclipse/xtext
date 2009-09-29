@@ -9,15 +9,12 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -39,7 +36,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.ExecutableImpl#getExceptions <em>Exceptions</em>}</li>
  * </ul>
@@ -57,26 +53,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	 * @ordered
 	 */
 	protected EList<TypeParameter> typeParameters;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VISIBILITY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected String visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -127,27 +103,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 			typeParameters = new EObjectContainmentWithInverseEList<TypeParameter>(TypeParameter.class, this, TypesPackage.EXECUTABLE__TYPE_PARAMETERS, TypesPackage.TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVisibility() {
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(String newVisibility) {
-		String oldVisibility = visibility;
-		visibility = newVisibility;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.EXECUTABLE__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -215,8 +170,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 		switch (featureID) {
 			case TypesPackage.EXECUTABLE__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				return getVisibility();
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				return getParameters();
 			case TypesPackage.EXECUTABLE__EXCEPTIONS:
@@ -237,9 +190,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 			case TypesPackage.EXECUTABLE__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends TypeParameter>)newValue);
-				return;
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				setVisibility((String)newValue);
 				return;
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				getParameters().clear();
@@ -264,9 +214,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 			case TypesPackage.EXECUTABLE__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				setVisibility(VISIBILITY_EDEFAULT);
-				return;
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -287,8 +234,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 		switch (featureID) {
 			case TypesPackage.EXECUTABLE__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case TypesPackage.EXECUTABLE__VISIBILITY:
-				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case TypesPackage.EXECUTABLE__EXCEPTIONS:
@@ -327,22 +272,6 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (visibility: ");
-		result.append(visibility);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ExecutableImpl

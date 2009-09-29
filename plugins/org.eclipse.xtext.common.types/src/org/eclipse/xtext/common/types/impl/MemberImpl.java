@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.MemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.MemberImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.MemberImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.MemberImpl#getDeclaredParameterizedTypes <em>Declared Parameterized Types</em>}</li>
  * </ul>
@@ -39,6 +41,24 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * @generated
  */
 public abstract class MemberImpl extends AnnotationTargetImpl implements Member {
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.DEFAULT;
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -135,6 +155,27 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.MEMBER__DECLARING_TYPE, newDeclaringType, newDeclaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.MEMBER__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -244,6 +285,8 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 		switch (featureID) {
 			case TypesPackage.MEMBER__DECLARING_TYPE:
 				return getDeclaringType();
+			case TypesPackage.MEMBER__VISIBILITY:
+				return getVisibility();
 			case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME:
 				return getFullyQualifiedName();
 			case TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES:
@@ -263,6 +306,9 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 		switch (featureID) {
 			case TypesPackage.MEMBER__DECLARING_TYPE:
 				setDeclaringType((DeclaredType)newValue);
+				return;
+			case TypesPackage.MEMBER__VISIBILITY:
+				setVisibility((Visibility)newValue);
 				return;
 			case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName((String)newValue);
@@ -286,6 +332,9 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 			case TypesPackage.MEMBER__DECLARING_TYPE:
 				setDeclaringType((DeclaredType)null);
 				return;
+			case TypesPackage.MEMBER__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
@@ -306,6 +355,8 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 		switch (featureID) {
 			case TypesPackage.MEMBER__DECLARING_TYPE:
 				return getDeclaringType() != null;
+			case TypesPackage.MEMBER__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME:
 				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
 			case TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES:
@@ -324,7 +375,9 @@ public abstract class MemberImpl extends AnnotationTargetImpl implements Member 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (fullyQualifiedName: ");
+		result.append(" (visibility: ");
+		result.append(visibility);
+		result.append(", fullyQualifiedName: ");
 		result.append(fullyQualifiedName);
 		result.append(')');
 		return result.toString();
