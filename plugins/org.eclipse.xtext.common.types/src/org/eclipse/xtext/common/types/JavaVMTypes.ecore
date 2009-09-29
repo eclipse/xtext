@@ -31,7 +31,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclaredType" abstract="true" eSuperTypes="#//ComponentType #//Member">
     <eOperations name="getPackageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
@@ -88,18 +87,23 @@
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//DeclaredType"
         eOpposite="#//DeclaredType/members"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParameterizedTypes"
         upperBound="-1" eType="#//ParameterizedType" containment="true" eOpposite="#//ParameterizedType/declarator"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="DEFAULT"/>
+    <eLiterals name="PRIVATE" value="1"/>
+    <eLiterals name="PROTECTED" value="2"/>
+    <eLiterals name="PUBLIC" value="3"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Member">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Executable" abstract="true" eSuperTypes="#//Member #//TypeParameterDeclarator">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//FormalParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exceptions" upperBound="-1"

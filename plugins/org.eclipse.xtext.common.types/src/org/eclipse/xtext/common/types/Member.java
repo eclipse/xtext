@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.Member#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.Member#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Member#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Member#getDeclaredParameterizedTypes <em>Declared Parameterized Types</em>}</li>
  * </ul>
@@ -56,6 +57,35 @@ public interface Member extends AnnotationTarget, IdentifyableElement {
 	 * @generated
 	 */
 	void setDeclaringType(DeclaredType value);
+
+	/**
+	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.xtext.common.types.Visibility}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visibility</em>' attribute.
+	 * @see org.eclipse.xtext.common.types.Visibility
+	 * @see #setVisibility(Visibility)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getMember_Visibility()
+	 * @model
+	 * @generated
+	 */
+	Visibility getVisibility();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Member#getVisibility <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visibility</em>' attribute.
+	 * @see org.eclipse.xtext.common.types.Visibility
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	void setVisibility(Visibility value);
 
 	/**
 	 * Returns the value of the '<em><b>Fully Qualified Name</b></em>' attribute.

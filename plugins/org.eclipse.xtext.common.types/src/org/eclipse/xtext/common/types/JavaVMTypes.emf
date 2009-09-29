@@ -36,7 +36,6 @@ class ArrayType extends ComponentType {
 
 abstract class DeclaredType extends ComponentType, Member {
   op String getPackageName();
-  attr String visibility;
   ref Type[*] superTypes;
   val Member[*]#declaringType members;
 }
@@ -98,20 +97,26 @@ class ReferenceTypeArgument extends TypeArgument {
 
 abstract class Member extends AnnotationTarget, IdentifyableElement {
   ref DeclaredType#members declaringType;
+  attr Visibility visibility;
   attr String fullyQualifiedName;
   op String getSimpleName();
   val ParameterizedType[*]#declarator declaredParameterizedTypes;
 }
 
+enum Visibility {
+  DEFAULT = 0;
+  PRIVATE = 1;
+  PROTECTED = 2;
+  PUBLIC = 3;
+}
+
 class Field extends Member {
-  attr String visibility;
   attr boolean static;
   attr boolean final;
   ref Type type;
 }
 
 abstract class Executable extends Member, TypeParameterDeclarator {
-  attr String visibility;
   val FormalParameter[*] parameters;
   ref Type[*] exceptions;
 }

@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,9 +42,9 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getDeclaredParameterizedTypes <em>Declared Parameterized Types</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getMembers <em>Members</em>}</li>
  * </ul>
@@ -61,6 +62,26 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	 * @ordered
 	 */
 	protected EList<AnnotationReference> annotations;
+
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Visibility VISIBILITY_EDEFAULT = Visibility.DEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getFullyQualifiedName() <em>Fully Qualified Name</em>}' attribute.
@@ -91,26 +112,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	 * @ordered
 	 */
 	protected EList<ParameterizedType> declaredParameterizedTypes;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VISIBILITY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected String visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
@@ -264,7 +265,7 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getVisibility() {
+	public Visibility getVisibility() {
 		return visibility;
 	}
 
@@ -273,9 +274,9 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVisibility(String newVisibility) {
-		String oldVisibility = visibility;
-		visibility = newVisibility;
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARED_TYPE__VISIBILITY, oldVisibility, visibility));
 	}
@@ -373,12 +374,12 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				return getAnnotations();
 			case TypesPackage.DECLARED_TYPE__DECLARING_TYPE:
 				return getDeclaringType();
+			case TypesPackage.DECLARED_TYPE__VISIBILITY:
+				return getVisibility();
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				return getFullyQualifiedName();
 			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 				return getDeclaredParameterizedTypes();
-			case TypesPackage.DECLARED_TYPE__VISIBILITY:
-				return getVisibility();
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				return getSuperTypes();
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
@@ -403,15 +404,15 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 			case TypesPackage.DECLARED_TYPE__DECLARING_TYPE:
 				setDeclaringType((DeclaredType)newValue);
 				return;
+			case TypesPackage.DECLARED_TYPE__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName((String)newValue);
 				return;
 			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 				getDeclaredParameterizedTypes().clear();
 				getDeclaredParameterizedTypes().addAll((Collection<? extends ParameterizedType>)newValue);
-				return;
-			case TypesPackage.DECLARED_TYPE__VISIBILITY:
-				setVisibility((String)newValue);
 				return;
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
@@ -439,14 +440,14 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 			case TypesPackage.DECLARED_TYPE__DECLARING_TYPE:
 				setDeclaringType((DeclaredType)null);
 				return;
+			case TypesPackage.DECLARED_TYPE__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
 			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 				getDeclaredParameterizedTypes().clear();
-				return;
-			case TypesPackage.DECLARED_TYPE__VISIBILITY:
-				setVisibility(VISIBILITY_EDEFAULT);
 				return;
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
@@ -470,12 +471,12 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.DECLARED_TYPE__DECLARING_TYPE:
 				return getDeclaringType() != null;
+			case TypesPackage.DECLARED_TYPE__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
 			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 				return declaredParameterizedTypes != null && !declaredParameterizedTypes.isEmpty();
-			case TypesPackage.DECLARED_TYPE__VISIBILITY:
-				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
@@ -500,6 +501,7 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 		if (baseClass == Member.class) {
 			switch (derivedFeatureID) {
 				case TypesPackage.DECLARED_TYPE__DECLARING_TYPE: return TypesPackage.MEMBER__DECLARING_TYPE;
+				case TypesPackage.DECLARED_TYPE__VISIBILITY: return TypesPackage.MEMBER__VISIBILITY;
 				case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME: return TypesPackage.MEMBER__FULLY_QUALIFIED_NAME;
 				case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES: return TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES;
 				default: return -1;
@@ -524,6 +526,7 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 		if (baseClass == Member.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.MEMBER__DECLARING_TYPE: return TypesPackage.DECLARED_TYPE__DECLARING_TYPE;
+				case TypesPackage.MEMBER__VISIBILITY: return TypesPackage.DECLARED_TYPE__VISIBILITY;
 				case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME: return TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME;
 				case TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES: return TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
 				default: return -1;
@@ -542,10 +545,10 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (fullyQualifiedName: ");
-		result.append(fullyQualifiedName);
-		result.append(", visibility: ");
+		result.append(" (visibility: ");
 		result.append(visibility);
+		result.append(", fullyQualifiedName: ");
+		result.append(fullyQualifiedName);
 		result.append(')');
 		return result.toString();
 	}

@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -42,6 +43,7 @@ import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
+import org.eclipse.xtext.common.types.Visibility;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
@@ -256,6 +258,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	private EClass annotationReferenceEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum visibilityEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -438,17 +447,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeclaredType_Visibility() {
-		return (EAttribute)declaredTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getDeclaredType_SuperTypes() {
-		return (EReference)declaredTypeEClass.getEStructuralFeatures().get(1);
+		return (EReference)declaredTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -457,7 +457,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getDeclaredType_Members() {
-		return (EReference)declaredTypeEClass.getEStructuralFeatures().get(2);
+		return (EReference)declaredTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -735,7 +735,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMember_FullyQualifiedName() {
+	public EAttribute getMember_Visibility() {
 		return (EAttribute)memberEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -744,8 +744,17 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMember_FullyQualifiedName() {
+		return (EAttribute)memberEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMember_DeclaredParameterizedTypes() {
-		return (EReference)memberEClass.getEStructuralFeatures().get(2);
+		return (EReference)memberEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -762,7 +771,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Visibility() {
+	public EAttribute getField_Static() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -771,7 +780,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Static() {
+	public EAttribute getField_Final() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -780,17 +789,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getField_Final() {
-		return (EAttribute)fieldEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getField_Type() {
-		return (EReference)fieldEClass.getEStructuralFeatures().get(3);
+		return (EReference)fieldEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -807,17 +807,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExecutable_Visibility() {
-		return (EAttribute)executableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getExecutable_Parameters() {
-		return (EReference)executableEClass.getEStructuralFeatures().get(1);
+		return (EReference)executableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -826,7 +817,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getExecutable_Exceptions() {
-		return (EReference)executableEClass.getEStructuralFeatures().get(2);
+		return (EReference)executableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -960,6 +951,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getVisibility() {
+		return visibilityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TypesFactory getTypesFactory() {
 		return (TypesFactory)getEFactoryInstance();
 	}
@@ -1004,7 +1004,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(arrayTypeEClass, ARRAY_TYPE__COMPONENT_TYPE);
 
 		declaredTypeEClass = createEClass(DECLARED_TYPE);
-		createEAttribute(declaredTypeEClass, DECLARED_TYPE__VISIBILITY);
 		createEReference(declaredTypeEClass, DECLARED_TYPE__SUPER_TYPES);
 		createEReference(declaredTypeEClass, DECLARED_TYPE__MEMBERS);
 
@@ -1050,17 +1049,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		memberEClass = createEClass(MEMBER);
 		createEReference(memberEClass, MEMBER__DECLARING_TYPE);
+		createEAttribute(memberEClass, MEMBER__VISIBILITY);
 		createEAttribute(memberEClass, MEMBER__FULLY_QUALIFIED_NAME);
 		createEReference(memberEClass, MEMBER__DECLARED_PARAMETERIZED_TYPES);
 
 		fieldEClass = createEClass(FIELD);
-		createEAttribute(fieldEClass, FIELD__VISIBILITY);
 		createEAttribute(fieldEClass, FIELD__STATIC);
 		createEAttribute(fieldEClass, FIELD__FINAL);
 		createEReference(fieldEClass, FIELD__TYPE);
 
 		executableEClass = createEClass(EXECUTABLE);
-		createEAttribute(executableEClass, EXECUTABLE__VISIBILITY);
 		createEReference(executableEClass, EXECUTABLE__PARAMETERS);
 		createEReference(executableEClass, EXECUTABLE__EXCEPTIONS);
 
@@ -1082,6 +1080,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		annotationReferenceEClass = createEClass(ANNOTATION_REFERENCE);
 		createEReference(annotationReferenceEClass, ANNOTATION_REFERENCE__ANNOTATION);
 		createEReference(annotationReferenceEClass, ANNOTATION_REFERENCE__TARGET);
+
+		// Create enums
+		visibilityEEnum = createEEnum(VISIBILITY);
 	}
 
 	/**
@@ -1176,7 +1177,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(arrayTypeEClass, ecorePackage.getEInt(), "getDimensions", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(declaredTypeEClass, DeclaredType.class, "DeclaredType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeclaredType_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclaredType_SuperTypes(), this.getType(), null, "superTypes", null, 0, -1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclaredType_Members(), this.getMember(), this.getMember_DeclaringType(), "members", null, 0, -1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1230,19 +1230,18 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(memberEClass, Member.class, "Member", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMember_DeclaringType(), this.getDeclaredType(), this.getDeclaredType_Members(), "declaringType", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMember_Visibility(), this.getVisibility(), "visibility", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMember_FullyQualifiedName(), ecorePackage.getEString(), "fullyQualifiedName", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMember_DeclaredParameterizedTypes(), this.getParameterizedType(), this.getParameterizedType_Declarator(), "declaredParameterizedTypes", null, 0, -1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(memberEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getField_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_Type(), this.getType(), null, "type", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executableEClass, Executable.class, "Executable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getExecutable_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutable_Parameters(), this.getFormalParameter(), null, "parameters", null, 0, -1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutable_Exceptions(), this.getType(), null, "exceptions", null, 0, -1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1264,6 +1263,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(annotationReferenceEClass, AnnotationReference.class, "AnnotationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotationReference_Annotation(), this.getAnnotationType(), null, "annotation", null, 0, 1, AnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotationReference_Target(), this.getAnnotationTarget(), this.getAnnotationTarget_Annotations(), "target", null, 0, 1, AnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+		addEEnumLiteral(visibilityEEnum, Visibility.DEFAULT);
+		addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
+		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
+		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.UpperBound;
+import org.eclipse.xtext.common.types.Visibility;
 import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -65,12 +66,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			result.setFinal(Flags.isFinal(jdtType.getFlags()));
 			result.setInterface(jdtType.isInterface());
 			result.setStatic(Flags.isStatic(jdtType.getFlags()));
-			if (Flags.isPrivate(jdtType.getFlags()))
-				result.setVisibility("private");
-			else if (Flags.isProtected(jdtType.getFlags()))
-				result.setVisibility("protected");
-			else if (Flags.isPublic(jdtType.getFlags()))
-				result.setVisibility("public");
+			setVisibility(result, jdtType.getFlags());
 			result.setFullyQualifiedName(jdtType.getFullyQualifiedName());
 			for (IType declaredType : jdtType.getTypes()) {
 				if (!declaredType.isAnonymous()) {
@@ -274,14 +270,20 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setFullyQualifiedName(field.getDeclaringType().getFullyQualifiedName() + "." + field.getElementName());
 		result.setFinal(Flags.isFinal(field.getFlags()));
 		result.setStatic(Flags.isStatic(field.getFlags()));
-		if (Flags.isPrivate(field.getFlags()))
-			result.setVisibility("private");
-		else if (Flags.isProtected(field.getFlags()))
-			result.setVisibility("protected");
-		else if (Flags.isPublic(field.getFlags()))
-			result.setVisibility("public");
+		setVisibility(result, field.getFlags());
 		result.setType(createReferencedType(field.getTypeSignature(), field, result));
 		return result;
+	}
+	
+	public void setVisibility(org.eclipse.xtext.common.types.Member result, int modifiers) {
+		if (Flags.isPrivate(modifiers))
+			result.setVisibility(Visibility.PRIVATE);
+		else if (Flags.isProtected(modifiers))
+			result.setVisibility(Visibility.PROTECTED);
+		else if (Flags.isPublic(modifiers))
+			result.setVisibility(Visibility.PUBLIC);
+		else
+			result.setVisibility(Visibility.DEFAULT);
 	}
 
 	public Constructor createConstructor(IMethod method) throws JavaModelException {
@@ -308,12 +310,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 		fqName.append(')');
 		result.setFullyQualifiedName(fqName.toString());
-		if (Flags.isPrivate(member.getFlags()))
-			result.setVisibility("private");
-		else if (Flags.isProtected(member.getFlags()))
-			result.setVisibility("protected");
-		else if (Flags.isPublic(member.getFlags()))
-			result.setVisibility("public");
+		setVisibility(result, member.getFlags());
 		for (int i = 0; i < parameterNames.length; i++) {
 			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterNames[i], member, result));
 		}

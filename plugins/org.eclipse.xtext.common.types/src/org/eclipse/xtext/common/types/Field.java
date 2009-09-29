@@ -16,7 +16,6 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.Field#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Field#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Field#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.Field#getType <em>Type</em>}</li>
@@ -28,32 +27,6 @@ package org.eclipse.xtext.common.types;
  * @generated
  */
 public interface Field extends Member {
-	/**
-	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see #setVisibility(String)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getField_Visibility()
-	 * @model
-	 * @generated
-	 */
-	String getVisibility();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Field#getVisibility <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see #getVisibility()
-	 * @generated
-	 */
-	void setVisibility(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
