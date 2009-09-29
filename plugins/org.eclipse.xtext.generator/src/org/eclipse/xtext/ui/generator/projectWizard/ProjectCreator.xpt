@@ -30,7 +30,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.internal.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
