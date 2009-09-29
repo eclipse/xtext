@@ -241,23 +241,31 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getSimpleName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (fullyQualifiedName == null)
+			return null;
+		int dollarIdx = fullyQualifiedName.lastIndexOf('$');
+		if (dollarIdx != -1) {
+			return fullyQualifiedName.substring(dollarIdx + 1);
+		}
+		int dotIdx = fullyQualifiedName.lastIndexOf('.');
+		return fullyQualifiedName.substring(dotIdx + 1);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getPackageName() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (fullyQualifiedName == null)
+			return null;
+		int dotIdx = fullyQualifiedName.lastIndexOf('.');
+		if (dotIdx == -1)
+			return "";
+		return fullyQualifiedName.substring(0, dotIdx);
 	}
 
 	/**

@@ -42,4 +42,32 @@ public class ArrayTypeTest extends TestCase {
 		assertEquals("int[][]", this.arrayType.getCanonicalName());
 	}
 	
+	public void testGetDimension_01() {
+		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
+		primitiveType.setName("int");
+		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
+		arrayType.setComponentType(primitiveType);
+		assertEquals(1, arrayType.getDimensions());
+	}
+	
+	public void testGetDimension_02() {
+		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
+		primitiveType.setName("int");
+		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
+		arrayType.setComponentType(primitiveType);
+		ArrayType nestedArrayType = TypesFactory.eINSTANCE.createArrayType();
+		nestedArrayType.setComponentType(arrayType);
+		assertEquals(2, nestedArrayType.getDimensions());
+	}
+	
+	public void testGetDimension_03() {
+		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
+		try {
+			arrayType.getDimensions();
+			fail("Expected NPE");
+		} catch(NullPointerException e) {
+			// ok
+		}
+	}
+	
 }

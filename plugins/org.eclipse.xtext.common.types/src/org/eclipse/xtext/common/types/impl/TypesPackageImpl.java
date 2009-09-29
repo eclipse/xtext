@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.lang.Iterable;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -263,6 +267,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EEnum visibilityEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iterableEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -960,6 +971,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getIterable() {
+		return iterableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TypesFactory getTypesFactory() {
 		return (TypesFactory)getEFactoryInstance();
 	}
@@ -1083,6 +1103,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Create enums
 		visibilityEEnum = createEEnum(VISIBILITY);
+
+		// Create data types
+		iterableEDataType = createEDataType(ITERABLE);
 	}
 
 	/**
@@ -1109,6 +1132,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(iterableEDataType, "E");
 
 		// Set bounds for type parameters
 
@@ -1151,12 +1175,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(identifyableElementEClass, ecorePackage.getEString(), "getCanonicalName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(typeEClass, ecorePackage.getEBoolean(), "isValidReturnType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(typeEClass, ecorePackage.getEBoolean(), "isValidParameterType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(typeEClass, ecorePackage.getEBoolean(), "isValidTypeArgument", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(voidEClass, org.eclipse.xtext.common.types.Void.class, "Void", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1207,9 +1225,17 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEAttribute(getGenericType_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, GenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenericType_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, GenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(genericTypeEClass, this.getType(), "getExtendedInterfaces", 0, -1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(genericTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getIterable());
+		EGenericType g2 = createEGenericType(this.getType());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
-		addEOperation(genericTypeEClass, this.getType(), "getExtendedClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(genericTypeEClass, null, "getExtendedClasses", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getType());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		addEOperation(genericTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1270,6 +1296,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
 		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
 		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
+
+		// Initialize data types
+		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

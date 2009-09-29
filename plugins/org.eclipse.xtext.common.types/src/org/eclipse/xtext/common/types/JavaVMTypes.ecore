@@ -6,11 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IdentifyableElement" abstract="true">
     <eOperations name="getCanonicalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//IdentifyableElement">
-    <eOperations name="isValidReturnType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isValidParameterType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isValidTypeArgument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//IdentifyableElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConstrainedType" abstract="true" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
@@ -56,8 +52,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="AnnotationType" eSuperTypes="#//DeclaredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//DeclaredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="GenericType" eSuperTypes="#//DeclaredType #//TypeParameterDeclarator">
-    <eOperations name="getExtendedInterfaces" upperBound="-1" eType="#//Type"/>
-    <eOperations name="getExtendedClasses" upperBound="-1" eType="#//Type"/>
+    <eOperations name="getExtendedInterfaces">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//Type"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getExtendedClasses">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//Type"/>
+      </eGenericType>
+    </eOperations>
     <eOperations name="isInstantiateable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -128,5 +132,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//AnnotationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AnnotationTarget"
         eOpposite="#//AnnotationTarget/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Iterable" instanceClassName="java.lang.Iterable">
+    <eTypeParameters name="E"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -54,12 +54,20 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public int getDimensions() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		int result = 1;
+		ComponentType componentType = getComponentType();
+		if (componentType == null)
+			throw new NullPointerException("component type may not be null");
+		while(componentType instanceof ArrayType) {
+			result++;
+			componentType = ((ArrayType)componentType).getComponentType();
+			if (componentType == null)
+				return result;
+		}
+		return result;
 	}
 
 	/**

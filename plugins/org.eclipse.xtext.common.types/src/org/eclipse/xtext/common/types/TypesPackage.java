@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -1625,6 +1626,17 @@ public interface TypesPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Iterable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Iterable
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
+	 * @generated
+	 */
+	int ITERABLE = 30;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.IdentifyableElement <em>Identifyable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2365,6 +2377,17 @@ public interface TypesPackage extends EPackage {
 	EEnum getVisibility();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.Iterable <em>Iterable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Iterable</em>'.
+	 * @see java.lang.Iterable
+	 * @model instanceClass="java.lang.Iterable" typeParameters="E"
+	 * @generated
+	 */
+	EDataType getIterable();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3005,6 +3028,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum VISIBILITY = eINSTANCE.getVisibility();
+
+		/**
+		 * The meta object literal for the '<em>Iterable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Iterable
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
+		 * @generated
+		 */
+		EDataType ITERABLE = eINSTANCE.getIterable();
 
 	}
 

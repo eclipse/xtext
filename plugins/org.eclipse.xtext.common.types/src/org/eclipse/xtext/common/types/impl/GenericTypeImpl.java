@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.lang.Iterable;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -23,10 +24,14 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.GenericType;
+import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +61,10 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 */
 	protected EList<TypeParameter> typeParameters;
 
+	protected Iterable<Type> extendedInterfaces;
+	
+	protected Iterable<Type> extendedClasses;
+	
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -254,34 +263,52 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EList<Type> getExtendedInterfaces() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Iterable<Type> getExtendedInterfaces() {
+		if (extendedClasses == null) {
+			extendedClasses = Iterables.filter(getSuperTypes(), new Predicate<Type>() {
+				public boolean apply(Type type) {
+					if (type instanceof GenericType) {
+						return ((GenericType) type).isInterface();
+					} else if (type instanceof ParameterizedType) {
+						return apply(((ParameterizedType) type).getRawType());
+					}
+					return false;
+				}
+			});
+		}
+		return extendedClasses;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EList<Type> getExtendedClasses() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Iterable<Type> getExtendedClasses() {
+		if (extendedClasses == null) {
+			extendedClasses = Iterables.filter(getSuperTypes(), new Predicate<Type>() {
+				public boolean apply(Type type) {
+					if (type instanceof GenericType) {
+						return !((GenericType) type).isInterface();
+					} else if (type instanceof ParameterizedType) {
+						return apply(((ParameterizedType) type).getRawType());
+					}
+					return false;
+				}
+			});
+		}
+		return extendedClasses;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean isInstantiateable() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return !isAbstract() && !isInterface();
 	}
 
 	/**

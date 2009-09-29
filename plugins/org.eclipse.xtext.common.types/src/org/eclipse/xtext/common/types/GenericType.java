@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import org.eclipse.emf.common.util.EList;
+import java.lang.Iterable;
 
 /**
  * <!-- begin-user-doc -->
@@ -136,10 +136,10 @@ public interface GenericType extends DeclaredType, TypeParameterDeclarator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.Type>"
 	 * @generated
 	 */
-	EList<Type> getExtendedInterfaces();
+	Iterable<Type> getExtendedInterfaces();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,10 +148,10 @@ public interface GenericType extends DeclaredType, TypeParameterDeclarator {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.Type>"
 	 * @generated
 	 */
-	EList<Type> getExtendedClasses();
+	Iterable<Type> getExtendedClasses();
 
 	/**
 	 * <!-- begin-user-doc -->
