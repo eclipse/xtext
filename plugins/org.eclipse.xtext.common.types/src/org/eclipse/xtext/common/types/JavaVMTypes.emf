@@ -6,9 +6,11 @@ abstract class IdentifyableElement {
 }
 
 abstract class Type extends IdentifyableElement {
+/*
   op boolean isValidReturnType();
   op boolean isValidParameterType();
   op boolean isValidTypeArgument();
+*/
 }
 
 class Void extends Type {
@@ -71,8 +73,8 @@ class GenericType extends DeclaredType, TypeParameterDeclarator {
   attr boolean ~interface;
   attr boolean static;
   attr boolean final;
-  op Type[*] getExtendedInterfaces();
-  op Type[*] getExtendedClasses();
+  op Iterable<Type> getExtendedInterfaces();
+  op Iterable<Type> getExtendedClasses();
   op boolean isInstantiateable(); 
 }
 
@@ -145,4 +147,8 @@ class AnnotationReference {
   ref AnnotationTarget#annotations target;
 }
 
-
+// important note: unfortunatly, emfatic does not support 
+// generified datatypes, that's why you'll have to uncomment /
+// comment the next lines and add the parameter type manually
+datatype Iterable<E> : java.lang.Iterable;
+// datatype Iterable : java.lang.Iterable;

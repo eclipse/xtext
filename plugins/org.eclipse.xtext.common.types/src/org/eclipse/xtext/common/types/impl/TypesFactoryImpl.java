@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.lang.Iterable;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -114,6 +115,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.VISIBILITY:
 				return createVisibilityFromString(eDataType, initialValue);
+			case TypesPackage.ITERABLE:
+				return createIterableFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +132,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eDataType.getClassifierID()) {
 			case TypesPackage.VISIBILITY:
 				return convertVisibilityToString(eDataType, instanceValue);
+			case TypesPackage.ITERABLE:
+				return convertIterableToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -332,6 +337,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 */
 	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Iterable<?> createIterableFromString(EDataType eDataType, String initialValue) {
+		return (Iterable<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIterableToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**
