@@ -18,14 +18,14 @@ import com.google.inject.Provider;
  */
 public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	
-	@Override
-	public Provider<Index> provideIndex() {
-		return new Provider<Index>() {
-			public Index get() {
-				return EmfIndexPlugin.getDefault().getIndex();
-			}
-		};
-	}
+//	@Override
+//	public Provider<Index> provideIndex() {
+//		return new Provider<Index>() {
+//			public Index get() {
+//				return EmfIndexPlugin.getDefault().getIndex();
+//			}
+//		};
+//	}
 	
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlightingCalculator.class;
