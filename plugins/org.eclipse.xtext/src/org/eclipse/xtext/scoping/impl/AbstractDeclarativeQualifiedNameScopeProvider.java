@@ -27,14 +27,14 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractDeclarativeQualifiedNameScopeProvider extends QualifiedNameBasedScopeProvider {
 	
-	@Inject
-	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		IScope scope = declarativeSupport.getScope(context, reference);
-		if (scope!=null)
-			return scope;
-		return super.getScope(context, reference);
-	}
+//	@Inject
+//	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);
+//	
+//	@Override
+//	public IScope getScope(EObject context, EReference reference) {
+//		IScope scope = declarativeSupport.getScope(context, reference);
+//		if (scope!=null)
+//			return scope;
+//		return super.getScope(context, reference);
+//	}
 }
