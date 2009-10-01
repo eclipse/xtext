@@ -55,7 +55,7 @@ public class Scopes {
 	 * creates a scope using the passed function to compute the names and 
 	 * sets the passed scope as the parent scope 
 	 */
-	public static IScope scopeFor(Iterable<? extends EObject> elements, final Function<EObject, String> nameComputation, IScope outer) {
+	public static <T extends EObject> IScope scopeFor(Iterable<? extends T> elements, final Function<T, String> nameComputation, IScope outer) {
 		return new SimpleScope(outer, scopedElementsFor(elements, nameComputation));
 	}
 	
@@ -73,9 +73,9 @@ public class Scopes {
 	 * computing the name of the elements using the passed {@link Function}
 	 * If the passed function returns null the object is filtered out.
 	 */
-	public static Iterable<IScopedElement> scopedElementsFor(Iterable<? extends EObject> elements, final Function<EObject, String> nameComputation) {
-		Iterable<IScopedElement> transformed = Iterables.transform(elements, new Function<EObject, IScopedElement>() {
-			public IScopedElement apply(EObject from) {
+	public static <T extends EObject> Iterable<IScopedElement> scopedElementsFor(Iterable<? extends T> elements, final Function<T, String> nameComputation) {
+		Iterable<IScopedElement> transformed = Iterables.transform(elements, new Function<T, IScopedElement>() {
+			public IScopedElement apply(T from) {
 				return ScopedElement.create(nameComputation.apply(from), from);
 			}
 		});
