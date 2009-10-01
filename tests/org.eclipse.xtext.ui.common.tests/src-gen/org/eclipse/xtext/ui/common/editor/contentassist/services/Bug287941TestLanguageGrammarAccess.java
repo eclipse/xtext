@@ -8,15 +8,15 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 
 @Singleton
-public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -44,7 +44,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getQueryMQLqueryParserRuleCall_1_0() { return cQueryMQLqueryParserRuleCall_1_0; }
 	}
 
-	public class ImportElements implements IParserRuleAccess {
+	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -68,7 +68,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
 	}
 
-	public class MQLqueryElements implements IParserRuleAccess {
+	public class MQLqueryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MQLquery");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSelectKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -156,7 +156,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getWhereEntriesWhereEntryParserRuleCall_6_1_0() { return cWhereEntriesWhereEntryParserRuleCall_6_1_0; }
 	}
 
-	public class SelectEntryElements implements IParserRuleAccess {
+	public class SelectEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SelectEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSelectAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -200,7 +200,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAttributeEAttributeIDTerminalRuleCall_1_1_0_1() { return cAttributeEAttributeIDTerminalRuleCall_1_1_0_1; }
 	}
 
-	public class FromEntryElements implements IParserRuleAccess {
+	public class FromEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FromEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -254,7 +254,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getScopeClauseScopeClauseParserRuleCall_4_0() { return cScopeClauseScopeClauseParserRuleCall_4_0; }
 	}
 
-	public class ScopeClauseElements implements IParserRuleAccess {
+	public class ScopeClauseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ScopeClause");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNotInAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -286,7 +286,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getScopeScopeParserRuleCall_2_0() { return cScopeScopeParserRuleCall_2_0; }
 	}
 
-	public class ScopeElements implements IParserRuleAccess {
+	public class ScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Scope");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cResourceScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -306,7 +306,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getElementScopeParserRuleCall_1() { return cElementScopeParserRuleCall_1; }
 	}
 
-	public class ResourceScopeElements implements IParserRuleAccess {
+	public class ResourceScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ResourceScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cResourcesKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -354,7 +354,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class ElementScopeElements implements IParserRuleAccess {
+	public class ElementScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ElementScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cElementsKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -402,7 +402,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class WhereEntryElements implements IParserRuleAccess {
+	public class WhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAndWhereEntryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -442,7 +442,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getEntriesAndWhereEntryParserRuleCall_1_1_1_0() { return cEntriesAndWhereEntryParserRuleCall_1_1_1_0; }
 	}
 
-	public class AndWhereEntryElements implements IParserRuleAccess {
+	public class AndWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AndWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cConcreteWhereEntryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -484,7 +484,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getEntriesConcreteWhereEntryParserRuleCall_1_1_1_0() { return cEntriesConcreteWhereEntryParserRuleCall_1_1_1_0; }
 	}
 
-	public class ConcreteWhereEntryElements implements IParserRuleAccess {
+	public class ConcreteWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cParWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -522,7 +522,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSubselectWhereEntryParserRuleCall_5() { return cSubselectWhereEntryParserRuleCall_5; }
 	}
 
-	public class ParWhereEntryElements implements IParserRuleAccess {
+	public class ParWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -546,7 +546,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 
-	public class AttributeWhereEntryElements implements IParserRuleAccess {
+	public class AttributeWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AttributeWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNumericAttributeWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -576,7 +576,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getVariableWhereEntryParserRuleCall_3() { return cVariableWhereEntryParserRuleCall_3; }
 	}
 
-	public class NumericAttributeWhereEntryElements implements IParserRuleAccess {
+	public class NumericAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericAttributeWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDoubleWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -596,7 +596,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getLongWhereEntryParserRuleCall_1() { return cLongWhereEntryParserRuleCall_1; }
 	}
 
-	public class DoubleWhereEntryElements implements IParserRuleAccess {
+	public class DoubleWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DoubleWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -654,7 +654,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueSIGNED_DOUBLETerminalRuleCall_4_0() { return cValueSIGNED_DOUBLETerminalRuleCall_4_0; }
 	}
 
-	public class LongWhereEntryElements implements IParserRuleAccess {
+	public class LongWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LongWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -712,7 +712,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueSINGED_LONGTerminalRuleCall_4_0() { return cValueSINGED_LONGTerminalRuleCall_4_0; }
 	}
 
-	public class VariableWhereEntryElements implements IParserRuleAccess {
+	public class VariableWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -790,7 +790,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getRightAttributeEAttributeIDTerminalRuleCall_6_0_1() { return cRightAttributeEAttributeIDTerminalRuleCall_6_0_1; }
 	}
 
-	public class StringAttributeWhereEntryElements implements IParserRuleAccess {
+	public class StringAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringAttributeWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -848,7 +848,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getPatternSTRINGTerminalRuleCall_4_0() { return cPatternSTRINGTerminalRuleCall_4_0; }
 	}
 
-	public class BooleanAttributeWhereEntryElements implements IParserRuleAccess {
+	public class BooleanAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAttributeWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -914,7 +914,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getFalseKeyword_4_1() { return cFalseKeyword_4_1; }
 	}
 
-	public class NullWhereEntryElements implements IParserRuleAccess {
+	public class NullWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -968,7 +968,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getNullKeyword_4() { return cNullKeyword_4; }
 	}
 
-	public class ReferenceAliasWhereEntryElements implements IParserRuleAccess {
+	public class ReferenceAliasWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReferenceAliasWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1024,7 +1024,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getRightAliasFromEntryIDTerminalRuleCall_4_0_1() { return cRightAliasFromEntryIDTerminalRuleCall_4_0_1; }
 	}
 
-	public class SubselectWhereEntryElements implements IParserRuleAccess {
+	public class SubselectWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubselectWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1094,7 +1094,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
 	}
 
-	public class AliasWhereEntryElements implements IParserRuleAccess {
+	public class AliasWhereEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AliasWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1135,7 +1135,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 	
-	public class NumericOperatorElements implements IEnumRuleAccess {
+	public class NumericOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "NumericOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLessThenEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -1197,7 +1197,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getNotEqualExclamationMarkEqualsSignKeyword_5_0() { return cNotEqualExclamationMarkEqualsSignKeyword_5_0; }
 	}
 
-	public class StringOperatorElements implements IEnumRuleAccess {
+	public class StringOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "StringOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -1241,7 +1241,7 @@ public class Bug287941TestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getNotLikeNotlikeKeyword_3_0() { return cNotLikeNotlikeKeyword_3_0; }
 	}
 
-	public class BooleanOperatorElements implements IEnumRuleAccess {
+	public class BooleanOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);

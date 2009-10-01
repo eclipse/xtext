@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
+public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class StartElements implements IParserRuleAccess {
+	public class StartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Start");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAbstractRulesKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
 	}
 
-	public class AbstractRuleElements implements IParserRuleAccess {
+	public class AbstractRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFirstAbstractRuleChildParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -65,7 +65,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getSecondAbstractRuleChildParserRuleCall_1() { return cSecondAbstractRuleChildParserRuleCall_1; }
 	}
 
-	public class FirstAbstractRuleChildElements implements IParserRuleAccess {
+	public class FirstAbstractRuleChildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -105,7 +105,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class SecondAbstractRuleChildElements implements IParserRuleAccess {
+	public class SecondAbstractRuleChildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -145,7 +145,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class AbstractRuleCallElements implements IParserRuleAccess {
+	public class AbstractRuleCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRuleCall");
 		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cRuleAbstractRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);

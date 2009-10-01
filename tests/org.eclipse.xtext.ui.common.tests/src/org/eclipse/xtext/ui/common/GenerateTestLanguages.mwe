@@ -28,7 +28,13 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug288734TestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug288760TestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug289187TestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/Bug291022TestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/ContentAssistContextTestLanguage.xtext">

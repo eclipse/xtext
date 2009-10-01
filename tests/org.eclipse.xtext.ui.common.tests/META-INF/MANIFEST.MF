@@ -115,5 +115,11 @@ Export-Package: org.eclipse.xtext.xtextUiTest,
  org.eclipse.xtext.testlanguages.referenceGrammarUi.util,
  org.eclipse.xtext.enumrules.enumRulesUiTestLanguage,
  org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.impl,
- org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.util
+ org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.util,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage.util,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage.impl,
+ org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage.util
 
