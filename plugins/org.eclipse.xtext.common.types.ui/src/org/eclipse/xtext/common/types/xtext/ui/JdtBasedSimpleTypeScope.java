@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.xtext.ui;
+package org.eclipse.xtext.common.types.xtext.ui;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
-import org.eclipse.xtext.common.types.access.xtext.AbstractTypeScope;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 

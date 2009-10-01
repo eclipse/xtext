@@ -5,12 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.xtext.ui;
+package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.xtext.AbstractTypeScopeProvider;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 
 import com.google.inject.Inject;
 
