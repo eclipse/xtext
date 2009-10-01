@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.access.xtext.ui;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.xtext.ui.XtextResourceSetBasedProjectProvider;
+import org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import junit.framework.TestCase;
