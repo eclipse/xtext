@@ -5,33 +5,34 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.xtext;
+package org.eclipse.xtext.common.types.xtext.ui;
 
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
-	
+public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
+
 	@Inject
-	private ClasspathTypeProviderFactory typeProviderFactory;
+	private JdtTypeProviderFactory typeProviderFactory;
 
 	@Override
-	public ClasspathBasedTypeScope createTypeScope(ITypeProvider typeProvider) {
-		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider);
+	public JdtBasedSimpleTypeScope createTypeScope(ITypeProvider typeProvider) {
+		return new JdtBasedSimpleTypeScope((JdtTypeProvider) typeProvider);
 	}
 
-	public void setTypeProviderFactory(ClasspathTypeProviderFactory typeProviderFactory) {
+	public void setTypeProviderFactory(JdtTypeProviderFactory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
 
 	@Override
-	public ClasspathTypeProviderFactory getTypeProviderFactory() {
+	public JdtTypeProviderFactory getTypeProviderFactory() {
 		return typeProviderFactory;
 	}
 	

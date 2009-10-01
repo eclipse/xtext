@@ -5,17 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.xtext;
+package org.eclipse.xtext.common.types.xtext;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.DeclaredType;
+import org.eclipse.xtext.common.types.Member;
+import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,5 +53,22 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 	public abstract AbstractTypeScope createTypeScope(ITypeProvider typeProvider);
 
 	public abstract ITypeProvider.Factory getTypeProviderFactory();
+	
+	public IScope createMemberScope(Type containerType, Predicate<Member> filter, Function<Member, String> names, IScope outer) {
+		if (containerType == null || containerType.eIsProxy())
+			return outer;		
+		if (containerType instanceof DeclaredType) {
+			IScope result = outer;
+			List<Type> superTypes = ((DeclaredType) containerType).getSuperTypes();
+			for(Type superType: superTypes) {
+				result = createMemberScope(superType, filter, names, result);
+			}
+			List<Member> members = ((DeclaredType) containerType).getMembers();
+			return Scopes.scopeFor(Iterables.filter(members, filter), names, result);
+		} else if (containerType instanceof ParameterizedType) {
+			return createMemberScope(((ParameterizedType) containerType).getRawType(), filter, names, outer);
+		}
+		return outer;
+	}
 
 }

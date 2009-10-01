@@ -17,7 +17,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types,
  org.eclipse.xtext.common.types.access,
  org.eclipse.xtext.common.types.access.impl,
- org.eclipse.xtext.common.types.access.xtext,
  org.eclipse.xtext.common.types.impl,
  org.eclipse.xtext.common.types.testSetups,
- org.eclipse.xtext.common.types.util
+ org.eclipse.xtext.common.types.util,
+ org.eclipse.xtext.common.types.xtext

@@ -17,8 +17,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.xtext.ui.JdtBasedSimpleTypeScope;
-import org.eclipse.xtext.common.types.access.xtext.ui.JdtBasedSimpleTypeScopeProvider;
+import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
+import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 

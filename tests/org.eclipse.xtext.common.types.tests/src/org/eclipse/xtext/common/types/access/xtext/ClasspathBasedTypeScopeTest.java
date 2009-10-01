@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.xtext;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
 import org.eclipse.xtext.scoping.IScope;
 
 /**

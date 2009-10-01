@@ -44,7 +44,7 @@ public class BindKey {
 	
 	private BindKey(String type, boolean isSingleton, boolean isEagerSingleton) {
 		super();
-		this.type = type;
+		this.type = type.replace('$', '.');
 		this.isSingleton = isSingleton;
 		this.isEagerSingleton = isEagerSingleton;
 	}

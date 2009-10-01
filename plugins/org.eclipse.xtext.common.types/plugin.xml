@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipse.org/xtext/common/JavaVMTypes" 
        class = "org.eclipse.xtext.common.types.TypesPackage"
-       genModel = "org/eclipse/xtext/common/types/JavaVMTypes.genmodel" /> 
+       genModel = "model/JavaVMTypes.genmodel" /> 
 	
   </extension>
 
