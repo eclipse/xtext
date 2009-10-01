@@ -21,7 +21,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug286935Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug287941Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug288734Test.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug288760Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug289187Test.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug291022Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistGrammarContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTest.class);

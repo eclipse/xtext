@@ -56,6 +56,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -169,8 +170,6 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		AbstractRule currentRule = getRule(currentGrammarElement);
 		for (FollowElement element : followElements) {
 			AbstractElement grammarElement = element.getGrammarElement();
-			if (!element.getLocalTrace().isEmpty())
-				grammarElement = element.getLocalTrace().get(0);
 			EObject loopGrammarElement = currentGrammarElement;
 			AbstractRule rule = currentRule;
 			CompositeNode loopParserNode = currentParserNode;
@@ -201,7 +200,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				if (!checkFurther(object))
 					return result;
 				if (!visiting.add(object))
-					return false;
+					return Boolean.FALSE;
 				if (visited.containsKey(object))
 					return visited.get(object);
 				EObject wasGrammarElement = grammarElement;
@@ -217,6 +216,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					if (grammarElement == previousGrammarElement) {
 						grammarElement = nextGrammarElement;
 						visited.clear();
+						visiting.clear();
 						return true;
 					}
 					result = Boolean.TRUE;
@@ -252,15 +252,41 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			public Boolean caseAlternatives(Alternatives object) {
 				if (!checkFurther(object))
 					return result;
-				for (AbstractElement group : object.getGroups())
+				EObject wasGrammarElement = this.grammarElement;
+				Set<AbstractRule> visiting = Sets.newHashSet(this.visiting);
+				boolean foundSomething = false;
+				for (AbstractElement group : object.getGroups()) {
+					this.grammarElement = wasGrammarElement;
+					this.visiting = Sets.newHashSet(visiting);
 					if (doSwitch(group))
 						return true;
+					if (wasGrammarElement != this.grammarElement) {
+						foundSomething = true;
+					}
+				}
+				if (foundSomething) {
+					this.grammarElement = nextGrammarElement;
+					this.visiting.clear();
+				}
 				if (GrammarUtil.isMultipleCardinality(object)) {
 					if (!checkFurther(object))
 						return result;
-					for (AbstractElement group : object.getGroups())
+					wasGrammarElement = this.grammarElement;
+					visiting = Sets.newHashSet(this.visiting);
+					foundSomething = false;
+					for (AbstractElement group : object.getGroups()) {
+						this.grammarElement = wasGrammarElement;
+						this.visiting = Sets.newHashSet(visiting);
 						if (doSwitch(group))
 							return true;
+						if (wasGrammarElement != this.grammarElement) {
+							foundSomething = true;
+						}
+					}
+					if (foundSomething) {
+						this.grammarElement = nextGrammarElement;
+						this.visiting.clear();
+					}
 				}
 				return Boolean.FALSE;
 			}
@@ -325,7 +351,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			public Boolean caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
 				if (!checkFurther(object))
 					return result;
-				return doSwitch(object.getLiteral());
+				Boolean result = doSwitch(object.getLiteral());
+				return result;
 			}
 			
 		}.doSwitch(rule);

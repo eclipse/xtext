@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
+public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Assignment cConstantsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cConstantsTConstantParserRuleCall_0 = (RuleCall)cConstantsAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getConstantsTConstantParserRuleCall_0() { return cConstantsTConstantParserRuleCall_0; }
 	}
 
-	public class TConstantElements implements IParserRuleAccess {
+	public class TConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TConstant");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTStringConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -57,7 +57,7 @@ public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getTBooleanConstantParserRuleCall_2() { return cTBooleanConstantParserRuleCall_2; }
 	}
 
-	public class TStringConstantElements implements IParserRuleAccess {
+	public class TStringConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TStringConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -93,7 +93,7 @@ public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 	}
 
-	public class TIntegerConstantElements implements IParserRuleAccess {
+	public class TIntegerConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TIntegerConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -129,7 +129,7 @@ public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 	}
 
-	public class TBooleanConstantElements implements IParserRuleAccess {
+	public class TBooleanConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TBooleanConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -165,7 +165,7 @@ public class Bug288734TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 	}
 
-	public class TAnnotationElements implements IParserRuleAccess {
+	public class TAnnotationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TAnnotation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDescKeyword_0 = (Keyword)cGroup.eContents().get(0);

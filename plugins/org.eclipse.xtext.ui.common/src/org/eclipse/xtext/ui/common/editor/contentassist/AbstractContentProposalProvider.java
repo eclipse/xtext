@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @author Heiko Behrens
  * @author Jan K&ouml;hnlein
  */
-public abstract class AbstractContentProposalProvider implements IContentProposalProvider {
+public abstract class AbstractContentProposalProvider implements IContentProposalProvider, ICompletionProposalFactory {
 
 	public class DefaultContentAssistProcessorSwitch extends XtextSwitch<Boolean> {
 
@@ -206,21 +206,21 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
+	public ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, proposal, null, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String proposal, Image image, ContentAssistContext contentAssistContext) {
+	public ICompletionProposal createCompletionProposal(String proposal, Image image, ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, proposal, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
+	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, displayString, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}

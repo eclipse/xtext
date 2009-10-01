@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.common.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.common.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.common.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.common.tests" forceOverwrite="true" modelName="Bug291022TestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.common.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.common.tests.editor">
+  <genPackages prefix="Bug291022TestLanguage" basePackage="org.eclipse.xtext.ui.common.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="Bug291022TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug291022TestLanguage.ecore#//ModelElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug291022TestLanguage.ecore#//ModelElement/firstReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug291022TestLanguage.ecore#//ModelElement/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug291022TestLanguage.ecore#//ModelElement/secondReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug291022TestLanguage.ecore#//ModelElement/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug291022TestLanguage.ecore#//ModelAttribute"/>
+    <genClasses ecoreClass="Bug291022TestLanguage.ecore#//Attribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug291022TestLanguage.ecore#//Attribute/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug291022TestLanguage.ecore#//Attribute/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug291022TestLanguage.ecore#//RootModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug291022TestLanguage.ecore#//RootModel/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

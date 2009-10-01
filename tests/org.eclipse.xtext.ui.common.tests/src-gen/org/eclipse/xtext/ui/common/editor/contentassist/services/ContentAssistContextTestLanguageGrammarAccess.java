@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAccess {
+public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class FirstLevelElements implements IParserRuleAccess {
+	public class FirstLevelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstLevel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSecondLevelAAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getSecondLevelBSecondLevelBParserRuleCall_1_0() { return cSecondLevelBSecondLevelBParserRuleCall_1_0; }
 	}
 
-	public class SecondLevelAElements implements IParserRuleAccess {
+	public class SecondLevelAElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondLevelA");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cThirdLevelA1Assignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -73,7 +73,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0() { return cThirdLevelA2ThirdLevelA2ParserRuleCall_1_0; }
 	}
 
-	public class SecondLevelBElements implements IParserRuleAccess {
+	public class SecondLevelBElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondLevelB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cThirdLevelB1Assignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -101,7 +101,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0() { return cThirdLevelB2ThirdLevelB2ParserRuleCall_1_0; }
 	}
 
-	public class ThirdLevelA1Elements implements IParserRuleAccess {
+	public class ThirdLevelA1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelA1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cA1Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -129,7 +129,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class ThirdLevelA2Elements implements IParserRuleAccess {
+	public class ThirdLevelA2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelA2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cA2Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -157,7 +157,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class ThirdLevelB1Elements implements IParserRuleAccess {
+	public class ThirdLevelB1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelB1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cB1Keyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -185,7 +185,7 @@ public class ContentAssistContextTestLanguageGrammarAccess implements IGrammarAc
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class ThirdLevelB2Elements implements IParserRuleAccess {
+	public class ThirdLevelB2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelB2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cB2Keyword_0 = (Keyword)cGroup.eContents().get(0);
