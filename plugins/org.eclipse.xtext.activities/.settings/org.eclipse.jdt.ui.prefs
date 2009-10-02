@@ -1,4 +1,4 @@
-#Thu Sep 24 15:28:23 CEST 2009
+#Fri Oct 02 09:24:35 CEST 2009
 cleanup.add_default_serial_version_id=true
 cleanup.add_generated_serial_version_id=false
 cleanup.add_missing_annotations=true
@@ -53,7 +53,7 @@ cleanup_profile=_Xtext
 cleanup_settings_version=2
 eclipse.preferences.version=1
 editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
-formatter_profile=_Xtext
+formatter_profile=_'Xtext'
 formatter_settings_version=11
 org.eclipse.jdt.ui.exception.name=e
 org.eclipse.jdt.ui.gettersetter.use.is=true
