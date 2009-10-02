@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xtend,
  org.eclipse.emf.emfindex;bundle-version="0.8.0",
  org.apache.commons.logging;bundle-version="1.1.1",
- org.eclipse.emf.emfindex.reference
+ org.eclipse.emf.emfindex.reference;bundle-version="0.8.0"
 Bundle-ClassPath: lib/simple.jar,.
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext,
