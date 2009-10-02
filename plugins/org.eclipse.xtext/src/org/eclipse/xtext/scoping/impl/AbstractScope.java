@@ -44,26 +44,26 @@ public abstract class AbstractScope implements IScope {
 	}
 
 	public IScopedElement getContentByEObject(EObject object) {
-		Iterator<IScopedElement> allContents = getAllContents().iterator();
+		Iterator<IScopedElement> contents = getContents().iterator();
 		URI uri = EcoreUtil.getURI(object);
-		while (allContents.hasNext()) {
-			IScopedElement element = allContents.next();
+		while (contents.hasNext()) {
+			IScopedElement element = contents.next();
 			URI elementsUri = EcoreUtil.getURI(element.element());
 			if (uri.equals(elementsUri))
 				return element;
 		}
-		return null;
+		return getOuterScope().getContentByEObject(object);
 	}
 
 	public IScopedElement getContentByName(String name) {
 		if (name==null)
 			throw new NullPointerException("name");
-		Iterator<IScopedElement> allContents = getAllContents().iterator();
-		while (allContents.hasNext()) {
-			IScopedElement element = allContents.next();
+		Iterator<IScopedElement> contents = getContents().iterator();
+		while (contents.hasNext()) {
+			IScopedElement element = contents.next();
 			if (name.equals(element.name())) 
 				return element;
 		}
-		return null;
+		return getOuterScope().getContentByName(name);
 	}
 }

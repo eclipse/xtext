@@ -63,7 +63,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 				try {
 					tokenFile.close();
 				} catch (IOException e) {
-					throw new WrappedException(e);
+					//ignore
 				}
 			}
 		}

@@ -24,17 +24,6 @@ public interface IQualifiedNameProvider {
 	public String getQualifiedName(EObject obj);
 
 	/**
-	 *@return the delimiter this {@link IQualifiedNameProvider} uses to delimit name space fragments (i.e. '.' in Java)
-	 */
-	public String getDelimiter();
-
-	/**
-	 *@return if supported, this method returns the character which is used as awildcard in imports (i.e. '*' in Java, '_' in Scala)
-	 */
-	public String getWildcard();
-
-	
-	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	public static abstract class AbstractImpl implements IQualifiedNameProvider {

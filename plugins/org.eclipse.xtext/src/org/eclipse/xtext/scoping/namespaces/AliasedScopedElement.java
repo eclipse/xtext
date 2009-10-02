@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.impl;
+package org.eclipse.xtext.scoping.namespaces;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.impl.AbstractScopedElement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

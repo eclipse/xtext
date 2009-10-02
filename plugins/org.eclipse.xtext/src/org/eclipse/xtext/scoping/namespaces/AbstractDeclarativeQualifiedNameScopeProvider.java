@@ -5,11 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.scoping.impl;
+package org.eclipse.xtext.scoping.namespaces;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.DeclarativeScopeProvider;
 
 import com.google.inject.Inject;
 
@@ -25,16 +27,18 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractDeclarativeQualifiedNameScopeProvider extends QualifiedNameBasedScopeProvider {
+public abstract class AbstractDeclarativeQualifiedNameScopeProvider extends AbstractScopeProvider {
 	
-//	@Inject
-//	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);
-//	
-//	@Override
-//	public IScope getScope(EObject context, EReference reference) {
-//		IScope scope = declarativeSupport.getScope(context, reference);
-//		if (scope!=null)
-//			return scope;
-//		return super.getScope(context, reference);
-//	}
+	@Inject 
+	private QualifiedNameBasedScopeProvider qnBasedScopeProvider = null;
+	
+	@Inject
+	private DeclarativeScopeProvider declarativeSupport = new DeclarativeScopeProvider(this);
+	
+	public IScope getScope(EObject context, EReference reference) {
+		IScope scope = declarativeSupport.getScope(context, reference);
+		if (scope!=null)
+			return scope;
+		return qnBasedScopeProvider.getScope(context, reference);
+	}
 }

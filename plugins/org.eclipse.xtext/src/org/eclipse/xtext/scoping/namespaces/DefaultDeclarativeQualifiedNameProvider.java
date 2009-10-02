@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.impl;
+package org.eclipse.xtext.scoping.namespaces;
 
 import java.util.Collections;
 
