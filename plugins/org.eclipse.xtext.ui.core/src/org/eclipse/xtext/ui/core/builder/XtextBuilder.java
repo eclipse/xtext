@@ -35,19 +35,24 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
+	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
-	public XtextBuilder() {
+	private static Injector injector;
+
+	static {
 		try {
-			Injector injector = Guice.createInjector(new BuilderModule());
-			injector.injectMembers(this);
+			injector = Guice.createInjector(new BuilderModule());
 			IndexAccess.setIndex(injector.getInstance(Index.class));
 		}
 		catch (Exception e) {
 			log.error("Couldn't initialize XtextBuilder", e);
 		}
 	}
+	
+	public XtextBuilder() {
+		injector.injectMembers(this);
+	}
 
-	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = "org.eclipse.xtext.ui.core.xtextBuilder";
 
