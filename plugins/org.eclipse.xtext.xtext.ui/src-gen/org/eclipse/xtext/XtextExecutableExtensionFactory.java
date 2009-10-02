@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IExecutableExtensionFactory;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.Bundle;
 
@@ -50,7 +51,7 @@ public class XtextExecutableExtensionFactory implements IExecutableExtensionFact
 		}
 		catch (Exception e) {
 			log.error(e);
-			throw new CoreException(new Status(Status.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
+			throw new CoreException(new Status(IStatus.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
 		}
 	}
 }

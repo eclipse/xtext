@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.validation.MarkerUtil;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -35,7 +34,7 @@ final class MockMarker implements IMarker {
 		if (context != null)
 			attributes.put(EValidator.URI_ATTRIBUTE, EcoreUtil.getURI(context).toString());
 		attributes.put(IXtextResourceChecker.CODE_KEY, code);
-		return new MockMarker(MarkerUtil.FAST_CHECK_MARKER_ID, resource, context, attributes);
+		return new MockMarker(EValidator.MARKER, resource, context, attributes);
 	}
 
 	public MockMarker(String type, IResource resource, EObject context, Map<String, ?> attributes) {

@@ -11,13 +11,10 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.ITextSelection;
@@ -32,7 +29,6 @@ import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -55,9 +51,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ToggleSLCommentAction;
-import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
-import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -72,10 +66,17 @@ import com.google.inject.name.Named;
  */
 public class XtextEditor extends TextEditor {
 
+	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.error";
+
+	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.warning";
+
 	private static final Logger log = Logger.getLogger(XtextEditor.class);
 
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 
+	@Inject
+	private IXtextEditorCallback callback;
+	
 	@Inject
 	private XtextSourceViewerConfiguration sourceViewerConfiguration;
 
@@ -93,11 +94,6 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private IHighlightingHelper highlightingHelper;
 
-	@Inject
-	private ValidationJob.Factory validationJobFactory;
-
-	private ValidationJob validationJob;
-
 	private ISelectionChangedListener selectionChangedListener;
 
 	private String languageName;
@@ -110,7 +106,7 @@ public class XtextEditor extends TextEditor {
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
-
+	
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String name) {
 		this.languageName = name;
@@ -151,6 +147,24 @@ public class XtextEditor extends TextEditor {
 	
 	public XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
 		return sourceViewerConfiguration;
+	}
+	
+	@Override
+	public void doSaveAs() {
+		super.doSaveAs();
+		callback.afterSave(this);
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		super.doSave(progressMonitor);
+		callback.afterSave(this);
+	}
+	
+	@Override
+	public void doRevertToSaved() {
+		super.doRevertToSaved();
+		callback.afterSave(this);
 	}
 
 	/**
@@ -203,10 +217,6 @@ public class XtextEditor extends TextEditor {
 		return page;
 	}
 	
-	public void doSelectionChanged(ISelection selection) {
-		
-	}
-
 	/**
 	 * Informs the editor that its outline has been closed.
 	 */
@@ -282,13 +292,14 @@ public class XtextEditor extends TextEditor {
 		// We need ProjectionViewer to support Folding
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
 		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
-		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
-		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); //$NON-NLS-1$
 		projectionSupport.install();
 		// TODO Folding stuff
 		
 		installHighlightingHelper();
 		installSelectionChangedListener();
+		callback.afterCreatePartControl(this);
 	}
 
 	private void installSelectionChangedListener() {
@@ -351,37 +362,6 @@ public class XtextEditor extends TextEditor {
 		return getSourceViewer();
 	}
 
-	@Override
-	protected void performSaveAs(IProgressMonitor progressMonitor) {
-		super.performSaveAs(progressMonitor);
-		doOnSaveValidation(progressMonitor);
-	}
-
-	@Override
-	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
-		super.performSave(overwrite, progressMonitor);
-		doOnSaveValidation(progressMonitor);
-	}
-
-	@Override
-	protected void performRevert() {
-		super.performRevert();
-		doOnSaveValidation(new NullProgressMonitor());
-	}
-
-	private void doOnSaveValidation(IProgressMonitor progressMonitor) {
-		if (validationJob == null)
-			validationJob = validationJobFactory.create(this.getDocument(), (IFile) this.getResource(), CheckMode.NORMAL_AND_FAST, true);
-		validationJob.cancel();
-		try {
-			validationJob.join();
-			Job.getJobManager().join(org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler.class.getName(), progressMonitor);
-		}
-		catch (InterruptedException e) {
-			log.error("Error joining canceled ValidationJob", e);
-		}
-		validationJob.schedule();
-	}
 
 	@Override
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {

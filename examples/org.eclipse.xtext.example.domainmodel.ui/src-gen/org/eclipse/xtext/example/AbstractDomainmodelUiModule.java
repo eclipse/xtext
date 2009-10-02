@@ -4,7 +4,7 @@
  */
 package org.eclipse.xtext.example;
 
-import org.eclipse.xtext.example.DomainmodelRuntimeModule;
+import org.eclipse.xtext.ui.core.builder.IndexProvider;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.example.DomainmodelUiModule}
@@ -118,11 +118,6 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.ValidationJob.Factory> bindValidationJob$Factory() {
-		return org.eclipse.xtext.ui.core.editor.validation.DefaultValidationJobFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker> bindIXtextResourceChecker() {
 		return org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker.class;
 	}
@@ -145,6 +140,27 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.contentassist.DomainmodelProposalProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	@Override
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.IContainerDependencyProvider> bindIndexBasedQualifiedNameScopeProvider$IContainerDependencyProvider() {
+		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIProjectImpl.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.Index>> provideIndex() {
+		return IndexProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment

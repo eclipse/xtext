@@ -26,9 +26,8 @@ public interface IScope {
     /**
      * The <code>NULLSCOPE</code> to be returned by the most outer scope
      */
-    public final static IScope NULLSCOPE = new AbstractScope(){
-    	
-    	@Override
+    public final static IScope NULLSCOPE = new IScope() {
+		
     	public Iterable<IScopedElement> getAllContents() {
     		return Collections.emptyList();
     	}
@@ -41,6 +40,13 @@ public interface IScope {
 			return NULLSCOPE;
 		}
 		
+		public IScopedElement getContentByEObject(EObject object) {
+			return null;
+		}
+
+		public IScopedElement getContentByName(String name) {
+			return null;
+		}
     };
     
     /**

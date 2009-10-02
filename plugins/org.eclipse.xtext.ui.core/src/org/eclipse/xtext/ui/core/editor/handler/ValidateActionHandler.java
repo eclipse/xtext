@@ -11,13 +11,6 @@ package org.eclipse.xtext.ui.core.editor.handler;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
-import org.eclipse.xtext.validation.CheckMode;
-
-import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -25,9 +18,6 @@ import com.google.inject.Inject;
  */
 public class ValidateActionHandler extends AbstractHandler {
 
-	@Inject
-	private ValidationJob.Factory validationJobFactory;
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,8 +28,8 @@ public class ValidateActionHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// Due to an Handler ExtensionPoint declaration, we have an XtextEditor
 		// as Active Editor so can just cast to an XtextEditor
-		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-		validationJobFactory.create(editor.getDocument(), (IFile) editor.getResource(), CheckMode.ALL, true).schedule();
+//		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
+//		validationJobFactory.create(editor.getDocument(), (IFile) editor.getResource(), CheckMode.ALL, true).schedule();
 		return this;
 	}
 

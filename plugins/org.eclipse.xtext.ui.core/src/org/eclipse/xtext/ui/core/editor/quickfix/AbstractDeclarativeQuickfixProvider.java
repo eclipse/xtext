@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.validation.MarkerUtil;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
@@ -177,7 +176,7 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 
 	public boolean hasResolutions(final IMarker marker) {
 		try {
-			if (!marker.isSubtypeOf(MarkerUtil.CHECK_MARKER_ID))
+			if (!marker.isSubtypeOf(EValidator.MARKER))
 				return false;
 		}
 		catch (CoreException e) {

@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class TestLanguageGrammarAccess implements IGrammarAccess {
+public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class FileElements implements IParserRuleAccess {
+	public class FileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
 		private final Assignment cStuffAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cStuffStuffParserRuleCall_0 = (RuleCall)cStuffAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getStuffStuffParserRuleCall_0() { return cStuffStuffParserRuleCall_0; }
 	}
 
-	public class StuffElements implements IParserRuleAccess {
+	public class StuffElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Stuff");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStuffKeyword_0 = (Keyword)cGroup.eContents().get(0);

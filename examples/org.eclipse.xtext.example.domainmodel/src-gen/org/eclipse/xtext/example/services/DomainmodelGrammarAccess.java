@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class DomainmodelGrammarAccess implements IGrammarAccess {
+public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements implements IParserRuleAccess {
+	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
@@ -33,7 +33,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getElementsAbstractElementParserRuleCall_0() { return cElementsAbstractElementParserRuleCall_0; }
 	}
 
-	public class AbstractElementElements implements IParserRuleAccess {
+	public class AbstractElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPackageDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -57,7 +57,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
 	}
 
-	public class ImportElements implements IParserRuleAccess {
+	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -81,7 +81,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
 	}
 
-	public class PackageDeclarationElements implements IParserRuleAccess {
+	public class PackageDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -121,7 +121,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class TypeElements implements IParserRuleAccess {
+	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEntityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -141,7 +141,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getDataTypeParserRuleCall_1() { return cDataTypeParserRuleCall_1; }
 	}
 
-	public class DataTypeElements implements IParserRuleAccess {
+	public class DataTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -165,7 +165,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
-	public class EntityElements implements IParserRuleAccess {
+	public class EntityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entity");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEntityKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -227,7 +227,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
-	public class FeatureElements implements IParserRuleAccess {
+	public class FeatureElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Feature");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cStructuralFeatureParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -247,7 +247,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getOperationParserRuleCall_1() { return cOperationParserRuleCall_1; }
 	}
 
-	public class StructuralFeatureElements implements IParserRuleAccess {
+	public class StructuralFeatureElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StructuralFeature");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAttributeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -267,7 +267,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getReferenceParserRuleCall_1() { return cReferenceParserRuleCall_1; }
 	}
 
-	public class AttributeElements implements IParserRuleAccess {
+	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAttrKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -303,7 +303,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypeTypeRefParserRuleCall_3_0() { return cTypeTypeRefParserRuleCall_3_0; }
 	}
 
-	public class ReferenceElements implements IParserRuleAccess {
+	public class ReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Reference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -359,7 +359,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getOppositeReferenceIDTerminalRuleCall_4_1_0_1() { return cOppositeReferenceIDTerminalRuleCall_4_1_0_1; }
 	}
 
-	public class OperationElements implements IParserRuleAccess {
+	public class OperationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVisibilityAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -441,7 +441,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypeTypeRefParserRuleCall_7_0() { return cTypeTypeRefParserRuleCall_7_0; }
 	}
 
-	public class ParameterElements implements IParserRuleAccess {
+	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -469,7 +469,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getTypeTypeRefParserRuleCall_1_0() { return cTypeTypeRefParserRuleCall_1_0; }
 	}
 
-	public class TypedElementElements implements IParserRuleAccess {
+	public class TypedElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFeatureParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -489,7 +489,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getParameterParserRuleCall_1() { return cParameterParserRuleCall_1; }
 	}
 
-	public class TypeRefElements implements IParserRuleAccess {
+	public class TypeRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
 		private final Assignment cReferencedAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cReferencedTypeCrossReference_0 = (CrossReference)cReferencedAssignment.eContents().get(0);
@@ -509,7 +509,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getReferencedTypeQualifiedNameParserRuleCall_0_1() { return cReferencedTypeQualifiedNameParserRuleCall_0_1; }
 	}
 
-	public class QualifiedNameWithWildCardElements implements IParserRuleAccess {
+	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildCard");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -529,7 +529,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
 	}
 
-	public class QualifiedNameElements implements IParserRuleAccess {
+	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -558,7 +558,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 	
 	
-	public class VisibilityElements implements IEnumRuleAccess {
+	public class VisibilityElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Visibility");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cPublicEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
