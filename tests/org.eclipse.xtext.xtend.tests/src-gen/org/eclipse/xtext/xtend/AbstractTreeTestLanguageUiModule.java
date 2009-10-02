@@ -123,11 +123,6 @@ public abstract class AbstractTreeTestLanguageUiModule extends TreeTestLanguageR
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.ValidationJob.Factory> bindValidationJob$Factory() {
-		return org.eclipse.xtext.ui.core.editor.validation.DefaultValidationJobFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker> bindIXtextResourceChecker() {
 		return org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker.class;
 	}

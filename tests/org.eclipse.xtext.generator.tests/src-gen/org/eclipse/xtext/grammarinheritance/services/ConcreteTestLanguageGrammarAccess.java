@@ -525,7 +525,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "\u02C6" | "\u2030" | "\u00B8" | "_") ("a".."z" | "A".."Z" | "_" | "0"
+	//  "^"? ("a".."z" | "A".."Z" | "\u00F6" | "\u00E4" | "\u00FC" | "_") ("a".."z" | "A".."Z" | "_" | "0"
 	//  .."9")*;
 	public TerminalRule getIDRule() {
 		return gaAbstractTestLanguage.getIDRule();

@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.ui.texteditor.MarkerAnnotation;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 public class ProblemHover extends AbstractHover {
 
 	public ProblemHover(final ISourceViewer sourceViewer) {
@@ -34,12 +37,12 @@ public class ProblemHover extends AbstractHover {
 		final Iterator<?> iterator = model.getAnnotationIterator();
 		while (iterator.hasNext()) {
 			final Annotation annotation = (Annotation) iterator.next();
-			if (!(annotation instanceof MarkerAnnotation)) {
+			if (annotation.isMarkedDeleted()) {
 				continue;
 			}
-			final MarkerAnnotation mAnno = (MarkerAnnotation) annotation;
-			final int start = model.getPosition(mAnno).getOffset();
-			final int end = start + model.getPosition(mAnno).getLength();
+			Position position = model.getPosition(annotation);
+			final int start = position.getOffset();
+			final int end = start + position.getLength();
 
 			if (offset > 0 && !(start <= offset && offset <= end)) {
 				continue;
@@ -52,7 +55,7 @@ public class ProblemHover extends AbstractHover {
 			} catch (final Exception x) {
 				continue;
 			}
-			messages.add(mAnno.getText().trim());
+			messages.add(annotation.getText().trim());
 		}
 		return formatInfo(messages);
 	}

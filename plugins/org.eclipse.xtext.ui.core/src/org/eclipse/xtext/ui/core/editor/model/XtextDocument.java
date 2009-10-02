@@ -15,118 +15,43 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ContentHandler;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IStorageEditorInput;
-import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.concurrent.IEObjectHandle;
 import org.eclipse.xtext.concurrent.IStateAccess;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
-import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
-import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 public class XtextDocument extends Document implements IXtextDocument {
-
-	private XtextResourceSet resourceSet = null;
-
+	
 	private XtextResource resource = null;
-
-	private IFile file;
 
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	@Inject
-	private Provider<XtextResourceSet> resourceSetProvider;
+	private IResourceFactory resourceFactory;
 
-	@Inject
-	private ValidationJob.Factory validationJobFactory;
-	
 	public void setInput(IEditorInput editorInput) {
-		file = ResourceUtil.getFile(editorInput);
-
-		resourceSet = resourceSetProvider.get();
-		if (file != null) {
-			// TODO find a way to identify a project for an IStorageEditorInput
-			IJavaProject javaProject = getIJavaProject(file);
-			if (javaProject != null) {
-				resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
-				resourceSet.setClasspathURIContext(javaProject);
-			}
+		this.resource = (XtextResource) resourceFactory.createResource(editorInput);
+		try {
+			this.resource.load(null);
 		}
-
-		IPath path = null;
-		Resource aResource = null;
-		URI uri = null;
-		if (file != null) {
-			path = file.getFullPath();
-			uri = URI.createPlatformResourceURI(path.toString(), true);
-		} else if (editorInput instanceof XtextReadonlyEditorInput) {
-			uri = ((XtextReadonlyEditorInput) editorInput).getURI();
-		} else {
-			IStorageEditorInput storageInput = (IStorageEditorInput) editorInput;
-			try {
-				// TODO get the FQN of the resource
-				path = storageInput.getStorage().getFullPath();
-				uri = URI.createPlatformResourceURI(path.toString(), true);
-			} catch (CoreException e) {
-				throw new WrappedException(e);
-			}
+		catch (IOException e) {
+			log.error(e.getMessage(), e);
 		}
-
-		aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-		if (!(aResource instanceof XtextResource))
-			throw new IllegalStateException("The resource factory registered for " + path
-					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
-		resource = (XtextResource) aResource;
-		if (resource instanceof LazyLinkingResource)
-			((LazyLinkingResource) resource).setEagerLinking(true);
-		resource.setValidationDisabled(file == null);
-	}
-
-//	// XXX why is this one not called inside an readOnly action???
-//	public boolean isReferenced(IResource anIResource) {
-//		if (!(anIResource instanceof IFile) || resource == null || resource.getResourceSet() == null)
-//			return false;
-//		EList<Resource> resources = resource.getResourceSet().getResources();
-//		final Map<String, Resource> uriToRes = new HashMap<String, Resource>();
-//		for (Resource res : resources) {
-//			if (res != resource) {
-//				URI uri = res.getURI();
-//				uriToRes.put(uri.lastSegment(), res);
-//			}
-//		}
-//
-//		return uriToRes.containsKey(anIResource.getFullPath().lastSegment());
-//	}
-
-	private IJavaProject getIJavaProject(IResource resource) {
-		IJavaProject create = JavaCore.create(resource.getProject());
-		if (create.exists())
-			return create;
-		return null;
 	}
 
 	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
@@ -137,13 +62,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		try {
-			synchronized (validationLock) {
-				if (validationJob != null)
-					validationJob.cancel();
-			}
+			validationJob.cancel();
 			return stateAccess.modify(work);
-		} finally {
-			checkAndUpdateMarkers();
+		}
+		finally {
+			checkAndUpdateAnnotations();
 		}
 	}
 
@@ -231,7 +154,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			try {
 				return super.modify(work);
-			} catch (RuntimeException e) {
+			}
+			catch (RuntimeException e) {
 				try {
 					getState().reparse(get());
 				}
@@ -249,7 +173,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 					if (log.isDebugEnabled())
 						log.debug("process - " + Thread.currentThread().getName());
 					return modify(transaction);
-				} finally {
+				}
+				finally {
 					readLock.lock();
 					writeLock.unlock();
 				}
@@ -260,16 +185,15 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
-	private final Object validationLock = new Object();
 	private transient Job validationJob;
 
-	private void checkAndUpdateMarkers() {
-		synchronized (validationLock) {
-			if (validationJob != null)
-				validationJob.cancel();
-			validationJob = validationJobFactory.create(this, file, CheckMode.FAST_ONLY, true);
-			validationJob.schedule(250);
-		}
+	public void setValidationJob(Job validationJob) {
+		this.validationJob = validationJob;
+	}
+
+	private void checkAndUpdateAnnotations() {
+		validationJob.cancel();
+		validationJob.schedule();
 	}
 
 	@SuppressWarnings("unchecked")

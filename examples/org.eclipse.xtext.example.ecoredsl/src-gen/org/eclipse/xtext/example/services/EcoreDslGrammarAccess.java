@@ -8,16 +8,16 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class EcoreDslGrammarAccess implements IGrammarAccess {
+public class EcoreDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class EcoreDslElements implements IParserRuleAccess {
+	public class EcoreDslElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EcoreDsl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cMetamodelDeclarationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -45,7 +45,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getPackageEPackageDeclParserRuleCall_1_0() { return cPackageEPackageDeclParserRuleCall_1_0; }
 	}
 
-	public class ReferencedMetamodelElements implements IParserRuleAccess {
+	public class ReferencedMetamodelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReferencedMetamodel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -93,7 +93,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class EPackageDeclElements implements IParserRuleAccess {
+	public class EPackageDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPackageDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -189,7 +189,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
 	}
 
-	public class SubEPackageDeclElements implements IParserRuleAccess {
+	public class SubEPackageDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubEPackageDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -251,7 +251,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
-	public class EClassifierDeclElements implements IParserRuleAccess {
+	public class EClassifierDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EClassifierDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEClassDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -271,7 +271,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getEDataTypeDeclParserRuleCall_1() { return cEDataTypeDeclParserRuleCall_1; }
 	}
 
-	public class EDataTypeDeclElements implements IParserRuleAccess {
+	public class EDataTypeDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EDataTypeDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -342,7 +342,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getEEnumDeclParserRuleCall_1() { return cEEnumDeclParserRuleCall_1; }
 	}
 
-	public class EAnnotationDeclElements implements IParserRuleAccess {
+	public class EAnnotationDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EAnnotationDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCommercialAtKeyword_0 = (Keyword)cGroup.eContents().get(0);
@@ -402,7 +402,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 	}
 
-	public class EClassDeclElements implements IParserRuleAccess {
+	public class EClassDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EClassDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -578,7 +578,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 
-	public class EStructuralFeatureDeclElements implements IParserRuleAccess {
+	public class EStructuralFeatureDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EStructuralFeatureDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEAttributeDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -598,7 +598,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getEReferenceDeclParserRuleCall_1() { return cEReferenceDeclParserRuleCall_1; }
 	}
 
-	public class EAttributeDeclElements implements IParserRuleAccess {
+	public class EAttributeDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EAttributeDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -769,7 +769,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
-	public class EReferenceDeclElements implements IParserRuleAccess {
+	public class EReferenceDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EReferenceDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -958,7 +958,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
-	public class EEnumDeclElements implements IParserRuleAccess {
+	public class EEnumDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EEnumDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1006,7 +1006,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
-	public class EEnumLiteralDeclElements implements IParserRuleAccess {
+	public class EEnumLiteralDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EEnumLiteralDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1062,7 +1062,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class ETypeParameterDeclElements implements IParserRuleAccess {
+	public class ETypeParameterDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ETypeParameterDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1098,7 +1098,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getEBoundsEGenericTypeDeclParserRuleCall_1_1_0() { return cEBoundsEGenericTypeDeclParserRuleCall_1_1_0; }
 	}
 
-	public class EGenericTypeReferenceDeclElements implements IParserRuleAccess {
+	public class EGenericTypeReferenceDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EGenericTypeReferenceDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -1187,7 +1187,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1() { return cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1; }
 	}
 
-	public class EGenericTypeDeclElements implements IParserRuleAccess {
+	public class EGenericTypeDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EGenericTypeDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
@@ -1321,7 +1321,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0() { return cELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0; }
 	}
 
-	public class EOperationDeclElements implements IParserRuleAccess {
+	public class EOperationDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EOperationDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1509,7 +1509,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_10() { return cSemicolonKeyword_10; }
 	}
 
-	public class EParameterDeclElements implements IParserRuleAccess {
+	public class EParameterDeclElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EParameterDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1545,7 +1545,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
-	public class MapEntryElements implements IParserRuleAccess {
+	public class MapEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MapEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
@@ -1577,7 +1577,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
 	}
 
-	public class QIDElements implements IParserRuleAccess {
+	public class QIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
@@ -1613,7 +1613,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 
-	public class STRING_OR_QIDElements implements IParserRuleAccess {
+	public class STRING_OR_QIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "STRING_OR_QID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
@@ -1633,7 +1633,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getQIDParserRuleCall_1() { return cQIDParserRuleCall_1; }
 	}
 
-	public class SINTElements implements IParserRuleAccess {
+	public class SINTElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SINT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);

@@ -17,7 +17,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
@@ -61,6 +60,7 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		final IXtextDocument document = activeEditor.getDocument();
 		final int offset = ((StyledText) activeEditor.getAdapter(Control.class)).getCaretOffset();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, offset);
 				action.run();

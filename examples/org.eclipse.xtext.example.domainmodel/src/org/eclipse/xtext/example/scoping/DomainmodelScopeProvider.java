@@ -11,7 +11,7 @@ import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Reference;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeQualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.AbstractDeclarativeQualifiedNameScopeProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
