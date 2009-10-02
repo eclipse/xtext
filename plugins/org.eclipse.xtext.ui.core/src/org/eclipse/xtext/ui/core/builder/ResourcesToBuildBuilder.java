@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.builder;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +84,7 @@ public class ResourcesToBuildBuilder {
 					if (!r.isRemoveOnly()) {
 						x.createOrUpdateResource(project, r.getUri(), System.currentTimeMillis(), null);
 						r.indexEObjects(new IEObjectDescriptorIndexer() {
-							public void index(String name, EObject obj, Map<String, Serializable> userData) {
+							public void index(String name, EObject obj, Map<String, String> userData) {
 								String uriFragment = obj.eResource().getURIFragment(obj);
 								x.createOrUpdateEObject(r.getUri(), uriFragment, name, obj.eClass(), userData);
 							}
