@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class JavaClassPathResourceSetFactory implements IResourceFactory {
+public class JavaClassPathResourceSetFactory implements IResourceForEditorInputFactory {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 	

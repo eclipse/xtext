@@ -42,10 +42,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	@Inject
-	private IResourceFactory resourceFactory;
+	private IResourceForEditorInputFactory resourceForEditorInputFactory;
 
 	public void setInput(IEditorInput editorInput) {
-		this.resource = (XtextResource) resourceFactory.createResource(editorInput);
+		this.resource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
 		try {
 			this.resource.load(null);
 		}
