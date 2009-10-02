@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.builder;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +57,6 @@ public interface ILanguageBuilder {
 	}
 	
 	public interface IEObjectDescriptorIndexer {
-		void index(String name, EObject obj, Map<String, Serializable> userData);
+		void index(String name, EObject obj, Map<String, String> userData);
 	}
 }
