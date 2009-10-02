@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domainmodel Example Tests
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui.tests
+Bundle-Version: 0.8.0.qualifier
+Bundle-Vendor: Eclipse Modeling
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.xtext.example.domainmodel;bundle-version="0.8.0",
+ org.eclipse.xtext.example.domainmodel.ui;bundle-version="0.8.0",
+ org.eclipse.xtext;bundle-version="0.8.0",
+ org.eclipse.xtext.ui.common;bundle-version="0.8.0",
+ org.eclipse.xtext.ui.core;bundle-version="0.8.0",
+ org.eclipse.xtext.util;bundle-version="0.8.0",
+ org.eclipse.ui.ide,
+ org.junit;bundle-version="3.8.2"
