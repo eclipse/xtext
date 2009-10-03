@@ -56,8 +56,12 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		Map<EObject, Collection<Setting>> find = EcoreUtil.CrossReferencer.find(resource.getContents());
 		for (Map.Entry<EObject, Collection<Setting>> entry : find.entrySet()) {
 			for (Setting setting : entry.getValue()) {
-				feeder.index(setting.getEObject(), (EObject) setting.get(true), (EReference) setting
-						.getEStructuralFeature());
+				Object target = setting.get(true);
+				if (setting.getEStructuralFeature().isMany())
+					for (Object t : (Collection<?>) target)
+						feeder.index(setting.getEObject(), (EObject) t, (EReference) setting.getEStructuralFeature());
+				else
+					feeder.index(setting.getEObject(), (EObject) target, (EReference) setting.getEStructuralFeature());
 			}
 		}
 	}
