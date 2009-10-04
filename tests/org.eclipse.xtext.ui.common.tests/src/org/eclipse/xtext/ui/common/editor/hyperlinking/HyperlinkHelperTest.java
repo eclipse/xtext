@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.common.editor.hyperlinking;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -75,14 +76,14 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	}
 
 	public void testCreateHyperlinksByOffset() {
-		ActionBasedHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("common.Terminals"), true);
+		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("common.Terminals"), true);
 		assertNotNull(links);
 		assertEquals(1, links.length);
-		OpenDeclarationAction action = links[0].getAction();
-		checkAction(action);
+		assertTrue(links[0] instanceof XtextHyperlink);
+		checkHyperlink((XtextHyperlink) links[0]);
 	}
 
-	private void checkAction(OpenDeclarationAction action) {
+	private void checkHyperlink(XtextHyperlink action) {
 		assertNotNull(action);
 		URI uri = action.getURI();
 		assertNotNull(uri);
@@ -95,9 +96,9 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertEquals(terminalGrammar, obj);
 	}
 
-	public void testGetOpenDeclarationAction() {
-		OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, model.indexOf("common.Terminals"));
-		checkAction(action);
-	}
+//	public void testGetOpenDeclarationAction() {
+//		OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, model.indexOf("common.Terminals"));
+//		checkHyperlink(action);
+//	}
 
 }

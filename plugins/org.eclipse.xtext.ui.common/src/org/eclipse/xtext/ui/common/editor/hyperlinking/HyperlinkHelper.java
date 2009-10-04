@@ -30,29 +30,26 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.Wrapper;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class HyperlinkHelper {
-
-	private final ILinkingService linkingService;
-	private final ILocationInFileProvider locationProvider;
-	private final ILabelProvider labelProvider;
+public class HyperlinkHelper implements IHyperlinkHelper {
 
 	@Inject
-	public HyperlinkHelper(ILinkingService linkingService, ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
-		super();
-		this.linkingService = linkingService;
-		this.locationProvider = locationProvider;
-		this.labelProvider = labelProvider;
-	}
+	private ILinkingService linkingService;
+	
+	@Inject
+	private ILabelProvider labelProvider;
+	
+	@Inject
+	private Provider<XtextHyperlink> hyperlinkProvider;
 
-	public ActionBasedHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
+	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
 		IParseResult parseResult = resource.getParseResult();
 		Assert.isNotNull(parseResult);
 		AbstractNode abstractNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
@@ -60,27 +57,26 @@ public class HyperlinkHelper {
 		List<EObject> crossLinkedEObjects = findCrossLinkedEObject(abstractNode, location);
 		if (crossLinkedEObjects.isEmpty())
 			return null;
-		final URIConverter uriConverter = resource.getResourceSet().getURIConverter();
 		List<IHyperlink> links = new ArrayList<IHyperlink>();
 		for (EObject crossReffed : crossLinkedEObjects) {
 			if (!links.isEmpty() && !createMultipleHyperlinks)
 				break;
-			final String label = labelProvider.getText(crossReffed);
-			final URI uri = EcoreUtil.getURI(crossReffed);
-			final URI normalized = uriConverter.normalize(uri);
-			links.add(new ActionBasedHyperlink(label, location.get(), new OpenDeclarationAction(normalized, locationProvider)));
+			links.add(createHyperlinkTo(resource, location.get(), crossReffed));
 		}
-		return links.toArray(new ActionBasedHyperlink[links.size()]);
+		return links.toArray(new IHyperlink[links.size()]);
 	}
-
-	public OpenDeclarationAction getOpenDeclarationAction(XtextResource resource, int offset) {
-		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(resource.getParseResult().getRootNode(), offset);
-		List<EObject> crossLinkedEObject = findCrossLinkedEObject(node, null);
-		if (crossLinkedEObject.isEmpty())
-			return null;
-		final URI uri = EcoreUtil.getURI(crossLinkedEObject.get(0));
-		final URI normalized = resource.getResourceSet().getURIConverter().normalize(uri);
-		return new OpenDeclarationAction(normalized, locationProvider);
+	
+	public IHyperlink createHyperlinkTo(XtextResource from, Region region, EObject to) {
+		final URIConverter uriConverter = from.getResourceSet().getURIConverter();
+		final String hyperlinkText = labelProvider.getText(to);
+		final URI uri = EcoreUtil.getURI(to);
+		final URI normalized = uriConverter.normalize(uri);
+		
+		XtextHyperlink result = hyperlinkProvider.get();
+		result.setHyperlinkRegion(region);
+		result.setURI(normalized);
+		result.setHyperlinkText(hyperlinkText);
+		return result;
 	}
 
 	protected List<EObject> findCrossLinkedEObject(AbstractNode node, Wrapper<Region> location) {
