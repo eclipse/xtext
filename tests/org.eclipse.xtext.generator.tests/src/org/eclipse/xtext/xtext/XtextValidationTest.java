@@ -451,7 +451,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -466,7 +466,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -475,14 +475,14 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
 				"RuleA : ruleC=RuleC;\n" +
-				"RuleB : ruleC=RuleC;\n" +
+				"Unused : something=Unused;\n" +
 				"RuleC : ruleA=RuleA;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -498,7 +498,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 6, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -514,7 +514,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -530,7 +530,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 6, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -546,7 +546,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -578,7 +578,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 3, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	

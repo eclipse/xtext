@@ -7,22 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.syntaxcoloring;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractNegatedToken;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
@@ -36,7 +30,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.UsedRulesFinder;
 
 import com.google.common.collect.Sets;
 
@@ -56,12 +50,8 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 			if (current instanceof Grammar) {
 				Grammar grammar = (Grammar) current;
 				if (!grammar.getRules().isEmpty()) {
-					AbstractRule firstRule = grammar.getRules().get(0);
-					if (firstRule instanceof ParserRule) {
-						UsedRulesFinder usedRulesFinder = new UsedRulesFinder(calledRules);
-						usedRulesFinder.doSwitch(firstRule);
-						usedRulesFinder.doSwitch(grammar);
-					}
+					UsedRulesFinder usedRulesFinder = new UsedRulesFinder(calledRules);
+					usedRulesFinder.compute(grammar);
 				}
 			} else if (current instanceof AbstractRule) {
 				AbstractNode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME.getName());
@@ -88,98 +78,6 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 				}
 			}
 		}
-	}
-	
-	public static class UsedRulesFinder extends XtextSwitch<Void> {
-		
-		private final Collection<AbstractRule> usedRules;
-		private final Collection<Grammar> visitedGrammars = Sets.newHashSet();
-
-		public UsedRulesFinder(Collection<AbstractRule> usedRules) {
-			this.usedRules = usedRules;
-		}
-		
-		@Override
-		public Void caseAbstractRule(AbstractRule object) {
-			usedRules.add(object);
-			return null;
-		}
-		
-		@Override
-		public Void caseParserRule(ParserRule object) {
-			if (usedRules.add(object)) {
-				if (object.getAlternatives() != null)
-					doSwitch(object.getAlternatives());
-				if (object.isDefinesHiddenTokens())
-					for(AbstractRule rule: object.getHiddenTokens())
-						doSwitch(rule);
-			}
-			return null;
-		}
-		
-		@Override
-		public Void caseTerminalRule(TerminalRule object) {
-			if (usedRules.add(object) && object.getAlternatives() != null) {
-				return doSwitch(object.getAlternatives());
-			}
-			return null;
-		}
-		
-		@Override
-		public Void caseAbstractNegatedToken(AbstractNegatedToken object) {
-			if (object.getTerminal() != null)
-				return doSwitch(object.getTerminal());
-			return null;
-		}
-		
-		@Override
-		public Void caseRuleCall(RuleCall object) {
-			if (object.getRule() != null)
-				return doSwitch(object.getRule());
-			return null;
-		}
-		
-		@Override
-		public Void caseCrossReference(CrossReference object) {
-			if (object.getTerminal() != null)
-				return doSwitch(object.getTerminal());
-			return null;
-		}
-		
-		@Override
-		public Void caseAssignment(Assignment object) {
-			if (object.getTerminal() != null)
-				return doSwitch(object.getTerminal());
-			return null;
-		}
-		
-		@Override
-		public Void caseAlternatives(Alternatives object) {
-			for(AbstractElement element: object.getGroups())
-				doSwitch(element);
-			return null;
-		}
-		
-		@Override
-		public Void caseGroup(Group object) {
-			for(AbstractElement element: object.getTokens())
-				doSwitch(element);
-			return null;
-		}
-		
-		@Override
-		public Void caseGrammar(Grammar object) {
-			if (!visitedGrammars.add(object))
-				return null;
-			if (object.isDefinesHiddenTokens())
-				for(AbstractRule rule: object.getHiddenTokens())
-					doSwitch(rule);
-			for(Grammar grammar: object.getUsedGrammars()) {
-				caseGrammar(grammar);
-			}
-			return null;
-		}
-		
 	}
 	
 	private void highlightNode(AbstractNode node, String id, IHighlightedPositionAcceptor acceptor) {
