@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -41,44 +40,14 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextHyperlink implements IHyperlink {
+public class XtextHyperlink extends AbstractHyperlink {
 
 	private static final Logger logger = Logger.getLogger(XtextHyperlink.class);
-	
-	private String hyperlinkText;
-	
-	private String typeLabel;
-	
-	private Region hyperlinkRegion;
 	
 	private URI uri;
 	
 	@Inject
 	private ILocationInFileProvider locationProvider;
-
-	public String getHyperlinkText() {
-		return hyperlinkText;
-	}
-
-	public void setHyperlinkText(String hyperlinkText) {
-		this.hyperlinkText = hyperlinkText;
-	}
-
-	public String getTypeLabel() {
-		return typeLabel;
-	}
-
-	public void setTypeLabel(String typeLabel) {
-		this.typeLabel = typeLabel;
-	}
-
-	public Region getHyperlinkRegion() {
-		return hyperlinkRegion;
-	}
-
-	public void setHyperlinkRegion(Region hyperlinkRegion) {
-		this.hyperlinkRegion = hyperlinkRegion;
-	}
 
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;

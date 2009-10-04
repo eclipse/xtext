@@ -40,6 +40,21 @@ import com.google.inject.Provider;
  */
 public class HyperlinkHelper implements IHyperlinkHelper {
 
+	protected static class HyperlinkAcceptor implements IHyperlinkAcceptor {
+
+		private final List<IHyperlink> links;
+
+		HyperlinkAcceptor(List<IHyperlink> links) {
+			this.links = links;
+		}
+		
+		public void accept(IHyperlink hyperlink) {
+			if (hyperlink != null)
+				links.add(hyperlink);
+		}
+		
+	}
+	
 	@Inject
 	private ILinkingService linkingService;
 	
@@ -58,15 +73,16 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		if (crossLinkedEObjects.isEmpty())
 			return null;
 		List<IHyperlink> links = new ArrayList<IHyperlink>();
+		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 		for (EObject crossReffed : crossLinkedEObjects) {
 			if (!links.isEmpty() && !createMultipleHyperlinks)
 				break;
-			links.add(createHyperlinkTo(resource, location.get(), crossReffed));
+			createHyperlinksTo(resource, location.get(), crossReffed, acceptor);
 		}
 		return links.toArray(new IHyperlink[links.size()]);
 	}
 	
-	public IHyperlink createHyperlinkTo(XtextResource from, Region region, EObject to) {
+	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {
 		final URIConverter uriConverter = from.getResourceSet().getURIConverter();
 		final String hyperlinkText = labelProvider.getText(to);
 		final URI uri = EcoreUtil.getURI(to);
@@ -76,7 +92,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		result.setHyperlinkRegion(region);
 		result.setURI(normalized);
 		result.setHyperlinkText(hyperlinkText);
-		return result;
+		acceptor.accept(result);
 	}
 
 	protected List<EObject> findCrossLinkedEObject(AbstractNode node, Wrapper<Region> location) {
