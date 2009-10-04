@@ -8,18 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 
 import com.google.inject.Inject;
@@ -33,20 +27,11 @@ import com.google.inject.Inject;
  * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector
  * @see org.eclipse.jface.text.hyperlink.IHyperlink
  */
-public class DefaultHyperlinkDetector extends org.eclipse.core.commands.AbstractHandler implements IHyperlinkDetector {
-
-	private final HyperlinkHelper helper;
+public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 
 	@Inject
-	public DefaultHyperlinkDetector(HyperlinkHelper helper) {
-		super();
-		this.helper = helper;
-	}
+	private IHyperlinkHelper helper;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
-	 */
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
 		return ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
@@ -55,18 +40,12 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		});
 	}
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		XtextEditor activeEditor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-		final IXtextDocument document = activeEditor.getDocument();
-		final int offset = ((StyledText) activeEditor.getAdapter(Control.class)).getCaretOffset();
-		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource resource) throws Exception {
-				OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, offset);
-				action.run();
-			}
-		});
-		return this;
+	public void setHelper(IHyperlinkHelper helper) {
+		this.helper = helper;
+	}
+
+	public IHyperlinkHelper getHelper() {
+		return helper;
 	}
 
 }

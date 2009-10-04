@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
 import java.io.File;
@@ -12,8 +19,8 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -29,39 +36,67 @@ import org.eclipse.xtext.ui.core.editor.ReadonlyFileStorage;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 
+import com.google.inject.Inject;
+
 /**
- * This action opens a <code>XtextEditor</code> on a selected <code>CrossReference</code> element.
- *
- * @author Michael Clay - Initial contribution and API
- * @author Peter Friese
- *
- * @see org.eclipse.jface.action.Action
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OpenDeclarationAction extends Action {
+public class XtextHyperlink implements IHyperlink {
 
-	// logger available to subclasses
-	private static final Logger logger = Logger.getLogger(OpenDeclarationAction.class);
+	private static final Logger logger = Logger.getLogger(XtextHyperlink.class);
+	
+	private String hyperlinkText;
+	
+	private String typeLabel;
+	
+	private Region hyperlinkRegion;
+	
+	private URI uri;
+	
+	@Inject
+	private ILocationInFileProvider locationProvider;
 
-	private final URI uri;
+	public String getHyperlinkText() {
+		return hyperlinkText;
+	}
 
-	private final ILocationInFileProvider locationProvider;
+	public void setHyperlinkText(String hyperlinkText) {
+		this.hyperlinkText = hyperlinkText;
+	}
 
-	public OpenDeclarationAction(URI uri, ILocationInFileProvider locationProvider) {
-		super();
-		this.uri = uri;
+	public String getTypeLabel() {
+		return typeLabel;
+	}
+
+	public void setTypeLabel(String typeLabel) {
+		this.typeLabel = typeLabel;
+	}
+
+	public Region getHyperlinkRegion() {
+		return hyperlinkRegion;
+	}
+
+	public void setHyperlinkRegion(Region hyperlinkRegion) {
+		this.hyperlinkRegion = hyperlinkRegion;
+	}
+
+	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
 	}
 
-	@Override
-	public void run() {
-		doOpen(uri);
+	public ILocationInFileProvider getLocationProvider() {
+		return locationProvider;
+	}
+
+	public void setURI(URI uri) {
+		this.uri = uri;
 	}
 
 	public URI getURI() {
 		return uri;
 	}
-
-	public void doOpen(final URI uri) {
+	
+	public void open() {
 		IFile file = getContainingResourceSetFile(uri);
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		IEditorPart openEditor = null;
@@ -153,4 +188,5 @@ public class OpenDeclarationAction extends Action {
 		}
 		return result;
 	}
+
 }

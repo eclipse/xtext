@@ -39,13 +39,21 @@ public class OpenDeclarationHandler extends AbstractHandler {
 
 		ISourceViewer internalSourceViewer = editor.getInternalSourceViewer();
 
-		IHyperlink[] hyperlinks = detector.detectHyperlinks(internalSourceViewer, region, false);
+		IHyperlink[] hyperlinks = getDetector().detectHyperlinks(internalSourceViewer, region, false);
 		if (hyperlinks != null && hyperlinks.length > 0) {
 			IHyperlink hyperlink = hyperlinks[0];
 			hyperlink.open();
 		}
 		
 		return null;
+	}
+
+	public void setDetector(IHyperlinkDetector detector) {
+		this.detector = detector;
+	}
+
+	public IHyperlinkDetector getDetector() {
+		return detector;
 	}
 
 }
