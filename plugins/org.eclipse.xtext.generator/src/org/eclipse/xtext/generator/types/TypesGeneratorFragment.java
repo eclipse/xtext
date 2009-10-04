@@ -44,6 +44,8 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
 		 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider", 
 				 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
+		 .addTypeToType("org.eclipse.xtext.ui.common.editor.hyperlinking.IHyperlinkHelper", 
+				 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
 		 .getBindings();
 	}
 	
