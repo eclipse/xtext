@@ -15,7 +15,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(JavaClassPathResourceSetFactory.class)
+@ImplementedBy(JavaClassPathResourceForIEditorInputFactory.class)
 public interface IResourceForEditorInputFactory {
 	Resource createResource(IEditorInput input);
 }
