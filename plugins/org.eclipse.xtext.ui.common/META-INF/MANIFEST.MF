@@ -35,4 +35,4 @@ Export-Package: org.eclipse.xtext.common,
 Bundle-Activator: org.eclipse.xtext.ui.common.internal.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
