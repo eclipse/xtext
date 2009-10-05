@@ -26,17 +26,19 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
-public class JavaClassPathResourceSetFactory implements IResourceForEditorInputFactory {
-	@Inject
-	private Provider<XtextResourceSet> resourceSetProvider;
+public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
 	
 	public Resource createResource(IEditorInput editorInput) {
 		IFile file = ResourceUtil.getFile(editorInput);
 
-		XtextResourceSet resourceSet = resourceSetProvider.get();
+		XtextResourceSet resourceSet = new XtextResourceSet() {
+			@Override
+			public Resource getResource(URI uri, boolean loadOnDemand) {
+				Resource resource = super.getResource(uri, loadOnDemand);
+				
+				return resource;
+			}
+		};
 		if (file != null) {
 			// TODO find a way to identify a project for an IStorageEditorInput
 			IJavaProject javaProject = getIJavaProject(file);
