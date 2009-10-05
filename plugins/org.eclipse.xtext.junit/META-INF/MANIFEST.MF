@@ -11,4 +11,4 @@ Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0",
  org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0"
 Export-Package: org.eclipse.xtext.junit,
  org.eclipse.xtext.junit.validation
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"

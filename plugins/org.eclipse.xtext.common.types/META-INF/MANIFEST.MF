@@ -12,7 +12,7 @@ Require-Bundle:
  com.google.collect;bundle-version="0.8.0",
  com.google.guice;bundle-version="1.0.1",
  org.eclipse.xtext;bundle-version="0.8.0"
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types,
  org.eclipse.xtext.common.types.access,

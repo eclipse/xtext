@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext.common.types;visibility:=reexport,
  org.eclipse.xtext.ui.common;bundle-version="0.8.0",
  org.eclipse.xtext.ui.core;bundle-version="0.8.0",
  org.eclipse.jdt.ui;bundle-version="3.5.0"
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.util.jdt,

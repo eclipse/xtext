@@ -24,4 +24,4 @@ Require-Bundle: org.eclipse.xtext.util,
  org.eclipse.xtext.common.types;bundle-version="0.8.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j;version="1.2.15"
