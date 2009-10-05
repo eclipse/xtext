@@ -22,3 +22,4 @@ Export-Package: org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.provider,
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
+Bundle-Activator: org.eclipse.xtext.common.types.provider.TypesEditPlugin$Implementation
