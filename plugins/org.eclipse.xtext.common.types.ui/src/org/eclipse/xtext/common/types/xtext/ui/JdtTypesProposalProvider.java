@@ -104,8 +104,11 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (prefix.length() > 0 && split.length > 0) {
 			if (Character.isUpperCase(split[split.length - 1].charAt(0))) {
 				typeName = split[split.length - 1].toCharArray();
-				packageName = prefix.substring(0, prefix.length() - (typeName.length + 1)).toCharArray();
+				if (split.length > 1)
+					packageName = prefix.substring(0, prefix.length() - (typeName.length + 1)).toCharArray();
 			} else {
+				if (prefix.endsWith("."))
+					prefix = prefix.substring(0, prefix.length() - 1);
 				packageName = prefix.toCharArray();
 			}
 		}
