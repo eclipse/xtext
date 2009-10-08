@@ -46,6 +46,8 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 				 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
 		 .addTypeToType("org.eclipse.xtext.ui.common.editor.hyperlinking.IHyperlinkHelper", 
 				 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
+		 .addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher", 
+				 	"org.eclipse.xtext.ui.core.editor.contentassist.FQNPrefixMatcher")
 		 .getBindings();
 	}
 	
