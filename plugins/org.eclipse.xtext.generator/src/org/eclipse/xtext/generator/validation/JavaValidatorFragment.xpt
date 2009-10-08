@@ -35,7 +35,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 public class «getValidatorName("Abstract").toSimpleName()» extends AbstractDeclarativeValidator {
 
     @Override
-    protected List<? extends EPackage> getEPackages() {
+    protected List<EPackage> getEPackages() {
         List<EPackage> result = new ArrayList<EPackage>();
         «FOREACH packageQNames.flatten() AS e-»
         result.add(«e».eINSTANCE);
