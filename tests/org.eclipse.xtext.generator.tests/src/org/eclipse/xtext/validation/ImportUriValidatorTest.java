@@ -52,8 +52,8 @@ public class ImportUriValidatorTest extends AbstractXtextTests {
 	public static class Validator extends AbstractDeclarativeValidator {
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(ImportedURIPackage.eINSTANCE);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(ImportedURIPackage.eINSTANCE);
 		}
 		
 	}

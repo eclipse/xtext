@@ -72,8 +72,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	
@@ -90,8 +90,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	
@@ -139,8 +139,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	
@@ -154,8 +154,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	
@@ -168,8 +168,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	
@@ -183,8 +183,8 @@ public abstract class AbstractCompositeValidatorTest extends AbstractXtextTests 
 		}
 		
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Collections.singletonList(pack);
+		protected List<EPackage> getEPackages() {
+			return Collections.<EPackage>singletonList(pack);
 		}
 	}
 	

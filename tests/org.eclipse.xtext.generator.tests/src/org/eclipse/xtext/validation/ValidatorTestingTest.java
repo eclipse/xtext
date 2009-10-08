@@ -47,8 +47,8 @@ public class ValidatorTestingTest extends TestCase {
 		}
 
 		@Override
-		protected List<? extends EPackage> getEPackages() {
-			return Arrays.asList(EcorePackage.eINSTANCE);
+		protected List<EPackage> getEPackages() {
+			return Arrays.<EPackage>asList(EcorePackage.eINSTANCE);
 		}
 	}
 
