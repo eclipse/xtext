@@ -4,7 +4,7 @@
  */
 package org.eclipse.xtext.example;
 
-import org.eclipse.xtext.ui.core.builder.IndexProvider;
+import org.eclipse.xtext.example.DomainmodelRuntimeModule;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.example.DomainmodelUiModule}
@@ -143,7 +143,6 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.class;
 	}
@@ -160,7 +159,7 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
 	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.Index>> provideIndex() {
-		return IndexProvider.class;
+		return org.eclipse.xtext.ui.core.builder.IndexProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
