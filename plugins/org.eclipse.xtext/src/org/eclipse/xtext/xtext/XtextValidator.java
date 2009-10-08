@@ -67,8 +67,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	private KeywordInspector keywordHidesTerminalInspector;
 	
 	@Override
-	protected List<? extends EPackage> getEPackages() {
-		return Collections.singletonList(XtextPackage.eINSTANCE);
+	protected List<EPackage> getEPackages() {
+		return Collections.<EPackage>singletonList(XtextPackage.eINSTANCE);
 	}
 
 	@Check(CheckType.FAST)

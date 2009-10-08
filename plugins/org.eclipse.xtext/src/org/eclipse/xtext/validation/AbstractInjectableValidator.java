@@ -25,13 +25,13 @@ public abstract class AbstractInjectableValidator implements EValidator {
 
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
-		List<? extends EPackage> packages = getEPackages();
+		List<EPackage> packages = getEPackages();
 		for (EPackage ePackage : packages) {
 			registrar.register(ePackage, this);
 		}
 	}
 
-	protected List<? extends EPackage> getEPackages() {
+	protected List<EPackage> getEPackages() {
 		throw new UnsupportedOperationException("please overwrite");
 	}
 

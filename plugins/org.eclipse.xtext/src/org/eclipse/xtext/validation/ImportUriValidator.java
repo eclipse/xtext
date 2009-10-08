@@ -34,7 +34,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Override
-	protected List<? extends EPackage> getEPackages() {
+	protected List<EPackage> getEPackages() {
 		return Collections.emptyList();
 	}
 	
