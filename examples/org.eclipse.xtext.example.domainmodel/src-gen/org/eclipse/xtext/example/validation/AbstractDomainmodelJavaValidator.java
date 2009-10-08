@@ -9,7 +9,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 public class AbstractDomainmodelJavaValidator extends AbstractDeclarativeValidator {
 
     @Override
-    protected List<? extends EPackage> getEPackages() {
+    protected List<EPackage> getEPackages() {
         List<EPackage> result = new ArrayList<EPackage>();
         result.add(org.eclipse.xtext.example.domainmodel.DomainmodelPackage.eINSTANCE);
         return result;

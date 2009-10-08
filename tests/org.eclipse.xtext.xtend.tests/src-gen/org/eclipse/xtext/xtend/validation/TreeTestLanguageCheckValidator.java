@@ -19,7 +19,7 @@ public class TreeTestLanguageCheckValidator extends org.eclipse.xtext.check.Abst
 	}
 	
 	@Override
-	protected List<? extends EPackage> getEPackages() {
+	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.xtend.treeXtendTestLanguage.TreeXtendTestLanguagePackage.eINSTANCE);
 		return result;
