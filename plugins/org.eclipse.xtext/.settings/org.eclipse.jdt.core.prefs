@@ -1,4 +1,4 @@
-#Wed Aug 12 21:13:13 CEST 2009
+#Wed Oct 14 22:36:22 CEST 2009
 eclipse.preferences.version=1
 org.eclipse.jdt.core.builder.cleanOutputFolder=clean
 org.eclipse.jdt.core.builder.duplicateResourceTask=warning
@@ -180,10 +180,10 @@ org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_member=insert
 org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_parameter=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_after_opening_brace_in_array_initializer=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing=do not insert
-org.eclipse.jdt.core.formatter.insert_new_line_before_catch_in_try_statement=insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_catch_in_try_statement=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_before_closing_brace_in_array_initializer=do not insert
-org.eclipse.jdt.core.formatter.insert_new_line_before_else_in_if_statement=insert
-org.eclipse.jdt.core.formatter.insert_new_line_before_finally_in_try_statement=insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_else_in_if_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_finally_in_try_statement=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_before_while_in_do_statement=do not insert
 org.eclipse.jdt.core.formatter.insert_new_line_in_empty_annotation_declaration=insert
 org.eclipse.jdt.core.formatter.insert_new_line_in_empty_anonymous_type_declaration=insert
