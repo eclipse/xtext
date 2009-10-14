@@ -20,6 +20,11 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.properties");
 	}
 	
 	

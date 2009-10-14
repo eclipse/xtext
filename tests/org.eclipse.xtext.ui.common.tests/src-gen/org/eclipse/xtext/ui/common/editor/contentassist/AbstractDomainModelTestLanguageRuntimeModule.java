@@ -20,6 +20,11 @@ public abstract class AbstractDomainModelTestLanguageRuntimeModule extends Defau
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/DomainModelTestLanguage.properties");
 	}
 	
 	

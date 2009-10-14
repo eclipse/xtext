@@ -20,6 +20,11 @@ public abstract class AbstractAbstractTestLanguageRuntimeModule extends DefaultR
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.properties");
 	}
 	
 	

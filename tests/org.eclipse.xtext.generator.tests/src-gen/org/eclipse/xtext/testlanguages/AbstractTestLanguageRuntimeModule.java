@@ -20,6 +20,11 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.testlanguages.TestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/testlanguages/TestLanguage.properties");
 	}
 	
 	

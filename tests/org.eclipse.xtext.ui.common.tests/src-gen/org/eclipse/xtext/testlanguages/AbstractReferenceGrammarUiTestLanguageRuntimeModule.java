@@ -20,6 +20,11 @@ public abstract class AbstractReferenceGrammarUiTestLanguageRuntimeModule extend
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/testlanguages/ReferenceGrammarUiTestLanguage.properties");
 	}
 	
 	

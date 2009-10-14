@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider;
-import org.eclipse.xtext.ui.core.builder.XtextNature;
+import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Iterables;
 

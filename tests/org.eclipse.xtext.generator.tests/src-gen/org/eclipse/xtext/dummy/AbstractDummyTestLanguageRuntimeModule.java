@@ -20,6 +20,11 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.dummy.DummyTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/dummy/DummyTestLanguage.properties");
 	}
 	
 	

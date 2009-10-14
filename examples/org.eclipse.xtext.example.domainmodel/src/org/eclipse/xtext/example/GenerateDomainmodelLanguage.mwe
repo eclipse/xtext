@@ -1,7 +1,7 @@
  <workflow>
-	<property name="grammarURI" value="classpath:/org/eclipse/xtext/example/Domainmodel.xtext"/>
-	<property name="file.extensions" value="dmodel"/>
+	<property file="org/eclipse/xtext/example/Domainmodel.properties"/>
 	<property name="projectName" value="org.eclipse.xtext.example.domainmodel"/>
+	<property name="grammarURI" value="classpath:/org/eclipse/xtext/example/Domainmodel.xtext"/>
 	
 	<property name="runtimeProject" value="../${projectName}"/>
 	
@@ -31,8 +31,7 @@
 			
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"
-				fileExtensions="${file.extensions}"/>
+			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
 				<options backtrack="true"/>
 			</fragment>

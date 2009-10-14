@@ -116,8 +116,7 @@
 	<extension
          point="org.eclipse.xtext.ui.core.languageBuilder">
       <languageBuilder
-            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.DefaultLanguageBuilder"
-            fileExtensions="dmodel">
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder">
       </languageBuilder>
    </extension>
    <!-- quickfix marker resolution generator -->

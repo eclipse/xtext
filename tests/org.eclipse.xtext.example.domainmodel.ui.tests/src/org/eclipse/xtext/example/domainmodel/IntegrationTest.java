@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -110,7 +111,7 @@ public class IntegrationTest extends TestCase {
 				IResource.DEPTH_INFINITE).length);
 	}
 
-	public void testChangeReferencedProjects() throws Exception {
+	public void testChangeReferenceOfProjects() throws Exception {
 		final String fooModel = "foo/foo.dmodel";
 		final String barModel = "bar/bar.dmodel";
 		new WorkspaceModifyOperation() {
@@ -189,13 +190,40 @@ public class IntegrationTest extends TestCase {
 		assertEquals(0, file(barModel).findMarkers(EValidator.MARKER, true,
 				IResource.DEPTH_INFINITE).length);
 		// change referenced file
+		System.out.println("changing "+fooModel);
 		createFile(fooModel, "entity Baz {}");
 		waitForAutoBuild();
 		assertEquals(1, file(barModel).findMarkers(EValidator.MARKER, true,
 				IResource.DEPTH_INFINITE).length);
+		System.out.println("changing "+fooModel);
 		createFile(fooModel, "entity Foo {}");
 		waitForAutoBuild();
 		assertEquals(0, file(barModel).findMarkers(EValidator.MARKER, true,
+				IResource.DEPTH_INFINITE).length);
+	}
+	
+	public void testDeleteReferencedFile() throws Exception {
+		final String fooModel = "foo/foo.dmodel";
+		final String barModel = "foo/bar.dmodel";
+		new WorkspaceModifyOperation() {
+			
+			@Override
+			protected void execute(IProgressMonitor monitor)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+				IFile file1 = createFile(fooModel, "entity Foo {}");
+				IFile file2 = createFile(barModel,
+				"entity Bar { ref stuff : Foo }");
+				setReference(file2.getProject(), file1.getProject());
+			}
+		}.run(monitor());
+		waitForAutoBuild();
+		assertEquals(0, file(barModel).findMarkers(EValidator.MARKER, true,
+				IResource.DEPTH_INFINITE).length);
+		// change referenced file
+		file(fooModel).delete(true, new NullProgressMonitor());
+		waitForAutoBuild();
+		assertEquals(1, file(barModel).findMarkers(EValidator.MARKER, true,
 				IResource.DEPTH_INFINITE).length);
 	}
 

@@ -20,6 +20,11 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.index.IndexTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/index/IndexTestLanguage.properties");
 	}
 	
 	

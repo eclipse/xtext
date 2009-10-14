@@ -158,8 +158,8 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.Index>> provideIndex() {
-		return org.eclipse.xtext.ui.core.builder.IndexProvider.class;
+	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.store.UpdateableIndex>> provideUpdateableIndex() {
+		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment

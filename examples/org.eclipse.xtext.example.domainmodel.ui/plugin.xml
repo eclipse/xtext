@@ -134,9 +134,7 @@
    <extension
          point="org.eclipse.xtext.ui.core.languageBuilder">
       <languageBuilder
-            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.builder.DomainModelLanguageBuilder"
-            fileExtensions="dmodel">
-      </languageBuilder>
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder"/>
    </extension>
 
 </plugin>

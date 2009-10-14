@@ -20,6 +20,11 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.properties");
 	}
 	
 	

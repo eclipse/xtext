@@ -27,7 +27,8 @@ public class SLCommentPrefixCalculator extends XtextSwitch<Boolean> {
 	protected SLCommentPrefixCalculator(List<String> result) {
 		this.result = result;
 	}
-
+ 
+	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		boolean result = true;
 		for(AbstractElement elem: object.getGroups()) {
@@ -36,6 +37,7 @@ public class SLCommentPrefixCalculator extends XtextSwitch<Boolean> {
 		return result;
 	}
 
+	@Override
 	public Boolean caseGroup(Group object) {
 		for (AbstractElement elem: object.getTokens()) {
 			if (!doSwitch(elem))
@@ -44,19 +46,23 @@ public class SLCommentPrefixCalculator extends XtextSwitch<Boolean> {
 		return true;
 	}
 
+	@Override
 	public Boolean caseKeyword(Keyword object) {
 		result.add(object.getValue());
 		return false;
 	}
 
+	@Override
 	public Boolean caseAbstractNegatedToken(AbstractNegatedToken object) {
 		return false;
 	}
 
+	@Override
 	public Boolean caseUntilToken(UntilToken object) {
 		return false;
 	}
 
+	@Override
 	public Boolean caseCharacterRange(CharacterRange object) {
 		return false;
 	}

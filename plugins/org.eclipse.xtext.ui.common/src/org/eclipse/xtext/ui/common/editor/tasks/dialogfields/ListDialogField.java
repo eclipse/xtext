@@ -241,6 +241,7 @@ public class ListDialogField extends DialogField {
 	/*
 	 * @see DialogField#doFillIntoGrid
 	 */
+	@Override
 	public Control[] doFillIntoGrid(Composite parent, int nColumns) {
 		PixelConverter converter = new PixelConverter(parent);
 
@@ -278,6 +279,7 @@ public class ListDialogField extends DialogField {
 	/*
 	 * @see DialogField#getNumberOfControls
 	 */
+	@Override
 	public int getNumberOfControls() {
 		return 3;
 	}
@@ -335,6 +337,7 @@ public class ListDialogField extends DialogField {
 			}
 
 			fTable.getTable().addKeyListener(new KeyAdapter() {
+				@Override
 				public void keyPressed(KeyEvent e) {
 					handleKeyPressed(e);
 				}
@@ -498,6 +501,7 @@ public class ListDialogField extends DialogField {
 	/*
 	 * @see DialogField#dialogFieldChanged
 	 */
+	@Override
 	public void dialogFieldChanged() {
 		super.dialogFieldChanged();
 		updateButtonState();
@@ -533,6 +537,7 @@ public class ListDialogField extends DialogField {
 	/*
 	 * @see DialogField#updateEnableState
 	 */
+	@Override
 	protected void updateEnableState() {
 		super.updateEnableState();
 
@@ -800,6 +805,7 @@ public class ListDialogField extends DialogField {
 	/**
 	 * Refreshes the table.
 	 */
+	@Override
 	public void refresh() {
 		super.refresh();
 		if (isOkToUse(fTableControl)) {
@@ -959,6 +965,7 @@ public class ListDialogField extends DialogField {
 	/**
 	 * @deprecated Use {@link #setViewerComparator(ViewerComparator)} instead}
 	 */
+	@Deprecated
 	public void setViewerSorter(ViewerSorter sorter) {
 		setViewerComparator(sorter);
 	}
@@ -1011,6 +1018,7 @@ public class ListDialogField extends DialogField {
 		public TableLayoutComposite(Composite parent, int style) {
 			super(parent, style);
 			addControlListener(new ControlAdapter() {
+				@Override
 				public void controlResized(ControlEvent e) {
 					Rectangle area = getClientArea();
 					Table table = (Table) getChildren()[0];

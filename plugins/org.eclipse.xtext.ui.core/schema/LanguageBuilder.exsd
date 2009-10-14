@@ -49,13 +49,6 @@
 
    <element name="languageBuilder">
       <complexType>
-         <attribute name="fileExtensions" type="string" use="required">
-            <annotation>
-               <documentation>
-                  The file extensions this language builder is responsible for.
-               </documentation>
-            </annotation>
-         </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>

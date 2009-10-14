@@ -20,6 +20,11 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.enumrules.EnumRulesTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.properties");
 	}
 	
 	

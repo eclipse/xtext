@@ -11,7 +11,6 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.core.tests");
-      suite.addTestSuite(org.eclipse.xtext.ui.core.builder.ResourcesToBuildBuilderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.DefaultLabelProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.CamelCasePrefixMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.DefaultLastSegmentFinderTest.class);

@@ -20,6 +20,11 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.xtend.TreeTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/xtend/TreeTestLanguage.properties");
 	}
 	
 	

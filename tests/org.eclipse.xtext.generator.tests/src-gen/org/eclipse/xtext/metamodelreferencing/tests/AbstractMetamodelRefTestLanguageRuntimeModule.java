@@ -20,6 +20,11 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.properties");
 	}
 	
 	
