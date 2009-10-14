@@ -15,14 +15,6 @@
 		</editor>
 	</extension>
 	
-	<extension
-         point="org.eclipse.xtext.ui.core.languageBuilder">
-      <languageBuilder
-            class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.DefaultLanguageBuilder"
-            fileExtensions="xtext,xtext2">
-      </languageBuilder>
-   </extension>
-	
 	<!-- Open declaration -->
 	<extension
 		point="org.eclipse.ui.handlers">

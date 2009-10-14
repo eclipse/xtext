@@ -42,7 +42,6 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null)
 			return;
-		
 		Iterator<EObject> iter = EcoreUtil.getAllContents(resource, true);
 		Set<AbstractRule> calledRules = Sets.newHashSet();
 		while(iter.hasNext()) {

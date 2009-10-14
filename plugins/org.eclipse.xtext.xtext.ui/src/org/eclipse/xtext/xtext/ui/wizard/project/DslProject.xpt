@@ -19,7 +19,7 @@
 
 «DEFINE workflow FOR XtextProjectInfo»
 
-«FILE basePackagePath+"/Generate"+languageNameAbbreviation+".properties" -»
+«FILE basePackagePath+"/"+languageNameAbbreviation+".properties" -»
 grammarURI=classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext
 file.extensions=«this.firstFileExtension»
 projectName=«this.projectName»
@@ -27,7 +27,7 @@ projectName=«this.projectName»
 
 «FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe" -»
 <workflow>
-    <property file="«basePackagePath»/Generate«languageNameAbbreviation».properties"/>
+    <property file="«basePackagePath»/«languageNameAbbreviation».properties"/>
 
     «this.wizardContribution.mweSnippet»
 </workflow>
