@@ -1,7 +1,5 @@
 package org.eclipse.xtext.ui.generator.scoping;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -23,22 +21,11 @@ public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment
 					"org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIProjectImpl")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback",
 					"org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl")
-			.addTypeToProvider("org.eclipse.emf.emfindex.Index", 
-					"org.eclipse.xtext.ui.core.builder.IndexProvider")
+			.addTypeToProvider("org.eclipse.emf.emfindex.store.UpdateableIndex", 
+					"org.eclipse.xtext.ui.core.index.IndexProvider")
 			.getBindings();
 	}
 
-	private String fileExtensions;
-	
-	public void setFileExtensions(String fileExtensions) {
-		this.fileExtensions = fileExtensions;
-	}
-	
-	@Override
-	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.singletonList((Object)fileExtensions);
-	}
-	
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[]{

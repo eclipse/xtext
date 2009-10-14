@@ -9,8 +9,10 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.service.AbstractGenericModule.Binding;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 public class GenericModuleTest extends TestCase {
 	
@@ -164,6 +166,14 @@ public class GenericModuleTest extends TestCase {
 		assertEquals(1,Foo.instantiations);
 		assertTrue(foo == inj.getInstance(Foo.class));
 		assertEquals(1,Foo.instantiations);
+	}
+	
+	public void testNamedBinding() throws Exception {
+		AbstractGenericModule module = new AbstractGenericModule() {
+			String foo() {
+				return "bar";
+			}
+		};
 	}
 	
 	public static class Foo {
