@@ -44,13 +44,9 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 	}
 	
 	public Object create() throws CoreException {
-		IGuiceAwareActivator instance = getActivator();
-		if (instance == null)
-			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
-		Bundle bundle = instance.getBundle();
 		try {
-			final Class<?> clazz = bundle.loadClass(clazzName);
-			final Injector injector = instance.getInjector("org.eclipse.xtext.example.Domainmodel");
+			final Class<?> clazz = getBundle().loadClass(clazzName);
+			final Injector injector = getInjector();
 			final Object result = injector.getInstance(clazz);
 			if (result instanceof IExecutableExtension)
 				((IExecutableExtension) result).setInitializationData(config, null, null);
@@ -58,9 +54,10 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 		}
 		catch (Exception e) {
 			log.error(e);
-			throw new CoreException(new Status(IStatus.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
+			throw new CoreException(new Status(IStatus.ERROR, getBundle().getSymbolicName(), e.getMessage(),e));
 		}
 	}
 	
-	protected abstract IGuiceAwareActivator getActivator();
+	protected abstract Bundle getBundle();
+	protected abstract Injector getInjector();
 }

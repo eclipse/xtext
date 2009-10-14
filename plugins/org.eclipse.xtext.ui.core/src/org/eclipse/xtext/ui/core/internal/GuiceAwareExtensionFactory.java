@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import org.eclipse.xtext.ui.core.guice.AbstractGuiceAwareExecutableExtensionFactory;
-import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
+import org.osgi.framework.Bundle;
+
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -16,8 +18,13 @@ import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
 public class GuiceAwareExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
-	protected IGuiceAwareActivator getActivator() {
-		return Activator.getDefault();
+	protected Bundle getBundle() {
+		return Activator.getDefault().getBundle();
+	}
+	
+	@Override
+	protected Injector getInjector() {
+		return Activator.getDefault().getInjector();
 	}
 
 }

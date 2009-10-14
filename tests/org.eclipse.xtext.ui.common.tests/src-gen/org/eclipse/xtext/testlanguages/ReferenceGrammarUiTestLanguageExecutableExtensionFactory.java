@@ -6,7 +6,9 @@
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.xtext.ui.core.guice.AbstractGuiceAwareExecutableExtensionFactory;
-import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
+import org.osgi.framework.Bundle;
+
+import com.google.inject.Injector;
 
 /**
  *@generated
@@ -14,8 +16,13 @@ import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
 public class ReferenceGrammarUiTestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
-	protected IGuiceAwareActivator getActivator() {
-		return org.eclipse.xtext.ui.common.tests.Activator.getInstance();
+	protected Bundle getBundle() {
+		return org.eclipse.xtext.ui.common.tests.Activator.getInstance().getBundle();
+	}
+	
+	@Override
+	protected Injector getInjector() {
+		return org.eclipse.xtext.ui.common.tests.Activator.getInstance().getInjector("org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguage");
 	}
 	
 }
