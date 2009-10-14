@@ -24,6 +24,7 @@ import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
+import org.eclipse.emf.emfindex.store.UpdateableIndex;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
@@ -80,7 +81,7 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 	private Index indexStore;
 
 	@Inject(optional = true)
-	public void setIndexStore(Index indexStore) {
+	public void setIndexStore(UpdateableIndex indexStore) {
 		this.indexStore = indexStore;
 	}
 
