@@ -18,7 +18,7 @@
 «DEFINE generate(Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
 «EXPAND guiceModuleRt»
 
-«FILE name.replaceAll("\\.","/")+".properties" SRC»-
+«FILE name.replaceAll("\\.","/")+".properties" SRC-»
 file.extensions=«fileExtensions.toString(",")»
 «ENDFILE»
 
