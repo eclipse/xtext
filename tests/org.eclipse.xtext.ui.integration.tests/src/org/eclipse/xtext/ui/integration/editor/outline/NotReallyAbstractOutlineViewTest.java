@@ -40,7 +40,7 @@ import org.eclipse.xtext.ui.integration.editor.AbstractEditorTest;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class OutlineViewTest extends AbstractEditorTest {
+public class NotReallyAbstractOutlineViewTest extends AbstractEditorTest {
 
 	private XtextEditor editor;
 	private IProject project;

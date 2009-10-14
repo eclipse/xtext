@@ -32,9 +32,9 @@ import org.eclipse.xtext.ui.integration.XtextUIIntegrationTestsPlugin;
  * @author Dennis Hübner - Initial contribution and API
  * @author Peter Friese
  */
-public class EditorTest extends AbstractEditorTest {
+public class NotReallyAbstractEditorTest extends AbstractEditorTest {
 
-	private static final Logger logger = Logger.getLogger(EditorTest.class);
+	private static final Logger logger = Logger.getLogger(NotReallyAbstractEditorTest.class);
 	
 	@Override
 	protected void setUp() throws Exception {
