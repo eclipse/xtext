@@ -16,7 +16,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.osgi.framework.BundleContext;
 
@@ -26,7 +25,7 @@ import com.google.inject.Injector;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin implements IGuiceAwareActivator {
+public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
@@ -116,7 +115,7 @@ public class Activator extends AbstractUIPlugin implements IGuiceAwareActivator 
 		}
 	}
 	
-	public Injector getInjector(String injectorName) {
+	public Injector getInjector() {
 		return injector;
 	}
 	

@@ -5,7 +5,6 @@
 package org.eclipse.xtext.example.internal;
 
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
-import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 /**
  * Generated
  */
-public class FowlerDslActivator extends AbstractUIPlugin implements IGuiceAwareActivator {
+public class FowlerDslActivator extends AbstractUIPlugin {
 
 	private Map<String,Injector> injectors = new HashMap<String,Injector>();
 	private static FowlerDslActivator INSTANCE;
