@@ -20,6 +20,11 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.grammarinheritance.InheritanceTest2Language");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.properties");
 	}
 	
 	

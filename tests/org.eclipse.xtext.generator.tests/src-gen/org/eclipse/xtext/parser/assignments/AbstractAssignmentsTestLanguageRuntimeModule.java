@@ -20,6 +20,11 @@ public abstract class AbstractAssignmentsTestLanguageRuntimeModule extends Defau
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.properties");
 	}
 	
 	

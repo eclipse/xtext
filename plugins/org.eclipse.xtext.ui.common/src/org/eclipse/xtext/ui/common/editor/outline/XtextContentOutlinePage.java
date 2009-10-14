@@ -279,6 +279,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	public void synchronizeOutlinePage() {
 		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
 			public void process(XtextResource resource) throws Exception {
 				int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
 

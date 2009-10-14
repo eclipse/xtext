@@ -14,18 +14,17 @@
 «EXTENSION org::eclipse::xtext::ui::generator::labeling::Extensions»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(String fileExtensions) FOR Grammar-»«ENDDEFINE»
+«DEFINE generate FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(String fileExtensions) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(String fileExtensions) FOR Grammar»
+«DEFINE addToPluginXmlUi FOR Grammar»
 	<extension
          point="org.eclipse.xtext.ui.core.languageBuilder">
       <languageBuilder
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.builder.DefaultLanguageBuilder"
-            fileExtensions="«fileExtensions»">
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder">
       </languageBuilder>
    </extension>
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(String fileExtensions) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»

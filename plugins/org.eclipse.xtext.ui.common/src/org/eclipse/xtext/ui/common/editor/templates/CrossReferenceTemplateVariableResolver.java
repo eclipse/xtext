@@ -33,6 +33,7 @@ public class CrossReferenceTemplateVariableResolver extends
 		super("CrossReference", "TemplateVariableResolver for CrossReferences");
 	}
 
+	@Override
 	public List<String> resolveValues(TemplateVariable variable,
 			XtextTemplateContext castedContext) {
 		String abbreviatedCrossReference = (String) variable.getVariableType()

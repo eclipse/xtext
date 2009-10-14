@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.xtext.ui.core.builder.XtextNature;
+import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.util.StringInputStream;
 
 public class IResources {

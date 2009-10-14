@@ -7,56 +7,49 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.builder;
 
-import java.util.List;
-import java.util.Map;
-
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
- * the callback methods are called during the build of a resource in the declared order.
+ * The Xtext builder is composed of {@link ILanguageBuilder}.
+ * The main purpose of this delegation is to introduce a post build hook.
+ * 
+ * Xtext resources depending on the index for cross-referencing need a proper state of the index when resolviong cross links.
+ * Typically such language implment the {@link #build(IBuilderAccess, int, IProgressMonitor)} hook in order to clean and update the index
+ * and implment {@link #postBuild(IBuilderAccess, int, IProgressMonitor)} to do the validation and add information about References to the index.
+ * 
+ * Languages which don't rely on the index can implment everything in {@link #build(IBuilderAccess, int, IProgressMonitor)}
  */
 public interface ILanguageBuilder {
-	
-	/**
-	 * Used to load a resource.
-	 */
-	Resource load(URI platformResourceUri, ResourceSet resourceSet, IProgressMonitor monitor);
 
 	/**
-	 * callback used to provide indexing information about the referencable EObjects
-	 */
-	void indexEObjectDescriptors(Resource resource, IEObjectDescriptorIndexer feeder, IProgressMonitor monitor);
-	
-	/**
-	 * callback used to provide indexing information about cross references
-	 */
-	void indexEReferenceDescriptors(Resource resource, IEReferenceDescriptorIndexer feeder, IProgressMonitor monitor);
-
-	/**
-	 * used to validate the given resource.
+	 * called on {@link org.eclipse.core.resources.IncrementalProjectBuilder#build(Integer, java.util.Map, IProgressMonitor)}
 	 * 
-	 * @return a list of maps, where each map represents meta data about an issue as they go into the {@link org.eclipse.core.resources.IMarker}s. 
+	 * @return the list of projects for which this builder would like deltas the
+	 * next time it is run or <code>null</code> if none
+	 * 
+	 * @param builder - provides access to the helper functions of the {@link org.eclipse.core.resources.IncrementalProjectBuilder}
+	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
+	 * @param monitor - a monitor used to provide information on the process
 	 */
-	List<Map<String, Object>> validate(Resource res, IProgressMonitor monitor);
+	IProject[] build(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException;
+
+	/**
+	 * called on {@link org.eclipse.core.resources.IncrementalProjectBuilder#build(Integer, java.util.Map, IProgressMonitor)}
+	 * after {@link #build(IBuilderAccess, int, IProgressMonitor)} has been called for all registered {@link ILanguageBuilder}s
+	 * 
+	 * @param builder - provides access to the helper functions of the {@link org.eclipse.core.resources.IncrementalProjectBuilder}
+	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
+	 * @param monitor - a monitor used to provide information on the process
+	 */
+	void postBuild(IBuilderAccess builder, int kind,  IProgressMonitor monitor) throws CoreException;
+	
 	
 	/**
-	 * used to do things like code generation.
+	 * {@link org.eclipse.core.resources.IncrementalProjectBuilder#clean()}
 	 */
-	void doBuild(Resource res, IProgressMonitor monitor);
-
-	
-	public interface IEReferenceDescriptorIndexer {
-		void index(EObject from, EObject to, EReference reference);
-	}
-	
-	public interface IEObjectDescriptorIndexer {
-		void index(String name, EObject obj, Map<String, String> userData);
-	}
+	void clean(IBuilderAccess builder, IProgressMonitor monitor) throws CoreException;
 }

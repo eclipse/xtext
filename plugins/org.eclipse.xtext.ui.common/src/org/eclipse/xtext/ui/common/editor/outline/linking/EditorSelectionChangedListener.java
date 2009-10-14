@@ -39,6 +39,7 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 			final ITextSelection textSel = (ITextSelection) selection;
 
 			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
 				public void process(XtextResource resource) throws Exception {
 					IParseResult parseResult = resource.getParseResult();
 					Assert.isNotNull(parseResult);

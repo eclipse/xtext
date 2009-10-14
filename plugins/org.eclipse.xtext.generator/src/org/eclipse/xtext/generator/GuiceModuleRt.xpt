@@ -15,8 +15,12 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::ModuleExtensions»
 
-«DEFINE generate(Set[Binding] bindings) FOR Grammar»
+«DEFINE generate(Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
 «EXPAND guiceModuleRt»
+
+«FILE name.replaceAll("\\.","/")+".properties" SRC»-
+file.extensions=«fileExtensions.toString(",")»
+«ENDFILE»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN»
 /*
@@ -40,6 +44,11 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultR
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"«name»");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/«name.replaceAll("\\.","/")».properties");
 	}
 	
 	«EXPAND bindingMethod FOREACH bindings»

@@ -260,7 +260,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
 		Set<Binding> bindings = config.getGuiceBindingsRt(config.getGrammar());
-		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings);
+		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings, config.getFileExtensions(config.getGrammar()));
 	}
 
 	private void generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {

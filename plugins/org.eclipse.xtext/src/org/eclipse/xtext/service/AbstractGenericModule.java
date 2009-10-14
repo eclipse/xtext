@@ -7,20 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
 import com.google.inject.Binder;
+import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Scopes;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -64,6 +70,25 @@ public abstract class AbstractGenericModule implements Module {
 				} else {
 					if (binding.toInstance != null)
 						binder.bind((Class<Object>) binding.from).toProvider((Provider<? extends Object>) binding.toInstance);
+				}
+			}
+		}
+		
+		addNamedBindings(binder);
+	}
+
+	protected void addNamedBindings(Binder binder) {
+		Method[] methods = this.getClass().getMethods();
+		for (Method method : methods) {
+			if (method.getReturnType().equals(String.class) && method.isAccessible() && method.getParameterTypes().length==0) {
+				Named named = Names.named(method.getName());
+				try {
+					Object invoke;
+					invoke = method.invoke(this);
+					binder.bind(Key.get(String.class,named)).toInstance((String) invoke);
+				}
+				catch (Exception e) {
+					LOG.error(e.getMessage(),e);
 				}
 			}
 		}
@@ -195,6 +220,21 @@ public abstract class AbstractGenericModule implements Module {
 	 */
 	private boolean isSingleton(Method method) {
 		return method.getAnnotation(SingletonBinding.class) != null;
+	}
+	
+	protected void bindProperties(Binder binder, String propertyFilePath) {
+		try {
+			InputStream in = getClass().getClassLoader().getResourceAsStream(
+					propertyFilePath);
+			if (in != null) {
+				Properties properties = new Properties();
+				properties.load(in);
+				Names.bindProperties(binder, properties);
+			}
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static class Binding {

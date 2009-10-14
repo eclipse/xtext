@@ -20,6 +20,11 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.parser.keywords.KeywordsTestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.properties");
 	}
 	
 	

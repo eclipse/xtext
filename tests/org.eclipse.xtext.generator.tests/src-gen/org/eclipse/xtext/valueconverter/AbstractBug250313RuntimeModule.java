@@ -20,6 +20,11 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.valueconverter.Bug250313");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/valueconverter/Bug250313.properties");
 	}
 	
 	

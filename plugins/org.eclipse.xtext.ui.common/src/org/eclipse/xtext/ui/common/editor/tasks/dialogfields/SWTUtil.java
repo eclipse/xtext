@@ -128,6 +128,7 @@ public class SWTUtil {
 	 */
 	public static void setAccessibilityText(Control control, final String text) {
 		control.getAccessible().addAccessibleListener(new AccessibleAdapter() {
+			@Override
 			public void getName(AccessibleEvent e) {
 				e.result = text;
 			}

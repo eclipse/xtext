@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.xtext.ui.core.builder.AddMarkersOperation;
+import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
 import org.eclipse.xtext.ui.core.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 

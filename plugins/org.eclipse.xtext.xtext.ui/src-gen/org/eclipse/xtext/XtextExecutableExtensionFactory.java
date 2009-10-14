@@ -50,7 +50,7 @@ public class XtextExecutableExtensionFactory implements IExecutableExtensionFact
 			return result;
 		}
 		catch (Exception e) {
-			log.error(e);
+			log.error(e.getMessage(),e);
 			throw new CoreException(new Status(IStatus.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
 		}
 	}

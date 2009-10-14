@@ -180,7 +180,8 @@
      <builder
            hasNature="true">
         <run
-              class="org.eclipse.xtext.ui.core.builder.XtextBuilder">
+              class="org.eclipse.xtext.ui.core.internal.GuiceAwareExtensionFactory">
+              <parameter name="guicekey" value="org.eclipse.xtext.ui.core.builder.internal.XtextBuilder"/>
         </run>
      </builder>
   </extension>
@@ -190,7 +191,7 @@
         point="org.eclipse.core.resources.natures">
      <runtime>
         <run
-              class="org.eclipse.xtext.ui.core.builder.XtextNature">
+              class="org.eclipse.xtext.ui.core.builder.internal.XtextNature">
         </run>
      </runtime>
      <builder
@@ -215,7 +216,7 @@
             id="org.eclipse.xtext.ui.core.contribution1"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.eclipse.xtext.ui.core.builder.ToggleNatureAction"
+               class="org.eclipse.xtext.ui.core.builder.internal.ToggleNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
                label="Add Xtext Nature"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
@@ -235,7 +236,7 @@
             id="org.eclipse.xtext.ui.core.contribution2"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.eclipse.xtext.ui.core.builder.ToggleNatureAction"
+               class="org.eclipse.xtext.ui.core.builder.internal.ToggleNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
                label="Remove Xtext Nature"
                menubarPath="org.eclipse.ui.projectConfigure/additions"

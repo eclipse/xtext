@@ -20,6 +20,11 @@ public abstract class AbstractBug288760TestLanguageRuntimeModule extends Default
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguage");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/Bug288760TestLanguage.properties");
 	}
 	
 	

@@ -11,20 +11,26 @@ package org.eclipse.xtext.ui.core.internal;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.emfindex.store.UpdateableIndex;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.core.guice.IGuiceAwareActivator;
+import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends AbstractUIPlugin implements IGuiceAwareActivator {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
-	
+
 	private static Logger log = Logger.getLogger(Activator.class);
 
 	// TODO extract DEBUG handling to separate class!
@@ -45,12 +51,6 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
-	/**
-	 * The constructor
-	 */
-	public Activator() {
-	}
-
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -60,6 +60,8 @@ public class Activator extends AbstractUIPlugin {
 			log.debug("Starting Xtext UI Core bundle.");
 		// make sure classpath entries are being resolved
 		JavaCore.initializeAfterLoad(new NullProgressMonitor());
+
+		initializeGuiceInjector();
 	}
 
 	private static void setDefault(Activator activator) {
@@ -70,7 +72,7 @@ public class Activator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		if (log.isDebugEnabled())
 			log.debug("Stopping Xtext UI bundle.");
-		
+
 		setDefault(null);
 		super.stop(context);
 	}
@@ -102,4 +104,20 @@ public class Activator extends AbstractUIPlugin {
 		return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
 
+	private Injector injector;
+
+	private void initializeGuiceInjector() {
+		try {
+			injector = Guice.createInjector(new Module());
+			IndexAccess.setIndex(injector.getInstance(UpdateableIndex.class));
+		}
+		catch (Exception e) {
+			log.error("Couldn't initialize XtextBuilder", e);
+		}
+	}
+	
+	public Injector getInjector(String injectorName) {
+		return injector;
+	}
+	
 }
