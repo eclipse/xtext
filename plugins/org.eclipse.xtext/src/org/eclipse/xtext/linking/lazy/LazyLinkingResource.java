@@ -95,7 +95,7 @@ public class LazyLinkingResource extends XtextResource {
 		return super.getEObject(uriFragment);
 	}
 
-	private XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+	protected XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
 		String msg = "Couldn't resolve reference to "+triple.getSecond().getEType().getName()+" "+triple.getThird().serialize();
 		return new XtextLinkingDiagnostic(triple.getThird(), msg);
 	}
