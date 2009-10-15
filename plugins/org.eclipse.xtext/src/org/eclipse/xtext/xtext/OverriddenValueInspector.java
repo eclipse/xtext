@@ -82,17 +82,20 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 			Collection<AbstractElement> sources = Lists.newArrayList(assignedFeatures.get(feature));
 			assignedFeatures.replaceValues(feature, Iterables.<AbstractElement> emptyIterable());
 			if (sources != null && sources.equals(Collections.singletonList(object))) {
-				acceptWarning("The assigned value of feature '" + feature
-						+ "' will possibly override itself because it is used inside of a loop.", object, null);
+				if (getNestingLevel() == 0)
+					acceptWarning("The assigned value of feature '" + feature
+							+ "' will possibly override itself because it is used inside of a loop.", object, null);
 			}
 			else {
 				if (sources != null) {
-					for (AbstractElement source : sources)
-						acceptWarning("The possibly assigned value of feature '" + feature
-								+ "' may be overridden by subsequent assignments.", source, null);
+					if (getNestingLevel() == 0)
+						for (AbstractElement source : sources)
+							acceptWarning("The possibly assigned value of feature '" + feature
+									+ "' may be overridden by subsequent assignments.", source, null);
 				}
-				acceptWarning("This assignment will override the possibly assigned value of feature '"
-						+ feature + "'.", object, null);
+				if (getNestingLevel() == 0)
+					acceptWarning("This assignment will override the possibly assigned value of feature '"
+							+ feature + "'.", object, null);
 			}
 		}
 		else {

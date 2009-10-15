@@ -71,6 +71,10 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 		return visitedRules.remove(rule);
 	}
 	
+	public int getNestingLevel() {
+		return visitedRules.size();
+	}
+	
 	protected String getTypeRefName(TypeRef typeRef) {
 		String simpleName = GrammarUtil.getTypeRefName(typeRef);
 		if (typeRef.getMetamodel() != null && !Strings.isEmpty(typeRef.getMetamodel().getAlias()))
