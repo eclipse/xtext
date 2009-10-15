@@ -228,6 +228,8 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	}
 
 	protected boolean isLanguageResource(IResource resource) {
+		if (resource.getType() != IResource.FILE)
+			return false;
 		String[] extensions = fileExtensions.split(",");
 		String fileExtension = resource.getFullPath().getFileExtension();
 		for (String string : extensions) {
