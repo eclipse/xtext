@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.core.editor.validation;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
 import org.eclipse.xtext.ui.core.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
@@ -36,8 +36,8 @@ public class ValidatingEditorCallback implements IXtextEditorCallback {
 		}
 
 		@Override
-		protected void processIssues(List<Map<String, Object>> issues) {
-			AddMarkersOperation.run(editor.getResource(), issues, true, new NullProgressMonitor());
+		protected void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
+			AddMarkersOperation.run(editor.getResource(), issues, true, monitor);
 		}
 	}
 
