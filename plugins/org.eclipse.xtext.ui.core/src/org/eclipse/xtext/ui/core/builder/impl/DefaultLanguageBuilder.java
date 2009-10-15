@@ -94,13 +94,11 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	public IProject[] build(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
 			fullBuild(builder, monitor);
-		}
-		else {
+		} else {
 			IResourceDelta delta = builder.getDelta(builder.getProject());
 			if (delta == null || isProjectDescriptionChange(delta) || isOpened(delta) || hasDependencyChanges(builder)) {
 				fullBuild(builder, monitor);
-			}
-			else {
+			} else {
 				incrementalBuild(delta, monitor);
 				updateReferencingResources(builder, delta, monitor);
 			}
@@ -199,8 +197,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
 					if (isLanguageResource(delta.getResource()))
 						build(delta.getResource());
-				}
-				else if (delta.getKind() == IResourceDelta.REMOVED) {
+				} else if (delta.getKind() == IResourceDelta.REMOVED) {
 					if (isLanguageResource(delta.getResource()))
 						delete(delta.getResource());
 				}
@@ -229,6 +226,8 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 
 	protected boolean isLanguageResource(IResource resource) {
 		if (resource.getType() != IResource.FILE)
+			return false;
+		if (resource.isDerived())
 			return false;
 		String[] extensions = fileExtensions.split(",");
 		String fileExtension = resource.getFullPath().getFileExtension();
@@ -285,8 +284,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			for (Entry<IResource, Resource> res : state.getUpdated().entrySet()) {
 				validate(res.getKey(), res.getValue(), monitor);
 			}
-		}
-		finally {
+		} finally {
 			state.clear();
 		}
 	}
