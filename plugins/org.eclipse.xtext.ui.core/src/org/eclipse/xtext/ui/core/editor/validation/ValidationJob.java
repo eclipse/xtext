@@ -48,14 +48,14 @@ public abstract class ValidationJob extends Job {
 		List<Map<String, Object>> issues = createIssues(monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		processIssues(issues);
+		processIssues(issues, monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		return Status.OK_STATUS;
 	}
 
 
-	protected abstract void processIssues(List<Map<String, Object>> issues);
+	protected abstract void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor);
 	
 
 	public List<Map<String, Object>> createIssues(final IProgressMonitor monitor) {
