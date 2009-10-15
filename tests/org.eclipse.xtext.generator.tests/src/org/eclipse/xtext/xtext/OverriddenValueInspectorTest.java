@@ -248,4 +248,18 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
 		validateRule(rule);
 		assertEquals(warnings.toString(), 2, warnings.size());
 	}
+	
+	public void testNoMarkerForCalledRules_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"First returns Object: Second;\n" +
+				"Second returns Object: name=ID name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "First");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 0, warnings.size());
+		rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Second");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
 }
