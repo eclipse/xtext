@@ -24,6 +24,8 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -91,7 +93,14 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		}
 	}
 
+	private void reset() {
+		getModifiedObjects().clear();
+		resourceChanged = false;
+	}
+
 	public void beginRecording(Resource newResource) {
+		reset();
+
 		if (newResource != resource) {
 			if (resource != null)
 				resource.eAdapters().remove(this);
@@ -112,9 +121,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		recording = false;
 		TextEdit textEdit = getTextEdit();
 
-		getModifiedObjects().clear();
-		resourceChanged = false;
-
+		reset();
 		return textEdit;
 	}
 
@@ -147,9 +154,14 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	private List<TextEdit> getObjectEdits() {
 		final Collection<EObject> modifiedObjects = getModifiedObjects();
 		Collection<EObject> topLevelObjects = EcoreUtil.filterDescendants(modifiedObjects);
-		List<TextEdit> edits = Lists.newArrayList();
+		Iterable<EObject> containedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				return input.eResource() == resource;
+			}
+		});
+		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedObjects));
 
-		for (EObject eObject : topLevelObjects) {
+		for (EObject eObject : containedObjects) {
 			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
 			CompositeNode node = nodeAdapter.getParserNode();
 

@@ -111,6 +111,22 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertMatches(alternatives, edit);
 	}
 
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=292349 */
+	public void testObjectModificationAndRemoval() throws Exception {
+		Resource res = getResource(newTestGrammar());
+
+		composer.beginRecording(res);
+		Grammar grammar = (Grammar) res.getContents().get(0);
+		AbstractRule rule = grammar.getRules().get(0);
+		Alternatives alternatives = (Alternatives) rule.getAlternatives();
+		Keyword bazKeyword = (Keyword) alternatives.getGroups().get(2);
+		bazKeyword.setValue("BAZ");
+		alternatives.getGroups().remove(bazKeyword);
+		TextEdit edit = composer.endRecording();
+
+		assertMatches(alternatives, edit);
+	}
+
 	public void testObjectReplacement() throws Exception {
 		Resource res = getResource(newTestGrammar());
 
