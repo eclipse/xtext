@@ -8,12 +8,12 @@ import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.*;
-
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 
 @Singleton
-public class TerminalsGrammarAccess implements IGrammarAccess {
+public class TerminalsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	

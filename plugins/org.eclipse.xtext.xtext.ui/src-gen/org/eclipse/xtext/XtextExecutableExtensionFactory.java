@@ -5,53 +5,24 @@
  
 package org.eclipse.xtext;
 
-import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExecutableExtension;
-import org.eclipse.core.runtime.IExecutableExtensionFactory;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.xtext.ui.core.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
 /**
- * generated
+ *@generated
  */
-public class XtextExecutableExtensionFactory implements IExecutableExtensionFactory, IExecutableExtension {
+public class XtextExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
-	private Logger log = Logger.getLogger(XtextExecutableExtensionFactory.class);
-	private String clazzName;
-	private IConfigurationElement config;
-
-	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
-		throws CoreException {
-		if (data instanceof String) {
-			clazzName = (String) data;
-			this.config = config;
-		}
-		else {
-			throw new IllegalArgumentException("couldn't handle passed data : "+data);
-		}
+	@Override
+	protected Bundle getBundle() {
+		return org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle();
 	}
 	
-	public Object create() throws CoreException {
-		org.eclipse.xtext.xtext.ui.internal.Activator instance = org.eclipse.xtext.xtext.ui.internal.Activator.getInstance();
-		if (instance == null)
-			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
-		Bundle bundle = instance.getBundle();
-		try {
-			final Class<?> clazz = bundle.loadClass(clazzName);
-			final Injector injector = org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getInjector("org.eclipse.xtext.Xtext");
-			final Object result = injector.getInstance(clazz);
-			if (result instanceof IExecutableExtension)
-				((IExecutableExtension) result).setInitializationData(config, null, null);
-			return result;
-		}
-		catch (Exception e) {
-			log.error(e.getMessage(),e);
-			throw new CoreException(new Status(IStatus.ERROR, bundle.getSymbolicName(), e.getMessage(),e));
-		}
+	@Override
+	protected Injector getInjector() {
+		return org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getInjector("org.eclipse.xtext.Xtext");
 	}
+	
 }

@@ -20,6 +20,11 @@ public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModul
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.common.Terminals");
+		bindProperties(binder);
+	}
+	
+	protected void bindProperties(Binder binder) {
+		bindProperties(binder, "/org/eclipse/xtext/common/Terminals.properties");
 	}
 	
 	
