@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -111,14 +112,25 @@ public class XtextResource extends ResourceImpl {
 		}
 		try {
 			isLoading = true;
+			EObject oldRootContainer = null;
+			EObject oldRootObject = null;
+			if (parseResult != null && parseResult.getRootASTElement() != null) {
+				oldRootObject = parseResult.getRootASTElement();
+				oldRootContainer = parseResult.getRootASTElement().eContainer();
+			}
 			CompositeNode rootNode = parseResult.getRootNode();
 			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
 			clearOutput();
 			if (parseResult != null) {
 				getErrors().addAll(createDiagnostics(parseResult));
-				if (parseResult.getRootASTElement() != null)
-					if (getContents().add(parseResult.getRootASTElement()))
+				if (parseResult.getRootASTElement() != null) {
+					if (getContents().add(parseResult.getRootASTElement())) {
 						reattachModificationTracker();
+						if (oldRootContainer != null && oldRootObject != parseResult.getRootASTElement()) {
+							EcoreUtil.replace(oldRootObject, parseResult.getRootASTElement());
+						}
+					}
+				}
 				if (parseResult.getRootNode() != rootNode) {
 					addAdaptersToRoot();
 				}
