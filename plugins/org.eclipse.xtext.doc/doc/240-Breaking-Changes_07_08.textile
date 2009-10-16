@@ -4,6 +4,10 @@ h1(#breaking_changes). Breaking API changes between the different versions
 
 h2(#breaking_changes_08). Changes in Xtext 0.8.0
 
+*Removed org.eclipse.xtext.log4j*
+
+* Replace plug-in dependency to org.eclipse.xtext.log4j with a package dependency org.apache.log4j  
+
 *Moved validation classes to dedicated package*
 
 * org.eclipse.xtext.ui.core.editor.IDiagnosticConverter -> org.eclipse.xtext.ui.core.editor.validation.IDiagnosticConverter
