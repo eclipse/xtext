@@ -59,6 +59,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug288432Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.ParserBug281962Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.CrossContainmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.GrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTransformationErrorTest.class);
@@ -76,6 +77,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.OffsetInformationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.packrat.PackratParserGenUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.packrat.PerformanceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.PartialParserCrossContainmentMultiTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.PartialParserCrossContainmentSingleTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParserReplaceTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPerformanceTest.class);
