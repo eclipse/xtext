@@ -21,7 +21,12 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
+import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
@@ -60,14 +65,21 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 		return XtextDocumentUtil.get(marker.getResource());
 	}
 
-	protected URI getURI(final IMarker marker) {
-		String uri = marker.getAttribute(EValidator.URI_ATTRIBUTE, null);
-		return uri == null ? null : URI.createURI(uri);
-	}
-
 	protected Integer getCode(final IMarker marker) {
 		Integer code = marker.getAttribute(IXtextResourceChecker.CODE_KEY, -1);
 		return code;
+	}
+
+	protected EObject getContext(XtextResource resource, final IMarker marker) {
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult != null && parseResult.getRootNode() != null) {
+			AbstractNode lastVisibleNode = ParseTreeUtil.getLastCompleteNodeByOffset(parseResult.getRootNode(),
+					MarkerUtilities.getCharStart(marker));
+			if (lastVisibleNode != null)
+				return NodeUtil.getNearestSemanticObject(lastVisibleNode);
+		}
+		String uri = marker.getAttribute(EValidator.URI_ATTRIBUTE, null);
+		return uri == null ? null : resource.getEObject(URI.createURI(uri).fragment());
 	}
 
 	protected EObject getContext(final IMarker marker) {
@@ -77,8 +89,7 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 
 		final EObject context = document.readOnly(new IUnitOfWork<EObject, XtextResource>() {
 			public EObject exec(XtextResource state) throws Exception {
-				URI uri = getURI(marker);
-				return uri != null ? state.getEObject(uri.fragment()) : null;
+				return getContext(state, marker);
 			}
 		});
 		return context;
@@ -128,7 +139,7 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 
 					public Image getImage() {
 						String image = annotation.image();
-						return image != null ? getImageHelper().getImage(image) : null;
+						return AbstractDeclarativeQuickfixProvider.this.getImage(image);
 					}
 
 					public String getDescription() {
@@ -139,12 +150,15 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 		}).toArray(new IMarkerResolution[fixMethods.size()]);
 	}
 
+	protected Image getImage(String image) {
+		return image != null ? getImageHelper().getImage(image) : null;
+	}
+
 	protected void executeFixMethod(final Method method, final IMarker marker) {
 		IXtextDocument document = getDocument(marker);
-		documentEditor.process(new IUnitOfWork<Void, XtextResource>() {
+		getDocumentEditor().process(new IUnitOfWork<Void, XtextResource>() {
 			public java.lang.Void exec(XtextResource state) throws Exception {
-				URI uri = getURI(marker);
-				EObject context = state.getEObject(uri.fragment());
+				EObject context = getContext(state, marker);
 				method.invoke(AbstractDeclarativeQuickfixProvider.this, new Object[] { context, marker });
 				return null;
 			}
@@ -178,11 +192,10 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 		try {
 			if (!marker.isSubtypeOf(EValidator.MARKER))
 				return false;
-		}
-		catch (CoreException e) {
+		} catch (CoreException e) {
 			return false;
 		}
-		if (getURI(marker) == null || getCode(marker) == null)
+		if (getCode(marker) == null)
 			return false;
 
 		List<Method> fixMethods = getFixMethods(marker);
