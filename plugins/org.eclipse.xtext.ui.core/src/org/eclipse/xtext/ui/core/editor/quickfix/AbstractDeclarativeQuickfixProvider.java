@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -41,6 +42,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -59,6 +61,23 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 
 	public IImageHelper getImageHelper() {
 		return imageHelper;
+	}
+
+	@Inject
+	@Named("file.extensions")
+	private String fileExtensions;
+
+	protected String[] getFileExtensions() {
+		return fileExtensions.split(",");
+	}
+
+	protected boolean isLanguageResource(IResource resource) {
+		String fileExtension = resource.getFullPath().getFileExtension();
+		for (String ext : getFileExtensions()) {
+			if (ext.equals(fileExtension))
+				return true;
+		}
+		return false;
 	}
 
 	protected IXtextDocument getDocument(IMarker marker) {
@@ -195,6 +214,8 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 		} catch (CoreException e) {
 			return false;
 		}
+		if (!isLanguageResource(marker.getResource()))
+			return false;
 		if (getCode(marker) == null)
 			return false;
 
