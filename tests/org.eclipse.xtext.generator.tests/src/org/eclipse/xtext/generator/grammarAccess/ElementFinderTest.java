@@ -19,10 +19,10 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ElementFinderTest extends AbstractXtextTests {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,6 +43,10 @@ public class ElementFinderTest extends AbstractXtextTests {
 
 	public void testKeywords() {
 		assertEquals(3, grammarFinder().findKeywords("myKeyword", "myKeyword2").size());
+	}
+
+	public void testKeywordsFromSuperGrammar() {
+		assertEquals(1, grammarFinder().findKeywords("superKeyword").size());
 	}
 
 	public void testKeywordPairs() {
