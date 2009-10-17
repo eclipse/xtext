@@ -1,4 +1,4 @@
-grammar org.eclipse.xtext.generator.grammarAccess.ElementFinderTestLanguage with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.generator.grammarAccess.ElementFinderTestLanguage with org.eclipse.xtext.generator.grammarAccess.ElementFinderSuperTestLanguage
 
 generate elementfinder "http://example.org/grammarfinder/0.1"
 

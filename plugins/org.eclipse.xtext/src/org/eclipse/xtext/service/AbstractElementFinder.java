@@ -10,6 +10,7 @@ package org.eclipse.xtext.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -43,15 +43,15 @@ public abstract class AbstractElementFinder {
 
 	public static abstract class AbstractEnumRuleElementFinder extends AbstractElementFinder implements IEnumRuleAccess {
 		@Override
-		protected EObject getRootElement() {
-			return getRule();
+		protected Iterable<? extends AbstractRule> getRules() {
+			return Collections.singletonList(getRule());
 		}
 	}
 
 	public static abstract class AbstractGrammarElementFinder extends AbstractElementFinder implements IGrammarAccess {
 		@Override
-		protected EObject getRootElement() {
-			return getGrammar();
+		protected Iterable<? extends AbstractRule> getRules() {
+			return GrammarUtil.allRules(getGrammar());
 		}
 
 	}
@@ -59,8 +59,8 @@ public abstract class AbstractElementFinder {
 	public static abstract class AbstractParserRuleElementFinder extends AbstractElementFinder implements
 			IParserRuleAccess {
 		@Override
-		protected EObject getRootElement() {
-			return getRule();
+		protected Iterable<? extends AbstractRule> getRules() {
+			return Collections.singletonList(getRule());
 		}
 
 	}
@@ -73,19 +73,21 @@ public abstract class AbstractElementFinder {
 	protected <T> List<T> findByNestedRuleCall(Class<T> clazz, AbstractRule... rule) {
 		Set<AbstractRule> rls = new HashSet<AbstractRule>(Arrays.asList(rule));
 		ArrayList<T> r = new ArrayList<T>();
-		TreeIterator<EObject> i = getRootElement().eAllContents();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (clazz.isInstance(o)) {
-				TreeIterator<EObject> ct = o.eAllContents();
-				while (ct.hasNext()) {
-					EObject cto = ct.next();
-					if (cto instanceof RuleCall && rls.contains(((RuleCall) cto).getRule())) {
-						r.add((T) o);
-						break;
+		for (AbstractRule ar : getRules()) {
+			TreeIterator<EObject> i = ar.eAllContents();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (clazz.isInstance(o)) {
+					TreeIterator<EObject> ct = o.eAllContents();
+					while (ct.hasNext()) {
+						EObject cto = ct.next();
+						if (cto instanceof RuleCall && rls.contains(((RuleCall) cto).getRule())) {
+							r.add((T) o);
+							break;
+						}
 					}
+					i.prune();
 				}
-				i.prune();
 			}
 		}
 		return r;
@@ -99,20 +101,22 @@ public abstract class AbstractElementFinder {
 		Set<EClassifier> classifiers = new HashSet<EClassifier>(Arrays.asList(targetEClassifiers));
 		Collection<EClass> classes = Collections2.forIterable(Iterables.filter(classifiers, EClass.class));
 		ArrayList<CrossReference> r = new ArrayList<CrossReference>();
-		TreeIterator<EObject> i = getRootElement().eAllContents();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (o instanceof CrossReference) {
-				CrossReference c = (CrossReference) o;
-				if (classifiers.contains(c.getType().getClassifier()))
-					r.add(c);
-				else if (c.getType().getClassifier() instanceof EClass)
-					for (EClass cls : classes)
-						if (cls.isSuperTypeOf((EClass) c.getType().getClassifier())) {
-							r.add(c);
-							break;
-						}
-				i.prune();
+		for (AbstractRule ar : getRules()) {
+			TreeIterator<EObject> i = ar.eAllContents();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (o instanceof CrossReference) {
+					CrossReference c = (CrossReference) o;
+					if (classifiers.contains(c.getType().getClassifier()))
+						r.add(c);
+					else if (c.getType().getClassifier() instanceof EClass)
+						for (EClass cls : classes)
+							if (cls.isSuperTypeOf((EClass) c.getType().getClassifier())) {
+								r.add(c);
+								break;
+							}
+					i.prune();
+				}
 			}
 		}
 		return r;
@@ -121,14 +125,9 @@ public abstract class AbstractElementFinder {
 
 	public List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw) {
 		ArrayList<Pair<Keyword, Keyword>> pairs = new ArrayList<Pair<Keyword, Keyword>>();
-		Iterable<AbstractRule> rules = Iterables.emptyIterable();
-		if (getRootElement() instanceof Grammar)
-			rules = ((Grammar) getRootElement()).getRules();
-		else if (getRootElement() instanceof ParserRule)
-			rules = Arrays.asList((AbstractRule) getRootElement());
-		Stack<Keyword> openings = new Stack<Keyword>();
-		for (AbstractRule ar : rules)
+		for (AbstractRule ar : getRules())
 			if (ar instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) ar)) {
+				Stack<Keyword> openings = new Stack<Keyword>();
 				TreeIterator<EObject> i = ar.eAllContents();
 				while (i.hasNext()) {
 					EObject o = i.next();
@@ -149,13 +148,15 @@ public abstract class AbstractElementFinder {
 	public List<Keyword> findKeywords(String... keywords) {
 		Set<String> kwds = new HashSet<String>(Arrays.asList(keywords));
 		ArrayList<Keyword> r = new ArrayList<Keyword>();
-		TreeIterator<EObject> i = getRootElement().eAllContents();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (o instanceof Keyword) {
-				Keyword k = (Keyword) o;
-				if (kwds.contains(k.getValue()))
-					r.add(k);
+		for (AbstractRule ar : getRules()) {
+			TreeIterator<EObject> i = ar.eAllContents();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (o instanceof Keyword) {
+					Keyword k = (Keyword) o;
+					if (kwds.contains(k.getValue()))
+						r.add(k);
+				}
 			}
 		}
 		return r;
@@ -164,13 +165,15 @@ public abstract class AbstractElementFinder {
 	public List<RuleCall> findRuleCalls(AbstractRule... rules) {
 		Set<AbstractRule> rls = new HashSet<AbstractRule>(Arrays.asList(rules));
 		ArrayList<RuleCall> r = new ArrayList<RuleCall>();
-		TreeIterator<EObject> i = getRootElement().eAllContents();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (o instanceof RuleCall) {
-				RuleCall c = (RuleCall) o;
-				if (rls.contains(c.getRule()))
-					r.add(c);
+		for (AbstractRule ar : getRules()) {
+			TreeIterator<EObject> i = ar.eAllContents();
+			while (i.hasNext()) {
+				EObject o = i.next();
+				if (o instanceof RuleCall) {
+					RuleCall c = (RuleCall) o;
+					if (rls.contains(c.getRule()))
+						r.add(c);
+				}
 			}
 		}
 		return r;
@@ -183,7 +186,7 @@ public abstract class AbstractElementFinder {
 	//	
 	//	private Iterable<Assignment> findAssignments(String feature) {
 	//		ArrayList<Assignment> r = new ArrayList<Assignment>();
-	//		TreeIterator<EObject> i = getRootElement().eAllContents();
+	//		TreeIterator<EObject> i = getRules().eAllContents();
 	//		while (i.hasNext()) {
 	//			EObject o = i.next();
 	//			if (o instanceof Assignment) {
@@ -195,6 +198,6 @@ public abstract class AbstractElementFinder {
 	//		return r;
 	//	}
 
-	protected abstract EObject getRootElement();
+	protected abstract Iterable<? extends AbstractRule> getRules();
 
 }
