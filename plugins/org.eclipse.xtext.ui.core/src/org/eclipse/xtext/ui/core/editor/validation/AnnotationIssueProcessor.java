@@ -1,11 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 Michael Clay and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.model;
+package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,32 +22,25 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.ui.texteditor.AnnotationTypeLookup;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
-import org.eclipse.xtext.concurrent.IStateAccess;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
-import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 
 import com.google.common.collect.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  */
-public class AnnotationBasedValidationJob extends ValidationJob {
-
+public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 	private final IAnnotationModel annotationModel;
-
 	private AnnotationTypeLookup lookup = new AnnotationTypeLookup();
 
-	public AnnotationBasedValidationJob(IXtextResourceChecker xtextResourceChecker,
-			IStateAccess<XtextResource> xtextDocument, IAnnotationModel annotationModel) {
-		super(xtextResourceChecker, xtextDocument);
+	public AnnotationIssueProcessor(IAnnotationModel annotationModel) {
+		super();
 		this.annotationModel = annotationModel;
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	protected void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
+	public void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
+		@SuppressWarnings("unchecked")
 		Iterator<Annotation> iter = annotationModel.getAnnotationIterator();
 		List<Annotation> toBeRemoved = new ArrayList<Annotation>();
 		while (iter.hasNext()) {
