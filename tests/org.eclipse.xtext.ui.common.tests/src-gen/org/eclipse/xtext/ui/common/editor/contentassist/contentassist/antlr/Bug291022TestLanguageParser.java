@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,7 +27,7 @@ public class Bug291022TestLanguageParser extends AbstractContentAssistParser {
 	private Map<AbstractElement, String> nameMappings;
 	
 	@Override
-	protected org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.internal.InternalBug291022TestLanguageLexer createLexer(CharStream stream) {
+	protected TokenSource createLexer(CharStream stream) {
 		return new org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.internal.InternalBug291022TestLanguageLexer(stream);
 	}
 	
@@ -41,6 +42,7 @@ public class Bug291022TestLanguageParser extends AbstractContentAssistParser {
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
+				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getModelElementAccess().getAlternatives_3(), "rule__ModelElement__Alternatives_3");
 					put(grammarAccess.getModelAttributeAccess().getAlternatives(), "rule__ModelAttribute__Alternatives");

@@ -59,8 +59,13 @@ public abstract class AbstractBug287941TestLanguageRuntimeModule extends Default
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalBug287941TestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalBug287941TestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalBug287941TestLanguageLexer> provideInternalBug287941TestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalBug287941TestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

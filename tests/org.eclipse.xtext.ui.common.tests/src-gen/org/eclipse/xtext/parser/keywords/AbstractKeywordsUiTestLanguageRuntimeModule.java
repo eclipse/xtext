@@ -59,8 +59,13 @@ public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends Defaul
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer> provideInternalKeywordsUiTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

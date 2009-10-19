@@ -59,8 +59,13 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.parsetree.formatter.parser.antlr.internal.InternalFormatterTestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.parsetree.formatter.parser.antlr.internal.InternalFormatterTestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.parsetree.formatter.parser.antlr.internal.InternalFormatterTestLanguageLexer> provideInternalFormatterTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.parsetree.formatter.parser.antlr.internal.InternalFormatterTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

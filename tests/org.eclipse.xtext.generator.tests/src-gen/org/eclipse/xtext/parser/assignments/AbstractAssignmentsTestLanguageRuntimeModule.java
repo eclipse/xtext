@@ -59,8 +59,13 @@ public abstract class AbstractAssignmentsTestLanguageRuntimeModule extends Defau
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.parser.assignments.parser.antlr.internal.InternalAssignmentsTestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.parser.assignments.parser.antlr.internal.InternalAssignmentsTestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.parser.assignments.parser.antlr.internal.InternalAssignmentsTestLanguageLexer> provideInternalAssignmentsTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.parser.assignments.parser.antlr.internal.InternalAssignmentsTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

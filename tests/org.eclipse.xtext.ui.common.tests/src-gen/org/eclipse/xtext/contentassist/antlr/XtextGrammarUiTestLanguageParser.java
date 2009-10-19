@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -26,7 +27,7 @@ public class XtextGrammarUiTestLanguageParser extends AbstractContentAssistParse
 	private Map<AbstractElement, String> nameMappings;
 	
 	@Override
-	protected org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer createLexer(CharStream stream) {
+	protected TokenSource createLexer(CharStream stream) {
 		return new org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer(stream);
 	}
 	
@@ -41,6 +42,7 @@ public class XtextGrammarUiTestLanguageParser extends AbstractContentAssistParse
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
 			nameMappings = new HashMap<AbstractElement, String>() {
+				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getAbstractRuleAccess().getAlternatives(), "rule__AbstractRule__Alternatives");
 					put(grammarAccess.getAbstractMetamodelDeclarationAccess().getAlternatives(), "rule__AbstractMetamodelDeclaration__Alternatives");

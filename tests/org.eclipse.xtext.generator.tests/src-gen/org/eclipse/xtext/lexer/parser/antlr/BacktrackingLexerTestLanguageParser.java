@@ -4,12 +4,15 @@
 package org.eclipse.xtext.lexer.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.TokenSource;
+import org.antlr.runtime.CharStream;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess;
 
@@ -21,13 +24,15 @@ public class BacktrackingLexerTestLanguageParser extends org.eclipse.xtext.parse
 	@Inject
 	private BacktrackingLexerTestLanguageGrammarAccess grammarAccess;
 	
+	@Inject
+	private Provider<org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer> lexerProvider;
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer lexer = new org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
-		stream.setInitialHiddenTokens("RULE_WS", "RULE_SL_COMMENT");
-		org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageParser parser = new org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageParser(
-				stream, getElementFactory(), grammarAccess);
+		TokenSource tokenSource = createLexer(in);
+		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_SL_COMMENT");
+		org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -36,6 +41,20 @@ public class BacktrackingLexerTestLanguageParser extends org.eclipse.xtext.parse
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected TokenSource createLexer(CharStream stream) {
+		org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(stream);
+		return lexer;
+	}
+	
+	protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
+		return new XtextTokenStream(tokenSource, antlrTokenDefProvider);
+	}
+	
+	protected org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -49,5 +68,13 @@ public class BacktrackingLexerTestLanguageParser extends org.eclipse.xtext.parse
 	
 	public void setGrammarAccess(BacktrackingLexerTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
+	}
+	
+	public Provider<org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setLexerProvider(Provider<org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
 	}
 }
