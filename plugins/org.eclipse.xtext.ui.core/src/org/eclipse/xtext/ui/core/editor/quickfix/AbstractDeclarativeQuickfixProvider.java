@@ -42,13 +42,15 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
 public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGenerator2 {
 
+	@Inject
+	private ILanguageResourceHelper languageResourceHelper;
+	
 	@Inject
 	private IDocumentEditor documentEditor;
 
@@ -63,21 +65,8 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 		return imageHelper;
 	}
 
-	@Inject
-	@Named("file.extensions")
-	private String fileExtensions;
-
-	protected String[] getFileExtensions() {
-		return fileExtensions.split(",");
-	}
-
 	protected boolean isLanguageResource(IResource resource) {
-		String fileExtension = resource.getFullPath().getFileExtension();
-		for (String ext : getFileExtensions()) {
-			if (ext.equals(fileExtension))
-				return true;
-		}
-		return false;
+		return languageResourceHelper.isLanguageResource(resource);
 	}
 
 	protected IXtextDocument getDocument(IMarker marker) {
@@ -226,6 +215,14 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 	public IMarkerResolution[] getResolutions(IMarker marker) {
 		List<Method> fixMethods = getFixMethods(marker);
 		return getMarkerResolutions(marker, fixMethods);
+	}
+
+	public void setLanguageResourceHelper(ILanguageResourceHelper languageResourceHelper) {
+		this.languageResourceHelper = languageResourceHelper;
+	}
+
+	public ILanguageResourceHelper getLanguageResourceHelper() {
+		return languageResourceHelper;
 	}
 
 }
