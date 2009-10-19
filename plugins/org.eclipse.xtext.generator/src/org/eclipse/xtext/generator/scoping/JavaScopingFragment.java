@@ -16,6 +16,8 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 
 /**
  * An {@link IGeneratorFragment} to create Java-based scoping.
@@ -23,11 +25,13 @@ import org.eclipse.xtext.scoping.IScopeProvider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class JavaScopingFragment extends AbstractGeneratorFragment {
+	
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar))
-		.getBindings();
+			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar))
+			.addTypeToType(AbstractScopeProvider.class.getName(), SimpleNameScopeProvider.class.getName())
+			.getBindings();
 	}
 
 	public static String getScopeProviderName(Grammar grammar) {

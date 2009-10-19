@@ -26,7 +26,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 	@SuppressWarnings("unused")
 	public void testSimple() throws Exception {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
@@ -41,7 +41,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
@@ -62,7 +62,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
 			}
@@ -86,7 +86,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
@@ -111,7 +111,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass_eSuperTypes(EClassifier clazz, EReference ref) {
 				return a;
 			}
@@ -135,7 +135,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
 			}
@@ -159,7 +159,7 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
 		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass_eSuperTypes(EClassifier clazz, EReference ref) {
 				return a;
 			}
