@@ -4,6 +4,8 @@
 package org.eclipse.xtext.testlanguages.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.TokenSource;
+import org.antlr.runtime.CharStream;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
@@ -27,11 +29,10 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer lexer = lexerProvider.get();
-		lexer.setCharStream(in);
-		XtextTokenStream stream = new XtextTokenStream(lexer, antlrTokenDefProvider);
-		stream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageParser parser = createParser(stream);
+		TokenSource tokenSource = createLexer(in);
+		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -40,6 +41,16 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
+	}
+	
+	protected TokenSource createLexer(CharStream stream) {
+		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer lexer = lexerProvider.get();
+		lexer.setCharStream(stream);
+		return lexer;
+	} 
+	
+	protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
+		return new XtextTokenStream(tokenSource, antlrTokenDefProvider);
 	}
 	
 	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageParser createParser(XtextTokenStream stream) {
@@ -63,7 +74,7 @@ public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		return this.lexerProvider;
 	}
 	
-	public void setGrammarAccess(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer> lexerProvider) {
+	public void setLexerProvider(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer> lexerProvider) {
 		this.lexerProvider = lexerProvider;
 	}
 }

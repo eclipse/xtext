@@ -25,7 +25,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -172,7 +171,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	protected abstract String getRuleName(AbstractElement element);
 		
-	protected abstract Lexer createLexer(CharStream stream);
+	protected abstract TokenSource createLexer(CharStream stream);
 	
 	protected abstract AbstractInternalContentAssistParser createParser();
 	
@@ -182,9 +181,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	
 	public Collection<FollowElement> getFollowElements(String input) {
 		CharStream stream = new ANTLRStringStream(input);
-		Lexer lexer = createLexer(stream);
+		TokenSource tokenSource = createLexer(stream);
 		AbstractInternalContentAssistParser parser = createParser();
-		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(lexer, parser);
+		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);
 		tokens.setListener(parser);

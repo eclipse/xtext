@@ -59,8 +59,13 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer> provideInternalInheritanceTest2LanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTest2LanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

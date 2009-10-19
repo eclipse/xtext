@@ -59,8 +59,13 @@ public abstract class AbstractContentAssistContextTestLanguageRuntimeModule exte
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalContentAssistContextTestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalContentAssistContextTestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalContentAssistContextTestLanguageLexer> provideInternalContentAssistContextTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal.InternalContentAssistContextTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

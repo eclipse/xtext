@@ -59,8 +59,13 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.parser.antlr.Lexer> provideLexer() {
-		return new org.eclipse.xtext.parser.antlr.LexerProvider(org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer.class);
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer> provideInternalConcreteTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
