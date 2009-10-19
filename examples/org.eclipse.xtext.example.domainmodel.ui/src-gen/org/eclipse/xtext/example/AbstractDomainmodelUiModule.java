@@ -143,8 +143,8 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.impl.AbstractScopeProvider> bindAbstractScopeProvider() {
-		return org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.class;
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.IScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
