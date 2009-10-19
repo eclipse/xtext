@@ -10,7 +10,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.FromEntry;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.MQLquery;
@@ -25,6 +27,10 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return ScopeProvider.class;
+	}
+	
+	public Class<? extends AbstractScopeProvider> bindAbstractScopeProvider() {
+		return SimpleNameScopeProvider.class;
 	}
 	
 	public static class ScopeProvider extends AbstractDeclarativeScopeProvider {

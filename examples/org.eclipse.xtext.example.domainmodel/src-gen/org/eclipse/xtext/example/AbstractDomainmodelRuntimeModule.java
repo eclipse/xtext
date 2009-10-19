@@ -83,4 +83,9 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.example.formatting.DomainmodelFormatter.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.impl.AbstractScopeProvider> bindAbstractScopeProvider() {
+		return org.eclipse.xtext.scoping.namespaces.QualifiedNameBasedScopeProvider.class;
+	}
+
 }
