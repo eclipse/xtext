@@ -63,11 +63,6 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractDelegatin
 	@Inject(optional=true)
 	@Named("org.eclipse.xtext.scoping.impl.DeclarativeScopeProvider.errorHandler")
 	private PolymorphicDispatcher.ErrorHandler<IScope> errorHandler = new PolymorphicDispatcher.NullErrorHandler<IScope>();
-	
-	@Inject
-	public void injectDelegate(AbstractScopeProvider delegate) {
-		super.setDelegate(delegate);
-	}
 
 	protected Predicate<Method> getPredicate(EObject context, EClass type) {
 		String methodName = "scope_" + type.getName();

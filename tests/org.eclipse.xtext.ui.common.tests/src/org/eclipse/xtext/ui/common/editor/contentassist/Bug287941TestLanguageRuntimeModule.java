@@ -3,14 +3,13 @@
  */
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
-import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -18,6 +17,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.Fr
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.MQLquery;
 
 import com.google.common.base.Function;
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -29,8 +30,8 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 		return ScopeProvider.class;
 	}
 	
-	public Class<? extends AbstractScopeProvider> bindAbstractScopeProvider() {
-		return SimpleNameScopeProvider.class;
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(IScopeProvider.class.getName()+ ".delegate")).to(SimpleNameScopeProvider.class);
 	}
 	
 	public static class ScopeProvider extends AbstractDeclarativeScopeProvider {
