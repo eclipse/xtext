@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.domainmodel;
 
-import static org.eclipse.xtext.example.domainmodel.IResources.*;
+import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -12,7 +13,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 public class IntegrationTest extends TestCase {
@@ -24,10 +27,17 @@ public class IntegrationTest extends TestCase {
 	}
 
 	public void testValidSimpleModel() throws Exception {
+		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/foo.dmodel", "entity Foo {}");
 		waitForAutoBuild();
 		assertEquals(0, file.findMarkers(EValidator.MARKER, true,
 				IResource.DEPTH_INFINITE).length);
+	}
+
+	private void createJavaProjectWithRootSrc(String string) throws CoreException {
+		IJavaProject project = createJavaProject(string);
+		deleteClasspathEntry(project, new Path("/foo/src"));
+		addSourceFolder(project, "/foo");
 	}
 
 	public void testSimpleModelWithSyntaxError() throws Exception {

@@ -34,7 +34,8 @@ public class EObjectDescriptorIndexer {
 			URI uri = resource.getURI();
 			String fragment = resource.getURIFragment(eObject);
 			String name = nameProvider.getQualifiedName(eObject);
-			indexUpdater.createOrUpdateEObject(uri, fragment, name, eObject.eClass(), getUserData(eObject));
+			if (name != null)
+				indexUpdater.createOrUpdateEObject(uri, fragment, name, eObject.eClass(), getUserData(eObject));
 		}
 	}
 

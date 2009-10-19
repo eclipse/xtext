@@ -107,11 +107,11 @@ protected class File_StuffAssignment extends AssignmentToken  {
 /************ begin Rule Stuff ****************
  *
  * Stuff:
- *   "stuff" name=ID;
+ *   "stuff" name=ID ("refs" refs=[Stuff])?;
  *
  **/
 
-// "stuff" name=ID
+// "stuff" name=ID ("refs" refs=[Stuff])?
 protected class Stuff_Group extends GroupToken {
 	
 	public Stuff_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -126,7 +126,8 @@ protected class Stuff_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Stuff_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new Stuff_Group_2(parent, this, 0, inst);
+			case 1: return new Stuff_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -192,6 +193,88 @@ protected class Stuff_NameAssignment_1 extends AssignmentToken  {
 	}
 
 }
+
+// ("refs" refs=[Stuff])?
+protected class Stuff_Group_2 extends GroupToken {
+	
+	public Stuff_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStuffAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Stuff_RefsAssignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "refs"
+protected class Stuff_RefsKeyword_2_0 extends KeywordToken  {
+	
+	public Stuff_RefsKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStuffAccess().getRefsKeyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Stuff_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// refs=[Stuff]
+protected class Stuff_RefsAssignment_2_1 extends AssignmentToken  {
+	
+	public Stuff_RefsAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getStuffAccess().getRefsAssignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Stuff_RefsKeyword_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("refs",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("refs");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
 
 
 /************ end Rule Stuff ****************/

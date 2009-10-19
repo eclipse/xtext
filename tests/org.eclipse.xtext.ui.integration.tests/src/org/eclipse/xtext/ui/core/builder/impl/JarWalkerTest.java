@@ -17,12 +17,19 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.ui.core.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class JarWalkerTest extends TestCase {
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		IResourcesSetupUtil.cleanWorkspace();
+	}
 	
 	public void testTraversePackageFragmentRoot() throws Exception {
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject("foo");

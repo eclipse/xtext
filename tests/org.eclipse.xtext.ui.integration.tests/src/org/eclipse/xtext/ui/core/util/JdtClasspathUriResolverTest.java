@@ -3,6 +3,8 @@ package org.eclipse.xtext.ui.core.util;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.ui.integration.XtextUIIntegrationTestsPlugin;
 

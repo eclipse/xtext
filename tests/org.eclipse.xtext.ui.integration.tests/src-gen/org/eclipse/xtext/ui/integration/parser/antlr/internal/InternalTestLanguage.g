@@ -156,7 +156,25 @@ ruleStuff returns [EObject current=null]
 	    }
 
 )
-));
+)('refs' 
+    {
+        createLeafNode(grammarAccess.getStuffAccess().getRefsKeyword_2_0(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getStuffRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0(), "refs"); 
+	}
+
+)
+))?);
 
 
 

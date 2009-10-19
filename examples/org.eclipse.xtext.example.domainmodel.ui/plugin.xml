@@ -134,7 +134,7 @@
    <extension
          point="org.eclipse.xtext.ui.core.languageBuilder">
       <languageBuilder
-            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder"/>
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder"/>
    </extension>
 
 </plugin>

@@ -152,5 +152,35 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 		return org.eclipse.xtext.ui.integration.contentassist.antlr.TestLanguageParser.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.IScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider> bindIContainerDependencyProvider() {
+		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.store.UpdateableIndex>> provideUpdateableIndex() {
+		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
+		return org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder.class;
+	}
+
 
 }

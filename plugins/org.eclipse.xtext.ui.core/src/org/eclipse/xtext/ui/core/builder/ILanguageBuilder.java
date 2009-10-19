@@ -24,6 +24,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * Languages which don't rely on the index can implment everything in {@link #build(IBuilderAccess, int, IProgressMonitor)}
  */
 public interface ILanguageBuilder {
+	
+	/**
+	 * @param builder - provides access to the helper functions of the {@link org.eclipse.core.resources.IncrementalProjectBuilder}
+	 */
+	void initialize(IBuilderAccess builderAccess);
 
 	/**
 	 * called on {@link org.eclipse.core.resources.IncrementalProjectBuilder#build(Integer, java.util.Map, IProgressMonitor)}
@@ -31,25 +36,22 @@ public interface ILanguageBuilder {
 	 * @return the list of projects for which this builder would like deltas the
 	 * next time it is run or <code>null</code> if none
 	 * 
-	 * @param builder - provides access to the helper functions of the {@link org.eclipse.core.resources.IncrementalProjectBuilder}
 	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
 	 * @param monitor - a monitor used to provide information on the process
 	 */
-	IProject[] build(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException;
+	IProject[] build(int kind, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * called on {@link org.eclipse.core.resources.IncrementalProjectBuilder#build(Integer, java.util.Map, IProgressMonitor)}
 	 * after {@link #build(IBuilderAccess, int, IProgressMonitor)} has been called for all registered {@link ILanguageBuilder}s
 	 * 
-	 * @param builder - provides access to the helper functions of the {@link org.eclipse.core.resources.IncrementalProjectBuilder}
 	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
 	 * @param monitor - a monitor used to provide information on the process
 	 */
-	void postBuild(IBuilderAccess builder, int kind,  IProgressMonitor monitor) throws CoreException;
-	
+	void postBuild(int kind,  IProgressMonitor monitor) throws CoreException;
 	
 	/**
 	 * {@link org.eclipse.core.resources.IncrementalProjectBuilder#clean()}
 	 */
-	void clean(IBuilderAccess builder, IProgressMonitor monitor) throws CoreException;
+	void clean(IProgressMonitor monitor) throws CoreException;
 }
