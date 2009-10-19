@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompositeLanguageBuilder implements ILanguageBuilder {
-	
+
 	private static Logger log = Logger.getLogger(CompositeLanguageBuilder.class);
 
 	protected List<ILanguageBuilder> languageBuilders = null;
@@ -40,8 +40,7 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 				try {
 					ILanguageBuilder builder = (ILanguageBuilder) element.createExecutableExtension("class");
 					languageBuilders.add(builder);
-				}
-				catch (CoreException e) {
+				} catch (CoreException e) {
 					log.error("Error loading extension " + element, e);
 				}
 			}
@@ -49,24 +48,30 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 		return languageBuilders;
 	}
 
-	public IProject[] build(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException {
+	public IProject[] build(int kind, IProgressMonitor monitor) throws CoreException {
 		Set<IProject> all = new HashSet<IProject>();
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			IProject[] projects = lb.build(builder, kind, monitor);
+			IProject[] projects = lb.build(kind, monitor);
 			all.addAll(Arrays.asList(projects));
 		}
 		return all.toArray(new IProject[all.size()]);
 	}
 
-	public void clean(IBuilderAccess builder, IProgressMonitor monitor) throws CoreException {
+	public void clean(IProgressMonitor monitor) throws CoreException {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.clean(builder, monitor);
+			lb.clean(monitor);
 		}
 	}
 
-	public void postBuild(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException {
+	public void postBuild(int kind, IProgressMonitor monitor) throws CoreException {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.postBuild(builder, kind, monitor);
+			lb.postBuild(kind, monitor);
+		}
+	}
+
+	public void initialize(IBuilderAccess builderAccess) {
+		for (ILanguageBuilder lb : getLanguageBuilders()) {
+			lb.initialize(builderAccess);
 		}
 	}
 

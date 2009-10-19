@@ -39,12 +39,17 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cStuffKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cRefsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cRefsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cRefsStuffCrossReference_2_1_0 = (CrossReference)cRefsAssignment_2_1.eContents().get(0);
+		private final RuleCall cRefsStuffIDTerminalRuleCall_2_1_0_1 = (RuleCall)cRefsStuffCrossReference_2_1_0.eContents().get(1);
 		
 		//Stuff:
-		//  "stuff" name=ID;
+		//  "stuff" name=ID ("refs" refs=[Stuff])?;
 		public ParserRule getRule() { return rule; }
 
-		//"stuff" name=ID
+		//"stuff" name=ID ("refs" refs=[Stuff])?
 		public Group getGroup() { return cGroup; }
 
 		//"stuff"
@@ -55,6 +60,21 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//("refs" refs=[Stuff])?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"refs"
+		public Keyword getRefsKeyword_2_0() { return cRefsKeyword_2_0; }
+
+		//refs=[Stuff]
+		public Assignment getRefsAssignment_2_1() { return cRefsAssignment_2_1; }
+
+		//[Stuff]
+		public CrossReference getRefsStuffCrossReference_2_1_0() { return cRefsStuffCrossReference_2_1_0; }
+
+		//ID
+		public RuleCall getRefsStuffIDTerminalRuleCall_2_1_0_1() { return cRefsStuffIDTerminalRuleCall_2_1_0_1; }
 	}
 	
 	
@@ -93,7 +113,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Stuff:
-	//  "stuff" name=ID;
+	//  "stuff" name=ID ("refs" refs=[Stuff])?;
 	public StuffElements getStuffAccess() {
 		return (pStuff != null) ? pStuff : (pStuff = new StuffElements());
 	}

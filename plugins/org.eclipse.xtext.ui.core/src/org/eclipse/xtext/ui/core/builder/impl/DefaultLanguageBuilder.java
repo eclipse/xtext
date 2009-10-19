@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.builder.impl;
 
-import static org.eclipse.core.resources.IncrementalProjectBuilder.FULL_BUILD;
+import static org.eclipse.core.resources.IncrementalProjectBuilder.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,14 +22,18 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.emfindex.ContainerDescriptor;
 import org.eclipse.emf.emfindex.EReferenceDescriptor;
+import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
 import org.eclipse.emf.emfindex.query.EReferenceDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
@@ -54,6 +58,8 @@ import com.google.inject.name.Named;
  */
 public class DefaultLanguageBuilder implements ILanguageBuilder {
 
+	public static final String MANAGED_BY = "MANAGED_BY";
+	
 	@Inject
 	protected BuildState state;
 
@@ -73,16 +79,25 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	@Inject
 	protected EReferenceDescriptorIndexer eReferenceIndexer;
 
-	protected void validate(IResource iResource, Resource res, IProgressMonitor monitor) {
-		List<Map<String, Object>> check = resourceChecker.check(res, getValidationContext(), monitor);
-		AddMarkersOperation.run(iResource, check, true, monitor);
+	protected IBuilderAccess builder;
+	
+	public void initialize(IBuilderAccess builderAccess) {
+		this.builder = builderAccess;
+	}
+
+	protected void validate(IStorage storage, Resource res, IProgressMonitor monitor) {
+		if (storage instanceof IFile) {
+			IFile file = (IFile) storage;
+			List<Map<String, Object>> check = resourceChecker.check(res, getValidationContext(), monitor);
+			AddMarkersOperation.runInCurrentThread(file, check, true, monitor);
+		}
 	}
 
 	protected Map<?, ?> getValidationContext() {
 		return Collections.singletonMap(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
 	}
 
-	public void clean(final IBuilderAccess builder, IProgressMonitor monitor) {
+	public void clean(IProgressMonitor monitor) {
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 				indexUpdater.deleteContainer(builder.getProject().getName());
@@ -91,22 +106,22 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		});
 	}
 
-	public IProject[] build(IBuilderAccess builder, int kind, IProgressMonitor monitor) throws CoreException {
+	public IProject[] build(int kind, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
-			fullBuild(builder, monitor);
+			fullBuild(monitor);
 		} else {
 			IResourceDelta delta = builder.getDelta(builder.getProject());
-			if (delta == null || isProjectDescriptionChange(delta) || isOpened(delta) || hasDependencyChanges(builder)) {
-				fullBuild(builder, monitor);
+			if (delta == null || isProjectDescriptionChange(delta) || isOpened(delta) || hasDependencyChanges()) {
+				fullBuild(monitor);
 			} else {
 				incrementalBuild(delta, monitor);
-				updateReferencingResources(builder, delta, monitor);
+				updateReferencingResources(delta, monitor);
 			}
 		}
 		return builder.getProject().getReferencedProjects();
 	}
 
-	protected void updateReferencingResources(final IBuilderAccess builder, IResourceDelta delta,
+	protected void updateReferencingResources(IResourceDelta delta,
 			IProgressMonitor monitor) {
 
 		index.executeQueryCommand(new QueryCommand<Void>() {
@@ -122,13 +137,13 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 								return affected.contains(refDesc.getTargetResourceURI());
 							}
 						});
-				Set<IResource> resources = new HashSet<IResource>();
+				Set<IStorage> storages = new HashSet<IStorage>();
 				for (EReferenceDescriptor refDesc : filtered) {
 					URI uri = refDesc.getSourceResourceDescriptor().getURI();
-					IResource resource = findResourceInProject(builder.getProject(), uri);
-					if (resource != null && resources.add(resource)) {
-						Resource resource2 = getEmfResource(resource);
-						state.updated(resource, resource2);
+					IStorage file = findStorageInProject(builder.getProject(), uri);
+					if (file != null && storages.add(file)) {
+						Resource resource2 = getEmfResource(file);
+						state.updated(file, resource2);
 					}
 				}
 				return null;
@@ -136,7 +151,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		});
 	}
 
-	protected IResource findResourceInProject(IProject project, URI uri) {
+	protected IStorage findStorageInProject(IProject project, URI uri) {
 		Path path = new Path(uri.toPlatformString(true));
 		IFile file = project.getWorkspace().getRoot().getFile(path);
 		if (file != null && file.exists() && file.getProject() == project)
@@ -156,7 +171,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return affected;
 	}
 
-	protected boolean hasDependencyChanges(IBuilderAccess builder) throws CoreException {
+	protected boolean hasDependencyChanges() throws CoreException {
 		for (IProject refProj : builder.getProject().getReferencedProjects()) {
 			IResourceDelta delta = builder.getDelta(refProj);
 			if (isClosed(delta) || isOpened(delta) || isProjectDescriptionChange(delta))
@@ -179,11 +194,11 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				&& !((IProject) delta.getResource()).isOpen();
 	}
 
-	protected void fullBuild(final IBuilderAccess builder, final IProgressMonitor monitor) throws CoreException {
+	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		IResourceVisitor visitor = new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
-				if (isLanguageResource(resource))
-					build(resource);
+				if ((resource instanceof IFile) && isLanguageResource(resource))
+					build((IFile) resource);
 				return true;
 			}
 		};
@@ -194,12 +209,16 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 
 			public boolean visit(IResourceDelta delta) throws CoreException {
+				IResource resource = delta.getResource();
+				if (!(resource instanceof IFile))
+					return true;
+				IFile file = (IFile) resource;
 				if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
-					if (isLanguageResource(delta.getResource()))
-						build(delta.getResource());
+					if (isLanguageResource(file))
+						build(file);
 				} else if (delta.getKind() == IResourceDelta.REMOVED) {
-					if (isLanguageResource(delta.getResource()))
-						delete(delta.getResource());
+					if (isLanguageResource(file))
+						delete(file);
 				}
 				return true;
 			}
@@ -207,30 +226,32 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		delta.accept(visitor);
 	}
 
-	protected void delete(final IResource resource) {
+	protected void delete(final IStorage resource) {
+		final URI uri = getURI(resource);
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
-
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-				indexUpdater.deleteResource(getURI(resource));
+				indexUpdater.deleteResource(uri);
 				return null;
 			}
 		});
-		state.deleted(getURI(resource));
+		state.deleted(uri);
 	}
 
-	protected URI getURI(IResource resource) {
+	protected URI getURI(IStorage resource) {
 		if (resource == null)
 			throw new NullPointerException("resource");
 		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
 
 	protected boolean isLanguageResource(IResource resource) {
-		if (resource.getType() != IResource.FILE)
-			return false;
 		if (resource.isDerived())
 			return false;
+		return hasRightFileExtension(resource.getFullPath());
+	}
+
+	protected boolean hasRightFileExtension(IPath path) {
 		String[] extensions = fileExtensions.split(",");
-		String fileExtension = resource.getFullPath().getFileExtension();
+		String fileExtension = path.getFileExtension();
 		for (String string : extensions) {
 			if (string.equals(fileExtension))
 				return true;
@@ -238,22 +259,40 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return false;
 	}
 
-	protected void build(final IResource resource) {
-		final Resource res = getEmfResource(resource);
+	protected void build(final IStorage storage) {
+		final Resource res = getEmfResource(storage);
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 				URI uri = res.getURI();
 				indexUpdater.deleteResource(uri);
-				indexUpdater.createOrUpdateResource(getContainerName(resource), uri, 0l, null);
+				String containerName = getContainerName(storage);
+				findOrCreateContainer(containerName,indexUpdater, queryExecutor);
+				indexUpdater.createOrUpdateResource(containerName, uri, 0l, null);
 				eObjectIndexer.update(res, indexUpdater, queryExecutor);
 				return null;
 			}
 		});
-		state.updated(resource, res);
+		state.updated(storage, res);
 	}
 
-	protected Resource getEmfResource(final IResource resource) {
+	protected void findOrCreateContainer(String containerName,IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
+		ContainerDescriptorQuery query = new ContainerDescriptorQuery();
+		query.setName(containerName);
+		QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
+		if (!result.isEmpty()) {
+			result.iterator().next();
+			return;
+		}
+		
+		indexUpdater.createContainer(containerName, getUserDataForContainer(containerName));
+	}
+
+	protected Map<String, String> getUserDataForContainer(String containerName) {
+		return Collections.singletonMap(MANAGED_BY, builder.getProject().getName());
+	}
+
+	protected Resource getEmfResource(final IStorage resource) {
 		URI uri = getURI(resource);
 		if (uri == null)
 			return null;
@@ -262,15 +301,15 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return res;
 	}
 
-	protected String getContainerName(IResource resource) {
-		return resource.getProject().getName();
+	protected String getContainerName(IStorage resource) {
+		return ((IResource) resource).getProject().getName();
 	}
 
 	protected ResourceSet getResourceSet() {
 		return new ResourceSetImpl();
 	}
 
-	public void postBuild(IBuilderAccess builder, int kind, IProgressMonitor monitor) {
+	public void postBuild(int kind, IProgressMonitor monitor) {
 		try {
 			index.executeUpdateCommand(new UpdateCommand<Void>() {
 
@@ -281,7 +320,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 					return null;
 				}
 			});
-			for (Entry<IResource, Resource> res : state.getUpdated().entrySet()) {
+			for (Entry<IStorage, Resource> res : state.getUpdated().entrySet()) {
 				validate(res.getKey(), res.getValue(), monitor);
 			}
 		} finally {

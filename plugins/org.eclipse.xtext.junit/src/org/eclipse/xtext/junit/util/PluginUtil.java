@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.junit.util;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

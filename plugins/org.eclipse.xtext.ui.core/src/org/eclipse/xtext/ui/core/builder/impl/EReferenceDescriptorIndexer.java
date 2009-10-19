@@ -10,8 +10,10 @@ package org.eclipse.xtext.ui.core.builder.impl;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -23,6 +25,8 @@ import org.eclipse.emf.emfindex.store.IndexUpdater;
  */
 public class EReferenceDescriptorIndexer {
 
+	private static Logger log = Logger.getLogger(EReferenceDescriptorIndexer.class);
+
 	public void update(Resource resource, IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 		Map<EObject, Collection<Setting>> find = EcoreUtil.CrossReferencer.find(resource.getContents());
 		for (Map.Entry<EObject, Collection<Setting>> entry : find.entrySet()) {
@@ -30,16 +34,24 @@ public class EReferenceDescriptorIndexer {
 				Object target = setting.get(true);
 				if (setting.getEStructuralFeature().isMany())
 					for (Object t : (Collection<?>) target)
-						index(indexUpdater,setting.getEObject(), (EObject) t, (EReference) setting.getEStructuralFeature());
+						index(indexUpdater, setting.getEObject(), (EObject) t, (EReference) setting
+								.getEStructuralFeature());
 				else
-					index(indexUpdater,setting.getEObject(), (EObject) target, (EReference) setting.getEStructuralFeature());
+					index(indexUpdater, setting.getEObject(), (EObject) target, (EReference) setting
+							.getEStructuralFeature());
 			}
 		}
 	}
 
 	protected void index(IndexUpdater indexUpdater, EObject from, EObject to, EReference ref) {
 		Resource res = from.eResource();
-		indexUpdater.createOrUpdateEReference(res.getURI(), res.getURIFragment(from), EcoreUtil.getURI(to), ref, getUserData(from,to,ref));
+		if (!((to instanceof InternalEObject) && ((InternalEObject) to).eIsProxy())) {
+			indexUpdater.createOrUpdateEReference(res.getURI(), res.getURIFragment(from), EcoreUtil.getURI(to), ref,
+					getUserData(from, to, ref));
+		} else {
+			if (log.isInfoEnabled())
+				log.info("Unresolved cross link to " + to);
+		}
 	}
 
 	protected Map<String, String> getUserData(EObject from, EObject to, EReference ref) {

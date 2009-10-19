@@ -12,6 +12,7 @@ public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.integration.tests");
       suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JarWalkerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.BundleClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.WorkspaceClasspathUriResolverTest.class);

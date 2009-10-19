@@ -1,6 +1,12 @@
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.junit.util;
 
+import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +45,13 @@ public class JavaProjectSetupUtil {
 		project.create(null);
 		project.open(null);
 		return project;
+	}
+	
+	public static IFolder deleteSourceFolder(IJavaProject project, String folderPath) throws JavaModelException, CoreException {
+		IFolder folder = project.getProject().getFolder(folderPath);
+		deleteClasspathEntry(project, folder.getFullPath());
+		folder.delete(true, monitor());
+		return folder;
 	}
 
 	public static void addProjectReference(IProject referencer, IProject referenced) throws CoreException {
@@ -89,20 +102,21 @@ public class JavaProjectSetupUtil {
 		}
 	}
 
-	private static void addSourceFolder(IJavaProject javaProject,
+	public static IFolder addSourceFolder(IJavaProject javaProject,
 			String folderName) throws CoreException, JavaModelException {
 		IProject project = javaProject.getProject();
 		IPath projectPath = project.getFullPath();
 
-		deleteClaspathEntry(javaProject, projectPath);
+		deleteClasspathEntry(javaProject, projectPath);
 
 		IFolder srcFolder = createSubFolder(project, folderName); //$NON-NLS-1$
 		IClasspathEntry srcFolderClasspathEntry = JavaCore
 				.newSourceEntry(srcFolder.getFullPath());
 		addToClasspath(javaProject, srcFolderClasspathEntry);
+		return srcFolder;
 	}
 
-	private static void deleteClaspathEntry(IJavaProject javaProject, IPath path)
+	public static void deleteClasspathEntry(IJavaProject javaProject, IPath path)
 			throws JavaModelException {
 		IClasspathEntry[] classpath = javaProject.getRawClasspath();
 		for (int i = 0; i < classpath.length; ++i) {
@@ -186,6 +200,18 @@ public class JavaProjectSetupUtil {
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(jarFile.getFullPath(), null, null);
 		addToClasspath(javaProject, newLibraryEntry);
 		return newLibraryEntry;
+	}
+	
+	public static File createExternalJar(InputStream data, String nameWithoutJarSuffix) throws IOException, FileNotFoundException {
+		File tempFile = File.createTempFile(nameWithoutJarSuffix, ".jar");
+		tempFile.createNewFile();
+		FileOutputStream stream = new FileOutputStream(tempFile);
+		int i = -1;
+		while ((i = data.read()) != -1)
+			stream.write(i);
+		stream.close();
+		data.close();
+		return tempFile;
 	}
 
 }

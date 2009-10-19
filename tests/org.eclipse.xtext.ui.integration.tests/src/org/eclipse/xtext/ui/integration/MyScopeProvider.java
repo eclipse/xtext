@@ -5,12 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.ui.integration.TestLanguage with org.eclipse.xtext.common.Terminals
+package org.eclipse.xtext.ui.integration;
 
-generate foo "http://foo"
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
-File :
-	(stuff+=Stuff)*;
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+public class MyScopeProvider extends AbstractDeclarativeScopeProvider {
 	
-Stuff :
-	"stuff" name=ID ("refs" refs=[Stuff])?;
+}

@@ -107,13 +107,22 @@ public interface FooPackage extends EPackage
   int STUFF__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Refs</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUFF__REFS = 1;
+
+  /**
    * The number of structural features of the '<em>Stuff</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STUFF_FEATURE_COUNT = 1;
+  int STUFF_FEATURE_COUNT = 2;
 
 
   /**
@@ -157,6 +166,17 @@ public interface FooPackage extends EPackage
    * @generated
    */
   EAttribute getStuff_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.ui.integration.foo.Stuff#getRefs <em>Refs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Refs</em>'.
+   * @see org.eclipse.xtext.ui.integration.foo.Stuff#getRefs()
+   * @see #getStuff()
+   * @generated
+   */
+  EReference getStuff_Refs();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -216,6 +236,14 @@ public interface FooPackage extends EPackage
      * @generated
      */
     EAttribute STUFF__NAME = eINSTANCE.getStuff_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Refs</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STUFF__REFS = eINSTANCE.getStuff_Refs();
 
   }
 

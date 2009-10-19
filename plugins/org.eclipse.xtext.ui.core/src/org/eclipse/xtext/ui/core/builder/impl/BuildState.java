@@ -12,7 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -20,10 +20,10 @@ import org.eclipse.emf.ecore.resource.Resource;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BuildState {
-	private Map<IResource,Resource> updated = new LinkedHashMap<IResource,Resource>();
+	private Map<IStorage,Resource> updated = new LinkedHashMap<IStorage,Resource>();
 	private Set<URI> deleted = new LinkedHashSet<URI>();
 	
-	public void updated(IResource iRes, Resource res) {
+	public void updated(IStorage iRes, Resource res) {
 		this.updated.put(iRes, res);
 	}
 	
@@ -35,7 +35,7 @@ public class BuildState {
 		return deleted;
 	}
 	
-	public Map<IResource,Resource> getUpdated() {
+	public Map<IStorage,Resource> getUpdated() {
 		return updated;
 	}
 	

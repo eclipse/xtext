@@ -147,6 +147,16 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getStuff_Refs()
+  {
+    return (EReference)stuffEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public FooFactory getFooFactory()
   {
     return (FooFactory)getEFactoryInstance();
@@ -177,6 +187,7 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
 
     stuffEClass = createEClass(STUFF);
     createEAttribute(stuffEClass, STUFF__NAME);
+    createEReference(stuffEClass, STUFF__REFS);
   }
 
   /**
@@ -215,6 +226,7 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
 
     initEClass(stuffEClass, Stuff.class, "Stuff", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStuff_Name(), ecorePackage.getEString(), "name", null, 0, 1, Stuff.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStuff_Refs(), this.getStuff(), null, "refs", null, 0, 1, Stuff.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

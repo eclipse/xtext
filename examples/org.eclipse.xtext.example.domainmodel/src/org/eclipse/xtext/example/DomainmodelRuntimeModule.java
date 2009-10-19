@@ -4,9 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.example;
 
 import org.eclipse.xtext.example.scoping.DomainmodelScopeProvider;
-import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 
 
 /**
@@ -19,7 +17,4 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 		return DomainmodelScopeProvider.class;
 	}
 	
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return DefaultDeclarativeQualifiedNameProvider.class;
-	}
 }

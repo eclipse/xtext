@@ -20,13 +20,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Iterables;
 
 public class ContainerDependencyProviderIProjectImpl implements
-		IndexBasedQualifiedNameScopeProvider.IContainerDependencyProvider {
+		IContainerDependencyProvider {
 
 	public static Logger log = Logger.getLogger(ContainerDependencyProviderIProjectImpl.class);
 

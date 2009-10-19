@@ -45,8 +45,10 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getStuffAccess().getGroup(), "rule__Stuff__Group__0");
+					put(grammarAccess.getStuffAccess().getGroup_2(), "rule__Stuff__Group_2__0");
 					put(grammarAccess.getFileAccess().getStuffAssignment(), "rule__File__StuffAssignment");
 					put(grammarAccess.getStuffAccess().getNameAssignment_1(), "rule__Stuff__NameAssignment_1");
+					put(grammarAccess.getStuffAccess().getRefsAssignment_2_1(), "rule__Stuff__RefsAssignment_2_1");
 				}
 			};
 		}

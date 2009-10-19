@@ -37,5 +37,6 @@ public class TestLanguageStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", resourceFactory);
 		
 
+
 	}
 }

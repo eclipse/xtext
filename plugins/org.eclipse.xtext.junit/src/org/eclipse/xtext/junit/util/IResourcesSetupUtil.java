@@ -1,4 +1,4 @@
-package org.eclipse.xtext.example.domainmodel;
+package org.eclipse.xtext.junit.util;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class IResources {
+public class IResourcesSetupUtil {
 
 	public static IWorkspaceRoot root() {
 		return ResourcesPlugin.getWorkspace().getRoot();
@@ -203,7 +203,9 @@ public class IResources {
 	public static void cleanWorkspace() throws CoreException {
 		IProject[] projects = root().getProjects();
 		for (IProject iProject : projects) {
-			iProject.delete(true, monitor());
+			if (iProject.exists()) {
+				iProject.delete(true,true, monitor());
+			}
 		}
 	}
 }

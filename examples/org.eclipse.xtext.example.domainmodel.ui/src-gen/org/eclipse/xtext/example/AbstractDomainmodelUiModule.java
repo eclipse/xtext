@@ -148,8 +148,8 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider.IContainerDependencyProvider> bindIndexBasedQualifiedNameScopeProvider$IContainerDependencyProvider() {
-		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIProjectImpl.class;
+	public Class<? extends org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider> bindIContainerDependencyProvider() {
+		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
@@ -160,6 +160,16 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
 	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.store.UpdateableIndex>> provideUpdateableIndex() {
 		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
+		return org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment

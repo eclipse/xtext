@@ -5,10 +5,17 @@ Bundle-SymbolicName: org.eclipse.xtext.junit
 Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0",
- org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.xtext;resolution:=optional,
  org.junit;bundle-version="3.8.2";resolution:=optional,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0"
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.xtext.ui.core;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional
 Export-Package: org.eclipse.xtext.junit,
+ org.eclipse.xtext.junit.util,
  org.eclipse.xtext.junit.validation
 Import-Package: org.apache.log4j;version="1.2.15"

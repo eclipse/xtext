@@ -12,6 +12,7 @@
   </extension>
 
 
+
     <extension
             point="org.eclipse.ui.editors">
         <editor
@@ -120,5 +121,13 @@
 		</parser>
 	</extension>
 
+
+
+	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 </plugin>

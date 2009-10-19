@@ -8,6 +8,7 @@ package org.eclipse.xtext.ui.integration.foo.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.ui.integration.foo.Stuff;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.integration.foo.impl.StuffImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.integration.foo.impl.StuffImpl#getRefs <em>Refs</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +51,16 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRefs() <em>Refs</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefs()
+   * @generated
+   * @ordered
+   */
+  protected Stuff refs;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,6 +111,49 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
+  public Stuff getRefs()
+  {
+    if (refs != null && refs.eIsProxy())
+    {
+      InternalEObject oldRefs = (InternalEObject)refs;
+      refs = (Stuff)eResolveProxy(oldRefs);
+      if (refs != oldRefs)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FooPackage.STUFF__REFS, oldRefs, refs));
+      }
+    }
+    return refs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Stuff basicGetRefs()
+  {
+    return refs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRefs(Stuff newRefs)
+  {
+    Stuff oldRefs = refs;
+    refs = newRefs;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FooPackage.STUFF__REFS, oldRefs, refs));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -106,6 +161,9 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
     {
       case FooPackage.STUFF__NAME:
         return getName();
+      case FooPackage.STUFF__REFS:
+        if (resolve) return getRefs();
+        return basicGetRefs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +180,9 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
     {
       case FooPackage.STUFF__NAME:
         setName((String)newValue);
+        return;
+      case FooPackage.STUFF__REFS:
+        setRefs((Stuff)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +201,9 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
       case FooPackage.STUFF__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case FooPackage.STUFF__REFS:
+        setRefs((Stuff)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +220,8 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
     {
       case FooPackage.STUFF__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case FooPackage.STUFF__REFS:
+        return refs != null;
     }
     return super.eIsSet(featureID);
   }
