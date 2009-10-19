@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.service;
 
 import java.lang.reflect.Type;
@@ -9,10 +16,8 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.service.AbstractGenericModule.Binding;
 
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 public class GenericModuleTest extends TestCase {
 	
@@ -169,6 +174,7 @@ public class GenericModuleTest extends TestCase {
 	}
 	
 	public void testNamedBinding() throws Exception {
+		@SuppressWarnings("unused")
 		AbstractGenericModule module = new AbstractGenericModule() {
 			String foo() {
 				return "bar";
