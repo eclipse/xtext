@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 
@@ -21,12 +22,11 @@ import com.google.inject.Provider;
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
+ * @author Michael Clay
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
-
 	@Inject
 	private Provider<XtextDocument> document;
-	
 	@Inject
 	private IXtextResourceChecker xtextResourceChecker;
 
@@ -47,9 +47,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		ValidationJob job = new AnnotationBasedValidationJob(xtextResourceChecker, doc, info.fModel);
+		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(info.fModel);
+		ValidationJob job = new ValidationJob(xtextResourceChecker, doc, annotationIssueProcessor);
 		doc.setValidationJob(job);
 		return info;
 	}
-	
 }

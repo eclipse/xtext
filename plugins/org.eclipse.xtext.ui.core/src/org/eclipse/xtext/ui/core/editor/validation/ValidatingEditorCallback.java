@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.validation;
 
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
 import org.eclipse.xtext.ui.core.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 
@@ -19,35 +14,25 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  */
 public class ValidatingEditorCallback implements IXtextEditorCallback {
-	
 	@Inject
 	private IXtextResourceChecker checker;
-	
-	static class MarkerAddingValidationJob extends ValidationJob {
-
-		private XtextEditor editor;
-
-		public MarkerAddingValidationJob(IXtextResourceChecker xtextResourceChecker,
-				XtextEditor editor) {
-			super(xtextResourceChecker, editor.getDocument());
-			this.editor = editor;
-		}
-
-		@Override
-		protected void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
-			AddMarkersOperation.run(editor.getResource(), issues, true, monitor);
-		}
-	}
-
 
 	public void afterCreatePartControl(XtextEditor editor) {
-		new MarkerAddingValidationJob(checker, editor).schedule();
+		ValidationJob validationJob = newValidationJob(editor);
+		validationJob.schedule();
 	}
 
 	public void afterSave(XtextEditor editor) {
-		new MarkerAddingValidationJob(checker, editor).schedule();
+		ValidationJob validationJob = newValidationJob(editor);
+		validationJob.schedule();
 	}
 
+	private ValidationJob newValidationJob(XtextEditor editor) {
+		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource());
+		ValidationJob validationJob = new ValidationJob(checker, editor.getDocument(), markerIssueProcessor);
+		return validationJob;
+	}
 }

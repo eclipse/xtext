@@ -11,26 +11,36 @@ package org.eclipse.xtext.ui.core.editor.handler;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
+import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
+import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
+import org.eclipse.xtext.validation.CheckMode;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ * @author Michael Clay
  */
 public class ValidateActionHandler extends AbstractHandler {
+	@Inject
+	private IXtextResourceChecker xtextResourceChecker;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.
-	 * ExecutionEvent)
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// Due to an Handler ExtensionPoint declaration, we have an XtextEditor
-		// as Active Editor so can just cast to an XtextEditor
-//		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-//		validationJobFactory.create(editor.getDocument(), (IFile) editor.getResource(), CheckMode.ALL, true).schedule();
+		XtextEditor xtextEditor = (XtextEditor) HandlerUtil.getActiveEditor(event);
+		IXtextDocument xtextDocument = XtextDocumentUtil.get(xtextEditor);
+		IDocumentProvider documentProvider = xtextEditor.getDocumentProvider();
+		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(xtextEditor.getEditorInput());
+		ValidationJob validationJob = new ValidationJob(xtextResourceChecker, xtextDocument,
+				new AnnotationIssueProcessor(annotationModel), ImmutableMap.of(CheckMode.KEY, CheckMode.ALL));
+		validationJob.schedule();
 		return this;
 	}
-
 }

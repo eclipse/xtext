@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.validation;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -22,23 +21,34 @@ import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.CheckMode;
 
+import com.google.common.collect.ImmutableMap;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * @author Sven Efftinge
+ * @author Michael Clay
  */
-public abstract class ValidationJob extends Job {
-
+public class ValidationJob extends Job {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
-
+	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
 	private final IXtextResourceChecker xtextResourceChecker;
-
 	private final IStateAccess<XtextResource> xtextDocument;
+	private final IValidationIssueProcessor validationIssueProcessor;
+	private final Map<?, ?> validationContext;
 
-	public ValidationJob(IXtextResourceChecker xtextResourceChecker, IStateAccess<XtextResource> xtextDocument) {
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
+			IValidationIssueProcessor validationIssueProcessor,Map<?, ?> validationContext) {
 		super("Xtext validation");
 		this.xtextDocument = xtextDocument;
 		this.xtextResourceChecker = xtextResourceChecker;
+		this.validationIssueProcessor = validationIssueProcessor;
+		this.validationContext = validationContext;
+	}
+	
+	public ValidationJob(IXtextResourceChecker xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
+			IValidationIssueProcessor validationIssueProcessor) {
+		this(xtextResourceChecker,xtextDocument,validationIssueProcessor,DEFAULT_VALIDATION_CONTEXT);
 	}
 
 	@Override
@@ -48,15 +58,11 @@ public abstract class ValidationJob extends Job {
 		List<Map<String, Object>> issues = createIssues(monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		processIssues(issues, monitor);
+		this.validationIssueProcessor.processIssues(issues, monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		return Status.OK_STATUS;
 	}
-
-
-	protected abstract void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor);
-	
 
 	public List<Map<String, Object>> createIssues(final IProgressMonitor monitor) {
 		final List<Map<String, Object>> issues = xtextDocument
@@ -76,8 +82,7 @@ public abstract class ValidationJob extends Job {
 		return xtextDocument;
 	}
 
-	protected Map<Object, Object> getValidationContext() {
-		return Collections.<Object, Object> singletonMap(CheckMode.KEY, CheckMode.FAST_ONLY);
+	protected Map<?, ?> getValidationContext() {
+		return validationContext;
 	}
-
 }
