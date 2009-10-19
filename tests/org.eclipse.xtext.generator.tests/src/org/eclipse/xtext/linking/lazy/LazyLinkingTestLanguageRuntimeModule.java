@@ -4,6 +4,8 @@
 package org.eclipse.xtext.linking.lazy;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -13,5 +15,9 @@ public class LazyLinkingTestLanguageRuntimeModule extends org.eclipse.xtext.link
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return LazyLinkingTestLanguageScopeProvider.class;
+	}
+	
+	public Class<? extends AbstractScopeProvider> bindAbstractScopeProvider() {
+		return SimpleNameScopeProvider.class;
 	}
 }
