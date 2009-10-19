@@ -16,7 +16,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 
 /**
@@ -30,7 +29,12 @@ public class JavaScopingFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar))
-			.addTypeToType(AbstractScopeProvider.class.getName(), SimpleNameScopeProvider.class.getName())
+			.addConfiguredBinding(IScopeProvider.class.getName() + "Delegate", 
+					"binder.bind(" + 
+						IScopeProvider.class.getName() + ".class" +
+						").annotatedWith(com.google.inject.name.Names.named(" +
+						"\"" + IScopeProvider.class.getName() + ".delegate\"" +
+						")).to("+ SimpleNameScopeProvider.class.getName() + ".class)")
 			.getBindings();
 	}
 

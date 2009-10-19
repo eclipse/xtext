@@ -35,6 +35,10 @@ public class BindFactory {
 		bindings.add(binding(BindKey.type(s1), BindValue.providerExpr(s2)));
 		return this;
 	}
+	public BindFactory addConfiguredBinding(String key, String... statements) {
+		bindings.add(binding(BindKey.type(key), BindValue.statements(statements)));
+		return this;
+	}
 	/**
 	 * @param type
 	 * @param expr
