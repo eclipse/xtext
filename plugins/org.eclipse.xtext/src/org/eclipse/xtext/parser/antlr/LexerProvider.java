@@ -20,11 +20,15 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LexerProvider implements Provider<Lexer> {
+public class LexerProvider<T extends Lexer> implements Provider<T> {
 
-	private final Class<? extends Lexer> clazz;
+	private final Class<T> clazz;
 
-	public LexerProvider(Class<? extends Lexer> clazz) {
+	public static <T extends Lexer> LexerProvider<T> create(Class<T> clazz) {
+		return new LexerProvider<T>(clazz);
+	}
+	
+	public LexerProvider(Class<T> clazz) {
 		this.clazz = clazz;
 	}
 	
@@ -33,7 +37,7 @@ public class LexerProvider implements Provider<Lexer> {
 	 * constructor because it will not initialize the backtracking state of the lexer.
 	 * Instead, we pass <code>null</code> as CharStream argument.
 	 */
-	public Lexer get() {
+	public T get() {
 		try {
 			return clazz.getConstructor(CharStream.class).newInstance(new Object[] { null });
 		}
