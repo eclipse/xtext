@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.core.editor.quickfix;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,7 +22,7 @@ import org.eclipse.xtext.ui.core.editor.quickfix.Fix;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class DeclarativeQuickfixProviderTest extends TestCase {
+public class DeclarativeQuickfixProviderTest extends TestCase implements ILanguageResourceHelper {
 
 	private static final int DUMMY_CODE = 42;
 
@@ -37,6 +38,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 			public void fixError(EObject obj, IMarker marker) {
 			}
 		};
+		generator.setLanguageResourceHelper(this);
 		IMarker marker = MockMarker.newFastErrorMarker(null, null, null);
 		assertFalse(generator.hasResolutions(marker));
 		marker = MockMarker.newFastErrorMarker(null, EcorePackage.eINSTANCE.getEClass(), DUMMY_CODE);
@@ -66,6 +68,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 			public void fixError3(EClass obj, IMarker marker) {
 			}
 		};
+		generator.setLanguageResourceHelper(this);
 		IMarker marker = MockMarker.newFastErrorMarker(null, null, null);
 		IMarkerResolution[] resolutions = generator.getResolutions(marker);
 		assertEquals(0, resolutions.length);
@@ -74,6 +77,10 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 		assertEquals(2, resolutions.length);
 		assertEquals("fixError1", resolutions[0].getLabel());
 		assertEquals("fixError3", resolutions[1].getLabel());
+	}
+
+	public boolean isLanguageResource(IResource resource) {
+		return resource == null;
 	}
 
 }
