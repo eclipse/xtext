@@ -12,11 +12,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AbstractDelegatingScopeProvider extends AbstractScopeProvider {
 
+	@Inject
+	@Named("org.eclipse.xtext.scoping.IScopeProvider.delegate")
 	private IScopeProvider delegate;
 	
 	public IScope getScope(EObject context, EReference reference) {
