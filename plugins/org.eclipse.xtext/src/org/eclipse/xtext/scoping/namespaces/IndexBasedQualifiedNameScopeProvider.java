@@ -8,8 +8,6 @@
 package org.eclipse.xtext.scoping.namespaces;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
@@ -31,7 +29,6 @@ import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.collect.Iterables;
-import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 
 /**
@@ -47,33 +44,6 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 			return object;
 		}
 		
-	}
-
-	/**
-	 * 
-	 * Used to abstract over the concrete implementation of project dependencies, etc.
-	 * 
-	 * @author Sven Efftinge - Initial contribution and API
-	 * 
-	 */
-	@ImplementedBy(IContainerDependencyProvider.Null.class)
-	public static interface IContainerDependencyProvider {
-
-		String getContainer(EObject context);
-
-		List<String> getReferencedContainers(EObject context);
-
-		public static class Null implements IContainerDependencyProvider {
-
-			public String getContainer(EObject context) {
-				return null;
-			}
-
-			public List<String> getReferencedContainers(EObject context) {
-				return Collections.emptyList();
-			}
-
-		}
 	}
 
 	public static Logger log = Logger.getLogger(IndexBasedQualifiedNameScopeProvider.class);
