@@ -21,13 +21,17 @@ public class ValidatingEditorCallback implements IXtextEditorCallback {
 	private IXtextResourceChecker checker;
 
 	public void afterCreatePartControl(XtextEditor editor) {
-		ValidationJob validationJob = newValidationJob(editor);
-		validationJob.schedule();
+		if (editor.isEditable()) {
+			ValidationJob validationJob = newValidationJob(editor);
+			validationJob.schedule();
+		}
 	}
 
 	public void afterSave(XtextEditor editor) {
-		ValidationJob validationJob = newValidationJob(editor);
-		validationJob.schedule();
+		if (editor.isEditable()) {
+			ValidationJob validationJob = newValidationJob(editor);
+			validationJob.schedule();
+		}
 	}
 
 	private ValidationJob newValidationJob(XtextEditor editor) {
