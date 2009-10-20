@@ -46,8 +46,6 @@ public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment
 					"org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl")
 			.addTypeToProvider("org.eclipse.emf.emfindex.store.UpdateableIndex", 
 					"org.eclipse.xtext.ui.core.index.IndexProvider")
-			.addTypeToType("org.eclipse.xtext.scoping.IQualifiedNameProvider", 
-					"org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider")
 			.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
 					"org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder")
 			.getBindings();
