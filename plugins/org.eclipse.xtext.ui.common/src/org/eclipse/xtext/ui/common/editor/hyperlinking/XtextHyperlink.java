@@ -7,17 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -30,8 +28,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.editor.ReadonlyArchiveStorage;
-import org.eclipse.xtext.ui.core.editor.ReadonlyFileStorage;
+import org.eclipse.xtext.ui.core.editor.ReadonlyStorage;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 
@@ -72,29 +69,17 @@ public class XtextHyperlink extends AbstractHyperlink {
 		try {
 			if (file != null) {
 				openEditor = IDE.openEditor(page, file);
-			} else if (uri.isArchive()) {
-				// TODO don't fall back to java.io
-				IEditorInput input = new XtextReadonlyEditorInput(new ReadonlyArchiveStorage(uri));
+			} else {
+				IEditorInput input = new XtextReadonlyEditorInput(new ReadonlyStorage(uri));
 				openEditor = IDE.openEditor(page, input, PlatformUI.getWorkbench().getEditorRegistry()
 						.getDefaultEditor(uri.lastSegment()).getId());
-			} else {
-				// fall back: URI is bundle resource uri and has to converted, or http uri
-				URL url = FileLocator.toFileURL(new URL(uri.scheme()+ ":" +uri.devicePath()));
-				URI urlAsUri = URI.createURI(url.toString());
-				String path = urlAsUri.toFileString();
-				if (path != null) {
-					File ioFile = new File(path);
-					// TODO don't fall back to java.io
-					IEditorInput input = new XtextReadonlyEditorInput(new ReadonlyFileStorage(ioFile, uri));
-					openEditor = IDE.openEditor(page, input, PlatformUI.getWorkbench().getEditorRegistry()
-							.getDefaultEditor(uri.lastSegment()).getId());
-				}
 			}
+		} catch (WrappedException e) {
+			logger.error("Error while opening editor part for EMF URI '" + uri + "'",
+					e.getCause());
 		} catch (PartInitException partInitException) {
 			logger.error("Error while opening editor part for EMF URI '" + uri + "'",
 					partInitException);
-		} catch (IOException e) {
-			logger.error("Error while opening editor part for EMF URI '" + uri + "'", e);
 		}
 		if (openEditor != null && openEditor instanceof XtextEditor) {
 			final XtextEditor edit = (XtextEditor) openEditor;

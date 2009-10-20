@@ -36,8 +36,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	public Resource createResource(IEditorInput editorInput) {
 		try {
 			if (editorInput instanceof XtextReadonlyEditorInput) {
-				XtextReadonlyEditorInput readOnlyInput = (XtextReadonlyEditorInput) editorInput;
-				return createResourceFor(readOnlyInput);
+				return createResourceFor((XtextReadonlyEditorInput) editorInput);
 			} else if (editorInput instanceof IStorageEditorInput) {
 				IStorage storage = ((IStorageEditorInput) editorInput).getStorage();
 				if (storage instanceof IFile) {
@@ -80,7 +79,8 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 
 	protected XtextResourceSet getResourceSet(IStorage storage) {
 		XtextResourceSet resourceSet = new XtextResourceSet();
-
+		if (storage==null)
+			return resourceSet;
 		IJavaProject javaProject = getIJavaProject(storage);
 		if (javaProject != null) {
 			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
