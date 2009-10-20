@@ -26,6 +26,7 @@ import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -230,25 +231,12 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		return new ImportNormalizer(new QualifiedName(name));
 	}
 
-	protected IScope getImportedElements(IScope parent, final IScope localElements, final EObject context,
+	protected IScope getImportedElements(final IScope parent, final IScope localElements, final EObject context,
 			final EClass type) {
 		final Set<ImportNormalizer> normalizers = getImportNormalizer(context);
 
-		Iterable<IScopedElement> transformed = transform(localElements.getAllContents(),
-				new Function<IScopedElement, IScopedElement>() {
-
-					public IScopedElement apply(final IScopedElement input) {
-						for (ImportNormalizer normalizer : normalizers) {
-							final String newName = normalizer.longToShortName(input.name());
-							if (newName != null) {
-								return new AliasedScopedElement(newName, input);
-							}
-						}
-						return null;
-					}
-				});
-		return new SimpleScope(parent, filter(transformed, Predicates.notNull())) {
-
+		return new AbstractScope() {
+			
 			@Override
 			public IScopedElement getContentByName(String name) {
 				for (ImportNormalizer normalizer : normalizers) {
@@ -260,6 +248,26 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 					}
 				}
 				return getOuterScope().getContentByName(name);
+			}
+			
+			public Iterable<IScopedElement> getContents() {
+				return filter(transform(localElements.getAllContents(),
+				new Function<IScopedElement, IScopedElement>() {
+
+					public IScopedElement apply(final IScopedElement input) {
+						for (ImportNormalizer normalizer : normalizers) {
+							final String newName = normalizer.longToShortName(input.name());
+							if (newName != null) {
+								return new AliasedScopedElement(newName, input);
+							}
+						}
+						return null;
+					}
+				}),Predicates.notNull());
+			}
+
+			public IScope getOuterScope() {
+				return parent;
 			}
 		};
 	}
