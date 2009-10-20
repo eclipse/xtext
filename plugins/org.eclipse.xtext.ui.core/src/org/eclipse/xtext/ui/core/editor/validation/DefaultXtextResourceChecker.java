@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.validation.CancelIndicator;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
@@ -61,6 +62,7 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
 	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
+		EcoreUtil.resolveAll(resource);
 		final List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
 		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
