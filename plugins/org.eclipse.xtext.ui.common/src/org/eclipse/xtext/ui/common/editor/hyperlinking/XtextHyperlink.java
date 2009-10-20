@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -18,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -92,18 +89,6 @@ public class XtextHyperlink extends AbstractHyperlink {
 					edit.selectAndReveal(region.getOffset(),region.getLength());
 				}});
 			}
-		}
-//		else if (openEditor instanceof EcoreEditor) {
-//			EcoreEditor ecoreEditor = (EcoreEditor)openEditor;
-//			// set selection
-//		    EditingDomain editingDomain = ecoreEditor.getEditingDomain();
-//		    EObject editObject = editingDomain.getResourceSet().getEObject(uri, true);
-//		    if (editObject != null) {
-//		        ecoreEditor.setSelectionToViewer(Collections.singleton(editObject));
-//		    }
-//		}
-		else if (openEditor instanceof ISelectionProvider) {
-			//TODO: use ISelectionProvider instead of ITextEditor
 		}
 	}
 
