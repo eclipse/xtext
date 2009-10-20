@@ -8,84 +8,105 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
-import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
+import org.eclipse.xtext.ui.core.util.JdtURIUtil;
+
+import com.google.inject.Inject;
 
 public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
-	
+
+	@Inject
+	private JdtURIUtil jdtURIUtil;
+
 	public Resource createResource(IEditorInput editorInput) {
-		IFile file = ResourceUtil.getFile(editorInput);
+		try {
+			if (editorInput instanceof XtextReadonlyEditorInput) {
+				XtextReadonlyEditorInput readOnlyInput = (XtextReadonlyEditorInput) editorInput;
+				return createResourceFor(readOnlyInput);
+			} else if (editorInput instanceof IStorageEditorInput) {
+				IStorage storage = ((IStorageEditorInput) editorInput).getStorage();
+				if (storage instanceof IFile) {
+					return createResourceFor((IFile) storage);
+				} else {
+					return createResourceFor((IJarEntryResource) storage);
+				}
+			}
+			throw new IllegalArgumentException("Couldn't create EMF Resource for input "+editorInput);
+		} catch (CoreException e) {
+			throw new WrappedException(e);
+		}
+	}
 
-		XtextResourceSet resourceSet = new XtextResourceSet() {
-			@Override
-			public Resource getResource(URI uri, boolean loadOnDemand) {
-				Resource resource = super.getResource(uri, loadOnDemand);
-				
-				return resource;
-			}
-		};
-		if (file != null) {
-			// TODO find a way to identify a project for an IStorageEditorInput
-			IJavaProject javaProject = getIJavaProject(file);
-			if (javaProject != null) {
-				resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
-				resourceSet.setClasspathURIContext(javaProject);
-			}
-		}
+	private Resource createResourceFor(XtextReadonlyEditorInput readOnlyInput) throws CoreException {
+		XtextResourceSet set = getResourceSet(readOnlyInput.getStorage());
+		XtextResource resource = getResource(set, readOnlyInput.getURI());
+		resource.setValidationDisabled(true);
+		return resource;
+	}
 
-		IPath path = null;
-		Resource aResource = null;
-		URI uri = null;
-		if (file != null) {
-			path = file.getFullPath();
-			uri = URI.createPlatformResourceURI(path.toString(), true);
-		}
-		else if (editorInput instanceof XtextReadonlyEditorInput) {
-			uri = ((XtextReadonlyEditorInput) editorInput).getURI();
-		}
-		else {
-			IStorageEditorInput storageInput = (IStorageEditorInput) editorInput;
-			try {
-				// TODO get the FQN of the resource
-				path = storageInput.getStorage().getFullPath();
-				uri = URI.createPlatformResourceURI(path.toString(), true);
-			}
-			catch (CoreException e) {
-				throw new WrappedException(e);
-			}
-		}
+	private Resource createResourceFor(IJarEntryResource storage) {
+		XtextResourceSet resourceSet = getResourceSet(storage);
+		URI uri = jdtURIUtil.getURI(storage);
+		XtextResource resource = getResource(resourceSet, uri);
+		resource.setValidationDisabled(true);
+		return resource;
+	}
 
-		aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+	private XtextResource getResource(XtextResourceSet resourceSet, URI uri) {
+		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
-			throw new IllegalStateException("The resource factory registered for " + path
+			throw new IllegalStateException("The resource factory registered for " + uri
 					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
 		XtextResource resource = (XtextResource) aResource;
 		if (resource instanceof LazyLinkingResource)
 			((LazyLinkingResource) resource).setEagerLinking(true);
-		resource.setValidationDisabled(file == null);
 		return resource;
 	}
-	
-	private IJavaProject getIJavaProject(IResource resource) {
-		IJavaProject create = JavaCore.create(resource.getProject());
-		if (create.exists())
-			return create;
+
+	protected XtextResourceSet getResourceSet(IStorage storage) {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+
+		IJavaProject javaProject = getIJavaProject(storage);
+		if (javaProject != null) {
+			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
+			resourceSet.setClasspathURIContext(javaProject);
+		}
+		return resourceSet;
+	}
+
+	private Resource createResourceFor(IFile storage) {
+		XtextResourceSet resourceSet = getResourceSet(storage);
+		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(),true);
+		XtextResource resource = getResource(resourceSet, uri);
+		resource.setValidationDisabled(false);
+		return resource;
+	}
+
+	private IJavaProject getIJavaProject(IStorage storage) {
+		IJavaProject jp = null;
+		if (storage instanceof IFile) {
+			jp = JavaCore.create(((IFile) storage).getProject());
+		} else if (storage instanceof IJarEntryResource) {
+			jp = ((IJarEntryResource) storage).getPackageFragmentRoot().getJavaProject();
+		}
+		if (jp != null && jp.exists())
+			return jp;
 		return null;
 	}
-	
+
 }
