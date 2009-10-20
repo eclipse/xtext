@@ -19,7 +19,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
@@ -71,10 +70,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + uri
 					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
-		XtextResource resource = (XtextResource) aResource;
-		if (resource instanceof LazyLinkingResource)
-			((LazyLinkingResource) resource).setEagerLinking(true);
-		return resource;
+		return (XtextResource) aResource;
 	}
 
 	protected XtextResourceSet getResourceSet(IStorage storage) {
