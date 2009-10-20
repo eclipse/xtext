@@ -89,6 +89,15 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 		}
 	}
 
+	@Override
+	protected void fullBuild(IProgressMonitor monitor) throws CoreException {
+		super.fullBuild(monitor);
+		IPackageFragmentRoot[] roots = getJavaProject().getPackageFragmentRoots();
+		for (IPackageFragmentRoot root : roots) {
+			build(root);
+		}
+	}
+
 	/**
 	 * checks whether the package fragment root is managed by this project builder
 	 */

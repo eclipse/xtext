@@ -282,6 +282,18 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		assertEquals(1, countResourcesInIndex());
 	}
 	
+	public void testProjectWithLocalJarBeforeFullBuild() throws Exception {
+		IJavaProject p_foo = createJavaProject("foo");
+		IFile file = p_foo.getProject().getFile("my.jar");
+		file.create(getClass().getResourceAsStream(getClass().getSimpleName()+".jar"), true, monitor());
+		addJarToClasspath(p_foo, file);
+		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
+		
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Foo"));
+		assertEquals(1, countResourcesInIndex());
+	}
+	
 	public void testReferenceWithinProjectWithLocalJar() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
