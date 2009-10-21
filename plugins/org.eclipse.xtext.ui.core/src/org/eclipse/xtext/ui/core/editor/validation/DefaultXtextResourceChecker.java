@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.ui.core.util.EcoreUIUtil;
 import org.eclipse.xtext.validation.CancelIndicator;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
@@ -62,7 +62,7 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
 	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
-		EcoreUtil.resolveAll(resource);
+		resolveProxies(resource, monitor);
 		final List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
 		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
@@ -86,9 +86,11 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
 			// Validation errors
-			// Collect Validator Diagnostics
+			// Collect validator Diagnostics
 			for (EObject ele : resource.getContents()) {
 				try {
+					if (monitor.isCanceled())
+						return null;
 					Map<Object, Object> options = Maps.newHashMap(context);
 					options.put(CancellableDiagnostician.CANCEL_INDICATOR, new CancelIndicator() {
 						public boolean isCancelled() {
@@ -96,8 +98,6 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 						}
 					});
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
-					if (monitor.isCanceled())
-						return null;
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							markerFromEValidatorDiagnostic(childDiagnostic, acceptor);
@@ -116,6 +116,10 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 			log.error(e.getMessage(), e);
 		}
 		return markers;
+	}
+
+	protected void resolveProxies(final Resource resource, final IProgressMonitor monitor) {
+		EcoreUIUtil.resolveAll(resource, monitor);
 	}
 
 	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Map<String, Object>> result) {
