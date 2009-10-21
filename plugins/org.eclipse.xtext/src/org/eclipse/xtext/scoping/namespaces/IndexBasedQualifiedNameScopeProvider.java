@@ -15,14 +15,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfindex.EObjectDescriptor;
-import org.eclipse.emf.emfindex.Index;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
 import org.eclipse.emf.emfindex.query.EObjectDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
-import org.eclipse.emf.emfindex.store.UpdateableIndex;
+import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
@@ -48,14 +47,14 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 	public static Logger log = Logger.getLogger(IndexBasedQualifiedNameScopeProvider.class);
 
-	private Index indexStore;
+	private IXtextIndex indexStore;
 
 	@Inject(optional = true)
-	public void setIndexStore(UpdateableIndex indexStore) {
+	public void setIndexStore(IXtextIndex indexStore) {
 		this.indexStore = indexStore;
 	}
 
-	public Index getIndexStore() {
+	public IXtextIndex getIndexStore() {
 		return indexStore;
 	}
 
@@ -87,10 +86,11 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 			@Override
 			public IScopedElement getContentByName(String name) {
-				IScopedElement local = getIndexStore()
-						.executeQueryCommand(new FindByName(project, context, type, name));
-				if (local != null)
-					return local;
+				EObjectDescriptor desc = getIndexStore().executeFindEObjectByName(context, project, type, name);
+				if(desc!=null) {
+					EObject proxy = Descriptors.createProxy(desc);
+					return ScopedElement.create(desc.getName(), proxy);
+				}
 				return getOuterScope().getContentByName(name);
 			}
 
@@ -131,31 +131,6 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 			}
 			return null;
 		}
-	}
-
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	private final static class FindByName extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
-
-		private String name;
-
-		public FindByName(String project, EObject context, EClass type, String name) {
-			super(project, context, type);
-			this.name = name;
-		}
-
-		public IScopedElement execute(QueryExecutor queryExecutor) {
-			EObjectDescriptorQuery query = createQuery();
-			query.setNameEquals(name);
-			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
-			for (EObjectDescriptor desc : result) {
-				EObject proxy = Descriptors.createProxy(desc);
-				return ScopedElement.create(desc.getName(), proxy);
-			}
-			return null;
-		}
-
 	}
 
 	/**
