@@ -8,11 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.validation;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
 
 /**
@@ -21,6 +24,8 @@ import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
  */
 public class MarkerIssueProcessor implements IValidationIssueProcessor {
 	private final IResource resource;
+	
+	private Logger log = Logger.getLogger(getClass());
 
 	public MarkerIssueProcessor(IResource resource) {
 		super();
@@ -28,6 +33,12 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 	}
 
 	public void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
-		AddMarkersOperation.run(this.resource, issues, true, monitor);
+		try {
+			new AddMarkersOperation(resource, issues, EValidator.MARKER, true).run(monitor);
+		} catch (InvocationTargetException e) {
+			log.error("Could not create marker.", e);
+		} catch (InterruptedException e) {
+			log.error("Could not create marker.", e);
+		}
 	}
 }
