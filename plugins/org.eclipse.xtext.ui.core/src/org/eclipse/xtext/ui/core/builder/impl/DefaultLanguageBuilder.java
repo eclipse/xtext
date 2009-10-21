@@ -62,10 +62,10 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	public static final String MANAGED_BY = "MANAGED_BY";
 	public static final String STORAGE = "STORAGE";
 	public static final String BUILDER_ID = "BUILDER_ID";
-	
+
 	@Inject
 	protected BuildState state;
-	
+
 	@Inject
 	protected IXtextIndex index;
 
@@ -75,7 +75,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	@Inject
 	@Named(Constants.FILE_EXTENSIONS)
 	protected String fileExtensions;
-	
+
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	protected String languageName;
@@ -88,13 +88,13 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 
 	@Inject
 	protected IStorageUtil storageUtil;
-	
+
 	protected IBuilderAccess builder;
-	
+
 	public void initialize(IBuilderAccess builderAccess) {
 		this.builder = builderAccess;
 	}
-	
+
 	protected String getBuilderId() {
 		return languageName;
 	}
@@ -218,9 +218,9 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			throw new NullPointerException("resource");
 		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
-	
+
 	protected boolean isManaged(IStorage resource) {
-		if ((resource instanceof IFile) && ((IFile)resource).isDerived())
+		if ((resource instanceof IFile) && ((IFile) resource).isDerived())
 			return false;
 		return hasRightFileExtension(resource.getFullPath());
 	}
@@ -243,8 +243,8 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				URI uri = res.getURI();
 				indexUpdater.deleteResource(uri);
 				String containerName = getContainerName(storage);
-				findOrCreateContainer(containerName,indexUpdater, queryExecutor);
-				indexUpdater.createOrUpdateResource(containerName, uri, 0l, getUserDataForResource(res,storage));
+				findOrCreateContainer(containerName, indexUpdater, queryExecutor);
+				indexUpdater.createOrUpdateResource(containerName, uri, 0l, getUserDataForResource(res, storage));
 				eObjectIndexer.update(res, indexUpdater, queryExecutor);
 				return null;
 			}
@@ -252,11 +252,11 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		});
 		state.updated(storage, res);
 	}
-	
+
 	protected void buildRecursivly(IResource iResource) throws CoreException, JavaModelException {
 		IResourceVisitor visitor = new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
-				if ((resource instanceof IFile) && isManaged((IFile)resource))
+				if ((resource instanceof IFile) && isManaged((IFile) resource))
 					build((IFile) resource);
 				return true;
 			}
@@ -267,8 +267,8 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	protected Map<String, String> getUserDataForResource(Resource res, final IStorage storage) {
 		return Collections.singletonMap(STORAGE, storageUtil.toExternalString(storage));
 	}
-	
-	protected void findOrCreateContainer(String containerName,IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
+
+	protected void findOrCreateContainer(String containerName, IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 		ContainerDescriptorQuery query = new ContainerDescriptorQuery();
 		query.setName(containerName);
 		QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
@@ -291,7 +291,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		final Resource res = rs.getResource(uri, true);
 		return res;
 	}
-	
+
 	protected IStorage getIStorage(final URI uri) {
 		return index.executeQueryCommand(new QueryCommand<IStorage>() {
 
@@ -301,7 +301,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
 				for (ResourceDescriptor resourceDescriptor : result) {
 					String externalStorageString = resourceDescriptor.getUserData(STORAGE);
-					if (externalStorageString!=null)
+					if (externalStorageString != null)
 						return storageUtil.getStorage(externalStorageString);
 				}
 				return null;
@@ -322,28 +322,33 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			Iterable<URI> resources = index.getPotentiallyInterestedResources(sharedState.getChangedEObjectNames());
 			for (URI uri : Sets.newHashSet(resources)) {
 				IStorage iStorage = getIStorage(uri);
-				if (iStorage!=null && isManaged(iStorage)) {
+				if (iStorage != null && isManaged(iStorage)) {
 					state.updated(iStorage, getEmfResource(iStorage));
 				}
 			}
-			
-			index.executeUpdateCommand(new UpdateCommand<Void>() {
 
-				public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-					for (Resource res : state.getUpdated().values()) {
-						eReferenceIndexer.update(res, indexUpdater, queryExecutor);
-					}
-					return null;
-				}
-			});
+			indexCrossReferences();
+			
 			for (Entry<IStorage, Resource> res : state.getUpdated().entrySet()) {
 				validate(res.getKey(), res.getValue(), monitor);
 			}
-			
-			
+
 		} finally {
 			state.clear();
 		}
+	}
+
+	protected void indexCrossReferences() {
+		index.executeUpdateCommand(new UpdateCommand<Void>() {
+
+			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
+				for (Resource res : state.getUpdated().values()) {
+					index.clearNameSearchesFor(res.getURI());
+					eReferenceIndexer.update(res, indexUpdater, queryExecutor);
+				}
+				return null;
+			}
+		});
 	}
 
 	protected void deleteResourceDescriptors(IndexUpdater indexUpdater, ContainerDescriptor containerDescriptor) {
