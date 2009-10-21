@@ -100,6 +100,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 

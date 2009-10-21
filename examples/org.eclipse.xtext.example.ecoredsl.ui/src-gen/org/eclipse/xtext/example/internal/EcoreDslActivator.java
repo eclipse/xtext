@@ -4,6 +4,7 @@
  */
 package org.eclipse.xtext.example.internal;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -31,12 +32,17 @@ public class EcoreDslActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		
-		injectors.put("org.eclipse.xtext.example.EcoreDsl", Guice.createInjector(
-			new org.eclipse.xtext.example.EcoreDslUiModule(),
-			createUIPluginModule()
-		));
-		
+		try {
+			
+			injectors.put("org.eclipse.xtext.example.EcoreDsl", Guice.createInjector(
+				new org.eclipse.xtext.example.EcoreDslUiModule(),
+				createUIPluginModule()
+			));
+			
+		} catch (Exception e) {
+			Logger.getLogger(getClass()).error(e.getMessage(), e);
+			throw e;
+		}
 	}
 	
 	public static EcoreDslActivator getInstance() {
