@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.ui.core.builder.impl.ISharedState;
 
 import com.google.inject.Inject;
 
@@ -39,13 +40,16 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 
 	@Inject
 	private CompositeLanguageBuilder compositeLanguageBuilder;
+	
+	@Inject
+	private ISharedState sharedState;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		try {
-			IProject[] projects = compositeLanguageBuilder.build(kind, monitor);
-			compositeLanguageBuilder.postBuild(kind, monitor);
+			IProject[] projects = compositeLanguageBuilder.build(sharedState,kind, monitor);
+			compositeLanguageBuilder.postBuild(sharedState,kind, monitor);
 			return projects;
 		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);

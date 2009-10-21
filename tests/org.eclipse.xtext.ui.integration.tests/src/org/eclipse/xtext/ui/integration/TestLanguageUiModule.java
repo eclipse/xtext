@@ -4,8 +4,11 @@
 package org.eclipse.xtext.ui.integration;
 
 
+
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class TestLanguageUiModule extends org.eclipse.xtext.ui.integration.AbstractTestLanguageUiModule {
+
 }

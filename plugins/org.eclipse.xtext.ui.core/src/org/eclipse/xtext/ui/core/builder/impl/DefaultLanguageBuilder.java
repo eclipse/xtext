@@ -32,22 +32,23 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfindex.ContainerDescriptor;
-import org.eclipse.emf.emfindex.EReferenceDescriptor;
+import org.eclipse.emf.emfindex.ResourceDescriptor;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
-import org.eclipse.emf.emfindex.query.EReferenceDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
+import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
 import org.eclipse.emf.emfindex.store.UpdateCommand;
-import org.eclipse.emf.emfindex.store.UpdateableIndex;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.ui.core.builder.IBuilderAccess;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -59,19 +60,25 @@ import com.google.inject.name.Named;
 public class DefaultLanguageBuilder implements ILanguageBuilder {
 
 	public static final String MANAGED_BY = "MANAGED_BY";
+	public static final String STORAGE = "STORAGE";
+	public static final String BUILDER_ID = "BUILDER_ID";
 	
 	@Inject
 	protected BuildState state;
-
+	
 	@Inject
-	protected UpdateableIndex index;
+	protected IXtextIndex index;
 
 	@Inject
 	protected IXtextResourceChecker resourceChecker;
 
 	@Inject
-	@Named("file.extensions")
+	@Named(Constants.FILE_EXTENSIONS)
 	protected String fileExtensions;
+	
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	protected String languageName;
 
 	@Inject
 	protected EObjectDescriptorIndexer eObjectIndexer;
@@ -79,10 +86,17 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	@Inject
 	protected EReferenceDescriptorIndexer eReferenceIndexer;
 
+	@Inject
+	protected IStorageUtil storageUtil;
+	
 	protected IBuilderAccess builder;
 	
 	public void initialize(IBuilderAccess builderAccess) {
 		this.builder = builderAccess;
+	}
+	
+	protected String getBuilderId() {
+		return languageName;
 	}
 
 	protected void validate(IStorage storage, Resource res, IProgressMonitor monitor) {
@@ -106,49 +120,18 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		});
 	}
 
-	public IProject[] build(int kind, IProgressMonitor monitor) throws CoreException {
+	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
 			fullBuild(monitor);
 		} else {
 			IResourceDelta delta = builder.getDelta(builder.getProject());
-			if (delta == null || isProjectDescriptionChange(delta) || isOpened(delta) || hasDependencyChanges()) {
+			if (delta == null || isOpened(delta)) {
 				fullBuild(monitor);
 			} else {
 				incrementalBuild(delta, monitor);
-				updateReferencingResources(delta, monitor);
 			}
 		}
 		return builder.getProject().getReferencedProjects();
-	}
-
-	protected void updateReferencingResources(IResourceDelta delta,
-			IProgressMonitor monitor) {
-
-		index.executeQueryCommand(new QueryCommand<Void>() {
-
-			public Void execute(QueryExecutor queryExecutor) {
-				final Set<URI> affected = getAffectedResourceURIs();
-
-				EReferenceDescriptorQuery q = new EReferenceDescriptorQuery();
-				QueryResult<EReferenceDescriptor> result = queryExecutor.execute(q);
-				Iterable<EReferenceDescriptor> filtered = Iterables.filter(result,
-						new Predicate<EReferenceDescriptor>() {
-							public boolean apply(EReferenceDescriptor refDesc) {
-								return affected.contains(refDesc.getTargetResourceURI());
-							}
-						});
-				Set<IStorage> storages = new HashSet<IStorage>();
-				for (EReferenceDescriptor refDesc : filtered) {
-					URI uri = refDesc.getSourceResourceDescriptor().getURI();
-					IStorage file = findStorageInProject(builder.getProject(), uri);
-					if (file != null && storages.add(file)) {
-						Resource resource2 = getEmfResource(file);
-						state.updated(file, resource2);
-					}
-				}
-				return null;
-			}
-		});
 	}
 
 	protected IStorage findStorageInProject(IProject project, URI uri) {
@@ -195,14 +178,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
-		IResourceVisitor visitor = new IResourceVisitor() {
-			public boolean visit(IResource resource) throws CoreException {
-				if ((resource instanceof IFile) && isLanguageResource(resource))
-					build((IFile) resource);
-				return true;
-			}
-		};
-		builder.getProject().accept(visitor);
+		buildRecursivly(builder.getProject());
 	}
 
 	protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
@@ -214,10 +190,10 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 					return true;
 				IFile file = (IFile) resource;
 				if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
-					if (isLanguageResource(file))
+					if (isManaged(file))
 						build(file);
 				} else if (delta.getKind() == IResourceDelta.REMOVED) {
-					if (isLanguageResource(file))
+					if (isManaged(file))
 						delete(file);
 				}
 				return true;
@@ -242,9 +218,9 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			throw new NullPointerException("resource");
 		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
-
-	protected boolean isLanguageResource(IResource resource) {
-		if (resource.isDerived())
+	
+	protected boolean isManaged(IStorage resource) {
+		if ((resource instanceof IFile) && ((IFile)resource).isDerived())
 			return false;
 		return hasRightFileExtension(resource.getFullPath());
 	}
@@ -268,14 +244,30 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				indexUpdater.deleteResource(uri);
 				String containerName = getContainerName(storage);
 				findOrCreateContainer(containerName,indexUpdater, queryExecutor);
-				indexUpdater.createOrUpdateResource(containerName, uri, 0l, null);
+				indexUpdater.createOrUpdateResource(containerName, uri, 0l, getUserDataForResource(res,storage));
 				eObjectIndexer.update(res, indexUpdater, queryExecutor);
 				return null;
 			}
+
 		});
 		state.updated(storage, res);
 	}
+	
+	protected void buildRecursivly(IResource iResource) throws CoreException, JavaModelException {
+		IResourceVisitor visitor = new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				if ((resource instanceof IFile) && isManaged((IFile)resource))
+					build((IFile) resource);
+				return true;
+			}
+		};
+		iResource.accept(visitor);
+	}
 
+	protected Map<String, String> getUserDataForResource(Resource res, final IStorage storage) {
+		return Collections.singletonMap(STORAGE, storageUtil.toExternalString(storage));
+	}
+	
 	protected void findOrCreateContainer(String containerName,IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 		ContainerDescriptorQuery query = new ContainerDescriptorQuery();
 		query.setName(containerName);
@@ -284,7 +276,6 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			result.iterator().next();
 			return;
 		}
-		
 		indexUpdater.createContainer(containerName, getUserDataForContainer(containerName));
 	}
 
@@ -300,6 +291,23 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		final Resource res = rs.getResource(uri, true);
 		return res;
 	}
+	
+	protected IStorage getIStorage(final URI uri) {
+		return index.executeQueryCommand(new QueryCommand<IStorage>() {
+
+			public IStorage execute(QueryExecutor queryExecutor) {
+				ResourceDescriptorQuery query = new ResourceDescriptorQuery();
+				query.setURI(uri);
+				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
+				for (ResourceDescriptor resourceDescriptor : result) {
+					String externalStorageString = resourceDescriptor.getUserData(STORAGE);
+					if (externalStorageString!=null)
+						return storageUtil.getStorage(externalStorageString);
+				}
+				return null;
+			}
+		});
+	}
 
 	protected String getContainerName(IStorage resource) {
 		return ((IResource) resource).getProject().getName();
@@ -309,8 +317,16 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return new ResourceSetImpl();
 	}
 
-	public void postBuild(int kind, IProgressMonitor monitor) {
+	public void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) {
 		try {
+			Iterable<URI> resources = index.getPotentiallyInterestedResources(sharedState.getChangedEObjectNames());
+			for (URI uri : Sets.newHashSet(resources)) {
+				IStorage iStorage = getIStorage(uri);
+				if (iStorage!=null && isManaged(iStorage)) {
+					state.updated(iStorage, getEmfResource(iStorage));
+				}
+			}
+			
 			index.executeUpdateCommand(new UpdateCommand<Void>() {
 
 				public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
@@ -323,8 +339,22 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 			for (Entry<IStorage, Resource> res : state.getUpdated().entrySet()) {
 				validate(res.getKey(), res.getValue(), monitor);
 			}
+			
+			
 		} finally {
 			state.clear();
+		}
+	}
+
+	protected void deleteResourceDescriptors(IndexUpdater indexUpdater, ContainerDescriptor containerDescriptor) {
+		Set<URI> toDelete = new HashSet<URI>();
+		List<ResourceDescriptor> descriptors = containerDescriptor.getResourceDescriptors();
+		for (ResourceDescriptor resourceDescriptor : descriptors) {
+			if (resourceDescriptor.getUserData(BUILDER_ID).equals(getBuilderId()))
+				toDelete.add(resourceDescriptor.getURI());
+		}
+		for (URI uri : toDelete) {
+			indexUpdater.deleteResource(uri);
 		}
 	}
 

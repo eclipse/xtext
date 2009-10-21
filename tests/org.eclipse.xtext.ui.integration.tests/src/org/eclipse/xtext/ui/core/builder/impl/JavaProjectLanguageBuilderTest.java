@@ -221,10 +221,9 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
 		
-		//TODO handle project open
-//		p_foo.getProject().open(monitor());
-//		waitForAutoBuild();
-//		assertTrue(indexContainsElement("Foo"));
+		p_foo.getProject().open(monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Foo"));
 	}
 	
 	public void testCloseReferencedProject() throws Exception {
@@ -251,7 +250,7 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		assertTrue(indexContainsElement("Bar"));
 		assertIsReferenced("Foo",0);
 		assertEquals(1, countResourcesInIndex());
-//TODO		assertEquals(1,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(1,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 	}
 	
 	public void testProjectWithExternalJar() throws Exception {

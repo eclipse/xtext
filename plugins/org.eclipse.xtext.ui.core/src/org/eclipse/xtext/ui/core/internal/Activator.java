@@ -11,11 +11,11 @@ package org.eclipse.xtext.ui.core.internal;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.emfindex.store.UpdateableIndex;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.osgi.framework.BundleContext;
 
@@ -108,7 +108,7 @@ public class Activator extends AbstractUIPlugin {
 	private void initializeGuiceInjector() {
 		try {
 			injector = Guice.createInjector(new Module());
-			IndexAccess.setIndex(injector.getInstance(UpdateableIndex.class));
+			IndexAccess.setIndex(injector.getInstance(IXtextIndex.class));
 		}
 		catch (Exception e) {
 			log.error("Couldn't initialize XtextBuilder", e);

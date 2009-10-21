@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.core.builder.IBuilderAccess;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
+import org.eclipse.xtext.ui.core.builder.impl.ISharedState;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,10 +49,10 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 		return languageBuilders;
 	}
 
-	public IProject[] build(int kind, IProgressMonitor monitor) throws CoreException {
+	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		Set<IProject> all = new HashSet<IProject>();
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			IProject[] projects = lb.build(kind, monitor);
+			IProject[] projects = lb.build(sharedState,kind, monitor);
 			all.addAll(Arrays.asList(projects));
 		}
 		return all.toArray(new IProject[all.size()]);
@@ -63,9 +64,9 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 		}
 	}
 
-	public void postBuild(int kind, IProgressMonitor monitor) throws CoreException {
+	public void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.postBuild(kind, monitor);
+			lb.postBuild(sharedState,kind, monitor);
 		}
 	}
 
