@@ -7,15 +7,17 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
+
+import org.eclipse.xtext.services.XtextGrammarAccess;
 
 public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject
 	private XtextGrammarAccess grammarAccess;
-
+	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		TokenSource tokenSource = createLexer(in);
