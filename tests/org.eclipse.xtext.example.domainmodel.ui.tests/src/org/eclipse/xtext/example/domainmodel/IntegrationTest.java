@@ -200,7 +200,6 @@ public class IntegrationTest extends TestCase {
 		assertEquals(0, file(barModel).findMarkers(EValidator.MARKER, true,
 				IResource.DEPTH_INFINITE).length);
 		// change referenced file
-		System.out.println("changing "+fooModel);
 		createFile(fooModel, "entity Baz {}");
 		waitForAutoBuild();
 		assertEquals(1, file(barModel).findMarkers(EValidator.MARKER, true,
