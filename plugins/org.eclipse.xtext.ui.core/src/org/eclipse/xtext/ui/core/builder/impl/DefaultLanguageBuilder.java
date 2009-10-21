@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.core.builder.impl;
 
 import static org.eclipse.core.resources.IncrementalProjectBuilder.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -28,6 +30,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -62,6 +65,8 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	public static final String MANAGED_BY = "MANAGED_BY";
 	public static final String STORAGE = "STORAGE";
 	public static final String BUILDER_ID = "BUILDER_ID";
+	
+	private final Logger log = Logger.getLogger(getClass());
 
 	@Inject
 	protected BuildState state;
@@ -103,7 +108,17 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
 			List<Map<String, Object>> check = resourceChecker.check(res, getValidationContext(), monitor);
-			AddMarkersOperation.run(file, check, true, monitor);
+			updateMarkers(monitor, file, check);
+		}
+	}
+
+	protected void updateMarkers(IProgressMonitor monitor, IFile file, List<Map<String, Object>> issues) {
+		try {
+			new AddMarkersOperation(file, issues, EValidator.MARKER, true).run(monitor);
+		} catch (InvocationTargetException e) {
+			log.error("Could not create marker.", e);
+		} catch (InterruptedException e) {
+			log.error("Could not create marker.", e);
 		}
 	}
 

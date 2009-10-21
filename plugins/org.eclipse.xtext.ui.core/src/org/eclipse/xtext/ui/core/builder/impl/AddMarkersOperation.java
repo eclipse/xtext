@@ -19,8 +19,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 /**
@@ -76,30 +74,6 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 					}
 				}
 			}
-		}
-	}
-
-	public static void run(final IResource resource, final List<Map<String, Object>> issues, boolean deleteOldMarkers,
-			IProgressMonitor monitor) {
-		try {
-			new AddMarkersOperation(resource, issues, EValidator.MARKER, deleteOldMarkers).run(monitor);
-		} catch (InvocationTargetException e) {
-			log.error("Could not create marker.", e);
-		} catch (InterruptedException e) {
-			log.error("Could not create marker.", e);
-		}
-	}
-
-	public static void runInCurrentThread(final IResource resource, final List<Map<String, Object>> issues,
-			boolean deleteOldMarkers, IProgressMonitor monitor) {
-		try {
-			new AddMarkersOperation(resource, issues, EValidator.MARKER, deleteOldMarkers).execute(monitor);
-		} catch (InvocationTargetException e) {
-			throw new WrappedException(e);
-		} catch (InterruptedException e) {
-			throw new WrappedException(e);
-		} catch (CoreException e) {
-			throw new WrappedException(e);
 		}
 	}
 
