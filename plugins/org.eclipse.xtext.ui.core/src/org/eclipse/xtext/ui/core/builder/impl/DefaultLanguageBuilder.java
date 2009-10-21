@@ -103,7 +103,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
 			List<Map<String, Object>> check = resourceChecker.check(res, getValidationContext(), monitor);
-			AddMarkersOperation.runInCurrentThread(file, check, true, monitor);
+			AddMarkersOperation.run(file, check, true, monitor);
 		}
 	}
 
