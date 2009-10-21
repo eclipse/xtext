@@ -25,11 +25,15 @@ import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
 
 	@Inject
 	private JdtURIUtil jdtURIUtil;
+	
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	public Resource createResource(IEditorInput editorInput) {
 		try {
@@ -64,7 +68,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	}
 
 	protected XtextResourceSet getResourceSet(IStorage storage) {
-		XtextResourceSet resourceSet = new XtextResourceSet();
+		XtextResourceSet resourceSet = resourceSetProvider.get();
 		if (storage==null)
 			return resourceSet;
 		IJavaProject javaProject = getIJavaProject(storage);
