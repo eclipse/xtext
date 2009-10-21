@@ -152,5 +152,10 @@ public abstract class AbstractTreeTestLanguageUiModule extends TreeTestLanguageR
 		return org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer.class;
 	}
 
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureHighlightingLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.xtend.parser.antlr.internal.InternalTreeTestLanguageLexer.class);
+	}
+
 
 }

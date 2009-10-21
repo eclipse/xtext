@@ -7,8 +7,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AbstractContentAssistParser;
@@ -25,11 +23,6 @@ public class CrossReferenceProposalTestLanguageParser extends AbstractContentAss
 	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
 	
 	private Map<AbstractElement, String> nameMappings;
-	
-	@Override
-	protected TokenSource createLexer(CharStream stream) {
-		return new org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.internal.InternalCrossReferenceProposalTestLanguageLexer(stream);
-	}
 	
 	@Override
 	protected org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.internal.InternalCrossReferenceProposalTestLanguageParser createParser() {

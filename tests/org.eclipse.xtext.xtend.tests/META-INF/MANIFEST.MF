@@ -33,4 +33,5 @@ Export-Package: org.eclipse.xtext.xtend,
  org.eclipse.xtext.xtend.parser.antlr,
  org.eclipse.xtext.xtend.treeXtendTestLanguage,
  org.eclipse.xtext.xtend.treeXtendTestLanguage.impl,
- org.eclipse.xtext.xtend.treeXtendTestLanguage.util
+ org.eclipse.xtext.xtend.treeXtendTestLanguage.util,
+ org.eclipse.xtext.xtend.parser.antlr.internal

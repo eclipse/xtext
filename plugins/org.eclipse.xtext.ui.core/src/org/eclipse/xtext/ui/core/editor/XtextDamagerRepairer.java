@@ -13,6 +13,7 @@ import java.util.WeakHashMap;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -21,11 +22,13 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.ui.core.LexerUIBindings;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,7 +43,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 	private final WeakHashMap<IDocument, String> previousContent = new WeakHashMap<IDocument, String>();
 
 	@Inject
-	public XtextDamagerRepairer(ITokenScanner scanner, Provider<Lexer> lexer) {
+	public XtextDamagerRepairer(ITokenScanner scanner, @Named(LexerUIBindings.HIGHLIGHTING) Provider<Lexer> lexer) {
 		super(scanner);
 		this.lexer = lexer;
 	}
@@ -63,6 +66,12 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		} finally {
 			previousContent.put(fDocument, fDocument.get());
 		}
+	}
+
+	protected Lexer createLexer(String string) {
+		Lexer l = lexer.get();
+		l.setCharStream(new ANTLRStringStream(string));
+		return l;
 	}
 
 	private final SimpleCache<DocumentEvent, IRegion> cache = new SimpleCache<DocumentEvent, IRegion>(new Function<DocumentEvent, IRegion>() {
@@ -125,50 +134,34 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 			return new Region(start, end - start);
 		}
 
-		/**
-		 * @param previous
-		 * @param actual
-		 * @param lengthDiff
-		 * @return
-		 */
 		private boolean inSync(TokenIterator previous, TokenIterator actual, int lengthDiff) {
 			boolean equal = equal(previous.getCurrent(), actual.getCurrent());
 			int prevIndex = previous.getCurrent().getStartIndex() + lengthDiff;
 			int startIndex = actual.getCurrent().getStartIndex();
 			return equal && prevIndex == startIndex;
 		}
-
-		/**
-		 * @param t1
-		 * @param t2
-		 * @return
-		 */
-		private boolean equal(CommonToken t1, CommonToken t2) {
+		
+		private boolean equal(Token t1, Token t2) {
 			return t1.getText().equals(t2.getText());
 		}
 
-		/**
-		 * @param string
-		 * @return
-		 */
 		private TokenIterator iterator(String string) {
-			Lexer l = lexer.get();
-			l.setCharStream(new ANTLRStringStream(string));
-			return new TokenIterator(l);
+			TokenSource source = createLexer(string);
+			return new TokenIterator(source);
 		}
 	});
-
+	
 	public static class TokenIterator implements Iterator<CommonToken> {
 
-		private final Lexer lexer;
+		private final TokenSource tokenSource;
 		private CommonToken nextToken;
 		private CommonToken current;
 
 		/**
 		 * @param document
 		 */
-		public TokenIterator(Lexer lexer) {
-			this.lexer = lexer;
+		public TokenIterator(TokenSource tokenSource) {
+			this.tokenSource = tokenSource;
 		}
 
 		public CommonToken getCurrent() {
@@ -178,7 +171,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		public boolean hasNext() {
 			if (nextToken != null)
 				return true;
-			CommonToken token = (CommonToken) lexer.nextToken();
+			CommonToken token = (CommonToken) tokenSource.nextToken();
 			if (token.getType() == Token.EOF) {
 				return false;
 			}

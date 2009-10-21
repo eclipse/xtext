@@ -25,4 +25,5 @@ Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.parser.antlr,
  org.eclipse.xtext.example.services,
  org.eclipse.xtext.example.ecoredsl.impl,
- org.eclipse.xtext.example.ecoredsl.util
+ org.eclipse.xtext.example.ecoredsl.util,
+ org.eclipse.xtext.example.parser.antlr.internal

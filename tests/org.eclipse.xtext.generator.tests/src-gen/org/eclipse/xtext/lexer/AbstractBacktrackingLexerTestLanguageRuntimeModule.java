@@ -54,6 +54,11 @@ public abstract class AbstractBacktrackingLexerTestLanguageRuntimeModule extends
 	}
 
 	// contributed by de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment
+	public void configureRuntimeLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer.class);
+	}
+
+	// contributed by de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

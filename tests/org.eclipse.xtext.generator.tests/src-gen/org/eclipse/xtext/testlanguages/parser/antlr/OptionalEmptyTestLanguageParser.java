@@ -5,27 +5,18 @@ package org.eclipse.xtext.testlanguages.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.TokenSource;
-import org.antlr.runtime.CharStream;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
 public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
-	@Inject 
-    protected ITokenDefProvider antlrTokenDefProvider;
-	
 	@Inject
 	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	private Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> lexerProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -33,7 +24,7 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser parser = createParser(tokenStream);
-		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
+		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
@@ -41,16 +32,6 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
-	}
-	
-	protected TokenSource createLexer(CharStream stream) {
-		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer lexer = lexerProvider.get();
-		lexer.setCharStream(stream);
-		return lexer;
-	} 
-	
-	protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
-		return new XtextTokenStream(tokenSource, antlrTokenDefProvider);
 	}
 	
 	protected org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageParser createParser(XtextTokenStream stream) {
@@ -70,11 +51,4 @@ public class OptionalEmptyTestLanguageParser extends org.eclipse.xtext.parser.an
 		this.grammarAccess = grammarAccess;
 	}
 	
-	public Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> getLexerProvider() {
-		return this.lexerProvider;
-	}
-	
-	public void setLexerProvider(Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalOptionalEmptyTestLanguageLexer> lexerProvider) {
-		this.lexerProvider = lexerProvider;
-	}
 }

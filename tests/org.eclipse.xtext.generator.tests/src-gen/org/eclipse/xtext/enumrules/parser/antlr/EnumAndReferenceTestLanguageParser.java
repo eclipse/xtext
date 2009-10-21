@@ -5,27 +5,18 @@ package org.eclipse.xtext.enumrules.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.TokenSource;
-import org.antlr.runtime.CharStream;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
 
 public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
-	@Inject 
-    protected ITokenDefProvider antlrTokenDefProvider;
-	
 	@Inject
 	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	private Provider<org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageLexer> lexerProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
@@ -33,7 +24,7 @@ public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageParser parser = createParser(tokenStream);
-		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
+		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
@@ -41,16 +32,6 @@ public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser
 		} catch (Exception re) {
 			throw new ParseException(re.getMessage(),re);
 		}
-	}
-	
-	protected TokenSource createLexer(CharStream stream) {
-		org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageLexer lexer = lexerProvider.get();
-		lexer.setCharStream(stream);
-		return lexer;
-	} 
-	
-	protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
-		return new XtextTokenStream(tokenSource, antlrTokenDefProvider);
 	}
 	
 	protected org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageParser createParser(XtextTokenStream stream) {
@@ -70,11 +51,4 @@ public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser
 		this.grammarAccess = grammarAccess;
 	}
 	
-	public Provider<org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageLexer> getLexerProvider() {
-		return this.lexerProvider;
-	}
-	
-	public void setLexerProvider(Provider<org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageLexer> lexerProvider) {
-		this.lexerProvider = lexerProvider;
-	}
 }

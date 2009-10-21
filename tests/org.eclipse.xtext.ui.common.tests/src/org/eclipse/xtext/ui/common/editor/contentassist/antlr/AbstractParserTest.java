@@ -15,10 +15,14 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarUiTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.common.tests.Activator;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +36,14 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextGrammarUiTestLanguageStandaloneSetup.class);
+		with(new XtextGrammarUiTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(
+						new org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule(),
+						new UIPluginModule(Activator.getInstance()));
+			}
+		});
 		grammarAccess = get(XtextGrammarUiTestLanguageGrammarAccess.class);
 	}
 

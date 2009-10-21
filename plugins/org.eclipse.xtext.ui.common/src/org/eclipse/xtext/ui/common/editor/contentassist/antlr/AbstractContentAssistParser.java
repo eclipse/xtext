@@ -25,12 +25,28 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ui.core.LexerUIBindings;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractContentAssistParser implements IContentAssistParser {
 
+	@Inject
+	@Named(LexerUIBindings.CONTENT_ASSIST)
+	private Provider<Lexer> lexerProvider;
+	
+	protected TokenSource createLexer(CharStream stream) {
+		Lexer lexer = lexerProvider.get();
+		lexer.setCharStream(stream);
+		return lexer;
+	}
+	
 	public Collection<FollowElement> getFollowElements(FollowElement element) {
 		if (element.getLookAhead() <= 1)
 			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
@@ -171,8 +187,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	protected abstract String getRuleName(AbstractElement element);
 		
-	protected abstract TokenSource createLexer(CharStream stream);
-	
 	protected abstract AbstractInternalContentAssistParser createParser();
 	
 	protected abstract Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser);
