@@ -20,6 +20,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationAccess;
+import org.eclipse.jface.text.source.IAnnotationAccessExtension;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension2;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -39,6 +41,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
+import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
@@ -65,10 +68,8 @@ import com.google.inject.name.Named;
  * @author Dan Stefanescu - Fix for bug 278279
  */
 public class XtextEditor extends TextEditor {
-
-	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.error";
-
-	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.warning";
+	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.core.editor.error";
+	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.core.editor.warning";
 
 	private static final Logger log = Logger.getLogger(XtextEditor.class);
 
@@ -389,6 +390,19 @@ public class XtextEditor extends TextEditor {
 		more[3] = getLanguageName() + ".coloring"; //$NON-NLS-1$
 		System.arraycopy(ids, 0, more, 4, ids.length);
 		return more;
+	}
+	
+	@Override
+	protected IAnnotationAccess createAnnotationAccess() {
+		return new DefaultMarkerAnnotationAccess(){
+			@Override
+			public int getLayer(Annotation annotation) {
+				if (annotation.isMarkedDeleted()) {
+					return IAnnotationAccessExtension.DEFAULT_LAYER;
+				}
+				return super.getLayer(annotation);
+			}
+		};
 	}
 
 	protected void updateStatusLine() {

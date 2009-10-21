@@ -18,6 +18,7 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,7 +38,7 @@ public class ProblemHover extends AbstractHover {
 		final Iterator<?> iterator = model.getAnnotationIterator();
 		while (iterator.hasNext()) {
 			final Annotation annotation = (Annotation) iterator.next();
-			if (annotation.isMarkedDeleted()) {
+			if (annotation instanceof MarkerAnnotation) {
 				continue;
 			}
 			Position position = model.getPosition(annotation);
