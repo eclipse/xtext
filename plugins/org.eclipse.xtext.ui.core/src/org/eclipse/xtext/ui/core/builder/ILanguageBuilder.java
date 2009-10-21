@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.core.builder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.xtext.ui.core.builder.impl.ISharedState;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,10 +37,11 @@ public interface ILanguageBuilder {
 	 * @return the list of projects for which this builder would like deltas the
 	 * next time it is run or <code>null</code> if none
 	 * 
+	 * @param shared state - state shared across all language builders for the current project
 	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
 	 * @param monitor - a monitor used to provide information on the process
 	 */
-	IProject[] build(int kind, IProgressMonitor monitor) throws CoreException;
+	IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException;
 
 	/**
 	 * called on {@link org.eclipse.core.resources.IncrementalProjectBuilder#build(Integer, java.util.Map, IProgressMonitor)}
@@ -48,7 +50,7 @@ public interface ILanguageBuilder {
 	 * @param kind - the kind of build (see constants in {@link org.eclipse.core.resources.IncrementalProjectBuilder})
 	 * @param monitor - a monitor used to provide information on the process
 	 */
-	void postBuild(int kind,  IProgressMonitor monitor) throws CoreException;
+	void postBuild(ISharedState sharedState, int kind,  IProgressMonitor monitor) throws CoreException;
 	
 	/**
 	 * {@link org.eclipse.core.resources.IncrementalProjectBuilder#clean()}

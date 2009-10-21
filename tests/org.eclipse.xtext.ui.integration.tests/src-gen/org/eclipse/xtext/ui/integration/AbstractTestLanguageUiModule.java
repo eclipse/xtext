@@ -168,13 +168,8 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends com.google.inject.Provider<org.eclipse.emf.emfindex.store.UpdateableIndex>> provideUpdateableIndex() {
+	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
 		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment

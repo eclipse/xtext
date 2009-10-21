@@ -5,22 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.index;
+package org.eclipse.xtext.ui.core.builder.impl;
 
-import org.eclipse.xtext.index.IXtextIndex;
+import java.util.Set;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IndexAccess {
-
-	private static IXtextIndex index;
-
-	public static IXtextIndex getIndex() {
-		return index;
-	}
-
-	public static void setIndex(IXtextIndex instance) {
-		index = instance;
-	}
+public interface ISharedState {
+	public Set<String> getChangedEObjectNames();
 }

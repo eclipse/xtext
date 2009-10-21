@@ -28,11 +28,11 @@ import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryCommand;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
-import org.eclipse.emf.emfindex.store.UpdateableIndex;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider;
 import org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
@@ -45,7 +45,7 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 	public static Logger log = Logger.getLogger(ContainerDependencyProviderIJavaProjectImpl.class);
 
 	@Inject
-	private UpdateableIndex index;
+	private IXtextIndex index;
 	
 	@Inject
 	private JdtURIUtil jdtURIUtil;

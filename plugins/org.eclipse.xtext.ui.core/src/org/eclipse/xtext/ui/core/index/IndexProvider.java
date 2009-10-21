@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.index;
 
-import org.eclipse.emf.emfindex.store.UpdateableIndex;
+import org.eclipse.xtext.index.IXtextIndex;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IndexProvider implements Provider<UpdateableIndex> {
+public class IndexProvider implements Provider<IXtextIndex> {
 
-	public UpdateableIndex get() {
+	public IXtextIndex get() {
 		return IndexAccess.getIndex();
 	}
 	

@@ -66,8 +66,7 @@ public abstract class JarWalker {
 	protected void traverse(IJarEntryResource jarEntry) {
 		if (jarEntry.isFile()) {
 			handle(jarEntry);
-		}
-		else {
+		} else {
 			IJarEntryResource[] children = jarEntry.getChildren();
 			for (IJarEntryResource child : children) {
 				traverse(child);

@@ -16,8 +16,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -82,7 +80,14 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 		if (isManaged(root)) {
 			index.executeUpdateCommand(new UpdateCommand<Void>() {
 				public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-					indexUpdater.deleteContainer(getContainerName(root));
+					ContainerDescriptorQuery query = new ContainerDescriptorQuery();
+					query.setName(getContainerName(root));
+					QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
+					for (ContainerDescriptor containerDescriptor : result) {
+						deleteResourceDescriptors(indexUpdater, containerDescriptor);
+						if (containerDescriptor.getResourceDescriptors().isEmpty())
+							indexUpdater.deleteContainer(containerDescriptor.getName());
+					}
 					return null;
 				}
 			});
@@ -91,7 +96,6 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 
 	@Override
 	protected void fullBuild(IProgressMonitor monitor) throws CoreException {
-		super.fullBuild(monitor);
 		try {
 			IPackageFragmentRoot[] roots = getJavaProject().getPackageFragmentRoots();
 			for (IPackageFragmentRoot root : roots) {
@@ -139,14 +143,14 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 	}
 
 	@Override
-	protected boolean isLanguageResource(IResource resource) {
-		if (!super.isLanguageResource(resource))
+	protected boolean isManaged(IStorage resource) {
+		if (!super.isManaged(resource))
 			return false;
 		if (!isJavaProject())
 			return true;
-		if (JdtUtil.isInSourceFolder(getJavaProject(), resource))
+		if ((resource instanceof IFile) && JdtUtil.isInSourceFolder(getJavaProject(), (IFile) resource))
 			return true;
-		return false;
+		return resource instanceof IJarEntryResource;
 	}
 
 	private IJavaProject getJavaProject() {
@@ -184,7 +188,7 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 				new JarWalker() {
 					@Override
 					protected void handle(IJarEntryResource jarEntry) {
-						if (hasRightFileExtension(jarEntry.getFullPath())) {
+						if (isManaged(jarEntry)) {
 							build(jarEntry);
 						}
 					}
@@ -196,14 +200,7 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 			try {
 				if (root.getUnderlyingResource() == null)
 					return;
-				IResourceVisitor visitor = new IResourceVisitor() {
-					public boolean visit(IResource resource) throws CoreException {
-						if ((resource instanceof IFile) && isLanguageResource(resource))
-							build((IFile) resource);
-						return true;
-					}
-				};
-				root.getUnderlyingResource().accept(visitor);
+				buildRecursivly(root.getUnderlyingResource());
 			} catch (JavaModelException e) {
 				throw new WrappedException(e);
 			} catch (CoreException e) {
