@@ -63,6 +63,9 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 	 */
 	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
 		resolveProxies(resource, monitor);
+		if (monitor.isCanceled())
+			return null;
+		
 		final List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
 		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
