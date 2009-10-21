@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfindex.EObjectDescriptor;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
@@ -39,8 +38,9 @@ public class NameSearchTrackingIndexImpl extends XtextIndexImpl implements IShar
 
 	private NamesToURIs namesToURI;
 
-	public void startLinking(Resource resource) {
-		namesToURI.deleteEntries(resource.getURI());
+	@Override
+	public void clearNameSearchesFor(URI uri) {
+		namesToURI.deleteEntries(uri);
 	}
 
 	@Override
