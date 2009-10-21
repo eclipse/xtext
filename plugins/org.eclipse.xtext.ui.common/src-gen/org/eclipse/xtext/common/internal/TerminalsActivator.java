@@ -4,6 +4,7 @@
  */
 package org.eclipse.xtext.common.internal;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -31,12 +32,17 @@ public class TerminalsActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		
-		injectors.put("org.eclipse.xtext.common.Terminals", Guice.createInjector(
-			new org.eclipse.xtext.common.TerminalsUiModule(),
-			createUIPluginModule()
-		));
-		
+		try {
+			
+			injectors.put("org.eclipse.xtext.common.Terminals", Guice.createInjector(
+				new org.eclipse.xtext.common.TerminalsUiModule(),
+				createUIPluginModule()
+			));
+			
+		} catch (Exception e) {
+			Logger.getLogger(getClass()).error(e.getMessage(), e);
+			throw e;
+		}
 	}
 	
 	public static TerminalsActivator getInstance() {
