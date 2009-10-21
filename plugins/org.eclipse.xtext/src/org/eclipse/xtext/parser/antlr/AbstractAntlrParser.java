@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -19,6 +21,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,6 +34,13 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	
 	@Inject(optional=true)
 	private IPartialParsingHelper partialParser;
+	
+	@Inject 
+    private ITokenDefProvider tokenDefProvider;
+	
+	@Inject
+	@Named(LexerBindings.RUNTIME)
+	private Provider<Lexer> lexerProvider;
 
 	@Override
 	public IParseResult doParse(InputStream in) {
@@ -83,6 +94,32 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 
 	public IPartialParsingHelper getPartialParser() {
 		return partialParser;
+	}
+	
+	protected TokenSource createLexer(CharStream stream) {
+		Lexer lexer = lexerProvider.get();
+		lexer.setCharStream(stream);
+		return lexer;
+	} 
+	
+	protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
+		return new XtextTokenStream(tokenSource, getTokenDefProvider());
+	}
+	
+	public Provider<Lexer> getLexerProvider() {
+		return this.lexerProvider;
+	}
+	
+	public void setLexerProvider(Provider<Lexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
+	}
+
+	public void setTokenDefProvider(ITokenDefProvider tokenDefProvider) {
+		this.tokenDefProvider = tokenDefProvider;
+	}
+
+	public ITokenDefProvider getTokenDefProvider() {
+		return tokenDefProvider;
 	}
 
 }

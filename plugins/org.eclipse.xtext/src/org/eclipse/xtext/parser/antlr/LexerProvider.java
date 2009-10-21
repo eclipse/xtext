@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.Lexer;
 
 import com.google.inject.Provider;
 
