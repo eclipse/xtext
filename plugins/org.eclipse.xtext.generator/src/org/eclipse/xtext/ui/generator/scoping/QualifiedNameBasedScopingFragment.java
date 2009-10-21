@@ -6,6 +6,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
@@ -44,7 +45,7 @@ public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment
 					"org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback",
 					"org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl")
-			.addTypeToProvider("org.eclipse.emf.emfindex.store.UpdateableIndex", 
+			.addTypeToProvider(IXtextIndex.class.getName(), 
 					"org.eclipse.xtext.ui.core.index.IndexProvider")
 			.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
 					"org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder")

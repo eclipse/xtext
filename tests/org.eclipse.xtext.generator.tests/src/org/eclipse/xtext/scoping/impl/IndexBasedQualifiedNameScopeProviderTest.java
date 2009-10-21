@@ -30,6 +30,7 @@ import org.eclipse.emf.emfindex.store.IndexUpdaterImpl;
 import org.eclipse.emf.emfindex.store.UpdateCommand;
 import org.eclipse.emf.emfindex.store.UpdateableIndex;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
+import org.eclipse.xtext.index.XtextIndexImpl;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
@@ -58,7 +59,7 @@ public class IndexBasedQualifiedNameScopeProviderTest extends AbstractXtextTests
 		with(new IndexTestLanguageStandaloneSetup());
 
 		scopeProvider = new IndexBasedQualifiedNameScopeProvider();
-		scopeProvider.setIndexStore(createIndex());
+		scopeProvider.setIndexStore(new XtextIndexImpl(createIndex()));
 		scopeProvider.setNameProvider(nameProvider);
 	}
 	
@@ -102,7 +103,7 @@ public class IndexBasedQualifiedNameScopeProviderTest extends AbstractXtextTests
 	}
 	
 	public void testMultipleFiles() throws Exception {
-		UpdateableIndex idx = (UpdateableIndex)scopeProvider.getIndexStore();
+		UpdateableIndex idx = scopeProvider.getIndexStore();
 		idx.executeUpdateCommand(new UpdateCommand<Void>() {
 
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
