@@ -142,6 +142,11 @@ public abstract class AbstractXtextGrammarUiTestLanguageUiModule extends XtextGr
 		return org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer.class;
 	}
 
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureHighlightingLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarUiTestLanguageLexer.class);
+	}
+
 	// contributed by org.eclipse.xtext.ui.common.SimpleLabelProviderFragment
 	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
 		return org.eclipse.xtext.ui.core.SimpleLabelProvider.class;
@@ -160,6 +165,16 @@ public abstract class AbstractXtextGrammarUiTestLanguageUiModule extends XtextGr
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
 		return org.eclipse.xtext.contentassist.antlr.XtextGrammarUiTestLanguageParser.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer.class));
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer.class);
 	}
 
 

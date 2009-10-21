@@ -39,12 +39,16 @@ public class XtextTemplateStore extends TemplateStore {
 	public XtextTemplateStore(ContextTypeRegistry registry, IPreferenceStore store, @Named(Constants.LANGUAGE_NAME) String key,
 			AbstractUIPlugin plugin) {
 		super(registry, store, key + ".templates");
-		res = plugin.getBundle().getEntry("templates/templates.xml");
+		res = getTemplateFileURL(plugin);
 		try {
 			load();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
+	}
+
+	protected URL getTemplateFileURL(AbstractUIPlugin plugin) {
+		return plugin.getBundle().getEntry("templates/templates.xml");
 	}
 
 	@Override

@@ -121,5 +121,10 @@ Export-Package: org.eclipse.xtext.xtextUiTest,
  org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage.util,
  org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage,
  org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage.impl,
- org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage.util
+ org.eclipse.xtext.ui.common.editor.contentassist.bug288760TestLanguage.util,
+ org.eclipse.xtext.parser.antlr.internal,
+ org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr.internal,
+ org.eclipse.xtext.parser.keywords.parser.antlr.internal,
+ org.eclipse.xtext.testlanguages.parser.antlr.internal,
+ org.eclipse.xtext.enumrules.parser.antlr.internal
 

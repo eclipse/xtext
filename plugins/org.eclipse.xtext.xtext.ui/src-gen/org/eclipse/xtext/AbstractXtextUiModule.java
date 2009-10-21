@@ -5,6 +5,8 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.XtextRuntimeModule;
+import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
+import org.eclipse.xtext.ui.core.LexerUIBindings;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.XtextUiModule}
@@ -160,6 +162,26 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
 		return org.eclipse.xtext.contentassist.antlr.XtextParser.class;
+	}
+	
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureTokenScannerLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(LexerUIBindings.HIGHLIGHTING)).to(InternalXtextLexer.class);
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).to(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class);
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class));
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexerName(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class);
 	}
 
 

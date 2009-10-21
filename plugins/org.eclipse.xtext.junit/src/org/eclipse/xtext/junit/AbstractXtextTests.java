@@ -9,10 +9,12 @@
 
 package org.eclipse.xtext.junit;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 
 import junit.framework.TestCase;
@@ -239,7 +241,6 @@ public abstract class AbstractXtextTests extends TestCase {
 			else
 				assertEquals(resource.getErrors().toString(), expectedErrors, resource.getErrors().size());
 		}
-		
 		for(Diagnostic d: resource.getErrors()) {
 			if (d instanceof ExceptionDiagnostic)
 				fail(d.getMessage());

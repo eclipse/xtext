@@ -12,13 +12,20 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.common.tests.Activator;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,7 +37,14 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(LookAheadContentAssistTestLanguageStandaloneSetup.class);
+		with(new LookAheadContentAssistTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(
+						new LookAheadContentAssistTestLanguageUiModule(),
+						new UIPluginModule(Activator.getInstance()));
+			}
+		});
 		grammarAccess = get(LookAheadContentAssistTestLanguageGrammarAccess.class);
 	}
 

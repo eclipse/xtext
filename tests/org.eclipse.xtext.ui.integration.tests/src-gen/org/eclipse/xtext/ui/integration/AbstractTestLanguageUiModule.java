@@ -142,6 +142,11 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 		return org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer.class;
 	}
 
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureHighlightingLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.integration.parser.antlr.internal.InternalTestLanguageLexer.class);
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.ui.integration.contentassist.TestLanguageProposalProvider.class;
@@ -155,6 +160,16 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
 		return org.eclipse.xtext.ui.integration.contentassist.antlr.TestLanguageParser.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.integration.contentassist.antlr.internal.InternalTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.integration.contentassist.antlr.internal.InternalTestLanguageLexer.class));
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.integration.contentassist.antlr.internal.InternalTestLanguageLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment

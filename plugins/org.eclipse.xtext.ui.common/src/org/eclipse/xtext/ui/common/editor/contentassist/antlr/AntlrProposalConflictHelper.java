@@ -10,10 +10,13 @@ package org.eclipse.xtext.ui.common.editor.contentassist.antlr;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelper;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,28 +24,31 @@ import com.google.inject.Inject;
 public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 
 	@Inject
+	@Named(LexerBindings.RUNTIME)
 	private Lexer proposalLexer;
 
 	@Inject
+	@Named(LexerBindings.RUNTIME)
 	private Lexer lastCompleteLexer;
 	
 	@Inject
+	@Named(LexerBindings.RUNTIME)
 	private Lexer combinedLexer;
 
 	@Override
 	public boolean existsConflict(String lastCompleteText, String proposal) {
-		initLexer(lastCompleteText, proposal);
-		if (!equalTokenSequence(lastCompleteLexer, combinedLexer))
+		initTokenSources(lastCompleteText, proposal);
+		if (!equalTokenSequence(getLastCompleteLexer(), getCombinedLexer()))
 			return true;
-		if (!equalTokenSequence(proposalLexer, combinedLexer))
+		if (!equalTokenSequence(getProposalLexer(), getCombinedLexer()))
 			return true;
-		Token lastToken = proposalLexer.nextToken();
+		Token lastToken = getProposalLexer().nextToken();
 		if (!lastToken.equals(Token.EOF_TOKEN))
 			return true;
 		return false;
 	}
 
-	protected boolean equalTokenSequence(Lexer first, Lexer second) {
+	protected boolean equalTokenSequence(TokenSource first, TokenSource second) {
 		Token token = null;
 		while(!(token = first.nextToken()).equals(Token.EOF_TOKEN)) {
 			Token otherToken = second.nextToken();
@@ -56,19 +62,20 @@ public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 		return true;
 	}
 	
-	protected void initLexer(String lastCompleteText, String proposal) {
+	protected void initTokenSources(String lastCompleteText, String proposal) {
 		String combinedText = lastCompleteText.concat(proposal);
-		initLexer(combinedText, combinedLexer);
-		initLexer(lastCompleteText, lastCompleteLexer);
-		initLexer(proposal, proposalLexer);
+		initTokenSource(combinedText, getCombinedLexer());
+		initTokenSource(lastCompleteText, getLastCompleteLexer());
+		initTokenSource(proposal, getProposalLexer());
 	}
 
-	protected void initLexer(String text, Lexer lexer) {
+	protected void initTokenSource(String text, TokenSource tokenSource) {
+		Lexer lexer = (Lexer) tokenSource;
 		CharStream stream = new ANTLRStringStream(text);
 		lexer.setCharStream(stream);
 	}
 
-	public Lexer getProposalLexer() {
+	public TokenSource getProposalLexer() {
 		return proposalLexer;
 	}
 
@@ -76,7 +83,7 @@ public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 		this.proposalLexer = proposalLexer;
 	}
 
-	public Lexer getCombinedLexer() {
+	public TokenSource getCombinedLexer() {
 		return combinedLexer;
 	}
 
@@ -88,7 +95,7 @@ public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 		this.lastCompleteLexer = lastCompleteLexer;
 	}
 
-	public Lexer getLastCompleteLexer() {
+	public TokenSource getLastCompleteLexer() {
 		return lastCompleteLexer;
 	}
 

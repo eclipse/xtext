@@ -142,6 +142,11 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 		return org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer.class;
 	}
 
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureHighlightingLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelLexer.class);
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.contentassist.DomainmodelProposalProvider.class;
@@ -170,6 +175,16 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
 		return org.eclipse.xtext.example.contentassist.antlr.DomainmodelParser.class;
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.example.contentassist.antlr.internal.InternalDomainmodelLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.example.contentassist.antlr.internal.InternalDomainmodelLexer.class));
+	}
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+	public void configureContentAssistLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.example.contentassist.antlr.internal.InternalDomainmodelLexer.class);
 	}
 
 

@@ -5,6 +5,8 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
@@ -49,6 +51,7 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
@@ -69,8 +72,13 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	public void configureRuntimeLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(LexerBindings.RUNTIME)).to(InternalXtextLexer.class);
+	}
 }
