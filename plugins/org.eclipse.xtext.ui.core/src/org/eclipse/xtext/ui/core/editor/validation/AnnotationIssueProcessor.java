@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.validation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,8 @@ import org.eclipse.ui.texteditor.AnnotationTypeLookup;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -40,27 +41,68 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 	}
 
 	public void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
-		@SuppressWarnings("unchecked")
-		Iterator<Annotation> iter = annotationModel.getAnnotationIterator();
-		List<Annotation> toBeRemoved = new ArrayList<Annotation>();
-		while (iter.hasNext()) {
-			if (monitor.isCanceled())
-				return;
-			Annotation annotation = iter.next();
-			String type = annotation.getType();
-			if (type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE)) {
-				if (annotation instanceof MarkerAnnotation) {
-					annotation.markDeleted(true);
+		List<Annotation> toBeRemoved = getAnnotationsToRemove(monitor);
+		HashBiMap<Annotation, Position> annotationToPosition = getAnnotationsToAdd(issues, monitor);
+		updateMarkerAnnotations(annotationToPosition.inverse(),monitor);
+		updateAnnotations(monitor, toBeRemoved, annotationToPosition);
+	}
+
+	private void updateAnnotations(IProgressMonitor monitor, List<Annotation> toBeRemoved,
+			HashBiMap<Annotation, Position> annotationToPosition) {
+		if (monitor.isCanceled()) {
+			return;
+		}
+		if (annotationModel instanceof IAnnotationModelExtension) {
+			Annotation[] removedAnnotations = toBeRemoved.toArray(new Annotation[toBeRemoved.size()]);
+			((IAnnotationModelExtension) annotationModel).replaceAnnotations(removedAnnotations, annotationToPosition);
+		} else {
+			for (Annotation annotation : toBeRemoved) {
+				if (monitor.isCanceled()) {
+					return;
 				}
-				else {
+				annotationModel.removeAnnotation(annotation);
+			}
+			for (Map.Entry<Annotation, Position> entry : annotationToPosition.entrySet()) {
+				if (monitor.isCanceled()) {
+					return;
+				}
+				annotationModel.addAnnotation(entry.getKey(), entry.getValue());
+			}
+		}
+	}
+
+	private List<Annotation> getAnnotationsToRemove(IProgressMonitor monitor) {
+		if (monitor.isCanceled()) {
+			return Lists.newArrayList();
+		}
+		@SuppressWarnings("unchecked")
+		Iterator<Annotation> annotationIterator = annotationModel.getAnnotationIterator();
+		List<Annotation> toBeRemoved = Lists.newArrayList();
+		while (annotationIterator.hasNext()) {
+			if (monitor.isCanceled()) {
+				return toBeRemoved;
+			}
+			Annotation annotation = annotationIterator.next();
+			String type = annotation.getType();
+			if (isRelevantAnnotationType(type)) {
+				if (!(annotation instanceof MarkerAnnotation)) {
 					toBeRemoved.add(annotation);
 				}
 			}
 		}
-		Map<Annotation, Position> annotationToPosition = Maps.newHashMapWithExpectedSize(issues.size());
+		return toBeRemoved;
+	}
+
+	private HashBiMap<Annotation, Position> getAnnotationsToAdd(List<Map<String, Object>> issues,
+			IProgressMonitor monitor) {
+		if (monitor.isCanceled()) {
+			return Maps.newHashBiMap();
+		}
+		HashBiMap<Annotation, Position> annotationToPosition = new HashBiMap<Annotation, Position>(issues.size());
 		for (Map<String, Object> map : issues) {
-			if (monitor.isCanceled())
-				return;
+			if (monitor.isCanceled()) {
+				return annotationToPosition;
+			}
 			Integer object = (Integer) map.get(IMarker.SEVERITY);
 			String message = (String) map.get(IMarker.MESSAGE);
 			Integer start = (Integer) map.get(IMarker.CHAR_START);
@@ -72,20 +114,32 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 				annotationToPosition.put(annotation, position);
 			}
 		}
-		if (annotationModel instanceof IAnnotationModelExtension) {
-			Annotation[] removedAnnotations = toBeRemoved.toArray(new Annotation[toBeRemoved.size()]);
-			((IAnnotationModelExtension) annotationModel).replaceAnnotations(removedAnnotations, annotationToPosition);
-		} else {
-			for (Annotation annotation : toBeRemoved) {
-				if (monitor.isCanceled())
-					return;
-				annotationModel.removeAnnotation(annotation);
+		return annotationToPosition;
+	}
+
+	private void updateMarkerAnnotations(Map<Position, Annotation> annotationsToAdd, IProgressMonitor monitor) {
+		if (monitor.isCanceled()) {
+			return;
+		}
+		@SuppressWarnings("unchecked")
+		Iterator<Annotation> annotationIterator = annotationModel.getAnnotationIterator();
+		while (annotationIterator.hasNext()) {
+			if (monitor.isCanceled()) {
+				return;
 			}
-			for(Map.Entry<Annotation, Position> entry: annotationToPosition.entrySet()) {
-				if (monitor.isCanceled())
-					return;
-				annotationModel.addAnnotation(entry.getKey(), entry.getValue());
+			Annotation annotation = annotationIterator.next();
+			if (isRelevantAnnotationType(annotation.getType()) && (annotation instanceof MarkerAnnotation)) {
+				Position markerAnnotationPosition = annotationModel.getPosition(annotation);
+				MarkerAnnotation markerAnnotation = (MarkerAnnotation) annotation;
+				Annotation sourceAnnotation = annotationsToAdd.get(markerAnnotationPosition);
+				boolean deleted = sourceAnnotation == null
+						|| !sourceAnnotation.getText().equals(markerAnnotation.getText());
+				markerAnnotation.markDeleted(deleted);
 			}
 		}
+	}
+
+	private boolean isRelevantAnnotationType(String type) {
+		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE);
 	}
 }
