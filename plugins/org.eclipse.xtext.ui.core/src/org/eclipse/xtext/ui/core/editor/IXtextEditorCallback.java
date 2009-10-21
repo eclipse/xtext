@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.xtext.ui.core.editor.validation.ValidatingEditorCallback;
-
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(ValidatingEditorCallback.class)
+@ImplementedBy(IXtextEditorCallback.NullImpl.class)
 public interface IXtextEditorCallback {
 	
 	public void afterCreatePartControl(XtextEditor editor);
