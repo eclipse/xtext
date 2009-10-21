@@ -38,12 +38,12 @@ public class LexerProviderTest extends TestCase {
 		
 	}
 
-	private LexerProvider provider;
+	private LexerProvider<MyLexer> provider;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		this.provider = new LexerProvider(MyLexer.class);
+		this.provider = new LexerProvider<MyLexer>(MyLexer.class);
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public class LexerProviderTest extends TestCase {
 	}
 	
 	public void testResultIsInitialized() {
-		MyLexer lexer = (MyLexer) provider.get();
+		MyLexer lexer = provider.get();
 		assertTrue("lexer.initialized", lexer.initialized);
 	}
 	
