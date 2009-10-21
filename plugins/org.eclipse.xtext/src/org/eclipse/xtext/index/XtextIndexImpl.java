@@ -86,4 +86,8 @@ public class XtextIndexImpl extends IndexDelegator implements IXtextIndex {
 	public Iterable<URI> getPotentiallyInterestedResources(Set<String> names) {
 		throw new UnsupportedOperationException();
 	}
+
+	public void clearNameSearchesFor(URI uri) {
+		throw new UnsupportedOperationException();
+	}
 }

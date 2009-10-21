@@ -20,11 +20,14 @@ import org.eclipse.emf.emfindex.store.UpdateableIndex;
  */
 public interface IXtextIndex extends UpdateableIndex {
 	
+	public void clearNameSearchesFor(URI uri);
+	
 	/**
 	 * finds instances of the given type with the given name in the given container.
 	 * Registers the search.
 	 */
 	EObjectDescriptor executeFindEObjectByName(EObject context, String containerName, EClass type, String name);
 
-	public Iterable<URI> getPotentiallyInterestedResources(Set<String> names);
+	Iterable<URI> getPotentiallyInterestedResources(Set<String> names);
+	
 }
