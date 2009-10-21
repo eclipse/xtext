@@ -4,6 +4,8 @@ Generated with Xtext
 package org.eclipse.xtext;
 
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.scoping.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
@@ -58,5 +60,8 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
 		return XtextActionBarContributor.class;
 	}
-		
+
+	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
+		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
+	}
 }

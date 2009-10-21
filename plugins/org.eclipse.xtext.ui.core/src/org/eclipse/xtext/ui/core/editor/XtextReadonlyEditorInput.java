@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.core.editor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.PlatformObject;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IPersistableElement;
 import org.eclipse.ui.IStorageEditorInput;
@@ -20,9 +19,9 @@ import org.eclipse.ui.IStorageEditorInput;
  */
 public class XtextReadonlyEditorInput extends PlatformObject implements IStorageEditorInput {
 
-	private final ReadonlyStorage storage;
+	private final IStorage storage;
 
-	public XtextReadonlyEditorInput(ReadonlyStorage storage) {
+	public XtextReadonlyEditorInput(IStorage storage) {
 		this.storage = storage;
 	}
 
@@ -50,18 +49,18 @@ public class XtextReadonlyEditorInput extends PlatformObject implements IStorage
 		return storage.getName();
 	}
 
-	public URI getURI() {
-		return storage.getURI();
-	}
-
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this || obj != null && (obj instanceof XtextReadonlyEditorInput) &&
-				storage.getFullPath().equals(((XtextReadonlyEditorInput)obj).storage.getFullPath()));
+		try {
+			return (obj == this || obj != null && (obj instanceof IStorageEditorInput) &&
+					storage.equals(((IStorageEditorInput)obj).getStorage()));
+		} catch (CoreException e) {
+			return false;
+		}
 	}
 
 	@Override
 	public int hashCode() {
-		return storage.getFullPath().hashCode();
+		return storage.hashCode();
 	}
 }

@@ -115,6 +115,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»

@@ -21,7 +21,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
@@ -34,9 +33,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 
 	public Resource createResource(IEditorInput editorInput) {
 		try {
-			if (editorInput instanceof XtextReadonlyEditorInput) {
-				return createResourceFor((XtextReadonlyEditorInput) editorInput);
-			} else if (editorInput instanceof IStorageEditorInput) {
+			if (editorInput instanceof IStorageEditorInput) {
 				IStorage storage = ((IStorageEditorInput) editorInput).getStorage();
 				if (storage instanceof IFile) {
 					return createResourceFor((IFile) storage);
@@ -48,13 +45,6 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		} catch (CoreException e) {
 			throw new WrappedException(e);
 		}
-	}
-
-	private Resource createResourceFor(XtextReadonlyEditorInput readOnlyInput) throws CoreException {
-		XtextResourceSet set = getResourceSet(readOnlyInput.getStorage());
-		XtextResource resource = getResource(set, readOnlyInput.getURI());
-		resource.setValidationDisabled(true);
-		return resource;
 	}
 
 	private Resource createResourceFor(IJarEntryResource storage) {

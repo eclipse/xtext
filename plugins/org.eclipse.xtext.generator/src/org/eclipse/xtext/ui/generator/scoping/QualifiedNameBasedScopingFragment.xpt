@@ -19,12 +19,6 @@
 «DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
 
 «DEFINE addToPluginXmlUi FOR Grammar»
-	<extension
-         point="org.eclipse.xtext.ui.core.languageBuilder">
-      <languageBuilder
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
-      </languageBuilder>
-   </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»

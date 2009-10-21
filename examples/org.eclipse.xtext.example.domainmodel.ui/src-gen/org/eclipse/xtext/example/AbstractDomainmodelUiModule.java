@@ -122,6 +122,11 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 		return org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
+		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
+	}
+
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
@@ -150,16 +155,6 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider> bindIContainerDependencyProvider() {
 		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
-		return org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
-		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment

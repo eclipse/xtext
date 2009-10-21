@@ -109,6 +109,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -227,6 +233,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -345,6 +357,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -463,6 +481,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -581,6 +605,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -699,6 +729,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -817,6 +853,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -935,6 +977,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1053,6 +1101,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1171,6 +1225,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1289,6 +1349,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1407,6 +1473,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1525,6 +1597,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1643,6 +1721,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1761,6 +1845,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1879,6 +1969,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 
@@ -1997,6 +2093,12 @@
          </command>  
          </menuContribution>
     </extension>
+    	<extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
 
 <!-- adding resource factories -->
 

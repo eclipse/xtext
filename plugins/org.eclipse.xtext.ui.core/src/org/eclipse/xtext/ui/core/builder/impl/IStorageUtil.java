@@ -16,11 +16,20 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.emfindex.ResourceDescriptor;
+import org.eclipse.emf.emfindex.query.QueryCommand;
+import org.eclipse.emf.emfindex.query.QueryExecutor;
+import org.eclipse.emf.emfindex.query.QueryResult;
+import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.index.IXtextIndex;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -30,6 +39,26 @@ public class IStorageUtil {
 	private static final String DELIMITER = ":";
 	private static final String JARENTRY_PREFIX = "jarentry:";
 	protected Logger log = Logger.getLogger(getClass());
+	
+	@Inject
+	private IXtextIndex index;
+	
+	public IStorage getIStorage(final URI uri) {
+		return index.executeQueryCommand(new QueryCommand<IStorage>() {
+
+			public IStorage execute(QueryExecutor queryExecutor) {
+				ResourceDescriptorQuery query = new ResourceDescriptorQuery();
+				query.setURI(uri);
+				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
+				for (ResourceDescriptor resourceDescriptor : result) {
+					String externalStorageString = resourceDescriptor.getUserData(DefaultLanguageBuilder.STORAGE);
+					if (externalStorageString!=null)
+						return getStorage(externalStorageString);
+				}
+				return null;
+			}
+		});
+	}
 
 	public String toExternalString(IStorage storage) {
 		if (storage instanceof IFile) {

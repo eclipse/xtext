@@ -97,6 +97,14 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
+	
+    <extension
+         point="org.eclipse.xtext.ui.core.languageBuilder">
+      <languageBuilder
+            class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
+      </languageBuilder>
+   </extension>
+   
    <!--
     <extension
          point="org.eclipse.ui.commands">

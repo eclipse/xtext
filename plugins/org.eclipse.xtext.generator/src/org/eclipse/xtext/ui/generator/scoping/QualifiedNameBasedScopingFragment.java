@@ -6,7 +6,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
@@ -27,8 +26,6 @@ public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment
 						").annotatedWith(com.google.inject.name.Names.named(" +
 						"\"" + IScopeProvider.class.getName() + ".delegate\"" +
 						")).to("+ QualifiedNameBasedScopeProvider.class.getName() + ".class)")
-		.addTypeToType(IQualifiedNameProvider.class.getName(), 
-				DefaultDeclarativeQualifiedNameProvider.class.getName())
 		.getBindings();
 	}
 	
@@ -43,10 +40,6 @@ public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment
 					")).to("+ IndexBasedQualifiedNameScopeProvider.class.getName() + ".class)")
 			.addTypeToType("org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider",
 					"org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl")
-			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback",
-					"org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.NullImpl")
-			.addTypeToProvider(IXtextIndex.class.getName(), 
-					"org.eclipse.xtext.ui.core.index.IndexProvider")
 			.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
 					"org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder")
 			.getBindings();
