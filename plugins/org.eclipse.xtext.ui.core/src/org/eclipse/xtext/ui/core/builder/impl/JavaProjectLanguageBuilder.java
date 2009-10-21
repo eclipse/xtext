@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfindex.ContainerDescriptor;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
@@ -37,6 +38,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 import org.eclipse.xtext.ui.core.util.JdtUtil;
 
@@ -290,5 +292,15 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 
 	protected String getContainerName(final IPackageFragmentRoot root) {
 		return jdtURIUtil.getURI(root).toString();
+	}
+	
+	@Override
+	protected ResourceSet getResourceSet() {
+		if (resourceSet==null) {
+			resourceSet = resourceSetProvider.get();
+			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
+			resourceSet.setClasspathURIContext(getJavaProject());
+		}
+		return resourceSet;
 	}
 }
