@@ -216,7 +216,7 @@
             id="org.eclipse.xtext.ui.core.contribution1"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.eclipse.xtext.ui.core.builder.internal.ToggleNatureAction"
+               class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
                label="Add Xtext Nature"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
@@ -236,7 +236,7 @@
             id="org.eclipse.xtext.ui.core.contribution2"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.eclipse.xtext.ui.core.builder.internal.ToggleNatureAction"
+               class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
                label="Remove Xtext Nature"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
