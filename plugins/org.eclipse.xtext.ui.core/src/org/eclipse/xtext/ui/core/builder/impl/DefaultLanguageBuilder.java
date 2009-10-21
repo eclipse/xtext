@@ -33,7 +33,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.emfindex.ContainerDescriptor;
 import org.eclipse.emf.emfindex.ResourceDescriptor;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
@@ -46,6 +45,7 @@ import org.eclipse.emf.emfindex.store.UpdateCommand;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.builder.IBuilderAccess;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
@@ -55,6 +55,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -327,9 +328,16 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	protected String getContainerName(IStorage resource) {
 		return ((IResource) resource).getProject().getName();
 	}
+	
+	@Inject
+	protected Provider<XtextResourceSet> resourceSetProvider;
+	protected XtextResourceSet resourceSet;
 
 	protected ResourceSet getResourceSet() {
-		return new ResourceSetImpl();
+		if (resourceSet==null) {
+			resourceSet = resourceSetProvider.get();
+		}
+		return resourceSet;
 	}
 
 	public void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) {
@@ -350,6 +358,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 
 		} finally {
 			state.clear();
+			resourceSet=null;
 		}
 	}
 
