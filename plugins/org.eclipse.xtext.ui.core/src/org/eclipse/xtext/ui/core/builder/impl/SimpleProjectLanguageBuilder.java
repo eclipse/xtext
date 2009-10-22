@@ -21,7 +21,7 @@ import org.eclipse.emf.emfindex.store.UpdateCommand;
 public class SimpleProjectLanguageBuilder extends AbstractLanguageBuilder {
 
 	@Override
-	public void clean(IProgressMonitor monitor) {
+	public void internalClean(IProgressMonitor monitor) {
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 				indexUpdater.deleteContainer(builder.getProject().getName());

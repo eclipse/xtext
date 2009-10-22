@@ -56,7 +56,7 @@ public class JdtURIUtil {
 	}
 
 	public URI createJarURI(URI jarURI, URI pathToResourceInURI) {
-		String fullURI = "jar:" + jarURI.toString() + "!" + pathToResourceInURI.toString();
+		String fullURI = "archive:" + jarURI.toString() + "!" + pathToResourceInURI.toString();
 		return URI.createURI(fullURI);
 	}
 

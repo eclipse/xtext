@@ -40,24 +40,27 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 
 	@Inject
 	private CompositeLanguageBuilder compositeLanguageBuilder;
-	
+
 	@Inject
 	private ISharedState sharedState;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		IProject[] projects = null;
 		try {
-			IProject[] projects = compositeLanguageBuilder.build(sharedState,kind, monitor);
-			compositeLanguageBuilder.postBuild(sharedState,kind, monitor);
-			return projects;
+			projects = compositeLanguageBuilder.build(sharedState, kind, monitor);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		try {
+			compositeLanguageBuilder.postBuild(sharedState, kind, monitor);
 		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
-			throw e;
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
-			throw e;
 		}
+		return projects;
 	}
 
 	@Override
@@ -92,18 +95,18 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 			try {
 				event.getDelta().accept(new IResourceDeltaVisitor() {
-					
+
 					public boolean visit(IResourceDelta delta) throws CoreException {
 						if (delta.getResource() instanceof IWorkspaceRoot)
 							return true;
 						if (delta.getResource().equals(getProject())) {
 							if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && getProject().isOpen()) {
 								Job job = new Job("deferred") {
-									
+
 									@Override
 									protected IStatus run(IProgressMonitor monitor) {
 										try {
-											build(FULL_BUILD,Collections.emptyMap(), new NullProgressMonitor());
+											build(FULL_BUILD, Collections.emptyMap(), new NullProgressMonitor());
 										} catch (CoreException e) {
 											log.error(e.getMessage(), e);
 											return e.getStatus();

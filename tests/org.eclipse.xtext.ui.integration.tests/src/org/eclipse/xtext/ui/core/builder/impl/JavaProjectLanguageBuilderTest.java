@@ -11,7 +11,6 @@ import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.io.File;
-import java.io.InputStream;
 
 import junit.framework.TestCase;
 
@@ -40,6 +39,7 @@ import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -49,14 +49,14 @@ import org.eclipse.xtext.util.StringInputStream;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class JavaProjectLanguageBuilderTest extends TestCase {
-	
+
 	@Override
 	protected void setUp() throws Exception {
-		assertEquals(0,countResourcesInIndex());
-		assertEquals(0,root().getProjects().length);
+		assertEquals(0, countResourcesInIndex());
+		assertEquals(0, root().getProjects().length);
 		super.setUp();
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		cleanWorkspace();
@@ -76,13 +76,13 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
 
 		IMarker[] markers = fileB.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE);
 		assertEquals(printMarker(markers), 0, markers.length);
 	}
-	
+
 	public void testMoveReferencedFileOutOfSourceFolder() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextNature.NATURE_ID);
@@ -91,255 +91,271 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		file.create(new StringInputStream("stuff Foo"), true, monitor());
 		IFile fileB = folder.getFile("Boo.testlanguage");
 		fileB.create(new StringInputStream("stuff Bar refs Foo"), true, monitor());
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
-		
+
 		IMarker[] markers = fileB.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE);
 		assertEquals(printMarker(markers), 0, markers.length);
-		
+
 		file.move(new Path("foo"), true, monitor());
 		waitForAutoBuild();
 		assertEquals(1, countResourcesInIndex());
 		assertTrue(indexContainsElement("Bar"));
 		assertFalse(indexContainsElement("Foo"));
-		
+
 		markers = fileB.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE);
 		assertEquals(printMarker(markers), 1, markers.length);
 	}
-	
+
 	public void testMakeExistingFolderToSourceFolder() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextNature.NATURE_ID);
-		IFolder folder = deleteSourceFolder(project,"src");
+		IFolder folder = deleteSourceFolder(project, "src");
 		folder.create(true, true, monitor());
 		IFile file = folder.getFile("Foo.testlanguage");
 		file.create(new StringInputStream("stuff Foo"), true, monitor());
 		IFile fileB = folder.getFile("Boo.testlanguage");
 		fileB.create(new StringInputStream("stuff Bar refs Foo"), true, monitor());
-		
+
 		waitForAutoBuild();
 		assertEquals(0, countResourcesInIndex());
-		
-		IClasspathEntry srcFolderClasspathEntry = JavaCore
-		.newSourceEntry(folder.getFullPath());
+
+		IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(folder.getFullPath());
 		addToClasspath(project, srcFolderClasspathEntry);
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
 	}
-	
+
 	public void testReferencingFilesInDifferentProjects() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		IJavaProject p_bar = createJavaProject("bar");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		addNature(p_bar.getProject(), XtextNature.NATURE_ID);
-		
+
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
 		IFile bar = createFile("bar/src/Bar.testlanguage", "stuff Bar refs Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",0);
+		assertIsReferenced("Foo", 0);
 		assertEquals(2, countResourcesInIndex());
-		assertEquals(1,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
-		
+		assertEquals(1, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+
 		addProjectReference(p_bar.getProject(), p_foo.getProject());
 		waitForAutoBuild();
-		assertIsReferenced("Foo",1);
-		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertIsReferenced("Foo", 1);
+		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 	}
-	
+
 	public void testDeleteProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
-		
+
 		p_foo.getProject().delete(true, true, monitor());
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
 	}
-	
+
 	public void testDeleteReferencedProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		IJavaProject p_bar = createJavaProject("bar");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		addNature(p_bar.getProject(), XtextNature.NATURE_ID);
 		addProjectReference(p_bar.getProject(), p_foo.getProject());
-		
+
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
 		IFile bar = createFile("bar/src/Bar.testlanguage", "stuff Bar refs Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
-		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 
 		// delete
 		p_foo.getProject().delete(true, true, monitor());
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",0);
+		assertIsReferenced("Foo", 0);
 		assertEquals(1, countResourcesInIndex());
-//TODO		assertEquals(1,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
-		
+		assertEquals(1, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+
 	}
-	
+
 	public void testCloseProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
-		
+
 		p_foo.getProject().close(monitor());
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
 	}
-	
+
 	public void testOpenClosedProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
-		
+
 		p_foo.getProject().close(monitor());
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
-		
+
 		p_foo.getProject().open(monitor());
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 	}
-	
+
 	public void testCloseReferencedProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		IJavaProject p_bar = createJavaProject("bar");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		addNature(p_bar.getProject(), XtextNature.NATURE_ID);
 		addProjectReference(p_bar.getProject(), p_foo.getProject());
-		
+
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
 		IFile bar = createFile("bar/src/Bar.testlanguage", "stuff Bar refs Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
-		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 
 		// delete
 		p_foo.getProject().close(monitor());
 		waitForAutoBuild();
 		assertFalse(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",0);
+		assertIsReferenced("Foo", 0);
 		assertEquals(1, countResourcesInIndex());
-		assertEquals(1,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(1, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 	}
-	
+
 	public void testProjectWithExternalJar() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		waitForAutoBuild();
-		
-		InputStream data = getClass().getResourceAsStream(getClass().getSimpleName()+".jar");
-		File tempFile = createExternalJar(data,"externalLib");
-		IClasspathEntry entry = JavaCore.newLibraryEntry(new Path(tempFile.getCanonicalPath()),null,null);
+
+		File tempFile = createExternalJar(jarInputStream(new TextFile("foo/bar.testlanguage", "stuff Foo")),
+				"externalLib");
+		IClasspathEntry entry = JavaCore.newLibraryEntry(new Path(tempFile.getCanonicalPath()), null, null);
 		addToClasspath(p_foo, entry);
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertEquals(1, countResourcesInIndex());
 	}
-	
+
 	public void testProjectWithLocalJar() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		IFile file = p_foo.getProject().getFile("my.jar");
-		file.create(getClass().getResourceAsStream(getClass().getSimpleName()+".jar"), true, monitor());
+		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "stuff Foo")), true, monitor());
 		waitForAutoBuild();
 		addJarToClasspath(p_foo, file);
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertEquals(1, countResourcesInIndex());
 	}
-	
+
+	public void testTouchLocalJar() throws Exception {
+		IJavaProject p_foo = createJavaProject("foo");
+		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
+		final IFile file = p_foo.getProject().getFile("my.jar");
+		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "stuff Foo")), true, monitor());
+		waitForAutoBuild();
+		addJarToClasspath(p_foo, file);
+
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Foo"));
+		assertEquals(1, countResourcesInIndex());
+		file.setContents(jarInputStream(new TextFile("foo/bar.testlanguage", "stuff Bar")), IResource.FORCE | IResource.KEEP_HISTORY, monitor());
+		waitForAutoBuild();
+		assertFalse(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertEquals(1, countResourcesInIndex());
+	}
+
 	public void testProjectWithLocalJarBeforeFullBuild() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		IFile file = p_foo.getProject().getFile("my.jar");
-		file.create(getClass().getResourceAsStream(getClass().getSimpleName()+".jar"), true, monitor());
+		file.create(getClass().getResourceAsStream(getClass().getSimpleName() + ".jar"), true, monitor());
 		addJarToClasspath(p_foo, file);
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertEquals(1, countResourcesInIndex());
 	}
-	
+
 	public void testReferenceWithinProjectWithLocalJar() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		IFile file = p_foo.getProject().getFile("my.jar");
-		file.create(getClass().getResourceAsStream(getClass().getSimpleName()+".jar"), true, monitor());
+		file.create(getClass().getResourceAsStream(getClass().getSimpleName() + ".jar"), true, monitor());
 		waitForAutoBuild();
 		addJarToClasspath(p_foo, file);
 		waitForAutoBuild();
 
-		createFile("foo/src/Bar.testlanguage","stuff Bar refs Foo");
+		createFile("foo/src/Bar.testlanguage", "stuff Bar refs Foo");
 		waitForAutoBuild();
 
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
 	}
-	
+
 	public void testCleanBuildProject() throws Exception {
 		IJavaProject p_foo = createJavaProject("foo");
 		IJavaProject p_bar = createJavaProject("bar");
 		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
 		addNature(p_bar.getProject(), XtextNature.NATURE_ID);
 		addProjectReference(p_bar.getProject(), p_foo.getProject());
-		
+
 		createFile("foo/src/Foo.testlanguage", "stuff Foo");
 		IFile bar = createFile("bar/src/Bar.testlanguage", "stuff Bar refs Foo");
-		
+
 		waitForAutoBuild();
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
-		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 
 		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
 		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
 		assertTrue(indexContainsElement("Foo"));
 		assertTrue(indexContainsElement("Bar"));
-		assertIsReferenced("Foo",1);
+		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
-		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 	}
-	
-	
+
 	@SuppressWarnings("unused")
 	private String toString(Index index) {
 		return index.executeQueryCommand(new QueryCommand<String>() {
@@ -357,7 +373,7 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 	}
 
 	private void assertIsReferenced(final String name, final int i) {
-		assertEquals((Integer)i,IndexAccess.getIndex().executeQueryCommand(new QueryCommand<Integer>() {
+		assertEquals((Integer) i, IndexAccess.getIndex().executeQueryCommand(new QueryCommand<Integer>() {
 
 			public Integer execute(QueryExecutor queryExecutor) {
 				EObjectDescriptorQuery oquery = new EObjectDescriptorQuery();
@@ -367,20 +383,21 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 					return 0;
 				}
 				EObjectDescriptor next = result.iterator().next();
-				
+
 				EReferenceDescriptorQuery query = new EReferenceDescriptorQuery();
 				query.setTargetResourceURIEquals(next.getResourceDescriptor().getURI());
 				query.setTargetFragmentEquals(next.getFragment());
-				
+
 				QueryResult<EReferenceDescriptor> refDesc = queryExecutor.execute(query);
 				int count = 0;
-				for (@SuppressWarnings("unused") EReferenceDescriptor ref : refDesc) {
+				for (@SuppressWarnings("unused")
+				EReferenceDescriptor ref : refDesc) {
 					count++;
 				}
 				return count;
 			}
 		}));
-		
+
 	}
 
 	private boolean indexContainsElement(final String name) {
@@ -390,8 +407,9 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 				EObjectDescriptorQuery query = new EObjectDescriptorQuery();
 				query.setNameEquals(name);
 				QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
-				for (@SuppressWarnings("unused") EObjectDescriptor d : result) {
-//					System.out.println(d.getName()+" : "+d.getFragmentURI());
+				for (@SuppressWarnings("unused")
+				EObjectDescriptor d : result) {
+					//					System.out.println(d.getName()+" : "+d.getFragmentURI());
 				}
 				return !result.isEmpty();
 			}
@@ -404,8 +422,9 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 			public Integer execute(QueryExecutor queryExecutor) {
 				QueryResult<ResourceDescriptor> result = queryExecutor.execute(new ResourceDescriptorQuery());
 				int count = 0;
-				for (@SuppressWarnings("unused") ResourceDescriptor rsd : result) {
-//					System.out.println(rsd.getURI());
+				for (@SuppressWarnings("unused")
+				ResourceDescriptor rsd : result) {
+					//					System.out.println(rsd.getURI());
 					count++;
 				}
 				return count;

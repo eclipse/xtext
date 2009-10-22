@@ -254,7 +254,7 @@
          point="org.eclipse.ui.decorators">
       <decorator
             adaptable="true"
-            icon="icons/nature_overlay.png"
+            icon="icons/nature_overlay1.png"
             id="org.eclipse.xtext.ui.core.nature.overlay"
             label="Xtext Nature"
             lightweight="true"

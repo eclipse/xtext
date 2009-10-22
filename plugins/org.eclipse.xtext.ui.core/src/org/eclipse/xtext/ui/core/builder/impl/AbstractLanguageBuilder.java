@@ -11,6 +11,7 @@ import static org.eclipse.core.resources.IncrementalProjectBuilder.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -126,8 +127,20 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	protected Map<?, ?> getValidationContext() {
 		return Collections.singletonMap(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
 	}
+	
+	public final void clean(IProgressMonitor monitor) throws CoreException {
+		try {
+			internalClean(monitor);
+		} finally {
+			cleanUpAfterClean();
+		}
+	}
 
-	public abstract void clean(IProgressMonitor monitor);
+	protected void cleanUpAfterClean() {
+		cleanUpAfterBuild();
+	}
+
+	public void internalClean(IProgressMonitor monitor) {}
 
 	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
@@ -272,7 +285,10 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	}
 
 	protected Map<String, String> getUserDataForResource(Resource res, final IStorage storage) {
-		return Collections.singletonMap(STORAGE, storageUtil.toExternalString(storage));
+		Map<String,String> map = new HashMap<String, String>();
+		map.put(STORAGE, storageUtil.toExternalString(storage));
+		map.put(BUILDER_ID, getBuilderId());
+		return map;
 	}
 
 	protected void findOrCreateContainer(String containerName, IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
@@ -375,7 +391,8 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		Set<URI> toDelete = new HashSet<URI>();
 		List<ResourceDescriptor> descriptors = containerDescriptor.getResourceDescriptors();
 		for (ResourceDescriptor resourceDescriptor : descriptors) {
-			if (resourceDescriptor.getUserData(BUILDER_ID).equals(getBuilderId()))
+			String userData = resourceDescriptor.getUserData(BUILDER_ID);
+			if (userData!=null && userData.equals(getBuilderId()))
 				toDelete.add(resourceDescriptor.getURI());
 		}
 		for (URI uri : toDelete) {

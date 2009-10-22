@@ -12,8 +12,6 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.LookAheadContentAssistTestLanguageParser;

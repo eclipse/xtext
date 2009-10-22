@@ -51,28 +51,45 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 
 	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		Set<IProject> all = new HashSet<IProject>();
+
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			IProject[] projects = lb.build(sharedState,kind, monitor);
-			all.addAll(Arrays.asList(projects));
+			try {
+				IProject[] projects = lb.build(sharedState, kind, monitor);
+				all.addAll(Arrays.asList(projects));
+			} catch (Exception e) {
+				log.error("Error invoking 'build' on language builder '" + lb + "'" + e.getMessage());
+			}
 		}
 		return all.toArray(new IProject[all.size()]);
 	}
 
 	public void clean(IProgressMonitor monitor) throws CoreException {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.clean(monitor);
+			try {
+				lb.clean(monitor);
+			} catch (Exception e) {
+				log.error("Error invoking 'clean' on language builder '" + lb + "'" + e.getMessage());
+			}
 		}
 	}
 
 	public void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.postBuild(sharedState,kind, monitor);
+			try {
+				lb.postBuild(sharedState, kind, monitor);
+			} catch (Exception e) {
+				log.error("Error invoking 'postBuild' on language builder '" + lb + "'" + e.getMessage());
+			}
 		}
 	}
 
 	public void initialize(IBuilderAccess builderAccess) {
 		for (ILanguageBuilder lb : getLanguageBuilders()) {
-			lb.initialize(builderAccess);
+			try {
+				lb.initialize(builderAccess);
+			} catch (Exception e) {
+				log.error("Error invoking 'initialize' on language builder '" + lb + "'" + e.getMessage());
+			}
 		}
 	}
 

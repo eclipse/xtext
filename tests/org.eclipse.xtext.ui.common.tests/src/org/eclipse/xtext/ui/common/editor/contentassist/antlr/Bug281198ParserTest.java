@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageUiModule;
