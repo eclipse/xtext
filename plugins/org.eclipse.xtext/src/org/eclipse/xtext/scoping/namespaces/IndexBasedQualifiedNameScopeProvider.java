@@ -107,7 +107,7 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	private static final class FindByEObject extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
+	static final class FindByEObject extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
 
 		private EObject object;
 
@@ -136,7 +136,7 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	private static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IScopedElement>> {
+	static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IScopedElement>> {
 
 		public ConvertAll(String project, EObject context, EClass type) {
 			super(project, context, type);
