@@ -80,7 +80,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		
 		// builder
 		.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
-					"org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder")
+					"org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder")
 		
 		.getBindings();
 	}
