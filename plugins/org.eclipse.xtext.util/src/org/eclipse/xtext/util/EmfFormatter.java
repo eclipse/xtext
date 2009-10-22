@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.FeatureMap;
 
@@ -171,9 +172,13 @@ public class EmfFormatter {
 		Resource r = target.eResource();
 		buf.append(target.eClass().getName());
 		buf.append("@");
-		if (r == null)
-			buf.append("(resource null)");
-		else if (parent.eResource() == r)
+		if (r == null) {
+			if (((InternalEObject)target).eIsProxy()) {
+				buf.append("(unresolved proxy "+((InternalEObject)target).eProxyURI()+")");
+			} else {
+				buf.append("(resource null)");
+			}
+		} else if (parent.eResource() == r)
 			buf.append(r.getURIFragment(target));
 		else
 			buf.append(r.getURI().toString()).append(r.getURIFragment(target));
