@@ -88,8 +88,7 @@ public class LazyLinkingResource extends XtextResource {
 		} catch (RuntimeException e) { 
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
 			// logged because EcoreUtil.resolve will ignore any exceptions.
-			if (log.isInfoEnabled())
-				log.info("resolution of uriFragment '"+uriFragment+"' failed.", e);
+			log.warn("resolution of uriFragment '"+uriFragment+"' failed.", e);
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
