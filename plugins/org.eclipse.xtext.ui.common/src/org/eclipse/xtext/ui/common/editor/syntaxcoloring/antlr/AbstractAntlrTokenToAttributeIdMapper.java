@@ -13,9 +13,11 @@ import java.util.Map.Entry;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration;
+import org.eclipse.xtext.ui.core.LexerUIBindings;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,7 +28,7 @@ public abstract class AbstractAntlrTokenToAttributeIdMapper {
 	private String[] ids;
 	
 	@Inject
-	public void setTokenDefProvider(ITokenDefProvider tokenDefProvider) {
+	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		initIds(tokenDefProvider.getTokenDefMap());
 	}
 
