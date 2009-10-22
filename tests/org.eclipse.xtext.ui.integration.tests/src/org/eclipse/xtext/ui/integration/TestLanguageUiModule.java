@@ -3,6 +3,9 @@
  */
 package org.eclipse.xtext.ui.integration;
 
+import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
+import org.eclipse.xtext.ui.core.builder.impl.TestLanguageBuilder;
+
 
 
 
@@ -10,5 +13,8 @@ package org.eclipse.xtext.ui.integration;
  * Use this class to register components to be used within the IDE.
  */
 public class TestLanguageUiModule extends org.eclipse.xtext.ui.integration.AbstractTestLanguageUiModule {
-
+	@Override
+	public Class<? extends ILanguageBuilder> bindILanguageBuilder() {
+		return TestLanguageBuilder.class;
+	}
 }

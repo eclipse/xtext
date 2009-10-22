@@ -22,7 +22,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.builder.impl.IStorageUtil;
+import org.eclipse.xtext.ui.core.builder.impl.StorageUtil;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 
@@ -41,7 +41,7 @@ public class XtextHyperlink extends AbstractHyperlink {
 	private ILocationInFileProvider locationProvider;
 	
 	@Inject
-	private IStorageUtil storageUtil;
+	private StorageUtil storageUtil;
 
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;

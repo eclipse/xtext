@@ -19,6 +19,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -38,6 +40,7 @@ import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.ui.actions.WorkspaceAction;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -309,6 +312,32 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		assertTrue(indexContainsElement("Bar"));
 		assertIsReferenced("Foo",1);
 		assertEquals(2, countResourcesInIndex());
+	}
+	
+	public void testCleanBuildProject() throws Exception {
+		IJavaProject p_foo = createJavaProject("foo");
+		IJavaProject p_bar = createJavaProject("bar");
+		addNature(p_foo.getProject(), XtextNature.NATURE_ID);
+		addNature(p_bar.getProject(), XtextNature.NATURE_ID);
+		addProjectReference(p_bar.getProject(), p_foo.getProject());
+		
+		createFile("foo/src/Foo.testlanguage", "stuff Foo");
+		IFile bar = createFile("bar/src/Bar.testlanguage", "stuff Bar refs Foo");
+		
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertIsReferenced("Foo",1);
+		assertEquals(2, countResourcesInIndex());
+		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
+		assertTrue(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertIsReferenced("Foo",1);
+		assertEquals(2, countResourcesInIndex());
+		assertEquals(0,bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
 	}
 	
 	

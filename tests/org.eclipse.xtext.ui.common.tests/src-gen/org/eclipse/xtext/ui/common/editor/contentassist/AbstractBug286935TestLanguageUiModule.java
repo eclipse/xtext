@@ -124,7 +124,7 @@ public abstract class AbstractBug286935TestLanguageUiModule extends Bug286935Tes
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder.class;
+		return org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

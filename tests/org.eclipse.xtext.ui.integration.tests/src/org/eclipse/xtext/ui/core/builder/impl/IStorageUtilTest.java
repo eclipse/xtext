@@ -34,7 +34,7 @@ public class IStorageUtilTest extends TestCase {
 	public void testForIFile() throws Exception {
 		IFile file = createFile("foo/bar/Baz.txt", "Moin!");
 		
-		IStorageUtil storageUtil = new IStorageUtil();
+		StorageUtil storageUtil = new StorageUtil();
 		String string = storageUtil.toExternalString(file);
 		assertEquals(file, storageUtil.getStorage(string));
 	}
@@ -55,7 +55,7 @@ public class IStorageUtilTest extends TestCase {
 		}.traverseAllJars(project.getProject());
 		
 		assertEquals(312,resources.size());
-		IStorageUtil storageUtil = new IStorageUtil(); 
+		StorageUtil storageUtil = new StorageUtil(); 
 		for (IJarEntryResource entry : resources) {
 			String externalString = storageUtil.toExternalString(entry);
 			IStorage storage = storageUtil.getStorage(externalString);

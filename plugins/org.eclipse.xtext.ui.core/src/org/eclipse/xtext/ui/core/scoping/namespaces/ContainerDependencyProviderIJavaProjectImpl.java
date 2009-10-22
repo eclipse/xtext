@@ -34,25 +34,24 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider;
-import org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder;
+import org.eclipse.xtext.ui.core.builder.impl.AbstractLanguageBuilder;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
 import com.google.inject.Inject;
 
-public class ContainerDependencyProviderIJavaProjectImpl implements
-		IContainerDependencyProvider {
+public class ContainerDependencyProviderIJavaProjectImpl implements IContainerDependencyProvider {
 
 	public static Logger log = Logger.getLogger(ContainerDependencyProviderIJavaProjectImpl.class);
 
 	@Inject
 	private IXtextIndex index;
-	
+
 	@Inject
 	private JdtURIUtil jdtURIUtil;
-	
+
 	public String getContainer(EObject context) {
 		IJavaProject project = getProject(context);
-		if (project==null)
+		if (project == null)
 			return null;
 		return project.getProject().getName();
 	}
@@ -68,10 +67,13 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 			for (IClasspathEntry entry : classpathEntries) {
 				if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					IPath projectPath = entry.getPath();
-                    IProject otherProject = getWorkspaceRoot().getProject(projectPath.segment(0));
-                    containerNames.addAll(getContainerNamesForReferencedProject(otherProject));
-				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY || entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
-					containerNames.add(getContainerName(project, entry));
+					IProject otherProject = getWorkspaceRoot().getProject(projectPath.segment(0));
+					containerNames.addAll(getContainerNamesForReferencedProject(otherProject));
+				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY
+						|| entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					String containerName = getContainerName(project, entry);
+					if (containerName != null)
+						containerNames.add(containerName);
 				}
 			}
 		} catch (JavaModelException e) {
@@ -82,6 +84,8 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 
 	protected String getContainerName(IJavaProject project, IClasspathEntry entry) {
 		URI uri = jdtURIUtil.getURI(project, entry);
+		if (uri == null)
+			return null;
 		return uri.toString();
 	}
 
@@ -90,11 +94,11 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 		IJavaProject jp = getJavaProject(otherProject);
 		if (!jp.exists() || !jp.isOpen())
 			return names;
-		
+
 		IClasspathEntry[] entries = jp.getResolvedClasspath(true);
 		for (IClasspathEntry cpEntry : entries) {
 			if (cpEntry.isExported()) {
-				names.add(getContainerName(jp,cpEntry));
+				names.add(getContainerName(jp, cpEntry));
 			}
 		}
 		return names;
@@ -133,7 +137,7 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 				query.setName(jdtURIUtil.getPathToArchive(uri).toString());
 				QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
 				for (ContainerDescriptor containerDescriptor : result) {
-					return containerDescriptor.getUserData(DefaultLanguageBuilder.MANAGED_BY);
+					return containerDescriptor.getUserData(AbstractLanguageBuilder.MANAGED_BY);
 				}
 				return null;
 			}
@@ -144,6 +148,5 @@ public class ContainerDependencyProviderIJavaProjectImpl implements
 		IProject project = getWorkspaceRoot().getProject(projectName);
 		return getJavaProject(project);
 	}
-
 
 }

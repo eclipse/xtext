@@ -48,7 +48,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implements IElementChangedListener {
+public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implements IElementChangedListener {
 
 	private static Logger log = Logger.getLogger(JavaProjectLanguageBuilder.class);
 
@@ -155,7 +155,7 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 		return resource instanceof IJarEntryResource;
 	}
 
-	private IJavaProject getJavaProject() {
+	protected IJavaProject getJavaProject() {
 		IProject project = builder.getProject();
 		IJavaProject jp = JavaCore.create(project);
 		return jp;
@@ -243,7 +243,7 @@ public class JavaProjectLanguageBuilder extends DefaultLanguageBuilder implement
 			}
 
 		}
-		return super.getContainerName(storage);
+		throw new IllegalArgumentException("Couldn't handle "+storage);
 	}
 
 	public void elementChanged(ElementChangedEvent event) {

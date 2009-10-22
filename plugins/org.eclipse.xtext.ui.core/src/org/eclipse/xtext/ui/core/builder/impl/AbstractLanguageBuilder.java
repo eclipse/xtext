@@ -61,7 +61,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultLanguageBuilder implements ILanguageBuilder {
+public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 
 	public static final String MANAGED_BY = "MANAGED_BY";
 	public static final String STORAGE = "STORAGE";
@@ -93,7 +93,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 	protected EReferenceDescriptorIndexer eReferenceIndexer;
 
 	@Inject
-	protected IStorageUtil storageUtil;
+	protected StorageUtil storageUtil;
 
 	protected IBuilderAccess builder;
 
@@ -127,14 +127,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return Collections.singletonMap(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
 	}
 
-	public void clean(IProgressMonitor monitor) {
-		index.executeUpdateCommand(new UpdateCommand<Void>() {
-			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-				indexUpdater.deleteContainer(builder.getProject().getName());
-				return null;
-			}
-		});
-	}
+	public abstract void clean(IProgressMonitor monitor);
 
 	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
@@ -193,9 +186,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 				&& !((IProject) delta.getResource()).isOpen();
 	}
 
-	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
-		buildRecursivly(builder.getProject());
-	}
+	protected abstract void fullBuild(final IProgressMonitor monitor) throws CoreException;
 
 	protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
@@ -325,9 +316,7 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		});
 	}
 
-	protected String getContainerName(IStorage resource) {
-		return ((IResource) resource).getProject().getName();
-	}
+	protected abstract String getContainerName(IStorage resource);
 	
 	@Inject
 	protected Provider<XtextResourceSet> resourceSetProvider;
@@ -340,26 +329,33 @@ public class DefaultLanguageBuilder implements ILanguageBuilder {
 		return resourceSet;
 	}
 
-	public void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) {
+	public final void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) {
 		try {
-			Iterable<URI> resources = index.getPotentiallyInterestedResources(sharedState.getChangedEObjectNames());
-			for (URI uri : Sets.newHashSet(resources)) {
-				IStorage iStorage = getIStorage(uri);
-				if (iStorage != null && isManaged(iStorage)) {
-					state.updated(iStorage, getEmfResource(iStorage));
-				}
-			}
-
-			indexCrossReferences();
-			
-			for (Entry<IStorage, Resource> res : state.getUpdated().entrySet()) {
-				validate(res.getKey(), res.getValue(), monitor);
-			}
-
+			internalPostBuild(sharedState, monitor);
 		} finally {
-			state.clear();
-			resourceSet=null;
+			cleanUpAfterBuild();
 		}
+	}
+
+	protected void internalPostBuild(ISharedState sharedState, IProgressMonitor monitor) {
+		Iterable<URI> resources = index.getPotentiallyInterestedResources(sharedState.getChangedEObjectNames());
+		for (URI uri : Sets.newHashSet(resources)) {
+			IStorage iStorage = getIStorage(uri);
+			if (iStorage != null && isManaged(iStorage)) {
+				state.updated(iStorage, getEmfResource(iStorage));
+			}
+		}
+
+		indexCrossReferences();
+		
+		for (Entry<IStorage, Resource> res : state.getUpdated().entrySet()) {
+			validate(res.getKey(), res.getValue(), monitor);
+		}
+	}
+
+	protected void cleanUpAfterBuild() {
+		state.clear();
+		resourceSet=null;
 	}
 
 	protected void indexCrossReferences() {

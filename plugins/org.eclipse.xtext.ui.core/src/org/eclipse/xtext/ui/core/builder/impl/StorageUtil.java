@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IStorageUtil {
+public class StorageUtil {
 
 	private static final String DELIMITER = ":";
 	private static final String JARENTRY_PREFIX = "jarentry:";
@@ -44,6 +44,9 @@ public class IStorageUtil {
 	private IXtextIndex index;
 	
 	public IStorage getIStorage(final URI uri) {
+		if (uri.isPlatformResource())
+			return workspaceRoot().getFile(new Path(uri.toPlatformString(true)));
+		
 		return index.executeQueryCommand(new QueryCommand<IStorage>() {
 
 			public IStorage execute(QueryExecutor queryExecutor) {
@@ -51,7 +54,7 @@ public class IStorageUtil {
 				query.setURI(uri);
 				QueryResult<ResourceDescriptor> result = queryExecutor.execute(query);
 				for (ResourceDescriptor resourceDescriptor : result) {
-					String externalStorageString = resourceDescriptor.getUserData(DefaultLanguageBuilder.STORAGE);
+					String externalStorageString = resourceDescriptor.getUserData(AbstractLanguageBuilder.STORAGE);
 					if (externalStorageString!=null)
 						return getStorage(externalStorageString);
 				}

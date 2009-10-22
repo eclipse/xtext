@@ -139,7 +139,7 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.DefaultLanguageBuilder.class;
+		return org.eclipse.xtext.ui.core.builder.impl.AbstractLanguageBuilder.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
