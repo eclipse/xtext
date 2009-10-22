@@ -60,7 +60,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	}
 
 	@Override
-	public void clean(IProgressMonitor monitor) {
+	public void internalClean(IProgressMonitor monitor) {
 		final String javaProject = getJavaProject().getElementName();
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
@@ -146,15 +146,39 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 
 	@Override
 	protected boolean isManaged(IStorage resource) {
+		if (getJarPackageFragmentRoot(resource)!=null)
+			return true;
 		if (!super.isManaged(resource))
 			return false;
 		if (!isJavaProject())
 			return true;
 		if ((resource instanceof IFile) && JdtUtil.isInSourceFolder(getJavaProject(), (IFile) resource))
 			return true;
-		return resource instanceof IJarEntryResource;
+		if (resource instanceof IJarEntryResource)
+			return true;
+		return false;
 	}
 
+	protected IPackageFragmentRoot getJarPackageFragmentRoot(IStorage resource) {
+		if (resource instanceof IFile) {
+			IFile file = (IFile) resource;
+			IPackageFragmentRoot root = getJavaProject().getPackageFragmentRoot(file);
+			if (root.exists())
+				return root;
+		}
+		return null;
+	}
+	
+	@Override
+	protected void delete(IStorage resource) {
+		IPackageFragmentRoot root = getJarPackageFragmentRoot(resource);
+		if (root!=null) {
+			delete(root);
+			return;
+		}
+		super.delete(resource);
+	}
+	
 	protected IJavaProject getJavaProject() {
 		IProject project = builder.getProject();
 		IJavaProject jp = JavaCore.create(project);
@@ -167,17 +191,11 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 
 	@Override
 	protected void build(IStorage storage) {
-		if (storage instanceof IFile) {
-			try {
-				IPackageFragmentRoot[] roots = getJavaProject().getPackageFragmentRoots();
-				for (IPackageFragmentRoot root : roots) {
-					if (storage.equals(root.getUnderlyingResource())) {
-						build(root);
-					}
-				}
-			} catch (JavaModelException e) {
-				throw new RuntimeException(e);
-			}
+		IPackageFragmentRoot root = getJarPackageFragmentRoot(storage);
+		if (root!=null) {
+			delete(root);
+			build(root);
+			return;
 		}
 		super.build(storage);
 	}

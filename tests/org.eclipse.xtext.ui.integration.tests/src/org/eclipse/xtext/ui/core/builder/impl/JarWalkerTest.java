@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.builder.impl;
 
+import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +20,6 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,11 +33,11 @@ public class JarWalkerTest extends TestCase {
 	}
 	
 	public void testTraversePackageFragmentRoot() throws Exception {
-		IJavaProject project = JavaProjectSetupUtil.createJavaProject("foo");
+		IJavaProject project = createJavaProject("foo");
 		String jarName = "JarWalkerTest.jar";
 		IFile file = project.getProject().getFile(jarName);
 		file.create(getClass().getResourceAsStream(jarName), true, new org.eclipse.core.runtime.NullProgressMonitor());
-		JavaProjectSetupUtil.addJarToClasspath(project, file);
+		addJarToClasspath(project, file);
 		
 		final Set<IPath> pathes = new HashSet<IPath>();
 		JarWalker walker = new JarWalker() {

@@ -31,18 +31,18 @@ import org.eclipse.xtext.ui.integration.foo.Stuff;
  */
 public class TestLanguageBuilder extends JavaProjectLanguageBuilder {
 	
+	@SuppressWarnings("unused")
 	private Logger log = Logger.getLogger(getClass());
 	
 	@Override
 	public void initialize(IBuilderAccess builderAccess) {
-		log.debug("initialize");
 		super.initialize(builderAccess);
 	}
 	
 	@Override
 	public IProject[] build(ISharedState sharedState, int kind, IProgressMonitor monitor) throws CoreException {
-		log.debug("build");
-		return super.build(sharedState, kind, monitor);
+		IProject[] build = super.build(sharedState, kind, monitor);
+		return build;
 	}
 	
 	@Override
@@ -51,7 +51,10 @@ public class TestLanguageBuilder extends JavaProjectLanguageBuilder {
 		for (Map.Entry<IStorage,Resource>  entry: state.getUpdated().entrySet()) {
 			if (entry.getKey() instanceof IFile) {
 				try {
-					if (((IFile)entry.getKey()).findMarkers(EValidator.MARKER, true, 1).length==0) {
+					IFile iFile = (IFile)entry.getKey();
+					if (!iFile.exists())
+						System.out.println("Ups");
+					if (iFile.exists() && iFile.findMarkers(EValidator.MARKER, true, 1).length==0) {
 						TreeIterator<EObject> iterator = entry.getValue().getAllContents();
 						while (iterator.hasNext()) {
 							EObject type = iterator.next();
@@ -67,12 +70,6 @@ public class TestLanguageBuilder extends JavaProjectLanguageBuilder {
 				}
 			}
 		}
-	}
-	
-	@Override
-	public void clean(IProgressMonitor monitor) {
-		log.debug("clean");
-		super.clean(monitor);
 	}
 	
 }
