@@ -40,7 +40,6 @@ import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.ui.actions.WorkspaceAction;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
 import org.eclipse.xtext.util.EmfFormatter;
