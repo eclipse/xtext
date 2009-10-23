@@ -26,6 +26,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
 public class UsedRulesFinder extends XtextSwitch<Void> {
 	
@@ -118,11 +119,12 @@ public class UsedRulesFinder extends XtextSwitch<Void> {
 	}
 
 	public void compute(Grammar grammar) {
-		AbstractRule firstRule = grammar.getRules().get(0);
-		if (firstRule instanceof ParserRule) {
-			doSwitch(firstRule);
-			doSwitch(grammar);
+		if (!grammar.getRules().isEmpty()) {
+			AbstractRule firstRule = grammar.getRules().get(0);
+			if (firstRule instanceof ParserRule) {
+				doSwitch(firstRule);
+				doSwitch(grammar);
+			}
 		}
 	}
-	
 }

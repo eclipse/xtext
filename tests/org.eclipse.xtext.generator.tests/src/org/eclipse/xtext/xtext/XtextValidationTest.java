@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.AbstractRule;
@@ -23,6 +26,9 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -608,6 +614,16 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertNotNull("diag", diag);
 		assertEquals(diag.getSeverity(), Diagnostic.ERROR);
 		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+	}
+	
+	public void testBug_293110() throws Exception {
+		XtextResource resource = doGetResource(new org.eclipse.xtext.util.StringInputStream("A: value=B; B: name=ID;"),URI.createURI("testBug_293110"));
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		Collection<Diagnostic> runtimeExceptions = Collections2.filter(diagnostic.getChildren(), new Predicate<Diagnostic>(){
+			public boolean apply(Diagnostic input) {
+				return input.getException() instanceof RuntimeException;
+			}});
+		assertTrue(runtimeExceptions.isEmpty());
 	}
 	
 	public void acceptError(String message, EObject object, Integer feature, Integer code) {
