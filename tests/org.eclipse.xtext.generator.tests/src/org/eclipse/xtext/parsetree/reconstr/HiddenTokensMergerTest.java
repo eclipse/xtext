@@ -13,7 +13,7 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 
 	private void assertRoundtrip(String model) throws Exception {
 		EObject o = getModel(model);
-		// System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
+		 //System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
 		String r = getSerializer().serialize(o, false);
 		assertEquals(model, r);
 	}
@@ -32,6 +32,10 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 
 	public void testDatatypeBug286557d() throws Exception {
 		assertRoundtrip("#1 a.b.c ref a.b.c;");
+	}
+	
+	public void testEnumBug() throws Exception {
+		assertRoundtrip("#2  kw1   array     test");
 	}
 
 }
