@@ -330,5 +330,14 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.parser.antlr.internal,
  org.eclipse.xtext.valueconverter.parser.antlr.internal,
- org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal
+ org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal,
+ org.eclipse.xtext.parser.antlr.services,
+ org.eclipse.xtext.parser.antlr.bug289515Test,
+ org.eclipse.xtext.parser.antlr.bug289515Test.impl,
+ org.eclipse.xtext.parser.antlr.bug289515Test.util,
+ org.eclipse.xtext.parser.antlr.parser.packrat,
+ org.eclipse.xtext.parser.antlr.parser.packrat.consumers,
+ org.eclipse.xtext.parser.antlr.parseTreeConstruction,
+ org.eclipse.xtext.parser.antlr.parser.antlr,
+ org.eclipse.xtext.parser.antlr.parser.antlr.internal
 
