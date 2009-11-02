@@ -400,4 +400,8 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return getBuilderId();
+	}
 }

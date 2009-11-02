@@ -30,15 +30,11 @@ public class JdtURIUtil {
 	}
 
 	public URI getURI(IPackageFragmentRoot root) {
-		try {
-			IResource underlyingResource = root.getUnderlyingResource();
-			if (underlyingResource == null) {
-				return URI.createFileURI(root.getPath().toString());
-			} else {
-				return URI.createPlatformResourceURI(underlyingResource.getFullPath().toString(), true);
-			}
-		} catch (JavaModelException e) {
-			throw new WrappedException(e);
+		IResource underlyingResource = root.getResource();
+		if (underlyingResource == null) {
+			return URI.createFileURI(root.getPath().toString());
+		} else {
+			return URI.createPlatformResourceURI(underlyingResource.getFullPath().toString(), true);
 		}
 	}
 
