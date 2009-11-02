@@ -88,6 +88,11 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
         return createDatatypeBug286557Adapter();
       }
       @Override
+      public Adapter caseEnumBug(EnumBug object)
+      {
+        return createEnumBugAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -135,6 +140,21 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDatatypeBug286557Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug <em>Enum Bug</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug
+   * @generated
+   */
+  public Adapter createEnumBugAdapter()
   {
     return null;
   }

@@ -7,12 +7,15 @@ package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestFactory;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Model;
@@ -38,6 +41,20 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * @generated
    */
   private EClass datatypeBug286557EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumBugEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum enumBugEnumEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -117,6 +134,16 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getModel_Name()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDatatypeBug286557()
   {
     return datatypeBug286557EClass;
@@ -127,9 +154,9 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDatatypeBug286557_Name()
+  public EReference getDatatypeBug286557_Ref()
   {
-    return (EAttribute)datatypeBug286557EClass.getEStructuralFeatures().get(0);
+    return (EReference)datatypeBug286557EClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -137,9 +164,29 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDatatypeBug286557_Ref()
+  public EClass getEnumBug()
   {
-    return (EReference)datatypeBug286557EClass.getEStructuralFeatures().get(1);
+    return enumBugEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEnumBug_Return()
+  {
+    return (EAttribute)enumBugEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getEnumBugEnum()
+  {
+    return enumBugEnumEEnum;
   }
 
   /**
@@ -173,10 +220,16 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
+    createEAttribute(modelEClass, MODEL__NAME);
 
     datatypeBug286557EClass = createEClass(DATATYPE_BUG286557);
-    createEAttribute(datatypeBug286557EClass, DATATYPE_BUG286557__NAME);
     createEReference(datatypeBug286557EClass, DATATYPE_BUG286557__REF);
+
+    enumBugEClass = createEClass(ENUM_BUG);
+    createEAttribute(enumBugEClass, ENUM_BUG__RETURN);
+
+    // Create enums
+    enumBugEnumEEnum = createEEnum(ENUM_BUG_ENUM);
   }
 
   /**
@@ -209,13 +262,24 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
 
     // Add supertypes to classes
     datatypeBug286557EClass.getESuperTypes().add(this.getModel());
+    enumBugEClass.getESuperTypes().add(this.getModel());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(datatypeBug286557EClass, DatatypeBug286557.class, "DatatypeBug286557", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDatatypeBug286557_Name(), ecorePackage.getEString(), "name", null, 0, 1, DatatypeBug286557.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDatatypeBug286557_Ref(), this.getDatatypeBug286557(), null, "ref", null, 0, 1, DatatypeBug286557.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumBugEClass, EnumBug.class, "EnumBug", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumBug_Return(), this.getEnumBugEnum(), "return", null, 0, 1, EnumBug.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(enumBugEnumEEnum, EnumBugEnum.class, "EnumBugEnum");
+    addEEnumLiteral(enumBugEnumEEnum, EnumBugEnum.ARRAY);
+    addEEnumLiteral(enumBugEnumEEnum, EnumBugEnum.OBJECT);
+    addEEnumLiteral(enumBugEnumEEnum, EnumBugEnum.RESULT_SET);
+    addEEnumLiteral(enumBugEnumEEnum, EnumBugEnum.ITERATOR);
 
     // Create resource
     createResource(eNS_URI);

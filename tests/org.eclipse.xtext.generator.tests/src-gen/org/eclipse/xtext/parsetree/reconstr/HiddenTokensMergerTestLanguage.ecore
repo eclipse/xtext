@@ -3,9 +3,19 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hiddentokenmergertest"
     nsURI="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger" nsPrefix="hiddentokenmergertest">
-  <eClassifiers xsi:type="ecore:EClass" name="Model"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DatatypeBug286557" eSuperTypes="#//Model">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatatypeBug286557" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DatatypeBug286557"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumBug" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="return" eType="#//EnumBugEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumBugEnum">
+    <eLiterals name="array" literal="array"/>
+    <eLiterals name="object" value="1" literal="object"/>
+    <eLiterals name="resultSet" value="2" literal="resultSet"/>
+    <eLiterals name="iterator" value="3" literal="iterator"/>
   </eClassifiers>
 </ecore:EPackage>

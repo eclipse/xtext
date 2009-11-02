@@ -8,7 +8,10 @@
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//Model"/>
       </type>
-      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+      </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="DatatypeBug286557">
       <type metamodel="/0/@metamodelDeclarations.0">
@@ -43,6 +46,44 @@
           <tokens xsi:type="xtext:Keyword" value="."/>
           <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="EnumBug">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBug"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#2"/>
+        <tokens xsi:type="xtext:Keyword" value="kw1"/>
+        <tokens xsi:type="xtext:Assignment" feature="return" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+        </tokens>
+        <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:EnumRule" name="EnumBugEnum">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBugEnum"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBugEnum/array"/>
+          <literal value="array"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBugEnum/object"/>
+          <literal value="object"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBugEnum/resultSet"/>
+          <literal value="resultSet"/>
+        </groups>
+        <groups xsi:type="xtext:EnumLiteralDeclaration">
+          <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger#//EnumBugEnum/iterator"/>
+          <literal value="iterator"/>
+        </groups>
       </alternatives>
     </rules>
   </xtext:Grammar>

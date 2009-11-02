@@ -14,16 +14,16 @@ public final class HiddenTokensMergerTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$13$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$20$Delimiter = new SetBasedKeywordMatcher(
-		"ref");
+	public static final ISequenceMatcher ruleCall$22$Delimiter = new SetBasedKeywordMatcher(
+		"ref", "kw1");
 
 }

@@ -9,10 +9,20 @@
     editorPluginID="org.eclipse.xtext.generator.tests.editor">
   <genPackages prefix="Hiddentokenmergertest" basePackage="org.eclipse.xtext.parsetree.reconstr"
       disposableProviderFactory="true" ecorePackage="HiddenTokensMergerTestLanguage.ecore#/">
-    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Model"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum">
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/array"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/object"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/resultSet"/>
+      <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/iterator"/>
+    </genEnums>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//Model/name"/>
+    </genClasses>
     <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//EnumBug">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//EnumBug/return"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

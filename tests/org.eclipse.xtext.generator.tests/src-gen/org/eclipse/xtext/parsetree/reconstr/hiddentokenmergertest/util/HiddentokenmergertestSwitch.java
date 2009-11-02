@@ -110,6 +110,14 @@ public class HiddentokenmergertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case HiddentokenmergertestPackage.ENUM_BUG:
+      {
+        EnumBug enumBug = (EnumBug)theEObject;
+        T result = caseEnumBug(enumBug);
+        if (result == null) result = caseModel(enumBug);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -142,6 +150,22 @@ public class HiddentokenmergertestSwitch<T>
    * @generated
    */
   public T caseDatatypeBug286557(DatatypeBug286557 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Bug</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Bug</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumBug(EnumBug object)
   {
     return null;
   }
