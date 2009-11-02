@@ -19,14 +19,22 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final RuleCall cDatatypeBug286557ParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDatatypeBug286557ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEnumBugParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Model:
-		//  DatatypeBug286557;
+		//  DatatypeBug286557|EnumBug;
 		public ParserRule getRule() { return rule; }
 
+		//DatatypeBug286557|EnumBug
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//DatatypeBug286557
-		public RuleCall getDatatypeBug286557ParserRuleCall() { return cDatatypeBug286557ParserRuleCall; }
+		public RuleCall getDatatypeBug286557ParserRuleCall_0() { return cDatatypeBug286557ParserRuleCall_0; }
+
+		//EnumBug
+		public RuleCall getEnumBugParserRuleCall_1() { return cEnumBugParserRuleCall_1; }
 	}
 
 	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
@@ -104,11 +112,93 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
+
+	public class EnumBugElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBug");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cKw1Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cReturnAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cReturnEnumBugEnumEnumRuleCall_2_0 = (RuleCall)cReturnAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		
+		//EnumBug:
+		//  "#2" "kw1" return=EnumBugEnum name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"#2" "kw1" return=EnumBugEnum name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#2"
+		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
+
+		//return=EnumBugEnum
+		public Assignment getReturnAssignment_2() { return cReturnAssignment_2; }
+
+		//EnumBugEnum
+		public RuleCall getReturnEnumBugEnumEnumRuleCall_2_0() { return cReturnEnumBugEnumEnumRuleCall_2_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
+	}
 	
+	
+	public class EnumBugEnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBugEnum");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cArrayEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cArrayArrayKeyword_0_0 = (Keyword)cArrayEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cObjectEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cObjectObjectKeyword_1_0 = (Keyword)cObjectEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cResultSetEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cResultSetResultSetKeyword_2_0 = (Keyword)cResultSetEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cIteratorEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cIteratorIteratorKeyword_3_0 = (Keyword)cIteratorEnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum EnumBugEnum:
+		//  array | object | resultSet | iterator;
+		public EnumRule getRule() { return rule; }
+
+		//array | object | resultSet | iterator
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//array
+		public EnumLiteralDeclaration getArrayEnumLiteralDeclaration_0() { return cArrayEnumLiteralDeclaration_0; }
+
+		//"array"
+		public Keyword getArrayArrayKeyword_0_0() { return cArrayArrayKeyword_0_0; }
+
+		//object
+		public EnumLiteralDeclaration getObjectEnumLiteralDeclaration_1() { return cObjectEnumLiteralDeclaration_1; }
+
+		//"object"
+		public Keyword getObjectObjectKeyword_1_0() { return cObjectObjectKeyword_1_0; }
+
+		//resultSet
+		public EnumLiteralDeclaration getResultSetEnumLiteralDeclaration_2() { return cResultSetEnumLiteralDeclaration_2; }
+
+		//"resultSet"
+		public Keyword getResultSetResultSetKeyword_2_0() { return cResultSetResultSetKeyword_2_0; }
+
+		//iterator
+		public EnumLiteralDeclaration getIteratorEnumLiteralDeclaration_3() { return cIteratorEnumLiteralDeclaration_3; }
+
+		//"iterator"
+		public Keyword getIteratorIteratorKeyword_3_0() { return cIteratorIteratorKeyword_3_0; }
+	}
 	
 	private ModelElements pModel;
 	private DatatypeBug286557Elements pDatatypeBug286557;
 	private FQNElements pFQN;
+	private EnumBugElements pEnumBug;
+	private EnumBugEnumElements unknownRuleEnumBugEnum;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -132,7 +222,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  DatatypeBug286557;
+	//  DatatypeBug286557|EnumBug;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -159,6 +249,26 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
+	}
+
+	//EnumBug:
+	//  "#2" "kw1" return=EnumBugEnum name=ID;
+	public EnumBugElements getEnumBugAccess() {
+		return (pEnumBug != null) ? pEnumBug : (pEnumBug = new EnumBugElements());
+	}
+	
+	public ParserRule getEnumBugRule() {
+		return getEnumBugAccess().getRule();
+	}
+
+	//enum EnumBugEnum:
+	//  array | object | resultSet | iterator;
+	public EnumBugEnumElements getEnumBugEnumAccess() {
+		return (unknownRuleEnumBugEnum != null) ? unknownRuleEnumBugEnum : (unknownRuleEnumBugEnum = new EnumBugEnumElements());
+	}
+	
+	public EnumRule getEnumBugEnumRule() {
+		return getEnumBugEnumAccess().getRule();
 	}
 
 	//terminal ID:

@@ -6,6 +6,7 @@
 package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -69,8 +70,43 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
     {
       case HiddentokenmergertestPackage.MODEL: return createModel();
       case HiddentokenmergertestPackage.DATATYPE_BUG286557: return createDatatypeBug286557();
+      case HiddentokenmergertestPackage.ENUM_BUG: return createEnumBug();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case HiddentokenmergertestPackage.ENUM_BUG_ENUM:
+        return createEnumBugEnumFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case HiddentokenmergertestPackage.ENUM_BUG_ENUM:
+        return convertEnumBugEnumToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -94,6 +130,39 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     DatatypeBug286557Impl datatypeBug286557 = new DatatypeBug286557Impl();
     return datatypeBug286557;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumBug createEnumBug()
+  {
+    EnumBugImpl enumBug = new EnumBugImpl();
+    return enumBug;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumBugEnum createEnumBugEnumFromString(EDataType eDataType, String initialValue)
+  {
+    EnumBugEnum result = EnumBugEnum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertEnumBugEnumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

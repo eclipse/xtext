@@ -44,6 +44,15 @@ public interface HiddentokenmergertestFactory extends EFactory
   DatatypeBug286557 createDatatypeBug286557();
 
   /**
+   * Returns a new object of class '<em>Enum Bug</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enum Bug</em>'.
+   * @generated
+   */
+  EnumBug createEnumBug();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

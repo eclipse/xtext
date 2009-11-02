@@ -7,6 +7,7 @@ package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -70,13 +71,22 @@ public interface HiddentokenmergertestPackage extends EPackage
   int MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__NAME = 0;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 0;
+  int MODEL_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.DatatypeBug286557Impl <em>Datatype Bug286557</em>}' class.
@@ -95,7 +105,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATATYPE_BUG286557__NAME = MODEL_FEATURE_COUNT + 0;
+  int DATATYPE_BUG286557__NAME = MODEL__NAME;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -104,7 +114,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATATYPE_BUG286557__REF = MODEL_FEATURE_COUNT + 1;
+  int DATATYPE_BUG286557__REF = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Datatype Bug286557</em>' class.
@@ -113,7 +123,54 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATATYPE_BUG286557_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+  int DATATYPE_BUG286557_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.EnumBugImpl <em>Enum Bug</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.EnumBugImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBug()
+   * @generated
+   */
+  int ENUM_BUG = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_BUG__NAME = MODEL__NAME;
+
+  /**
+   * The feature id for the '<em><b>Return</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_BUG__RETURN = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Enum Bug</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_BUG_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBugEnum()
+   * @generated
+   */
+  int ENUM_BUG_ENUM = 3;
 
 
   /**
@@ -127,6 +184,17 @@ public interface HiddentokenmergertestPackage extends EPackage
   EClass getModel();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Model#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Model#getName()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557 <em>Datatype Bug286557</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -135,17 +203,6 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    */
   EClass getDatatypeBug286557();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557#getName()
-   * @see #getDatatypeBug286557()
-   * @generated
-   */
-  EAttribute getDatatypeBug286557_Name();
 
   /**
    * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557#getRef <em>Ref</em>}'.
@@ -157,6 +214,37 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    */
   EReference getDatatypeBug286557_Ref();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug <em>Enum Bug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enum Bug</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug
+   * @generated
+   */
+  EClass getEnumBug();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug#getReturn <em>Return</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Return</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug#getReturn()
+   * @see #getEnumBug()
+   * @generated
+   */
+  EAttribute getEnumBug_Return();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Enum Bug Enum</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum
+   * @generated
+   */
+  EEnum getEnumBugEnum();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -192,6 +280,14 @@ public interface HiddentokenmergertestPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.DatatypeBug286557Impl <em>Datatype Bug286557</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -202,20 +298,40 @@ public interface HiddentokenmergertestPackage extends EPackage
     EClass DATATYPE_BUG286557 = eINSTANCE.getDatatypeBug286557();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DATATYPE_BUG286557__NAME = eINSTANCE.getDatatypeBug286557_Name();
-
-    /**
      * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference DATATYPE_BUG286557__REF = eINSTANCE.getDatatypeBug286557_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.EnumBugImpl <em>Enum Bug</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.EnumBugImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBug()
+     * @generated
+     */
+    EClass ENUM_BUG = eINSTANCE.getEnumBug();
+
+    /**
+     * The meta object literal for the '<em><b>Return</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENUM_BUG__RETURN = eINSTANCE.getEnumBug_Return();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBugEnum()
+     * @generated
+     */
+    EEnum ENUM_BUG_ENUM = eINSTANCE.getEnumBugEnum();
 
   }
 

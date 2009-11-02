@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
@@ -240,6 +241,8 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 				RuleCall rc = (RuleCall) ((CompositeNode) node).getGrammarElement();
 				if (rc.getRule() instanceof ParserRule)
 					return GrammarUtil.isDatatypeRule((ParserRule) rc.getRule());
+				if(rc.getRule() instanceof EnumRule)
+					return true;
 			}
 			if (e instanceof CrossReference)
 				return true;

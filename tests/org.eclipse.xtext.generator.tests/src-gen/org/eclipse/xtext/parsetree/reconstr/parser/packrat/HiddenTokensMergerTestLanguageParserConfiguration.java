@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.HiddenTokensMergerTestLanguageModelConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.HiddenTokensMergerTestLanguageDatatypeBug286557Consumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.HiddenTokensMergerTestLanguageFQNConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.HiddenTokensMergerTestLanguageEnumBugConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.HiddenTokensMergerTestLanguageEnumBugEnumConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -26,6 +28,8 @@ public class HiddenTokensMergerTestLanguageParserConfiguration extends AbstractP
     private HiddenTokensMergerTestLanguageModelConsumer modelConsumer;
     private HiddenTokensMergerTestLanguageDatatypeBug286557Consumer datatypeBug286557Consumer;
     private HiddenTokensMergerTestLanguageFQNConsumer fqnConsumer;
+    private HiddenTokensMergerTestLanguageEnumBugConsumer enumBugConsumer;
+    private HiddenTokensMergerTestLanguageEnumBugEnumConsumer enumBugEnumConsumer;
 
 	private HiddenTokensMergerTestLanguageGrammarAccess grammarAccess;
 
@@ -50,6 +54,10 @@ public class HiddenTokensMergerTestLanguageParserConfiguration extends AbstractP
 		fqnConsumer = new HiddenTokensMergerTestLanguageFQNConsumer(
     		this, null
     	);
+		enumBugConsumer = new HiddenTokensMergerTestLanguageEnumBugConsumer(
+    		this, null
+    	);
+		enumBugEnumConsumer = new HiddenTokensMergerTestLanguageEnumBugEnumConsumer(this, null);
 	}
 	
 	public void createTerminalConsumers() {
@@ -62,6 +70,8 @@ public class HiddenTokensMergerTestLanguageParserConfiguration extends AbstractP
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
 		getDatatypeBug286557Consumer().setRule(grammarAccess.getDatatypeBug286557Access());
 		getFqnConsumer().setRule(grammarAccess.getFQNAccess());
+		getEnumBugConsumer().setRule(grammarAccess.getEnumBugAccess());
+		getEnumBugEnumConsumer().setRule(grammarAccess.getEnumBugEnumAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -72,17 +82,24 @@ public class HiddenTokensMergerTestLanguageParserConfiguration extends AbstractP
 
 
 		getModelConsumer().setDatatypeBug286557Consumer(getDatatypeBug286557Consumer());
+		getModelConsumer().setEnumBugConsumer(getEnumBugConsumer());
 
 		getDatatypeBug286557Consumer().setFqnConsumer(getFqnConsumer());
 
 		getFqnConsumer().setIdConsumer(getIdConsumer());
 
-		getDatatypeBug286557Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$11$Delimiter);
-		getDatatypeBug286557Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$7$Delimiter);
-		getDatatypeBug286557Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$7$Delimiter);
-		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$7$Delimiter);
-		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.ruleCall$20$Delimiter);
-		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getEnumBugConsumer().setEnumBugEnumConsumer(getEnumBugEnumConsumer());
+		getEnumBugConsumer().setIdConsumer(getIdConsumer());
+
+		getDatatypeBug286557Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$13$Delimiter);
+		getDatatypeBug286557Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$9$Delimiter);
+		getDatatypeBug286557Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$9$Delimiter);
+		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$9$Delimiter);
+		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.ruleCall$22$Delimiter);
+		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.ruleCall$22$Delimiter);
+		getEnumBugConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$9$Delimiter);
+		getEnumBugConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.keyword$13$Delimiter);
+		getEnumBugConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.HiddenTokensMergerTestLanguageDelimiters.ruleCall$22$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -99,6 +116,14 @@ public class HiddenTokensMergerTestLanguageParserConfiguration extends AbstractP
 
     public HiddenTokensMergerTestLanguageFQNConsumer getFqnConsumer() {
     	return fqnConsumer;
+    }
+
+    public HiddenTokensMergerTestLanguageEnumBugConsumer getEnumBugConsumer() {
+    	return enumBugConsumer;
+    }
+
+    public HiddenTokensMergerTestLanguageEnumBugEnumConsumer getEnumBugEnumConsumer() {
+    	return enumBugEnumConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
@@ -22,11 +23,30 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 
 	private INonTerminalConsumer datatypeBug286557Consumer;
 
-	private IElementConsumer ruleCall$1$Consumer;
+	private INonTerminalConsumer enumBugConsumer;
 
-	protected class RuleCall$1$Consumer extends ElementConsumer<RuleCall> {
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
-		protected RuleCall$1$Consumer(final RuleCall ruleCall) {
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -36,13 +56,25 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		}
 	}
 
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(enumBugConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public HiddenTokensMergerTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
 	protected int doConsume() throws Exception {
-		return ruleCall$1$Consumer.consume();
+		return alternatives$1$Consumer.consume();
 	}
 
 	public ModelElements getRule() {
@@ -52,7 +84,9 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		ruleCall$1$Consumer = new RuleCall$1$Consumer(rule.getDatatypeBug286557ParserRuleCall());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getDatatypeBug286557ParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEnumBugParserRuleCall_1());
 	}
 	
 	@Override
@@ -67,6 +101,10 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 	
 	public void setDatatypeBug286557Consumer(INonTerminalConsumer datatypeBug286557Consumer) {
 		this.datatypeBug286557Consumer = datatypeBug286557Consumer;
+	}
+	
+	public void setEnumBugConsumer(INonTerminalConsumer enumBugConsumer) {
+		this.enumBugConsumer = enumBugConsumer;
 	}
 	
 }

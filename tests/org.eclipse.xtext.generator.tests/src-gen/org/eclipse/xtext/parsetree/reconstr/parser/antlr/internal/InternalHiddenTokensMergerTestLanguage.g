@@ -26,6 +26,7 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -83,16 +84,26 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-
+(
     { 
-        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDatatypeBug286557ParserRuleCall(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDatatypeBug286557ParserRuleCall_0(), currentNode); 
     }
     this_DatatypeBug286557_0=ruleDatatypeBug286557
     { 
         $current = $this_DatatypeBug286557_0.current; 
         currentNode = currentNode.getParent();
     }
-;
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnumBugParserRuleCall_1(), currentNode); 
+    }
+    this_EnumBug_1=ruleEnumBug
+    { 
+        $current = $this_EnumBug_1.current; 
+        currentNode = currentNode.getParent();
+    }
+);
 
 
 
@@ -210,6 +221,116 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     ;
 
 
+
+
+
+// Entry rule entryRuleEnumBug
+entryRuleEnumBug returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEnumBugRule(), currentNode); }
+	 iv_ruleEnumBug=ruleEnumBug 
+	 { $current=$iv_ruleEnumBug.current; } 
+	 EOF 
+;
+
+// Rule EnumBug
+ruleEnumBug returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#2' 
+    {
+        createLeafNode(grammarAccess.getEnumBugAccess().getNumberSignDigitTwoKeyword_0(), null); 
+    }
+'kw1' 
+    {
+        createLeafNode(grammarAccess.getEnumBugAccess().getKw1Keyword_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEnumBugAccess().getReturnEnumBugEnumEnumRuleCall_2_0(), currentNode); 
+	    }
+		lv_return_2_0=ruleEnumBugEnum		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumBugRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"return",
+	        		lv_return_2_0, 
+	        		"EnumBugEnum", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)(
+(
+		lv_name_3_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getEnumBugAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumBugRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_3_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+));
+
+
+
+
+
+// Rule EnumBugEnum
+ruleEnumBugEnum returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	'array' 
+	{
+        $current = grammarAccess.getEnumBugEnumAccess().getArrayEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBugEnumAccess().getArrayEnumLiteralDeclaration_0(), null); 
+    }
+)
+    |(	'object' 
+	{
+        $current = grammarAccess.getEnumBugEnumAccess().getObjectEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBugEnumAccess().getObjectEnumLiteralDeclaration_1(), null); 
+    }
+)
+    |(	'resultSet' 
+	{
+        $current = grammarAccess.getEnumBugEnumAccess().getResultSetEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBugEnumAccess().getResultSetEnumLiteralDeclaration_2(), null); 
+    }
+)
+    |(	'iterator' 
+	{
+        $current = grammarAccess.getEnumBugEnumAccess().getIteratorEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBugEnumAccess().getIteratorEnumLiteralDeclaration_3(), null); 
+    }
+));
 
 
 
