@@ -64,7 +64,9 @@ public class BindValue {
 	public String toString() {
 		if (expression!=null)
 			return expression;
-		return typeName;
+		if (typeName!=null)
+			return typeName;
+		return statements == null ? "null" : "configuredBinding(..)";
 	}
 
 }
