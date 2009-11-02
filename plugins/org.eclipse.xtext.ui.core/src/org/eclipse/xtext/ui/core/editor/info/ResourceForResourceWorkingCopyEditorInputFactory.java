@@ -2,7 +2,6 @@ package org.eclipse.xtext.ui.core.editor.info;
 
 import java.io.InputStream;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -21,7 +20,7 @@ public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassP
 
 	private Resource createWorkingCopy(ResourceWorkingCopyFileEditorInput editorInput) {
 		try {
-			XtextResourceSet xtextResourceSet = createXtextResourceSet(editorInput.getFile());
+			XtextResourceSet xtextResourceSet = getResourceSet(editorInput.getFile());
 			Resource workingCopy = xtextResourceSet.createResource(editorInput.getResource().getURI());
 			InputStream inputStream = editorInput.getFile().getContents(); 
 			try {
