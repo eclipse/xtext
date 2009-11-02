@@ -45,7 +45,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private IResourceForEditorInputFactory resourceForEditorInputFactory;
 
 	public void setInput(IEditorInput editorInput) {
-		this.resource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
+		setInput((XtextResource) resourceForEditorInputFactory.createResource(editorInput));
+	}
+	
+	public void setInput(XtextResource resource) {
+		this.resource = resource;
 		try {
 			this.resource.load(null);
 		}
@@ -53,7 +57,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			log.error(e.getMessage(), e);
 		}
 	}
-
+	
 	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
 
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
