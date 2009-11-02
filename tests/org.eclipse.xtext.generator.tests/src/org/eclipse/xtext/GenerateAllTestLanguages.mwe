@@ -92,6 +92,42 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
+				<property name="file.extensions" value=""/>
+				<property name="genModels" value=""/>
+				<property name="basePackage" value=""/>
+				<property name="javaModelDirectory" value=""/>
+				<property name="xmiModelDirectory" value=""/>
+				<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+				<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genModels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
+				<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+				<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+				<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
+					<options backtrack="true"/>
+				</fragment>
+				<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+					fileExtensions="${file.extensions}"/>
+			</fragment>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
+				<property name="file.extensions" value=""/>
+				<property name="genModels" value=""/>
+				<property name="basePackage" value=""/>
+				<property name="javaModelDirectory" value=""/>
+				<property name="xmiModelDirectory" value=""/>
+				<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+				<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genModels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
+				<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+				<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+				<fragment class="de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment">
+					<options backtrack="true"/>
+				</fragment>
+				<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+					fileExtensions="${file.extensions}"/>
+			</fragment>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>

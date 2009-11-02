@@ -55,6 +55,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.MweReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug289515Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug289524ExTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug289524Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.LexerProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.AntlrDatatypeRuleTokenTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);

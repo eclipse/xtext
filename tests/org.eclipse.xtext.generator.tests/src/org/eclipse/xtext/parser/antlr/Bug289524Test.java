@@ -5,15 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.antlr.Bug289515TestLanguage with org.eclipse.xtext.common.Terminals
+package org.eclipse.xtext.parser.antlr;
 
-generate bug289515Test "http://eclipse.org/xtext/Bug289515TestLanguage"
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class Bug289524Test extends AbstractBug289524Test {
 
-Model: 
-    '1' value="%" 
-  | '2' value='%' 
-  | '3' value="\\%" 
-  | '4' value='\\%' 
-  | '5' value="%%" 
-  | '6' value='%%';
-	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(Bug289524TestLanguageStandaloneSetup.class);
+	}
+}
