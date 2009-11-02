@@ -85,6 +85,11 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	public void reparse(String newContent) throws IOException {
+		if (unloader != null) {
+			for(EObject content: getContents()) {
+				unloader.unloadRoot(content);
+			}
+		}
 		clearOutput();
 		doLoad(new StringInputStream(newContent), null);
 		reattachModificationTracker();
@@ -144,11 +149,6 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	private void clearOutput() {
-		if (unloader != null) {
-			for(EObject content: getContents()) {
-				unloader.unloadRoot(content);
-			}
-		}
 		getContents().clear();
 		getErrors().clear();
 	}
