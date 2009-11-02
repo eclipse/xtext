@@ -254,7 +254,7 @@
          point="org.eclipse.ui.decorators">
       <decorator
             adaptable="true"
-            icon="icons/nature_overlay1.png"
+            icon="icons/nature_overlay.png"
             id="org.eclipse.xtext.ui.core.nature.overlay"
             label="Xtext Nature"
             lightweight="true"
@@ -288,15 +288,16 @@
       <specification
             annotationImageProvider="org.eclipse.xtext.ui.core.editor.model.XtextMarkerAnnotationImageProvider"
             annotationType="org.eclipse.xtext.ui.core.editor.error"
-            includeOnPreferencePage="true">
+            includeOnPreferencePage="true"
+            symbolicIcon="error"
+            quickFixIcon="icons/quick_fix_error_obj.gif">
       </specification>
-   </extension>
-   <extension
-         point="org.eclipse.ui.editors.markerAnnotationSpecification">
       <specification
             annotationImageProvider="org.eclipse.xtext.ui.core.editor.model.XtextMarkerAnnotationImageProvider"
             annotationType="org.eclipse.xtext.ui.core.editor.warning"
-            includeOnPreferencePage="true">
+            includeOnPreferencePage="true"
+            symbolicIcon="warning"
+            quickFixIcon="icons/quick_fix_warning_obj.gif">
       </specification>
    </extension>
    <!--extension
