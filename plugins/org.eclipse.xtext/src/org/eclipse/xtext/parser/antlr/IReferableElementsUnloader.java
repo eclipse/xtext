@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.google.inject.ImplementedBy;
 
@@ -22,6 +26,21 @@ public interface IReferableElementsUnloader {
 	public final class NullUnloader implements IReferableElementsUnloader {
 
 		public void unloadRoot(EObject root) {
+		}
+		
+	}
+	
+	public final class GenericUnloader implements IReferableElementsUnloader {
+
+		public void unloadRoot(EObject root) {
+			for(Iterator<EObject> i = EcoreUtil.getAllProperContents(root, false); i.hasNext();) {
+				final EObject next = i.next();
+				next.eAdapters().clear();
+				((InternalEObject) next).eSetProxyURI(EcoreUtil.getURI(next));
+			}
+			((InternalEObject) root).eSetProxyURI(EcoreUtil.getURI(root));
+			root.eAdapters().clear();
+
 		}
 		
 	}
