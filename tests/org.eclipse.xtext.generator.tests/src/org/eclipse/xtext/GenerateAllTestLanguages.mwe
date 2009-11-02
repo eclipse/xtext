@@ -89,6 +89,9 @@
 		<language uri="classpath:/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
