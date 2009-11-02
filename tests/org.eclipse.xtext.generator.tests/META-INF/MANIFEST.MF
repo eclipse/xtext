@@ -339,5 +339,11 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parser.antlr.parser.packrat.consumers,
  org.eclipse.xtext.parser.antlr.parseTreeConstruction,
  org.eclipse.xtext.parser.antlr.parser.antlr,
- org.eclipse.xtext.parser.antlr.parser.antlr.internal
+ org.eclipse.xtext.parser.antlr.parser.antlr.internal,
+ org.eclipse.xtext.parser.antlr.bug289524Test,
+ org.eclipse.xtext.parser.antlr.bug289524Test.impl,
+ org.eclipse.xtext.parser.antlr.bug289524Test.util,
+ org.eclipse.xtext.parser.antlr.bug289524ExTest,
+ org.eclipse.xtext.parser.antlr.bug289524ExTest.impl,
+ org.eclipse.xtext.parser.antlr.bug289524ExTest.util
 
