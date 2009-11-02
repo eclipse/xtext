@@ -61,13 +61,14 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 
 	@Override
 	public void internalClean(IProgressMonitor monitor) {
-		final String javaProject = getJavaProject().getElementName();
+		IJavaProject javaProject = getJavaProject();
+		final String javaProjectName = javaProject.getElementName();
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 				QueryResult<ContainerDescriptor> result = queryExecutor.execute(new ContainerDescriptorQuery());
 				Set<String> toBeDeleted = new HashSet<String>();
 				for (ContainerDescriptor containerDescriptor : result) {
-					if (javaProject.equals(containerDescriptor.getUserData(MANAGED_BY)))
+					if (javaProjectName.equals(containerDescriptor.getUserData(MANAGED_BY)))
 						toBeDeleted.add(containerDescriptor.getName());
 				}
 				for (String string : toBeDeleted) {
@@ -99,9 +100,11 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	@Override
 	protected void fullBuild(IProgressMonitor monitor) throws CoreException {
 		try {
-			IPackageFragmentRoot[] roots = getJavaProject().getPackageFragmentRoots();
-			for (IPackageFragmentRoot root : roots) {
-				build(root);
+			if (isJavaProject()) {
+				IPackageFragmentRoot[] roots = getJavaProject().getPackageFragmentRoots();
+				for (IPackageFragmentRoot root : roots) {
+					build(root);
+				}
 			}
 		} catch (JavaModelException jme) {
 			log.error(jme.getMessage());
@@ -112,32 +115,38 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	 * checks whether the package fragment root is managed by this project builder
 	 */
 	protected boolean isManaged(final IPackageFragmentRoot root) {
-		try {
-			if ("org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
-				return false;
-			if (root.getKind() == IPackageFragmentRoot.K_SOURCE)
-				return true;
-			if (root.isArchive()) {
-				UpdateCommand<Boolean> updateCommand = new UpdateCommand<Boolean>() {
-
-					public Boolean execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-						final String name = getContainerName(root);
-						ContainerDescriptorQuery query = new ContainerDescriptorQuery();
-						query.setName(name);
-						QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
-						Iterator<ContainerDescriptor> iterator = result.iterator();
-						if (iterator.hasNext()) {
-							ContainerDescriptor descriptor = iterator.next();
-							return builder.getProject().getName().equals(descriptor.getUserData(MANAGED_BY));
-						} else {
-							indexUpdater.createContainer(name, getUserDataForContainer(name));
-						}
-						return true;
-					}
-				};
-				return index.executeUpdateCommand(updateCommand);
+		if (root.isArchive()) {
+			if (root.exists()) {
+				try {
+					if ("org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
+						return false;
+				} catch (JavaModelException e) {
+					log.error(e.getMessage(), e);
+				}
 			}
-			return false;
+			UpdateCommand<Boolean> updateCommand = new UpdateCommand<Boolean>() {
+				
+				public Boolean execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
+					final String name = getContainerName(root);
+					ContainerDescriptorQuery query = new ContainerDescriptorQuery();
+					query.setName(name);
+					QueryResult<ContainerDescriptor> result = queryExecutor.execute(query);
+					Iterator<ContainerDescriptor> iterator = result.iterator();
+					if (iterator.hasNext()) {
+						ContainerDescriptor descriptor = iterator.next();
+						return builder.getProject().getName().equals(descriptor.getUserData(MANAGED_BY));
+					} else {
+						indexUpdater.createContainer(name, getUserDataForContainer(name));
+					}
+					return true;
+				}
+			};
+			return index.executeUpdateCommand(updateCommand);
+		}
+		try {
+			if (root.exists() && root.getKind() == IPackageFragmentRoot.K_SOURCE)
+				return true;
+			return !root.isOpen();
 		} catch (JavaModelException e) {
 			log.error("skipping " + root);
 			return false;
@@ -146,7 +155,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 
 	@Override
 	protected boolean isManaged(IStorage resource) {
-		if (getJarPackageFragmentRoot(resource)!=null)
+		if (getJarPackageFragmentRoot(resource) != null)
 			return true;
 		if (!super.isManaged(resource))
 			return false;
@@ -160,6 +169,8 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	}
 
 	protected IPackageFragmentRoot getJarPackageFragmentRoot(IStorage resource) {
+		if (!isJavaProject())
+			return null;
 		if (resource instanceof IFile) {
 			IFile file = (IFile) resource;
 			IPackageFragmentRoot root = getJavaProject().getPackageFragmentRoot(file);
@@ -168,17 +179,17 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void delete(IStorage resource) {
 		IPackageFragmentRoot root = getJarPackageFragmentRoot(resource);
-		if (root!=null) {
+		if (root != null) {
 			delete(root);
 			return;
 		}
 		super.delete(resource);
 	}
-	
+
 	protected IJavaProject getJavaProject() {
 		IProject project = builder.getProject();
 		IJavaProject jp = JavaCore.create(project);
@@ -186,13 +197,14 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	}
 
 	protected boolean isJavaProject() {
-		return getJavaProject() != null;
+		IJavaProject jp = getJavaProject();
+		return jp.exists();
 	}
 
 	@Override
 	protected void build(IStorage storage) {
 		IPackageFragmentRoot root = getJarPackageFragmentRoot(storage);
-		if (root!=null) {
+		if (root != null) {
 			delete(root);
 			build(root);
 			return;
@@ -261,7 +273,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 			}
 
 		}
-		throw new IllegalArgumentException("Couldn't handle "+storage);
+		throw new IllegalArgumentException("Couldn't handle " + storage);
 	}
 
 	public void elementChanged(ElementChangedEvent event) {
@@ -311,10 +323,10 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	protected String getContainerName(final IPackageFragmentRoot root) {
 		return jdtURIUtil.getURI(root).toString();
 	}
-	
+
 	@Override
 	protected ResourceSet getResourceSet() {
-		if (resourceSet==null) {
+		if (resourceSet == null) {
 			resourceSet = resourceSetProvider.get();
 			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
 			resourceSet.setClasspathURIContext(getJavaProject());

@@ -17,6 +17,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -39,6 +40,7 @@ import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
@@ -354,6 +356,17 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		assertIsReferenced("Foo", 1);
 		assertEquals(2, countResourcesInIndex());
 		assertEquals(0, bar.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE).length);
+	}
+	
+	public void testSimpleProject() throws Exception {
+		IProject project = IResourcesSetupUtil.createProject("foo");
+		addNature(project, XtextNature.NATURE_ID);
+		
+		createFile("foo/src/Foo.testlanguage", "stuff Foo");
+		
+		waitForAutoBuild();
+		assertFalse(indexContainsElement("Foo"));
+		assertEquals(0, countResourcesInIndex());
 	}
 
 	@SuppressWarnings("unused")
