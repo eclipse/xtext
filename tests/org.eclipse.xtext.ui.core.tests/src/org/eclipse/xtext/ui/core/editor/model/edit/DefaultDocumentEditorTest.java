@@ -33,7 +33,7 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 
 	public void testProcess() throws Exception {
 		String grammar = "grammar foo.Foo " + "generate foo \"foo://foo/42\" " + "Foo: \"foo\" | \"bar\" | \"baz\"; "
-				+ "Bar: foo=Foo; ";
+				+ "Bar: foo=Foo;";
 		final Resource res = getResource(new StringInputStream(grammar));
 		final Object expected = res.getContents().get(0);
 		final IXtextDocument document = new XtextDocument() {
