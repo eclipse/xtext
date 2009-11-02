@@ -5,15 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.antlr.Bug289515TestLanguage with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.parser.antlr.Bug289524ExTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate bug289515Test "http://eclipse.org/xtext/Bug289515TestLanguage"
+generate bug289524ExTest "http://eclipse.org/xtext/Bug289524ExTestLanguage"
 
-Model: 
-    '1' value="%" 
-  | '2' value='%' 
-  | '3' value="\\%" 
-  | '4' value='\\%' 
-  | '5' value="%%" 
-  | '6' value='%%';
-	
+Model: {Model} "Model" (refs+=ModelElement)*;
+ModelElement: {ModelElement} ( containments+=Contained | "reference" refs+=[Contained]  ("$" refs+=[Contained])* )+;
+Contained: "containment" name=ID;
