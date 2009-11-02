@@ -166,7 +166,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			CompositeNode node = nodeAdapter.getParserNode();
 
 			String text = serializerUtil.serialize(eObject, false);
-			TextEdit edit = new ReplaceEdit(node.getOffset(), node.getLength(), text);
+			TextEdit edit = new ReplaceEdit(node.getTotalOffset(), node.getTotalLength(), text);
 			edits.add(edit);
 		}
 		return edits;
