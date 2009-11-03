@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.index;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -74,6 +75,18 @@ public class NameSearchTrackingIndexImpl extends XtextIndexImpl implements IShar
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.POST_BUILD)
 			this.changedNames.clear();
+	}
+	
+	@Override
+	public void save() throws IOException {
+		super.save();
+		namesToURI.save();
+	}
+	
+	@Override
+	public void load() throws IOException {
+		super.load();
+		namesToURI.load();
 	}
 
 }

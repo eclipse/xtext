@@ -9,10 +9,17 @@ package org.eclipse.xtext.ui.core.index;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -26,6 +33,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class NamesToURIs {
+
 	private Set<Pair<String, URI>> namesToURIs = new HashSet<Pair<String, URI>>();
 
 	public Iterable<URI> findURIs(final Set<String> names) {
@@ -52,6 +60,33 @@ public class NamesToURIs {
 
 	public void insert(URI uri, String name) {
 		namesToURIs.add(Tuples.pair(name, uri));
+	}
+
+	protected void save() throws IOException {
+		File file = getFile();
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		for (Pair<String, URI> element : namesToURIs) {
+			writer.append(element.getFirst() + "|" + element.getSecond() + "\n");
+		}
+	}
+
+	protected void load() throws IOException {
+		File file = getFile();
+		if (file.exists()) {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				String[] strings = line.split("\\|");
+				namesToURIs.add(Tuples.create(strings[0], URI.createURI(strings[1])));
+			}
+			file.delete();
+		}
+	}
+
+	private File getFile() {
+		IPath path = org.eclipse.xtext.ui.core.internal.Activator.getDefault().getStateLocation();
+		File file = new File(path + "/namesToURI.data");
+		return file;
 	}
 
 }
