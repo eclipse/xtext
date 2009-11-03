@@ -257,6 +257,8 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 
 	protected void build(final IStorage storage) {
 		final Resource res = getEmfResource(storage);
+		if(res == null) 
+			return; 
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
@@ -358,7 +360,9 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		for (URI uri : Sets.newHashSet(resources)) {
 			IStorage iStorage = getIStorage(uri);
 			if (iStorage != null && isManaged(iStorage)) {
-				state.updated(iStorage, getEmfResource(iStorage));
+				Resource res = getEmfResource(iStorage);
+				if (res != null)
+					state.updated(iStorage, res);
 			}
 		}
 
