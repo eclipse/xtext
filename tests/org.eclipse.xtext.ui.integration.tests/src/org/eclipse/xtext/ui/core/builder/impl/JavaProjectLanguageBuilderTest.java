@@ -84,6 +84,41 @@ public class JavaProjectLanguageBuilderTest extends TestCase {
 		IMarker[] markers = fileB.findMarkers(EValidator.MARKER, true, IResource.DEPTH_ONE);
 		assertEquals(printMarker(markers), 0, markers.length);
 	}
+	
+	public void testChangeReferencedFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo.testlanguage");
+		file.create(new StringInputStream("stuff Foo"), true, monitor());
+		IFile fileB = folder.getFile("Boo.testlanguage");
+		fileB.create(new StringInputStream("stuff Bar refs Foo"), true, monitor());
+		
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertIsReferenced("Foo", 1);
+		assertEquals(2, countResourcesInIndex());
+		
+		file.setContents(new StringInputStream("stuff Unknown"), true, true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement("Unknown"));
+		assertFalse(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertIsReferenced("Foo", 0);
+		assertIsReferenced("Unknown", 0);
+		assertEquals(2, countResourcesInIndex());
+		
+		file.setContents(new StringInputStream("stuff Foo"), true, true, monitor());
+		waitForAutoBuild();
+		assertFalse(indexContainsElement("Unknown"));
+		assertTrue(indexContainsElement("Foo"));
+		assertTrue(indexContainsElement("Bar"));
+		assertIsReferenced("Foo", 1);
+		assertIsReferenced("Unknown", 0);
+		assertEquals(2, countResourcesInIndex());
+		
+	}
 
 	public void testMoveReferencedFileOutOfSourceFolder() throws Exception {
 		IJavaProject project = createJavaProject("foo");
