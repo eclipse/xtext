@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.emfindex.ContainerDescriptor;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
@@ -38,6 +37,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 import org.eclipse.xtext.ui.core.util.JdtUtil;
@@ -53,7 +53,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	private static Logger log = Logger.getLogger(JavaProjectLanguageBuilder.class);
 
 	@Inject
-	protected JdtURIUtil jdtURIUtil;
+	private JdtURIUtil jdtURIUtil;
 
 	public JavaProjectLanguageBuilder() {
 		JavaCore.addElementChangedListener(this);
@@ -63,7 +63,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	public void internalClean(IProgressMonitor monitor) {
 		IJavaProject javaProject = getJavaProject();
 		final String javaProjectName = javaProject.getElementName();
-		index.executeUpdateCommand(new UpdateCommand<Void>() {
+		getIndex().executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 				QueryResult<ContainerDescriptor> result = queryExecutor.execute(new ContainerDescriptorQuery());
 				Set<String> toBeDeleted = new HashSet<String>();
@@ -81,7 +81,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 
 	protected void delete(final IPackageFragmentRoot root) {
 		if (isManaged(root)) {
-			index.executeUpdateCommand(new UpdateCommand<Void>() {
+			getIndex().executeUpdateCommand(new UpdateCommand<Void>() {
 				public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
 					ContainerDescriptorQuery query = new ContainerDescriptorQuery();
 					query.setName(getContainerName(root));
@@ -134,14 +134,14 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 					Iterator<ContainerDescriptor> iterator = result.iterator();
 					if (iterator.hasNext()) {
 						ContainerDescriptor descriptor = iterator.next();
-						return builder.getProject().getName().equals(descriptor.getUserData(MANAGED_BY));
+						return getBuilder().getProject().getName().equals(descriptor.getUserData(MANAGED_BY));
 					} else {
 						indexUpdater.createContainer(name, getUserDataForContainer(name));
 					}
 					return true;
 				}
 			};
-			return index.executeUpdateCommand(updateCommand);
+			return getIndex().executeUpdateCommand(updateCommand);
 		}
 		try {
 			if (root.exists() && root.getKind() == IPackageFragmentRoot.K_SOURCE)
@@ -191,7 +191,7 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	}
 
 	protected IJavaProject getJavaProject() {
-		IProject project = builder.getProject();
+		IProject project = getBuilder().getProject();
 		IJavaProject jp = JavaCore.create(project);
 		return jp;
 	}
@@ -325,12 +325,19 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 	}
 
 	@Override
-	protected ResourceSet getResourceSet() {
-		if (resourceSet == null) {
-			resourceSet = resourceSetProvider.get();
-			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
-			resourceSet.setClasspathURIContext(getJavaProject());
-		}
-		return resourceSet;
+	protected XtextResourceSet createResourceSet() {
+		XtextResourceSet result = super.createResourceSet();
+		result.setClasspathUriResolver(new JdtClasspathUriResolver());
+		result.setClasspathURIContext(getJavaProject());
+		return result;
 	}
+
+	public JdtURIUtil getJdtURIUtil() {
+		return jdtURIUtil;
+	}
+
+	public void setJdtURIUtil(JdtURIUtil jdtURIUtil) {
+		this.jdtURIUtil = jdtURIUtil;
+	}
+	
 }

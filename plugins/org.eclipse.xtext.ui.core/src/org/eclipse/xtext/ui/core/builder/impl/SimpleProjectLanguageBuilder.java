@@ -22,9 +22,9 @@ public class SimpleProjectLanguageBuilder extends AbstractLanguageBuilder {
 
 	@Override
 	public void internalClean(IProgressMonitor monitor) {
-		index.executeUpdateCommand(new UpdateCommand<Void>() {
+		getIndex().executeUpdateCommand(new UpdateCommand<Void>() {
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-				indexUpdater.deleteContainer(builder.getProject().getName());
+				indexUpdater.deleteContainer(getBuilder().getProject().getName());
 				return null;
 			}
 		});
@@ -32,7 +32,7 @@ public class SimpleProjectLanguageBuilder extends AbstractLanguageBuilder {
 	
 	@Override
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
-		buildRecursivly(builder.getProject());
+		buildRecursivly(getBuilder().getProject());
 	}
 	
 	@Override

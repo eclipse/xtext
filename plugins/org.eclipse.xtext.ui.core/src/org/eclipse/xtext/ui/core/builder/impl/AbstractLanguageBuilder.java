@@ -68,35 +68,35 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	public static final String STORAGE = "STORAGE";
 	public static final String BUILDER_ID = "BUILDER_ID";
 	
-	private final Logger log = Logger.getLogger(getClass());
+	private static final Logger log = Logger.getLogger(AbstractLanguageBuilder.class);
 
 	@Inject
-	protected BuildState state;
+	private BuildState state;
 
 	@Inject
-	protected IXtextIndex index;
+	private IXtextIndex index;
 
 	@Inject
-	protected IXtextResourceChecker resourceChecker;
+	private IXtextResourceChecker resourceChecker;
 
 	@Inject
 	@Named(Constants.FILE_EXTENSIONS)
-	protected String fileExtensions;
+	private String fileExtensions;
 
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
-	protected String languageName;
+	private String languageName;
 
 	@Inject
-	protected EObjectDescriptorIndexer eObjectIndexer;
+	private EObjectDescriptorIndexer eObjectIndexer;
 
 	@Inject
-	protected EReferenceDescriptorIndexer eReferenceIndexer;
+	private EReferenceDescriptorIndexer eReferenceIndexer;
 
 	@Inject
-	protected StorageUtil storageUtil;
+	private StorageUtil storageUtil;
 
-	protected IBuilderAccess builder;
+	private IBuilderAccess builder;
 
 	public void initialize(IBuilderAccess builderAccess) {
 		this.builder = builderAccess;
@@ -337,14 +337,19 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	protected abstract String getContainerName(IStorage resource);
 	
 	@Inject
-	protected Provider<XtextResourceSet> resourceSetProvider;
-	protected XtextResourceSet resourceSet;
+	private Provider<XtextResourceSet> resourceSetProvider;
+	
+	private XtextResourceSet resourceSet;
 
-	protected ResourceSet getResourceSet() {
+	protected final ResourceSet getResourceSet() {
 		if (resourceSet==null) {
-			resourceSet = resourceSetProvider.get();
+			resourceSet = createResourceSet();
 		}
 		return resourceSet;
+	}
+
+	protected XtextResourceSet createResourceSet() {
+		return resourceSetProvider.get();
 	}
 
 	public final void postBuild(ISharedState sharedState, int kind, IProgressMonitor monitor) {
@@ -408,4 +413,81 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	public String toString() {
 		return getBuilderId();
 	}
+
+	public BuildState getState() {
+		return state;
+	}
+
+	public void setState(BuildState state) {
+		this.state = state;
+	}
+
+	public IXtextIndex getIndex() {
+		return index;
+	}
+
+	public void setIndex(IXtextIndex index) {
+		this.index = index;
+	}
+
+	public IXtextResourceChecker getResourceChecker() {
+		return resourceChecker;
+	}
+
+	public void setResourceChecker(IXtextResourceChecker resourceChecker) {
+		this.resourceChecker = resourceChecker;
+	}
+
+	public String getFileExtensions() {
+		return fileExtensions;
+	}
+
+	public void setFileExtensions(String fileExtensions) {
+		this.fileExtensions = fileExtensions;
+	}
+
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+
+	public EObjectDescriptorIndexer getEObjectIndexer() {
+		return eObjectIndexer;
+	}
+
+	public void setEObjectIndexer(EObjectDescriptorIndexer eObjectIndexer) {
+		this.eObjectIndexer = eObjectIndexer;
+	}
+
+	public EReferenceDescriptorIndexer getEReferenceIndexer() {
+		return eReferenceIndexer;
+	}
+
+	public void setEReferenceIndexer(EReferenceDescriptorIndexer eReferenceIndexer) {
+		this.eReferenceIndexer = eReferenceIndexer;
+	}
+
+	public StorageUtil getStorageUtil() {
+		return storageUtil;
+	}
+
+	public void setStorageUtil(StorageUtil storageUtil) {
+		this.storageUtil = storageUtil;
+	}
+
+	public IBuilderAccess getBuilder() {
+		return builder;
+	}
+
+	public Provider<XtextResourceSet> getResourceSetProvider() {
+		return resourceSetProvider;
+	}
+
+	public void setResourceSetProvider(Provider<XtextResourceSet> resourceSetProvider) {
+		this.resourceSetProvider = resourceSetProvider;
+	}
+	
 }

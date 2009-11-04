@@ -48,7 +48,7 @@ public class TestLanguageBuilder extends JavaProjectLanguageBuilder {
 	@Override
 	protected void internalPostBuild(ISharedState sharedState, IProgressMonitor monitor) {
 		super.internalPostBuild(sharedState, monitor);
-		for (Map.Entry<IStorage,Resource>  entry: state.getUpdated().entrySet()) {
+		for (Map.Entry<IStorage,Resource>  entry: getState().getUpdated().entrySet()) {
 			if (entry.getKey() instanceof IFile) {
 				try {
 					IFile iFile = (IFile)entry.getKey();
