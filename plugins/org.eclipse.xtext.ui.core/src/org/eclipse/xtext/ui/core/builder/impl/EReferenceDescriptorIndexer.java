@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.core.builder.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -17,7 +18,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.emfindex.ResourceDescriptor;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
+import org.eclipse.emf.emfindex.query.QueryResult;
+import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
 
 /**
@@ -28,6 +32,14 @@ public class EReferenceDescriptorIndexer {
 	private static Logger log = Logger.getLogger(EReferenceDescriptorIndexer.class);
 
 	public void update(Resource resource, IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
+		ResourceDescriptorQuery query = new ResourceDescriptorQuery();
+		query.setURI(resource.getURI());
+		Iterator<ResourceDescriptor> result = queryExecutor.execute(query).iterator();
+		if (!result.hasNext()) {
+			return;
+		}
+		ResourceDescriptor descriptor = result.next();
+		descriptor.getEReferenceDescriptors().clear();
 		Map<EObject, Collection<Setting>> find = EcoreUtil.CrossReferencer.find(resource.getContents());
 		for (Map.Entry<EObject, Collection<Setting>> entry : find.entrySet()) {
 			for (Setting setting : entry.getValue()) {
