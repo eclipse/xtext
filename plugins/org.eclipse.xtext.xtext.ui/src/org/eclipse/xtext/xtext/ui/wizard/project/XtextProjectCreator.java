@@ -40,9 +40,19 @@ import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
  */
 public class XtextProjectCreator extends DefaultProjectCreator {
 
-	private static final String[] PROJECT_NATURES = new String[] {
+	private static final String[] DSL_PROJECT_NATURES = new String[] { 
 			JavaCore.NATURE_ID,
-			"org.eclipse.pde.PluginNature"}; //$NON-NLS-1$
+			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
+			"org.eclipse.xtext.ui.core.xtextNature" //$NON-NLS-1$
+	};
+
+	private static final String[] DSL_UI_PROJECT_NATURES = new String[] { 
+			JavaCore.NATURE_ID,
+			"org.eclipse.pde.PluginNature" //$NON-NLS-1$
+	};
+
+	private static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
+
 	// some constants
 	private static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
 	private static final String SRC_ROOT = "src"; //$NON-NLS-1$
@@ -55,7 +65,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	@Override
 	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 			InterruptedException {
-		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName(), 3);
+		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage2
+				+ getXtextProjectInfo().getProjectName(), 3);
 
 		IProject project = createDslProject(monitor);
 
@@ -65,7 +76,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 			createGeneratorProject(monitor);
 		}
 
-		IFile dslGrammarFile = project.getFile(new Path(SRC_ROOT+"/"+getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
+		IFile dslGrammarFile = project.getFile(new Path(SRC_ROOT
+				+ "/" + getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
 				+ ".xtext")); //$NON-NLS-1$
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
@@ -74,22 +86,23 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getUiProjectName();
 
-		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
-				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport", //$NON-NLS-1$
+		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(getXtextProjectInfo()
+				.getProjectName().toLowerCase()
+				+ ";visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common", //$NON-NLS-1$ //$NON-NLS-2$
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\"")); //$NON-NLS-1$
 
-		String templateName = pathToTemplates()+"DslUiProject::main"; //$NON-NLS-1$
+		String templateName = pathToTemplates() + "DslUiProject::main"; //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, Collections.singletonList("org.apache.log4j"),SRC_FOLDER_LIST, templateName,monitor);
+		return createProject(getXtextProjectInfo(), projectName, DSL_UI_PROJECT_NATURES, requiredBundles, 
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
 	}
 
 	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getProjectName();
 
-		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
-				"org.eclipse.xtext", //$NON-NLS-1$
+		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList("org.eclipse.xtext", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"de.itemis.xtext.antlr;resolution:=optional", //$NON-NLS-1$
 				"org.apache.commons.logging;resolution:=optional", //$NON-NLS-1$
@@ -98,41 +111,42 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.mwe.core;resolution:=optional", //$NON-NLS-1$
 				"com.ibm.icu;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.xtext.xtend;resolution:=optional")); //$NON-NLS-1$
-		
+
 		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
 		for (String bundleId : bundles) {
 			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
 		}
 
-		String templateName = pathToTemplates()+"DslProject::main"; //$NON-NLS-1$
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, Collections.singletonList("org.apache.log4j"),SRC_FOLDER_LIST, templateName,
-				monitor);
+		String templateName = pathToTemplates() + "DslProject::main"; //$NON-NLS-1$
+		return createProject(getXtextProjectInfo(), projectName, DSL_PROJECT_NATURES, requiredBundles, 
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
 	}
 
 	private IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getGeneratorProjectName();
 
-		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
-				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport",
-				"org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
+		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(getXtextProjectInfo()
+				.getProjectName().toLowerCase()
+				+ ";visibility:=reexport", "org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtend;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.core;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
 				"org.eclipse.xtend.typesystem.emf;visibility:=reexport")); //$NON-NLS-1$
 
-		String templateName = pathToTemplates()+"GeneratorProject::main"; //$NON-NLS-1$
+		String templateName = pathToTemplates() + "GeneratorProject::main"; //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, requiredBundles, Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
+		return createProject(getXtextProjectInfo(), projectName, GENERATOR_PROJECT_NATURES, requiredBundles,
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
 	}
 
-	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName,
+	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName, String[] projectNatures,
 			Set<String> requiredBundles, List<String> importPackages, List<String> srcFolderList, String templateName,
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage + projectName, 3);
-		final IProject dslProject = EclipseResourceUtil.createProject(projectName,xtextProjectInfo.getLocation(),
-				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, importPackages, null, monitor,
-				null,PROJECT_NATURES,xtextProjectInfo.getWorkingSets(),xtextProjectInfo.getWorkbench());
+		final IProject dslProject = EclipseResourceUtil.createProject(projectName, xtextProjectInfo.getLocation(),
+				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, importPackages, null,
+				monitor, null, projectNatures, xtextProjectInfo.getWorkingSets(), xtextProjectInfo.getWorkbench());
 
 		if (dslProject == null) {
 			return null;
