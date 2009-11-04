@@ -41,10 +41,8 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
          }
         
 
-    @Override
-	public String[] getTokenNames() { return tokenNames; }
-    @Override
-	public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g"; }
+    public String[] getTokenNames() { return tokenNames; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g"; }
 
 
      
@@ -598,7 +596,7 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g:257:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g:258:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=input.LT(1);
+            lv_name_1_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContained422); if (failed) return current;
             if ( backtracking==0 ) {
 
