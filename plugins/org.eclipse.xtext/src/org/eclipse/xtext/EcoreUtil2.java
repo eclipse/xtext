@@ -245,6 +245,8 @@ public class EcoreUtil2 extends EcoreUtil {
 			EClass f1Type = (EClass) f1.getEType();
 			EClass f2Type = (EClass) f2.getEType();
 			result &= f1Type.isSuperTypeOf(f2Type);
+			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
+			result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
 		} else
 			result &= f1.getEType().equals(f2.getEType());
 		return result;
@@ -265,7 +267,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 	
 	
-	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, EClassifier type) {
+	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, boolean isContainment, EClassifier type) {
 		EStructuralFeature existingFeature = clazz.getEStructuralFeature(name);
 		if (existingFeature!=null) {
 			boolean many = existingFeature.isMany();
@@ -273,7 +275,10 @@ public class EcoreUtil2 extends EcoreUtil {
 				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
 					EClass expected = (EClass) type;
 					EClass actual = (EClass) existingFeature.getEType();
-					return actual.equals(expected) || actual.isSuperTypeOf(expected);
+					boolean result = (actual.equals(expected) || actual.isSuperTypeOf(expected));
+					result &= isContainment == ((EReference)existingFeature).isContainment();
+					result &= !((EReference) existingFeature).isContainer();
+					return result;
 				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
 					EDataType expected = (EDataType) type;
 					EDataType actual = (EDataType) existingFeature.getEType();

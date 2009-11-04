@@ -161,21 +161,21 @@ public class EcoreUtil2Test extends TestCase {
 	public void testContainsCompatibleFeature() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass eClass = pack.getEClass();
-		assertEquals(true,containsCompatibleFeature(eClass, "name", false, pack.getEString()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEString()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEAnnotation()));
-		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEShort()));
-		assertEquals(false,containsCompatibleFeature(eClass, "names", false, pack.getEString()));
+		assertEquals(true,containsCompatibleFeature(eClass, "name", false, true, pack.getEString()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEString()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEAnnotation()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, true, pack.getEShort()));
+		assertEquals(false,containsCompatibleFeature(eClass, "names", false, true, pack.getEString()));
 		
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEAttribute()));
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEReference()));
-		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEStructuralFeature()));
-		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", false, pack.getEStructuralFeature()));
-		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEAnnotation()));
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEAttribute()));
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEReference()));
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEStructuralFeature()));
+		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", false, true, pack.getEStructuralFeature()));
+		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", true, true, pack.getEAnnotation()));
 		
 		eClass = pack.getEAttribute();
-		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, pack.getEInt()));
-		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, pack.getEIntegerObject()));
-		assertEquals(false, containsCompatibleFeature(eClass, "lowerBound", false, pack.getELong()));
+		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEInt()));
+		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEIntegerObject()));
+		assertEquals(false, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getELong()));
 	}
 }

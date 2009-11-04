@@ -129,7 +129,7 @@ public abstract class EClassifierInfo {
 		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
 			if (!isGenerated()) {
-				if (!EcoreUtil2.containsCompatibleFeature(getEClass(), featureName, isMultivalue, featureClassifier)) {
+				if (!EcoreUtil2.containsCompatibleFeature(getEClass(), featureName, isMultivalue, isContainment, featureClassifier)) {
 					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+".", parserElement);
 				}
 				return true;
@@ -160,8 +160,7 @@ public abstract class EClassifierInfo {
 								"configuration already exists in type '" + getEClass().getName() + "'.",
 						parserElement);
 			
-			EClassifier compatibleType = EcoreUtil2
-			.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
+			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
 						"Cannot find compatible type for features", parserElement);
