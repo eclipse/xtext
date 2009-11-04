@@ -1217,4 +1217,60 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 	}
 	
+	public void testContainmentVsReference_01() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EClass: name=ID eSuperTypes+=EClass;";
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
+	public void testContainmentVsReference_02() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EClass: name=ID eSuperTypes+=[EClass];";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
+	
+	public void testContainmentVsReference_03() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EReference: name=ID eType=[EClass];";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+	}
+	
+	public void testContainmentVsReference_04() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EReference: name=ID eType=EClass;\n" +
+			"EClass: name=ID;";
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
+	public void testContainmentVsReference_05() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EReference: name=ID eContainingClass=[EClass];";
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
+	public void testContainmentVsReference_06() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals " +
+			"import 'http://www.eclipse.org/emf/2002/Ecore' " +
+			"EReference: name=ID eContainingClass=EClass;\n" +
+			"EClass: name=ID;";
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
 }
