@@ -8,7 +8,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.index.IXtextIndex;
 
 public class ImplicitUiFragment extends AbstractGeneratorFragment {
 
@@ -76,7 +75,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker", "org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker")
 		
 		// index
-		.addTypeToProvider(IXtextIndex.class.getName(), "org.eclipse.xtext.ui.core.index.IndexProvider")
+		.addTypeToProvider("org.eclipse.xtext.index.IXtextIndex", "org.eclipse.xtext.ui.core.index.IndexProvider")
 		
 		// builder
 		.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
