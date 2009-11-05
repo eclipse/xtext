@@ -11,12 +11,16 @@ package org.eclipse.xtext.xtext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -50,6 +54,7 @@ import org.eclipse.xtext.validation.CheckType;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -216,10 +221,38 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkCrossReferenceTerminal(CrossReference reference) {
-		if (reference.getTerminal() != null && !(reference.getTerminal() instanceof RuleCall))
-			warning("Your grammar will not work with the default linking implementation, "
-					+ "because Alternatives are currently not handled properly in CrossReferences.",
-					XtextPackage.CROSS_REFERENCE__TERMINAL);
+		if (reference.getTerminal() != null) {
+			if (reference.getTerminal() instanceof RuleCall) {
+				RuleCall call = (RuleCall) reference.getTerminal();
+				checkCrossReferenceTerminal(call);
+			} else {
+				boolean errorFound = false;
+				Iterator<RuleCall> iterator = Iterators.filter(EcoreUtil.getAllProperContents(reference.getTerminal(), true), RuleCall.class);
+				while(iterator.hasNext()) {
+					RuleCall call = iterator.next();
+					if (checkCrossReferenceTerminal(call))
+						errorFound = true;
+				}
+				if (!errorFound)
+					warning("Your grammar will not work with the default linking implementation, "
+							+ "because Alternatives are currently not handled properly in CrossReferences.",
+							reference.getTerminal(), null);
+			}
+			
+		}
+		
+	}
+
+	public boolean checkCrossReferenceTerminal(RuleCall call) {
+		if (call.getRule() != null && call.getRule().getType() != null) {
+			EClassifier type = call.getRule().getType().getClassifier();
+			if (type != null && EcorePackage.Literals.ESTRING != type) {
+				error("The rule '" + call.getRule().getName() + "' is not valid for a cross reference since it does not return "+
+						"an EString. You'll have to wrap it in a data type rule.", call, null);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Check
