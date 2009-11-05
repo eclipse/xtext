@@ -1,6 +1,7 @@
 <workflow>
 	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
 	<property name="standardFragmentsWithBacktracking" value="org/eclipse/xtext/lexer/StandardRuntimeFragmentsWithBacktracking.mwe"/>
+	<property name="standardFragmentsWithIgnoreCase" value="org/eclipse/xtext/lexer/StandardRuntimeFragmentsWithIgnoreCase.mwe"/>
 	<property name="genmodelReferenceFragments" value="org/eclipse/xtext/GenModelReferenceFragments.mwe"/>
 	<property name="projectName" value="org.eclipse.xtext.generator.tests"/>
 	<property name="runtimeProject" value="../${projectName}"/>
@@ -24,6 +25,9 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext">
 			<fragment file="${standardFragmentsWithBacktracking}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext">
+			<fragment file="${standardFragmentsWithIgnoreCase}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>

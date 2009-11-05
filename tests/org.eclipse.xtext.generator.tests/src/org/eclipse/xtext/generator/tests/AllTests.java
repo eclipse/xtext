@@ -36,6 +36,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.Bug282355Test.class);
+      suite.addTestSuite(org.eclipse.xtext.lexer.IngoreCaseTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug266082Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988Test.class);
