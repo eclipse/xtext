@@ -81,6 +81,9 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
 					"org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder")
 		
+		// editor notification
+		.addTypeToType("org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider",
+				"org.eclipse.xtext.ui.core.editor.model.ResourceAwareXtextDocumentProvider")
 		.getBindings();
 	}
 

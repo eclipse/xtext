@@ -31,7 +31,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	private IXtextResourceChecker xtextResourceChecker;
 
 	@Override
-	protected IDocument createEmptyDocument() {
+	protected XtextDocument createEmptyDocument() {
 		XtextDocument xtextDocument = document.get();
 		return xtextDocument;
 	}
@@ -52,4 +52,5 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		doc.setValidationJob(job);
 		return info;
 	}
+
 }
