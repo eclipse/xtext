@@ -13,67 +13,29 @@ import java.util.ArrayList;
 public class InternalBug289524ExTestLanguageLexer extends Lexer {
     public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int KEYWORD_4=4;
+    public static final int KEYWORD_4=6;
     public static final int RULE_WS=13;
-    public static final int KEYWORD_1=7;
+    public static final int KEYWORD_1=5;
     public static final int RULE_INT=9;
     public static final int EOF=-1;
     public static final int RULE_STRING=10;
     public static final int Tokens=15;
     public static final int RULE_ANY_OTHER=14;
-    public static final int KEYWORD_2=6;
+    public static final int KEYWORD_2=4;
     public static final int RULE_SL_COMMENT=12;
-    public static final int KEYWORD_3=5;
+    public static final int KEYWORD_3=7;
     public InternalBug289524ExTestLanguageLexer() {;} 
     public InternalBug289524ExTestLanguageLexer(CharStream input) {
         super(input);
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g"; }
 
-    // $ANTLR start KEYWORD_4
-    public final void mKEYWORD_4() throws RecognitionException {
-        try {
-            int _type = KEYWORD_4;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:19:11: ( 'containment' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:19:13: 'containment'
-            {
-            match("containment"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end KEYWORD_4
-
-    // $ANTLR start KEYWORD_3
-    public final void mKEYWORD_3() throws RecognitionException {
-        try {
-            int _type = KEYWORD_3;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:21:11: ( 'reference' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:21:13: 'reference'
-            {
-            match("reference"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end KEYWORD_3
-
     // $ANTLR start KEYWORD_2
     public final void mKEYWORD_2() throws RecognitionException {
         try {
             int _type = KEYWORD_2;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:23:11: ( 'Model' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:23:13: 'Model'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:19:11: ( 'Model' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:19:13: 'Model'
             {
             match("Model"); 
 
@@ -91,8 +53,8 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
     public final void mKEYWORD_1() throws RecognitionException {
         try {
             int _type = KEYWORD_1;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:25:11: ( '$' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:25:13: '$'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:21:11: ( '$' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:21:13: '$'
             {
             match('$'); 
 
@@ -104,6 +66,44 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
         }
     }
     // $ANTLR end KEYWORD_1
+
+    // $ANTLR start KEYWORD_4
+    public final void mKEYWORD_4() throws RecognitionException {
+        try {
+            int _type = KEYWORD_4;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:23:11: ( 'containment' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:23:13: 'containment'
+            {
+            match("containment"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end KEYWORD_4
+
+    // $ANTLR start KEYWORD_3
+    public final void mKEYWORD_3() throws RecognitionException {
+        try {
+            int _type = KEYWORD_3;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:25:11: ( 'reference' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:25:13: 'reference'
+            {
+            match("reference"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end KEYWORD_3
 
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
@@ -614,29 +614,65 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:8: ( KEYWORD_4 | KEYWORD_3 | KEYWORD_2 | KEYWORD_1 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:8: ( KEYWORD_2 | KEYWORD_1 | KEYWORD_4 | KEYWORD_3 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=11;
         int LA12_0 = input.LA(1);
 
-        if ( (LA12_0=='c') ) {
+        if ( (LA12_0=='M') ) {
             int LA12_1 = input.LA(2);
 
             if ( (LA12_1=='o') ) {
                 int LA12_13 = input.LA(3);
 
-                if ( (LA12_13=='n') ) {
+                if ( (LA12_13=='d') ) {
                     int LA12_23 = input.LA(4);
 
-                    if ( (LA12_23=='t') ) {
+                    if ( (LA12_23=='e') ) {
                         int LA12_26 = input.LA(5);
 
-                        if ( (LA12_26=='a') ) {
+                        if ( (LA12_26=='l') ) {
                             int LA12_29 = input.LA(6);
 
-                            if ( (LA12_29=='i') ) {
-                                int LA12_32 = input.LA(7);
+                            if ( ((LA12_29>='0' && LA12_29<='9')||(LA12_29>='A' && LA12_29<='Z')||LA12_29=='_'||(LA12_29>='a' && LA12_29<='z')) ) {
+                                alt12=5;
+                            }
+                            else {
+                                alt12=1;}
+                        }
+                        else {
+                            alt12=5;}
+                    }
+                    else {
+                        alt12=5;}
+                }
+                else {
+                    alt12=5;}
+            }
+            else {
+                alt12=5;}
+        }
+        else if ( (LA12_0=='$') ) {
+            alt12=2;
+        }
+        else if ( (LA12_0=='c') ) {
+            int LA12_3 = input.LA(2);
 
-                                if ( (LA12_32=='n') ) {
+            if ( (LA12_3=='o') ) {
+                int LA12_16 = input.LA(3);
+
+                if ( (LA12_16=='n') ) {
+                    int LA12_24 = input.LA(4);
+
+                    if ( (LA12_24=='t') ) {
+                        int LA12_27 = input.LA(5);
+
+                        if ( (LA12_27=='a') ) {
+                            int LA12_30 = input.LA(6);
+
+                            if ( (LA12_30=='i') ) {
+                                int LA12_33 = input.LA(7);
+
+                                if ( (LA12_33=='n') ) {
                                     int LA12_35 = input.LA(8);
 
                                     if ( (LA12_35=='m') ) {
@@ -655,7 +691,7 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
                                                         alt12=5;
                                                     }
                                                     else {
-                                                        alt12=1;}
+                                                        alt12=3;}
                                                 }
                                                 else {
                                                     alt12=5;}
@@ -688,24 +724,24 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
                 alt12=5;}
         }
         else if ( (LA12_0=='r') ) {
-            int LA12_2 = input.LA(2);
+            int LA12_4 = input.LA(2);
 
-            if ( (LA12_2=='e') ) {
-                int LA12_15 = input.LA(3);
+            if ( (LA12_4=='e') ) {
+                int LA12_17 = input.LA(3);
 
-                if ( (LA12_15=='f') ) {
-                    int LA12_24 = input.LA(4);
+                if ( (LA12_17=='f') ) {
+                    int LA12_25 = input.LA(4);
 
-                    if ( (LA12_24=='e') ) {
-                        int LA12_27 = input.LA(5);
+                    if ( (LA12_25=='e') ) {
+                        int LA12_28 = input.LA(5);
 
-                        if ( (LA12_27=='r') ) {
-                            int LA12_30 = input.LA(6);
+                        if ( (LA12_28=='r') ) {
+                            int LA12_31 = input.LA(6);
 
-                            if ( (LA12_30=='e') ) {
-                                int LA12_33 = input.LA(7);
+                            if ( (LA12_31=='e') ) {
+                                int LA12_34 = input.LA(7);
 
-                                if ( (LA12_33=='n') ) {
+                                if ( (LA12_34=='n') ) {
                                     int LA12_36 = input.LA(8);
 
                                     if ( (LA12_36=='c') ) {
@@ -718,7 +754,7 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
                                                 alt12=5;
                                             }
                                             else {
-                                                alt12=2;}
+                                                alt12=4;}
                                         }
                                         else {
                                             alt12=5;}
@@ -743,42 +779,6 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
             }
             else {
                 alt12=5;}
-        }
-        else if ( (LA12_0=='M') ) {
-            int LA12_3 = input.LA(2);
-
-            if ( (LA12_3=='o') ) {
-                int LA12_16 = input.LA(3);
-
-                if ( (LA12_16=='d') ) {
-                    int LA12_25 = input.LA(4);
-
-                    if ( (LA12_25=='e') ) {
-                        int LA12_28 = input.LA(5);
-
-                        if ( (LA12_28=='l') ) {
-                            int LA12_31 = input.LA(6);
-
-                            if ( ((LA12_31>='0' && LA12_31<='9')||(LA12_31>='A' && LA12_31<='Z')||LA12_31=='_'||(LA12_31>='a' && LA12_31<='z')) ) {
-                                alt12=5;
-                            }
-                            else {
-                                alt12=3;}
-                        }
-                        else {
-                            alt12=5;}
-                    }
-                    else {
-                        alt12=5;}
-                }
-                else {
-                    alt12=5;}
-            }
-            else {
-                alt12=5;}
-        }
-        else if ( (LA12_0=='$') ) {
-            alt12=4;
         }
         else if ( (LA12_0=='^') ) {
             int LA12_5 = input.LA(2);
@@ -837,36 +837,36 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( KEYWORD_4 | KEYWORD_3 | KEYWORD_2 | KEYWORD_1 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( KEYWORD_2 | KEYWORD_1 | KEYWORD_4 | KEYWORD_3 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:10: KEYWORD_4
-                {
-                mKEYWORD_4(); 
-
-                }
-                break;
-            case 2 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:20: KEYWORD_3
-                {
-                mKEYWORD_3(); 
-
-                }
-                break;
-            case 3 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:30: KEYWORD_2
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:10: KEYWORD_2
                 {
                 mKEYWORD_2(); 
 
                 }
                 break;
-            case 4 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:40: KEYWORD_1
+            case 2 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:20: KEYWORD_1
                 {
                 mKEYWORD_1(); 
+
+                }
+                break;
+            case 3 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:30: KEYWORD_4
+                {
+                mKEYWORD_4(); 
+
+                }
+                break;
+            case 4 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug289524ExTestLanguage.g:1:40: KEYWORD_3
+                {
+                mKEYWORD_3(); 
 
                 }
                 break;
