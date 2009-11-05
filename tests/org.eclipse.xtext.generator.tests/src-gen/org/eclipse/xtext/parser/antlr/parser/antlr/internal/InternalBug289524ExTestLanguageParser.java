@@ -24,21 +24,21 @@ import java.util.Map;
 import java.util.HashMap;
 public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_2", "KEYWORD_1", "KEYWORD_4", "KEYWORD_3", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "Tokens"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_4", "KEYWORD_3", "KEYWORD_2", "KEYWORD_1", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "Tokens"
     };
     public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int KEYWORD_4=6;
+    public static final int KEYWORD_4=4;
     public static final int RULE_WS=13;
-    public static final int KEYWORD_1=5;
+    public static final int KEYWORD_1=7;
     public static final int RULE_INT=9;
     public static final int EOF=-1;
     public static final int RULE_STRING=10;
     public static final int Tokens=15;
     public static final int RULE_ANY_OTHER=14;
-    public static final int KEYWORD_2=4;
+    public static final int KEYWORD_2=6;
     public static final int RULE_SL_COMMENT=12;
-    public static final int KEYWORD_3=7;
+    public static final int KEYWORD_3=5;
 
         public InternalBug289524ExTestLanguageParser(TokenStream input) {
             super(input);
@@ -804,23 +804,23 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel127 = new BitSet(new long[]{0x00000000000000C2L});
-    public static final BitSet FOLLOW_ruleModelElement_in_ruleModel148 = new BitSet(new long[]{0x00000000000000C2L});
+    public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel127 = new BitSet(new long[]{0x0000000000000032L});
+    public static final BitSet FOLLOW_ruleModelElement_in_ruleModel148 = new BitSet(new long[]{0x0000000000000032L});
     public static final BitSet FOLLOW_ruleModelElement_in_entryRuleModelElement182 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModelElement192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContained_in_ruleModelElement248 = new BitSet(new long[]{0x00000000000000C2L});
+    public static final BitSet FOLLOW_ruleContained_in_ruleModelElement248 = new BitSet(new long[]{0x0000000000000032L});
     public static final BitSet FOLLOW_KEYWORD_3_in_ruleModelElement266 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModelElement288 = new BitSet(new long[]{0x00000000000000E2L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModelElement288 = new BitSet(new long[]{0x00000000000000B2L});
     public static final BitSet FOLLOW_KEYWORD_1_in_ruleModelElement300 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModelElement322 = new BitSet(new long[]{0x00000000000000E2L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModelElement322 = new BitSet(new long[]{0x00000000000000B2L});
     public static final BitSet FOLLOW_ruleContained_in_entryRuleContained360 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleContained370 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_KEYWORD_4_in_ruleContained406 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleContained423 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleContained_in_synpred2248 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_KEYWORD_3_in_synpred4266 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_ID_in_synpred4288 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_RULE_ID_in_synpred4288 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_KEYWORD_1_in_synpred4300 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_ID_in_synpred4322 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_RULE_ID_in_synpred4322 = new BitSet(new long[]{0x0000000000000082L});
 
 }
