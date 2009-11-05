@@ -12,14 +12,18 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -69,9 +73,8 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("child.isWarning", child.getSeverity(), Diagnostic.WARNING);
 		assertNotNull("child.children", child.getChildren());
 		assertTrue("child.children.isEmpty", child.getChildren().isEmpty());
-		assertEquals("child.data[0]", reference, child.getData().get(0));
-		assertEquals("child.data[1]", XtextPackage.CROSS_REFERENCE__TERMINAL, child.getData().get(1));
-		assertEquals(child.getData().toString(), 2, child.getData().size());
+		assertEquals("child.data[0]", reference.getTerminal(), child.getData().get(0));
+		assertEquals(child.getData().toString(), 1, child.getData().size());
 	}
 
 	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
@@ -624,6 +627,105 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 				return input.getException() instanceof RuntimeException;
 			}});
 		assertTrue(runtimeExceptions.isEmpty());
+	}
+	
+	public void testCheckCrossReferenceTerminal_01() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
+		reference.setTerminal(call);
+		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
+		call.setRule(rule);
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		rule.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.ESTRING);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckCrossReferenceTerminal_02() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
+		reference.setTerminal(call);
+		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
+		call.setRule(rule);
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		rule.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.EINT);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(call, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckCrossReferenceTerminal_03() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		Alternatives alternatives = XtextFactory.eINSTANCE.createAlternatives();
+		reference.setTerminal(alternatives);
+		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
+		alternatives.getGroups().add(call);
+		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
+		call.setRule(rule);
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		rule.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.EINT);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(call, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckCrossReferenceTerminal_04() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		Alternatives alternatives = XtextFactory.eINSTANCE.createAlternatives();
+		reference.setTerminal(alternatives);
+		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
+		alternatives.getGroups().add(call);
+		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
+		call.setRule(rule);
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		rule.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.ESTRING);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(alternatives, false, true);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
+
+		private final EObject context;
+		private boolean error;
+		private boolean warning;
+
+		public ValidatingMessageAcceptor(EObject context, boolean error, boolean warning) {
+			this.context = context;
+			this.error = error;
+			this.warning = warning;
+		}
+		
+		public void validate() {
+			assertFalse(warning);
+			assertFalse(error);
+		}
+
+		public void acceptError(String message, EObject object, Integer feature, Integer code) {
+			assertTrue(error);
+			error = false;
+			assertSame(context, object);
+		}
+
+		public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+			assertTrue(warning);
+			warning = false;
+			assertSame(context, object);
+		}
+		
 	}
 	
 	public void acceptError(String message, EObject object, Integer feature, Integer code) {
