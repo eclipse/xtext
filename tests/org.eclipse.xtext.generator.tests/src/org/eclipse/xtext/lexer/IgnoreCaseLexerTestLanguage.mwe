@@ -1,0 +1,18 @@
+<workflow>
+	<property name="standardFragmentsWithIgnoreCase" value="org/eclipse/xtext/lexer/StandardRuntimeFragmentsWithIgnoreCase.mwe"/>
+	<property name="projectName" value="org.eclipse.xtext.generator.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen/org/eclipse/xtext/lexer"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		
+		<language uri="classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext">
+			<fragment file="${standardFragmentsWithIgnoreCase}"/>
+		</language>
+	</component>
+</workflow>
