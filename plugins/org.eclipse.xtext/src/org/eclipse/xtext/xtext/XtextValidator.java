@@ -233,7 +233,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					if (checkCrossReferenceTerminal(call))
 						errorFound = true;
 				}
-				if (!errorFound)
+				if (!errorFound && !(reference.getTerminal() instanceof Keyword))
 					warning("Your grammar will not work with the default linking implementation, "
 							+ "because Alternatives are currently not handled properly in CrossReferences.",
 							reference.getTerminal(), null);
