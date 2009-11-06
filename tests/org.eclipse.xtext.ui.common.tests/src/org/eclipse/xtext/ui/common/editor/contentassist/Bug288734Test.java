@@ -58,7 +58,7 @@ public class Bug288734Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug288734_08() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc").assertText("@desc");
+		newBuilder(getBug288734TestLanguageSetup()).append("@desc").assertText("@desc", "\"Description\"");
 	}
 
 	public void testBug288734_09() throws Exception {
@@ -70,7 +70,7 @@ public class Bug288734Test extends AbstractContentAssistProcessorTest {
 	}
 
 	public void testBug288734_11() throws Exception {
-		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc").assertText("@desc");
+		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc").assertText("@desc", "\"Description\"");
 	}
 
 	public void testBug288734_12() throws Exception {
@@ -93,6 +93,10 @@ public class Bug288734Test extends AbstractContentAssistProcessorTest {
 	public void testBug288734_16() throws Exception {
 		newBuilder(getBug288734TestLanguageSetup()).append("@desc 'Name' @desc 'Name' constant ").assertText("string",
 				"integer", "boolean");
+	}
+	
+	public void testBug288734_17() throws Exception {
+		newBuilder(getBug288734TestLanguageSetup()).append("@des").assertText("@desc");
 	}
 
 }
