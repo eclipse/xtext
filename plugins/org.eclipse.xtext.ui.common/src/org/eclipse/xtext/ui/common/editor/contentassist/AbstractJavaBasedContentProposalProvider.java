@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -140,8 +139,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-			EClass eClass = (EClass) containingParserRule.getType().getClassifier();
-			EReference ref = GrammarUtil.getReference(crossReference, eClass);
+			EReference ref = GrammarUtil.getReference(crossReference);
 			lookupCrossReference(crossReference, ref, contentAssistContext,	acceptor, filter);
 		}
 	}
@@ -150,8 +148,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter, Function<IScopedElement, ICompletionProposal> proposalFactory) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-			EClass eClass = (EClass) containingParserRule.getType().getClassifier();
-			EReference ref = GrammarUtil.getReference(crossReference, eClass);
+			EReference ref = GrammarUtil.getReference(crossReference);
 			lookupCrossReference(crossReference, ref, acceptor, filter, proposalFactory);
 		}
 	}
