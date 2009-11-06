@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 /**
  * @author Jan Koehnlein
@@ -308,8 +310,16 @@ public class GrammarUtil {
 		return null;
 	}
 
+	// TODO replace me by compiled grammar model
 	public static EReference getReference(CrossReference crossRef) {
-		return getReference(crossRef, (EClass) containingParserRule(crossRef).getType().getClassifier());
+		EClassifier referenceOwner = findCurrentType(crossRef);
+		if (referenceOwner instanceof EClass)
+			return getReference(crossRef, (EClass) referenceOwner);
+		return null;
+	}
+	
+	public static EClassifier findCurrentType(final AbstractElement element) {
+		return new CurrentTypeFinder().findCurrentType(element);
 	}
 
 }
