@@ -120,19 +120,28 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				EObject previousModel = NodeUtil.getNearestSemanticObject(previousNode);
 				AbstractNode currentDatatypeNode = getContainingDatatypeRuleNode(currentNode);
 				Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+				int prevSize = result.size();
 				createContexts(viewer, parseResult, completionOffset, rootNode, previousNode, currentDatatypeNode, result, prefix,
 						previousModel, followElements);
+				
+				// 3rd context: the current leaf node is valid but has no grammar element assigned
+				// kind of inverted forth context
+				if (lastCompleteNode instanceof LeafNode && lastCompleteNode.getGrammarElement() == null) {
+					List<ContentAssistContext> newContexts = result.subList(prevSize, result.size());
+					boolean wasValid = isLikelyToBeValidProposal(lastCompleteNode, newContexts);
+					if (wasValid && !(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
+						createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNode, currentNode,
+								currentModel, result);
+					}
+				}
 			}
 
-			// 3rd context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
+			// 4th context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
 			if (!(lastCompleteNode instanceof LeafNode) || lastCompleteNode.getGrammarElement() != null) {
 				// do not calculate twice for the same input
 				if (!(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
-					String prefix = "";
-					String completeInput = viewer.getDocument().get(0, completionOffset);
-					Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
-					createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNode, currentNode, result, prefix,
-							currentModel, followElements);
+					createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNode, currentNode,
+							currentModel, result);
 				}
 			}
 			
@@ -141,6 +150,30 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		catch (BadLocationException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected boolean isLikelyToBeValidProposal(AbstractNode lastCompleteNode, List<ContentAssistContext> contexts) {
+		for(ContentAssistContext context: contexts) {
+			for (AbstractElement element: context.getFirstSetGrammarElements()) {
+				if (element instanceof Keyword) {
+					String keywordValue = ((Keyword) element).getValue();
+					String lastText = ((LeafNode) lastCompleteNode).getText();
+					if (keywordValue.equals(lastText)) 
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected void createContexts(ITextViewer viewer, IParseResult parseResult, int completionOffset,
+			CompositeNode rootNode, AbstractNode lastCompleteNode, AbstractNode currentNode, EObject currentModel,
+			List<ContentAssistContext> result) throws BadLocationException {
+		String prefix = "";
+		String completeInput = viewer.getDocument().get(0, completionOffset);
+		Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
+		createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNode, currentNode, result, prefix,
+				currentModel, followElements);
 	}
 
 	protected void createContexts(
@@ -497,7 +530,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 	public String getPrefix(AbstractNode prefixNode, int offset) {
 		if (prefixNode instanceof LeafNode) {
-			if (((LeafNode) prefixNode).isHidden())
+			if (((LeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
 				return "";
 			return getNodeText(prefixNode, offset);
 		}
