@@ -20,6 +20,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -691,6 +692,17 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		rule.setType(typeRef);
 		typeRef.setClassifier(EcorePackage.Literals.ESTRING);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(alternatives, false, true);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckCrossReferenceTerminal_05() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
+		reference.setTerminal(keyword);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkCrossReferenceTerminal(reference);
 		messageAcceptor.validate();
