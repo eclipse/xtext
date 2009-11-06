@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -56,7 +57,10 @@ public class LazyURIEncoder {
 		String[] split = uriFragment.split(SEP);
 		EObject source = res.getEObject(split[1]);
 		EReference ref = (EReference) res.getResourceSet().getEObject(URI.createURI(split[2]), true);
-		AbstractNode text = getNode(NodeUtil.getNodeAdapter(source).getParserNode(), split[3]);
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(source);
+		if (nodeAdapter==null)
+			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
+		AbstractNode text = getNode(nodeAdapter.getParserNode(), split[3]);
 		return Tuples.create(source, ref, text);
 	}
 
