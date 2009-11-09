@@ -75,16 +75,17 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cExtendsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cExtendsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cExtendsTypeCrossReference_3_0 = (CrossReference)cExtendsAssignment_3.eContents().get(0);
-		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cExtendsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cExtendsTypeCrossReference_2_1_0 = (CrossReference)cExtendsAssignment_2_1.eContents().get(0);
+		private final RuleCall cExtendsTypeIDTerminalRuleCall_2_1_0_1 = (RuleCall)cExtendsTypeCrossReference_2_1_0.eContents().get(1);
 		
 		//Type:
-		//  "type" name=ID "extends" extends=[Type];
+		//  "type" name=ID ("extends" extends=[Type])?;
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID "extends" extends=[Type]
+		//"type" name=ID ("extends" extends=[Type])?
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -96,17 +97,20 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
+		//("extends" extends=[Type])?
+		public Group getGroup_2() { return cGroup_2; }
+
 		//"extends"
-		public Keyword getExtendsKeyword_2() { return cExtendsKeyword_2; }
+		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 
 		//extends=[Type]
-		public Assignment getExtendsAssignment_3() { return cExtendsAssignment_3; }
+		public Assignment getExtendsAssignment_2_1() { return cExtendsAssignment_2_1; }
 
 		//[Type]
-		public CrossReference getExtendsTypeCrossReference_3_0() { return cExtendsTypeCrossReference_3_0; }
+		public CrossReference getExtendsTypeCrossReference_2_1_0() { return cExtendsTypeCrossReference_2_1_0; }
 
 		//ID
-		public RuleCall getExtendsTypeIDTerminalRuleCall_3_0_1() { return cExtendsTypeIDTerminalRuleCall_3_0_1; }
+		public RuleCall getExtendsTypeIDTerminalRuleCall_2_1_0_1() { return cExtendsTypeIDTerminalRuleCall_2_1_0_1; }
 	}
 	
 	
@@ -156,7 +160,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Type:
-	//  "type" name=ID "extends" extends=[Type];
+	//  "type" name=ID ("extends" extends=[Type])?;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}

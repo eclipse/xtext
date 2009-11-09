@@ -229,9 +229,9 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)'extends' 
+)('extends' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2(), null); 
+        createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null); 
     }
 (
 (
@@ -243,11 +243,11 @@ ruleType returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(), "extends"); 
+		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), "extends"); 
 	}
 
 )
-));
+))?);
 
 
 

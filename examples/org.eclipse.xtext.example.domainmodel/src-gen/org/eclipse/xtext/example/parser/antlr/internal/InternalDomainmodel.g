@@ -433,6 +433,12 @@ ruleEntity returns [EObject current=null]
     }
 (
 (
+		{ 
+		  /* 
+		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
+		  create synpreds that cannot be compiled in some rare cases
+		  */ 
+		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityRule().getType().getClassifier());
@@ -719,6 +725,12 @@ ruleReference returns [EObject current=null]
     }
 (
 (
+		{ 
+		  /* 
+		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
+		  create synpreds that cannot be compiled in some rare cases
+		  */ 
+		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getReferenceRule().getType().getClassifier());
@@ -986,6 +998,12 @@ ruleTypeRef returns [EObject current=null]
     }:
 (
 (
+		{ 
+		  /* 
+		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
+		  create synpreds that cannot be compiled in some rare cases
+		  */ 
+		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getTypeRefRule().getType().getClassifier());

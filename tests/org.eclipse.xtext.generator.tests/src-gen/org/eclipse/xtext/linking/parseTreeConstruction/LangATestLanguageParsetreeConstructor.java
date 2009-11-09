@@ -272,11 +272,11 @@ protected class Import_UriAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID "extends" extends=[Type];
+ *   "type" name=ID ("extends" extends=[Type])?;
  *
  **/
 
-// "type" name=ID "extends" extends=[Type]
+// "type" name=ID ("extends" extends=[Type])?
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -291,7 +291,8 @@ protected class Type_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Type_ExtendsAssignment_3(parent, this, 0, inst);
+			case 0: return new Type_Group_2(parent, this, 0, inst);
+			case 1: return new Type_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -358,16 +359,38 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "extends"
-protected class Type_ExtendsKeyword_2 extends KeywordToken  {
+// ("extends" extends=[Type])?
+protected class Type_Group_2 extends GroupToken {
 	
-	public Type_ExtendsKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Type_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_ExtendsAssignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "extends"
+protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
+	
+	public Type_ExtendsKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTypeAccess().getExtendsKeyword_2();
+		return grammarAccess.getTypeAccess().getExtendsKeyword_2_0();
 	}
 
     @Override
@@ -381,34 +404,34 @@ protected class Type_ExtendsKeyword_2 extends KeywordToken  {
 }
 
 // extends=[Type]
-protected class Type_ExtendsAssignment_3 extends AssignmentToken  {
+protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 	
-	public Type_ExtendsAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Type_ExtendsAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTypeAccess().getExtendsAssignment_3();
+		return grammarAccess.getTypeAccess().getExtendsAssignment_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Type_ExtendsKeyword_2(parent, this, 0, inst);
+			case 0: return new Type_ExtendsKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("extends",true)) == null) return null;
+		if((value = current.getConsumable("extends",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(); 
+				element = grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0(); 
 				return obj;
 			}
 		}
@@ -416,6 +439,7 @@ protected class Type_ExtendsAssignment_3 extends AssignmentToken  {
 	}
 
 }
+
 
 
 /************ end Rule Type ****************/
