@@ -284,34 +284,37 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 		Set<String> exported = new LinkedHashSet<String>();
 		Set<String> requiredBundles = new LinkedHashSet<String>();
+		Set<String> imported = new LinkedHashSet<String>();
 		String activator = null;
 		if (isMergedProjects())
 			activator = getActivator();
 		for (LanguageConfig config : configs) {
 			exported.addAll(Arrays.asList(config.getExportedPackagesRt(config.getGrammar())));
 			requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesRt(config.getGrammar())));
+			imported.addAll(Arrays.asList(config.getImportedPackagesRt(config.getGrammar())));
 			if (isMergedProjects()) {
 				exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
+				imported.addAll(Arrays.asList(config.getImportedPackagesUi(config.getGrammar())));
 				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
 			}
 		}
 		if (isMergeManifest()) {
 			String path = ctx.getOutput().getOutlet(PLUGIN_RT).getPath() + "/" + manifestPath;
-			mergeManifest(getProjectNameRt(), path, exported, requiredBundles, activator);
+			mergeManifest(getProjectNameRt(), path, exported, requiredBundles, imported, activator);
 		} else {
 			manifestPath = manifestPath + "_gen";
 			deleteFile(ctx, manifestPath, PLUGIN_RT);
 			ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 			try {
 				XpandFacade facade = XpandFacade.create(ctx);
-				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported, requiredBundles, activator);
+				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported, requiredBundles, imported, activator);
 			} finally {
 				ctx.getOutput().closeFile();
 			}
 		}
 	}
 
-	private void mergeManifest(String projectName, String path, Set<String> exported, Set<String> requiredBundles, String activator) {
+	private void mergeManifest(String projectName, String path, Set<String> exported, Set<String> requiredBundles, Set<String> imported, String activator) {
 		File file = new File(path);
 		InputStream in = null;
 		OutputStream out = null;
@@ -320,6 +323,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			MergeableManifest manifest = new MergeableManifest(in, projectName);
 			manifest.addExportedPackages(exported);
 			manifest.addRequiredBundles(requiredBundles);
+			manifest.addImportedPackages(imported);
 			if (activator != null && !manifest.getMainAttributes().containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
 				manifest.getMainAttributes().put(MergeableManifest.BUNDLE_ACTIVATOR, activator);
 			}
@@ -356,15 +360,17 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (isUi() && !isMergedProjects()) {
 			String manifestPath = "META-INF/MANIFEST.MF";
 			Set<String> exported = new LinkedHashSet<String>();
+			Set<String> imported = new LinkedHashSet<String>();
 			Set<String> requiredBundles = new LinkedHashSet<String>();
 			for (LanguageConfig config : languageConfigs) {
 				exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
+				imported.addAll(Arrays.asList(config.getImportedPackagesUi(config.getGrammar())));
 				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
 			}
 
 			if (isMergeManifest()) {
 				String path = ctx.getOutput().getOutlet(PLUGIN_UI).getPath() + "/" + manifestPath;
-				mergeManifest(getProjectNameUi(), path, exported, requiredBundles, getActivator());
+				mergeManifest(getProjectNameUi(), path, exported, requiredBundles, imported, getActivator());
 			} else {
 				manifestPath = manifestPath + "_gen";
 				deleteFile(ctx, manifestPath, PLUGIN_UI);
@@ -372,7 +378,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 				try {
 					XpandFacade facade = XpandFacade.create(ctx);
 					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported, requiredBundles,
-							getActivator());
+							imported, getActivator());
 				} finally {
 					ctx.getOutput().closeFile();
 				}
@@ -429,10 +435,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
-			Set<String> requiredBundles, String activator) {
-		facade
-				.evaluate("org::eclipse::xtext::generator::Manifest::file", name, symbolicName, version, exported, requiredBundles,
-						activator);
+			Set<String> requiredBundles, Set<String> imported, String activator) {
+		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", 
+				name, symbolicName, version, exported, requiredBundles, imported, activator);
 	}
 
 	public void setActivator(String activator) {

@@ -15,22 +15,56 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
-
 @Deprecated
 public class BasicRuntimeFragment implements IGeneratorFragment {
-	private static Logger LOG = Logger.getLogger(BasicRuntimeFragment.class); 
+	private static Logger LOG = Logger.getLogger(BasicRuntimeFragment.class);
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		LOG.warn("Fragment org.eclipse.xtext.generator.BasicRuntimeFragment is deprecated and not needed anymore. Just remove it from the mwe configuration.");
+		LOG.warn("Fragment org.eclipse.xtext.generator.BasicRuntimeFragment is deprecated and not needed anymore. " +
+				"Just remove it from the mwe configuration.");
 	}
-	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {	}
-	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {	}
-	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {	}
-	public String[] getExportedPackagesRt(Grammar grammar) {		return null;	}
-	public String[] getExportedPackagesUi(Grammar grammar) {		return null;	}
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {		return null;	}
-	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {		return null;	}
-	public String[] getRequiredBundlesRt(Grammar grammar) {		return null;	}
-	public String[] getRequiredBundlesUi(Grammar grammar) {		return null;	}
-	public void checkConfiguration(Issues issues) {	}
+
+	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getExportedPackagesUi(Grammar grammar) {
+		return null;
+	}
+
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		return null;
+	}
+
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getRequiredBundlesRt(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getRequiredBundlesUi(Grammar grammar) {
+		return null;
+	}
+
+	public void checkConfiguration(Issues issues) {
+	}
+
+	public String[] getImportedPackagesRt(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getImportedPackagesUi(Grammar grammar) {
+		return null;
+	}
 }
