@@ -89,6 +89,14 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 			}
 		});
 	}
+	
+	public String[] getImportedPackagesRt(final Grammar grammar) {
+		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
+			public String[] apply(IGeneratorFragment param) {
+				return param.getImportedPackagesRt(grammar);
+			}
+		});
+	}
 
 	public String[] getExportedPackagesUi(final Grammar grammar) {
 		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
@@ -97,7 +105,15 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 			}
 		});
 	}
-
+	
+	public String[] getImportedPackagesUi(final Grammar grammar) {
+		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
+			public String[] apply(IGeneratorFragment param) {
+				return param.getImportedPackagesUi(grammar);
+			}
+		});
+	}
+	
 	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
 			public Set<Binding> apply(IGeneratorFragment param) {
@@ -117,9 +133,19 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 	private String[] internalGetExportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
-			String[] exportedPackagesRt = func.apply(f);
-			if (exportedPackagesRt != null)
-				all.addAll(Arrays.asList(exportedPackagesRt));
+			String[] exportedPackages = func.apply(f);
+			if (exportedPackages != null)
+				all.addAll(Arrays.asList(exportedPackages));
+		}
+		return all.toArray(new String[all.size()]);
+	}
+	
+	private String[] internalGetImportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
+		Set<String> all = new LinkedHashSet<String>();
+		for (IGeneratorFragment f : this.fragments) {
+			String[] importedPackages = func.apply(f);
+			if (importedPackages != null)
+				all.addAll(Arrays.asList(importedPackages));
 		}
 		return all.toArray(new String[all.size()]);
 	}

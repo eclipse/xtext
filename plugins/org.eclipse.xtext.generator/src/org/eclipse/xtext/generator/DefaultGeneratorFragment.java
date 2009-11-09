@@ -16,18 +16,52 @@ import org.eclipse.xtext.Grammar;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class DefaultGeneratorFragment implements IGeneratorFragment {
-	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {	}
-	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {	}
-	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {	}
-	public String[] getExportedPackagesRt(Grammar grammar) {		return null;	}
-	public String[] getExportedPackagesUi(Grammar grammar) {		return null;	}
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {		return null;	}
-	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {		return null;	}
-	public String[] getRequiredBundlesRt(Grammar grammar) {		return null;	}
-	public String[] getRequiredBundlesUi(Grammar grammar) {		return null;	}
-	public void checkConfiguration(Issues issues) {	}
-	public void generate(Grammar grammar, XpandExecutionContext ctx) {	}
+	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
+	}
+
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getExportedPackagesUi(Grammar grammar) {
+		return null;
+	}
+
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		return null;
+	}
+
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return null;
+	}
+	
+	public String[] getImportedPackagesRt(Grammar grammar) {
+		return null;
+	}
+	
+	public String[] getImportedPackagesUi(Grammar grammar) {
+		return null;
+	}
+	
+	public String[] getRequiredBundlesRt(Grammar grammar) {
+		return null;
+	}
+
+	public String[] getRequiredBundlesUi(Grammar grammar) {
+		return null;
+	}
+
+	public void checkConfiguration(Issues issues) {
+	}
+
+	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+	}
 }

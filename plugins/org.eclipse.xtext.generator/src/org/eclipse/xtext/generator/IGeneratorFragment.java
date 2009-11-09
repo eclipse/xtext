@@ -92,6 +92,13 @@ public interface IGeneratorFragment {
 	String[] getExportedPackagesRt(Grammar grammar);
 	
 	/**
+	 * return the imported packages for the runtime bundle
+	 * 
+	 * @param grammar
+	 */
+	String[] getImportedPackagesRt(Grammar grammar);
+	
+	/**
 	 * return the bundles this fragment requires in ui
 	 * 
 	 * @param grammar
@@ -104,4 +111,11 @@ public interface IGeneratorFragment {
 	 * @param grammar
 	 */
 	String[] getExportedPackagesUi(Grammar grammar);
+	
+	/**
+	 * return the imported packages for the ui bundle
+	 * 
+	 * @param grammar
+	 */
+	String[] getImportedPackagesUi(Grammar grammar);
 }

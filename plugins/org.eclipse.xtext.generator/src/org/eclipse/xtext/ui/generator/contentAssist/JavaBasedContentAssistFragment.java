@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.generator.contentAssist;
 
 import java.util.Collections;
@@ -13,7 +20,7 @@ import org.eclipse.xtext.generator.Binding;
 /**
  * A {@link IGeneratorFragment} to generate a java-based content assist for an Xtext language.
  * 
- * @author koehnlein
+ * @author Jan Koehnlein
  */
 public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	
@@ -44,6 +51,11 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		return new String[] {
 			GrammarUtil.getNamespace(grammar) + ".contentassist"
 		};
+	}
+	
+	@Override
+	public String[] getImportedPackagesUi(Grammar grammar) {
+		return new String[] { "org.apache.log4j" };
 	}
 	
 	@Override
