@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
 Bundle-Name: %bundleName
 Bundle-SymbolicName: com.google.collect
 Bundle-Version: 0.8.0.qualifier
