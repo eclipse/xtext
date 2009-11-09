@@ -48,8 +48,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertWithXtend("3", "types.size", model);
 
 		EObject context = (EObject) invokeWithXtend("types.first()", model);
-		ParserRule prType =  get(LangATestLanguageGrammarAccess.class).getTypeRule();
-		Assignment asExtends = (Assignment) ((Group) prType.getAlternatives()).getTokens().get(3);
+		Assignment asExtends = get(LangATestLanguageGrammarAccess.class).getTypeAccess().getExtendsAssignment_2_1();
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());
 
@@ -115,6 +114,33 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertTrue(propType.eIsProxy());
 		linkText = linkingService.getLinkText(propType, LazyLinkingPackage.Literals.PROPERTY__TYPE, prop);
 		assertNull(linkText);
+	}
+
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */
+	public void testNonDefaultLinkText() throws Exception {
+		XtextResource r = getResourceFromString("type TypeA extends ^TypeB type TypeB");
+		Main model = (Main) r.getContents().get(0);
+		assertEquals(2, model.getTypes().size());
+
+		Type type = model.getTypes().get(0);
+		assertEquals("TypeA", type.getName());
+		Type superType = type.getExtends();
+		assertEquals("TypeB", superType.getName());
+		String linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		assertEquals("^TypeB", linkText);
+	}
+
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287813 */
+	public void testOutOfSyncNodeModel() throws Exception {
+		XtextResource r = getResourceFromString("type TypeA extends ^TypeB type TypeB ");
+		Main model = (Main) r.getContents().get(0);
+
+		Type type = model.getTypes().get(0);
+		Type superType = type.getExtends();
+		superType.setName("TypeC");
+
+		String linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		assertEquals("TypeC", linkText);
 	}
 
 }
