@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Localization: fragment
-Bundle-Name: Xtext log4j fragment
+Bundle-Name: %pluginName
 Fragment-Host: org.apache.log4j;bundle-version="1.2.15"
 Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
 Bundle-Vendor: %providerName
