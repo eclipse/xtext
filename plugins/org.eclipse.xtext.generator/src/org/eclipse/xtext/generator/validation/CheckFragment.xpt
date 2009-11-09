@@ -17,6 +17,9 @@
 
 «DEFINE generate(List[String] packageQNames) FOR Grammar»
 
+«FILE validationPackage().asPath() + "/" + getName() + "Extensions.ext" SRC-»
+«ENDFILE»
+
 «FILE validationPackage().asPath() + "/" + getName() + "FastChecks.chk" SRC-»
 /*
  * This check file is used to specify inexpensive constraints for the
@@ -31,6 +34,8 @@
  * context Class WARNING "Name should start with a capital" :
  *    name.toFirstUpper() == name;
  */
+
+extension «validationPackage().replaceAll('\\.', '::')»::«getName()»Extensions;
 «ENDFILE»
 
 «FILE validationPackage().asPath() + "/" + getName() + "Checks.chk" SRC-»
@@ -46,6 +51,8 @@
  * context Class WARNING "Name should start with a capital" :
  *    name.toFirstUpper() == name;
  */
+
+extension «validationPackage().replaceAll('\\.', '::')»::«getName()»Extensions;
 «ENDFILE»
 
 «FILE validationPackage().asPath() + "/" + getName() + "ExpensiveChecks.chk" SRC-»
@@ -56,11 +63,13 @@
  *
  * import myDsl;
  *
- * extension org::xtext::example::MyExtensions; 
+ * extension org::xtext::example::validation::MyDslExtensions; 
  *
  * context Model ERROR "Inconsistent Model" :
  *    invariantThatIsComplexToCheck();
  */
+
+extension «validationPackage().replaceAll('\\.', '::')»::«getName()»Extensions;
 «ENDFILE»
 
 «FILE getCheckValidatorName().asPath()+".java" SRC_GEN»
