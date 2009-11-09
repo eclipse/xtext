@@ -17,4 +17,4 @@ Import :
 	'import' uri=STRING;
 	
 Type :
-	'type' name=ID 'extends' ^extends=[Type];
+	'type' name=ID ('extends' ^extends=[Type])?;

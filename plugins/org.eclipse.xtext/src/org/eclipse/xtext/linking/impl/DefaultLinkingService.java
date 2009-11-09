@@ -49,9 +49,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	private IValueConverterService valueConverter;
 
 	protected IScope getScope(EObject context, EReference reference) {
-		if (scopeProvider == null)
+		if (getScopeProvider() == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
-		return scopeProvider.getScope(context, reference);
+		return getScopeProvider().getScope(context, reference);
 	}
 
 	/**
@@ -91,8 +91,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 						builder.append(' ');
 					builder.append(leaf.getText());
 					hiddenSeen = false;
-				}
-				else {
+				} else {
 					hiddenSeen = true;
 				}
 			}
@@ -106,10 +105,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			String ruleName = getRuleNameFrom(node.getGrammarElement());
 			if (ruleName == null)
 				return convertMe;
-			Object result = valueConverter.toValue(convertMe, ruleName, node);
+			Object result = getValueConverter().toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
-		}
-		catch (ValueConverterException ex) {
+		} catch (ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);
 		}
 	}
@@ -135,10 +133,34 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 *         passed object {@link EObject}
 	 */
 	public String getLinkText(EObject object, EReference reference, EObject context) {
+		AbstractNode node = getCrossReferenceNode(object, reference, context);
+		if (node != null) {
+			List<EObject> objects = getLinkedObjects(context, reference, node);
+			if (!objects.isEmpty() && EcoreUtil.getURI(object).equals(EcoreUtil.getURI(objects.get(0)))) {
+				return getCrossRefNodeAsString(node, false);
+			}
+		}
 		String unconverted = getUnconvertedLinkText(object, reference, context);
 		if (unconverted != null)
 			return getConvertedValue(unconverted, object, reference, context);
-		return getNodeModelLinkText(object, reference, context);
+		if (node != null) {
+			return getCrossRefNodeAsString(node, false);
+		}
+		return null;
+	}
+
+	private AbstractNode getCrossReferenceNode(EObject object, EReference reference, EObject context) {
+		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(context, reference);
+		if (!nodes.isEmpty()) {
+			if (reference.isMany()) {
+				int index = ((List<?>) context.eGet(reference, false)).indexOf(object);
+				if (index >= 0 && index < nodes.size())
+					return nodes.get(index);
+			} else {
+				return nodes.get(0);
+			}
+		}
+		return null;
 	}
 
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
@@ -206,8 +228,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 				int index = ((List<? extends EObject>) context.eGet(reference, false)).indexOf(object);
 				if (index >= 0 && index < nodes.size())
 					return getCrossRefNodeAsString(nodes.get(index), false);
-			}
-			else {
+			} else {
 				return getCrossRefNodeAsString(nodes.get(0), false);
 			}
 		}
