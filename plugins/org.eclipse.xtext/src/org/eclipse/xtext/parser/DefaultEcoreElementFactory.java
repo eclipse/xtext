@@ -59,7 +59,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 	public void set(EObject object, String feature, Object value, String ruleName, AbstractNode node) throws ValueConverterException {
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
-			throw new IllegalArgumentException(feature + " object was: " + object);
+			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
+		
 		try {
 			final Object tokenValue = getTokenValue(value, ruleName, node);
 			object.eSet(structuralFeature, tokenValue);
@@ -93,7 +94,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			return;
 		final EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature(feature);
 		if (structuralFeature == null)
-			throw new IllegalArgumentException(feature);
+			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
 		
 		try {
 			final Object tokenValue = getTokenValue(value, ruleName, node);

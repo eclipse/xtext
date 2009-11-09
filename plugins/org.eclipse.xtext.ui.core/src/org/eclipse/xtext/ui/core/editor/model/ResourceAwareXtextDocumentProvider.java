@@ -68,23 +68,26 @@ public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 						public void process(XtextResource arg) throws Exception {
 							for (IResourceDelta delta : visitor.deltas) {
 								IResource res = delta.getResource();
-								String string = res.getFullPath().lastSegment();
+								String resourcesLastSegment = getLastSegment(res);
 								ResourceSet set = arg.getResourceSet();
 								for(int i = 0; i < set.getResources().size(); ) {
 									final Resource emfResource = set.getResources().get(i);
-									if (emfResource!=null && string.equals(emfResource.getURI().lastSegment())) {
-										switch (delta.getKind()) {
-										case IResourceDelta.REMOVED:
-											// UNLOAD
-											emfResource.unload();
-											if (emfResource.getResourceSet() != null)
-												set.getResources().remove(emfResource);
-											break;
-										case IResourceDelta.CHANGED:
-											// RELOAD
-											emfResource.unload();
-											emfResource.load(null);
-											break;
+									if (emfResource != null) {
+										String otherLastSegment = getLastSegment(emfResource);
+										if (resourcesLastSegment.equals(otherLastSegment)) {
+											switch (delta.getKind()) {
+											case IResourceDelta.REMOVED:
+												// UNLOAD
+												emfResource.unload();
+												if (emfResource.getResourceSet() != null)
+													set.getResources().remove(emfResource);
+												break;
+											case IResourceDelta.CHANGED:
+												// RELOAD
+												emfResource.unload();
+												emfResource.load(null);
+												break;
+											}
 										}
 									}
 									if (set.getResources().size() > i && set.getResources().get(i) == emfResource)
@@ -102,6 +105,7 @@ public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 		protected ResourceDeltaVisitor createDeltaVisitor() {
 			return new ResourceDeltaVisitor(document);
 		}
+
 	}
 
 	/**
@@ -136,11 +140,11 @@ public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 					if (resource == null || resource.getResourceSet() == null)
 						return false;
 					List<Resource> resources = resource.getResourceSet().getResources();
+					String resourcesLastSegment = getLastSegment(anIResource);
 					for (Resource res : resources) {
 						if (res != resource) {
-							URI uri = res.getURI();
-							String segment = uri.lastSegment();
-							if (segment.equals(anIResource.getFullPath().lastSegment()))
+							String otherLastSegment = getLastSegment(res);
+							if (otherLastSegment.equals(resourcesLastSegment))
 								return true;
 						}
 					}
@@ -149,6 +153,18 @@ public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 			});
 			return result.booleanValue();
 		}
+	}
+	
+	protected static String getLastSegment(IResource resource) {
+		String result = resource.getFullPath().lastSegment();
+		result = URI.encodeSegment(result, true);
+		return result;
+	}
+
+	protected static String getLastSegment(final Resource resource) {
+		String result = resource.getURI().lastSegment();
+		result = URI.encodeSegment(result, true);
+		return result;
 	}
 
 	private final List<IResourceChangeListener> resourceChangeListener = new ArrayList<IResourceChangeListener>();
