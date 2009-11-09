@@ -247,7 +247,7 @@
             id="org.eclipse.xtext.ui.core.nature.overlay"
             label="Xtext Nature"
             lightweight="true"
-            location="BOTTOM_RIGHT"
+            location="TOP_RIGHT"
             state="true">
          <enablement>
             <objectState
