@@ -464,7 +464,7 @@ bc.. Expression :
 p. Instead one has to rewrite such things by "left-factoring" it:
 
 bc.. Expression :
-  TerminalExpression ('+' Expression)?
+  TerminalExpression ('+' TerminalExpression)?
 ;
  
 TerminalExpression :
@@ -476,7 +476,7 @@ p. In practice this is always the same pattern and therefore not that problemati
 However, by simply applying the Xtext AST construction features we've covered so far, a grammar ...
 
 bc.. Expression :
-  {Operation} left=TerminalExpression (op='+' right=Expression)?
+  {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?
 ;
  
 TerminalExpression returns Expression:
