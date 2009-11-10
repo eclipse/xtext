@@ -57,7 +57,7 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 				IProject[] projects = lb.build(sharedState, kind, monitor);
 				all.addAll(Arrays.asList(projects));
 			} catch (Exception e) {
-				log.error("Error invoking 'build' on language builder '" + lb + "'" + e.getMessage());
+				log.error("Error invoking 'build' on language builder '" + lb + "' " + e.getMessage(), e);
 			}
 		}
 		return all.toArray(new IProject[all.size()]);
@@ -68,7 +68,7 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 			try {
 				lb.clean(monitor);
 			} catch (Exception e) {
-				log.error("Error invoking 'clean' on language builder '" + lb + "'" + e.getMessage());
+				log.error("Error invoking 'clean' on language builder '" + lb + "' " + e.getMessage(), e);
 			}
 		}
 	}
@@ -78,7 +78,7 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 			try {
 				lb.postBuild(sharedState, kind, monitor);
 			} catch (Exception e) {
-				log.error("Error invoking 'postBuild' on language builder '" + lb + "'" + e.getMessage());
+				log.error("Error invoking 'postBuild' on language builder '" + lb + "' " + e.getMessage(), e);
 			}
 		}
 	}
@@ -88,7 +88,7 @@ public class CompositeLanguageBuilder implements ILanguageBuilder {
 			try {
 				lb.initialize(builderAccess);
 			} catch (Exception e) {
-				log.error("Error invoking 'initialize' on language builder '" + lb + "'" + e.getMessage());
+				log.error("Error invoking 'initialize' on language builder '" + lb + "' " + e.getMessage(), e);
 			}
 		}
 	}

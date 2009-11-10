@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +39,7 @@ public class StorageUtil {
 
 	private static final String DELIMITER = ":";
 	private static final String JARENTRY_PREFIX = "jarentry:";
-	protected Logger log = Logger.getLogger(getClass());
+	private static final Logger log = Logger.getLogger(StorageUtil.class);
 	
 	@Inject
 	private IXtextIndex index;
@@ -47,8 +48,7 @@ public class StorageUtil {
 		if (uri.isPlatformResource())
 			return workspaceRoot().getFile(new Path(uri.toPlatformString(true)));
 		
-		return index.executeQueryCommand(new QueryCommand<IStorage>() {
-
+		IStorage result = index.executeQueryCommand(new QueryCommand<IStorage>() {
 			public IStorage execute(QueryExecutor queryExecutor) {
 				ResourceDescriptorQuery query = new ResourceDescriptorQuery();
 				query.setURI(uri);
@@ -61,6 +61,11 @@ public class StorageUtil {
 				return null;
 			}
 		});
+		if (result != null)
+			return result;
+		if (uri.isFile())
+			return getStorage(uri.toFileString());
+		return null;
 	}
 
 	public String toExternalString(IStorage storage) {
@@ -101,7 +106,11 @@ public class StorageUtil {
 				log.error(e.getMessage());
 			}
 		}
-		return ws.getFile(new Path(externalString));
+		IPath location = new Path(externalString);
+		IFile result = ws.getFile(location);
+		if (result == null)
+			return ws.getFileForLocation(location);
+		return result;
 	}
 
 	protected IJavaProject findAccesibleJavaProject(IWorkspaceRoot ws, String projectName) throws CoreException {
