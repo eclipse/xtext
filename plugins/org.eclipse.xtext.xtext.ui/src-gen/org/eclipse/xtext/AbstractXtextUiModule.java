@@ -129,7 +129,12 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.AbstractLanguageBuilder.class;
+		return org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider> bindXtextDocumentProvider() {
+		return org.eclipse.xtext.ui.core.editor.model.ResourceAwareXtextDocumentProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -151,8 +156,8 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer.class);
 	}
-	
-	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+
+	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public void configureHighlightingTokenDefProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
@@ -181,5 +186,6 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class);
 	}
+
 
 }
