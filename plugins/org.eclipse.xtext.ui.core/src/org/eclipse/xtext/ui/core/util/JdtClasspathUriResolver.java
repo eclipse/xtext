@@ -129,7 +129,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 					}
 				}
 				return URI.createURI(
-						"jar:" + "platform:/resource" + resource.getFullPath() + "!" + projectRelativePath, true);
+						"archive:" + "platform:/resource" + resource.getFullPath() + "!" + projectRelativePath, true);
 			}
 		}
 		return null;
@@ -143,7 +143,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 	public static URI getZipEntryUri(String projectRelativePath, String osDependentName) {
 		String name = osDependentName.replace('\\', '/');
 		URI fileURI = URI.createFileURI(name);
-		String uri = "jar:" + fileURI + "!" + projectRelativePath;
+		String uri = "archive:" + fileURI + "!" + projectRelativePath;
 		return URI.createURI(uri);
 	}
 
