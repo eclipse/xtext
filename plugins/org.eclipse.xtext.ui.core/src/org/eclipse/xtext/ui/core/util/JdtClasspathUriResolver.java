@@ -7,27 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.util;
 
-import java.io.File;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
-import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
+import org.eclipse.jdt.internal.core.JarEntryResource;
+import org.eclipse.jdt.internal.core.NonJavaResource;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
+import org.eclipse.xtext.util.Wrapper;
 
 @SuppressWarnings("restriction")
 public class JdtClasspathUriResolver implements IClasspathUriResolver {
@@ -54,59 +51,62 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		return classpathUri;
 	}
 
-	protected static URI findResourceInWorkspace(IJavaProject javaProject, URI classpathUri) throws JavaModelException,
+	protected URI findResourceInWorkspace(IJavaProject javaProject, URI classpathUri) throws JavaModelException,
 			CoreException {
-		Path fullPath = new Path(classpathUri.path());
-		String projectRelativePath = fullPath.toString();
 		if (javaProject.exists()) {
-			IPackageFragmentRoot[] allPackageFragmentRoots = javaProject.getAllPackageFragmentRoots();
-			for (IPackageFragmentRoot packageFragmentRoot : allPackageFragmentRoots) {
-				IResource correspondingResource = packageFragmentRoot.getCorrespondingResource();
-				if ((correspondingResource != null && correspondingResource instanceof IFile)
-						|| packageFragmentRoot instanceof JarPackageFragmentRoot) {
-					// jar file
-					JarPackageFragmentRoot jarPackageFragmentRoot = (packageFragmentRoot instanceof JarPackageFragmentRoot) ? (JarPackageFragmentRoot) packageFragmentRoot
-							: (JarPackageFragmentRoot) JavaCore
-									.createJarPackageFragmentRootFrom((IFile) correspondingResource);
-					if (jarPackageFragmentRoot != null) {
-						URI resourceUri = findUriInJarFile(projectRelativePath, jarPackageFragmentRoot);
-						if(resourceUri != null) {
-							return resourceUri;
+			String path = classpathUri.trimSegments(1).path();
+			String fullPath = classpathUri.path();
+			final String name = classpathUri.lastSegment();
+			String packageName = path.substring(1).replace('/', '.');	
+			for(IPackageFragmentRoot packageFragmentRoot: javaProject.getAllPackageFragmentRoots()) {
+				IJavaElement foundElement = packageFragmentRoot.getPackageFragment(packageName);
+				if (foundElement instanceof IPackageFragment && foundElement.exists()) {
+					IPackageFragment packageFragment = (IPackageFragment) foundElement;
+					IResource packageFragmentResource = packageFragment.getResource();
+					if (packageFragmentResource == null || packageFragmentResource instanceof IFile) {
+						Object[] nonJavaResources = packageFragment.getNonJavaResources();
+						for(Object nonJavaResource: nonJavaResources) {
+							// we have to check for concrete class because getFullPath
+							// behaves differently
+							if (nonJavaResource instanceof JarEntryResource) {
+								JarEntryResource jarEntryResource = (JarEntryResource) nonJavaResource;
+								if (fullPath.equals(jarEntryResource.getFullPath().toString())) {
+									IResource packageFragmentRootResource = packageFragmentRoot.getResource();
+									if (packageFragmentRootResource != null) { // we have a resource - use nested platform/resource
+										URI packageFragmentRootURI = createPlatformResourceURI(packageFragmentRootResource);
+										URI result = createArchiveURI(packageFragmentRootURI, fullPath);
+										return result;
+									} else {
+										// no resource - use file uri
+										IPath packageFragmentRootPath = packageFragmentRoot.getPath();
+										URI packageFragmentRootURI = URI.createFileURI(packageFragmentRootPath.toString());
+										URI result = createArchiveURI(packageFragmentRootURI, fullPath);
+										return result;
+									}
+								}
+							} else if (nonJavaResource instanceof NonJavaResource) {
+								String nonJavaResourceName = ((NonJavaResource) nonJavaResource).getName();
+								if (name.equals(nonJavaResourceName)) {
+									if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
+										IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
+										IPath absolutePath = resource.getFullPath();
+										absolutePath = absolutePath.append(fullPath);
+										return createPlatformResourceURI(absolutePath);
+									}
+								}
+							}
 						}
-					}
-				}
-				else {
-					// folder
-					IFolder rootFolder = null;
-					// path as fallback necessary due to jdt bug #264776
-					IPath path = null;
-					if (correspondingResource instanceof IFolder) {
-						rootFolder = (IFolder) correspondingResource;
-					}
-					else if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
-						IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
-						path = ((ExternalPackageFragmentRoot) packageFragmentRoot).getPath();
-						if (resource instanceof IFolder) {
-							rootFolder = (IFolder) resource;
-						}
-					}
-					if (rootFolder != null) {
-						IResource modelFile = rootFolder.findMember(projectRelativePath);
-						// modelFile.exists() is sometimes false, even if it exists
-						if (modelFile != null && modelFile.exists() && modelFile instanceof IFile) {
-							URI platformResourceUri = URI.createPlatformResourceURI(modelFile.getFullPath().toString(),
-									true);
-							return platformResourceUri;
-						}
-					}
-					// fallback for jdt bug #264776
-					if (path != null) {
-						path = path.append(fullPath);
-						File f = path.toFile();
-						if (f.exists() && f.isFile()) {
-							URI fileUri = URI.createFileURI(f.getAbsolutePath());
-							return fileUri;
-						}
+					} else {
+						final Wrapper<IResource> result = Wrapper.<IResource>wrap(null);
+						packageFragmentResource.accept(new IResourceVisitor() {
+							public boolean visit(IResource resource) throws CoreException {
+								if (name.equals(resource.getName()))
+									result.set(resource);
+								return result.get() == null;
+							}
+						}, IResource.DEPTH_ONE, IResource.NONE);
+						if (result.get() != null)
+							return createPlatformResourceURI(result.get());
 					}
 				}
 			}
@@ -114,37 +114,19 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		return classpathUri;
 	}
 
-	private static URI findUriInJarFile(String projectRelativePath, JarPackageFragmentRoot jarPackageFragmentRoot)
-			throws CoreException {
-		ZipFile zipFile = jarPackageFragmentRoot.getJar();
-		if (zipFile != null) {
-			ZipEntry zipEntry = zipFile.getEntry(projectRelativePath.substring(1));
-			if (zipEntry != null) {
-				IResource resource = jarPackageFragmentRoot.resource();
-				if (resource == null) {
-					resource = jarPackageFragmentRoot.getUnderlyingResource();
-					if (resource == null) {
-						String name = zipFile.getName();
-						return getZipEntryUri(projectRelativePath, name);
-					}
-				}
-				return URI.createURI(
-						"archive:" + "platform:/resource" + resource.getFullPath() + "!" + projectRelativePath, true);
-			}
-		}
-		return null;
+	protected URI createArchiveURI(URI baseURI, String entryPath) {
+		URI result = URI.createURI("archive:" + baseURI.toString() + "!" + entryPath);
+		return result;
 	}
 
-	/**
-	 * Have a look at the JdtClasspahtUriResolverTest to get an idea about the semantics
-	 * of this method. The tests are actually deactivated, because this implementation is
-	 * sort of platform dependent.
-	 */
-	public static URI getZipEntryUri(String projectRelativePath, String osDependentName) {
-		String name = osDependentName.replace('\\', '/');
-		URI fileURI = URI.createFileURI(name);
-		String uri = "archive:" + fileURI + "!" + projectRelativePath;
-		return URI.createURI(uri);
+	protected URI createPlatformResourceURI(IResource resource) {
+		IPath resourcePath = resource.getFullPath();
+		return createPlatformResourceURI(resourcePath);
+	}
+
+	private URI createPlatformResourceURI(IPath resourcePath) {
+		URI result = URI.createPlatformResourceURI(resourcePath.toString(), true);
+		return result;
 	}
 
 }
