@@ -262,7 +262,7 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		index.executeUpdateCommand(new UpdateCommand<Void>() {
 
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {
-				URI uri = res.getURI();
+				URI uri = getNormalizedURI(res);
 				indexUpdater.deleteResource(uri);
 				String containerName = getContainerName(storage);
 				findOrCreateContainer(containerName, indexUpdater, queryExecutor);
@@ -273,6 +273,10 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 
 		});
 		state.updated(storage, res);
+	}
+
+	protected URI getNormalizedURI(Resource res) {
+		return res.getResourceSet().getURIConverter().normalize(res.getURI());
 	}
 
 	protected void buildRecursivly(IResource iResource) throws CoreException, JavaModelException {
