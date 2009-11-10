@@ -24,19 +24,19 @@ Next, we need to define a main template which will be invoked by the code genera
 
 bc.. 
 «DEFINE main FOR Model»
-  «EXPAND DAO::dao FOREACH this.types.typeSelect(Entity)»
-  «EXPAND Entity::entity FOREACH this.types.typeSelect(Entity)»
+  «EXPAND DAO::dao FOREACH this.elements.typeSelect(Entity)»
+  «EXPAND Entity::entity FOREACH this.elements.typeSelect(Entity)»
 «ENDDEFINE»
 
-p. By using the expression @this.types.typeSelect(Entity)@, we make sure we only iterate over @Entity@ elements, and skip @SimpleType@ elements.
+p. By using the expression @this.elements.typeSelect(Entity)@, we make sure we only iterate over @Entity@ elements, and skip @SimpleType@ elements.
 
 p. Your template @Main.xpt@ should now look like this: 
 
 bc.. 
 «IMPORT entities»
 «DEFINE main FOR Model»
-  «EXPAND DAO::dao FOREACH this.types.typeSelect(Entity)»
-  «EXPAND Entity::entity FOREACH this.types.typeSelect(Entity)»
+  «EXPAND DAO::dao FOREACH this.elements.typeSelect(Entity)»
+  «EXPAND Entity::entity FOREACH this.elements.typeSelect(Entity)»
 «ENDDEFINE»
 
 
