@@ -27,3 +27,4 @@ Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.parser.antlr.internal,
  org.eclipse.xtext.example.services,
  org.eclipse.xtext.example.validation
+Import-Package: org.apache.log4j
