@@ -47,7 +47,7 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 				+ JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE);
-		String expectedUri = "jar:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE;
+		String expectedUri = "archive:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE;
 		URI normalizedUri = _resolver.resolve(_project, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
@@ -59,7 +59,7 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 				+ JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
-		String expectedUri = "jar:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE + "#/";
+		String expectedUri = "archive:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE + "#/";
 		URI normalizedUri = _resolver.resolve(_project, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}

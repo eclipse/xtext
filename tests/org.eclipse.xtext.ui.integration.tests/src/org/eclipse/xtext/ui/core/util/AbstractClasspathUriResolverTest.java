@@ -29,7 +29,7 @@ public abstract class AbstractClasspathUriResolverTest extends TestCase {
 			assertEquals(expectedUri, normalizedUri.toString());
 		}
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(normalizedUri, true);
+		Resource resource = resourceSet.getResource(normalizedUri.trimFragment(), true);
 		assertNotNull("Classpath URI ot registered", resource);
 		assertTrue("Resource not loaded", resource.isLoaded());
 	}
