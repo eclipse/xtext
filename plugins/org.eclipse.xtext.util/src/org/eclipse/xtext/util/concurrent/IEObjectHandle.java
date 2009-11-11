@@ -6,11 +6,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.concurrent;
+package org.eclipse.xtext.util.concurrent;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 
 /**
- * @deprecated use {@link org.eclipse.xtext.util.concurrent.IUnitOfWork}
+ * @author Sven Efftinge - Initial contribution and API
+ *
  */
-@Deprecated
-public interface IUnitOfWork<R,P> extends org.eclipse.xtext.util.concurrent.IUnitOfWork<R, P>{
+public interface IEObjectHandle<T extends EObject> extends IStateAccess<T> {
+	
+	public URI getURI();
+	
 }

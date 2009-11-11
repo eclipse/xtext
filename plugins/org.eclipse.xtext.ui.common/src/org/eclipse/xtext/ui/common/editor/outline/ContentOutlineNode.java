@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.concurrent.IEObjectHandle;
+import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 
 /**
  * @author Peter Friese - Initial contribution and API

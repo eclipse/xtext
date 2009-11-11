@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
@@ -33,6 +34,7 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 		super.setUp();
 		
 		resource = new XtextResource();
+		resource.setURI(URI.createURI("http://foo/bar/test.test"));
 
 		theRoot = SimplestructureFactory.eINSTANCE.createroot();
 		resource.getContents().add(theRoot);

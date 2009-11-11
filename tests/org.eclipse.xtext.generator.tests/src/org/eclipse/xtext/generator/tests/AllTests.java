@@ -14,7 +14,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.actions.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.actions.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.services.DefaultTerminalConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.concurrent.IEObjectHandleImplTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.concurrent.StateAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Test.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrEnumAndReferenceTest.class);

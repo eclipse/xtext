@@ -12,12 +12,14 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.concurrent.IEObjectHandle;
+import org.eclipse.xtext.resource.EObjectHandleImpl;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
 import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+import org.eclipse.xtext.util.concurrent.IEObjectHandle;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -31,7 +33,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 	private ILocationInFileProvider locationProvider;
 
-	private XtextDocument document;
+	private IStateAccess<XtextResource> resourceAccess;
 	
 	@Inject
 	private Provider<ContentOutlineNode> outlineNodeProvider;
@@ -88,7 +90,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		ContentOutlineNode outlineNode = newOutlineNode(outlineParentNode, label, image, location);
 		outlineNode.setClazz(semanticNode.eClass());
 		
-		IEObjectHandle<EObject> handle = new IEObjectHandle.DefaultImpl<EObject>(semanticNode, document);
+		IEObjectHandle<EObject> handle = new EObjectHandleImpl<EObject>(semanticNode, resourceAccess);
 		outlineNode.setEObjectHandle(handle);
 		
 		/*
@@ -117,8 +119,8 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		return newOutlineNode(semanticNode, outlineParentNode);
 	}
 
-	public void setDocument(XtextDocument document) {
-		this.document = document;
+	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
+		this.resourceAccess = resourceAccess;
 	}
 
 	public void setOutlineNodeProvider(Provider<ContentOutlineNode> outlineNodeProvider) {

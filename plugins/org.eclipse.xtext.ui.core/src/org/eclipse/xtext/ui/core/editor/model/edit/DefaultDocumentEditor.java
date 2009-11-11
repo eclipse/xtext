@@ -8,9 +8,9 @@
 package org.eclipse.xtext.ui.core.editor.model.edit;
 
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 

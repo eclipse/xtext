@@ -9,8 +9,9 @@
 package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -19,6 +20,6 @@ public interface ISemanticModelTransformer {
 
 	ContentOutlineNode transformSemanticModel(EObject semanticModel);
 
-	void setDocument(XtextDocument document);
+	void setResourceAccess(IStateAccess<XtextResource> document);
 
 }

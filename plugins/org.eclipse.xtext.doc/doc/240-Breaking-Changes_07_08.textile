@@ -20,6 +20,8 @@ h2(#breaking_changes_08). Changes in Xtext 0.8.0
 
 *Renamed DefaultScopeProvider to SimpleNameScopeProvider*
 
+*Renamed and moved org.eclipse.xtext.concurrent to org.eclipse.xtext.util.concurrent*
+
 
 
 
