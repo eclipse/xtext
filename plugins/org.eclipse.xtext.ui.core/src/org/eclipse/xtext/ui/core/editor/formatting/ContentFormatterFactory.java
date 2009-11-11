@@ -14,12 +14,12 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.formatter.IFormattingStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.reconciler.ReplaceRegion;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 

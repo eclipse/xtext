@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.core.editor.reconciler;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

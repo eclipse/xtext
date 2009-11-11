@@ -9,8 +9,8 @@ package org.eclipse.xtext.ui.core.editor.model;
 
 
 import org.eclipse.jface.text.IDocumentListener;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

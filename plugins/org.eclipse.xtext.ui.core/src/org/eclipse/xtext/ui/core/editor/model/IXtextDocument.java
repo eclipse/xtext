@@ -10,9 +10,9 @@ package org.eclipse.xtext.ui.core.editor.model;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtext.concurrent.IEObjectHandle;
-import org.eclipse.xtext.concurrent.IStateAccess;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.concurrent.IEObjectHandle;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 /**
  * @author Sebastian Zarnekow

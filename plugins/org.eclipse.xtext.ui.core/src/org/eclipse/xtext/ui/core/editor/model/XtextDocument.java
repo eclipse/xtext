@@ -22,11 +22,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.xtext.concurrent.IEObjectHandle;
-import org.eclipse.xtext.concurrent.IStateAccess;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
+import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
+import org.eclipse.xtext.util.concurrent.IEObjectHandle;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -34,7 +35,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtextDocument extends Document implements IXtextDocument {
-	
+
 	private XtextResource resource = null;
 
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
@@ -47,17 +48,16 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void setInput(IEditorInput editorInput) {
 		setInput((XtextResource) resourceForEditorInputFactory.createResource(editorInput));
 	}
-	
+
 	public void setInput(XtextResource resource) {
 		this.resource = resource;
 		try {
 			this.resource.load(null);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
 	}
-	
+
 	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
 
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
@@ -68,8 +68,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		try {
 			validationJob.cancel();
 			return stateAccess.modify(work);
-		}
-		finally {
+		} finally {
 			checkAndUpdateAnnotations();
 		}
 	}
@@ -158,12 +157,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			try {
 				return super.modify(work);
-			}
-			catch (RuntimeException e) {
+			} catch (RuntimeException e) {
 				try {
 					getState().reparse(get());
-				}
-				catch (IOException ioe) {
+				} catch (IOException ioe) {
 				}
 				throw e;
 			}
@@ -177,8 +174,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 					if (log.isDebugEnabled())
 						log.debug("process - " + Thread.currentThread().getName());
 					return modify(transaction);
-				}
-				finally {
+				} finally {
 					readLock.lock();
 					writeLock.unlock();
 				}
@@ -210,7 +206,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
-		return new IEObjectHandle.DefaultImpl<T>(obj, this);
+		return new EObjectHandleImpl<T>(obj, this);
 	}
 
 }

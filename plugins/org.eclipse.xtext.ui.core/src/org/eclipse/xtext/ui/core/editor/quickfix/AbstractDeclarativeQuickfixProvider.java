@@ -23,7 +23,6 @@ import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.eclipse.ui.texteditor.MarkerUtilities;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -35,6 +34,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.util.SimpleCache;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

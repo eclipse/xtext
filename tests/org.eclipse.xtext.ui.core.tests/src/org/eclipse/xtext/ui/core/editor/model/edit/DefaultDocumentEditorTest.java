@@ -10,12 +10,12 @@ package org.eclipse.xtext.ui.core.editor.model.edit;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Knut Wannheden - Initial contribution and API

@@ -13,8 +13,8 @@ import java.util.LinkedHashSet;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.TemplateProposal;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -22,7 +22,6 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -36,6 +35,7 @@ import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.integration.editor.AbstractEditorTest;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Peter Friese - Initial contribution and API

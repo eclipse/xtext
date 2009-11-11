@@ -20,12 +20,12 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.ITreeProvider;
 import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -54,7 +54,7 @@ public class TransformingTreeProvider extends LabelProvider implements ITreeProv
 
 		if (newInput instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) newInput;
-			semanticModelTransformer.setDocument(document);
+			semanticModelTransformer.setResourceAccess(document);
 			outlineModel = document.readOnly(new IUnitOfWork<ContentOutlineNode, XtextResource>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
 					if (resource == null || resource.getParseResult() == null || resource.getParseResult().getRootASTElement() == null)
