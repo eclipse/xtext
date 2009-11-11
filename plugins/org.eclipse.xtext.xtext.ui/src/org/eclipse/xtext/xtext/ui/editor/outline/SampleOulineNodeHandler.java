@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractContentOutlineNodeHandler;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * TODO This is just a sample. I intend to replace it with some implementation
