@@ -6,19 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.concurrent;
+package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.concurrent.IEObjectHandle.DefaultImpl;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class IEObjectHandleImplTest extends AbstractXtextTests {
+public class EObjectHandleImplTest extends AbstractXtextTests {
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -37,7 +37,7 @@ public class IEObjectHandleImplTest extends AbstractXtextTests {
 		
 		final EObject eObject = resource.getContents().get(0);
 		
-		DefaultImpl<EObject> impl = new IEObjectHandle.DefaultImpl<EObject>(eObject,access);
+		EObjectHandleImpl<EObject> impl = new EObjectHandleImpl<EObject>(eObject,access);
 		
 		impl.readOnly(new IUnitOfWork.Void<EObject>(){
 			@Override
