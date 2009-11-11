@@ -23,27 +23,29 @@ import com.google.common.collect.Sets;
 public class SuperTypeCollector {
 
 	public Collection<Type> collectSuperTypes(Type type) {
-		if (type == null) {
-			Implementation<Type> implementation = new Implementation<Type>(new Function<Type, Type>() {
-				public Type apply(Type from) {
-					return from;
-				}
-			});
-			implementation.doSwitch(type);
-			return implementation.getResult();
-		}
-		return Collections.emptySet();
+		Function<Type, Type> function = new Function<Type, Type>() {
+			public Type apply(Type from) {
+				return from;
+			}
+		};
+		return doCollectSupertypeData(type, function);
 	}
 	
 	public Collection<String> collectSuperTypeNames(Type type) {
-		if (type == null) {
-			Implementation<String> implementation = new Implementation<String>(new Function<Type, String>() {
-				public String apply(Type from) {
-					return from.getCanonicalName();
-				}
-			});
+		Function<Type, String> function = new Function<Type, String>() {
+			public String apply(Type from) {
+				return from.getCanonicalName();
+			}
+		};
+		return doCollectSupertypeData(type, function);
+	}
+	
+	public <Result> Collection<Result> doCollectSupertypeData(Type type, Function<Type, Result> function) {
+		if (type != null) {
+			Implementation<Result> implementation = new Implementation<Result>(function);
 			implementation.doSwitch(type);
-			return implementation.getResult();
+			Collection<Result> result = implementation.getResult();
+			return result;
 		}
 		return Collections.emptySet();
 	}

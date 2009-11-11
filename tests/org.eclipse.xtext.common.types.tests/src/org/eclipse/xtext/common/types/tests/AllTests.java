@@ -43,6 +43,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.ReferenceTypeArgumentTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.TypeParameterTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.UpperBoundTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.util.ClasspathSuperTypeCollectorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtSuperTypeCollectorTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.VoidTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.WildcardTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.WildcardTypeArgumentTest.class);
