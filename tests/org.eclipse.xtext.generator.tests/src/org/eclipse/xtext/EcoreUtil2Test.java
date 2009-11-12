@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 /**
@@ -35,6 +36,27 @@ public class EcoreUtil2Test extends TestCase {
 		EClass result = EcoreFactory.eINSTANCE.createEClass();
 		result.setName(name);
 		return result;
+	}
+	
+	public void testSimple() throws Exception {
+		
+		ResourceSet rs = new ResourceSetImpl();
+		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		foo.getContents().add(ePackage);
+		Resource bar = rs.createResource(URI.createURI("bar.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		bar.getContents().add(EcoreFactory.eINSTANCE.createEAttribute());
+		
+		assertEquals(true, EcoreUtil2.isValidUri(ePackage, URI.createURI("bar.xmi")));
+	}
+
+	public void testEPackageURI() throws Exception {
+		ResourceSet rs = new ResourceSetImpl();
+		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		foo.getContents().add(ePackage);
+		
+		assertEquals(true, EcoreUtil2.isValidUri(ePackage, URI.createURI(EcorePackage.eNS_URI)));
 	}
 	
 	public void testClone() throws Exception {

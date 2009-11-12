@@ -18,8 +18,10 @@ import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -38,7 +40,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 
 	private String modelAsText;
 
-	private IScopeProvider scopeProvider;
+	private QualifiedNameScopeProvider scopeProvider;
 
 	private EReference reference;
 
@@ -46,8 +48,13 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		scopeProvider = new SimpleNameScopeProvider();
-		((SimpleNameScopeProvider) scopeProvider).setImportUriResolver(get(ImportUriResolver.class));
+		scopeProvider = new QualifiedNameScopeProvider();
+		SimpleNameProvider nameProvider = new SimpleNameProvider();
+		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
+		globalScopeProvider.setImportResolver(new ImportUriResolver());
+		globalScopeProvider.setNameProvider(nameProvider);
+		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
+		scopeProvider.setNameProvider(nameProvider);
 		modelAsText =
 			"spielplatz 1 {\n" +
 			"  kind( Bommel1 1)\n" +
