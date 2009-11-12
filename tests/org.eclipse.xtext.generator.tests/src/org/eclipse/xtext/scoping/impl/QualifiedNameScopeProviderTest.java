@@ -306,8 +306,8 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 	private List<String> toListOfNames(Iterable<IEObjectDescription> elements) {
 		List<String> result = new ArrayList<String>();
 		for (IEObjectDescription e : elements) {
-			if (!result.contains(e.name()))
-				result.add(e.name());
+			if (!result.contains(e.getName()))
+				result.add(e.getName());
 		}
 		Collections.sort(result);
 		return result;
