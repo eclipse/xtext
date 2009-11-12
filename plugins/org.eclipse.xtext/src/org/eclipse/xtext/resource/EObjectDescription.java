@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class EObjectDescription extends AbstractEObjectDescription {
 
-	protected EObjectDescription(String name, EObject element, Map<String, String> userData) {
+	public EObjectDescription(String name, EObject element, Map<String, String> userData) {
 		this.name = name;
 		this.element = element;
 		this.userData = userData;
