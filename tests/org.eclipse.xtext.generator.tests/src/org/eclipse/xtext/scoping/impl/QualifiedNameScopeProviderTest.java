@@ -25,11 +25,11 @@ import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
 import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
@@ -303,9 +303,9 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 
 	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 
-	private List<String> toListOfNames(Iterable<IScopedElement> elements) {
+	private List<String> toListOfNames(Iterable<IEObjectDescription> elements) {
 		List<String> result = new ArrayList<String>();
-		for (IScopedElement e : elements) {
+		for (IEObjectDescription e : elements) {
 			if (!result.contains(e.name()))
 				result.add(e.name());
 		}

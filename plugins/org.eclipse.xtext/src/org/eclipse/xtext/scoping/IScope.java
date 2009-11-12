@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
@@ -28,11 +29,11 @@ public interface IScope {
      */
     public final static IScope NULLSCOPE = new IScope() {
 		
-    	public Iterable<IScopedElement> getAllContents() {
+    	public Iterable<IEObjectDescription> getAllContents() {
     		return Collections.emptyList();
     	}
 
-		public Iterable<IScopedElement> getContents() {
+		public Iterable<IEObjectDescription> getContents() {
 			return Collections.emptyList();
 		}
 
@@ -40,11 +41,11 @@ public interface IScope {
 			return NULLSCOPE;
 		}
 		
-		public IScopedElement getContentByEObject(EObject object) {
+		public IEObjectDescription getContentByEObject(EObject object) {
 			return null;
 		}
 
-		public IScopedElement getContentByName(String name) {
+		public IEObjectDescription getContentByName(String name) {
 			return null;
 		}
     };
@@ -57,22 +58,22 @@ public interface IScope {
     /**
      * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope only
      */
-    Iterable<IScopedElement> getContents();
+    Iterable<IEObjectDescription> getContents();
     
     /**
      * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's outer scope
      * (see {@link IScope#getOuterScope()}), where the elements from an outer scope follows the one from it's inner scope
      */
-    Iterable<IScopedElement> getAllContents();
+    Iterable<IEObjectDescription> getAllContents();
     
     /**
      * a deep search for the element with the given name
      */
-    IScopedElement getContentByName(String name);
+    IEObjectDescription getContentByName(String name);
     
     /**
      * a deep search for the element with the given object
      */
-    IScopedElement getContentByEObject(EObject object);
+    IEObjectDescription getContentByEObject(EObject object);
     
 }

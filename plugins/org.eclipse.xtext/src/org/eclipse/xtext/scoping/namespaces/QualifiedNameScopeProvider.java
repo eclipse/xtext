@@ -20,10 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
@@ -206,11 +206,11 @@ public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 		return new AbstractScope() {
 			
 			@Override
-			public IScopedElement getContentByName(String name) {
+			public IEObjectDescription getContentByName(String name) {
 				for (ImportNormalizer normalizer : normalizers) {
 					String shortToLongName = normalizer.shortToLongName(name);
 					if (shortToLongName != null) {
-						IScopedElement element = localElements.getContentByName(shortToLongName);
+						IEObjectDescription element = localElements.getContentByName(shortToLongName);
 						if (element != null)
 							return element;
 					}
@@ -218,11 +218,11 @@ public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 				return getOuterScope().getContentByName(name);
 			}
 			
-			public Iterable<IScopedElement> getContents() {
+			public Iterable<IEObjectDescription> getContents() {
 				return filter(transform(localElements.getAllContents(),
-				new Function<IScopedElement, IScopedElement>() {
+				new Function<IEObjectDescription, IEObjectDescription>() {
 
-					public IScopedElement apply(final IScopedElement input) {
+					public IEObjectDescription apply(final IEObjectDescription input) {
 						for (ImportNormalizer normalizer : normalizers) {
 							final String newName = normalizer.longToShortName(input.name());
 							if (newName != null) {

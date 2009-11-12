@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 import junit.framework.TestCase;
 
@@ -34,8 +35,8 @@ public class ScopesTest extends TestCase {
 		list.add(attr);
 		list.add(attr2);
 		
-		Iterable<IScopedElement> iterable = Scopes.scopedElementsFor(list);
-		Iterator<IScopedElement> iterator = iterable.iterator();
+		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
+		Iterator<IEObjectDescription> iterator = iterable.iterator();
 		assertEquals("Foo", iterator.next().name());
 		assertEquals("Bar", iterator.next().name());
 	}
@@ -51,8 +52,8 @@ public class ScopesTest extends TestCase {
 		list.add(EcoreFactory.eINSTANCE.createEAttribute());
 		list.add(attr2);
 		
-		Iterable<IScopedElement> iterable = Scopes.scopedElementsFor(list);
-		Iterator<IScopedElement> iterator = iterable.iterator();
+		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
+		Iterator<IEObjectDescription> iterator = iterable.iterator();
 		assertEquals("Foo", iterator.next().name());
 		assertEquals("Bar", iterator.next().name());
 		assertFalse(iterator.hasNext());
@@ -69,20 +70,20 @@ public class ScopesTest extends TestCase {
 		list.add(EcoreFactory.eINSTANCE.createEObject());
 		list.add(datatype);
 		
-		Iterable<IScopedElement> iterable = Scopes.scopedElementsFor(list);
-		Iterator<IScopedElement> iterator = iterable.iterator();
-		IScopedElement next = iterator.next();
+		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
+		Iterator<IEObjectDescription> iterator = iterable.iterator();
+		IEObjectDescription next = iterator.next();
 		assertEquals("Foo", next.name());
-		assertEquals(attr,next.element());
+		assertEquals(attr,next.getEObjectOrProxy());
 		next = iterator.next();
 		assertEquals("Bar", next.name());
-		assertEquals(datatype,next.element());
+		assertEquals(datatype,next.getEObjectOrProxy());
 		assertFalse(iterator.hasNext());
 	}
 	
 	public void testEmptyIterable() throws Exception {
 		ArrayList<EAttribute> list = new ArrayList<EAttribute>();
-		Iterable<IScopedElement> iterable = Scopes.scopedElementsFor(list);
+		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		assertFalse(iterable.iterator().hasNext());
 	}
 }

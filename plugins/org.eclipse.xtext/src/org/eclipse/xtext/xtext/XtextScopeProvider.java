@@ -28,8 +28,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
@@ -75,8 +75,8 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 
 	private IScope createEnumLiteralsScope(EEnum eEnum) {
 		return new SimpleScope(IScope.NULLSCOPE,
-				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IScopedElement>() {
-					public IScopedElement apply(EEnumLiteral param) {
+				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
+					public IEObjectDescription apply(EEnumLiteral param) {
 						return ScopedElement.create(param.getName(), param);
 					}
 				}));
@@ -84,8 +84,8 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 
 	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
 		return new SimpleScope(IScope.NULLSCOPE,
-				Iterables.transform(classifiers, new Function<EClassifier, IScopedElement>() {
-					public IScopedElement apply(EClassifier param) {
+				Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
+					public IEObjectDescription apply(EClassifier param) {
 						return ScopedElement.create(param.getName(), param);
 					}
 				}));
@@ -100,6 +100,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 		return createClassifierScope(allClassifiers);
 	}
 
+	@Override
 	protected IScope createScope(Resource resource, EClass type) {
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
@@ -115,8 +116,8 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 			return createEPackageScope(grammar);
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
 			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
-					new Function<AbstractMetamodelDeclaration,IScopedElement>(){
-						public IScopedElement apply(AbstractMetamodelDeclaration from) {
+					new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
+						public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
 							return ScopedElement.create(from.getAlias(), from);
 						}
 					}));
@@ -153,8 +154,8 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 					public boolean apply(AbstractMetamodelDeclaration input) {
 						return input.getEPackage() != null;
 					}
-				}), new Function<AbstractMetamodelDeclaration, IScopedElement>() {
-			public IScopedElement apply(AbstractMetamodelDeclaration from) {
+				}), new Function<AbstractMetamodelDeclaration, IEObjectDescription>() {
+			public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
 				return ScopedElement.create(from.getEPackage().getNsURI(), from.getEPackage());
 			}
 		}));

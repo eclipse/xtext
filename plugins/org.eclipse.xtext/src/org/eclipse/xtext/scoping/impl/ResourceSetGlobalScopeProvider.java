@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -62,9 +62,9 @@ public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implem
 			Iterable<EObject> eObjects) {
 
 		eObjects = filter(eObjects, typeFilter(reference.getEReferenceType()));
-		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
+		Iterable<IEObjectDescription> result = transform(eObjects, new Function<EObject, IEObjectDescription>() {
 
-			public IScopedElement apply(EObject from) {
+			public IEObjectDescription apply(EObject from) {
 				String qualifiedName = nameProvider.getQualifiedName(from);
 				if (qualifiedName != null) {
 					return ScopedElement.create(qualifiedName, from);

@@ -11,7 +11,7 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
@@ -28,19 +28,19 @@ public abstract class ScopedElements {
 	}
 
 	@Deprecated
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final EClass typeToFilter,
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final EClass typeToFilter,
 			final Function<EObject, String> nameFunc) {
 		return Scopes.allInResource(resource, typeToFilter, nameFunc);
 	}
 
 	@Deprecated
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> predicate,
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> predicate,
 			final Function<EObject, String> nameFunc) {
 		return Scopes.allInResource(resource,predicate,nameFunc);
 	}
 	
 	@Deprecated
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> filter,final Function<EObject, String> nameFunc, boolean skipDuplicates) {
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> filter,final Function<EObject, String> nameFunc, boolean skipDuplicates) {
 		return Scopes.allInResource(resource, filter, nameFunc, skipDuplicates);
 	}
 

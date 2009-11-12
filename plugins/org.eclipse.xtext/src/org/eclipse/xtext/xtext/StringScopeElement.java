@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.resource.AbstractEObjectDescription;
 
-public class StringScopeElement implements IScopedElement {
+public class StringScopeElement extends AbstractEObjectDescription {
 
 	private final String name;
 
@@ -22,12 +24,20 @@ public class StringScopeElement implements IScopedElement {
 		return null;
 	}
 
-	public EObject element() {
+	public EObject getEObjectOrProxy() {
 		return null;
 	}
 
 	public String name() {
 		return name;
+	}
+
+	public URI getEObjectURI() {
+		return null;
+	}
+	
+	public EClass getEClass() {
+		return null;
 	}
 
 }

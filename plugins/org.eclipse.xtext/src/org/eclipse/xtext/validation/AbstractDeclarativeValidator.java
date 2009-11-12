@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -425,9 +425,9 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	 */
 	@Deprecated
 	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
-		for (Iterator<IScopedElement> i = scope.getContents().iterator(); i.hasNext();) {
-			IScopedElement scopedElement = i.next();
-			if (!object.equals(scopedElement.element()) && name.equals(scopedElement.name())) {
+		for (Iterator<IEObjectDescription> i = scope.getContents().iterator(); i.hasNext();) {
+			IEObjectDescription eObjectDescription = i.next();
+			if (!object.equals(eObjectDescription.getEObjectOrProxy()) && name.equals(eObjectDescription.name())) {
 				error(message, feature);
 			}
 		}

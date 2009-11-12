@@ -5,32 +5,46 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.scoping;
+package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Stable;
-import org.eclipse.xtext.scoping.impl.AbstractScopedElement;
 
 /**
- * Represents an element of an {@link IScope}.
+ * A description of an EObject.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
-@Stable(since="0.7.0", subClass=AbstractScopedElement.class)
-public interface IScopedElement {
+public interface IEObjectDescription {
 	
 	/**
-	 * @return the name, this element can be accessed within its scope. 
+	 * @return the name, this element can be accessed 
 	 */
 	String name();
 	
 	/**
-	 * @return the actual element, this element is referring to.
+	 * @return the actual element or a proxy.
 	 */
-	EObject element();
+	EObject getEObjectOrProxy();
 	
 	/**
-	 * Can be used to associate additional information.
-	 * @return optional additional information. 
+	 * @return the full URI to the described element
 	 */
-	Object additionalInformation();
+	URI getEObjectURI();
+	
+	/**
+	 * @return the EClass of the described element.
+	 */
+	EClass getEClass();
+	
+	/**
+	 * access to specific user data
+	 */
+	String getUserData(String name);
+	
+	/**
+	 * @return all available user data keys 
+	 */
+	String[] getUserDataKeys();
 }

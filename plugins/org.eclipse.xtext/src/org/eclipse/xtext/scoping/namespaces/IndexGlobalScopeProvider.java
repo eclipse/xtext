@@ -21,9 +21,9 @@ import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -70,12 +70,12 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 		return new SimpleScope(parent, null) {
 
 			@Override
-			public Iterable<IScopedElement> getContents() {
+			public Iterable<IEObjectDescription> getContents() {
 				return getIndexStore().executeQueryCommand(new ConvertAll(project, context, reference));
 			}
 
 			@Override
-			public IScopedElement getContentByName(String name) {
+			public IEObjectDescription getContentByName(String name) {
 				EObjectDescriptor desc = getIndexStore().executeFindEObjectByName(context, project, reference.getEReferenceType(), name);
 				if(desc!=null) {
 					EObject proxy = desc.createProxy();
@@ -85,8 +85,8 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 			}
 
 			@Override
-			public IScopedElement getContentByEObject(EObject object) {
-				IScopedElement local = getIndexStore().executeQueryCommand(new FindByEObject(project, context, reference, object));
+			public IEObjectDescription getContentByEObject(EObject object) {
+				IEObjectDescription local = getIndexStore().executeQueryCommand(new FindByEObject(project, context, reference, object));
 				if (local != null)
 					return local;
 				return getOuterScope().getContentByEObject(object);
@@ -97,7 +97,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	static final class FindByEObject extends AbstractIndexQuery implements QueryCommand<IScopedElement> {
+	static final class FindByEObject extends AbstractIndexQuery implements QueryCommand<IEObjectDescription> {
 
 		private EObject object;
 
@@ -106,7 +106,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 			this.object = object;
 		}
 
-		public IScopedElement execute(QueryExecutor queryExecutor) {
+		public IEObjectDescription execute(QueryExecutor queryExecutor) {
 			EObjectDescriptorQuery query = createQuery();
 
 			ResourceDescriptorQuery resourceQuery = new ResourceDescriptorQuery();
@@ -126,18 +126,18 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IScopedElement>> {
+	static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IEObjectDescription>> {
 
 		public ConvertAll(String project, EObject context, final EReference reference) {
 			super(project, context, reference);
 		}
 
-		public Iterable<IScopedElement> execute(QueryExecutor queryExecutor) {
+		public Iterable<IEObjectDescription> execute(QueryExecutor queryExecutor) {
 			QueryResult<EObjectDescriptor> result = queryExecutor.execute(createQuery());
-			ArrayList<IScopedElement> elements = new ArrayList<IScopedElement>();
+			ArrayList<IEObjectDescription> elements = new ArrayList<IEObjectDescription>();
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = desc.createProxy();
-				IScopedElement element = ScopedElement.create(desc.getName(), proxy);
+				IEObjectDescription element = ScopedElement.create(desc.getName(), proxy);
 				elements.add(element);
 			}
 			return elements;
