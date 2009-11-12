@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,7 +25,7 @@ import org.eclipse.xtext.scoping.IScopedElement;
 public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 	@SuppressWarnings("unused")
 	public void testSimple() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
@@ -38,8 +38,8 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testNested() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
@@ -58,9 +58,9 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testPolymorphic() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
@@ -83,9 +83,9 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testScopeByType() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
@@ -108,9 +108,9 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testScopeByReference() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass_eSuperTypes(EClassifier clazz, EReference ref) {
 				return a;
@@ -132,9 +132,9 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testScopeByType2() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
@@ -156,9 +156,9 @@ public class DeclarativeScopeProviderTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	public void testScopeByReference2() throws Exception {
-		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
-		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement> emptySet());
+		final IScope a = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope b = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
+		final IScope c = new SimpleScope(IScope.NULLSCOPE, Collections.<IEObjectDescription> emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass_eSuperTypes(EClassifier clazz, EReference ref) {
 				return a;

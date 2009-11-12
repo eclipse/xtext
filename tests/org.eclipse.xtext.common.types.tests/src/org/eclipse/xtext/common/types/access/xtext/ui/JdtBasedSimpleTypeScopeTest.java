@@ -15,8 +15,8 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.xtext.AbstractTypeScopeTest;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -41,18 +41,18 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	}
 	
 	public void testGetContents_01() {
-		Iterable<IScopedElement> contents = typeScope.getContents();
-		assertTrue(Iterables.any(contents, new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement input) {
+		Iterable<IEObjectDescription> contents = typeScope.getContents();
+		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
 				return List.class.getName().equals(input.name());
 			}
 		}));
 	}
 	
 	public void testGetContents_02() {
-		Iterable<IScopedElement> contents = typeScope.getContents();
-		assertTrue(Iterables.any(contents, new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement input) {
+		Iterable<IEObjectDescription> contents = typeScope.getContents();
+		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
 				return "int".equals(input.name());
 			}
 		}));
