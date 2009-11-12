@@ -10,9 +10,8 @@ package org.eclipse.xtext.scoping.namespaces;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfindex.EObjectDescriptor;
 import org.eclipse.emf.emfindex.query.ContainerDescriptorQuery;
@@ -22,8 +21,10 @@ import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
@@ -33,19 +34,9 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScopeProvider {
+public class IndexGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
 	
-	static class Descriptors {
-
-		public static EObject createProxy(EObjectDescriptor desc) {
-			EObject object = desc.getEClass().getEPackage().getEFactoryInstance().create(desc.getEClass());
-			((InternalEObject)object).eSetProxyURI(desc.getFragmentURI());
-			return object;
-		}
-		
-	}
-
-	public static Logger log = Logger.getLogger(IndexBasedQualifiedNameScopeProvider.class);
+	public static Logger log = Logger.getLogger(IndexGlobalScopeProvider.class);
 
 	private IXtextIndex indexStore;
 
@@ -65,30 +56,29 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 		this.containerDependencyProvider = containerDependencyProvider;
 	}
 
-	@Override
-	protected IScope getGlobalScope(final EObject context, EClass type) {
+	public IScope getScope(final EObject context, EReference reference) {
 		IScope parent = IScope.NULLSCOPE;
 		for (String dependentContainerName : Iterables.reverse(containerDependencyProvider
 				.getReferencedContainers(context))) {
-			parent = createIndexScope(parent, dependentContainerName, context, type);
+			parent = createIndexScope(parent, dependentContainerName, context, reference);
 		}
 		String container = containerDependencyProvider.getContainer(context);
-		return createIndexScope(parent, container, context, type);
+		return createIndexScope(parent, container, context, reference);
 	}
 
-	protected SimpleScope createIndexScope(IScope parent, final String project, final EObject context, final EClass type) {
+	protected SimpleScope createIndexScope(IScope parent, final String project, final EObject context, final EReference reference) {
 		return new SimpleScope(parent, null) {
 
 			@Override
 			public Iterable<IScopedElement> getContents() {
-				return getIndexStore().executeQueryCommand(new ConvertAll(project, context, type));
+				return getIndexStore().executeQueryCommand(new ConvertAll(project, context, reference));
 			}
 
 			@Override
 			public IScopedElement getContentByName(String name) {
-				EObjectDescriptor desc = getIndexStore().executeFindEObjectByName(context, project, type, name);
+				EObjectDescriptor desc = getIndexStore().executeFindEObjectByName(context, project, reference.getEReferenceType(), name);
 				if(desc!=null) {
-					EObject proxy = Descriptors.createProxy(desc);
+					EObject proxy = desc.createProxy();
 					return ScopedElement.create(desc.getName(), proxy);
 				}
 				return getOuterScope().getContentByName(name);
@@ -96,7 +86,7 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 			@Override
 			public IScopedElement getContentByEObject(EObject object) {
-				IScopedElement local = getIndexStore().executeQueryCommand(new FindByEObject(project, context, type, object));
+				IScopedElement local = getIndexStore().executeQueryCommand(new FindByEObject(project, context, reference, object));
 				if (local != null)
 					return local;
 				return getOuterScope().getContentByEObject(object);
@@ -111,8 +101,8 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 		private EObject object;
 
-		public FindByEObject(String project, EObject context, EClass type, EObject object) {
-			super(project, context, type);
+		public FindByEObject(String project, EObject context, final EReference reference, EObject object) {
+			super(project, context, reference);
 			this.object = object;
 		}
 
@@ -126,7 +116,7 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
 			for (EObjectDescriptor desc : result) {
-				EObject proxy = Descriptors.createProxy(desc);
+				EObject proxy = desc.createProxy();
 				return ScopedElement.create(desc.getName(), proxy);
 			}
 			return null;
@@ -138,15 +128,15 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 	 */
 	static final class ConvertAll extends AbstractIndexQuery implements QueryCommand<Iterable<IScopedElement>> {
 
-		public ConvertAll(String project, EObject context, EClass type) {
-			super(project, context, type);
+		public ConvertAll(String project, EObject context, final EReference reference) {
+			super(project, context, reference);
 		}
 
 		public Iterable<IScopedElement> execute(QueryExecutor queryExecutor) {
 			QueryResult<EObjectDescriptor> result = queryExecutor.execute(createQuery());
 			ArrayList<IScopedElement> elements = new ArrayList<IScopedElement>();
 			for (EObjectDescriptor desc : result) {
-				EObject proxy = Descriptors.createProxy(desc);
+				EObject proxy = desc.createProxy();
 				IScopedElement element = ScopedElement.create(desc.getName(), proxy);
 				elements.add(element);
 			}
@@ -159,13 +149,13 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 	 */
 	abstract static class AbstractIndexQuery {
 
-		private EClass type;
+		private EReference reference;
 		private EObject context;
 		private String project;
 
-		public AbstractIndexQuery(String project, EObject context, EClass type) {
+		public AbstractIndexQuery(String project, EObject context, final EReference reference) {
 			this.context = context;
-			this.type = type;
+			this.reference = reference;
 			this.project = project;
 		}
 
@@ -180,9 +170,10 @@ public class IndexBasedQualifiedNameScopeProvider extends QualifiedNameBasedScop
 
 			EObjectDescriptorQuery query = new EObjectDescriptorQuery();
 			query.setResourceQuery(resourceQuery);
-			query.setIsInstanceOf(type);
+			query.setIsInstanceOf(reference.getEReferenceType());
 
 			return query;
 		}
 	}
+
 }

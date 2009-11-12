@@ -40,6 +40,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -219,8 +220,9 @@ public class XtextLinkingService extends DefaultLinkingService {
 				if (text == leaf)
 					return super.getLinkedObjects(context, ref, text);
 				if (!(leaf.getGrammarElement() instanceof Keyword) && !leaf.isHidden()) {
+					IScope scope = getScope(context, ref);
 					return XtextMetamodelReferenceHelper.findBestMetamodelForType(
-							context, text.getText(), leaf.getText(), getScope(context, ref));
+							context, text.getText(), leaf.getText(), scope);
 				}
 			}
 		}

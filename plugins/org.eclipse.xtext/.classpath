@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="model"/>
+	<classpathentry kind="src" path="deprecated"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

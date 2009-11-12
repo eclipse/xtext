@@ -10,10 +10,11 @@ package org.eclipse.xtext.validation;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.xtext.scoping.impl.ImportUriUtil;
 
 import com.google.inject.Inject;
 
@@ -28,7 +29,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	@Check(value=CheckType.FAST)
 	public void checkImportUriIsValid(EObject object) {
 		String importURI = getResolver().resolve(object);
-		if (importURI != null && !ImportUriUtil.isValid(object, importURI)) {
+		if (importURI != null && !EcoreUtil2.isValidUri(object, URI.createURI(importURI))) {
 			error("Imported resource could not be found.", getResolver().getAttribute(object).getFeatureID());
 		}
 	}
