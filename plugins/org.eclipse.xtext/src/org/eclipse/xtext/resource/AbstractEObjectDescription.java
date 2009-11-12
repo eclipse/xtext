@@ -17,7 +17,7 @@ package org.eclipse.xtext.resource;
 public abstract class AbstractEObjectDescription implements IEObjectDescription {
 	@Override
 	public String toString() {
-		return name();
+		return getName();
 	}
 	
 	public String getUserData(String name) {

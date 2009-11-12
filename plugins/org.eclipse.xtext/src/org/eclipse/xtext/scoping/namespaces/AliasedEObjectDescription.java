@@ -18,18 +18,18 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class AliasedScopedElement extends AbstractEObjectDescription {
+public class AliasedEObjectDescription extends AbstractEObjectDescription {
 
 	private IEObjectDescription delegate;
 	private String alias;
 
-	public AliasedScopedElement(String alias, IEObjectDescription delegate) {
+	public AliasedEObjectDescription(String alias, IEObjectDescription delegate) {
 		super();
 		this.alias = alias;
 		this.delegate = delegate;
 	}
 
-	public String name() {
+	public String getName() {
 		return alias;
 	}
 

@@ -49,7 +49,7 @@ public class ScopeTest extends TestCase {
 	
 	public void testContentByName_existent() throws Exception {
 		String name = EcorePackage.eINSTANCE.getEAnnotation().getName();
-		assertEquals(name, scope.getContentByName(name).name());
+		assertEquals(name, scope.getContentByName(name).getName());
 	}
 	
 	public void testContentByName_nonExistent() throws Exception {

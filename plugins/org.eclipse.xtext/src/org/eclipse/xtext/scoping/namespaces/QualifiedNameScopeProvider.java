@@ -224,9 +224,9 @@ public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 
 					public IEObjectDescription apply(final IEObjectDescription input) {
 						for (ImportNormalizer normalizer : normalizers) {
-							final String newName = normalizer.longToShortName(input.name());
+							final String newName = normalizer.longToShortName(input.getName());
 							if (newName != null) {
-								return new AliasedScopedElement(newName, input);
+								return new AliasedEObjectDescription(newName, input);
 							}
 						}
 						return null;

@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -80,7 +80,7 @@ public class Scopes {
 			public IEObjectDescription apply(T from) {
 				String name = nameComputation.apply(from);
 				if (name != null)
-					return ScopedElement.create(name, from);
+					return EObjectDescription.create(name, from);
 				return null;
 			}
 		});
@@ -143,7 +143,7 @@ public class Scopes {
 			Iterable<IEObjectDescription> transformed = transform(filtered, new Function<EObject, IEObjectDescription>() {
 
 				public IEObjectDescription apply(EObject from) {
-					return ScopedElement.create(nameFunc.apply(from), from);
+					return EObjectDescription.create(nameFunc.apply(from), from);
 				}
 			});
 			if (!skipDuplicates)
@@ -158,13 +158,13 @@ public class Scopes {
 		final ListMultimap<String, IEObjectDescription> multiMap = Multimaps.index(transformed,
 				new Function<IEObjectDescription, String>() {
 					public String apply(IEObjectDescription from) {
-						return from.name();
+						return from.getName();
 					}
 				});
 
 		return filter(transformed, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return multiMap.get(input.name()).size() == 1;
+				return multiMap.get(input.getName()).size() == 1;
 			}
 		});
 	}
