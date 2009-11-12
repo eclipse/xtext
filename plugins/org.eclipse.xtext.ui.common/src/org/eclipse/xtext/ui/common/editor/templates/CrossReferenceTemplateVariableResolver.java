@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * Resolves a template variable to <code>EClass classes</code> which are visible in the
@@ -44,11 +44,11 @@ public class CrossReferenceTemplateVariableResolver extends
 		IScope scope = castedContext.getScopeProvider().getScope(
 				castedContext.getContentAssistContext().getCurrentModel(),
 				reference);
-		Iterable<IScopedElement> linkingCandidates = scope.getAllContents();
+		Iterable<IEObjectDescription> linkingCandidates = scope.getAllContents();
 
 		List<String> names = new ArrayList<String>();
-		for (IScopedElement scopedElement : linkingCandidates) {
-			names.add(scopedElement.name());
+		for (IEObjectDescription eObjectDescription : linkingCandidates) {
+			names.add(eObjectDescription.name());
 		}
 		return names;
 	}

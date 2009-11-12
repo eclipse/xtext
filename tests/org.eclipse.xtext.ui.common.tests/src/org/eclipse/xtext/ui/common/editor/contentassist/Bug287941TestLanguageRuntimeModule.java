@@ -6,9 +6,9 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
@@ -36,11 +36,11 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 	
 	public static class ScopeProvider extends AbstractDeclarativeScopeProvider {
 		public IScope scope_FromEntry(MQLquery _this, EClass type) {
-			Iterable<IScopedElement> transformed = transform(
+			Iterable<IEObjectDescription> transformed = transform(
 					_this.getFromEntries(),
-					new Function<FromEntry, IScopedElement>() {
+					new Function<FromEntry, IEObjectDescription>() {
 
-						public IScopedElement apply(FromEntry from) {
+						public IEObjectDescription apply(FromEntry from) {
 							return ScopedElement.create(from.getAlias(), from);
 						}
 					});
