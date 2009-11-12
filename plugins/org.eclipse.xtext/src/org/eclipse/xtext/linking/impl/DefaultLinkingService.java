@@ -169,7 +169,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			return null;
 		IEObjectDescription eObjectDescription = getScopedElement(scope, object);
 		if (eObjectDescription != null) {
-			return eObjectDescription.name();
+			return eObjectDescription.getName();
 		}
 		return null;
 	}

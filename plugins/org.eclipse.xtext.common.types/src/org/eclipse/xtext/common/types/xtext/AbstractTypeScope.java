@@ -12,10 +12,10 @@ import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,7 +38,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 			Type type = typeProvider.findTypeByName(name);
 			if (type == null)
 				return null;
-			return ScopedElement.create(name, type);
+			return EObjectDescription.create(name, type);
 		} catch (TypeNotFoundException e) {
 			return null;
 		}
@@ -47,7 +47,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	@Override
 	public IEObjectDescription getContentByEObject(EObject object) {
 		if (object instanceof IdentifyableElement) {
-			return ScopedElement.create(((IdentifyableElement) object).getCanonicalName(), object);
+			return EObjectDescription.create(((IdentifyableElement) object).getCanonicalName(), object);
 		}
 		return null;
 	}

@@ -33,7 +33,7 @@ public class FilteredScope extends AbstractScope {
 	public IEObjectDescription getContentByEObject(EObject object) {
 		if (elementFilter.apply(object)) {
 			IEObjectDescription result = delegate.getContentByEObject(object);
-			if (result != null && nameFilter.apply(result.name()))
+			if (result != null && nameFilter.apply(result.getName()))
 				return result;
 		}
 		return null;
@@ -53,7 +53,7 @@ public class FilteredScope extends AbstractScope {
 		return Iterables.filter(delegate.getContents(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				if (input != null) {
-					return nameFilter.apply(input.name()) && elementFilter.apply(input.getEObjectOrProxy());
+					return nameFilter.apply(input.getName()) && elementFilter.apply(input.getEObjectOrProxy());
 				}
 				return true;
 			}

@@ -427,7 +427,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
 		for (Iterator<IEObjectDescription> i = scope.getContents().iterator(); i.hasNext();) {
 			IEObjectDescription eObjectDescription = i.next();
-			if (!object.equals(eObjectDescription.getEObjectOrProxy()) && name.equals(eObjectDescription.name())) {
+			if (!object.equals(eObjectDescription.getEObjectOrProxy()) && name.equals(eObjectDescription.getName())) {
 				error(message, feature);
 			}
 		}

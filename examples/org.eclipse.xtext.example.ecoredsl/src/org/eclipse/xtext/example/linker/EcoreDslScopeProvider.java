@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 
@@ -71,7 +71,7 @@ public class EcoreDslScopeProvider extends QualifiedNameScopeProvider {
 				Iterables.filter(EPackage.Registry.INSTANCE.values(), EPackage.class),
 				new Function<Object, IEObjectDescription>() {
 					public IEObjectDescription apply(Object param) {
-						return ScopedElement.create(valueConverterService.toString(((EPackage) param)
+						return EObjectDescription.create(valueConverterService.toString(((EPackage) param)
 								.getNsURI(), "STRING"), (EObject) param);
 					}
 				}));
@@ -82,7 +82,7 @@ public class EcoreDslScopeProvider extends QualifiedNameScopeProvider {
 		return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(
 				classifiers, new Function<EClassifier, IEObjectDescription>() {
 					public IEObjectDescription apply(EClassifier param) {
-						return ScopedElement.create(param.getName(), param);
+						return EObjectDescription.create(param.getName(), param);
 					}
 				}));
 	}

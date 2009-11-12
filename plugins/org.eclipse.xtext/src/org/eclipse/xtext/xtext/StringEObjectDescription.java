@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.AbstractEObjectDescription;
 
-public class StringScopeElement extends AbstractEObjectDescription {
+public class StringEObjectDescription extends AbstractEObjectDescription {
 
 	private final String name;
 
-	public StringScopeElement(String name) {
+	public StringEObjectDescription(String name) {
 		this.name = name;
 	}
 
@@ -28,7 +28,7 @@ public class StringScopeElement extends AbstractEObjectDescription {
 		return null;
 	}
 
-	public String name() {
+	public String getName() {
 		return name;
 	}
 

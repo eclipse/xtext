@@ -23,8 +23,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 
 import com.google.common.collect.Lists;
 
@@ -80,7 +80,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 			URI uri = getTypeProvider().getTypeUriHelper().getFullURI(typeSignature, null);
 			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createVoid();
 			proxy.eSetProxyURI(uri);
-			IEObjectDescription eObjectDescription = ScopedElement.create(fullyQualifiedName, proxy);
+			IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
 			return eObjectDescription;
 		}
 		catch (JavaModelException e) {

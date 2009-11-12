@@ -21,11 +21,11 @@ import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.collect.Iterables;
@@ -79,7 +79,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 				EObjectDescriptor desc = getIndexStore().executeFindEObjectByName(context, project, reference.getEReferenceType(), name);
 				if(desc!=null) {
 					EObject proxy = desc.createProxy();
-					return ScopedElement.create(desc.getName(), proxy);
+					return EObjectDescription.create(desc.getName(), proxy);
 				}
 				return getOuterScope().getContentByName(name);
 			}
@@ -117,7 +117,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 			QueryResult<EObjectDescriptor> result = queryExecutor.execute(query);
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = desc.createProxy();
-				return ScopedElement.create(desc.getName(), proxy);
+				return EObjectDescription.create(desc.getName(), proxy);
 			}
 			return null;
 		}
@@ -137,7 +137,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 			ArrayList<IEObjectDescription> elements = new ArrayList<IEObjectDescription>();
 			for (EObjectDescriptor desc : result) {
 				EObject proxy = desc.createProxy();
-				IEObjectDescription element = ScopedElement.create(desc.getName(), proxy);
+				IEObjectDescription element = EObjectDescription.create(desc.getName(), proxy);
 				elements.add(element);
 			}
 			return elements;

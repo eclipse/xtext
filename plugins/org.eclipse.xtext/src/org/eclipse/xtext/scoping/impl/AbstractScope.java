@@ -33,12 +33,12 @@ public abstract class AbstractScope implements IScope {
 		final Set<String> identifiers = new HashSet<String>();
 		return Iterables.concat(Iterables.transform(getContents(), new Function<IEObjectDescription, IEObjectDescription>() {
 			public IEObjectDescription apply(IEObjectDescription param) {
-				identifiers.add(param.name());
+				identifiers.add(param.getName());
 				return param;
 			}
 		}), Iterables.filter(getOuterScope().getAllContents(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription param) {
-				return !identifiers.contains(param.name());
+				return !identifiers.contains(param.getName());
 			}
 		}));
 	}
@@ -61,7 +61,7 @@ public abstract class AbstractScope implements IScope {
 		Iterator<IEObjectDescription> contents = getContents().iterator();
 		while (contents.hasNext()) {
 			IEObjectDescription element = contents.next();
-			if (name.equals(element.name())) 
+			if (name.equals(element.getName())) 
 				return element;
 		}
 		return getOuterScope().getContentByName(name);

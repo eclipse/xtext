@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -67,7 +68,7 @@ public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implem
 			public IEObjectDescription apply(EObject from) {
 				String qualifiedName = nameProvider.getQualifiedName(from);
 				if (qualifiedName != null) {
-					return ScopedElement.create(qualifiedName, from);
+					return EObjectDescription.create(qualifiedName, from);
 				}
 				return null;
 			}

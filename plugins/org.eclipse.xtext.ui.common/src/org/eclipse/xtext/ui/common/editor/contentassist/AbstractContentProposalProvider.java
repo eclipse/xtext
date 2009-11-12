@@ -172,7 +172,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
 	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.getEObjectOrProxy(), element.name(), contentAssistContext);
+		return createCompletionProposal(element.getEObjectOrProxy(), element.getName(), contentAssistContext);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
 	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.getEObjectOrProxy(), element.name(), getDisplayString(element), prefix, contentAssistContext);
+		return createCompletionProposal(element.getEObjectOrProxy(), element.getName(), getDisplayString(element), prefix, contentAssistContext);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	}
 	
 	protected String getDisplayString(IEObjectDescription candidate) {
-		return candidate.name();
+		return candidate.getName();
 	}
 	
 	protected String getDisplayString(EObject element, String proposal) {

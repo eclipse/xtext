@@ -22,7 +22,7 @@ class StringScope extends SimpleScope {
 	public StringScope(IScope parentScope, Iterable<? extends String> content) {
 		super(parentScope, Iterables.transform(content, new Function<String, IEObjectDescription>() {
 			public IEObjectDescription apply(String param) {
-				return new StringScopeElement(param);
+				return new StringEObjectDescription(param);
 			}
 		}));
 	}

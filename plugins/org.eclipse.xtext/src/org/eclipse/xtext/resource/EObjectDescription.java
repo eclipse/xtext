@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.scoping.impl;
+package org.eclipse.xtext.resource;
 
 import java.util.Collections;
 import java.util.Map;
@@ -14,23 +14,21 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.AbstractEObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class ScopedElement extends AbstractEObjectDescription {
+public class EObjectDescription extends AbstractEObjectDescription {
 
-	protected ScopedElement(String name, EObject element, Map<String, String> userData) {
+	protected EObjectDescription(String name, EObject element, Map<String, String> userData) {
 		this.name = name;
 		this.element = element;
 		this.userData = userData;
 	}
 
 	public static IEObjectDescription create(String name, EObject element, Map<String, String> userData) {
-		return new ScopedElement(name, element, userData);
+		return new EObjectDescription(name, element, userData);
 	}
 	
 	public static IEObjectDescription create(String name, EObject element) {
@@ -49,7 +47,7 @@ public class ScopedElement extends AbstractEObjectDescription {
 		return EcoreUtil.getURI(element);
 	}
 
-	public String name() {
+	public String getName() {
 		return name;
 	}
 	

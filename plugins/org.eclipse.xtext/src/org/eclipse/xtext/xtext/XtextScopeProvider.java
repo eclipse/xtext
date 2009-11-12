@@ -28,10 +28,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
@@ -77,7 +77,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 		return new SimpleScope(IScope.NULLSCOPE,
 				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
 					public IEObjectDescription apply(EEnumLiteral param) {
-						return ScopedElement.create(param.getName(), param);
+						return EObjectDescription.create(param.getName(), param);
 					}
 				}));
 	}
@@ -86,7 +86,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 		return new SimpleScope(IScope.NULLSCOPE,
 				Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
 					public IEObjectDescription apply(EClassifier param) {
-						return ScopedElement.create(param.getName(), param);
+						return EObjectDescription.create(param.getName(), param);
 					}
 				}));
 	}
@@ -118,7 +118,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
 					new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
 						public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-							return ScopedElement.create(from.getAlias(), from);
+							return EObjectDescription.create(from.getAlias(), from);
 						}
 					}));
 		}
@@ -156,7 +156,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 					}
 				}), new Function<AbstractMetamodelDeclaration, IEObjectDescription>() {
 			public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-				return ScopedElement.create(from.getEPackage().getNsURI(), from.getEPackage());
+				return EObjectDescription.create(from.getEPackage().getNsURI(), from.getEPackage());
 			}
 		}));
 	}
