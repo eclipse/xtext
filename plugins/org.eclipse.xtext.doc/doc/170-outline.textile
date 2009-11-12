@@ -135,14 +135,14 @@ h3. Context menus
 
 You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s, you cannot easily register an "Object contribution":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm. (Besides, using the extension point @org.eclipse.ui.popupMenus@ is regarded somewhat old school - you should rather use the new command and expression framework, as depicted below).
 
-So to register context menus for specific node types of your Ecore model, you need to do the following:
+To register context menus for specific node types of your Ecore model, we need to:
 
-* register a ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory} which will translate ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s to their underlying node type
+* implement ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory} which will translate ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s to their underlying node type
 * register a menu contribution to add a command / handler pair to the context menu for the specific node types you're interested in.
 
 h4. Registering an @IContentOutlineNodeAdapterFactory@
 
-Create a subclass of ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory} - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override @getAdapterList()@ and return an array of classes. This is the list of classes you want to add context menus to:
+The Xtext code generator creates a subclass of ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory}. All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 
 bc.. public class MyDslContentOutlineNodeAdapterFactory extends 
     DefaultContentOutlineNodeAdapterFactory {
@@ -155,20 +155,13 @@ bc.. public class MyDslContentOutlineNodeAdapterFactory extends
   }
 }
 
-p. Register this class with your @MyDslUiModule@ to make it available to your DSL editor:
+p. If you want to bind context menu actions to nodes representing @Attribute@ and @Entity@, you need to change the declaration of @type@ as follows:
 
-bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
-  ...
-  public Class<? extends IContentOutlineNodeAdapterFactory>
-      bindIContentOutlineNodeAdapterFactory() {
-    return org.example.myDSLContentOutlineNodeAdapterFactory.class;
-  }
-  ...
-}
+bc. private static final Class[] types = { Attribute.class, Entity.class };
 
 h4. Registering a menu contribution
 
-After you have registered the ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory}, you can add command / handler pairs to the context menu.
+You can now add command / handler pairs to the context menu.
 
 First, you need to define a command - it will serve as a handle to glue together the handler and the menu contribution:
 
