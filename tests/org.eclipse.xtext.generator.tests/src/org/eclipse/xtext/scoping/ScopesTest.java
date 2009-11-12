@@ -37,8 +37,8 @@ public class ScopesTest extends TestCase {
 		
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
-		assertEquals("Foo", iterator.next().name());
-		assertEquals("Bar", iterator.next().name());
+		assertEquals("Foo", iterator.next().getName());
+		assertEquals("Bar", iterator.next().getName());
 	}
 	
 	public void testWithNull() throws Exception {
@@ -54,8 +54,8 @@ public class ScopesTest extends TestCase {
 		
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
-		assertEquals("Foo", iterator.next().name());
-		assertEquals("Bar", iterator.next().name());
+		assertEquals("Foo", iterator.next().getName());
+		assertEquals("Bar", iterator.next().getName());
 		assertFalse(iterator.hasNext());
 	}
 	
@@ -73,10 +73,10 @@ public class ScopesTest extends TestCase {
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
 		IEObjectDescription next = iterator.next();
-		assertEquals("Foo", next.name());
+		assertEquals("Foo", next.getName());
 		assertEquals(attr,next.getEObjectOrProxy());
 		next = iterator.next();
-		assertEquals("Bar", next.name());
+		assertEquals("Bar", next.getName());
 		assertEquals(datatype,next.getEObjectOrProxy());
 		assertFalse(iterator.hasNext());
 	}

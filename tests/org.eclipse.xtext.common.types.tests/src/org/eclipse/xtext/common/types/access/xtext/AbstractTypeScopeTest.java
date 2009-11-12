@@ -28,7 +28,7 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 		IEObjectDescription objectElement = getTypeScope().getContentByName(Object.class.getName());
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
-		assertEquals("java.lang.Object", objectElement.name());
+		assertEquals("java.lang.Object", objectElement.getName());
 	}
 	
 	public void testGetElementByName_02() {
@@ -40,7 +40,7 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 		Void voidType = TypesFactory.eINSTANCE.createVoid();
 		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);
 		assertNotNull(element);
-		assertEquals(voidType.getCanonicalName(), element.name());
+		assertEquals(voidType.getCanonicalName(), element.getName());
 	}
 	
 	public void testGetElementByInstance_02() {
