@@ -16,6 +16,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 
 /**
@@ -33,7 +34,7 @@ public class JavaScopingFragment extends AbstractGeneratorFragment {
 					"binder.bind(" + 
 						IScopeProvider.class.getName() + ".class" +
 						").annotatedWith(com.google.inject.name.Names.named(" +
-						"\"" + IScopeProvider.class.getName() + ".delegate\"" +
+						"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
 						")).to("+ SimpleNameScopeProvider.class.getName() + ".class)")
 			.getBindings();
 	}

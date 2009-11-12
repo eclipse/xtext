@@ -32,8 +32,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameBasedScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameBasedScopeProvider.ImportNormalizer;
+import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider.ImportNormalizer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -45,14 +45,17 @@ import com.google.common.collect.Iterables;
  */
 public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 
-	private QualifiedNameBasedScopeProvider scopeProvider;
+	private QualifiedNameScopeProvider scopeProvider;
+	private ResourceSetGlobalScopeProvider globalScopeProvider;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
 
-		scopeProvider = new QualifiedNameBasedScopeProvider();
+		globalScopeProvider = new ResourceSetGlobalScopeProvider(nameProvider);
+		scopeProvider = new QualifiedNameScopeProvider();
+		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
 		scopeProvider.setNameProvider(nameProvider);
 	}
 

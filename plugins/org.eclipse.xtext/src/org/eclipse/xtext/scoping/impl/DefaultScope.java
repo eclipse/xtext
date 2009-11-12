@@ -13,11 +13,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
@@ -42,7 +45,7 @@ public class DefaultScope extends SimpleScope {
 		while (iter.hasNext()) {
 			EObject object = iter.next();
 			String uri = importResolver.apply(object);
-			if (uri != null && uniqueImportURIs.add(uri) && ImportUriUtil.isValid(object, uri)) {
+			if (uri != null && uniqueImportURIs.add(uri) && EcoreUtil2.isValidUri(object, URI.createURI(uri))) {
 				orderedImportURIs.add(uri);
 			}
 		}
@@ -55,8 +58,23 @@ public class DefaultScope extends SimpleScope {
 	
 	static class LazyReferencedResourceScope extends SimpleScope {
 
+		private EClass type;
+		private Resource context;
+		private String uri;
+		private Function<EObject, String> nameFunction;
+
 		public LazyReferencedResourceScope(IScope parent, EClass type, Resource context, String uri, Function<EObject, String> nameFunc) {
-			super(parent, Scopes.allInResource(ImportUriUtil.getResource(context, uri), type, nameFunc));
+			super(parent, null);
+			this.type = type;
+			this.context = context;
+			this.uri = uri;
+			this.nameFunction = nameFunc;
+		}
+		
+		@Override
+		public Iterable<IScopedElement> getContents() {
+			Resource resource = EcoreUtil2.getResource(context, uri);
+			return Scopes.allInResource(resource, type, nameFunction);
 		}
 
 	}

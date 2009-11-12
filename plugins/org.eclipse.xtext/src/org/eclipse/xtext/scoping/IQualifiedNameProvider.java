@@ -10,12 +10,14 @@ package org.eclipse.xtext.scoping;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.google.common.base.Function;
+
 /**
  * Provides qualified names for EObjects.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IQualifiedNameProvider {
+public interface IQualifiedNameProvider extends Function<EObject, String> {
 
 	/**
 	 * @return the qualified name for the given object, <code>null</code> if this {@link IQualifiedNameProvider} is not
@@ -27,5 +29,8 @@ public interface IQualifiedNameProvider {
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	public static abstract class AbstractImpl implements IQualifiedNameProvider {
+		public String apply(EObject from) {
+			return getQualifiedName(from);
+		}
 	}
 }

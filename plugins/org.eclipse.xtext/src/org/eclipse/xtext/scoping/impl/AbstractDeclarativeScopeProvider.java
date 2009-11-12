@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Predicate;
@@ -56,12 +57,31 @@ import com.google.inject.name.Named;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public abstract class AbstractDeclarativeScopeProvider extends AbstractDelegatingScopeProvider {
+public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider {
+	
+	public final static String NAMED_DELEGATE = "org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate";
+	public final static String NAMED_ERROR_HANDLER = "org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.errorHandler";
 	
 	public final Logger logger = Logger.getLogger(getClass());
 	
+	@Inject
+	@Named(NAMED_DELEGATE)
+	private IScopeProvider delegate;
+	
+	protected IScope delegateGetScope(EObject context, EReference reference) {
+		return getDelegate().getScope(context, reference);
+	}
+
+	public void setDelegate(IScopeProvider delegate) {
+		this.delegate = delegate;
+	}
+
+	public IScopeProvider getDelegate() {
+		return delegate;
+	}
+	
 	@Inject(optional=true)
-	@Named("org.eclipse.xtext.scoping.impl.DeclarativeScopeProvider.errorHandler")
+	@Named(NAMED_ERROR_HANDLER)
 	private PolymorphicDispatcher.ErrorHandler<IScope> errorHandler = new PolymorphicDispatcher.NullErrorHandler<IScope>();
 
 	protected Predicate<Method> getPredicate(EObject context, EClass type) {
@@ -74,13 +94,12 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractDelegatin
 		return PolymorphicDispatcher.Predicates.forName(methodName, 2);
 	}
 
-	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = polymorphicFindScopeForReferenceName(context, reference);
 		if (scope == null) {
 			scope = polymorphicFindScopeForClassName(context, reference);
 			if (scope == null) {
-				scope = super.getScope(context, reference);
+				scope = delegateGetScope(context, reference);
 			}
 		}
 		return scope;

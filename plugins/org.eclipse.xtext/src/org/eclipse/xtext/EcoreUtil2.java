@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
@@ -398,6 +399,45 @@ public class EcoreUtil2 extends EcoreUtil {
 			return Collections.<EObject>emptyList();
 		}
 		return (List<EObject>) referer.eGet(reference);
+	}
+	
+	/**
+	 * checks whether the given URI can be loaded given the context.
+	 * I.e. there's a resource set with a correpsonding resource factory and the
+	 * physical resource exists.
+	 */
+	public static boolean isValidUri(EObject context, URI uri) {
+		URI newURI = getResolvedImportUri(context.eResource(), uri);
+		try {
+			ResourceSet resourceSet = context.eResource().getResourceSet();
+			if (resourceSet.getResource(uri, false) != null)
+				return true;
+			URIConverter uriConverter = resourceSet.getURIConverter();
+			URI normalized = uriConverter.normalize(newURI);
+			if (normalized != null)
+				return uriConverter.exists(normalized, Collections.emptyMap());
+		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
+			log.trace("Cannot load resource: " + newURI, e);
+		}
+		return false;
+	}
+
+	private static URI getResolvedImportUri(Resource context, URI uri) {
+		URI contextURI = context.getURI();
+		if (contextURI.isHierarchical() && !contextURI.isRelative() && uri.isRelative()) {
+			uri = uri.resolve(contextURI);
+		}
+		return uri;
+	}
+	
+	public static Resource getResource(Resource context, String uri) {
+		URI newURI = getResolvedImportUri(context, URI.createURI(uri));
+		try {
+			return context.getResourceSet().getResource(newURI, true);
+		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
+			log.trace("Cannot load resource: " + newURI, e);
+		}
+		return null;
 	}
 
 }

@@ -100,7 +100,6 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 		return createClassifierScope(allClassifiers);
 	}
 
-	@Override
 	protected IScope createScope(Resource resource, EClass type) {
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "

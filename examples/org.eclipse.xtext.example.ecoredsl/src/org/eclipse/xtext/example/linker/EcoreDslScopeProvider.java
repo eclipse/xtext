@@ -11,7 +11,6 @@ package org.eclipse.xtext.example.linker;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,9 +22,9 @@ import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -34,21 +33,11 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class EcoreDslScopeProvider extends SimpleNameScopeProvider {
+public class EcoreDslScopeProvider extends QualifiedNameScopeProvider {
 
 	@Inject
 	private IValueConverterService valueConverterService;
 	
-	@Override
-	protected IScope createScope(Resource resource, EClass type) {
-		if (EcorePackage.Literals.EPACKAGE == type) {
-			EcoreDsl ecoreDsl = (EcoreDsl) resource.getResourceSet()
-					.getEObject(resource.getURI().appendFragment("/"), true);
-			return createEPackageScope(ecoreDsl);
-		}
-		return super.createScope(resource, type);
-	}
-
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference.getEType()
@@ -67,6 +56,12 @@ public class EcoreDslScopeProvider extends SimpleNameScopeProvider {
 			}
 			allClassifiers.addAll(ecoreDsl.getPackage().getEClassifiers());
 			return createClassifierScope(allClassifiers);
+		}
+		if (EcorePackage.Literals.EPACKAGE == reference.getEReferenceType()) {
+			Resource resource = context.eResource();
+			EcoreDsl ecoreDsl = (EcoreDsl) resource.getResourceSet()
+					.getEObject(resource.getURI().appendFragment("/"), true);
+			return createEPackageScope(ecoreDsl);
 		}
 		return super.getScope(context, reference);
 	}

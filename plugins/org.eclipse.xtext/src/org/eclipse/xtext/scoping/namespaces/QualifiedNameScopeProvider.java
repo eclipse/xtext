@@ -18,18 +18,15 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -41,7 +38,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
+public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -85,9 +82,9 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		}
 	}
 
-	@Inject
 	private IQualifiedNameProvider nameProvider;
 
+	@Inject
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
@@ -95,16 +92,26 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 	public IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
 	}
+	
+	private IGlobalScopeProvider globalScopeProvider;
+	
+	@Inject
+	public void setGlobalScopeProvider(IGlobalScopeProvider globalScopeProvider) {
+		this.globalScopeProvider = globalScopeProvider;
+	}
+	
+	public IGlobalScopeProvider getGlobalScopeProvider() {
+		return globalScopeProvider;
+	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		final EClass type = reference.getEReferenceType();
 		if (context == null)
-			return getGlobalScope(null, type);
+			return getGlobalScope(null, reference);
 		IScope result = null;
 		if (context.eContainer() == null) {
 			// global scope
-			result = getGlobalScope(context, type);
-			result = getResourceScope(result, context, type);
+			result = getGlobalScope(context, reference);
+			result = getResourceScope(result, context, reference);
 		}
 		else {
 			// outer scope
@@ -113,13 +120,13 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 
 		// local scope used by the import scope
 		if (hasImports(context)) {
-			IScope localElements = getLocalElements(result, context, type);
+			IScope localElements = getLocalElements(result, context, reference);
 			// imports
-			result = getImportedElements(result, localElements, context, type);
+			result = getImportedElements(result, localElements, context, reference);
 		}
 		// local scope
 		if (nameProvider.getQualifiedName(context) != null) {
-			result = getLocalElements(result, context, type);
+			result = getLocalElements(result, context, reference);
 		}
 		return result;
 	}
@@ -128,33 +135,11 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 		return !getImportNormalizer(context).isEmpty();
 	}
 
-	protected IScope getGlobalScope(final EObject context, final EClass type) {
-		IScope parent = IScope.NULLSCOPE;
-		if (context.eResource() == null || context.eResource().getResourceSet() == null)
-			return parent;
-		final ResourceSet resourceSet = context.eResource().getResourceSet();
-		if (resourceSet instanceof ResourceSetReferencingResourceSet) {
-			ResourceSetReferencingResourceSet set = (ResourceSetReferencingResourceSet) resourceSet;
-			Iterable<ResourceSet> referencedSets = Iterables.reverse(set.getReferencedResourceSets());
-			for (ResourceSet referencedSet : referencedSets) {
-				parent = createScopeWithQualifiedNames(parent, type, allEObjects(referencedSet));
-			}
-		}
-		Iterable<EObject> filtered = allEObjects(resourceSet);
-		return createScopeWithQualifiedNames(parent, type, filtered);
+	protected IScope getGlobalScope(final EObject context, final EReference reference) {
+		return globalScopeProvider.getScope(context, reference);
 	}
 
-	private Iterable<EObject> allEObjects(final ResourceSet resourceSet) {
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return EcoreUtil.getAllProperContents(resourceSet, true);
-			}
-		};
-		Iterable<EObject> filtered = Iterables.filter(contents, EObject.class);
-		return filtered;
-	}
-
-	protected IScope getResourceScope(IScope parent, final EObject context, final EClass type) {
+	protected IScope getResourceScope(IScope parent, final EObject context, final EReference reference) {
 		if (context.eResource() == null)
 			return parent;
 		Iterable<EObject> contents = new Iterable<EObject>() {
@@ -162,10 +147,11 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 				return EcoreUtil.getAllProperContents(context.eResource(), true);
 			}
 		};
-		return createScopeWithQualifiedNames(parent, type, contents);
+		contents = Iterables.filter(contents, typeFilter(reference.getEReferenceType()));
+		return Scopes.scopeFor(contents, nameProvider, parent);
 	}
 
-	protected IScope getLocalElements(IScope parent, final EObject context, final EClass type) {
+	private IScope getLocalElements(IScope parent, final EObject context, final EReference reference) {
 		final String commonPrefix = nameProvider.getQualifiedName(context) + ".";
 
 		Iterable<EObject> contents = new Iterable<EObject>() {
@@ -174,38 +160,20 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 			}
 		};
 		// filter by type
-		contents = filter(contents, typeFilter(type));
+		contents = filter(contents, typeFilter(reference.getEReferenceType()));
 		// transform to IScopedElements
-		Iterable<IScopedElement> scopedElements = Scopes.scopedElementsFor(contents, new Function<EObject, String>() {
+		Function<EObject, String> nameComputation = new Function<EObject, String>() {
 			public String apply(EObject from) {
 				String name = nameProvider.getQualifiedName(from);
 				if (name != null && name.startsWith(commonPrefix))
 					return name.substring(commonPrefix.length());
 				return null;
-			}
-		});
-		// filter null values;
-		return new SimpleScope(parent, filter(scopedElements, Predicates.notNull()));
+			}};
+			
+		return Scopes.scopeFor(contents, nameComputation, parent);
 	}
 
-	protected IScope createScopeWithQualifiedNames(final IScope parent, final EClass type, Iterable<EObject> eObjects) {
-
-		eObjects = filter(eObjects, typeFilter(type));
-
-		Iterable<IScopedElement> result = transform(eObjects, new Function<EObject, IScopedElement>() {
-
-			public IScopedElement apply(EObject from) {
-				String qualifiedName = nameProvider.getQualifiedName(from);
-				if (qualifiedName != null) {
-					return ScopedElement.create(qualifiedName, from);
-				}
-				return null;
-			}
-		});
-		return new SimpleScope(parent, filter(result, Predicates.notNull()));
-	}
-
-	protected Predicate<EObject> typeFilter(final EClass type) {
+	private Predicate<EObject> typeFilter(final EClass type) {
 		return new Predicate<EObject>() {
 
 			public boolean apply(EObject input) {
@@ -232,7 +200,7 @@ public class QualifiedNameBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope getImportedElements(final IScope parent, final IScope localElements, final EObject context,
-			final EClass type) {
+			final EReference reference) {
 		final Set<ImportNormalizer> normalizers = getImportNormalizer(context);
 
 		return new AbstractScope() {

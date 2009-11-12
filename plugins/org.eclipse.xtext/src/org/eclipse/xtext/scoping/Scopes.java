@@ -23,73 +23,72 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 
 /**
- * This class contains static utility functions to create
- * and work on {@link IScope} and {@link IScopedElement}
+ * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
  * 
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class Scopes {
-	
+
 	/**
-	 * creates a scope using {@link SimpleAttributeResolver#NAME_RESOLVER} to compute the names 
-	 * and sets {@link IScope#NULLSCOPE} as parent scope
+	 * creates a scope using {@link SimpleAttributeResolver#NAME_RESOLVER} to compute the names and sets
+	 * {@link IScope#NULLSCOPE} as parent scope
 	 */
 	public static IScope scopeFor(Iterable<? extends EObject> elements) {
 		return scopeFor(elements, IScope.NULLSCOPE);
 	}
-	
+
 	/**
 	 * creates a scope using {@link SimpleAttributeResolver#NAME_RESOLVER} to compute the names
 	 */
 	public static IScope scopeFor(Iterable<? extends EObject> elements, IScope outer) {
 		return scopeFor(elements, SimpleAttributeResolver.NAME_RESOLVER, outer);
 	}
-	
+
 	/**
-	 * creates a scope using the passed function to compute the names and 
-	 * sets the passed scope as the parent scope 
+	 * creates a scope using the passed function to compute the names and sets the passed scope as the parent scope
 	 */
-	public static <T extends EObject> IScope scopeFor(Iterable<? extends T> elements, final Function<T, String> nameComputation, IScope outer) {
+	public static <T extends EObject> IScope scopeFor(Iterable<? extends T> elements,
+			final Function<T, String> nameComputation, IScope outer) {
 		return new SimpleScope(outer, scopedElementsFor(elements, nameComputation));
 	}
-	
+
 	/**
-	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s 
-	 * computing the {@link EAttribute} 'name' to compute the {@link IScopedElement}'s name.
-	 * If not existent the object is filtered out.
+	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
+	 * the {@link EAttribute} 'name' to compute the {@link IScopedElement}'s name. If not existent the object is
+	 * filtered out.
 	 */
 	public static Iterable<IScopedElement> scopedElementsFor(Iterable<? extends EObject> elements) {
 		return scopedElementsFor(elements, SimpleAttributeResolver.NAME_RESOLVER);
 	}
-	
+
 	/**
-	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s 
-	 * computing the name of the elements using the passed {@link Function}
-	 * If the passed function returns null the object is filtered out.
+	 * transforms an {@link Iterable} of {@link EObject}s into an {@link Iterable} of {@link IScopedElement}s computing
+	 * the name of the elements using the passed {@link Function} If the passed function returns null the object is
+	 * filtered out.
 	 */
-	public static <T extends EObject> Iterable<IScopedElement> scopedElementsFor(Iterable<? extends T> elements, final Function<T, String> nameComputation) {
+	public static <T extends EObject> Iterable<IScopedElement> scopedElementsFor(Iterable<? extends T> elements,
+			final Function<T, String> nameComputation) {
 		Iterable<IScopedElement> transformed = Iterables.transform(elements, new Function<T, IScopedElement>() {
 			public IScopedElement apply(T from) {
-				return ScopedElement.create(nameComputation.apply(from), from);
+				String name = nameComputation.apply(from);
+				if (name != null)
+					return ScopedElement.create(name, from);
+				return null;
 			}
 		});
-		return Iterables.filter(transformed, new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement input) {
-				return input.name()!=null;
-			}
-		});
+		return Iterables.filter(transformed, Predicates.notNull());
 	}
-	
+
 	/**
 	 * returns an Iterable<IScopedElement> containing all scoped elements for the AllContnts of the passed resource,
-	 * which are of the given type.
-	 * The name is computed using the passed function
+	 * which are of the given type. The name is computed using the passed function
 	 * 
 	 * 
 	 * @param resource
@@ -111,15 +110,15 @@ public class Scopes {
 	 * @param predicate
 	 * @param nameFunc
 	 * 
-	 * skips duplicate elements
+	 *            skips duplicate elements
 	 * 
 	 * @return
 	 */
 	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> predicate,
 			final Function<EObject, String> nameFunc) {
-		return allInResource(resource,predicate,nameFunc, true);
+		return allInResource(resource, predicate, nameFunc, true);
 	}
-	
+
 	/**
 	 * @param resource
 	 * @param filter
@@ -127,42 +126,44 @@ public class Scopes {
 	 * @param skipDuplicates
 	 * @return
 	 */
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> filter,final Function<EObject, String> nameFunc, boolean skipDuplicates) {
+	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> filter,
+			final Function<EObject, String> nameFunc, boolean skipDuplicates) {
 		if (resource != null) {
-			
-			Iterable<EObject> iterable = new Iterable<EObject>(){
-			
+
+			Iterable<EObject> iterable = new Iterable<EObject>() {
+
 				public Iterator<EObject> iterator() {
 					return EcoreUtil.getAllContents(resource, true);
 				}
 			};
-			
+
 			Iterable<EObject> filtered = filter(iterable, filter);
-			
-			Iterable<IScopedElement> transformed = transform(filtered, new Function<EObject, IScopedElement>(){
+
+			Iterable<IScopedElement> transformed = transform(filtered, new Function<EObject, IScopedElement>() {
 
 				public IScopedElement apply(EObject from) {
 					return ScopedElement.create(nameFunc.apply(from), from);
 				}
 			});
-			if (!skipDuplicates) 
+			if (!skipDuplicates)
 				return transformed;
-			
+
 			return skipDuplicates(transformed);
 		}
 		return Iterables.emptyIterable();
 	}
 
 	public static Iterable<IScopedElement> skipDuplicates(Iterable<IScopedElement> transformed) {
-		final ListMultimap<String,IScopedElement> multiMap = Multimaps.index(transformed, new Function<IScopedElement, String>(){
-			public String apply(IScopedElement from) {
-				return from.name();
-			}
-		});
-		
-		return filter(transformed, new Predicate<IScopedElement>(){
+		final ListMultimap<String, IScopedElement> multiMap = Multimaps.index(transformed,
+				new Function<IScopedElement, String>() {
+					public String apply(IScopedElement from) {
+						return from.name();
+					}
+				});
+
+		return filter(transformed, new Predicate<IScopedElement>() {
 			public boolean apply(IScopedElement input) {
-				return multiMap.get(input.name()).size()==1;
+				return multiMap.get(input.name()).size() == 1;
 			}
 		});
 	}

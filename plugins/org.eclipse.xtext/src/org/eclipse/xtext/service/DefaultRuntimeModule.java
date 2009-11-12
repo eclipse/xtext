@@ -39,10 +39,12 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.validation.CancellableDiagnostician;
 
 import com.google.inject.Binder;
@@ -114,6 +116,14 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return SimpleNameScopeProvider.class;
 	}
+	
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return ImportUriGlobalScopeProvider.class;
+	}
+	
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return SimpleNameProvider.class;
+	}
 
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return LazyLinker.class;
@@ -151,8 +161,4 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return LazyLinkingResource.class;
 	}
 	
-	public Class<? extends IQualifiedNameProvider> bindQualifiedNameProvider() {
-		return DefaultDeclarativeQualifiedNameProvider.class;
-	}
-
 }
