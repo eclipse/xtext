@@ -10,12 +10,14 @@ package org.eclipse.xtext.resource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Stable;
 
 /**
  * A description of an EObject.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Stable(since="0.7.0", subClass=AbstractEObjectDescription.class)
 public interface IEObjectDescription {
 	
 	/**
