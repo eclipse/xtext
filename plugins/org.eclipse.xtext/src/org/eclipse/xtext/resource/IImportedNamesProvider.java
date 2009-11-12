@@ -10,10 +10,11 @@ package org.eclipse.xtext.resource;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IExportedEObjectsProvider {
+public interface IImportedNamesProvider {
 	
 	/**
-	 * @return descriptions of all EObjects provided by <p>this</p>
+	 * returns the list of names this {@link IImportedNamesProvider}
+	 * depends on. 
 	 */
-	Iterable<IEObjectDescription> getExportedObjects();
+	Iterable<String> getImportedNames();
 }
