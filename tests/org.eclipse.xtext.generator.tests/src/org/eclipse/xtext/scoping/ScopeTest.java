@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.collect.Iterables;
@@ -61,7 +62,7 @@ public class ScopeTest extends TestCase {
 			public IScope getOuterScope() {
 				return getEcoreClassesScope();
 			}
-			public Iterable<IScopedElement> getContents() {
+			public Iterable<IEObjectDescription> getContents() {
 				return Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),EDataType.class));
 			}
 		};
@@ -72,7 +73,7 @@ public class ScopeTest extends TestCase {
 			public IScope getOuterScope() {
 				return IScope.NULLSCOPE;
 			}
-			public Iterable<IScopedElement> getContents() {
+			public Iterable<IEObjectDescription> getContents() {
 				return Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),EClass.class));
 			}
 		};
