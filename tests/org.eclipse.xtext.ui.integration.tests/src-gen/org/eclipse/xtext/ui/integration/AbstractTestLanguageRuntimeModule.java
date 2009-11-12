@@ -80,7 +80,12 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 
 	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.IScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.QualifiedNameBasedScopeProvider.class);
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider.class;
 	}
 
 }

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.*;
 
 import java.util.Iterator;
 
@@ -39,7 +39,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.scoping.namespaces.IndexBasedQualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -50,16 +51,19 @@ import com.google.common.collect.Iterables;
  */
 public class IndexBasedQualifiedNameScopeProviderTest extends AbstractXtextTests {
 
-	private IndexBasedQualifiedNameScopeProvider scopeProvider;
+	private QualifiedNameScopeProvider scopeProvider;
 	private IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
+	private IndexGlobalScopeProvider globalScope;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new IndexTestLanguageStandaloneSetup());
 
-		scopeProvider = new IndexBasedQualifiedNameScopeProvider();
-		scopeProvider.setIndexStore(new XtextIndexImpl(createIndex()));
+		globalScope = new IndexGlobalScopeProvider();
+		globalScope.setIndexStore(new XtextIndexImpl(createIndex()));
+		scopeProvider = new QualifiedNameScopeProvider();
+		scopeProvider.setGlobalScopeProvider(globalScope);
 		scopeProvider.setNameProvider(nameProvider);
 	}
 	
@@ -82,7 +86,7 @@ public class IndexBasedQualifiedNameScopeProviderTest extends AbstractXtextTests
 	
 	public void testLocalElementsNotFromIndex() throws Exception {
 		// no index
-		scopeProvider.setIndexStore(null);
+		globalScope.setIndexStore(null);
 		final XtextResource resource = getResource(new StringInputStream(
 				"A { " +
 				"  B { " +
@@ -103,7 +107,7 @@ public class IndexBasedQualifiedNameScopeProviderTest extends AbstractXtextTests
 	}
 	
 	public void testMultipleFiles() throws Exception {
-		UpdateableIndex idx = scopeProvider.getIndexStore();
+		UpdateableIndex idx = globalScope.getIndexStore();
 		idx.executeUpdateCommand(new UpdateCommand<Void>() {
 
 			public Void execute(IndexUpdater indexUpdater, QueryExecutor queryExecutor) {

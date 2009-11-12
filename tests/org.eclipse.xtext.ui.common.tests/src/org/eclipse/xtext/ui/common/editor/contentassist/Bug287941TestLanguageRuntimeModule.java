@@ -31,7 +31,7 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 	}
 	
 	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(IScopeProvider.class.getName()+ ".delegate")).to(SimpleNameScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(SimpleNameScopeProvider.class);
 	}
 	
 	public static class ScopeProvider extends AbstractDeclarativeScopeProvider {
