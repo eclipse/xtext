@@ -41,7 +41,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 				IStorage storage = ((IStorageEditorInput) editorInput).getStorage();
 				if (storage instanceof IFile) {
 					return createResourceFor((IFile) storage);
-				} else {
+				} else if (storage instanceof IJarEntryResource) {
 					return createResourceFor((IJarEntryResource) storage);
 				}
 			}
