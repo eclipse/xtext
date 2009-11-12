@@ -12,8 +12,8 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.Void;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,27 +25,27 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByName_01() {
-		IScopedElement objectElement = getTypeScope().getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = getTypeScope().getContentByName(Object.class.getName());
 		assertNotNull(objectElement);
-		assertFalse(objectElement.element().eIsProxy());
+		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
 		assertEquals("java.lang.Object", objectElement.name());
 	}
 	
 	public void testGetElementByName_02() {
-		IScopedElement objectElement = getTypeScope().getContentByName(Object.class.getName() + "Foo");
+		IEObjectDescription objectElement = getTypeScope().getContentByName(Object.class.getName() + "Foo");
 		assertNull(objectElement);
 	}
 	
 	public void testGetElementByInstance_01() {
 		Void voidType = TypesFactory.eINSTANCE.createVoid();
-		IScopedElement element = getTypeScope().getContentByEObject(voidType);
+		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);
 		assertNotNull(element);
 		assertEquals(voidType.getCanonicalName(), element.name());
 	}
 	
 	public void testGetElementByInstance_02() {
 		AnnotationReference annotationReference = TypesFactory.eINSTANCE.createAnnotationReference();
-		IScopedElement element = getTypeScope().getContentByEObject(annotationReference);
+		IEObjectDescription element = getTypeScope().getContentByEObject(annotationReference);
 		assertNull(element);
 	}
 	

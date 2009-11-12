@@ -19,8 +19,8 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import junit.framework.TestCase;
 
@@ -109,7 +109,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_01() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.FIELD__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IScopedElement objectElement = scope.getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
 		assertNotNull(objectElement);
 		assertEquals(1, resourceSet.eAdapters().size());
 	}
@@ -117,8 +117,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_02() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.FIELD__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IScopedElement objectElement = scope.getContentByName(Object.class.getName());
-		Resource objectResource = objectElement.element().eResource();
+		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int size = resourceSet.getResources().size();
 		int adaptersSize = resourceSet.eAdapters().size();
@@ -131,8 +131,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_03() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.FIELD__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IScopedElement objectElement = scope.getContentByName(Object.class.getName());
-		Resource objectResource = objectElement.element().eResource();
+		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int adaptersSize = resourceSet.eAdapters().size();
 		resourceSet.getResources().clear();
@@ -144,15 +144,15 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_04() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.FIELD__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IScopedElement objectElement = scope.getContentByName(Object.class.getName());
-		IScopedElement stringElement = scope.getContentByName(String.class.getName());
-		Resource objectResource = objectElement.element().eResource();
+		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		IEObjectDescription stringElement = scope.getContentByName(String.class.getName());
+		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		int size = resourceSet.getResources().size();
 		int adaptersSize = resourceSet.eAdapters().size();
 		resourceSet.getResources().remove(objectResource);
 		assertEquals(size - 1, resourceSet.getResources().size());
 		assertEquals(adaptersSize - 1, resourceSet.eAdapters().size());
 		assertFalse(objectResource.isLoaded());
-		assertTrue(stringElement.element().eResource().isLoaded());
+		assertTrue(stringElement.getEObjectOrProxy().eResource().isLoaded());
 	}
 }

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -17,14 +17,14 @@ public class SimpleScope extends AbstractScope {
 	
 	private final IScope outer;
 
-	private final Iterable<IScopedElement> elements;
+	private final Iterable<IEObjectDescription> elements;
 
-	public SimpleScope(final IScope outer, final Iterable<IScopedElement> elements) {
+	public SimpleScope(final IScope outer, final Iterable<IEObjectDescription> elements) {
 		this.outer = outer;
 		this.elements = elements;
 	}
 	
-	public SimpleScope(final Iterable<IScopedElement> elements) {
+	public SimpleScope(final Iterable<IEObjectDescription> elements) {
 		this(IScope.NULLSCOPE, elements);
 	}
 
@@ -32,7 +32,7 @@ public class SimpleScope extends AbstractScope {
 		return outer;
 	}
 
-	public Iterable<IScopedElement> getContents() {
+	public Iterable<IEObjectDescription> getContents() {
 		return elements;
 	}
 

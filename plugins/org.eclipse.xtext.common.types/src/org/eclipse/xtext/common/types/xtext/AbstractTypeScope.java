@@ -12,8 +12,8 @@ import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 
@@ -28,12 +28,12 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		this.typeProvider = typeProvider;
 	}
 
-	public Iterable<IScopedElement> getContents() {
+	public Iterable<IEObjectDescription> getContents() {
 		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public IScopedElement getContentByName(String name) {
+	public IEObjectDescription getContentByName(String name) {
 		try {
 			Type type = typeProvider.findTypeByName(name);
 			if (type == null)
@@ -45,7 +45,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	}
 	
 	@Override
-	public IScopedElement getContentByEObject(EObject object) {
+	public IEObjectDescription getContentByEObject(EObject object) {
 		if (object instanceof IdentifyableElement) {
 			return ScopedElement.create(((IdentifyableElement) object).getCanonicalName(), object);
 		}

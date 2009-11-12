@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
@@ -72,7 +72,7 @@ public class DefaultScope extends SimpleScope {
 		}
 		
 		@Override
-		public Iterable<IScopedElement> getContents() {
+		public Iterable<IEObjectDescription> getContents() {
 			Resource resource = EcoreUtil2.getResource(context, uri);
 			return Scopes.allInResource(resource, type, nameFunction);
 		}

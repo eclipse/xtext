@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.Scopes;
 
 import com.google.common.base.Function;
@@ -71,7 +71,7 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 			final Function<EObject, String> nameFunction) {
 		return new SimpleScope(parent, null) {
 			@Override
-			public Iterable<IScopedElement> getContents() {
+			public Iterable<IEObjectDescription> getContents() {
 				final Resource resource = context.eResource().getResourceSet().getResource(createURI, true);
 				return Scopes.allInResource(resource, reference.getEReferenceType(), nameFunction);
 			}

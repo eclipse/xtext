@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
@@ -64,7 +65,7 @@ public class Scopes {
 	 * the {@link EAttribute} 'name' to compute the {@link IScopedElement}'s name. If not existent the object is
 	 * filtered out.
 	 */
-	public static Iterable<IScopedElement> scopedElementsFor(Iterable<? extends EObject> elements) {
+	public static Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends EObject> elements) {
 		return scopedElementsFor(elements, SimpleAttributeResolver.NAME_RESOLVER);
 	}
 
@@ -73,10 +74,10 @@ public class Scopes {
 	 * the name of the elements using the passed {@link Function} If the passed function returns null the object is
 	 * filtered out.
 	 */
-	public static <T extends EObject> Iterable<IScopedElement> scopedElementsFor(Iterable<? extends T> elements,
+	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
 			final Function<T, String> nameComputation) {
-		Iterable<IScopedElement> transformed = Iterables.transform(elements, new Function<T, IScopedElement>() {
-			public IScopedElement apply(T from) {
+		Iterable<IEObjectDescription> transformed = Iterables.transform(elements, new Function<T, IEObjectDescription>() {
+			public IEObjectDescription apply(T from) {
 				String name = nameComputation.apply(from);
 				if (name != null)
 					return ScopedElement.create(name, from);
@@ -96,7 +97,7 @@ public class Scopes {
 	 * @param nameFunc
 	 * @return
 	 */
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final EClass typeToFilter,
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final EClass typeToFilter,
 			final Function<EObject, String> nameFunc) {
 		return allInResource(resource, new Predicate<EObject>() {
 			public boolean apply(EObject input) {
@@ -114,7 +115,7 @@ public class Scopes {
 	 * 
 	 * @return
 	 */
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> predicate,
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> predicate,
 			final Function<EObject, String> nameFunc) {
 		return allInResource(resource, predicate, nameFunc, true);
 	}
@@ -126,7 +127,7 @@ public class Scopes {
 	 * @param skipDuplicates
 	 * @return
 	 */
-	public static Iterable<IScopedElement> allInResource(final Resource resource, final Predicate<EObject> filter,
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> filter,
 			final Function<EObject, String> nameFunc, boolean skipDuplicates) {
 		if (resource != null) {
 
@@ -139,9 +140,9 @@ public class Scopes {
 
 			Iterable<EObject> filtered = filter(iterable, filter);
 
-			Iterable<IScopedElement> transformed = transform(filtered, new Function<EObject, IScopedElement>() {
+			Iterable<IEObjectDescription> transformed = transform(filtered, new Function<EObject, IEObjectDescription>() {
 
-				public IScopedElement apply(EObject from) {
+				public IEObjectDescription apply(EObject from) {
 					return ScopedElement.create(nameFunc.apply(from), from);
 				}
 			});
@@ -153,16 +154,16 @@ public class Scopes {
 		return Iterables.emptyIterable();
 	}
 
-	public static Iterable<IScopedElement> skipDuplicates(Iterable<IScopedElement> transformed) {
-		final ListMultimap<String, IScopedElement> multiMap = Multimaps.index(transformed,
-				new Function<IScopedElement, String>() {
-					public String apply(IScopedElement from) {
+	public static Iterable<IEObjectDescription> skipDuplicates(Iterable<IEObjectDescription> transformed) {
+		final ListMultimap<String, IEObjectDescription> multiMap = Multimaps.index(transformed,
+				new Function<IEObjectDescription, String>() {
+					public String apply(IEObjectDescription from) {
 						return from.name();
 					}
 				});
 
-		return filter(transformed, new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement input) {
+		return filter(transformed, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
 				return multiMap.get(input.name()).size() == 1;
 			}
 		});

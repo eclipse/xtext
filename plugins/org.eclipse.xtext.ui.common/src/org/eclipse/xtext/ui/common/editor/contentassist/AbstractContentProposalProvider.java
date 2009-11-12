@@ -16,7 +16,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
@@ -171,8 +171,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(IScopedElement element, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.element(), element.name(), contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(element.getEObjectOrProxy(), element.name(), contentAssistContext);
 	}
 
 	/**
@@ -192,8 +192,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(IScopedElement element, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.element(), element.name(), getDisplayString(element), prefix, contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, String prefix, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(element.getEObjectOrProxy(), element.name(), getDisplayString(element), prefix, contentAssistContext);
 	}
 
 	/**
@@ -272,7 +272,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return result;
 	}
 	
-	protected String getDisplayString(IScopedElement candidate) {
+	protected String getDisplayString(IEObjectDescription candidate) {
 		return candidate.name();
 	}
 	

@@ -23,7 +23,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
-import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.ScopedElement;
 
 import com.google.common.collect.Lists;
@@ -38,12 +38,12 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 
 	@Override
-	public Iterable<IScopedElement> getContents() {
-		final List<IScopedElement> allScopedElements = Lists.newArrayListWithExpectedSize(25000);
+	public Iterable<IEObjectDescription> getContents() {
+		final List<IEObjectDescription> allScopedElements = Lists.newArrayListWithExpectedSize(25000);
 		try {
 			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { getTypeProvider().getJavaProject() });
 			for(Class<?> clazz: Primitives.ALL_PRIMITIVE_TYPES) {
-				IScopedElement primitive = createScopedElement(clazz.getName());
+				IEObjectDescription primitive = createScopedElement(clazz.getName());
 				if (primitive != null)
 					allScopedElements.add(primitive);
 			}
@@ -61,9 +61,9 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 						fqName.append('$');
 					}
 					fqName.append(simpleTypeName);
-					IScopedElement scopedElement = createScopedElement(fqName.toString());
-					if (scopedElement != null)
-						allScopedElements.add(scopedElement);
+					IEObjectDescription eObjectDescription = createScopedElement(fqName.toString());
+					if (eObjectDescription != null)
+						allScopedElements.add(eObjectDescription);
 				}
 			};
 			collectContents(searchScope, nameMatchRequestor);
@@ -74,14 +74,14 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 		return allScopedElements;
 	}
 	
-	public IScopedElement createScopedElement(String fullyQualifiedName) {
+	public IEObjectDescription createScopedElement(String fullyQualifiedName) {
 		String typeSignature = Signature.createTypeSignature(fullyQualifiedName, true);
 		try {
 			URI uri = getTypeProvider().getTypeUriHelper().getFullURI(typeSignature, null);
 			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createVoid();
 			proxy.eSetProxyURI(uri);
-			IScopedElement scopedElement = ScopedElement.create(fullyQualifiedName, proxy);
-			return scopedElement;
+			IEObjectDescription eObjectDescription = ScopedElement.create(fullyQualifiedName, proxy);
+			return eObjectDescription;
 		}
 		catch (JavaModelException e) {
 			return null;

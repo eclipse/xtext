@@ -29,9 +29,9 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import com.google.inject.Inject;
 
@@ -67,9 +67,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		final IScope scope = getScope(context, ref);
 		final String s = getCrossRefNodeAsString(node);
 		if (s != null) {
-			IScopedElement scopedElement = scope.getContentByName(s);
-			if (scopedElement != null)
-				return Collections.singletonList(scopedElement.element());
+			IEObjectDescription eObjectDescription = scope.getContentByName(s);
+			if (eObjectDescription != null)
+				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}
 		return Collections.emptyList();
 	}
@@ -167,20 +167,20 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
 			return null;
-		IScopedElement scopedElement = getScopedElement(scope, object);
-		if (scopedElement != null) {
-			return scopedElement.name();
+		IEObjectDescription eObjectDescription = getScopedElement(scope, object);
+		if (eObjectDescription != null) {
+			return eObjectDescription.name();
 		}
 		return null;
 	}
 
-	protected IScopedElement getScopedElement(IScope scope, EObject element) {
-		Iterable<IScopedElement> allContents = scope.getAllContents();
+	protected IEObjectDescription getScopedElement(IScope scope, EObject element) {
+		Iterable<IEObjectDescription> allContents = scope.getAllContents();
 		URI left = EcoreUtil.getURI(element);
-		for (IScopedElement scopedElement : allContents) {
-			URI right = EcoreUtil.getURI(scopedElement.element());
+		for (IEObjectDescription eObjectDescription : allContents) {
+			URI right = EcoreUtil.getURI(eObjectDescription.getEObjectOrProxy());
 			if (left.equals(right))
-				return scopedElement;
+				return eObjectDescription;
 		}
 		return null;
 	}

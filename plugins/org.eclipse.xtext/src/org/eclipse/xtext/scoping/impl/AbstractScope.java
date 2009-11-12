@@ -15,8 +15,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -29,38 +29,38 @@ import com.google.common.collect.Iterables;
  */
 public abstract class AbstractScope implements IScope {
 
-	public Iterable<IScopedElement> getAllContents() {
+	public Iterable<IEObjectDescription> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
-		return Iterables.concat(Iterables.transform(getContents(), new Function<IScopedElement, IScopedElement>() {
-			public IScopedElement apply(IScopedElement param) {
+		return Iterables.concat(Iterables.transform(getContents(), new Function<IEObjectDescription, IEObjectDescription>() {
+			public IEObjectDescription apply(IEObjectDescription param) {
 				identifiers.add(param.name());
 				return param;
 			}
-		}), Iterables.filter(getOuterScope().getAllContents(), new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement param) {
+		}), Iterables.filter(getOuterScope().getAllContents(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription param) {
 				return !identifiers.contains(param.name());
 			}
 		}));
 	}
 
-	public IScopedElement getContentByEObject(EObject object) {
-		Iterator<IScopedElement> contents = getContents().iterator();
+	public IEObjectDescription getContentByEObject(EObject object) {
+		Iterator<IEObjectDescription> contents = getContents().iterator();
 		URI uri = EcoreUtil.getURI(object);
 		while (contents.hasNext()) {
-			IScopedElement element = contents.next();
-			URI elementsUri = EcoreUtil.getURI(element.element());
+			IEObjectDescription element = contents.next();
+			URI elementsUri = EcoreUtil.getURI(element.getEObjectOrProxy());
 			if (uri.equals(elementsUri))
 				return element;
 		}
 		return getOuterScope().getContentByEObject(object);
 	}
 
-	public IScopedElement getContentByName(String name) {
+	public IEObjectDescription getContentByName(String name) {
 		if (name==null)
 			throw new NullPointerException("name");
-		Iterator<IScopedElement> contents = getContents().iterator();
+		Iterator<IEObjectDescription> contents = getContents().iterator();
 		while (contents.hasNext()) {
-			IScopedElement element = contents.next();
+			IEObjectDescription element = contents.next();
 			if (name.equals(element.name())) 
 				return element;
 		}

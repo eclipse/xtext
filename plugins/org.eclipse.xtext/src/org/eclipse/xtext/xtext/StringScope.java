@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -20,8 +20,8 @@ import com.google.common.collect.Iterables;
 class StringScope extends SimpleScope {
 
 	public StringScope(IScope parentScope, Iterable<? extends String> content) {
-		super(parentScope, Iterables.transform(content, new Function<String, IScopedElement>() {
-			public IScopedElement apply(String param) {
+		super(parentScope, Iterables.transform(content, new Function<String, IEObjectDescription>() {
+			public IEObjectDescription apply(String param) {
 				return new StringScopeElement(param);
 			}
 		}));

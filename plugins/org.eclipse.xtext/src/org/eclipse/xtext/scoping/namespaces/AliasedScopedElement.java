@@ -8,36 +8,51 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.namespaces;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.scoping.IScopedElement;
-import org.eclipse.xtext.scoping.impl.AbstractScopedElement;
+import org.eclipse.xtext.resource.AbstractEObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class AliasedScopedElement extends AbstractScopedElement {
+public class AliasedScopedElement extends AbstractEObjectDescription {
 
-	private IScopedElement delegate;
+	private IEObjectDescription delegate;
 	private String alias;
 
-	public AliasedScopedElement(String alias, IScopedElement delegate) {
+	public AliasedScopedElement(String alias, IEObjectDescription delegate) {
 		super();
 		this.alias = alias;
 		this.delegate = delegate;
 	}
 
-	@Override
-	public Object additionalInformation() {
-		return delegate.additionalInformation();
-	}
-
-	public EObject element() {
-		return delegate.element();
-	}
-
 	public String name() {
 		return alias;
+	}
+
+	public EObject getEObjectOrProxy() {
+		return delegate.getEObjectOrProxy();
+	}
+
+	public URI getEObjectURI() {
+		return delegate.getEObjectURI();
+	}
+
+	@Override
+	public String getUserData(String name) {
+		return delegate.getUserData(name);
+	}
+
+	@Override
+	public String[] getUserDataKeys() {
+		return delegate.getUserDataKeys();
+	}
+
+	public EClass getEClass() {
+		return delegate.getEClass();
 	}
 
 }

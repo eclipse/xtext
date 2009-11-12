@@ -7,45 +7,64 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.AbstractEObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
-public class ScopedElement extends AbstractScopedElement {
-	
-	public static  IScopedElement create(String name, EObject element, Object additionalInformation) {
-		return new ScopedElement(name,element,additionalInformation);
-	}
-	
-	public static  IScopedElement create(String name, EObject element) {
-		return create(name,element,null);
-	}
-	
-	private ScopedElement(String name, EObject element, Object additionalInformation) {
-		super();
+public class ScopedElement extends AbstractEObjectDescription {
+
+	protected ScopedElement(String name, EObject element, Map<String, String> userData) {
 		this.name = name;
 		this.element = element;
-		this.additionalInformation = additionalInformation;
+		this.userData = userData;
 	}
 
+	public static IEObjectDescription create(String name, EObject element, Map<String, String> userData) {
+		return new ScopedElement(name, element, userData);
+	}
+	
+	public static IEObjectDescription create(String name, EObject element) {
+		return create(name, element, Collections.<String,String>emptyMap());
+	}
+
+	private final Map<String, String> userData;
 	private final String name;
 	private final EObject element;
-	private final Object additionalInformation;
 
-	@Override
-	public Object additionalInformation() {
-		return additionalInformation;
+	public EObject getEObjectOrProxy() {
+		return element;
 	}
 
-	public EObject element() {
-		return element;
+	public URI getEObjectURI() {
+		return EcoreUtil.getURI(element);
 	}
 
 	public String name() {
 		return name;
+	}
+	
+	@Override
+	public String getUserData(String name) {
+		return userData.get(name);
+	}
+	
+	@Override
+	public String[] getUserDataKeys() {
+		return userData.keySet().toArray(new String[userData.size()]);
+	}
+
+	public EClass getEClass() {
+		return element.eClass();
 	}
 
 }

@@ -8,8 +8,8 @@
 package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopedElement;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -30,9 +30,9 @@ public class FilteredScope extends AbstractScope {
 	}
 	
 	@Override
-	public IScopedElement getContentByEObject(EObject object) {
+	public IEObjectDescription getContentByEObject(EObject object) {
 		if (elementFilter.apply(object)) {
-			IScopedElement result = delegate.getContentByEObject(object);
+			IEObjectDescription result = delegate.getContentByEObject(object);
 			if (result != null && nameFilter.apply(result.name()))
 				return result;
 		}
@@ -40,20 +40,20 @@ public class FilteredScope extends AbstractScope {
 	}
 
 	@Override
-	public IScopedElement getContentByName(String name) {
+	public IEObjectDescription getContentByName(String name) {
 		if (nameFilter.apply(name)) {
-			IScopedElement result = delegate.getContentByName(name);
-			if (result != null && elementFilter.apply(result.element()))
+			IEObjectDescription result = delegate.getContentByName(name);
+			if (result != null && elementFilter.apply(result.getEObjectOrProxy()))
 				return result;
 		}
 		return null;
 	}
 
-	public Iterable<IScopedElement> getContents() {
-		return Iterables.filter(delegate.getContents(), new Predicate<IScopedElement>() {
-			public boolean apply(IScopedElement input) {
+	public Iterable<IEObjectDescription> getContents() {
+		return Iterables.filter(delegate.getContents(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
 				if (input != null) {
-					return nameFilter.apply(input.name()) && elementFilter.apply(input.element());
+					return nameFilter.apply(input.name()) && elementFilter.apply(input.getEObjectOrProxy());
 				}
 				return true;
 			}
