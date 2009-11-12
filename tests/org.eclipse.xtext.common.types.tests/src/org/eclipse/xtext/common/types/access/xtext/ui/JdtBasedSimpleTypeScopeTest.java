@@ -44,7 +44,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 		Iterable<IEObjectDescription> contents = typeScope.getContents();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return List.class.getName().equals(input.name());
+				return List.class.getName().equals(input.getName());
 			}
 		}));
 	}
@@ -53,7 +53,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 		Iterable<IEObjectDescription> contents = typeScope.getContents();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return "int".equals(input.name());
+				return "int".equals(input.getName());
 			}
 		}));
 	}
