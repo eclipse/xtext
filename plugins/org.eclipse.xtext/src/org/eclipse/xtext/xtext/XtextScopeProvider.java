@@ -163,7 +163,11 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 
 	private IScope createEPackageScope(final Grammar grammar) {
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
-		IScope current = new StringScope(EPackage.Registry.INSTANCE.keySet());
+		IScope current = new SimpleScope(Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
+			public IEObjectDescription apply(String from) {
+				return EObjectDescription.create(from, null);
+			}
+		}));
 		for (int i = allGrammars.size() - 1; i >= 0; i--) {
 			current = createEPackageScope(allGrammars.get(i), current);
 		}
