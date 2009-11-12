@@ -130,7 +130,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.DeclarativeScopeProviderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.impl.ImportUriUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.IndexBasedQualifiedNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.QualifiedNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.SimpleNameScopeProviderTest.class);
