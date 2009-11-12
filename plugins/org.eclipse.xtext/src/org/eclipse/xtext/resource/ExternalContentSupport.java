@@ -33,7 +33,7 @@ public class ExternalContentSupport implements IExternalContentSupport {
 		configureConverter(resourceSet.getURIConverter(), contentProvider);
 	}
 	
-	public void configureConverter(URIConverter converter, final IExternalContentProvider contentProvider) {
+	public void configureConverter(URIConverter converter, IExternalContentProvider contentProvider) {
 		List<URIHandler> uriHandlers = converter.getURIHandlers();
 		ListIterator<URIHandler> iter = uriHandlers.listIterator();
 		while(iter.hasNext()) {
