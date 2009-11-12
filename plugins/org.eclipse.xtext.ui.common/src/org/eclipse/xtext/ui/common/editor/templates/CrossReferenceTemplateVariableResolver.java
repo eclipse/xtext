@@ -48,7 +48,7 @@ public class CrossReferenceTemplateVariableResolver extends
 
 		List<String> names = new ArrayList<String>();
 		for (IEObjectDescription eObjectDescription : linkingCandidates) {
-			names.add(eObjectDescription.name());
+			names.add(eObjectDescription.getName());
 		}
 		return names;
 	}

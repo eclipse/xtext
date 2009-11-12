@@ -6,11 +6,11 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.ScopedElement;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.FromEntry;
@@ -41,7 +41,7 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 					new Function<FromEntry, IEObjectDescription>() {
 
 						public IEObjectDescription apply(FromEntry from) {
-							return ScopedElement.create(from.getAlias(), from);
+							return EObjectDescription.create(from.getAlias(), from);
 						}
 					});
 			return new SimpleScope(IScope.NULLSCOPE, transformed);
