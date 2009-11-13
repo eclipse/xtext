@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExportedEObjectsProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -41,11 +40,12 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 	public void setImportResolver(ImportUriResolver importResolver) {
 		this.importResolver = importResolver;
 	}
-	private IResourceServiceProvider serviceProvider;
+	
+	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
 
 	@Inject
-	public void setServiceProvider(IResourceServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
+	public void setServiceProvider(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
+		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
 	}
 	
 	public IScope getScope(EObject context, EReference reference) {
@@ -75,7 +75,7 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 			@Override
 			public Iterable<IEObjectDescription> getContents() {
 				final Resource resource = context.eResource().getResourceSet().getResource(createURI, true);
-				IExportedEObjectsProvider provider = serviceProvider.getService(resource, IExportedEObjectsProvider.class);
+				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
 				if (provider==null)
 					return Iterables.emptyIterable();
 				Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(resource);

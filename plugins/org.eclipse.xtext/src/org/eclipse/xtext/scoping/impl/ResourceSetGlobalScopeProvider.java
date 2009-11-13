@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExportedEObjectsProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -34,11 +33,11 @@ import com.google.inject.Inject;
  */
 public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
 
-	private IResourceServiceProvider serviceProvider;
+	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
 
 	@Inject
-	public void setServiceProvider(IResourceServiceProvider serviceProvider) {
-		this.serviceProvider = serviceProvider;
+	public void setServiceProvider(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
+		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
@@ -61,7 +60,7 @@ public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implem
 		List<Iterable<IEObjectDescription>> iterables = new ArrayList<Iterable<IEObjectDescription>>();
 
 		for (Resource resource : resourceSet.getResources()) {
-			IExportedEObjectsProvider service = serviceProvider.getService(resource, IExportedEObjectsProvider.class);
+			IExportedEObjectsProvider service = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
 			if (service != null)
 				iterables.add(service.getExportedObjects(resource));
 		}
