@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -16,5 +18,5 @@ public interface IImportedNamesProvider {
 	 * returns the list of names this {@link IImportedNamesProvider}
 	 * depends on. 
 	 */
-	Iterable<String> getImportedNames();
+	Iterable<String> getImportedNames(Resource resource);
 }
