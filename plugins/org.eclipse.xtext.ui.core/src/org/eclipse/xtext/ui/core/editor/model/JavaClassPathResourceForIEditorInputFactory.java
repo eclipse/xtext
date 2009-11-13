@@ -62,10 +62,15 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	private Resource createResourceFor(IJarEntryResource storage) {
 		XtextResourceSet resourceSet = getResourceSet(storage);
 		URI uri = jdtURIUtil.getURI(storage);
-		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
+		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(true);
 		return resource;
+	}
+
+	protected void configureResourceSet(XtextResourceSet resourceSet, URI primaryURI) {
+		// TODO: Filter external content - primary resource should not use dirty state
+		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 	}
 
 	private XtextResource getResource(XtextResourceSet resourceSet, URI uri) {
@@ -90,8 +95,8 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 
 	private Resource createResourceFor(IFile storage) {
 		XtextResourceSet resourceSet = getResourceSet(storage);
-		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(),true);
+		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(false);
 		return resource;
