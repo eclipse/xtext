@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -15,5 +17,5 @@ public interface IExportedEObjectsProvider {
 	/**
 	 * @return descriptions of all EObjects provided by <p>this</p>
 	 */
-	Iterable<IEObjectDescription> getExportedObjects();
+	Iterable<IEObjectDescription> getExportedObjects(Resource resource);
 }
