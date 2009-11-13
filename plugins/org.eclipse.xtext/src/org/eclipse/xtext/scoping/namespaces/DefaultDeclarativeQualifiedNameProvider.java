@@ -12,7 +12,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.scoping.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**

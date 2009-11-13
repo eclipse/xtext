@@ -9,7 +9,7 @@ package org.eclipse.xtext.scoping.namespaces;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.scoping.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

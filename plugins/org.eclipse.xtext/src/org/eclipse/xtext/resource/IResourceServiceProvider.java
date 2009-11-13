@@ -8,18 +8,30 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * a generic way to find a service for a resource.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(DefaultExportedEObjectsProvider.class)
-public interface IExportedEObjectsProvider {
+@ImplementedBy(IResourceServiceProvider.DefaultImpl.class)
+public interface IResourceServiceProvider {
 	
 	/**
-	 * @return descriptions of all EObjects provided by <p>this</p>
+	 * @return an instance of <b>clazz</b> responsible for the given resource or null, if no such service exists.
 	 */
-	Iterable<IEObjectDescription> getExportedObjects(Resource resource);
+	<T> T getService(Resource resource, Class<T> clazz);
+	
+	public static class DefaultImpl implements IResourceServiceProvider {
+
+		public <T> T getService(Resource resource, Class<T> clazz) {
+			if (resource instanceof XtextResource) {
+				return ((XtextResource)resource).getAdapter(clazz);
+			}
+			return null;
+		}
+		
+	}
 }
