@@ -36,7 +36,7 @@ public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 
 		private byte[] buffer;
 		private IFile file;
-		private String debug;
+//		private String debug;
 
 		public ResourceWorkingCopyFileInvocationHandler(Resource resource) throws IOException {
 			file = ResourceUtil.getFile(resource);
@@ -50,7 +50,7 @@ public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 				resource.setModified(isModified);
 			}
 			buffer = outputBuffer.toByteArray();
-			debug = new String(buffer);
+//			debug = new String(buffer);
 		}
 
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

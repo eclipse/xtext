@@ -34,6 +34,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 	
 	private static final Logger log = Logger.getLogger(ResourceAwareXtextDocumentProvider.class);
@@ -182,11 +183,6 @@ public class ResourceAwareXtextDocumentProvider extends XtextDocumentProvider {
 
 	private ReferencedResourcesUpdater createReferencedResourceUpdater(XtextDocument result) {
 		return new ReferencedResourcesUpdater(result);
-	}
-
-	@Override
-	protected void setupDocument(Object element, IDocument document) {
-		((XtextDocument) document).setInput((IEditorInput) element);
 	}
 
 	@Override
