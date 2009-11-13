@@ -9,23 +9,21 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -36,11 +34,11 @@ import com.google.inject.Inject;
  */
 public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
 
-	private IQualifiedNameProvider nameProvider;
+	private IResourceServiceProvider serviceProvider;
 
 	@Inject
-	public ResourceSetGlobalScopeProvider(IQualifiedNameProvider qualifiedNameProvider) {
-		this.nameProvider = qualifiedNameProvider;
+	public void setServiceProvider(IResourceServiceProvider serviceProvider) {
+		this.serviceProvider = serviceProvider;
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
@@ -52,47 +50,28 @@ public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implem
 			ResourceSetReferencingResourceSet set = (ResourceSetReferencingResourceSet) resourceSet;
 			Iterable<ResourceSet> referencedSets = Iterables.reverse(set.getReferencedResourceSets());
 			for (ResourceSet referencedSet : referencedSets) {
-				parent = createScopeWithQualifiedNames(parent, reference, allEObjects(referencedSet));
+				parent = createScopeWithQualifiedNames(parent, context, reference, referencedSet);
 			}
 		}
-		Iterable<EObject> filtered = allEObjects(resourceSet);
-		return createScopeWithQualifiedNames(parent, reference, filtered);
+		return createScopeWithQualifiedNames(parent, context, reference, resourceSet);
 	}
 
-	protected IScope createScopeWithQualifiedNames(final IScope parent, final EReference reference,
-			Iterable<EObject> eObjects) {
+	protected IScope createScopeWithQualifiedNames(final IScope parent, final EObject context,
+			final EReference reference, ResourceSet resourceSet) {
+		List<Iterable<IEObjectDescription>> iterables = new ArrayList<Iterable<IEObjectDescription>>();
 
-		eObjects = filter(eObjects, typeFilter(reference.getEReferenceType()));
-		Iterable<IEObjectDescription> result = transform(eObjects, new Function<EObject, IEObjectDescription>() {
-
-			public IEObjectDescription apply(EObject from) {
-				String qualifiedName = nameProvider.getQualifiedName(from);
-				if (qualifiedName != null) {
-					return EObjectDescription.create(qualifiedName, from);
-				}
-				return null;
+		for (Resource resource : resourceSet.getResources()) {
+			IExportedEObjectsProvider service = serviceProvider.getService(resource, IExportedEObjectsProvider.class);
+			if (service != null)
+				iterables.add(service.getExportedObjects(resource));
+		}
+		Iterable<IEObjectDescription> descriptions = Iterables.concat(iterables);
+		Iterable<IEObjectDescription> filtered = filter(descriptions, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return reference.getEReferenceType().isSuperTypeOf(input.getEClass());
 			}
 		});
-		return new SimpleScope(parent, filter(result, Predicates.notNull()));
-	}
-
-	protected Predicate<EObject> typeFilter(final EClass type) {
-		return new Predicate<EObject>() {
-
-			public boolean apply(EObject input) {
-				return type.isInstance(input);
-			}
-		};
-	}
-
-	private Iterable<EObject> allEObjects(final ResourceSet resourceSet) {
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return EcoreUtil.getAllProperContents(resourceSet, true);
-			}
-		};
-		Iterable<EObject> filtered = Iterables.filter(contents, EObject.class);
-		return filtered;
+		return new SimpleScope(parent,filtered);
 	}
 
 }

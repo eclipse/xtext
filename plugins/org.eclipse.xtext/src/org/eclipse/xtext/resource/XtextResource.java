@@ -42,6 +42,7 @@ import com.google.inject.Inject;
  * @author Dennis Hübner
  * @author Moritz Eysholdt
  * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
 public class XtextResource extends ResourceImpl {
 
@@ -70,6 +71,29 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	protected void setInjectedParser(ISwitchingParser parser) {
 		this.parser = parser;
+	}
+	
+	private IExportedEObjectsProvider exportProvider;
+	
+	@Inject
+	public void setExportProvider(IExportedEObjectsProvider exportProvider) {
+		this.exportProvider = exportProvider;
+	}
+	
+//	private IImportedNamesProvider importProvider;
+//	
+//	@Inject
+//	public void setImportProvider(IImportedNamesProvider importProvider) {
+//		this.importProvider = importProvider;
+//	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getAdapter(Class<T> clazz) {
+		if (clazz.isInstance(exportProvider))
+			return (T) exportProvider;
+//		if (clazz.isInstance(importProvider))
+//			return (T) importProvider;
+		return null;
 	}
 
 	public XtextResource(URI uri) {

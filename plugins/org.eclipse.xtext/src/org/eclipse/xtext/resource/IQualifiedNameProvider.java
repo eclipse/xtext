@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping;
+package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 
