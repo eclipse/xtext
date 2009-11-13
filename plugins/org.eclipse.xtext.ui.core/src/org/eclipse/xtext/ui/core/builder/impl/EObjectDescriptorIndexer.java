@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
-import org.eclipse.xtext.scoping.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 
 import com.google.inject.Inject;
 
