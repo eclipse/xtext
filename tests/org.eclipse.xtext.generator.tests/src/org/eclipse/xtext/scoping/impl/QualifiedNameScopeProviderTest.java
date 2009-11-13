@@ -26,8 +26,8 @@ import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
@@ -56,12 +56,11 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
-		globalScopeProvider.setServiceProvider(new IResourceServiceProvider() {
-			@SuppressWarnings("unchecked")
-			public <T> T getService(Resource resource, Class<T> clazz) {
-				DefaultExportedEObjectsProvider x = new DefaultExportedEObjectsProvider();
-				x.setNameProvider(new DefaultDeclarativeQualifiedNameProvider());
-				return (T) x;
+		globalScopeProvider.setServiceProvider(new IExportedEObjectsProvider.Registry() {
+			public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
+				DefaultExportedEObjectsProvider result = new DefaultExportedEObjectsProvider();
+				result.setNameProvider(new DefaultDeclarativeQualifiedNameProvider());
+				return result;
 			}});
 		scopeProvider = new QualifiedNameScopeProvider();
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
