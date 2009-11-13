@@ -19,8 +19,10 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
@@ -34,6 +36,12 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+	
+	@Inject
+	private IExternalContentSupport externalContentSupport;
+	
+	@Inject
+	private IExternalContentProvider externalContentProvider;
 
 	public Resource createResource(IEditorInput editorInput) {
 		try {
@@ -54,6 +62,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	private Resource createResourceFor(IJarEntryResource storage) {
 		XtextResourceSet resourceSet = getResourceSet(storage);
 		URI uri = jdtURIUtil.getURI(storage);
+		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(true);
 		return resource;
@@ -81,6 +90,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 
 	private Resource createResourceFor(IFile storage) {
 		XtextResourceSet resourceSet = getResourceSet(storage);
+		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(),true);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(false);

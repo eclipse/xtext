@@ -54,7 +54,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	class DocumentListener implements IDocumentListener, IXtextDocumentContentObserver {
 
 		public void documentAboutToBeChanged(DocumentEvent event) {
-			// do nothing so far
+			
 		}
 
 		public void documentChanged(DocumentEvent event) {
