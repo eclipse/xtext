@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
+import org.eclipse.xtext.resource.impl.ExportedEObjectProviderRegistry;
 
 import com.google.inject.ImplementedBy;
 
@@ -22,4 +23,11 @@ public interface IExportedEObjectsProvider {
 	 * @return descriptions of all EObjects provided by <p>this</p>
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(Resource resource);
+	
+	@ImplementedBy(ExportedEObjectProviderRegistry.class)
+	interface Registry {
+		
+		IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource);
+		
+	}
 }

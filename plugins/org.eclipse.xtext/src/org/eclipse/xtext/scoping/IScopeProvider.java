@@ -21,7 +21,7 @@ import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  */
-@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
+@Stable(since = "0.8.0", subClass = AbstractScopeProvider.class)
 public interface IScopeProvider {
 
 	/**

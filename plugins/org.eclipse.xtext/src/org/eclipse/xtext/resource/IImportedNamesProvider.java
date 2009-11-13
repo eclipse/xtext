@@ -8,10 +8,15 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.impl.DefaultImportedNamesProvider;
+import org.eclipse.xtext.resource.impl.ImportedNamesProviderRegistry;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@ImplementedBy(DefaultImportedNamesProvider.class)
 public interface IImportedNamesProvider {
 	
 	/**
@@ -19,4 +24,11 @@ public interface IImportedNamesProvider {
 	 * depends on. 
 	 */
 	Iterable<String> getImportedNames(Resource resource);
+	
+	@ImplementedBy(ImportedNamesProviderRegistry.class)
+	interface Registry {
+			
+		IImportedNamesProvider getImportedNamesProvider(Resource resource);
+		
+	}
 }

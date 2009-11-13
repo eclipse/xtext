@@ -66,6 +66,12 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	private IReferableElementsUnloader unloader;
 	
+	@Inject
+	private IExportedEObjectsProvider exportedEObjectsProvider;
+	
+	@Inject
+	private IImportedNamesProvider importedNamesProvider;
+	
 	private IParseResult parseResult;
 
 	@Inject
@@ -73,27 +79,20 @@ public class XtextResource extends ResourceImpl {
 		this.parser = parser;
 	}
 	
-	private IExportedEObjectsProvider exportProvider;
-	
-	@Inject
-	public void setExportProvider(IExportedEObjectsProvider exportProvider) {
-		this.exportProvider = exportProvider;
+	public void setExportedEObjectsProvider(IExportedEObjectsProvider exportedEObjectsProvider) {
+		this.exportedEObjectsProvider = exportedEObjectsProvider;
 	}
 	
-//	private IImportedNamesProvider importProvider;
-//	
-//	@Inject
-//	public void setImportProvider(IImportedNamesProvider importProvider) {
-//		this.importProvider = importProvider;
-//	}
+	public void setImportedNamesProvider(IImportedNamesProvider importProvider) {
+		this.importedNamesProvider = importProvider;
+	}
 	
-	@SuppressWarnings("unchecked")
-	public <T> T getAdapter(Class<T> clazz) {
-		if (clazz.isInstance(exportProvider))
-			return (T) exportProvider;
-//		if (clazz.isInstance(importProvider))
-//			return (T) importProvider;
-		return null;
+	public IImportedNamesProvider getImportedNamesProvider() {
+		return importedNamesProvider;
+	}
+	
+	public IExportedEObjectsProvider getExportedEObjectsProvider() {
+		return exportedEObjectsProvider;
 	}
 
 	public XtextResource(URI uri) {
@@ -310,4 +309,5 @@ public class XtextResource extends ResourceImpl {
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
 	}
+
 }
