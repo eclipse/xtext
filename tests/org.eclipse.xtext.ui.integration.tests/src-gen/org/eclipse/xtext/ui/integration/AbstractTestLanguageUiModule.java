@@ -129,7 +129,22 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider> bindXtextDocumentProvider() {
-		return org.eclipse.xtext.ui.core.editor.model.ResourceAwareXtextDocumentProvider.class;
+		return org.eclipse.xtext.ui.core.editor.model.DirtyStateAwareXtextDocumentProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> provideIExternalContentSupport$IExternalContentProvider() {
+		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER_AS_CONTENTPROVIDER;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.ui.core.editor.IDirtyStateManager> provideIDirtyStateManager() {
+		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker> provideIStateChangeEventBroker() {
+		return org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker.PROVIDER;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
