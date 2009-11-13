@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  */
 public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 
-	final SyntaxError error;
+	private final SyntaxError error;
 
 	public XtextSyntaxDiagnostic(SyntaxError error) {
 		this.error = error;
