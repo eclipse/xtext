@@ -71,6 +71,7 @@ public class DirtyStateAwareXtextDocumentProvider extends XtextDocumentProvider 
 					return result;
 				}
 			});
+			// TODO: should this run in a job? (see ResourceAwareXtextDocumentProvider)
 			if (affectedResources != null && !affectedResources.isEmpty()) {
 				document.modify(new IUnitOfWork.Void<XtextResource>() {
 					@Override

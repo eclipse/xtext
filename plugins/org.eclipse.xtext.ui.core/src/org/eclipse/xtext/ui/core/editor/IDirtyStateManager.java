@@ -19,7 +19,7 @@ import com.google.inject.Provider;
  * a currently edited resource and listen to changes on those resources.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider{
+public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider {
 
 	/**
 	 * Provide access to the one and only dirty state manager.

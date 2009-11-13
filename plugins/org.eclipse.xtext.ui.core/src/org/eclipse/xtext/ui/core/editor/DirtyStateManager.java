@@ -18,6 +18,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+// TODO: batch events, fulfill contract as defined in documentation of IDirtyStateManager
 public class DirtyStateManager implements IDirtyStateManager {
 
 	private ConcurrentMap<URI, IDirtyResource> managedResources;

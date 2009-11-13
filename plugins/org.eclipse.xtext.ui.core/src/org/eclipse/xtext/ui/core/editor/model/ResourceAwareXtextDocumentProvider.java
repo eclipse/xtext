@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
+ * TODO: Move to dedicated deprecated source folder / remove entirely 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Deprecated
