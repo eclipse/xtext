@@ -82,8 +82,6 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 					"org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder")
 		
 		// editor notification
-		.addTypeToType("org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider",
-				"org.eclipse.xtext.ui.core.editor.model.DirtyStateAwareXtextDocumentProvider")
 		.addTypeToProviderInstance("org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider", 
 				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER_AS_CONTENTPROVIDER")
 		.addTypeToProviderInstance("org.eclipse.xtext.ui.core.editor.IDirtyStateManager", 
