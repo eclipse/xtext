@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.emfindex.ResourceDescriptor;
 import org.eclipse.emf.emfindex.query.QueryExecutor;
-import org.eclipse.emf.emfindex.query.QueryResult;
 import org.eclipse.emf.emfindex.query.ResourceDescriptorQuery;
 import org.eclipse.emf.emfindex.store.IndexUpdater;
 
