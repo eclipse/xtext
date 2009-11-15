@@ -18,14 +18,16 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class NatureAddingEditorCallback implements IXtextEditorCallback {
+public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	
 	@Inject
 	private ToggleXtextNatureAction toggleNature;
 
+	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
+		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
-		if (resource!=null && !toggleNature.hasNature(resource.getProject())) {
+		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().exists()) {
 			String title = "Add Xtext Nature";
 			String message = "Do you want the Xtext nature to be added to this project?";
 			Image image = null;
@@ -35,9 +37,6 @@ public class NatureAddingEditorCallback implements IXtextEditorCallback {
 				toggleNature.toggleNature(resource.getProject());
 			}
 		}
-	}
-
-	public void afterSave(XtextEditor editor) {
 	}
 
 }

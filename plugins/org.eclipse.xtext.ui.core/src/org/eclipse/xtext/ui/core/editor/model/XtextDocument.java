@@ -23,9 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.xtext.resource.EObjectHandleImpl;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.IDirtyResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
@@ -40,27 +38,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	private XtextResource resource = null;
 	
-	private IDirtyResource dirtyResource = new IDirtyResource() {
-		
-		public URI getURI() {
-			return resource.getURI();
-		}
-		
-		public Iterable<String> getImportedNames() {
-			// TODO: UnitOfWork?
-			return resource.getImportedNamesProvider().getImportedNames(resource);
-		}
-		
-		public Iterable<IEObjectDescription> getExportedObjects() {
-			// TODO: UnitOfWork?
-			return resource.getExportedEObjectsProvider().getExportedObjects(resource);
-		}
-		
-		public String getContents() {
-			return get();
-		}
-	};
-
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -225,14 +202,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
 		}
-		if (adapterType == IDirtyResource.class) {
-			return adapterType.cast(getDirtyResource());
-		}
 		return null;
-	}
-
-	public IDirtyResource getDirtyResource() {
-		return dirtyResource;
 	}
 
 	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {

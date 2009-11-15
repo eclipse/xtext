@@ -133,11 +133,6 @@ public abstract class AbstractFowlerDslUiModule extends FowlerDslRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider> bindXtextDocumentProvider() {
-		return org.eclipse.xtext.ui.core.editor.model.DirtyStateAwareXtextDocumentProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public com.google.inject.Provider<org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> provideIExternalContentSupport$IExternalContentProvider() {
 		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER_AS_CONTENTPROVIDER;
 	}

@@ -331,6 +331,7 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	public void dispose() {
+		callback.beforeDispose(this);
 		super.dispose();
 		if (projectionSupport != null) {
 			projectionSupport.dispose();
@@ -416,6 +417,11 @@ public class XtextEditor extends TextEditor {
 			}
 		}
 		setStatusLineMessage(message);
+	}
+	
+	@Override
+	public boolean validateEditorInputState() {
+		return callback.onValidateEditorInputState(this) && super.validateEditorInputState();
 	}
 	
 	@SuppressWarnings("unchecked")

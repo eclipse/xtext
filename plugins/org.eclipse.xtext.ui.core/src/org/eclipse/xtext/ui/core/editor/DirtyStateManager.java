@@ -51,7 +51,8 @@ public class DirtyStateManager implements IDirtyStateManager {
 	}
 
 	public boolean manageDirtyState(IDirtyResource dirtyResource) {
-		return managedResources.putIfAbsent(dirtyResource.getURI(), dirtyResource) == null;
+		IDirtyResource prevValue = managedResources.putIfAbsent(dirtyResource.getURI(), dirtyResource);
+		return prevValue == null || prevValue == dirtyResource;
 	}
 	
 	public IDirtyResource getDirtyResource(URI uri) {
