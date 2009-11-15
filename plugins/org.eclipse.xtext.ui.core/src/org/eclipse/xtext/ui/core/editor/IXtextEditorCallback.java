@@ -15,9 +15,13 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(NatureAddingEditorCallback.class)
 public interface IXtextEditorCallback {
 	
-	public void afterCreatePartControl(XtextEditor editor);
+	void afterCreatePartControl(XtextEditor editor);
 	
-	public void afterSave(XtextEditor editor);
+	void afterSave(XtextEditor editor);
+	
+	void beforeDispose(XtextEditor editor);
+	
+	boolean onValidateEditorInputState(XtextEditor editor);
 	
 	public static class NullImpl implements IXtextEditorCallback {
 
@@ -25,6 +29,13 @@ public interface IXtextEditorCallback {
 		}
 
 		public void afterSave(XtextEditor editor) {
+		}
+
+		public void beforeDispose(XtextEditor editor) {
+		}
+
+		public boolean onValidateEditorInputState(XtextEditor editor) {
+			return true;
 		}
 		
 	}

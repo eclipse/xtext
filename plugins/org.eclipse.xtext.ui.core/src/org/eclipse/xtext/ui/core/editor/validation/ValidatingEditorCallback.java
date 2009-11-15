@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.validation;
 
-import org.eclipse.xtext.ui.core.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.core.editor.AbstractDirtyStateAwareEditorCallback;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 
 import com.google.inject.Inject;
@@ -16,18 +16,22 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public class ValidatingEditorCallback implements IXtextEditorCallback {
+public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	@Inject
 	private IXtextResourceChecker checker;
 
+	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
+		super.afterCreatePartControl(editor);
 		if (editor.isEditable()) {
 			ValidationJob validationJob = newValidationJob(editor);
 			validationJob.schedule();
 		}
 	}
 
+	@Override
 	public void afterSave(XtextEditor editor) {
+		super.afterSave(editor);
 		if (editor.isEditable()) {
 			ValidationJob validationJob = newValidationJob(editor);
 			validationJob.schedule();
