@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -42,9 +42,8 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextScopeProvider extends SimpleNameScopeProvider {
+public class XtextScopeProvider extends AbstractScopeProvider {
 
-	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
 			if (context instanceof TypeRef) {
@@ -70,7 +69,7 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 			return IScope.NULLSCOPE;
 			
 		}
-		return super.getScope(context, reference);
+		return createScope(context.eResource(), reference.getEReferenceType());
 	}
 
 	private IScope createEnumLiteralsScope(EEnum eEnum) {
@@ -100,7 +99,6 @@ public class XtextScopeProvider extends SimpleNameScopeProvider {
 		return createClassifierScope(allClassifiers);
 	}
 
-	@Override
 	protected IScope createScope(Resource resource, EClass type) {
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "

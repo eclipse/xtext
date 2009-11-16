@@ -32,13 +32,16 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Michael Clay
  * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
 public class DefaultLinkingService extends AbstractLinkingService {
 
@@ -48,10 +51,42 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	@Inject
 	private IValueConverterService valueConverter;
 
+	@Inject
+	private Provider<ImportedNamesAdapter> importedNamesAdapterProvider;
+
 	protected IScope getScope(EObject context, EReference reference) {
 		if (getScopeProvider() == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
-		return getScopeProvider().getScope(context, reference);
+		try {
+			registerImportedNamesAdapter(context);
+			return getScopeProvider().getScope(context, reference);
+		} finally {
+			unRegisterImportedNamesAdapter();
+		}
+	}
+
+	private void unRegisterImportedNamesAdapter() {
+		if (getScopeProvider() instanceof AbstractGlobalScopeDelegatingScopeProvider) {
+			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) getScopeProvider();
+			provider.setWrapper(null);
+		}
+	}
+
+	private void registerImportedNamesAdapter(EObject context) {
+		if (getScopeProvider() instanceof AbstractGlobalScopeDelegatingScopeProvider) {
+			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) getScopeProvider();
+			ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
+			provider.setWrapper(adapter);
+		}
+	}
+
+	private ImportedNamesAdapter getImportedNamesAdapter(EObject context) {
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(context.eResource());
+		if (adapter!=null)
+			return adapter;
+		ImportedNamesAdapter importedNamesAdapter = importedNamesAdapterProvider.get();
+		context.eResource().eAdapters().add(importedNamesAdapter);
+		return importedNamesAdapter;
 	}
 
 	/**

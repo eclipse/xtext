@@ -37,6 +37,14 @@ import com.google.common.collect.Multimaps;
  */
 public class Scopes {
 
+	public static Iterable<IEObjectDescription> selectCompatible(Iterable<IEObjectDescription> exportedObjects, final EClass clazz) {
+		return Iterables.filter(exportedObjects, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return clazz.isSuperTypeOf(input.getEClass());
+			}
+		});
+	}
+
 	/**
 	 * creates a scope using {@link SimpleAttributeResolver#NAME_RESOLVER} to compute the names and sets
 	 * {@link IScope#NULLSCOPE} as parent scope
@@ -76,14 +84,15 @@ public class Scopes {
 	 */
 	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
 			final Function<T, String> nameComputation) {
-		Iterable<IEObjectDescription> transformed = Iterables.transform(elements, new Function<T, IEObjectDescription>() {
-			public IEObjectDescription apply(T from) {
-				String name = nameComputation.apply(from);
-				if (name != null)
-					return EObjectDescription.create(name, from);
-				return null;
-			}
-		});
+		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
+				new Function<T, IEObjectDescription>() {
+					public IEObjectDescription apply(T from) {
+						String name = nameComputation.apply(from);
+						if (name != null)
+							return EObjectDescription.create(name, from);
+						return null;
+					}
+				});
 		return Iterables.filter(transformed, Predicates.notNull());
 	}
 
@@ -115,8 +124,8 @@ public class Scopes {
 	 * 
 	 * @return
 	 */
-	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> predicate,
-			final Function<EObject, String> nameFunc) {
+	public static Iterable<IEObjectDescription> allInResource(final Resource resource,
+			final Predicate<EObject> predicate, final Function<EObject, String> nameFunc) {
 		return allInResource(resource, predicate, nameFunc, true);
 	}
 
@@ -140,12 +149,13 @@ public class Scopes {
 
 			Iterable<EObject> filtered = filter(iterable, filter);
 
-			Iterable<IEObjectDescription> transformed = transform(filtered, new Function<EObject, IEObjectDescription>() {
+			Iterable<IEObjectDescription> transformed = transform(filtered,
+					new Function<EObject, IEObjectDescription>() {
 
-				public IEObjectDescription apply(EObject from) {
-					return EObjectDescription.create(nameFunc.apply(from), from);
-				}
-			});
+						public IEObjectDescription apply(EObject from) {
+							return EObjectDescription.create(nameFunc.apply(from), from);
+						}
+					});
 			if (!skipDuplicates)
 				return transformed;
 

@@ -74,7 +74,7 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 		return new SimpleScope(parent, null) {
 			@Override
 			public Iterable<IEObjectDescription> getContents() {
-				final Resource resource = context.eResource().getResourceSet().getResource(createURI, true);
+				final Resource resource = EcoreUtil2.getResource(context.eResource(), createURI.toString());
 				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
 				if (provider==null)
 					return Iterables.emptyIterable();

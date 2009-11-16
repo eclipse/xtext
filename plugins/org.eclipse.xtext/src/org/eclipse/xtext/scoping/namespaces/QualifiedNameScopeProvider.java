@@ -22,11 +22,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -38,7 +37,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class QualifiedNameScopeProvider extends AbstractScopeProvider {
+public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
 	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -92,21 +91,10 @@ public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 	public IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
 	}
-	
-	private IGlobalScopeProvider globalScopeProvider;
-	
-	@Inject
-	public void setGlobalScopeProvider(IGlobalScopeProvider globalScopeProvider) {
-		this.globalScopeProvider = globalScopeProvider;
-	}
-	
-	public IGlobalScopeProvider getGlobalScopeProvider() {
-		return globalScopeProvider;
-	}
 
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
-			return getGlobalScope(null, reference);
+			return getGlobalScope(context, reference);
 		IScope result = null;
 		if (context.eContainer() == null) {
 			// global scope
@@ -133,10 +121,6 @@ public class QualifiedNameScopeProvider extends AbstractScopeProvider {
 
 	protected boolean hasImports(final EObject context) {
 		return !getImportNormalizer(context).isEmpty();
-	}
-
-	protected IScope getGlobalScope(final EObject context, final EReference reference) {
-		return globalScopeProvider.getScope(context, reference);
 	}
 
 	protected IScope getResourceScope(IScope parent, final EObject context, final EReference reference) {
