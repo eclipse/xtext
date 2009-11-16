@@ -9,12 +9,10 @@
 
 package org.eclipse.xtext.junit;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashMap;
 
 import junit.framework.TestCase;
@@ -231,6 +229,10 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	public final XtextResource getResource(InputStream in, URI uri) throws Exception {
 		return getResourceAndExpect(in, uri, 0);
+	}
+	
+	public final XtextResource getResource(String contents, String uri) throws Exception {
+		return getResource(new StringInputStream(contents), URI.createURI(uri));
 	}
 	
 	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors) throws Exception {

@@ -59,11 +59,19 @@ public abstract class AbstractScope implements IScope {
 		if (name==null)
 			throw new NullPointerException("name");
 		Iterator<IEObjectDescription> contents = getContents().iterator();
+		IEObjectDescription candidate = null;
 		while (contents.hasNext()) {
 			IEObjectDescription element = contents.next();
-			if (name.equals(element.getName())) 
-				return element;
+			if (name.equals(element.getName())) {
+				if (candidate==null) {
+					candidate = element;
+				} else {
+					return null;
+				}
+			}
 		}
+		if (candidate!=null)
+			return candidate;
 		return getOuterScope().getContentByName(name);
 	}
 }

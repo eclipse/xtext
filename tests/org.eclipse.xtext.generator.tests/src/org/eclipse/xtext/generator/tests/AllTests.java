@@ -127,6 +127,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ExternalContentSupportTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultImportedNamesProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);

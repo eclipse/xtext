@@ -7,21 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.resource.IImportedNamesProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class DefaultImportedNamesProvider implements IImportedNamesProvider {
 
-	/**
-	 * TODO: Implement me!
-	 */
 	public Iterable<String> getImportedNames(Resource resource) {
-		return Collections.emptyList();
+		Set<String> names = new HashSet<String>();
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(resource);
+		if (adapter!=null)
+			names.addAll(adapter.getImportedNames());
+		return names;
 	}
 
 }
