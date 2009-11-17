@@ -38,7 +38,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 
 	@Override
-	public Iterable<IEObjectDescription> getContents() {
+	public Iterable<IEObjectDescription> internalGetContents() {
 		final List<IEObjectDescription> allScopedElements = Lists.newArrayListWithExpectedSize(25000);
 		try {
 			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { getTypeProvider().getJavaProject() });

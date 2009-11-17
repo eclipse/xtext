@@ -8,10 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Iterables.*;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -26,8 +27,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimaps;
 
 /**
  * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
@@ -105,7 +104,9 @@ public class Scopes {
 	 * @param typeToFilter
 	 * @param nameFunc
 	 * @return
+	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
 	 */
+	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final EClass typeToFilter,
 			final Function<EObject, String> nameFunc) {
 		return allInResource(resource, new Predicate<EObject>() {
@@ -123,7 +124,9 @@ public class Scopes {
 	 *            skips duplicate elements
 	 * 
 	 * @return
+	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
 	 */
+	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource,
 			final Predicate<EObject> predicate, final Function<EObject, String> nameFunc) {
 		return allInResource(resource, predicate, nameFunc, true);
@@ -135,7 +138,9 @@ public class Scopes {
 	 * @param nameFunc
 	 * @param skipDuplicates
 	 * @return
+	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
 	 */
+	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> filter,
 			final Function<EObject, String> nameFunc, boolean skipDuplicates) {
 		if (resource != null) {
@@ -159,23 +164,21 @@ public class Scopes {
 			if (!skipDuplicates)
 				return transformed;
 
-			return skipDuplicates(transformed);
+			return filterDuplicates(transformed);
 		}
 		return Iterables.emptyIterable();
 	}
 
-	public static Iterable<IEObjectDescription> skipDuplicates(Iterable<IEObjectDescription> transformed) {
-		final ListMultimap<String, IEObjectDescription> multiMap = Multimaps.index(transformed,
-				new Function<IEObjectDescription, String>() {
-					public String apply(IEObjectDescription from) {
-						return from.getName();
-					}
-				});
-
-		return filter(transformed, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return multiMap.get(input.getName()).size() == 1;
+	public static Iterable<IEObjectDescription> filterDuplicates(Iterable<IEObjectDescription> filtered) {
+		Map<String, IEObjectDescription> result = new LinkedHashMap<String, IEObjectDescription>();
+		for (IEObjectDescription e : filtered) {
+			String name = e.getName();
+			if (result.containsKey(name)) {
+				result.put(name, null);
+			} else {
+				result.put(name, e);
 			}
-		});
+		}
+		return Iterables.filter(result.values(), Predicates.notNull());
 	}
 }

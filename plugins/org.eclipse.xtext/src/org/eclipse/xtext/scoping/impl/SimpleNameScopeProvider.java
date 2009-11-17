@@ -32,6 +32,7 @@ public class SimpleNameScopeProvider extends AbstractGlobalScopeDelegatingScopeP
 		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(context.eResource());
 		Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(context.eResource());
 		Iterable<IEObjectDescription> filtered = Scopes.selectCompatible(exportedObjects, reference.getEReferenceType());
+		filtered = Scopes.filterDuplicates(filtered);
 		return new SimpleScope(getGlobalScope(context, reference), filtered);
 	}
 	

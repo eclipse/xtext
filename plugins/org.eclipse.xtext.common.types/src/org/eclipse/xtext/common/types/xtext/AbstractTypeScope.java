@@ -28,7 +28,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		this.typeProvider = typeProvider;
 	}
 
-	public Iterable<IEObjectDescription> getContents() {
+	@Override
+	public Iterable<IEObjectDescription> internalGetContents() {
 		throw new UnsupportedOperationException();
 	}
 	
