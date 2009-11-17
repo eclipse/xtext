@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  * 
  */
 public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
-	
+
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
@@ -55,8 +55,7 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 				if (name.lastSegment().equals(shortName)) {
 					return name.toString();
 				}
-			}
-			else {
+			} else {
 				return name.replaceWildcard(shortName).toString();
 			}
 			return null;
@@ -71,9 +70,10 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 				QualifiedName fromName = new QualifiedName(from);
 				List<String> fromSegments = fromName.segments();
 				List<String> importSegments = name.segments();
-				if (importSegments.size()<fromSegments.size()) {
+				if (importSegments.size() < fromSegments.size()) {
 					if (importSegments.equals(fromSegments.subList(0, importSegments.size()))) {
-						return new QualifiedName(fromSegments.subList(importSegments.size(), fromSegments.size())).toString();
+						return new QualifiedName(fromSegments.subList(importSegments.size(), fromSegments.size()))
+								.toString();
 					}
 				}
 			}
@@ -100,8 +100,7 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 			// global scope
 			result = getGlobalScope(context, reference);
 			result = getResourceScope(result, context, reference);
-		}
-		else {
+		} else {
 			// outer scope
 			result = getScope(context.eContainer(), reference);
 		}
@@ -152,8 +151,9 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 				if (name != null && name.startsWith(commonPrefix))
 					return name.substring(commonPrefix.length());
 				return null;
-			}};
-			
+			}
+		};
+
 		return Scopes.scopeFor(contents, nameComputation, parent);
 	}
 
@@ -188,7 +188,7 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 		final Set<ImportNormalizer> normalizers = getImportNormalizer(context);
 
 		return new AbstractScope() {
-			
+
 			@Override
 			public IEObjectDescription getContentByName(String name) {
 				for (ImportNormalizer normalizer : normalizers) {
@@ -201,28 +201,29 @@ public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingSco
 				}
 				return getOuterScope().getContentByName(name);
 			}
-			
-			public Iterable<IEObjectDescription> getContents() {
-				return filter(transform(localElements.getAllContents(),
-				new Function<IEObjectDescription, IEObjectDescription>() {
 
-					public IEObjectDescription apply(final IEObjectDescription input) {
-						for (ImportNormalizer normalizer : normalizers) {
-							final String newName = normalizer.longToShortName(input.getName());
-							if (newName != null) {
-								return new AliasedEObjectDescription(newName, input);
+			@Override
+			protected Iterable<IEObjectDescription> internalGetContents() {
+				return filter(transform(localElements.getAllContents(),
+						new Function<IEObjectDescription, IEObjectDescription>() {
+
+							public IEObjectDescription apply(final IEObjectDescription input) {
+								for (ImportNormalizer normalizer : normalizers) {
+									final String newName = normalizer.longToShortName(input.getName());
+									if (newName != null) {
+										return new AliasedEObjectDescription(newName, input);
+									}
+								}
+								return null;
 							}
-						}
-						return null;
-					}
-				}),Predicates.notNull());
+						}), Predicates.notNull());
 			}
 
 			public IScope getOuterScope() {
 				return parent;
 			}
+
 		};
 	}
-
 
 }
