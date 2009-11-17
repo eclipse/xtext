@@ -20,14 +20,12 @@ import com.google.inject.ImplementedBy;
 public interface IExportedEObjectsProvider {
 	
 	/**
-	 * @return descriptions of all EObjects provided by <p>this</p>
+	 * @return descriptions of all EObjects provided by the given Resource
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(Resource resource);
 	
 	@ImplementedBy(ExportedEObjectProviderRegistry.class)
 	interface Registry {
-		
 		IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource);
-		
 	}
 }

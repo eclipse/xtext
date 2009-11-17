@@ -70,7 +70,7 @@ public class IndexGlobalScopeProvider extends AbstractScopeProvider implements I
 		return new SimpleScope(parent, null) {
 
 			@Override
-			public Iterable<IEObjectDescription> getContents() {
+			public Iterable<IEObjectDescription> internalGetContents() {
 				return getIndexStore().executeQueryCommand(new ConvertAll(project, context, reference));
 			}
 

@@ -28,6 +28,12 @@ import com.google.common.collect.Iterables;
  *
  */
 public abstract class AbstractScope implements IScope {
+	
+	public Iterable<IEObjectDescription> getContents() {
+		return internalGetContents();
+	}
+
+	protected abstract Iterable<IEObjectDescription> internalGetContents();
 
 	public Iterable<IEObjectDescription> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
@@ -46,32 +52,31 @@ public abstract class AbstractScope implements IScope {
 	public IEObjectDescription getContentByEObject(EObject object) {
 		Iterator<IEObjectDescription> contents = getContents().iterator();
 		URI uri = EcoreUtil.getURI(object);
+		Set<String> names = new HashSet<String>();
 		while (contents.hasNext()) {
 			IEObjectDescription element = contents.next();
+			names.add(element.getName());
 			URI elementsUri = EcoreUtil.getURI(element.getEObjectOrProxy());
 			if (uri.equals(elementsUri))
 				return element;
 		}
-		return getOuterScope().getContentByEObject(object);
+		IEObjectDescription contentByEObject = getOuterScope().getContentByEObject(object);
+		if (contentByEObject!=null && names.contains(contentByEObject.getName())) {
+			// element is shadowed by a local element with the same name.
+			return null;
+		}
+		return contentByEObject;
 	}
 
 	public IEObjectDescription getContentByName(String name) {
 		if (name==null)
 			throw new NullPointerException("name");
 		Iterator<IEObjectDescription> contents = getContents().iterator();
-		IEObjectDescription candidate = null;
 		while (contents.hasNext()) {
 			IEObjectDescription element = contents.next();
-			if (name.equals(element.getName())) {
-				if (candidate==null) {
-					candidate = element;
-				} else {
-					return null;
-				}
-			}
+			if (name.equals(element.getName())) 
+				return element;
 		}
-		if (candidate!=null)
-			return candidate;
 		return getOuterScope().getContentByName(name);
 	}
 }

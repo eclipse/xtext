@@ -27,9 +27,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
@@ -38,11 +38,19 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextScopeProvider extends AbstractScopeProvider {
+	
+	@Inject
+	private IExportedEObjectsProvider exportedEObjectsProvider;
+	
+	public void setExportedEObjectsProvider(IExportedEObjectsProvider exportedEObjectsProvider) {
+		this.exportedEObjectsProvider = exportedEObjectsProvider;
+	}
 
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
@@ -129,7 +137,9 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope createScope(final Grammar grammar, EClass type, IScope parent) {
-		return new SimpleScope(parent, Scopes.allInResource(grammar.eResource(), type, SimpleAttributeResolver.NAME_RESOLVER));
+		Iterable<IEObjectDescription> exportedObjects = exportedEObjectsProvider.getExportedObjects(grammar.eResource());
+		Iterable<IEObjectDescription> compatible = Scopes.selectCompatible(exportedObjects, type);
+		return new SimpleScope(parent, compatible);
 	}
 
 	private List<Grammar> getAllGrammars(Grammar grammar) {

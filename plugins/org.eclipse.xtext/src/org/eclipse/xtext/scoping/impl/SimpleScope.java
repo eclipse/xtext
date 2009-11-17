@@ -32,7 +32,8 @@ public class SimpleScope extends AbstractScope {
 		return outer;
 	}
 
-	public Iterable<IEObjectDescription> getContents() {
+	@Override
+	public Iterable<IEObjectDescription> internalGetContents() {
 		return elements;
 	}
 

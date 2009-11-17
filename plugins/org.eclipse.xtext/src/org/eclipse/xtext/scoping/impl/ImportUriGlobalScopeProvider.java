@@ -73,7 +73,7 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 	private SimpleScope createLazyResourceScope(IScope parent, final URI createURI, final EObject context, final EReference reference) {
 		return new SimpleScope(parent, null) {
 			@Override
-			public Iterable<IEObjectDescription> getContents() {
+			public Iterable<IEObjectDescription> internalGetContents() {
 				final Resource resource = EcoreUtil2.getResource(context.eResource(), createURI.toString());
 				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
 				if (provider==null)
