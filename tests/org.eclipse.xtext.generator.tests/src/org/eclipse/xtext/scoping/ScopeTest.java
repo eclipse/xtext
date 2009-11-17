@@ -62,7 +62,8 @@ public class ScopeTest extends TestCase {
 			public IScope getOuterScope() {
 				return getEcoreClassesScope();
 			}
-			public Iterable<IEObjectDescription> getContents() {
+			@Override
+			public Iterable<IEObjectDescription> internalGetContents() {
 				return Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),EDataType.class));
 			}
 		};
@@ -73,7 +74,8 @@ public class ScopeTest extends TestCase {
 			public IScope getOuterScope() {
 				return IScope.NULLSCOPE;
 			}
-			public Iterable<IEObjectDescription> getContents() {
+			@Override
+			public Iterable<IEObjectDescription> internalGetContents() {
 				return Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),EClass.class));
 			}
 		};
