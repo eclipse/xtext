@@ -23,7 +23,8 @@ public class JdtUtil {
 			for (IPackageFragmentRoot root : roots) {
 				if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
 					IResource resource2 = root.getUnderlyingResource();
-					return resource2.contains(resource);
+					if (resource2.contains(resource))
+						return true;
 				}
 			}
 		} catch (JavaModelException jme) {
