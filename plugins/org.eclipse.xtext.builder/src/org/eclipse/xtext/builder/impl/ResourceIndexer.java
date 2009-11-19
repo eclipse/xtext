@@ -1,16 +1,15 @@
 package org.eclipse.xtext.builder.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
@@ -22,19 +21,12 @@ import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IImportedNamesProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class ResourceIndexer {
 	
-	private static final String DEFAULT_CONTAINER = "DEFAULT_CONTAINER";
-
 	@Inject
 	private BuilderStateManager builderStateManager;
-	
-	@Inject
-	private Provider<ResourceSet> resourceSetProvider;
 	
 	@Inject 
 	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
@@ -45,15 +37,37 @@ public class ResourceIndexer {
 	@Inject
 	private StorageUtil storageUtil;
 	
+	@Inject
+	private ResourceProvider resourceProvider;
+	
+	public void setBuilderStateManager(BuilderStateManager builderStateManager) {
+		this.builderStateManager = builderStateManager;
+	}
+	
+	public void setExportedEObjectsProviderRegistry(
+			IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
+		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
+	}
+	
+	public void setImportedNamesProviderRegistry(
+			IImportedNamesProvider.Registry importedNamesProviderRegistry) {
+		this.importedNamesProviderRegistry = importedNamesProviderRegistry;
+	}
+	
+	public void setResourceProvider(ResourceProvider resourceProvider) {
+		this.resourceProvider = resourceProvider;
+	}
+	
+	public void setStorageUtil(StorageUtil storageUtil) {
+		this.storageUtil = storageUtil;
+	}
+	
 	/**
 	 * @param storage
 	 * @return whether children of the given storage shall be asked
 	 */
 	public void updateExportedElements(IStorage storage) {
-		URI uri = getURI(storage);
-		if (uri!=null)
-			return;
-		Resource resource = resourceSetProvider.get().getResource(uri, true);
+		Resource resource = resourceProvider.getResource(storage);
 		if (resource==null)
 			return;
 		updateBuilderState(resource, storage);
@@ -77,11 +91,13 @@ public class ResourceIndexer {
 		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
 		Iterable<IEObjectDescription> objects = provider.getExportedObjects(resource);
 		
+		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
 		for (IEObjectDescription ieObjectDescription : objects) {
 			IEObjectDescription copy = createPersistableCopy(ieObjectDescription);
-			res.getEObjectDescriptions().add(copy);
+			descriptions.add(copy);
 		}
-		sortByName(res.getEObjectDescriptions());
+		sortByName(descriptions);
+		res.getEObjectDescriptions().addAll(descriptions);
 	}
 
 	protected void cleanAndUpdate(ResourceDescriptor res, Resource resource,
@@ -92,7 +108,7 @@ public class ResourceIndexer {
 		res.setURI(resource.getURI());
 	}
 
-	protected void sortByName(EList<IEObjectDescription> eObjectDescriptions) {
+	protected void sortByName(List<IEObjectDescription> eObjectDescriptions) {
 		Collections.sort(eObjectDescriptions, new Comparator<IEObjectDescription>() {
 			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
 				return o1.getName().compareTo(o2.getName());
@@ -125,14 +141,15 @@ public class ResourceIndexer {
 			IResource res = (IResource) storage;
 			IProject project = res.getProject();
 			EList<Container> containers = state.getContainers();
+			String projectName = project.getName();
 			for (Container container : containers) {
-				if (container.getProject().equals(project.getName()) && container.getName().equals(DEFAULT_CONTAINER))
+				if (container.getProject().equals(projectName) && container.getName().equals(projectName))
 					return container;
 			}
 			
 			Container container = BuilderStateFactory.eINSTANCE.createContainer();
-			container.setName(DEFAULT_CONTAINER);
-			container.setProject(project.getName());
+			container.setName(projectName);
+			container.setProject(projectName);
 			state.getContainers().add(container);
 			return container;
 		}
@@ -142,15 +159,11 @@ public class ResourceIndexer {
 	protected ResourceDescriptor findResource(BuilderState state, Resource res) {
 		EList<Container> containers = state.getContainers();
 		for (Container container : containers) {
-			container.getResourceDescriptor(res.getURI());
+			ResourceDescriptor descriptor = container.getResourceDescriptor(res.getURI());
+			if (descriptor!=null)
+				return descriptor;
 		}
 		return null;
-	}
-
-	protected URI getURI(IStorage resource) {
-		if (resource == null)
-			throw new NullPointerException("resource");
-		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
 
 	protected ResourceDescriptor getResourceDescriptor(final Resource resource,

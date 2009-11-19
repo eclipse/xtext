@@ -38,8 +38,6 @@ public class BuilderStateManager extends IStateAccess.AbstractImpl<BuilderState>
 
 	@Override
 	protected BuilderState getState() {
-		if (!resource.isLoaded())
-			throw new IllegalStateException("ResourceState has not been loaded.");
 		EList<EObject> list = resource.getContents();
 		if (list.isEmpty()) {
 			BuilderState builderState = BuilderStateFactory.eINSTANCE.createBuilderState();
