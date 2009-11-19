@@ -1,0 +1,28 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.builder.tests.BuilderTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate builderTestLanguage "http://eclipse.org/xtext/builderTestLanguage"
+
+Namespace :
+	'namespace' name=QualifiedName '{'
+	    imports+=Import*
+		elements+=NamedElement*
+	'}';
+	
+Import :
+	'import' importedNamespace=QualifiedName;
+	
+NamedElement :
+	Namespace | Element;
+	
+Element :
+	'object' name=ID ('references' references=[Element|QualifiedName])?;
+	
+QualifiedName :
+	ID ('.' ID)*;
