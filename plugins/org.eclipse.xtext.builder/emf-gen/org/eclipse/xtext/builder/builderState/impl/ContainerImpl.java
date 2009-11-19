@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainerImpl.java,v 1.1 2009/11/19 08:39:58 sefftinge Exp $
+ * $Id: ContainerImpl.java,v 1.2 2009/11/19 14:09:08 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -167,14 +167,14 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * returns a resource descriptor with the given URI - null if no such resource descriptor exists.
 	 */
 	public ResourceDescriptor getResourceDescriptor(URI uri) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		for (ResourceDescriptor resDesc : getResourceDescriptors()) {
+			if (resDesc.getURI().equals(uri))
+				return resDesc;
+		}
+		return null;
 	}
 
 	/**
