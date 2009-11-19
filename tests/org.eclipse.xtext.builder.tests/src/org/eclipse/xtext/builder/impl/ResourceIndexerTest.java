@@ -3,6 +3,12 @@ package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -37,7 +43,7 @@ public class ResourceIndexerTest extends TestCase {
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
 		
-		indexer.addOrUpdate(file1);
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 
@@ -52,12 +58,22 @@ public class ResourceIndexerTest extends TestCase {
 			}});
 	}
 	
+	protected <T> void assertContents(Set<T> setOfElements, T ...elements) {
+		for (T ele: elements) {
+			assertTrue("set does not contain '"+ele+"'",setOfElements.contains(ele));
+		}
+		List<T> elementsAsList = Arrays.asList(elements);
+		Set<T> copyOfSet = new HashSet<T>(setOfElements);
+		copyOfSet.removeAll(elementsAsList);
+		assertTrue("unmatched elements :"+copyOfSet,copyOfSet.isEmpty());
+	}
+
 	public void testSimpleDelete() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
 		
-		indexer.addOrUpdate(file1);
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			
@@ -73,7 +89,7 @@ public class ResourceIndexerTest extends TestCase {
 				return null;
 			}});
 		
-		indexer.delete(file1);
+		assertContents(indexer.delete(file1), "foo","bar");
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			
@@ -93,7 +109,7 @@ public class ResourceIndexerTest extends TestCase {
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
 		
-		indexer.addOrUpdate(file1);
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			
@@ -109,7 +125,7 @@ public class ResourceIndexerTest extends TestCase {
 		
 		file1.setContents(new StringInputStream("namespace foo2 { object bar2 }"), true, true, monitor());
 		
-		indexer.addOrUpdate(file1);
+		assertContents(indexer.addOrUpdate(file1), "foo","bar", "foo2", "bar2");
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			
