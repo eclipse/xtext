@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.core.index.NameSearchTrackingIndexImpl;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Module extends org.eclipse.emf.emfindex.EmfIndexModule {
+public class Module extends org.eclipse.emf.emfindex.EquinoxEmfIndexModule {
 	
 	@Override
 	protected void configure() {
