@@ -76,6 +76,41 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		assertNotNull(decl.getEPackage());
 		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
 		assertEquals("ecore", decl.getAlias());
+		AbstractRule abstractRule = g.getRules().get(0);
+		assertSame(decls.get(1), abstractRule.getType().getMetamodel());
+	}
+	
+	public void testAllMetamodelDeclarations_03() throws Exception {
+		with(XtextStandaloneSetup.class);
+		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
+				"generate g 'http://3' as bar " +
+				"import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
+				"startrule returns bar::startrule: name=ID;";
+		Resource r = getResourceFromString(model);
+		assertTrue(r.getErrors().isEmpty());
+		Grammar g = (Grammar) r.getContents().get(0);
+		List<AbstractMetamodelDeclaration> decls = GrammarUtil.allMetamodelDeclarations(g);
+		// ecore as bar
+		// g as bar
+		// inherited ecore as ecore != ecore as bar
+		assertEquals(3, decls.size());
+		AbstractMetamodelDeclaration decl = decls.get(0);
+		assertTrue(decl instanceof GeneratedMetamodel);
+		assertEquals("bar", decl.getAlias());
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://3", decl.getEPackage().getNsURI());
+		decl = decls.get(1);
+		assertTrue(decl instanceof ReferencedMetamodel);
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+		assertEquals("bar", decl.getAlias());
+		decl = decls.get(2);
+		assertTrue(decl instanceof ReferencedMetamodel);
+		assertNotNull(decl.getEPackage());
+		assertEquals("http://www.eclipse.org/emf/2002/Ecore", decl.getEPackage().getNsURI());
+		assertEquals("ecore", decl.getAlias());
+		AbstractRule abstractRule = g.getRules().get(0);
+		assertSame(decls.get(0), abstractRule.getType().getMetamodel());
 	}
 
 	public void testGetReference() throws Exception {
