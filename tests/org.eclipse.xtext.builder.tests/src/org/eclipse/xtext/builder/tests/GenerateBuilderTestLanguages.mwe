@@ -1,0 +1,25 @@
+<workflow>
+	<property name="projectName" value="org.eclipse.xtext.builder.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		<activator value="org.eclipse.xtext.builder.tests.Activator"/>
+		<language uri="classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
+			<!--fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/-->
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+			<!--fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/-->
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"/>
+		</language>
+	</component>
+</workflow>
