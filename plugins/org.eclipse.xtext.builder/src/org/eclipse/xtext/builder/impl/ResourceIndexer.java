@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IImportedNamesProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
