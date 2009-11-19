@@ -25,7 +25,7 @@ public class ResourceProvider {
 		return resourceSet.getResource(uri, true);
 	}
 	
-	protected URI getURI(IStorage resource) {
+	public URI getURI(IStorage resource) {
 		if (resource == null)
 			throw new NullPointerException("resource");
 		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);

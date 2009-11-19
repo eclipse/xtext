@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.BuilderModule;
+import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.Container;
@@ -20,14 +21,14 @@ import com.google.inject.Injector;
 public class ResourceIndexerTest extends TestCase {
 	
 	private static final String EXT = "buildertestlanguage";
-	private ResourceIndexer indexer;
+	private IResourceIndexer indexer;
 	private BuilderStateManager stateManager;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		Injector injector = Guice.createInjector(new BuilderModule());
-		indexer = injector.getInstance(ResourceIndexer.class);
+		indexer = injector.getInstance(IResourceIndexer.class);
 		stateManager = injector.getInstance(BuilderStateManager.class);
 	}
 	
@@ -36,7 +37,7 @@ public class ResourceIndexerTest extends TestCase {
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
 		
-		indexer.updateExportedElements(file1);
+		indexer.addOrUpdate(file1);
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 
@@ -51,12 +52,48 @@ public class ResourceIndexerTest extends TestCase {
 			}});
 	}
 	
+	public void testSimpleDelete() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addSourceFolder(project, "src");
+		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
+		
+		indexer.addOrUpdate(file1);
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				Container container = state.getContainers().get(0);
+				
+				assertEquals("foo", container.getName());
+				assertEquals("foo", container.getProject());
+				
+				assertEquals("bar",container.getResourceDescriptors().get(0).getEObjectDescriptions().get(0).getName());
+				
+				return null;
+			}});
+		
+		indexer.delete(file1);
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				Container container = state.getContainers().get(0);
+				
+				assertEquals("foo", container.getName());
+				assertEquals("foo", container.getProject());
+				assertTrue(container.getResourceDescriptors().isEmpty());
+				return null;
+			}});
+	}
+	
 	public void testSimpleUpdate() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
 		
-		indexer.updateExportedElements(file1);
+		indexer.addOrUpdate(file1);
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			
@@ -72,7 +109,7 @@ public class ResourceIndexerTest extends TestCase {
 		
 		file1.setContents(new StringInputStream("namespace foo2 { object bar2 }"), true, true, monitor());
 		
-		indexer.updateExportedElements(file1);
+		indexer.addOrUpdate(file1);
 		
 		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
 			

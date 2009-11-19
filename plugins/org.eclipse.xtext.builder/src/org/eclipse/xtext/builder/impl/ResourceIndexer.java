@@ -3,13 +3,17 @@ package org.eclipse.xtext.builder.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
@@ -23,7 +27,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
-public class ResourceIndexer {
+public class ResourceIndexer implements IResourceIndexer {
 	
 	@Inject
 	private BuilderStateManager builderStateManager;
@@ -62,30 +66,58 @@ public class ResourceIndexer {
 		this.storageUtil = storageUtil;
 	}
 	
+	public Set<String> delete(final IStorage storage) {
+		final URI uri = resourceProvider.getURI(storage);
+		if (uri==null)
+			return Collections.emptySet();
+		
+		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
+			public Set<String> exec(BuilderState state) throws Exception {
+				ResourceDescriptor res = findResource(state, uri);
+				if (res==null)
+					return Collections.emptySet();
+				Set<String> exportedNames = getExportedNames(res);
+				res.setContainer(null);
+				return exportedNames;
+			}
+		});
+	}
+	
 	/**
 	 * @param storage
 	 * @return whether children of the given storage shall be asked
 	 */
-	public void updateExportedElements(IStorage storage) {
+	public Set<String> addOrUpdate(IStorage storage) {
 		Resource resource = resourceProvider.getResource(storage);
 		if (resource==null)
-			return;
-		updateBuilderState(resource, storage);
+			return Collections.emptySet();
+		return updateBuilderState(resource, storage);
 	}
 
-	protected void updateBuilderState(final Resource resource, final IStorage storage) {
-		builderStateManager.modify(new IUnitOfWork<Void, BuilderState>() {
-			public java.lang.Void exec(BuilderState state) throws Exception {
+	protected Set<String> updateBuilderState(final Resource resource, final IStorage storage) {
+		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
+			public Set<String> exec(BuilderState state) throws Exception {
 				ResourceDescriptor res = getResourceDescriptor(resource,
 						storage, state);
+				Set<String> exportedNames = getExportedNames(res);
+				cleanAndUpdate(res, resource, storage);
 				addExportedEObjects(resource, res);
+				exportedNames.addAll(getExportedNames(res));
 				addImportedNames(resource, res);
-				return null;
+				return exportedNames;
 			}
 
 		});
 	}
 	
+	protected Set<String> getExportedNames(ResourceDescriptor res) {
+		HashSet<String> set = new HashSet<String>();
+		for (IEObjectDescription desc: res.getEObjectDescriptions()) {
+			set.add(desc.getName());
+		}
+		return set;
+	}
+
 	protected void addExportedEObjects(final Resource resource,
 			ResourceDescriptor res) {
 		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
@@ -156,10 +188,10 @@ public class ResourceIndexer {
 		throw new UnsupportedOperationException("Couldn't handle storage "+storage);
 	}
 
-	protected ResourceDescriptor findResource(BuilderState state, Resource res) {
+	protected ResourceDescriptor findResource(BuilderState state, URI resUri) {
 		EList<Container> containers = state.getContainers();
 		for (Container container : containers) {
-			ResourceDescriptor descriptor = container.getResourceDescriptor(res.getURI());
+			ResourceDescriptor descriptor = container.getResourceDescriptor(resUri);
 			if (descriptor!=null)
 				return descriptor;
 		}
@@ -168,12 +200,10 @@ public class ResourceIndexer {
 
 	protected ResourceDescriptor getResourceDescriptor(final Resource resource,
 			final IStorage storage, BuilderState state) {
-		ResourceDescriptor res = findResource(state, resource);
+		ResourceDescriptor res = findResource(state, resource.getURI());
 		if (res==null) {
 			Container container = findOrCreateResponsibleContainer(state, storage);
 			res = createResourceDescriptor(container, resource, storage);
-		} else {
-			cleanAndUpdate(res, resource, storage);
 		}
 		return res;
 	}

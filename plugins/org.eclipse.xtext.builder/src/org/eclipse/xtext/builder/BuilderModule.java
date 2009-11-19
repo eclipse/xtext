@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.IPersister;
+import org.eclipse.xtext.builder.impl.ResourceIndexer;
 import org.eclipse.xtext.builder.impl.StorageUtil;
 import org.eclipse.xtext.builder.impl.javasupport.JavaSupportingStorageUtil;
 
@@ -17,6 +18,7 @@ public class BuilderModule extends AbstractModule {
 		bind(IPersister.class).to(IPersister.DefaultImpl.class);
 		bind(StorageUtil.class).to(JavaSupportingStorageUtil.class);
 		bind(ResourceSet.class).to(ResourceSetImpl.class);
+		bind(IResourceIndexer.class).to(ResourceIndexer.class);
 		bind(BuilderStateManager.class).in(com.google.inject.Scopes.SINGLETON);
 		bind(String.class).annotatedWith(Names.named(BuilderStateManager.NAMED_URI)).toInstance("./mybuilderstate.idx");
 	}
