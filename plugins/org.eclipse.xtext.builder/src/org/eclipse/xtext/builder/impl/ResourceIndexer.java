@@ -87,14 +87,10 @@ public class ResourceIndexer implements IResourceIndexer {
 	 * @param storage
 	 * @return whether children of the given storage shall be asked
 	 */
-	public Set<String> addOrUpdate(IStorage storage) {
-		Resource resource = resourceProvider.getResource(storage);
+	public Set<String> addOrUpdate(final IStorage storage) {
+		final Resource resource = resourceProvider.getResource(storage);
 		if (resource==null)
 			return Collections.emptySet();
-		return updateBuilderState(resource, storage);
-	}
-
-	protected Set<String> updateBuilderState(final Resource resource, final IStorage storage) {
 		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
 			public Set<String> exec(BuilderState state) throws Exception {
 				ResourceDescriptor res = getResourceDescriptor(resource,
@@ -109,7 +105,7 @@ public class ResourceIndexer implements IResourceIndexer {
 
 		});
 	}
-	
+
 	protected Set<String> getExportedNames(ResourceDescriptor res) {
 		HashSet<String> set = new HashSet<String>();
 		for (IEObjectDescription desc: res.getEObjectDescriptions()) {
