@@ -166,10 +166,14 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 	}
 
-	private void createTypeProposal(String typeName, ICompletionProposalFactory proposalFactory, 
+	protected void createTypeProposal(String typeName, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (acceptor.canAcceptMoreProposals()) {
-			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, context);
+			int lastDot = typeName.lastIndexOf('.');
+			String displayString = typeName;
+			if (lastDot != -1)
+				displayString = typeName.substring(lastDot + 1) + " - " + typeName.substring(0, lastDot);
+			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, displayString, null, context);
 			acceptor.accept(proposal);
 		}
 	}

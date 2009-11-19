@@ -104,6 +104,17 @@ public class JavaElementFinder implements IJavaElementFinder {
 									FormalParameter formalParameter = object.getParameters().get(i);
 									String parameterType = parameterTypes[i];
 									String readable = Signature.toString(parameterType);
+									if (parameterType.startsWith("Q")) {
+										String[][] resolved = type.resolveType(readable);
+										if (resolved != null && resolved.length == 1) {
+											readable = resolved[0][0];
+											if (readable != null && readable.length() >= 1) {
+												readable = readable + '.' + resolved[0][1];
+											} else {
+												readable = resolved[0][1];
+											}
+										}
+									}
 									if (!readable.equals(formalParameter.getParameterType().getCanonicalName()))
 										match = false;
 								}

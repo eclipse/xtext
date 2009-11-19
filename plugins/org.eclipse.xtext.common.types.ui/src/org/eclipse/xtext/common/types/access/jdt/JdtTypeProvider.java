@@ -35,8 +35,16 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
 		this.javaProject = javaProject;
-		this.typeUriHelper = new TypeURIHelper();
-		this.typeFactory = new JdtBasedTypeFactory(typeUriHelper);
+		this.typeUriHelper = createTypeURIHelper();
+		this.typeFactory = createTypeFactory();
+	}
+
+	protected JdtBasedTypeFactory createTypeFactory() {
+		return new JdtBasedTypeFactory(typeUriHelper);
+	}
+
+	protected TypeURIHelper createTypeURIHelper() {
+		return new TypeURIHelper();
 	}
 	
 	@Override
@@ -85,6 +93,10 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	
 	public TypeURIHelper getTypeUriHelper() {
 		return typeUriHelper;
+	}
+	
+	public JdtBasedTypeFactory getJdtBasedTypeFactory() {
+		return typeFactory;
 	}
 
 }

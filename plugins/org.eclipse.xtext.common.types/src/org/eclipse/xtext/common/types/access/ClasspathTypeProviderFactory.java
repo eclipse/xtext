@@ -27,8 +27,16 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	public ClasspathTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
-		ClasspathTypeProvider result = new ClasspathTypeProvider(classLoader, resourceSet);
+		ClasspathTypeProvider result = createClasspathTypeProvider(resourceSet);
 		return result;
+	}
+
+	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
+		return new ClasspathTypeProvider(classLoader, resourceSet);
+	}
+	
+	public ClassLoader getClassLoader() {
+		return classLoader;
 	}
 	
 	@Override

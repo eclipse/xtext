@@ -108,7 +108,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	private org.eclipse.xtext.common.types.Type createReferencedType(Type type,
+	public org.eclipse.xtext.common.types.Type createReferencedType(Type type,
 			org.eclipse.xtext.common.types.Member container) {
 		org.eclipse.xtext.common.types.Type result = createReferencedTypeForParameterizedOrReturnNull(type, container);
 		if (result == null)
@@ -116,7 +116,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	private org.eclipse.xtext.common.types.Type createReferencedTypeForParameterizedOrReturnNull(Type type,
+	public org.eclipse.xtext.common.types.Type createReferencedTypeForParameterizedOrReturnNull(Type type,
 			org.eclipse.xtext.common.types.Member container) {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
@@ -160,7 +160,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	private TypeArgument createTypeArgument(Type actualTypeArgument, org.eclipse.xtext.common.types.Member container,
+	public TypeArgument createTypeArgument(Type actualTypeArgument, org.eclipse.xtext.common.types.Member container,
 			Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;

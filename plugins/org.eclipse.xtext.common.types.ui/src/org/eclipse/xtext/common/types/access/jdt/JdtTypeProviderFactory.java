@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 
 import com.google.inject.Inject;
@@ -27,8 +28,13 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 	public JdtTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
-		JdtTypeProvider result = new JdtTypeProvider(javaProjectProvider.getJavaProject(resourceSet), resourceSet);
+		IJavaProject javaProject = javaProjectProvider.getJavaProject(resourceSet);
+		JdtTypeProvider result = createJdtTypeProvider(javaProject, resourceSet);
 		return result;
+	}
+
+	protected JdtTypeProvider createJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
+		return new JdtTypeProvider(javaProject, resourceSet);
 	}
 
 	@Override

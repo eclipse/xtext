@@ -13,7 +13,7 @@ package org.eclipse.xtext.common.types.testSetups;
 public class TestScenario {
 
 	protected TestScenario() {
-		throw new AssertionError("This class is not intendet to be implemented. It is only a test scenario.");
+		throw new AssertionError("This class is not intendet to be implemented or instantiated. It is only a test scenario.");
 	}
 	
 }

@@ -49,7 +49,7 @@ public class TypeURIHelper {
 		return builder;
 	}
 
-	private URI createURI(StringBuilder uriBuilder) {
+	protected URI createURI(StringBuilder uriBuilder) {
 		return URI.createURI(uriBuilder.toString());
 	}
 
@@ -61,7 +61,7 @@ public class TypeURIHelper {
 		return createURI(uriBuilder);
 	}
 
-	private void createFragment(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragment(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		int signatureKind = Signature.getTypeSignatureKind(signature);
 		switch (signatureKind) {
 			case Signature.BASE_TYPE_SIGNATURE:
@@ -81,7 +81,7 @@ public class TypeURIHelper {
 		}
 	}
 
-	private void createFragmentForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragmentForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		String readable = Signature.toString(signature);
 		IMember localDeclarator = declarator;
 		while(localDeclarator != null) {
@@ -108,7 +108,7 @@ public class TypeURIHelper {
 		uriBuilder.append(readable);
 	}
 
-	private ITypeParameter findTypeParameterByName(String readable, ITypeParameter[] typeParameters) {
+	protected ITypeParameter findTypeParameterByName(String readable, ITypeParameter[] typeParameters) {
 		if (typeParameters != null) {
 			for(ITypeParameter parameter: typeParameters) {
 				if (readable.equals(parameter.getElementName())) {
@@ -119,7 +119,7 @@ public class TypeURIHelper {
 		return null;
 	}
 
-	private void createFragmentForMethod(IMethod method, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragmentForMethod(IMethod method, StringBuilder uriBuilder) throws JavaModelException {
 		IType declaringType = method.getDeclaringType();
 		createFragmentForClass(Signature.createTypeSignature(declaringType.getFullyQualifiedName(), true), null, uriBuilder);
 		uriBuilder.append('.');
@@ -206,11 +206,11 @@ public class TypeURIHelper {
 		}
 	}
 
-	private void createFragmentForPrimitive(String signature, StringBuilder uriBuilder) {
+	protected void createFragmentForPrimitive(String signature, StringBuilder uriBuilder) {
 		uriBuilder.append(Signature.toString(signature));
 	}
 
-	private void createFragmentForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragmentForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		String elementType = Signature.getElementType(signature);
 		createFragment(elementType, declarator, uriBuilder);
 		int dim = Signature.getArrayCount(signature);
@@ -219,7 +219,8 @@ public class TypeURIHelper {
 		}
 	}
 
-	private void createFragmentForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragmentForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+		signature = resolveSourceReference(signature, declarator);
 		if (declarator != null && signature.indexOf('.') == -1) {
 			String readable = Signature.toString(signature);
 			IMember localDeclarator = declarator;
@@ -254,7 +255,7 @@ public class TypeURIHelper {
 		uriBuilder.append(fragment);
 	}
 
-	private void createResourceURI(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURI(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		int signatureKind = Signature.getTypeSignatureKind(signature);
 		switch (signatureKind) {
 			case Signature.BASE_TYPE_SIGNATURE:
@@ -274,16 +275,17 @@ public class TypeURIHelper {
 		}
 	}
 
-	private void createResourceURIForPrimitive(String signature, StringBuilder uriBuilder) {
+	protected void createResourceURIForPrimitive(String signature, StringBuilder uriBuilder) {
 		uriBuilder.append(TypeURIHelper.PRIMITIVES);
 	}
 
-	private void createResourceURIForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURIForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		String elementType = Signature.getElementType(signature);
 		createResourceURI(elementType, declarator, uriBuilder);
 	}
 
-	private void createResourceURIForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURIForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+		signature = resolveSourceReference(signature, declarator);
 		if (declarator != null && signature.indexOf('.') == -1) {
 			String readable = Signature.toString(signature);
 			IMember localDeclarator = declarator;
@@ -318,7 +320,28 @@ public class TypeURIHelper {
 		}
 	}
 
-	private void createResourceURIForClassImpl(String signature, StringBuilder uriBuilder) {
+	protected String resolveSourceReference(String signature, IMember declarator) throws JavaModelException {
+		if (signature.startsWith("Q")) {
+			String readable = Signature.toString(signature);
+			IType resolveContext = declarator.getDeclaringType();
+			if (declarator instanceof IType) {
+				resolveContext = (IType) declarator;
+			}
+			String[][] resolved = resolveContext.resolveType(readable);
+			if (resolved != null && resolved.length == 1) {
+				readable = resolved[0][0];
+				if (readable != null && readable.length() >= 1) {
+					readable = readable + '.' + resolved[0][1];
+				} else {
+					readable = resolved[0][1];
+				}
+				signature = Signature.createTypeSignature(readable, true);
+			}
+		}
+		return signature;
+	}
+
+	protected void createResourceURIForClassImpl(String signature, StringBuilder uriBuilder) {
 		String topLevel = signature;
 		int idx = topLevel.indexOf('$');
 		if (idx != -1)
@@ -326,7 +349,7 @@ public class TypeURIHelper {
 		uriBuilder.append(TypeURIHelper.OBJECTS).append(Signature.toString(topLevel));
 	}
 
-	private void createResourceURIForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURIForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		if (declarator instanceof IType) {
 			IType declaringClass = (IType) declarator;
 			createResourceURIForClass(Signature.createTypeSignature(declaringClass.getFullyQualifiedName(), true),
