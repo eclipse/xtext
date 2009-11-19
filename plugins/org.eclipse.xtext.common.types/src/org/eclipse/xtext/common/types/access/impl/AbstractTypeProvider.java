@@ -36,9 +36,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Fa
 	public abstract Type findTypeByName(String name);
 
 	public TypeResource createResource(URI uri) {
-		TypeResource result = new TypeResource(uri);
+		TypeResource result = doCreateResource(uri);
 		result.setMirror(createMirror(uri));
 		return result;
+	}
+
+	protected TypeResource doCreateResource(URI uri) {
+		return new TypeResource(uri);
 	}
 
 	public ResourceSet getResourceSet() {

@@ -38,14 +38,14 @@ public class ClassURIHelper {
 		return createURI(uriBuilder);
 	}
 
-	private StringBuilder createURIBuilder() {
+	protected StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);
 		builder.append(ClassURIHelper.PROTOCOL);
 		builder.append(':');
 		return builder;
 	}
 
-	private URI createURI(StringBuilder uriBuilder) {
+	protected URI createURI(StringBuilder uriBuilder) {
 		return URI.createURI(uriBuilder.toString());
 	}
 
@@ -63,7 +63,7 @@ public class ClassURIHelper {
 		return uriBuilder.toString();
 	}
 
-	private void createFragment(Type type, StringBuilder uriBuilder) {
+	protected void createFragment(Type type, StringBuilder uriBuilder) {
 		if (type instanceof Class<?>) {
 			Class<?> clazz = (Class<?>) type;
 			createFragmentForClass(clazz, uriBuilder);
@@ -81,7 +81,7 @@ public class ClassURIHelper {
 		}
 	}
 
-	private void createFragmentForTypeVariable(TypeVariable<?> variable, StringBuilder uriBuilder) {
+	protected void createFragmentForTypeVariable(TypeVariable<?> variable, StringBuilder uriBuilder) {
 		Object declaration = variable.getGenericDeclaration();
 		if (declaration instanceof Type) {
 			Type declaringType = (Type) declaration;
@@ -98,7 +98,7 @@ public class ClassURIHelper {
 		uriBuilder.append(variable.getName());
 	}
 
-	private void createFragmentForMember(Member member, StringBuilder uriBuilder) {
+	protected void createFragmentForMember(Member member, StringBuilder uriBuilder) {
 		Class<?> declaringClass = member.getDeclaringClass();
 		createFragmentForClass(declaringClass, uriBuilder);
 		uriBuilder.append('.');
@@ -208,7 +208,7 @@ public class ClassURIHelper {
 		}
 	}
 
-	private void createFragmentForClass(Class<?> clazz, StringBuilder uriBuilder) {
+	protected void createFragmentForClass(Class<?> clazz, StringBuilder uriBuilder) {
 		if (clazz.isArray()) {
 			createFragmentForClass(clazz.getComponentType(), uriBuilder);
 			uriBuilder.append("[]");
@@ -221,7 +221,7 @@ public class ClassURIHelper {
 		}
 	}
 
-	private void createResourceURI(Type type, StringBuilder uriBuilder) {
+	protected void createResourceURI(Type type, StringBuilder uriBuilder) {
 		if (type instanceof Class<?>) {
 			Class<?> clazz = (Class<?>) type;
 			createResourceURIForClass(clazz, uriBuilder);
@@ -238,7 +238,7 @@ public class ClassURIHelper {
 		}
 	}
 
-	private void createResourceURIForTypeVariable(TypeVariable<?> variable, StringBuilder uriBuilder) {
+	protected void createResourceURIForTypeVariable(TypeVariable<?> variable, StringBuilder uriBuilder) {
 		Object declaration = variable.getGenericDeclaration();
 		if (declaration instanceof Class<?>) {
 			Class<?> declaringClass = (Class<?>) declaration;
@@ -254,7 +254,7 @@ public class ClassURIHelper {
 		}
 	}
 
-	private void createResourceURIForClass(Class<?> clazz, StringBuilder uriBuilder) {
+	protected void createResourceURIForClass(Class<?> clazz, StringBuilder uriBuilder) {
 		if (clazz.isArray()) {
 			createResourceURIForClass(clazz.getComponentType(), uriBuilder);
 		}

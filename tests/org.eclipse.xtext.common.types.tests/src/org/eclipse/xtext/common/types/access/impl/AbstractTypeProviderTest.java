@@ -391,7 +391,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int constructorCount = Fields.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
 		int fieldCount = Fields.class.getDeclaredFields().length;
-		assertEquals(4, fieldCount);
+		assertEquals(5, fieldCount);
 		int nestedCount = Fields.class.getDeclaredClasses().length;
 		assertEquals(1, nestedCount);
 		assertEquals(nestedCount + constructorCount + fieldCount, type.getMembers().size());
@@ -1174,6 +1174,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Field field = getFieldFromType(type, Fields.class, "protectedString");
 		assertSame(type, field.getDeclaringType());
+		assertEquals(Visibility.PROTECTED, field.getVisibility());
+		Type fieldType = field.getType();
+		assertEquals("java.lang.String", fieldType.getCanonicalName());
+	}
+	
+	public void testFields_protectedStaticString_01() {
+		String typeName = Fields.class.getName();
+		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
+		Field field = getFieldFromType(type, Fields.class, "protectedStaticString");
+		assertSame(type, field.getDeclaringType());
+		assertTrue(field.isStatic());
 		assertEquals(Visibility.PROTECTED, field.getVisibility());
 		Type fieldType = field.getType();
 		assertEquals("java.lang.String", fieldType.getCanonicalName());

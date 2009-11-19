@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
  */
 public class ClasspathTypeProvider extends AbstractTypeProvider {
 
-	final ClassFinder classFinder;
+	private final ClassFinder classFinder;
 	
 	private final DeclaredTypeFactory declaredTypeFactory;
 	
@@ -28,11 +28,35 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 	
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
 		super(resourceSet);
-		classFinder = new ClassFinder(classLoader);
-		uriHelper = new ClassURIHelper();
-		declaredTypeFactory = new DeclaredTypeFactory(uriHelper);
+		classFinder = createClassFinder(classLoader);
+		uriHelper = createClassURIHelper();
+		declaredTypeFactory = createDeclaredTypeFactory();
+	}
+
+	protected ClassFinder createClassFinder(ClassLoader classLoader) {
+		return new ClassFinder(classLoader);
+	}
+
+	protected DeclaredTypeFactory createDeclaredTypeFactory() {
+		return new DeclaredTypeFactory(uriHelper);
+	}
+
+	protected ClassURIHelper createClassURIHelper() {
+		return new ClassURIHelper();
 	}
 	
+	public ClassURIHelper getClassURIHelper() {
+		return uriHelper;
+	}
+	
+	public DeclaredTypeFactory getDeclaredTypeFactory() {
+		return declaredTypeFactory;
+	}
+
+	public ClassFinder getClassFinder() {
+		return classFinder;
+	}
+
 	@Override
 	public Type findTypeByName(String name) {
 		try {

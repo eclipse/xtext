@@ -23,6 +23,8 @@ public class Fields<T> extends TestScenario {
 	
 	public int publicInt;
 	
+	protected static String protectedStaticString;
+	
 	public static class Inner extends TestScenario {
 		
 		public Fields<String> innerFields;
