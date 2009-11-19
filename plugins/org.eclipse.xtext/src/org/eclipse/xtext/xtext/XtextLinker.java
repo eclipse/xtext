@@ -74,6 +74,14 @@ public class XtextLinker extends Linker {
 		this.scopeProvider = scopeProvider;
 	}
 
+	public IXtext2EcorePostProcessor getPostProcessor() {
+		return postProcessor;
+	}
+
+	public void setPostProcessor(IXtext2EcorePostProcessor postProcessor) {
+		this.postProcessor = postProcessor;
+	}
+
 	@Override
 	protected IDiagnosticProducer createDiagnosticProducer(final IDiagnosticConsumer consumer) {
 		return new AbstractDiagnosticProducerDecorator(super.createDiagnosticProducer(consumer)) {
