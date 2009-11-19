@@ -23,11 +23,11 @@ import org.eclipse.xtext.builder.impl.StorageUtil;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JavaSupportingStorageUtil extends StorageUtil {
+public class JdtStorageUtil extends StorageUtil {
 
 	private static final String DELIMITER = ":";
 	private static final String JARENTRY_PREFIX = "jarentry:";
-	private static final Logger log = Logger.getLogger(JavaSupportingStorageUtil.class);
+	private static final Logger log = Logger.getLogger(JdtStorageUtil.class);
 	
 	public String toExternalString(IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
