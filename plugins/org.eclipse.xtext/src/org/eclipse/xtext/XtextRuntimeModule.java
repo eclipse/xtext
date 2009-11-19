@@ -24,7 +24,7 @@ import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
-import org.eclipse.xtext.xtext.ecoreInference.DefaultXtext2EcorePostProcessor;
+import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 
 import com.google.inject.Binder;
@@ -71,7 +71,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	}
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
-		return DefaultXtext2EcorePostProcessor.class;
+		return XtendXtext2EcorePostProcessor.class;
 	}
 	
 	@Override

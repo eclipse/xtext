@@ -9,8 +9,18 @@ package org.eclipse.xtext.xtext.ecoreInference;
 
 import org.eclipse.xtext.GeneratedMetamodel;
 
+/**
+ * Strategy interface for post processors used to augment the generated Ecore models.
+ * 
+ * @author Knut Wannheden - Initial contribution and API
+ * @author Michael Clay
+ */
 public interface IXtext2EcorePostProcessor {
 
+	/**
+	 * Process the given metatmodel (e.g. set default values, make references bi-directional, ...)
+	 * 
+	 * @param metamodel the metatmodel to augment
+	 */
 	void process(GeneratedMetamodel metamodel);
-
 }
