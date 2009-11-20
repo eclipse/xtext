@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.IPersister;
 import org.eclipse.xtext.builder.impl.ResourceIndexer;
 import org.eclipse.xtext.builder.impl.StorageUtil;
+import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.impl.javasupport.JdtStorageUtil;
 
 import com.google.inject.AbstractModule;
@@ -31,7 +33,12 @@ public class BuilderModule extends AbstractModule {
 		bindIResourceIndexer();
 		bindResourceProvider();
 		bindBuilderStateManager();
+		bindIncrementalProjectBuilder();
 		bindUriForBuilderStateResource();
+	}
+
+	protected void bindIncrementalProjectBuilder() {
+		bind(IncrementalProjectBuilder.class).to(XtextBuilder.class);
 	}
 
 	protected void bindResourceProvider() {

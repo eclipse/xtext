@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl.javasupport;
 
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.xtext.builder.BuilderModule;
 import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.impl.ResourceProvider;
@@ -32,4 +33,10 @@ public class JdtBuilderModule extends BuilderModule {
 	protected void bindStorageUtil() {
 		bind(StorageUtil.class).to(JdtStorageUtil.class);
 	}
+	
+	@Override
+	protected void bindIncrementalProjectBuilder() {
+		bind(IncrementalProjectBuilder.class).to(JdtXtextBuilder.class);
+	}
+	
 }
