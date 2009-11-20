@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ $Id: plugin.xml,v 1.2 2009/11/20 13:35:05 sefftinge Exp $
 -->
 
 <plugin>
@@ -15,6 +15,91 @@
             uri="http://www.eclipse.org/xtext/builderstate/1.0"
             class="org.eclipse.xtext.builder.builderState.BuilderStatePackage"
             genModel="model/BuilderState.genmodel"/>
+   </extension>
+   
+   <extension
+        id="xtextBuilder"
+        name="Xtext Project Builder"
+        point="org.eclipse.core.resources.builders">
+     <builder
+           hasNature="true">
+        <run
+              class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory">
+             <parameter name="guicekey" value="org.eclipse.core.resources.IncrementalProjectBuilder"/>
+        </run>
+     </builder>
+  </extension>
+  <extension
+        id="xtextNature"
+        name="Xtext Project Nature"
+        point="org.eclipse.core.resources.natures">
+     <runtime>
+        	<run
+              class="org.eclipse.xtext.builder.nature.XtextNature">
+      	</run>
+     </runtime>
+     <builder
+           id="org.eclipse.xtext.builder.xtextBuilder">
+     </builder>
+  </extension>
+  <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.xtext.builder.addNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
+               id="org.eclipse.xtext.builder.action.AddXtextNatureAction"
+               label="Add Xtext Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+         	<not>
+	            <objectState
+    	              name="nature"
+        	          value="org.eclipse.xtext.builder.xtextNature">
+            	</objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.xtext.builder.removeNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
+               id="org.eclipse.xtext.builder.action.RemoveXtextNatureAction"
+               label="Remove Xtext Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+               <objectState
+    	              name="nature"
+        	          value="org.eclipse.xtext.builder.xtextNature">
+            	</objectState>
+         </visibility>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            icon="icons/nature_overlay.png"
+            id="org.eclipse.xtext.builder.nature.overlay"
+            label="Xtext Nature"
+            lightweight="true"
+            location="TOP_RIGHT"
+            state="true">
+         <enablement>
+            <objectState
+                  name="nature"
+                  value="org.eclipse.xtext.builder.xtextNature">
+            </objectState>
+         </enablement>
+      </decorator>
    </extension>
 
 </plugin>

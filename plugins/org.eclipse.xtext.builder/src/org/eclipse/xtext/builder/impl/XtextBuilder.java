@@ -34,7 +34,7 @@ public class XtextBuilder extends IncrementalProjectBuilder implements
 		IResourceChangeListener {
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
-	public static final String BUILDER_ID = "org.eclipse.xtext.ui.core.xtextBuilder";
+	public static final String BUILDER_ID = "org.eclipse.xtext.builder.xtextBuilder";
 
 	@SuppressWarnings("unchecked")
 	@Override

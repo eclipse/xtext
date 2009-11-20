@@ -28,6 +28,7 @@ import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
 import org.eclipse.xtext.builder.impl.javasupport.JarWalker;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
 import org.eclipse.xtext.builder.impl.javasupport.JdtResourceIndexer;
+import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Guice;
@@ -49,6 +50,7 @@ public class JdtResourceIndexerTest extends TestCase {
 	
 	public void testAddFromJarFile() throws Exception{
 		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
 		IFile file = project.getProject().getFile("myjar.jar");
 		file.create(jarInputStream(new TextFile("foo/bar."+EXT, "namespace foo { object bar }"),
 								   new TextFile("foo2/bar2."+EXT, "namespace foo2 { object bar2 }")), true, monitor());
