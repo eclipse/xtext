@@ -95,7 +95,10 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
-		String msg = "Couldn't resolve reference to "+triple.getSecond().getEType().getName()+" "+triple.getThird().serialize();
+		String serializedNode = triple.getThird().serialize();
+		if (serializedNode != null)
+			serializedNode = serializedNode.trim();
+		String msg = "Couldn't resolve reference to "+triple.getSecond().getEType().getName()+" "+serializedNode;
 		return new XtextLinkingDiagnostic(triple.getThird(), msg);
 	}
 

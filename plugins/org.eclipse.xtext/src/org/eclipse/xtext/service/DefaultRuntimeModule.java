@@ -45,7 +45,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
-import org.eclipse.xtext.validation.CancellableDiagnostician;
+import org.eclipse.xtext.validation.CancelableDiagnostician;
 
 import com.google.inject.Binder;
 
@@ -70,7 +70,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	
 	@SingletonBinding
 	public Class<? extends Diagnostician> bindDiagnostician() {
-		return CancellableDiagnostician.class;
+		return CancelableDiagnostician.class;
 	}
 
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
