@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * @author Sven Efftinge
+ * @author Sven Efftinge - Initial contribution and API
  * 
  */
 public class BuilderStateManager extends IStateAccess.AbstractImpl<BuilderState> {
