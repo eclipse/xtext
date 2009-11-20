@@ -25,6 +25,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
+		//TODO check whether JDT is available, if not use BuilderModule instead
 		injector = Guice.createInjector(new JdtBuilderModule());
 	}
 	
