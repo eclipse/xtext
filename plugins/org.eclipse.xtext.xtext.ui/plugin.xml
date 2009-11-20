@@ -186,6 +186,7 @@
 			<!-- java-based API for validation -->
 			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
                 <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
+                <composedCheck value="org.eclipse.xtext.validation.NamesAreUniqueValidator"/>
             </fragment>
             
 			<!-- scoping API -->
