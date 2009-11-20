@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -30,36 +31,41 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultExportedEObjectsProvider implements IExportedEObjectsProvider {
-	
+
 	@Inject
 	private IQualifiedNameProvider nameProvider;
-	
+
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
-	
+
 	private final static Logger log = Logger.getLogger(DefaultExportedEObjectsProvider.class);
 
 	public Iterable<IEObjectDescription> getExportedObjects(final Resource resource) {
-		if (!resource.isLoaded()) {
-			try {
-				resource.load(null);
-			} catch (IOException e) {
-				log.error(e.getMessage(), e);
-				return Iterables.emptyIterable();
+		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(resource); 
+		if (adapter.get(getClass().getName()) == null) {
+			if (!resource.isLoaded()) {
+				try {
+					resource.load(null);
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+					return Iterables.emptyIterable();
+				}
 			}
+			Iterable<EObject> contents = new Iterable<EObject>() {
+				public Iterator<EObject> iterator() {
+					return EcoreUtil.getAllProperContents(resource, true);
+				}
+			};
+			Iterable<IEObjectDescription> result = transform(contents, new Function<EObject, IEObjectDescription>() {
+				public IEObjectDescription apply(EObject from) {
+					return createIEObjectDescription(from);
+				}
+			});
+			Iterable<IEObjectDescription> filter = Iterables.filter(result, Predicates.notNull());
+			adapter.set(getClass().getName(),filter);
 		}
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return EcoreUtil.getAllProperContents(resource, true);
-			}
-		};
-		Iterable<IEObjectDescription> result = transform(contents, new Function<EObject, IEObjectDescription>() {
-			public IEObjectDescription apply(EObject from) {
-				return createIEObjectDescription(from);
-			}
-		});
-		return Iterables.filter(result,Predicates.notNull());
+		return adapter.get(getClass().getName());
 	}
 
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
@@ -69,5 +75,6 @@ public class DefaultExportedEObjectsProvider implements IExportedEObjectsProvide
 		}
 		return null;
 	}
+
 
 }

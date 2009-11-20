@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -33,50 +34,61 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
-	
+
 	private ImportUriResolver importResolver = null;
-	
+
 	@Inject
 	public void setImportResolver(ImportUriResolver importResolver) {
 		this.importResolver = importResolver;
 	}
-	
+
 	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
 
 	@Inject
 	public void setServiceProvider(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
 		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
 	}
-	
+
 	public IScope getScope(EObject context, EReference reference) {
-		TreeIterator<EObject> iterator = context.eResource().getAllContents();
-		final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
-		while (iterator.hasNext()) {
-			EObject object = iterator.next();
-			String uri = importResolver.apply(object);
-			if (uri != null) {
-				URI importUri = URI.createURI(uri);
-				if (EcoreUtil2.isValidUri(object, importUri))
-					uniqueImportURIs.add(importUri); 
-			}
-		}
-	
+		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(context);
+
 		ArrayList<URI> newArrayList = Lists.newArrayList(uniqueImportURIs);
 		Collections.reverse(newArrayList);
 		IScope scope = IScope.NULLSCOPE;
 		for (URI u : newArrayList) {
-			scope = createLazyResourceScope(scope,u,context,reference);
+			scope = createLazyResourceScope(scope, u, context, reference);
 		}
 		return scope;
 	}
 
-	private SimpleScope createLazyResourceScope(IScope parent, final URI createURI, final EObject context, final EReference reference) {
+	private LinkedHashSet<URI> getImportedUris(EObject context) {
+		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context.eResource());
+		if (cache.get(getClass().getName()) == null) {
+			TreeIterator<EObject> iterator = context.eResource().getAllContents();
+			final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
+			while (iterator.hasNext()) {
+				EObject object = iterator.next();
+				String uri = importResolver.apply(object);
+				if (uri != null) {
+					URI importUri = URI.createURI(uri);
+					if (EcoreUtil2.isValidUri(object, importUri))
+						uniqueImportURIs.add(importUri);
+				}
+			}
+			cache.set(getClass().getName(), uniqueImportURIs);
+		}
+		return cache.get(getClass().getName());
+	}
+
+	private SimpleScope createLazyResourceScope(IScope parent, final URI createURI, final EObject context,
+			final EReference reference) {
 		return new SimpleScope(parent, null) {
 			@Override
 			public Iterable<IEObjectDescription> internalGetContents() {
 				final Resource resource = EcoreUtil2.getResource(context.eResource(), createURI.toString());
-				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
-				if (provider==null)
+				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry
+						.getExportedEObjectsProvider(resource);
+				if (provider == null)
 					return Iterables.emptyIterable();
 				Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(resource);
 				Iterable<IEObjectDescription> filtered = filter(exportedObjects, new Predicate<IEObjectDescription>() {
@@ -88,6 +100,5 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 			}
 		};
 	}
-	
-	
+
 }
