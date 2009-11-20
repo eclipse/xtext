@@ -7,14 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -29,11 +34,37 @@ public class SimpleNameScopeProvider extends AbstractGlobalScopeDelegatingScopeP
 	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
 
 	public IScope getScope(EObject context, EReference reference) {
-		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(context.eResource());
-		Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(context.eResource());
-		Iterable<IEObjectDescription> filtered = Scopes.selectCompatible(exportedObjects, reference.getEReferenceType());
-		filtered = Scopes.filterDuplicates(filtered);
-		return new SimpleScope(getGlobalScope(context, reference), filtered);
+		final Map<String, IEObjectDescription> result = getDescriptionsAsMap(context, reference);
+		return new SimpleScope(getGlobalScope(context, reference), result.values()) {
+			@Override
+			public IEObjectDescription getContentByName(String name) {
+				IEObjectDescription description = result.get(name);
+				if (description != null)
+					return description;
+				return getOuterScope().getContentByName(name);
+			}
+		};
 	}
-	
+
+	protected Map<String, IEObjectDescription> getDescriptionsAsMap(EObject context, EReference reference) {
+		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context.eResource());
+		if (cache.get(getCacheKey(reference)) == null) {
+			IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(context
+					.eResource());
+			Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(context.eResource());
+			Iterable<IEObjectDescription> filtered = Scopes.selectCompatible(exportedObjects, reference
+					.getEReferenceType());
+			filtered = Scopes.filterDuplicates(filtered);
+			final Map<String, IEObjectDescription> result = Maps.newLinkedHashMap();
+			for (IEObjectDescription e : filtered)
+				result.put(e.getName(), e);
+			cache.set(getCacheKey(reference), result);
+		}
+		return cache.get(getCacheKey(reference));
+	}
+
+	protected String getCacheKey(EReference reference) {
+		return getClass().getName() + EcoreUtil.getURI(reference);
+	}
+
 }
