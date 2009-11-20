@@ -35,7 +35,7 @@ import org.eclipse.xtext.generator.Generator;
  */
 public class EmptyPackageAwareGrammarAccessFragment extends AbstractGeneratorFragment {
 
-	private final Logger log = Logger.getLogger(EmptyPackageAwareGrammarAccessFragment.class);
+	private static final Logger log = Logger.getLogger(EmptyPackageAwareGrammarAccessFragment.class);
 
 	@Override
 	protected String getTemplate() {

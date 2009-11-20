@@ -28,13 +28,13 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
 
 /**
- * An {@link IGeneratorFragment} to generate model-&gt;text services (aka serialzier) for an Xtext language.
+ * An {@link IGeneratorFragment} to generate model-&gt;text services (aka serializer) for an Xtext language.
  * 
  * @author koehnlein - Javadocs
  */
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
-	protected static final Logger log = Logger.getLogger(ParseTreeConstructorFragment.class);
+	private static final Logger log = Logger.getLogger(ParseTreeConstructorFragment.class);
 
 	private boolean generateDotDiagram = false;
 
