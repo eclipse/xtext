@@ -37,7 +37,7 @@ import org.eclipse.xtext.generator.Generator;
  */
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
-	private final Logger log = Logger.getLogger(GrammarAccessFragment.class);
+	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {

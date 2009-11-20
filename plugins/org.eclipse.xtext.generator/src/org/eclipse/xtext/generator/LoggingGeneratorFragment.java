@@ -21,7 +21,7 @@ import org.eclipse.xtext.util.Strings;
  */
 public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
-	private static Logger log = Logger.getLogger(LoggingGeneratorFragment.class);
+	private static final Logger log = Logger.getLogger(LoggingGeneratorFragment.class);
 
 	private String message;
 

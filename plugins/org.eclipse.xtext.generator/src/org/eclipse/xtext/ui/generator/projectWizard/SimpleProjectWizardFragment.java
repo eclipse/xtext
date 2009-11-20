@@ -34,7 +34,7 @@ import com.google.common.collect.Lists;
  */
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
-	private final static Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);
+	private static final Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);
 
 	private String generatorProjectName;
 	private String modelFileExtension;

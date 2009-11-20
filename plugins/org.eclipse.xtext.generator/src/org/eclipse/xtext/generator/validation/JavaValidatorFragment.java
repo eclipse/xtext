@@ -27,7 +27,7 @@ import org.eclipse.xtext.generator.Binding;
  */
 public class JavaValidatorFragment extends AbstractValidatorFragment {
 
-	private static Logger log = Logger.getLogger(JavaValidatorFragment.class);
+	private static final Logger log = Logger.getLogger(JavaValidatorFragment.class);
 
 	private final List<String> composedChecks = new ArrayList<String>();
 
