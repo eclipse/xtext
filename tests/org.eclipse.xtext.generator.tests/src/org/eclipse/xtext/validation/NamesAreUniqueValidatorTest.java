@@ -1,0 +1,89 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.validation;
+
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IExportedEObjectsProvider.Registry;
+import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, Registry {
+
+	private NamesAreUniqueValidator validator;
+	private DefaultExportedEObjectsProvider eObjectsProvider;
+	private int callCount;
+	private Map<Object, Object> context;
+	private Resource resource;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		context = Maps.newHashMap();
+		validator = new NamesAreUniqueValidator() {
+			@Override
+			protected Map<Object, Object> getContext() {
+				return context;
+			}
+		};
+		validator.setExportedEObjectProviderRegistry(this);
+		validator.setHelper(this);
+		eObjectsProvider = new DefaultExportedEObjectsProvider();
+		eObjectsProvider.setNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			public String getQualifiedName(EObject obj) {
+				return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
+			}
+		});
+		callCount = 0;
+		resource = new ResourceImpl();
+		resource.getContents().add(EcoreFactory.eINSTANCE.createEClass());
+		resource.getContents().add(EcoreFactory.eINSTANCE.createEClass());
+		resource.getContents().add(EcoreFactory.eINSTANCE.createEClass());
+		for (int i = 0; i < resource.getContents().size(); i++) {
+			EClass clazz = (EClass) resource.getContents().get(i);
+			clazz.setName(String.valueOf(i));
+		}
+	}
+	
+	public void testOnlyOnesPerResource() {
+		validator.checkUniqueNamesInResourceOf(resource.getContents().get(0));
+		validator.checkUniqueNamesInResourceOf(resource.getContents().get(1));
+		assertEquals(1, callCount);
+	}
+
+	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
+		fail("Unexpected call");
+	}
+
+	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, CancelIndicator cancelIndicator,
+			ValidationMessageAcceptor acceptor) {
+		callCount++;
+		assertEquals(resource.getContents().size(), Iterables.size(descriptions));
+		assertNull(cancelIndicator);
+		assertSame(validator, acceptor);
+	}
+
+	public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
+		return eObjectsProvider;
+	}
+}

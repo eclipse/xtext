@@ -154,6 +154,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.ConcurrentValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.DeclarativeValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ImportUriValidatorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.validation.NamesAreUniqueValidationHelperTest.class);
+      suite.addTestSuite(org.eclipse.xtext.validation.NamesAreUniqueValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313PackratTest.class);

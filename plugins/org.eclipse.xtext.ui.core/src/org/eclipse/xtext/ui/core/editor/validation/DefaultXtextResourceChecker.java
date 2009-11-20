@@ -17,11 +17,12 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.ui.core.util.EcoreUIUtil;
 import org.eclipse.xtext.validation.CancelIndicator;
-import org.eclipse.xtext.validation.CancellableDiagnostician;
+import org.eclipse.xtext.validation.CancelableDiagnostician;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -95,11 +96,13 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 					if (monitor.isCanceled())
 						return null;
 					Map<Object, Object> options = Maps.newHashMap(context);
-					options.put(CancellableDiagnostician.CANCEL_INDICATOR, new CancelIndicator() {
-						public boolean isCancelled() {
+					options.put(CancelableDiagnostician.CANCEL_INDICATOR, new CancelIndicator() {
+						public boolean isCanceled() {
 							return monitor.isCanceled();
 						}
 					});
+					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
+					options.put(EValidator.class, diagnostician); 
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
