@@ -18,11 +18,14 @@ import java.util.Set;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.Container;
+import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
+import org.eclipse.xtext.builder.impl.javasupport.JarWalker;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
 import org.eclipse.xtext.builder.impl.javasupport.JdtResourceIndexer;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -44,7 +47,69 @@ public class JdtResourceIndexerTest extends TestCase {
 		stateManager = injector.getInstance(BuilderStateManager.class);
 	}
 	
-	public void testSimpleAdd() throws Exception {
+	public void testAddFromJarFile() throws Exception{
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("myjar.jar");
+		file.create(jarInputStream(new TextFile("foo/bar."+EXT, "namespace foo { object bar }"),
+								   new TextFile("foo2/bar2."+EXT, "namespace foo2 { object bar2 }")), true, monitor());
+		addJarToClasspath(project, file);
+		new JarWalker() {
+			@Override
+			protected void handle(IJarEntryResource jarEntry) {
+				indexer.addOrUpdate(jarEntry);
+			}
+		}.traverseAllJars(project);
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				Container container = state.getContainers().get(0);
+				
+				assertEquals("java:myjar.jar", container.getName());
+				assertEquals("foo", container.getProject());
+				
+				assertEquals(2,container.getResourceDescriptors().size());
+				
+				ResourceDescriptor resourceDescriptor = container.getResourceDescriptors().get(0);
+				System.out.println(resourceDescriptor.getURI());
+				
+				return null;
+			}});
+	}
+	
+	public void testAddAndUpdateFromJarFile() throws Exception{
+		IJavaProject project = createJavaProject("foo");
+		IFile file = project.getProject().getFile("myjar.jar");
+		file.create(jarInputStream(new TextFile("foo/bar."+EXT, "namespace foo { object bar }"),
+				new TextFile("foo2/bar2."+EXT, "namespace foo2 { object bar2 }")), true, monitor());
+		addJarToClasspath(project, file);
+		new JarWalker() {
+			@Override
+			protected void handle(IJarEntryResource jarEntry) {
+				indexer.addOrUpdate(jarEntry);
+			}
+		}.traverseAllJars(project);
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				Container container = state.getContainers().get(0);
+				
+				assertEquals("java:myjar.jar", container.getName());
+				assertEquals("foo", container.getProject());
+				
+				assertEquals(2,container.getResourceDescriptors().size());
+				
+				ResourceDescriptor resourceDescriptor = container.getResourceDescriptors().get(0);
+				System.out.println(resourceDescriptor.getURI());
+				
+				return null;
+			}});
+	}
+	
+	public void testSimpleAddInSourceFolder() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addSourceFolder(project, "src");
 		IFile file1 = createFile("/foo/src/bar."+EXT, "namespace foo { object bar }");
@@ -58,6 +123,54 @@ public class JdtResourceIndexerTest extends TestCase {
 				Container container = state.getContainers().get(0);
 				
 				assertEquals("java:src", container.getName());
+				assertEquals("foo", container.getProject());
+				
+				return null;
+			}});
+	}
+	
+	public void testAddInMultipleSourceFolders() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addSourceFolder(project, "src");
+		addSourceFolder(project, "src-gen");
+		IFile file1 = createFile("/foo/src/bar."+EXT, "namespace foo { object bar }");
+		IFile file2 = createFile("/foo/src-gen/bar."+EXT, "namespace foo { object bar }");
+		
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
+		assertContents(indexer.addOrUpdate(file2), "foo","bar");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(2,state.getContainers().size());
+				Container src = state.getContainers().get(0);
+				Container src_gen = state.getContainers().get(1);
+				
+				assertEquals("java:src", src.getName());
+				assertEquals("foo", src.getProject());
+				assertEquals("java:src-gen", src_gen.getName());
+				assertEquals("foo", src_gen.getProject());
+				
+				assertEquals(1,src.getResourceDescriptors().size());
+				assertEquals(1,src_gen.getResourceDescriptors().size());
+				return null;
+			}});
+	}
+	
+	public void testSimpleAdd() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addSourceFolder(project, "src");
+		IFile file1 = createFile("/foo/baz/bar."+EXT, "namespace foo { object bar }");
+		
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				Container container = state.getContainers().get(0);
+				
+				assertEquals("foo", container.getName());
 				assertEquals("foo", container.getProject());
 				
 				return null;

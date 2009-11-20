@@ -62,7 +62,7 @@ public class JdtResourceIndexer extends ResourceIndexer {
 		} else if (storage instanceof IJarEntryResource) {
 			return ((IJarEntryResource)storage).getPackageFragmentRoot().getJavaProject();
 		}
-		throw new IllegalArgumentException("Couldn't handle storage : "+storage);
+		return null;
 	}
 
 	@SuppressWarnings("cast")
