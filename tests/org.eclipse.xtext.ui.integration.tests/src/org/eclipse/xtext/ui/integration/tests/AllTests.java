@@ -16,6 +16,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.BundleClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.WorkspaceClasspathUriResolverTest.class);
       return suite;
    }

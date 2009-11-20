@@ -207,7 +207,7 @@
          <action
                class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
-               label="Add Xtext Nature"
+               label="Add Xtext Nature (Deprecated)"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
                >
          </action>
@@ -227,7 +227,7 @@
          <action
                class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
                id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
-               label="Remove Xtext Nature"
+               label="Remove Xtext Nature (Deprecated)"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
                >
          </action>
@@ -245,7 +245,7 @@
             adaptable="true"
             icon="icons/nature_overlay.png"
             id="org.eclipse.xtext.ui.core.nature.overlay"
-            label="Xtext Nature"
+            label="Xtext Nature (Deprecated)"
             lightweight="true"
             location="TOP_RIGHT"
             state="true">
