@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl.javasupport;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
 /**
@@ -21,8 +19,7 @@ import org.eclipse.jdt.core.JavaModelException;
  */
 public abstract class JarWalker {
 
-	public void traverseAllJars(IProject project) throws JavaModelException {
-		IJavaProject javaProject = JavaCore.create(project);
+	public void traverseAllJars(IJavaProject javaProject) throws JavaModelException {
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] fragmentRoots = javaProject.getAllPackageFragmentRoots();
 			for (IPackageFragmentRoot packRoot : fragmentRoots) {

@@ -29,6 +29,7 @@ public class JdtStorageUtil extends StorageUtil {
 	private static final String JARENTRY_PREFIX = "jarentry:";
 	private static final Logger log = Logger.getLogger(JdtStorageUtil.class);
 	
+	@Override
 	public String toExternalString(IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			IJarEntryResource entry = (IJarEntryResource) storage;
@@ -38,6 +39,7 @@ public class JdtStorageUtil extends StorageUtil {
 		return super.toExternalString(storage);
 	}
 
+	@Override
 	public IStorage getStorage(String externalString) {
 		IWorkspaceRoot ws = workspaceRoot();
 		if (externalString.startsWith(JARENTRY_PREFIX)) {
