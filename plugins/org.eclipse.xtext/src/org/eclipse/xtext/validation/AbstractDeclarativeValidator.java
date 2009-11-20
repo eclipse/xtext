@@ -36,16 +36,11 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- * @author Michael Clay
+ * Allows subclasses to specify invariants in a declarative manner using
+ * {@link Check} annotation.
  *
- *
- *         Allows subclasses to specify invariants in a declarative manner using
- *         {@link Check} annotation.
- *
- *         Example:
- *
- *         <pre>
+ * Example:
+ * <pre>
  * &#064;Check
  * void checkName(ParserRule rule) {
  * 	if (!toFirstUpper(rule.getName()).equals(rule.getName())) {
@@ -53,6 +48,8 @@ import com.google.inject.Injector;
  * 	}
  * }
  * </pre>
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  */
 public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements ValidationMessageAcceptor {
 

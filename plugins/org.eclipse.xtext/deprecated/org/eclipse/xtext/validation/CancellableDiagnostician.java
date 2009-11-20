@@ -7,11 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link CancelableDiagnostician} instead.
  */
-public interface CancelIndicator {
+@Deprecated
+public class CancellableDiagnostician extends CancelableDiagnostician {
 
-	boolean isCanceled();
-	
+	@Inject
+	public CancellableDiagnostician(Registry registry) {
+		super(registry);
+	}
+
 }

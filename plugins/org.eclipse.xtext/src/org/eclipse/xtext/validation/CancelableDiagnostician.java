@@ -19,27 +19,30 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CancellableDiagnostician extends Diagnostician {
+public class CancelableDiagnostician extends Diagnostician {
 	
-	public static final String CANCEL_INDICATOR = "org.eclipse.xtext.validation.CancellableDiagnostician.CANCEL_INDICATOR";
+	public static final String CANCEL_INDICATOR = CancelableDiagnostician.class + ".CANCEL_INDICATOR";
 	
 	@Inject
-	public CancellableDiagnostician(EValidator.Registry registry) {
+	public CancelableDiagnostician(EValidator.Registry registry) {
 		super(registry);
 	}
 	
 	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		CancelIndicator indicator = context != null ? (CancelIndicator) context.get(CANCEL_INDICATOR) : null;
-		if (indicator != null && indicator.isCancelled())
+		if (isCanceled(context))
 			return true;
 		return super.validate(eObject, diagnostics, context);
+	}
+
+	protected boolean isCanceled(Map<Object, Object> context) {
+		CancelIndicator indicator = context != null ? (CancelIndicator) context.get(CANCEL_INDICATOR) : null;
+		return indicator != null && indicator.isCanceled();
 	}
 	
 	@Override
 	protected boolean doValidateContents(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		CancelIndicator indicator = context != null ? (CancelIndicator) context.get(CANCEL_INDICATOR) : null;
-		if (indicator != null && indicator.isCancelled())
+		if (isCanceled(context))
 			return true;
 		return super.doValidateContents(eObject, diagnostics, context);
 	}
