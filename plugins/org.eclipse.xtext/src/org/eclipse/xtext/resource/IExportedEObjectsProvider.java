@@ -21,7 +21,7 @@ public interface IExportedEObjectsProvider {
 	
 	/**
 	 * @return descriptions of all EObjects provided by the given Resource. The result is expected
-	 * 	to return any combination of <code>name</code> and <code>eObjectOrProxy</code> only ones
+	 * 	to return any combination of <code>name</code> and <code>eObjectOrProxy</code> only once
 	 *  as an {@link IEObjectDescription}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(Resource resource);
