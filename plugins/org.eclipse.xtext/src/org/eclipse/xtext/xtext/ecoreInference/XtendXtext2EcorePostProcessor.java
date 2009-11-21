@@ -41,8 +41,7 @@ import org.eclipse.xtext.util.Strings;
  */
 public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
 
-	// logger is available to sublasses
-	protected static final Logger logger = Logger.getLogger(XtendXtext2EcorePostProcessor.class);
+	private static final Logger logger = Logger.getLogger(XtendXtext2EcorePostProcessor.class);
 	private ExecutionContext executionContext;
 
 	public void process(GeneratedMetamodel metamodel) {
@@ -53,10 +52,10 @@ public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor 
 			ResourceLoader currentThreadResourceLoader = null;
 			try {
 				currentThreadResourceLoader = getCurrentThreadResourceLoader();
+				setCurrentThreadResourceLoader(getResourceLoader(metamodel));
 				final Object[] params = new Object[] { metamodel };
 				Extension extension = ctx.getExtension("process", params);
 				if (extension != null) {
-					setCurrentThreadResourceLoader(getResourceLoader(metamodel));
 					extension.evaluate(params, ctx);
 				}
 			}
