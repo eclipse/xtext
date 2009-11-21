@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,8 +25,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -410,24 +407,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void assertNotEmpty(String message, EObject source, int feature, String string) {
 		if (string == null || string.trim().length() == 0)
 			error(message, source, feature);
-	}
-
-	/**
-	 *
-	 * @deprecated Since the contract of a scope is, that for all
-	 *             IScopedElements returned by {@link IScope#getContents()} the
-	 *             name feature is unique it doesn't make sense to use a scope
-	 *             to find duplicate names (as they shouldn't be returned at
-	 *             all)
-	 */
-	@Deprecated
-	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
-		for (Iterator<IEObjectDescription> i = scope.getContents().iterator(); i.hasNext();) {
-			IEObjectDescription eObjectDescription = i.next();
-			if (!object.equals(eObjectDescription.getEObjectOrProxy()) && name.equals(eObjectDescription.getName())) {
-				error(message, feature);
-			}
-		}
 	}
 
 	protected void guard(boolean guardExpression) {
