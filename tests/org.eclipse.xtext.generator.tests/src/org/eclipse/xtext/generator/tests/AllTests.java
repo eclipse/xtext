@@ -143,6 +143,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.LineFilterOutputStreamTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.MappingIteratorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.util.OnChangeEvictingCacheAdapterTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.PolymorphicDispatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.ReflectionTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.SimpleCacheTest.class);
