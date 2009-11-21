@@ -15,6 +15,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -45,6 +46,8 @@ import com.google.common.collect.Lists;
 public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcorePostProcessor implements
 		IResourceChangeListener {
 
+	private static final Logger logger = Logger.getLogger(ProjectAwareXtendXtext2EcorePostProcessor.class);
+	
 	private Resource xtendFile;
 	private ResourceLoader resourceLoader;
 
