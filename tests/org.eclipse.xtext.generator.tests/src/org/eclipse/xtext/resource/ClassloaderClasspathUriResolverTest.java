@@ -10,6 +10,7 @@
 package org.eclipse.xtext.resource;
 
 import java.net.URL;
+import java.net.URLClassLoader;
 
 import junit.framework.TestCase;
 
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
-public class ClassloaderClasspathUriResolverTests extends TestCase {
+public class ClassloaderClasspathUriResolverTest extends TestCase {
 	private ClassloaderClasspathUriResolver _resolver;
 
 	@Override
@@ -75,7 +76,12 @@ public class ClassloaderClasspathUriResolverTests extends TestCase {
 		assertTrue("Resource not loaded", resource.isLoaded());
 	}
 
-	public static void main(String[] args) {
-		new ClassloaderClasspathUriResolverTests().testClasspathUriForFileInJar();
+	public void testBug293760() throws Exception {
+		ClassloaderClasspathUriResolver resolver = new ClassloaderClasspathUriResolver();
+		URL resource = getClass().getResource("mydsl.ecore");
+		URL url = new URL(resource.toString().replace("mydsl.ecore", "some folder/"));
+		URLClassLoader loader = new URLClassLoader(new URL[]{url});
+		URI uri = resolver.findResourceOnClasspath(loader, URI.createURI("classpath:/pack/ClassLoaderClasspathUriResolverTest.txt"));
+		assertNotNull(uri);
 	}
 }
