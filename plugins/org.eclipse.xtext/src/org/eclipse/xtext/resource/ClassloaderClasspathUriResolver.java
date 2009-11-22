@@ -50,7 +50,7 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
         return classpathUri;
     }
 
-    private URI findResourceOnClasspath(ClassLoader classLoader, URI classpathUri) throws URISyntaxException {
+    public URI findResourceOnClasspath(ClassLoader classLoader, URI classpathUri) throws URISyntaxException {
         String pathAsString = classpathUri.path();
         if (classpathUri.hasAbsolutePath()) {
             pathAsString = pathAsString.substring(1);
@@ -58,7 +58,7 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
         URL resource = classLoader.getResource(pathAsString);
         if (resource==null)
         	throw new IllegalStateException("Couldn't find resource on classpath. URI was '"+classpathUri+"'");
-        URI fileUri = URI.createURI(resource.toURI().toString());
+        URI fileUri = URI.createURI(resource.toString(),true);
         return fileUri.appendFragment(classpathUri.fragment());
     }
 
