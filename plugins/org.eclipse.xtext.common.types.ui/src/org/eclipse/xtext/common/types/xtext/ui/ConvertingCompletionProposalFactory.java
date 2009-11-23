@@ -23,20 +23,6 @@ public class ConvertingCompletionProposalFactory implements ICompletionProposalF
 		this.delegate = delegate;
 	}
 	
-	public ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
-		return delegate.createCompletionProposal(
-				convertProposal(proposal), 
-				contentAssistContext);
-	}
-
-	public ICompletionProposal createCompletionProposal(String proposal, Image image,
-			ContentAssistContext contentAssistContext) {
-		return delegate.createCompletionProposal(
-				convertProposal(proposal), 
-				image, 
-				contentAssistContext);
-	}
-
 	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
 		return delegate.createCompletionProposal(
