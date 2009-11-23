@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -25,18 +26,19 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Triple;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class LazyLinkingResource extends XtextResource {
-	
+
 	private final Logger log = Logger.getLogger(getClass());
-	
+
 	@Inject
 	private ILinkingService linkingService;
-	
+
 	@Inject
 	private LazyURIEncoder encoder;
 
@@ -48,57 +50,83 @@ public class LazyLinkingResource extends XtextResource {
 		if (options != null && Boolean.TRUE.equals(options.get(OPTION_RESOLVE_ALL)))
 			EcoreUtil.resolveAll(this);
 	}
-	
+
 	@Override
 	protected void doLinking() {
 		super.doLinking();
-		if(isEagerLinking())
+		if (isEagerLinking())
 			EcoreUtil.resolveAll(this);
 	}
-	
+
+	private LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving = Sets.newLinkedHashSet();
+
 	@Override
 	public EObject getEObject(String uriFragment) {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, AbstractNode> triple = getEncoder().decode(this, uriFragment);
-				EReference reference = triple.getSecond();
-                List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
-						triple.getThird());
-				if (linkedObjects.isEmpty()) {
+				try {
+					if (!resolving.add(triple))
+						throw new AssertionError("Cyclic resolution of lazy links : "+getReferences(triple,resolving));
+					EReference reference = triple.getSecond();
+					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
+							triple.getThird());
+					if (linkedObjects.isEmpty()) {
+						XtextLinkingDiagnostic diag = createDiagnostic(triple);
+						if (!getErrors().contains(diag))
+							getErrors().add(diag);
+						return null;
+					}
+					if (linkedObjects.size() > 1)
+						throw new IllegalStateException("linkingService returned more than one object for fragment "
+								+ uriFragment);
+					EObject result = linkedObjects.get(0);
+					if (!reference.getEReferenceType().isSuperTypeOf(result.eClass())
+							&& EcorePackage.Literals.EOBJECT != reference.getEReferenceType()) {
+						XtextLinkingDiagnostic diag = createDiagnostic(triple);
+						if (!getErrors().contains(diag))
+							getErrors().add(diag);
+						return null;
+					}
+					// remove previously added error markers, since everything should be fine now
 					XtextLinkingDiagnostic diag = createDiagnostic(triple);
-					if (!getErrors().contains(diag))
-						getErrors().add(diag);
-					return null;
+					getErrors().remove(diag);
+					return result;
+				} finally {
+					resolving.remove(triple);
 				}
-				if (linkedObjects.size() > 1)
-					throw new IllegalStateException("linkingService returned more than one object for fragment "
-							+ uriFragment);
-				EObject result = linkedObjects.get(0);
-				if (!reference.getEReferenceType().isSuperTypeOf(result.eClass()) && EcorePackage.Literals.EOBJECT != reference.getEReferenceType()) {
-					XtextLinkingDiagnostic diag = createDiagnostic(triple);
-					if (!getErrors().contains(diag))
-						getErrors().add(diag);
-					return null;
-				}
-				// remove previously added error markers, since everything should be fine now
-				XtextLinkingDiagnostic diag = createDiagnostic(triple);
-				getErrors().remove(diag);
-				return result;
 			}
-		} catch (RuntimeException e) { 
+		} catch (RuntimeException e) {
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
 			// logged because EcoreUtil.resolve will ignore any exceptions.
-			log.warn("resolution of uriFragment '"+uriFragment+"' failed.", e);
+			log.warn("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	private String getReferences(Triple<EObject, EReference, AbstractNode> triple,
+			LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving2) {
+		StringBuffer buffer = new StringBuffer();
+		boolean found = false;
+		for (Triple<EObject, EReference, AbstractNode> triple2 : resolving2) {
+			found = found || triple2.equals(triple);
+			if (found)
+				buffer.append(getQualifiedName(triple2.getSecond())).append("->");
+		}
+		buffer.append(getQualifiedName(triple.getSecond()));
+		return buffer.toString();
+	}
+
+	private String getQualifiedName(EReference eReference) {
+		return eReference.getEContainingClass().getName()+"."+eReference.getName();
 	}
 
 	protected XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
 		String serializedNode = triple.getThird().serialize();
 		if (serializedNode != null)
 			serializedNode = serializedNode.trim();
-		String msg = "Couldn't resolve reference to "+triple.getSecond().getEType().getName()+" "+serializedNode;
+		String msg = "Couldn't resolve reference to " + triple.getSecond().getEType().getName() + " " + serializedNode;
 		return new XtextLinkingDiagnostic(triple.getThird(), msg);
 	}
 
@@ -121,7 +149,6 @@ public class LazyLinkingResource extends XtextResource {
 	public void setEagerLinking(boolean eagerLinking) {
 		this.eagerLinking = eagerLinking;
 	}
-	
 
 	public boolean isEagerLinking() {
 		return eagerLinking;
