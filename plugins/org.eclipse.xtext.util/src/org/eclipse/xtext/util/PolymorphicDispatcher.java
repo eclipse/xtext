@@ -263,6 +263,8 @@ public class PolymorphicDispatcher<RT> {
 			current.method.setAccessible(true);
 			return (RT) current.method.invoke(current.target, params);
 		} catch (InvocationTargetException e) {
+			if (e.getTargetException() instanceof Error)
+				throw (Error) e.getTargetException();
 			return handler.handle(params, e.getTargetException());
 		} catch (IllegalArgumentException e) {
 			return handler.handle(params, e);
