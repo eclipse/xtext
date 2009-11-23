@@ -43,6 +43,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988WithEagerLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.lazy.Bug281990Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.Bug289059Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkerTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkingResourceTest.class);
