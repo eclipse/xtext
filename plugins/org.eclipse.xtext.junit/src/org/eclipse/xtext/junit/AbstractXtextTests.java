@@ -118,6 +118,10 @@ public abstract class AbstractXtextTests extends TestCase {
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
+	
+	protected Injector getInjector() {
+		return injector;
+	}
 
 	public<T> T get(Class<T> clazz) {
 		if (injector == null)
