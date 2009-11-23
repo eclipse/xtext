@@ -19,7 +19,7 @@ import com.google.inject.Inject;
  *
  * @author Michael Clay - Initial contribution and API
  */
-public class XtextTemplateContextType extends TemplateContextType {
+public class XtextTemplateContextType extends TemplateContextType implements Comparable<TemplateContextType>{
 
 	public XtextTemplateContextType() {
 		addDefaultTemplateVariables();
@@ -59,6 +59,14 @@ public class XtextTemplateContextType extends TemplateContextType {
 	@Override
 	public int hashCode() {
 		return getId().hashCode();
+	}
+
+	public int compareTo(TemplateContextType templateContextType) {
+		int result = getName().compareTo(templateContextType.getName());
+		if (result == 0) {
+			return getId().compareTo(templateContextType.getId());
+		}
+		return result;
 	}
 
 }

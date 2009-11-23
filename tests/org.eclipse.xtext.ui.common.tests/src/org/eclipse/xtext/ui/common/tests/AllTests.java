@@ -41,6 +41,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.LightweightPositionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistryTest.class);
       return suite;
    }
 }
