@@ -8,14 +8,19 @@
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ICompletionProposalFactory {
+@ImplementedBy(ContentProposalPriorities.class)
+public interface IContentProposalPriorities {
 
-	ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image, ContentAssistContext contentAssistContext);
+	void adjustKeywordPriority(ICompletionProposal proposal, String prefix);
+
+	void adjustCrossReferencePriority(ICompletionProposal proposal, String prefix);
+
+	int getDefaultPriority();
 
 }

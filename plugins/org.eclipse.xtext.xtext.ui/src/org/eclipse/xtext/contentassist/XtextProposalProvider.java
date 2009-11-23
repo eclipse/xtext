@@ -12,9 +12,11 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow
@@ -39,7 +41,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 						relativePath = relativePath.removeFileExtension();
 						String result = relativePath.toString();
 						result = result.replace('/', '.');
-						acceptor.accept(createCompletionProposal(result, context));
+						acceptor.accept(createCompletionProposal(result, null, null, context));
 						return;
 					}
 				}
@@ -47,6 +49,16 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 				// nothing to do
 			}
 		}
+	}
+	
+	@Override
+	protected String getDisplayString(EObject element, String proposal) {
+		if (element instanceof AbstractMetamodelDeclaration) {
+			AbstractMetamodelDeclaration decl = (AbstractMetamodelDeclaration) element;
+			if (!Strings.isEmpty(decl.getAlias()))
+				return decl.getAlias();
+		}
+		return super.getDisplayString(element, proposal);
 	}
 	
 }

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -55,20 +54,16 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 		public ICompletionProposal apply(IEObjectDescription candidate) {
 			ICompletionProposal result = null;
-			if (ruleName != null) {
-				String proposal = getValueConverter().toString(getDisplayString(candidate), ruleName);
-				result = createCompletionProposal(candidate.getEObjectOrProxy(), proposal, getDisplayString(candidate), contentAssistContext);
-			} else {
-				result = createCompletionProposal(candidate, contentAssistContext);
-			}
-			adjustPriority(result, contentAssistContext.getPrefix(), getCrossReferencePriority());			
+			String proposal = candidate.getName();
+			if (ruleName != null)
+				proposal = getValueConverter().toString(proposal, ruleName);
+			result = createCompletionProposal(proposal, getDisplayString(candidate.getEObjectOrProxy(), candidate.getName()), getImage(candidate.getEObjectOrProxy()), contentAssistContext);
+			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			
 			return result;
 		}
 
 	}
 
-	private final static Logger logger = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
-	
 	@Inject
 	private IScopeProvider scopeProvider;
 	
@@ -80,38 +75,14 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeKeyword '" + keyword.getValue()+ "' for model '" + contentAssistContext.getCurrentModel()
-				+ "' and prefix '"+ contentAssistContext.getPrefix() + "'");
-		}
-		ICompletionProposal proposal = createCompletionProposal(keyword, keyword.getValue(), contentAssistContext);
-		adjustPriority(proposal, contentAssistContext.getPrefix(), getKeywordPriority());
+		ICompletionProposal proposal = createCompletionProposal(keyword.getValue(), getKeywordDisplayString(keyword), 
+				getImage(keyword), contentAssistContext);
+		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
-	}
-
-	public void adjustPriority(ICompletionProposal proposal, String prefix, int priority) {
-		if (proposal == null || !(proposal instanceof ConfigurableCompletionProposal))
-			return;
-		ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
-		if (castedProposal.getPriority() != getDefaultPriority())
-			return;
-		int adjustedPriority = priority;
-		if (!Strings.isEmpty(prefix)) {
-			if (castedProposal.getReplacementString().equals(prefix))
-				adjustedPriority = (int) (adjustedPriority * getSameTextMultiplier());
-			else
-				adjustedPriority = adjustedPriority * getProposalWithPrefixMultiplier();
-		}
-		castedProposal.setPriority(adjustedPriority);
 	}
 
 	@Override
 	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeRuleCall '"+ ruleCall.getRule().getName()+ "' cardinality '"
-				+ ruleCall.getCardinality()+ "' for model '"+ contentAssistContext.getCurrentModel()
-				+ "' and prefix '"+ contentAssistContext.getPrefix() + "'");
-		}
 		AbstractRule calledRule = ruleCall.getRule();
 		String methodName = "complete_"+ calledRule.getName();
 		invokeMethod(methodName, acceptor, contentAssistContext.getCurrentModel(), ruleCall, contentAssistContext);

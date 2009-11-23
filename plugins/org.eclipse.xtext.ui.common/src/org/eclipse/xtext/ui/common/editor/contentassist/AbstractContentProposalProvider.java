@@ -16,7 +16,6 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
@@ -71,15 +70,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		}
 	}
 	
-	private int crossReferencePriority = 500;
-	
-	private int keywordPriority = 300;
-	
-	private int defaultPriority = 400;
-	
-	private int proposalWithPrefixMultiplier = 2;
-	
-	private double sameTextMultiplier = 0.75;
+	@Inject
+	private IContentProposalPriorities priorities;
 
 	@Inject
 	protected ILabelProvider labelProvider;
@@ -167,90 +159,21 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public ICompletionProposalAcceptor modify(ICompletionProposalAcceptor acceptor, Function<ICompletionProposal, ICompletionProposal> modifier) {
 		return new ModifyingCompletionProposalAcceptor(acceptor, modifier);
 	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.getEObjectOrProxy(), element.getName(), contentAssistContext);
-	}
 
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, getDisplayString(element, proposal), getImage(element), contentAssistContext);
-	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, String displayString, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, getImage(element), contentAssistContext);
-	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(IEObjectDescription element, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.getEObjectOrProxy(), element.getName(), getDisplayString(element), prefix, contentAssistContext);
-	}
-
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String proposal, String displayString, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, getImage(element), prefix, contentAssistContext);
-	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	public ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, proposal, null, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
-	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	public ICompletionProposal createCompletionProposal(String proposal, Image image, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, proposal, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
-	}
-	
-	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
 	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, image, getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
 	/**
-	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
-	 */
-	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
-			String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, image, getDefaultPriority(), prefix, contentAssistContext);
-	}
-	
-	/**
-	 * @param abstractElement the {@link AbstractElement} which is used to create the proposals
-	 * @param displayString the string that is already entered by the user prior to requesting content assist
-	 * @param contentAssistContext the commonly used set of attributes related to the current content assist request
-	 * @param image the {@link Image} for the {@link ICompletionProposal}
-	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
+	 * @see #isValidProposal(String, String, ContentAssistContext)
+	 * @see #doCreateProposal(String, String, Image, int, ContentAssistContext)
 	 */
 	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			int priority, String prefix, ContentAssistContext context) {
-		int replacementOffset = context.getReplaceRegion().getOffset();
-		int replacementLength = context.getReplaceRegion().getLength();
-		return createCompletionProposal(proposal, displayString, image, priority, replacementOffset, replacementLength, prefix, context);
-	}
-
-	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
-			int priority, int replacementOffset, int replacementLength, String prefix, ContentAssistContext context) {
-		if (isValidProposal(proposal, prefix, context))
-			return doCreateProposal(proposal, displayString, image, priority, replacementOffset, replacementLength, context);
+		if (isValidProposal(proposal, prefix, context)) {
+			return doCreateProposal(proposal, displayString, image, priority, context);
+		}
 		return null;
 	}
 
@@ -263,21 +186,31 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	}
 
 	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
-			int priority, int replacementOffset, int replacementLength, ContentAssistContext context) {
-		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, proposal.length(), image, displayString, null, null);
+			int priority, ContentAssistContext context) {
+		int replacementOffset = context.getReplaceRegion().getOffset();
+		int replacementLength = context.getReplaceRegion().getLength();
+		ConfigurableCompletionProposal result = doCreateProposal(proposal, displayString, image, replacementOffset, replacementLength);
 		result.setPriority(priority);
 		result.setMatcher(context.getMatcher());
 		int replaceContextLength = context.getCurrentNode().getLength() - (replacementOffset - context.getCurrentNode().getOffset());
 		result.setReplaceContextLength(replaceContextLength);
 		return result;
 	}
+
+	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
+			int replacementOffset, int replacementLength) {
+		return new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, 
+				proposal.length(), image, displayString, null, null);
+	}
 	
-	protected String getDisplayString(IEObjectDescription candidate) {
-		return candidate.getName();
+	protected String getKeywordDisplayString(Keyword keyword) {
+		return keyword.getValue();
 	}
 	
 	protected String getDisplayString(EObject element, String proposal) {
-		return proposal;
+		if (element == null)
+			return proposal;
+		return labelProvider.getText(element);
 	}
 	
 	public void setValueConverter(IValueConverterService valueConverter) {
@@ -305,45 +238,13 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public IProposalConflictHelper getConflictHelper() {
 		return conflictHelper;
 	}
+
+	public void setPriorityHelper(IContentProposalPriorities priorities) {
+		this.priorities = priorities;
+	}
+
+	public IContentProposalPriorities getPriorityHelper() {
+		return priorities;
+	}
 	
-	public void setCrossReferencePriority(int crossReferencePriority) {
-		this.crossReferencePriority = crossReferencePriority;
-	}
-
-	public int getCrossReferencePriority() {
-		return crossReferencePriority;
-	}
-
-	public void setKeywordPriority(int keywordPriority) {
-		this.keywordPriority = keywordPriority;
-	}
-
-	public int getKeywordPriority() {
-		return keywordPriority;
-	}
-
-	public void setDefaultPriority(int defaultPriority) {
-		this.defaultPriority = defaultPriority;
-	}
-
-	public int getDefaultPriority() {
-		return defaultPriority;
-	}
-
-	public void setProposalWithPrefixMultiplier(int proposalWithPrefixMultiplier) {
-		this.proposalWithPrefixMultiplier = proposalWithPrefixMultiplier;
-	}
-
-	public int getProposalWithPrefixMultiplier() {
-		return proposalWithPrefixMultiplier;
-	}
-
-	public void setSameTextMultiplier(double sameTextMultiplier) {
-		this.sameTextMultiplier = sameTextMultiplier;
-	}
-
-	public double getSameTextMultiplier() {
-		return sameTextMultiplier;
-	}
-
 }

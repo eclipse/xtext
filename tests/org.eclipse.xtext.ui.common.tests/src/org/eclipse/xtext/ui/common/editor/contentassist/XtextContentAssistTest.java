@@ -148,7 +148,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"alias",
         		"::",
         		":",
-        		"a" // has already been infered as type in metamodelA
+        		"a" // has already been inferred as type in metamodelA
         );
     }
     
