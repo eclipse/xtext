@@ -119,7 +119,6 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		Diagnostic diag = res.getErrors().get(0);
 		assertNotNull(diag);
 		assertEquals(5, diag.getLine());
-		assertEquals(1, diag.getColumn());
 		Model parsedModel = (Model) res.getContents().get(0);
 		assertNotNull(parsedModel);
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(parsedModel);
