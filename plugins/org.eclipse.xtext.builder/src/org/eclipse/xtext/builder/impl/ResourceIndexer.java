@@ -31,11 +31,12 @@ import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IImportedNamesProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class ResourceIndexer implements IResourceIndexer {
 
@@ -58,13 +59,11 @@ public class ResourceIndexer implements IResourceIndexer {
 		this.builderStateManager = builderStateManager;
 	}
 
-	public void setExportedEObjectsProviderRegistry(
-			IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
+	public void setExportedEObjectsProviderRegistry(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
 		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
 	}
 
-	public void setImportedNamesProviderRegistry(
-			IImportedNamesProvider.Registry importedNamesProviderRegistry) {
+	public void setImportedNamesProviderRegistry(IImportedNamesProvider.Registry importedNamesProviderRegistry) {
 		this.importedNamesProviderRegistry = importedNamesProviderRegistry;
 	}
 
@@ -81,18 +80,14 @@ public class ResourceIndexer implements IResourceIndexer {
 		if (uri == null)
 			return Collections.emptySet();
 
-		return builderStateManager
-				.modify(new IUnitOfWork<Set<String>, BuilderState>() {
-					public Set<String> exec(BuilderState state)
-							throws Exception {
-						ResourceDescriptor res = findResource(state, uri);
-						if (res == null)
-							return Collections.emptySet();
-						Set<String> exportedNames = getExportedNames(res);
-						res.setContainer(null);
-						return exportedNames;
-					}
-				});
+		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
+			public Set<String> exec(BuilderState state) throws Exception {
+				ResourceDescriptor res = findResource(state, uri);
+				if (res == null)
+					return Collections.emptySet();
+				return delete(res);
+			}
+		});
 	}
 
 	/**
@@ -103,21 +98,18 @@ public class ResourceIndexer implements IResourceIndexer {
 		final Resource resource = resourceProvider.getResource(storage);
 		if (resource == null)
 			return Collections.emptySet();
-		return builderStateManager
-				.modify(new IUnitOfWork<Set<String>, BuilderState>() {
-					public Set<String> exec(BuilderState state)
-							throws Exception {
-						ResourceDescriptor res = getResourceDescriptor(
-								resource, storage, state);
-						Set<String> exportedNames = getExportedNames(res);
-						cleanAndUpdate(res, resource, storage);
-						addExportedEObjects(resource, res);
-						exportedNames.addAll(getExportedNames(res));
-						addImportedNames(resource, res);
-						return exportedNames;
-					}
+		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
+			public Set<String> exec(BuilderState state) throws Exception {
+				ResourceDescriptor res = getResourceDescriptor(resource, storage, state);
+				Set<String> exportedNames = getExportedNames(res);
+				cleanAndUpdate(res, resource, storage);
+				addExportedEObjects(resource, res);
+				exportedNames.addAll(getExportedNames(res));
+				addImportedNames(resource, res);
+				return exportedNames;
+			}
 
-				});
+		});
 	}
 
 	protected Set<String> getExportedNames(ResourceDescriptor res) {
@@ -128,12 +120,9 @@ public class ResourceIndexer implements IResourceIndexer {
 		return set;
 	}
 
-	protected void addExportedEObjects(final Resource resource,
-			ResourceDescriptor res) {
-		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry
-				.getExportedEObjectsProvider(resource);
-		Iterable<IEObjectDescription> objects = provider
-				.getExportedObjects(resource);
+	protected void addExportedEObjects(final Resource resource, ResourceDescriptor res) {
+		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
+		Iterable<IEObjectDescription> objects = provider.getExportedObjects(resource);
 
 		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
 		for (IEObjectDescription ieObjectDescription : objects) {
@@ -144,8 +133,7 @@ public class ResourceIndexer implements IResourceIndexer {
 		res.getEObjectDescriptions().addAll(descriptions);
 	}
 
-	protected void cleanAndUpdate(ResourceDescriptor res, Resource resource,
-			IStorage storage) {
+	protected void cleanAndUpdate(ResourceDescriptor res, Resource resource, IStorage storage) {
 		res.getImportedNames().clear();
 		res.getEObjectDescriptions().clear();
 		res.setPathToStorage(storageUtil.toExternalString(storage));
@@ -153,19 +141,15 @@ public class ResourceIndexer implements IResourceIndexer {
 	}
 
 	protected void sortByName(List<IEObjectDescription> eObjectDescriptions) {
-		Collections.sort(eObjectDescriptions,
-				new Comparator<IEObjectDescription>() {
-					public int compare(IEObjectDescription o1,
-							IEObjectDescription o2) {
-						return o1.getName().compareTo(o2.getName());
-					}
-				});
+		Collections.sort(eObjectDescriptions, new Comparator<IEObjectDescription>() {
+			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
 	}
 
-	protected IEObjectDescription createPersistableCopy(
-			IEObjectDescription ieObjectDescription) {
-		EObjectDescriptionImpl desc = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE
-				.createEObjectDescription();
+	protected IEObjectDescription createPersistableCopy(IEObjectDescription ieObjectDescription) {
+		EObjectDescriptionImpl desc = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE.createEObjectDescription();
 		desc.setEClass(ieObjectDescription.getEClass());
 		desc.setFragment(ieObjectDescription.getEObjectURI().fragment());
 		desc.setName(ieObjectDescription.getName());
@@ -175,23 +159,19 @@ public class ResourceIndexer implements IResourceIndexer {
 		return desc;
 	}
 
-	protected ResourceDescriptor createResourceDescriptor(Container container,
-			Resource resource, IStorage storage) {
-		ResourceDescriptor descriptor = BuilderStateFactory.eINSTANCE
-				.createResourceDescriptor();
+	protected ResourceDescriptor createResourceDescriptor(Container container, Resource resource, IStorage storage) {
+		ResourceDescriptor descriptor = BuilderStateFactory.eINSTANCE.createResourceDescriptor();
 		descriptor.setContainer(container);
 		cleanAndUpdate(descriptor, resource, storage);
 		return descriptor;
 	}
 
-	protected Container findOrCreateResponsibleContainer(BuilderState state,
-			IStorage storage) {
+	protected Container findOrCreateResponsibleContainer(BuilderState state, IStorage storage) {
 		EList<Container> containers = state.getContainers();
 		String projectName = getProjectName(storage);
 		String containerName = getContainerName(storage);
 		for (Container container : containers) {
-			if (container.getProject().equals(projectName)
-					&& container.getName().equals(containerName))
+			if (container.getProject().equals(projectName) && container.getName().equals(containerName))
 				return container;
 		}
 		Container container = BuilderStateFactory.eINSTANCE.createContainer();
@@ -205,47 +185,75 @@ public class ResourceIndexer implements IResourceIndexer {
 		if (storage instanceof IResource) {
 			return ((IResource) storage).getProject().getName();
 		}
-		throw new UnsupportedOperationException("Couldn't handle storage "
-				+ storage);
+		throw new UnsupportedOperationException("Couldn't handle storage " + storage);
 	}
 
 	protected String getContainerName(IStorage storage) {
 		if (storage instanceof IResource) {
 			return ((IResource) storage).getProject().getName();
 		}
-		throw new UnsupportedOperationException("Couldn't handle storage "
-				+ storage);
+		throw new UnsupportedOperationException("Couldn't handle storage " + storage);
 	}
 
 	protected ResourceDescriptor findResource(BuilderState state, URI resUri) {
 		EList<Container> containers = state.getContainers();
 		for (Container container : containers) {
-			ResourceDescriptor descriptor = container
-					.getResourceDescriptor(resUri);
+			ResourceDescriptor descriptor = container.getResourceDescriptor(resUri);
 			if (descriptor != null)
 				return descriptor;
 		}
 		return null;
 	}
 
-	protected ResourceDescriptor getResourceDescriptor(final Resource resource,
-			final IStorage storage, BuilderState state) {
+	protected ResourceDescriptor getResourceDescriptor(final Resource resource, final IStorage storage,
+			BuilderState state) {
 		ResourceDescriptor res = findResource(state, resource.getURI());
 		if (res == null) {
-			Container container = findOrCreateResponsibleContainer(state,
-					storage);
+			Container container = findOrCreateResponsibleContainer(state, storage);
 			res = createResourceDescriptor(container, resource, storage);
 		}
 		return res;
 	}
 
-	protected void addImportedNames(final Resource resource,
-			ResourceDescriptor res) {
-		IImportedNamesProvider namesProvider = importedNamesProviderRegistry
-				.getImportedNamesProvider(resource);
+	protected void addImportedNames(final Resource resource, ResourceDescriptor res) {
+		IImportedNamesProvider namesProvider = importedNamesProviderRegistry.getImportedNamesProvider(resource);
 		Iterable<String> names = namesProvider.getImportedNames(resource);
 		for (String string : names) {
 			res.getImportedNames().add(string);
 		}
+	}
+
+	public Set<String> cleanProject(final String projectName) {
+		return builderStateManager.modify(new IUnitOfWork<Set<String>, BuilderState>() {
+			public Set<String> exec(BuilderState state) throws Exception {
+				Set<String> affectedStrings = new HashSet<String>();
+				List<Container> containers = Lists.newArrayList(state.getContainers());
+				for (Container container : containers) {
+					if (container.getProject().equals(projectName)) {
+						affectedStrings.addAll(delete(container));
+					}
+				}
+				return affectedStrings;
+			}
+		});
+	}
+
+	protected Set<String> delete(Container container) {
+		Set<String> affectedStrings = new HashSet<String>();
+		List<ResourceDescriptor> descriptors = Lists.newArrayList(container.getResourceDescriptors());
+		for (ResourceDescriptor resourceDescriptor : descriptors) {
+			affectedStrings.addAll(delete(resourceDescriptor));
+		}
+		((BuilderState)container.eContainer()).getContainers().remove(container);
+		return affectedStrings;
+	}
+
+	protected Set<String> delete(ResourceDescriptor desc) {
+		Set<String> affectedStrings = new HashSet<String>();
+		for (IEObjectDescription description : desc.getEObjectDescriptions()) {
+			affectedStrings.add(description.getName());
+		}
+		desc.setContainer(null);
+		return affectedStrings;
 	}
 }
