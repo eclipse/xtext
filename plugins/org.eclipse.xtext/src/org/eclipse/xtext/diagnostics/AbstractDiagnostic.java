@@ -25,7 +25,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	}
 
 	public int getColumn() {
-		return 1;
+		throw new UnsupportedOperationException();
 	}
 
 	public int getLine() {
