@@ -36,6 +36,7 @@ public class FowlerDslStandaloneSetup implements ISetup {
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", resourceFactory);
 		
+	//TODO registration of EValidators should be added here, too
 
 	}
 }

@@ -73,4 +73,24 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
+		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
+		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	public java.lang.ClassLoader bindClassLoaderToInstance() {
+		return AbstractFowlerDslRuntimeModule.class.getClassLoader();
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.CheckFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.example.validation.FowlerDslCheckValidator> bindFowlerDslCheckValidator() {
+		return org.eclipse.xtext.example.validation.FowlerDslCheckValidator.class;
+	}
+
 }
