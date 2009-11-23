@@ -5,7 +5,7 @@
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	
-	<property name="enums.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
+	<property name="enums.genmodel" value="platform:/resource/org.eclipse.xtext.ui.common.tests/src/org/eclipse/xtext/enumrules/enumsUi.genmodel"/>
 	
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>

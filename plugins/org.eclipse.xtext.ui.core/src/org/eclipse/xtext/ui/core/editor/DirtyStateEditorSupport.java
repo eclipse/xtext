@@ -101,8 +101,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 		this.isDirty = false;
 		IXtextDocument document = client.getDocument();
 		document.addModelListener(this);
-		stateChangeEventBroker.addListener(this);
 		initDirtyResource(document);
+		stateChangeEventBroker.addListener(this);
 		client.addVerifyListener(this);
 	}
 	
@@ -148,11 +148,15 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 		if (this.currentClient == null || this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all.");
 		client.removeVerifyListener(this);
-		dirtyStateManager.discardDirtyState(dirtyResource);
-		dirtyResource.disconnect(client.getDocument());
 		stateChangeEventBroker.removeListener(this);
+		dirtyStateManager.discardDirtyState(dirtyResource);
 		IXtextDocument document = client.getDocument();
-		document.removeModelListener(this);
+		if (document == null)
+			document = dirtyResource.getUnderlyingDocument();
+		if (document != null) {
+			dirtyResource.disconnect(document);
+			document.removeModelListener(this);
+		}
 		this.currentClient = null;
 	}
 	

@@ -17,7 +17,7 @@ import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.EnumRulesUiTestLangua
 import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.Model;
 
-import org.eclipse.xtext.enumrules.enums.EnumsPackage;
+import org.eclipse.xtext.enumrules.enumsUi.EnumsUiPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,7 +90,7 @@ public class EnumRulesUiTestLanguagePackageImpl extends EPackageImpl implements 
     isInited = true;
 
     // Initialize simple dependencies
-    EnumsPackage.eINSTANCE.eClass();
+    EnumsUiPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theEnumRulesUiTestLanguagePackage.createPackageContents();
@@ -210,7 +210,7 @@ public class EnumRulesUiTestLanguagePackageImpl extends EPackageImpl implements 
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    EnumsPackage theEnumsPackage = (EnumsPackage)EPackage.Registry.INSTANCE.getEPackage(EnumsPackage.eNS_URI);
+    EnumsUiPackage theEnumsUiPackage = (EnumsUiPackage)EPackage.Registry.INSTANCE.getEPackage(EnumsUiPackage.eNS_URI);
 
     // Create type parameters
 
@@ -220,7 +220,7 @@ public class EnumRulesUiTestLanguagePackageImpl extends EPackageImpl implements 
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Existing(), theEnumsPackage.getExistingEnum(), "existing", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Existing(), theEnumsUiPackage.getExistingEnum(), "existing", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Generated(), this.getGeneratedEnum(), "generated", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals

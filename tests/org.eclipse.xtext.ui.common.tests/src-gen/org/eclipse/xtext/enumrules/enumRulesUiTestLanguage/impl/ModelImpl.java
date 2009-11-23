@@ -16,7 +16,7 @@ import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.EnumRulesUiTestLangua
 import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesUiTestLanguage.Model;
 
-import org.eclipse.xtext.enumrules.enums.ExistingEnum;
+import org.eclipse.xtext.enumrules.enumsUi.ExistingEnum;
 
 /**
  * <!-- begin-user-doc -->

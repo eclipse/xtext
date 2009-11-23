@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsFactoryImpl.java,v 1.1 2009/09/10 22:29:47 sefftinge Exp $
+ * $Id: EnumsUiFactoryImpl.java,v 1.1 2009/11/23 16:50:04 szarnekow Exp $
  */
-package org.eclipse.xtext.enumrules.enums.impl;
+package org.eclipse.xtext.enumrules.enumsUi.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.enumrules.enums.*;
+import org.eclipse.xtext.enumrules.enumsUi.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,24 +23,24 @@ import org.eclipse.xtext.enumrules.enums.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
+public class EnumsUiFactoryImpl extends EFactoryImpl implements EnumsUiFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EnumsFactory init() {
+	public static EnumsUiFactory init() {
 		try {
-			EnumsFactory theEnumsFactory = (EnumsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported"); 
-			if (theEnumsFactory != null) {
-				return theEnumsFactory;
+			EnumsUiFactory theEnumsUiFactory = (EnumsUiFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/ui/EnumRulesTestLanguage/imported"); 
+			if (theEnumsUiFactory != null) {
+				return theEnumsUiFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new EnumsFactoryImpl();
+		return new EnumsUiFactoryImpl();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumsFactoryImpl() {
+	public EnumsUiFactoryImpl() {
 		super();
 	}
 
@@ -74,7 +74,7 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case EnumsPackage.EXISTING_ENUM:
+			case EnumsUiPackage.EXISTING_ENUM:
 				return createExistingEnumFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -89,7 +89,7 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case EnumsPackage.EXISTING_ENUM:
+			case EnumsUiPackage.EXISTING_ENUM:
 				return convertExistingEnumToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -121,8 +121,8 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumsPackage getEnumsPackage() {
-		return (EnumsPackage)getEPackage();
+	public EnumsUiPackage getEnumsUiPackage() {
+		return (EnumsUiPackage)getEPackage();
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static EnumsPackage getPackage() {
-		return EnumsPackage.eINSTANCE;
+	public static EnumsUiPackage getPackage() {
+		return EnumsUiPackage.eINSTANCE;
 	}
 
-} //EnumsFactoryImpl
+} //EnumsUiFactoryImpl

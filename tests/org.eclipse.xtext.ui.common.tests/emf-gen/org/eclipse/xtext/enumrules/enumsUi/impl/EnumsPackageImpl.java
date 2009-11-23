@@ -2,18 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsPackageImpl.java,v 1.1 2009/09/10 22:29:47 sefftinge Exp $
+ * $Id: EnumsPackageImpl.java,v 1.1 2009/11/23 16:50:03 szarnekow Exp $
  */
-package org.eclipse.xtext.enumrules.enums.impl;
+package org.eclipse.xtext.enumrules.enumsUi.impl;
 
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.enumrules.enums.EnumsFactory;
-import org.eclipse.xtext.enumrules.enums.EnumsPackage;
-import org.eclipse.xtext.enumrules.enums.ExistingEnum;
+import org.eclipse.xtext.enumrules.enumsUi.EnumsFactory;
+import org.eclipse.xtext.enumrules.enumsUi.EnumsPackage;
+import org.eclipse.xtext.enumrules.enumsUi.ExistingEnum;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class EnumsPackageImpl extends EPackageImpl implements EnumsPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.xtext.enumrules.enums.EnumsPackage#eNS_URI
+	 * @see org.eclipse.xtext.enumrules.enumsUi.EnumsPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

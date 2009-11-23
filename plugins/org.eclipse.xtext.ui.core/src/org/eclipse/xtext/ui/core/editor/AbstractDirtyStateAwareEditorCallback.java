@@ -69,7 +69,8 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 	public void removeVerifyListener(VerifyListener listener) {
 		ISourceViewer sourceViewer = currentEditor.getInternalSourceViewer();
 		StyledText widget = sourceViewer.getTextWidget();
-		widget.removeVerifyListener(listener);
+		if (widget != null)
+			widget.removeVerifyListener(listener);
 	}
 	
 }
