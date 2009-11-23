@@ -15,12 +15,24 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  */
 public interface IDirtyResource {
 
+	/**
+	 * @return the content of the resource as text, never <code>null</code>.
+	 */
 	String getContents();
 	
+	/**
+	 * @return the URI of the resource, never <code>null</code>.
+	 */
 	URI getURI();
 	
+	/**
+	 * @return the exported descriptions of the resource's content, never <code>null</code>.
+	 */
 	Iterable<IEObjectDescription> getExportedObjects();
 	
+	/**
+	 * @return the names that the resource imports, never <code>null</code>.
+	 */
 	Iterable<String> getImportedNames();
 	
 }
