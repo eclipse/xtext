@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.common.tests" forceOverwrite="true" modelName="EnumRulesUiTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.common.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.common.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel#//enums">
+    editorPluginID="org.eclipse.xtext.ui.common.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.ui.common.tests/src/org/eclipse/xtext/enumrules/enumsUi.genmodel#//enumsUi">
   <genPackages prefix="EnumRulesUiTestLanguage" basePackage="org.eclipse.xtext.enumrules"
       disposableProviderFactory="true" ecorePackage="EnumRulesUiTestLanguage.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="EnumRulesUiTestLanguage.ecore#//GeneratedEnum">

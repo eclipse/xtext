@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsPackage.java,v 1.1 2009/09/10 22:29:47 sefftinge Exp $
+ * $Id: EnumsPackage.java,v 1.1 2009/11/23 16:50:03 szarnekow Exp $
  */
-package org.eclipse.xtext.enumrules.enums;
+package org.eclipse.xtext.enumrules.enumsUi;
 
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.enumrules.enums.EnumsFactory
+ * @see org.eclipse.xtext.enumrules.enumsUi.EnumsFactory
  * @model kind="package"
  * @generated
  */
@@ -31,7 +31,7 @@ public interface EnumsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "enums";
+	String eNAME = "enumsUi";
 
 	/**
 	 * The package namespace URI.
@@ -39,7 +39,7 @@ public interface EnumsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported";
+	String eNS_URI = "http://www.eclipse.org/2009/tmf/xtext/ui/EnumRulesTestLanguage/imported";
 
 	/**
 	 * The package namespace name.
@@ -47,7 +47,7 @@ public interface EnumsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "enums";
+	String eNS_PREFIX = "enumsUi";
 
 	/**
 	 * The singleton instance of the package.
@@ -55,25 +55,25 @@ public interface EnumsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	EnumsPackage eINSTANCE = org.eclipse.xtext.enumrules.enums.impl.EnumsPackageImpl.init();
+	EnumsPackage eINSTANCE = org.eclipse.xtext.enumrules.enumsUi.impl.EnumsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.enumrules.enums.ExistingEnum <em>Existing Enum</em>}' enum.
+	 * The meta object id for the '{@link org.eclipse.xtext.enumrules.enumsUi.ExistingEnum <em>Existing Enum</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.enumrules.enums.ExistingEnum
-	 * @see org.eclipse.xtext.enumrules.enums.impl.EnumsPackageImpl#getExistingEnum()
+	 * @see org.eclipse.xtext.enumrules.enumsUi.ExistingEnum
+	 * @see org.eclipse.xtext.enumrules.enumsUi.impl.EnumsPackageImpl#getExistingEnum()
 	 * @generated
 	 */
 	int EXISTING_ENUM = 0;
 
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.xtext.enumrules.enums.ExistingEnum <em>Existing Enum</em>}'.
+	 * Returns the meta object for enum '{@link org.eclipse.xtext.enumrules.enumsUi.ExistingEnum <em>Existing Enum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Existing Enum</em>'.
-	 * @see org.eclipse.xtext.enumrules.enums.ExistingEnum
+	 * @see org.eclipse.xtext.enumrules.enumsUi.ExistingEnum
 	 * @generated
 	 */
 	EEnum getExistingEnum();
@@ -101,11 +101,11 @@ public interface EnumsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.enumrules.enums.ExistingEnum <em>Existing Enum</em>}' enum.
+		 * The meta object literal for the '{@link org.eclipse.xtext.enumrules.enumsUi.ExistingEnum <em>Existing Enum</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.enumrules.enums.ExistingEnum
-		 * @see org.eclipse.xtext.enumrules.enums.impl.EnumsPackageImpl#getExistingEnum()
+		 * @see org.eclipse.xtext.enumrules.enumsUi.ExistingEnum
+		 * @see org.eclipse.xtext.enumrules.enumsUi.impl.EnumsPackageImpl#getExistingEnum()
 		 * @generated
 		 */
 		EEnum EXISTING_ENUM = eINSTANCE.getExistingEnum();

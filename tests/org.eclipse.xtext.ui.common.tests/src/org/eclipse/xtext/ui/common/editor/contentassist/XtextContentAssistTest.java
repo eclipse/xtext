@@ -191,7 +191,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
-	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enumsUi.ecore'")
 	        .appendNl("enum ExistingEnum:")
 	        .assertText("SameName", "DifferentName", "OverriddenLiteral");
     }

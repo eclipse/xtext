@@ -39,10 +39,12 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	private StateChangeEventBroker stateChangeEventBroker;
 	private IXtextModelListener modelListener;
 	private DocumentBasedDirtyResource dirtyResource;
+	private IXtextDocument document;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		document = this;
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
@@ -68,6 +70,21 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	
 	public void testRemoveDirtyStateSupport_01(){
 		dirtyStateSupport.initializeDirtyStateSupport(this);
+		dirtyStateSupport.removeDirtyStateSupport(this);
+		assertNull(verifyListener);
+		assertNull(modelListener);
+		assertFalse(dirtyStateManager.hasContent(resourceURI));
+		try {
+			dirtyResource.getURI();
+			fail("Expected IllegalStateException");
+		} catch(IllegalStateException e) {
+			// expect
+		}
+	}
+	
+	public void testRemoveDirtyStateSupport_02(){
+		dirtyStateSupport.initializeDirtyStateSupport(this);
+		document = null; // client.getDocument() returns null when editor is disposing
 		dirtyStateSupport.removeDirtyStateSupport(this);
 		assertNull(verifyListener);
 		assertNull(modelListener);
@@ -235,7 +252,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	}
 
 	public IXtextDocument getDocument() {
-		return this;
+		return document;
 	}
 	
 	@Override

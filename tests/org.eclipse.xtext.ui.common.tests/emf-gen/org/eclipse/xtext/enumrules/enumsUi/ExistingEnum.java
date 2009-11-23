@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExistingEnum.java,v 1.1 2009/09/10 22:29:47 sefftinge Exp $
+ * $Id: ExistingEnum.java,v 1.1 2009/11/23 16:50:03 szarnekow Exp $
  */
-package org.eclipse.xtext.enumrules.enums;
+package org.eclipse.xtext.enumrules.enumsUi;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Existing Enum</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.enumrules.enums.EnumsPackage#getExistingEnum()
+ * @see org.eclipse.xtext.enumrules.enumsUi.EnumsUiPackage#getExistingEnum()
  * @model
  * @generated
  */

@@ -57,6 +57,10 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		this.uri = null;
 	}
 	
+	public IXtextDocument getUnderlyingDocument() {
+		return document;
+	}
+	
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
