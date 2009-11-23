@@ -148,4 +148,32 @@ public class ResourceIndexerTest extends TestCase {
 				return null;
 			}});
 	}
+	
+	public void testDeleteProject() throws Exception {
+		createJavaProject("foo");
+		createJavaProject("bar");
+		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
+		IFile file2 = createFile("/bar/baz."+EXT, "namespace foo { object baz }");
+		
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
+		assertContents(indexer.addOrUpdate(file2), "foo","baz");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(2,state.getContainers().size());
+				return null;
+			}});
+		
+		assertContents(indexer.cleanProject("foo"), "foo", "bar");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(1,state.getContainers().size());
+				return null;
+			}});
+		
+	}
+	
 }

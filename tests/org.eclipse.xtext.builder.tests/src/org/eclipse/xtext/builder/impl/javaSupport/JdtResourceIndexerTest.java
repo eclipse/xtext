@@ -189,5 +189,31 @@ public class JdtResourceIndexerTest extends TestCase {
 		assertTrue("unmatched elements :"+copyOfSet,copyOfSet.isEmpty());
 	}
 
+	public void testDeleteProject() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addSourceFolder(project, "src");
+		IFile file1 = createFile("/foo/bar."+EXT, "namespace foo { object bar }");
+		IFile file2 = createFile("/foo/src/bar."+EXT, "namespace foo { object baz }");
+		
+		assertContents(indexer.addOrUpdate(file1), "foo","bar");
+		assertContents(indexer.addOrUpdate(file2), "foo","baz");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(2,state.getContainers().size());
+				return null;
+			}});
+
+		assertContents(indexer.cleanProject("foo"), "foo", "bar","baz");
+		
+		stateManager.readOnly(new IUnitOfWork<Void, BuilderState>() {
+			
+			public java.lang.Void exec(BuilderState state) throws Exception {
+				assertEquals(0,state.getContainers().size());
+				return null;
+			}});
+		
+	}
 	
 }
