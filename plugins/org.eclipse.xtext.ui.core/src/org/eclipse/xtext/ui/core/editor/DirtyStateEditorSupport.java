@@ -17,11 +17,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
-import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
@@ -31,6 +29,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 
 /**
@@ -38,128 +37,134 @@ import com.google.inject.Inject;
  */
 public class DirtyStateEditorSupport implements IXtextModelListener, IStateChangeEventBroker.IStateChangeEventListener, VerifyListener {
 	
+	/**
+	 * Allows to mock the user decision in unit tests.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	@ImplementedBy(InteractiveConcurrentEditingQuestion.class)
+	public interface IConcurrentEditingCallback {
+		/**
+		 * @return <code>true</code> if the concurrent editing warning should be ignored.
+		 */
+		boolean isConcurrentEditingIgnored(IDirtyStateEditorSupportClient client);
+	}
+	
+	public static class InteractiveConcurrentEditingQuestion implements IConcurrentEditingCallback {
+
+		public boolean isConcurrentEditingIgnored(IDirtyStateEditorSupportClient client) {
+			String title = "Resource was edited concurrently.";
+			String message = "The resource is currently edited in another editor. Do you want to continue?";
+			return MessageDialog.openQuestion(client.getShell(), title, message);
+		}
+		
+	}
+	
+	/**
+	 * Minimal required interface for clients. Allows easy mocking.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	public interface IDirtyStateEditorSupportClient {
+
+		IXtextDocument getDocument();
+
+		/**
+		 * May return <code>null</code> in headless environments.
+		 */
+		Shell getShell();
+
+		void addVerifyListener(VerifyListener listener);
+
+		void removeVerifyListener(VerifyListener listener);
+		
+	}
+	
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
 
 	@Inject
 	private IStateChangeEventBroker stateChangeEventBroker;
 	
-	/**
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	protected static class EditorBasedDirtyResource implements IDirtyResource {
-		
-		private final XtextEditor editor;
-		private final URI uri;
-
-		protected EditorBasedDirtyResource(XtextEditor editor) {
-			this.editor = editor;
-			uri = editor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>(){
-				public URI exec(XtextResource state) throws Exception {
-					return state.getURI();
-				}
-			});
-		}
-		
-		public URI getURI() {
-			return uri;
-		}
-
-		public Iterable<String> getImportedNames() {
-			// TODO implement me
-			return null;
-		}
-
-		public Iterable<IEObjectDescription> getExportedObjects() {
-			// TODO implement me
-			return null;
-		}
-
-		public String getContents() {
-			return editor.getDocument().get();
-		}
-	}
-
-	private XtextEditor editor;
+	@Inject
+	private DocumentBasedDirtyResource dirtyResource;
+	
+	@Inject
+	private IConcurrentEditingCallback concurrentEditingWarningDialog;
+	
+	private IDirtyStateEditorSupportClient currentClient;
 	
 	private boolean isDirty;
 	
-	private IDirtyResource dirtyResource;
-	
-	public void initializeDirtyStateSupport(XtextEditor editor) {
-		if (this.editor != null)
+	public void initializeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
+		if (this.currentClient != null)
 			throw new IllegalStateException("editor was already assigned");
-		this.editor = editor;
+		this.currentClient = client;
 		this.isDirty = false;
-		IXtextDocument document = editor.getDocument();
+		IXtextDocument document = client.getDocument();
 		document.addModelListener(this);
 		stateChangeEventBroker.addListener(this);
-		dirtyResource = createDirtyResource(editor);
-		ISourceViewer sourceViewer = editor.getInternalSourceViewer();
-		StyledText widget = sourceViewer.getTextWidget();
-		widget.addVerifyListener(this);
+		initDirtyResource(document);
+		client.addVerifyListener(this);
 	}
 	
 	public void verifyText(VerifyEvent e) {
 		if (isDirty || !e.doit)
 			return;
-	
-		if (!dirtyStateManager.manageDirtyState(dirtyResource)) {
-			if (!showConcurrentEditingWarning()) {
-				e.doit = false;
-				dirtyStateManager.discardDirtyState(dirtyResource);
-				return;
-			}
-		}
-		isDirty = true;
+		e.doit = doVerify();
+		if (e.doit)
+			isDirty = true;
 	}
 	
-	public boolean isEditingPossible(XtextEditor editor) {
-		if (this.editor != editor)
-			throw new IllegalStateException("has been configured with another editor");
-		if (isDirty)
-			return true;
-	
+	public boolean doVerify() {
 		if (!dirtyStateManager.manageDirtyState(dirtyResource)) {
-			if (!showConcurrentEditingWarning()) {
+			if (!isConcurrentEditingIgnored()) {
 				dirtyStateManager.discardDirtyState(dirtyResource);
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	public boolean isEditingPossible(IDirtyStateEditorSupportClient client) {
+		if (this.currentClient == null || this.currentClient != client)
+			throw new IllegalStateException("Was configured with another client or not configured at all.");
+		if (isDirty)
+			return true;
+	
+		if (!doVerify())
+			return false;
 		isDirty = true;
 		return true;
 	}
 
-	protected boolean showConcurrentEditingWarning() {
-		String title = "Resource was edited concurrently.";
-		String message = "The resource is currently edited in another editor. Do you want to continue?";
-		return MessageDialog.openQuestion(editor.getEditorSite().getShell(), title, message);
+	protected boolean isConcurrentEditingIgnored() {
+		return concurrentEditingWarningDialog.isConcurrentEditingIgnored(currentClient);
 	}
 
-	protected IDirtyResource createDirtyResource(XtextEditor editor) {
-		return new EditorBasedDirtyResource(editor);
+	protected void initDirtyResource(IXtextDocument document) {
+		dirtyResource.connect(document);
 	}
 	
-	public void removeDirtyStateSupport(XtextEditor editor) {
-		if (this.editor != editor)
-			throw new IllegalStateException("has been configured with another editor");
-		stateChangeEventBroker.removeListener(this);
+	public void removeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
+		if (this.currentClient == null || this.currentClient != client)
+			throw new IllegalStateException("Was configured with another client or not configured at all.");
+		client.removeVerifyListener(this);
 		dirtyStateManager.discardDirtyState(dirtyResource);
-		ISourceViewer sourceViewer = editor.getInternalSourceViewer();
-		StyledText widget = sourceViewer.getTextWidget();
-		widget.removeVerifyListener(this);
-		this.editor = null;
+		dirtyResource.disconnect(client.getDocument());
+		stateChangeEventBroker.removeListener(this);
+		IXtextDocument document = client.getDocument();
+		document.removeModelListener(this);
+		this.currentClient = null;
 	}
 	
-	public void markEditorClean(XtextEditor editor) {
-		if (this.editor != editor)
-			throw new IllegalStateException("has been configured with another editor");
+	public void markEditorClean(IDirtyStateEditorSupportClient client) {
+		if (this.currentClient == null || this.currentClient != client)
+			throw new IllegalStateException("Was configured with another client or not configured at all.");
 		dirtyStateManager.discardDirtyState(dirtyResource);
 		isDirty = false;
 	}
 	
 	public void onStateChanged(IStateChangeEventBroker sender, final ImmutableCollection<URI> affectedURIs) {
-		final IXtextDocument document = editor.getDocument();
+		final IXtextDocument document = currentClient.getDocument();
 		final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
 			public Collection<Resource> exec(XtextResource resource) throws Exception {
 				if (resource == null || resource.getResourceSet() == null)
@@ -187,7 +192,6 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 				return result;
 			}
 		});
-		// TODO: should this be run in a job? (see ResourceAwareXtextDocumentProvider)
 		if (affectedResources != null && !affectedResources.isEmpty()) {
 			document.modify(new IUnitOfWork.Void<XtextResource>() {
 				@Override
@@ -204,6 +208,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 	}
 	
 	public void modelChanged(XtextResource resource) {
+		if (resource == null)
+			return;
 		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource))
 			dirtyStateManager.announceDirtyStateChanged(dirtyResource);
 	}
@@ -222,5 +228,21 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 
 	public void setStateChangeEventBroker(IStateChangeEventBroker stateChangeEventBroker) {
 		this.stateChangeEventBroker = stateChangeEventBroker;
+	}
+
+	public void setConcurrentEditingWarningDialog(IConcurrentEditingCallback concurrentEditingWarningDialog) {
+		this.concurrentEditingWarningDialog = concurrentEditingWarningDialog;
+	}
+
+	public IConcurrentEditingCallback getConcurrentEditingWarningDialog() {
+		return concurrentEditingWarningDialog;
+	}
+
+	public void setDirtyResource(DocumentBasedDirtyResource dirtyResource) {
+		this.dirtyResource = dirtyResource;
+	}
+
+	public DocumentBasedDirtyResource getDirtyResource() {
+		return dirtyResource;
 	}
 }

@@ -18,7 +18,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-// TODO: batch events, fulfill contract as defined in documentation of IDirtyStateManager
+// TODO: batch events according to the contract of IDirtyStateManager
 public class DirtyStateManager implements IDirtyStateManager {
 
 	private ConcurrentMap<URI, IDirtyResource> managedResources;
@@ -42,8 +42,8 @@ public class DirtyStateManager implements IDirtyStateManager {
 	}
 
 	protected void notifyListeners(IDirtyResource dirtyResource) {
-		Object[] notifyUs = listeners.getListeners();
 		ImmutableList<IDirtyResource> changedResources = ImmutableList.of(dirtyResource);
+		Object[] notifyUs = listeners.getListeners();
 		for(Object notifyMe: notifyUs) {
 			IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
 			listener.dirtyStateChanged(this, changedResources);

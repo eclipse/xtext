@@ -16,6 +16,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.DefaultLastSegmentFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.FQNPrefixMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.IgnoreCasePrefixMatcherTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.editor.DirtyStateEditorSupportTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.editor.DocumentBasedDirtyResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.model.edit.DefaultDocumentEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.model.edit.DefaultTextEditComposerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.quickfix.DeclarativeQuickfixProviderTest.class);

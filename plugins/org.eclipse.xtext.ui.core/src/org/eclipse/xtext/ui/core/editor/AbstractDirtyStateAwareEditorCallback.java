@@ -7,30 +7,69 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.VerifyListener;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.ui.core.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEditorCallback {
+public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEditorCallback, IDirtyStateEditorSupportClient {
 	
 	@Inject
 	private DirtyStateEditorSupport editorSupport;
 	
-	public void afterCreatePartControl(XtextEditor editor) {
-		editorSupport.initializeDirtyStateSupport(editor);
+	private XtextEditor currentEditor;
+	
+	public void afterCreatePartControl(final XtextEditor editor) {
+		if (this.currentEditor != null)
+			throw new IllegalStateException("afterCreatePartControl was called twice");
+		this.currentEditor = editor;
+		editorSupport.initializeDirtyStateSupport(this);
 	}
 	
 	public void beforeDispose(XtextEditor editor) {
-		editorSupport.removeDirtyStateSupport(editor);
+		if (this.currentEditor != editor)
+			throw new IllegalStateException("different instances of editor were given.");
+		editorSupport.removeDirtyStateSupport(this);
+		this.currentEditor = null;
 	}
 	
 	public void afterSave(XtextEditor editor) {
-		editorSupport.markEditorClean(editor);
+		if (this.currentEditor != editor)
+			throw new IllegalStateException("different instances of editor were given.");
+		editorSupport.markEditorClean(this);
 	}
 	
 	public boolean onValidateEditorInputState(XtextEditor editor) {
-		return editorSupport.isEditingPossible(editor);
+		if (this.currentEditor != editor)
+			throw new IllegalStateException("different instances of editor were given.");
+		return editorSupport.isEditingPossible(this);
+	}
+	
+	public IXtextDocument getDocument() {
+		return currentEditor.getDocument();
+	}
+	
+	public void addVerifyListener(VerifyListener listener) {
+		ISourceViewer sourceViewer = currentEditor.getInternalSourceViewer();
+		StyledText widget = sourceViewer.getTextWidget();
+		widget.addVerifyListener(listener);
+	}
+
+	public Shell getShell() {
+		return currentEditor.getEditorSite().getShell();
+	}
+
+	public void removeVerifyListener(VerifyListener listener) {
+		ISourceViewer sourceViewer = currentEditor.getInternalSourceViewer();
+		StyledText widget = sourceViewer.getTextWidget();
+		widget.removeVerifyListener(listener);
 	}
 	
 }
