@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.templates;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
@@ -17,13 +18,14 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * @author Michael Clay
  */
 @Singleton
 public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
@@ -35,12 +37,12 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 
 	protected void registerContextTypes(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider) {
 		List<ParserRule> parserRules = GrammarUtil.allParserRules(grammarAccess.getGrammar());
+		List<XtextTemplateContextType> allContextTypes = Lists.newArrayList();
 		for (ParserRule parserRule : parserRules) {
 			XtextTemplateContextType type = ctxTypeProvider.get();
 			type.setName(parserRule.getName());
 			type.setId(getId(parserRule));
-			addContextType(type);
-			
+			allContextTypes.add(type);
 			List<Keyword> keywords = EcoreUtil2.getAllContentsOfType(parserRule, Keyword.class);
 			for (Keyword keyword : keywords) {
 				String value = getId(keyword);
@@ -48,9 +50,13 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 					type = ctxTypeProvider.get();
 					type.setName("Keyword '"+keyword.getValue()+"'");
 					type.setId(value);
-					addContextType(type);
+					allContextTypes.add(type);
 				}
 			}
+		}
+		Collections.sort(allContextTypes);
+		for (XtextTemplateContextType templateContextType: allContextTypes) {
+			addContextType(templateContextType);
 		}
 	}
 	
