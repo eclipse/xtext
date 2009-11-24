@@ -24,10 +24,10 @@ import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.Container;
-import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
 import org.eclipse.xtext.builder.impl.javasupport.JarWalker;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
 import org.eclipse.xtext.builder.impl.javasupport.JdtResourceIndexer;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -71,9 +71,9 @@ public class JdtResourceIndexerTest extends TestCase {
 				assertEquals("java:myjar.jar", container.getName());
 				assertEquals("foo", container.getProject());
 				
-				assertEquals(2,container.getResourceDescriptors().size());
+				assertEquals(2,container.getResourceDescriptions().size());
 				
-				ResourceDescriptor resourceDescriptor = container.getResourceDescriptors().get(0);
+				IResourceDescription resourceDescriptor = container.getResourceDescriptions().get(0);
 				System.out.println(resourceDescriptor.getURI());
 				
 				return null;
@@ -102,9 +102,9 @@ public class JdtResourceIndexerTest extends TestCase {
 				assertEquals("java:myjar.jar", container.getName());
 				assertEquals("foo", container.getProject());
 				
-				assertEquals(2,container.getResourceDescriptors().size());
+				assertEquals(2,container.getResourceDescriptions().size());
 				
-				ResourceDescriptor resourceDescriptor = container.getResourceDescriptors().get(0);
+				IResourceDescription resourceDescriptor = container.getResourceDescriptions().get(0);
 				System.out.println(resourceDescriptor.getURI());
 				
 				return null;
@@ -153,8 +153,8 @@ public class JdtResourceIndexerTest extends TestCase {
 				assertEquals("java:src-gen", src_gen.getName());
 				assertEquals("foo", src_gen.getProject());
 				
-				assertEquals(1,src.getResourceDescriptors().size());
-				assertEquals(1,src_gen.getResourceDescriptors().size());
+				assertEquals(1,src.getResourceDescriptions().size());
+				assertEquals(1,src_gen.getResourceDescriptions().size());
 				return null;
 			}});
 	}

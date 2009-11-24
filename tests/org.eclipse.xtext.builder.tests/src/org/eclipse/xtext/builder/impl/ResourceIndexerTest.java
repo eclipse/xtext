@@ -25,9 +25,11 @@ import org.eclipse.xtext.builder.IResourceIndexer;
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateManager;
 import org.eclipse.xtext.builder.builderState.Container;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -91,7 +93,8 @@ public class ResourceIndexerTest extends TestCase {
 				assertEquals("foo", container.getName());
 				assertEquals("foo", container.getProject());
 				
-				assertEquals("bar",container.getResourceDescriptors().get(0).getEObjectDescriptions().get(0).getName());
+				Iterable<IEObjectDescription> exportedObjects = container.getResourceDescriptions().get(0).getExportedObjects();
+				assertEquals("bar",Iterables.get(exportedObjects, 0).getName());
 				
 				return null;
 			}});
@@ -106,7 +109,7 @@ public class ResourceIndexerTest extends TestCase {
 				
 				assertEquals("foo", container.getName());
 				assertEquals("foo", container.getProject());
-				assertTrue(container.getResourceDescriptors().isEmpty());
+				assertTrue(container.getResourceDescriptions().isEmpty());
 				return null;
 			}});
 	}
@@ -143,8 +146,9 @@ public class ResourceIndexerTest extends TestCase {
 				assertEquals("foo", container.getName());
 				assertEquals("foo", container.getProject());
 				
-				assertEquals("foo2",container.getResourceDescriptors().get(0).getEObjectDescriptions().get(1).getName());
-				assertEquals("bar2",container.getResourceDescriptors().get(0).getEObjectDescriptions().get(0).getName());
+				Iterable<IEObjectDescription> exportedObjects = container.getResourceDescriptions().get(0).getExportedObjects();
+				assertEquals("foo2",Iterables.get(exportedObjects, 1).getName());
+				assertEquals("bar2",Iterables.get(exportedObjects, 0).getName());
 				return null;
 			}});
 	}
