@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,8 +80,8 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 				return createContainerAdapter();
 			}
 			@Override
-			public Adapter caseResourceDescriptor(ResourceDescriptor object) {
-				return createResourceDescriptorAdapter();
+			public Adapter caseResourceDescription(IResourceDescription object) {
+				return createResourceDescriptionAdapter();
 			}
 			@Override
 			public Adapter caseEObjectDescription(IEObjectDescription object) {
@@ -129,16 +130,16 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor <em>Resource Descriptor</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor
+	 * @see org.eclipse.xtext.resource.IResourceDescription
 	 * @generated
 	 */
-	public Adapter createResourceDescriptorAdapter() {
+	public Adapter createResourceDescriptionAdapter() {
 		return null;
 	}
 

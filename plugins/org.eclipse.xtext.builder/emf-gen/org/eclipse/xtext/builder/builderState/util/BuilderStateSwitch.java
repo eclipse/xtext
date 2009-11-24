@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateSwitch.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderStateSwitch.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,12 +96,6 @@ public class BuilderStateSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BuilderStatePackage.RESOURCE_DESCRIPTOR: {
-				ResourceDescriptor resourceDescriptor = (ResourceDescriptor)theEObject;
-				T result = caseResourceDescriptor(resourceDescriptor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BuilderStatePackage.USER_DATA_ENTRY: {
 				@SuppressWarnings("unchecked") Map.Entry<String, String> userDataEntry = (Map.Entry<String, String>)theEObject;
 				T result = caseUserDataEntry(userDataEntry);
@@ -133,17 +128,17 @@ public class BuilderStateSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Resource Descriptor</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Resource Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Resource Descriptor</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Resource Description</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceDescriptor(ResourceDescriptor object) {
+	public T caseResourceDescription(IResourceDescription object) {
 		return null;
 	}
 

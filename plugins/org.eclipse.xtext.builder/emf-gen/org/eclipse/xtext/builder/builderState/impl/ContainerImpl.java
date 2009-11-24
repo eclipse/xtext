@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainerImpl.java,v 1.2 2009/11/19 14:09:08 sefftinge Exp $
+ * $Id: ContainerImpl.java,v 1.3 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
-import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ContainerImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ContainerImpl#getResourceDescriptors <em>Resource Descriptors</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ContainerImpl#getResourceDescriptions <em>Resource Descriptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ContainerImpl#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
@@ -64,14 +64,14 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getResourceDescriptors() <em>Resource Descriptors</em>}' containment reference list.
+	 * The cached value of the '{@link #getResourceDescriptions() <em>Resource Descriptions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourceDescriptors()
+	 * @see #getResourceDescriptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ResourceDescriptor> resourceDescriptors;
+	protected EList<IResourceDescription> resourceDescriptions;
 
 	/**
 	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
@@ -138,11 +138,11 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ResourceDescriptor> getResourceDescriptors() {
-		if (resourceDescriptors == null) {
-			resourceDescriptors = new EObjectContainmentWithInverseEList<ResourceDescriptor>(ResourceDescriptor.class, this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS, BuilderStatePackage.RESOURCE_DESCRIPTOR__CONTAINER);
+	public EList<IResourceDescription> getResourceDescriptions() {
+		if (resourceDescriptions == null) {
+			resourceDescriptions = new EObjectContainmentEList<IResourceDescription>(IResourceDescription.class, this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS);
 		}
-		return resourceDescriptors;
+		return resourceDescriptions;
 	}
 
 	/**
@@ -169,27 +169,12 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	/**
 	 * returns a resource descriptor with the given URI - null if no such resource descriptor exists.
 	 */
-	public ResourceDescriptor getResourceDescriptor(URI uri) {
-		for (ResourceDescriptor resDesc : getResourceDescriptors()) {
-			if (resDesc.getURI().equals(uri))
-				return resDesc;
+	public IResourceDescription getResourceDescription(URI uri) {
+		for (IResourceDescription description : getResourceDescriptions()) {
+			if (description.getURI().equals(uri))
+				return description;
 		}
 		return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getResourceDescriptors()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -200,8 +185,8 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				return ((InternalEList<?>)getResourceDescriptors()).basicRemove(otherEnd, msgs);
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				return ((InternalEList<?>)getResourceDescriptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -216,8 +201,8 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 		switch (featureID) {
 			case BuilderStatePackage.CONTAINER__NAME:
 				return getName();
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				return getResourceDescriptors();
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				return getResourceDescriptions();
 			case BuilderStatePackage.CONTAINER__PROJECT:
 				return getProject();
 		}
@@ -236,9 +221,9 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 			case BuilderStatePackage.CONTAINER__NAME:
 				setName((String)newValue);
 				return;
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				getResourceDescriptors().clear();
-				getResourceDescriptors().addAll((Collection<? extends ResourceDescriptor>)newValue);
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				getResourceDescriptions().clear();
+				getResourceDescriptions().addAll((Collection<? extends IResourceDescription>)newValue);
 				return;
 			case BuilderStatePackage.CONTAINER__PROJECT:
 				setProject((String)newValue);
@@ -258,8 +243,8 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 			case BuilderStatePackage.CONTAINER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				getResourceDescriptors().clear();
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				getResourceDescriptions().clear();
 				return;
 			case BuilderStatePackage.CONTAINER__PROJECT:
 				setProject(PROJECT_EDEFAULT);
@@ -278,8 +263,8 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 		switch (featureID) {
 			case BuilderStatePackage.CONTAINER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTORS:
-				return resourceDescriptors != null && !resourceDescriptors.isEmpty();
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				return resourceDescriptions != null && !resourceDescriptions.isEmpty();
 			case BuilderStatePackage.CONTAINER__PROJECT:
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 		}

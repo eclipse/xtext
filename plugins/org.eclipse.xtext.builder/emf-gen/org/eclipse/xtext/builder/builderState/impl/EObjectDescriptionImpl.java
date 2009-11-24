@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObjectDescriptionImpl.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: EObjectDescriptionImpl.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
-import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -206,9 +206,9 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResourceDescriptor getResourceDescriptor() {
+	public IResourceDescription getResourceDescriptor() {
 		if (eContainerFeatureID() != BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR) return null;
-		return (ResourceDescriptor)eContainer();
+		return (IResourceDescription)eContainer();
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetResourceDescriptor(ResourceDescriptor newResourceDescriptor, NotificationChain msgs) {
+	public NotificationChain basicSetResourceDescriptor(IResourceDescription newResourceDescriptor, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newResourceDescriptor, BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR, msgs);
 		return msgs;
 	}
@@ -226,15 +226,15 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setResourceDescriptor(ResourceDescriptor newResourceDescriptor) {
+	public void setResourceDescriptor(IResourceDescription newResourceDescriptor) {
 		if (newResourceDescriptor != eInternalContainer() || (eContainerFeatureID() != BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR && newResourceDescriptor != null)) {
-			if (EcoreUtil.isAncestor(this, newResourceDescriptor))
+			if (EcoreUtil.isAncestor(this, (EObject)newResourceDescriptor))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newResourceDescriptor != null)
-				msgs = ((InternalEObject)newResourceDescriptor).eInverseAdd(this, BuilderStatePackage.RESOURCE_DESCRIPTOR__EOBJECT_DESCRIPTIONS, ResourceDescriptor.class, msgs);
+				msgs = ((InternalEObject)newResourceDescriptor).eInverseAdd(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IResourceDescription.class, msgs);
 			msgs = basicSetResourceDescriptor(newResourceDescriptor, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -324,7 +324,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetResourceDescriptor((ResourceDescriptor)otherEnd, msgs);
+				return basicSetResourceDescriptor((IResourceDescription)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -354,7 +354,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				return eInternalContainer().eInverseRemove(this, BuilderStatePackage.RESOURCE_DESCRIPTOR__EOBJECT_DESCRIPTIONS, ResourceDescriptor.class, msgs);
+				return eInternalContainer().eInverseRemove(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IResourceDescription.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -401,7 +401,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				setEClass((EClass)newValue);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				setResourceDescriptor((ResourceDescriptor)newValue);
+				setResourceDescriptor((IResourceDescription)newValue);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				((EStructuralFeature.Setting)getUserData()).set(newValue);
@@ -428,7 +428,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				setEClass((EClass)null);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				setResourceDescriptor((ResourceDescriptor)null);
+				setResourceDescriptor((IResourceDescription)null);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				unsetUserData();

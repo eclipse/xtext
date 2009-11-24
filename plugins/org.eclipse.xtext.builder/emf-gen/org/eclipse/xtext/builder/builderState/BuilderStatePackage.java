@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderStatePackage.java,v 1.2 2009/11/24 18:25:12 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -80,13 +80,13 @@ public interface BuilderStatePackage extends EPackage {
 	int CONTAINER__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Resource Descriptors</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Resource Descriptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER__RESOURCE_DESCRIPTORS = 1;
+	int CONTAINER__RESOURCE_DESCRIPTIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Project</b></em>' attribute.
@@ -107,14 +107,14 @@ public interface BuilderStatePackage extends EPackage {
 	int CONTAINER_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptorImpl <em>Resource Descriptor</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl <em>Resource Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.builder.builderState.impl.ResourceDescriptorImpl
-	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getResourceDescriptor()
+	 * @see org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl
+	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getResourceDescription()
 	 * @generated
 	 */
-	int RESOURCE_DESCRIPTOR = 1;
+	int RESOURCE_DESCRIPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>URI</b></em>' attribute.
@@ -123,25 +123,16 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTOR__URI = 0;
+	int RESOURCE_DESCRIPTION__URI = 0;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Exported Objects</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTOR__CONTAINER = 1;
-
-	/**
-	 * The feature id for the '<em><b>EObject Descriptions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_DESCRIPTOR__EOBJECT_DESCRIPTIONS = 2;
+	int RESOURCE_DESCRIPTION__EXPORTED_OBJECTS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Imported Names</b></em>' attribute list.
@@ -150,7 +141,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTOR__IMPORTED_NAMES = 3;
+	int RESOURCE_DESCRIPTION__IMPORTED_NAMES = 2;
 
 	/**
 	 * The feature id for the '<em><b>Path To Storage</b></em>' attribute.
@@ -159,16 +150,25 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTOR__PATH_TO_STORAGE = 4;
+	int RESOURCE_DESCRIPTION__PATH_TO_STORAGE = 3;
 
 	/**
-	 * The number of structural features of the '<em>Resource Descriptor</em>' class.
+	 * The feature id for the '<em><b>Container Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTOR_FEATURE_COUNT = 5;
+	int RESOURCE_DESCRIPTION__CONTAINER_NAME = 4;
+
+	/**
+	 * The number of structural features of the '<em>Resource Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_DESCRIPTION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl <em>EObject Description</em>}' class.
@@ -342,15 +342,15 @@ public interface BuilderStatePackage extends EPackage {
 	EAttribute getContainer_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.builderState.Container#getResourceDescriptors <em>Resource Descriptors</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.builderState.Container#getResourceDescriptions <em>Resource Descriptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Resource Descriptors</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.Container#getResourceDescriptors()
+	 * @return the meta object for the containment reference list '<em>Resource Descriptions</em>'.
+	 * @see org.eclipse.xtext.builder.builderState.Container#getResourceDescriptions()
 	 * @see #getContainer()
 	 * @generated
 	 */
-	EReference getContainer_ResourceDescriptors();
+	EReference getContainer_ResourceDescriptions();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.builderState.Container#getProject <em>Project</em>}'.
@@ -364,69 +364,70 @@ public interface BuilderStatePackage extends EPackage {
 	EAttribute getContainer_Project();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor <em>Resource Descriptor</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Resource Descriptor</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor
+	 * @return the meta object for class '<em>Resource Description</em>'.
+	 * @see org.eclipse.xtext.resource.IResourceDescription
+	 * @model instanceClass="org.eclipse.xtext.resource.IResourceDescription"
 	 * @generated
 	 */
-	EClass getResourceDescriptor();
+	EClass getResourceDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getURI <em>URI</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getURI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>URI</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getURI()
-	 * @see #getResourceDescriptor()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getURI()
+	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EAttribute getResourceDescriptor_URI();
+	EAttribute getResourceDescription_URI();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getContainer <em>Container</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Container</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getContainer()
-	 * @see #getResourceDescriptor()
+	 * @return the meta object for the containment reference list '<em>Exported Objects</em>'.
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getExportedObjects()
+	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EReference getResourceDescriptor_Container();
+	EReference getResourceDescription_ExportedObjects();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getEObjectDescriptions <em>EObject Descriptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EObject Descriptions</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getEObjectDescriptions()
-	 * @see #getResourceDescriptor()
-	 * @generated
-	 */
-	EReference getResourceDescriptor_EObjectDescriptions();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getImportedNames <em>Imported Names</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.IResourceDescription#getImportedNames <em>Imported Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Imported Names</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getImportedNames()
-	 * @see #getResourceDescriptor()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getImportedNames()
+	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EAttribute getResourceDescriptor_ImportedNames();
+	EAttribute getResourceDescription_ImportedNames();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getPathToStorage <em>Path To Storage</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getPathToStorage <em>Path To Storage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Path To Storage</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getPathToStorage()
-	 * @see #getResourceDescriptor()
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getPathToStorage()
+	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EAttribute getResourceDescriptor_PathToStorage();
+	EAttribute getResourceDescription_PathToStorage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getContainerName <em>Container Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container Name</em>'.
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getContainerName()
+	 * @see #getResourceDescription()
+	 * @generated
+	 */
+	EAttribute getResourceDescription_ContainerName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>EObject Description</em>}'.
@@ -611,12 +612,12 @@ public interface BuilderStatePackage extends EPackage {
 		EAttribute CONTAINER__NAME = eINSTANCE.getContainer_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Resource Descriptors</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Resource Descriptions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTAINER__RESOURCE_DESCRIPTORS = eINSTANCE.getContainer_ResourceDescriptors();
+		EReference CONTAINER__RESOURCE_DESCRIPTIONS = eINSTANCE.getContainer_ResourceDescriptions();
 
 		/**
 		 * The meta object literal for the '<em><b>Project</b></em>' attribute feature.
@@ -627,14 +628,14 @@ public interface BuilderStatePackage extends EPackage {
 		EAttribute CONTAINER__PROJECT = eINSTANCE.getContainer_Project();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptorImpl <em>Resource Descriptor</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl <em>Resource Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.builder.builderState.impl.ResourceDescriptorImpl
-		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getResourceDescriptor()
+		 * @see org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl
+		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getResourceDescription()
 		 * @generated
 		 */
-		EClass RESOURCE_DESCRIPTOR = eINSTANCE.getResourceDescriptor();
+		EClass RESOURCE_DESCRIPTION = eINSTANCE.getResourceDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>URI</b></em>' attribute feature.
@@ -642,23 +643,15 @@ public interface BuilderStatePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE_DESCRIPTOR__URI = eINSTANCE.getResourceDescriptor_URI();
+		EAttribute RESOURCE_DESCRIPTION__URI = eINSTANCE.getResourceDescription_URI();
 
 		/**
-		 * The meta object literal for the '<em><b>Container</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Exported Objects</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RESOURCE_DESCRIPTOR__CONTAINER = eINSTANCE.getResourceDescriptor_Container();
-
-		/**
-		 * The meta object literal for the '<em><b>EObject Descriptions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RESOURCE_DESCRIPTOR__EOBJECT_DESCRIPTIONS = eINSTANCE.getResourceDescriptor_EObjectDescriptions();
+		EReference RESOURCE_DESCRIPTION__EXPORTED_OBJECTS = eINSTANCE.getResourceDescription_ExportedObjects();
 
 		/**
 		 * The meta object literal for the '<em><b>Imported Names</b></em>' attribute list feature.
@@ -666,7 +659,7 @@ public interface BuilderStatePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE_DESCRIPTOR__IMPORTED_NAMES = eINSTANCE.getResourceDescriptor_ImportedNames();
+		EAttribute RESOURCE_DESCRIPTION__IMPORTED_NAMES = eINSTANCE.getResourceDescription_ImportedNames();
 
 		/**
 		 * The meta object literal for the '<em><b>Path To Storage</b></em>' attribute feature.
@@ -674,7 +667,15 @@ public interface BuilderStatePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE_DESCRIPTOR__PATH_TO_STORAGE = eINSTANCE.getResourceDescriptor_PathToStorage();
+		EAttribute RESOURCE_DESCRIPTION__PATH_TO_STORAGE = eINSTANCE.getResourceDescription_PathToStorage();
+
+		/**
+		 * The meta object literal for the '<em><b>Container Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOURCE_DESCRIPTION__CONTAINER_NAME = eINSTANCE.getResourceDescription_ContainerName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl <em>EObject Description</em>}' class.

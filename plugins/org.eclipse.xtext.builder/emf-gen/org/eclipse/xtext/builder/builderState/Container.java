@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Container.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: Container.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.Container#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.Container#getResourceDescriptors <em>Resource Descriptors</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.Container#getResourceDescriptions <em>Resource Descriptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.Container#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
@@ -57,22 +58,20 @@ public interface Container extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Resource Descriptors</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.builder.builderState.ResourceDescriptor}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.builder.builderState.ResourceDescriptor#getContainer <em>Container</em>}'.
+	 * Returns the value of the '<em><b>Resource Descriptions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.resource.IResourceDescription}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Resource Descriptors</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Resource Descriptions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resource Descriptors</em>' containment reference list.
-	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getContainer_ResourceDescriptors()
-	 * @see org.eclipse.xtext.builder.builderState.ResourceDescriptor#getContainer
-	 * @model opposite="container" containment="true"
+	 * @return the value of the '<em>Resource Descriptions</em>' containment reference list.
+	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getContainer_ResourceDescriptions()
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" containment="true"
 	 * @generated
 	 */
-	EList<ResourceDescriptor> getResourceDescriptors();
+	EList<IResourceDescription> getResourceDescriptions();
 
 	/**
 	 * Returns the value of the '<em><b>Project</b></em>' attribute.
@@ -103,9 +102,9 @@ public interface Container extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model uriDataType="org.eclipse.xtext.builder.builderState.EURI"
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" uriDataType="org.eclipse.xtext.builder.builderState.EURI"
 	 * @generated
 	 */
-	ResourceDescriptor getResourceDescriptor(URI uri);
+	IResourceDescription getResourceDescription(URI uri);
 
 } // Container

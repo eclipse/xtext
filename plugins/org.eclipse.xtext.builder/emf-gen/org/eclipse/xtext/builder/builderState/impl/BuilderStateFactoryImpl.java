@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +68,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case BuilderStatePackage.CONTAINER: return createContainer();
-			case BuilderStatePackage.RESOURCE_DESCRIPTOR: return createResourceDescriptor();
+			case BuilderStatePackage.RESOURCE_DESCRIPTION: return (EObject)createResourceDescription();
 			case BuilderStatePackage.EOBJECT_DESCRIPTION: return (EObject)createEObjectDescription();
 			case BuilderStatePackage.USER_DATA_ENTRY: return (EObject)createUserDataEntry();
 			case BuilderStatePackage.BUILDER_STATE: return createBuilderState();
@@ -125,9 +126,9 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResourceDescriptor createResourceDescriptor() {
-		ResourceDescriptorImpl resourceDescriptor = new ResourceDescriptorImpl();
-		return resourceDescriptor;
+	public IResourceDescription createResourceDescription() {
+		ResourceDescriptionImpl resourceDescription = new ResourceDescriptionImpl();
+		return resourceDescription;
 	}
 
 	/**
