@@ -99,6 +99,29 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		// don't call super, since it would do a plain vanilla
 		// System.err.println(msg);
 	}
+	
+	@Override
+	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
+			throws RecognitionException {
+		// inlined super call because we want to get rid of the System.err.println(..)
+		// System.err.println("BR.recoverFromMismatchedToken");
+		// if next token is what we are looking for then "delete" this token
+		if ( input.LA(2)==ttype ) {
+			reportError(re);
+			/*
+			System.err.println("recoverFromMismatchedToken deleting "+input.LT(1)+
+							   " since "+input.LT(2)+" is what we want");
+			*/
+			beginResync();
+			input.consume(); // simply delete extra token
+			endResync();
+			input.consume(); // move past ttype token as if all were ok
+			return;
+		}
+		if ( !recoverFromMismatchedElement(input, re,follow) ) {
+			throw re;
+		}
+	}
 
 	protected abstract Grammar getGrammar();
 
