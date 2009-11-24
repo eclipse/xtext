@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
-import org.eclipse.xtext.resource.IImportedNamesProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -22,8 +22,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTest implements  
-	IExportedEObjectsProvider.Registry, IImportedNamesProvider.Registry, 
-	IImportedNamesProvider, IExportedEObjectsProvider {
+	IResourceDescription.Provider, IResourceDescription {
 
 	private String documentContent;
 	private XtextResource resource;
@@ -41,9 +40,8 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 				+ "generate test 'http://test'\n"
 				+ "Model: name=ID;";
 		resource = getResource(documentContent, uri);
+		resource.setResourceDescriptionProvider(this);
 		dirtyResource = new DocumentBasedDirtyResource();
-		dirtyResource.setExportedEObjectProviderRegistry(this);
-		dirtyResource.setImportedNamesProviderRegistry(this);
 		importedNames = Lists.newArrayList();
 		exportedDescriptions = Lists.newArrayList();
 	}
@@ -171,24 +169,22 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 
-	public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
-		assertSame(this.resource, resource);
-		return this;
-	}
-
-	public IImportedNamesProvider getImportedNamesProvider(Resource resource) {
-		assertSame(this.resource, resource);
-		return this;
-	}
-
-	public Iterable<String> getImportedNames(Resource resource) {
-		assertSame(this.resource, resource);
+	public Iterable<String> getImportedNames() {
 		return importedNames;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects(Resource resource) {
-		assertSame(this.resource, resource);
+	public Iterable<IEObjectDescription> getExportedObjects() {
 		return exportedDescriptions;
+	}
+
+	public IResourceDescription getResourceDescription(Resource resource) {
+		assertSame(this.resource, resource);
+		return this;
+	}
+
+	public URI getURI() {
+		fail("Unexpected call");
+		return null;
 	}
 	
 }

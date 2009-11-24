@@ -11,13 +11,10 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
-import org.eclipse.xtext.resource.IImportedNamesProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,12 +24,6 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 	private IXtextDocument document;
 	private URI uri;
 	
-	@Inject
-	private IImportedNamesProvider.Registry importedNamesProviderRegistry;
-	
-	@Inject
-	private IExportedEObjectsProvider.Registry exportedEObjectProviderRegistry;
-
 	public void connect(IXtextDocument document) {
 		if (document == null)
 			throw new IllegalArgumentException("document may not be null");
@@ -72,10 +63,13 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getImportedNames if this dirty resource is not connected to a document");
 		return document.readOnly(new IUnitOfWork<Iterable<String>, XtextResource>(){
 			public Iterable<String> exec(XtextResource resource) throws Exception {
-				IImportedNamesProvider provider = importedNamesProviderRegistry.getImportedNamesProvider(resource);
+				IResourceDescription.Provider provider = resource.getResourceDescriptionProvider();
 				if (provider == null)
 					return Collections.emptyList();
-				return provider.getImportedNames(resource);
+				IResourceDescription description = provider.getResourceDescription(resource);
+				if (description == null)
+					return Collections.emptyList();
+				return description.getImportedNames();
 			}
 		});
 	}
@@ -85,10 +79,13 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getExportedObjects if this dirty resource is not connected to a document");
 		return document.readOnly(new IUnitOfWork<Iterable<IEObjectDescription>, XtextResource>(){
 			public Iterable<IEObjectDescription> exec(XtextResource resource) throws Exception {
-				IExportedEObjectsProvider provider = exportedEObjectProviderRegistry.getExportedEObjectsProvider(resource);
+				IResourceDescription.Provider provider = resource.getResourceDescriptionProvider();
 				if (provider == null)
 					return Collections.emptyList();
-				return provider.getExportedObjects(resource);
+				IResourceDescription description = provider.getResourceDescription(resource);
+				if (description == null)
+					return Collections.emptyList();
+				return description.getExportedObjects();
 			}
 		});
 	}
@@ -97,22 +94,6 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is not connected to a document");
 		return document.get();
-	}
-
-	public void setExportedEObjectProviderRegistry(IExportedEObjectsProvider.Registry exportedEObjectProviderRegistry) {
-		this.exportedEObjectProviderRegistry = exportedEObjectProviderRegistry;
-	}
-
-	public IExportedEObjectsProvider.Registry getExportedEObjectProviderRegistry() {
-		return exportedEObjectProviderRegistry;
-	}
-
-	public void setImportedNamesProviderRegistry(IImportedNamesProvider.Registry importedNamesProviderRegistry) {
-		this.importedNamesProviderRegistry = importedNamesProviderRegistry;
-	}
-
-	public IImportedNamesProvider.Registry getImportedNamesProviderRegistry() {
-		return importedNamesProviderRegistry;
 	}
 	
 }
