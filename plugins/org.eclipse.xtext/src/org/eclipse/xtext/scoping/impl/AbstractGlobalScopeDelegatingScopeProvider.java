@@ -17,11 +17,11 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractGlobalScopeDelegatingScopeProvider extends AbstractScopeProvider {
-
-	private IGlobalScopeProvider globalScopeProvider;
+public abstract class AbstractGlobalScopeDelegatingScopeProvider extends AbstractExportedObjectsAwareScopeProvider {
 
 	@Inject
+	private IGlobalScopeProvider globalScopeProvider;
+
 	public void setGlobalScopeProvider(IGlobalScopeProvider globalScopeProvider) {
 		this.globalScopeProvider = globalScopeProvider;
 	}
@@ -31,6 +31,7 @@ public abstract class AbstractGlobalScopeDelegatingScopeProvider extends Abstrac
 	}
 	
 	private IScopeWrapper scopeWrapper;
+	
 	public void setWrapper(IScopeWrapper wrapper) {
 		this.scopeWrapper = wrapper;
 	}

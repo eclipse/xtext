@@ -67,10 +67,10 @@ public class XtextResource extends ResourceImpl {
 	private IReferableElementsUnloader unloader;
 	
 	@Inject
-	private IExportedEObjectsProvider exportedEObjectsProvider;
+	private IResourceDescription.Provider resourceDescriptionProvider;
 	
 	@Inject
-	private IImportedNamesProvider importedNamesProvider;
+	private IQualifiedNameProvider qualifiedNameProvider;
 	
 	private IParseResult parseResult;
 
@@ -79,20 +79,20 @@ public class XtextResource extends ResourceImpl {
 		this.parser = parser;
 	}
 	
-	public void setExportedEObjectsProvider(IExportedEObjectsProvider exportedEObjectsProvider) {
-		this.exportedEObjectsProvider = exportedEObjectsProvider;
+	public void setResourceDescriptionProvider(IResourceDescription.Provider resourceDescriptionProvider) {
+		this.resourceDescriptionProvider = resourceDescriptionProvider;
 	}
 	
-	public void setImportedNamesProvider(IImportedNamesProvider importProvider) {
-		this.importedNamesProvider = importProvider;
+	public IResourceDescription.Provider getResourceDescriptionProvider() {
+		return resourceDescriptionProvider;
 	}
 	
-	public IImportedNamesProvider getImportedNamesProvider() {
-		return importedNamesProvider;
+	public void setQualifiedNameProvider(IQualifiedNameProvider qualifiedNameProvider) {
+		this.qualifiedNameProvider = qualifiedNameProvider;
 	}
-	
-	public IExportedEObjectsProvider getExportedEObjectsProvider() {
-		return exportedEObjectsProvider;
+
+	public IQualifiedNameProvider getQualifiedNameProvider() {
+		return qualifiedNameProvider;
 	}
 
 	public XtextResource(URI uri) {

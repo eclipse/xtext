@@ -17,28 +17,19 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 
 /**
  * A {@link IGlobalScopeProvider} which puts all elements in the {@link ResourceSet} on the scope.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
-
-	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
-
-	@Inject
-	public void setServiceProvider(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
-		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
-	}
+public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAwareScopeProvider implements IGlobalScopeProvider {
 
 	public IScope getScope(EObject context, EReference reference) {
 		IScope parent = IScope.NULLSCOPE;
@@ -60,9 +51,7 @@ public class ResourceSetGlobalScopeProvider extends AbstractScopeProvider implem
 		List<Iterable<IEObjectDescription>> iterables = new ArrayList<Iterable<IEObjectDescription>>();
 
 		for (Resource resource : resourceSet.getResources()) {
-			IExportedEObjectsProvider service = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
-			if (service != null)
-				iterables.add(service.getExportedObjects(resource));
+			iterables.add(getExportedEObjects(resource));
 		}
 		Iterable<IEObjectDescription> descriptions = Iterables.concat(iterables);
 		Iterable<IEObjectDescription> filtered = filter(descriptions, new Predicate<IEObjectDescription>() {

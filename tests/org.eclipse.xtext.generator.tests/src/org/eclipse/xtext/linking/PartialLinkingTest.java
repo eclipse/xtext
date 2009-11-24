@@ -16,14 +16,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -56,11 +54,9 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
-		globalScopeProvider.setServiceProvider(new IExportedEObjectsProvider.Registry() {
-			public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
-				DefaultExportedEObjectsProvider result = new DefaultExportedEObjectsProvider();
-				result.setNameProvider(new DefaultDeclarativeQualifiedNameProvider());
-				return result;
+		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Provider.Registry() {
+			public IResourceDescription.Provider getResourceDescriptionProvider(Resource resource) {
+				return get(IResourceDescription.Provider.class);
 			}
 		});
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);

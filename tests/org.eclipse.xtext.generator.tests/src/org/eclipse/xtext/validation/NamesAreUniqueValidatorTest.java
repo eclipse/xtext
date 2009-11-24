@@ -17,21 +17,23 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider.Registry;
-import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.AbstractResourceBasedResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, Registry {
+public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Provider.Registry {
 
 	private NamesAreUniqueValidator validator;
-	private DefaultExportedEObjectsProvider eObjectsProvider;
+	private DefaultResourceDescriptionProvider resourceDescriptionProvider;
 	private int callCount;
 	private Map<Object, Object> context;
 	private Resource resource;
@@ -46,13 +48,25 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 				return context;
 			}
 		};
-		validator.setExportedEObjectProviderRegistry(this);
+		validator.setResourceDescriptionProviderRegistry(this);
 		validator.setHelper(this);
-		eObjectsProvider = new DefaultExportedEObjectsProvider();
-		eObjectsProvider.setNameProvider(new IQualifiedNameProvider.AbstractImpl() {
-			public String getQualifiedName(EObject obj) {
-				return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
+		resourceDescriptionProvider = new DefaultResourceDescriptionProvider();
+		resourceDescriptionProvider.setDescriptionProvider(new Provider<AbstractResourceBasedResourceDescription>() {
+			public AbstractResourceBasedResourceDescription get() {
+				DefaultResourceDescription resourceDescription = new DefaultResourceDescription();
+				resourceDescription.setResource(resource);
+				resourceDescription.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
+					public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
+						return new IQualifiedNameProvider.AbstractImpl() {
+							public String getQualifiedName(EObject obj) {
+								return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
+							}
+						};
+					}
+				});
+				return resourceDescription;
 			}
+			
 		});
 		callCount = 0;
 		resource = new ResourceImpl();
@@ -83,7 +97,8 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		assertSame(validator, acceptor);
 	}
 
-	public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
-		return eObjectsProvider;
+	public IResourceDescription.Provider getResourceDescriptionProvider(Resource resource) {
+		return resourceDescriptionProvider;
 	}
+
 }

@@ -8,11 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public abstract class AbstractEObjectDescription implements IEObjectDescription {
 	@Override
