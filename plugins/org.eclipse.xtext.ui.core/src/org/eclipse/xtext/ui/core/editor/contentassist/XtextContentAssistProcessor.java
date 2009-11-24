@@ -64,7 +64,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	private String completionProposalAutoActivationCharacters = null;
 	
 	@Inject(optional = true)
-	@Named(value=COMPLETION_AUTO_ACTIVATION_CHARS)
+	@Named(value=CONTEXT_INFO_AUTO_ACTIVATION_CHARS)
 	private String contextInformationAutoActivationCharacters = null;
 	
 	@Inject(optional = true)
