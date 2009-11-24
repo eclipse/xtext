@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.inject.Inject;
 
@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
-	private IExportedEObjectsProvider.Registry exportedEObjectProviderRegistry;
+	private IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry;
 	
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
@@ -59,19 +59,14 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IExportedEObjectsProvider provider = exportedEObjectProviderRegistry.getExportedEObjectsProvider(resource);
+		IResourceDescription.Provider provider = resourceDescriptionProviderRegistry.getResourceDescriptionProvider(resource);
 		if (provider != null) {
-			Iterable<IEObjectDescription> descriptions = provider.getExportedObjects(resource);
-			helper.checkUniqueNames(descriptions, cancelIndicator, this);
+			IResourceDescription description = provider.getResourceDescription(resource);
+			if (description != null) {
+				Iterable<IEObjectDescription> descriptions = description.getExportedObjects();
+				helper.checkUniqueNames(descriptions, cancelIndicator, this);
+			}
 		}
-	}
-
-	public void setExportedEObjectProviderRegistry(IExportedEObjectsProvider.Registry exportedEObjectProviderRegistry) {
-		this.exportedEObjectProviderRegistry = exportedEObjectProviderRegistry;
-	}
-
-	public IExportedEObjectsProvider.Registry getExportedEObjectProviderRegistry() {
-		return exportedEObjectProviderRegistry;
 	}
 
 	public void setHelper(INamesAreUniqueValidationHelper helper) {
@@ -80,6 +75,14 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	public INamesAreUniqueValidationHelper getHelper() {
 		return helper;
+	}
+
+	public void setResourceDescriptionProviderRegistry(IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry) {
+		this.resourceDescriptionProviderRegistry = resourceDescriptionProviderRegistry;
+	}
+
+	public IResourceDescription.Provider.Registry getResourceDescriptionProviderRegistry() {
+		return resourceDescriptionProviderRegistry;
 	}
 	
 }

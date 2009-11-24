@@ -20,33 +20,28 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
-
-	private ImportUriResolver importResolver = null;
+public class ImportUriGlobalScopeProvider extends AbstractExportedObjectsAwareScopeProvider implements IGlobalScopeProvider {
 
 	@Inject
+	private ImportUriResolver importResolver;
+	
+	public ImportUriResolver getImportUriResolver() {
+		return importResolver;
+	}
+	
 	public void setImportResolver(ImportUriResolver importResolver) {
 		this.importResolver = importResolver;
-	}
-
-	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
-
-	@Inject
-	public void setServiceProvider(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
-		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
@@ -86,11 +81,7 @@ public class ImportUriGlobalScopeProvider extends AbstractScopeProvider implemen
 			@Override
 			public Iterable<IEObjectDescription> internalGetContents() {
 				final Resource resource = EcoreUtil2.getResource(context.eResource(), createURI.toString());
-				IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry
-						.getExportedEObjectsProvider(resource);
-				if (provider == null)
-					return Iterables.emptyIterable();
-				Iterable<IEObjectDescription> exportedObjects = provider.getExportedObjects(resource);
+				Iterable<IEObjectDescription> exportedObjects = getExportedEObjects(resource);
 				Iterable<IEObjectDescription> filtered = filter(exportedObjects, new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
 						return reference.getEReferenceType().isSuperTypeOf(input.getEClass());

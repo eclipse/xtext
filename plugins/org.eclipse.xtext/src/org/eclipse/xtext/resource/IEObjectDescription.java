@@ -47,4 +47,5 @@ public interface IEObjectDescription {
 	 * @return all available user data keys 
 	 */
 	String[] getUserDataKeys();
+	
 }

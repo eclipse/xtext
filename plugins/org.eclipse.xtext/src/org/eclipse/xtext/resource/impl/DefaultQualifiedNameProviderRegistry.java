@@ -8,24 +8,21 @@
 package org.eclipse.xtext.resource.impl;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @author Sven Efftinge
  */
-public class ExportedEObjectProviderRegistry implements IExportedEObjectsProvider.Registry {
-	
-	public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
+public class DefaultQualifiedNameProviderRegistry implements IQualifiedNameProvider.Registry {
+
+	public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
 		if (resource instanceof XtextResource) {
-			return ((XtextResource) resource).getExportedEObjectsProvider();
+			return ((XtextResource) resource).getQualifiedNameProvider();
 		}
-		// use simple name as fall back;
-		DefaultExportedEObjectsProvider exportedEObjectsProvider = new DefaultExportedEObjectsProvider();
-		exportedEObjectsProvider.setNameProvider(new SimpleNameProvider());
-		return exportedEObjectsProvider;
+		// use default simple name provider as fallback
+		return new SimpleNameProvider();
 	}
-	
+
 }

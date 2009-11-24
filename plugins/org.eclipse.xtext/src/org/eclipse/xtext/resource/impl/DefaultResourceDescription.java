@@ -10,43 +10,42 @@ package org.eclipse.xtext.resource.impl;
 import static com.google.common.collect.Iterables.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultExportedEObjectsProvider implements IExportedEObjectsProvider {
+public class DefaultResourceDescription extends AbstractResourceBasedResourceDescription {
 
+	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
+	
 	@Inject
-	private IQualifiedNameProvider nameProvider;
-
-	public void setNameProvider(IQualifiedNameProvider nameProvider) {
-		this.nameProvider = nameProvider;
-	}
-
-	private final static Logger log = Logger.getLogger(DefaultExportedEObjectsProvider.class);
-
-	public Iterable<IEObjectDescription> getExportedObjects(final Resource resource) {
-		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(resource); 
+	private IQualifiedNameProvider.Registry nameProviderRegistry;
+	
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(getResource()); 
 		if (adapter.get(getClass().getName()) == null) {
-			if (!resource.isLoaded()) {
+			if (!getResource().isLoaded()) {
 				try {
-					resource.load(null);
+					getResource().load(null);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 					return Iterables.emptyIterable();
@@ -54,7 +53,7 @@ public class DefaultExportedEObjectsProvider implements IExportedEObjectsProvide
 			}
 			Iterable<EObject> contents = new Iterable<EObject>() {
 				public Iterator<EObject> iterator() {
-					return EcoreUtil.getAllProperContents(resource, true);
+					return EcoreUtil.getAllProperContents(getResource(), true);
 				}
 			};
 			Iterable<IEObjectDescription> result = transform(contents, new Function<EObject, IEObjectDescription>() {
@@ -69,12 +68,35 @@ public class DefaultExportedEObjectsProvider implements IExportedEObjectsProvide
 	}
 
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
-		String qualifiedName = nameProvider.getQualifiedName(from);
+		IQualifiedNameProvider qualifiedNameProvider = nameProviderRegistry.getQualifiedNameProvider(from.eResource());
+		if (qualifiedNameProvider == null)
+			return null;
+		String qualifiedName = qualifiedNameProvider.getQualifiedName(from);
 		if (qualifiedName != null) {
 			return EObjectDescription.create(qualifiedName, from);
 		}
 		return null;
 	}
+	
+	public Iterable<String> getImportedNames() {
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(getResource());
+		if (adapter!=null) {
+			ImmutableSet<String> result = ImmutableSet.copyOf(adapter.getImportedNames());
+			return result;
+		}
+		return Collections.emptySet();
+	}
 
+	public URI getURI() {
+		return getResource().getURI();
+	}
 
+	public void setQualifiedNameProviderRegistry(IQualifiedNameProvider.Registry nameProviderRegistry) {
+		this.nameProviderRegistry = nameProviderRegistry;
+	}
+	
+	public IQualifiedNameProvider.Registry getQualifiedNameProviderRegistry() {
+		return nameProviderRegistry;
+	}
+	
 }

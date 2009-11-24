@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,11 +26,13 @@ import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.DefaultExportedEObjectsProvider;
+import org.eclipse.xtext.resource.impl.AbstractResourceBasedResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -56,10 +59,22 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
-		globalScopeProvider.setServiceProvider(new IExportedEObjectsProvider.Registry() {
-			public IExportedEObjectsProvider getExportedEObjectsProvider(Resource resource) {
-				DefaultExportedEObjectsProvider result = new DefaultExportedEObjectsProvider();
-				result.setNameProvider(new DefaultDeclarativeQualifiedNameProvider());
+		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Provider.Registry() {
+			public IResourceDescription.Provider getResourceDescriptionProvider(final Resource resource) {
+				DefaultResourceDescriptionProvider result = new DefaultResourceDescriptionProvider();
+				result.setDescriptionProvider(new Provider<AbstractResourceBasedResourceDescription>() {
+					public AbstractResourceBasedResourceDescription get() {
+						DefaultResourceDescription result = new DefaultResourceDescription();
+						result.setResource(resource);
+						result.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
+							public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
+								return new DefaultDeclarativeQualifiedNameProvider();
+							}
+						});
+						return result;
+					}
+					
+				});
 				return result;
 			}});
 		scopeProvider = new QualifiedNameScopeProvider();

@@ -27,8 +27,7 @@ import org.eclipse.xtext.builder.builderState.Container;
 import org.eclipse.xtext.builder.builderState.ResourceDescriptor;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IExportedEObjectsProvider;
-import org.eclipse.xtext.resource.IImportedNamesProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
@@ -44,10 +43,7 @@ public class ResourceIndexer implements IResourceIndexer {
 	private BuilderStateManager builderStateManager;
 
 	@Inject
-	private IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry;
-
-	@Inject
-	private IImportedNamesProvider.Registry importedNamesProviderRegistry;
+	private IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry;
 
 	@Inject
 	private StorageUtil storageUtil;
@@ -55,16 +51,16 @@ public class ResourceIndexer implements IResourceIndexer {
 	@Inject
 	private ResourceProvider resourceProvider;
 
+	public void setResourceDescriptionProviderRegistry(IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry) {
+		this.resourceDescriptionProviderRegistry = resourceDescriptionProviderRegistry;
+	}
+
+	public IResourceDescription.Provider.Registry getResourceDescriptionProviderRegistry() {
+		return resourceDescriptionProviderRegistry;
+	}
+
 	public void setBuilderStateManager(BuilderStateManager builderStateManager) {
 		this.builderStateManager = builderStateManager;
-	}
-
-	public void setExportedEObjectsProviderRegistry(IExportedEObjectsProvider.Registry exportedEObjectsProviderRegistry) {
-		this.exportedEObjectsProviderRegistry = exportedEObjectsProviderRegistry;
-	}
-
-	public void setImportedNamesProviderRegistry(IImportedNamesProvider.Registry importedNamesProviderRegistry) {
-		this.importedNamesProviderRegistry = importedNamesProviderRegistry;
 	}
 
 	public void setResourceProvider(ResourceProvider resourceProvider) {
@@ -121,8 +117,8 @@ public class ResourceIndexer implements IResourceIndexer {
 	}
 
 	protected void addExportedEObjects(final Resource resource, ResourceDescriptor res) {
-		IExportedEObjectsProvider provider = exportedEObjectsProviderRegistry.getExportedEObjectsProvider(resource);
-		Iterable<IEObjectDescription> objects = provider.getExportedObjects(resource);
+		IResourceDescription description = getResourceDescription(resource);
+		Iterable<IEObjectDescription> objects = description.getExportedObjects();
 
 		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
 		for (IEObjectDescription ieObjectDescription : objects) {
@@ -131,6 +127,12 @@ public class ResourceIndexer implements IResourceIndexer {
 		}
 		sortByName(descriptions);
 		res.getEObjectDescriptions().addAll(descriptions);
+	}
+
+	protected IResourceDescription getResourceDescription(Resource resource) {
+		IResourceDescription.Provider descriptionProvider = resourceDescriptionProviderRegistry.getResourceDescriptionProvider(resource);
+		IResourceDescription description = descriptionProvider.getResourceDescription(resource);
+		return description;
 	}
 
 	protected void cleanAndUpdate(ResourceDescriptor res, Resource resource, IStorage storage) {
@@ -216,8 +218,8 @@ public class ResourceIndexer implements IResourceIndexer {
 	}
 
 	protected void addImportedNames(final Resource resource, ResourceDescriptor res) {
-		IImportedNamesProvider namesProvider = importedNamesProviderRegistry.getImportedNamesProvider(resource);
-		Iterable<String> names = namesProvider.getImportedNames(resource);
+		IResourceDescription description = getResourceDescription(resource);
+		Iterable<String> names = description.getImportedNames();
 		for (String string : names) {
 			res.getImportedNames().add(string);
 		}

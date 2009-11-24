@@ -8,19 +8,26 @@
 package org.eclipse.xtext.resource.impl;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IImportedNamesProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ImportedNamesProviderRegistry implements IImportedNamesProvider.Registry {
+public class DefaultResourceDescriptionProviderRegistry implements IResourceDescription.Provider.Registry {
 
-	public IImportedNamesProvider getImportedNamesProvider(Resource resource) {
+	@Inject
+	private Provider<IResourceDescription.Provider> resourceDescriptionProvider;
+	
+	public IResourceDescription.Provider getResourceDescriptionProvider(Resource resource) {
 		if (resource instanceof XtextResource) {
-			return ((XtextResource) resource).getImportedNamesProvider();
+			return ((XtextResource) resource).getResourceDescriptionProvider();
 		}
-		return null;
+		// use default impl as fallback
+		return resourceDescriptionProvider.get();
 	}
-
+	
 }
