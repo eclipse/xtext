@@ -276,7 +276,24 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			throws RecognitionException {
 		if (currentError == null)
 			currentError = getErrorMessage(re, getTokenNames());
-		super.recoverFromMismatchedToken(in, re, ttype, follow);
+		// inlined super call because we want to get rid of the System.err.println(..)
+		// System.err.println("BR.recoverFromMismatchedToken");
+		// if next token is what we are looking for then "delete" this token
+		if ( input.LA(2)==ttype ) {
+			reportError(re);
+			/*
+			System.err.println("recoverFromMismatchedToken deleting "+input.LT(1)+
+							   " since "+input.LT(2)+" is what we want");
+			*/
+			beginResync();
+			input.consume(); // simply delete extra token
+			endResync();
+			input.consume(); // move past ttype token as if all were ok
+			return;
+		}
+		if ( !recoverFromMismatchedElement(input, re,follow) ) {
+			throw re;
+		}
 	}
 
 	public final IParseResult parse() throws RecognitionException {
