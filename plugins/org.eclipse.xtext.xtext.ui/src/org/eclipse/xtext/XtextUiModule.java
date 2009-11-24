@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCo
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
 import org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder;
+import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -22,11 +23,22 @@ import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalc
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * used to register components to be used within the IDE.
  */
 public class XtextUiModule extends AbstractXtextUiModule {
 
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(String.class).annotatedWith(Names.named(
+				XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("=[{");
+
+	}
+	
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return XtextDeclarativeModelTransformer.class;
