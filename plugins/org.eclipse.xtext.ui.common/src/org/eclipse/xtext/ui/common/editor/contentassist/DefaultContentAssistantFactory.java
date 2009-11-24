@@ -52,6 +52,7 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 
 	private void configureDefaults(ContentAssistant assistant, SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		setAutoInsert(assistant);
+		setAutoActivation(assistant);
 		setContentAssistProcessor(assistant);
 		setInformationControlCreator(assistant, configuration, sourceViewer);
 		setDialogSettings(assistant);
@@ -70,6 +71,13 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 
 	protected void setAutoInsert(ContentAssistant assistant) {
 		assistant.enableAutoInsert(true);
+	}
+	
+	protected void setAutoActivation(ContentAssistant assistant) {
+		if (contentAssistProcessor != null) {
+			boolean activated = contentAssistProcessor.getCompletionProposalAutoActivationCharacters() != null;
+			assistant.enableAutoActivation(activated);
+		}
 	}
 	
 	protected void setContentAssistProcessor(ContentAssistant assistant) {
