@@ -59,7 +59,7 @@ bc.. public void completeModel_StringDescription (
   // check for valid prefixes
   // and terminal token conflicts
   ICompletionProposal completionProposal = 
-    createCompletionProposal(proposal, contentAssistContext);
+    createCompletionProposal(proposal, context);
 
   // register the proposal, the acceptor handles null-values gracefully
   acceptor.accept(completionProposal);
