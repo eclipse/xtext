@@ -63,7 +63,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getImportedNames if this dirty resource is not connected to a document");
 		return document.readOnly(new IUnitOfWork<Iterable<String>, XtextResource>(){
 			public Iterable<String> exec(XtextResource resource) throws Exception {
-				IResourceDescription.Manager manager = resource.getResourceDescriptionProvider();
+				IResourceDescription.Manager manager = resource.getResourceDescriptionManager();
 				if (manager == null)
 					return Collections.emptyList();
 				IResourceDescription description = manager.getResourceDescription(resource);
@@ -79,7 +79,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getExportedObjects if this dirty resource is not connected to a document");
 		return document.readOnly(new IUnitOfWork<Iterable<IEObjectDescription>, XtextResource>(){
 			public Iterable<IEObjectDescription> exec(XtextResource resource) throws Exception {
-				IResourceDescription.Manager manager = resource.getResourceDescriptionProvider();
+				IResourceDescription.Manager manager = resource.getResourceDescriptionManager();
 				if (manager == null)
 					return Collections.emptyList();
 				IResourceDescription description = manager.getResourceDescription(resource);

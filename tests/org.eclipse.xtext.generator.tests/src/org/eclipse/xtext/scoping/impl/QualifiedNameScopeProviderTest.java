@@ -57,7 +57,7 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
-		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Manager.Registry() {
+		globalScopeProvider.setResourceDescriptionManagerRegistry(new IResourceDescription.Manager.Registry() {
 			public IResourceDescription.Manager getResourceDescriptionManager(final URI uri, String contentType) {
 				return new DefaultResourceDescriptionManager() {
 					@Override
