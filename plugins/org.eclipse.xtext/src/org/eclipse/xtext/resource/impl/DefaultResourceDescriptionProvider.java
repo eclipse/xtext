@@ -8,10 +8,10 @@
 package org.eclipse.xtext.resource.impl;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,20 +19,17 @@ import com.google.inject.Provider;
 public class DefaultResourceDescriptionProvider implements IResourceDescription.Provider {
 
 	@Inject
-	private Provider<AbstractResourceBasedResourceDescription> descriptionProvider;
+	private IQualifiedNameProvider.Registry nameProviderRegistry;
 	
 	public IResourceDescription getResourceDescription(Resource resource) {
-		AbstractResourceBasedResourceDescription result = descriptionProvider.get();
-		result.setResource(resource);
+		IQualifiedNameProvider nameProvider = nameProviderRegistry.getQualifiedNameProvider(resource);
+		IResourceDescription result = createResourceDescription(resource, nameProvider);
 		return result;
 	}
 
-	public void setDescriptionProvider(Provider<AbstractResourceBasedResourceDescription> descriptionProvider) {
-		this.descriptionProvider = descriptionProvider;
-	}
-
-	public Provider<AbstractResourceBasedResourceDescription> getDescriptionProvider() {
-		return descriptionProvider;
+	protected IResourceDescription createResourceDescription(Resource resource,
+			IQualifiedNameProvider nameProvider) {
+		return new DefaultResourceDescription(resource, nameProvider);
 	}
 
 }

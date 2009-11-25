@@ -9,7 +9,6 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.impl.AbstractResourceBasedResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProviderRegistry;
 
@@ -18,7 +17,6 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(AbstractResourceBasedResourceDescription.class)
 public interface IResourceDescription {
 
 	/**
