@@ -31,6 +31,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
@@ -56,14 +57,16 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
-		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Provider.Registry() {
-			public IResourceDescription.Provider getResourceDescriptionProvider(final Resource resource) {
-				return new IResourceDescription.Provider() {
+		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Manager.Registry() {
+			public IResourceDescription.Manager getResourceDescriptionManager(final URI uri, String contentType) {
+				return new DefaultResourceDescriptionManager() {
+					@Override
 					public IResourceDescription getResourceDescription(Resource resource) {
 						DefaultResourceDescription resourceDescription = new DefaultResourceDescription(
 								resource, new DefaultDeclarativeQualifiedNameProvider());
 						return resourceDescription;
 					}
+
 				};
 			}});
 		scopeProvider = new QualifiedNameScopeProvider();
