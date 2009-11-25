@@ -20,21 +20,21 @@ import com.google.inject.Inject;
 public abstract class AbstractExportedObjectsAwareScopeProvider extends AbstractScopeProvider {
 
 	@Inject
-	private IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry;
+	private IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry;
 	
-	public IResourceDescription.Provider.Registry getResourceDescriptionProviderRegistry() {
-		return resourceDescriptionProviderRegistry;
+	public IResourceDescription.Manager.Registry getResourceDescriptionManagerRegistry() {
+		return resourceDescriptionManagerRegistry;
 	}
 
-	public void setResourceDescriptionProviderRegistry(IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry) {
-		this.resourceDescriptionProviderRegistry = resourceDescriptionProviderRegistry;
+	public void setResourceDescriptionProviderRegistry(IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry) {
+		this.resourceDescriptionManagerRegistry = resourceDescriptionProviderRegistry;
 	}
 	
 	public Iterable<IEObjectDescription> getExportedEObjects(Resource resource) {
-		IResourceDescription.Provider provider = resourceDescriptionProviderRegistry.getResourceDescriptionProvider(resource);
-		if (provider == null)
+		IResourceDescription.Manager manager = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		if (manager == null)
 			return Iterables.emptyIterable();
-		IResourceDescription description = provider.getResourceDescription(resource);
+		IResourceDescription description = manager.getResourceDescription(resource);
 		if (description == null)
 			return Iterables.emptyIterable();
 		Iterable<IEObjectDescription> result = description.getExportedObjects();

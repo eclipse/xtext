@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.3 2009/11/25 16:24:22 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -225,8 +225,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getResourceDescription_ContainerName() {
-		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(4);
+	public EReference getResourceDescription_Container() {
+		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -384,7 +384,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		createEReference(resourceDescriptionEClass, RESOURCE_DESCRIPTION__EXPORTED_OBJECTS);
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__IMPORTED_NAMES);
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__PATH_TO_STORAGE);
-		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__CONTAINER_NAME);
+		createEReference(resourceDescriptionEClass, RESOURCE_DESCRIPTION__CONTAINER);
 
 		eObjectDescriptionEClass = createEClass(EOBJECT_DESCRIPTION);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__NAME);
@@ -437,7 +437,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		// Initialize classes and features; add operations and parameters
 		initEClass(containerEClass, org.eclipse.xtext.builder.builderState.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, org.eclipse.xtext.builder.builderState.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContainer_ResourceDescriptions(), this.getResourceDescription(), null, "resourceDescriptions", null, 0, -1, org.eclipse.xtext.builder.builderState.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainer_ResourceDescriptions(), this.getResourceDescription(), this.getResourceDescription_Container(), "resourceDescriptions", null, 0, -1, org.eclipse.xtext.builder.builderState.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Project(), ecorePackage.getEString(), "project", null, 0, 1, org.eclipse.xtext.builder.builderState.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(containerEClass, this.getResourceDescription(), "getResourceDescription", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -448,7 +448,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_ImportedNames(), ecorePackage.getEString(), "importedNames", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_PathToStorage(), ecorePackage.getEString(), "pathToStorage", null, 0, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceDescription_ContainerName(), ecorePackage.getEString(), "containerName", null, 0, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_Container(), this.getContainer(), this.getContainer_ResourceDescriptions(), "container", null, 1, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eObjectDescriptionEClass, IEObjectDescription.class, "EObjectDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEObjectDescription_Name(), ecorePackage.getEString(), "name", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

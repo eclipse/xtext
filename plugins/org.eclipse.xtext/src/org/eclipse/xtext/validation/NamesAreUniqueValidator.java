@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
-	private IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry;
+	private IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry;
 	
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
@@ -59,9 +59,9 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IResourceDescription.Provider provider = resourceDescriptionProviderRegistry.getResourceDescriptionProvider(resource);
-		if (provider != null) {
-			IResourceDescription description = provider.getResourceDescription(resource);
+		IResourceDescription.Manager manager = resourceDescriptionProviderRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		if (manager != null) {
+			IResourceDescription description = manager.getResourceDescription(resource);
 			if (description != null) {
 				Iterable<IEObjectDescription> descriptions = description.getExportedObjects();
 				helper.checkUniqueNames(descriptions, cancelIndicator, this);
@@ -77,11 +77,11 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 		return helper;
 	}
 
-	public void setResourceDescriptionProviderRegistry(IResourceDescription.Provider.Registry resourceDescriptionProviderRegistry) {
+	public void setResourceDescriptionProviderRegistry(IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry) {
 		this.resourceDescriptionProviderRegistry = resourceDescriptionProviderRegistry;
 	}
 
-	public IResourceDescription.Provider.Registry getResourceDescriptionProviderRegistry() {
+	public IResourceDescription.Manager.Registry getResourceDescriptionProviderRegistry() {
 		return resourceDescriptionProviderRegistry;
 	}
 	

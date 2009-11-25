@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Container.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: Container.java,v 1.3 2009/11/25 16:24:23 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -60,6 +60,7 @@ public interface Container extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Resource Descriptions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.resource.IResourceDescription}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.resource.IResourceDescription#getContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resource Descriptions</em>' containment reference list isn't clear,
@@ -68,7 +69,8 @@ public interface Container extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Resource Descriptions</em>' containment reference list.
 	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getContainer_ResourceDescriptions()
-	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" containment="true"
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getContainer
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" opposite="container" containment="true"
 	 * @generated
 	 */
 	EList<IResourceDescription> getResourceDescriptions();

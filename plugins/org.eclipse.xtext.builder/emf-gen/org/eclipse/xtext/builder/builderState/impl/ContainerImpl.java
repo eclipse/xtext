@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainerImpl.java,v 1.3 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: ContainerImpl.java,v 1.4 2009/11/25 16:24:22 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -140,7 +141,7 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 	 */
 	public EList<IResourceDescription> getResourceDescriptions() {
 		if (resourceDescriptions == null) {
-			resourceDescriptions = new EObjectContainmentEList<IResourceDescription>(IResourceDescription.class, this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS);
+			resourceDescriptions = new EObjectContainmentWithInverseEList<IResourceDescription>(IResourceDescription.class, this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS, BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER);
 		}
 		return resourceDescriptions;
 	}
@@ -175,6 +176,21 @@ public class ContainerImpl extends Container implements org.eclipse.xtext.builde
 				return description;
 		}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getResourceDescriptions()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

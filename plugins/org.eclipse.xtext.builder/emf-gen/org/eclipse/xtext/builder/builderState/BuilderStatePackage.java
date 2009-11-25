@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.2 2009/11/24 18:25:12 szarnekow Exp $
+ * $Id: BuilderStatePackage.java,v 1.3 2009/11/25 16:24:23 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -153,13 +153,13 @@ public interface BuilderStatePackage extends EPackage {
 	int RESOURCE_DESCRIPTION__PATH_TO_STORAGE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Container Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTION__CONTAINER_NAME = 4;
+	int RESOURCE_DESCRIPTION__CONTAINER = 4;
 
 	/**
 	 * The number of structural features of the '<em>Resource Description</em>' class.
@@ -419,15 +419,15 @@ public interface BuilderStatePackage extends EPackage {
 	EAttribute getResourceDescription_PathToStorage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getContainerName <em>Container Name</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.resource.IResourceDescription#getContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Container Name</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getContainerName()
+	 * @return the meta object for the container reference '<em>Container</em>'.
+	 * @see org.eclipse.xtext.resource.IResourceDescription#getContainer()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EAttribute getResourceDescription_ContainerName();
+	EReference getResourceDescription_Container();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>EObject Description</em>}'.
@@ -670,12 +670,12 @@ public interface BuilderStatePackage extends EPackage {
 		EAttribute RESOURCE_DESCRIPTION__PATH_TO_STORAGE = eINSTANCE.getResourceDescription_PathToStorage();
 
 		/**
-		 * The meta object literal for the '<em><b>Container Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Container</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE_DESCRIPTION__CONTAINER_NAME = eINSTANCE.getResourceDescription_ContainerName();
+		EReference RESOURCE_DESCRIPTION__CONTAINER = eINSTANCE.getResourceDescription_Container();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl <em>EObject Description</em>}' class.

@@ -67,7 +67,7 @@ public class XtextResource extends ResourceImpl {
 	private IReferableElementsUnloader unloader;
 	
 	@Inject
-	private IResourceDescription.Provider resourceDescriptionProvider;
+	private IResourceDescription.Manager resourceDescriptionProvider;
 	
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
@@ -79,11 +79,11 @@ public class XtextResource extends ResourceImpl {
 		this.parser = parser;
 	}
 	
-	public void setResourceDescriptionProvider(IResourceDescription.Provider resourceDescriptionProvider) {
+	public void setResourceDescriptionProvider(IResourceDescription.Manager resourceDescriptionProvider) {
 		this.resourceDescriptionProvider = resourceDescriptionProvider;
 	}
 	
-	public IResourceDescription.Provider getResourceDescriptionProvider() {
+	public IResourceDescription.Manager getResourceDescriptionProvider() {
 		return resourceDescriptionProvider;
 	}
 	
