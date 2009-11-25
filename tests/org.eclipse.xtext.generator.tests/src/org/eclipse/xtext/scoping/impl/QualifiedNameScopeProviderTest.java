@@ -30,9 +30,7 @@ import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.AbstractResourceBasedResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
@@ -42,7 +40,6 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,21 +58,13 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
 		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Provider.Registry() {
 			public IResourceDescription.Provider getResourceDescriptionProvider(final Resource resource) {
-				DefaultResourceDescriptionProvider result = new DefaultResourceDescriptionProvider();
-				result.setDescriptionProvider(new Provider<AbstractResourceBasedResourceDescription>() {
-					public AbstractResourceBasedResourceDescription get() {
-						DefaultResourceDescription result = new DefaultResourceDescription();
-						result.setResource(resource);
-						result.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
-							public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
-								return new DefaultDeclarativeQualifiedNameProvider();
-							}
-						});
-						return result;
+				return new IResourceDescription.Provider() {
+					public IResourceDescription getResourceDescription(Resource resource) {
+						DefaultResourceDescription resourceDescription = new DefaultResourceDescription(
+								resource, new DefaultDeclarativeQualifiedNameProvider());
+						return resourceDescription;
 					}
-					
-				});
-				return result;
+				};
 			}});
 		scopeProvider = new QualifiedNameScopeProvider();
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
@@ -86,7 +75,13 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		XtextResource resource = getResource(new StringInputStream("import foo.bar.* "), URI
 				.createURI("import.indextestlanguage"));
 		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
-				new StringInputStream("foo.bar { " + "  entity Person {  " + "    String name " + "  } " + "  datatype String " + "}"), null);
+				new StringInputStream(
+						"foo.bar { " + 
+						"  entity Person {  " + 
+						"    String name " + 
+						"  } " + 
+						"  datatype String " + 
+						"}"), null);
 
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());

@@ -19,13 +19,10 @@ import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.impl.AbstractResourceBasedResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,7 +30,7 @@ import com.google.inject.Provider;
 public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Provider.Registry {
 
 	private NamesAreUniqueValidator validator;
-	private DefaultResourceDescriptionProvider resourceDescriptionProvider;
+	private IResourceDescription.Provider resourceDescriptionProvider;
 	private int callCount;
 	private Map<Object, Object> context;
 	private Resource resource;
@@ -50,24 +47,16 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		};
 		validator.setResourceDescriptionProviderRegistry(this);
 		validator.setHelper(this);
-		resourceDescriptionProvider = new DefaultResourceDescriptionProvider();
-		resourceDescriptionProvider.setDescriptionProvider(new Provider<AbstractResourceBasedResourceDescription>() {
-			public AbstractResourceBasedResourceDescription get() {
-				DefaultResourceDescription resourceDescription = new DefaultResourceDescription();
-				resourceDescription.setResource(resource);
-				resourceDescription.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
-					public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
-						return new IQualifiedNameProvider.AbstractImpl() {
-							public String getQualifiedName(EObject obj) {
-								return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
-							}
-						};
+		resourceDescriptionProvider = new IResourceDescription.Provider() {
+			public IResourceDescription getResourceDescription(Resource resource) {
+				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
+					public String getQualifiedName(EObject obj) {
+						return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
 					}
 				});
 				return resourceDescription;
 			}
-			
-		});
+		};
 		callCount = 0;
 		resource = new ResourceImpl();
 		resource.getContents().add(EcoreFactory.eINSTANCE.createEClass());
