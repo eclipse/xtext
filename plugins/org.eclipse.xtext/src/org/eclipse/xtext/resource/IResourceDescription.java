@@ -9,8 +9,8 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProvider;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionProviderRegistry;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManagerRegistry;
 
 import com.google.inject.ImplementedBy;
 
@@ -20,32 +20,73 @@ import com.google.inject.ImplementedBy;
 public interface IResourceDescription {
 
 	/**
-	 * @return descriptions of all EObjects provided by the given Resource. The result is expected
-	 * 	to return any combination of <code>name</code> and <code>eObjectOrProxy</code> only once
-	 *  as an {@link IEObjectDescription}.
+	 * @return descriptions of all EObjects provided by the given Resource. The result is expected to return any
+	 *         combination of <code>name</code> and <code>eObjectOrProxy</code> only once as an
+	 *         {@link IEObjectDescription}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects();
-	
+
 	/**
-	 * returns the list of names the described resource depends
-	 * depends on. 
+	 * returns the list of names the described resource depends depends on.
 	 */
 	Iterable<String> getImportedNames();
-	
+
 	URI getURI();
-	
-//	boolean isDirtyState();
-	
-//	String getContainerName();
-	
-	@ImplementedBy(DefaultResourceDescriptionProvider.class)
-	interface Provider {
+
+	@ImplementedBy(DefaultResourceDescriptionManager.class)
+	interface Manager {
+
+		/**
+		 * @return a resource description for the given resource
+		 */
 		IResourceDescription getResourceDescription(Resource resource);
-		
-		@ImplementedBy(DefaultResourceDescriptionProviderRegistry.class)
+
+		/**
+		 * @return whether the candidate is affected by the change in the delta.
+		 * @throws IllegalArgumentException
+		 *             , if this manager is not responsible for the given candidate.
+		 */
+		boolean isAffected(IResourceDescription.Delta delta, IResourceDescription candidate)
+				throws IllegalArgumentException;
+
+		@ImplementedBy(DefaultResourceDescriptionManagerRegistry.class)
 		interface Registry {
-			IResourceDescription.Provider getResourceDescriptionProvider(Resource resource);
+
+			/**
+			 * Returns the {@link IResourceDescription.Manager} appropriate for the given URI. <b>Content types are not
+			 * yet supported.</b>
+			 * 
+			 * @param uri
+			 *            the URI.
+			 * @param contentType
+			 *            the content type of the URI or <code>null</code> if a content type should not be used during
+			 *            lookup.
+			 * @return the {@link IResourceDescription.Manager} appropriate for the given URI, or <code>null</code> if
+			 *         there isn't one.
+			 */
+			IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType);
 		}
 	}
-	
+
+	/**
+	 * A delta describing the differences between two versions of the same {@link IResourceDescription}. Instances have
+	 * to follow the rule :
+	 * <p>
+	 * <code>getNew()==null || getOld().getURI().equals(getNew().getURI())</code>
+	 * </p>
+	 * and
+	 * <p>
+	 * <code>getNew()!=getOld()</code>
+	 * </p>
+	 * 
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	interface Delta {
+		IResourceDescription getOld();
+
+		IResourceDescription getNew();
+		
+		boolean hasChanges();
+	}
+
 }

@@ -1,0 +1,62 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.resource.impl;
+
+import java.util.Collections;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
+ */
+public class DefaultResourceDescriptionManager implements IResourceDescription.Manager {
+
+	@Inject
+	private IQualifiedNameProvider nameProvider;
+	
+	public IResourceDescription getResourceDescription(Resource resource) {
+		return new DefaultResourceDescription(resource, nameProvider);
+	}
+	
+	public void setNameProvider(IQualifiedNameProvider nameProvider) {
+		this.nameProvider = nameProvider;
+	}
+	
+	public IQualifiedNameProvider getNameProvider() {
+		return nameProvider;
+	}
+
+	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
+		if (!delta.hasChanges())
+			return false;
+		Set<String> names = Sets.newHashSet();
+		addExportedNames(names,delta.getOld());
+		addExportedNames(names,delta.getNew());
+		return !Collections.disjoint(names, Collections2.forIterable(candidate.getImportedNames()));
+	}
+
+	private void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {
+		if (resourceDescriptor==null)
+			return;
+		Iterable<IEObjectDescription> iterable = resourceDescriptor.getExportedObjects();
+		for (IEObjectDescription ieObjectDescription : iterable) {
+			names.add(ieObjectDescription.getName());
+		}
+	}
+
+}
