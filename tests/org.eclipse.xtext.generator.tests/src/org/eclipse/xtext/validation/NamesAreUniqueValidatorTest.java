@@ -9,6 +9,7 @@ package org.eclipse.xtext.validation;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -27,10 +29,10 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Provider.Registry {
+public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Manager.Registry {
 
 	private NamesAreUniqueValidator validator;
-	private IResourceDescription.Provider resourceDescriptionProvider;
+	private IResourceDescription.Manager resourceDescriptionProvider;
 	private int callCount;
 	private Map<Object, Object> context;
 	private Resource resource;
@@ -47,7 +49,8 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		};
 		validator.setResourceDescriptionProviderRegistry(this);
 		validator.setHelper(this);
-		resourceDescriptionProvider = new IResourceDescription.Provider() {
+		resourceDescriptionProvider = new DefaultResourceDescriptionManager() {
+			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
 					public String getQualifiedName(EObject obj) {
@@ -86,7 +89,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		assertSame(validator, acceptor);
 	}
 
-	public IResourceDescription.Provider getResourceDescriptionProvider(Resource resource) {
+	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
 		return resourceDescriptionProvider;
 	}
 

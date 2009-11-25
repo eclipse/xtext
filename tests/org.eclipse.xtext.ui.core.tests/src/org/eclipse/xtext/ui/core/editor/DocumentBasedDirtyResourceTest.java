@@ -13,6 +13,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -22,7 +23,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTest implements  
-	IResourceDescription.Provider, IResourceDescription {
+	IResourceDescription.Manager, IResourceDescription {
 
 	private String documentContent;
 	private XtextResource resource;
@@ -185,6 +186,10 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	public URI getURI() {
 		fail("Unexpected call");
 		return null;
+	}
+
+	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
+		return new DefaultResourceDescriptionManager().isAffected(delta, candidate);
 	}
 	
 }

@@ -10,10 +10,10 @@ package org.eclipse.xtext.linking;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -54,9 +54,9 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
-		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Provider.Registry() {
-			public IResourceDescription.Provider getResourceDescriptionProvider(Resource resource) {
-				return get(IResourceDescription.Provider.class);
+		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Manager.Registry() {
+			public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
+				return get(IResourceDescription.Manager.class);
 			}
 		});
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
