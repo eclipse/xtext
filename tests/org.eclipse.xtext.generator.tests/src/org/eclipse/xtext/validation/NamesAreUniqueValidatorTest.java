@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
 public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Manager.Registry {
 
 	private NamesAreUniqueValidator validator;
-	private IResourceDescription.Manager resourceDescriptionProvider;
+	private IResourceDescription.Manager resourceDescriptionManager;
 	private int callCount;
 	private Map<Object, Object> context;
 	private Resource resource;
@@ -47,9 +47,9 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 				return context;
 			}
 		};
-		validator.setResourceDescriptionProviderRegistry(this);
+		validator.setResourceDescriptionManagerRegistry(this);
 		validator.setHelper(this);
-		resourceDescriptionProvider = new DefaultResourceDescriptionManager() {
+		resourceDescriptionManager = new DefaultResourceDescriptionManager() {
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
@@ -90,7 +90,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 	}
 
 	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
-		return resourceDescriptionProvider;
+		return resourceDescriptionManager;
 	}
 
 }
