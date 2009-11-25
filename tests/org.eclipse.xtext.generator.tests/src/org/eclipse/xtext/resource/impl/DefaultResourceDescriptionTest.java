@@ -29,19 +29,19 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescriptionTest extends TestCase {
+public class DefaultResourceDescriptionTest extends TestCase implements IQualifiedNameProvider {
 
 	private DefaultResourceDescription description;
 	private EPackage pack;
 	private EClass eClass;
 	private EDataType dtype;
 	private Resource resource;
+	private IQualifiedNameProvider delegate;
 	
 	@Override
 	protected void setUp() throws Exception {
-		description = new DefaultResourceDescription();
 		resource = new XMLResourceImpl();
-		description.setResource(resource);
+		description = new DefaultResourceDescription(resource, this);
 		EcoreFactory f = EcoreFactory.eINSTANCE;
 		pack = f.createEPackage();
 		pack.setName("MyPackage");
@@ -55,17 +55,13 @@ public class DefaultResourceDescriptionTest extends TestCase {
 	}
 
 	public void testGetExportedObject_1() throws Exception {
-		description.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
-			public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
-				return new IQualifiedNameProvider.AbstractImpl() {
-					public String getQualifiedName(EObject obj) {
-						if (obj instanceof EPackage)
-							return ((EPackage)obj).getName();
-						return null;
-					}
-				};
+		delegate = new IQualifiedNameProvider.AbstractImpl() {
+			public String getQualifiedName(EObject obj) {
+				if (obj instanceof EPackage)
+					return ((EPackage)obj).getName();
+				return null;
 			}
-		});
+		};
 				
 		
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
@@ -76,17 +72,13 @@ public class DefaultResourceDescriptionTest extends TestCase {
 	}
 	
 	public void testGetExportedObject_2() throws Exception {
-		description.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
-			public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
-				return new IQualifiedNameProvider.AbstractImpl() {
-					public String getQualifiedName(EObject obj) {
-						if (obj instanceof EClassifier)
-							return ((EClassifier)obj).getName();
-						return null;
-					}
-				};
+		delegate = new IQualifiedNameProvider.AbstractImpl() {
+			public String getQualifiedName(EObject obj) {
+				if (obj instanceof EClassifier)
+					return ((EClassifier)obj).getName();
+				return null;
 			}
-		});
+		};
 		
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
@@ -98,17 +90,13 @@ public class DefaultResourceDescriptionTest extends TestCase {
 	}
 	
 	public void testGetExportedObject_3() throws Exception {
-		description.setQualifiedNameProviderRegistry(new IQualifiedNameProvider.Registry() {
-			public IQualifiedNameProvider getQualifiedNameProvider(Resource resource) {
-				return new IQualifiedNameProvider.AbstractImpl() {
-					public String getQualifiedName(EObject obj) {
-						if (obj instanceof ENamedElement)
-							return ((ENamedElement)obj).getName();
-						return null;
-					}
-				};
+		delegate = new IQualifiedNameProvider.AbstractImpl() {
+			public String getQualifiedName(EObject obj) {
+				if (obj instanceof ENamedElement)
+					return ((ENamedElement)obj).getName();
+				return null;
 			}
-		});
+		};
 		
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
@@ -119,6 +107,14 @@ public class DefaultResourceDescriptionTest extends TestCase {
 		assertEquals(eClass,list.get(1).getEObjectOrProxy());
 		assertEquals(dtype.getName(),list.get(2).getName());
 		assertEquals(dtype,list.get(2).getEObjectOrProxy());
+	}
+
+	public String getQualifiedName(EObject obj) {
+		return delegate.getQualifiedName(obj);
+	}
+
+	public String apply(EObject from) {
+		return delegate.apply(from);
 	}
 
 }

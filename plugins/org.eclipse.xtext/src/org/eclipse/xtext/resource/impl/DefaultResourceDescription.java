@@ -16,30 +16,37 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescription extends AbstractResourceBasedResourceDescription {
+public class DefaultResourceDescription implements IResourceDescription {
 
 	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
 	
-	@Inject
-	private IQualifiedNameProvider.Registry nameProviderRegistry;
-	
+	private final Resource resource;
+
+	private final IQualifiedNameProvider nameProvider;
+
+	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
+		this.resource = resource;
+		this.nameProvider = nameProvider;
+	}
+
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(getResource()); 
 		if (adapter.get(getClass().getName()) == null) {
@@ -68,10 +75,9 @@ public class DefaultResourceDescription extends AbstractResourceBasedResourceDes
 	}
 
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
-		IQualifiedNameProvider qualifiedNameProvider = nameProviderRegistry.getQualifiedNameProvider(from.eResource());
-		if (qualifiedNameProvider == null)
+		if (nameProvider == null)
 			return null;
-		String qualifiedName = qualifiedNameProvider.getQualifiedName(from);
+		String qualifiedName = nameProvider.getQualifiedName(from);
 		if (qualifiedName != null) {
 			return EObjectDescription.create(qualifiedName, from);
 		}
@@ -86,17 +92,17 @@ public class DefaultResourceDescription extends AbstractResourceBasedResourceDes
 		}
 		return Collections.emptySet();
 	}
+	
+	public Resource getResource() {
+		return resource;
+	}
 
 	public URI getURI() {
-		return getResource().getURI();
+		return resource.getURI();
 	}
 
-	public void setQualifiedNameProviderRegistry(IQualifiedNameProvider.Registry nameProviderRegistry) {
-		this.nameProviderRegistry = nameProviderRegistry;
-	}
-	
-	public IQualifiedNameProvider.Registry getQualifiedNameProviderRegistry() {
-		return nameProviderRegistry;
+	public IQualifiedNameProvider getNameProvider() {
+		return nameProvider;
 	}
 	
 }
