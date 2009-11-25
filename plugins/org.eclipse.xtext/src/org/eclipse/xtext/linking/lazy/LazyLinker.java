@@ -8,6 +8,8 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -34,7 +36,10 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.util.SimpleCache;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
@@ -44,6 +49,13 @@ import com.google.inject.Inject;
  * @author Knut Wannheden
  */
 public class LazyLinker extends AbstractCleaningLinker {
+
+	private SimpleCache<EClass, EClass> instantiableSubTypes = new SimpleCache<EClass, EClass>(
+			new Function<EClass, EClass>() {
+				public EClass apply(EClass from) {
+					return findInstantiableCompatible(from);
+				}
+			});
 
 	@Inject
 	private LazyURIEncoder encoder;
@@ -65,7 +77,8 @@ public class LazyLinker extends AbstractCleaningLinker {
 		settingsToLink = null;
 	}
 
-	protected void installProxies(EObject obj, IDiagnosticProducer producer, Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
+	protected void installProxies(EObject obj, IDiagnosticProducer producer,
+			Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
@@ -87,8 +100,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (!eRef.isResolveProxies() || eRef.getEOpposite() != null) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
 					settingsToLink.put(new SettingDelegate(setting), abstractNode);
-				}
-				else {
+				} else {
 					createAndSetProxy(obj, abstractNode, eRef);
 				}
 			}
@@ -114,8 +126,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 					final EObject proxy = createProxy(eObject, node, eRef);
 					list.add(EcoreUtil.resolve(proxy, eObject));
 				}
-			}
-			else {
+			} else {
 				final AbstractNode node = nodes.iterator().next();
 				final EObject proxy = createProxy(eObject, node, eRef);
 				setting.set(EcoreUtil.resolve(proxy, eObject));
@@ -128,8 +139,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		final EObject proxy = createProxy(obj, abstractNode, eRef);
 		if (eRef.isMany()) {
 			((BasicEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
-		}
-		else {
+		} else {
 			obj.eSet(eRef, proxy);
 		}
 	}
@@ -137,9 +147,9 @@ public class LazyLinker extends AbstractCleaningLinker {
 	protected EObject createProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		final URI uri = obj.eResource().getURI();
 		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
-		EClass eType = eRef.getEReferenceType();
-		eType = findInstantiableCompatible(eType);
-		final EObject proxy = EcoreUtil.create(eType);
+		EClass referenceType = eRef.getEReferenceType();
+		EClass instantiableType = instantiableSubTypes.get(referenceType);
+		final EObject proxy = EcoreUtil.create(instantiableType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
 		return proxy;
 	}
@@ -152,15 +162,28 @@ public class LazyLinker extends AbstractCleaningLinker {
 			if (eClass != null)
 				return eClass;
 			// check registry
-			for (String nsURI : getRegistry().keySet()) {
-				if (nsURI.equals(ePackage.getNsURI())) // avoid double check of local EPackage
+			for (String nsURI : getRegisteredNsUris()) {
+				if (isLocalPackage(ePackage, nsURI))
 					continue;
+
 				EClass class1 = findSubTypeInEPackage(getRegistry().getEPackage(nsURI), eType);
 				if (class1 != null)
 					return class1;
 			}
+
 		}
 		return eType;
+	}
+
+	private List<String> getRegisteredNsUris() {
+		Set<String> keySet = getRegistry().keySet();
+		// copy to avoid ConcurrentModificationException while iterating over the EPackageMap
+		List<String> copy = Lists.newArrayList(keySet);
+		return copy;
+	}
+
+	private boolean isLocalPackage(EPackage ePackage, String nsURI) {
+		return nsURI.equals(ePackage.getNsURI());
 	}
 
 	private EClass findSubTypeInEPackage(EPackage ePackage, EClass superType) {
