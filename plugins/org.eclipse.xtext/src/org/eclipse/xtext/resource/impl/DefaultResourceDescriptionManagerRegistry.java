@@ -23,17 +23,19 @@ import com.google.inject.Provider;
 public class DefaultResourceDescriptionManagerRegistry implements IResourceDescription.Manager.Registry {
 
 	@Inject
-	private Provider<IResourceDescription.Manager> resourceDescriptionProvider;
+	private Provider<IResourceDescription.Manager> resourceDescriptionManagers;
 	
 	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
 		//TODO we need to come up with a real registry.
 		Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri, contentType);
-		Resource resource = factory.createResource(uri);
-		if (resource instanceof XtextResource) {
-			return ((XtextResource) resource).getResourceDescriptionProvider();
+		if (factory != null) {
+			Resource resource = factory.createResource(uri);
+			if (resource instanceof XtextResource) {
+				return ((XtextResource) resource).getResourceDescriptionManager();
+			}
 		}
 		// use default impl as fallback
-		return resourceDescriptionProvider.get();
+		return resourceDescriptionManagers.get();
 	}
 	
 }

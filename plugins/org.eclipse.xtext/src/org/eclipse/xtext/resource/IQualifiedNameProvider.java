@@ -9,14 +9,11 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.impl.DefaultQualifiedNameProviderRegistry;
 
 import com.google.common.base.Function;
-import com.google.inject.ImplementedBy;
 
 /**
- * Provides qualified names for EObjects.
+ * Provides qualified names for EObjects. 
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -28,11 +25,6 @@ public interface IQualifiedNameProvider extends Function<EObject, String> {
 	 */
 	String getQualifiedName(EObject obj);
 
-	@ImplementedBy(DefaultQualifiedNameProviderRegistry.class)
-	interface Registry {
-		IQualifiedNameProvider getQualifiedNameProvider(Resource resource);
-	}
-	
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */

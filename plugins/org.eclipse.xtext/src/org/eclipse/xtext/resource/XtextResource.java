@@ -67,10 +67,7 @@ public class XtextResource extends ResourceImpl {
 	private IReferableElementsUnloader unloader;
 	
 	@Inject
-	private IResourceDescription.Manager resourceDescriptionProvider;
-	
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IResourceDescription.Manager resourceDescriptionManager;
 	
 	private IParseResult parseResult;
 
@@ -79,22 +76,14 @@ public class XtextResource extends ResourceImpl {
 		this.parser = parser;
 	}
 	
-	public void setResourceDescriptionProvider(IResourceDescription.Manager resourceDescriptionProvider) {
-		this.resourceDescriptionProvider = resourceDescriptionProvider;
+	public void setResourceDescriptionManager(IResourceDescription.Manager resourceDescriptionManager) {
+		this.resourceDescriptionManager = resourceDescriptionManager;
 	}
 	
-	public IResourceDescription.Manager getResourceDescriptionProvider() {
-		return resourceDescriptionProvider;
+	public IResourceDescription.Manager getResourceDescriptionManager() {
+		return resourceDescriptionManager;
 	}
 	
-	public void setQualifiedNameProvider(IQualifiedNameProvider qualifiedNameProvider) {
-		this.qualifiedNameProvider = qualifiedNameProvider;
-	}
-
-	public IQualifiedNameProvider getQualifiedNameProvider() {
-		return qualifiedNameProvider;
-	}
-
 	public XtextResource(URI uri) {
 		super(uri);
 	}

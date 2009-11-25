@@ -13,7 +13,6 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -41,7 +40,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 				+ "generate test 'http://test'\n"
 				+ "Model: name=ID;";
 		resource = getResource(documentContent, uri);
-		resource.setResourceDescriptionProvider(this);
+		resource.setResourceDescriptionManager(this);
 		dirtyResource = new DocumentBasedDirtyResource();
 		importedNames = Lists.newArrayList();
 		exportedDescriptions = Lists.newArrayList();
@@ -189,7 +188,8 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		return new DefaultResourceDescriptionManager().isAffected(delta, candidate);
+		fail("Unexpected call");
+		return false;
 	}
 	
 }

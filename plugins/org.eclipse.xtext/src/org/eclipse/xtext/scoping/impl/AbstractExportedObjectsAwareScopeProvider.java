@@ -26,8 +26,8 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 		return resourceDescriptionManagerRegistry;
 	}
 
-	public void setResourceDescriptionProviderRegistry(IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry) {
-		this.resourceDescriptionManagerRegistry = resourceDescriptionProviderRegistry;
+	public void setResourceDescriptionManagerRegistry(IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry) {
+		this.resourceDescriptionManagerRegistry = resourceDescriptionManagerRegistry;
 	}
 	
 	public Iterable<IEObjectDescription> getExportedEObjects(Resource resource) {

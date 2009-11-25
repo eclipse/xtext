@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
-	private IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry;
+	private IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry;
 	
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
@@ -59,7 +59,7 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IResourceDescription.Manager manager = resourceDescriptionProviderRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		IResourceDescription.Manager manager = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
 		if (manager != null) {
 			IResourceDescription description = manager.getResourceDescription(resource);
 			if (description != null) {
@@ -77,12 +77,12 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 		return helper;
 	}
 
-	public void setResourceDescriptionProviderRegistry(IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry) {
-		this.resourceDescriptionProviderRegistry = resourceDescriptionProviderRegistry;
+	public void setResourceDescriptionManagerRegistry(IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry) {
+		this.resourceDescriptionManagerRegistry = resourceDescriptionManagerRegistry;
 	}
 
-	public IResourceDescription.Manager.Registry getResourceDescriptionProviderRegistry() {
-		return resourceDescriptionProviderRegistry;
+	public IResourceDescription.Manager.Registry getResourceDescriptionManagerRegistry() {
+		return resourceDescriptionManagerRegistry;
 	}
 	
 }
