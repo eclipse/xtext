@@ -21,7 +21,9 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.core.index.IndexAccess;
+import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
@@ -78,6 +80,8 @@ public class Activator extends AbstractUIPlugin {
 			log.debug("Stopping Xtext UI bundle.");
 
 		setDefault(null);
+		dirtyStateManager = null;
+		stateChangeEventBroker = null;
 		super.stop(context);
 	}
 
@@ -109,10 +113,16 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	private Injector injector;
-
+	
+	private IStateChangeEventBroker stateChangeEventBroker;
+	
+	private IDirtyStateManager dirtyStateManager;
+	
 	private void initializeGuiceInjector() {
 		try {
-			injector = Guice.createInjector(new Module());
+			injector = Guice.createInjector(createGuiceModule());
+			stateChangeEventBroker = injector.getInstance(IStateChangeEventBroker.class);
+			dirtyStateManager = injector.getInstance(IDirtyStateManager.class);
 			final IXtextIndex index = injector.getInstance(IXtextIndex.class);
 			try {
 				index.load();
@@ -146,8 +156,20 @@ public class Activator extends AbstractUIPlugin {
 		}
 	}
 
+	protected Module createGuiceModule() {
+		return new Module();
+	}
+
 	public Injector getInjector() {
 		return injector;
+	}
+
+	public IStateChangeEventBroker getStateChangeEventBroker() {
+		return stateChangeEventBroker;
+	}
+	
+	public IDirtyStateManager getDirtyStateManager() {
+		return dirtyStateManager;
 	}
 
 }

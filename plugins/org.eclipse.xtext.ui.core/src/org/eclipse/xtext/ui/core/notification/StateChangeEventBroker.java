@@ -16,14 +16,16 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StateChangeEventBroker implements IStateChangeEventBroker, IDirtyStateManager.IDirtyStateListener{
 
-	private ListenerList listeners;
+	private final ListenerList listeners;
 
+	@Inject
 	public StateChangeEventBroker(IDirtyStateManager instance) {
 		listeners = new ListenerList();
 		registerAtDirtyStateManager(instance);
