@@ -82,12 +82,12 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 					"org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder")
 		
 		// editor notification
-		.addTypeToProviderInstance("org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider", 
-				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER_AS_CONTENTPROVIDER")
+		.addTypeToType("org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider", 
+				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager")
 		.addTypeToProviderInstance("org.eclipse.xtext.ui.core.editor.IDirtyStateManager", 
-				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER")
+				"new org.eclipse.xtext.ui.core.editor.DirtyStateManagerProvider()")
 		.addTypeToProviderInstance("org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker", 
-				"org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker.PROVIDER")
+				"new org.eclipse.xtext.ui.core.notification.StateChangeEventBrokerProvider()")
 		.getBindings();
 	}
 

@@ -6,8 +6,6 @@ package org.eclipse.xtext;
 
 import org.eclipse.xtext.XtextRuntimeModule;
 
-import com.google.inject.Provider;
-
 /**
  * Manual modifications go to {org.eclipse.xtext.XtextUiModule}
  */
@@ -135,18 +133,18 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Provider<org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> provideIExternalContentSupport$IExternalContentProviderToInstance() {
-		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER_AS_CONTENTPROVIDER;
+	public Class<? extends org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> bindIExternalContentSupport$IExternalContentProvider() {
+		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Provider<org.eclipse.xtext.ui.core.editor.IDirtyStateManager> provideIDirtyStateManagerToInstance() {
-		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.PROVIDER;
+	public com.google.inject.Provider<org.eclipse.xtext.ui.core.editor.IDirtyStateManager> provideIDirtyStateManager() {
+		return new org.eclipse.xtext.ui.core.editor.DirtyStateManagerProvider();
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Provider<org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker> provideIStateChangeEventBrokerToInstance() {
-		return org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker.PROVIDER;
+	public com.google.inject.Provider<org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker> provideIStateChangeEventBroker() {
+		return new org.eclipse.xtext.ui.core.notification.StateChangeEventBrokerProvider();
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

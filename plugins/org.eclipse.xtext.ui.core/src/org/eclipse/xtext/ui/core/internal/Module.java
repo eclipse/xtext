@@ -8,8 +8,15 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.ui.core.builder.impl.ISharedState;
+import org.eclipse.xtext.ui.core.editor.DirtyStateManager;
+import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.core.index.NameSearchTrackingIndexImpl;
+import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.ui.core.notification.StateChangeEventBroker;
+
+import com.google.inject.Scopes;
 
 
 /**
@@ -20,9 +27,12 @@ public class Module extends org.eclipse.emf.emfindex.EquinoxEmfIndexModule {
 	@Override
 	protected void configure() {
 		super.configure();
-		binder().bind(IXtextIndex.class).to(NameSearchTrackingIndexImpl.class);
-		binder().bind(ISharedState.class).to(NameSearchTrackingIndexImpl.class);
-		binder().bind(NameSearchTrackingIndexImpl.class).asEagerSingleton();
+		bind(IXtextIndex.class).to(NameSearchTrackingIndexImpl.class);
+		bind(ISharedState.class).to(NameSearchTrackingIndexImpl.class);
+		bind(NameSearchTrackingIndexImpl.class).asEagerSingleton();
+		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);
+		bind(IDirtyStateManager.class).to(DirtyStateManager.class).in(Scopes.SINGLETON);
+		bind(IStateChangeEventBroker.class).to(StateChangeEventBroker.class).in(Scopes.SINGLETON);
 	}
 	
 }

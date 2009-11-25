@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-
 import org.eclipse.xtext.resource.IExternalContentSupport;
-import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 
 import com.google.common.collect.ImmutableCollection;
-import com.google.inject.Provider;
 
 /**
  * An implementation of {@link IDirtyStateManager} can be used to register
@@ -21,23 +18,6 @@ import com.google.inject.Provider;
  */
 public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider {
 
-	/**
-	 * Provide access to the one and only dirty state manager.
-	 */
-	IDirtyStateManager INSTANCE = new DirtyStateManager();
-	
-	Provider<IDirtyStateManager> PROVIDER = new Provider<IDirtyStateManager>() {
-		public IDirtyStateManager get() {
-			return INSTANCE;
-		}
-	};
-
-	Provider<IExternalContentProvider> PROVIDER_AS_CONTENTPROVIDER = new Provider<IExternalContentProvider>() {
-		public IExternalContentProvider get() {
-			return INSTANCE;
-		}
-	};
-	
 	/**
 	 * A listener for events raised by the dirty state manager.
 	 */

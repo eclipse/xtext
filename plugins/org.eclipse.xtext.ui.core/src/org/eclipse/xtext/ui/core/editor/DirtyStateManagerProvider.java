@@ -5,23 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.notification;
+package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.ui.core.internal.Activator;
 
-import com.google.common.collect.ImmutableCollection;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IStateChangeEventBroker {
+public class DirtyStateManagerProvider implements Provider<IDirtyStateManager>{
 
-	interface IStateChangeEventListener {
-		void onStateChanged(IStateChangeEventBroker sender, ImmutableCollection<URI> affectedURIs);
+	public IDirtyStateManager get() {
+		return Activator.getDefault().getDirtyStateManager();
 	}
-	
-	void addListener(IStateChangeEventListener listener);
-	
-	void removeListener(IStateChangeEventListener listener);
-	
+
 }
