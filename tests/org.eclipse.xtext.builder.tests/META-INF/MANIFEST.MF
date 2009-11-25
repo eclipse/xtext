@@ -18,7 +18,17 @@ Require-Bundle: org.junit,
  org.eclipse.xtext.ui.common,
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.jdt.core
+ org.eclipse.jdt.core,
+ de.itemis.xtext.antlr;bundle-version="0.8.0";resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
 Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.impl,
+ org.eclipse.xtext.builder.tests.builderTestLanguage.util,
+ org.eclipse.xtext.builder.tests,
+ org.eclipse.xtext.builder.tests.services,
+ org.eclipse.xtext.builder.tests.parseTreeConstruction,
+ org.eclipse.xtext.builder.tests.parser.antlr,
+ org.eclipse.xtext.builder.tests.parser.antlr.internal,
+ org.eclipse.xtext.builder.tests.contentassist.antlr
