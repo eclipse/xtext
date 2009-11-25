@@ -54,7 +54,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
-		globalScopeProvider.setResourceDescriptionProviderRegistry(new IResourceDescription.Manager.Registry() {
+		globalScopeProvider.setResourceDescriptionManagerRegistry(new IResourceDescription.Manager.Registry() {
 			public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
 				return get(IResourceDescription.Manager.class);
 			}
