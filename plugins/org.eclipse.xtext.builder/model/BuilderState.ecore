@@ -9,7 +9,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resourceDescriptions" upperBound="-1"
-        eType="#//ResourceDescription" containment="true"/>
+        eType="#//ResourceDescription" containment="true" eOpposite="#//ResourceDescription/container"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.IResourceDescription">
@@ -19,7 +19,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNames" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToStorage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+        eType="#//Container" eOpposite="#//Container/resourceDescriptions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EObjectDescription" instanceClassName="org.eclipse.xtext.resource.IEObjectDescription">
     <eOperations name="getEObjectURI" eType="#//EURI"/>
