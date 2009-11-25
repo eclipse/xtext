@@ -16,6 +16,8 @@ import org.eclipse.xtext.builder.impl.ResourceIndexer;
 import org.eclipse.xtext.builder.impl.StorageUtil;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.impl.javasupport.JdtStorageUtil;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
@@ -35,6 +37,11 @@ public class BuilderModule extends AbstractModule {
 		bindBuilderStateManager();
 		bindIncrementalProjectBuilder();
 		bindUriForBuilderStateResource();
+		bindQualifiedNameProvider();
+	}
+
+	protected void bindQualifiedNameProvider() {
+		bind(IQualifiedNameProvider.class).to(SimpleNameProvider.class);
 	}
 
 	protected void bindIncrementalProjectBuilder() {
