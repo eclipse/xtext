@@ -31,7 +31,7 @@ public class Activator extends AbstractUIPlugin {
 		//TODO check whether JDT is available, if not use BuilderModule instead
 		try {
 			injector = Guice.createInjector(new JdtBuilderModule());
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw e;
 		}

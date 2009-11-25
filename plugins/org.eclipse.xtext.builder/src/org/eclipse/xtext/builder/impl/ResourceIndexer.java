@@ -53,8 +53,8 @@ public class ResourceIndexer implements IResourceIndexer {
 	@Inject
 	private ResourceProvider resourceProvider;
 
-	public void setResourceDescriptionProviderRegistry(IResourceDescription.Manager.Registry resourceDescriptionProviderRegistry) {
-		this.resourceDescriptionManagerRegistry = resourceDescriptionProviderRegistry;
+	public void setResourceDescriptionManagerRegistry(IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry) {
+		this.resourceDescriptionManagerRegistry = resourceDescriptionManagerRegistry;
 	}
 
 	public IResourceDescription.Manager.Registry getResourceDescriptionManagerRegistry() {
@@ -132,8 +132,8 @@ public class ResourceIndexer implements IResourceIndexer {
 	}
 
 	protected IResourceDescription getResourceDescription(Resource resource) {
-		IResourceDescription.Manager descriptionProvider = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
-		IResourceDescription description = descriptionProvider.getResourceDescription(resource);
+		IResourceDescription.Manager descriptionManager = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		IResourceDescription description = descriptionManager.getResourceDescription(resource);
 		return description;
 	}
 
