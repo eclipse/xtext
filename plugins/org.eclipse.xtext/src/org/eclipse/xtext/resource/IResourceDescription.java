@@ -8,6 +8,8 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManagerRegistry;
@@ -16,6 +18,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public interface IResourceDescription {
 
@@ -25,6 +28,21 @@ public interface IResourceDescription {
 	 *         {@link IEObjectDescription}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects();
+	
+	/**
+	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass} and where its name equals the given name.
+	 */
+	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name);
+	
+	/**
+	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass}.
+	 */
+	Iterable<IEObjectDescription> getExportedObjects(EClass clazz);
+	
+	/**
+	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which describe the given EObject.
+	 */
+	Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object);
 
 	/**
 	 * returns the list of names the described resource depends depends on.

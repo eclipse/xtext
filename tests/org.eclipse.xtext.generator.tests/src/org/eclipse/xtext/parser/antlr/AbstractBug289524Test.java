@@ -12,7 +12,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractBug289524Test extends AbstractXtextTests {
+public abstract class AbstractBug289524Test extends AbstractXtextTests {
 	
 	public void testGetModel_01() throws Exception {
 		String model = "Model containment C reference C";

@@ -22,7 +22,6 @@ import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.base.Function;
@@ -34,7 +33,7 @@ import com.google.common.collect.Iterables;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescription implements IResourceDescription {
+public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
 	
