@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateImpl.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderStateImpl.java,v 1.2 2009/11/26 09:56:26 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -22,6 +23,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.Cache;
+import org.eclipse.xtext.resource.IResourceDescription;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +34,7 @@ import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl#getContainers <em>Containers</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl#getResourceDescriptions <em>Resource Descriptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,15 +42,14 @@ import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
  */
 public class BuilderStateImpl extends Container implements BuilderState {
 	/**
-	 * The cached value of the '{@link #getContainers() <em>Containers</em>}' containment reference list.
+	 * The cached value of the '{@link #getResourceDescriptions() <em>Resource Descriptions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContainers()
+	 * @see #getResourceDescriptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.xtext.builder.builderState.Container> containers;
-
+	protected EList<IResourceDescription> resourceDescriptions;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,11 +74,26 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.xtext.builder.builderState.Container> getContainers() {
-		if (containers == null) {
-			containers = new EObjectContainmentEList<org.eclipse.xtext.builder.builderState.Container>(org.eclipse.xtext.builder.builderState.Container.class, this, BuilderStatePackage.BUILDER_STATE__CONTAINERS);
+	public EList<IResourceDescription> getResourceDescriptions() {
+		if (resourceDescriptions == null) {
+			resourceDescriptions = new EObjectContainmentEList<IResourceDescription>(IResourceDescription.class, this, BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS);
 		}
-		return containers;
+		return resourceDescriptions;
+	}
+	
+	{
+		this.cache = new Cache();
+		eAdapters().add(this.cache);
+	}
+	
+	private Cache cache;
+	
+	public IResourceDescription getResourceDescription(URI uri) {
+		return cache.getResourceDescription(uri);
+	}
+
+	public IResourceDescription getResourceDescriptionForStorage(String externalStorageForm) {
+		return cache.getResourceDescriptionForStorage(externalStorageForm);
 	}
 
 	/**
@@ -86,8 +104,8 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BuilderStatePackage.BUILDER_STATE__CONTAINERS:
-				return ((InternalEList<?>)getContainers()).basicRemove(otherEnd, msgs);
+			case BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS:
+				return ((InternalEList<?>)getResourceDescriptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -100,8 +118,8 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BuilderStatePackage.BUILDER_STATE__CONTAINERS:
-				return getContainers();
+			case BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS:
+				return getResourceDescriptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -115,9 +133,9 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BuilderStatePackage.BUILDER_STATE__CONTAINERS:
-				getContainers().clear();
-				getContainers().addAll((Collection<? extends org.eclipse.xtext.builder.builderState.Container>)newValue);
+			case BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS:
+				getResourceDescriptions().clear();
+				getResourceDescriptions().addAll((Collection<? extends IResourceDescription>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -131,8 +149,8 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BuilderStatePackage.BUILDER_STATE__CONTAINERS:
-				getContainers().clear();
+			case BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS:
+				getResourceDescriptions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -146,8 +164,8 @@ public class BuilderStateImpl extends Container implements BuilderState {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BuilderStatePackage.BUILDER_STATE__CONTAINERS:
-				return containers != null && !containers.isEmpty();
+			case BuilderStatePackage.BUILDER_STATE__RESOURCE_DESCRIPTIONS:
+				return resourceDescriptions != null && !resourceDescriptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

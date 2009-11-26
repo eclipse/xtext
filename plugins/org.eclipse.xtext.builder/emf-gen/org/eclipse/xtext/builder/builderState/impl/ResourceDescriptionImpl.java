@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.2 2009/11/25 16:24:23 sefftinge Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.3 2009/11/26 09:56:26 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -10,26 +10,23 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
-
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +39,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getExportedObjects <em>Exported Objects</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getPathToStorage <em>Path To Storage</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getContainer <em>Container</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,45 +190,29 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE, oldPathToStorage, pathToStorage));
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.xtext.builder.builderState.Container getContainer() {
-		if (eContainerFeatureID() != BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER) return null;
-		return (org.eclipse.xtext.builder.builderState.Container)eContainer();
+	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
+		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return clazz.isSuperTypeOf(input.getEClass()) && input.getName().equals(name);
+			}
+		});
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetContainer(org.eclipse.xtext.builder.builderState.Container newContainer, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newContainer, BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER, msgs);
-		return msgs;
+	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
+		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return clazz.isSuperTypeOf(input.getEClass());
+			}
+		});
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContainer(org.eclipse.xtext.builder.builderState.Container newContainer) {
-		if (newContainer != eInternalContainer() || (eContainerFeatureID() != BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER && newContainer != null)) {
-			if (EcoreUtil.isAncestor(this, newContainer))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newContainer != null)
-				msgs = ((InternalEObject)newContainer).eInverseAdd(this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS, org.eclipse.xtext.builder.builderState.Container.class, msgs);
-			msgs = basicSetContainer(newContainer, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER, newContainer, newContainer));
+	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
+		final URI uri = EcoreUtil.getURI(object);
+		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return uri.equals(input.getEObjectURI());
+			}
+		});
 	}
 
 	/**
@@ -246,10 +226,6 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 		switch (featureID) {
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExportedObjects()).basicAdd(otherEnd, msgs);
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetContainer((org.eclipse.xtext.builder.builderState.Container)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -264,24 +240,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 		switch (featureID) {
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				return ((InternalEList<?>)getExportedObjects()).basicRemove(otherEnd, msgs);
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				return basicSetContainer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				return eInternalContainer().eInverseRemove(this, BuilderStatePackage.CONTAINER__RESOURCE_DESCRIPTIONS, org.eclipse.xtext.builder.builderState.Container.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -300,8 +260,6 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 				return getImportedNames();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
 				return getPathToStorage();
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				return getContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -329,9 +287,6 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
 				setPathToStorage((String)newValue);
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				setContainer((org.eclipse.xtext.builder.builderState.Container)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -356,9 +311,6 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
 				setPathToStorage(PATH_TO_STORAGE_EDEFAULT);
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				setContainer((org.eclipse.xtext.builder.builderState.Container)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,8 +331,6 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 				return importedNames != null && !importedNames.isEmpty();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
 				return PATH_TO_STORAGE_EDEFAULT == null ? pathToStorage != null : !PATH_TO_STORAGE_EDEFAULT.equals(pathToStorage);
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__CONTAINER:
-				return getContainer() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -53,11 +53,15 @@ public class EObjectDescription extends AbstractEObjectDescription {
 	
 	@Override
 	public String getUserData(String name) {
+		if (userData==null)
+			return null;
 		return userData.get(name);
 	}
 	
 	@Override
 	public String[] getUserDataKeys() {
+		if (userData==null)
+			return new String[0];
 		return userData.keySet().toArray(new String[userData.size()]);
 	}
 

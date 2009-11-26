@@ -30,9 +30,4 @@ public interface IResourceIndexer {
 	public Set<String> delete(IStorage storage);
 
 	
-	/**
-	 * removes all containers for the given project
-	 * @return the name changes
-	 */
-	public Set<String> cleanProject(String projectName);
 }

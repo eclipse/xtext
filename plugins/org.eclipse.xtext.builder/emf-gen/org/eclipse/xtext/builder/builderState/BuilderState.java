@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderState.java,v 1.1 2009/11/19 08:39:59 sefftinge Exp $
+ * $Id: BuilderState.java,v 1.2 2009/11/26 09:56:28 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.builder.builderState.BuilderState#getContainers <em>Containers</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.BuilderState#getResourceDescriptions <em>Resource Descriptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,19 +30,35 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface BuilderState extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Containers</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.builder.builderState.Container}.
+	 * Returns the value of the '<em><b>Resource Descriptions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.resource.IResourceDescription}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Containers</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Resource Descriptions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Containers</em>' containment reference list.
-	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getBuilderState_Containers()
-	 * @model containment="true"
+	 * @return the value of the '<em>Resource Descriptions</em>' containment reference list.
+	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getBuilderState_ResourceDescriptions()
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" containment="true"
 	 * @generated
 	 */
-	EList<Container> getContainers();
+	EList<IResourceDescription> getResourceDescriptions();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription" uriDataType="org.eclipse.xtext.builder.builderState.EURI"
+	 * @generated
+	 */
+	IResourceDescription getResourceDescription(URI uri);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model type="org.eclipse.xtext.builder.builderState.ResourceDescription"
+	 * @generated
+	 */
+	IResourceDescription getResourceDescriptionForStorage(String externalStorageForm);
 
 } // BuilderState

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactory.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: BuilderStateFactory.java,v 1.3 2009/11/26 09:56:28 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -26,15 +26,6 @@ public interface BuilderStateFactory extends EFactory {
 	 * @generated
 	 */
 	BuilderStateFactory eINSTANCE = org.eclipse.xtext.builder.builderState.impl.BuilderStateFactoryImpl.init();
-
-	/**
-	 * Returns a new object of class '<em>Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Container</em>'.
-	 * @generated
-	 */
-	Container createContainer();
 
 	/**
 	 * Returns a new object of class '<em>Resource Description</em>'.

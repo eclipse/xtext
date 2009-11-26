@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.3 2009/11/26 09:56:28 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -76,10 +76,6 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	protected BuilderStateSwitch<Adapter> modelSwitch =
 		new BuilderStateSwitch<Adapter>() {
 			@Override
-			public Adapter caseContainer(Container object) {
-				return createContainerAdapter();
-			}
-			@Override
 			public Adapter caseResourceDescription(IResourceDescription object) {
 				return createResourceDescriptionAdapter();
 			}
@@ -114,20 +110,6 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.builderState.Container <em>Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.builder.builderState.Container
-	 * @generated
-	 */
-	public Adapter createContainerAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
