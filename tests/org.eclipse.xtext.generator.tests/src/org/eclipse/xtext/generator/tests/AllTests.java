@@ -35,6 +35,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilGetReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
+      suite.addTestSuite(org.eclipse.xtext.index.XtextIndexFacadeTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.Bug282355Test.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.IngoreCaseTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
@@ -130,6 +131,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ExternalContentSupportTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultImportedNamesProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDeltaTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
