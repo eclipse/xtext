@@ -27,6 +27,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class XtextIndexImpl extends IndexDelegator implements IXtextIndex {
 	
 	@Inject

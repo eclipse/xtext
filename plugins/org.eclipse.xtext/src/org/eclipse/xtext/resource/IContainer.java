@@ -14,14 +14,17 @@ import org.eclipse.emf.common.util.URI;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-interface IContainer {
+public interface IContainer {
+	
 	/**
-	 * @return the {@link IResourceDescription} contained in this container.
+	 * @return the {@link IResourceDescription} contained in this container. The result is never
+	 * <code>null</code>.
 	 */
 	Iterable<IResourceDescription> getResourceDescriptions();
 
 	/**
-	 * @return the {@link IResourceDescription} for the given URI, or null is this container does not contain auch an {@link IResourceDescription}
+	 * @return the {@link IResourceDescription} for the given URI, or null is this container does 
+	 * not contain such an {@link IResourceDescription}.
 	 */
 	IResourceDescription getResourceDescription(URI uri);
 
@@ -31,21 +34,17 @@ interface IContainer {
 	interface Manager {
 
 		/**
-		 * @return returns the container for a given {@link IResourceDescription}
+		 * @return returns the container for a given {@link IResourceDescription}. The result is never
+		 * <code>null</code>.
 		 */
 		IContainer getContainer(IResourceDescription desc);
 
 		/**
 		 * @return a sorted list of all {@link IContainer}, which are visible from the given {@link IResourceDescription}.
-		 * In an Java environment this would correspond to the list of classpath entries.
+		 * In an Java environment this would correspond to the list of classpath entries. The list includes the 
+		 * container that contains the given resource description. This implies that it is never empty.
 		 */
 		List<IContainer> getVisibleContainers(IResourceDescription desc);
 
-		interface Registry {
-			/**
-			 *@return the responsible {@link Manager} for the given {@link IResourceDescription}
-			 */
-			IContainer.Manager getContainerManager(IResourceDescription resourceDescription);
-		}
 	}
 }

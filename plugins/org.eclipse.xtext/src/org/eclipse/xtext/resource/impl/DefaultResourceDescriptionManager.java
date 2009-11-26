@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.common.collect.Collections2;
@@ -39,6 +40,10 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	public IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
+	}
+	
+	public IContainer.Manager getContainerManager(IResourceDescription description) {
+		throw new UnsupportedOperationException("Implement me and use the resource set as container");
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {

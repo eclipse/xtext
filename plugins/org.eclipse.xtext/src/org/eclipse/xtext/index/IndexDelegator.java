@@ -16,6 +16,7 @@ import org.eclipse.emf.emfindex.store.UpdateableIndex;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class IndexDelegator implements UpdateableIndex {
 	protected UpdateableIndex delegate;
 

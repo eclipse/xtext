@@ -18,6 +18,7 @@ import org.eclipse.emf.emfindex.store.UpdateableIndex;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public interface IXtextIndex extends UpdateableIndex {
 	
 	public void clearNameSearchesFor(URI uri);

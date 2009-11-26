@@ -14,6 +14,7 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
+@Deprecated
 @ImplementedBy(IContainerDependencyProvider.Null.class)
 public interface IContainerDependencyProvider {
 

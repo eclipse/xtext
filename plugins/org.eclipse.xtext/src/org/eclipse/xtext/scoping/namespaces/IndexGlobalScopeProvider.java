@@ -34,6 +34,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class IndexGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
 	
 	public static Logger log = Logger.getLogger(IndexGlobalScopeProvider.class);
