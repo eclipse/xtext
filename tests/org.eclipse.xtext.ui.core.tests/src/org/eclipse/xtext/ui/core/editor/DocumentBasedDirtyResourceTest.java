@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -190,6 +192,21 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		fail("Unexpected call");
 		return false;
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
+		fail("Unexpected call");
+		return null;
 	}
 	
 }
