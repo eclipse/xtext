@@ -24,15 +24,6 @@ import org.eclipse.xtext.builder.impl.ResourceIndexer;
  */
 public class JdtResourceIndexer extends ResourceIndexer {
 
-	@Override
-	protected String getContainerName(IStorage storage) {
-		if (!isOnJavaProject(storage))
-			return super.getContainerName(storage);
-		
-		IPackageFragmentRoot packageFragmentRoot = getPackageFragmentRoot(storage);
-		return "java:"+packageFragmentRoot.getElementName();
-	}
-
 	private IPackageFragmentRoot getPackageFragmentRoot(IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			return ((IJarEntryResource)storage).getPackageFragmentRoot();

@@ -12,8 +12,6 @@ public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.builder.tests");
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.BuilderStateManagerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.builder.impl.javaSupport.JdtResourceIndexerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.builder.impl.ResourceIndexerTest.class);
       return suite;
    }
 }

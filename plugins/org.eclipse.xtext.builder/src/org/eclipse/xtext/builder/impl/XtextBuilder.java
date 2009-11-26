@@ -109,7 +109,7 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 	@Override
 	protected void clean(IProgressMonitor monitor) throws CoreException {
 		try {
-			resourceIndexer.cleanProject(getProject().getName());
+//			resourceIndexer.cleanProject(getProject().getName());
 		} catch (WrappedException e) {
 			log.error(e.getCause().getMessage(), e.getCause());
 			throw e;

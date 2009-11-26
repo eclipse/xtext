@@ -10,14 +10,6 @@
   <genPackages prefix="BuilderState" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
       ecorePackage="BuilderState.ecore#/">
     <genDataTypes ecoreDataType="BuilderState.ecore#//EURI"/>
-    <genClasses ecoreClass="BuilderState.ecore#//Container">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//Container/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//Container/resourceDescriptors"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//Container/project"/>
-      <genOperations ecoreOperation="BuilderState.ecore#//Container/getResourceDescriptor">
-        <genParameters ecoreParameter="BuilderState.ecore#//Container/getResourceDescriptor/uri"/>
-      </genOperations>
-    </genClasses>
     <genClasses ecoreClass="BuilderState.ecore#//ResourceDescriptor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ResourceDescriptor/URI"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BuilderState.ecore#//ResourceDescriptor/container"/>
@@ -43,7 +35,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//UserDataEntry/value"/>
     </genClasses>
     <genClasses ecoreClass="BuilderState.ecore#//BuilderState">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//BuilderState/containers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//BuilderState/resourceDescriptions"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
