@@ -29,8 +29,16 @@ import com.google.inject.Inject;
  */
 public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements IGlobalScopeProvider {
 	
+	public static final String NAMED_EDITOR_SCOPE = "org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider2.EDITOR_SCOPE";
+	public static final String NAMED_COMMON_SCOPE = "org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider2.COMMON_SCOPE";
+	
 	@Inject
-	private IXtextIndexFacade indexFacade;
+//	@Named(NAMED_EDITOR_SCOPE)
+	private IXtextIndexFacade editorIndexFacade;
+	
+//	@Inject
+//	@Named(NAMED_COMMON_SCOPE)
+//	private IXtextIndexFacade commonIndexFacade;
 	
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
@@ -45,12 +53,17 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 		ListIterator<IContainer> iter = containers.listIterator();
 		while(iter.hasPrevious()) {
 			IContainer container = iter.previous();
-			result = createIndexScope(result, container, reference);
+			result = createIndexScope(getIndexFacadeFor(context), result, container, reference);
 		}
 		return result;
 	}
+	
+	protected IXtextIndexFacade getIndexFacadeFor(EObject context) {
+		// TODO: switch used facade depending on the state in the resource set
+		return editorIndexFacade;
+	}
 
-	protected SimpleScope createIndexScope(IScope parent, final IContainer container, final EReference reference) {
+	protected SimpleScope createIndexScope(final IXtextIndexFacade indexFacade, IScope parent, final IContainer container, final EReference reference) {
 		return new SimpleScope(parent, null) {
 
 			@Override

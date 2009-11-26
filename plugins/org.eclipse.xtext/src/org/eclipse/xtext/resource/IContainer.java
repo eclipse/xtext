@@ -18,13 +18,13 @@ public interface IContainer {
 	
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
-	 * <code>null</code>.
+	 * <code>null</code>. The result may be a cached view on the actual content of the underlying resources.
 	 */
 	Iterable<IResourceDescription> getResourceDescriptions();
 
 	/**
 	 * @return the {@link IResourceDescription} for the given URI, or null is this container does 
-	 * not contain such an {@link IResourceDescription}.
+	 * not contain such an {@link IResourceDescription}. The result may be a cached view on the actual content of the underlying resource.
 	 */
 	IResourceDescription getResourceDescription(URI uri);
 

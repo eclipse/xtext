@@ -24,6 +24,8 @@ public class XtextIndexFacade implements IXtextIndexFacade {
 	private IResourceDescription.Manager.Registry resourceDescriptionsManager;
 	
 	public Iterable<IEObjectDescription> findAllDescriptionsFor(EObject object) {
+		if (object.eIsProxy())
+			throw new IllegalArgumentException("object may not be a proxy: " + object);
 		IResourceDescription.Manager descriptionManager = resourceDescriptionsManager.getResourceDescriptionManager(object.eResource().getURI(), null);
 		if (descriptionManager == null)
 			throw new IllegalStateException("Cannot find description manager for " + object);
@@ -34,7 +36,8 @@ public class XtextIndexFacade implements IXtextIndexFacade {
 	public Iterable<IEObjectDescription> findAllEObjects(IContainer in, final EClass type) {
 		return Iterables.concat(Iterables.transform(in.getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(type);
+				IResourceDescription resourceDescription = getActualResourceDescription(from);
+				return resourceDescription.getExportedObjects(type);
 			}
 		}));
 	}
@@ -42,9 +45,14 @@ public class XtextIndexFacade implements IXtextIndexFacade {
 	public Iterable<IEObjectDescription> findAllEObjects(IContainer in, final EClass type, final String name) {
 		return Iterables.concat(Iterables.transform(in.getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(type, name);
+				IResourceDescription resourceDescription = getActualResourceDescription(from);
+				return resourceDescription.getExportedObjects(type, name);
 			}
 		}));
+	}
+	
+	protected IResourceDescription getActualResourceDescription(IResourceDescription persisted) {
+		return persisted;
 	}
 	
 	public IResourceDescription.Manager.Registry getResourceDescriptionsManager() {

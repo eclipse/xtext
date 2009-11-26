@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.collect.ImmutableCollection;
 
@@ -40,7 +42,7 @@ public interface IDirtyStateManager extends IExternalContentSupport.IExternalCon
 		 * @param changedResources an immutable collection of changed resources. 
 		 * Is never <code>null</code> but may be empty.
 		 */
-		void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedResources);
+		void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedManagedResources, ImmutableCollection<URI> unmanagedResources);
 	}
 	
 	/**
@@ -72,6 +74,11 @@ public interface IDirtyStateManager extends IExternalContentSupport.IExternalCon
 	 * thread.
 	 */
 	void announceDirtyStateChanged(IDirtyResource dirtyResource);
+	
+	/**
+	 * @return the description of the managed dirty resource with the given {@link URI} or <code>null</code> if unmanaged.
+	 */
+	IResourceDescription getDirtyResourceDescription(URI uri);
 	
 	/**
 	 * Add a listener to the dirty state manager. Listeners will not be added twice.
