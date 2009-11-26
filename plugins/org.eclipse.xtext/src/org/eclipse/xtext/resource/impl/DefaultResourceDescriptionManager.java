@@ -30,6 +30,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 	
+	@Inject
+	private ResourceSetBasedContainerManager containerManager;
+	
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, nameProvider);
 	}
@@ -42,8 +45,18 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return nameProvider;
 	}
 	
+	public ResourceSetBasedContainerManager getContainerManager() {
+		return containerManager;
+	}
+	
+	public void setContainerManager(ResourceSetBasedContainerManager containerManager) {
+		this.containerManager = containerManager;
+	}
+	
 	public IContainer.Manager getContainerManager(IResourceDescription description) {
-		throw new UnsupportedOperationException("Implement me and use the resource set as container");
+		if (!(description instanceof DefaultResourceDescription))
+			throw new IllegalArgumentException("description " + description + " was not provided by this manager");
+		return containerManager;
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {

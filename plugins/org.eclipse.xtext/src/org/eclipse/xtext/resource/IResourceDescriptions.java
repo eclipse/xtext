@@ -9,6 +9,8 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -17,5 +19,13 @@ public interface IResourceDescriptions {
 	Iterable<IResourceDescription> getAllResourceDescriptions();
 	
 	IResourceDescription getResourceDescription(URI uri);
+	
+	void addListener(Listener listener);
+	
+	void removeListener(Listener listener);
+	
+	interface Listener {
+		void onDescriptionsChanged(ImmutableList<IResourceDescription.Delta> delta);
+	}
 	
 }
