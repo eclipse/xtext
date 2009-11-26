@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -32,21 +33,30 @@ public class DirtyStateManager implements IDirtyStateManager {
 	
 	public void announceDirtyStateChanged(IDirtyResource dirtyResource) {
 		managedResources.put(dirtyResource.getURI(), dirtyResource);
-		notifyListeners(dirtyResource);
+		notifyListeners(dirtyResource, true);
 	}
 
 	public void discardDirtyState(IDirtyResource dirtyResource) {
 		if (managedResources.remove(dirtyResource.getURI(), dirtyResource)) {
-			notifyListeners(dirtyResource);
+			notifyListeners(dirtyResource, false);
 		}
 	}
 
-	protected void notifyListeners(IDirtyResource dirtyResource) {
-		ImmutableList<IDirtyResource> changedResources = ImmutableList.of(dirtyResource);
-		Object[] notifyUs = listeners.getListeners();
-		for(Object notifyMe: notifyUs) {
-			IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
-			listener.dirtyStateChanged(this, changedResources);
+	protected void notifyListeners(IDirtyResource dirtyResource, boolean managed) {
+		if (managed) {
+			ImmutableList<IDirtyResource> changedResources = ImmutableList.of(dirtyResource);
+			Object[] notifyUs = listeners.getListeners();
+			for(Object notifyMe: notifyUs) {
+				IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
+				listener.dirtyStateChanged(this, changedResources, ImmutableList.<URI>of());
+			}
+		} else {
+			ImmutableList<URI> unmanaged = ImmutableList.of(dirtyResource.getURI());
+			Object[] notifyUs = listeners.getListeners();
+			for(Object notifyMe: notifyUs) {
+				IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
+				listener.dirtyStateChanged(this, ImmutableList.<IDirtyResource>of(), unmanaged);
+			}
 		}
 	}
 
@@ -57,6 +67,13 @@ public class DirtyStateManager implements IDirtyStateManager {
 	
 	public IDirtyResource getDirtyResource(URI uri) {
 		return managedResources.get(uri);
+	}
+	
+	public IResourceDescription getDirtyResourceDescription(URI uri) {
+		IDirtyResource dirtyResource = getDirtyResource(uri);
+		if (dirtyResource != null)
+			return dirtyResource.getDescription();
+		return null;
 	}
 
 	public void addListener(IDirtyStateListener listener) {

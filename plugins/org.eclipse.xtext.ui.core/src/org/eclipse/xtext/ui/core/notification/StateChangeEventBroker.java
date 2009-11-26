@@ -51,13 +51,14 @@ public class StateChangeEventBroker implements IStateChangeEventBroker, IDirtySt
 		}
 	}
 
-	public void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedResources) {
-		Iterable<URI> tranformed = Iterables.transform(changedResources, new Function<IDirtyResource, URI>() {
+	public void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedResources, ImmutableCollection<URI> unmanagedResources) {
+		Iterable<URI> transformed = Iterables.transform(changedResources, new Function<IDirtyResource, URI>() {
 			public URI apply(IDirtyResource from) {
 				return from.getURI();
 			}
 		});
-		ImmutableList<URI> uris = ImmutableList.copyOf(tranformed);
+		Iterable<URI> concatenated = Iterables.concat(unmanagedResources, transformed);
+		ImmutableList<URI> uris = ImmutableList.copyOf(concatenated);
 		notifyListeners(uris);
 	}
 
