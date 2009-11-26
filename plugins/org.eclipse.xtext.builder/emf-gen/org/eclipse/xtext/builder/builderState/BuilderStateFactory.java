@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactory.java,v 1.3 2009/11/26 09:56:28 sefftinge Exp $
+ * $Id: BuilderStateFactory.java,v 1.4 2009/11/26 13:42:14 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -44,15 +44,6 @@ public interface BuilderStateFactory extends EFactory {
 	 * @generated
 	 */
 	IEObjectDescription createEObjectDescription();
-
-	/**
-	 * Returns a new object of class '<em>Builder State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Builder State</em>'.
-	 * @generated
-	 */
-	BuilderState createBuilderState();
 
 	/**
 	 * Returns the package supported by this factory.

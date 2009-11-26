@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.3 2009/11/26 09:56:28 sefftinge Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.4 2009/11/26 13:42:03 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -88,10 +88,6 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 				return createUserDataEntryAdapter();
 			}
 			@Override
-			public Adapter caseBuilderState(BuilderState object) {
-				return createBuilderStateAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -150,20 +146,6 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserDataEntryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.builderState.BuilderState <em>Builder State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.builder.builderState.BuilderState
-	 * @generated
-	 */
-	public Adapter createBuilderStateAdapter() {
 		return null;
 	}
 

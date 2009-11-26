@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.3 2009/11/26 09:56:26 sefftinge Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.4 2009/11/26 13:42:16 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -70,7 +70,6 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 			case BuilderStatePackage.RESOURCE_DESCRIPTION: return (EObject)createResourceDescription();
 			case BuilderStatePackage.EOBJECT_DESCRIPTION: return (EObject)createEObjectDescription();
 			case BuilderStatePackage.USER_DATA_ENTRY: return (EObject)createUserDataEntry();
-			case BuilderStatePackage.BUILDER_STATE: return createBuilderState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -138,16 +137,6 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	public Map.Entry<String, String> createUserDataEntry() {
 		UserDataEntryImpl userDataEntry = new UserDataEntryImpl();
 		return userDataEntry;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BuilderState createBuilderState() {
-		BuilderStateImpl builderState = new BuilderStateImpl();
-		return builderState;
 	}
 
 	/**

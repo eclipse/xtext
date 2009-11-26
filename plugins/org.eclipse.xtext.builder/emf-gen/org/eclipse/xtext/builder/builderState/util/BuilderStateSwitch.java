@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateSwitch.java,v 1.3 2009/11/26 09:56:27 sefftinge Exp $
+ * $Id: BuilderStateSwitch.java,v 1.4 2009/11/26 13:42:02 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -96,12 +96,6 @@ public class BuilderStateSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BuilderStatePackage.BUILDER_STATE: {
-				BuilderState builderState = (BuilderState)theEObject;
-				T result = caseBuilderState(builderState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -148,21 +142,6 @@ public class BuilderStateSwitch<T> {
 	 * @generated
 	 */
 	public T caseUserDataEntry(Map.Entry<String, String> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Builder State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Builder State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBuilderState(BuilderState object) {
 		return null;
 	}
 

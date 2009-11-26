@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.4 2009/11/26 09:56:29 sefftinge Exp $
+ * $Id: BuilderStatePackage.java,v 1.5 2009/11/26 13:42:15 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -217,34 +217,6 @@ public interface BuilderStatePackage extends EPackage {
 	int USER_DATA_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl <em>Builder State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl
-	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getBuilderState()
-	 * @generated
-	 */
-	int BUILDER_STATE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Resource Descriptions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUILDER_STATE__RESOURCE_DESCRIPTIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Builder State</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUILDER_STATE_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '<em>EURI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,7 +224,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getEURI()
 	 * @generated
 	 */
-	int EURI = 4;
+	int EURI = 3;
 
 
 	/**
@@ -262,7 +234,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getEStringArray()
 	 * @generated
 	 */
-	int ESTRING_ARRAY = 5;
+	int ESTRING_ARRAY = 4;
 
 
 	/**
@@ -419,27 +391,6 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getUserDataEntry_Value();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.builderState.BuilderState <em>Builder State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Builder State</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.BuilderState
-	 * @generated
-	 */
-	EClass getBuilderState();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.builderState.BuilderState#getResourceDescriptions <em>Resource Descriptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Resource Descriptions</em>'.
-	 * @see org.eclipse.xtext.builder.builderState.BuilderState#getResourceDescriptions()
-	 * @see #getBuilderState()
-	 * @generated
-	 */
-	EReference getBuilderState_ResourceDescriptions();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>EURI</em>}'.
@@ -601,24 +552,6 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute USER_DATA_ENTRY__VALUE = eINSTANCE.getUserDataEntry_Value();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl <em>Builder State</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStateImpl
-		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getBuilderState()
-		 * @generated
-		 */
-		EClass BUILDER_STATE = eINSTANCE.getBuilderState();
-
-		/**
-		 * The meta object literal for the '<em><b>Resource Descriptions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BUILDER_STATE__RESOURCE_DESCRIPTIONS = eINSTANCE.getBuilderState_ResourceDescriptions();
 
 		/**
 		 * The meta object literal for the '<em>EURI</em>' data type.

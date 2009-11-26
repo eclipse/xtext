@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.4 2009/11/26 09:56:27 sefftinge Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.5 2009/11/26 13:42:18 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.xtext.builder.builderState.BuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -49,13 +48,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * @generated
 	 */
 	private EClass userDataEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass builderStateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -263,24 +255,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBuilderState() {
-		return builderStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBuilderState_ResourceDescriptions() {
-		return (EReference)builderStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getEURI() {
 		return euriEDataType;
 	}
@@ -338,9 +312,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		userDataEntryEClass = createEClass(USER_DATA_ENTRY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__KEY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__VALUE);
-
-		builderStateEClass = createEClass(BUILDER_STATE);
-		createEReference(builderStateEClass, BUILDER_STATE__RESOURCE_DESCRIPTIONS);
 
 		// Create data types
 		euriEDataType = createEDataType(EURI);
@@ -412,15 +383,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEClass(userDataEntryEClass, Map.Entry.class, "UserDataEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUserDataEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUserDataEntry_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(builderStateEClass, BuilderState.class, "BuilderState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBuilderState_ResourceDescriptions(), this.getResourceDescription(), null, "resourceDescriptions", null, 0, -1, BuilderState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(builderStateEClass, this.getResourceDescription(), "getResourceDescription", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(builderStateEClass, this.getResourceDescription(), "getResourceDescriptionForStorage", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "externalStorageForm", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(euriEDataType, URI.class, "EURI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
