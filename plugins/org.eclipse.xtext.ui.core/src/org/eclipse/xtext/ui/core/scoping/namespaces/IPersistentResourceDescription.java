@@ -5,27 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.resource;
+package org.eclipse.xtext.ui.core.scoping.namespaces;
 
-import org.eclipse.emf.common.util.URI;
-
-import com.google.common.collect.ImmutableList;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IResourceDescriptions {
+public interface IPersistentResourceDescription extends IResourceDescription {
 
-	Iterable<IResourceDescription> getAllResourceDescriptions();
-	
-	IResourceDescription getResourceDescription(URI uri);
-	
-	void addListener(Listener listener);
-	
-	void removeListener(Listener listener);
-	
-	interface Listener {
-		void onDescriptionsChanged(ImmutableList<IResourceDescription.Delta> delta);
-	}
+	IStorage getStorage();
 	
 }

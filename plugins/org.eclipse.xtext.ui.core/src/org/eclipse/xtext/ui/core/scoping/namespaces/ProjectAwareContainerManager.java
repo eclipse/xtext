@@ -21,22 +21,29 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ContainerManager implements IContainer.Manager {
+public class ProjectAwareContainerManager implements IContainer.Manager {
 
-	private static final Logger log = Logger.getLogger(ContainerManager.class);
+	private static final Logger log = Logger.getLogger(ProjectAwareContainerManager.class);
+	
+	@Inject
+	private Provider<ProjectBasedContainer> containerProvider;
 	
 	public IContainer getContainer(IResourceDescription desc) {
 		IProject project = getProject(desc.getURI());
 		return createContainer(project);
 	}
 
-	protected NameBasedContainer createContainer(IProject project) {
-		return new NameBasedContainer(project);
+	protected ProjectBasedContainer createContainer(IProject project) {
+		ProjectBasedContainer result = containerProvider.get();
+		result.setProject(project);
+		return result;
 	}
 
 	private IProject getProject(URI uri) {

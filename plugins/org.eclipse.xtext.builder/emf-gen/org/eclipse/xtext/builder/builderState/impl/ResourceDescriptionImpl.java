@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.3 2009/11/26 09:56:26 sefftinge Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.4 2009/11/26 18:17:28 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
@@ -193,7 +194,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return clazz.isSuperTypeOf(input.getEClass()) && input.getName().equals(name);
+				return (clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass())) && input.getName().equals(name);
 			}
 		});
 	}
@@ -201,7 +202,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return clazz.isSuperTypeOf(input.getEClass());
+				return clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass());
 			}
 		});
 	}
