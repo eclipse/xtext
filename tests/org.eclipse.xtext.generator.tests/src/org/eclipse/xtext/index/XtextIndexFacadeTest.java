@@ -27,7 +27,6 @@ import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedContainer;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
