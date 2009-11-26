@@ -7,28 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import static org.eclipse.xtext.builder.builderState.BuilderStateUtil.*;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class PersistableResourceDescriptionsImpl implements IResourceDescriptions {
 
-	private Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
+	private final Collection<IResourceDescriptions.Listener> listeners;
+	
+	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
+	
+	public PersistableResourceDescriptionsImpl() {
+		listeners = new CopyOnWriteArraySet<Listener>();
+	}
 
-	public synchronized List<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
+	public synchronized ImmutableList<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
 		List<IResourceDescription.Delta> deltas = Lists.newArrayList();
 		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
 		if (toBeRemoved != null) {
@@ -46,8 +57,12 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 				deltas.add(new DefaultResourceDescriptionDelta(oldOne, impl));
 			}
 		}
-		resourceDescriptionMap = newMap;
-		return deltas;
+		resourceDescriptionMap = Collections.unmodifiableMap(newMap);
+		ImmutableList<Delta> immutableDeltas = ImmutableList.copyOf(deltas);
+		for(Listener listener: listeners) {
+			listener.onDescriptionsChanged(immutableDeltas);
+		}
+		return immutableDeltas;
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
@@ -56,6 +71,14 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return resourceDescriptionMap.get(uri);
+	}
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	public void removeListener(Listener listener) {
+		listeners.remove(listener);
 	}
 
 }
