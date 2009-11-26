@@ -60,7 +60,7 @@ public class JdtURIUtil {
 		if (!archiveURI.isArchive())
 			throw new IllegalArgumentException("not an archive URI : " + archiveURI);
 		String string = archiveURI.toString();
-		return URI.createURI(string.substring(4, string.indexOf('!')));
+		return URI.createURI(string.substring(archiveURI.scheme().length() + 1, string.indexOf('!')));
 	}
 
 }

@@ -8,29 +8,29 @@
 package org.eclipse.xtext.ui.core.scoping.namespaces;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NameBasedContainer implements IContainer {
+public class ProjectBasedContainer extends AbstractMapBasedContainer {
 
-	private final IProject project;
-
-	public NameBasedContainer(IProject project) {
+	private IProject project;
+	
+	public void setProject(IProject project) {
 		this.project = project;
 	}
-
-	public IResourceDescription getResourceDescription(URI uri) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public IProject getProject() {
+		return project;
 	}
 
-	public Iterable<IResourceDescription> getResourceDescriptions() {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public boolean apply(IResourceDescription input) {
+		IPath path = new Path(input.getURI().toPlatformString(true));
+		return project.exists(path);
 	}
 
 }
