@@ -5,29 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDirtyResource {
+public interface IResourceDescriptions {
 
-	/**
-	 * @return the content of the resource as text, never <code>null</code>.
-	 */
-	String getContents();
+	Iterable<IResourceDescription> getAllResourceDescriptions();
 	
-	/**
-	 * @return the description of the resource, never <code>null</code>.
-	 */
-	IResourceDescription getDescription();
-	
-	/**
-	 * @return the URI of the resource, never <code>null</code>.
-	 */
-	URI getURI();
+	IResourceDescription getResourceDescription(URI uri);
 	
 }

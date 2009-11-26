@@ -18,8 +18,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.Lists;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -29,8 +27,6 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	private String documentContent;
 	private XtextResource resource;
 	private DocumentBasedDirtyResource dirtyResource;
-	private Iterable<String> importedNames;
-	private Iterable<IEObjectDescription> exportedDescriptions;
 	private String uri;
 	
 	@Override
@@ -44,8 +40,6 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		resource = getResource(documentContent, uri);
 		resource.setResourceDescriptionManager(this);
 		dirtyResource = new DocumentBasedDirtyResource();
-		importedNames = Lists.newArrayList();
-		exportedDescriptions = Lists.newArrayList();
 	}
 	
 	public void testConnect_01() {
@@ -129,32 +123,18 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		assertEquals(uri, dirtyResource.getURI().toString());
 	}
 	
-	public void testGetImportedNames_01() {
+	public void testGetDescription_01() {
 		try {
-			dirtyResource.getImportedNames();
+			dirtyResource.getDescription();
 			fail("Expected IllegalStateException");
 		} catch(IllegalStateException e) {
 			// expected
 		}
 	}
 	
-	public void testGetImportedNames_02() {
+	public void testGetDescription_02() {
 		dirtyResource.connect(this);
-		assertSame(importedNames, dirtyResource.getImportedNames());
-	}
-	
-	public void testGetExportedDescriptions_01() {
-		try {
-			dirtyResource.getExportedObjects();
-			fail("Expected IllegalStateException");
-		} catch(IllegalStateException e) {
-			// expected
-		}
-	}
-	
-	public void testGetExportedDescriptions_02() {
-		dirtyResource.connect(this);
-		assertSame(exportedDescriptions, dirtyResource.getExportedObjects());
+		assertSame(this, dirtyResource.getDescription());
 	}
 	
 	@Override
@@ -169,14 +149,6 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public Iterable<String> getImportedNames() {
-		return importedNames;
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjects() {
-		return exportedDescriptions;
 	}
 
 	public IResourceDescription getResourceDescription(Resource resource) {
@@ -205,6 +177,21 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public Iterable<String> getImportedNames() {
+		fail("Unexpected call");
+		return null;
+	}
+	
+	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager(IResourceDescription description) {
 		fail("Unexpected call");
 		return null;
 	}

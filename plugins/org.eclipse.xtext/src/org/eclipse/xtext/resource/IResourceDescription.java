@@ -30,12 +30,12 @@ public interface IResourceDescription {
 	Iterable<IEObjectDescription> getExportedObjects();
 	
 	/**
-	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass} and where its name equals the given name.
+	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass} and match the given name.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name);
 	
 	/**
-	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass}.
+	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(EClass clazz);
 	
@@ -61,11 +61,16 @@ public interface IResourceDescription {
 
 		/**
 		 * @return whether the candidate is affected by the change in the delta.
-		 * @throws IllegalArgumentException
-		 *             , if this manager is not responsible for the given candidate.
+		 * @throws IllegalArgumentException, if this manager is not responsible for the given candidate.
 		 */
 		boolean isAffected(IResourceDescription.Delta delta, IResourceDescription candidate)
 				throws IllegalArgumentException;
+		
+		/**
+		 * @return the container manager that is responsible for the given resource description. 
+		 * @throws IllegalArgumentException, if this manager is not responsible for the given description.
+		 */
+		IContainer.Manager getContainerManager(IResourceDescription description);
 
 		@ImplementedBy(DefaultResourceDescriptionManagerRegistry.class)
 		interface Registry {
