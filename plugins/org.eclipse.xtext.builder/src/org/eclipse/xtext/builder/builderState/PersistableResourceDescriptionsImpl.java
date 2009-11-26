@@ -28,7 +28,7 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 
 	private Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 
-	public synchronized List<IResourceDescription.Delta> update(Iterable<ResourceDescriptionImpl> toBeAdded, Iterable<URI> toBeRemoved) {
+	public synchronized List<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
 		List<IResourceDescription.Delta> deltas = Lists.newArrayList();
 		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
 		if (toBeRemoved != null) {
