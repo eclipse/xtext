@@ -48,7 +48,7 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 	
 	public void testUpdate_Delta() throws Exception {
 		// test add
-		List<ResourceDescriptionImpl> newResDesc = newResDesc("foo","bar");
+		List<IResourceDescription> newResDesc = newResDesc("foo","bar");
 		List<Delta> update = descs.update(newResDesc, null);
 		assertNull(update.get(0).getOld());
 		assertEquals(newResDesc.get(0),update.get(0).getNew());
@@ -56,7 +56,7 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 		assertEquals(newResDesc.get(1),update.get(1).getNew());
 		
 		// test update
-		List<ResourceDescriptionImpl> updateDescs = newResDesc("foo");
+		List<IResourceDescription> updateDescs = newResDesc("foo");
 		update = descs.update(updateDescs, null);
 		assertEquals(newResDesc.get(0),update.get(0).getOld());
 		assertEquals(updateDescs.get(0),update.get(0).getNew());
@@ -72,7 +72,7 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 	}
 	
 	public void testUpdate_NullParams() throws Exception {
-		List<ResourceDescriptionImpl> newResDesc = newResDesc("foo","bar");
+		List<IResourceDescription> newResDesc = newResDesc("foo","bar");
 		descs.update(newResDesc, null);
 		
 		assertEquals(uri("foo"),descs.getResourceDescription(uri("foo")).getURI());
@@ -87,8 +87,8 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 	
 
 	public void testUpdate_Update() throws Exception {
-		List<ResourceDescriptionImpl> newResDesc = newResDesc("foo","bar");
-		List<ResourceDescriptionImpl> newResDesc2 = newResDesc("foo");
+		List<IResourceDescription> newResDesc = newResDesc("foo","bar");
+		List<IResourceDescription> newResDesc2 = newResDesc("foo");
 		descs.update(newResDesc, null);
 		descs.update(newResDesc2, null);
 		assertEquals(2,Collections2.forIterable(descs.getAllResourceDescriptions()).size());
@@ -120,8 +120,8 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 		return URI.createURI(string);
 	}
 
-	private List<ResourceDescriptionImpl> newResDesc(String ...uris) {
-		List<ResourceDescriptionImpl> result = Lists.newArrayList();
+	private List<IResourceDescription> newResDesc(String ...uris) {
+		List<IResourceDescription> result = Lists.newArrayList();
 		for (String uri : uris) {
 			ResourceDescriptionImpl description = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
 			description.setURI(uri(uri));
