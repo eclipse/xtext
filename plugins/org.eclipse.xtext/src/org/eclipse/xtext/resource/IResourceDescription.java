@@ -95,7 +95,7 @@ public interface IResourceDescription {
 	 * A delta describing the differences between two versions of the same {@link IResourceDescription}. Instances have
 	 * to follow the rule :
 	 * <p>
-	 * <code>getNew()==null || getOld().getURI().equals(getNew().getURI())</code>
+	 * <code>getNew()==null || getOld()==null || getOld().getURI().equals(getNew().getURI())</code>
 	 * </p>
 	 * and
 	 * <p>
@@ -105,10 +105,19 @@ public interface IResourceDescription {
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	interface Delta {
+		/**
+		 * @return the old resource description, or null if the change is an addition
+		 */
 		IResourceDescription getOld();
 
+		/**
+		 * @return the new resource description, or null if the change is a deletion
+		 */
 		IResourceDescription getNew();
 		
+		/**
+		 * @return whether there are differences between the old and the new resource description. 
+		 */
 		boolean hasChanges();
 	}
 
