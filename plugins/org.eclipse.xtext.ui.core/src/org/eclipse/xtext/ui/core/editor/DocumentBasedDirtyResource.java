@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.util.Collections;
-
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
@@ -57,35 +54,17 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
 		return uri;
 	}
-
-	public Iterable<String> getImportedNames() {
+	
+	public IResourceDescription getDescription() {
 		if (document == null)
-			throw new IllegalStateException("Cannot use getImportedNames if this dirty resource is not connected to a document");
-		return document.readOnly(new IUnitOfWork<Iterable<String>, XtextResource>(){
-			public Iterable<String> exec(XtextResource resource) throws Exception {
+			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
+		return document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>(){
+			public IResourceDescription exec(XtextResource resource) throws Exception {
 				IResourceDescription.Manager manager = resource.getResourceDescriptionManager();
 				if (manager == null)
-					return Collections.emptyList();
+					throw new IllegalStateException("ResourceDescriptionManager may not be null.");
 				IResourceDescription description = manager.getResourceDescription(resource);
-				if (description == null)
-					return Collections.emptyList();
-				return description.getImportedNames();
-			}
-		});
-	}
-
-	public Iterable<IEObjectDescription> getExportedObjects() {
-		if (document == null)
-			throw new IllegalStateException("Cannot use getExportedObjects if this dirty resource is not connected to a document");
-		return document.readOnly(new IUnitOfWork<Iterable<IEObjectDescription>, XtextResource>(){
-			public Iterable<IEObjectDescription> exec(XtextResource resource) throws Exception {
-				IResourceDescription.Manager manager = resource.getResourceDescriptionManager();
-				if (manager == null)
-					return Collections.emptyList();
-				IResourceDescription description = manager.getResourceDescription(resource);
-				if (description == null)
-					return Collections.emptyList();
-				return description.getExportedObjects();
+				return description;
 			}
 		});
 	}

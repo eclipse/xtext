@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
@@ -288,12 +288,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		return "otherContents";
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects() {
-		fail("Unexpected call");
-		return null;
-	}
-
-	public Iterable<String> getImportedNames() {
+	public IResourceDescription getDescription() {
 		fail("Unexpected call");
 		return null;
 	}

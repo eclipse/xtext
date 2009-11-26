@@ -5,29 +5,32 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.ui.core.scoping.namespaces;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDirtyResource {
+public class NameBasedContainer implements IContainer {
 
-	/**
-	 * @return the content of the resource as text, never <code>null</code>.
-	 */
-	String getContents();
-	
-	/**
-	 * @return the description of the resource, never <code>null</code>.
-	 */
-	IResourceDescription getDescription();
-	
-	/**
-	 * @return the URI of the resource, never <code>null</code>.
-	 */
-	URI getURI();
-	
+	private final IProject project;
+
+	public NameBasedContainer(IProject project) {
+		this.project = project;
+	}
+
+	public IResourceDescription getResourceDescription(URI uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Iterable<IResourceDescription> getResourceDescriptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
