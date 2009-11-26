@@ -43,15 +43,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="EURI" instanceClassName="org.eclipse.emf.common.util.URI"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BuilderState">
-    <eOperations name="getResourceDescription" eType="#//ResourceDescription">
-      <eParameters name="uri" eType="#//EURI"/>
-    </eOperations>
-    <eOperations name="getResourceDescriptionForStorage" eType="#//ResourceDescription">
-      <eParameters name="externalStorageForm" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceDescriptions" upperBound="-1"
-        eType="#//ResourceDescription" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="EStringArray" instanceTypeName="String[]"/>
 </ecore:EPackage>

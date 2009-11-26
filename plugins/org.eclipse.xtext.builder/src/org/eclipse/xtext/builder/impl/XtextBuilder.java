@@ -29,9 +29,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtext.builder.IResourceIndexer;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -40,9 +37,6 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = "org.eclipse.xtext.builder.xtextBuilder";
-
-	@Inject
-	private IResourceIndexer resourceIndexer;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -75,11 +69,11 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 				IResource resource = delta.getResource();
 				if (!(resource instanceof IFile))
 					return true;
-				IFile file = (IFile) resource;
+//				IFile file = (IFile) resource;
 				if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
-					resourceIndexer.addOrUpdate(file);
+//					resourceIndexer.addOrUpdate(file);
 				} else if (delta.getKind() == IResourceDelta.REMOVED) {
-					resourceIndexer.delete(file);
+//					resourceIndexer.delete(file);
 				}
 				return true;
 			}
@@ -94,8 +88,8 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 					return false;
 				if (!(resource instanceof IFile))
 					return true;
-				IFile file = (IFile) resource;
-				resourceIndexer.addOrUpdate(file);
+//				IFile file = (IFile) resource;
+//				resourceIndexer.addOrUpdate(file);
 				return true;
 			}
 		});
