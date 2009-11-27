@@ -18,6 +18,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
 
 /**
+ * A snapshot representation of a resource's contents. The description is not expected to be live.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
@@ -29,17 +31,19 @@ public interface IResourceDescription {
 	 *         {@link IEObjectDescription}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects();
-	
+
 	/**
-	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass} and match the given name.
+	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
+	 *         {@link EClass} and match the given name.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name);
-	
+
 	/**
-	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given {@link EClass}.
+	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
+	 *         {@link EClass}.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects(EClass clazz);
-	
+
 	/**
 	 * @return the all {@link IEObjectDescription} from {@link #getExportedObjects()} which describe the given EObject.
 	 */
@@ -56,19 +60,21 @@ public interface IResourceDescription {
 	interface Manager {
 
 		/**
-		 * @return a resource description for the given resource
+		 * @return a resource description for the given resource. The result represents the current state of the given
+		 *         resource.
 		 */
 		IResourceDescription getResourceDescription(Resource resource);
 
 		/**
 		 * @return whether the candidate is affected by the change in the delta.
-		 * @throws IllegalArgumentException, if this manager is not responsible for the given candidate.
+		 * @throws IllegalArgumentException
+		 *             if this manager is not responsible for the given candidate.
 		 */
 		boolean isAffected(IResourceDescription.Delta delta, IResourceDescription candidate)
 				throws IllegalArgumentException;
-		
+
 		/**
-		 * @return the container manager that is responsible for descriptions provided by this manager. 
+		 * @return the container manager that is responsible for descriptions provided by this resource manager.
 		 */
 		IContainer.Manager getContainerManager();
 
@@ -114,70 +120,74 @@ public interface IResourceDescription {
 		 * @return the new resource description, or null if the change is a deletion
 		 */
 		IResourceDescription getNew();
-		
+
 		/**
-		 * @return whether there are differences between the old and the new resource description. 
+		 * @return whether there are differences between the old and the new resource description.
 		 */
 		boolean hasChanges();
-		
+
 	}
-	
+
 	interface Event {
-		
+
 		/**
 		 * @return the list of changes. It is never <code>null</code> but may be empty.
 		 */
 		ImmutableList<Delta> getDeltas();
-		
+
 		/**
 		 * @return the sender of this event. Is never <code>null</code>.
 		 */
 		Source getSender();
 
 		interface Source {
-			
+
 			/**
-			 * Add a listener to the event source. Listeners will not be added twice.
-			 * Subsequent calls to {@link #addListener(Listener)} will not affect the number
-			 * of events that the listener receives. {@link #removeListener(Listener)} will
-			 * remove the listener immediately independently from the number of invocations of
-			 * {@link #addListener(Listener)} for the given listener.
-			 * @param listener the listener to be registered. May not be <code>null</code>.
+			 * Add a listener to the event source. Listeners will not be added twice. Subsequent calls to
+			 * {@link #addListener(Listener)} will not affect the number of events that the listener receives.
+			 * {@link #removeListener(Listener)} will remove the listener immediately independently from the number of
+			 * invocations of {@link #addListener(Listener)} for the given listener.
+			 * 
+			 * @param listener
+			 *            the listener to be registered. May not be <code>null</code>.
 			 */
 			void addListener(Listener listener);
-			
+
 			/**
-			 * Immediately removes a registered listener from the source. However if 
-			 * {@link #removeListener(Listener)} is called during a notification, the removed
-			 * listener will still receive the event. If the listener has not been registered before, 
-			 * the {@link #removeListener(Listener)} does nothing.
-			 * @param listener the listener to be removed. May not be <code>null</code>. 
+			 * Immediately removes a registered listener from the source. However if {@link #removeListener(Listener)}
+			 * is called during a notification, the removed listener will still receive the event. If the listener has
+			 * not been registered before, the {@link #removeListener(Listener)} does nothing.
+			 * 
+			 * @param listener
+			 *            the listener to be removed. May not be <code>null</code>.
 			 */
 			void removeListener(Listener listener);
 		}
-		
+
 		/**
 		 * A listener for events raised by a {@link Event.Source}.
 		 */
 		interface Listener {
-			
+
 			/**
-			 * <p>The source will invoce this method to announce changed
-			 * resource. The event will never be <code>null</code>.
-			 * However, it may contain an empty list of deltas.
-			 * </p><p>
-			 * Listeners are free to remove themselves from the sender
-			 * of the event or add other listeners. However added listeners
-			 * will not be informed about the current change. 
-			 * </p><p>This event may be fired 
-			 * asynchronously. 
-			 * It is ensured that the changed resources will provide the content as it 
-			 * was when the change has been announced to the sender of the event.
+			 * <p>
+			 * The source will invoce this method to announce changed resource. The event will never be
+			 * <code>null</code>. However, it may contain an empty list of deltas.
 			 * </p>
-			 * @param event the fired event. Will never be <code>null</code>.
+			 * <p>
+			 * Listeners are free to remove themselves from the sender of the event or add other listeners. However
+			 * added listeners will not be informed about the current change.
+			 * </p>
+			 * <p>
+			 * This event may be fired asynchronously. It is ensured that the changed resources will provide the content
+			 * as it was when the change has been announced to the sender of the event.
+			 * </p>
+			 * 
+			 * @param event
+			 *            the fired event. Will never be <code>null</code>.
 			 */
 			void descriptionsChanged(Event event);
 		}
 	}
-	
+
 }
