@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,6 +28,16 @@ public interface IContainer {
 	 * not contain such an {@link IResourceDescription}. The result may be a cached view on the actual content of the underlying resource.
 	 */
 	IResourceDescription getResourceDescription(URI uri);
+	
+	/**
+	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
+	 */
+	Iterable<IEObjectDescription> findAllEObjects(EClass type);
+
+	/**
+	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
+	 */
+	Iterable<IEObjectDescription> findAllEObjects(EClass type, String name);
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API

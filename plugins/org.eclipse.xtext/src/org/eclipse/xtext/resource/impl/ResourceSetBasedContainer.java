@@ -10,7 +10,6 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.base.Function;
@@ -20,7 +19,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResourceSetBasedContainer implements IContainer, Function<Resource, IResourceDescription> {
+public class ResourceSetBasedContainer extends AbstractContainer {
 
 	private final ResourceSet resourceSet;
 	private final IResourceDescription.Manager.Registry descriptionManagerRegistry;
@@ -34,14 +33,18 @@ public class ResourceSetBasedContainer implements IContainer, Function<Resource,
 		Resource resource = resourceSet.getResource(uri, false);
 		if (resource == null)
 			return null;
-		return apply(resource);
+		return getDescriptionFor(resource);
 	}
 
 	public Iterable<IResourceDescription> getResourceDescriptions() {
-		return Iterables.filter(Iterables.transform(resourceSet.getResources(), this), Predicates.notNull());
+		return Iterables.filter(Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
+			public IResourceDescription apply(Resource resource) {
+				return getDescriptionFor(resource);
+			}
+		}), Predicates.notNull());
 	}
-
-	public IResourceDescription apply(Resource resource) {
+	
+	protected IResourceDescription getDescriptionFor(Resource resource) {
 		IResourceDescription.Manager descriptionManager = descriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(), null);
 		if (descriptionManager == null)
 			return null;

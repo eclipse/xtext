@@ -67,10 +67,9 @@ public interface IResourceDescription {
 				throws IllegalArgumentException;
 		
 		/**
-		 * @return the container manager that is responsible for the given resource description. 
-		 * @throws IllegalArgumentException, if this manager is not responsible for the given description.
+		 * @return the container manager that is responsible for descriptions provided by this manager. 
 		 */
-		IContainer.Manager getContainerManager(IResourceDescription description);
+		IContainer.Manager getContainerManager();
 
 		@ImplementedBy(DefaultResourceDescriptionManagerRegistry.class)
 		interface Registry {

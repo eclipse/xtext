@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.index;
+package org.eclipse.xtext.resource.impl;
 
 import java.util.List;
 
@@ -35,12 +35,11 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextIndexFacadeTest extends TestCase implements IResourceDescription.Manager.Registry, Function<IEObjectDescription, EObject> {
+public class ResourceSetBasedContainerTest extends TestCase implements IResourceDescription.Manager.Registry, Function<IEObjectDescription, EObject> {
 
 	private ResourceSet resourceSet;
 	private DefaultResourceDescriptionManager resourceDescriptionManager;
 	private IContainer container;
-	private XtextIndexFacade indexFacade;
 	private int nameCount;
 
 	@Override
@@ -61,8 +60,6 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 		resourceDescriptionManager = new DefaultResourceDescriptionManager();
 		resourceDescriptionManager.setNameProvider(qualifiedNameProvider);
 		container = new ResourceSetBasedContainer(resourceSet, this);
-		indexFacade = new XtextIndexFacade();
-		indexFacade.setResourceDescriptionsManager(this);
 	}
 
 	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
@@ -70,9 +67,9 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 	}
 	
 	public void testEmptyResourceSet() {
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT, "Zonk");
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, "Zonk");
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
@@ -81,11 +78,11 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
 		createNamedElement(name, type, resource);
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ECLASS);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ECLASS, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS, name);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE, "AnotherName");
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, "AnotherName");
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
@@ -94,15 +91,15 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
 		ENamedElement element = createNamedElement(name, type, resource);
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
@@ -112,15 +109,15 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 		Resource resource = createResource();
 		ENamedElement element = createNamedElement(name, type, resource);
 		ENamedElement other = createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ECLASSIFIER);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER);
 		assertSame(other, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
@@ -132,16 +129,16 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 		resource = createResource();
 		ENamedElement second = createNamedElement(name, type, resource);
 		List<ENamedElement> expected = Lists.newArrayList(first, second);
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		Iterable<EObject> transformed = Iterables.transform(iterable, this);
 		assertTrue(Iterables.elementsEqual(expected, transformed));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
 		transformed = Iterables.transform(iterable, this);
 		assertTrue(Iterables.elementsEqual(expected, transformed));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
 		transformed = Iterables.transform(iterable, this);
 		assertTrue(Iterables.elementsEqual(expected, transformed));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
 		transformed = Iterables.transform(iterable, this);
 		assertTrue(Iterables.elementsEqual(expected, transformed));
 	}
@@ -155,9 +152,9 @@ public class XtextIndexFacadeTest extends TestCase implements IResourceDescripti
 				createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
 			}
 		}
-		Iterable<IEObjectDescription> iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.EDATA_TYPE);
+		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EDATA_TYPE);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = indexFacade.findAllEObjects(container, EcorePackage.Literals.ECLASS);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS);
 		assertEquals(resourceCount*eClassCount, Iterables.size(iterable));
 	}
 

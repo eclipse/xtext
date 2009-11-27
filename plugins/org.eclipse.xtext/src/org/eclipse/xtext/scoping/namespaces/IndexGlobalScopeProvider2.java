@@ -13,7 +13,6 @@ import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.index.IXtextIndexFacade;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -34,7 +33,7 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 	
 	@Inject
 //	@Named(NAMED_EDITOR_SCOPE)
-	private IXtextIndexFacade editorIndexFacade;
+	private IContainer.Manager containerManager;
 	
 //	@Inject
 //	@Named(NAMED_COMMON_SCOPE)
@@ -43,38 +42,36 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
 	
-	@Inject
-	private IContainer.Manager containerManager;
-	
 	public IScope getScope(final EObject context, EReference reference) {
 		IScope result = IScope.NULLSCOPE;
-		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
-		List<IContainer> containers = containerManager.getVisibleContainers(description);
+		List<IContainer> containers = getVisibleContainers(context);
 		ListIterator<IContainer> iter = containers.listIterator();
 		while(iter.hasPrevious()) {
 			IContainer container = iter.previous();
-			result = createIndexScope(getIndexFacadeFor(context), result, container, reference);
+			result = createIndexScope(result, container, reference);
 		}
 		return result;
 	}
 	
-	protected IXtextIndexFacade getIndexFacadeFor(EObject context) {
-		// TODO: switch used facade depending on the state in the resource set
-		return editorIndexFacade;
+	protected List<IContainer> getVisibleContainers(EObject context) {
+		// TODO read state from ResourceSet
+		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
+		List<IContainer> containers = containerManager.getVisibleContainers(description);
+		return containers;
 	}
-
-	protected SimpleScope createIndexScope(final IXtextIndexFacade indexFacade, IScope parent, final IContainer container, final EReference reference) {
+	
+	protected SimpleScope createIndexScope(IScope parent, final IContainer container, final EReference reference) {
 		return new SimpleScope(parent, null) {
 
 			@Override
 			public Iterable<IEObjectDescription> internalGetContents() {
-				return indexFacade.findAllEObjects(container, reference.getEReferenceType());
+				return container.findAllEObjects(reference.getEReferenceType());
 			}
 
 			@Override
 			public IEObjectDescription getContentByName(String name) {
-				Iterable<IEObjectDescription> allDescriptions = indexFacade.findAllEObjects(
-						container, reference.getEReferenceType(), name);
+				Iterable<IEObjectDescription> allDescriptions = container.findAllEObjects(
+						reference.getEReferenceType(), name);
 				Iterator<IEObjectDescription> iter = allDescriptions.iterator();
 				IEObjectDescription result = null;
 				while(iter.hasNext()) {
@@ -89,7 +86,7 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 
 			@Override
 			public IEObjectDescription getContentByEObject(EObject object) {
-				Iterable<IEObjectDescription> allDescriptions = indexFacade.findAllDescriptionsFor(object);
+				Iterable<IEObjectDescription> allDescriptions = findAllDescriptionsFor(object);
 				Iterator<IEObjectDescription> iter = allDescriptions.iterator();
 				boolean hadNext = false;
 				while(iter.hasNext()) {
@@ -104,8 +101,8 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 			}
 
 			private boolean isValidForEObject(IEObjectDescription result) {
-				Iterable<IEObjectDescription> allDescriptionsByName = indexFacade.findAllEObjects(
-						container, reference.getEReferenceType(), result.getName());
+				Iterable<IEObjectDescription> allDescriptionsByName = container.findAllEObjects(
+						reference.getEReferenceType(), result.getName());
 				Iterator<IEObjectDescription> iter = allDescriptionsByName.iterator();
 				IEObjectDescription inverted = null;
 				while(iter.hasNext()) {
@@ -116,6 +113,31 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 				return inverted != null && inverted.getEObjectURI().equals(result.getEObjectURI());
 			}
 		};
+	}
+	
+	private IResourceDescription.Manager.Registry resourceDescriptionsManager;
+	
+	public Iterable<IEObjectDescription> findAllDescriptionsFor(EObject object) {
+		if (object.eIsProxy())
+			throw new IllegalArgumentException("object may not be a proxy: " + object);
+		IResourceDescription.Manager descriptionManager = resourceDescriptionsManager.getResourceDescriptionManager(object.eResource().getURI(), null);
+		if (descriptionManager == null)
+			throw new IllegalStateException("Cannot find description manager for " + object);
+		IResourceDescription description = descriptionManager.getResourceDescription(object.eResource());
+		return description.getExportedObjectsForEObject(object);
+	}
+
+	
+	protected IResourceDescription getActualResourceDescription(IResourceDescription persisted) {
+		return persisted;
+	}
+	
+	public IResourceDescription.Manager.Registry getResourceDescriptionsManager() {
+		return resourceDescriptionsManager;
+	}
+	
+	public void setResourceDescriptionsManager(IResourceDescription.Manager.Registry resourceDescriptionsManager) {
+		this.resourceDescriptionsManager = resourceDescriptionsManager;
 	}
 
 }

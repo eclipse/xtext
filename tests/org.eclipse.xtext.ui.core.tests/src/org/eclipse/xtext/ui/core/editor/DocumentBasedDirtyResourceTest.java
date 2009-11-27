@@ -191,7 +191,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return null;
 	}
 	
-	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager(IResourceDescription description) {
+	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
 		fail("Unexpected call");
 		return null;
 	}

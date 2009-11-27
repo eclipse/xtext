@@ -5,19 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.scoping.namespaces;
+package org.eclipse.xtext.resource.impl;
 
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,13 +28,16 @@ import com.google.inject.Inject;
  *  - ReentrantRWLock
  *  - Listen for description deltas
  */
-public abstract class AbstractMapBasedContainer implements IContainer, Predicate<IResourceDescription> {
+public class ResourceDescriptionsBasedContainer implements IContainer {
 
-	@Inject
-	private IResourceDescriptions descriptions;
+	private final IResourceDescriptions descriptions;
 	
 	private Map<URI, IResourceDescription> uriToDescription;
 
+	public ResourceDescriptionsBasedContainer(IResourceDescriptions descriptions) {
+		this.descriptions = descriptions;
+	}
+	
 	public IResourceDescription getResourceDescription(URI uri) {
 		return getUriToDescription().get(uri);
 	}
@@ -43,7 +48,7 @@ public abstract class AbstractMapBasedContainer implements IContainer, Predicate
 
 	protected Map<URI, IResourceDescription> getUriToDescription() {
 		if (uriToDescription == null) {
-			Iterable<IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), this);
+			Iterable<IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), new DelegatingPredicate());
 			uriToDescription = Maps.newHashMap();
 			for(IResourceDescription description: filtered) {
 				uriToDescription.put(description.getURI(), description);
@@ -52,6 +57,31 @@ public abstract class AbstractMapBasedContainer implements IContainer, Predicate
 		return uriToDescription;
 	}
 	
-	public abstract boolean apply(IResourceDescription input);
+	private class DelegatingPredicate implements Predicate<IResourceDescription> {
 
+		public boolean apply(IResourceDescription input) {
+			return contains(input);
+		}
+		
+	}
+	
+	protected boolean contains(IResourceDescription input) {
+		return true;
+	}
+
+	public Iterable<IEObjectDescription> findAllEObjects(final EClass type) {
+		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				return from.getExportedObjects(type);
+			}
+		}));
+	}
+
+	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final String name) {
+		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				return from.getExportedObjects(type, name);
+			}
+		}));
+	}
 }

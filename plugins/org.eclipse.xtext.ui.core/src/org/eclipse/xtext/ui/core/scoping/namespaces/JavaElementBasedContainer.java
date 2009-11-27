@@ -11,16 +11,23 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaElementBasedContainer extends AbstractMapBasedContainer {
+public class JavaElementBasedContainer extends ResourceDescriptionsBasedContainer {
 
-	private IPackageFragmentRoot fragmentRoot;
+	private final IPackageFragmentRoot fragmentRoot;
+	
+	public JavaElementBasedContainer(IResourceDescriptions descriptions, IPackageFragmentRoot fragmentRoot) {
+		super(descriptions);
+		this.fragmentRoot = fragmentRoot;
+	}
 	
 	@Override
-	public boolean apply(IResourceDescription input) {
+	protected boolean contains(IResourceDescription input) {
 		if (!(input instanceof IPersistentResourceDescription)) {
 			throw new IllegalArgumentException("input cannot be filtered: " + input);
 		}
@@ -30,10 +37,6 @@ public class JavaElementBasedContainer extends AbstractMapBasedContainer {
 			return fragmentRoot.equals(other);
 		}
 		return fragmentRoot.getResource().getFullPath().isPrefixOf(storage.getFullPath());
-	}
-
-	public void setFragmentRoot(IPackageFragmentRoot fragmentRoot) {
-		this.fragmentRoot = fragmentRoot;
 	}
 
 	public IPackageFragmentRoot getFragmentRoot() {
