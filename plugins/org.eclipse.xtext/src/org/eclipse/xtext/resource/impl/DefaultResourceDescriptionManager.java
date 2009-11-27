@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.common.collect.Collections2;
@@ -53,12 +52,6 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		this.containerManager = containerManager;
 	}
 	
-	public IContainer.Manager getContainerManager(IResourceDescription description) {
-		if (!(description instanceof DefaultResourceDescription))
-			throw new IllegalArgumentException("description " + description + " was not provided by this manager");
-		return containerManager;
-	}
-
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		if (!delta.hasChanges())
 			return false;
