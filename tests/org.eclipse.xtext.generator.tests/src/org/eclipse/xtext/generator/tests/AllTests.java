@@ -133,7 +133,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDeltaTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.resource.impl.ResourceSetBasedContainerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptionsTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
