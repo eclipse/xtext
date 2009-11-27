@@ -22,7 +22,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,16 +31,13 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 
 	private static final Logger log = Logger.getLogger(ProjectAwareContainerManager.class);
 	
-	@Inject
-	private IResourceDescriptions descriptions;
-	
-	public IContainer getContainer(IResourceDescription desc) {
+	public IContainer getContainer(IResourceDescription desc,IResourceDescriptions resourceDescriptions) {
 		IProject project = getProject(desc.getURI());
-		return createContainer(project);
+		return createContainer(project,resourceDescriptions);
 	}
 
-	protected ProjectBasedContainer createContainer(IProject project) {
-		ProjectBasedContainer result = new ProjectBasedContainer(descriptions, project);
+	protected ProjectBasedContainer createContainer(IProject project,IResourceDescriptions resourceDescriptions) {
+		ProjectBasedContainer result = new ProjectBasedContainer(resourceDescriptions, project);
 		return result;
 	}
 
@@ -55,14 +51,14 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 		return project;
 	}
 
-	public List<IContainer> getVisibleContainers(IResourceDescription desc) {
+	public List<IContainer> getVisibleContainers(IResourceDescription desc,IResourceDescriptions resourceDescriptions) {
 		IProject project = getProject(desc.getURI());
 		List<IContainer> result = Lists.newArrayList();
-		result.add(createContainer(project));
+		result.add(createContainer(project,resourceDescriptions));
 		try {
 			for (IProject p : project.getReferencedProjects()) {
 				if (isAccessableXtextProject(p))
-					result.add(createContainer(p));
+					result.add(createContainer(p,resourceDescriptions));
 			}
 		}
 		catch (CoreException e) {
@@ -85,12 +81,4 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 		}
 	}
 	
-	public IResourceDescriptions getDescriptions() {
-		return descriptions;
-	}
-	
-	public void setDescriptions(IResourceDescriptions descriptions) {
-		this.descriptions = descriptions;
-	}
-
 }

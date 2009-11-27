@@ -25,8 +25,6 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
-import org.eclipse.xtext.resource.impl.ResourceSetBasedContainer;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -35,7 +33,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResourceSetBasedContainerTest extends TestCase implements IResourceDescription.Manager.Registry, Function<IEObjectDescription, EObject> {
+public class ResourceSetBasedResourceDescriptionsTest extends TestCase implements IResourceDescription.Manager.Registry, Function<IEObjectDescription, EObject> {
 
 	private ResourceSet resourceSet;
 	private DefaultResourceDescriptionManager resourceDescriptionManager;
@@ -59,7 +57,10 @@ public class ResourceSetBasedContainerTest extends TestCase implements IResource
 		};
 		resourceDescriptionManager = new DefaultResourceDescriptionManager();
 		resourceDescriptionManager.setNameProvider(qualifiedNameProvider);
-		container = new ResourceSetBasedContainer(resourceSet, this);
+		ResourceSetBasedResourceDescriptions resDescs = new ResourceSetBasedResourceDescriptions();
+		resDescs.setContext(resourceSet);
+		resDescs.setRegistry(this);
+		container = new ResourceDescriptionsBasedContainer(resDescs);
 	}
 
 	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
@@ -143,9 +144,9 @@ public class ResourceSetBasedContainerTest extends TestCase implements IResource
 		assertTrue(Iterables.elementsEqual(expected, transformed));
 	}
 	
-	public void testPerformance100Resources1000EClassesEach() {
-		int resourceCount = 100;
-		int eClassCount = 1000;
+	public void testPerformance10Resources100EClassesEach() {
+		int resourceCount = 10;
+		int eClassCount = 100;
 		for(int i = 0; i < resourceCount; i++) {
 			Resource resource = createResource();
 			for(int j = 0; j < eClassCount; j++) {

@@ -26,38 +26,34 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JavaProjectAwareContainerManager implements IContainer.Manager {
 
-	@Inject
-	private IResourceDescriptions descriptions;
-
-	public IContainer getContainer(IResourceDescription desc) {
-		IPackageFragmentRoot root = getContainerJavaElement(desc.getURI());
-		return createContainer(root);
+	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		IPackageFragmentRoot root = getContainerJavaElement(desc.getURI(),resourceDescriptions);
+		return createContainer(root,resourceDescriptions);
 	}
 	
-	public IContainer createContainer(IPackageFragmentRoot root) {
-		JavaElementBasedContainer result = new JavaElementBasedContainer(descriptions, root);
+	public IContainer createContainer(IPackageFragmentRoot root, IResourceDescriptions resourceDescriptions) {
+		JavaElementBasedContainer result = new JavaElementBasedContainer(resourceDescriptions, root);
 		return result;
 	}
 
-	public List<IContainer> getVisibleContainers(IResourceDescription desc) {
-		IJavaElement element = getContainerJavaElement(desc.getURI());
+	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		IJavaElement element = getContainerJavaElement(desc.getURI(),resourceDescriptions);
 		IJavaProject javaProject = element.getJavaProject();
-		return getVisibleContainers(javaProject);
+		return getVisibleContainers(javaProject,resourceDescriptions);
 	}
 	
-	public List<IContainer> getVisibleContainers(IJavaProject project) {
+	public List<IContainer> getVisibleContainers(IJavaProject project, IResourceDescriptions resourceDescriptions) {
 		try {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
 			List<IContainer> result = Lists.newArrayListWithExpectedSize(roots.length);
 			for(IPackageFragmentRoot root: roots) {
-				result.add(createContainer(root));
+				result.add(createContainer(root, resourceDescriptions));
 			}
 			return result;
 		} catch (JavaModelException e) {
@@ -65,9 +61,9 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		}
 	}
 	
-	public IPackageFragmentRoot getContainerJavaElement(URI uri) {
+	public IPackageFragmentRoot getContainerJavaElement(URI uri, IResourceDescriptions resourceDescriptions) {
 		if (uri.isArchive()) {
-			return getJarWithEntry(uri);
+			return getJarWithEntry(uri, resourceDescriptions);
 		}
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
 		if (file == null) {
@@ -84,8 +80,8 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		return (IPackageFragmentRoot) fragmentRoot;
 	}
 	
-	public IPackageFragmentRoot getJarWithEntry(URI uri) {
-		IResourceDescription persistentDescription = descriptions.getResourceDescription(uri);
+	public IPackageFragmentRoot getJarWithEntry(URI uri, IResourceDescriptions resourceDescriptions) {
+		IResourceDescription persistentDescription = resourceDescriptions.getResourceDescription(uri);
 		if (persistentDescription instanceof IPersistentResourceDescription) {
 			IStorage storage = ((IPersistentResourceDescription) persistentDescription).getStorage();
 			if (storage instanceof IJarEntryResource) {
