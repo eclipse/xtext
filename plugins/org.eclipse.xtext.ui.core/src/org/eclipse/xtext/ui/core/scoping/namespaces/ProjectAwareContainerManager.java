@@ -18,11 +18,11 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,7 +33,7 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 	private static final Logger log = Logger.getLogger(ProjectAwareContainerManager.class);
 	
 	@Inject
-	private Provider<ProjectBasedContainer> containerProvider;
+	private IResourceDescriptions descriptions;
 	
 	public IContainer getContainer(IResourceDescription desc) {
 		IProject project = getProject(desc.getURI());
@@ -41,8 +41,7 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 	}
 
 	protected ProjectBasedContainer createContainer(IProject project) {
-		ProjectBasedContainer result = containerProvider.get();
-		result.setProject(project);
+		ProjectBasedContainer result = new ProjectBasedContainer(descriptions, project);
 		return result;
 	}
 
@@ -84,6 +83,14 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 			log.error(e.getMessage(),e);
 			return false;
 		}
+	}
+	
+	public IResourceDescriptions getDescriptions() {
+		return descriptions;
+	}
+	
+	public void setDescriptions(IResourceDescriptions descriptions) {
+		this.descriptions = descriptions;
 	}
 
 }

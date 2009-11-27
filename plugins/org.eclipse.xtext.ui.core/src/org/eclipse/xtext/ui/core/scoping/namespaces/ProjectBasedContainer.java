@@ -11,15 +11,18 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ProjectBasedContainer extends AbstractMapBasedContainer {
+public class ProjectBasedContainer extends ResourceDescriptionsBasedContainer {
 
-	private IProject project;
+	private final IProject project;
 	
-	public void setProject(IProject project) {
+	public ProjectBasedContainer(IResourceDescriptions descriptions, IProject project) {
+		super(descriptions);
 		this.project = project;
 	}
 	
@@ -28,7 +31,7 @@ public class ProjectBasedContainer extends AbstractMapBasedContainer {
 	}
 
 	@Override
-	public boolean apply(IResourceDescription input) {
+	protected boolean contains(IResourceDescription input) {
 		IPath path = new Path(input.getURI().toPlatformString(true));
 		return project.exists(path);
 	}

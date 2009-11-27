@@ -27,7 +27,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,17 +36,13 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 	@Inject
 	private IResourceDescriptions descriptions;
 
-	@Inject
-	private Provider<JavaElementBasedContainer> containerProvider;
-
 	public IContainer getContainer(IResourceDescription desc) {
 		IPackageFragmentRoot root = getContainerJavaElement(desc.getURI());
 		return createContainer(root);
 	}
 	
 	public IContainer createContainer(IPackageFragmentRoot root) {
-		JavaElementBasedContainer result = containerProvider.get();
-		result.setFragmentRoot(root);
+		JavaElementBasedContainer result = new JavaElementBasedContainer(descriptions, root);
 		return result;
 	}
 
