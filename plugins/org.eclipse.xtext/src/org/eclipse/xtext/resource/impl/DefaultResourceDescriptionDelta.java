@@ -43,8 +43,17 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	public IResourceDescription getOld() {
 		return old;
 	}
+	
+	private Boolean hasChanges;
 
 	public boolean hasChanges() {
+		if (hasChanges==null) {
+			hasChanges = internalHasChanges();
+		}
+		return hasChanges.booleanValue();
+	}
+	
+	protected boolean internalHasChanges() {
 		if (_new==null)
 			return true;
 		

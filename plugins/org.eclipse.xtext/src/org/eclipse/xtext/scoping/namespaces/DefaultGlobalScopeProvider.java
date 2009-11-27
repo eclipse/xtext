@@ -10,37 +10,61 @@ package org.eclipse.xtext.scoping.namespaces;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements IGlobalScopeProvider {
-	
-	public static final String NAMED_EDITOR_SCOPE = "org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider2.EDITOR_SCOPE";
-	public static final String NAMED_COMMON_SCOPE = "org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider2.COMMON_SCOPE";
+public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
+	public static final String NAMED_BUILDER_SCOPE = "org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.BUILDER_SCOPE";
 	
 	@Inject
-//	@Named(NAMED_EDITOR_SCOPE)
 	private IContainer.Manager containerManager;
-	
-//	@Inject
-//	@Named(NAMED_COMMON_SCOPE)
-//	private IXtextIndexFacade commonIndexFacade;
 	
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
+	
+	@Inject(optional=true)
+	@Named(NAMED_BUILDER_SCOPE)
+	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
+	
+	@Inject
+	private Provider<IResourceDescriptions> resourceDescriptions;
+	
+	public void setBuilderScopeResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
+		this.builderScopeResourceDescriptions = resourceDescriptions;
+	}
+	
+	public void setResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
+		this.resourceDescriptions = resourceDescriptions;
+	}
+	
+	public IResourceDescriptions getResourceDescriptions(EObject ctx) {
+		Map<Object, Object> loadOptions = ctx.eResource().getResourceSet().getLoadOptions();
+		IResourceDescriptions result = resourceDescriptions.get();
+		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
+			result = builderScopeResourceDescriptions.get();
+		}
+		if (result instanceof IResourceDescriptions.IContextAware) {
+			((IResourceDescriptions.IContextAware)result).setContext(ctx);
+		}
+		return result;
+	}
 	
 	public IScope getScope(final EObject context, EReference reference) {
 		IScope result = IScope.NULLSCOPE;
@@ -56,7 +80,7 @@ public class IndexGlobalScopeProvider2 extends AbstractScopeProvider implements 
 	protected List<IContainer> getVisibleContainers(EObject context) {
 		// TODO read state from ResourceSet
 		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
-		List<IContainer> containers = containerManager.getVisibleContainers(description);
+		List<IContainer> containers = containerManager.getVisibleContainers(description,getResourceDescriptions(context));
 		return containers;
 	}
 	

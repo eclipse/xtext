@@ -7,15 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * Represents an observable set of {@link IResourceDescription}
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IResourceDescriptions extends IResourceDescription.Event.Source {
 
 	Iterable<IResourceDescription> getAllResourceDescriptions();
-	
+
 	IResourceDescription getResourceDescription(URI uri);
-	
+
+	/**
+	 * A context aware instance {@link IResourceDescriptions}.
+	 * Needs to be configured with the current context before used.
+	 * 
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	interface IContextAware extends IResourceDescriptions {
+		
+		void setContext(Notifier ctx);
+	}
 }
