@@ -7,27 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.notification;
 
-import org.eclipse.core.runtime.ListenerList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ui.core.editor.IDirtyResource;
+import java.util.Collection;
+
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StateChangeEventBroker implements IStateChangeEventBroker, IDirtyStateManager.IDirtyStateListener{
+public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEventSource implements IStateChangeEventBroker, IResourceDescription.Event.Listener {
 
-	private final ListenerList listeners;
+	public static class StateChangeEventBrokerEvent extends ResourceDescriptionChangeEvent {
 
+		public StateChangeEventBrokerEvent(Collection<IResourceDescription.Delta> delta, IStateChangeEventBroker sender) {
+			super(delta, sender);
+		}
+
+		@Override
+		public IStateChangeEventBroker getSender() {
+			return (IStateChangeEventBroker) super.getSender();
+		}
+	}
+	
 	@Inject
 	public StateChangeEventBroker(IDirtyStateManager instance) {
-		listeners = new ListenerList();
 		registerAtDirtyStateManager(instance);
 	}
 
@@ -35,31 +42,8 @@ public class StateChangeEventBroker implements IStateChangeEventBroker, IDirtySt
 		manager.addListener(this);
 	}
 	
-	public void addListener(IStateChangeEventListener listener) {
-		listeners.add(listener);
-	}
-
-	public void removeListener(IStateChangeEventListener listener) {
-		listeners.remove(listener);
+	public void descriptionsChanged(IResourceDescription.Event event) {
+		notifyListeners(new StateChangeEventBrokerEvent(event.getDeltas(), this));
 	}
 	
-	protected void notifyListeners(ImmutableList<URI> uris) {
-		Object[] listeners = this.listeners.getListeners();
-		for(Object listener: listeners) {
-			IStateChangeEventListener stateChangeListener = (IStateChangeEventListener) listener;
-			stateChangeListener.onStateChanged(this, uris);
-		}
-	}
-
-	public void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedResources, ImmutableCollection<URI> unmanagedResources) {
-		Iterable<URI> transformed = Iterables.transform(changedResources, new Function<IDirtyResource, URI>() {
-			public URI apply(IDirtyResource from) {
-				return from.getURI();
-			}
-		});
-		Iterable<URI> concatenated = Iterables.concat(unmanagedResources, transformed);
-		ImmutableList<URI> uris = ImmutableList.copyOf(concatenated);
-		notifyListeners(uris);
-	}
-
 }

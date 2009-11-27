@@ -7,21 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.notification;
 
-import org.eclipse.emf.common.util.URI;
-
-import com.google.common.collect.ImmutableCollection;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IStateChangeEventBroker {
-
-	interface IStateChangeEventListener {
-		void onStateChanged(IStateChangeEventBroker sender, ImmutableCollection<URI> affectedURIs);
+public interface IStateChangeEventBroker extends IResourceDescription.Event.Source {
+	
+	interface Event extends IResourceDescription.Event {
+		
+		IStateChangeEventBroker getSender();
+		
 	}
-	
-	void addListener(IStateChangeEventListener listener);
-	
-	void removeListener(IStateChangeEventListener listener);
 	
 }

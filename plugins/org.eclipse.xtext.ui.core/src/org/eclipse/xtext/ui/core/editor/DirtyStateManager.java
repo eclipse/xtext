@@ -7,28 +7,41 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ConcurrentMap;
 
-import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 // TODO: batch events according to the contract of IDirtyStateManager
-public class DirtyStateManager implements IDirtyStateManager {
+public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSource implements IDirtyStateManager {
 
-	private ConcurrentMap<URI, IDirtyResource> managedResources;
+	protected static class Event extends ResourceDescriptionChangeEvent {
+
+		public Event(Collection<Delta> delta, Source sender) {
+			super(delta, sender);
+		}
+
+		@Override
+		public IDirtyStateManager getSender() {
+			return (IDirtyStateManager) super.getSender();
+		}
+
+	}
 	
-	private ListenerList listeners;
+	private ConcurrentMap<URI, IDirtyResource> managedResources;
 	
 	public DirtyStateManager() {
 		managedResources = Maps.newConcurrentHashMap();
-		listeners = new ListenerList();
 	}
 	
 	public void announceDirtyStateChanged(IDirtyResource dirtyResource) {
@@ -42,21 +55,37 @@ public class DirtyStateManager implements IDirtyStateManager {
 		}
 	}
 
-	protected void notifyListeners(IDirtyResource dirtyResource, boolean managed) {
+	protected void notifyListeners(final IDirtyResource dirtyResource, boolean managed) {
 		if (managed) {
-			ImmutableList<IDirtyResource> changedResources = ImmutableList.of(dirtyResource);
-			Object[] notifyUs = listeners.getListeners();
-			for(Object notifyMe: notifyUs) {
-				IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
-				listener.dirtyStateChanged(this, changedResources, ImmutableList.<URI>of());
-			}
+			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
+				public boolean hasChanges() {
+					return true;
+				}
+				
+				public IResourceDescription getOld() {
+					return null;
+				}
+				
+				public IResourceDescription getNew() {
+					return dirtyResource.getDescription();
+				}
+			};
+			notifyListeners(new Event(Collections.singletonList(delta), this));
 		} else {
-			ImmutableList<URI> unmanaged = ImmutableList.of(dirtyResource.getURI());
-			Object[] notifyUs = listeners.getListeners();
-			for(Object notifyMe: notifyUs) {
-				IDirtyStateListener listener = (IDirtyStateListener) notifyMe;
-				listener.dirtyStateChanged(this, ImmutableList.<IDirtyResource>of(), unmanaged);
-			}
+			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
+				public boolean hasChanges() {
+					return true;
+				}
+				
+				public IResourceDescription getOld() {
+					return dirtyResource.getDescription();
+				}
+				
+				public IResourceDescription getNew() {
+					return null;
+				}
+			};
+			notifyListeners(new Event(Collections.singletonList(delta), this));
 		}
 	}
 
@@ -74,14 +103,6 @@ public class DirtyStateManager implements IDirtyStateManager {
 		if (dirtyResource != null)
 			return dirtyResource.getDescription();
 		return null;
-	}
-
-	public void addListener(IDirtyStateListener listener) {
-		listeners.add(listener);
-	}
-
-	public void removeListener(IDirtyStateListener listener) {
-		listeners.remove(listener);
 	}
 
 	public String getContent(URI uri) {

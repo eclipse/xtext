@@ -20,13 +20,13 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DirtyStateEditorSupport implements IXtextModelListener, IStateChangeEventBroker.IStateChangeEventListener, VerifyListener {
+public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
 	
 	/**
 	 * Allows to mock the user decision in unit tests.
@@ -167,17 +167,24 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IStateChang
 		isDirty = false;
 	}
 	
-	public void onStateChanged(IStateChangeEventBroker sender, final ImmutableCollection<URI> affectedURIs) {
+	public void descriptionsChanged(IResourceDescription.Event event) {
+		final Set<URI> uris = Sets.newHashSet();
+		for(IResourceDescription.Delta delta: event.getDeltas()) {
+			if (delta.getNew() != null)
+				uris.add(delta.getNew().getURI());
+			else if (delta.getOld() != null)
+				uris.add(delta.getOld().getURI());
+		}
 		final IXtextDocument document = currentClient.getDocument();
 		final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
 			public Collection<Resource> exec(XtextResource resource) throws Exception {
 				if (resource == null || resource.getResourceSet() == null)
 					return null;
-				Collection<Resource> affectedResources = collectAffectedResources(resource, affectedURIs);
+				Collection<Resource> affectedResources = collectAffectedResources(resource, uris);
 				return affectedResources;
 			}
 			
-			protected Collection<Resource> collectAffectedResources(XtextResource resource, final ImmutableCollection<URI> affectedURIs) {
+			protected Collection<Resource> collectAffectedResources(XtextResource resource, final Collection<URI> affectedURIs) {
 				List<Resource> result = Lists.newArrayListWithExpectedSize(2);
 				ResourceSet resourceSet = resource.getResourceSet();
 				URIConverter converter = resourceSet.getURIConverter();
