@@ -7,16 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
-import java.util.Collection;
+import static org.eclipse.xtext.builder.builderState.BuilderStateUtil.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
@@ -24,21 +25,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import static org.eclipse.xtext.builder.builderState.BuilderStateUtil.*;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PersistableResourceDescriptionsImpl implements IResourceDescriptions {
+public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions {
 
-	private final Collection<IResourceDescription.Event.Listener> listeners;
-	
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 	
-	public PersistableResourceDescriptionsImpl() {
-		listeners = new CopyOnWriteArraySet<IResourceDescription.Event.Listener>();
-	}
-
 	public synchronized ImmutableList<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
 		List<IResourceDescription.Delta> deltas = Lists.newArrayList();
 		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
@@ -59,9 +52,7 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 		}
 		resourceDescriptionMap = Collections.unmodifiableMap(newMap);
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
-		for(IResourceDescription.Event.Listener listener: listeners) {
-			listener.descriptionsChanged(event);
-		}
+		notifyListeners(event);
 		return event.getDeltas();
 	}
 
@@ -73,12 +64,4 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 		return resourceDescriptionMap.get(uri);
 	}
 	
-	public void addListener(IResourceDescription.Event.Listener listener) {
-		listeners.add(listener);
-	}
-	
-	public void removeListener(IResourceDescription.Event.Listener listener) {
-		listeners.remove(listener);
-	}
-
 }
