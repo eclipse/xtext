@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -31,12 +31,12 @@ import static org.eclipse.xtext.builder.builderState.BuilderStateUtil.*;
  */
 public class PersistableResourceDescriptionsImpl implements IResourceDescriptions {
 
-	private final Collection<IResourceDescriptions.Listener> listeners;
+	private final Collection<IResourceDescription.Event.Listener> listeners;
 	
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 	
 	public PersistableResourceDescriptionsImpl() {
-		listeners = new CopyOnWriteArraySet<Listener>();
+		listeners = new CopyOnWriteArraySet<IResourceDescription.Event.Listener>();
 	}
 
 	public synchronized ImmutableList<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
@@ -58,11 +58,11 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 			}
 		}
 		resourceDescriptionMap = Collections.unmodifiableMap(newMap);
-		ImmutableList<Delta> immutableDeltas = ImmutableList.copyOf(deltas);
-		for(Listener listener: listeners) {
-			listener.onDescriptionsChanged(immutableDeltas);
+		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
+		for(IResourceDescription.Event.Listener listener: listeners) {
+			listener.descriptionsChanged(event);
 		}
-		return immutableDeltas;
+		return event.getDeltas();
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
@@ -73,11 +73,11 @@ public class PersistableResourceDescriptionsImpl implements IResourceDescription
 		return resourceDescriptionMap.get(uri);
 	}
 	
-	public void addListener(Listener listener) {
+	public void addListener(IResourceDescription.Event.Listener listener) {
 		listeners.add(listener);
 	}
 	
-	public void removeListener(Listener listener) {
+	public void removeListener(IResourceDescription.Event.Listener listener) {
 		listeners.remove(listener);
 	}
 

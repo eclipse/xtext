@@ -16,11 +16,10 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescription.Event;
 
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -189,15 +188,15 @@ public class PersistableResourceDescriptorsImplTest extends TestCase {
 		assertEquals(3, notificationCount);
 	}
 	
-	private class TestListener implements IResourceDescriptions.Listener {
+	private class TestListener implements IResourceDescription.Event.Listener {
 
 		boolean remove = false;
 		
-		public void onDescriptionsChanged(ImmutableList<Delta> delta) {
+		public void descriptionsChanged(Event event) {
 			notificationCount++;
 			if (wasDelta != null)
-				assertSame(wasDelta, delta);
-			wasDelta = delta;
+				assertSame(wasDelta, event.getDeltas());
+			wasDelta = event.getDeltas();
 			if (remove)
 				descs.removeListener(this);
 		}

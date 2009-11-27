@@ -10,11 +10,16 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.LinkedList;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.ui.core.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
@@ -27,7 +32,8 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest 
-	implements DirtyStateEditorSupport.IDirtyStateEditorSupportClient, DirtyStateEditorSupport.IConcurrentEditingCallback, IDirtyResource {
+	implements DirtyStateEditorSupport.IDirtyStateEditorSupportClient, DirtyStateEditorSupport.IConcurrentEditingCallback, IDirtyResource,
+		IResourceDescription.Manager {
 
 	private DirtyStateEditorSupport dirtyStateSupport;
 	private VerifyListener verifyListener;
@@ -48,6 +54,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
+		resource.setResourceDescriptionManager(this);
 		resourceSet.getResources().add(resource);
 		dirtyStateSupport = new DirtyStateEditorSupport();
 		dirtyStateSupport.setConcurrentEditingWarningDialog(this);
@@ -295,6 +302,20 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 
 	public URI getURI() {
 		return resourceURI;
+	}
+
+	public Manager getContainerManager() {
+		fail("Unexpected call");
+		return null;
+	}
+
+	public IResourceDescription getResourceDescription(Resource resource) {
+		return new DefaultResourceDescription(resource, new SimpleNameProvider());
+	}
+
+	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
+		fail("Unexpected call");
+		return false;
 	}
 	
 }

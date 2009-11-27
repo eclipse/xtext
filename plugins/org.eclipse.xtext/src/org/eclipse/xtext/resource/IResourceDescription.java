@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManagerRegistry;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -118,6 +119,65 @@ public interface IResourceDescription {
 		 * @return whether there are differences between the old and the new resource description. 
 		 */
 		boolean hasChanges();
+		
 	}
+	
+	interface Event {
+		
+		/**
+		 * @return the list of changes. It is never <code>null</code> but may be empty.
+		 */
+		ImmutableList<Delta> getDeltas();
+		
+		/**
+		 * @return the sender of this event. Is never <code>null</code>.
+		 */
+		Source getSender();
 
+		interface Source {
+			
+			/**
+			 * Add a listener to the event source. Listeners will not be added twice.
+			 * Subsequent calls to {@link #addListener(Listener)} will not affect the number
+			 * of events that the listener receives. {@link #removeListener(Listener)} will
+			 * remove the listener immediately independently from the number of invocations of
+			 * {@link #addListener(Listener)} for the given listener.
+			 * @param listener the listener to be registered. May not be <code>null</code>.
+			 */
+			void addListener(Listener listener);
+			
+			/**
+			 * Immediately removes a registered listener from the source. However if 
+			 * {@link #removeListener(Listener)} is called during a notification, the removed
+			 * listener will still receive the event. If the listener has not been registered before, 
+			 * the {@link #removeListener(Listener)} does nothing.
+			 * @param listener the listener to be removed. May not be <code>null</code>. 
+			 */
+			void removeListener(Listener listener);
+		}
+		
+		/**
+		 * A listener for events raised by a {@link Event.Source}.
+		 */
+		interface Listener {
+			
+			/**
+			 * <p>The source will invoce this method to announce changed
+			 * resource. The event will never be <code>null</code>.
+			 * However, it may contain an empty list of deltas.
+			 * </p><p>
+			 * Listeners are free to remove themselves from the sender
+			 * of the event or add other listeners. However added listeners
+			 * will not be informed about the current change. 
+			 * </p><p>This event may be fired 
+			 * asynchronously. 
+			 * It is ensured that the changed resources will provide the content as it 
+			 * was when the change has been announced to the sender of the event.
+			 * </p>
+			 * @param event the fired event. Will never be <code>null</code>.
+			 */
+			void descriptionsChanged(Event event);
+		}
+	}
+	
 }

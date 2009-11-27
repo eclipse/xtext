@@ -7,42 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
-
-import com.google.common.collect.ImmutableCollection;
 
 /**
  * An implementation of {@link IDirtyStateManager} can be used to register
  * a currently edited resource and listen to changes on those resources.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider {
+public interface IDirtyStateManager extends IExternalContentSupport.IExternalContentProvider, IResourceDescription.Event.Source {
 
 	/**
-	 * A listener for events raised by the dirty state manager.
+	 * The {@link IDirtyStateManager} will raise specialized events that provide
+	 * direct type-safe access to the source as {@link IDirtyStateManager}.
+	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	interface IDirtyStateListener {
+	interface Event extends IResourceDescription.Event {
+		
 		/**
-		 * <p>The manager will call this method to announce changed
-		 * resource. The collection of affected resources may be empty.
-		 * None of the parameters will be <code>null</code>.
-		 * </p><p>
-		 * Listeners are free to remove themselves from the sender
-		 * of the event or add other listeners. However added listeners
-		 * will not be informed about the current change. 
-		 * </p><p>This event may be fired 
-		 * asynchronously from the originating call to {@link IDirtyStateManager#announceDirtyStateChanged(IDirtyResource)}
-		 * or {@link IDirtyStateManager#discardDirtyState(IDirtyResource)}. 
-		 * It is ensured that the changed resources will provide the content as it 
-		 * was when the change has been announced to the sender of the event.
-		 * </p>
-		 * @param sender the sender of this event. Is never <code>null</code>.
-		 * @param changedResources an immutable collection of changed resources. 
-		 * Is never <code>null</code> but may be empty.
+		 * The sender is guaranteed to be of type {@link IDirtyStateManager}.
 		 */
-		void dirtyStateChanged(IDirtyStateManager sender, ImmutableCollection<IDirtyResource> changedManagedResources, ImmutableCollection<URI> unmanagedResources);
+		IDirtyStateManager getSender();
+		
 	}
 	
 	/**
@@ -74,27 +60,5 @@ public interface IDirtyStateManager extends IExternalContentSupport.IExternalCon
 	 * thread.
 	 */
 	void announceDirtyStateChanged(IDirtyResource dirtyResource);
-	
-	/**
-	 * @return the description of the managed dirty resource with the given {@link URI} or <code>null</code> if unmanaged.
-	 */
-	IResourceDescription getDirtyResourceDescription(URI uri);
-	
-	/**
-	 * Add a listener to the dirty state manager. Listeners will not be added twice.
-	 * Subsequent calls to {@link #addListener(IDirtyStateListener)} will not affect the number
-	 * of events that the listener receives. {@link #removeListener(IDirtyStateListener)} will
-	 * remove the listener immediately independently from the number of calls to
-	 * {@link #addListener(IDirtyStateListener)}.
-	 * @param listener the listener to be registered. May not be <code>null</code>.
-	 */
-	void addListener(IDirtyStateListener listener);
-	
-	/**
-	 * Removes a registed listener from the manager.
-	 * If the listener has not been registered before, the call does nothing.
-	 * @param listener the listener to be removed. May not be <code>null</code>. 
-	 */
-	void removeListener(IDirtyStateListener listener);
 	
 }
