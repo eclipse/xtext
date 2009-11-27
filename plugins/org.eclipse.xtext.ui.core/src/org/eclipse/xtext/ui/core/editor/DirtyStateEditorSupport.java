@@ -221,8 +221,12 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void modelChanged(XtextResource resource) {
 		if (resource == null)
 			return;
-		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource))
-			dirtyStateManager.announceDirtyStateChanged(dirtyResource);
+		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource)) {
+			synchronized (dirtyResource) {
+				dirtyResource.copyState(resource);
+				dirtyStateManager.announceDirtyStateChanged(dirtyResource);
+			}
+		}
 	}
 		
 	public IDirtyStateManager getDirtyStateManager() {

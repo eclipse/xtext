@@ -19,7 +19,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 public class DocumentBasedDirtyResource implements IDirtyResource {
 	
 	private IXtextDocument document;
-	private URI uri;
+	private IResourceDescription description;
+	private String content;
 	
 	public void connect(IXtextDocument document) {
 		if (document == null)
@@ -28,12 +29,13 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			return;
 		if (this.document != null)
 			throw new IllegalStateException("Dirty resource was already connected to another document");
-		this.uri = document.readOnly(new IUnitOfWork<URI, XtextResource>() {
-			public URI exec(XtextResource resource) throws Exception {
-				return resource.getURI();
+		this.document = document;
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource resource) throws Exception {
+				copyState(resource);
 			}
 		});
-		this.document = document;
 	}
 	
 	public void disconnect(IXtextDocument document) {
@@ -42,7 +44,13 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		if (this.document != document)
 			throw new IllegalStateException("Cannot disconnect document that is not connected");
 		this.document = null;
-		this.uri = null;
+		description = null;
+		content = null;
+	}
+	
+	public synchronized void copyState(XtextResource resource) {
+		description = resource.getResourceDescriptionManager().getResourceDescription(resource);
+		content = getUnderlyingDocument().get();
 	}
 	
 	public IXtextDocument getUnderlyingDocument() {
@@ -52,27 +60,23 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
-		return uri;
+		return description.getURI();
 	}
 	
-	public IResourceDescription getDescription() {
+	public synchronized IResourceDescription getDescription() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
-		return document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>(){
-			public IResourceDescription exec(XtextResource resource) throws Exception {
-				IResourceDescription.Manager manager = resource.getResourceDescriptionManager();
-				if (manager == null)
-					throw new IllegalStateException("ResourceDescriptionManager may not be null.");
-				IResourceDescription description = manager.getResourceDescription(resource);
-				return description;
-			}
-		});
+		if (description == null)
+			throw new IllegalStateException("Cannot use getDescription if this dirty resource is currently not mementoed");
+		return description;
 	}
 
-	public String getContents() {
+	public synchronized String getContents() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is not connected to a document");
-		return document.get();
+		if (content == null)
+			throw new IllegalStateException("Cannot use getContents if this dirty resource is currently not mementoed");
+		return content;
 	}
 	
 }
