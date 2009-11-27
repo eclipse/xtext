@@ -16,46 +16,67 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
-import org.eclipse.xtext.resource.impl.ResourceSetBasedContainer;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 
 import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResourceDescriptionsBasedContainerTest extends TestCase implements IResourceDescriptions, IResourceDescription.Manager.Registry {
+public class ResourceDescriptionsBasedContainerTest extends TestCase implements IResourceDescriptions {
 
-	private ResourceSet resourceSet;
-	private DefaultResourceDescriptionManager resourceDescriptionManager;
 	private IContainer container;
-	private Resource resource;
 	private EClass eClass;
-	private ResourceSetBasedContainer delegatingContainer;
+	private URI uri;
+	private ResourceDescription resourceDescription;
+	
+	private class ResourceDescription implements IResourceDescription {
+
+		public Iterable<IEObjectDescription> getExportedObjects() {
+			if (eClass != null)
+				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
+			if (eClass != null && (EcorePackage.Literals.EOBJECT == clazz || clazz.isSuperTypeOf(eClass.eClass())) && eClass.getName().equals(name))
+				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
+			if (eClass != null && (EcorePackage.Literals.EOBJECT == clazz || clazz.isSuperTypeOf(eClass.eClass())))
+				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
+			return Collections.emptyList();
+		}
+
+		public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
+			if (eClass != null && object == eClass)
+				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
+			return Collections.emptyList();
+		}
+
+		public Iterable<String> getImportedNames() {
+			fail("unexpected");
+			return null;
+		}
+
+		public URI getURI() {
+			return uri;
+		}
+		
+	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		resourceSet = new ResourceSetImpl();
-		resource = new EcoreResourceFactoryImpl().createResource(URI.createURI("test://uri.ecore"));
-		resourceSet.getResources().add(resource);
 		eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName("SomeName");
-		resource.getContents().add(eClass);
-		IQualifiedNameProvider qualifiedNameProvider = new DefaultDeclarativeQualifiedNameProvider();
-		resourceDescriptionManager = new DefaultResourceDescriptionManager();
-		resourceDescriptionManager.setNameProvider(qualifiedNameProvider);
-		delegatingContainer = new ResourceSetBasedContainer(resourceSet, this);
+		resourceDescription = new ResourceDescription();
 		container = new ResourceDescriptionsBasedContainer(this);
 	}
 	
@@ -66,7 +87,7 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	}
 	
 	public void testFindAllEObjectsByType_02() {
-		delegatingContainer = null;
+		eClass = null;
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER);
 		assertTrue(Iterables.isEmpty(iterable));
 	}
@@ -78,47 +99,26 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	}
 	
 	public void testFindAllEObjectsByName_02() {
-		delegatingContainer = null;
+		eClass = null;
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER, "SomeName");
 		assertTrue(Iterables.isEmpty(iterable));
 	}
-//	
-//	public void testFindDescriptionByEObject_01() {
-//		Iterable<IEObjectDescription> iterable = indexFacade.findAllDescriptionsFor(eClass);
-//		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
-//		assertSame(eClass, eObject);
-//		assertEquals(0, invocationCount);
-//	}
-//	
-//	public void testFindDescriptionByEObject_02() {
-//		returnedDescription = new EmptyResourceDescription(); // cannot shadow the actual resource of the eobject itself
-//		Iterable<IEObjectDescription> iterable = container.findAllDescriptionsFor(eClass);
-//		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
-//		assertSame(eClass, eObject);
-//		assertEquals(0, invocationCount);
-//	}
 
-	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
-		return resourceDescriptionManager;
-	}
-
-	public void addListener(Listener listener) {
-		fail("Unexpected");
-	}
-	
-	public void removeListener(Listener listener) {
-		fail("Unexpected");
+	public void addListener(IResourceDescription.Event.Listener listener) {
+		fail("unexpected");
 	}
 	
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		if (delegatingContainer != null)
-			return delegatingContainer.getResourceDescriptions();
-		return Collections.emptyList();
+		return Collections.<IResourceDescription>singletonList(resourceDescription);
 	}
 	
 	public IResourceDescription getResourceDescription(URI uri) {
-//		return delegatingContainer.getResourceDescription(uri);
-		fail("Unexpected");
+		if (uri == this.uri)
+			return resourceDescription;
 		return null;
+	}
+	
+	public void removeListener(IResourceDescription.Event.Listener listener) {
+		fail("unexpected");
 	}
 }
