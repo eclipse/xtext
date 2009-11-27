@@ -10,13 +10,14 @@ package org.eclipse.xtext.builder;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.builder.impl.StorageUtil;
+import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
-import org.eclipse.xtext.builder.impl.javasupport.JdtStorageUtil;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,11 +26,11 @@ public class BuilderModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bindStorageUtil();
 		bindResourceSet();
 		bindResourceProvider();
 		bindIncrementalProjectBuilder();
 		bindQualifiedNameProvider();
+		bind(IResourceDescriptions.class).to(PersistableResourceDescriptionsImpl.class).in(Scopes.SINGLETON);
 	}
 
 	protected void bindQualifiedNameProvider() {
@@ -45,10 +46,6 @@ public class BuilderModule extends AbstractModule {
 
 	protected void bindResourceSet() {
 		bind(ResourceSet.class).to(ResourceSetImpl.class);
-	}
-
-	protected void bindStorageUtil() {
-		bind(StorageUtil.class).to(JdtStorageUtil.class);
 	}
 
 }

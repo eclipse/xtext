@@ -24,7 +24,8 @@ public class JdtBuilderModule extends BuilderModule {
 	}
 	
 	@Override
-	protected void bindStorageUtil() {
+	protected void configure() {
+		super.configure();
 		bind(StorageUtil.class).to(JdtStorageUtil.class);
 	}
 	
