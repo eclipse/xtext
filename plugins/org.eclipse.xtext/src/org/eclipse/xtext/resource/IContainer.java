@@ -48,14 +48,15 @@ public interface IContainer {
 		 * @return returns the container for a given {@link IResourceDescription}. The result is never
 		 * <code>null</code>.
 		 */
-		IContainer getContainer(IResourceDescription desc);
+		IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions);
 
 		/**
 		 * @return a sorted list of all {@link IContainer}, which are visible from the given {@link IResourceDescription}.
 		 * In an Java environment this would correspond to the list of classpath entries. The list includes the 
 		 * container that contains the given resource description. This implies that it is never empty.
 		 */
-		List<IContainer> getVisibleContainers(IResourceDescription desc);
+		List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions);
 
 	}
+	
 }

@@ -30,7 +30,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	private IQualifiedNameProvider nameProvider;
 	
 	@Inject
-	private ResourceSetBasedContainerManager containerManager;
+	private SimpleResourceDescriptionsBasedContainerManager containerManager;
 	
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, nameProvider);
@@ -44,11 +44,11 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return nameProvider;
 	}
 	
-	public ResourceSetBasedContainerManager getContainerManager() {
+	public SimpleResourceDescriptionsBasedContainerManager getContainerManager() {
 		return containerManager;
 	}
 	
-	public void setContainerManager(ResourceSetBasedContainerManager containerManager) {
+	public void setContainerManager(SimpleResourceDescriptionsBasedContainerManager containerManager) {
 		this.containerManager = containerManager;
 	}
 	
