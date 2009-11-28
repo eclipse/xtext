@@ -48,6 +48,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implements IElementChangedListener {
 
 	private static Logger log = Logger.getLogger(JavaProjectLanguageBuilder.class);

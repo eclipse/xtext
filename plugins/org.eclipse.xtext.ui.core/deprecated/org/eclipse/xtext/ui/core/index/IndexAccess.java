@@ -12,6 +12,7 @@ import org.eclipse.xtext.index.IXtextIndex;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class IndexAccess {
 
 	private static IXtextIndex index;

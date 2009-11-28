@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
 import com.google.inject.Inject;
 
+@Deprecated
 public class ContainerDependencyProviderIJavaProjectImpl implements IContainerDependencyProvider {
 
 	public static Logger log = Logger.getLogger(ContainerDependencyProviderIJavaProjectImpl.class);

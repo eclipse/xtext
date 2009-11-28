@@ -16,6 +16,7 @@ import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 /**
  * @author Sven Efftinge
  */
+@Deprecated
 public class QualifiedNameBasedScopingFragment extends AbstractGeneratorFragment {
 	
 	@Override
