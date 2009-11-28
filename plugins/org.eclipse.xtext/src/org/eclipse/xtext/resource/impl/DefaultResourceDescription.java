@@ -84,6 +84,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	}
 	
 	public Iterable<String> getImportedNames() {
+		EcoreUtil.resolveAll(resource);
 		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(getResource());
 		if (adapter!=null) {
 			ImmutableSet<String> result = ImmutableSet.copyOf(adapter.getImportedNames());
