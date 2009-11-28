@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.Collection;
-
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
@@ -22,7 +20,7 @@ public class ResourceDescriptionChangeEvent implements IResourceDescription.Even
 	private final Source sender;
 	private final ImmutableList<Delta> delta;
 
-	public ResourceDescriptionChangeEvent(Collection<IResourceDescription.Delta> delta, Source sender) {
+	public ResourceDescriptionChangeEvent(Iterable<IResourceDescription.Delta> delta, Source sender) {
 		this.sender = sender;
 		this.delta = ImmutableList.copyOf(delta);
 	}
