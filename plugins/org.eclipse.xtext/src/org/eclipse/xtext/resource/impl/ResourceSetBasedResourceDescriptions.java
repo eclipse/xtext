@@ -9,9 +9,9 @@ package org.eclipse.xtext.resource.impl;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -29,7 +29,7 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 
 	@Inject
 	private IResourceDescription.Manager.Registry registry;
-	
+
 	public void setRegistry(IResourceDescription.Manager.Registry registry) {
 		this.registry = registry;
 	}
@@ -51,13 +51,7 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 	}
 
 	public void setContext(Notifier ctx) {
-		if (ctx instanceof EObject) {
-			this.resourceSet = ((EObject) ctx).eResource().getResourceSet();
-		} else if (ctx instanceof Resource) {
-			this.resourceSet = ((Resource) ctx).getResourceSet();
-		} else if (ctx instanceof ResourceSet) {
-			this.resourceSet = (ResourceSet) ctx;
-		}
+		this.resourceSet = EcoreUtil2.getResourceSet(ctx);
 	}
 
 	public void addListener(IResourceDescription.Event.Listener listener) {

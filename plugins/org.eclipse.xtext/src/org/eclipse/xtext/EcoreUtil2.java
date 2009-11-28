@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -57,7 +58,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			return getContainerOfType(ele.eContainer(), type);
 		return null;
 	}
-	
+
 	/**
 	 * copies contents of a resource set into a new one
 	 */
@@ -104,7 +105,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			if (feature == null)
 				throw new NullPointerException("feature may not be null");
 			final Object object = obj.eGet(feature);
-			if (object!=null)
+			if (object != null)
 				result.add(type.cast(object));
 		}
 		return result;
@@ -147,30 +148,30 @@ public class EcoreUtil2 extends EcoreUtil {
 		return null;
 	}
 
-//	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
-//		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
-//		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
-//		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
-//			URI originalBaseURI;
-//			@Override
-//			public void setBaseURI(URI uri) {
-//				this.originalBaseURI = uri;
-//				// fake the base uri
-//			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
-//			}
-//
-//			@Override
-//			public URI deresolve(URI uri) {
-//				if (uri.trimFragment().equals(baseURI))
-//					return super.deresolve(uri);
-//				if (uri.trimFragment().equals(originalBaseURI))
-//					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
-//				return uri;
-//			}
-//		});
-//		metaModelResource.getContents().add(ePackage);
-//		metaModelResource.save(options);
-//	}
+	//	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
+	//		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
+	//		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
+	//		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
+	//			URI originalBaseURI;
+	//			@Override
+	//			public void setBaseURI(URI uri) {
+	//				this.originalBaseURI = uri;
+	//				// fake the base uri
+	//			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
+	//			}
+	//
+	//			@Override
+	//			public URI deresolve(URI uri) {
+	//				if (uri.trimFragment().equals(baseURI))
+	//					return super.deresolve(uri);
+	//				if (uri.trimFragment().equals(originalBaseURI))
+	//					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
+	//				return uri;
+	//			}
+	//		});
+	//		metaModelResource.getContents().add(ePackage);
+	//		metaModelResource.save(options);
+	//	}
 
 	public static String getURIFragment(EObject eObject) {
 		Resource resource = eObject.eResource();
@@ -266,66 +267,52 @@ public class EcoreUtil2 extends EcoreUtil {
 
 		return null;
 	}
-	
-	
-	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, boolean isContainment, EClassifier type) {
+
+	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, boolean isContainment,
+			EClassifier type) {
 		EStructuralFeature existingFeature = clazz.getEStructuralFeature(name);
-		if (existingFeature!=null) {
+		if (existingFeature != null) {
 			boolean many = existingFeature.isMany();
 			if (many == isMulti) {
 				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
 					EClass expected = (EClass) type;
 					EClass actual = (EClass) existingFeature.getEType();
 					boolean result = (actual.equals(expected) || actual.isSuperTypeOf(expected));
-					result &= isContainment == ((EReference)existingFeature).isContainment();
+					result &= isContainment == ((EReference) existingFeature).isContainment();
 					result &= !((EReference) existingFeature).isContainer();
 					return result;
 				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
 					EDataType expected = (EDataType) type;
 					EDataType actual = (EDataType) existingFeature.getEType();
-					return actual.equals(expected) || getObjectType(actual.getInstanceClass()).isAssignableFrom(getObjectType(expected.getInstanceClass()));
+					return actual.equals(expected)
+							|| getObjectType(actual.getInstanceClass()).isAssignableFrom(
+									getObjectType(expected.getInstanceClass()));
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	private static Class<?> getObjectType(Class<?> clazzA) {
-		if (clazzA.isPrimitive())
-        {
-          if (clazzA == Boolean.TYPE)
-          {
-            return Boolean.class;
-          }
-          else if (clazzA == Integer.TYPE)
-          {
-            return Integer.class;
-          }
-          else if (clazzA == Float.TYPE)
-          {
-            return Float.class;
-          }
-          else if (clazzA == Byte.TYPE)
-          {
-            return Byte.class;
-          }
-          else if (clazzA == Character.TYPE)
-          {
-            return Character.class;
-          }
-          else if (clazzA == Double.TYPE)
-          {
-            return Double.class;
-          }
-          else if (clazzA == Short.TYPE)
-          {
-            return Short.class;
-          }
-          else if (clazzA == Long.TYPE)
-          {
-            return Long.class;
-          }
-        }
+		if (clazzA.isPrimitive()) {
+			if (clazzA == Boolean.TYPE) {
+				return Boolean.class;
+			} else if (clazzA == Integer.TYPE) {
+				return Integer.class;
+			} else if (clazzA == Float.TYPE) {
+				return Float.class;
+			} else if (clazzA == Byte.TYPE) {
+				return Byte.class;
+			} else if (clazzA == Character.TYPE) {
+				return Character.class;
+			} else if (clazzA == Double.TYPE) {
+				return Double.class;
+			} else if (clazzA == Short.TYPE) {
+				return Short.class;
+			} else if (clazzA == Long.TYPE) {
+				return Long.class;
+			}
+		}
 		return clazzA;
 	}
 
@@ -351,8 +338,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			EReference resultAsReference = EcoreFactory.eINSTANCE.createEReference();
 			resultAsReference.setContainment(prototypeAsReference.isContainment());
 			result = resultAsReference;
-		}
-		else if (prototype instanceof EAttribute)
+		} else if (prototype instanceof EAttribute)
 			result = EcoreFactory.eINSTANCE.createEAttribute();
 		else
 			throw new IllegalArgumentException("Unsupported feature type " + prototype);
@@ -373,8 +359,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	/**
-	 * In addition to {@link org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos#getAllEClassInfos()} this implementation can
-	 * deal with cycles in type hierarchy
+	 * In addition to {@link org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos#getAllEClassInfos()} this
+	 * implementation can deal with cycles in type hierarchy
 	 */
 	public static Collection<EClass> getAllSuperTypes(EClass eClass) {
 		Set<EClass> allSuperTypes = new HashSet<EClass>();
@@ -396,15 +382,14 @@ public class EcoreUtil2 extends EcoreUtil {
 			EObject eObject = (EObject) referer.eGet(reference);
 			if (null != eObject)
 				return Collections.singletonList(eObject);
-			return Collections.<EObject>emptyList();
+			return Collections.<EObject> emptyList();
 		}
 		return (List<EObject>) referer.eGet(reference);
 	}
-	
+
 	/**
-	 * checks whether the given URI can be loaded given the context.
-	 * I.e. there's a resource set with a correpsonding resource factory and the
-	 * physical resource exists.
+	 * checks whether the given URI can be loaded given the context. I.e. there's a resource set with a correpsonding
+	 * resource factory and the physical resource exists.
 	 */
 	public static boolean isValidUri(EObject context, URI uri) {
 		URI newURI = getResolvedImportUri(context.eResource(), uri);
@@ -416,7 +401,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			URI normalized = uriConverter.normalize(newURI);
 			if (normalized != null)
 				return uriConverter.exists(normalized, Collections.emptyMap());
-		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
+		} catch (RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
 		}
 		return false;
@@ -429,13 +414,26 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 		return uri;
 	}
-	
+
 	public static Resource getResource(Resource context, String uri) {
 		URI newURI = getResolvedImportUri(context, URI.createURI(uri));
 		try {
 			return context.getResourceSet().getResource(newURI, true);
-		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
+		} catch (RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
+		}
+		return null;
+	}
+
+	public static ResourceSet getResourceSet(Notifier ctx) {
+		if (ctx instanceof EObject) {
+			Resource eResource = ((EObject) ctx).eResource();
+			if (eResource != null)
+				return eResource.getResourceSet();
+		} else if (ctx instanceof Resource) {
+			return ((Resource) ctx).getResourceSet();
+		} else if (ctx instanceof ResourceSet) {
+			return (ResourceSet) ctx;
 		}
 		return null;
 	}
