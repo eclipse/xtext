@@ -29,6 +29,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class NameSearchTrackingIndexImpl extends XtextIndexImpl implements ISharedState, IResourceChangeListener {
 
 	@Inject

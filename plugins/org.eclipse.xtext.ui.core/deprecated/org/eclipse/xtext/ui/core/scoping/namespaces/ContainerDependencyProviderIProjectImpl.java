@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Iterables;
 
+@Deprecated
 public class ContainerDependencyProviderIProjectImpl implements
 		IContainerDependencyProvider {
 

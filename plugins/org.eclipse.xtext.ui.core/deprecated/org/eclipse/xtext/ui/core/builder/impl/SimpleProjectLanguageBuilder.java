@@ -18,6 +18,7 @@ import org.eclipse.emf.emfindex.store.UpdateCommand;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class SimpleProjectLanguageBuilder extends AbstractLanguageBuilder {
 
 	@Override

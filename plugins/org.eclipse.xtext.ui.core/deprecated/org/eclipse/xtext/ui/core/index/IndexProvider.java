@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class IndexProvider implements Provider<IXtextIndex> {
 
 	public IXtextIndex get() {

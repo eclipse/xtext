@@ -62,6 +62,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 
 	public static final String MANAGED_BY = "MANAGED_BY";
