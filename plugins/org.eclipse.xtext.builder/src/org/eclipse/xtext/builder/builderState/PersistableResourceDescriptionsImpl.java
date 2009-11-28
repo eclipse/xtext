@@ -10,20 +10,21 @@ package org.eclipse.xtext.builder.builderState;
 import static org.eclipse.xtext.builder.builderState.BuilderStateUtil.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,22 +33,27 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 	
-	public synchronized ImmutableList<IResourceDescription.Delta> update(Iterable<IResourceDescription> toBeAdded, Iterable<URI> toBeRemoved) {
-		List<IResourceDescription.Delta> deltas = Lists.newArrayList();
+	@Inject
+	private ResourceDescriptionsUpdater updater;
+	
+	@Inject
+	private Provider<ResourceSet> resourceSetProvider;
+	
+	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
+		this.resourceSetProvider = resourceSetProvider;
+	}
+	
+	public synchronized ImmutableList<IResourceDescription.Delta> update(Iterable<URI> toBeAddedOrUpdated, Iterable<URI> toBeRemoved) {
+		ResourceSet resourceSet = resourceSetProvider.get();
+		resourceSet.getLoadOptions().put(DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
+		
+		Iterable<Delta> deltas = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved);
 		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
-		if (toBeRemoved != null) {
-			for (URI uri : toBeRemoved) {
-				IResourceDescription desc = newMap.remove(uri);
-				if (desc != null) {
-					deltas.add(new DefaultResourceDescriptionDelta(desc, null));
-				}
-			}
-		}
-		if (toBeAdded != null) {
-			for (IResourceDescription iResourceDescription : toBeAdded) {
-				ResourceDescriptionImpl impl = create(iResourceDescription);
-				IResourceDescription oldOne = newMap.put(impl.getURI(), impl);
-				deltas.add(new DefaultResourceDescriptionDelta(oldOne, impl));
+		for (Delta delta : deltas) {
+			if (delta.getNew()==null) {
+				newMap.remove(delta.getOld().getURI());
+			} else {
+				newMap.put(delta.getNew().getURI(), create(delta.getNew()));
 			}
 		}
 		resourceDescriptionMap = Collections.unmodifiableMap(newMap);

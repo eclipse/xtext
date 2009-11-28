@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
@@ -26,74 +25,76 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ShadowingResourceDescriptions implements IResourceDescriptions, IResourceDescriptions.IContextAware {
 
-	public static class DeletedUrisAdapter extends AdapterImpl {
+	public static class Adapter extends AdapterImpl {
 
-		public DeletedUrisAdapter(Set<URI> deletedUris) {
+		private IResourceDescriptions toBeShadowed;
+		private Set<URI> deletedUris;
+
+		public Adapter(IResourceDescriptions toBeShadowed, Set<URI> deletedUris) {
 			super();
+			this.toBeShadowed = toBeShadowed;
 			this.deletedUris = deletedUris;
 		}
-
-		private Set<URI> deletedUris = null;
-
+		
+		public IResourceDescriptions getToBeShadowed() {
+			return toBeShadowed;
+		}
+		
 		public Set<URI> getDeletedUris() {
 			return deletedUris;
 		}
 
 		@Override
 		public boolean isAdapterForType(Object type) {
-			return DeletedUrisAdapter.class == type;
+			return Adapter.class == type;
 		}
-	}
-
-	protected Set<URI> getDeletedUris(Notifier notifier) {
-		DeletedUrisAdapter adapter = (DeletedUrisAdapter) EcoreUtil.getAdapter(notifier.eAdapters(),
-				DeletedUrisAdapter.class);
-		if (adapter == null)
-			return Collections.emptySet();
-		return adapter.deletedUris;
 	}
 
 	public void setContext(Notifier ctx) {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
 		if (resourceSet == null)
 			throw new NullPointerException();
+		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resourceSet.eAdapters(),
+				Adapter.class);
+		if (adapter == null)
+			throw new IllegalArgumentException("No "+ShadowingResourceDescriptions.Adapter.class.getName()+" found");
+		
 		ResourceSetBasedResourceDescriptions resourceSetBasedResourceDescriptions = new ResourceSetBasedResourceDescriptions();
 		resourceSetBasedResourceDescriptions.setContext(resourceSet);
-		this.shadow = resourceSetBasedResourceDescriptions;
-		deleteUris = getDeletedUris(resourceSet);
+		setShadowing(resourceSetBasedResourceDescriptions);
+		setShadowed(adapter.getToBeShadowed());
+		setDeleteUris(adapter.getDeletedUris());
 	}
 
-	private IResourceDescriptions descriptions;
-	private IResourceDescriptions shadow;
+	private IResourceDescriptions shadowed;
+	private IResourceDescriptions shadowing;
 	private Set<URI> deleteUris;
-
-	@Inject
-	public ShadowingResourceDescriptions(IResourceDescriptions descriptions) {
-		this.descriptions = descriptions;
+	public void setDeleteUris(Set<URI> deleteUris) {
+		this.deleteUris = deleteUris;
 	}
-
-	public ShadowingResourceDescriptions(IResourceDescriptions descriptions, IResourceDescriptions shadow,
-			Set<URI> deletedUris) {
-		this.descriptions = descriptions;
-		this.shadow = shadow;
-		this.deleteUris = deletedUris;
+	
+	public void setShadowing(IResourceDescriptions shadow) {
+		this.shadowing = shadow;
+	}
+	
+	public void setShadowed(IResourceDescriptions descriptions) {
+		this.shadowed = descriptions;
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		final ImmutableMap<URI, IResourceDescription> shadowAsSet = Maps.uniqueIndex(shadow
+		final ImmutableMap<URI, IResourceDescription> shadowAsSet = Maps.uniqueIndex(shadowing
 				.getAllResourceDescriptions(), new Function<IResourceDescription, URI>() {
 			public URI apply(IResourceDescription from) {
 				return from.getURI();
 			}
 		});
-		return Iterables.concat(shadowAsSet.values(), Iterables.filter(descriptions.getAllResourceDescriptions(),
+		return Iterables.concat(shadowAsSet.values(), Iterables.filter(shadowed.getAllResourceDescriptions(),
 				new Predicate<IResourceDescription>() {
 					public boolean apply(IResourceDescription input) {
 						URI uri = input.getURI();
@@ -103,22 +104,22 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {
-		IResourceDescription desc = shadow.getResourceDescription(uri);
+		IResourceDescription desc = shadowing.getResourceDescription(uri);
 		if (desc != null)
 			return desc;
 		if (deleteUris.contains(uri))
 			return null;
-		return descriptions.getResourceDescription(uri);
+		return shadowed.getResourceDescription(uri);
 	}
 
 	public void addListener(Listener listener) {
-		this.descriptions.addListener(listener);
-		this.shadow.addListener(listener);
+		this.shadowed.addListener(listener);
+		this.shadowing.addListener(listener);
 	}
 
 	public void removeListener(Listener listener) {
-		this.descriptions.removeListener(listener);
-		this.shadow.removeListener(listener);
+		this.shadowed.removeListener(listener);
+		this.shadowing.removeListener(listener);
 	}
 
 }
