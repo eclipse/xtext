@@ -5,27 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl.javasupport;
+package org.eclipse.xtext.builder;
 
-import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.xtext.builder.BuilderModule;
-import org.eclipse.xtext.builder.impl.StorageUtil;
+import org.eclipse.xtext.builder.internal.Activator;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
-public class JdtBuilderModule extends BuilderModule {
-	
-	@Override
-	protected void configure() {
-		super.configure();
-		bind(StorageUtil.class).to(JdtStorageUtil.class);
+public class BuilderAccess {
+	public static Provider<IResourceDescriptions> getResourceDescriptions() {
+		return new Provider<IResourceDescriptions>() {
+			public IResourceDescriptions get() {
+				return Activator.getDefault().getInjector().getInstance(IResourceDescriptions.class);
+			}};
 	}
-	
-	@Override
-	protected void bindIncrementalProjectBuilder() {
-		bind(IncrementalProjectBuilder.class).to(JdtXtextBuilder.class);
-	}
-	
 }

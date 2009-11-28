@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObjectDescriptionImpl.java,v 1.2 2009/11/24 18:25:11 szarnekow Exp $
+ * $Id: EObjectDescriptionImpl.java,v 1.3 2009/11/28 20:51:48 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -272,15 +272,8 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 		return userData != null && ((InternalEList.Unsettable<?>)userData).isSet();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public URI getEObjectURI() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getResourceDescriptor().getURI().appendFragment(getFragment());
 	}
 
 	/**
@@ -310,7 +303,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * @generated NOT
 	 */
 	public String[] getUserDataKeys() {
-		return getUserData().keySet().toArray(null);
+		return getUserData().keySet().toArray(new String[getUserData().size()]);
 	}
 
 	/**

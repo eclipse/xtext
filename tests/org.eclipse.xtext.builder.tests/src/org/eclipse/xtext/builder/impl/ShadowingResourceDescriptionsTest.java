@@ -36,10 +36,19 @@ public class ShadowingResourceDescriptionsTest extends TestCase {
 		ResourceDescs shadow = descs(         d("bar"));
 		Set<URI> deleteUris = uris(                      "baz");
 		
-		ShadowingResourceDescriptions shadowed = new ShadowingResourceDescriptions(target,shadow,deleteUris);
+		ShadowingResourceDescriptions shadowed = shadowingResourceDescriptions(target, shadow, deleteUris);
 		assertSame(get(target,0),shadowed.getResourceDescription(uri("foo")));
 		assertSame(get(shadow,0),shadowed.getResourceDescription(uri("bar")));
 		assertNull(shadowed.getResourceDescription(uri("baz")));
+	}
+
+	private ShadowingResourceDescriptions shadowingResourceDescriptions(ResourceDescs target, ResourceDescs shadow,
+			Set<URI> deleteUris) {
+		ShadowingResourceDescriptions descriptions = new ShadowingResourceDescriptions();
+		descriptions.setShadowed(target);
+		descriptions.setShadowing(shadow);
+		descriptions.setDeleteUris(deleteUris);
+		return descriptions;
 	}
 	
 	public void testSimpleShadowing_1() throws Exception {
@@ -47,7 +56,7 @@ public class ShadowingResourceDescriptionsTest extends TestCase {
 		ResourceDescs shadow = descs(d("dings"));
 		Set<URI> deleteUris = uris("dings");
 		
-		ShadowingResourceDescriptions shadowed = new ShadowingResourceDescriptions(target,shadow,deleteUris);
+		ShadowingResourceDescriptions shadowed = shadowingResourceDescriptions(target, shadow, deleteUris);
 		assertSame(get(target,0),shadowed.getResourceDescription(uri("foo")));
 		assertSame(get(target,1),shadowed.getResourceDescription(uri("bar")));
 		assertSame(get(target,2),shadowed.getResourceDescription(uri("baz")));
