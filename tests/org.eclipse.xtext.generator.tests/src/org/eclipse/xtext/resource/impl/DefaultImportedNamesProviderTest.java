@@ -27,7 +27,7 @@ public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
 				"type Bar extends Foo"), null);
 		
 		Iterable<String> names = res2.getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
-		assertFalse(names.iterator().hasNext());
+		assertTrue(names.iterator().hasNext());
 	}
 	
 	public void testValidExternalLink() throws Exception {
