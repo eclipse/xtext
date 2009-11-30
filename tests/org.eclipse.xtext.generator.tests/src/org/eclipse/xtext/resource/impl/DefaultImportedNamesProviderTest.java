@@ -26,9 +26,10 @@ public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
 		res2.load(new StringInputStream("import 'foo.langatestlanguage'" +
 				"type Bar extends Foo"), null);
 		
-		Iterable<String> names = res2.getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
+		Iterable<String> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
 		assertTrue(names.iterator().hasNext());
 	}
+	
 	
 	public void testValidExternalLink() throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
@@ -40,7 +41,7 @@ public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
 		"type Bar extends Foo"), null);
 		
 		EcoreUtil.resolveAll(res2);
-		Iterable<String> names = res2.getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
+		Iterable<String> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
 		assertEquals("Foo",names.iterator().next());
 	}
 	
@@ -54,7 +55,7 @@ public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
 		"type Foo type Bar extends Foo"), null);
 		
 		EcoreUtil.resolveAll(res2);
-		Iterable<String> names = res2.getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
+		Iterable<String> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
 		assertFalse(names.iterator().hasNext());
 	}
 	
@@ -68,7 +69,7 @@ public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
 		"type Bar extends Baz"), null);
 		
 		EcoreUtil.resolveAll(res2);
-		Iterable<String> names = res2.getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
+		Iterable<String> names = res2.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(res2).getImportedNames();
 		assertEquals("Baz",names.iterator().next());
 	}
 }

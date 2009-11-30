@@ -28,10 +28,12 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.QualifiedName;
@@ -57,18 +59,22 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		with(new IndexTestLanguageStandaloneSetup());
 
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
-		globalScopeProvider.setResourceDescriptionManagerRegistry(new IResourceDescription.Manager.Registry() {
-			public IResourceDescription.Manager getResourceDescriptionManager(final URI uri, String contentType) {
-				return new DefaultResourceDescriptionManager() {
-					@Override
-					public IResourceDescription getResourceDescription(Resource resource) {
-						DefaultResourceDescription resourceDescription = new DefaultResourceDescription(
-								resource, new DefaultDeclarativeQualifiedNameProvider());
-						return resourceDescription;
-					}
+		final DefaultResourceServiceProvider provider = new DefaultResourceServiceProvider();
+		provider.setResourceDescriptionManager(new DefaultResourceDescriptionManager() {
+			@Override
+			public IResourceDescription getResourceDescription(Resource resource) {
+				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource,
+						new DefaultDeclarativeQualifiedNameProvider());
+				return resourceDescription;
+			}
 
-				};
-			}});
+		});
+		globalScopeProvider.setResourceServiceProviderRegistry(new IResourceServiceProvider.Registry() {
+
+			public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
+				return provider;
+			}
+		});
 		scopeProvider = new QualifiedNameScopeProvider();
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
 		scopeProvider.setNameProvider(nameProvider);
@@ -78,13 +84,8 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 		XtextResource resource = getResource(new StringInputStream("import foo.bar.* "), URI
 				.createURI("import.indextestlanguage"));
 		resource.getResourceSet().createResource(URI.createURI("foo.indextestlanguage")).load(
-				new StringInputStream(
-						"foo.bar { " + 
-						"  entity Person {  " + 
-						"    String name " + 
-						"  } " + 
-						"  datatype String " + 
-						"}"), null);
+				new StringInputStream("foo.bar { " + "  entity Person {  " + "    String name " + "  } "
+						+ "  datatype String " + "}"), null);
 
 		IScope scope = scopeProvider.getScope(resource.getContents().get(0), IndexTestLanguagePackage.eINSTANCE
 				.getFile_Elements());
@@ -131,15 +132,8 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void testReexports() throws Exception {
-		final XtextResource resource = getResource(new StringInputStream(
-				  "stuff { " 
-				+ "  import baz.*" 
-				+ "  baz { "
-				+ "    stuff {" 
-				+ "      import stuff.*" 
-				+ "      datatype String " 
-				+ "    }" 
-				+ "    entity Person {}"
+		final XtextResource resource = getResource(new StringInputStream("stuff { " + "  import baz.*" + "  baz { "
+				+ "    stuff {" + "      import stuff.*" + "      datatype String " + "    }" + "    entity Person {}"
 				+ "  }" + "}"), URI.createURI("relative.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -150,7 +144,7 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 
 		EReference propertyType = EcoreFactory.eINSTANCE.createEReference();
 		propertyType.setEType(IndexTestLanguagePackage.eINSTANCE.getEntity());
-		
+
 		IScope scope = scopeProvider.getScope(datatype, propertyType);
 		List<String> names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 0, names.size());
