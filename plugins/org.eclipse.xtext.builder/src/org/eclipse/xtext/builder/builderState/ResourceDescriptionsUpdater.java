@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
@@ -35,9 +36,9 @@ import com.google.inject.Inject;
 public class ResourceDescriptionsUpdater {
 
 	@Inject
-	private IResourceDescription.Manager.Registry managerRegistry;
+	private IResourceServiceProvider.Registry managerRegistry;
 
-	public void setManagerRegistry(IResourceDescription.Manager.Registry managerRegistry) {
+	public void setResourceServiceRegistry(IResourceServiceProvider.Registry managerRegistry) {
 		this.managerRegistry = managerRegistry;
 	}
 
@@ -103,7 +104,7 @@ public class ResourceDescriptionsUpdater {
 		}
 		Map<URI, Delta> result = Maps.newHashMap();
 		for (URI uri : toBeUpdated) {
-			Manager manager = managerRegistry.getResourceDescriptionManager(uri, null);
+			Manager manager = getResourceDescriptionManager(uri);
 			Resource resource = set.getResource(uri, false);
 			IResourceDescription description = manager.getResourceDescription(resource);
 			result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
@@ -112,12 +113,16 @@ public class ResourceDescriptionsUpdater {
 		return result;
 	}
 
+	private Manager getResourceDescriptionManager(URI uri) {
+		return managerRegistry.getResourceServiceProvider(uri, null).getResourceDescriptionManager();
+	}
+
 	private Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions resourceDescriptions,
 			Collection<Delta> collection) throws IllegalArgumentException {
 		Set<IResourceDescription> result = Sets.newHashSet();
 		Iterable<IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
 		for (IResourceDescription desc : descriptions) {
-			Manager manager = managerRegistry.getResourceDescriptionManager(desc.getURI(), null);
+			Manager manager = getResourceDescriptionManager(desc.getURI());
 			for (Delta delta : collection) {
 				if (manager.isAffected(delta, desc))
 					result.add(desc);

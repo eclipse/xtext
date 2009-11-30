@@ -67,21 +67,21 @@ public class XtextResource extends ResourceImpl {
 	private IReferableElementsUnloader unloader;
 	
 	@Inject
-	private IResourceDescription.Manager resourceDescriptionManager;
+	private IResourceServiceProvider resourceServiceProvider;
+	
+	public IResourceServiceProvider getResourceServiceProvider() {
+		return resourceServiceProvider;
+	}
+	
+	public void setResourceServiceProvider(IResourceServiceProvider resourceServiceProvider) {
+		this.resourceServiceProvider = resourceServiceProvider;
+	}
 	
 	private IParseResult parseResult;
 
 	@Inject
 	protected void setInjectedParser(ISwitchingParser parser) {
 		this.parser = parser;
-	}
-	
-	public void setResourceDescriptionManager(IResourceDescription.Manager resourceDescriptionManager) {
-		this.resourceDescriptionManager = resourceDescriptionManager;
-	}
-	
-	public IResourceDescription.Manager getResourceDescriptionManager() {
-		return resourceDescriptionManager;
 	}
 	
 	public XtextResource(URI uri) {
@@ -298,5 +298,5 @@ public class XtextResource extends ResourceImpl {
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
 	}
-
+	
 }

@@ -49,7 +49,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 	}
 	
 	public synchronized void copyState(XtextResource resource) {
-		description = resource.getResourceDescriptionManager().getResourceDescription(resource);
+		description = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
 		content = getUnderlyingDocument().get();
 	}
 	

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Inject;
 
@@ -34,7 +35,7 @@ import com.google.inject.Inject;
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
-	private IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry;
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
@@ -59,7 +60,7 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IResourceDescription.Manager manager = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null).getResourceDescriptionManager();
 		if (manager != null) {
 			IResourceDescription description = manager.getResourceDescription(resource);
 			if (description != null) {
@@ -77,12 +78,12 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 		return helper;
 	}
 
-	public void setResourceDescriptionManagerRegistry(IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry) {
-		this.resourceDescriptionManagerRegistry = resourceDescriptionManagerRegistry;
+	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionManagerRegistry) {
+		this.resourceServiceProviderRegistry = resourceDescriptionManagerRegistry;
 	}
 
-	public IResourceDescription.Manager.Registry getResourceDescriptionManagerRegistry() {
-		return resourceDescriptionManagerRegistry;
+	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
+		return resourceServiceProviderRegistry;
 	}
 	
 }

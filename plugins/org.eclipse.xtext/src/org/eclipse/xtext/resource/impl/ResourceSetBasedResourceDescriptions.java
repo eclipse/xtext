@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
 import com.google.common.base.Function;
@@ -28,9 +29,9 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 	private ResourceSet resourceSet;
 
 	@Inject
-	private IResourceDescription.Manager.Registry registry;
+	private IResourceServiceProvider.Registry registry;
 
-	public void setRegistry(IResourceDescription.Manager.Registry registry) {
+	public void setRegistry(IResourceServiceProvider.Registry registry) {
 		this.registry = registry;
 	}
 
@@ -46,7 +47,7 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 		Resource resource = resourceSet.getResource(uri, false);
 		if (resource == null)
 			return null;
-		Manager manager = registry.getResourceDescriptionManager(uri, null);
+		Manager manager = registry.getResourceServiceProvider(uri, null).getResourceDescriptionManager();
 		return manager.getResourceDescription(resource);
 	}
 

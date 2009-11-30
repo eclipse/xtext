@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManagerRegistry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
@@ -73,28 +72,6 @@ public interface IResourceDescription {
 		boolean isAffected(IResourceDescription.Delta delta, IResourceDescription candidate)
 				throws IllegalArgumentException;
 
-		/**
-		 * @return the container manager that is responsible for descriptions provided by this resource manager.
-		 */
-		IContainer.Manager getContainerManager();
-
-		@ImplementedBy(DefaultResourceDescriptionManagerRegistry.class)
-		interface Registry {
-
-			/**
-			 * Returns the {@link IResourceDescription.Manager} appropriate for the given URI. <b>Content types are not
-			 * yet supported.</b>
-			 * 
-			 * @param uri
-			 *            the URI.
-			 * @param contentType
-			 *            the content type of the URI or <code>null</code> if a content type should not be used during
-			 *            lookup.
-			 * @return the {@link IResourceDescription.Manager} appropriate for the given URI, or <code>null</code> if
-			 *         there isn't one.
-			 */
-			IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType);
-		}
 	}
 
 	/**

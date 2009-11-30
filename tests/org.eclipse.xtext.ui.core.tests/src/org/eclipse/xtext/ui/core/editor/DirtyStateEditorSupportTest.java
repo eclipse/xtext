@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.ui.core.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
@@ -54,7 +55,9 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
-		resource.setResourceDescriptionManager(this);
+		DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider();
+		resourceServiceProvider.setResourceDescriptionManager(this);
+		resource.setResourceServiceProvider(resourceServiceProvider);
 		resourceSet.getResources().add(resource);
 		dirtyStateSupport = new DirtyStateEditorSupport();
 		dirtyStateSupport.setConcurrentEditingWarningDialog(this);

@@ -10,7 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Inject;
@@ -20,22 +20,20 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public class DefaultResourceDescriptionManagerRegistry implements IResourceDescription.Manager.Registry {
+public class DefaultResourceServiceProviderRegistry implements IResourceServiceProvider.Registry {
 
 	@Inject
-	private Provider<IResourceDescription.Manager> resourceDescriptionManagers;
-	
-	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
-		//TODO we need to come up with a real registry.
+	private Provider<IResourceServiceProvider> resourceServiceProviderProvider;
+
+	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		Factory factory = Resource.Factory.Registry.INSTANCE.getFactory(uri, contentType);
 		if (factory != null) {
 			Resource resource = factory.createResource(uri);
 			if (resource instanceof XtextResource) {
-				return ((XtextResource) resource).getResourceDescriptionManager();
+				return ((XtextResource) resource).getResourceServiceProvider();
 			}
 		}
-		// use default impl as fallback
-		return resourceDescriptionManagers.get();
+		return resourceServiceProviderProvider.get();
 	}
 	
 }
