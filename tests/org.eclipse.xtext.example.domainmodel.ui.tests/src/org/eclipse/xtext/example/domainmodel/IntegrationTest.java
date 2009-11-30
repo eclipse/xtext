@@ -17,8 +17,18 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 public class IntegrationTest extends TestCase {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IJavaProject project2 = createJavaProject("bar");
+		addNature(project2.getProject(), XtextNature.NATURE_ID);
+	}
 
 	@Override
 	protected void tearDown() throws Exception {
