@@ -19,7 +19,7 @@
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
 			<!--fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/-->
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
-			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 		</language>
 	</component>
 </workflow>
