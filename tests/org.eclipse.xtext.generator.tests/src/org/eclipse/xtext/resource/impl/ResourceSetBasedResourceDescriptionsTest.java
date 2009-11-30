@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +25,8 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -36,7 +36,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResourceSetBasedResourceDescriptionsTest extends TestCase implements IResourceDescription.Manager.Registry, Function<IEObjectDescription, EObject> {
+public class ResourceSetBasedResourceDescriptionsTest extends TestCase implements IResourceServiceProvider.Registry, Function<IEObjectDescription, EObject> {
 
 	private ResourceSet resourceSet;
 	private DefaultResourceDescriptionManager resourceDescriptionManager;
@@ -66,8 +66,13 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		container = new ResourceDescriptionsBasedContainer(resDescs);
 	}
 
-	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
-		return resourceDescriptionManager;
+	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
+		return new DefaultResourceServiceProvider() {
+			@Override
+			public Manager getResourceDescriptionManager() {
+				return resourceDescriptionManager;
+			}
+		};
 	}
 	
 	public void testEmptyResourceSet() {

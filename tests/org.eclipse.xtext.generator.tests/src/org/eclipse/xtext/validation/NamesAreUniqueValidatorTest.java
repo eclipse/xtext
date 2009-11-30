@@ -20,8 +20,11 @@ import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -29,7 +32,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceDescription.Manager.Registry {
+public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements INamesAreUniqueValidationHelper, IResourceServiceProvider.Registry {
 
 	private NamesAreUniqueValidator validator;
 	private IResourceDescription.Manager resourceDescriptionManager;
@@ -47,7 +50,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 				return context;
 			}
 		};
-		validator.setResourceDescriptionManagerRegistry(this);
+		validator.setResourceServiceProviderRegistry(this);
 		validator.setHelper(this);
 		resourceDescriptionManager = new DefaultResourceDescriptionManager() {
 			@Override
@@ -89,8 +92,13 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		assertSame(validator, acceptor);
 	}
 
-	public IResourceDescription.Manager getResourceDescriptionManager(URI uri, String contentType) {
-		return resourceDescriptionManager;
+	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
+		return new DefaultResourceServiceProvider() {
+			@Override
+			public Manager getResourceDescriptionManager() {
+				return resourceDescriptionManager;
+			}
+		}; 
 	}
 
 }
