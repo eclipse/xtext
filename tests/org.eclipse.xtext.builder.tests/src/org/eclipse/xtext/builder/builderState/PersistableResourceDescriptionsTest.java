@@ -58,7 +58,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 			}
 		};
 		builderState.setResourceSetProvider(new Provider<ResourceSet>() {
-			
+
 			public ResourceSet get() {
 				ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 				resourceSetImpl.setURIConverter(uriConverter);
@@ -69,7 +69,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 
 	public void testSimpleAdd() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
-		Map<URI, Delta> reload = update(uris("foo"),null);
+		Map<URI, Delta> reload = update(uris("foo"), null);
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
@@ -77,115 +77,115 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	public void testMultipleAdd() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar"),null); // update
+		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // update
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
-	
+
 	public void testUpdate() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getNew());
-		
+
 		addToFileSystem("bar", "namespace bar { object C }");
-		reload = update(uris("bar"),null); // update
+		reload = update(uris("bar"), null); // update
 		assertNotNull(reload.get(uri("bar")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
-	
+
 	public void testUpdate_1() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
 		addToFileSystem("bar", "namespace bar { object B references foo.A}");
 		addToFileSystem("baz", "namespace baz { object C references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar","baz"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar", "baz"), null); // add
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("baz")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("baz")).getNew());
-		
+
 		addToFileSystem("foo", "namespace foo { object X }");
-		reload = update(uris("foo"),null); // update
+		reload = update(uris("foo"), null); // update
 		assertNotNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 		assertNotNull(reload.get(uri("bar")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNull(reload.get(uri("baz")));
 	}
-	
+
 	public void testUpdate_2() throws Exception {
 		addToFileSystem("foo", "namespace foo { object A }");
 		addToFileSystem("bar", "namespace bar { object B references foo.A}");
 		addToFileSystem("baz", "namespace baz { object C references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar","baz"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar", "baz"), null); // add
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("baz")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("baz")).getNew());
-		
+
 		addToFileSystem("foo", "namespace foo { object X }");
 		addToFileSystem("bar", "namespace bar { object B references foo.X}");
-		reload = update(uris("foo"),null); // update
+		reload = update(uris("foo"), null); // update
 		assertNotNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 		assertNotNull(reload.get(uri("bar")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNull(reload.get(uri("baz")));
 	}
-	
+
 	public void testDelete() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getNew());
-		
-		reload = update(null,uris("bar")); // delete
+
+		reload = update(null, uris("bar")); // delete
 		assertNotNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("foo")).getNew());
 	}
-	
+
 	public void testDelete_1() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getNew());
-		
-		reload = update(null,uris("foo")); // delete
+
+		reload = update(null, uris("foo")); // delete
 		assertNull(reload.get(uri("bar")));
 		assertNotNull(reload.get(uri("foo")).getOld());
 		assertNull(reload.get(uri("foo")).getNew());
 	}
-	
+
 	public void testUpdateNoChange() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");
-		Map<URI, Delta> reload = update(uris("foo", "bar"),null); // add
+		Map<URI, Delta> reload = update(uris("foo", "bar"), null); // add
 		assertNull(reload.get(uri("bar")).getOld());
 		assertNull(reload.get(uri("foo")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 		assertNotNull(reload.get(uri("foo")).getNew());
-		
-		reload = update(uris("bar"),null); // delete
-		assertEquals(1,reload.size());
+
+		reload = update(uris("bar"), null); // delete
+		assertEquals(1, reload.size());
 		assertNotNull(reload.get(uri("bar")).getOld());
 		assertNotNull(reload.get(uri("bar")).getNew());
 	}
@@ -193,12 +193,12 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	private void addToFileSystem(String uri, String contents) {
 		fileSystem.put(uri + FILE_EXT, contents);
 	}
-	
+
 	private URI uri(String name) {
 		return URI.createURI(name + FILE_EXT);
 	}
-	
-	private Iterable<URI> uris(String ...urisAsStrings) {
+
+	private Iterable<URI> uris(String... urisAsStrings) {
 		Set<URI> result = Sets.newHashSet();
 		for (String string : urisAsStrings) {
 			result.add(uri(string));
@@ -206,11 +206,17 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		return result;
 	}
 
-	private Map<URI,IResourceDescription.Delta> update(Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted) {
-		ImmutableList<Delta> update = builderState.update(toBeUpdated, toBeDeleted);
+	private Map<URI, IResourceDescription.Delta> update(Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted) {
+		Map<URI, String> toBeUpdatedAsMap = Maps.newHashMap();
+		if (toBeUpdated != null) {
+			for (URI uri : toBeUpdated) {
+				toBeUpdatedAsMap.put(uri, uri.toString());
+			}
+		}
+		ImmutableList<Delta> update = builderState.update(toBeUpdatedAsMap, toBeDeleted);
 		return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 			public URI apply(IResourceDescription.Delta from) {
-				return from.getOld()!=null?from.getOld().getURI():from.getNew().getURI();
+				return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
 			}
 		});
 	}

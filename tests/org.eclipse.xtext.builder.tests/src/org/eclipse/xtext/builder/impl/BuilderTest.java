@@ -103,7 +103,6 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(1,events.get(3).getDeltas().size());
-		
 	}
 
 	private ImmutableList<Delta> print(ImmutableList<Delta> deltas) {

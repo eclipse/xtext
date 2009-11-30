@@ -18,12 +18,12 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.builder.impl.StorageUtil;
+import org.eclipse.xtext.builder.impl.StorageUtilImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JdtStorageUtil extends StorageUtil {
+public class JdtStorageUtil extends StorageUtilImpl {
 
 	private static final String DELIMITER = ":";
 	private static final String JARENTRY_PREFIX = "jarentry:";

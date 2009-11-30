@@ -15,8 +15,8 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(DefaultUriUtil.class)
-public interface IUriUtil {
+@ImplementedBy(UriUtilImpl.class)
+public interface UriUtil {
 	
 	/**
 	 * computes an EMF URI for the given IStorage.

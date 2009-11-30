@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl;
+package org.eclipse.xtext.builder.builderState;
 
 import java.util.Set;
 
