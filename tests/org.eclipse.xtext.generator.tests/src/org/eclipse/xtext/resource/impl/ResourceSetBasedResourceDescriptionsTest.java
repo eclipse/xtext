@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -29,6 +31,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -131,17 +134,21 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		ENamedElement second = createNamedElement(name, type, resource);
 		List<ENamedElement> expected = Lists.newArrayList(first, second);
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
-		Iterable<EObject> transformed = Iterables.transform(iterable, this);
-		assertTrue(Iterables.elementsEqual(expected, transformed));
+		checkFindAllEObjectsResult(expected, iterable);
 		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
-		transformed = Iterables.transform(iterable, this);
-		assertTrue(Iterables.elementsEqual(expected, transformed));
+		checkFindAllEObjectsResult(expected, iterable);
 		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
-		transformed = Iterables.transform(iterable, this);
-		assertTrue(Iterables.elementsEqual(expected, transformed));
+		checkFindAllEObjectsResult(expected, iterable);
 		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
-		transformed = Iterables.transform(iterable, this);
-		assertTrue(Iterables.elementsEqual(expected, transformed));
+		checkFindAllEObjectsResult(expected, iterable);
+	}
+
+	private void checkFindAllEObjectsResult(List<ENamedElement> expected, Iterable<IEObjectDescription> iterable) {
+		Iterable<EObject> transformed = Iterables.transform(iterable, this);
+		Set<EObject> transformedSet = Sets.newHashSet(transformed);
+		Set<ENamedElement> expectedSet = Sets.newHashSet(expected);
+		assertEquals(expected.size(), expectedSet.size());
+		assertEquals(expectedSet, transformedSet);
 	}
 	
 	public void testPerformance10Resources100EClassesEach() {
