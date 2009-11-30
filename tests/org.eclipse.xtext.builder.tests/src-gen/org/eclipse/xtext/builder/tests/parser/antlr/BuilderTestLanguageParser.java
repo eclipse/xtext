@@ -40,7 +40,7 @@ public class BuilderTestLanguageParser extends org.eclipse.xtext.parser.antlr.Ab
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Namespace";
+		return "NamedElement";
 	}
 	
 	public BuilderTestLanguageGrammarAccess getGrammarAccess() {

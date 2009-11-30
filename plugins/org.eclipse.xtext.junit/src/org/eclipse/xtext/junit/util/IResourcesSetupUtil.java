@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 import org.eclipse.xtext.util.StringInputStream;
 
 public class IResourcesSetupUtil {
@@ -38,8 +37,6 @@ public class IResourcesSetupUtil {
 		if (!project.exists())
 			project.create(monitor());
 		project.open(monitor());
-		removeNature(project, XtextNature.NATURE_ID);
-		addNature(project, XtextNature.NATURE_ID);
 		return project;
 	}
 
@@ -51,7 +48,7 @@ public class IResourcesSetupUtil {
 		// Add the nature
 		String[] newNatures = new String[natures.length + 1];
 		System.arraycopy(natures, 0, newNatures, 0, natures.length);
-		newNatures[natures.length] = XtextNature.NATURE_ID;
+		newNatures[natures.length] = nature;
 		description.setNatureIds(newNatures);
 		project.setDescription(description, null);
 	}

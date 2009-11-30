@@ -67,13 +67,24 @@ public class BuilderTestLanguageFactoryImpl extends EFactoryImpl implements Buil
   {
     switch (eClass.getClassifierID())
     {
+      case BuilderTestLanguagePackage.NAMED_ELEMENT: return createNamedElement();
       case BuilderTestLanguagePackage.NAMESPACE: return createNamespace();
       case BuilderTestLanguagePackage.IMPORT: return createImport();
-      case BuilderTestLanguagePackage.NAMED_ELEMENT: return createNamedElement();
       case BuilderTestLanguagePackage.ELEMENT: return createElement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NamedElement createNamedElement()
+  {
+    NamedElementImpl namedElement = new NamedElementImpl();
+    return namedElement;
   }
 
   /**
@@ -96,17 +107,6 @@ public class BuilderTestLanguageFactoryImpl extends EFactoryImpl implements Buil
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamedElement createNamedElement()
-  {
-    NamedElementImpl namedElement = new NamedElementImpl();
-    return namedElement;
   }
 
   /**

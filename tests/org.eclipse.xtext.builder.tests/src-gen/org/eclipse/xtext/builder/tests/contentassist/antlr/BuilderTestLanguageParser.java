@@ -60,7 +60,7 @@ public class BuilderTestLanguageParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			org.eclipse.xtext.builder.tests.contentassist.antlr.internal.InternalBuilderTestLanguageParser typedParser = (org.eclipse.xtext.builder.tests.contentassist.antlr.internal.InternalBuilderTestLanguageParser) parser;
-			typedParser.entryRuleNamespace();
+			typedParser.entryRuleNamedElement();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

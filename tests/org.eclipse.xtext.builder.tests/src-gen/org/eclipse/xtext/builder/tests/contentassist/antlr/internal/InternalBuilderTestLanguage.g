@@ -56,6 +56,33 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
 
 
 
+// Entry rule entryRuleNamedElement
+entryRuleNamedElement :
+{ before(grammarAccess.getNamedElementRule()); }
+	 ruleNamedElement
+{ after(grammarAccess.getNamedElementRule()); } 
+	 EOF 
+;
+
+// Rule NamedElement
+ruleNamedElement 
+    @init {
+		int stackSize = keepStackSize();
+    }
+ :
+(
+{ before(grammarAccess.getNamedElementAccess().getAlternatives()); }
+(rule__NamedElement__Alternatives)
+{ after(grammarAccess.getNamedElementAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleNamespace
 entryRuleNamespace :
 { before(grammarAccess.getNamespaceRule()); }
@@ -101,33 +128,6 @@ ruleImport
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
 { after(grammarAccess.getImportAccess().getGroup()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-// Entry rule entryRuleNamedElement
-entryRuleNamedElement :
-{ before(grammarAccess.getNamedElementRule()); }
-	 ruleNamedElement
-{ after(grammarAccess.getNamedElementRule()); } 
-	 EOF 
-;
-
-// Rule NamedElement
-ruleNamedElement 
-    @init {
-		int stackSize = keepStackSize();
-    }
- :
-(
-{ before(grammarAccess.getNamedElementAccess().getAlternatives()); }
-(rule__NamedElement__Alternatives)
-{ after(grammarAccess.getNamedElementAccess().getAlternatives()); }
 )
 
 ;

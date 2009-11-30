@@ -3,6 +3,7 @@ package org.eclipse.xtext.builder.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.xtext.builder.impl.BuilderTest;
 import org.eclipse.xtext.builder.impl.ShadowingResourceDescriptionsTest;
 
 /*
@@ -15,6 +16,7 @@ public class AllTests {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.builder.tests");
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsTest.class);
       suite.addTestSuite(ShadowingResourceDescriptionsTest.class);
+      suite.addTestSuite(BuilderTest.class);
       return suite;
    }
 }

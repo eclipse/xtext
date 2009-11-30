@@ -67,7 +67,7 @@ public interface BuilderTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguagePackageImpl#getNamedElement()
    * @generated
    */
-  int NAMED_ELEMENT = 2;
+  int NAMED_ELEMENT = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -95,7 +95,7 @@ public interface BuilderTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguagePackageImpl#getNamespace()
    * @generated
    */
-  int NAMESPACE = 0;
+  int NAMESPACE = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -141,7 +141,7 @@ public interface BuilderTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguagePackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 1;
+  int IMPORT = 2;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -200,6 +200,27 @@ public interface BuilderTestLanguagePackage extends EPackage
 
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement <em>Named Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named Element</em>'.
+   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement
+   * @generated
+   */
+  EClass getNamedElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement#getName()
+   * @see #getNamedElement()
+   * @generated
+   */
+  EAttribute getNamedElement_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Namespace <em>Namespace</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -253,27 +274,6 @@ public interface BuilderTestLanguagePackage extends EPackage
   EAttribute getImport_ImportedNamespace();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement <em>Named Element</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Named Element</em>'.
-   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement
-   * @generated
-   */
-  EClass getNamedElement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement#getName()
-   * @see #getNamedElement()
-   * @generated
-   */
-  EAttribute getNamedElement_Name();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -318,6 +318,24 @@ public interface BuilderTestLanguagePackage extends EPackage
   interface Literals
   {
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamedElementImpl <em>Named Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamedElementImpl
+     * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguagePackageImpl#getNamedElement()
+     * @generated
+     */
+    EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamespaceImpl <em>Namespace</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -360,24 +378,6 @@ public interface BuilderTestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamedElementImpl <em>Named Element</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.NamedElementImpl
-     * @see org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguagePackageImpl#getNamedElement()
-     * @generated
-     */
-    EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.ElementImpl <em>Element</em>}' class.

@@ -26,6 +26,15 @@ public interface BuilderTestLanguageFactory extends EFactory
   BuilderTestLanguageFactory eINSTANCE = org.eclipse.xtext.builder.tests.builderTestLanguage.impl.BuilderTestLanguageFactoryImpl.init();
 
   /**
+   * Returns a new object of class '<em>Named Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Named Element</em>'.
+   * @generated
+   */
+  NamedElement createNamedElement();
+
+  /**
    * Returns a new object of class '<em>Namespace</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -42,15 +51,6 @@ public interface BuilderTestLanguageFactory extends EFactory
    * @generated
    */
   Import createImport();
-
-  /**
-   * Returns a new object of class '<em>Named Element</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Element</em>'.
-   * @generated
-   */
-  NamedElement createNamedElement();
 
   /**
    * Returns a new object of class '<em>Element</em>'.

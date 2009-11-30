@@ -5,24 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.builder.tests.BuilderTestLanguage with org.eclipse.xtext.common.Terminals
+package org.eclipse.xtext.builder.impl;
 
-generate builderTestLanguage "http://eclipse.org/xtext/builderTestLanguage"
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 
-NamedElement :
-	Namespace | Element;
+import com.google.inject.ImplementedBy;
 
-Namespace :
-	'namespace' name=QualifiedName '{'
-	    imports+=Import*
-		elements+=NamedElement*
-	'}';
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+@ImplementedBy(DefaultUriUtil.class)
+public interface IUriUtil {
 	
-Import :
-	'import' importedNamespace=QualifiedName;
+	/**
+	 * computes an EMF URI for the given IStorage.
+	 * @return the uri, or null if the given {@link IStorage} is not an EMF resource.
+	 */
+	URI getUri(IStorage storage);
 	
-Element :
-	'object' name=ID ('references' references=[Element|QualifiedName])?;
-	
-QualifiedName :
-	ID ('.' ID)*;
+}

@@ -112,6 +112,10 @@ public interface IResourceDescription {
 	 */
 	interface Delta {
 		/**
+		 *@return the uri for the resource description delta.
+		 */
+		URI getUri();
+		/**
 		 * @return the old resource description, or null if the change is an addition
 		 */
 		IResourceDescription getOld();

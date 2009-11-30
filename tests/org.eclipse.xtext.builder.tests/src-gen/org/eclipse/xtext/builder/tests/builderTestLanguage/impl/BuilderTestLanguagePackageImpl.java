@@ -32,6 +32,13 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass namedElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass namespaceEClass = null;
 
   /**
@@ -40,13 +47,6 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * @generated
    */
   private EClass importEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass namedElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -123,6 +123,26 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getNamedElement()
+  {
+    return namedElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNamedElement_Name()
+  {
+    return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNamespace()
   {
     return namespaceEClass;
@@ -166,26 +186,6 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getNamedElement()
-  {
-    return namedElementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getNamedElement_Name()
-  {
-    return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -238,15 +238,15 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
     isCreated = true;
 
     // Create classes and their features
+    namedElementEClass = createEClass(NAMED_ELEMENT);
+    createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
     namespaceEClass = createEClass(NAMESPACE);
     createEReference(namespaceEClass, NAMESPACE__IMPORTS);
     createEReference(namespaceEClass, NAMESPACE__ELEMENTS);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
-
-    namedElementEClass = createEClass(NAMED_ELEMENT);
-    createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
     elementEClass = createEClass(ELEMENT);
     createEReference(elementEClass, ELEMENT__REFERENCES);
@@ -285,15 +285,15 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
     elementEClass.getESuperTypes().add(this.getNamedElement());
 
     // Initialize classes and features; add operations and parameters
+    initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(namespaceEClass, Namespace.class, "Namespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNamespace_Imports(), this.getImport(), null, "imports", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNamespace_Elements(), this.getNamedElement(), null, "elements", null, 0, -1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getElement_References(), this.getElement(), null, "references", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

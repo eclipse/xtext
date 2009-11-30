@@ -122,6 +122,28 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(reload.get(uri("baz")));
 	}
 	
+	public void testUpdate_2() throws Exception {
+		addToFileSystem("foo", "namespace foo { object A }");
+		addToFileSystem("bar", "namespace bar { object B references foo.A}");
+		addToFileSystem("baz", "namespace baz { object C references bar.B}");
+		Map<URI, Delta> reload = update(uris("foo", "bar","baz"),null); // add
+		assertNull(reload.get(uri("foo")).getOld());
+		assertNull(reload.get(uri("bar")).getOld());
+		assertNull(reload.get(uri("baz")).getOld());
+		assertNotNull(reload.get(uri("foo")).getNew());
+		assertNotNull(reload.get(uri("bar")).getNew());
+		assertNotNull(reload.get(uri("baz")).getNew());
+		
+		addToFileSystem("foo", "namespace foo { object X }");
+		addToFileSystem("bar", "namespace bar { object B references foo.X}");
+		reload = update(uris("foo"),null); // update
+		assertNotNull(reload.get(uri("foo")).getOld());
+		assertNotNull(reload.get(uri("foo")).getNew());
+		assertNotNull(reload.get(uri("bar")).getOld());
+		assertNotNull(reload.get(uri("bar")).getNew());
+		assertNull(reload.get(uri("baz")));
+	}
+	
 	public void testDelete() throws Exception {
 		addToFileSystem("bar", "namespace bar { object B }");
 		addToFileSystem("foo", "namespace foo { object A references bar.B}");

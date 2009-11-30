@@ -35,15 +35,124 @@ protected class ThisRootNode extends RootToken {
 	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Namespace_Group(this, this, 0, inst);
-			case 1: return new Import_Group(this, this, 1, inst);
-			case 2: return new NamedElement_Alternatives(this, this, 2, inst);
+			case 0: return new NamedElement_Alternatives(this, this, 0, inst);
+			case 1: return new Namespace_Group(this, this, 1, inst);
+			case 2: return new Import_Group(this, this, 2, inst);
 			case 3: return new Element_Group(this, this, 3, inst);
 			default: return null;
 		}	
 	}	
 }
 	
+
+/************ begin Rule NamedElement ****************
+ *
+ * NamedElement:
+ *   Namespace|Element;
+ *
+ **/
+
+// Namespace|Element
+protected class NamedElement_Alternatives extends AlternativesToken {
+
+	public NamedElement_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getNamedElementAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NamedElement_NamespaceParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new NamedElement_ElementParserRuleCall_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// Namespace
+protected class NamedElement_NamespaceParserRuleCall_0 extends RuleCallToken {
+	
+	public NamedElement_NamespaceParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Namespace_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Namespace_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Element
+protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
+	
+	public NamedElement_ElementParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getNamedElementAccess().getElementParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Element_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule NamedElement ****************/
+
 
 /************ begin Rule Namespace ****************
  *
@@ -370,115 +479,6 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Import ****************/
-
-
-/************ begin Rule NamedElement ****************
- *
- * NamedElement:
- *   Namespace|Element;
- *
- **/
-
-// Namespace|Element
-protected class NamedElement_Alternatives extends AlternativesToken {
-
-	public NamedElement_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getAlternatives();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new NamedElement_NamespaceParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new NamedElement_ElementParserRuleCall_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
-}
-
-// Namespace
-protected class NamedElement_NamespaceParserRuleCall_0 extends RuleCallToken {
-	
-	public NamedElement_NamespaceParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Namespace_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Namespace_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// Element
-protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
-	
-	public NamedElement_ElementParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getNamedElementAccess().getElementParserRuleCall_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Element_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Element_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-
-/************ end Rule NamedElement ****************/
 
 
 /************ begin Rule Element ****************

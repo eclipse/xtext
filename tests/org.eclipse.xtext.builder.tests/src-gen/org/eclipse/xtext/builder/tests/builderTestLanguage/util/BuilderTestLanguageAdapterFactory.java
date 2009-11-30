@@ -78,6 +78,11 @@ public class BuilderTestLanguageAdapterFactory extends AdapterFactoryImpl
     new BuilderTestLanguageSwitch<Adapter>()
     {
       @Override
+      public Adapter caseNamedElement(NamedElement object)
+      {
+        return createNamedElementAdapter();
+      }
+      @Override
       public Adapter caseNamespace(Namespace object)
       {
         return createNamespaceAdapter();
@@ -86,11 +91,6 @@ public class BuilderTestLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseImport(Import object)
       {
         return createImportAdapter();
-      }
-      @Override
-      public Adapter caseNamedElement(NamedElement object)
-      {
-        return createNamedElementAdapter();
       }
       @Override
       public Adapter caseElement(Element object)
@@ -120,6 +120,21 @@ public class BuilderTestLanguageAdapterFactory extends AdapterFactoryImpl
 
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement <em>Named Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement
+   * @generated
+   */
+  public Adapter createNamedElementAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Namespace <em>Namespace</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -145,21 +160,6 @@ public class BuilderTestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createImportAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement <em>Named Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.NamedElement
-   * @generated
-   */
-  public Adapter createNamedElementAdapter()
   {
     return null;
   }

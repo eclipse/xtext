@@ -54,7 +54,7 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
     
     @Override
     protected String getFirstRuleName() {
-    	return "Namespace";	
+    	return "NamedElement";	
    	} 
 }
 
@@ -64,6 +64,46 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
         appendSkippedTokens();
     } 
 }
+
+
+
+
+// Entry rule entryRuleNamedElement
+entryRuleNamedElement returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getNamedElementRule(), currentNode); }
+	 iv_ruleNamedElement=ruleNamedElement 
+	 { $current=$iv_ruleNamedElement.current; } 
+	 EOF 
+;
+
+// Rule NamedElement
+ruleNamedElement returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0(), currentNode); 
+    }
+    this_Namespace_0=ruleNamespace
+    { 
+        $current = $this_Namespace_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getElementParserRuleCall_1(), currentNode); 
+    }
+    this_Element_1=ruleElement
+    { 
+        $current = $this_Element_1.current; 
+        currentNode = currentNode.getParent();
+    }
+);
+
 
 
 
@@ -217,46 +257,6 @@ ruleImport returns [EObject current=null]
 
 )
 ));
-
-
-
-
-
-// Entry rule entryRuleNamedElement
-entryRuleNamedElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getNamedElementRule(), currentNode); }
-	 iv_ruleNamedElement=ruleNamedElement 
-	 { $current=$iv_ruleNamedElement.current; } 
-	 EOF 
-;
-
-// Rule NamedElement
-ruleNamedElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-(
-    { 
-        currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0(), currentNode); 
-    }
-    this_Namespace_0=ruleNamespace
-    { 
-        $current = $this_Namespace_0.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |
-    { 
-        currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getElementParserRuleCall_1(), currentNode); 
-    }
-    this_Element_1=ruleElement
-    { 
-        $current = $this_Element_1.current; 
-        currentNode = currentNode.getParent();
-    }
-);
 
 
 

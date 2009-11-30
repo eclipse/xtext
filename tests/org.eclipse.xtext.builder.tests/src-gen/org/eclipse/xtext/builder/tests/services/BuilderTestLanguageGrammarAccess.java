@@ -17,6 +17,26 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
+	public class NamedElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cNamespaceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cElementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//NamedElement:
+		//  Namespace|Element;
+		public ParserRule getRule() { return rule; }
+
+		//Namespace|Element
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Namespace
+		public RuleCall getNamespaceParserRuleCall_0() { return cNamespaceParserRuleCall_0; }
+
+		//Element
+		public RuleCall getElementParserRuleCall_1() { return cElementParserRuleCall_1; }
+	}
+
 	public class NamespaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Namespace");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -87,26 +107,6 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 
 		//QualifiedName
 		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
-	}
-
-	public class NamedElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNamespaceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cElementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//NamedElement:
-		//  Namespace|Element;
-		public ParserRule getRule() { return rule; }
-
-		//Namespace|Element
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//Namespace
-		public RuleCall getNamespaceParserRuleCall_0() { return cNamespaceParserRuleCall_0; }
-
-		//Element
-		public RuleCall getElementParserRuleCall_1() { return cElementParserRuleCall_1; }
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
@@ -182,9 +182,9 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
+	private NamedElementElements pNamedElement;
 	private NamespaceElements pNamespace;
 	private ImportElements pImport;
-	private NamedElementElements pNamedElement;
 	private ElementElements pElement;
 	private QualifiedNameElements pQualifiedName;
 	
@@ -209,6 +209,16 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	
+	//NamedElement:
+	//  Namespace|Element;
+	public NamedElementElements getNamedElementAccess() {
+		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
+	}
+	
+	public ParserRule getNamedElementRule() {
+		return getNamedElementAccess().getRule();
+	}
+
 	//Namespace:
 	//  "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
 	public NamespaceElements getNamespaceAccess() {
@@ -227,16 +237,6 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
-	}
-
-	//NamedElement:
-	//  Namespace|Element;
-	public NamedElementElements getNamedElementAccess() {
-		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
-	}
-	
-	public ParserRule getNamedElementRule() {
-		return getNamedElementAccess().getRule();
 	}
 
 	//Element:

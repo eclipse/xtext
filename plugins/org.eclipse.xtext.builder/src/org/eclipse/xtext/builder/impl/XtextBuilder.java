@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.impl;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -19,6 +20,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -28,7 +30,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,6 +44,17 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = "org.eclipse.xtext.builder.xtextBuilder";
+
+	@Inject
+	private IBuilderState builderState;
+
+	@Inject
+	private IUriUtil uriUtil;
+
+	class ToBeBuild {
+		Set<URI> toBeUpdated = Sets.newHashSet();
+		Set<URI> toBeDeleted = Sets.newHashSet();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -62,37 +80,83 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 	}
 
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
+		final ToBeBuild toBeBuild = new ToBeBuild();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 			public boolean visit(IResourceDelta delta) throws CoreException {
 				if (monitor.isCanceled())
 					return false;
 				IResource resource = delta.getResource();
-				if (!(resource instanceof IFile))
+				if (!isHandled(resource))
 					return true;
-//				IFile file = (IFile) resource;
-				if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
-//					resourceIndexer.addOrUpdate(file);
-				} else if (delta.getKind() == IResourceDelta.REMOVED) {
-//					resourceIndexer.delete(file);
+				IFile file = (IFile) resource;
+				URI uri = getUri(file);
+				if (uri != null) {
+					if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.CHANGED) {
+						toBeBuild.toBeUpdated.add(uri);
+					} else if (delta.getKind() == IResourceDelta.REMOVED) {
+						toBeBuild.toBeDeleted.add(uri);
+					}
 				}
 				return true;
 			}
+
 		};
 		delta.accept(visitor);
+		doBuild(toBeBuild);
+	}
+	
+	protected boolean isHandled(IResource resource) {
+		return (resource instanceof IFile) && !resource.isDerived();
+	}
+
+	protected void doBuild(ToBeBuild toBeBuild) {
+		builderState.update(toBeBuild.toBeUpdated, toBeBuild.toBeDeleted);
+	}
+
+	protected URI getUri(IStorage file) {
+		return uriUtil.getUri(file);
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
-		getProject().accept(new IResourceVisitor() {
+		IProject project = getProject();
+		final ToBeBuild toBeBuild = updateProject(monitor, project);
+		doBuild(toBeBuild);
+	}
+
+	protected ToBeBuild updateProject(final IProgressMonitor monitor, IProject project) throws CoreException {
+		final ToBeBuild toBeBuild = new ToBeBuild();
+		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
 				if (monitor.isCanceled())
 					return false;
-				if (!(resource instanceof IFile))
+				if (!isHandled(resource))
 					return true;
-//				IFile file = (IFile) resource;
-//				resourceIndexer.addOrUpdate(file);
+				IFile file = (IFile) resource;
+				URI uri = getUri(file);
+				if (uri != null)
+					toBeBuild.toBeUpdated.add(uri);
 				return true;
 			}
 		});
+		return toBeBuild;
+	}
+	
+	protected ToBeBuild deleteProject(final IProgressMonitor monitor, IProject project) throws CoreException {
+		final ToBeBuild toBeBuild = new ToBeBuild();
+		project.accept(new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				if (monitor.isCanceled())
+					return false;
+				if (!isHandled(resource))
+					return true;
+				IFile file = (IFile) resource;
+				URI uri = getUri(file);
+				if (uri != null)
+					toBeBuild.toBeDeleted.add(uri);
+				return true;
+			}
+		});
+		return toBeBuild;
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {
@@ -101,9 +165,10 @@ public class XtextBuilder extends IncrementalProjectBuilder implements IResource
 	}
 
 	@Override
-	protected void clean(IProgressMonitor monitor) throws CoreException {
+	protected void clean(final IProgressMonitor monitor) throws CoreException {
 		try {
-//			resourceIndexer.cleanProject(getProject().getName());
+			final ToBeBuild toBeBuild = deleteProject(monitor, getProject());
+			doBuild(toBeBuild);
 		} catch (WrappedException e) {
 			log.error(e.getCause().getMessage(), e.getCause());
 			throw e;

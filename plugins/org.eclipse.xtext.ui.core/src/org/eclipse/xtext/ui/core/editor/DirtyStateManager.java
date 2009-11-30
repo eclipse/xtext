@@ -69,6 +69,10 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 				public IResourceDescription getNew() {
 					return dirtyResource.getDescription();
 				}
+
+				public URI getUri() {
+					return dirtyResource.getURI();
+				}
 			};
 			notifyListeners(new Event(Collections.singletonList(delta), this));
 		} else {
@@ -83,6 +87,9 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 				
 				public IResourceDescription getNew() {
 					return null;
+				}
+				public URI getUri() {
+					return dirtyResource.getURI();
 				}
 			};
 			notifyListeners(new Event(Collections.singletonList(delta), this));
