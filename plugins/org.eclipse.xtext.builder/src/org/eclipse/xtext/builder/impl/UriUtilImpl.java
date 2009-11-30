@@ -23,7 +23,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class DefaultUriUtil implements IUriUtil {
+public class UriUtilImpl implements UriUtil {
 
 	private ResourceSet resourceSet;
 

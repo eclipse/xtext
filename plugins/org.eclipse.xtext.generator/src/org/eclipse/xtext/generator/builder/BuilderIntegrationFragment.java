@@ -10,7 +10,7 @@ package org.eclipse.xtext.generator.builder;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.builder.impl.ShadowingResourceDescriptions;
+import org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;

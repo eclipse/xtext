@@ -7,18 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import org.eclipse.core.resources.IStorage;
+import java.util.Map;
+import java.util.Set;
 
-import com.google.inject.ImplementedBy;
+import org.eclipse.emf.common.util.URI;
 
-/**
- * @author Sven Efftinge - Initial contribution and API
- */
-@ImplementedBy(StorageUtilImpl.class)
-public interface StorageUtil {
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
-	public String toExternalString(IStorage storage);
-
-	public IStorage getStorage(String externalString);
-
+class ToBeBuilt {
+	Map<URI,String> toBeUpdated = Maps.newHashMap();
+	Set<URI> toBeDeleted = Sets.newHashSet();
+	
+	public Set<URI> getToBeDeleted() {
+		return toBeDeleted;
+	}
+	
+	public Map<URI, String> getToBeUpdated() {
+		return toBeUpdated;
+	}
 }

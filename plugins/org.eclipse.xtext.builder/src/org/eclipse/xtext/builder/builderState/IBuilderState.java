@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -23,6 +25,11 @@ public interface IBuilderState extends IResourceDescriptions {
 	 * It updates transitively affected {@link IResourceDescription} as well.
 	 * 
 	 * The change to the underlying {@link IResourceDescriptions} is guaranteed to be atomic.
+	 * 
+	 * @param toBeAddedOrUpdated - a map containing URI to String, where the String is the external representation of the underlying storage
+	 * @param toBeRemoved - the uris to be removed
+	 * 
+	 * @return a list of changes in the form of deltas.
 	 */
-	public ImmutableList<IResourceDescription.Delta> update(Iterable<URI> toBeAddedOrUpdated, Iterable<URI> toBeRemoved);
+	public ImmutableList<IResourceDescription.Delta> update(Map<URI,String> toBeAddedOrUpdated, Iterable<URI> toBeRemoved);
 }

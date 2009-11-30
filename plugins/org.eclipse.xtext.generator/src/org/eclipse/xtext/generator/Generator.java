@@ -168,7 +168,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
 		//since our templates are all encoded in ISO-8859-1, we have to fix it here.
-		execCtx.setFileEncoding("ISO-8859-1");
+		execCtx.getResourceManager().setFileEncoding("ISO-8859-1");
 		
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
 		// add default value for 'modelPluginID' for generated GenModel required
