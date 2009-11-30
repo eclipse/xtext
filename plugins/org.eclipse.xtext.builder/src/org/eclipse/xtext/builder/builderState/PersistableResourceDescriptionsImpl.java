@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
@@ -29,7 +28,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource implements IResourceDescriptions {
+public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource implements IBuilderState {
 
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 	
