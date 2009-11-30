@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -30,7 +31,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	private IQualifiedNameProvider nameProvider;
 	
 	@Inject
-	private SimpleResourceDescriptionsBasedContainerManager containerManager;
+	private IContainer.Manager containerManager;
 	
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, nameProvider);
@@ -44,11 +45,11 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return nameProvider;
 	}
 	
-	public SimpleResourceDescriptionsBasedContainerManager getContainerManager() {
+	public IContainer.Manager getContainerManager() {
 		return containerManager;
 	}
 	
-	public void setContainerManager(SimpleResourceDescriptionsBasedContainerManager containerManager) {
+	public void setContainerManager(IContainer.Manager containerManager) {
 		this.containerManager = containerManager;
 	}
 	

@@ -39,7 +39,8 @@ public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
 	
-	@Inject(optional=true)
+//	@Inject(optional=true)  did not work - that's why I'll register a dummy binding for now
+	@Inject
 	@Named(NAMED_BUILDER_SCOPE)
 	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
 	
@@ -80,7 +81,7 @@ public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements
 	protected List<IContainer> getVisibleContainers(EObject context) {
 		// TODO read state from ResourceSet
 		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
-		List<IContainer> containers = containerManager.getVisibleContainers(description,getResourceDescriptions(context));
+		List<IContainer> containers = containerManager.getVisibleContainers(description, getResourceDescriptions(context));
 		return containers;
 	}
 	

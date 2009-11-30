@@ -11,6 +11,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -42,6 +45,7 @@ public interface IContainer {
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
+	@ImplementedBy(SimpleResourceDescriptionsBasedContainerManager.class)
 	interface Manager {
 
 		/**
