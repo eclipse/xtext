@@ -98,7 +98,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		resourceDesc2.imported.add("fop");
 		resourceDesc2.exported.add(new EObjectDescription("bar", EcorePackage.Literals.EANNOTATION, null));
 		
-		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).hasChanges());
+		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).hasChanges());
 	}
 	
 	public void testHasChanges_6() throws Exception {
@@ -109,7 +109,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		resourceDesc2.imported.add("fop");
 		resourceDesc2.exported.add(new EObjectDescription("bar", EcorePackage.Literals.EANNOTATION, null));
 		
-		assertTrue(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).hasChanges());
+		assertFalse(new DefaultResourceDescriptionDelta(resourceDesc, resourceDesc2).hasChanges());
 	}
 	
 	public void testHasChanges_7() throws Exception {
