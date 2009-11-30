@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -54,17 +55,12 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	}
 	
 	protected boolean internalHasChanges() {
-		if (_new==null)
+		if (_new==null || old==null)
 			return true;
 		
 		Collection<IEObjectDescription> oldEObjects = Collections2.forIterable(old.getExportedObjects());
 		Collection<IEObjectDescription> newEObjects = Collections2.forIterable(_new.getExportedObjects());
 		if (oldEObjects.size()!=newEObjects.size())
-			return true;
-		
-		Collection<String> oldImported = Collections2.forIterable(old.getImportedNames());
-		Collection<String> newImported = Collections2.forIterable(_new.getImportedNames());
-		if (oldImported.size()!=newImported.size())
 			return true;
 		
 		Iterator<IEObjectDescription> iterator1 = oldEObjects.iterator();
@@ -73,13 +69,7 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 			if (!equals(iterator1.next(),iterator2.next()))
 				return true;
 		}
-		
-		Iterator<String> importedIterator1 = oldImported.iterator();
-		Iterator<String> importedIterator2 = newImported.iterator();
-		while (importedIterator1.hasNext()) {
-			if (!importedIterator1.next().equals(importedIterator2.next()))
-				return true;
-		}
+
 		return false;
 	}
 
@@ -101,6 +91,13 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		}
 		return true;
 	}
-	
 
+	public URI getUri() {
+		return old==null?_new.getURI():old.getURI();
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+" for "+getUri()+" old :"+(getOld()!=null)+",new :"+(getNew()!=null);
+	}
 }

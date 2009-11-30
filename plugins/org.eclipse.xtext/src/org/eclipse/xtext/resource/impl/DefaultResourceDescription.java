@@ -42,6 +42,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	private final IQualifiedNameProvider nameProvider;
 
 	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
+		//TODO initialize eager (see javaDoc in IResourceDescription)
 		this.resource = resource;
 		this.nameProvider = nameProvider;
 	}
