@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -20,18 +21,18 @@ import com.google.inject.Inject;
 public abstract class AbstractExportedObjectsAwareScopeProvider extends AbstractScopeProvider {
 
 	@Inject
-	private IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry;
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
-	public IResourceDescription.Manager.Registry getResourceDescriptionManagerRegistry() {
-		return resourceDescriptionManagerRegistry;
+	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
+		return resourceServiceProviderRegistry;
 	}
 
-	public void setResourceDescriptionManagerRegistry(IResourceDescription.Manager.Registry resourceDescriptionManagerRegistry) {
-		this.resourceDescriptionManagerRegistry = resourceDescriptionManagerRegistry;
+	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionManagerRegistry) {
+		this.resourceServiceProviderRegistry = resourceDescriptionManagerRegistry;
 	}
 	
 	public Iterable<IEObjectDescription> getExportedEObjects(Resource resource) {
-		IResourceDescription.Manager manager = resourceDescriptionManagerRegistry.getResourceDescriptionManager(resource.getURI(),null);
+		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null).getResourceDescriptionManager();
 		if (manager == null)
 			return Iterables.emptyIterable();
 		IResourceDescription description = manager.getResourceDescription(resource);

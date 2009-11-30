@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
@@ -140,12 +141,12 @@ public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements
 		};
 	}
 	
-	private IResourceDescription.Manager.Registry resourceDescriptionsManager;
+	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
 	public Iterable<IEObjectDescription> findAllDescriptionsFor(EObject object) {
 		if (object.eIsProxy())
 			throw new IllegalArgumentException("object may not be a proxy: " + object);
-		IResourceDescription.Manager descriptionManager = resourceDescriptionsManager.getResourceDescriptionManager(object.eResource().getURI(), null);
+		IResourceDescription.Manager descriptionManager = resourceServiceProviderRegistry.getResourceServiceProvider(object.eResource().getURI(), null).getResourceDescriptionManager();
 		if (descriptionManager == null)
 			throw new IllegalStateException("Cannot find description manager for " + object);
 		IResourceDescription description = descriptionManager.getResourceDescription(object.eResource());
@@ -157,12 +158,12 @@ public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements
 		return persisted;
 	}
 	
-	public IResourceDescription.Manager.Registry getResourceDescriptionsManager() {
-		return resourceDescriptionsManager;
+	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
+		return resourceServiceProviderRegistry;
 	}
 	
-	public void setResourceDescriptionsManager(IResourceDescription.Manager.Registry resourceDescriptionsManager) {
-		this.resourceDescriptionsManager = resourceDescriptionsManager;
+	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionsManager) {
+		this.resourceServiceProviderRegistry = resourceDescriptionsManager;
 	}
 
 }
