@@ -73,14 +73,29 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider.class);
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider.class;
+		return org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
+		return org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IResourceDescriptions> bindIResourceDescriptions() {
+		return org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
 }
