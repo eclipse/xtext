@@ -90,7 +90,7 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		getBuilderState().addListener(this);
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
-		assertEquals(1,print(events.get(0).getDeltas()).size());
+		assertEquals(1,events.get(0).getDeltas().size());
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
 		waitForAutoBuild();
@@ -104,7 +104,27 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		waitForAutoBuild();
 		assertEquals(1,events.get(3).getDeltas().size());
 	}
+	
+	public void testDeleteFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
+		assertEquals(1, countResourcesInIndex());
+		
+		getBuilderState().addListener(this);
+		file.delete(true, monitor());
+		waitForAutoBuild();
+		assertEquals(1,events.get(0).getDeltas().size());
+		assertNull(events.get(0).getDeltas().get(0).getNew());
+		assertEquals(0, countResourcesInIndex());
+		
+	}
 
+	@SuppressWarnings("unused")
 	private ImmutableList<Delta> print(ImmutableList<Delta> deltas) {
 		int i = 1;
 		String buff = "Deltas : \n";
