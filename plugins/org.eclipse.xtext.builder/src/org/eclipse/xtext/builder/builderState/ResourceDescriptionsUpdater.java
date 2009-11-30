@@ -69,8 +69,9 @@ public class ResourceDescriptionsUpdater {
 
 		// add deleted
 		for (URI toDelete : toBeDeletedAsSet) {
-			result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescriptions
-					.getResourceDescription(toDelete), null));
+			IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(toDelete);
+			if (resourceDescription != null)
+				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
 		}
 
 		// add toBeUpdated

@@ -25,22 +25,22 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ToBeBuiltComputer {
-	
+
 	@Inject
 	private IBuilderState builderState;
 
 	@Inject
 	private UriUtil uriUtil;
-	
-	@Inject 
+
+	@Inject
 	private StorageUtil storageUtil;
-	
+
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
 		ToBeBuilt result = new ToBeBuilt();
 		for (IResourceDescription iResourceDescription : builderState.getAllResourceDescriptions()) {
 			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
 			IStorage storage = storageUtil.getStorage(descImpl.getPathToStorage());
-			if (isOnProject(storage,project))
+			if (isOnProject(storage, project))
 				result.getToBeDeleted().add(descImpl.getURI());
 		}
 		return result;
@@ -48,45 +48,58 @@ public class ToBeBuiltComputer {
 
 	protected boolean isOnProject(IStorage storage, IProject project) {
 		if (storage instanceof IFile) {
-			return project.contains((IFile)storage);
+			return project.contains((IFile) storage);
 		}
 		return false;
 	}
-	
+
 	public ToBeBuilt updateProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
 		final ToBeBuilt toBeBuilt = removeProject(project, monitor);
 		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
-				return updateResource(monitor, toBeBuilt, resource);
+				if (resource instanceof IStorage) {
+					return updateStorage(monitor, toBeBuilt, (IStorage) resource);
+				}
+				return true;
 			}
 		});
 		return toBeBuilt;
 	}
-	
-	public boolean updateResource(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IResource resource) {
+
+	public boolean updateStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
 		if (monitor.isCanceled())
 			return false;
-		if (!isHandled(resource))
+		if (!isHandled(storage))
 			return true;
-		IFile file = (IFile) resource;
-		URI uri = getUri(file);
+		URI uri = getUri(storage);
 		if (uri != null) {
-			toBeBuilt.getToBeUpdated().put(uri,getExternalRep(file));
+			toBeBuilt.getToBeUpdated().put(uri, getExternalRep(storage));
+		}
+		return true;
+	}
+	
+	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
+		if (monitor.isCanceled())
+			return false;
+		if (!isHandled(storage))
+			return true;
+		URI uri = getUri(storage);
+		if (uri != null) {
+			toBeBuilt.getToBeDeleted().add(uri);
 		}
 		return true;
 	}
 
-	protected boolean isHandled(IResource resource) {
-		return (resource instanceof IFile) && !resource.isDerived();
+	protected boolean isHandled(IStorage resource) {
+		return (resource instanceof IFile) && !((IFile) resource).isDerived();
 	}
-	
+
 	protected URI getUri(IStorage file) {
 		return uriUtil.getUri(file);
 	}
-	
+
 	protected String getExternalRep(IStorage file) {
 		return storageUtil.toExternalString(file);
 	}
-
 
 }

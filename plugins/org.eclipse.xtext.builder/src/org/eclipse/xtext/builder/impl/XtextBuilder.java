@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -31,7 +32,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
-	
+
 	@Inject
 	private IBuilderState builderState;
 
@@ -62,13 +63,20 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 			public boolean visit(IResourceDelta delta) throws CoreException {
-				return toBeBuiltComputer.updateResource(monitor, toBeBuilt, delta.getResource());
+				if (delta.getResource() instanceof IStorage) {
+					if (delta.getKind() == IResourceDelta.REMOVED) {
+						return toBeBuiltComputer.removeStorage(monitor, toBeBuilt, (IStorage) delta.getResource());
+					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
+						return toBeBuiltComputer.updateStorage(monitor, toBeBuilt, (IStorage) delta.getResource());
+					}
+				}
+				return true;
 			}
 		};
 		delta.accept(visitor);
 		doBuild(toBeBuilt);
 	}
-	
+
 	protected void doBuild(ToBeBuilt toBeBuilt) {
 		builderState.update(toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted);
 	}
@@ -83,13 +91,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		return delta.getResource() instanceof IProject && (delta.getFlags() & IResourceDelta.OPEN) != 0
 				&& ((IProject) delta.getResource()).isOpen();
 	}
-	
+
 	@Override
 	protected void startupOnInitialize() {
 		super.startupOnInitialize();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(listener);
 	}
-	
+
 	@Inject
 	private ProjectOpenedOrClosedListener listener;
 
