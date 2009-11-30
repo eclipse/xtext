@@ -15,6 +15,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -39,7 +40,9 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 				+ "generate test 'http://test'\n"
 				+ "Model: name=ID;";
 		resource = getResource(documentContent, uri.toString());
-		resource.setResourceDescriptionManager(this);
+		DefaultResourceServiceProvider provider = new DefaultResourceServiceProvider();
+		provider.setResourceDescriptionManager(this);
+		resource.setResourceServiceProvider(provider);
 		dirtyResource = new DocumentBasedDirtyResource();
 		description = this;
 	}
