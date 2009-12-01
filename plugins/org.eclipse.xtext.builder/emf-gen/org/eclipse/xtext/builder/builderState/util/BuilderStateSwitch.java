@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateSwitch.java,v 1.4 2009/11/26 13:42:02 sefftinge Exp $
+ * $Id: BuilderStateSwitch.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -11,10 +11,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.xtext.builder.builderState.*;
+import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,7 +110,7 @@ public class BuilderStateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseResourceDescription(IResourceDescription object) {
+	public T caseResourceDescription(IStorageAwareResourceDescription object) {
 		return null;
 	}
 

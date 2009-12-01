@@ -74,17 +74,17 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 		};
 		delta.accept(visitor);
-		doBuild(toBeBuilt);
+		doBuild(toBeBuilt,monitor);
 	}
 
-	protected void doBuild(ToBeBuilt toBeBuilt) {
-		builderState.update(toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted);
+	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) {
+		builderState.update(toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,monitor);
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		IProject project = getProject();
 		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, monitor);
-		doBuild(toBeBuilt);
+		doBuild(toBeBuilt,monitor);
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {

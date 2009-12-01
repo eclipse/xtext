@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.5 2009/11/26 13:42:18 sefftinge Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.6 2009/12/01 14:07:34 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -165,7 +165,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getResourceDescription_PathToStorage() {
+	public EAttribute getResourceDescription_StorageAsString() {
 		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -300,7 +300,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__URI);
 		createEReference(resourceDescriptionEClass, RESOURCE_DESCRIPTION__EXPORTED_OBJECTS);
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__IMPORTED_NAMES);
-		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__PATH_TO_STORAGE);
+		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__STORAGE_AS_STRING);
 
 		eObjectDescriptionEClass = createEClass(EOBJECT_DESCRIPTION);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__NAME);
@@ -348,11 +348,11 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(resourceDescriptionEClass, IResourceDescription.class, "ResourceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResourceDescription_URI(), this.getEURI(), "URI", null, 1, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceDescription_ImportedNames(), ecorePackage.getEString(), "importedNames", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getResourceDescription_PathToStorage(), ecorePackage.getEString(), "pathToStorage", null, 0, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(resourceDescriptionEClass, IStorageAwareResourceDescription.class, "ResourceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResourceDescription_URI(), this.getEURI(), "URI", null, 1, 1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceDescription_ImportedNames(), ecorePackage.getEString(), "importedNames", null, 0, -1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourceDescription_StorageAsString(), ecorePackage.getEString(), "storageAsString", null, 0, 1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(resourceDescriptionEClass, this.getEObjectDescription(), "getExportedObjects", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEClass(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);

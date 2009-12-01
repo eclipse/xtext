@@ -37,5 +37,6 @@ public class BuilderTestLanguageStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("buildertestlanguage", resourceFactory);
 		
 
+
 	}
 }

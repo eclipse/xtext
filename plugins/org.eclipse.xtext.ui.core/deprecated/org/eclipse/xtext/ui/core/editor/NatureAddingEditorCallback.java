@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	
 	@Inject

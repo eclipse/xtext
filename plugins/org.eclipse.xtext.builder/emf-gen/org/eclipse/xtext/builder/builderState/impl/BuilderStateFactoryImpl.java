@@ -2,26 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.4 2009/11/26 13:42:16 sefftinge Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.5 2009/12/01 14:07:34 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.xtext.builder.builderState.*;
+import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
+import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,7 +111,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IResourceDescription createResourceDescription() {
+	public IStorageAwareResourceDescription createResourceDescription() {
 		ResourceDescriptionImpl resourceDescription = new ResourceDescriptionImpl();
 		return resourceDescription;
 	}

@@ -48,7 +48,7 @@ public class ResourceDescriptionsBasedContainer implements IContainer {
 
 	protected Map<URI, IResourceDescription> getUriToDescription() {
 		if (uriToDescription == null) {
-			Iterable<IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), new DelegatingPredicate());
+			Iterable<? extends IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), new DelegatingPredicate());
 			uriToDescription = Maps.newHashMap();
 			for(IResourceDescription description: filtered) {
 				uriToDescription.put(description.getURI(), description);

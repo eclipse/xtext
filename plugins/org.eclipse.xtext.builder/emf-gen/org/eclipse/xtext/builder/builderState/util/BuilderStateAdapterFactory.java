@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.4 2009/11/26 13:42:03 sefftinge Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -10,14 +10,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.xtext.builder.builderState.*;
+import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,7 +73,7 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	protected BuilderStateSwitch<Adapter> modelSwitch =
 		new BuilderStateSwitch<Adapter>() {
 			@Override
-			public Adapter caseResourceDescription(IResourceDescription object) {
+			public Adapter caseResourceDescription(IStorageAwareResourceDescription object) {
 				return createResourceDescriptionAdapter();
 			}
 			@Override
@@ -108,13 +105,13 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.resource.IResourceDescription
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription
 	 * @generated
 	 */
 	public Adapter createResourceDescriptionAdapter() {

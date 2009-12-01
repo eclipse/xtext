@@ -106,7 +106,7 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 	@Inject
 	private Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	
-	private Map<URI, IStorageAwareResourceDescription> resourceDescriptions;
+	private Map<URI, IResourceDescription> resourceDescriptions;
 
 	public void setContext(Notifier ctx) {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
@@ -136,13 +136,13 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		for (IResourceDescription desc : descriptions) {
 			URI uri = desc.getURI();
 			if (!adapter.getDeletedUris().contains(uri) && !resourceDescriptions.containsKey(uri)) {
-				resourceDescriptions.put(uri, (IStorageAwareResourceDescription) desc);
+				resourceDescriptions.put(uri, desc);
 			}
 		}
 	}
 
 	
-	public Iterable<? extends IResourceDescription> getAllResourceDescriptions() {
+	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return resourceDescriptions.values();
 	}
 

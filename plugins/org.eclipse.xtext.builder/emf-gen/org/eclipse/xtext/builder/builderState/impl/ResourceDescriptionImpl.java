@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.4 2009/11/26 18:17:28 szarnekow Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
 import java.util.Collection;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -23,8 +24,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.impl.IStorageUtil.Access;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -39,13 +41,13 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getURI <em>URI</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getExportedObjects <em>Exported Objects</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getPathToStorage <em>Path To Storage</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getStorageAsString <em>Storage As String</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ResourceDescriptionImpl extends Container implements IResourceDescription {
+public class ResourceDescriptionImpl extends Container implements IStorageAwareResourceDescription {
 	/**
 	 * The default value of the '{@link #getURI() <em>URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -87,24 +89,24 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	protected EList<String> importedNames;
 
 	/**
-	 * The default value of the '{@link #getPathToStorage() <em>Path To Storage</em>}' attribute.
+	 * The default value of the '{@link #getStorageAsString() <em>Storage As String</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathToStorage()
+	 * @see #getStorageAsString()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PATH_TO_STORAGE_EDEFAULT = null;
+	protected static final String STORAGE_AS_STRING_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPathToStorage() <em>Path To Storage</em>}' attribute.
+	 * The cached value of the '{@link #getStorageAsString() <em>Storage As String</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathToStorage()
+	 * @see #getStorageAsString()
 	 * @generated
 	 * @ordered
 	 */
-	protected String pathToStorage = PATH_TO_STORAGE_EDEFAULT;
+	protected String storageAsString = STORAGE_AS_STRING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,8 +177,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getPathToStorage() {
-		return pathToStorage;
+	public String getStorageAsString() {
+		return storageAsString;
 	}
 
 	/**
@@ -184,11 +186,11 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPathToStorage(String newPathToStorage) {
-		String oldPathToStorage = pathToStorage;
-		pathToStorage = newPathToStorage;
+	public void setStorageAsString(String newStorageAsString) {
+		String oldStorageAsString = storageAsString;
+		storageAsString = newStorageAsString;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE, oldPathToStorage, pathToStorage));
+			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING, oldStorageAsString, storageAsString));
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
@@ -259,8 +261,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 				return getExportedObjects();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
 				return getImportedNames();
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
-				return getPathToStorage();
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
+				return getStorageAsString();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,8 +287,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 				getImportedNames().clear();
 				getImportedNames().addAll((Collection<? extends String>)newValue);
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
-				setPathToStorage((String)newValue);
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
+				setStorageAsString((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -309,8 +311,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
 				getImportedNames().clear();
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
-				setPathToStorage(PATH_TO_STORAGE_EDEFAULT);
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
+				setStorageAsString(STORAGE_AS_STRING_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -330,8 +332,8 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 				return exportedObjects != null && !exportedObjects.isEmpty();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
 				return importedNames != null && !importedNames.isEmpty();
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__PATH_TO_STORAGE:
-				return PATH_TO_STORAGE_EDEFAULT == null ? pathToStorage != null : !PATH_TO_STORAGE_EDEFAULT.equals(pathToStorage);
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
+				return STORAGE_AS_STRING_EDEFAULT == null ? storageAsString != null : !STORAGE_AS_STRING_EDEFAULT.equals(storageAsString);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,10 +352,25 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 		result.append(uri);
 		result.append(", importedNames: ");
 		result.append(importedNames);
-		result.append(", pathToStorage: ");
-		result.append(pathToStorage);
+		result.append(", storageAsString: ");
+		result.append(storageAsString);
 		result.append(')');
 		return result.toString();
+	}
+	
+	
+	private IStorage storage = null;
+
+	public IStorage getStorage() {
+		if (storage==null && getStorageAsString()!=null) {
+			storage = Access.storageUtil.getStorage(getStorageAsString());
+		}
+		return storage;
+	}
+	
+	public void setStorage(IStorage storage) {
+		this.storage = storage;
+		setStorageAsString(Access.storageUtil.toExternalString(storage));
 	}
 
 } //ResourceDescriptionImpl

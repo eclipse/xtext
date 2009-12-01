@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.scoping.namespaces;
+package org.eclipse.xtext.ui.core.resource;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -13,7 +13,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IPersistentResourceDescription extends IResourceDescription {
+public interface IStorageAwareResourceDescription extends IResourceDescription {
 
 	IStorage getStorage();
 	

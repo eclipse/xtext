@@ -34,6 +34,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	private IBuilderState builderState;
 	
 	public void resourceChanged(IResourceChangeEvent event) {
+		final NullProgressMonitor monitor = new NullProgressMonitor();
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 			try {
 				event.getDelta().accept(new IResourceDeltaVisitor() {
@@ -44,8 +45,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						if (delta.getResource() instanceof IProject) {
 							IProject project = (IProject) delta.getResource();
 							if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
-								ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, new NullProgressMonitor());
-								builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted());
+								ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, monitor);
+								builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
 							}
 						}
 						return false;
@@ -57,8 +58,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 		}
 		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
 			if (event.getResource() instanceof IProject) {
-				ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), new NullProgressMonitor());
-				builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted());
+				ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), monitor);
+				builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
 			}
 		}
 	}

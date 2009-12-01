@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl;
+package org.eclipse.xtext.builder.builderState.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.Path;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class StorageUtilImpl implements StorageUtil {
+public class StorageUtilImpl implements IStorageUtil {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(StorageUtilImpl.class);
@@ -28,10 +28,12 @@ public class StorageUtilImpl implements StorageUtil {
 			IFile file = (IFile) storage;
 			return file.getFullPath().toString();
 		}
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	public IStorage getStorage(String externalString) {
+		if (externalString==null)
+			return null;
 		IWorkspaceRoot ws = workspaceRoot();
 		IPath location = new Path(externalString);
 		IFile result = ws.getFile(location);

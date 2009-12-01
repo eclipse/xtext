@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
 import org.eclipse.xtext.validation.Issue;
 
 /**
@@ -27,14 +26,17 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 	
 	private Logger log = Logger.getLogger(getClass());
 
-	public MarkerIssueProcessor(IResource resource) {
+	private MarkerCreator markerCreator;
+
+	public MarkerIssueProcessor(IResource resource, MarkerCreator markerCreator) {
 		super();
 		this.resource = resource;
+		this.markerCreator = markerCreator;
 	}
 
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		try {
-			new AddMarkersOperation(resource, issues, EValidator.MARKER, true).run(monitor);
+			new AddMarkersOperation(resource, issues, EValidator.MARKER, true, markerCreator).run(monitor);
 		} catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
 		} catch (InterruptedException e) {

@@ -10,20 +10,21 @@ package org.eclipse.xtext.builder.impl;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 class ToBeBuilt {
-	Map<URI,String> toBeUpdated = Maps.newHashMap();
+	Map<URI,IStorage> toBeUpdated = Maps.newHashMap();
 	Set<URI> toBeDeleted = Sets.newHashSet();
 	
 	public Set<URI> getToBeDeleted() {
 		return toBeDeleted;
 	}
 	
-	public Map<URI, String> getToBeUpdated() {
+	public Map<URI, IStorage> getToBeUpdated() {
 		return toBeUpdated;
 	}
 }

@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.xtext.builder.BuilderModule;
-import org.eclipse.xtext.builder.impl.StorageUtilImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -20,7 +19,6 @@ public class JdtBuilderModule extends BuilderModule {
 	@Override
 	protected void configure() {
 		super.configure();
-		bind(StorageUtilImpl.class).to(JdtStorageUtil.class);
 	}
 	
 	@Override

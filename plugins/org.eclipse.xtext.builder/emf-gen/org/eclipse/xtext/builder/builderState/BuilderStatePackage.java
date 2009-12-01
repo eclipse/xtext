@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.5 2009/11/26 13:42:15 sefftinge Exp $
+ * $Id: BuilderStatePackage.java,v 1.6 2009/12/01 14:07:34 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -98,13 +98,13 @@ public interface BuilderStatePackage extends EPackage {
 	int RESOURCE_DESCRIPTION__IMPORTED_NAMES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Path To Storage</b></em>' attribute.
+	 * The feature id for the '<em><b>Storage As String</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTION__PATH_TO_STORAGE = 3;
+	int RESOURCE_DESCRIPTION__STORAGE_AS_STRING = 3;
 
 	/**
 	 * The number of structural features of the '<em>Resource Description</em>' class.
@@ -238,59 +238,59 @@ public interface BuilderStatePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Resource Description</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription
-	 * @model instanceClass="org.eclipse.xtext.resource.IResourceDescription"
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription
+	 * @model instanceClass="org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription"
 	 * @generated
 	 */
 	EClass getResourceDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getURI <em>URI</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getURI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>URI</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getURI()
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getURI()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_URI();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Exported Objects</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getExportedObjects()
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getExportedObjects()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EReference getResourceDescription_ExportedObjects();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.IResourceDescription#getImportedNames <em>Imported Names</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getImportedNames <em>Imported Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Imported Names</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getImportedNames()
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getImportedNames()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_ImportedNames();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getPathToStorage <em>Path To Storage</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getStorageAsString <em>Storage As String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Path To Storage</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getPathToStorage()
+	 * @return the meta object for the attribute '<em>Storage As String</em>'.
+	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription#getStorageAsString()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
-	EAttribute getResourceDescription_PathToStorage();
+	EAttribute getResourceDescription_StorageAsString();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IEObjectDescription <em>EObject Description</em>}'.
@@ -470,12 +470,12 @@ public interface BuilderStatePackage extends EPackage {
 		EAttribute RESOURCE_DESCRIPTION__IMPORTED_NAMES = eINSTANCE.getResourceDescription_ImportedNames();
 
 		/**
-		 * The meta object literal for the '<em><b>Path To Storage</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Storage As String</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RESOURCE_DESCRIPTION__PATH_TO_STORAGE = eINSTANCE.getResourceDescription_PathToStorage();
+		EAttribute RESOURCE_DESCRIPTION__STORAGE_AS_STRING = eINSTANCE.getResourceDescription_StorageAsString();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl <em>EObject Description</em>}' class.

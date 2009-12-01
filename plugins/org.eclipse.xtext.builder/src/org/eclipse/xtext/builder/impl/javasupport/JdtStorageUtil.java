@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.builder.impl.StorageUtilImpl;
+import org.eclipse.xtext.builder.builderState.impl.StorageUtilImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

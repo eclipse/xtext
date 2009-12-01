@@ -31,4 +31,6 @@ Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.parseTreeConstruction,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
- org.eclipse.xtext.builder.tests.contentassist.antlr
+ org.eclipse.xtext.builder.tests.contentassist.antlr,
+ org.eclipse.xtext.builder.tests.validation
+

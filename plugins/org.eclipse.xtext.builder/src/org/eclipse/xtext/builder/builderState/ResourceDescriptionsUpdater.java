@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,7 +22,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
-import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
@@ -57,17 +57,14 @@ public class ResourceDescriptionsUpdater {
 	 *         change (i.e. the to BeUpdated and toBeDeleted resources)
 	 */
 	public Iterable<Delta> transitiveUpdate(IResourceDescriptions resourceDescriptions, final ResourceSet rs,
-			Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted) {
+			Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted, IProgressMonitor monitor) {
 		if (toBeUpdated == null)
 			toBeUpdated = Iterables.emptyIterable();
 		HashSet<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted != null ? toBeDeleted : Iterables
 				.<URI> emptyIterable());
 		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
-
+		
 		Map<URI, Delta> result = Maps.newHashMap();
-		rs.eAdapters().add(new ShadowingResourceDescriptions.Adapter(resourceDescriptions, toBeDeletedAsSet));
-		rs.getLoadOptions().put(DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-
 		// add deleted
 		for (URI toDelete : toBeDeletedAsSet) {
 			IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(toDelete);
@@ -80,6 +77,8 @@ public class ResourceDescriptionsUpdater {
 
 		// add transient
 		while (true) {
+			if (monitor.isCanceled())
+				return Iterables.emptyIterable();
 			Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(resourceDescriptions, result
 					.values());
 			Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
@@ -120,7 +119,7 @@ public class ResourceDescriptionsUpdater {
 	private Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions resourceDescriptions,
 			Collection<Delta> collection) throws IllegalArgumentException {
 		Set<IResourceDescription> result = Sets.newHashSet();
-		Iterable<IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
+		Iterable<? extends IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
 		for (IResourceDescription desc : descriptions) {
 			Manager manager = getResourceDescriptionManager(desc.getURI());
 			for (Delta delta : collection) {

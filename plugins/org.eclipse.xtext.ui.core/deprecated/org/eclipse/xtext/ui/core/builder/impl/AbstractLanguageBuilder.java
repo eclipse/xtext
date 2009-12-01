@@ -49,6 +49,8 @@ import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.builder.IBuilderAccess;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
+import org.eclipse.xtext.ui.core.editor.validation.AddMarkersOperation;
+import org.eclipse.xtext.ui.core.editor.validation.MarkerCreator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -89,6 +91,9 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
+	
+	@Inject
+	private MarkerCreator markerCreator;
 
 	@Inject
 	private EObjectDescriptorIndexer eObjectIndexer;
@@ -123,7 +128,7 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 
 	protected void updateMarkers(IProgressMonitor monitor, IFile file, List<Issue> issues) {
 		try {
-			new AddMarkersOperation(file, issues, EValidator.MARKER, true).run(monitor);
+			new AddMarkersOperation(file, issues, EValidator.MARKER, true,markerCreator).run(monitor);
 		} catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
 		} catch (InterruptedException e) {

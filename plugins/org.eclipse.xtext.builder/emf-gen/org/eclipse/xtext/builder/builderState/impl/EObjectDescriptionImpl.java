@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObjectDescriptionImpl.java,v 1.3 2009/11/28 20:51:48 sefftinge Exp $
+ * $Id: EObjectDescriptionImpl.java,v 1.4 2009/12/01 14:07:33 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -206,9 +206,9 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IResourceDescription getResourceDescriptor() {
+	public IStorageAwareResourceDescription getResourceDescriptor() {
 		if (eContainerFeatureID() != BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR) return null;
-		return (IResourceDescription)eContainer();
+		return (IStorageAwareResourceDescription)eContainer();
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetResourceDescriptor(IResourceDescription newResourceDescriptor, NotificationChain msgs) {
+	public NotificationChain basicSetResourceDescriptor(IStorageAwareResourceDescription newResourceDescriptor, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newResourceDescriptor, BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR, msgs);
 		return msgs;
 	}
@@ -226,7 +226,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setResourceDescriptor(IResourceDescription newResourceDescriptor) {
+	public void setResourceDescriptor(IStorageAwareResourceDescription newResourceDescriptor) {
 		if (newResourceDescriptor != eInternalContainer() || (eContainerFeatureID() != BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR && newResourceDescriptor != null)) {
 			if (EcoreUtil.isAncestor(this, (EObject)newResourceDescriptor))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -234,7 +234,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newResourceDescriptor != null)
-				msgs = ((InternalEObject)newResourceDescriptor).eInverseAdd(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IResourceDescription.class, msgs);
+				msgs = ((InternalEObject)newResourceDescriptor).eInverseAdd(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IStorageAwareResourceDescription.class, msgs);
 			msgs = basicSetResourceDescriptor(newResourceDescriptor, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -317,7 +317,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetResourceDescriptor((IResourceDescription)otherEnd, msgs);
+				return basicSetResourceDescriptor((IStorageAwareResourceDescription)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -347,7 +347,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				return eInternalContainer().eInverseRemove(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IResourceDescription.class, msgs);
+				return eInternalContainer().eInverseRemove(this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, IStorageAwareResourceDescription.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -394,7 +394,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				setEClass((EClass)newValue);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				setResourceDescriptor((IResourceDescription)newValue);
+				setResourceDescriptor((IStorageAwareResourceDescription)newValue);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				((EStructuralFeature.Setting)getUserData()).set(newValue);
@@ -421,7 +421,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				setEClass((EClass)null);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR:
-				setResourceDescriptor((IResourceDescription)null);
+				setResourceDescriptor((IStorageAwareResourceDescription)null);
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				unsetUserData();

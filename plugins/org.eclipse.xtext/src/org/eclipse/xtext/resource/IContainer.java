@@ -20,21 +20,6 @@ import com.google.inject.ImplementedBy;
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface IContainer {
-	
-	IContainer Null = new IContainer() {
-
-		public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
-			return Iterables.emptyIterable();
-		}
-		public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
-			return Iterables.emptyIterable();
-		}
-		public IResourceDescription getResourceDescription(URI uri) {
-			return null;
-		}
-		public Iterable<IResourceDescription> getResourceDescriptions() {
-			return Iterables.emptyIterable();
-		}};
 
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
@@ -78,5 +63,23 @@ public interface IContainer {
 		List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions);
 
 	}
+
+	/**
+	 * a reusable instance representing an empty container
+	 */
+	IContainer Null = new IContainer() {
+
+		public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
+			return Iterables.emptyIterable();
+		}
+		public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
+			return Iterables.emptyIterable();
+		}
+		public IResourceDescription getResourceDescription(URI uri) {
+			return null;
+		}
+		public Iterable<IResourceDescription> getResourceDescriptions() {
+			return Iterables.emptyIterable();
+		}};
 	
 }

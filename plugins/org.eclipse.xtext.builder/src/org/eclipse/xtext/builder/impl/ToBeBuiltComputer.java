@@ -32,14 +32,11 @@ public class ToBeBuiltComputer {
 	@Inject
 	private UriUtil uriUtil;
 
-	@Inject
-	private StorageUtil storageUtil;
-
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
 		ToBeBuilt result = new ToBeBuilt();
 		for (IResourceDescription iResourceDescription : builderState.getAllResourceDescriptions()) {
 			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
-			IStorage storage = storageUtil.getStorage(descImpl.getPathToStorage());
+			IStorage storage = descImpl.getStorage();
 			if (isOnProject(storage, project))
 				result.getToBeDeleted().add(descImpl.getURI());
 		}
@@ -73,7 +70,7 @@ public class ToBeBuiltComputer {
 			return true;
 		URI uri = getUri(storage);
 		if (uri != null) {
-			toBeBuilt.getToBeUpdated().put(uri, getExternalRep(storage));
+			toBeBuilt.getToBeUpdated().put(uri, storage);
 		}
 		return true;
 	}
@@ -96,10 +93,6 @@ public class ToBeBuiltComputer {
 
 	protected URI getUri(IStorage file) {
 		return uriUtil.getUri(file);
-	}
-
-	protected String getExternalRep(IStorage file) {
-		return storageUtil.toExternalString(file);
 	}
 
 }
