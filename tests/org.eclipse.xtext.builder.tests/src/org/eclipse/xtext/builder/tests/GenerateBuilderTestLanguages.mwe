@@ -15,7 +15,7 @@
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
-			<!--fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/-->
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
 			<!--fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/-->
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>

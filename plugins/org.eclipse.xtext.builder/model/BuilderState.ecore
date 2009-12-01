@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="builderState"
     nsURI="http://www.eclipse.org/xtext/builderstate/1.0" nsPrefix="builderState">
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.IResourceDescription">
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription">
     <eOperations name="getExportedObjects" upperBound="-1" eType="#//EObjectDescription">
       <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -19,7 +19,7 @@
         eType="#//EObjectDescription" containment="true" eOpposite="#//EObjectDescription/resourceDescriptor"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNames" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToStorage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storageAsString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EObjectDescription" instanceClassName="org.eclipse.xtext.resource.IEObjectDescription">
     <eOperations name="getEObjectURI" eType="#//EURI"/>

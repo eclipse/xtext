@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.BuilderAccess;
@@ -91,18 +92,22 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(1,events.get(0).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(2,events.get(1).getDeltas().size());
+		assertNumberOfMarkers(fileB, 1);
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(2,events.get(2).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(1,events.get(3).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
 	}
 	
 	public void testDeleteFile() throws Exception {
@@ -171,13 +176,17 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		return Collections2.forIterable(getBuilderState().getAllResourceDescriptions()).size();
 	}
 
-	@SuppressWarnings("unused")
 	private String printMarker(IMarker[] markers) throws CoreException {
 		String s = "";
 		for (IMarker iMarker : markers) {
 			s += "," + iMarker.getAttribute(IMarker.MESSAGE);
 		}
 		return s;
+	}
+	
+	private void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {
+		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, 1);
+		assertEquals(printMarker(markers),numberOfMarkers,markers.length);
 	}
 
 	public void descriptionsChanged(Event event) {

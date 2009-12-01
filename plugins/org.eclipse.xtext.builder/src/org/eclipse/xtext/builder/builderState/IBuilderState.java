@@ -8,7 +8,10 @@
 package org.eclipse.xtext.builder.builderState;
 
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -31,5 +34,5 @@ public interface IBuilderState extends IResourceDescriptions {
 	 * 
 	 * @return a list of changes in the form of deltas.
 	 */
-	public ImmutableList<IResourceDescription.Delta> update(Map<URI,String> toBeAddedOrUpdated, Iterable<URI> toBeRemoved);
+	public ImmutableList<IResourceDescription.Delta> update(Map<URI,IStorage> toBeAddedOrUpdated, Set<URI> toBeRemoved, IProgressMonitor monitor);
 }

@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
@@ -198,7 +200,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		return URI.createURI(name + FILE_EXT);
 	}
 
-	private Iterable<URI> uris(String... urisAsStrings) {
+	private Set<URI> uris(String... urisAsStrings) {
 		Set<URI> result = Sets.newHashSet();
 		for (String string : urisAsStrings) {
 			result.add(uri(string));
@@ -206,14 +208,14 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		return result;
 	}
 
-	private Map<URI, IResourceDescription.Delta> update(Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted) {
-		Map<URI, String> toBeUpdatedAsMap = Maps.newHashMap();
+	private Map<URI, IResourceDescription.Delta> update(Iterable<URI> toBeUpdated, Set<URI> toBeDeleted) {
+		Map<URI, IStorage> toBeUpdatedAsMap = Maps.newHashMap();
 		if (toBeUpdated != null) {
 			for (URI uri : toBeUpdated) {
-				toBeUpdatedAsMap.put(uri, uri.toString());
+				toBeUpdatedAsMap.put(uri, null);
 			}
 		}
-		ImmutableList<Delta> update = builderState.update(toBeUpdatedAsMap, toBeDeleted);
+		ImmutableList<Delta> update = builderState.update(toBeUpdatedAsMap, toBeDeleted, new NullProgressMonitor());
 		return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 			public URI apply(IResourceDescription.Delta from) {
 				return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
