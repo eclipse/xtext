@@ -22,6 +22,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
