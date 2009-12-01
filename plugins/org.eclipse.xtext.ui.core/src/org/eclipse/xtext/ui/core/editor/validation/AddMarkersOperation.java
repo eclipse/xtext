@@ -6,13 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.builder.impl;
+package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -34,13 +33,16 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 	private final boolean deleteMarkers;
 	private final String markerId;
 
+	private MarkerCreator markerCreator;
+
 	public AddMarkersOperation(IResource resource, List<Issue> issues, String markerId,
-			boolean deleteMarkers) {
+			boolean deleteMarkers, MarkerCreator markerCreator) {
 		super(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource));
 		this.issues = issues;
 		this.markerId = markerId;
 		this.resource = resource;
 		this.deleteMarkers = deleteMarkers;
+		this.markerCreator = markerCreator;
 	}
 
 	public String getMarkerId() {
@@ -59,33 +61,11 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			for (Issue issue : issues) {
 				if (monitor.isCanceled())
 					return;
-				IMarker marker = resource.createMarker(getMarkerId());
-				String lineNR = "";
-				if (issue.getLineNumber() != null) {
-					lineNR = "line: " + issue.getLineNumber() + " ";
-				}
-				marker.setAttribute(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
-				marker.setAttribute(IMarker.CHAR_START, issue.getOffset());
-				marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
-				marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
-				marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
-				marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
-				marker.setAttribute(Issue.CODE_KEY, issue.getCode());
-				marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem());
+				markerCreator.createMarker(issue,resource,getMarkerId());
 			}
 		}
 	}
 
-	private Object getSeverity(Issue issue) {
-		switch (issue.getSeverity()) {
-			case ERROR : 
-				return IMarker.SEVERITY_ERROR;
-			case WARNING : 
-				return IMarker.SEVERITY_WARNING;
-			case INFO : 
-				return IMarker.SEVERITY_INFO;
-		}
-		throw new IllegalArgumentException();
-	}
+	
 
 }

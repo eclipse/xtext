@@ -21,6 +21,9 @@ import com.google.inject.Inject;
 public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	@Inject
 	private IResourceValidator resourceValidator;
+	
+	@Inject 
+	private MarkerCreator markerCreator;
 
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
@@ -41,7 +44,7 @@ public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallb
 	}
 
 	private ValidationJob newValidationJob(XtextEditor editor) {
-		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource());
+		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource(),markerCreator);
 		ValidationJob validationJob = new ValidationJob(resourceValidator, editor.getDocument(), markerIssueProcessor, CheckMode.NORMAL_AND_FAST);
 		return validationJob;
 	}

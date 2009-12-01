@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.scoping.namespaces;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
+import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,15 +30,19 @@ public class JavaElementBasedContainer extends ResourceDescriptionsBasedContaine
 	
 	@Override
 	protected boolean contains(IResourceDescription input) {
-		if (!(input instanceof IPersistentResourceDescription)) {
+		if (!(input instanceof IStorageAwareResourceDescription)) {
 			throw new IllegalArgumentException("input cannot be filtered: " + input);
 		}
-		IStorage storage = ((IPersistentResourceDescription) input).getStorage();
+		IStorage storage = ((IStorageAwareResourceDescription) input).getStorage();
 		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot other = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			return fragmentRoot.equals(other);
 		}
-		return fragmentRoot.getResource().getFullPath().isPrefixOf(storage.getFullPath());
+		if (storage instanceof IFile) {
+			if (!fragmentRoot.isExternal())
+				return fragmentRoot.getResource().getFullPath().isPrefixOf(storage.getFullPath());
+		}
+		return false;
 	}
 
 	public IPackageFragmentRoot getFragmentRoot() {

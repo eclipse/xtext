@@ -12,7 +12,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(NatureAddingEditorCallback.class)
+@ImplementedBy(IXtextEditorCallback.NullImpl.class)
 public interface IXtextEditorCallback {
 	
 	void afterCreatePartControl(XtextEditor editor);
