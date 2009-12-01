@@ -11,7 +11,6 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.common.tests");
-      suite.addTestSuite(org.eclipse.xtext.ui.common.DefaultXtextResourceCheckerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug281198ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug282031ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest.class);

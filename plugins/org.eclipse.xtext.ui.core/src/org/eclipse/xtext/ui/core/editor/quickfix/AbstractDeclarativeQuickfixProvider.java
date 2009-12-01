@@ -32,9 +32,9 @@ import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
-import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -74,7 +74,7 @@ public class AbstractDeclarativeQuickfixProvider implements IMarkerResolutionGen
 	}
 
 	protected Integer getCode(final IMarker marker) {
-		Integer code = marker.getAttribute(IXtextResourceChecker.CODE_KEY, -1);
+		Integer code = marker.getAttribute(Issue.CODE_KEY, -1);
 		return code;
 	}
 

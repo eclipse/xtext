@@ -5,16 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.validation;
+package org.eclipse.xtext.validation;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -22,74 +18,78 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.validation.Issue.IssueImpl;
+import org.eclipse.xtext.validation.Issue.Severity;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultDiagnosticConverter implements IDiagnosticConverter {
+public class DiagnosticConverterImpl implements IDiagnosticConverter {
 
-	public void convertResourceDiagnostic(Diagnostic diagnostic, Object severity, IDiagnosticConverter.Acceptor acceptor) {
-		Map<String, Object> marker = new HashMap<String, Object>();
-		marker.put(IMarker.SEVERITY, severity);
-		marker.put(IMarker.LINE_NUMBER, diagnostic.getLine());
-		marker.put(IMarker.MESSAGE, diagnostic.getMessage());
-		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
+	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,
+			IDiagnosticConverter.Acceptor acceptor) {
+		IssueImpl issue = new Issue.IssueImpl();
+		issue.setSyntaxError(true);
+		issue.setSeverity(severity);
+		issue.setLineNumber(diagnostic.getLine());
+		issue.setMessage(diagnostic.getMessage());
+		//		issue.setmarker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 
 		if (diagnostic instanceof org.eclipse.xtext.diagnostics.Diagnostic) {
 			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;
-			marker.put(IMarker.CHAR_START, xtextDiagnostic.getOffset());
-			marker.put(IMarker.CHAR_END, xtextDiagnostic.getOffset() + xtextDiagnostic.getLength());
+			issue.setOffset(xtextDiagnostic.getOffset());
+			issue.setLength(xtextDiagnostic.getLength());
 		}
-
-		acceptor.accept(marker);
+		acceptor.accept(issue);
 	}
 
-	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IDiagnosticConverter.Acceptor acceptor) {
+	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic,
+			IDiagnosticConverter.Acceptor acceptor) {
 		if (diagnostic.getSeverity() == org.eclipse.emf.common.util.Diagnostic.OK)
 			return;
-		
-		Map<String, Object> marker = new HashMap<String, Object>();
-		int sever = IMarker.SEVERITY_ERROR;
+		IssueImpl issue = new Issue.IssueImpl();
+		issue.setSeverity(Severity.ERROR);
 		switch (diagnostic.getSeverity()) {
 			case org.eclipse.emf.common.util.Diagnostic.WARNING:
-				sever = IMarker.SEVERITY_WARNING;
+				issue.setSeverity(Severity.WARNING);
 				break;
 			case org.eclipse.emf.common.util.Diagnostic.INFO:
-				sever = IMarker.SEVERITY_INFO;
+				issue.setSeverity(Severity.INFO);
 				break;
 		}
-		marker.put(IMarker.SEVERITY, sever);
-		Triple<Integer,Integer,Integer> locationData = getLocationData(diagnostic);
+		Triple<Integer, Integer, Integer> locationData = getLocationData(diagnostic);
 		if (locationData != null) {
-			marker.put(IMarker.LINE_NUMBER, locationData.getFirst());
-			marker.put(IMarker.CHAR_START, locationData.getSecond());
-			marker.put(IMarker.CHAR_END, locationData.getThird());
+			issue.setLineNumber(locationData.getFirst());
+			issue.setOffset(locationData.getSecond());
+			issue.setLength(locationData.getThird() - issue.getOffset());
 		}
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
-			marker.put(EValidator.URI_ATTRIBUTE, EcoreUtil.getURI(causer).toString());
+			issue.setUriToProblem(EcoreUtil.getURI(causer));
 		final Integer code = diagnostic.getCode();
 		if (code != null)
-			marker.put(IXtextResourceChecker.CODE_KEY, code);
-		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
-		marker.put(IMarker.MESSAGE, diagnostic.getMessage());
-		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
-		acceptor.accept(marker);
+			issue.setCode(code);
+		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
+		issue.setMessage(diagnostic.getMessage());
+		//		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
+		acceptor.accept(issue);
 	}
-	
+
 	protected EObject getCauser(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 		// causer is the first element see Diagnostician.getData
+		if (diagnostic.getData().isEmpty())
+			return null;
 		Object causer = diagnostic.getData().get(0);
 		return causer instanceof EObject ? (EObject) causer : null;
 	}
 
 	/**
-	 * @return the location data for the given diagnostic. 
-	 * <ol>
-	 * 	<li>First: line number,</li>
-	 * 	<li>Second: Offset of first char (inclusive), and</li> 
-	 * 	<li>Third: Offset of last char (exclusive).</li>
-	 * </ol>
+	 * @return the location data for the given diagnostic.
+	 *         <ol>
+	 *         <li>First: line number,</li>
+	 *         <li>Second: Offset of first char (inclusive), and</li>
+	 *         <li>Third: Offset of last char (exclusive).</li>
+	 *         </ol>
 	 */
 	protected Triple<Integer, Integer, Integer> getLocationData(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 		EObject causer = getCauser(diagnostic);
@@ -102,14 +102,14 @@ public class DefaultDiagnosticConverter implements IDiagnosticConverter {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * @return the location data for the given diagnostic. 
-	 * <ol>
-	 * 	<li>First: line number,</li>
-	 * 	<li>Second: Offset of first char (inclusive), and</li> 
-	 * 	<li>Third: Offset of last char (exclusive).</li>
-	 * </ol>
+	 * @return the location data for the given diagnostic.
+	 *         <ol>
+	 *         <li>First: line number,</li>
+	 *         <li>Second: Offset of first char (inclusive), and</li>
+	 *         <li>Third: Offset of last char (exclusive).</li>
+	 *         </ol>
 	 */
 	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
@@ -128,15 +128,13 @@ public class DefaultDiagnosticConverter implements IDiagnosticConverter {
 		}
 		return null;
 	}
-	
+
 	protected EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
 		if (feature instanceof String) {
 			return ele.eClass().getEStructuralFeature((String) feature);
-		}
-		else if (feature instanceof EStructuralFeature) {
+		} else if (feature instanceof EStructuralFeature) {
 			return (EStructuralFeature) feature;
-		}
-		else if (feature instanceof Integer) {
+		} else if (feature instanceof Integer) {
 			return ele.eClass().getEStructuralFeature((Integer) feature);
 		}
 		return null;

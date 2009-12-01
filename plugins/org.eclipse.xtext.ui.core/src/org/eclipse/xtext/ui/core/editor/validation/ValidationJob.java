@@ -17,9 +17,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -32,30 +35,25 @@ public class ValidationJob extends Job {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
-	private final IXtextResourceChecker xtextResourceChecker;
+	private final IResourceValidator resourceValidator;
 	private final IStateAccess<XtextResource> xtextDocument;
 	private final IValidationIssueProcessor validationIssueProcessor;
-	private final Map<?, ?> validationContext;
+	private final CheckMode checkMode;
 
-	public ValidationJob(IXtextResourceChecker xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
-			IValidationIssueProcessor validationIssueProcessor,Map<?, ?> validationContext) {
+	public ValidationJob(IResourceValidator xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
+			IValidationIssueProcessor validationIssueProcessor,CheckMode checkMode) {
 		super("Xtext validation");
 		this.xtextDocument = xtextDocument;
-		this.xtextResourceChecker = xtextResourceChecker;
+		this.resourceValidator = xtextResourceChecker;
 		this.validationIssueProcessor = validationIssueProcessor;
-		this.validationContext = validationContext;
+		this.checkMode = checkMode;
 	}
 	
-	public ValidationJob(IXtextResourceChecker xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
-			IValidationIssueProcessor validationIssueProcessor) {
-		this(xtextResourceChecker,xtextDocument,validationIssueProcessor,DEFAULT_VALIDATION_CONTEXT);
-	}
-
 	@Override
 	protected IStatus run(final IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-		List<Map<String, Object>> issues = createIssues(monitor);
+		List<Issue> issues = createIssues(monitor);
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		this.validationIssueProcessor.processIssues(issues, monitor);
@@ -64,25 +62,30 @@ public class ValidationJob extends Job {
 		return Status.OK_STATUS;
 	}
 
-	public List<Map<String, Object>> createIssues(final IProgressMonitor monitor) {
-		final List<Map<String, Object>> issues = xtextDocument
-				.readOnly(new IUnitOfWork<List<Map<String, Object>>, XtextResource>() {
-					public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-						return xtextResourceChecker.check(resource, getValidationContext(), monitor);
+	public List<Issue> createIssues(final IProgressMonitor monitor) {
+		final List<Issue> issues = xtextDocument
+				.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
+					public List<Issue> exec(XtextResource resource) throws Exception {
+						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
+							public boolean isCanceled() {
+								return monitor.isCanceled();
+							}
+						});
 					}
 				});
 		return issues;
 	}
 
-	protected IXtextResourceChecker getXtextResourceChecker() {
-		return xtextResourceChecker;
+	protected IResourceValidator getResourceValidator() {
+		return resourceValidator;
 	}
 
 	protected IStateAccess<XtextResource> getXtextDocument() {
 		return xtextDocument;
 	}
-
-	protected Map<?, ?> getValidationContext() {
-		return validationContext;
+	
+	public CheckMode getCheckMode() {
+		return checkMode;
 	}
+
 }

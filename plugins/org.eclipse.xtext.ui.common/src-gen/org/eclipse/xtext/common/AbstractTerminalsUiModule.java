@@ -128,11 +128,6 @@ public abstract class AbstractTerminalsUiModule extends TerminalsRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker> bindIXtextResourceChecker() {
-		return org.eclipse.xtext.ui.core.editor.validation.DefaultXtextResourceChecker.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
 		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
 	}

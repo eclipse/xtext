@@ -5,9 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.validation;
+package org.eclipse.xtext.validation;
 
-import java.util.Map;
+import org.eclipse.xtext.validation.Issue.Severity;
 
 import com.google.inject.ImplementedBy;
 
@@ -17,7 +17,7 @@ import com.google.inject.ImplementedBy;
  * The acceptor allows more than one marker per diagnostic to be created.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(DefaultDiagnosticConverter.class)
+@ImplementedBy(DiagnosticConverterImpl.class)
 public interface IDiagnosticConverter {
 
 	/**
@@ -28,16 +28,16 @@ public interface IDiagnosticConverter {
 		
 		/**
 		 * Accepts the create markers. Implementors should ignore any null values that are passed to this method.
-		 * @param marker the marker to be accepted. May be null.
+		 * @param the issue to be accepted. May be null.
 		 */
-		void accept(Map<String, Object> marker);
+		void accept(Issue issue);
 	}
 	
 	/**
 	 * Convert a resource diagnostic to zero, one or more markers.
 	 */
 	void convertResourceDiagnostic(
-			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity, Acceptor acceptor);
+			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Severity severity, Acceptor acceptor);
 	
 	/**
 	 * Convert a validation diagnostic to zero, one or more markers.

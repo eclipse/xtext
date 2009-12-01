@@ -49,8 +49,10 @@ import org.eclipse.xtext.index.IXtextIndex;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.builder.IBuilderAccess;
 import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
-import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -78,7 +80,7 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 	private IXtextIndex index;
 
 	@Inject
-	private IXtextResourceChecker resourceChecker;
+	private IResourceValidator resourceValidator;
 
 	@Inject
 	@Named(Constants.FILE_EXTENSIONS)
@@ -107,15 +109,19 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		return languageName;
 	}
 
-	protected void validate(IStorage storage, Resource res, IProgressMonitor monitor) {
+	protected void validate(IStorage storage, Resource res, final IProgressMonitor monitor) {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
-			List<Map<String, Object>> check = resourceChecker.check(res, getValidationContext(), monitor);
+			List<Issue> check = resourceValidator.validate(res, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
+				public boolean isCanceled() {
+					return monitor.isCanceled();
+				}
+			});
 			updateMarkers(monitor, file, check);
 		}
 	}
 
-	protected void updateMarkers(IProgressMonitor monitor, IFile file, List<Map<String, Object>> issues) {
+	protected void updateMarkers(IProgressMonitor monitor, IFile file, List<Issue> issues) {
 		try {
 			new AddMarkersOperation(file, issues, EValidator.MARKER, true).run(monitor);
 		} catch (InvocationTargetException e) {
@@ -125,10 +131,6 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		}
 	}
 
-	protected Map<?, ?> getValidationContext() {
-		return Collections.singletonMap(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
-	}
-	
 	public final void clean(IProgressMonitor monitor) throws CoreException {
 		try {
 			internalClean(monitor);
@@ -435,12 +437,12 @@ public abstract class AbstractLanguageBuilder implements ILanguageBuilder {
 		this.index = index;
 	}
 
-	public IXtextResourceChecker getResourceChecker() {
-		return resourceChecker;
+	public IResourceValidator getResourceValidator() {
+		return resourceValidator;
 	}
 
-	public void setResourceChecker(IXtextResourceChecker resourceChecker) {
-		this.resourceChecker = resourceChecker;
+	public void setResourceValidator(IResourceValidator resourceChecker) {
+		this.resourceValidator = resourceChecker;
 	}
 
 	public String getFileExtensions() {

@@ -6,81 +6,75 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.validation;
+package org.eclipse.xtext.validation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.ui.core.util.EcoreUIUtil;
-import org.eclipse.xtext.validation.CancelIndicator;
-import org.eclipse.xtext.validation.CancelableDiagnostician;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.Issue.Severity;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  */
-public class DefaultXtextResourceChecker implements IXtextResourceChecker {
+public class ResourceValidatorImpl implements IResourceValidator {
 
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	protected static class ListBasedMarkerAcceptor implements IDiagnosticConverter.Acceptor {
-		private final List<Map<String, Object>> result;
+		private final List<Issue> result;
 
-		protected ListBasedMarkerAcceptor(List<Map<String, Object>> result) {
+		protected ListBasedMarkerAcceptor(List<Issue> result) {
 			this.result = result;
 		}
 
-		public void accept(Map<String, Object> marker) {
-			if (marker != null)
-				result.add(marker);
+		public void accept(Issue issue) {
+			if (issue != null)
+				result.add(issue);
 		}
 	}
 
-	private static final Logger log = Logger.getLogger(DefaultXtextResourceChecker.class);
+	private static final Logger log = Logger.getLogger(ResourceValidatorImpl.class);
 
 	@Inject
 	private Diagnostician diagnostician;
-	
+
 	@Inject
 	private IDiagnosticConverter converter;
-	
-	/**
-	 * Checks an {@link XtextResource}
-	 * 
-	 * @param resource
-	 * @return a {@link List} of {@link IMarker} attributes
-	 */
-	public List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, final IProgressMonitor monitor) {
+
+	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
+		final CancelIndicator monitor = mon == null ? new CancelIndicator.NullImpl() : mon;
 		resolveProxies(resource, monitor);
 		if (monitor.isCanceled())
 			return null;
-		
-		final List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>(resource.getErrors().size() + resource.getWarnings().size());
+
+		final List<Issue> markers = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
+				+ resource.getWarnings().size());
 		IDiagnosticConverter.Acceptor acceptor = createAcceptor(markers);
 		try {
 			// Syntactical and linking errors
 			// Collect EMF Resource Diagnostics
 			for (int i = 0; i < resource.getErrors().size(); i++) {
-				markerFromXtextResourceDiagnostic(resource.getErrors().get(i), IMarker.SEVERITY_ERROR, acceptor);
+				markerFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 			}
 
 			if (monitor.isCanceled())
 				return null;
 
 			for (int i = 0; i < resource.getWarnings().size(); i++) {
-				markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), IMarker.SEVERITY_WARNING, acceptor);
+				markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 			}
 
 			if (monitor.isCanceled())
@@ -95,40 +89,34 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 				try {
 					if (monitor.isCanceled())
 						return null;
-					Map<Object, Object> options = Maps.newHashMap(context);
-					options.put(CancelableDiagnostician.CANCEL_INDICATOR, new CancelIndicator() {
-						public boolean isCanceled() {
-							return monitor.isCanceled();
-						}
-					});
+					Map<Object, Object> options = Maps.newHashMap();
+					options.put(CheckMode.KEY, mode);
+					options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-					options.put(EValidator.class, diagnostician); 
+					options.put(EValidator.class, diagnostician);
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							markerFromEValidatorDiagnostic(childDiagnostic, acceptor);
 						}
-					}
-					else {
+					} else {
 						markerFromEValidatorDiagnostic(diagnostic, acceptor);
 					}
-				}
-				catch (RuntimeException e) {
+				} catch (RuntimeException e) {
 					log.error(e.getMessage(), e);
 				}
 			}
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
 		}
 		return markers;
 	}
 
-	protected void resolveProxies(final Resource resource, final IProgressMonitor monitor) {
-		EcoreUIUtil.resolveAll(resource, monitor);
+	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
+		EcoreUtil2.resolveAll(resource, monitor);
 	}
 
-	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Map<String, Object>> result) {
+	protected IDiagnosticConverter.Acceptor createAcceptor(final List<Issue> result) {
 		return new ListBasedMarkerAcceptor(result);
 	}
 
@@ -138,8 +126,8 @@ public class DefaultXtextResourceChecker implements IXtextResourceChecker {
 		}
 	}
 
-	protected void markerFromXtextResourceDiagnostic(
-			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity, IDiagnosticConverter.Acceptor acceptor) {
+	protected void markerFromXtextResourceDiagnostic(org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic,
+			Severity severity, IDiagnosticConverter.Acceptor acceptor) {
 		converter.convertResourceDiagnostic(diagnostic, severity, acceptor);
 	}
 
