@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
