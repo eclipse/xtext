@@ -13,8 +13,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
-import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -28,7 +29,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private Provider<XtextDocument> document;
 	@Inject
-	private IXtextResourceChecker xtextResourceChecker;
+	private IResourceValidator resourceValidator;
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -48,7 +49,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		ElementInfo info = super.createElementInfo(element);
 		XtextDocument doc = (XtextDocument) info.fDocument;
 		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(info.fModel);
-		ValidationJob job = new ValidationJob(xtextResourceChecker, doc, annotationIssueProcessor);
+		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor,CheckMode.FAST_ONLY);
 		doc.setValidationJob(job);
 		return info;
 	}

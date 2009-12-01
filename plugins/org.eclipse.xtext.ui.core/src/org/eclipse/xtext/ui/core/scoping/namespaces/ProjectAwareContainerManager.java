@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.core.builder.internal.XtextNature;
 
 import com.google.common.collect.Lists;
 
@@ -73,7 +72,7 @@ public class ProjectAwareContainerManager implements IContainer.Manager {
 
 	protected boolean hasXtextNature(IProject p) {
 		try {
-			return p.getNature(XtextNature.NATURE_ID)!=null;
+			return p.getNature("org.eclipse.xtext.builder.xtextNature")!=null;
 		}
 		catch (CoreException e) {
 			log.error(e.getMessage(),e);

@@ -18,11 +18,10 @@ import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
-import org.eclipse.xtext.ui.core.editor.validation.IXtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
 /**
@@ -31,15 +30,15 @@ import com.google.inject.Inject;
  */
 public class ValidateActionHandler extends AbstractHandler {
 	@Inject
-	private IXtextResourceChecker xtextResourceChecker;
+	private IResourceValidator resourceValidator;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = (XtextEditor) HandlerUtil.getActiveEditor(event);
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(xtextEditor);
 		IDocumentProvider documentProvider = xtextEditor.getDocumentProvider();
 		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(xtextEditor.getEditorInput());
-		ValidationJob validationJob = new ValidationJob(xtextResourceChecker, xtextDocument,
-				new AnnotationIssueProcessor(annotationModel), ImmutableMap.of(CheckMode.KEY, CheckMode.ALL));
+		ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument,
+				new AnnotationIssueProcessor(annotationModel), CheckMode.ALL);
 		validationJob.schedule();
 		return this;
 	}

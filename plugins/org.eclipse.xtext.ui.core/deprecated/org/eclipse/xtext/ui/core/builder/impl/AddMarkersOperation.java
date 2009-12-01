@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.core.builder.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
@@ -20,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,14 +26,15 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  */
 public class AddMarkersOperation extends WorkspaceModifyOperation {
 
+	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(AddMarkersOperation.class);
 
-	private final List<Map<String, Object>> issues;
+	private final List<Issue> issues;
 	private final IResource resource;
 	private final boolean deleteMarkers;
 	private final String markerId;
 
-	public AddMarkersOperation(IResource resource, List<Map<String, Object>> issues, String markerId,
+	public AddMarkersOperation(IResource resource, List<Issue> issues, String markerId,
 			boolean deleteMarkers) {
 		super(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource));
 		this.issues = issues;
@@ -56,25 +56,36 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 			resource.deleteMarkers(getMarkerId(), false, IResource.DEPTH_INFINITE);
 		if (!issues.isEmpty()) {
 			// update
-			for (Map<String, Object> map : issues) {
+			for (Issue issue : issues) {
 				if (monitor.isCanceled())
 					return;
 				IMarker marker = resource.createMarker(getMarkerId());
-				Object lNr = map.get(IMarker.LINE_NUMBER);
 				String lineNR = "";
-				if (lNr != null) {
-					lineNR = "line: " + lNr + " ";
+				if (issue.getLineNumber() != null) {
+					lineNR = "line: " + issue.getLineNumber() + " ";
 				}
-				map.put(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
-				for (Entry<String, Object> entry : map.entrySet()) {
-					try {
-						marker.setAttribute(entry.getKey(), entry.getValue());
-					} catch (IllegalArgumentException e) {
-						log.debug("Couldn't set attribute '" + entry.getKey() + "' : " + e.getMessage());
-					}
-				}
+				marker.setAttribute(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
+				marker.setAttribute(IMarker.CHAR_START, issue.getOffset());
+				marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
+				marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
+				marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
+				marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
+				marker.setAttribute(Issue.CODE_KEY, issue.getCode());
+				marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem());
 			}
 		}
+	}
+
+	private Object getSeverity(Issue issue) {
+		switch (issue.getSeverity()) {
+			case ERROR : 
+				return IMarker.SEVERITY_ERROR;
+			case WARNING : 
+				return IMarker.SEVERITY_WARNING;
+			case INFO : 
+				return IMarker.SEVERITY_INFO;
+		}
+		throw new IllegalArgumentException();
 	}
 
 }

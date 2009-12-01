@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.core.editor.validation;
 
 import org.eclipse.xtext.ui.core.editor.AbstractDirtyStateAwareEditorCallback;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
 
@@ -18,7 +20,7 @@ import com.google.inject.Inject;
  */
 public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallback {
 	@Inject
-	private IXtextResourceChecker checker;
+	private IResourceValidator resourceValidator;
 
 	@Override
 	public void afterCreatePartControl(XtextEditor editor) {
@@ -40,7 +42,7 @@ public class ValidatingEditorCallback extends AbstractDirtyStateAwareEditorCallb
 
 	private ValidationJob newValidationJob(XtextEditor editor) {
 		MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(editor.getResource());
-		ValidationJob validationJob = new ValidationJob(checker, editor.getDocument(), markerIssueProcessor);
+		ValidationJob validationJob = new ValidationJob(resourceValidator, editor.getDocument(), markerIssueProcessor, CheckMode.NORMAL_AND_FAST);
 		return validationJob;
 	}
 }

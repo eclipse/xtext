@@ -9,13 +9,13 @@
 package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public interface IValidationIssueProcessor {
-	void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor);
+	void processIssues(List<Issue> issues, IProgressMonitor monitor);
 }

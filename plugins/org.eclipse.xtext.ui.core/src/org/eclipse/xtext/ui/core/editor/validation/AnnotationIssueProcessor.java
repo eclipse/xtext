@@ -25,6 +25,8 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.ui.texteditor.AnnotationTypeLookup;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.Issue.Severity;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -45,11 +47,11 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 		this.annotationModel = annotationModel;
 	}
 
-	public void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
+	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		List<Annotation> toBeRemoved = getAnnotationsToRemove(monitor);
 		Multimap<Position, Annotation> positionToAnnotations = Multimaps.newArrayListMultimap();
-		Map<Annotation, Position> annotationToPosition = getAnnotationsToAdd(positionToAnnotations,issues, monitor);
-		updateMarkerAnnotations(positionToAnnotations,monitor);
+		Map<Annotation, Position> annotationToPosition = getAnnotationsToAdd(positionToAnnotations, issues, monitor);
+		updateMarkerAnnotations(positionToAnnotations, monitor);
 		updateAnnotations(monitor, toBeRemoved, annotationToPosition);
 	}
 
@@ -99,29 +101,37 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 		return toBeRemoved;
 	}
 
-	private Map<Annotation, Position> getAnnotationsToAdd(Multimap<Position,Annotation> positionToAnnotations, List<Map<String, Object>> issues,
-			IProgressMonitor monitor) {
+	private Map<Annotation, Position> getAnnotationsToAdd(Multimap<Position, Annotation> positionToAnnotations,
+			List<Issue> issues, IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
 			return Maps.newHashBiMap();
 		}
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMapWithExpectedSize(issues.size());
-		for (Map<String, Object> map : issues) {
+		for (Issue issue : issues) {
 			if (monitor.isCanceled()) {
 				return annotationToPosition;
 			}
-			Integer object = (Integer) map.get(IMarker.SEVERITY);
-			String message = (String) map.get(IMarker.MESSAGE);
-			Integer start = (Integer) map.get(IMarker.CHAR_START);
-			Integer end = (Integer) map.get(IMarker.CHAR_END);
-			if (start != null && end != null && message != null) {
-				String type = lookup.getAnnotationType(EValidator.MARKER, object);
-				Annotation annotation = new Annotation(type, false, message);
-				Position position = new Position(start, end - start);
+			if (issue.getOffset() != -1 && issue.getLength() != -1 && issue.getMessage() != null) {
+				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
+				Annotation annotation = new Annotation(type, false, issue.getMessage());
+				Position position = new Position(issue.getOffset(), issue.getLength());
 				annotationToPosition.put(annotation, position);
 				positionToAnnotations.put(position, annotation);
 			}
 		}
 		return annotationToPosition;
+	}
+
+	private int getMarkerSeverity(Severity severity) {
+		switch (severity) {
+			case ERROR:
+				return IMarker.SEVERITY_ERROR;
+			case WARNING:
+				return IMarker.SEVERITY_WARNING;
+			case INFO:
+				return IMarker.SEVERITY_INFO;
+		}
+		throw new IllegalArgumentException();
 	}
 
 	private void updateMarkerAnnotations(Multimap<Position, Annotation> positionToAnnotations, IProgressMonitor monitor) {
@@ -139,14 +149,15 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 				Position markerAnnotationPosition = annotationModel.getPosition(annotation);
 				final MarkerAnnotation markerAnnotation = (MarkerAnnotation) annotation;
 				Collection<Annotation> sourceAnnotations = positionToAnnotations.get(markerAnnotationPosition);
-				boolean markAsDeleted=true;
-				if (null!=sourceAnnotations) {
-					markAsDeleted = filter(sourceAnnotations, new Predicate<Annotation>(){
+				boolean markAsDeleted = true;
+				if (null != sourceAnnotations) {
+					markAsDeleted = filter(sourceAnnotations, new Predicate<Annotation>() {
 						public boolean apply(Annotation sourceAnnotation) {
-							return sourceAnnotation.getText().equals(markerAnnotation.getText()) && 
-								   sourceAnnotation.getType().equals(markerAnnotation.getType());
-					}}).isEmpty();
-				} 
+							return sourceAnnotation.getText().equals(markerAnnotation.getText())
+									&& sourceAnnotation.getType().equals(markerAnnotation.getType());
+						}
+					}).isEmpty();
+				}
 				markerAnnotation.markDeleted(markAsDeleted);
 			}
 		}

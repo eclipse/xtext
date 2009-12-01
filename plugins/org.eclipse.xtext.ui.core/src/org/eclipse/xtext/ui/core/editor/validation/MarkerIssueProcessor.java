@@ -10,13 +10,13 @@ package org.eclipse.xtext.ui.core.editor.validation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.ui.core.builder.impl.AddMarkersOperation;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,7 +32,7 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 		this.resource = resource;
 	}
 
-	public void processIssues(List<Map<String, Object>> issues, IProgressMonitor monitor) {
+	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		try {
 			new AddMarkersOperation(resource, issues, EValidator.MARKER, true).run(monitor);
 		} catch (InvocationTargetException e) {
