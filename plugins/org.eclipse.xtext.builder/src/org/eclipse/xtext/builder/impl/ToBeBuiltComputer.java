@@ -30,7 +30,7 @@ public class ToBeBuiltComputer {
 	private IBuilderState builderState;
 
 	@Inject
-	private UriUtil uriUtil;
+	private IUriUtil iUriUtil;
 
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
 		ToBeBuilt result = new ToBeBuilt();
@@ -92,7 +92,7 @@ public class ToBeBuiltComputer {
 	}
 
 	protected URI getUri(IStorage file) {
-		return uriUtil.getUri(file);
+		return iUriUtil.getUri(file);
 	}
 
 }

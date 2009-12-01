@@ -69,7 +69,6 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		fileB.create(new StringInputStream("object Bar references Foo"), true, monitor());
 
 		waitForAutoBuild();
-		System.out.println(toString(getBuilderState()));
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertTrue(indexContainsElement(fileB.getFullPath().toString(),"Bar"));
 		assertEquals(2, countResourcesInIndex());
@@ -126,7 +125,26 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		assertEquals(1,events.get(0).getDeltas().size());
 		assertNull(events.get(0).getDeltas().get(0).getNew());
 		assertEquals(0, countResourcesInIndex());
+	}
+	
+	public void testDeleteReferencedFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		IFile fileB = folder.getFile("Bar" + F_EXT);
+		fileB.create(new StringInputStream("object Bar references Foo"), true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
+		assertEquals(2, countResourcesInIndex());
+		assertNumberOfMarkers(file, 0);
+		assertNumberOfMarkers(fileB, 0);
 		
+		file.delete(true, monitor());
+		waitForAutoBuild();
+		assertNumberOfMarkers(fileB, 1);
+		assertEquals(1, countResourcesInIndex());
 	}
 
 	@SuppressWarnings("unused")
@@ -150,7 +168,7 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		return EmfFormatter.objToStr(desc, new EStructuralFeature[0]);
 	}
 
-	private String toString(IResourceDescriptions index) {
+	protected String toString(IResourceDescriptions index) {
 		StringBuffer buff = new StringBuffer();
 		for (IResourceDescription desc : index.getAllResourceDescriptions()) {
 			buff.append(EmfFormatter.objToStr(desc, new EStructuralFeature[0]));

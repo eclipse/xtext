@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-class ToBeBuilt {
+public class ToBeBuilt {
 	Map<URI,IStorage> toBeUpdated = Maps.newHashMap();
 	Set<URI> toBeDeleted = Sets.newHashSet();
 	

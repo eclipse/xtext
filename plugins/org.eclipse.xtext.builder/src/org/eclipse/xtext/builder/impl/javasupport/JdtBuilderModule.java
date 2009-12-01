@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl.javasupport;
 
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.xtext.builder.BuilderModule;
+import org.eclipse.xtext.builder.builderState.impl.IStorageUtil;
+import org.eclipse.xtext.builder.builderState.impl.JdtStorageUtil;
+import org.eclipse.xtext.builder.impl.IUriUtil;
+import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -19,11 +22,9 @@ public class JdtBuilderModule extends BuilderModule {
 	@Override
 	protected void configure() {
 		super.configure();
-	}
-	
-	@Override
-	protected void bindIncrementalProjectBuilder() {
-		bind(IncrementalProjectBuilder.class).to(JdtXtextBuilder.class);
+		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
+		bind(IUriUtil.class).to(JdtUriUtil.class);
+		bind(IStorageUtil.class).to(JdtStorageUtil.class);
 	}
 	
 }

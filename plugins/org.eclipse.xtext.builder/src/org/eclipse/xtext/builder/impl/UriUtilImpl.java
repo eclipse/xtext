@@ -23,7 +23,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class UriUtilImpl implements UriUtil {
+public class UriUtilImpl implements IUriUtil {
 
 	private ResourceSet resourceSet;
 
@@ -35,11 +35,19 @@ public class UriUtilImpl implements UriUtil {
 
 	public URI getUri(IStorage storage) {
 		if (storage instanceof IFile) {
-			URI createPlatformResourceURI = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
-			if (resourceSet.getResourceFactoryRegistry().getFactory(createPlatformResourceURI) != null)
-				return createPlatformResourceURI;
+			URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
+			if (isValidUri(uri))
+				return uri;
 		}
 		return null;
+	}
+
+	protected boolean isValidUri(URI uri) {
+		return (getResourceSet().getResourceFactoryRegistry().getFactory(uri) != null);
+	}
+
+	protected ResourceSet getResourceSet() {
+		return resourceSet;
 	}
 
 	protected void removeDefaultFactories(final ResourceSet resourceSet) {
