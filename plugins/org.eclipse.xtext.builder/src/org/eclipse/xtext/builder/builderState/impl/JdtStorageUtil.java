@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl.javasupport;
+package org.eclipse.xtext.builder.builderState.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.builder.builderState.impl.StorageUtilImpl;
+import org.eclipse.xtext.builder.impl.javasupport.JarWalker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

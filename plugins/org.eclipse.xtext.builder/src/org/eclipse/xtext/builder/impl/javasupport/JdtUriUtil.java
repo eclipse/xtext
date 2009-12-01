@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.impl.javasupport;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -15,11 +16,22 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.builder.impl.UriUtilImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JdtUriUtil {
+public class JdtUriUtil extends UriUtilImpl {
+
+	@Override
+	public URI getUri(IStorage storage) {
+		if (storage instanceof IJarEntryResource) {
+			URI uri = getURI((IJarEntryResource) storage);
+			if (isValidUri(uri))
+				return uri;
+		}
+		return super.getUri(storage);
+	}
 
 	public URI getURI(IJarEntryResource resource) {
 		IJarEntryResource jarEntry = resource;
