@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface IResourceDescriptions extends IResourceDescription.Event.Source {
 
-	Iterable<? extends IResourceDescription> getAllResourceDescriptions();
+	Iterable<IResourceDescription> getAllResourceDescriptions();
 
 	IResourceDescription getResourceDescription(URI uri);
 
