@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -20,6 +21,21 @@ import com.google.inject.ImplementedBy;
  */
 public interface IContainer {
 	
+	IContainer Null = new IContainer() {
+
+		public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
+			return Iterables.emptyIterable();
+		}
+		public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
+			return Iterables.emptyIterable();
+		}
+		public IResourceDescription getResourceDescription(URI uri) {
+			return null;
+		}
+		public Iterable<IResourceDescription> getResourceDescriptions() {
+			return Iterables.emptyIterable();
+		}};
+
 	/**
 	 * @return the {@link IResourceDescription} contained in this container. The result is never
 	 * <code>null</code>. The result may be a cached view on the actual content of the underlying resources.
