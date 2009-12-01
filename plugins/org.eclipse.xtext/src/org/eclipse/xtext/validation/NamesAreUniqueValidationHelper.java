@@ -8,6 +8,7 @@
 package org.eclipse.xtext.validation;
 
 import java.util.Iterator;
+import org.eclipse.xtext.util.CancelIndicator;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;

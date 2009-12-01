@@ -7,20 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import java.util.List;
-import org.eclipse.xtext.util.CancelIndicator;
-
-import org.eclipse.emf.ecore.resource.Resource;
-
-import com.google.inject.ImplementedBy;
-
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated - moved to org.eclipse.xtext.util.CancelIndicator
  */
-@ImplementedBy(ResourceValidatorImpl.class)
-public interface IResourceValidator {
-	/**
-	 * @return all issues of the underlying resources (includes syntax errors as well as semantic problems)
-	 */
-	List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator);
+@Deprecated
+public interface CancelIndicator extends org.eclipse.xtext.util.CancelIndicator{
+
 }

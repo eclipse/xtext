@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +43,12 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author Heiko Behrens
+ * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
 public class EcoreUtil2 extends EcoreUtil {
 
@@ -436,6 +440,33 @@ public class EcoreUtil2 extends EcoreUtil {
 			return (ResourceSet) ctx;
 		}
 		return null;
+	}
+	
+	/**
+	 * @see org.eclipse.emf.ecore.util.EcoreUtil#resolveAll(Resource)
+	 */
+	public static void resolveAll(Resource resource, CancelIndicator monitor) {
+		for (Iterator<EObject> i = resource.getAllContents(); !monitor.isCanceled() && i.hasNext();) {
+			EObject eObject = i.next();
+			resolveCrossReferences(eObject, monitor);
+		}
+	}
+
+	/**
+	 * @see org.eclipse.emf.ecore.util.EcoreUtil#resolveAll(EObject)
+	 */
+	public static void resolveAll(EObject eObject, CancelIndicator monitor) {
+		resolveCrossReferences(eObject, monitor);
+		for (Iterator<EObject> i = eObject.eAllContents(); !monitor.isCanceled() && i.hasNext();) {
+			EObject childEObject = i.next();
+			resolveCrossReferences(childEObject, monitor);
+		}
+	}
+
+	private static void resolveCrossReferences(EObject eObject, CancelIndicator monitor) {
+		for (Iterator<EObject> i = eObject.eCrossReferences().iterator(); !monitor.isCanceled() && i.hasNext(); i.next()) {
+			// The loop resolves the cross references by visiting them.
+		}
 	}
 
 }

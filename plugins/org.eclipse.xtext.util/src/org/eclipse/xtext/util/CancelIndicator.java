@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.util;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -14,4 +14,9 @@ public interface CancelIndicator {
 
 	boolean isCanceled();
 	
+	class NullImpl implements CancelIndicator {
+		public boolean isCanceled() {
+			return false;
+		}
+	}
 }

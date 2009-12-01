@@ -8,9 +8,11 @@
 package org.eclipse.xtext.validation;
 
 import java.util.Collections;
+
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,25 +23,26 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import com.google.inject.Inject;
 
 /**
- * <p>An {@link org.eclipse.emf.ecore.EValidator} implementation, that can be
- * used via {@link ComposedChecks} generically to validate for duplicated 
- * exported objects.</p>
  * <p>
- * It validates <b>only</b> the objects, that will be publicly available via
- * an {@link IExportedEObjectsProvider}. Local variables and similar objects 
- * have to be validated on their own. The {@link INamesAreUniqueValidationHelper} provides
+ * An {@link org.eclipse.emf.ecore.EValidator} implementation, that can be used via {@link ComposedChecks} generically
+ * to validate for duplicated exported objects.
+ * </p>
+ * <p>
+ * It validates <b>only</b> the objects, that will be publicly available via an {@link IExportedEObjectsProvider}. Local
+ * variables and similar objects have to be validated on their own. The {@link INamesAreUniqueValidationHelper} provides
  * a convenient way to apply this kind of constraints.
  * </p>
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-	
+
 	@Inject
 	private INamesAreUniqueValidationHelper helper;
-	
+
 	@Override
 	protected List<EPackage> getEPackages() {
 		return Collections.emptyList();
@@ -60,7 +63,8 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	}
 
 	public void doCheckUniqueNames(Resource resource, CancelIndicator cancelIndicator) {
-		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null).getResourceDescriptionManager();
+		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(
+				resource.getURI(), null).getResourceDescriptionManager();
 		if (manager != null) {
 			IResourceDescription description = manager.getResourceDescription(resource);
 			if (description != null) {
@@ -85,5 +89,5 @@ public class NamesAreUniqueValidator extends AbstractDeclarativeValidator {
 	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
 		return resourceServiceProviderRegistry;
 	}
-	
+
 }

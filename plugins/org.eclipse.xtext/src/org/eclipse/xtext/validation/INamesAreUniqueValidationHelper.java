@@ -8,6 +8,7 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
