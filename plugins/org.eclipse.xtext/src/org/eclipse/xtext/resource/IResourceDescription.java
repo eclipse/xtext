@@ -17,7 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
 
 /**
- * A snapshot representation of a resource's contents. The description is not expected to be live.
+ * A representation of a resource's contents.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
@@ -49,9 +49,14 @@ public interface IResourceDescription {
 	Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object);
 
 	/**
-	 * returns the list of names the described resource depends depends on.
+	 * @return the list of names the described resource depends depends on.
 	 */
 	Iterable<String> getImportedNames();
+	
+	/**
+	 * @return the list of all references contained in the underlying resource.
+	 */
+	Iterable<IReferenceDescription> getReferenceDescriptions();
 
 	URI getURI();
 
