@@ -10,10 +10,12 @@ package org.eclipse.xtext;
 import static org.eclipse.xtext.EcoreUtil2.*;
 
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -21,11 +23,15 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import com.google.common.collect.Sets;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
@@ -199,5 +205,23 @@ public class EcoreUtil2Test extends TestCase {
 		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEInt()));
 		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getEIntegerObject()));
 		assertEquals(false, containsCompatibleFeature(eClass, "lowerBound", false, true, pack.getELong()));
+	}
+	
+	public void testExternalFormOfEReference() throws Exception {
+		Registry registry = EPackage.Registry.INSTANCE;
+		Set<String> uris = Sets.newHashSet(registry.keySet());
+		for (String string : uris) {
+			EPackage ePackage = registry.getEPackage(string);
+			TreeIterator<Object> iterator = EcoreUtil.getAllProperContents(ePackage, true);
+			while (iterator.hasNext()) {
+				Object next = iterator.next();
+				if (next instanceof EReference) {
+					EReference ref = (EReference) next;
+					String externalForm = EcoreUtil2.toExternalForm(ref);
+					assertEquals(ref, EcoreUtil2.getEReferenceFromExternalForm(registry,externalForm));
+				}
+			}
+		}
+		
 	}
 }

@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -45,6 +47,10 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 
 		public URI getURI() {
 			return URI.createURI("foo://test");
+		}
+
+		public Iterable<IReferenceDescription> getReferenceDescriptions() {
+			return Iterables.emptyIterable();
 		}
 	}
 	

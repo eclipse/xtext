@@ -13,11 +13,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -220,6 +223,11 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
 		fail("Unexpected call");
 		return null;
+	}
+
+	public Iterable<IReferenceDescription> getReferenceDescriptions() {
+		fail("Unexpected call");
+		return Iterables.emptyIterable();
 	}
 	
 }
