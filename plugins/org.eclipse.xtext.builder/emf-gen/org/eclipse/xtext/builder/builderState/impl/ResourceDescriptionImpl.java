@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.7 2009/12/02 18:32:57 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
@@ -24,6 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.impl.IStorageUtil.Access;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -221,7 +221,7 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return (clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass())) && input.getName().equals(name);
+				return (EcoreUtil2.isAssignableFrom(clazz,input.getEClass())) && input.getName().equals(name);
 			}
 		});
 	}
@@ -229,7 +229,7 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass());
+				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 			}
 		});
 	}

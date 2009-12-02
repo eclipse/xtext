@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -85,8 +84,7 @@ public class ImportUriGlobalScopeProvider extends AbstractExportedObjectsAwareSc
 				Iterable<IEObjectDescription> exportedObjects = getExportedEObjects(resource);
 				Iterable<IEObjectDescription> filtered = filter(exportedObjects, new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
-						return reference.getEReferenceType() == EcorePackage.Literals.EOBJECT
-								|| reference.getEReferenceType().isSuperTypeOf(input.getEClass());
+						return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),input.getEClass());
 					}
 				});
 				return filtered;

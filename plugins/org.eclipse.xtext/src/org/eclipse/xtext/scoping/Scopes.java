@@ -16,9 +16,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -38,11 +38,9 @@ import com.google.common.collect.Iterables;
 public class Scopes {
 
 	public static Iterable<IEObjectDescription> selectCompatible(Iterable<IEObjectDescription> exportedObjects, final EClass clazz) {
-		if (clazz == EcorePackage.Literals.EOBJECT)
-			return exportedObjects;
 		return Iterables.filter(exportedObjects, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return clazz.isSuperTypeOf(input.getEClass());
+				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 			}
 		});
 	}

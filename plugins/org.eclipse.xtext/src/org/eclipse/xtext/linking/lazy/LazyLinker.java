@@ -21,13 +21,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
@@ -201,7 +201,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	private boolean isInstantiatableSubType(EClass c, EClass superType) {
 		return !c.isAbstract() && !c.isInterface()
-				&& (superType.isSuperTypeOf(c) || superType == EcorePackage.Literals.EOBJECT);
+				&& EcoreUtil2.isAssignableFrom(superType,c);
 	}
 
 	public LazyURIEncoder getEncoder() {

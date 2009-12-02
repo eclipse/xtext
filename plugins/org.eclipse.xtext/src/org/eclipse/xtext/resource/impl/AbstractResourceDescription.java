@@ -10,8 +10,8 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -26,7 +26,7 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return (clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass()))
+				return (EcoreUtil2.isAssignableFrom(clazz,input.getEClass()))
 					&& input.getName().equals(name);
 			}
 		});
@@ -35,7 +35,7 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return clazz == EcorePackage.Literals.EOBJECT || clazz.isSuperTypeOf(input.getEClass());
+				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 			}
 		});
 	}

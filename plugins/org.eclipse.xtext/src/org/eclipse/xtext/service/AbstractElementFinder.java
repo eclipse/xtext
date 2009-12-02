@@ -20,10 +20,10 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -112,11 +112,9 @@ public abstract class AbstractElementFinder {
 						r.add(c);
 					else if (c.getType().getClassifier() instanceof EClass)
 						for (EClass cls : classes)
-							if (cls == EcorePackage.Literals.EOBJECT
-									|| cls.isSuperTypeOf((EClass) c.getType().getClassifier())) {
+							if (EcoreUtil2.isAssignableFrom(cls,(EClass) c.getType().getClassifier())) {
 								r.add(c);
 								break;
-
 							}
 					i.prune();
 				}
