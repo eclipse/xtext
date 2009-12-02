@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactory.java,v 1.5 2009/12/01 14:07:34 sefftinge Exp $
+ * $Id: BuilderStateFactory.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
@@ -44,6 +45,15 @@ public interface BuilderStateFactory extends EFactory {
 	 * @generated
 	 */
 	IEObjectDescription createEObjectDescription();
+
+	/**
+	 * Returns a new object of class '<em>Reference Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Description</em>'.
+	 * @generated
+	 */
+	IReferenceDescription createReferenceDescription();
 
 	/**
 	 * Returns the package supported by this factory.

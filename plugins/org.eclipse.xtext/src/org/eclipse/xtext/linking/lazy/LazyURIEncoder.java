@@ -8,11 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -41,7 +42,7 @@ public class LazyURIEncoder {
 	public String encode(EObject obj, EReference ref, AbstractNode node) {
 		StringBuilder fragment = new StringBuilder(40).append(XTEXT_LINK).append(SEP);
 		fragment.append(obj.eResource().getURIFragment(obj)).append(SEP);
-		fragment.append(EcoreUtil.getURI(ref)).append(SEP);
+		fragment.append(EcoreUtil2.toExternalForm(ref)).append(SEP);
 		getRelativePath(fragment, NodeUtil.getNodeAdapter(obj).getParserNode(), node);
 		return fragment.toString();
 	}
@@ -56,7 +57,8 @@ public class LazyURIEncoder {
 	public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
 		String[] split = uriFragment.split(SEP);
 		EObject source = res.getEObject(split[1]);
-		EReference ref = (EReference) res.getResourceSet().getEObject(URI.createURI(split[2]), true);
+		Registry packageRegistry = res.getResourceSet().getPackageRegistry();
+		EReference ref = EcoreUtil2.getEReferenceFromExternalForm(packageRegistry,split[2]);
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(source);
 		if (nodeAdapter==null)
 			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");

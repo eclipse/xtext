@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
@@ -85,6 +86,10 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 				return createUserDataEntryAdapter();
 			}
 			@Override
+			public Adapter caseReferenceDescription(IReferenceDescription object) {
+				return createReferenceDescriptionAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -143,6 +148,20 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserDataEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IReferenceDescription <em>Reference Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.resource.IReferenceDescription
+	 * @generated
+	 */
+	public Adapter createReferenceDescriptionAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -20,12 +20,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.impl.IStorageUtil.Access;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 import com.google.common.base.Predicate;
@@ -42,6 +44,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getExportedObjects <em>Exported Objects</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getStorageAsString <em>Storage As String</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getReferenceDescriptions <em>Reference Descriptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,6 +110,16 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 	 * @ordered
 	 */
 	protected String storageAsString = STORAGE_AS_STRING_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReferenceDescriptions() <em>Reference Descriptions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceDescriptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<IReferenceDescription> referenceDescriptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -193,6 +206,18 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING, oldStorageAsString, storageAsString));
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IReferenceDescription> getReferenceDescriptions() {
+		if (referenceDescriptions == null) {
+			referenceDescriptions = new EObjectContainmentEList<IReferenceDescription>(IReferenceDescription.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS);
+		}
+		return referenceDescriptions;
+	}
+
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -243,6 +268,8 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 		switch (featureID) {
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				return ((InternalEList<?>)getExportedObjects()).basicRemove(otherEnd, msgs);
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
+				return ((InternalEList<?>)getReferenceDescriptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -263,6 +290,8 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 				return getImportedNames();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
 				return getStorageAsString();
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
+				return getReferenceDescriptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,6 +319,10 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
 				setStorageAsString((String)newValue);
 				return;
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
+				getReferenceDescriptions().clear();
+				getReferenceDescriptions().addAll((Collection<? extends IReferenceDescription>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -314,6 +347,9 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
 				setStorageAsString(STORAGE_AS_STRING_EDEFAULT);
 				return;
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
+				getReferenceDescriptions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +370,8 @@ public class ResourceDescriptionImpl extends Container implements IStorageAwareR
 				return importedNames != null && !importedNames.isEmpty();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__STORAGE_AS_STRING:
 				return STORAGE_AS_STRING_EDEFAULT == null ? storageAsString != null : !STORAGE_AS_STRING_EDEFAULT.equals(storageAsString);
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
+				return referenceDescriptions != null && !referenceDescriptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateSwitch.java,v 1.5 2009/12/01 14:07:33 sefftinge Exp $
+ * $Id: BuilderStateSwitch.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
@@ -141,6 +142,21 @@ public class BuilderStateSwitch<T> {
 	 * @generated
 	 */
 	public T caseUserDataEntry(Map.Entry<String, String> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reference Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reference Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferenceDescription(IReferenceDescription object) {
 		return null;
 	}
 

@@ -8,8 +8,10 @@
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
+import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.collect.Collections2;
@@ -28,9 +30,24 @@ public class BuilderStateUtil {
 		for (IEObjectDescription objDesc : desc.getExportedObjects()) {
 			description.getExportedObjects().add(create(objDesc));
 		}
+		Iterable<IReferenceDescription> referenceDescriptions = desc.getReferenceDescriptions();
+		for (IReferenceDescription iReferenceDescription : referenceDescriptions) {
+			description.getReferenceDescriptions().add(create(iReferenceDescription));
+		}
 		return description;
 	}
 	
+	public static ReferenceDescriptionImpl create(IReferenceDescription desc) {
+		if (desc instanceof ReferenceDescriptionImpl)
+			return (ReferenceDescriptionImpl) desc;
+		ReferenceDescriptionImpl description = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
+		description.setIndexInList(desc.getIndexInList());
+		description.setSourceEObjectUri(desc.getSourceEObjectUri());
+		description.setTargetEObjectUri(desc.getTargetEObjectUri());
+		description.setReference(desc.getEReference());
+		return description;
+	}
+
 	public static EObjectDescriptionImpl create(IEObjectDescription desc) {
 		if (desc instanceof EObjectDescriptionImpl)
 			return (EObjectDescriptionImpl) desc;

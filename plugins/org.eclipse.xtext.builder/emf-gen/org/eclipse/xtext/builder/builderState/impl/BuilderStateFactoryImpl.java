@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.5 2009/12/01 14:07:34 sefftinge Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
@@ -67,6 +68,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 			case BuilderStatePackage.RESOURCE_DESCRIPTION: return (EObject)createResourceDescription();
 			case BuilderStatePackage.EOBJECT_DESCRIPTION: return (EObject)createEObjectDescription();
 			case BuilderStatePackage.USER_DATA_ENTRY: return (EObject)createUserDataEntry();
+			case BuilderStatePackage.REFERENCE_DESCRIPTION: return (EObject)createReferenceDescription();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -134,6 +136,16 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	public Map.Entry<String, String> createUserDataEntry() {
 		UserDataEntryImpl userDataEntry = new UserDataEntryImpl();
 		return userDataEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IReferenceDescription createReferenceDescription() {
+		ReferenceDescriptionImpl referenceDescription = new ReferenceDescriptionImpl();
+		return referenceDescription;
 	}
 
 	/**

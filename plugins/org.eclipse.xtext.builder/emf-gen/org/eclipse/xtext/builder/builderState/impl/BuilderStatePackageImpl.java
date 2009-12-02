@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.6 2009/12/01 14:07:34 sefftinge Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.7 2009/12/02 16:38:29 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 /**
@@ -48,6 +49,13 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * @generated
 	 */
 	private EClass userDataEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass referenceDescriptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,6 +182,15 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getResourceDescription_ReferenceDescriptions() {
+		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEObjectDescription() {
 		return eObjectDescriptionEClass;
 	}
@@ -255,6 +272,51 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReferenceDescription() {
+		return referenceDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceDescription_SourceEObjectUri() {
+		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceDescription_TargetEObjectUri() {
+		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceDescription_IndexInList() {
+		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReferenceDescription_ExternalFormOfEReference() {
+		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getEURI() {
 		return euriEDataType;
 	}
@@ -301,6 +363,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		createEReference(resourceDescriptionEClass, RESOURCE_DESCRIPTION__EXPORTED_OBJECTS);
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__IMPORTED_NAMES);
 		createEAttribute(resourceDescriptionEClass, RESOURCE_DESCRIPTION__STORAGE_AS_STRING);
+		createEReference(resourceDescriptionEClass, RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS);
 
 		eObjectDescriptionEClass = createEClass(EOBJECT_DESCRIPTION);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__NAME);
@@ -312,6 +375,12 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		userDataEntryEClass = createEClass(USER_DATA_ENTRY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__KEY);
 		createEAttribute(userDataEntryEClass, USER_DATA_ENTRY__VALUE);
+
+		referenceDescriptionEClass = createEClass(REFERENCE_DESCRIPTION);
+		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__SOURCE_EOBJECT_URI);
+		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI);
+		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__INDEX_IN_LIST);
+		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE);
 
 		// Create data types
 		euriEDataType = createEDataType(EURI);
@@ -353,6 +422,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_ImportedNames(), ecorePackage.getEString(), "importedNames", null, 0, -1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_StorageAsString(), ecorePackage.getEString(), "storageAsString", null, 0, 1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_ReferenceDescriptions(), this.getReferenceDescription(), null, "referenceDescriptions", null, 0, -1, IStorageAwareResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(resourceDescriptionEClass, this.getEObjectDescription(), "getExportedObjects", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEClass(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -383,6 +453,12 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEClass(userDataEntryEClass, Map.Entry.class, "UserDataEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUserDataEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUserDataEntry_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceDescriptionEClass, IReferenceDescription.class, "ReferenceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReferenceDescription_SourceEObjectUri(), this.getEURI(), "sourceEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceDescription_TargetEObjectUri(), this.getEURI(), "targetEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceDescription_IndexInList(), ecorePackage.getEInt(), "indexInList", "-1", 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceDescription_ExternalFormOfEReference(), ecorePackage.getEString(), "externalFormOfEReference", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(euriEDataType, URI.class, "EURI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
