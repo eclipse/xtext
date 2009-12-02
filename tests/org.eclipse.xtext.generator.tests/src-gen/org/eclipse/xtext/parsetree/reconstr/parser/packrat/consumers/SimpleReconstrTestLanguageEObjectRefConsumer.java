@@ -7,22 +7,26 @@ import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.BooleanElements;
+import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.EObjectRefElements;
 
-public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminalConsumer {
+public final class SimpleReconstrTestLanguageEObjectRefConsumer extends NonTerminalConsumer {
 
-	private BooleanElements rule;	
+	private EObjectRefElements rule;	
+
+	private INonTerminalConsumer eObjectElementConsumer;
 
 	private ITerminalConsumer idConsumer;
 
@@ -32,21 +36,21 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 
 	private IElementConsumer assignment$3$Consumer;
 
-	private IElementConsumer keyword$4$Consumer;
+	private IElementConsumer ruleCall$4$Consumer;
 
 	private IElementConsumer keyword$5$Consumer;
 
 	private IElementConsumer assignment$6$Consumer;
 
-	private IElementConsumer ruleCall$7$Consumer;
+	private IElementConsumer crossReference$7$Consumer;
 
-	private ICharacterClass keyword$4$Delimiter;
-
-	private ICharacterClass keyword$5$Delimiter;
+	private IElementConsumer ruleCall$9$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
-	private ISequenceMatcher ruleCall$7$Delimiter;
+	private ICharacterClass keyword$5$Delimiter;
+
+	private ISequenceMatcher ruleCall$9$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -75,7 +79,7 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		}
 	}
 
-	protected class Assignment$3$Consumer extends OptionalAssignmentConsumer {
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$3$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -83,19 +87,19 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$4$Consumer;
+			return ruleCall$4$Consumer;
 		}
 	}
 
-	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$4$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "bool", false, true, getKeyword$4$Delimiter(), optional);
+			return consumeNonTerminal(eObjectElementConsumer, "obj", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -119,28 +123,39 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$7$Consumer;
+			return crossReference$7$Consumer;
 		}
 	}
 
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+	protected class CrossReference$7$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+		protected CrossReference$7$Consumer(final CrossReference crossReference) {
+			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "value", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
 		}
 	}
 
-	public SimpleReconstrTestLanguageBooleanConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public SimpleReconstrTestLanguageEObjectRefConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -148,20 +163,20 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		return group$1$Consumer.consume();
 	}
 
-	public BooleanElements getRule() {
+	public EObjectRefElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(BooleanElements rule) {
+	public void setRule(EObjectRefElements rule) {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNumberSignDigitFourKeyword_0());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.getBoolAssignment_1());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.getBoolMyoptionKeyword_1_0());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.getKwKeyword_2());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.getValueAssignment_3());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getValueIDTerminalRuleCall_3_0());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNumberSignDigitOneDigitSixKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getObjAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getObjEObjectElementParserRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRefsKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getRefAssignment_3());
+		crossReference$7$Consumer = new CrossReference$7$Consumer(rule.getRefEObjectCrossReference_3_0());
 	}
 	
 	@Override
@@ -174,24 +189,12 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		return getGrammarElement().getType().getClassifier();
 	}
 	
+	public void setEObjectElementConsumer(INonTerminalConsumer eObjectElementConsumer) {
+		this.eObjectElementConsumer = eObjectElementConsumer;
+	}
+	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
-	}
-	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
-	}
-	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
-	}
-	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -202,12 +205,20 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
 	}
 	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
+	}
+	
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

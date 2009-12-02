@@ -91,6 +91,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//AbstractMulti2/m2"/>
     </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//ConcreteMulti"/>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EObjectRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//EObjectRef/obj"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//EObjectRef/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//EObjectElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//EObjectElement/name"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

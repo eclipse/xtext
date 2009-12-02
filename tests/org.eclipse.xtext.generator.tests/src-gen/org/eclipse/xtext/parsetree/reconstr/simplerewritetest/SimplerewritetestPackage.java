@@ -1011,6 +1011,80 @@ public interface SimplerewritetestPackage extends EPackage
   int CONCRETE_MULTI_FEATURE_COUNT = ABSTRACT_MULTI1_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectRefImpl <em>EObject Ref</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectRefImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEObjectRef()
+   * @generated
+   */
+  int EOBJECT_REF = 24;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_REF__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Obj</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_REF__OBJ = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_REF__REF = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>EObject Ref</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_REF_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectElementImpl <em>EObject Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectElementImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEObjectElement()
+   * @generated
+   */
+  int EOBJECT_ELEMENT = 25;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_ELEMENT__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>EObject Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOBJECT_ELEMENT_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1018,7 +1092,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 24;
+  int OP = 26;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1674,6 +1748,59 @@ public interface SimplerewritetestPackage extends EPackage
   EClass getConcreteMulti();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef <em>EObject Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EObject Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef
+   * @generated
+   */
+  EClass getEObjectRef();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef#getObj <em>Obj</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Obj</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef#getObj()
+   * @see #getEObjectRef()
+   * @generated
+   */
+  EReference getEObjectRef_Obj();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef#getRef()
+   * @see #getEObjectRef()
+   * @generated
+   */
+  EReference getEObjectRef_Ref();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement <em>EObject Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EObject Element</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement
+   * @generated
+   */
+  EClass getEObjectElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement#getName()
+   * @see #getEObjectElement()
+   * @generated
+   */
+  EAttribute getEObjectElement_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2236,6 +2363,50 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EClass CONCRETE_MULTI = eINSTANCE.getConcreteMulti();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectRefImpl <em>EObject Ref</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectRefImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEObjectRef()
+     * @generated
+     */
+    EClass EOBJECT_REF = eINSTANCE.getEObjectRef();
+
+    /**
+     * The meta object literal for the '<em><b>Obj</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOBJECT_REF__OBJ = eINSTANCE.getEObjectRef_Obj();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EOBJECT_REF__REF = eINSTANCE.getEObjectRef_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectElementImpl <em>EObject Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EObjectElementImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEObjectElement()
+     * @generated
+     */
+    EClass EOBJECT_ELEMENT = eINSTANCE.getEObjectElement();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EOBJECT_ELEMENT__NAME = eINSTANCE.getEObjectElement_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

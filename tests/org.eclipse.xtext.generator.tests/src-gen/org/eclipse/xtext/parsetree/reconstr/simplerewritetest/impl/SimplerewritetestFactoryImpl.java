@@ -20,6 +20,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
@@ -116,6 +118,8 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.ABSTRACT_MULTI1: return createAbstractMulti1();
       case SimplerewritetestPackage.ABSTRACT_MULTI2: return createAbstractMulti2();
       case SimplerewritetestPackage.CONCRETE_MULTI: return createConcreteMulti();
+      case SimplerewritetestPackage.EOBJECT_REF: return createEObjectRef();
+      case SimplerewritetestPackage.EOBJECT_ELEMENT: return createEObjectElement();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -384,6 +388,28 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     ConcreteMultiImpl concreteMulti = new ConcreteMultiImpl();
     return concreteMulti;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EObjectRef createEObjectRef()
+  {
+    EObjectRefImpl eObjectRef = new EObjectRefImpl();
+    return eObjectRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EObjectElement createEObjectElement()
+  {
+    EObjectElementImpl eObjectElement = new EObjectElementImpl();
+    return eObjectElement;
   }
 
   /**

@@ -61,6 +61,8 @@ protected class ThisRootNode extends RootToken {
 			case 23: return new AbstractMulti1_Alternatives(this, this, 23, inst);
 			case 24: return new AbstractMulti2_Alternatives(this, this, 24, inst);
 			case 25: return new ConcreteMulti_Group(this, this, 25, inst);
+			case 26: return new EObjectRef_Group(this, this, 26, inst);
+			case 27: return new EObjectElement_NameAssignment(this, this, 27, inst);
 			default: return null;
 		}	
 	}	
@@ -247,13 +249,13 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  * Term returns Expression:
  *   Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
  *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
- *   EmptyObjectBug284850|MultiInheritanceBug280439;
+ *   EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 // Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-// EmptyObjectBug284850|MultiInheritanceBug280439
+// EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -287,6 +289,7 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 16: return new Term_DuplicateBug284491ParserRuleCall_16(parent, this, 16, inst);
 			case 17: return new Term_EmptyObjectBug284850ParserRuleCall_17(parent, this, 17, inst);
 			case 18: return new Term_MultiInheritanceBug280439ParserRuleCall_18(parent, this, 18, inst);
+			case 19: return new Term_EObjectRefParserRuleCall_19(parent, this, 19, inst);
 			default: return null;
 		}	
 	}	
@@ -952,6 +955,41 @@ protected class Term_MultiInheritanceBug280439ParserRuleCall_18 extends RuleCall
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(MultiInheritanceBug280439_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// EObjectRef
+protected class Term_EObjectRefParserRuleCall_19 extends RuleCallToken {
+	
+	public Term_EObjectRefParserRuleCall_19(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getEObjectRefParserRuleCall_19();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EObjectRef_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(EObjectRef_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getEObjectRefRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4774,5 +4812,217 @@ protected class ConcreteMulti_M2Assignment_1 extends AssignmentToken  {
 
 
 /************ end Rule ConcreteMulti ****************/
+
+
+/************ begin Rule EObjectRef ****************
+ *
+ * EObjectRef:
+ *   "#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+ *
+ **/
+
+// "#16" obj=EObjectElement "refs" ref=[ecore::EObject]
+protected class EObjectRef_Group extends GroupToken {
+	
+	public EObjectRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEObjectRefAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EObjectRef_RefAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getEObjectRefRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#16"
+protected class EObjectRef_NumberSignDigitOneDigitSixKeyword_0 extends KeywordToken  {
+	
+	public EObjectRef_NumberSignDigitOneDigitSixKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEObjectRefAccess().getNumberSignDigitOneDigitSixKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// obj=EObjectElement
+protected class EObjectRef_ObjAssignment_1 extends AssignmentToken  {
+	
+	public EObjectRef_ObjAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEObjectRefAccess().getObjAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EObjectElement_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("obj",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("obj");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEObjectElementRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getEObjectRefAccess().getObjEObjectElementParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new EObjectRef_NumberSignDigitOneDigitSixKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "refs"
+protected class EObjectRef_RefsKeyword_2 extends KeywordToken  {
+	
+	public EObjectRef_RefsKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEObjectRefAccess().getRefsKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EObjectRef_ObjAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ref=[ecore::EObject]
+protected class EObjectRef_RefAssignment_3 extends AssignmentToken  {
+	
+	public EObjectRef_RefAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEObjectRefAccess().getRefAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new EObjectRef_RefsKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("ref",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEObjectRefAccess().getRefEObjectCrossReference_3_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getEObjectRefAccess().getRefEObjectCrossReference_3_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule EObjectRef ****************/
+
+
+/************ begin Rule EObjectElement ****************
+ *
+ * EObjectElement:
+ *   name=ID;
+ *
+ **/
+
+// name=ID
+protected class EObjectElement_NameAssignment extends AssignmentToken  {
+	
+	public EObjectElement_NameAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEObjectElementAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getEObjectElementRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule EObjectElement ****************/
 
 }

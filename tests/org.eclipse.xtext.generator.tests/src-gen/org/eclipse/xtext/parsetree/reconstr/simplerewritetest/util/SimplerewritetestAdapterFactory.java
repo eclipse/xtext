@@ -19,6 +19,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
@@ -220,6 +222,16 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseConcreteMulti(ConcreteMulti object)
       {
         return createConcreteMultiAdapter();
+      }
+      @Override
+      public Adapter caseEObjectRef(EObjectRef object)
+      {
+        return createEObjectRefAdapter();
+      }
+      @Override
+      public Adapter caseEObjectElement(EObjectElement object)
+      {
+        return createEObjectElementAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -604,6 +616,36 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConcreteMultiAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef <em>EObject Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef
+   * @generated
+   */
+  public Adapter createEObjectRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement <em>EObject Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement
+   * @generated
+   */
+  public Adapter createEObjectElementAdapter()
   {
     return null;
   }
