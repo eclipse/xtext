@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -56,7 +57,8 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 		Iterable<IEObjectDescription> descriptions = Iterables.concat(iterables);
 		Iterable<IEObjectDescription> filtered = filter(descriptions, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return reference.getEReferenceType().isSuperTypeOf(input.getEClass());
+				return reference.getEReferenceType() == EcorePackage.Literals.EOBJECT
+						|| reference.getEReferenceType().isSuperTypeOf(input.getEClass());
 			}
 		});
 		return new SimpleScope(parent,filtered);

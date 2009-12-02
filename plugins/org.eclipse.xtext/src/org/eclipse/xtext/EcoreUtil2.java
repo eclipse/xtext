@@ -281,7 +281,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
 					EClass expected = (EClass) type;
 					EClass actual = (EClass) existingFeature.getEType();
-					boolean result = (actual.equals(expected) || actual.isSuperTypeOf(expected));
+					boolean result = (actual == EcorePackage.Literals.EOBJECT || actual.isSuperTypeOf(expected));
 					result &= isContainment == ((EReference) existingFeature).isContainment();
 					result &= !((EReference) existingFeature).isContainer();
 					return result;
@@ -373,7 +373,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	public static boolean isAssignableFrom(EClass target, EClass candidate) {
-		return (target.equals(candidate) || target.isSuperTypeOf(candidate));
+		return (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate));
 	}
 
 	public static boolean isAssignableFrom(EClass target, EObject candidate) {
