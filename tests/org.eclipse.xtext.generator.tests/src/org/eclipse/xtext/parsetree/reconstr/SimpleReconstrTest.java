@@ -254,6 +254,12 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		EObject result = getModel(model);
 		assertEquals(model, getSerializer().serialize(result, false));
 	}
+	
+	public void testEObjectRef() throws Exception {
+		String model = "#16 obj refs obj";
+		EObject result = getModel(model);
+		assertEquals(model, getSerializer().serialize(result, false));
+	}
 
 	@Override
 	protected void setUp() throws Exception {
