@@ -18,8 +18,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -81,8 +81,7 @@ public class LazyLinkingResource extends XtextResource {
 						throw new IllegalStateException("linkingService returned more than one object for fragment "
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
-					if (!reference.getEReferenceType().isSuperTypeOf(result.eClass())
-							&& EcorePackage.Literals.EOBJECT != reference.getEReferenceType()) {
+					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),result.eClass())) {
 						XtextLinkingDiagnostic diag = createDiagnostic(triple);
 						if (!getErrors().contains(diag))
 							getErrors().add(diag);

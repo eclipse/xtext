@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -244,7 +243,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			List<CrossReference> xreferences = EcoreUtil2.getAllContentsOfType(rule, CrossReference.class);
 			for (CrossReference xref : xreferences) {
 				EClass type = (EClass) xref.getType().getClassifier();
-				if (type == EcorePackage.Literals.EOBJECT || type.isSuperTypeOf(object.eClass())) {
+				if (EcoreUtil2.isAssignableFrom(type,object.eClass())) {
 					Assignment assignment = GrammarUtil.containingAssignment(xref);
 					if (assignment != null && assignment.getFeature().equals(reference.getName())) {
 						AbstractElement xrefTerminal = xref.getTerminal();

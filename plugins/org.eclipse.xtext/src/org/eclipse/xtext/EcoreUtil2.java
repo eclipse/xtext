@@ -152,31 +152,6 @@ public class EcoreUtil2 extends EcoreUtil {
 		return null;
 	}
 
-	//	public static void saveEPackage(final EPackage ePackage, String path) throws IOException {
-	//		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
-	//		Resource metaModelResource = new XMIResourceFactoryImpl().createResource(uri);
-	//		Map<?, ?> options = Collections.singletonMap(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl() {
-	//			URI originalBaseURI;
-	//			@Override
-	//			public void setBaseURI(URI uri) {
-	//				this.originalBaseURI = uri;
-	//				// fake the base uri
-	//			    super.setBaseURI(URI.createURI(ePackage.getNsURI()));
-	//			}
-	//
-	//			@Override
-	//			public URI deresolve(URI uri) {
-	//				if (uri.trimFragment().equals(baseURI))
-	//					return super.deresolve(uri);
-	//				if (uri.trimFragment().equals(originalBaseURI))
-	//					return deresolve(URI.createURI(baseURI.toString() + '#' + uri.fragment()));
-	//				return uri;
-	//			}
-	//		});
-	//		metaModelResource.getContents().add(ePackage);
-	//		metaModelResource.save(options);
-	//	}
-
 	public static String getURIFragment(EObject eObject) {
 		Resource resource = eObject.eResource();
 		String fragment = resource.getURIFragment(eObject);
@@ -281,7 +256,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
 					EClass expected = (EClass) type;
 					EClass actual = (EClass) existingFeature.getEType();
-					boolean result = (actual == EcorePackage.Literals.EOBJECT || actual.isSuperTypeOf(expected));
+					boolean result = isAssignableFrom(actual, expected);
 					result &= isContainment == ((EReference) existingFeature).isContainment();
 					result &= !((EReference) existingFeature).isContainer();
 					return result;
@@ -374,10 +349,6 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	public static boolean isAssignableFrom(EClass target, EClass candidate) {
 		return (target == EcorePackage.Literals.EOBJECT || target.isSuperTypeOf(candidate));
-	}
-
-	public static boolean isAssignableFrom(EClass target, EObject candidate) {
-		return isAssignableFrom(target, candidate.eClass());
 	}
 
 	@SuppressWarnings("unchecked")
