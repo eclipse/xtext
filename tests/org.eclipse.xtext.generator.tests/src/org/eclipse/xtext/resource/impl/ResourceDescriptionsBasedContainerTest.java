@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
@@ -67,6 +68,10 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 
 		public URI getURI() {
 			return uri;
+		}
+
+		public Iterable<IReferenceDescription> getReferenceDescriptions() {
+			return Iterables.emptyIterable();
 		}
 		
 	}
