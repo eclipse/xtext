@@ -181,18 +181,22 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			CompositeNode rootNode, AbstractNode lastCompleteNode, AbstractNode currentNode,
 			List<ContentAssistContext> result, String prefix,
 			EObject previousModel, Collection<FollowElement> followElements) {
-		Multimap<EObject, FollowElement> contextMap = computeCurrentModel(previousModel, lastCompleteNode, followElements);
-		for (Entry<EObject, Collection<FollowElement>> entry : contextMap.asMap().entrySet()) {
+		Set<AbstractElement> followElementAsAbstractElements = Sets.newLinkedHashSet();
+		computeFollowElements(followElements, followElementAsAbstractElements);
+		Multimap<EObject, AbstractElement> contextMap = computeCurrentModel(previousModel, lastCompleteNode, followElementAsAbstractElements);
+		for (Entry<EObject, Collection<AbstractElement>> entry : contextMap.asMap().entrySet()) {
 			ContentAssistContext context = createContext(viewer, completionOffset, parseResult, rootNode,
 					lastCompleteNode, entry.getKey(), currentNode, prefix);
-			computeFollowElements(entry.getValue(), context);
+			for(AbstractElement element: entry.getValue()) {
+				context.accept(element);
+			}
 			result.add(context);
 		}
 	}
 
-	protected Multimap<EObject, FollowElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
-			Collection<FollowElement> followElements) {
-		Multimap<EObject, FollowElement> result = Multimaps.newArrayListMultimap();
+	protected Multimap<EObject, AbstractElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
+			Collection<AbstractElement> followElements) {
+		Multimap<EObject, AbstractElement> result = Multimaps.newArrayListMultimap();
 		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
 		if (adapter == null || adapter.getParserNode() == null) {
 			result.putAll(currentModel, followElements);
@@ -201,8 +205,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		CompositeNode currentParserNode = adapter.getParserNode();
 		EObject currentGrammarElement = currentParserNode.getGrammarElement();
 		AbstractRule currentRule = getRule(currentGrammarElement);
-		for (FollowElement element : followElements) {
-			AbstractElement grammarElement = element.getGrammarElement();
+		for (AbstractElement grammarElement : followElements) {
 			EObject loopGrammarElement = currentGrammarElement;
 			AbstractRule rule = currentRule;
 			CompositeNode loopParserNode = currentParserNode;
@@ -216,7 +219,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				rule = getRule(loopGrammarElement);
 			}
 			EObject context = NodeUtil.getNearestSemanticObject(loopParserNode);
-			result.put(context, element);
+			result.put(context, grammarElement);
 		}
 		return result;
 	}
@@ -226,6 +229,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			private Set<AbstractRule> visiting = new HashSet<AbstractRule>();
 			private Map<AbstractRule, Boolean> visited = Maps.newHashMapWithExpectedSize(4);
 			private EObject grammarElement = previousGrammarElement;
+			private EObject queuedGrammarElement = nextGrammarElement;
 			private Boolean result = Boolean.FALSE;
 			
 			@Override
@@ -234,8 +238,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					return result;
 				if (!visiting.add(object))
 					return Boolean.FALSE;
-				if (visited.containsKey(object))
+				if (visited.containsKey(object)) {
+					visiting.remove(object);
 					return visited.get(object);
+				}
 				EObject wasGrammarElement = grammarElement;
 				Boolean result = doSwitch(object.getAlternatives());
 				visiting.remove(object);
@@ -246,8 +252,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 			private boolean checkFurther(EObject object) {
 				if (object == grammarElement) {
-					if (grammarElement == previousGrammarElement) {
-						grammarElement = nextGrammarElement;
+					if (queuedGrammarElement != null) {
+						grammarElement = queuedGrammarElement;
+						queuedGrammarElement = null;
 						visited.clear();
 						visiting.clear();
 						return true;
@@ -448,16 +455,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
-	protected void computeFollowElements(Collection<FollowElement> followElements, final ContentAssistContext result) {
+	protected void computeFollowElements(Collection<FollowElement> followElements, final Collection<AbstractElement> result) {
 		FollowElementCalculator calculator = new FollowElementCalculator();
-		calculator.acceptor =
-			new IFollowElementAcceptor(){
-				public void accept(AbstractElement element) {
-					ParserRule rule = GrammarUtil.containingParserRule(element);
-					if (rule == null || !GrammarUtil.isDatatypeRule(rule))
-						result.accept(element);
-				}
-			};
+		calculator.acceptor = new IFollowElementAcceptor(){
+			public void accept(AbstractElement element) {
+				ParserRule rule = GrammarUtil.containingParserRule(element);
+				if (rule == null || !GrammarUtil.isDatatypeRule(rule))
+					result.add(element);
+			}
+		};
 		for(FollowElement element: followElements) {
 			computeFollowElements(calculator, element);
 		}
@@ -485,7 +491,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 		Collection<FollowElement> followElements = parser.getFollowElements(element);
 		for(FollowElement newElement: followElements) {
-			computeFollowElements(calculator, newElement);
+			if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement())
+				computeFollowElements(calculator, newElement);
 		}
 	}
 
