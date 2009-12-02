@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
@@ -43,7 +44,6 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		private IResourceDescription delegate;
 		private IStorage storage;
 		
-		
 		public StorageAwareResourceDescription(IStorage storage, IResourceDescription delegate) {
 			super();
 			this.storage = storage;
@@ -66,6 +66,9 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		}
 		public URI getURI() {
 			return delegate.getURI();
+		}
+		public Iterable<IReferenceDescription> getReferenceDescriptions() {
+			return delegate.getReferenceDescriptions();
 		}
 		public IStorage getStorage() {
 			return storage;

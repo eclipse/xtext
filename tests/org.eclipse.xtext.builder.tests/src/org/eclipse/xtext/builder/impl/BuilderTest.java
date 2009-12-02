@@ -11,6 +11,7 @@ import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.BuilderAccess;
 import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.util.StringInputStream;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -92,11 +95,13 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		waitForAutoBuild();
 		assertEquals(1,events.get(0).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
+		assertEquals(1,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(2,events.get(1).getDeltas().size());
 		assertNumberOfMarkers(fileB, 1);
+		assertEquals(0,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
@@ -145,6 +150,32 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 		waitForAutoBuild();
 		assertNumberOfMarkers(fileB, 1);
 		assertEquals(1, countResourcesInIndex());
+	}
+	
+	public void testFileInJar() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		assertEquals(0, countResourcesInIndex());
+		addJarToClasspath(project, file);
+		waitForAutoBuild();
+		assertEquals(1, countResourcesInIndex());
+	}
+	
+	public void testTwoJars() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		IFile file2 = project.getProject().getFile("bar.jar");
+		file2.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo"), new TextFile("foo/Bar2"+F_EXT, "object Bar references Foo")), true, monitor());
+
+		addJarToClasspath(project, file);
+		addJarToClasspath(project, file2);
+		
+		waitForAutoBuild();
+		assertEquals(3, countResourcesInIndex());
 	}
 
 	@SuppressWarnings("unused")
@@ -209,5 +240,23 @@ public class BuilderTest extends TestCase implements IResourceDescription.Event.
 
 	public void descriptionsChanged(Event event) {
 		this.events.add(event);
+	}
+	
+	public Set<IReferenceDescription> getReferences(URI uri) {
+		Set<IReferenceDescription> desc = Sets.newHashSet();
+		Iterable<IResourceDescription> descriptions = getBuilderState().getAllResourceDescriptions();
+		for (IResourceDescription res : descriptions) {
+			Iterable<IReferenceDescription> descriptions2 = res.getReferenceDescriptions();
+			for (IReferenceDescription ref : descriptions2) {
+				if (uri.hasFragment()) {
+					if (ref.getTargetEObjectUri().equals(uri))
+						desc.add(ref);
+				} else {
+					if (ref.getTargetEObjectUri().trimFragment().equals(uri.trimFragment()))
+						desc.add(ref);
+				}
+			}
+		}
+		return desc;
 	}
 }
