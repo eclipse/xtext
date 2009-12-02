@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -44,13 +45,13 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		}
 
 		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
-			if (eClass != null && (EcorePackage.Literals.EOBJECT == clazz || clazz.isSuperTypeOf(eClass.eClass())) && eClass.getName().equals(name))
+			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()) && eClass.getName().equals(name))
 				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
 			return Collections.emptyList();
 		}
 
 		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-			if (eClass != null && (EcorePackage.Literals.EOBJECT == clazz || clazz.isSuperTypeOf(eClass.eClass())))
+			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()))
 				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
 			return Collections.emptyList();
 		}
