@@ -9,12 +9,13 @@
 grammar org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate simplerewritetest "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Op returns Expression: 
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef;
 	
 Atom: 
 	name=ID;
@@ -87,3 +88,9 @@ AbstractMulti2:
 	
 ConcreteMulti:
 	m1=ID m2=ID;
+	
+EObjectRef:
+	'#16' obj=EObjectElement 'refs' ref=[ecore::EObject|ID];
+	
+EObjectElement:
+	name=ID;

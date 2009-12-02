@@ -19,6 +19,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
@@ -214,6 +216,20 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass concreteMultiEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eObjectRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eObjectElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -880,6 +896,56 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEObjectRef()
+  {
+    return eObjectRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEObjectRef_Obj()
+  {
+    return (EReference)eObjectRefEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEObjectRef_Ref()
+  {
+    return (EReference)eObjectRefEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEObjectElement()
+  {
+    return eObjectElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEObjectElement_Name()
+  {
+    return (EAttribute)eObjectElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -1008,6 +1074,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     concreteMultiEClass = createEClass(CONCRETE_MULTI);
 
+    eObjectRefEClass = createEClass(EOBJECT_REF);
+    createEReference(eObjectRefEClass, EOBJECT_REF__OBJ);
+    createEReference(eObjectRefEClass, EOBJECT_REF__REF);
+
+    eObjectElementEClass = createEClass(EOBJECT_ELEMENT);
+    createEAttribute(eObjectElementEClass, EOBJECT_ELEMENT__NAME);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -1061,6 +1134,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     multiInheritanceBug280439EClass.getESuperTypes().add(this.getExpression());
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti1());
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti2());
+    eObjectRefEClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1146,6 +1220,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEAttribute(getAbstractMulti2_M2(), ecorePackage.getEString(), "m2", null, 0, 1, AbstractMulti2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(concreteMultiEClass, ConcreteMulti.class, "ConcreteMulti", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eObjectRefEClass, EObjectRef.class, "EObjectRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEObjectRef_Obj(), this.getEObjectElement(), null, "obj", null, 0, 1, EObjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEObjectRef_Ref(), ecorePackage.getEObject(), null, "ref", null, 0, 1, EObjectRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eObjectElementEClass, EObjectElement.class, "EObjectElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEObjectElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, EObjectElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

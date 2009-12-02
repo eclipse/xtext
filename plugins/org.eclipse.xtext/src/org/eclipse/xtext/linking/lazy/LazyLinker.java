@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -199,7 +200,8 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	private boolean isInstantiatableSubType(EClass c, EClass superType) {
-		return !c.isAbstract() && !c.isInterface() && superType.isSuperTypeOf(c);
+		return !c.isAbstract() && !c.isInterface()
+				&& (superType.isSuperTypeOf(c) || superType == EcorePackage.Literals.EOBJECT);
 	}
 
 	public LazyURIEncoder getEncoder() {

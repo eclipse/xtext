@@ -71,16 +71,17 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDuplicateBug284491ParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		private final RuleCall cEmptyObjectBug284850ParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
 		private final RuleCall cMultiInheritanceBug280439ParserRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
+		private final RuleCall cEObjectRefParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//  EmptyObjectBug284850|MultiInheritanceBug280439;
+		//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//EmptyObjectBug284850|MultiInheritanceBug280439
+		//EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -139,6 +140,9 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//MultiInheritanceBug280439
 		public RuleCall getMultiInheritanceBug280439ParserRuleCall_18() { return cMultiInheritanceBug280439ParserRuleCall_18; }
+
+		//EObjectRef
+		public RuleCall getEObjectRefParserRuleCall_19() { return cEObjectRefParserRuleCall_19; }
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
@@ -1084,6 +1088,62 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getM2IDTerminalRuleCall_1_0() { return cM2IDTerminalRuleCall_1_0; }
 	}
+
+	public class EObjectRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EObjectRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cObjAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cObjEObjectElementParserRuleCall_1_0 = (RuleCall)cObjAssignment_1.eContents().get(0);
+		private final Keyword cRefsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cRefAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cRefEObjectCrossReference_3_0 = (CrossReference)cRefAssignment_3.eContents().get(0);
+		private final RuleCall cRefEObjectIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEObjectCrossReference_3_0.eContents().get(1);
+		
+		//EObjectRef:
+		//  "#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+		public ParserRule getRule() { return rule; }
+
+		//"#16" obj=EObjectElement "refs" ref=[ecore::EObject]
+		public Group getGroup() { return cGroup; }
+
+		//"#16"
+		public Keyword getNumberSignDigitOneDigitSixKeyword_0() { return cNumberSignDigitOneDigitSixKeyword_0; }
+
+		//obj=EObjectElement
+		public Assignment getObjAssignment_1() { return cObjAssignment_1; }
+
+		//EObjectElement
+		public RuleCall getObjEObjectElementParserRuleCall_1_0() { return cObjEObjectElementParserRuleCall_1_0; }
+
+		//"refs"
+		public Keyword getRefsKeyword_2() { return cRefsKeyword_2; }
+
+		//ref=[ecore::EObject]
+		public Assignment getRefAssignment_3() { return cRefAssignment_3; }
+
+		//[ecore::EObject]
+		public CrossReference getRefEObjectCrossReference_3_0() { return cRefEObjectCrossReference_3_0; }
+
+		//ID
+		public RuleCall getRefEObjectIDTerminalRuleCall_3_0_1() { return cRefEObjectIDTerminalRuleCall_3_0_1; }
+	}
+
+	public class EObjectElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EObjectElement");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//EObjectElement:
+		//  name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -1112,6 +1172,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	private AbstractMulti1Elements pAbstractMulti1;
 	private AbstractMulti2Elements pAbstractMulti2;
 	private ConcreteMultiElements pConcreteMulti;
+	private EObjectRefElements pEObjectRef;
+	private EObjectElementElements pEObjectElement;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1147,7 +1209,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Term returns Expression:
 	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-	//  EmptyObjectBug284850|MultiInheritanceBug280439;
+	//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1394,6 +1456,26 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getConcreteMultiRule() {
 		return getConcreteMultiAccess().getRule();
+	}
+
+	//EObjectRef:
+	//  "#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+	public EObjectRefElements getEObjectRefAccess() {
+		return (pEObjectRef != null) ? pEObjectRef : (pEObjectRef = new EObjectRefElements());
+	}
+	
+	public ParserRule getEObjectRefRule() {
+		return getEObjectRefAccess().getRule();
+	}
+
+	//EObjectElement:
+	//  name=ID;
+	public EObjectElementElements getEObjectElementAccess() {
+		return (pEObjectElement != null) ? pEObjectElement : (pEObjectElement = new EObjectElementElements());
+	}
+	
+	public ParserRule getEObjectElementRule() {
+		return getEObjectElementAccess().getRule();
 	}
 
 	//terminal ID:

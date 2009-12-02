@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 
@@ -136,9 +137,11 @@ public class InstanceDescription implements IInstanceDescription {
 	public boolean isInstanceOf(EClassifier classifier) {
 		if (!(classifier instanceof EClass))
 			return false;
+		if (classifier == EcorePackage.Literals.EOBJECT)
+			return true;
 		return ((EClass) classifier).isSuperTypeOf(getDelegate().eClass());
 	}
-
+	
 	private int nextID(EStructuralFeature f, int lastId) {
 		int myLastId = lastId;
 		if (f.isMany()) {

@@ -17,6 +17,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.DuplicateBug284491;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectElement;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
@@ -304,6 +306,21 @@ public class SimplerewritetestSwitch<T>
         T result = caseConcreteMulti(concreteMulti);
         if (result == null) result = caseAbstractMulti1(concreteMulti);
         if (result == null) result = caseAbstractMulti2(concreteMulti);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.EOBJECT_REF:
+      {
+        EObjectRef eObjectRef = (EObjectRef)theEObject;
+        T result = caseEObjectRef(eObjectRef);
+        if (result == null) result = caseExpression(eObjectRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.EOBJECT_ELEMENT:
+      {
+        EObjectElement eObjectElement = (EObjectElement)theEObject;
+        T result = caseEObjectElement(eObjectElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -699,6 +716,38 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseConcreteMulti(ConcreteMulti object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EObject Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEObjectRef(EObjectRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EObject Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEObjectElement(EObjectElement object)
   {
     return null;
   }

@@ -242,6 +242,24 @@ public interface SimplerewritetestFactory extends EFactory
   ConcreteMulti createConcreteMulti();
 
   /**
+   * Returns a new object of class '<em>EObject Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EObject Ref</em>'.
+   * @generated
+   */
+  EObjectRef createEObjectRef();
+
+  /**
+   * Returns a new object of class '<em>EObject Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EObject Element</em>'.
+   * @generated
+   */
+  EObjectElement createEObjectElement();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

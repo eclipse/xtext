@@ -342,6 +342,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_MultiInheritanceBug280439_18.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getEObjectRefParserRuleCall_19(), currentNode); 
+    }
+    this_EObjectRef_19=ruleEObjectRef
+    { 
+        $current = $this_EObjectRef_19.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -2040,6 +2050,118 @@ ruleConcreteMulti returns [EObject current=null]
 
 )
 ));
+
+
+
+
+
+// Entry rule entryRuleEObjectRef
+entryRuleEObjectRef returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEObjectRefRule(), currentNode); }
+	 iv_ruleEObjectRef=ruleEObjectRef 
+	 { $current=$iv_ruleEObjectRef.current; } 
+	 EOF 
+;
+
+// Rule EObjectRef
+ruleEObjectRef returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#16' 
+    {
+        createLeafNode(grammarAccess.getEObjectRefAccess().getNumberSignDigitOneDigitSixKeyword_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEObjectRefAccess().getObjEObjectElementParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_obj_1_0=ruleEObjectElement		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEObjectRefRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"obj",
+	        		lv_obj_1_0, 
+	        		"EObjectElement", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)'refs' 
+    {
+        createLeafNode(grammarAccess.getEObjectRefAccess().getRefsKeyword_2(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getEObjectRefRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getEObjectRefAccess().getRefEObjectCrossReference_3_0(), "ref"); 
+	}
+
+)
+));
+
+
+
+
+
+// Entry rule entryRuleEObjectElement
+entryRuleEObjectElement returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEObjectElementRule(), currentNode); }
+	 iv_ruleEObjectElement=ruleEObjectElement 
+	 { $current=$iv_ruleEObjectElement.current; } 
+	 EOF 
+;
+
+// Rule EObjectElement
+ruleEObjectElement returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+(
+		lv_name_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEObjectElementRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+);
 
 
 
