@@ -31,7 +31,7 @@
 			
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
 				<options backtrack="true"/>
 			</fragment>

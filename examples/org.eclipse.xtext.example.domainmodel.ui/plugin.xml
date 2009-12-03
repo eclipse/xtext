@@ -12,8 +12,6 @@
 			type="dmodel">
 		</parser>
 	</extension>
-	
-
 
 	<extension
 			point="org.eclipse.ui.editors">
@@ -130,11 +128,6 @@
       <markerResolutionGenerator
             class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider">
       </markerResolutionGenerator>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.core.languageBuilder">
-      <languageBuilder
-            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder"/>
    </extension>
 
 </plugin>

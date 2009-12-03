@@ -5,10 +5,13 @@ package org.eclipse.xtext.example;
 
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingConfiguration;
-import org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
-import org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIProjectImpl;
+import org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager;
+
+import com.google.inject.Binder;
 
 
 /**
@@ -25,12 +28,17 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	}
 	
 	@Override
-	public Class<? extends IContainerDependencyProvider> bindIContainerDependencyProvider() {
-		return ContainerDependencyProviderIProjectImpl.class;
+	public Class<? extends Manager> bindIContainer$Manager() {
+		return JavaProjectAwareContainerManager.class;
 	}
 	
 	@Override
-	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder.class;
+	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
+		return super.bindIResourceDescriptions();
+	}
+	
+	@Override
+	public void configureIResourceDescriptionsBuilderScope(Binder binder) {
+		super.configureIResourceDescriptionsBuilderScope(binder);
 	}
 }

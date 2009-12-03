@@ -123,6 +123,11 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
+		return org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> bindIExternalContentSupport$IExternalContentProvider() {
 		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.class;
 	}
@@ -167,19 +172,14 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 		return org.eclipse.xtext.example.contentassist.DomainmodelProposalProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider.class;
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider> bindIContainerDependencyProvider() {
-		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder.class;
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
+		return org.eclipse.xtext.ui.core.scoping.namespaces.ProjectAwareContainerManager.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
