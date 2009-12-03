@@ -49,4 +49,8 @@ public class JavaElementBasedContainer extends ResourceDescriptionsBasedContaine
 		return fragmentRoot;
 	}
 
+	@Override
+	public String toString() {
+		return fragmentRoot.toString();
+	}
 }
