@@ -11,10 +11,6 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.common.tests");
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug281198ParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug282031ParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug281198Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug282031Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.Bug286935Test.class);
@@ -34,6 +30,10 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.XtextContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.XtextGrammarUiContentAssistTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug281198ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug282031ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DeclarativeSemanticModelTransformerTest.class);
