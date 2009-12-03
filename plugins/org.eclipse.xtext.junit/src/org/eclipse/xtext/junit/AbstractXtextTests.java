@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
@@ -64,6 +66,9 @@ public abstract class AbstractXtextTests extends TestCase {
 	private HashMap<EPackage, Object> validatorReg;
 	private HashMap<String, Object> epackageReg;
 	private boolean canCreateInjector;
+	private HashMap<String, Object> protocolToFactoryMap;
+	private HashMap<String, Object> extensionToFactoryMap;
+	private HashMap<String, Object> contentTypeIdentifierToFactoryMap;
 
 	static {
 		//EMF Standalone setup
@@ -83,6 +88,9 @@ public abstract class AbstractXtextTests extends TestCase {
 		canCreateInjector = true;
 		this.validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
 		this.epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
+		this.protocolToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
+		this.extensionToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
+		this.contentTypeIdentifierToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap());
 	}
 
 	@Override
@@ -93,6 +101,13 @@ public abstract class AbstractXtextTests extends TestCase {
 
 		EPackage.Registry.INSTANCE.clear();
 		EPackage.Registry.INSTANCE.putAll(epackageReg);
+		
+		Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().clear();
+		Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToFactoryMap);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().clear();
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToFactoryMap);
+		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToFactoryMap);
 		super.tearDown();
 	}
 
