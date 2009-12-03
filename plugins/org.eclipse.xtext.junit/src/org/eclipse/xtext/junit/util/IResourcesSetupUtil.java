@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
@@ -204,5 +205,13 @@ public class IResourcesSetupUtil {
 				iProject.delete(true,true, monitor());
 			}
 		}
+	}
+	
+	public static String printMarker(IMarker[] markers) throws CoreException {
+		String s = "";
+		for (IMarker iMarker : markers) {
+			s += "," + iMarker.getAttribute(IMarker.MESSAGE);
+		}
+		return s;
 	}
 }

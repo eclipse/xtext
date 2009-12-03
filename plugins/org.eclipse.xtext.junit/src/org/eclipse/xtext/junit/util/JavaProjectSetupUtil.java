@@ -10,8 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
@@ -25,7 +24,6 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -33,6 +31,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
+
+import com.google.common.collect.Lists;
 
 public class JavaProjectSetupUtil {
 
@@ -89,13 +89,21 @@ public class JavaProjectSetupUtil {
 		return folder;
 	}
 
-	public static void addProjectReference(IProject referencer, IProject referenced) throws CoreException {
-		IProjectDescription description = referencer.getDescription();
-		List<IProject> referencedProjects = new ArrayList<IProject>(Arrays.asList(description.getReferencedProjects()));
-		referencedProjects.add(referenced);
-		IProject[] refProjectsArray = referencedProjects.toArray(new IProject[referencedProjects.size()]);
-		description.setReferencedProjects(refProjectsArray);
-		referencer.setDescription(description, new NullProgressMonitor());
+	public static void addProjectReference(IJavaProject from, IJavaProject to) throws CoreException {
+		addToClasspath(from, JavaCore.newProjectEntry(to.getPath()));
+	}
+	
+	public static void removeProjectReference(IJavaProject from, IJavaProject to) throws CoreException {
+		List<IClasspathEntry> classpath = Lists.newArrayList(from.getRawClasspath());
+		Iterator<IClasspathEntry> iterator = classpath.iterator();
+		while (iterator.hasNext()) {
+			IClasspathEntry entry = iterator.next();
+			if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+				if (entry.getPath().equals(to.getPath()))
+					iterator.remove();
+			}
+		}
+		from.setRawClasspath(classpath.toArray(new IClasspathEntry[classpath.size()]), monitor());
 	}
 
 	public static void deleteJavaProject(IJavaProject javaProject) throws CoreException {
