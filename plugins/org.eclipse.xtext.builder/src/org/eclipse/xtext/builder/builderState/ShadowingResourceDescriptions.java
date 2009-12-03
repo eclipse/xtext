@@ -130,7 +130,7 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		this.resourceDescriptions = Maps.newHashMap();
 		for (Map.Entry<URI,IStorage> toBeUpdated : adapter.getToBeUpdated().entrySet()) {
 			URI uri = toBeUpdated.getKey();
-			if (!adapter.getDeletedUris().contains(uri) && !resourceDescriptions.containsKey(uri)) {
+			if (!resourceDescriptions.containsKey(uri)) {
 				IResourceDescription description = shadowing.getResourceDescription(uri);
 				resourceDescriptions.put(uri, new StorageAwareResourceDescription(toBeUpdated.getValue(),description));
 			}

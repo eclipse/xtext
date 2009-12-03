@@ -63,7 +63,7 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
 			List<IContainer> result = Lists.newArrayListWithExpectedSize(roots.length);
 			for (IPackageFragmentRoot root : roots) {
-				if (root != null)
+				if (root != null && !"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
 					result.add(createContainer(root, resourceDescriptions));
 			}
 			return result;

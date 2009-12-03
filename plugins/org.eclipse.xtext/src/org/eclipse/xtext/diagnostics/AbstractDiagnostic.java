@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.diagnostics;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,6 +38,16 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 
 	public String getLocation() {
 		return null;
+	}
+
+	public URI getUriToProblem() {
+		AbstractNode node = getNode();
+		if (node == null)
+			return null;
+		EObject eObject = NodeUtil.getNearestSemanticObject(node);
+		if (eObject==null || eObject.eResource()==null)
+			return null;
+		return EcoreUtil.getURI(eObject);
 	}
 
 	@Override

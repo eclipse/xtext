@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -39,6 +40,9 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;
 			issue.setOffset(xtextDiagnostic.getOffset());
 			issue.setLength(xtextDiagnostic.getLength());
+		}
+		if (diagnostic instanceof AbstractDiagnostic) {
+			issue.setUriToProblem(((AbstractDiagnostic)diagnostic).getUriToProblem());
 		}
 		acceptor.accept(issue);
 	}
