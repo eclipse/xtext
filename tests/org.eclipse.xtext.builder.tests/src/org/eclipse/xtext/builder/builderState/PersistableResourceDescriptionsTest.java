@@ -47,11 +47,10 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
+		with(new BuilderTestLanguageStandaloneSetup());
 		BuilderModule module = new BuilderModule();
 		builderInjector = Guice.createInjector(module);
 		builderState = builderInjector.getInstance(PersistableResourceDescriptionsImpl.class);
-		with(new BuilderTestLanguageStandaloneSetup());
-
 		uriConverter = new ExtensibleURIConverterImpl() {
 			@Override
 			public InputStream createInputStream(org.eclipse.emf.common.util.URI uri, Map<?, ?> options)
@@ -67,6 +66,15 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 				return resourceSetImpl;
 			}
 		});
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		builderInjector = null;
+		fileSystem = Maps.newHashMap();
+		uriConverter = null;
+		builderState = null;
 	}
 
 	public void testSimpleAdd() throws Exception {

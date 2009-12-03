@@ -25,6 +25,8 @@ public class JdtBuilderModule extends BuilderModule {
 		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
 		bind(IUriUtil.class).to(JdtUriUtil.class);
 		bind(IStorageUtil.class).to(JdtStorageUtil.class);
+		bind(ElementChangeListener.class).asEagerSingleton();
 	}
+	
 	
 }

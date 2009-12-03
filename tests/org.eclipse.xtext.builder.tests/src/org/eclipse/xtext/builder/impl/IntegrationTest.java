@@ -1,0 +1,267 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.builder.impl;
+
+import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
+import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.util.StringInputStream;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+public class IntegrationTest extends AbstractBuilderTest {
+
+	private IJavaProject foo_project;
+	private IJavaProject bar_project;
+	private IFile foo_file;
+	private IFile bar_file;
+
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		cleanWorkspace();
+		waitForAutoBuild();
+	}
+
+	public void testValidSimpleModel() throws Exception {
+		createJavaProjectWithRootSrc("foo");
+		IFile file = createFile("foo/src/foo"+F_EXT, "object Foo ");
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(file));
+	}
+
+	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
+		IJavaProject project = createJavaProject(string);
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addSourceFolder(project, "src");
+		return project;
+	}
+
+	public void testSimpleModelWithSyntaxError() throws Exception {
+		createJavaProjectWithRootSrc("foo");
+		IFile file = createFile("foo/src/foo"+F_EXT, "objekt Foo ");
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(file));
+	}
+
+	public void testTwoFilesInSameProject() throws Exception {
+		createJavaProjectWithRootSrc("foo");
+		IFile file1 = createFile("foo/src/foo"+F_EXT, "object Foo ");
+		IFile file2 = createFile("foo/src/bar"+F_EXT, "object Bar references Foo");
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(file1));
+		assertEquals(0, countMarkers(file2));
+		assertTrue(indexContainsElement(file1.getFullPath().toString(),"Foo"));
+		assertTrue(indexContainsElement(file2.getFullPath().toString(),"Bar"));
+		assertEquals(2, countResourcesInIndex());
+	}
+	
+	protected String printMarkers(IMarker[] findMarkers) throws CoreException {
+		StringBuffer buff = new StringBuffer();
+		for (IMarker iMarker : findMarkers) {
+			buff.append("\n");
+			buff.append(iMarker.getAttribute(IMarker.MESSAGE));
+		}
+		return buff.toString();
+	}
+
+	public void testTwoFilesInSameProjectWithLinkingError() throws Exception {
+		createJavaProjectWithRootSrc("foo");
+		createFile("foo/src/foo"+F_EXT, "object Foo ");
+		IFile file = createFile("foo/src/bar"+F_EXT, "object Bar references Fuu");
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(file));
+	}
+	
+	public void testTwoFilesInTwoReferencedProjects() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+	}
+	
+	protected void createTwoFilesInTwoReferencedProjects() throws Exception {
+		foo_project = createJavaProjectWithRootSrc("foo");
+		bar_project = createJavaProjectWithRootSrc("bar");
+		foo_file = createFile("foo/src/foo"+F_EXT, "object Foo ");
+		bar_file = createFile("bar/src/bar"+F_EXT, "object Bar references Foo");
+		addProjectReference(bar_project, foo_project);
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(0, countMarkers(bar_file));
+	}
+
+	public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		removeProjectReference(bar_project, foo_project);
+		waitForAutoBuild();
+		addProjectReference(foo_project, bar_project);
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(1, countMarkers(bar_file));
+	}
+
+	public void testTwoFilesInTwoNonReferencedProjects() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		removeProjectReference(bar_project, foo_project);
+
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(1, countMarkers(bar_file));
+	}
+
+	public void testChangeReferenceOfProjects() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		
+		removeProjectReference(bar_project, foo_project);
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(1, countMarkers(bar_file));
+		
+		addProjectReference(bar_project, foo_project);
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(0, countMarkers(bar_file));
+	}
+
+	public void testOpenAndCloseReferencedProjects() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		// close project
+		foo_project.getProject().close(monitor());
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(bar_file));
+		foo_project.getProject().open(monitor());
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(bar_file));
+	}
+
+	public void testChangeReferencedFile() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		
+		// change referenced file
+		foo_file.setContents(new StringInputStream("object Baz "),true,true,monitor());
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(bar_file));
+		
+		//change back to valid state
+		foo_file.setContents(new StringInputStream("object Foo "),true,true,monitor());
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(bar_file));
+	}
+	
+	public void testDeleteReferencedFile() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		
+		// delete referenced file
+		foo_file.delete(true, new NullProgressMonitor());
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(bar_file));
+		
+		// create new
+		foo_file = createFile("foo/src/foo"+F_EXT, "object Foo ");
+		waitForAutoBuild();
+		assertEquals(0, countMarkers(foo_file));
+		assertEquals(0, countMarkers(bar_file));
+	}
+	
+	public void testUpdateOfReferencedFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		IFile fileB = folder.getFile("Boo" + F_EXT);
+		fileB.create(new StringInputStream("object Bar references Foo"), true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
+		assertTrue(indexContainsElement(fileB.getFullPath().toString(),"Bar"));
+		assertEquals(2, countResourcesInIndex());
+		
+		getBuilderState().addListener(this);
+		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
+		waitForAutoBuild();
+		assertEquals(1,getEvents().get(0).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
+		assertEquals(1,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
+		
+		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
+		waitForAutoBuild();
+		assertEquals(2,getEvents().get(1).getDeltas().size());
+		assertNumberOfMarkers(fileB, 1);
+		assertEquals(0,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
+		
+		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
+		waitForAutoBuild();
+		assertEquals(2,getEvents().get(2).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
+		
+		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
+		waitForAutoBuild();
+		assertEquals(1,getEvents().get(3).getDeltas().size());
+		assertNumberOfMarkers(fileB, 0);
+	}
+	
+	public void testDeleteFile() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
+		assertEquals(1, countResourcesInIndex());
+		
+		getBuilderState().addListener(this);
+		file.delete(true, monitor());
+		waitForAutoBuild();
+		assertEquals(1,getEvents().get(0).getDeltas().size());
+		assertNull(getEvents().get(0).getDeltas().get(0).getNew());
+		assertEquals(0, countResourcesInIndex());
+	}
+	
+	public void testFileInJar() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		assertEquals(0, countResourcesInIndex());
+		addJarToClasspath(project, file);
+		waitForAutoBuild();
+		assertEquals(1, countResourcesInIndex());
+	}
+	
+	public void testTwoJars() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFile file = project.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		IFile file2 = project.getProject().getFile("bar.jar");
+		file2.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo"), new TextFile("foo/Bar2"+F_EXT, "object Bar references Foo")), true, monitor());
+
+		addJarToClasspath(project, file);
+		addJarToClasspath(project, file2);
+		
+		waitForAutoBuild();
+		assertEquals(3, countResourcesInIndex());
+	}
+
+	private int countMarkers(IFile file) throws CoreException {
+		return file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length;
+	}
+
+}

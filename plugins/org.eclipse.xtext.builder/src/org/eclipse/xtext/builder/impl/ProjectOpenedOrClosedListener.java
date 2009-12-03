@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -14,10 +16,15 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -33,10 +40,10 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	@Inject
 	private IBuilderState builderState;
 	
-	public void resourceChanged(IResourceChangeEvent event) {
-		final NullProgressMonitor monitor = new NullProgressMonitor();
+	public void resourceChanged(final IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 			try {
+				final Set<IProject> toUpdate = Sets.newLinkedHashSet();
 				event.getDelta().accept(new IResourceDeltaVisitor() {
 
 					public boolean visit(IResourceDelta delta) throws CoreException {
@@ -45,21 +52,31 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						if (delta.getResource() instanceof IProject) {
 							IProject project = (IProject) delta.getResource();
 							if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
-								ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, monitor);
-								builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
+								toUpdate.add(project);
 							}
 						}
 						return false;
 					}
 				});
+				new UpdateProjectsJob("updating projects", toUpdate, toBeBuiltComputer, builderState).schedule();
 			} catch (CoreException e) {
 				log.error(e);
 			}
 		}
 		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
 			if (event.getResource() instanceof IProject) {
-				ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), monitor);
-				builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
+				new Job("removing project "+event.getResource().getName()+" from xtext index.") {
+					{
+						setRule(ResourcesPlugin.getWorkspace().getRoot());
+						this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
+					}
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), monitor);
+						builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
+						return Status.OK_STATUS;
+					}
+				}.schedule();
 			}
 		}
 	}
