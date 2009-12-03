@@ -17,4 +17,5 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel;bundle-version="0.8.0",
  org.eclipse.jdt.core;bundle-version="3.5.0",
  org.eclipse.xtext.common.types.ui;bundle-version="0.8.0",
  org.eclipse.xtext.ui.integration.tests;bundle-version="0.8.0",
- org.eclipse.xtext.junit;bundle-version="0.8.0"
+ org.eclipse.xtext.junit;bundle-version="0.8.0",
+ org.eclipse.xtext.builder;bundle-version="0.8.0"
