@@ -36,7 +36,7 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 }
 
 @parser::members {
- 
+
  	private AbstractTestLanguageGrammarAccess grammarAccess;
  	
     public InternalAbstractTestLanguageParser(TokenStream input, IAstFactory factory, AbstractTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleInheritedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null); 
     }
@@ -134,7 +134,7 @@ ruleOverridableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0(), null); 
     }
@@ -187,7 +187,7 @@ ruleExtendableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0(), null); 
     }

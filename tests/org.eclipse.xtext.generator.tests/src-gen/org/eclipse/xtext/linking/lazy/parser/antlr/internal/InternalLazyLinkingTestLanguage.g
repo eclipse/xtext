@@ -36,7 +36,7 @@ import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAcc
 }
 
 @parser::members {
- 
+
  	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLazyLinkingTestLanguageParser(TokenStream input, IAstFactory factory, LazyLinkingTestLanguageGrammarAccess grammarAccess) {
@@ -128,7 +128,7 @@ ruleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('type' 
+(	'type' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getTypeKeyword_0(), null); 
     }
@@ -156,7 +156,7 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)('extends' 
+)(	'extends' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null); 
     }
@@ -174,7 +174,7 @@ ruleType returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getFullStopKeyword_2_2(), null); 
     }
@@ -192,7 +192,7 @@ ruleType returns [EObject current=null]
 	}
 
 )
-))?('for' 
+))?(	'for' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getForKeyword_3_0(), null); 
     }
@@ -210,7 +210,7 @@ ruleType returns [EObject current=null]
 	}
 
 )
-)'in' 
+)	'in' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getInKeyword_3_2(), null); 
     }
@@ -228,7 +228,7 @@ ruleType returns [EObject current=null]
 	}
 
 )
-))?'{' 
+))?	'{' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getLeftCurlyBracketKeyword_4(), null); 
     }
@@ -280,7 +280,7 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7(), null); 
     }
@@ -343,7 +343,7 @@ ruleProperty returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getPropertyAccess().getSemicolonKeyword_2(), null); 
     }
@@ -368,7 +368,7 @@ ruleUnresolvedProxyProperty returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('unresolved' 
+(	'unresolved' 
     {
         createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getUnresolvedKeyword_0(), null); 
     }
@@ -410,7 +410,7 @@ ruleUnresolvedProxyProperty returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3(), null); 
     }

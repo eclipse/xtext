@@ -36,7 +36,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
 }
 
 @parser::members {
- 
+
  	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMultiValueFeatureTestLanguageParser(TokenStream input, IAstFactory factory, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {

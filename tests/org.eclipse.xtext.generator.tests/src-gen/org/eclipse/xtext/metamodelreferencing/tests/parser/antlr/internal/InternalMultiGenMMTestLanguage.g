@@ -36,7 +36,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 }
 
 @parser::members {
- 
+
  	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMultiGenMMTestLanguageParser(TokenStream input, IAstFactory factory, MultiGenMMTestLanguageGrammarAccess grammarAccess) {

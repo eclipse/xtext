@@ -37,7 +37,7 @@ import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarA
 }
 
 @parser::members {
- 
+
  	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
  	
     public InternalEnumAndReferenceTestLanguageParser(TokenStream input, IAstFactory factory, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
@@ -132,7 +132,7 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 	    }
 
 )
-)'reference' 
+)	'reference' 
     {
         createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null); 
     }

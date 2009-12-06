@@ -37,7 +37,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLangu
 }
 
 @parser::members {
- 
+
  	private HiddenTokensMergerTestLanguageGrammarAccess grammarAccess;
  	
     public InternalHiddenTokensMergerTestLanguageParser(TokenStream input, IAstFactory factory, HiddenTokensMergerTestLanguageGrammarAccess grammarAccess) {
@@ -124,7 +124,7 @@ ruleDatatypeBug286557 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('#1' 
+(	'#1' 
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getNumberSignDigitOneKeyword_0(), null); 
     }
@@ -152,7 +152,7 @@ ruleDatatypeBug286557 returns [EObject current=null]
 	    }
 
 )
-)('ref' 
+)(	'ref' 
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getRefKeyword_2_0(), null); 
     }
@@ -172,7 +172,7 @@ ruleDatatypeBug286557 returns [EObject current=null]
 	    }
 
 )
-))?';' 
+))?	';' 
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getSemicolonKeyword_3(), null); 
     }
@@ -239,11 +239,11 @@ ruleEnumBug returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('#2' 
+(	'#2' 
     {
         createLeafNode(grammarAccess.getEnumBugAccess().getNumberSignDigitTwoKeyword_0(), null); 
     }
-'kw1' 
+	'kw1' 
     {
         createLeafNode(grammarAccess.getEnumBugAccess().getKw1Keyword_1(), null); 
     }

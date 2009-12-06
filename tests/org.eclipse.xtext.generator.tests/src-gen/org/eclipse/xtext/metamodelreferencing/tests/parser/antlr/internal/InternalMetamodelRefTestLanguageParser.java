@@ -43,7 +43,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g"; }
 
 
-     
+
      	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
      	
         public InternalMetamodelRefTestLanguageParser(TokenStream input, IAstFactory factory, MetamodelRefTestLanguageGrammarAccess grammarAccess) {

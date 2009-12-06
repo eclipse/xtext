@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 }
 
 @parser::members {
- 
+
  	private LookaheadTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLookaheadTestLanguageParser(TokenStream input, IAstFactory factory, LookaheadTestLanguageGrammarAccess grammarAccess) {
@@ -178,13 +178,13 @@ ruleLookAhead0 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('bar' 
+(	'bar' 
     {
         createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
     }
 (
 (
-		lv_x_1_0='a' 
+		lv_x_1_0=	'a' 
     {
         createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
     }
@@ -224,7 +224,7 @@ ruleLookAhead1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('foo' 
+(	'foo' 
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
     }
@@ -254,7 +254,7 @@ ruleLookAhead1 returns [EObject current=null]
 )
 )(
 (
-		lv_x_2_0='b' 
+		lv_x_2_0=	'b' 
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
     }
@@ -275,7 +275,7 @@ ruleLookAhead1 returns [EObject current=null]
 )
 )(
 (
-		lv_x_3_0='d' 
+		lv_x_3_0=	'd' 
     {
         createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
     }
@@ -317,7 +317,7 @@ ruleLookAhead2 returns [EObject current=null]
     }:
 (((
 (
-		lv_z_0_0='foo' 
+		lv_z_0_0=	'foo' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
     }
@@ -339,7 +339,7 @@ ruleLookAhead2 returns [EObject current=null]
 )
     |(
 (
-		lv_z_1_0='bar' 
+		lv_z_1_0=	'bar' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
     }
@@ -358,7 +358,7 @@ ruleLookAhead2 returns [EObject current=null]
 	    }
 
 )
-))'c' 
+))	'c' 
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
     }
@@ -383,17 +383,17 @@ ruleLookAhead3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('foo' 
+(	'foo' 
     {
         createLeafNode(grammarAccess.getLookAhead3Access().getFooKeyword_0(), null); 
     }
-'bar' 
+	'bar' 
     {
         createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
     }
 (
 (
-		lv_x_2_0='b' 
+		lv_x_2_0=	'b' 
     {
         createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
     }
@@ -459,7 +459,7 @@ ruleLookAhead4 returns [EObject current=null]
     }:
 ((
 (
-		lv_x_0_0='c' 
+		lv_x_0_0=	'c' 
     {
         createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
     }
@@ -481,7 +481,7 @@ ruleLookAhead4 returns [EObject current=null]
 )
     |(
 (
-		lv_x_1_0='d' 
+		lv_x_1_0=	'd' 
     {
         createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
     }

@@ -49,7 +49,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalAntlrPa
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug288760TestLanguage.g"; }
 
 
-     
+
      	private Bug288760TestLanguageGrammarAccess grammarAccess;
      	
         public InternalBug288760TestLanguageParser(TokenStream input, IAstFactory factory, Bug288760TestLanguageGrammarAccess grammarAccess) {

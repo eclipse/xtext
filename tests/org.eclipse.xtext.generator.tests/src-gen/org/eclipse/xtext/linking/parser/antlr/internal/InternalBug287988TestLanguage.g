@@ -36,7 +36,7 @@ import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private Bug287988TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug287988TestLanguageParser(TokenStream input, IAstFactory factory, Bug287988TestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('actions' 
+((	'actions' 
     {
         createLeafNode(grammarAccess.getModelAccess().getActionsKeyword_0_0(), null); 
     }
@@ -112,7 +112,7 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |('simple' 
+    |(	'simple' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSimpleKeyword_1_0(), null); 
     }
@@ -141,7 +141,7 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |('rulecall' 
+    |(	'rulecall' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRulecallKeyword_2_0(), null); 
     }
@@ -170,7 +170,7 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |('rulecall2' 
+    |(	'rulecall2' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRulecall2Keyword_3_0(), null); 
     }
@@ -199,7 +199,7 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |('rulecall3' 
+    |(	'rulecall3' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRulecall3Keyword_4_0(), null); 
     }
@@ -228,7 +228,7 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |('inlinedActions' 
+    |(	'inlinedActions' 
     {
         createLeafNode(grammarAccess.getModelAccess().getInlinedActionsKeyword_5_0(), null); 
     }
@@ -296,7 +296,7 @@ ruleBaseAttribute returns [EObject current=null]
         $current = $this_Master_1.current; 
         currentNode = currentNode.getParent();
     }
-)(('ref' 
+)((	'ref' 
     {
         createLeafNode(grammarAccess.getBaseAttributeAccess().getRefKeyword_1_0_0(), null); 
     }
@@ -363,7 +363,7 @@ ruleBaseAttribute returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getBaseAttributeAccess().getSemicolonKeyword_3(), null); 
     }
@@ -399,7 +399,7 @@ ruleAttribute returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'attribute' 
+)	'attribute' 
     {
         createLeafNode(grammarAccess.getAttributeAccess().getAttributeKeyword_1(), null); 
     }
@@ -435,7 +435,7 @@ ruleMaster returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'master' 
+)	'master' 
     {
         createLeafNode(grammarAccess.getMasterAccess().getMasterKeyword_1(), null); 
     }
@@ -471,7 +471,7 @@ ruleActionAttribute returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'attribute' 
+)	'attribute' 
     {
         createLeafNode(grammarAccess.getActionAttributeAccess().getAttributeKeyword_0_0_1(), null); 
     }
@@ -487,11 +487,11 @@ ruleActionAttribute returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'master' 
+)	'master' 
     {
         createLeafNode(grammarAccess.getActionAttributeAccess().getMasterKeyword_0_1_1(), null); 
     }
-))(('ref' 
+))((	'ref' 
     {
         createLeafNode(grammarAccess.getActionAttributeAccess().getRefKeyword_1_0_0(), null); 
     }
@@ -558,7 +558,7 @@ ruleActionAttribute returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getActionAttributeAccess().getSemicolonKeyword_3(), null); 
     }
@@ -583,7 +583,7 @@ ruleSimpleAttribute returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('ref' 
+(((	'ref' 
     {
         createLeafNode(grammarAccess.getSimpleAttributeAccess().getRefKeyword_0_0_0(), null); 
     }
@@ -650,7 +650,7 @@ ruleSimpleAttribute returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getSimpleAttributeAccess().getSemicolonKeyword_2(), null); 
     }
@@ -708,7 +708,7 @@ ruleRuleCallAttribute returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getRuleCallAttributeAccess().getSemicolonKeyword_2(), null); 
     }
@@ -733,7 +733,7 @@ ruleCallMe returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('ref' 
+((	'ref' 
     {
         createLeafNode(grammarAccess.getCallMeAccess().getRefKeyword_0_0(), null); 
     }
@@ -806,7 +806,7 @@ ruleRuleCallAttribute2 returns [EObject current=null]
         $current = $this_CallMe2_0.current; 
         currentNode = currentNode.getParent();
     }
-(('ref' 
+((	'ref' 
     {
         createLeafNode(grammarAccess.getRuleCallAttribute2Access().getRefKeyword_1_0_0(), null); 
     }
@@ -849,7 +849,7 @@ ruleRuleCallAttribute2 returns [EObject current=null]
 	    }
 
 )
-))';' 
+))	';' 
     {
         createLeafNode(grammarAccess.getRuleCallAttribute2Access().getSemicolonKeyword_2(), null); 
     }
@@ -928,7 +928,7 @@ ruleRuleCallAttribute3 returns [EObject current=null]
         $current = $this_CallMe3_0.current; 
         currentNode = currentNode.getParent();
     }
-(('ref' 
+((	'ref' 
     {
         createLeafNode(grammarAccess.getRuleCallAttribute3Access().getRefKeyword_1_0_0(), null); 
     }
@@ -971,7 +971,7 @@ ruleRuleCallAttribute3 returns [EObject current=null]
 	    }
 
 )
-))';' 
+))	';' 
     {
         createLeafNode(grammarAccess.getRuleCallAttribute3Access().getSemicolonKeyword_2(), null); 
     }
@@ -996,11 +996,11 @@ ruleCallMe3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('call' 
+(	'call' 
     {
         createLeafNode(grammarAccess.getCallMe3Access().getCallKeyword_0(), null); 
     }
-'me' 
+	'me' 
     {
         createLeafNode(grammarAccess.getCallMe3Access().getMeKeyword_1(), null); 
     }

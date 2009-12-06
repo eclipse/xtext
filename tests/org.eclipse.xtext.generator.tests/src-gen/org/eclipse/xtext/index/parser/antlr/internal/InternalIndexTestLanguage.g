@@ -36,7 +36,7 @@ import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private IndexTestLanguageGrammarAccess grammarAccess;
  	
     public InternalIndexTestLanguageParser(TokenStream input, IAstFactory factory, IndexTestLanguageGrammarAccess grammarAccess) {
@@ -128,7 +128,7 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
     }
@@ -282,7 +282,7 @@ ruleNamespace returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
@@ -310,7 +310,7 @@ ruleNamespace returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_3(), null); 
     }
@@ -425,7 +425,7 @@ ruleEntity returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('entity' 
+(	'entity' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getEntityKeyword_0(), null); 
     }
@@ -453,7 +453,7 @@ ruleEntity returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
@@ -481,7 +481,7 @@ ruleEntity returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_4(), null); 
     }
@@ -506,7 +506,7 @@ ruleDatatype returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('datatype' 
+(	'datatype' 
     {
         createLeafNode(grammarAccess.getDatatypeAccess().getDatatypeKeyword_0(), null); 
     }

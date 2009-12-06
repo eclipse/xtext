@@ -37,7 +37,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug289187TestLa
 }
 
 @parser::members {
- 
+
  	private Bug289187TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug289187TestLanguageParser(TokenStream input, IAstFactory factory, Bug289187TestLanguageGrammarAccess grammarAccess) {
@@ -131,7 +131,7 @@ ruleClass returns [EObject current=null]
     }:
 ((
 (
-		lv_abstract_0_0='abstract' 
+		lv_abstract_0_0=	'abstract' 
     {
         createLeafNode(grammarAccess.getClassAccess().getAbstractAbstractKeyword_0_0(), "abstract"); 
     }
@@ -152,7 +152,7 @@ ruleClass returns [EObject current=null]
 )
 )?(
 (
-		lv_transient_1_0='transient' 
+		lv_transient_1_0=	'transient' 
     {
         createLeafNode(grammarAccess.getClassAccess().getTransientTransientKeyword_1_0(), "transient"); 
     }
@@ -171,7 +171,7 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-)?'class' 
+)?	'class' 
     {
         createLeafNode(grammarAccess.getClassAccess().getClassKeyword_2(), null); 
     }
@@ -199,7 +199,7 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-)('extends' 
+)(	'extends' 
     {
         createLeafNode(grammarAccess.getClassAccess().getExtendsKeyword_4_0(), null); 
     }
@@ -217,7 +217,7 @@ ruleClass returns [EObject current=null]
 	}
 
 )
-))?('implements' 
+))?(	'implements' 
     {
         createLeafNode(grammarAccess.getClassAccess().getImplementsKeyword_5_0(), null); 
     }
@@ -235,11 +235,11 @@ ruleClass returns [EObject current=null]
 	}
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getClassAccess().getCommaKeyword_5_2_0(), null); 
     }
-'implements' 
+	'implements' 
     {
         createLeafNode(grammarAccess.getClassAccess().getImplementsKeyword_5_2_1(), null); 
     }
@@ -257,15 +257,15 @@ ruleClass returns [EObject current=null]
 	}
 
 )
-))*)?'{' 
+))*)?	'{' 
     {
         createLeafNode(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_6(), null); 
     }
-('classNumber' 
+(	'classNumber' 
     {
         createLeafNode(grammarAccess.getClassAccess().getClassNumberKeyword_7_0(), null); 
     }
-'=' 
+	'=' 
     {
         createLeafNode(grammarAccess.getClassAccess().getEqualsSignKeyword_7_1(), null); 
     }
@@ -293,11 +293,11 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-))?('quid' 
+))?(	'quid' 
     {
         createLeafNode(grammarAccess.getClassAccess().getQuidKeyword_8_0(), null); 
     }
-'=' 
+	'=' 
     {
         createLeafNode(grammarAccess.getClassAccess().getEqualsSignKeyword_8_1(), null); 
     }
@@ -325,11 +325,11 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-))?('documentation' 
+))?(	'documentation' 
     {
         createLeafNode(grammarAccess.getClassAccess().getDocumentationKeyword_9_0(), null); 
     }
-'=' 
+	'=' 
     {
         createLeafNode(grammarAccess.getClassAccess().getEqualsSignKeyword_9_1(), null); 
     }
@@ -405,7 +405,7 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_12(), null); 
     }
@@ -454,7 +454,7 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-)?'attribute' 
+)?	'attribute' 
     {
         createLeafNode(grammarAccess.getAttributeAccess().getAttributeKeyword_1(), null); 
     }
@@ -527,7 +527,7 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)?'operation' 
+)?	'operation' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getOperationKeyword_1(), null); 
     }

@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGram
 }
 
 @parser::members {
- 
+
  	private AssignmentsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalAssignmentsTestLanguageParser(TokenStream input, IAstFactory factory, AssignmentsTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('simple' 
+((	'simple' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSimpleKeyword_0_0(), null); 
     }
@@ -187,7 +187,7 @@ ruleModel returns [EObject current=null]
 
 )
 )))
-    |('complex' 
+    |(	'complex' 
     {
         createLeafNode(grammarAccess.getModelAccess().getComplexKeyword_1_0(), null); 
     }
@@ -302,7 +302,7 @@ ruleSingleValue returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('id' 
+((	'id' 
     {
         createLeafNode(grammarAccess.getSingleValueAccess().getIdKeyword_0_0(), null); 
     }
@@ -331,7 +331,7 @@ ruleSingleValue returns [EObject current=null]
 
 )
 ))
-    |('alternative' 
+    |(	'alternative' 
     {
         createLeafNode(grammarAccess.getSingleValueAccess().getAlternativeKeyword_1_0(), null); 
     }
@@ -384,7 +384,7 @@ ruleSingleValue returns [EObject current=null]
 
 )
 ))
-    |('string' 
+    |(	'string' 
     {
         createLeafNode(grammarAccess.getSingleValueAccess().getStringKeyword_2_0(), null); 
     }
@@ -433,7 +433,7 @@ ruleMultiValue returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('ids' 
+((	'ids' 
     {
         createLeafNode(grammarAccess.getMultiValueAccess().getIdsKeyword_0_0(), null); 
     }
@@ -462,7 +462,7 @@ ruleMultiValue returns [EObject current=null]
 
 )
 ))
-    |('alternatives' 
+    |(	'alternatives' 
     {
         createLeafNode(grammarAccess.getMultiValueAccess().getAlternativesKeyword_1_0(), null); 
     }
@@ -515,7 +515,7 @@ ruleMultiValue returns [EObject current=null]
 
 )
 ))
-    |('strings' 
+    |(	'strings' 
     {
         createLeafNode(grammarAccess.getMultiValueAccess().getStringsKeyword_2_0(), null); 
     }
@@ -564,7 +564,7 @@ ruleSingleDatatype returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('datatypeid' 
+((	'datatypeid' 
     {
         createLeafNode(grammarAccess.getSingleDatatypeAccess().getDatatypeidKeyword_0_0(), null); 
     }
@@ -593,7 +593,7 @@ ruleSingleDatatype returns [EObject current=null]
 
 )
 ))
-    |('datatypealternative' 
+    |(	'datatypealternative' 
     {
         createLeafNode(grammarAccess.getSingleDatatypeAccess().getDatatypealternativeKeyword_1_0(), null); 
     }
@@ -646,7 +646,7 @@ ruleSingleDatatype returns [EObject current=null]
 
 )
 ))
-    |('datatypestring' 
+    |(	'datatypestring' 
     {
         createLeafNode(grammarAccess.getSingleDatatypeAccess().getDatatypestringKeyword_2_0(), null); 
     }
@@ -695,7 +695,7 @@ ruleMultiDatatype returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('datatypeids' 
+((	'datatypeids' 
     {
         createLeafNode(grammarAccess.getMultiDatatypeAccess().getDatatypeidsKeyword_0_0(), null); 
     }
@@ -724,7 +724,7 @@ ruleMultiDatatype returns [EObject current=null]
 
 )
 ))
-    |('datatypealternatives' 
+    |(	'datatypealternatives' 
     {
         createLeafNode(grammarAccess.getMultiDatatypeAccess().getDatatypealternativesKeyword_1_0(), null); 
     }
@@ -777,7 +777,7 @@ ruleMultiDatatype returns [EObject current=null]
 
 )
 ))
-    |('datatypestrings' 
+    |(	'datatypestrings' 
     {
         createLeafNode(grammarAccess.getMultiDatatypeAccess().getDatatypestringsKeyword_2_0(), null); 
     }

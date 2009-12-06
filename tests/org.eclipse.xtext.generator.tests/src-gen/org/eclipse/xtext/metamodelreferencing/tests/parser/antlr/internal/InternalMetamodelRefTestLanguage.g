@@ -36,7 +36,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
 }
 
 @parser::members {
- 
+
  	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
  	
     public InternalMetamodelRefTestLanguageParser(TokenStream input, IAstFactory factory, MetamodelRefTestLanguageGrammarAccess grammarAccess) {

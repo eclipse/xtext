@@ -36,7 +36,7 @@ import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGram
 }
 
 @parser::members {
- 
+
  	private InheritanceTestLanguageGrammarAccess grammarAccess;
  	
     public InternalInheritanceTestLanguageParser(TokenStream input, IAstFactory factory, InheritanceTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('model' 
+(	'model' 
     {
         createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
     }
@@ -111,7 +111,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
@@ -139,7 +139,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRightCurlyBracketKeyword_4(), null); 
     }
@@ -164,7 +164,7 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getElementAccess().getElementKeyword_0(), null); 
     }

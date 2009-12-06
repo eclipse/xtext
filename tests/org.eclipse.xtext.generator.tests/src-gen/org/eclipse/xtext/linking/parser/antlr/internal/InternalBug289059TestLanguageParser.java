@@ -43,7 +43,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g"; }
 
 
-     
+
      	private Bug289059TestLanguageGrammarAccess grammarAccess;
      	
         public InternalBug289059TestLanguageParser(TokenStream input, IAstFactory factory, Bug289059TestLanguageGrammarAccess grammarAccess) {
@@ -319,7 +319,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleUnassignedAction257); 
+            match(input,11,FOLLOW_11_in_ruleUnassignedAction258); 
 
                     createLeafNode(grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null); 
                 
@@ -354,6 +354,6 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
     public static final BitSet FOLLOW_RULE_ID_in_ruleModel170 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction204 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedAction214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleUnassignedAction257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleUnassignedAction258 = new BitSet(new long[]{0x0000000000000002L});
 
 }

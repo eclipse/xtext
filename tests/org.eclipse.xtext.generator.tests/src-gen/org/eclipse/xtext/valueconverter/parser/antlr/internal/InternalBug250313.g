@@ -36,7 +36,7 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 }
 
 @parser::members {
- 
+
  	private Bug250313GrammarAccess grammarAccess;
  	
     public InternalBug250313Parser(TokenStream input, IAstFactory factory, Bug250313GrammarAccess grammarAccess) {
@@ -83,14 +83,14 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('1' 
+(((	'1' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
     }
 )?(
 (
 (
-		lv_value_1_1='mykeyword1' 
+		lv_value_1_1=	'mykeyword1' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValueMykeyword1Keyword_0_1_0_0(), "value"); 
     }
@@ -196,14 +196,14 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('1+' 
+    |(	'1+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitOnePlusSignKeyword_1_0(), null); 
     }
 (
 (
 (
-		lv_multiValue_3_1='mykeyword1' 
+		lv_multiValue_3_1=	'mykeyword1' 
     {
         createLeafNode(grammarAccess.getModelAccess().getMultiValueMykeyword1Keyword_1_1_0_0(), "multiValue"); 
     }
@@ -309,7 +309,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('2' 
+    |(	'2' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_2_0(), null); 
     }
@@ -338,7 +338,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('2+' 
+    |(	'2+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitTwoPlusSignKeyword_3_0(), null); 
     }
@@ -367,7 +367,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('3' 
+    |(	'3' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_4_0(), null); 
     }
@@ -396,7 +396,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('3+' 
+    |(	'3+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitThreePlusSignKeyword_5_0(), null); 
     }
@@ -425,7 +425,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('4' 
+    |(	'4' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_6_0(), null); 
     }
@@ -454,7 +454,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('4+' 
+    |(	'4+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitFourPlusSignKeyword_7_0(), null); 
     }
@@ -483,7 +483,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(('content' 
+    |((	'content' 
     {
         createLeafNode(grammarAccess.getModelAccess().getContentKeyword_8_0_0(), null); 
     }
@@ -511,7 +511,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))('ref' 
+))(	'ref' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRefKeyword_8_1_0(), null); 
     }

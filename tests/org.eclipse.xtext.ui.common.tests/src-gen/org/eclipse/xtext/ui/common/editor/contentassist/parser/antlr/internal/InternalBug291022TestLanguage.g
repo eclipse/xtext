@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug291022TestLa
 }
 
 @parser::members {
- 
+
  	private Bug291022TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug291022TestLanguageParser(TokenStream input, IAstFactory factory, Bug291022TestLanguageGrammarAccess grammarAccess) {
@@ -132,7 +132,7 @@ ruleRootModel returns [EObject current=null]
 	}
 
 )
-)?('{' 
+)?(	'{' 
     {
         createLeafNode(grammarAccess.getRootModelAccess().getLeftCurlyBracketKeyword_3_0(), null); 
     }
@@ -160,7 +160,7 @@ ruleRootModel returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getRootModelAccess().getRightCurlyBracketKeyword_3_2(), null); 
     }
@@ -199,7 +199,7 @@ ruleModelElement returns [EObject current=null]
 	}
 
 )
-)(':' 
+)(	':' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getColonKeyword_1_0(), null); 
     }
@@ -241,12 +241,12 @@ ruleModelElement returns [EObject current=null]
 	}
 
 )
-)?(';' 
+)?(	';' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getSemicolonKeyword_3_0(), null); 
     }
 
-    |('{' 
+    |(	'{' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getLeftCurlyBracketKeyword_3_1_0(), null); 
     }
@@ -274,7 +274,7 @@ ruleModelElement returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getRightCurlyBracketKeyword_3_1_2(), null); 
     }
@@ -353,7 +353,7 @@ ruleAttribute returns [EObject current=null]
 	}
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getAttributeAccess().getEqualsSignKeyword_1(), null); 
     }

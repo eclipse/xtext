@@ -44,7 +44,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g"; }
 
 
-     
+
      	private AbstractTestLanguageGrammarAccess grammarAccess;
      	
         public InternalAbstractTestLanguageParser(TokenStream input, IAstFactory factory, AbstractTestLanguageGrammarAccess grammarAccess) {
@@ -116,9 +116,9 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:86:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:86:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:86:2: 'element' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:86:3: 'element' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,12,FOLLOW_12_in_ruleInheritedParserRule117); 
+            match(input,12,FOLLOW_12_in_ruleInheritedParserRule118); 
 
                     createLeafNode(grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null); 
                 
@@ -129,7 +129,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:92:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule134); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule135); 
 
             			createLeafNode(grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -190,12 +190,12 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:124:2: iv_ruleOverridableParserRule= ruleOverridableParserRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.getOverridableParserRuleRule(), currentNode); 
-            pushFollow(FOLLOW_ruleOverridableParserRule_in_entryRuleOverridableParserRule174);
+            pushFollow(FOLLOW_ruleOverridableParserRule_in_entryRuleOverridableParserRule175);
             iv_ruleOverridableParserRule=ruleOverridableParserRule();
             _fsp--;
 
              current =iv_ruleOverridableParserRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOverridableParserRule184); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOverridableParserRule185); 
 
             }
 
@@ -226,9 +226,9 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:137:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:137:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:137:2: 'element' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:137:3: 'element' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,12,FOLLOW_12_in_ruleOverridableParserRule218); 
+            match(input,12,FOLLOW_12_in_ruleOverridableParserRule220); 
 
                     createLeafNode(grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0(), null); 
                 
@@ -239,7 +239,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:143:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOverridableParserRule235); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOverridableParserRule237); 
 
             			createLeafNode(grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -300,12 +300,12 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:177:2: iv_ruleExtendableParserRule= ruleExtendableParserRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExtendableParserRuleRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExtendableParserRule_in_entryRuleExtendableParserRule277);
+            pushFollow(FOLLOW_ruleExtendableParserRule_in_entryRuleExtendableParserRule279);
             iv_ruleExtendableParserRule=ruleExtendableParserRule();
             _fsp--;
 
              current =iv_ruleExtendableParserRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExtendableParserRule287); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExtendableParserRule289); 
 
             }
 
@@ -336,9 +336,9 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:190:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:190:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:190:2: 'element' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:190:3: 'element' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,12,FOLLOW_12_in_ruleExtendableParserRule321); 
+            match(input,12,FOLLOW_12_in_ruleExtendableParserRule324); 
 
                     createLeafNode(grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0(), null); 
                 
@@ -349,7 +349,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g:196:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtendableParserRule338); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtendableParserRule341); 
 
             			createLeafNode(grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -401,15 +401,15 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
     public static final BitSet FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleInheritedParserRule83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleInheritedParserRule117 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInheritedParserRule134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOverridableParserRule_in_entryRuleOverridableParserRule174 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOverridableParserRule184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleOverridableParserRule218 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleOverridableParserRule235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExtendableParserRule_in_entryRuleExtendableParserRule277 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExtendableParserRule287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleExtendableParserRule321 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExtendableParserRule338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleInheritedParserRule118 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInheritedParserRule135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOverridableParserRule_in_entryRuleOverridableParserRule175 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOverridableParserRule185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleOverridableParserRule220 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleOverridableParserRule237 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExtendableParserRule_in_entryRuleExtendableParserRule279 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExtendableParserRule289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleExtendableParserRule324 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExtendableParserRule341 = new BitSet(new long[]{0x0000000000000002L});
 
 }

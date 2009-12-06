@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.antlr.services.Bug289515TestLanguageGrammarAcces
 }
 
 @parser::members {
- 
+
  	private Bug289515TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug289515TestLanguageParser(TokenStream input, IAstFactory factory, Bug289515TestLanguageGrammarAccess grammarAccess) {
@@ -83,13 +83,13 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('1' 
+((	'1' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
     }
 (
 (
-		lv_value_1_0='%' 
+		lv_value_1_0=	'%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), "value"); 
     }
@@ -109,13 +109,13 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('2' 
+    |(	'2' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null); 
     }
 (
 (
-		lv_value_3_0='%' 
+		lv_value_3_0=	'%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), "value"); 
     }
@@ -135,13 +135,13 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('3' 
+    |(	'3' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null); 
     }
 (
 (
-		lv_value_5_0='\\%' 
+		lv_value_5_0=	'\\%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), "value"); 
     }
@@ -161,13 +161,13 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('4' 
+    |(	'4' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null); 
     }
 (
 (
-		lv_value_7_0='\\%' 
+		lv_value_7_0=	'\\%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), "value"); 
     }
@@ -187,13 +187,13 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('5' 
+    |(	'5' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
     }
 (
 (
-		lv_value_9_0='%%' 
+		lv_value_9_0=	'%%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), "value"); 
     }
@@ -213,13 +213,13 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |('6' 
+    |(	'6' 
     {
         createLeafNode(grammarAccess.getModelAccess().getDigitSixKeyword_5_0(), null); 
     }
 (
 (
-		lv_value_11_0='%%' 
+		lv_value_11_0=	'%%' 
     {
         createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), "value"); 
     }

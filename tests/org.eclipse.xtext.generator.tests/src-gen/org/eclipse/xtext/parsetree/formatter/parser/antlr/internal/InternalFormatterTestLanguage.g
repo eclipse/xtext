@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 }
 
 @parser::members {
- 
+
  	private FormatterTestLanguageGrammarAccess grammarAccess;
  	
     public InternalFormatterTestLanguageParser(TokenStream input, IAstFactory factory, FormatterTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleRoot returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('test' 
+(	'test' 
     {
         createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
     }
@@ -176,7 +176,7 @@ ruleLine returns [EObject current=null]
         $current = $this_FqnRef_4.current; 
         currentNode = currentNode.getParent();
     }
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_1(), null); 
     }
@@ -297,7 +297,7 @@ ruleAssign returns [EObject current=null]
 )(
 (
 (
-		lv_op_1_1='=' 
+		lv_op_1_1=	'=' 
     {
         createLeafNode(grammarAccess.getAssignAccess().getOpEqualsSignKeyword_1_0_0(), "op"); 
     }
@@ -315,7 +315,7 @@ ruleAssign returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_op_1_2='+=' 
+    |		lv_op_1_2=	'+=' 
     {
         createLeafNode(grammarAccess.getAssignAccess().getOpPlusSignEqualsSignKeyword_1_0_1(), "op"); 
     }
@@ -336,7 +336,7 @@ ruleAssign returns [EObject current=null]
 )
 
 )
-)'[' 
+)	'[' 
     {
         createLeafNode(grammarAccess.getAssignAccess().getLeftSquareBracketKeyword_2(), null); 
     }
@@ -364,7 +364,7 @@ ruleAssign returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getAssignAccess().getCommaKeyword_3_1_0(), null); 
     }
@@ -392,7 +392,7 @@ ruleAssign returns [EObject current=null]
 	    }
 
 )
-))*)?']' 
+))*)?	']' 
     {
         createLeafNode(grammarAccess.getAssignAccess().getRightSquareBracketKeyword_4(), null); 
     }
@@ -417,7 +417,7 @@ ruleMeth returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('void' 
+(	'void' 
     {
         createLeafNode(grammarAccess.getMethAccess().getVoidKeyword_0(), null); 
     }
@@ -445,7 +445,7 @@ ruleMeth returns [EObject current=null]
 	    }
 
 )
-)'(' 
+)	'(' 
     {
         createLeafNode(grammarAccess.getMethAccess().getLeftParenthesisKeyword_2(), null); 
     }
@@ -473,7 +473,7 @@ ruleMeth returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getMethAccess().getCommaKeyword_3_1_0(), null); 
     }
@@ -501,7 +501,7 @@ ruleMeth returns [EObject current=null]
 	    }
 
 )
-))*)?')' 
+))*)?	')' 
     {
         createLeafNode(grammarAccess.getMethAccess().getRightParenthesisKeyword_4(), null); 
     }
@@ -550,7 +550,7 @@ ruleParam returns [EObject current=null]
 	    }
 
 )
-)':' 
+)	':' 
     {
         createLeafNode(grammarAccess.getParamAccess().getColonKeyword_1(), null); 
     }
@@ -599,7 +599,7 @@ ruleTestLinewrap returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('linewrap' 
+(	'linewrap' 
     {
         createLeafNode(grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0(), null); 
     }
@@ -648,11 +648,11 @@ ruleTestIndentation returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('indentation' 
+(	'indentation' 
     {
         createLeafNode(grammarAccess.getTestIndentationAccess().getIndentationKeyword_0(), null); 
     }
-'{' 
+	'{' 
     {
         createLeafNode(grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
@@ -705,13 +705,13 @@ ruleTestIndentation returns [EObject current=null]
 	    }
 
 )
-))*'}' 
+))*	'}' 
     {
         createLeafNode(grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), null); 
     }
 (
 (
-		lv_semi_5_0=';' 
+		lv_semi_5_0=	';' 
     {
         createLeafNode(grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_4_0(), "semi"); 
     }
@@ -751,7 +751,7 @@ ruleFqnObj returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('fqn' 
+(	'fqn' 
     {
         createLeafNode(grammarAccess.getFqnObjAccess().getFqnKeyword_0(), null); 
     }
@@ -842,7 +842,7 @@ ruleFqnRef returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('fqnref' 
+(	'fqnref' 
     {
         createLeafNode(grammarAccess.getFqnRefAccess().getFqnrefKeyword_0(), null); 
     }

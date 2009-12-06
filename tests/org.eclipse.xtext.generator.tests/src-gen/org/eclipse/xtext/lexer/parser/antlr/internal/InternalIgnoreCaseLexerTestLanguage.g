@@ -29,7 +29,8 @@ import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess
 }
 
 @members {
- 
+
+
  	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
  	
     public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input, IAstFactory factory, IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess) {

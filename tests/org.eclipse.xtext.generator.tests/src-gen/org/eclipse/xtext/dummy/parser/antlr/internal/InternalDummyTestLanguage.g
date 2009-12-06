@@ -36,7 +36,7 @@ import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private DummyTestLanguageGrammarAccess grammarAccess;
  	
     public InternalDummyTestLanguageParser(TokenStream input, IAstFactory factory, DummyTestLanguageGrammarAccess grammarAccess) {
@@ -130,7 +130,7 @@ ruleElement returns [EObject current=null]
     }:
 ((
 (
-		lv_optional_0_0='optional' 
+		lv_optional_0_0=	'optional' 
     {
         createLeafNode(grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0(), "optional"); 
     }
@@ -149,7 +149,7 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)?'element' 
+)?	'element' 
     {
         createLeafNode(grammarAccess.getElementAccess().getElementKeyword_1(), null); 
     }
@@ -201,7 +201,7 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*';' 
+)*	';' 
     {
         createLeafNode(grammarAccess.getElementAccess().getSemicolonKeyword_4(), null); 
     }

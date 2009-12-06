@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.CrossReferenceP
 }
 
 @parser::members {
- 
+
  	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
  	
     public InternalCrossReferenceProposalTestLanguageParser(TokenStream input, IAstFactory factory, CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
@@ -142,7 +142,7 @@ ruleClass returns [EObject current=null]
 	}
 
 )
-)'<-' 
+)	'<-' 
     {
         createLeafNode(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1(), null); 
     }
@@ -170,11 +170,11 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
-'}' 
+	'}' 
     {
         createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null); 
     }

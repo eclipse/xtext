@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 }
 
 @parser::members {
- 
+
  	private ReferenceGrammarTestLanguageGrammarAccess grammarAccess;
  	
     public InternalReferenceGrammarTestLanguageParser(TokenStream input, IAstFactory factory, ReferenceGrammarTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleSpielplatz returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('spielplatz' 
+(	'spielplatz' 
     {
         createLeafNode(grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0(), null); 
     }
@@ -135,7 +135,7 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 
 )
-)?'{' 
+)?	'{' 
     {
         createLeafNode(grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3(), null); 
     }
@@ -238,7 +238,7 @@ ruleSpielplatz returns [EObject current=null]
 	    }
 
 )
-))*'}' 
+))*	'}' 
     {
         createLeafNode(grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5(), null); 
     }
@@ -265,11 +265,11 @@ ruleKind returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('kind' 
+(	'kind' 
     {
         createLeafNode(grammarAccess.getKindAccess().getKindKeyword_0(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getKindAccess().getLeftParenthesisKeyword_1(), null); 
     }
@@ -321,7 +321,7 @@ ruleKind returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getKindAccess().getRightParenthesisKeyword_4(), null); 
     }
@@ -346,11 +346,11 @@ ruleErwachsener returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('erwachsener' 
+(	'erwachsener' 
     {
         createLeafNode(grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1(), null); 
     }
@@ -402,7 +402,7 @@ ruleErwachsener returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4(), null); 
     }
@@ -427,11 +427,11 @@ ruleSpielzeug returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('spielzeug' 
+(	'spielzeug' 
     {
         createLeafNode(grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1(), null); 
     }
@@ -483,7 +483,7 @@ ruleSpielzeug returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4(), null); 
     }
@@ -511,7 +511,7 @@ ruleFarbe returns [EObject current=null]
 (
 (
 (
-		lv_wert_0_1='ROT' 
+		lv_wert_0_1=	'ROT' 
     {
         createLeafNode(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0(), "wert"); 
     }
@@ -529,7 +529,7 @@ ruleFarbe returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_wert_0_2='BLAU' 
+    |		lv_wert_0_2=	'BLAU' 
     {
         createLeafNode(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1(), "wert"); 
     }
@@ -547,7 +547,7 @@ ruleFarbe returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_wert_0_3='GELB' 
+    |		lv_wert_0_3=	'GELB' 
     {
         createLeafNode(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2(), "wert"); 
     }
@@ -565,7 +565,7 @@ ruleFarbe returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_wert_0_4='GR\u00DCN' 
+    |		lv_wert_0_4=	'GR\u00DCN' 
     {
         createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
     }
@@ -607,18 +607,18 @@ ruleFamilie returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('familie' 
+(	'familie' 
     {
         createLeafNode(grammarAccess.getFamilieAccess().getFamilieKeyword_0(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1(), null); 
     }
 (
 (
 (
-		lv_name_2_1='keyword' 
+		lv_name_2_1=	'keyword' 
     {
         createLeafNode(grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0(), "name"); 
     }
@@ -723,7 +723,7 @@ ruleFamilie returns [EObject current=null]
 	}
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getFamilieAccess().getCommaKeyword_6_0(), null); 
     }
@@ -741,7 +741,7 @@ ruleFamilie returns [EObject current=null]
 	}
 
 )
-))*')' 
+))*	')' 
     {
         createLeafNode(grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7(), null); 
     }

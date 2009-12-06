@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 }
 
 @parser::members {
- 
+
  	private ContentAssistTestLanguageGrammarAccess grammarAccess;
  	
     public InternalContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, ContentAssistTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleStart returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('abstract rules' 
+(	'abstract rules' 
     {
         createLeafNode(grammarAccess.getStartAccess().getAbstractRulesKeyword_0(), null); 
     }
@@ -111,7 +111,7 @@ ruleStart returns [EObject current=null]
 	    }
 
 )
-)+'end' 
+)+	'end' 
     {
         createLeafNode(grammarAccess.getStartAccess().getEndKeyword_2(), null); 
     }
@@ -200,7 +200,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)'(' 
+)	'(' 
     {
         createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1(), null); 
     }
@@ -228,11 +228,11 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)+')' 
+)+	')' 
     {
         createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3(), null); 
     }
-';' 
+	';' 
     {
         createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }
@@ -281,11 +281,11 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)'rule' 
+)	'rule' 
     {
         createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1(), null); 
     }
-':' 
+	':' 
     {
         createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2(), null); 
     }
@@ -313,7 +313,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }

@@ -38,6 +38,11 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 }
 
 @parser::members {
+
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
  
  	private DomainmodelGrammarAccess grammarAccess;
  	
@@ -131,6 +136,9 @@ ruleAbstractElement returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractElementAccess().getPackageDeclarationParserRuleCall_0(), currentNode); 
     }
@@ -141,6 +149,9 @@ ruleAbstractElement returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractElementAccess().getTypeParserRuleCall_1(), currentNode); 
     }
@@ -151,6 +162,9 @@ ruleAbstractElement returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractElementAccess().getImportParserRuleCall_2(), currentNode); 
     }
@@ -180,7 +194,7 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
     }
@@ -229,7 +243,7 @@ rulePackageDeclaration returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('package' 
+(	'package' 
     {
         createLeafNode(grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0(), null); 
     }
@@ -257,7 +271,7 @@ rulePackageDeclaration returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getPackageDeclarationAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
@@ -285,7 +299,7 @@ rulePackageDeclaration returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getPackageDeclarationAccess().getRightCurlyBracketKeyword_4(), null); 
     }
@@ -311,6 +325,9 @@ ruleType returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_0(), currentNode); 
     }
@@ -321,6 +338,9 @@ ruleType returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_1(), currentNode); 
     }
@@ -350,7 +370,7 @@ ruleDataType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('datatype' 
+(	'datatype' 
     {
         createLeafNode(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0(), null); 
     }
@@ -399,7 +419,7 @@ ruleEntity returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('entity' 
+(	'entity' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getEntityKeyword_0(), null); 
     }
@@ -427,17 +447,14 @@ ruleEntity returns [EObject current=null]
 	    }
 
 )
-)('extends' 
+)(	'extends' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getExtendsKeyword_2_0(), null); 
     }
 (
 (
 		{ 
-		  /* 
-		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
-		  create synpreds that cannot be compiled in some rare cases
-		  */ 
+		  /* */ 
 		}
 		{
 			if ($current==null) {
@@ -453,7 +470,7 @@ ruleEntity returns [EObject current=null]
 	    }
 
 )
-))?'{' 
+))?	'{' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3(), null); 
     }
@@ -481,7 +498,7 @@ ruleEntity returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5(), null); 
     }
@@ -507,6 +524,9 @@ ruleFeature returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getStructuralFeatureParserRuleCall_0(), currentNode); 
     }
@@ -517,6 +537,9 @@ ruleFeature returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getOperationParserRuleCall_1(), currentNode); 
     }
@@ -547,6 +570,9 @@ ruleStructuralFeature returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getStructuralFeatureAccess().getAttributeParserRuleCall_0(), currentNode); 
     }
@@ -557,6 +583,9 @@ ruleStructuralFeature returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getStructuralFeatureAccess().getReferenceParserRuleCall_1(), currentNode); 
     }
@@ -586,7 +615,7 @@ ruleAttribute returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('attr' 
+(	'attr' 
     {
         createLeafNode(grammarAccess.getAttributeAccess().getAttrKeyword_0(), null); 
     }
@@ -614,7 +643,7 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-)':' 
+)	':' 
     {
         createLeafNode(grammarAccess.getAttributeAccess().getColonKeyword_2(), null); 
     }
@@ -663,7 +692,7 @@ ruleReference returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('ref' 
+(	'ref' 
     {
         createLeafNode(grammarAccess.getReferenceAccess().getRefKeyword_0(), null); 
     }
@@ -691,7 +720,7 @@ ruleReference returns [EObject current=null]
 	    }
 
 )
-)':' 
+)	':' 
     {
         createLeafNode(grammarAccess.getReferenceAccess().getColonKeyword_2(), null); 
     }
@@ -719,17 +748,14 @@ ruleReference returns [EObject current=null]
 	    }
 
 )
-)('opposite' 
+)(	'opposite' 
     {
         createLeafNode(grammarAccess.getReferenceAccess().getOppositeKeyword_4_0(), null); 
     }
 (
 (
 		{ 
-		  /* 
-		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
-		  create synpreds that cannot be compiled in some rare cases
-		  */ 
+		  /* */ 
 		}
 		{
 			if ($current==null) {
@@ -788,7 +814,7 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)?'op' 
+)?	'op' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getOpKeyword_1(), null); 
     }
@@ -816,7 +842,7 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)'(' 
+)	'(' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getLeftParenthesisKeyword_3(), null); 
     }
@@ -844,7 +870,7 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getCommaKeyword_4_1_0(), null); 
     }
@@ -872,11 +898,11 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-))*)?')' 
+))*)?	')' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getRightParenthesisKeyword_5(), null); 
     }
-':' 
+	':' 
     {
         createLeafNode(grammarAccess.getOperationAccess().getColonKeyword_6(), null); 
     }
@@ -999,10 +1025,7 @@ ruleTypeRef returns [EObject current=null]
 (
 (
 		{ 
-		  /* 
-		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
-		  create synpreds that cannot be compiled in some rare cases
-		  */ 
+		  /* */ 
 		}
 		{
 			if ($current==null) {

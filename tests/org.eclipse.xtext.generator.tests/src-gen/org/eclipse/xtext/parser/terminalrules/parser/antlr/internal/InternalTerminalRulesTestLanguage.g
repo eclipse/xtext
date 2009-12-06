@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 }
 
 @parser::members {
- 
+
  	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
  	
     public InternalTerminalRulesTestLanguageParser(TokenStream input, IAstFactory factory, TerminalRulesTestLanguageGrammarAccess grammarAccess) {

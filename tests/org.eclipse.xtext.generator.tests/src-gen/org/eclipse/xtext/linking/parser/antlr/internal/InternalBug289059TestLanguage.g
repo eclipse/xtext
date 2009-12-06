@@ -36,7 +36,7 @@ import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private Bug289059TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug289059TestLanguageParser(TokenStream input, IAstFactory factory, Bug289059TestLanguageGrammarAccess grammarAccess) {
@@ -177,7 +177,7 @@ ruleUnassignedAction returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'enabled' 
+)	'enabled' 
     {
         createLeafNode(grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null); 
     }

@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGramma
 }
 
 @parser::members {
- 
+
  	private Bug288432TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug288432TestLanguageParser(TokenStream input, IAstFactory factory, Bug288432TestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleBody returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('(' 
+((	'(' 
     {
         createLeafNode(grammarAccess.getBodyAccess().getLeftParenthesisKeyword_0_0(), null); 
     }
@@ -111,7 +111,7 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getBodyAccess().getCommaKeyword_0_2_0(), null); 
     }
@@ -139,11 +139,11 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-))*')' 
+))*	')' 
     {
         createLeafNode(grammarAccess.getBodyAccess().getRightParenthesisKeyword_0_3(), null); 
     }
-)?'body' 
+)?	'body' 
     {
         createLeafNode(grammarAccess.getBodyAccess().getBodyKeyword_1(), null); 
     }
@@ -219,7 +219,7 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-)+'end body' 
+)+	'end body' 
     {
         createLeafNode(grammarAccess.getBodyAccess().getEndBodyKeyword_4(), null); 
     }
@@ -289,7 +289,7 @@ ruleContent returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('content' 
+(	'content' 
     {
         createLeafNode(grammarAccess.getContentAccess().getContentKeyword_0(), null); 
     }
@@ -302,7 +302,7 @@ ruleContent returns [EObject current=null]
         $current = $this_MyElement_1.current; 
         currentNode = currentNode.getParent();
     }
-'end content' 
+	'end content' 
     {
         createLeafNode(grammarAccess.getContentAccess().getEndContentKeyword_2(), null); 
     }
@@ -327,7 +327,7 @@ ruleMyElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getMyElementAccess().getElementKeyword_0(), null); 
     }

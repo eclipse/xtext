@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestL
 }
 
 @parser::members {
- 
+
  	private SerializationBug269362TestLanguageGrammarAccess grammarAccess;
  	
     public InternalSerializationBug269362TestLanguageParser(TokenStream input, IAstFactory factory, SerializationBug269362TestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('foo' 
+((	'foo' 
     {
         createLeafNode(grammarAccess.getModelAccess().getFooKeyword_0_0(), null); 
     }
@@ -111,7 +111,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)('bar' 
+)(	'bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getBarKeyword_0_2_0(), null); 
     }
@@ -140,7 +140,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))?)
-    |('bar' 
+    |(	'bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getBarKeyword_1_0(), null); 
     }

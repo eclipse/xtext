@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private TestLanguageGrammarAccess grammarAccess;
  	
     public InternalTestLanguageParser(TokenStream input, IAstFactory factory, TestLanguageGrammarAccess grammarAccess) {
@@ -128,7 +128,7 @@ ruleStuff returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('stuff' 
+(	'stuff' 
     {
         createLeafNode(grammarAccess.getStuffAccess().getStuffKeyword_0(), null); 
     }
@@ -156,7 +156,7 @@ ruleStuff returns [EObject current=null]
 	    }
 
 )
-)('refs' 
+)(	'refs' 
     {
         createLeafNode(grammarAccess.getStuffAccess().getRefsKeyword_2_0(), null); 
     }

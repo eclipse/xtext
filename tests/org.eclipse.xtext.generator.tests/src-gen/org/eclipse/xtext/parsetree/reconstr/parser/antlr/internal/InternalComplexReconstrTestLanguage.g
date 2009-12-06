@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 }
 
 @parser::members {
- 
+
  	private ComplexReconstrTestLanguageGrammarAccess grammarAccess;
  	
     public InternalComplexReconstrTestLanguageParser(TokenStream input, IAstFactory factory, ComplexReconstrTestLanguageGrammarAccess grammarAccess) {
@@ -148,7 +148,7 @@ ruleOp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'+' 
+)	'+' 
     {
         createLeafNode(grammarAccess.getOpAccess().getPlusSignKeyword_1_0_1(), null); 
     }
@@ -193,7 +193,7 @@ ruleOp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'-' 
+)	'-' 
     {
         createLeafNode(grammarAccess.getOpAccess().getHyphenMinusKeyword_1_1_1(), null); 
     }
@@ -327,7 +327,7 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('(' 
+(	'(' 
     {
         createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
     }
@@ -340,13 +340,13 @@ ruleParens returns [EObject current=null]
         $current = $this_Op_1.current; 
         currentNode = currentNode.getParent();
     }
-')' 
+	')' 
     {
         createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
     }
 (
 (
-		lv_em_3_0='!' 
+		lv_em_3_0=	'!' 
     {
         createLeafNode(grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0(), "em"); 
     }
@@ -443,7 +443,7 @@ ruleTrickyG returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('TG' 
+(	'TG' 
     {
         createLeafNode(grammarAccess.getTrickyGAccess().getTGKeyword_0(), null); 
     }
@@ -492,7 +492,7 @@ ruleTrickyG1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('[' 
+(	'[' 
     {
         createLeafNode(grammarAccess.getTrickyG1Access().getLeftSquareBracketKeyword_0(), null); 
     }
@@ -520,7 +520,7 @@ ruleTrickyG1 returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getTrickyG1Access().getCommaKeyword_1_1_0(), null); 
     }
@@ -548,7 +548,7 @@ ruleTrickyG1 returns [EObject current=null]
 	    }
 
 )
-))*)?']' 
+))*)?	']' 
     {
         createLeafNode(grammarAccess.getTrickyG1Access().getRightSquareBracketKeyword_2(), null); 
     }

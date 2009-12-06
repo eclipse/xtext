@@ -32,7 +32,13 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
 }
 
 @members {
+
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
  
+
  	private BacktrackingLexerTestLanguageGrammarAccess grammarAccess;
  	
     public InternalBacktrackingLexerTestLanguageParser(TokenStream input, IAstFactory factory, BacktrackingLexerTestLanguageGrammarAccess grammarAccess) {

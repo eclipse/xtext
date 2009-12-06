@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288760TestLa
 }
 
 @parser::members {
- 
+
  	private Bug288760TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug288760TestLanguageParser(TokenStream input, IAstFactory factory, Bug288760TestLanguageGrammarAccess grammarAccess) {

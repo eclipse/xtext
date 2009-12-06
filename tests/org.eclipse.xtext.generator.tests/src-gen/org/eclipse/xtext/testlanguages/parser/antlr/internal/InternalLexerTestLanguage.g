@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private LexerTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLexerTestLanguageParser(TokenStream input, IAstFactory factory, LexerTestLanguageGrammarAccess grammarAccess) {

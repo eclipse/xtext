@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLangu
 }
 
 @parser::members {
- 
+
  	private SerializationErrorTestLanguageGrammarAccess grammarAccess;
  	
     public InternalSerializationErrorTestLanguageParser(TokenStream input, IAstFactory factory, SerializationErrorTestLanguageGrammarAccess grammarAccess) {
@@ -153,7 +153,7 @@ ruleParenthesis returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('(' 
+(	'(' 
     {
         createLeafNode(grammarAccess.getParenthesisAccess().getLeftParenthesisKeyword_0(), null); 
     }
@@ -166,7 +166,7 @@ ruleParenthesis returns [EObject current=null]
         $current = $this_Test_1.current; 
         currentNode = currentNode.getParent();
     }
-')' 
+	')' 
     {
         createLeafNode(grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_2(), null); 
     }
@@ -241,7 +241,7 @@ ruleTwoRequired returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('tworequired' 
+(	'tworequired' 
     {
         createLeafNode(grammarAccess.getTwoRequiredAccess().getTworequiredKeyword_0(), null); 
     }
@@ -314,11 +314,11 @@ ruleTwoOptions returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('twooptions' 
+(	'twooptions' 
     {
         createLeafNode(grammarAccess.getTwoOptionsAccess().getTwooptionsKeyword_0(), null); 
     }
-(('one' 
+((	'one' 
     {
         createLeafNode(grammarAccess.getTwoOptionsAccess().getOneKeyword_1_0_0(), null); 
     }
@@ -347,7 +347,7 @@ ruleTwoOptions returns [EObject current=null]
 
 )
 ))
-    |('two' 
+    |(	'two' 
     {
         createLeafNode(grammarAccess.getTwoOptionsAccess().getTwoKeyword_1_1_0(), null); 
     }
@@ -396,7 +396,7 @@ ruleIndent returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('{' 
+(	'{' 
     {
         createLeafNode(grammarAccess.getIndentAccess().getLeftCurlyBracketKeyword_0(), null); 
     }
@@ -472,7 +472,7 @@ ruleIndent returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4(), null); 
     }

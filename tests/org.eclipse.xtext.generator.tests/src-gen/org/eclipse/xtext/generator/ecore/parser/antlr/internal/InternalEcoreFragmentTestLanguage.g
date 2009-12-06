@@ -36,7 +36,7 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
 }
 
 @parser::members {
- 
+
  	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
  	
     public InternalEcoreFragmentTestLanguageParser(TokenStream input, IAstFactory factory, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
@@ -107,7 +107,7 @@ ruleSecond returns [EObject current=null]
 	    }
 
 )
-)'first' 
+)	'first' 
     {
         createLeafNode(grammarAccess.getSecondAccess().getFirstKeyword_1(), null); 
     }

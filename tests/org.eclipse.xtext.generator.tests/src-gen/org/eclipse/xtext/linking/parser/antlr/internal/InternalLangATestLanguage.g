@@ -36,7 +36,7 @@ import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private LangATestLanguageGrammarAccess grammarAccess;
  	
     public InternalLangATestLanguageParser(TokenStream input, IAstFactory factory, LangATestLanguageGrammarAccess grammarAccess) {
@@ -152,7 +152,7 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
     }
@@ -201,7 +201,7 @@ ruleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('type' 
+(	'type' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getTypeKeyword_0(), null); 
     }
@@ -229,7 +229,7 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)('extends' 
+)(	'extends' 
     {
         createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null); 
     }

@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 }
 
 @parser::members {
- 
+
  	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
  	
     public InternalDatatypeRulesTestLanguageParser(TokenStream input, IAstFactory factory, DatatypeRulesTestLanguageGrammarAccess grammarAccess) {
@@ -152,7 +152,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)(':' 
+)(	':' 
     {
         createLeafNode(grammarAccess.getModelAccess().getColonKeyword_1_0(), null); 
     }
@@ -180,7 +180,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?('#' 
+))?(	'#' 
     {
         createLeafNode(grammarAccess.getModelAccess().getNumberSignKeyword_2_0(), null); 
     }
@@ -208,7 +208,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?('+' 
+))?(	'+' 
     {
         createLeafNode(grammarAccess.getModelAccess().getPlusSignKeyword_3_0(), null); 
     }
@@ -236,7 +236,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?';' 
+))?	';' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_4(), null); 
     }
