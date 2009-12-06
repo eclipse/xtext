@@ -450,6 +450,8 @@ public class EcoreUtil2 extends EcoreUtil {
 		if (ref==null)
 			return null;
 		EClass class1 = ref.getEContainingClass();
+		if (class1 == null) // some references may be contained in an EAnnotation
+			return EcoreUtil.getURI(ref).toString();
 		StringBuffer buff = new StringBuffer(class1.getEPackage().getNsURI());
 		buff.append(delim).append(class1.getName());
 		buff.append(delim).append(ref.getFeatureID());
@@ -464,6 +466,13 @@ public class EcoreUtil2 extends EcoreUtil {
 		if (externalForm==null)
 			return null;
 		String[] split = externalForm.split(delim);
+		if (split.length != 3) {
+			URI uri = URI.createURI(externalForm);
+			URI packURI = uri.trimFragment();
+			EPackage ePackage = registry.getEPackage(packURI.toString());
+			EReference result = (EReference) ePackage.eResource().getEObject(uri.fragment());
+			return result;
+		}
 		EPackage ePackage = registry.getEPackage(split[0]);
 		EClass clazz = (EClass) ePackage.getEClassifier(split[1]);
 		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
