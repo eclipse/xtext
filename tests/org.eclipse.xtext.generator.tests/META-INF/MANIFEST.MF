@@ -348,5 +348,11 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parser.antlr.bug289524ExTest.util,
  org.eclipse.xtext.lexer.ignoreCaseTestLanguage,
  org.eclipse.xtext.lexer.ignoreCaseTestLanguage.impl,
- org.eclipse.xtext.lexer.ignoreCaseTestLanguage.util
+ org.eclipse.xtext.lexer.ignoreCaseTestLanguage.util,
+ org.eclipse.xtext.parser.antlr.bug296889Test,
+ org.eclipse.xtext.parser.antlr.bug296889Test.impl,
+ org.eclipse.xtext.parser.antlr.bug296889Test.util,
+ org.eclipse.xtext.parser.antlr.bug296889ExTest,
+ org.eclipse.xtext.parser.antlr.bug296889ExTest.impl,
+ org.eclipse.xtext.parser.antlr.bug296889ExTest.util
 
