@@ -43,7 +43,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g"; }
 
 
-     
+
      	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
      	
         public InternalTerminalRulesTestLanguageParser(TokenStream input, IAstFactory factory, TerminalRulesTestLanguageGrammarAccess grammarAccess) {

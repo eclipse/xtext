@@ -44,7 +44,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g"; }
 
 
-     
+
      	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
      	
         public InternalEnumAndReferenceTestLanguageParser(TokenStream input, IAstFactory factory, EnumAndReferenceTestLanguageGrammarAccess grammarAccess) {
@@ -189,7 +189,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleEntityWithEnumAndReference160); 
+            match(input,11,FOLLOW_11_in_ruleEntityWithEnumAndReference161); 
 
                     createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null); 
                 
@@ -205,7 +205,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference178); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179); 
 
             		createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0(), "ref"); 
             	
@@ -270,7 +270,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:165:2: ( 'kindOfKeyword' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:165:4: 'kindOfKeyword'
                     {
-                    match(input,12,FOLLOW_12_in_ruleKindOfKeyword225); 
+                    match(input,12,FOLLOW_12_in_ruleKindOfKeyword226); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0(), null); 
@@ -287,7 +287,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:171:6: ( 'anotherEnumLiteral' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:171:8: 'anotherEnumLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_ruleKindOfKeyword240); 
+                    match(input,13,FOLLOW_13_in_ruleKindOfKeyword241); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1(), null); 
@@ -326,9 +326,9 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
     public static final BitSet FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference83 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference129 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference146 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference160 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference178 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleKindOfKeyword225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleKindOfKeyword240 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference161 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleKindOfKeyword226 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleKindOfKeyword241 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -36,7 +36,7 @@ import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguage
 }
 
 @parser::members {
- 
+
  	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
  	
     public InternalBaseInheritanceTestLanguageParser(TokenStream input, IAstFactory factory, BaseInheritanceTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('model' 
+(	'model' 
     {
         createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
     }

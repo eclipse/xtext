@@ -37,7 +37,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug287941TestLa
 }
 
 @parser::members {
- 
+
  	private Bug287941TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug287941TestLanguageParser(TokenStream input, IAstFactory factory, Bug287941TestLanguageGrammarAccess grammarAccess) {
@@ -153,7 +153,7 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
     }
@@ -202,7 +202,7 @@ ruleMQLquery returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('select' 
+(	'select' 
     {
         createLeafNode(grammarAccess.getMQLqueryAccess().getSelectKeyword_0(), null); 
     }
@@ -230,7 +230,7 @@ ruleMQLquery returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getMQLqueryAccess().getCommaKeyword_2_0(), null); 
     }
@@ -258,7 +258,7 @@ ruleMQLquery returns [EObject current=null]
 	    }
 
 )
-))*'from' 
+))*	'from' 
     {
         createLeafNode(grammarAccess.getMQLqueryAccess().getFromKeyword_3(), null); 
     }
@@ -286,7 +286,7 @@ ruleMQLquery returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getMQLqueryAccess().getCommaKeyword_5_0(), null); 
     }
@@ -314,7 +314,7 @@ ruleMQLquery returns [EObject current=null]
 	    }
 
 )
-))*('where' 
+))*(	'where' 
     {
         createLeafNode(grammarAccess.getMQLqueryAccess().getWhereKeyword_6_0(), null); 
     }
@@ -377,7 +377,7 @@ ruleSelectEntry returns [EObject current=null]
 	}
 
 )
-)('.' 
+)(	'.' 
     {
         createLeafNode(grammarAccess.getSelectEntryAccess().getFullStopKeyword_1_0(), null); 
     }
@@ -432,7 +432,7 @@ ruleFromEntry returns [EObject current=null]
 )
 )(
 (
-		lv_withoutsubtypes_1_0='withoutsubtypes' 
+		lv_withoutsubtypes_1_0=	'withoutsubtypes' 
     {
         createLeafNode(grammarAccess.getFromEntryAccess().getWithoutsubtypesWithoutsubtypesKeyword_1_0(), "withoutsubtypes"); 
     }
@@ -451,7 +451,7 @@ ruleFromEntry returns [EObject current=null]
 	    }
 
 )
-)?'as' 
+)?	'as' 
     {
         createLeafNode(grammarAccess.getFromEntryAccess().getAsKeyword_2(), null); 
     }
@@ -526,7 +526,7 @@ ruleScopeClause returns [EObject current=null]
     }:
 ((
 (
-		lv_notIn_0_0='not' 
+		lv_notIn_0_0=	'not' 
     {
         createLeafNode(grammarAccess.getScopeClauseAccess().getNotInNotKeyword_0_0(), "notIn"); 
     }
@@ -545,7 +545,7 @@ ruleScopeClause returns [EObject current=null]
 	    }
 
 )
-)?'in' 
+)?	'in' 
     {
         createLeafNode(grammarAccess.getScopeClauseAccess().getInKeyword_1(), null); 
     }
@@ -634,11 +634,11 @@ ruleResourceScope returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('resources' 
+(	'resources' 
     {
         createLeafNode(grammarAccess.getResourceScopeAccess().getResourcesKeyword_0(), null); 
     }
-'{' 
+	'{' 
     {
         createLeafNode(grammarAccess.getResourceScopeAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
@@ -666,7 +666,7 @@ ruleResourceScope returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getResourceScopeAccess().getCommaKeyword_3_0(), null); 
     }
@@ -694,7 +694,7 @@ ruleResourceScope returns [EObject current=null]
 	    }
 
 )
-))*'}' 
+))*	'}' 
     {
         createLeafNode(grammarAccess.getResourceScopeAccess().getRightCurlyBracketKeyword_4(), null); 
     }
@@ -719,11 +719,11 @@ ruleElementScope returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('elements' 
+(	'elements' 
     {
         createLeafNode(grammarAccess.getElementScopeAccess().getElementsKeyword_0(), null); 
     }
-'{' 
+	'{' 
     {
         createLeafNode(grammarAccess.getElementScopeAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
@@ -751,7 +751,7 @@ ruleElementScope returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getElementScopeAccess().getCommaKeyword_3_0(), null); 
     }
@@ -779,7 +779,7 @@ ruleElementScope returns [EObject current=null]
 	    }
 
 )
-))*'}' 
+))*	'}' 
     {
         createLeafNode(grammarAccess.getElementScopeAccess().getRightCurlyBracketKeyword_4(), null); 
     }
@@ -829,7 +829,7 @@ ruleWhereEntry returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)('or' 
+)(	'or' 
     {
         createLeafNode(grammarAccess.getWhereEntryAccess().getOrKeyword_1_1_0(), null); 
     }
@@ -903,7 +903,7 @@ ruleAndWhereEntry returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)('and' 
+)(	'and' 
     {
         createLeafNode(grammarAccess.getAndWhereEntryAccess().getAndKeyword_1_1_0(), null); 
     }
@@ -1032,7 +1032,7 @@ ruleParWhereEntry returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('(' 
+(	'(' 
     {
         createLeafNode(grammarAccess.getParWhereEntryAccess().getLeftParenthesisKeyword_0(), null); 
     }
@@ -1045,7 +1045,7 @@ ruleParWhereEntry returns [EObject current=null]
         $current = $this_WhereEntry_1.current; 
         currentNode = currentNode.getParent();
     }
-')' 
+	')' 
     {
         createLeafNode(grammarAccess.getParWhereEntryAccess().getRightParenthesisKeyword_2(), null); 
     }
@@ -1184,7 +1184,7 @@ ruleDoubleWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getDoubleWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1285,7 +1285,7 @@ ruleLongWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getLongWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1386,7 +1386,7 @@ ruleVariableWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getVariableWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1442,7 +1442,7 @@ ruleVariableWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getVariableWhereEntryAccess().getFullStopKeyword_5(), null); 
     }
@@ -1495,7 +1495,7 @@ ruleStringAttributeWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getStringAttributeWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1596,7 +1596,7 @@ ruleBooleanAttributeWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getBooleanAttributeWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1640,7 +1640,7 @@ ruleBooleanAttributeWhereEntry returns [EObject current=null]
 )
 )((
 (
-		lv_isTrue_4_0='true' 
+		lv_isTrue_4_0=	'true' 
     {
         createLeafNode(grammarAccess.getBooleanAttributeWhereEntryAccess().getIsTrueTrueKeyword_4_0_0(), "isTrue"); 
     }
@@ -1660,7 +1660,7 @@ ruleBooleanAttributeWhereEntry returns [EObject current=null]
 
 )
 )
-    |'false' 
+    |	'false' 
     {
         createLeafNode(grammarAccess.getBooleanAttributeWhereEntryAccess().getFalseKeyword_4_1(), null); 
     }
@@ -1699,7 +1699,7 @@ ruleNullWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getNullWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1741,7 +1741,7 @@ ruleNullWhereEntry returns [EObject current=null]
 	    }
 
 )
-)'null' 
+)	'null' 
     {
         createLeafNode(grammarAccess.getNullWhereEntryAccess().getNullKeyword_4(), null); 
     }
@@ -1780,7 +1780,7 @@ ruleReferenceAliasWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getReferenceAliasWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1798,7 +1798,7 @@ ruleReferenceAliasWhereEntry returns [EObject current=null]
 	}
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getReferenceAliasWhereEntryAccess().getEqualsSignKeyword_3(), null); 
     }
@@ -1851,7 +1851,7 @@ ruleSubselectWhereEntry returns [EObject current=null]
 	}
 
 )
-)'.' 
+)	'.' 
     {
         createLeafNode(grammarAccess.getSubselectWhereEntryAccess().getFullStopKeyword_1(), null); 
     }
@@ -1871,7 +1871,7 @@ ruleSubselectWhereEntry returns [EObject current=null]
 )
 )(
 (
-		lv_notIn_3_0='not' 
+		lv_notIn_3_0=	'not' 
     {
         createLeafNode(grammarAccess.getSubselectWhereEntryAccess().getNotInNotKeyword_3_0(), "notIn"); 
     }
@@ -1890,11 +1890,11 @@ ruleSubselectWhereEntry returns [EObject current=null]
 	    }
 
 )
-)?'in' 
+)?	'in' 
     {
         createLeafNode(grammarAccess.getSubselectWhereEntryAccess().getInKeyword_4(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getSubselectWhereEntryAccess().getLeftParenthesisKeyword_5(), null); 
     }
@@ -1922,7 +1922,7 @@ ruleSubselectWhereEntry returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getSubselectWhereEntryAccess().getRightParenthesisKeyword_7(), null); 
     }
@@ -1961,7 +1961,7 @@ ruleAliasWhereEntry returns [EObject current=null]
 	}
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getAliasWhereEntryAccess().getEqualsSignKeyword_1(), null); 
     }

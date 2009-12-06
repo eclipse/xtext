@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 }
 
 @parser::members {
- 
+
  	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalSimpleExpressionsTestLanguageParser(TokenStream input, IAstFactory factory, SimpleExpressionsTestLanguageGrammarAccess grammarAccess) {
@@ -181,7 +181,7 @@ ruleAddition returns [EObject current=null]
 )(
 (
 (
-		lv_operator_2_1='+' 
+		lv_operator_2_1=	'+' 
     {
         createLeafNode(grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0(), "operator"); 
     }
@@ -199,7 +199,7 @@ ruleAddition returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_operator_2_2='-' 
+    |		lv_operator_2_2=	'-' 
     {
         createLeafNode(grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1(), "operator"); 
     }
@@ -293,7 +293,7 @@ ruleMultiplication returns [EObject current=null]
 )(
 (
 (
-		lv_operator_2_1='*' 
+		lv_operator_2_1=	'*' 
     {
         createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0(), "operator"); 
     }
@@ -311,7 +311,7 @@ ruleMultiplication returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_operator_2_2='/' 
+    |		lv_operator_2_2=	'/' 
     {
         createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1(), "operator"); 
     }
@@ -462,7 +462,7 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('(' 
+(	'(' 
     {
         createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
     }
@@ -475,7 +475,7 @@ ruleParens returns [EObject current=null]
         $current = $this_Addition_1.current; 
         currentNode = currentNode.getParent();
     }
-')' 
+	')' 
     {
         createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
     }

@@ -37,7 +37,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug286935TestLa
 }
 
 @parser::members {
- 
+
  	private Bug286935TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug286935TestLanguageParser(TokenStream input, IAstFactory factory, Bug286935TestLanguageGrammarAccess grammarAccess) {
@@ -86,7 +86,7 @@ ruleState returns [EObject current=null]
     }:
 (((
 (
-		lv_isInitial_0_0='init' 
+		lv_isInitial_0_0=	'init' 
     {
         createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0(), "isInitial"); 
     }
@@ -108,7 +108,7 @@ ruleState returns [EObject current=null]
 )
     |(
 (
-		lv_isFinal_1_0='final' 
+		lv_isFinal_1_0=	'final' 
     {
         createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0(), "isFinal"); 
     }
@@ -155,7 +155,7 @@ ruleState returns [EObject current=null]
 )
     |((
 (
-		lv_isInitial_3_0='init' 
+		lv_isInitial_3_0=	'init' 
     {
         createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0(), "isInitial"); 
     }
@@ -201,7 +201,7 @@ ruleState returns [EObject current=null]
 ))
     |((
 (
-		lv_isInitial_5_0='init' 
+		lv_isInitial_5_0=	'init' 
     {
         createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0(), "isInitial"); 
     }
@@ -246,7 +246,7 @@ ruleState returns [EObject current=null]
 )
 )(
 (
-		lv_isFinal_7_0='final' 
+		lv_isFinal_7_0=	'final' 
     {
         createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0(), "isFinal"); 
     }
@@ -265,7 +265,7 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)))?('state' 
+)))?(	'state' 
     {
         createLeafNode(grammarAccess.getStateAccess().getStateKeyword_1(), null); 
     }

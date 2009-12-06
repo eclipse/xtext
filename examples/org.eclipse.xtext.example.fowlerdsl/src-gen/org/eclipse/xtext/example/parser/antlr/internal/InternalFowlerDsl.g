@@ -36,7 +36,7 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private FowlerDslGrammarAccess grammarAccess;
  	
     public InternalFowlerDslParser(TokenStream input, IAstFactory factory, FowlerDslGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleStatemachine returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('events' 
+(	'events' 
     {
         createLeafNode(grammarAccess.getStatemachineAccess().getEventsKeyword_0(), null); 
     }
@@ -111,11 +111,11 @@ ruleStatemachine returns [EObject current=null]
 	    }
 
 )
-)*'end' 
+)*	'end' 
     {
         createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_2(), null); 
     }
-'commands' 
+	'commands' 
     {
         createLeafNode(grammarAccess.getStatemachineAccess().getCommandsKeyword_3(), null); 
     }
@@ -143,7 +143,7 @@ ruleStatemachine returns [EObject current=null]
 	    }
 
 )
-)*'end' 
+)*	'end' 
     {
         createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_5(), null); 
     }
@@ -194,7 +194,7 @@ ruleEvent returns [EObject current=null]
     }:
 ((
 (
-		lv_resetting_0_0='resetting' 
+		lv_resetting_0_0=	'resetting' 
     {
         createLeafNode(grammarAccess.getEventAccess().getResettingResettingKeyword_0_0(), "resetting"); 
     }
@@ -351,7 +351,7 @@ ruleState returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('state' 
+(	'state' 
     {
         createLeafNode(grammarAccess.getStateAccess().getStateKeyword_0(), null); 
     }
@@ -379,11 +379,11 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)('actions' 
+)(	'actions' 
     {
         createLeafNode(grammarAccess.getStateAccess().getActionsKeyword_2_0(), null); 
     }
-'{' 
+	'{' 
     {
         createLeafNode(grammarAccess.getStateAccess().getLeftCurlyBracketKeyword_2_1(), null); 
     }
@@ -401,7 +401,7 @@ ruleState returns [EObject current=null]
 	}
 
 )
-)+'}' 
+)+	'}' 
     {
         createLeafNode(grammarAccess.getStateAccess().getRightCurlyBracketKeyword_2_3(), null); 
     }
@@ -429,7 +429,7 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)*'end' 
+)*	'end' 
     {
         createLeafNode(grammarAccess.getStateAccess().getEndKeyword_4(), null); 
     }
@@ -468,7 +468,7 @@ ruleTransition returns [EObject current=null]
 	}
 
 )
-)'=>' 
+)	'=>' 
     {
         createLeafNode(grammarAccess.getTransitionAccess().getEqualsSignGreaterThanSignKeyword_1(), null); 
     }

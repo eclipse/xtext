@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private TreeTestLanguageGrammarAccess grammarAccess;
  	
     public InternalTreeTestLanguageParser(TokenStream input, IAstFactory factory, TreeTestLanguageGrammarAccess grammarAccess) {
@@ -152,7 +152,7 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)'(' 
+)	'(' 
     {
         createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null); 
     }
@@ -180,11 +180,11 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getNodeAccess().getRightParenthesisKeyword_3(), null); 
     }
-'{' 
+	'{' 
     {
         createLeafNode(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null); 
     }
@@ -212,7 +212,7 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)*'};' 
+)*	'};' 
     {
         createLeafNode(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null); 
     }

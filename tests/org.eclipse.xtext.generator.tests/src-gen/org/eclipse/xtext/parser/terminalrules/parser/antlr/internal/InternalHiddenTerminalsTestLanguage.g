@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 }
 
 @parser::members {
- 
+
  	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalHiddenTerminalsTestLanguageParser(TokenStream input, IAstFactory factory, HiddenTerminalsTestLanguageGrammarAccess grammarAccess) {
@@ -153,7 +153,7 @@ ruleWithoutHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('without' 
+(	'without' 
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null); 
     }
@@ -181,7 +181,7 @@ ruleWithoutHiddens returns [EObject current=null]
 	    }
 
 )
-)'hiddens' 
+)	'hiddens' 
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null); 
     }
@@ -211,7 +211,7 @@ ruleWithoutHiddens returns [EObject current=null]
 )
 )?(
 (
-		lv_valid_4_0=';' 
+		lv_valid_4_0=	';' 
     {
         createLeafNode(grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid"); 
     }
@@ -253,17 +253,17 @@ ruleWithHiddens returns [EObject current=null]
     	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
-('with' 
+(	'with' 
     {
         createLeafNode(grammarAccess.getWithHiddensAccess().getWithKeyword_0(), null); 
     }
-'hiddens' 
+	'hiddens' 
     {
         createLeafNode(grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null); 
     }
 (
 (
-		lv_valid_2_0=';' 
+		lv_valid_2_0=	';' 
     {
         createLeafNode(grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
@@ -305,15 +305,15 @@ ruleOverridingHiddens returns [EObject current=null]
     	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
-('overriding' 
+(	'overriding' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0(), null); 
     }
-'hiddens' 
+	'hiddens' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
@@ -341,13 +341,13 @@ ruleOverridingHiddens returns [EObject current=null]
 	    }
 
 )
-)')' 
+)	')' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
 (
 (
-		lv_valid_5_0=';' 
+		lv_valid_5_0=	';' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
@@ -389,7 +389,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
     	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
-('call' 
+(	'call' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null); 
     }
@@ -419,7 +419,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 )
 )?(
 (
-		lv_valid_2_0=';' 
+		lv_valid_2_0=	';' 
     {
         createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
@@ -461,15 +461,15 @@ ruleInheritingHiddens returns [EObject current=null]
     	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
-('inheriting' 
+(	'inheriting' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0(), null); 
     }
-'hiddens' 
+	'hiddens' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1(), null); 
     }
-'(' 
+	'(' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
@@ -522,13 +522,13 @@ ruleInheritingHiddens returns [EObject current=null]
 	    }
 
 )
-))')' 
+))	')' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
 (
 (
-		lv_valid_6_0=';' 
+		lv_valid_6_0=	';' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
@@ -568,7 +568,7 @@ ruleDatatypeHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('datatype' 
+(	'datatype' 
     {
         createLeafNode(grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null); 
     }
@@ -655,7 +655,7 @@ ruleHidingHiddens returns [EObject current=null]
     	lastConsumedNode = currentNode;
 		myHiddenTokenState.restore();
     }:
-('hiding' 
+(	'hiding' 
     {
         createLeafNode(grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null); 
     }
@@ -728,13 +728,13 @@ ruleInheritingHiddensCall returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('call' 
+(	'call' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null); 
     }
 (
 (
-		lv_valid_1_0=';' 
+		lv_valid_1_0=	';' 
     {
         createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid"); 
     }

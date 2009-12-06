@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288734TestLa
 }
 
 @parser::members {
- 
+
  	private Bug288734TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug288734TestLanguageParser(TokenStream input, IAstFactory factory, Bug288734TestLanguageGrammarAccess grammarAccess) {
@@ -202,11 +202,11 @@ ruleTStringConstant returns [EObject current=null]
 	    }
 
 )
-)*'constant' 
+)*	'constant' 
     {
         createLeafNode(grammarAccess.getTStringConstantAccess().getConstantKeyword_1(), null); 
     }
-'string' 
+	'string' 
     {
         createLeafNode(grammarAccess.getTStringConstantAccess().getStringKeyword_2(), null); 
     }
@@ -279,11 +279,11 @@ ruleTIntegerConstant returns [EObject current=null]
 	    }
 
 )
-)*'constant' 
+)*	'constant' 
     {
         createLeafNode(grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1(), null); 
     }
-'integer' 
+	'integer' 
     {
         createLeafNode(grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2(), null); 
     }
@@ -356,11 +356,11 @@ ruleTBooleanConstant returns [EObject current=null]
 	    }
 
 )
-)*'constant' 
+)*	'constant' 
     {
         createLeafNode(grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1(), null); 
     }
-'boolean' 
+	'boolean' 
     {
         createLeafNode(grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2(), null); 
     }
@@ -409,7 +409,7 @@ ruleTAnnotation returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('@desc' 
+(	'@desc' 
     {
         createLeafNode(grammarAccess.getTAnnotationAccess().getDescKeyword_0(), null); 
     }

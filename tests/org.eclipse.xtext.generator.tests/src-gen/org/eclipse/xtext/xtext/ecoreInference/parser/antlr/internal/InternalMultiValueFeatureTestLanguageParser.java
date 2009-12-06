@@ -43,7 +43,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g"; }
 
 
-     
+
      	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
      	
         public InternalMultiValueFeatureTestLanguageParser(TokenStream input, IAstFactory factory, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {

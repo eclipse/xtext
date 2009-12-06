@@ -36,7 +36,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
 }
 
 @parser::members {
- 
+
  	private UnassignedRuleCallTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnassignedRuleCallTestLanguageParser(TokenStream input, IAstFactory factory, UnassignedRuleCallTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('model' 
+(	'model' 
     {
         createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
     }
@@ -136,7 +136,7 @@ ruleModelFeatures returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('feature' 
+(	'feature' 
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null); 
     }
@@ -164,7 +164,7 @@ ruleModelFeatures returns [EObject current=null]
 	    }
 
 )
-)ruleDataTypeRule';' 
+)ruleDataTypeRule	';' 
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
     }

@@ -37,7 +37,7 @@ import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private EnumRulesTestLanguageGrammarAccess grammarAccess;
  	
     public InternalEnumRulesTestLanguageParser(TokenStream input, IAstFactory factory, EnumRulesTestLanguageGrammarAccess grammarAccess) {
@@ -84,7 +84,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('existing' 
+((	'existing' 
     {
         createLeafNode(grammarAccess.getModelAccess().getExistingKeyword_0_0(), null); 
     }
@@ -112,7 +112,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)('generated' 
+)(	'generated' 
     {
         createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0(), null); 
     }
@@ -141,7 +141,7 @@ ruleModel returns [EObject current=null]
 
 )
 ))?)
-    |('generated' 
+    |(	'generated' 
     {
         createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null); 
     }

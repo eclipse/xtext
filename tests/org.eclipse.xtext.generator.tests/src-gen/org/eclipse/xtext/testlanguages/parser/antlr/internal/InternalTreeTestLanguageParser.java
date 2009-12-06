@@ -43,7 +43,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g"; }
 
 
-     
+
      	private TreeTestLanguageGrammarAccess grammarAccess;
      	
         public InternalTreeTestLanguageParser(TokenStream input, IAstFactory factory, TreeTestLanguageGrammarAccess grammarAccess) {
@@ -275,7 +275,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleNode227); 
+            match(input,11,FOLLOW_11_in_ruleNode228); 
 
                     createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null); 
                 
@@ -286,7 +286,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.g:161:3: lv_attrib_2_0= RULE_STRING
             {
             lv_attrib_2_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNode244); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNode245); 
 
             			createLeafNode(grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0(), "attrib"); 
             		
@@ -312,11 +312,11 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleNode258); 
+            match(input,12,FOLLOW_12_in_ruleNode260); 
 
                     createLeafNode(grammarAccess.getNodeAccess().getRightParenthesisKeyword_3(), null); 
                 
-            match(input,13,FOLLOW_13_in_ruleNode267); 
+            match(input,13,FOLLOW_13_in_ruleNode270); 
 
                     createLeafNode(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null); 
                 
@@ -341,7 +341,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNode_in_ruleNode288);
+            	    pushFollow(FOLLOW_ruleNode_in_ruleNode291);
             	    lv_children_5_0=ruleNode();
             	    _fsp--;
 
@@ -374,7 +374,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
                 }
             } while (true);
 
-            match(input,14,FOLLOW_14_in_ruleNode298); 
+            match(input,14,FOLLOW_14_in_ruleNode302); 
 
                     createLeafNode(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null); 
                 
@@ -408,11 +408,11 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
     public static final BitSet FOLLOW_ruleNode_in_entryRuleNode161 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNode171 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleNode213 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleNode227 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleNode244 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleNode258 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleNode267 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleNode_in_ruleNode288 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_14_in_ruleNode298 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleNode228 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleNode245 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleNode260 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleNode270 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_ruleNode_in_ruleNode291 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_14_in_ruleNode302 = new BitSet(new long[]{0x0000000000000002L});
 
 }

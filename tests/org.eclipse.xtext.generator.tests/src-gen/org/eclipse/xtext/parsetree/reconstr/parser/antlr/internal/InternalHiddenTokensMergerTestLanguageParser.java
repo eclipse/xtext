@@ -44,7 +44,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g"; }
 
 
-     
+
      	private HiddenTokensMergerTestLanguageGrammarAccess grammarAccess;
      	
         public InternalHiddenTokensMergerTestLanguageParser(TokenStream input, IAstFactory factory, HiddenTokensMergerTestLanguageGrammarAccess grammarAccess) {
@@ -241,9 +241,9 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:127:1: ( '#1' ( (lv_name_1_0= ruleFQN ) ) ( 'ref' ( ( ruleFQN ) ) )? ';' )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:127:1: ( '#1' ( (lv_name_1_0= ruleFQN ) ) ( 'ref' ( ( ruleFQN ) ) )? ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:127:2: '#1' ( (lv_name_1_0= ruleFQN ) ) ( 'ref' ( ( ruleFQN ) ) )? ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:127:3: '#1' ( (lv_name_1_0= ruleFQN ) ) ( 'ref' ( ( ruleFQN ) ) )? ';'
             {
-            match(input,11,FOLLOW_11_in_ruleDatatypeBug286557233); 
+            match(input,11,FOLLOW_11_in_ruleDatatypeBug286557234); 
 
                     createLeafNode(grammarAccess.getDatatypeBug286557Access().getNumberSignDigitOneKeyword_0(), null); 
                 
@@ -256,7 +256,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
              
             	        currentNode=createCompositeNode(grammarAccess.getDatatypeBug286557Access().getNameFQNParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleDatatypeBug286557254);
+            pushFollow(FOLLOW_ruleFQN_in_ruleDatatypeBug286557255);
             lv_name_1_0=ruleFQN();
             _fsp--;
 
@@ -292,9 +292,9 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:155:3: 'ref' ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:155:4: 'ref' ( ( ruleFQN ) )
                     {
-                    match(input,12,FOLLOW_12_in_ruleDatatypeBug286557264); 
+                    match(input,12,FOLLOW_12_in_ruleDatatypeBug286557266); 
 
                             createLeafNode(grammarAccess.getDatatypeBug286557Access().getRefKeyword_2_0(), null); 
                         
@@ -313,7 +313,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
                      
                     	        currentNode=createCompositeNode(grammarAccess.getDatatypeBug286557Access().getRefDatatypeBug286557CrossReference_2_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleDatatypeBug286557287);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleDatatypeBug286557289);
                     ruleFQN();
                     _fsp--;
 
@@ -332,7 +332,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleDatatypeBug286557298); 
+            match(input,13,FOLLOW_13_in_ruleDatatypeBug286557301); 
 
                     createLeafNode(grammarAccess.getDatatypeBug286557Access().getSemicolonKeyword_3(), null); 
                 
@@ -371,12 +371,12 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:187:2: iv_ruleFQN= ruleFQN EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN332);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN335);
             iv_ruleFQN=ruleFQN();
             _fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN343); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN346); 
 
             }
 
@@ -412,7 +412,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:200:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN383); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN386); 
 
             		current.merge(this_ID_0);
                 
@@ -435,13 +435,13 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:208:2: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)input.LT(1);
-            	    match(input,14,FOLLOW_14_in_ruleFQN402); 
+            	    match(input,14,FOLLOW_14_in_ruleFQN405); 
 
             	            current.merge(kw);
             	            createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
             	        
             	    this_ID_2=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN417); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN420); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -492,12 +492,12 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:229:2: iv_ruleEnumBug= ruleEnumBug EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEnumBugRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEnumBug_in_entryRuleEnumBug462);
+            pushFollow(FOLLOW_ruleEnumBug_in_entryRuleEnumBug465);
             iv_ruleEnumBug=ruleEnumBug();
             _fsp--;
 
              current =iv_ruleEnumBug; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumBug472); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumBug475); 
 
             }
 
@@ -530,13 +530,13 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:242:1: ( '#2' 'kw1' ( (lv_return_2_0= ruleEnumBugEnum ) ) ( (lv_name_3_0= RULE_ID ) ) )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:242:1: ( '#2' 'kw1' ( (lv_return_2_0= ruleEnumBugEnum ) ) ( (lv_name_3_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:242:2: '#2' 'kw1' ( (lv_return_2_0= ruleEnumBugEnum ) ) ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:242:3: '#2' 'kw1' ( (lv_return_2_0= ruleEnumBugEnum ) ) ( (lv_name_3_0= RULE_ID ) )
             {
-            match(input,15,FOLLOW_15_in_ruleEnumBug506); 
+            match(input,15,FOLLOW_15_in_ruleEnumBug510); 
 
                     createLeafNode(grammarAccess.getEnumBugAccess().getNumberSignDigitTwoKeyword_0(), null); 
                 
-            match(input,16,FOLLOW_16_in_ruleEnumBug515); 
+            match(input,16,FOLLOW_16_in_ruleEnumBug520); 
 
                     createLeafNode(grammarAccess.getEnumBugAccess().getKw1Keyword_1(), null); 
                 
@@ -549,7 +549,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
              
             	        currentNode=createCompositeNode(grammarAccess.getEnumBugAccess().getReturnEnumBugEnumEnumRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleEnumBugEnum_in_ruleEnumBug536);
+            pushFollow(FOLLOW_ruleEnumBugEnum_in_ruleEnumBug541);
             lv_return_2_0=ruleEnumBugEnum();
             _fsp--;
 
@@ -583,7 +583,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:276:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumBug553); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumBug558); 
 
             			createLeafNode(grammarAccess.getEnumBugAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
             		
@@ -678,7 +678,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:310:2: ( 'array' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:310:4: 'array'
                     {
-                    match(input,17,FOLLOW_17_in_ruleEnumBugEnum605); 
+                    match(input,17,FOLLOW_17_in_ruleEnumBugEnum610); 
 
                             current = grammarAccess.getEnumBugEnumAccess().getArrayEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getEnumBugEnumAccess().getArrayEnumLiteralDeclaration_0(), null); 
@@ -695,7 +695,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:316:6: ( 'object' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:316:8: 'object'
                     {
-                    match(input,18,FOLLOW_18_in_ruleEnumBugEnum620); 
+                    match(input,18,FOLLOW_18_in_ruleEnumBugEnum625); 
 
                             current = grammarAccess.getEnumBugEnumAccess().getObjectEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getEnumBugEnumAccess().getObjectEnumLiteralDeclaration_1(), null); 
@@ -712,7 +712,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:322:6: ( 'resultSet' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:322:8: 'resultSet'
                     {
-                    match(input,19,FOLLOW_19_in_ruleEnumBugEnum635); 
+                    match(input,19,FOLLOW_19_in_ruleEnumBugEnum640); 
 
                             current = grammarAccess.getEnumBugEnumAccess().getResultSetEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getEnumBugEnumAccess().getResultSetEnumLiteralDeclaration_2(), null); 
@@ -729,7 +729,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:328:6: ( 'iterator' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:328:8: 'iterator'
                     {
-                    match(input,20,FOLLOW_20_in_ruleEnumBugEnum650); 
+                    match(input,20,FOLLOW_20_in_ruleEnumBugEnum655); 
 
                             current = grammarAccess.getEnumBugEnumAccess().getIteratorEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getEnumBugEnumAccess().getIteratorEnumLiteralDeclaration_3(), null); 
@@ -770,25 +770,25 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
     public static final BitSet FOLLOW_ruleEnumBug_in_ruleModel157 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDatatypeBug286557_in_entryRuleDatatypeBug286557189 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleDatatypeBug286557199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleDatatypeBug286557233 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleDatatypeBug286557254 = new BitSet(new long[]{0x0000000000003000L});
-    public static final BitSet FOLLOW_12_in_ruleDatatypeBug286557264 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleDatatypeBug286557287 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleDatatypeBug286557298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN332 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN383 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleFQN402 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN417 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_ruleEnumBug_in_entryRuleEnumBug462 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumBug472 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleEnumBug506 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleEnumBug515 = new BitSet(new long[]{0x00000000001E0000L});
-    public static final BitSet FOLLOW_ruleEnumBugEnum_in_ruleEnumBug536 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumBug553 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleEnumBugEnum605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleEnumBugEnum620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleEnumBugEnum635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleEnumBugEnum650 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleDatatypeBug286557234 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleDatatypeBug286557255 = new BitSet(new long[]{0x0000000000003000L});
+    public static final BitSet FOLLOW_12_in_ruleDatatypeBug286557266 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleDatatypeBug286557289 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleDatatypeBug286557301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN335 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN386 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleFQN405 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN420 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_ruleEnumBug_in_entryRuleEnumBug465 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumBug475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleEnumBug510 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleEnumBug520 = new BitSet(new long[]{0x00000000001E0000L});
+    public static final BitSet FOLLOW_ruleEnumBugEnum_in_ruleEnumBug541 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumBug558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleEnumBugEnum610 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleEnumBugEnum625 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleEnumBugEnum640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleEnumBugEnum655 = new BitSet(new long[]{0x0000000000000002L});
 
 }

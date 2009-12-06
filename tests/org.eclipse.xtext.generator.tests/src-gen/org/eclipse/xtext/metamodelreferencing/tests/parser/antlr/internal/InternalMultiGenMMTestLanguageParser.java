@@ -43,7 +43,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g"; }
 
 
-     
+
      	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
      	
         public InternalMultiGenMMTestLanguageParser(TokenStream input, IAstFactory factory, MultiGenMMTestLanguageGrammarAccess grammarAccess) {

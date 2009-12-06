@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.DatatypeRuleTes
 }
 
 @parser::members {
- 
+
  	private DatatypeRuleTestLanguageGrammarAccess grammarAccess;
  	
     public InternalDatatypeRuleTestLanguageParser(TokenStream input, IAstFactory factory, DatatypeRuleTestLanguageGrammarAccess grammarAccess) {
@@ -113,7 +113,7 @@ ruleTypes returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('Types' 
+(	'Types' 
     {
         createLeafNode(grammarAccess.getTypesAccess().getTypesKeyword_0(), null); 
     }
@@ -202,7 +202,7 @@ ruleSimpleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('Type' 
+(	'Type' 
     {
         createLeafNode(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0(), null); 
     }
@@ -230,7 +230,7 @@ ruleSimpleType returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2(), null); 
     }
@@ -255,7 +255,7 @@ ruleCompositeType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('Composite' 
+(	'Composite' 
     {
         createLeafNode(grammarAccess.getCompositeTypeAccess().getCompositeKeyword_0(), null); 
     }
@@ -283,7 +283,7 @@ ruleCompositeType returns [EObject current=null]
 	    }
 
 )
-)'base' 
+)	'base' 
     {
         createLeafNode(grammarAccess.getCompositeTypeAccess().getBaseKeyword_2(), null); 
     }
@@ -311,7 +311,7 @@ ruleCompositeType returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4(), null); 
     }

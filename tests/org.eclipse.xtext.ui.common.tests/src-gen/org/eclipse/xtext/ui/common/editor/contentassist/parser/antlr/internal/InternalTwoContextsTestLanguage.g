@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTest
 }
 
 @parser::members {
- 
+
  	private TwoContextsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalTwoContextsTestLanguageParser(TokenStream input, IAstFactory factory, TwoContextsTestLanguageGrammarAccess grammarAccess) {
@@ -152,7 +152,7 @@ ruleAnElement returns [EObject current=null]
 	    }
 
 )
-)('refersTo' 
+)(	'refersTo' 
     {
         createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
     }
@@ -170,7 +170,7 @@ ruleAnElement returns [EObject current=null]
 	}
 
 )
-))?';' 
+))?	';' 
     {
         createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
     }

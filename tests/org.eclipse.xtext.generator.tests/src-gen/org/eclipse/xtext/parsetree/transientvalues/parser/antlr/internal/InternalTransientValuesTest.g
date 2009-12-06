@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 }
 
 @parser::members {
- 
+
  	private TransientValuesTestGrammarAccess grammarAccess;
  	
     public InternalTransientValuesTestParser(TokenStream input, IAstFactory factory, TransientValuesTestGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleRoot returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('test' 
+(	'test' 
     {
         createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
     }
@@ -137,7 +137,7 @@ ruleTestRequired returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('required' 
+(	'required' 
     {
         createLeafNode(grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null); 
     }
@@ -210,7 +210,7 @@ ruleTestOptional returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('optional' 
+(	'optional' 
     {
         createLeafNode(grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null); 
     }
@@ -238,7 +238,7 @@ ruleTestOptional returns [EObject current=null]
 	    }
 
 )
-)?(':' 
+)?(	':' 
     {
         createLeafNode(grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null); 
     }
@@ -287,7 +287,7 @@ ruleTestList returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('list' 
+(	'list' 
     {
         createLeafNode(grammarAccess.getTestListAccess().getListKeyword_0(), null); 
     }

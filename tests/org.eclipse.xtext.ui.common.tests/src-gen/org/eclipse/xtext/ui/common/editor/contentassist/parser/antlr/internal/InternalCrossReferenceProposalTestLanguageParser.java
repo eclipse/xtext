@@ -43,7 +43,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g"; }
 
 
-     
+
      	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
      	
         public InternalCrossReferenceProposalTestLanguageParser(TokenStream input, IAstFactory factory, CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
@@ -276,7 +276,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
                     }
 
-                    match(input,11,FOLLOW_11_in_ruleClass224); 
+                    match(input,11,FOLLOW_11_in_ruleClass225); 
 
                             createLeafNode(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1(), null); 
                         
@@ -293,7 +293,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:151:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass243); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleClass244); 
 
             			createLeafNode(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -319,11 +319,11 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleClass257); 
+            match(input,12,FOLLOW_12_in_ruleClass259); 
 
                     createLeafNode(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            match(input,13,FOLLOW_13_in_ruleClass266); 
+            match(input,13,FOLLOW_13_in_ruleClass269); 
 
                     createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null); 
                 
@@ -357,9 +357,9 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     public static final BitSet FOLLOW_ruleClass_in_entryRuleClass161 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleClass171 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleClass215 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleClass224 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleClass243 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleClass257 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleClass266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleClass225 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleClass244 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleClass259 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleClass269 = new BitSet(new long[]{0x0000000000000002L});
 
 }

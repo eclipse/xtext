@@ -36,7 +36,7 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
 }
 
 @parser::members {
- 
+
  	private BuilderTestLanguageGrammarAccess grammarAccess;
  	
     public InternalBuilderTestLanguageParser(TokenStream input, IAstFactory factory, BuilderTestLanguageGrammarAccess grammarAccess) {
@@ -123,7 +123,7 @@ ruleNamespace returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('namespace' 
+(	'namespace' 
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getNamespaceKeyword_0(), null); 
     }
@@ -151,7 +151,7 @@ ruleNamespace returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
@@ -203,7 +203,7 @@ ruleNamespace returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_5(), null); 
     }
@@ -228,7 +228,7 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
     }
@@ -277,7 +277,7 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('object' 
+(	'object' 
     {
         createLeafNode(grammarAccess.getElementAccess().getObjectKeyword_0(), null); 
     }
@@ -305,7 +305,7 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)('references' 
+)(	'references' 
     {
         createLeafNode(grammarAccess.getElementAccess().getReferencesKeyword_2_0(), null); 
     }

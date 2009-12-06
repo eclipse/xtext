@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private TestLanguageGrammarAccess grammarAccess;
  	
     public InternalTestLanguageParser(TokenStream input, IAstFactory factory, TestLanguageGrammarAccess grammarAccess) {
@@ -168,13 +168,13 @@ ruleChoiceRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('choice' 
+(	'choice' 
     {
         createLeafNode(grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0(), null); 
     }
 (
 (
-		lv_optionalKeyword_1_0='optional' 
+		lv_optionalKeyword_1_0=	'optional' 
     {
         createLeafNode(grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0(), "optionalKeyword"); 
     }
@@ -238,7 +238,7 @@ ruleReducibleRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('reducible' 
+(	'reducible' 
     {
         createLeafNode(grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0(), null); 
     }

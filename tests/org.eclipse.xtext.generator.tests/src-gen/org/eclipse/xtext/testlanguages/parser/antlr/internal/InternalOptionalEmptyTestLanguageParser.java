@@ -43,7 +43,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g"; }
 
 
-     
+
      	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
      	
         public InternalOptionalEmptyTestLanguageParser(TokenStream input, IAstFactory factory, OptionalEmptyTestLanguageGrammarAccess grammarAccess) {
@@ -230,9 +230,9 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:1: ( 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:1: ( 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:2: 'hallo' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:3: 'hallo' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,11,FOLLOW_11_in_ruleGreeting205); 
+            match(input,11,FOLLOW_11_in_ruleGreeting206); 
 
                     createLeafNode(grammarAccess.getGreetingAccess().getHalloKeyword_0(), null); 
                 
@@ -243,7 +243,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:137:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting222); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting223); 
 
             			createLeafNode(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -298,7 +298,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
     public static final BitSet FOLLOW_ruleGreeting_in_ruleModel128 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting161 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGreeting171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleGreeting205 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting222 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleGreeting206 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting223 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -43,7 +43,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g"; }
 
 
-     
+
      	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
      	
         public InternalEcoreFragmentTestLanguageParser(TokenStream input, IAstFactory factory, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
@@ -150,7 +150,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleSecond139); 
+            match(input,11,FOLLOW_11_in_ruleSecond140); 
 
                     createLeafNode(grammarAccess.getSecondAccess().getFirstKeyword_1(), null); 
                 
@@ -166,7 +166,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSecond157); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSecond158); 
 
             		createLeafNode(grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
             	
@@ -203,7 +203,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
     public static final BitSet FOLLOW_ruleSecond_in_entryRuleSecond73 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSecond83 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleSecond125 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleSecond139 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSecond157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleSecond140 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSecond158 = new BitSet(new long[]{0x0000000000000002L});
 
 }

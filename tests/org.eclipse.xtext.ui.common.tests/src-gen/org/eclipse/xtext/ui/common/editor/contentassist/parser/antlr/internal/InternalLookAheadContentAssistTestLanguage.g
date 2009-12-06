@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadConten
 }
 
 @parser::members {
- 
+
  	private LookAheadContentAssistTestLanguageGrammarAccess grammarAccess;
  	
     public InternalLookAheadContentAssistTestLanguageParser(TokenStream input, IAstFactory factory, LookAheadContentAssistTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('(' 
+((	'(' 
     {
         createLeafNode(grammarAccess.getModelAccess().getLeftParenthesisKeyword_0_0(), null); 
     }
@@ -135,12 +135,12 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*')' 
+)*	')' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRightParenthesisKeyword_0_3(), null); 
     }
 )
-    |('[' 
+    |(	'[' 
     {
         createLeafNode(grammarAccess.getModelAccess().getLeftSquareBracketKeyword_1_0(), null); 
     }
@@ -192,12 +192,12 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*']' 
+)*	']' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRightSquareBracketKeyword_1_3(), null); 
     }
 )
-    |('<' 
+    |(	'<' 
     {
         createLeafNode(grammarAccess.getModelAccess().getLessThanSignKeyword_2_0(), null); 
     }
@@ -249,12 +249,12 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)+'>' 
+)+	'>' 
     {
         createLeafNode(grammarAccess.getModelAccess().getGreaterThanSignKeyword_2_3(), null); 
     }
 )
-    |('{' 
+    |(	'{' 
     {
         createLeafNode(grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_3_0(), null); 
     }
@@ -306,7 +306,7 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)+'}' 
+)+	'}' 
     {
         createLeafNode(grammarAccess.getModelAccess().getRightCurlyBracketKeyword_3_3(), null); 
     }
@@ -400,7 +400,7 @@ rulePair returns [EObject current=null]
 	    }
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getPairAccess().getEqualsSignKeyword_1(), null); 
     }

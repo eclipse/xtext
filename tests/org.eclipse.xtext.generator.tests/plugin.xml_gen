@@ -209,6 +209,24 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/Bug296889TestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/Bug296889ExTestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug296889ExTest.Bug296889ExTestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" 
        class = "org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.genmodel" /> 

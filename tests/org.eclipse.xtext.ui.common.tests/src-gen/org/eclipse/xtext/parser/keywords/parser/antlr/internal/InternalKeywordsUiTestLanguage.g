@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsUiTestLanguageGrammarA
 }
 
 @parser::members {
- 
+
  	private KeywordsUiTestLanguageGrammarAccess grammarAccess;
  	
     public InternalKeywordsUiTestLanguageParser(TokenStream input, IAstFactory factory, KeywordsUiTestLanguageGrammarAccess grammarAccess) {
@@ -85,7 +85,7 @@ ruleModel returns [EObject current=null]
     }:
 ((
 (
-		lv_first_0_0='foo\\bar' 
+		lv_first_0_0=	'foo\\bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first"); 
     }
@@ -107,7 +107,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_second_1_0='foo\\' 
+		lv_second_1_0=	'foo\\' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second"); 
     }
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_third_2_0='\\bar' 
+		lv_third_2_0=	'\\bar' 
     {
         createLeafNode(grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third"); 
     }
@@ -151,7 +151,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_forth_3_0='\\' 
+		lv_forth_3_0=	'\\' 
     {
         createLeafNode(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth"); 
     }
@@ -173,7 +173,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_fifth_4_0='"a"' 
+		lv_fifth_4_0=	'"a"' 
     {
         createLeafNode(grammarAccess.getModelAccess().getFifthAKeyword_4_0(), "fifth"); 
     }
@@ -195,7 +195,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_sixth_5_0='\'b\'' 
+		lv_sixth_5_0=	'\'b\'' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSixthBKeyword_5_0(), "sixth"); 
     }
@@ -217,7 +217,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_seventh_6_0='\'c\'' 
+		lv_seventh_6_0=	'\'c\'' 
     {
         createLeafNode(grammarAccess.getModelAccess().getSeventhCKeyword_6_0(), "seventh"); 
     }
@@ -239,7 +239,7 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_eighth_7_0='"d"' 
+		lv_eighth_7_0=	'"d"' 
     {
         createLeafNode(grammarAccess.getModelAccess().getEighthDKeyword_7_0(), "eighth"); 
     }

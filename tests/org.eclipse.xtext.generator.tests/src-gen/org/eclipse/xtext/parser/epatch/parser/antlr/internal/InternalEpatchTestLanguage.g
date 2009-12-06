@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 }
 
 @parser::members {
- 
+
  	private EpatchTestLanguageGrammarAccess grammarAccess;
  	
     public InternalEpatchTestLanguageParser(TokenStream input, IAstFactory factory, EpatchTestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleEPatch returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('epatch' 
+(	'epatch' 
     {
         createLeafNode(grammarAccess.getEPatchAccess().getEpatchKeyword_0(), null); 
     }
@@ -111,7 +111,7 @@ ruleEPatch returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getEPatchAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
@@ -187,7 +187,7 @@ ruleEPatch returns [EObject current=null]
 	    }
 
 )
-)*'}' 
+)*	'}' 
     {
         createLeafNode(grammarAccess.getEPatchAccess().getRightCurlyBracketKeyword_6(), null); 
     }
@@ -302,7 +302,7 @@ ruleResourceImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getResourceImportAccess().getImportKeyword_0(), null); 
     }
@@ -330,7 +330,7 @@ ruleResourceImport returns [EObject current=null]
 	    }
 
 )
-)'uri' 
+)	'uri' 
     {
         createLeafNode(grammarAccess.getResourceImportAccess().getUriKeyword_2(), null); 
     }
@@ -379,7 +379,7 @@ ruleEPackageImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getEPackageImportAccess().getImportKeyword_0(), null); 
     }
@@ -407,7 +407,7 @@ ruleEPackageImport returns [EObject current=null]
 	    }
 
 )
-)'ns' 
+)	'ns' 
     {
         createLeafNode(grammarAccess.getEPackageImportAccess().getNsKeyword_2(), null); 
     }
@@ -456,11 +456,11 @@ ruleJavaImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getJavaImportAccess().getImportKeyword_0(), null); 
     }
-'java' 
+	'java' 
     {
         createLeafNode(grammarAccess.getJavaImportAccess().getJavaKeyword_1(), null); 
     }
@@ -488,7 +488,7 @@ ruleJavaImport returns [EObject current=null]
 	    }
 
 )
-)('.' 
+)(	'.' 
     {
         createLeafNode(grammarAccess.getJavaImportAccess().getFullStopKeyword_3_0(), null); 
     }
@@ -537,11 +537,11 @@ ruleExtensionImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('import' 
+(	'import' 
     {
         createLeafNode(grammarAccess.getExtensionImportAccess().getImportKeyword_0(), null); 
     }
-'extension' 
+	'extension' 
     {
         createLeafNode(grammarAccess.getExtensionImportAccess().getExtensionKeyword_1(), null); 
     }
@@ -569,7 +569,7 @@ ruleExtensionImport returns [EObject current=null]
 	    }
 
 )
-)('::' 
+)(	'::' 
     {
         createLeafNode(grammarAccess.getExtensionImportAccess().getColonColonKeyword_3_0(), null); 
     }
@@ -618,7 +618,7 @@ ruleNamedResource returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('resource' 
+(	'resource' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getResourceKeyword_0(), null); 
     }
@@ -646,15 +646,15 @@ ruleNamedResource returns [EObject current=null]
 	    }
 
 )
-)'{' 
+)	'{' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getLeftCurlyBracketKeyword_2(), null); 
     }
-'left' 
+	'left' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getLeftKeyword_3(), null); 
     }
-(('uri' 
+((	'uri' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_4_0_0(), null); 
     }
@@ -707,15 +707,15 @@ ruleNamedResource returns [EObject current=null]
 	    }
 
 )
-))';' 
+))	';' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_5(), null); 
     }
-'right' 
+	'right' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getRightKeyword_6(), null); 
     }
-(('uri' 
+((	'uri' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_7_0_0(), null); 
     }
@@ -768,11 +768,11 @@ ruleNamedResource returns [EObject current=null]
 	    }
 
 )
-))';' 
+))	';' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_8(), null); 
     }
-'}' 
+	'}' 
     {
         createLeafNode(grammarAccess.getNamedResourceAccess().getRightCurlyBracketKeyword_9(), null); 
     }
@@ -799,7 +799,7 @@ ruleObjectRef returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('object' 
+(	'object' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getObjectKeyword_0(), null); 
     }
@@ -866,7 +866,7 @@ ruleObjectRef returns [EObject current=null]
 
 )
 ))
-    |('left' 
+    |(	'left' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_2_1_0(), null); 
     }
@@ -908,7 +908,7 @@ ruleObjectRef returns [EObject current=null]
 	    }
 
 )
-)'right' 
+)	'right' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_2_1_3(), null); 
     }
@@ -950,7 +950,7 @@ ruleObjectRef returns [EObject current=null]
 	    }
 
 )
-)))('{' 
+)))(	'{' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getLeftCurlyBracketKeyword_3_0(), null); 
     }
@@ -1003,7 +1003,7 @@ ruleObjectRef returns [EObject current=null]
 	    }
 
 )
-))+('left' 
+))+(	'left' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_3_2_0(), null); 
     }
@@ -1031,7 +1031,7 @@ ruleObjectRef returns [EObject current=null]
 	    }
 
 )
-))?('right' 
+))?(	'right' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_3_3_0(), null); 
     }
@@ -1059,7 +1059,7 @@ ruleObjectRef returns [EObject current=null]
 	    }
 
 )
-))?'}' 
+))?	'}' 
     {
         createLeafNode(grammarAccess.getObjectRefAccess().getRightCurlyBracketKeyword_3_4(), null); 
     }
@@ -1110,7 +1110,7 @@ ruleBiSingleAssignment returns [EObject current=null]
 	    }
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
     }
@@ -1138,7 +1138,7 @@ ruleBiSingleAssignment returns [EObject current=null]
 	    }
 
 )
-)'|' 
+)	'|' 
     {
         createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getVerticalLineKeyword_3(), null); 
     }
@@ -1166,7 +1166,7 @@ ruleBiSingleAssignment returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getSemicolonKeyword_5(), null); 
     }
@@ -1215,11 +1215,11 @@ ruleBiListAssignment returns [EObject current=null]
 	    }
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getEqualsSignKeyword_1(), null); 
     }
-'[' 
+	'[' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
     }
@@ -1247,7 +1247,7 @@ ruleBiListAssignment returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
     }
@@ -1275,7 +1275,7 @@ ruleBiListAssignment returns [EObject current=null]
 	    }
 
 )
-))*)?'|' 
+))*)?	'|' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getVerticalLineKeyword_4(), null); 
     }
@@ -1303,7 +1303,7 @@ ruleBiListAssignment returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_5_1_0(), null); 
     }
@@ -1331,11 +1331,11 @@ ruleBiListAssignment returns [EObject current=null]
 	    }
 
 )
-))*)?']' 
+))*)?	']' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getRightSquareBracketKeyword_6(), null); 
     }
-';' 
+	';' 
     {
         createLeafNode(grammarAccess.getBiListAssignmentAccess().getSemicolonKeyword_7(), null); 
     }
@@ -1384,7 +1384,7 @@ ruleMonoSingleAssignment returns [EObject current=null]
 	    }
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
     }
@@ -1412,7 +1412,7 @@ ruleMonoSingleAssignment returns [EObject current=null]
 	    }
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getSemicolonKeyword_3(), null); 
     }
@@ -1461,11 +1461,11 @@ ruleMonoListAssignment returns [EObject current=null]
 	    }
 
 )
-)'=' 
+)	'=' 
     {
         createLeafNode(grammarAccess.getMonoListAssignmentAccess().getEqualsSignKeyword_1(), null); 
     }
-'[' 
+	'[' 
     {
         createLeafNode(grammarAccess.getMonoListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
     }
@@ -1493,7 +1493,7 @@ ruleMonoListAssignment returns [EObject current=null]
 	    }
 
 )
-)(',' 
+)(	',' 
     {
         createLeafNode(grammarAccess.getMonoListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
     }
@@ -1521,11 +1521,11 @@ ruleMonoListAssignment returns [EObject current=null]
 	    }
 
 )
-))*)?']' 
+))*)?	']' 
     {
         createLeafNode(grammarAccess.getMonoListAssignmentAccess().getRightSquareBracketKeyword_4(), null); 
     }
-';' 
+	';' 
     {
         createLeafNode(grammarAccess.getMonoListAssignmentAccess().getSemicolonKeyword_5(), null); 
     }
@@ -1589,7 +1589,7 @@ ruleAssignmentValue returns [EObject current=null]
 	}
 
 )
-)('.' 
+)(	'.' 
     {
         createLeafNode(grammarAccess.getAssignmentValueAccess().getFullStopKeyword_1_1_0(), null); 
     }
@@ -1617,7 +1617,7 @@ ruleAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)('[' 
+)(	'[' 
     {
         createLeafNode(grammarAccess.getAssignmentValueAccess().getLeftSquareBracketKeyword_1_1_2_0(), null); 
     }
@@ -1645,7 +1645,7 @@ ruleAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)']' 
+)	']' 
     {
         createLeafNode(grammarAccess.getAssignmentValueAccess().getRightSquareBracketKeyword_1_1_2_2(), null); 
     }
@@ -1758,11 +1758,11 @@ ruleListAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)':' 
+)	':' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getColonKeyword_1(), null); 
     }
-(('[' 
+((	'[' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_0_0(), null); 
     }
@@ -1790,7 +1790,7 @@ ruleListAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)']' 
+)	']' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_0_2(), null); 
     }
@@ -1834,7 +1834,7 @@ ruleListAssignmentValue returns [EObject current=null]
 	}
 
 )
-)('.' 
+)(	'.' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getFullStopKeyword_2_2_1_0(), null); 
     }
@@ -1862,7 +1862,7 @@ ruleListAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)('[' 
+)(	'[' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_2_1_2_0(), null); 
     }
@@ -1890,7 +1890,7 @@ ruleListAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)']' 
+)	']' 
     {
         createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_2_1_2_2(), null); 
     }
@@ -1981,7 +1981,7 @@ ruleSingleAssignmentValue returns [EObject current=null]
     }:
 ((
 (
-		lv_keyword_0_0='null' 
+		lv_keyword_0_0=	'null' 
     {
         createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getKeywordNullKeyword_0_0(), "keyword"); 
     }
@@ -2040,7 +2040,7 @@ ruleSingleAssignmentValue returns [EObject current=null]
 	}
 
 )
-)('.' 
+)(	'.' 
     {
         createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getFullStopKeyword_2_1_0(), null); 
     }
@@ -2068,7 +2068,7 @@ ruleSingleAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)('[' 
+)(	'[' 
     {
         createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getLeftSquareBracketKeyword_2_1_2_0(), null); 
     }
@@ -2096,7 +2096,7 @@ ruleSingleAssignmentValue returns [EObject current=null]
 	    }
 
 )
-)']' 
+)	']' 
     {
         createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRightSquareBracketKeyword_2_1_2_2(), null); 
     }
@@ -2228,7 +2228,7 @@ ruleCreatedObject returns [EObject current=null]
 	    }
 
 )
-)?('{' 
+)?(	'{' 
     {
         createLeafNode(grammarAccess.getCreatedObjectAccess().getLeftCurlyBracketKeyword_2_0(), null); 
     }
@@ -2305,7 +2305,7 @@ ruleCreatedObject returns [EObject current=null]
 	    }
 
 )
-)?'}' 
+)?	'}' 
     {
         createLeafNode(grammarAccess.getCreatedObjectAccess().getRightCurlyBracketKeyword_2_3(), null); 
     }
@@ -2330,7 +2330,7 @@ ruleObjectNew returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('new' 
+(	'new' 
     {
         createLeafNode(grammarAccess.getObjectNewAccess().getNewKeyword_0(), null); 
     }
@@ -2393,7 +2393,7 @@ ruleObjectCopy returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('copy' 
+(	'copy' 
     {
         createLeafNode(grammarAccess.getObjectCopyAccess().getCopyKeyword_0(), null); 
     }
@@ -2456,7 +2456,7 @@ ruleMigration returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('migrate' 
+(	'migrate' 
     {
         createLeafNode(grammarAccess.getMigrationAccess().getMigrateKeyword_0(), null); 
     }
@@ -2484,7 +2484,7 @@ ruleMigration returns [EObject current=null]
 	    }
 
 )
-)?(('as' 
+)?((	'as' 
     {
         createLeafNode(grammarAccess.getMigrationAccess().getAsKeyword_2_0_0(), null); 
     }
@@ -2513,7 +2513,7 @@ ruleMigration returns [EObject current=null]
 
 )
 ))
-    |('each' 
+    |(	'each' 
     {
         createLeafNode(grammarAccess.getMigrationAccess().getEachKeyword_2_1_0(), null); 
     }
@@ -2541,7 +2541,7 @@ ruleMigration returns [EObject current=null]
 	    }
 
 )
-)))?';' 
+)))?	';' 
     {
         createLeafNode(grammarAccess.getMigrationAccess().getSemicolonKeyword_3(), null); 
     }
@@ -2606,7 +2606,7 @@ ruleJavaExecutable returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('java' 
+(	'java' 
     {
         createLeafNode(grammarAccess.getJavaExecutableAccess().getJavaKeyword_0(), null); 
     }
@@ -2634,11 +2634,11 @@ ruleJavaExecutable returns [EObject current=null]
 	    }
 
 )
-)'(' 
+)	'(' 
     {
         createLeafNode(grammarAccess.getJavaExecutableAccess().getLeftParenthesisKeyword_2(), null); 
     }
-')' 
+	')' 
     {
         createLeafNode(grammarAccess.getJavaExecutableAccess().getRightParenthesisKeyword_3(), null); 
     }

@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
 }
 
 @parser::members {
- 
+
  	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnassignedTextTestLanguageParser(TokenStream input, IAstFactory factory, UnassignedTextTestLanguageGrammarAccess grammarAccess) {
@@ -202,7 +202,7 @@ rulePluralRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('contents:' 
+(	'contents:' 
     {
         createLeafNode(grammarAccess.getPluralRuleAccess().getContentsKeyword_0(), null); 
     }
@@ -255,7 +255,7 @@ ruleMultiRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('multi' 
+(	'multi' 
     {
         createLeafNode(grammarAccess.getMultiRuleAccess().getMultiKeyword_0(), null); 
     }
@@ -316,7 +316,7 @@ ruleDatatypeRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('datatype' 
+(	'datatype' 
     {
         createLeafNode(grammarAccess.getDatatypeRuleAccess().getDatatypeKeyword_0(), null); 
     }
@@ -442,7 +442,7 @@ ruleCommonTerminalsRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('terminals' 
+(	'terminals' 
     {
         createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getTerminalsKeyword_0(), null); 
     }

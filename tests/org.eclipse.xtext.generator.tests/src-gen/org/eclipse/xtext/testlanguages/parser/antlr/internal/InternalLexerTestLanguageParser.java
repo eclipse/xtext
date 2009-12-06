@@ -43,7 +43,7 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g"; }
 
 
-     
+
      	private LexerTestLanguageGrammarAccess grammarAccess;
      	
         public InternalLexerTestLanguageParser(TokenStream input, IAstFactory factory, LexerTestLanguageGrammarAccess grammarAccess) {

@@ -43,7 +43,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g"; }
 
 
-     
+
      	private TwoContextsTestLanguageGrammarAccess grammarAccess;
      	
         public InternalTwoContextsTestLanguageParser(TokenStream input, IAstFactory factory, TwoContextsTestLanguageGrammarAccess grammarAccess) {
@@ -281,9 +281,9 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:155:3: 'refersTo' ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:155:4: 'refersTo' ( ( RULE_ID ) )
                     {
-                    match(input,11,FOLLOW_11_in_ruleAnElement228); 
+                    match(input,11,FOLLOW_11_in_ruleAnElement229); 
 
                             createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
                         
@@ -299,7 +299,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement246); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement247); 
 
                     		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
                     	
@@ -315,7 +315,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleAnElement257); 
+            match(input,12,FOLLOW_12_in_ruleAnElement259); 
 
                     createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
                 
@@ -349,8 +349,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
     public static final BitSet FOLLOW_ruleAnElement_in_entryRuleAnElement161 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAnElement171 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement213 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_11_in_ruleAnElement228 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement246 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleAnElement257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleAnElement229 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement247 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleAnElement259 = new BitSet(new long[]{0x0000000000000002L});
 
 }

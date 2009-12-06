@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGramma
 }
 
 @parser::members {
- 
+
  	private Bug287184TestLanguageGrammarAccess grammarAccess;
  	
     public InternalBug287184TestLanguageParser(TokenStream input, IAstFactory factory, Bug287184TestLanguageGrammarAccess grammarAccess) {
@@ -83,7 +83,7 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('model' 
+(	'model' 
     {
         createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
     }
@@ -230,14 +230,14 @@ ruleDetail returns [EObject current=null]
 	    }
 
 )
-)?'detail' 
+)?	'detail' 
     {
         createLeafNode(grammarAccess.getDetailAccess().getDetailKeyword_1(), null); 
     }
 (
 (
 (
-		lv_visibility_2_1='private' 
+		lv_visibility_2_1=	'private' 
     {
         createLeafNode(grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_2_0_0(), "visibility"); 
     }
@@ -255,7 +255,7 @@ ruleDetail returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_visibility_2_2='protected' 
+    |		lv_visibility_2_2=	'protected' 
     {
         createLeafNode(grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_2_0_1(), "visibility"); 
     }
@@ -273,7 +273,7 @@ ruleDetail returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_visibility_2_3='public' 
+    |		lv_visibility_2_3=	'public' 
     {
         createLeafNode(grammarAccess.getDetailAccess().getVisibilityPublicKeyword_2_0_2(), "visibility"); 
     }
@@ -331,7 +331,7 @@ ruleAssociatedDetail returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('associated' 
+(	'associated' 
     {
         createLeafNode(grammarAccess.getAssociatedDetailAccess().getAssociatedKeyword_0(), null); 
     }
@@ -357,7 +357,7 @@ ruleAssociatedDetail returns [EObject current=null]
 )
 
 )
-)';' 
+)	';' 
     {
         createLeafNode(grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2(), null); 
     }

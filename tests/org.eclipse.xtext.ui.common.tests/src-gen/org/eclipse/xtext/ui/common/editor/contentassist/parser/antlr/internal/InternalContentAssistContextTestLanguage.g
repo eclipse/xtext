@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.ContentAssistCo
 }
 
 @parser::members {
- 
+
  	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
  	
     public InternalContentAssistContextTestLanguageParser(TokenStream input, IAstFactory factory, ContentAssistContextTestLanguageGrammarAccess grammarAccess) {
@@ -290,7 +290,7 @@ ruleThirdLevelA1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('A1' 
+(	'A1' 
     {
         createLeafNode(grammarAccess.getThirdLevelA1Access().getA1Keyword_0(), null); 
     }
@@ -350,7 +350,7 @@ ruleThirdLevelA2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('A2' 
+(	'A2' 
     {
         createLeafNode(grammarAccess.getThirdLevelA2Access().getA2Keyword_0(), null); 
     }
@@ -410,7 +410,7 @@ ruleThirdLevelB1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('B1' 
+(	'B1' 
     {
         createLeafNode(grammarAccess.getThirdLevelB1Access().getB1Keyword_0(), null); 
     }
@@ -470,7 +470,7 @@ ruleThirdLevelB2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('B2' 
+(	'B2' 
     {
         createLeafNode(grammarAccess.getThirdLevelB2Access().getB2Keyword_0(), null); 
     }

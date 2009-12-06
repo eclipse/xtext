@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 }
 
 @parser::members {
- 
+
  	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
  	
     public InternalOptionalEmptyTestLanguageParser(TokenStream input, IAstFactory factory, OptionalEmptyTestLanguageGrammarAccess grammarAccess) {
@@ -128,7 +128,7 @@ ruleGreeting returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('hallo' 
+(	'hallo' 
     {
         createLeafNode(grammarAccess.getGreetingAccess().getHalloKeyword_0(), null); 
     }

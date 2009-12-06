@@ -36,7 +36,7 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 }
 
 @parser::members {
- 
+
  	private ConcreteTestLanguageGrammarAccess grammarAccess;
  	
     public InternalConcreteTestLanguageParser(TokenStream input, IAstFactory factory, ConcreteTestLanguageGrammarAccess grammarAccess) {
@@ -143,7 +143,7 @@ ruleConcreteParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('model' 
+(	'model' 
     {
         createLeafNode(grammarAccess.getConcreteParserRuleAccess().getModelKeyword_0(), null); 
     }
@@ -171,7 +171,7 @@ ruleConcreteParserRule returns [EObject current=null]
 	    }
 
 )
-)':' 
+)	':' 
     {
         createLeafNode(grammarAccess.getConcreteParserRuleAccess().getColonKeyword_2(), null); 
     }
@@ -220,7 +220,7 @@ ruleOverridableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('overriddenelement' 
+(	'overriddenelement' 
     {
         createLeafNode(grammarAccess.getOverridableParserRuleAccess().getOverriddenelementKeyword_0(), null); 
     }
@@ -314,7 +314,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('overridden other element' 
+(	'overridden other element' 
     {
         createLeafNode(grammarAccess.getOverridableParserRule2Access().getOverriddenOtherElementKeyword_0(), null); 
     }
@@ -342,7 +342,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
 	    }
 
 )
-)'-' 
+)	'-' 
     {
         createLeafNode(grammarAccess.getOverridableParserRule2Access().getHyphenMinusKeyword_2(), null); 
     }
@@ -441,7 +441,7 @@ ruleSubrule1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('subrule1' 
+(	'subrule1' 
     {
         createLeafNode(grammarAccess.getSubrule1Access().getSubrule1Keyword_0(), null); 
     }
@@ -514,7 +514,7 @@ ruleSubrule2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('subrule3' 
+(	'subrule3' 
     {
         createLeafNode(grammarAccess.getSubrule2Access().getSubrule3Keyword_0(), null); 
     }
@@ -587,7 +587,7 @@ ruleSubrule3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('subrule3' 
+(	'subrule3' 
     {
         createLeafNode(grammarAccess.getSubrule3Access().getSubrule3Keyword_0(), null); 
     }
@@ -705,7 +705,7 @@ ruleInheritedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('element' 
+(	'element' 
     {
         createLeafNode(grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null); 
     }
@@ -754,7 +754,7 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('overridemodel' 
+(	'overridemodel' 
     {
         createLeafNode(grammarAccess.getAbstractCallOverridenParserRuleAccess().getOverridemodelKeyword_0(), null); 
     }
@@ -803,7 +803,7 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('extendedmodel' 
+(	'extendedmodel' 
     {
         createLeafNode(grammarAccess.getAbstractCallExtendedParserRuleAccess().getExtendedmodelKeyword_0(), null); 
     }

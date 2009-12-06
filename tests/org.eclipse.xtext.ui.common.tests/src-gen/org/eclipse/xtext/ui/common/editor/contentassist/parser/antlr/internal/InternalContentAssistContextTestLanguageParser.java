@@ -43,7 +43,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g"; }
 
 
-     
+
      	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
      	
         public InternalContentAssistContextTestLanguageParser(TokenStream input, IAstFactory factory, ContentAssistContextTestLanguageGrammarAccess grammarAccess) {
@@ -687,9 +687,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:293:1: ( 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
             {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:293:1: ( 'A1' () ( (lv_name_2_0= RULE_ID ) )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:293:2: 'A1' () ( (lv_name_2_0= RULE_ID ) )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:293:3: 'A1' () ( (lv_name_2_0= RULE_ID ) )?
             {
-            match(input,11,FOLLOW_11_in_ruleThirdLevelA1453); 
+            match(input,11,FOLLOW_11_in_ruleThirdLevelA1454); 
 
                     createLeafNode(grammarAccess.getThirdLevelA1Access().getA1Keyword_0(), null); 
                 
@@ -724,7 +724,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:310:3: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelA1479); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelA1480); 
 
                     			createLeafNode(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
                     		
@@ -788,12 +788,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:340:2: iv_ruleThirdLevelA2= ruleThirdLevelA2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getThirdLevelA2Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2518);
+            pushFollow(FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2519);
             iv_ruleThirdLevelA2=ruleThirdLevelA2();
             _fsp--;
 
              current =iv_ruleThirdLevelA2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelA2528); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelA2529); 
 
             }
 
@@ -824,9 +824,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:353:1: ( 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
             {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:353:1: ( 'A2' () ( (lv_name_2_0= RULE_ID ) )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:353:2: 'A2' () ( (lv_name_2_0= RULE_ID ) )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:353:3: 'A2' () ( (lv_name_2_0= RULE_ID ) )?
             {
-            match(input,12,FOLLOW_12_in_ruleThirdLevelA2562); 
+            match(input,12,FOLLOW_12_in_ruleThirdLevelA2564); 
 
                     createLeafNode(grammarAccess.getThirdLevelA2Access().getA2Keyword_0(), null); 
                 
@@ -861,7 +861,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:370:3: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelA2588); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelA2590); 
 
                     			createLeafNode(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
                     		
@@ -925,12 +925,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:400:2: iv_ruleThirdLevelB1= ruleThirdLevelB1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getThirdLevelB1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1627);
+            pushFollow(FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1629);
             iv_ruleThirdLevelB1=ruleThirdLevelB1();
             _fsp--;
 
              current =iv_ruleThirdLevelB1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelB1637); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelB1639); 
 
             }
 
@@ -961,9 +961,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:413:1: ( 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
             {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:413:1: ( 'B1' () ( (lv_name_2_0= RULE_ID ) )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:413:2: 'B1' () ( (lv_name_2_0= RULE_ID ) )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:413:3: 'B1' () ( (lv_name_2_0= RULE_ID ) )?
             {
-            match(input,13,FOLLOW_13_in_ruleThirdLevelB1671); 
+            match(input,13,FOLLOW_13_in_ruleThirdLevelB1674); 
 
                     createLeafNode(grammarAccess.getThirdLevelB1Access().getB1Keyword_0(), null); 
                 
@@ -998,7 +998,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:430:3: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelB1697); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelB1700); 
 
                     			createLeafNode(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
                     		
@@ -1062,12 +1062,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:460:2: iv_ruleThirdLevelB2= ruleThirdLevelB2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getThirdLevelB2Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2736);
+            pushFollow(FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2739);
             iv_ruleThirdLevelB2=ruleThirdLevelB2();
             _fsp--;
 
              current =iv_ruleThirdLevelB2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelB2746); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleThirdLevelB2749); 
 
             }
 
@@ -1098,9 +1098,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:473:1: ( 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
             {
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:473:1: ( 'B2' () ( (lv_name_2_0= RULE_ID ) )? )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:473:2: 'B2' () ( (lv_name_2_0= RULE_ID ) )?
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:473:3: 'B2' () ( (lv_name_2_0= RULE_ID ) )?
             {
-            match(input,14,FOLLOW_14_in_ruleThirdLevelB2780); 
+            match(input,14,FOLLOW_14_in_ruleThirdLevelB2784); 
 
                     createLeafNode(grammarAccess.getThirdLevelB2Access().getB2Keyword_0(), null); 
                 
@@ -1135,7 +1135,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.g:490:3: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelB2806); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleThirdLevelB2810); 
 
                     			createLeafNode(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
                     		
@@ -1202,19 +1202,19 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     public static final BitSet FOLLOW_ruleThirdLevelB2_in_ruleSecondLevelB375 = new BitSet(new long[]{0x0000000000004002L});
     public static final BitSet FOLLOW_ruleThirdLevelA1_in_entryRuleThirdLevelA1409 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA1419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleThirdLevelA1453 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelA1479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2518 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA2528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleThirdLevelA2562 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelA2588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1627 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB1637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleThirdLevelB1671 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelB1697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2736 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB2746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleThirdLevelB2780 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelB2806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleThirdLevelA1454 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelA1480 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2519 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA2529 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleThirdLevelA2564 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelA2590 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1629 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB1639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleThirdLevelB1674 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelB1700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2739 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB2749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleThirdLevelB2784 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleThirdLevelB2810 = new BitSet(new long[]{0x0000000000000002L});
 
 }

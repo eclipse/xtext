@@ -37,6 +37,11 @@ import org.eclipse.xtext.parser.antlr.services.Bug289524TestLanguageGrammarAcces
 }
 
 @parser::members {
+
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
  
  	private Bug289524TestLanguageGrammarAccess grammarAccess;
  	
@@ -85,6 +90,9 @@ ruleModel returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
+	{ 
+	  /* */ 
+	}
     { 
         temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
         $current = temp; 
@@ -95,7 +103,7 @@ ruleModel returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)'Model' 
+)	'Model' 
     {
         createLeafNode(grammarAccess.getModelAccess().getModelKeyword_1(), null); 
     }
@@ -145,6 +153,9 @@ ruleModelElement returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
+	{ 
+	  /* */ 
+	}
     { 
         temp=factory.create(grammarAccess.getModelElementAccess().getModelElementAction_0().getType().getClassifier());
         $current = temp; 
@@ -180,17 +191,14 @@ ruleModelElement returns [EObject current=null]
 
 )
 )
-    |('reference' 
+    |(	'reference' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getReferenceKeyword_1_1_0(), null); 
     }
 (
 (
 		{ 
-		  /* 
-		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
-		  create synpreds that cannot be compiled in some rare cases
-		  */ 
+		  /* */ 
 		}
 		{
 			if ($current==null) {
@@ -204,17 +212,14 @@ ruleModelElement returns [EObject current=null]
 	}
 
 )
-)('$' 
+)(	'$' 
     {
         createLeafNode(grammarAccess.getModelElementAccess().getDollarSignKeyword_1_1_2_0(), null); 
     }
 (
 (
 		{ 
-		  /* 
-		  dummy action to prevent antlr bug: if backtracking is enabled, antlr will
-		  create synpreds that cannot be compiled in some rare cases
-		  */ 
+		  /* */ 
 		}
 		{
 			if ($current==null) {
@@ -249,7 +254,7 @@ ruleContained returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('containment' 
+(	'containment' 
     {
         createLeafNode(grammarAccess.getContainedAccess().getContainmentKeyword_0(), null); 
     }

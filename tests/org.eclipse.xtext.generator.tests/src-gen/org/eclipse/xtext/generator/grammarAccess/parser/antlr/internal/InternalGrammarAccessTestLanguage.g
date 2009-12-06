@@ -36,7 +36,7 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
 }
 
 @parser::members {
- 
+
  	private GrammarAccessTestLanguageGrammarAccess grammarAccess;
  	
     public InternalGrammarAccessTestLanguageParser(TokenStream input, IAstFactory factory, GrammarAccessTestLanguageGrammarAccess grammarAccess) {
@@ -168,7 +168,7 @@ ruleAType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('foo' 
+(	'foo' 
     {
         createLeafNode(grammarAccess.getATypeAccess().getFooKeyword_0(), null); 
     }
@@ -204,7 +204,7 @@ ruleAnotherType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('bar' 
+(	'bar' 
     {
         createLeafNode(grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null); 
     }
