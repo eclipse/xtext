@@ -44,8 +44,7 @@ public class InternalDomainmodelLexer extends Lexer {
     public InternalDomainmodelLexer(CharStream input) {
         super(input);
     }
-    @Override
-	public String getGrammarFileName() { return "../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g"; }
 
     // $ANTLR start T11
     public final void mT11() throws RecognitionException {
@@ -928,8 +927,7 @@ public class InternalDomainmodelLexer extends Lexer {
     }
     // $ANTLR end RULE_ANY_OTHER
 
-    @Override
-	public void mTokens() throws RecognitionException {
+    public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=27;
         int LA12_0 = input.LA(1);

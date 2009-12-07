@@ -80,12 +80,12 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:74:2: iv_ruleState= ruleState EOF
             {
              currentNode = createCompositeNode(grammarAccess.getStateRule(), currentNode); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState73);
+            pushFollow(FollowSets000.FOLLOW_ruleState_in_entryRuleState73);
             iv_ruleState=ruleState();
             _fsp--;
 
              current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleState83); 
 
             }
 
@@ -222,7 +222,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:89:3: lv_isInitial_0_0= 'init'
                     {
                     lv_isInitial_0_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState127); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleState127); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0(), "isInitial"); 
                         
@@ -257,7 +257,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:111:3: lv_isFinal_1_0= 'final'
                     {
                     lv_isFinal_1_0=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleState164); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleState164); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0(), "isFinal"); 
                         
@@ -294,7 +294,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState204);
+                    pushFollow(FollowSets000.FOLLOW_ruleStateType_in_ruleState204);
                     lv_stateKind_2_0=ruleStateType();
                     _fsp--;
 
@@ -337,7 +337,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:158:3: lv_isInitial_3_0= 'init'
                     {
                     lv_isInitial_3_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState229); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleState229); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0(), "isInitial"); 
                         
@@ -368,7 +368,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState263);
+                    pushFollow(FollowSets000.FOLLOW_ruleStateType_in_ruleState263);
                     lv_stateKind_4_0=ruleStateType();
                     _fsp--;
 
@@ -414,7 +414,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:204:3: lv_isInitial_5_0= 'init'
                     {
                     lv_isInitial_5_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleState289); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleState289); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0(), "isInitial"); 
                         
@@ -445,7 +445,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                      
                     	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleStateType_in_ruleState323);
+                    pushFollow(FollowSets000.FOLLOW_ruleStateType_in_ruleState323);
                     lv_stateKind_6_0=ruleStateType();
                     _fsp--;
 
@@ -479,7 +479,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:249:3: lv_isFinal_7_0= 'final'
                     {
                     lv_isFinal_7_0=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleState341); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleState341); 
 
                             createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0(), "isFinal"); 
                         
@@ -521,7 +521,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:268:7: 'state'
                     {
-                    match(input,13,FOLLOW_13_in_ruleState368); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleState368); 
 
                             createLeafNode(grammarAccess.getStateAccess().getStateKeyword_1(), null); 
                         
@@ -546,7 +546,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:274:3: lv_stateName_9_0= RULE_ID
                     {
                     lv_stateName_9_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState387); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleState387); 
 
                     			createLeafNode(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0(), "stateName"); 
                     		
@@ -590,7 +590,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:298:3: lv_label_10_0= RULE_STRING
                     {
                     lv_label_10_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleState410); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleState410); 
 
                     			createLeafNode(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0(), "label"); 
                     		
@@ -688,7 +688,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:2: ( 'NORMAL' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:332:4: 'NORMAL'
                     {
-                    match(input,14,FOLLOW_14_in_ruleStateType463); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_ruleStateType463); 
 
                             current = grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0(), null); 
@@ -705,7 +705,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:338:6: ( 'cond' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:338:8: 'cond'
                     {
-                    match(input,15,FOLLOW_15_in_ruleStateType478); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleStateType478); 
 
                             current = grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1(), null); 
@@ -722,7 +722,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:344:6: ( 'reference' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:344:8: 'reference'
                     {
-                    match(input,16,FOLLOW_16_in_ruleStateType493); 
+                    match(input,16,FollowSets000.FOLLOW_16_in_ruleStateType493); 
 
                             current = grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2(), null); 
@@ -739,7 +739,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:350:6: ( 'textual' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:350:8: 'textual'
                     {
-                    match(input,17,FOLLOW_17_in_ruleStateType508); 
+                    match(input,17,FollowSets000.FOLLOW_17_in_ruleStateType508); 
 
                             current = grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3(), null); 
@@ -774,22 +774,26 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
 
  
 
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleState127 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_12_in_ruleState164 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState204 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_11_in_ruleState229 = new BitSet(new long[]{0x000000000003C000L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState263 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_11_in_ruleState289 = new BitSet(new long[]{0x000000000003C000L});
-    public static final BitSet FOLLOW_ruleStateType_in_ruleState323 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleState341 = new BitSet(new long[]{0x0000000000002032L});
-    public static final BitSet FOLLOW_13_in_ruleState368 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState387 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleState410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleStateType463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleStateType478 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleStateType493 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleStateType508 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleState_in_entryRuleState73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleState83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleState127 = new BitSet(new long[]{0x0000000000002032L});
+        public static final BitSet FOLLOW_12_in_ruleState164 = new BitSet(new long[]{0x0000000000002032L});
+        public static final BitSet FOLLOW_ruleStateType_in_ruleState204 = new BitSet(new long[]{0x0000000000002032L});
+        public static final BitSet FOLLOW_11_in_ruleState229 = new BitSet(new long[]{0x000000000003C000L});
+        public static final BitSet FOLLOW_ruleStateType_in_ruleState263 = new BitSet(new long[]{0x0000000000002032L});
+        public static final BitSet FOLLOW_11_in_ruleState289 = new BitSet(new long[]{0x000000000003C000L});
+        public static final BitSet FOLLOW_ruleStateType_in_ruleState323 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleState341 = new BitSet(new long[]{0x0000000000002032L});
+        public static final BitSet FOLLOW_13_in_ruleState368 = new BitSet(new long[]{0x0000000000000032L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleState387 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleState410 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleStateType463 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleStateType478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleStateType493 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleStateType508 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

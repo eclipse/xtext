@@ -182,6 +182,11 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 		return org.eclipse.xtext.ui.core.scoping.namespaces.ProjectAwareContainerManager.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory> bindContentAssistContext$Factory() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.class;
